@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     dotContainer: {
         backgroundColor: COLORS.transparent,
         bottom: 60,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
     },
 });
