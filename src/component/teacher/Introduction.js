@@ -6,7 +6,7 @@ import Introduction1 from '../reusable/introduction/Inroduction1';
 import Introduction2 from '../reusable/introduction/Inroduction2';
 import Introduction3 from '../reusable/introduction/Inroduction3';
 
-export default class IntroductionActivity extends Component {
+export default class Introduction extends Component {
     constructor(props) {
         super(props);
     }
@@ -29,6 +29,7 @@ export default class IntroductionActivity extends Component {
                     dotInactiveColor='gray'
                     dotsContainerStyle={styles.dotContainer}
                 />
+
             </View>
         );
     }
