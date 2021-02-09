@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, Image, View } from "react-native";
-import COLORS from "../../utils/Colors";
-import STYLE from '../../utils/Style';
+import COLORS from "../../../utils/Colors";
+import STYLE from '../../../utils/Style';
 
 const Introduction2 = (props) => {
     return (

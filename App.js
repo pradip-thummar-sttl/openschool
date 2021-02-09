@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import IntroductionActivity from './src/component/teacher/Introduction';
+import Introduction from './src/component/teacher/Introduction';
 
 import combineReducers from './src/reducer/index'
 
@@ -21,7 +21,7 @@ export default class App extends Component {
         <SafeAreaView style={{ flex: 1 }}>
           <NavigationContainer>
             <Stack.Navigator headerMode={'none'}>
-              <Stack.Screen name="Home" component={IntroductionActivity} />
+              <Stack.Screen name="Introduction" component={Introduction} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaView>
