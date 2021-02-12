@@ -1,10 +1,8 @@
 react-native-view-slider
-dot.js
-  dot: {
-    marginHorizontal: 10,
-    height: 25,
-    width: 25,
-    padding: 5,
+/node_modules/react-native-view-slider/dots.js
+dot: {
+    marginHorizontal: 12,
+    padding: 16,
     borderRadius: 100,
-  }
-========================
+}
+==========================================================
