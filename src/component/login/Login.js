@@ -7,6 +7,7 @@ import COLORS from '../../utils/Colors';
 import STYLE from '../../utils/Style';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
