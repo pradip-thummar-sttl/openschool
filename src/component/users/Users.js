@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
 import COLORS from '../../utils/Colors';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 export default class Users extends Component {
     constructor(props) {
         super(props);
@@ -45,16 +46,16 @@ const styles = StyleSheet.create({
     },
     text: {
         color: COLORS.white,
-        fontSize: 42,
+        fontSize: hp('4.2%'),
         fontWeight: '600',
         alignSelf: 'center',
     },
     titleText: {
         color: COLORS.white,
-        fontSize: 42,
+        fontSize: hp('4.2%'),
         fontWeight: '600',
         alignSelf: 'center',
-        marginBottom: 70,
+        marginBottom: hp('7.0%'),
     },
     image: {
         flex: 1,
@@ -75,6 +76,6 @@ const styles = StyleSheet.create({
         width: 230,
         resizeMode: "contain",
         alignSelf: 'center',
-        marginBottom: 40,
+        marginBottom: hp('4.0%'),
     },
 });

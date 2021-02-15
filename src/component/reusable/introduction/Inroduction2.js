@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet,Text, Image, ImageBackground } from "react-native";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
     },
     lefContent:{
         width: '40%',
-        top: 330,
-        left: 70,
+        top: hp('33.0%'),
+        left: hp('7.0%'),
     },
     image: {
         flex: 1,
@@ -32,14 +33,14 @@ const styles = StyleSheet.create({
     },
     introTitle: {
         color:COLORS.white,
-        fontSize: 50,
-        marginBottom:30,
+        fontSize: hp('5.0%'),
+        marginBottom:hp('3.0%'),
         fontWeight: '600',
     },
     introContent: {
-        fontSize: 25,
+        fontSize: hp('2.5%'),
         color: COLORS.white,
-        lineHeight:35,
+        lineHeight:hp('3.5%'),
     },
 });
 export default Introduction2;

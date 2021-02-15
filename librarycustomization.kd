@@ -1,8 +1,14 @@
 react-native-view-slider
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 /node_modules/react-native-view-slider/dots.js
-dot: {
-    marginHorizontal: 12,
-    padding: 16,
-    borderRadius: 100,
-}
+dotContainer: {
+    marginVertical: hp('2.0%'),
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  dot: {
+    marginHorizontal: hp('1.2%'),
+    padding: hp('1.6%'),
+    borderRadius: hp('100.0%'),
+  }
 ==========================================================

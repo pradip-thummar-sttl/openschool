@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         color: '#03014C',
         fontSize: hp('5%'),
         fontWeight: 'bold',
-        marginBottom: 50,
+        marginBottom: hp('5.0%'),
     },
     loginForm: {
         paddingLeft:hp('9%'),
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     field :{
         position: 'relative',
-        marginBottom: 20,
+        marginBottom: hp('2.0%'),
     },
     userIcon: {
         position: 'absolute',
@@ -134,17 +134,17 @@ const styles = StyleSheet.create({
         fontSize: hp('2.2%'),
         color: '#676794',
         fontWeight: 'bold',
-        lineHeight: 30,
-        marginLeft: 10,
+        lineHeight: hp('3.0%'),
+        marginLeft: hp('1.0%'),
     },
     forgotPass: {
         fontSize: hp('2.15%'),
         color: '#676794',
         fontWeight: 'bold',
-        lineHeight: 30,
+        lineHeight: hp('3.0%'),
     },
     loginButtonView: {
-        marginTop: 30,
+        marginTop: hp('3.0%'),
     },
     bottomLoginIntro :{
         top: hp('15%'),

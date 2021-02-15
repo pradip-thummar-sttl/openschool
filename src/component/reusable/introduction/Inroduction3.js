@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet,Text, Button, Image, ImageBackground, Alert } from "react-native";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 
@@ -23,34 +24,34 @@ const styles = StyleSheet.create({
     },
     lefContent:{
         width: '40%',
-        top: 330,
-        left: 70,
+        top: hp('33.0%'),
+        left: hp('7.0%'),
     },
     introTitle: {
         color:COLORS.white,
-        fontSize: 50,
-        marginBottom:30,
+        fontSize: hp('5.0%'),
+        marginBottom:hp('3.0%'),
         fontWeight: '600',
     },
     introContent: {
-        fontSize: 25,
+        fontSize: hp('2.5%'),
         color: COLORS.white,
-        lineHeight:35,
+        lineHeight:hp('3.5%'),
     },
     commonButtonGreen: {
         backgroundColor: '#00A36B',
         color: COLORS.white,
-        fontSize: 24,
+        fontSize: hp('2.4%'),
         fontWeight: '800',
-        borderRadius:8,
+        borderRadius: hp('0.8%'),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: 35,
-        paddingRight: 35,
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingLeft: hp('3.5%'),
+        paddingRight: hp('3.5%'),
+        paddingTop: hp('1.5%'),
+        paddingBottom: hp('1.5%'),
         alignSelf: 'center',
-        bottom: 131,
+        bottom: hp('13.1%'),
         position: 'absolute',
         shadowColor: "#000",
         shadowOffset: {width: 0,height: 50,},

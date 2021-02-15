@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../utils/Colors';
 import STYLE from '../../utils/Style';
@@ -54,8 +55,8 @@ const styles = StyleSheet.create({
     },
     dotContainer: {
         backgroundColor: COLORS.transparent,
-        bottom: 120,
-        left: 70,
+        bottom: hp('12.0%'),
+        left: hp('7.0%'),
         position: 'absolute',
         alignSelf: 'flex-start',
     },
@@ -65,10 +66,10 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     logo: {
-        width: 350,
+        width: hp('35.0%'),
         resizeMode: "contain",
-        left: 70,
-        top: 100,
+        left: hp('7.0%'),
+        top: hp('10.0%'),
         alignSelf: 'flex-start',
     }
 });
