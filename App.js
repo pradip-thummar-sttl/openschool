@@ -10,6 +10,9 @@ import Splash from './src/component/splash/Splash';
 import Users from './src/component/users/Users';
 import Introduction from './src/component/teacher/Introduction';
 import Login from './src/component/login/Login';
+import Popup from './src/component/reusable/popup/Popup';
+import Popupuser from './src/component/reusable/popup/Popupuser';
+import Sidebar from './src/component/reusable/sidebar/Sidebar';
 import combineReducers from './src/reducer/index';
 
 const store = createStore(combineReducers)
@@ -25,7 +28,10 @@ export default class App extends Component {
               {/* <Stack.Screen name="Splash" component={Splash} /> */}
               {/* <Stack.Screen name="Users" component={Users} /> */}
               {/* <Stack.Screen name="Introduction" component={Introduction} /> */}
-              <Stack.Screen name="Login" component={Login} />
+              {/* <Stack.Screen name="Login" component={Login} /> */}
+              {/* <Stack.Screen name="Popup" component={Popup} /> */}
+              {/* <Stack.Screen name="Popupuser" component={Popupuser} /> */}
+              <Stack.Screen name="Sidebar" component={Sidebar} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaView>

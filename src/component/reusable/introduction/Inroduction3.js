@@ -3,6 +3,7 @@ import { View, StyleSheet,Text, Button, Image, ImageBackground, Alert } from "re
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import FONTS from '../../../utils/Fonts';
 
 const Introduction3 = (props) => {
     return (
@@ -32,18 +33,20 @@ const styles = StyleSheet.create({
         fontSize: hp('5.0%'),
         marginBottom:hp('3.0%'),
         fontWeight: '600',
+        fontFamily: FONTS.fontBold,
     },
     introContent: {
         fontSize: hp('2.5%'),
         color: COLORS.white,
-        lineHeight:hp('3.5%'),
+        lineHeight:hp('3.0%'),
+        fontFamily: FONTS.fontRegular,
     },
     commonButtonGreen: {
         backgroundColor: '#00A36B',
         color: COLORS.white,
         fontSize: hp('2.4%'),
         fontWeight: '800',
-        borderRadius: hp('0.8%'),
+        borderRadius: hp('1.3%'),
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp('3.5%'),
@@ -51,14 +54,15 @@ const styles = StyleSheet.create({
         paddingTop: hp('1.5%'),
         paddingBottom: hp('1.5%'),
         alignSelf: 'center',
-        bottom: hp('13.1%'),
+        bottom: hp('12%'),
         position: 'absolute',
         shadowColor: "#000",
         shadowOffset: {width: 0,height: 50,},
         shadowOpacity: 0.16,
-        shadowRadius: 8,
+        shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
 });
 

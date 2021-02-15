@@ -6,6 +6,9 @@ const COLORS = {
     blueButton: '#5381F8',
     themeBlue: '#03014C',
     thmePurple: '#5F34F5',
+    darkGray: '#262626',
+    lightGray: '#9699A5',
+    buttonGreen: '#049160'
 }
 
 export default COLORS;

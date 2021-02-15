@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
 import COLORS from '../../utils/Colors';
+import FONTS from '../../utils/Fonts';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 export default class Users extends Component {
     constructor(props) {
@@ -17,19 +18,19 @@ export default class Users extends Component {
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/teacher_intro_screen_school_bg.png')} />
+                                    source={require('../../assets/images/userIcon.png')} />
                                 <Text style={styles.text}>School</Text>
                             </View>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/teacher_intro_screen_school_bg.png')} />
+                                    source={require('../../assets/images/userIcon.png')} />
                                 <Text style={styles.text}>Teacher</Text>
                             </View>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/teacher_intro_screen_school_bg.png')} />
+                                    source={require('../../assets/images/userIcon.png')} />
                                 <Text style={styles.text}>Pupil</Text>
                             </View>
                         </View>
@@ -46,16 +47,16 @@ const styles = StyleSheet.create({
     },
     text: {
         color: COLORS.white,
-        fontSize: hp('4.2%'),
-        fontWeight: '600',
+        fontSize: hp(3.8),
         alignSelf: 'center',
+        fontFamily: FONTS.fontSemiBold,
     },
     titleText: {
         color: COLORS.white,
-        fontSize: hp('4.2%'),
-        fontWeight: '600',
+        fontSize: hp(3.8),
+        fontFamily: FONTS.fontBold,
         alignSelf: 'center',
-        marginBottom: hp('7.0%'),
+        marginBottom: hp(6.0),
     },
     image: {
         flex: 1,
@@ -73,9 +74,9 @@ const styles = StyleSheet.create({
 
     },
     userIcon: {
-        width: 230,
+        width: hp(25.0),
         resizeMode: "contain",
         alignSelf: 'center',
-        marginBottom: hp('4.0%'),
+        marginBottom: hp(2.5),
     },
 });

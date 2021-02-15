@@ -3,6 +3,7 @@ import { View, StyleSheet,Text, Image, ImageBackground } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import FONTS from '../../../utils/Fonts';
 
 const Introduction1 = (props) => {
     return (
@@ -35,11 +36,13 @@ const styles = StyleSheet.create({
         fontSize: hp('5.0%'),
         marginBottom:hp('3.0%'),
         fontWeight: '600',
+        fontFamily: FONTS.fontBold,
     },
     introContent: {
         fontSize: hp('2.5%'),
         color: COLORS.white,
-        lineHeight:hp('3.5%'),
+        lineHeight:hp('3.0%'),
+        fontFamily: FONTS.fontRegular,
     },
 });
 
