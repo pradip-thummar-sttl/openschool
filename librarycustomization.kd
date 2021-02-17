@@ -12,3 +12,6 @@ dotContainer: {
     borderRadius: hp('100.0%'),
   }
 ==========================================================
+react-native-svg-image
+node_modules/react-native-svg-image/index.js
+import WebView from 'react-native-webview';  -- new added in node_modules
