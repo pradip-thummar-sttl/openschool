@@ -117,12 +117,16 @@ const styles = StyleSheet.create({
     userIcon: {
         position: 'absolute',
         top: hp('2.3%'),
-        left: hp('2.6%'),
+        left: hp('3%'),
+        resizeMode: 'contain',
+        width: hp(1.7),
     },
     viewIcon: {
         position: 'absolute',
         top: hp('2.5%'),
-        right: hp('2.6%'),
+        right: hp('3%'),
+        resizeMode: 'contain',
+        width: hp(2.5),
     },
     bottomLoginFeild: {
         flexDirection: 'row',

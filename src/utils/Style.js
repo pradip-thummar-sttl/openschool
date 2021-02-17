@@ -82,14 +82,14 @@ export default StyleSheet.create({
     },
     commonFonts: {
         color: COLORS.themeBlue,
-        fontSize: hp('2.0%'),
+        fontSize: hp(1.81),
         fontWeight: '500',
         marginBottom: hp('0.4%'),
         fontFamily: FONTS.fontRegular,
     },
     commonFontsPuple: {
         color: COLORS.thmePurple,
-        fontSize: hp('2.0%'),
+        fontSize: hp(1.81),
         fontWeight: '500',
         lineHeight: hp('2.6%'),
         fontFamily: FONTS.fontRegular,

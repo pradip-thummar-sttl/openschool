@@ -11,7 +11,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={styles.sideBarAside}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image source={require('../../../assets/images/profileBack.png')} />
+                        <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitle}>Johney Depp</Text>
                             <Text style={styles.profileDesi}>Administrator</Text>
@@ -71,9 +71,6 @@ const Sidebar = (props) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.rightMain}>
-                    <Text style={{fontSize: 50,}}>Header</Text>
-                </View>
             </View>
         </View>
     );
@@ -99,7 +96,7 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems:'center',
-        paddingTop: hp(2.0),
+        paddingTop: hp(1.5),
         paddingBottom: hp(2.0),
         paddingLeft: hp(1.5),
     },
@@ -107,13 +104,13 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.5),
     },
     profileTitle: {
-        fontSize: hp(2.2),
-        marginBottom: hp(0.2),
+        fontSize: hp(2.0),
+        marginBottom: hp(0.1),
         color: COLORS.lightGray,
         fontFamily: FONTS.fontRegular,
     },
     profileDesi: {
-        fontSize: hp(1.8),
+        fontSize: hp(1.6),
         color: COLORS.lightGray,
         fontFamily: FONTS.fontRegular,
     },
@@ -140,6 +137,10 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),
+    },
+    headerProfile: {
+        width: hp(5.40),
+        resizeMode: 'contain',
     },
     userInfobottom: {
         position: 'absolute',
@@ -170,10 +171,5 @@ const styles = StyleSheet.create({
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
-    },
-     rightMain: {
-        flex: 1,
-        backgroundColor: COLORS.backgroundColorCommon,
-        paddingLeft: hp(5.20),
     },
 });

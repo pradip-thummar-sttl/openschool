@@ -47,16 +47,16 @@ const styles = StyleSheet.create({
     },
     text: {
         color: COLORS.white,
-        fontSize: hp(3.8),
+        fontSize: hp(2.86),
         alignSelf: 'center',
         fontFamily: FONTS.fontSemiBold,
     },
     titleText: {
         color: COLORS.white,
-        fontSize: hp(3.8),
-        fontFamily: FONTS.fontBold,
+        fontSize: hp(2.86),
+        fontFamily: FONTS.fontSemiBold,
         alignSelf: 'center',
-        marginBottom: hp(6.0),
+        marginBottom: hp(3),
     },
     image: {
         flex: 1,
@@ -68,15 +68,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     user: {
-        width: '27%',
+        width: hp(22.13),
         justifyContent: "center",
         textAlign: 'center',
-
+        marginLeft: hp(5.5),
+        marginRight: hp(5.5),
     },
     userIcon: {
         width: hp(25.0),
         resizeMode: "contain",
         alignSelf: 'center',
-        marginBottom: hp(2.5),
+        marginBottom: hp(2),
     },
 });

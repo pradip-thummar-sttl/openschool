@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     introContent: {
-        fontSize: hp('2.5%'),
+        fontSize: hp('2.2%'),
         color: COLORS.white,
         lineHeight:hp('3.0%'),
         fontFamily: FONTS.fontRegular,

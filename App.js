@@ -13,6 +13,7 @@ import Login from './src/component/login/Login';
 import Popup from './src/component/reusable/popup/Popup';
 import Popupuser from './src/component/reusable/popup/Popupuser';
 import Sidebar from './src/component/reusable/sidebar/Sidebar';
+import Header from './src/component/reusable/header/Header';
 import combineReducers from './src/reducer/index';
 
 const store = createStore(combineReducers)
@@ -31,7 +32,8 @@ export default class App extends Component {
               {/* <Stack.Screen name="Login" component={Login} /> */}
               {/* <Stack.Screen name="Popup" component={Popup} /> */}
               {/* <Stack.Screen name="Popupuser" component={Popupuser} /> */}
-              <Stack.Screen name="Sidebar" component={Sidebar} />
+              {/* <Stack.Screen name="Sidebar" component={Sidebar} /> */}
+              <Stack.Screen name="Header" component={Header} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaView>
