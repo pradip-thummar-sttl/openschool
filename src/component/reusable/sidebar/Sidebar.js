@@ -7,69 +7,67 @@ import FONTS from '../../../utils/Fonts';
 
 const Sidebar = (props) => {
     return (
-        <View style={STYLE.viewBox}>
-            <View style={styles.sidebarHeader}>
-                <View style={styles.sideBarAside}>
-                    <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
-                        <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
-                        </View>
+        <View style={styles.sidebarHeader}>
+            <View style={styles.sideBarAside}>
+                <TouchableOpacity style={styles.userInfo}>
+                    <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
+                    <View style={styles.profileTextMain}>
+                        <Text style={styles.profileTitle}>Johney Depp</Text>
+                        <Text style={styles.profileDesi}>Administrator</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={styles.mainMenu}>
+                    <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={require('../../../assets/images/dashboard2.png')}
+                        />
+                        <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
                     </TouchableOpacity>
-                    <View style={styles.mainMenu}>
-                        <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
-                            <Image
-                                style={styles.menuIcon}
-                                source={require('../../../assets/images/dashboard2.png')}
-                            />
-                            <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
-                            <Image
-                                style={styles.menuIcon}
-                                source={require('../../../assets/images/teachers2.png')}
-                            />
-                            <Text style={styles.menuText}>Teachers</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
-                            <Image
-                                style={styles.menuIcon}
-                                source={require('../../../assets/images/pupils2.png')}
-                            />
-                            <Text style={styles.menuText}>Pupils</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
-                            <Image
-                                style={styles.menuIcon}
-                                source={require('../../../assets/images/messaging.png')}
-                            />
-                            <Text style={styles.menuText}>Messaging</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
-                            <Image
-                                style={styles.menuIcon}
-                                source={require('../../../assets/images/parents2.png')}
-                            />
-                            <Text style={styles.menuText}>Parents</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.menuItem}>
-                            <Image
-                                style={styles.menuIcon}
-                                source={require('../../../assets/images/faq2.png')}
-                            />
-                            <Text style={styles.menuText}>FAQ</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={require('../../../assets/images/teachers2.png')}
+                        />
+                        <Text style={styles.menuText}>Teachers</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={require('../../../assets/images/pupils2.png')}
+                        />
+                        <Text style={styles.menuText}>Pupils</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={require('../../../assets/images/messaging.png')}
+                        />
+                        <Text style={styles.menuText}>Messaging</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={require('../../../assets/images/parents2.png')}
+                        />
+                        <Text style={styles.menuText}>Parents</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={require('../../../assets/images/faq2.png')}
+                        />
+                        <Text style={styles.menuText}>FAQ</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={[styles.userInfo, styles.userInfobottom]}>
+                    <Image style={styles.bottomUser} source={require('../../../assets/images/profileBack.png')} />
+                    <View style={styles.profileTextMain}>
+                        <Text style={styles.profileTitleBottom}>Johney Depp</Text>
                     </View>
-                    <View style={[styles.userInfo, styles.userInfobottom]}>
-                        <Image style={styles.bottomUser} source={require('../../../assets/images/profileBack.png')} />
-                        <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitleBottom}>Johney Depp</Text>
-                        </View>
-                        <TouchableOpacity style={styles.moreMenu}>
-                            <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={styles.moreMenu}>
+                        <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
     },
     userInfo: {
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         paddingTop: hp(1.5),
         paddingBottom: hp(2.0),
         paddingLeft: hp(1.5),
@@ -119,7 +117,7 @@ const styles = StyleSheet.create({
     },
     menuItem: {
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         paddingLeft: hp(2.2),
         paddingTop: hp(2.2),
         paddingRight: hp(2.0),
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: hp(6),
         borderWidth: 1,
-        left:-1,
+        left: -1,
         width: hp(29.6),
         borderColor: COLORS.bottomProfileLightBorder,
         paddingTop: hp(1),

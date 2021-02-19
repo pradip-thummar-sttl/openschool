@@ -14,6 +14,7 @@ import Popup from './src/component/reusable/popup/Popup';
 import Popupuser from './src/component/reusable/popup/Popupuser';
 import Sidebar from './src/component/reusable/sidebar/Sidebar';
 import Header from './src/component/reusable/header/Header';
+import LessonandHomeworkPlanner from './src/screens/teacher/lessonandhomeworkplanner/Lessonandhomeworkplanner';
 import combineReducers from './src/reducer/index';
 
 const store = createStore(combineReducers)
@@ -33,7 +34,8 @@ export default class App extends Component {
               {/* <Stack.Screen name="Popup" component={Popup} /> */}
               {/* <Stack.Screen name="Popupuser" component={Popupuser} /> */}
               {/* <Stack.Screen name="Sidebar" component={Sidebar} /> */}
-              <Stack.Screen name="Header" component={Header} />
+              {/* <Stack.Screen name="Header" component={Header} /> */}
+              <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaView>

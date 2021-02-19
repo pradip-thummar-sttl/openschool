@@ -12,6 +12,14 @@ export default StyleSheet.create({
         height: height,
         fontFamily: FONTS.fontRegular,
     },
+    viewRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    padLeftRight: {
+        paddingLeft: hp(3.25),
+        paddingRight: hp(2.0),
+    },
     commonInput: {
         color:'#03014C',
         fontSize: hp('1.9%'),

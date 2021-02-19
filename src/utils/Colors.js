@@ -12,6 +12,10 @@ const COLORS = {
     menuLightFonts: '#B4B6BE',
     bottomProfileLightBorder:'#F1F2F7',
     backgroundColorCommon: '#F9FAFC',
+    red: '#FF200D',
+    orage: '#FFB100',
+    dashboardBorder: '#ECEDF2',
+    dashboardPupilBlue: '#50A7F0',
 }
 
 export default COLORS;
