@@ -6,10 +6,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import Splash from './src/component/splash/Splash';
+import Users from './src/component/users/Users';
 import Introduction from './src/component/teacher/Introduction';
-
-import combineReducers from './src/reducer/index'
+import Login from './src/component/login/Login';
+import Popup from './src/component/reusable/popup/Popup';
+import Popupuser from './src/component/reusable/popup/Popupuser';
+import Sidebar from './src/component/reusable/sidebar/Sidebar';
+import Header from './src/component/reusable/header/Header';
+import LessonandHomeworkPlanner from './src/screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
+import LessonandHomeworkPlannerDashboard from './src/screens/teacher/lessonandhomeworkplannerdashboard/Lessonandhomeworkplannerdashboard';
+import combineReducers from './src/reducer/index';
 
 const store = createStore(combineReducers)
 const Stack = createStackNavigator()
@@ -21,7 +28,16 @@ export default class App extends Component {
         <SafeAreaView style={{ flex: 1 }}>
           <NavigationContainer>
             <Stack.Navigator headerMode={'none'}>
-              <Stack.Screen name="Introduction" component={Introduction} />
+              {/* <Stack.Screen name="Splash" component={Splash} /> */}
+              {/* <Stack.Screen name="Users" component={Users} /> */}
+              {/* <Stack.Screen name="Introduction" component={Introduction} /> */}
+              {/* <Stack.Screen name="Login" component={Login} /> */}
+              {/* <Stack.Screen name="Popup" component={Popup} /> */}
+              {/* <Stack.Screen name="Popupuser" component={Popupuser} /> */}
+              {/* <Stack.Screen name="Sidebar" component={Sidebar} /> */}
+              {/* <Stack.Screen name="Header" component={Header} /> */}
+              {/* <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} /> */}
+              <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaView>
