@@ -16,6 +16,13 @@ const COLORS = {
     orage: '#FFB100',
     dashboardBorder: '#ECEDF2',
     dashboardPupilBlue: '#50A7F0',
+    lightGreen: '#C4F7D2',
+    lightYellow: '#FFE882',
+    lightPurple: '#FED9FF',
+    lightBlue: '#BFE6FF',
+    selectedDashboard: '#F5F7FB',
+    borderGrp: '#DCDCE2',
+    grpColor: '#4E4E4E',
 }
 
 export default COLORS;

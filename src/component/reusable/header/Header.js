@@ -8,7 +8,7 @@ import FONTS from '../../../utils/Fonts';
 const Header = (props) => {
     return (
         <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}>Welcome back, Miss Barker!</Text>
+            <Text style={styles.mainTitle}>Dashboard</Text>
             <View style={styles.headerRight}>
                 <TouchableOpacity style={styles.notificationBar}>
                     <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
+        marginTop: hp(-2.5),
     },
     mainTitle: {
         fontSize: hp(2.86),

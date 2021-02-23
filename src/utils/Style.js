@@ -19,6 +19,7 @@ export default StyleSheet.create({
     padLeftRight: {
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
+        width: wp(77),
     },
     commonInput: {
         color:'#03014C',
@@ -104,7 +105,7 @@ export default StyleSheet.create({
     },
     popupCard: {
         backgroundColor: COLORS.white,
-        borderRadius: 20,
+        borderRadius: hp(1.3),
         width: hp(85),
         alignItems: 'center',
         alignSelf: 'center',
