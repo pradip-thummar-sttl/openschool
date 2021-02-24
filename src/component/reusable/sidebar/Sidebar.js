@@ -6,15 +6,23 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 
 const Sidebar = (props) => {
+    const [isSmall, action] = useState(true);
+    const isHide = () => {
+        action(!isSmall)
+        props.hide();
+    }
     return (
         <View style={styles.sidebarHeader}>
-            <View style={styles.sideBarAside}>
-                <TouchableOpacity style={styles.userInfo}>
+            <View style={[styles.sideBarAside, {width: isSmall? hp(9.50) : hp(29.42)}]}>
+                <TouchableOpacity onPress={()=>isHide()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
-                    <View style={styles.profileTextMain}>
-                        <Text style={styles.profileTitle}>Johney Depp</Text>
-                        <Text style={styles.profileDesi}>Administrator</Text>
-                    </View>
+                    {
+                        isSmall? null:
+                        <View style={styles.profileTextMain}>
+                            <Text style={styles.profileTitle}>Johney Depp</Text>
+                            <Text style={styles.profileDesi}>Administrator</Text>
+                        </View>
+                    }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
                     <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
@@ -22,52 +30,75 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={require('../../../assets/images/dashboard2.png')}
                         />
-                        <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                        {
+                            isSmall? null:
+                            <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                        }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={require('../../../assets/images/teachers2.png')}
                         />
-                        <Text style={styles.menuText}>Teachers</Text>
+                        {
+                            isSmall? null:
+                            <Text style={styles.menuText}>Teachers</Text>
+                        }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={require('../../../assets/images/pupils2.png')}
                         />
-                        <Text style={styles.menuText}>Pupils</Text>
+                        {
+                            isSmall? null:
+                            <Text style={styles.menuText}>Pupils</Text>
+                        }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={require('../../../assets/images/messaging.png')}
                         />
-                        <Text style={styles.menuText}>Messaging</Text>
+                        {
+                            isSmall? null:
+                            <Text style={styles.menuText}>Messaging</Text>
+                        }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={require('../../../assets/images/parents2.png')}
                         />
-                        <Text style={styles.menuText}>Parents</Text>
+                         {
+                            isSmall? null:
+                            <Text style={styles.menuText}>Parents</Text>
+                        }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={require('../../../assets/images/faq2.png')}
                         />
-                        <Text style={styles.menuText}>FAQ</Text>
+                        {
+                            isSmall? null:
+                            <Text style={styles.menuText}>FAQ</Text>
+                        }
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={require('../../../assets/images/profileBack.png')} />
-                    <View style={styles.profileTextMain}>
-                        <Text style={styles.profileTitleBottom}>Johney Depp</Text>
-                    </View>
-                    <TouchableOpacity style={styles.moreMenu}>
-                        <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
-                    </TouchableOpacity>
+                    {
+                        isSmall? null:
+                        <>
+                            <View style={styles.profileTextMain}>
+                                <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                            </View>
+                            <TouchableOpacity style={styles.moreMenu}>
+                                <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
+                            </TouchableOpacity>
+                        </>
+                    }
                 </View>
             </View>
         </View>
@@ -86,7 +117,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1,
         backgroundColor: COLORS.white,
-        width: hp(29.42),
         paddingTop: hp(2.0),
         paddingLeft: hp(1.0),
         paddingRight: hp(1.0),

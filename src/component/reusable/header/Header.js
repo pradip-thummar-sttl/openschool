@@ -23,12 +23,9 @@ const styles = StyleSheet.create({
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: wp(78),
-        height: hp(16.40),
         alignItems: 'center',
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
-        marginTop: hp(-2.5),
     },
     mainTitle: {
         fontSize: hp(2.86),

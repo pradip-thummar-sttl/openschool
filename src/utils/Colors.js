@@ -23,6 +23,11 @@ const COLORS = {
     selectedDashboard: '#F5F7FB',
     borderGrp: '#DCDCE2',
     grpColor: '#4E4E4E',
+    commonBorderColor: '#ECEDF2',
+    dashboardGreenButton: '#00A36B',
+    purpleDark: '#BC8BFF',
+    yellowDark: '#FFAD12',
+    lightGrayPupil: '#ECEDF0',
 }
 
 export default COLORS;
