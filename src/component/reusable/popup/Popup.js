@@ -14,7 +14,7 @@ const Popup = (props) => {
     };
     return (
         <View>
-            <Text style={STYLE.fullWidthPrimaryButton} onPress={toggleModal}>Show modal</Text>
+            <Text style={STYLE.openClassLink} onPress={toggleModal}>Open Class</Text>
             <Modal isVisible={isModalVisible}>
                 <View style={STYLE.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>

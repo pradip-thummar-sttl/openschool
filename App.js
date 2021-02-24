@@ -15,33 +15,54 @@ import Popupuser from './src/component/reusable/popup/Popupuser';
 import Sidebar from './src/component/reusable/sidebar/Sidebar';
 import Header from './src/component/reusable/header/Header';
 import LessonandHomeworkPlanner from './src/screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
+import NotificationDrawer from './src/component/reusable/notificationdrawer/NotificationDrawer';
 import LessonandHomeworkPlannerDashboard from './src/screens/teacher/lessonandhomeworkplannerdashboard/Lessonandhomeworkplannerdashboard';
 import combineReducers from './src/reducer/index';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import STYLE from './src/utils/Style';
 
 const store = createStore(combineReducers)
 const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator();
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <NavigationContainer>
-            <Stack.Navigator headerMode={'none'}>
-              {/* <Stack.Screen name="Splash" component={Splash} /> */}
-              {/* <Stack.Screen name="Users" component={Users} /> */}
-              {/* <Stack.Screen name="Introduction" component={Introduction} /> */}
-              {/* <Stack.Screen name="Login" component={Login} /> */}
-              {/* <Stack.Screen name="Popup" component={Popup} /> */}
-              {/* <Stack.Screen name="Popupuser" component={Popupuser} /> */}
-              {/* <Stack.Screen name="Sidebar" component={Sidebar} /> */}
-              {/* <Stack.Screen name="Header" component={Header} /> */}
-              {/* <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} /> */}
-              <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </SafeAreaView>
-      </Provider>
-    )
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer drawerPosition='right'>
+          <Stack.Navigator headerMode='none'>
+            <Stack.Screen name="MyDrawer" component={MyDrawer} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
+  )
+}
+
+function ScreenStack() {
+  return (
+    <Stack.Navigator headerMode='none'>
+      {/* <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="Users" component={Users} />
+      <Stack.Screen name="Introduction" component={Introduction} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Popup" component={Popup} />
+      <Stack.Screen name="Popupuser" component={Popupuser} />
+      <Stack.Screen name="Sidebar" component={Sidebar} />
+      <Stack.Screen name="Header" component={Header} /> */}
+      <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
+    </Stack.Navigator>
+  );
+}
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator 
+    drawerContent={props => <NotificationDrawer {...props}  />}
+    drawerPosition='right'
+    headerMode='none'
+    drawerStyle={STYLE.drawerWidth} >
+      <Drawer.Screen name="ScreenStack" component={ScreenStack} />
+    </Drawer.Navigator>
+  );
 }

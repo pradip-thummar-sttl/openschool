@@ -7,8 +7,6 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
-import { PanGestureHandler } from "react-native-gesture-handler";
-import { useImperativeHandle } from "react/cjs/react.development";
 
 const Item = ({ onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>        
