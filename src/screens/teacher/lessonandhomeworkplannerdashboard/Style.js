@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet } from 'react-native'
 import COLORS from '../../../utils/Colors';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
-import { forModalPresentationIOS } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators';
 
 const { width, height } = Dimensions.get('window');
 
@@ -15,7 +14,6 @@ export default StyleSheet.create({
         backgroundColor: COLORS.orage,
         paddingRight: hp(2.60),
         paddingLeft: hp(1.60),
-        position: 'relative',
         flexDirection: 'row',
         borderRadius: hp(1.3),
         justifyContent: 'space-between',
@@ -75,7 +73,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.white,
         borderRadius: hp(1.95),
         marginTop: hp(1.30),
-        borderColor: COLORS.dashboardBorder,
+        borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
         shadowColor: "#000",
         shadowOffset: {width: 0,height: hp(0.2),},
@@ -130,15 +128,17 @@ export default StyleSheet.create({
         position: 'absolute',
         right: 0,
         bottom: 0,
-        width: hp(10),
+        width: hp(12.94),
         resizeMode: 'contain',
-        height: hp(10),
+        height: hp(11.86),
     },
     leftTabbing: {
         width: hp(45.57),
+        borderRightWidth:1,
+        borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
-        width: hp(72.26),
+        width: hp(72.39),
     },
     item: {
         flexDirection: 'row',
@@ -148,6 +148,8 @@ export default StyleSheet.create({
         paddingBottom: hp(2.60),
         alignItems: 'center',
         justifyContent: 'space-between',
+        borderColor: COLORS.commonBorderColor,
+        borderBottomWidth: 1,
     },
     border: {
         height: hp(5.85),
@@ -180,9 +182,9 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         textAlign: 'center',
         width: hp(9),
-        paddingTop: hp(0.2),
-        paddingBottom: hp(0.2),
-        marginBottom: hp(0.8),
+        paddingTop: hp(0.1),
+        paddingBottom: hp(0.1),
+        marginBottom: hp(0.5),
     },
     timing: {
         fontSize: hp(1.82),
@@ -199,5 +201,267 @@ export default StyleSheet.create({
         lineHeight: hp(4.55),
         color: COLORS.darkGray,
         marginBottom: hp(1.95),
+    },
+    timedateGrp: {
+        flexDirection: 'row',
+    },
+    dateWhiteBoard: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(3.25),
+    },
+    datetimeText: {
+        fontSize: hp(1.82),
+        lineHeight: hp(2.60),
+        marginLeft: hp(0.9),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    mediaMain: {
+        flexDirection: 'row',
+        marginLeft: hp(-0.39),
+        marginRight: hp(-0.39),
+        marginBottom: hp(5),
+    },
+    mediabarTouch: {
+        paddingLeft: hp(0.39),
+        paddingRight: hp(0.39),
+    },
+    mediabar: {
+        width: hp(4.16),
+        height: hp(4.16),
+        borderRadius: hp(200),
+        backgroundColor: COLORS.lightGrayPupil,
+    },
+    moreMedia: {
+        width: hp(4.16),
+        height: hp(4.16),
+        borderRadius: hp(200),
+        backgroundColor: '#fff',
+        borderColor: COLORS.lightGrayPupil,
+        borderWidth: 1,
+        justifyContent: 'center',
+    },
+    moreMediaText: {
+        fontSize: hp(1.6),
+        fontFamily: FONTS.fontRegular,
+        textAlign: 'center',
+    },
+    lessondesciption: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        lineHeight: hp(2.60),
+        color: COLORS.darkGray,
+        marginBottom: hp(1.95),
+    },
+    attchmentSectionwithLink: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    attachment: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    attachmentText: {
+        fontSize: hp(1.82),
+        lineHeight: hp(2.60),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        marginLeft: hp(0.9),
+    },
+    attachmentIcon: {
+        width: hp(1.5),
+        resizeMode: 'contain',
+    },
+    linkText: {
+        color: COLORS.buttonGreen,
+        textTransform: 'uppercase',
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontBold,
+    },
+    arrowSelectedTab: {
+        width: 0,
+        height: 0,
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderTopWidth: 15,
+        borderRightWidth: 15,
+        borderBottomWidth: 15,
+        borderLeftWidth: 15,
+        position: 'absolute',
+        top: 45,
+        left: -30,
+        borderTopColor: 'transparent',
+        borderRightColor: '#fff',
+        borderBottomColor: 'transparent',
+        borderLeftColor: 'transparent',
+    },
+    requirementofClass: {
+        marginTop: hp(4.81),
+    },
+    requireText: {
+        fontSize: hp(2.08),
+        fontFamily: FONTS.fontSemiBold,
+        lineHeight: hp(2.86),
+        color: COLORS.darkGray,
+        marginBottom: hp(1.95),
+    },
+    lessonPoints: {
+        flexDirection: 'row',
+        marginBottom: hp(1.95),
+    },
+    checkIcon: {
+        width: hp(1.7),
+        resizeMode: 'contain',
+        top: hp(0.5),
+    },
+    lessonPointText: {
+        fontSize: hp(1.85),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        lineHeight: hp(2.60),
+        marginLeft: hp(1),
+    },
+    lessonstartButton: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    buttonGrp: {
+        marginLeft: hp(2.21),
+    },
+    pupilTable: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    pupilDashboard: {
+        paddingLeft: hp(3.125),
+        paddingTop: hp(2.21),
+        paddingRight: hp(2.21),
+        paddingBottom: hp(3.51),
+    },
+    pupilTableHeadingMain: {
+        width: hp(35.80),
+    },
+    tabpupil2: {
+        width: hp(17.97),
+    },
+    tabpupil3: {
+        width: hp(20.18),
+        marginRight: hp(9.50),
+    },
+    tabpupil4: {
+        width: hp(18.22),
+    },
+    pupilTableHeadingMainTitle: {
+        fontSize: hp(1.82),
+        lineHeight: hp(2.60),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+    },
+    pupilTableHeadingMainsubTitle: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
+        lineHeight: hp(2.08),
+        marginRight: hp(2.60),
+    },
+    pupilTableHeadingMainsubTitlestar: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
+        lineHeight: hp(2.08),
+        marginRight: hp(0.91),
+    },
+    pupilTableHeadingsubMain: {
+        flexDirection: 'row',
+    },
+    pupilhrCustomMargin: {
+        marginTop: hp(1.95),
+        marginBottom: hp(1.30),
+    },
+    pupilData: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    pupilProfile: {
+        width: hp(35.80),
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    groupColumnmain: {
+        width: hp(17.97),
+    },
+    groupColumn: {
+        width: hp(5.59),
+        alignItems: 'center',
+    },
+    pupilgroupName: {
+        textAlign: 'center',
+    },
+    perfomanceColumn: {
+        flexDirection: 'row',
+        width: hp(20.18),
+        marginRight: hp(9.50),
+    },
+    perfomanceDotmain: {
+        width: hp(10.80),
+        alignItems: 'center',
+        marginRight: hp(2.60),
+    },
+    perfomanceDotmainTwo: {
+        width: hp(7),
+        alignItems: 'center',
+    },
+    perfomanceDots: {
+        width: hp(1.1),
+        height: hp(1.1),
+        borderRadius: hp(100),
+    },
+    purpleDot: {
+        backgroundColor: COLORS.purpleDark,
+    },
+    yellowDot: {
+        backgroundColor: COLORS.yellowDark,
+    },
+    rewardColumn: {
+        flexDirection: 'row',
+    },
+    rewardStar: {
+        width: hp(5.5),
+        marginRight: hp(0.91),
+    },
+    rewardStartIcon: {
+        width: hp(2.15),
+        resizeMode: 'contain',
+        alignSelf:'center',
+    },
+    pupilDetailLink: {
+        width: hp(10),
+        alignItems: 'flex-end',
+    },
+    pupilDetaillinkIcon: {
+        width: hp(1),
+        resizeMode: 'contain',
+    },
+    pupilImage: {
+        width: hp(3.7),
+        height: hp(3.7),
+        borderRadius: hp(100),
+        backgroundColor: COLORS.lightGrayPupil,
+        marginRight: hp(1.69),
+    },
+    pupilName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    pupilgroupName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
     },
 });
