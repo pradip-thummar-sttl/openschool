@@ -57,6 +57,9 @@ function ScreenStack() {
       {/* <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> */}
       {/* <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} /> */}
       <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
+      <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} /> */}
+      {/* <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> */}
+      <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
     </Stack.Navigator>
   );
 }
