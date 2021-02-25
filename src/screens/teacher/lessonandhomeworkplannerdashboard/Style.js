@@ -156,9 +156,12 @@ export default StyleSheet.create({
         backgroundColor: '#71C4E4',
         padding: 3,
         borderRadius: hp(5),
+        marginRight: hp(2.1),
     },
     classSubject: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
     },
     subjectName: {
         fontSize: hp(1.82),
@@ -171,7 +174,9 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     subjecRow: {
-        marginLeft: hp(2.34),
+        marginLeft: hp(0.8),
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     groupName: {
         borderWidth: 2,

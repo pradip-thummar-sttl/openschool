@@ -11,10 +11,16 @@ import Header from "../../../component/reusable/header/Header";
 const Item = ({ onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>        
         <View style={PAGESTYLE.classSubject}>
-            <View style={PAGESTYLE.border}></View>
             <View style={PAGESTYLE.subjecRow}>
-                <Text style={PAGESTYLE.subjectName}>English</Text>
-                <Text style={PAGESTYLE.subject}>Grammar</Text>
+                <View style={PAGESTYLE.border}></View>
+                <View>
+                    <Text style={PAGESTYLE.subjectName}>English</Text>
+                    <Text style={PAGESTYLE.subject}>Grammar</Text>
+                </View>
+            </View>
+            <View style={PAGESTYLE.timingMain}>
+                <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
+                <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
             </View>
         </View>
     </TouchableOpacity>
