@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { Animated, View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -7,100 +7,120 @@ import FONTS from '../../../utils/Fonts';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
+    const [animationValue, setAnimationValue] = useState(9.50);
     const isHide = () => {
         action(!isSmall)
+        setAnimationValue(isSmall ? 29.42 : 9.50)
         props.hide();
+
+        // if (isSmall) {
+        //     Animated.timing(animatedValue, {
+        //         toValue: 29.42,
+        //         timing: 1500
+        //     }).start(() => {
+        //         console.log(hp(29.42));
+        //     });
+        // }
+        // else {
+        //     Animated.timing(animatedValue, {
+        //         toValue: 9.50,
+        //         timing: 1500
+        //     }).start();
+        // }
     }
+
     return (
         <View style={styles.sidebarHeader}>
-            <View style={[styles.sideBarAside, {width: isSmall? hp(9.50) : hp(29.42)}]}>
-                <TouchableOpacity onPress={()=>isHide()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
-                    {
-                        isSmall? null:
-                        <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
-                        </View>
-                    }
-                </TouchableOpacity>
-                <View style={styles.mainMenu}>
-                    <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
-                        <Image
-                            style={styles.menuIcon}
-                            source={require('../../../assets/images/dashboard2.png')}
-                        />
+            <Animated.View style={[styles.sideBarAside, { width: hp(animationValue) }]} >
+                <View>
+                    <TouchableOpacity onPress={() => isHide()} style={styles.userInfo}>
+                        <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                            isSmall ? null :
+                                <View style={styles.profileTextMain}>
+                                    <Text style={styles.profileTitle}>Johney Depp</Text>
+                                    <Text style={styles.profileDesi}>Administrator</Text>
+                                </View>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
-                        <Image
-                            style={styles.menuIcon}
-                            source={require('../../../assets/images/teachers2.png')}
-                        />
+                    <View style={styles.mainMenu}>
+                        <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={require('../../../assets/images/dashboard2.png')}
+                            />
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={require('../../../assets/images/teachers2.png')}
+                            />
+                            {
+                                isSmall ? null :
+                                    <Text style={styles.menuText}>Teachers</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={require('../../../assets/images/pupils2.png')}
+                            />
+                            {
+                                isSmall ? null :
+                                    <Text style={styles.menuText}>Pupils</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={require('../../../assets/images/messaging.png')}
+                            />
+                            {
+                                isSmall ? null :
+                                    <Text style={styles.menuText}>Messaging</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={require('../../../assets/images/parents2.png')}
+                            />
+                            {
+                                isSmall ? null :
+                                    <Text style={styles.menuText}>Parents</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={require('../../../assets/images/faq2.png')}
+                            />
+                            {
+                                isSmall ? null :
+                                    <Text style={styles.menuText}>FAQ</Text>
+                            }
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.userInfo, styles.userInfobottom]}>
+                        <Image style={styles.bottomUser} source={require('../../../assets/images/profileBack.png')} />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Teachers</Text>
+                            isSmall ? null :
+                                <>
+                                    <View style={styles.profileTextMain}>
+                                        <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                                    </View>
+                                    <TouchableOpacity style={styles.moreMenu}>
+                                        <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
+                                    </TouchableOpacity>
+                                </>
                         }
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
-                        <Image
-                            style={styles.menuIcon}
-                            source={require('../../../assets/images/pupils2.png')}
-                        />
-                        {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Pupils</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
-                        <Image
-                            style={styles.menuIcon}
-                            source={require('../../../assets/images/messaging.png')}
-                        />
-                        {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Messaging</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
-                        <Image
-                            style={styles.menuIcon}
-                            source={require('../../../assets/images/parents2.png')}
-                        />
-                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Parents</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
-                        <Image
-                            style={styles.menuIcon}
-                            source={require('../../../assets/images/faq2.png')}
-                        />
-                        {
-                            isSmall? null:
-                            <Text style={styles.menuText}>FAQ</Text>
-                        }
-                    </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={[styles.userInfo, styles.userInfobottom]}>
-                    <Image style={styles.bottomUser} source={require('../../../assets/images/profileBack.png')} />
-                    {
-                        isSmall? null:
-                        <>
-                            <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitleBottom}>Johney Depp</Text>
-                            </View>
-                            <TouchableOpacity style={styles.moreMenu}>
-                                <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
-                            </TouchableOpacity>
-                        </>
-                    }
-                </View>
-            </View>
+            </Animated.View>
         </View>
     );
 }
@@ -109,7 +129,7 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:'#002211'
+        backgroundColor: '#002211'
     },
     sideBarAside: {
         shadowColor: '#152232',
