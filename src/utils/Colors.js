@@ -28,6 +28,7 @@ const COLORS = {
     purpleDark: '#BC8BFF',
     yellowDark: '#FFAD12',
     lightGrayPupil: '#ECEDF0',
+    dashboardHomeWorkPurple: '#BC8BFD',
 }
 
 export default COLORS;

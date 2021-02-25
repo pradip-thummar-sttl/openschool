@@ -17,6 +17,8 @@ import Header from './src/component/reusable/header/Header';
 import LessonandHomeworkPlanner from './src/screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
 import NotificationDrawer from './src/component/reusable/notificationdrawer/NotificationDrawer';
 import LessonandHomeworkPlannerDashboard from './src/screens/teacher/lessonandhomeworkplannerdashboard/Lessonandhomeworkplannerdashboard';
+import PupuilDashboard from './src/screens/pupil/pupildashboard/Pupildashboard';
+import PupuilDashboardHomeWorkState from './src/screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import combineReducers from './src/reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import STYLE from './src/utils/Style';
@@ -49,8 +51,10 @@ function ScreenStack() {
       <Stack.Screen name="Popup" component={Popup} />
       <Stack.Screen name="Popupuser" component={Popupuser} />
       <Stack.Screen name="Sidebar" component={Sidebar} />
-      <Stack.Screen name="Header" component={Header} /> */}
-      <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
+      <Stack.Screen name="Header" component={Header} /> 
+      <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} /> */}
+      {/* <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> */}
+      <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
     </Stack.Navigator>
   );
 }
