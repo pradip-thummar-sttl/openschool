@@ -19,6 +19,8 @@ export default StyleSheet.create({
     padLeftRight: {
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
+        width: '100%',
+
     },
     commonInput: {
         color:'#03014C',
@@ -195,5 +197,14 @@ export default StyleSheet.create({
     },
     centerText: {
         textAlign: 'center',
+    },
+    drawerWidth: {
+        width: hp(44.27),
+    },
+    openClassLink: {
+        color: COLORS.buttonGreen,
+        textTransform: 'uppercase',
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontBold,
     },
 });

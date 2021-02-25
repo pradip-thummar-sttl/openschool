@@ -8,7 +8,6 @@ const { width, height } = Dimensions.get('window');
 export default StyleSheet.create({
     mainPage: {
         flexDirection: 'row',
-        flex: 1,
     },
     myDay: {
         backgroundColor: COLORS.orage,

@@ -109,7 +109,7 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        flex: 1,
+        backgroundColor:'#002211'
     },
     sideBarAside: {
         shadowColor: '#152232',
