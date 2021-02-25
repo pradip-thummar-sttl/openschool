@@ -17,6 +17,7 @@ import Header from './src/component/reusable/header/Header';
 import LessonandHomeworkPlanner from './src/screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
 import NotificationDrawer from './src/component/reusable/notificationdrawer/NotificationDrawer';
 import LessonandHomeworkPlannerDashboard from './src/screens/teacher/lessonandhomeworkplannerdashboard/Lessonandhomeworkplannerdashboard';
+import TeacherLessonEmpty from './src/screens/teacher/teacherlessonempty/TeacherLessonEmpty';
 import combineReducers from './src/reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import STYLE from './src/utils/Style';
@@ -50,7 +51,8 @@ function ScreenStack() {
       <Stack.Screen name="Popupuser" component={Popupuser} />
       <Stack.Screen name="Sidebar" component={Sidebar} />
       <Stack.Screen name="Header" component={Header} /> */}
-      <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
+      {/* <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} /> */}
+      <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
     </Stack.Navigator>
   );
 }

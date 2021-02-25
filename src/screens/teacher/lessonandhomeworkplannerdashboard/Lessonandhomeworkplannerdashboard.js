@@ -52,7 +52,6 @@ const Pupillist = ({ style }) => (
 );
 const LessonandHomeworkPlannerDashboard = (props) => {
     const [isHide, action] = useState(true);
-    const [animationValue, setAnimationValue] = useState('93%');
     const [selectedId, setSelectedId] = useState(null);
     const pupilRender = ({ item }) => {
         return (
@@ -75,7 +74,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar hide={() => action(!isHide)} />
-            <View style={{width: animationValue}}>
+            <View style={{width: isHide? '93%' : '78%'}}>
                 <Header />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.dashBoardBoxes}>
