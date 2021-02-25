@@ -33,8 +33,7 @@ export default StyleSheet.create({
         height: hp('8%'),
         paddingLeft: hp('7.0%'),
         paddingRight: hp('2.0%'),
-        fontWeight: 'bold',
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
     },
     commonInputPassword: {
         color:'#03014C',

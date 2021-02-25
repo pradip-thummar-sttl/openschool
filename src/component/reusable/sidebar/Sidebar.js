@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -7,14 +7,40 @@ import FONTS from '../../../utils/Fonts';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
-    const isHide = () => {
-        action(!isSmall)
-        props.hide();
+    const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
+    // const isHide = () => {
+    //     action(!isSmall)
+    //     props.hide();
+    // }
+
+    toggleAnimation = () => {
+
+        if (isSmall) {
+            Animated.timing(animationValue, {
+                toValue: hp(29.42),
+                duration: 500
+            }).start(() => {
+                action(false)
+            });
+        }
+        else {
+            Animated.timing(animationValue, {
+                toValue: hp(9.50),
+                duration: 500
+            }).start(() => {
+                action(true)
+            });
+        }
     }
+
+    const animatedStyle = {
+        width: animationValue,
+    }
+
     return (
         <View style={styles.sidebarHeader}>
-            <View style={[styles.sideBarAside, {width: isSmall? hp(9.50) : hp(29.42)}]}>
-                <TouchableOpacity onPress={()=>isHide()} style={styles.userInfo}>
+            <Animated.View style={[styles.sideBarAside, animatedStyle]}>
+                <TouchableOpacity onPress={()=>this.toggleAnimation()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
                     {
                         isSmall? null:
@@ -100,7 +126,7 @@ const Sidebar = (props) => {
                         </>
                     }
                 </View>
-            </View>
+            </Animated.View>
         </View>
     );
 }
@@ -109,17 +135,20 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:'#002211'
-    },
-    sideBarAside: {
+        backgroundColor:'#002211',
+        zIndex: 9,
+        position: 'relative',
         shadowColor: '#152232',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
         shadowRadius: 1,
+    },
+    sideBarAside: {
         backgroundColor: COLORS.white,
         paddingTop: hp(2.0),
         paddingLeft: hp(1.0),
         paddingRight: hp(1.0),
+        overflow: 'hidden',
     },
     userInfo: {
         flexDirection: 'row',
@@ -130,6 +159,7 @@ const styles = StyleSheet.create({
     },
     profileTextMain: {
         paddingLeft: hp(1.5),
+        width: hp(19.53),
     },
     profileTitle: {
         fontSize: hp(2.0),
@@ -165,6 +195,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),
+        width: hp(19.53),
     },
     headerProfile: {
         width: hp(5.40),
@@ -192,9 +223,6 @@ const styles = StyleSheet.create({
     menuIcon: {
         width: hp(3.25),
         height: hp(3.25)
-    },
-    moreMenu: {
-        marginLeft: hp(4),
     },
     moreIcon: {
         width: hp(3),

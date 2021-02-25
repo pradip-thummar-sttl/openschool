@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     massagesIcon: {
-        width: hp(9),
+        width: wp(5.20),
         resizeMode: 'contain',
     },
 });
