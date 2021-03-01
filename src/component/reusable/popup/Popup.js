@@ -18,7 +18,7 @@ const Popup = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={STYLE.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
-                        <Image source={require('../../../assets/images/cancel2.png')} />
+                        <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
                     <View style={STYLE.popupContentMain}>

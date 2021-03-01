@@ -9,10 +9,30 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 
 const LessonandHomeworkPlanner = (props) => {
+    const [isHide, action] = useState(true);
+    const [selectedId, setSelectedId] = useState(null);
+    const pupilRender = ({ item }) => {
+        return (
+          <Pupillist
+            item={item}
+          />
+        );
+    }; 
+    const renderItem = ({ item }) => {
+        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
+    
+        return (
+          <Item
+            item={item}
+            onPress={() => setSelectedId(item.id)}
+            style={{ backgroundColor }}
+          />
+        );
+    }; 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar />
-            <View>
+            <Sidebar hide={() => action(!isHide)} />
+            <View style={{width: isHide? '93%' : '78%'}}>
                 <Header />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.myDay}>

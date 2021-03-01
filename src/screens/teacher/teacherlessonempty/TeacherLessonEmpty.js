@@ -10,25 +10,6 @@ import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 
 const TeacherLessonEmpty = (props) => {
     const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(null);
-    const pupilRender = ({ item }) => {
-        return (
-          <Pupillist
-            item={item}
-          />
-        );
-    }; 
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-    
-        return (
-          <Item
-            item={item}
-            onPress={() => setSelectedId(item.id)}
-            style={{ backgroundColor }}
-          />
-        );
-    }; 
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar hide={() => action(!isHide)} />

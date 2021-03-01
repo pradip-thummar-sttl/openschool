@@ -15,7 +15,7 @@ export default StyleSheet.create({
         paddingRight: hp(2.60),
         paddingLeft: hp(1.60),
         flexDirection: 'row',
-        borderRadius: hp(1.3),
+        borderRadius: hp(1),
         justifyContent: 'space-between',
         height: hp(8.5),
     },
@@ -71,7 +71,7 @@ export default StyleSheet.create({
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
-        borderRadius: hp(1.95),
+        borderRadius: hp(1),
         marginTop: hp(1.30),
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
@@ -97,7 +97,7 @@ export default StyleSheet.create({
         width: '25%',
     },
     boxInnerMain: {
-        borderRadius: hp(1.3),
+        borderRadius: hp(1),
         paddingLeft: hp(2),
         alignItems: 'center',
         flexDirection: 'row',
@@ -116,8 +116,16 @@ export default StyleSheet.create({
     blueBox: {
         backgroundColor: COLORS.lightBlue,
     },
+    timeIcon: {
+        resizeMode:'contain',
+        width: hp(1.76),
+    },
+    calIcon: {
+        resizeMode:'contain',
+        width: hp(1.76),
+    },
     titleBox: {
-        fontSize: hp(1.9),
+        fontSize: hp(2.08),
         fontFamily: FONTS.fontSemiBold,
         position: 'relative',
         zIndex: 9,
@@ -154,7 +162,7 @@ export default StyleSheet.create({
     border: {
         height: hp(5.85),
         backgroundColor: '#71C4E4',
-        padding: 3,
+        padding: hp(0.39),
         borderRadius: hp(5),
         marginRight: hp(2.1),
     },
@@ -290,13 +298,13 @@ export default StyleSheet.create({
         height: 0,
         backgroundColor: 'transparent',
         borderStyle: 'solid',
-        borderTopWidth: 15,
-        borderRightWidth: 15,
-        borderBottomWidth: 15,
-        borderLeftWidth: 15,
+        borderTopWidth: hp(1.95),
+        borderRightWidth: hp(1.95),
+        borderBottomWidth: hp(1.95),
+        borderLeftWidth: hp(1.95),
         position: 'absolute',
-        top: 45,
-        left: -30,
+        top: hp(5.85),
+        left: hp(-3.90),
         borderTopColor: 'transparent',
         borderRightColor: '#fff',
         borderBottomColor: 'transparent',
@@ -319,7 +327,7 @@ export default StyleSheet.create({
     checkIcon: {
         width: hp(1.7),
         resizeMode: 'contain',
-        top: hp(0.5),
+        top: hp(0.2),
     },
     lessonPointText: {
         fontSize: hp(1.85),

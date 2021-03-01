@@ -145,7 +145,7 @@ export default StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
-        width: hp(85),
+        width: hp(69.40),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -154,14 +154,17 @@ export default StyleSheet.create({
     },
     popupBack: {
         width: '100%',
-        height: hp(12),
+        height: hp(10.41),
         resizeMode: "contain",
     },
     cancelButton: {
         position: 'absolute',
-        top: hp(2),
-        right: hp(2),
+        right: hp(1.21),
         zIndex: 9,
+    },
+    cancelButtonIcon: {
+        width: hp(2.94),
+        resizeMode: 'contain',
     },
     popupContentMain: {
         paddingLeft: hp(3.5),
@@ -171,21 +174,25 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     popupTitle: {
-        fontSize: hp(3.2),
+        fontSize: hp(2.86),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
-        marginBottom: hp(2.5),
-        textTransform: 'uppercase',
+        marginBottom: hp(1),
+        //textTransform: 'uppercase',
     },
     popupText: {
-        fontSize: hp(2.4),
+        fontSize: hp(1.8),
         fontFamily: FONTS.fontRegular,
-        color: COLORS.lightGray,
+        color: COLORS.darkGray,
         marginBottom: hp(3.5),
     },
     userProfile: {
         position: 'absolute',
-        top: hp(3),
+        top: hp(1),
+    },
+    userProfileimage: {
+        width: hp(7),
+        resizeMode: 'contain',
     },
     hrCommon: {
         borderBottomWidth: 1,
@@ -223,5 +230,11 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.buttonGreen,
+    },
+    labelCommon: {
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: hp(1.3),
     },
 });
