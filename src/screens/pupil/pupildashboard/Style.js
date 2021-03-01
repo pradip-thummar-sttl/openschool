@@ -360,6 +360,11 @@ export default StyleSheet.create({
     lessonPoints: {
         flexDirection: 'row',
         paddingBottom: hp(1.5),
+        marginBottom: hp(1),
+    },
+    lessonPointsBorder: {
+        flexDirection: 'row',
+        paddingBottom: hp(1.5),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
         marginBottom: hp(1),
@@ -378,8 +383,7 @@ export default StyleSheet.create({
     },
     lessonstartButton: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        alignSelf:'flex-end',
         marginLeft: hp(-1),
         marginRight: hp(-1),
     },    
@@ -473,7 +477,7 @@ export default StyleSheet.create({
     checkIconSquare: {
         width: hp(1.95),
         resizeMode: 'contain',
-        top:hp(-0.88),
+        top:hp(-0.5),
     },
     achivementWrap:{
         flexDirection: 'row',

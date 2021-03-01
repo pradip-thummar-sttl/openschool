@@ -134,7 +134,7 @@ const PupuilDashboard = (props) => {
                                                 </View>
                                                 <View style={PAGESTYLE.lessonstartButton}>
                                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
                                                 </View>
                                             </View>
                                         </View>
@@ -191,7 +191,7 @@ const PupuilDashboard = (props) => {
                                                 <Text style={PAGESTYLE.lessondesciption}>Write a short story from your imagination. You can use the help sheet to plan your story. Your story should be one page long and can be about anything you choose. Make sure correct grammar is used as explained in the lesson.</Text>
                                                 <View style={PAGESTYLE.requirementofClass}>
                                                     <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
-                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                    <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
                                                         <Image source={require('../../../assets/images/checkedSquare2.png')} style={PAGESTYLE.checkIconSquare} />
                                                         <Text style={PAGESTYLE.lessonPointText}>Watch The BBC Bitesize Video.</Text>
                                                     </View>
