@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
         fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
     },
+    notificationBar: {
+        marginLeft: hp(1.25),
+    },
     massagesIcon: {
         width: wp(5.20),
         resizeMode: 'contain',

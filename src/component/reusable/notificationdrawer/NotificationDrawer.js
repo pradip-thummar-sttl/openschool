@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
-import Popup from '../../../component/reusable/popup/Popup';
+import PopupUser from '../../../component/reusable/popup/Popupuser';
 import { ScrollView } from "react-native-gesture-handler";
 import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/PixelRatio";
 
@@ -27,20 +27,19 @@ const NotificationDrawer = (props) => {
                                 <Text style={styles.timingText}>09:00 - 09:30</Text>
                             </View>
                             <TouchableOpacity>
-                                <Text style={STYLE.openClassLink}>{[<Popup />]}</Text>
+                                <Text style={STYLE.openClassLink}>{[<PopupUser />]}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
                 <View>
-                    <Text style={styles.notificationsText}>Live Classes</Text>
+                    <Text style={styles.notificationsText}>Homework</Text>
                     <View style={styles.classDetail}>
                         <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
                         <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
                         <View style={styles.timingJoinClass}>
                             <View style={styles.timing}>
-                                <Image source={require('../../../assets/images/clock2.png')} style={styles.timingClass} />
-                                <Text style={styles.timingText}>09:00 - 09:30</Text>
+                                <Text style={styles.timingText}>6 submitted</Text>
                             </View>
                             <TouchableOpacity>
                                 <Text style={STYLE.openClassLink}>Check</Text>
@@ -49,14 +48,27 @@ const NotificationDrawer = (props) => {
                     </View>
                 </View>
                 <View>
-                    <Text style={styles.notificationsText}>Live Classes</Text>
+                    <Text style={styles.notificationsText}>Personal</Text>
                     <View style={styles.classDetail}>
                         <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
-                        <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
+                        <Text style={styles.classsummary}>You have a new message from</Text>
                         <View style={styles.timingJoinClass}>
                             <View style={styles.timing}>
-                                <Image source={require('../../../assets/images/clock2.png')} style={styles.timingClass} />
-                                <Text style={styles.timingText}>09:00 - 09:30</Text>
+                                <Text style={styles.timingText}>Mrs Ann Le-Paradesi</Text>
+                            </View>
+                            <TouchableOpacity>
+                                <Text style={STYLE.openClassLink}>Read</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+                <View>
+                    <View style={styles.classDetail}>
+                        <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                        <Text style={styles.classsummary}>You have a new message from</Text>
+                        <View style={styles.timingJoinClass}>
+                            <View style={styles.timing}>
+                                <Text style={styles.timingText}>Mr Harminder Singh</Text>
                             </View>
                             <TouchableOpacity>
                                 <Text style={STYLE.openClassLink}>Read</Text>
@@ -127,6 +139,7 @@ const styles = StyleSheet.create({
     closeIconSmall: {
         width: hp(2.8),
         resizeMode: 'contain',
+        opacity: 0.4,
     },
     classsummary: {
         paddingRight: hp(5.1),

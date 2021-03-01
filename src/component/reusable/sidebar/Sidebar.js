@@ -88,7 +88,7 @@ const Sidebar = (props) => {
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>Messaging</Text>
+                            <Text style={styles.menuText}>Pupil Management</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
         paddingRight: hp(2.0),
         paddingBottom: hp(2.2),
         borderRadius: hp(1.5),
+        marginBottom: hp(0.9),
     },
     menuItemSelected: {
         backgroundColor: '#F3F5F9',
@@ -191,11 +192,11 @@ const styles = StyleSheet.create({
         color: '#262626',
     },
     menuText: {
-        fontSize: hp(2.0),
+        fontSize: hp(1.8),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),
-        width: hp(19.53),
+        width: hp(22),
     },
     headerProfile: {
         width: hp(5.40),
