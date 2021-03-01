@@ -25,6 +25,8 @@ export default StyleSheet.create({
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
+        height: hp(3.60),
+        lineHeight: hp(3.60),
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -81,10 +83,12 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor:COLORS.white,
-        shadowColor:COLORS.lightGray,
-        shadowOffset:{width: 0,height: hp(0.2),},
+        shadowColor: "#000",
+        shadowOffset: {width: 0, height: 1,},
+        elevation: 3,
+        borderRadius: hp(1.95),
         height:hp(8.85),
-        borderRadius:hp(1.2),
+        borderRadius:hp(2.0),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -176,7 +180,13 @@ export default StyleSheet.create({
     },
     firstColumn:{
       paddingLeft: hp(4.5),
-      width:hp(20.55),
+      width:hp(15.55),
+    },
+    secoundColumn:{
+        width:hp(17.55),
+    },
+    lastColumn:{
+        width:hp(30.55),
     },
     yesText:{
       fontFamily: FONTS.fontSemiBold,
@@ -187,5 +197,15 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color:COLORS.yellowDark, 
         fontSize:hp(1.82), 
+    },
+    whiteBg: {
+        backgroundColor: COLORS.backgroundColorCommon,
+        paddingLeft:hp(2.0),
+        paddingRight:hp(2.0),
+        paddingBottom: hp(2.0),
+        paddingTop: hp(2.0),
+    },
+    teacherLessonGrid:{
+       
     },
 });

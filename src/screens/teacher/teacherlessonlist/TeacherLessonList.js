@@ -14,7 +14,7 @@ const Pupillist = ({ style }) => (
             <View style={PAGESTYLE.border}></View>
             <Text style={PAGESTYLE.pupilName}>English</Text>
         </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
             <Text style={PAGESTYLE.pupilName}>Grammar</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
@@ -35,7 +35,6 @@ const Pupillist = ({ style }) => (
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={require('../../../assets/images/right-arrow2.png')} />
             </TouchableOpacity>
         </View>
-
     </View>
 );
 
@@ -64,13 +63,13 @@ const TeacherLessonList = (props) => {
             <Sidebar hide={() => action(!isHide)} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
-                <ScrollView style={STYLE.padLeftRight}>
-                    <View>
+                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                    <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>
-                            <View style={PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn}>
+                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Subject</Text>
                             </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn}>
+                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Lesson Topic</Text>
                             </View>
                             <View style={PAGESTYLE.pupilTableHeadingMain}>
@@ -85,11 +84,10 @@ const TeacherLessonList = (props) => {
                             <View style={PAGESTYLE.pupilTableHeadingMain}>
                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Published</Text>
                             </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
+                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Homework</Text>
                             </View>
                         </View>
-                        <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
@@ -100,7 +98,6 @@ const TeacherLessonList = (props) => {
                                 />
                             </SafeAreaView>
                         </View>
-
                     </View>
                 </ScrollView>
             </View>
