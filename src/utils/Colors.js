@@ -29,6 +29,8 @@ const COLORS = {
     yellowDark: '#FFAD12',
     lightGrayPupil: '#ECEDF0',
     dashboardHomeWorkPurple: '#BC8BFD',
+    videoLinkBorder: '#E7E9EF',
+    greyplaceholder: '#262626',
 }
 
 export default COLORS;
