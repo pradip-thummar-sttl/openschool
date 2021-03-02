@@ -4,7 +4,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
-import { MenuProvider } from 'react-native-popup-menu';
 import {
     Menu,
     MenuOptions,
@@ -13,55 +12,53 @@ import {
 } from 'react-native-popup-menu';
 const HeaderWhite = (props) => {
     return (
-        <MenuProvider style={styles.filterMenu}>
-            <View style={styles.headerBarMainWhite}>
-                <View style={styles.headerMain}>
-                    <Text style={styles.mainTitle}>Lesson and homework planner</Text>
-                    <View style={styles.headerRight}>
-                        <TouchableOpacity style={styles.notificationBar}>
-                            <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.filterbarMain}>
-                    <View style={styles.field}>
-                        <Image
-                            style={styles.userIcon}
-                            source={require('../../../assets/images/search2.png')} />
-                        <TextInput
-                            style={[STYLE.commonInput, styles.searchHeader]}
-                            placeholder="Search subject, class, etc"
-                            maxLength={50}
-                            placeholderTextColor={COLORS.menuLightFonts}
-                        />
-                    </View>                    
-                    <TouchableOpacity style={styles.buttonGroup}>                    
-                        <Menu>
-                        <MenuTrigger style={styles.commonButtonBorderedheader} text='by subject' /> 
-                            <MenuOptions style={styles.filterListWrap}>
-                                <MenuOption>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        <Image source={require('../../../assets/images/check-icon2.png')} style={styles.checkMark} />
-                                    </View>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                    </View>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                    </View>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                        <Image style={styles.filterIcon} source={require('../../../assets/images/filter2.png')} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={require('../../../assets/images/addIcon2.png')} />
-                        <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+        <View style={styles.headerBarMainWhite}>
+            <View style={styles.headerMain}>
+                <Text style={styles.mainTitle}>Lesson and homework planner</Text>
+                <View style={styles.headerRight}>
+                    <TouchableOpacity style={styles.notificationBar}>
+                        <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
-        </MenuProvider>
+            <View style={styles.filterbarMain}>
+                <View style={styles.field}>
+                    <Image
+                        style={styles.userIcon}
+                        source={require('../../../assets/images/search2.png')} />
+                    <TextInput
+                        style={[STYLE.commonInput, styles.searchHeader]}
+                        placeholder="Search subject, class, etc"
+                        maxLength={50}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                    />
+                </View>
+                <TouchableOpacity style={styles.buttonGroup}>
+                    <Menu>
+                        <MenuTrigger style={styles.commonButtonBorderedheader} text='by subject' />
+                        <MenuOptions style={styles.filterListWrap}>
+                            <MenuOption>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Subject</Text>
+                                    <Image source={require('../../../assets/images/check-icon2.png')} style={styles.checkMark} />
+                                </View>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Date</Text>
+                                </View>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Name</Text>
+                                </View>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
+                    <Image style={styles.filterIcon} source={require('../../../assets/images/filter2.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonGroup}>
+                    <Image style={styles.addIcon} source={require('../../../assets/images/addIcon2.png')} />
+                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     );
 }
 export default HeaderWhite;
@@ -164,27 +161,27 @@ const styles = StyleSheet.create({
         left: hp(1.8),
         zIndex: 9,
     },
-    filterList:{
-        flexDirection:'row',
-        justifyContent: 'space-between',  
-        borderBottomColor:COLORS.bottomProfileLightBorder,
-        borderBottomWidth:1,  
-        lineHeight:hp(4.94),
-        paddingBottom:hp(1),
-        marginBottom:hp(1),
-        borderRadius:hp(0.78),
+    filterList: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
+        lineHeight: hp(4.94),
+        paddingBottom: hp(1),
+        marginBottom: hp(1),
+        borderRadius: hp(0.78),
     },
-    filterListWrap:{
-        paddingLeft:hp(1.21),
-        paddingRight:hp(1.21),
-        paddingTop:hp(0.25),
-        paddingBottom:hp(0.25),
+    filterListWrap: {
+        paddingLeft: hp(1.21),
+        paddingRight: hp(1.21),
+        paddingTop: hp(0.25),
+        paddingBottom: hp(0.25),
     },
-    checkMark:{
-        width:hp(1.48),
-        resizeMode:'contain',
+    checkMark: {
+        width: hp(1.48),
+        resizeMode: 'contain',
     },
-    filterListText:{
+    filterListText: {
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,

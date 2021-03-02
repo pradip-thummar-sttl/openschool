@@ -27,6 +27,7 @@ const COLORS = {
     dashboardGreenButton: '#00A36B',
     purpleDark: '#BC8BFF',
     yellowDark: '#FFAD12',
+    yellowBorder: '#FFCC22',
     lightGrayPupil: '#ECEDF0',
     dashboardHomeWorkPurple: '#BC8BFD',
 }
