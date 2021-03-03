@@ -34,7 +34,7 @@ const HeaderWhite = (props) => {
                     />
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
-                    <Menu>
+                    <Menu style={styles.filterGroup}>
                         <MenuTrigger style={styles.commonButtonBorderedheader} text='by subject' />
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        marginBottom: hp(5.85),
+       // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
-        fontSize: hp(3),
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
@@ -185,5 +184,5 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
-    }
+    },
 });
