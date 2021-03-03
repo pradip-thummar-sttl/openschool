@@ -21,6 +21,7 @@ import TeacherLessonEmpty from './src/screens/teacher/teacherlessonempty/Teacher
 import PupuilDashboard from './src/screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from './src/screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from './src/screens/teacher/teacherlessonlist/TeacherLessonList';
+import TeacherLessonDetail from './src/screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import combineReducers from './src/reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import STYLE from './src/utils/Style';
@@ -62,6 +63,7 @@ function ScreenStack() {
       {/* <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} /> */}
       <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
+      {/* <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />  */}
     </Stack.Navigator>
   );
 }
