@@ -9,8 +9,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
-import Popupaddnewdata from "../../../component/reusable/popup/Popupaddnewdata"
-const TeacherLessonEmpty = (props) => {
+const PupilLessonEmpty = (props) => {
     const [isHide, action] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -19,16 +18,15 @@ const TeacherLessonEmpty = (props) => {
                 <HeaderWhite />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={styles.whiteBoard}>
-                        <View><Popupaddnewdata /></View>
+                        <View><Popupdata /></View>
                         <View style={{top: 20,}}><Popupdatasecond /></View>
-                        <View style={{top: 40,}}><Popupdata /></View>
                     </View>
                 </ScrollView>
             </View>
         </View>
     );
 }
-export default TeacherLessonEmpty;
+export default PupilLessonEmpty;
 
 const styles = StyleSheet.create({
     whiteBoard: {
