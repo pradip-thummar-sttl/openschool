@@ -10,6 +10,10 @@ import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import TLDetail from './lessonplan/TeacherLessonDetail';
 import TLDetailEdit from './lessonplan/TeacherLessonDetailEdit';
 import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
+import TLHomeWork from './lessonhomework/TeacherLessonHomeWork';
+import TLHomeWorkInstructionalVideoAdded from './lessonhomework/TeacherLessonHomeWorkInstructionalVideoAdded';
+import TLHomeWorkSubmitted from './homeworksubmitted/TeacherLessonHomeWorkSubmitted';
+
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -39,7 +43,10 @@ const TeacherLessonDetail = (props) => {
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     {/* <TLDetail /> */}
                     {/* <TLDetailEdit /> */}
-                    <TLDetailAdd />
+                    {/* <TLDetailAdd /> */}
+                    {/* <TLHomeWork /> */}
+                    {/* <TLHomeWorkInstructionalVideoAdded /> */}
+                    <TLHomeWorkSubmitted />
                 </ScrollView>
 
             </View>

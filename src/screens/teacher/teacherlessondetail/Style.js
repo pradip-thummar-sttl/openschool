@@ -61,8 +61,8 @@ export default StyleSheet.create({
         marginRight: hp(8.7),
     },
     subjectDateTime: {
-        flexDirection: 'row',
         alignItems: 'center',
+        width: '100%',
     },
     datetimeText: {
         fontSize: hp(1.82),
@@ -151,6 +151,14 @@ export default StyleSheet.create({
         borderRadius: hp(1.5),
         flexDirection: 'row',
     },
+    videoLinkBlockSmall: {
+        width: hp(24.84),
+        padding: hp(1.43),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1.5),
+        flexDirection: 'row',
+    },
     videoLinkBlockSpaceTop: {
         marginTop: hp(4.81),
     },
@@ -183,15 +191,23 @@ export default StyleSheet.create({
         marginBottom: hp(1.04),
         position: 'relative',
     },
+    checkBoxLabelLine: {
+        flexDirection: 'row',
+        width: 'auto',
+        paddingBottom: hp(1.30),
+        marginBottom: hp(1.04),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.videoLinkBorder,
+    },
     checkBoxLabelText: {
-        lineHeight: hp(4.60),
+        lineHeight: hp(2.82),
         fontSize: hp(1.85),
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(3.23),
     },
     checkBoxcommon: {
         position: 'absolute',
-        top: hp(1.5),
+        top: hp(0.7),
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -200,6 +216,15 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: hp(1.8),
         paddingBottom: hp(1.8),
+    },
+    toggleGrpBox: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderColor: COLORS.videoLinkBorder,
+        borderWidth: 1,
+        marginBottom: hp(1.8),
+        padding: hp(1.1),
+        borderRadius: hp(1.5),
     },
     toggleText: {
         fontFamily: FONTS.fontRegular,
@@ -214,7 +239,10 @@ export default StyleSheet.create({
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: hp(1.43),
+        paddingLeft: hp(1.43),
+        paddingRight: hp(1.43),
+        paddingTop: hp(1),
+        paddingBottom: hp(0.3),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.5),
@@ -236,6 +264,7 @@ export default StyleSheet.create({
     grpThumbVideo: {
         width: hp(31.90),
         resizeMode: 'contain',
+        alignItems: 'center',
     },
     subLineTitle: {
         marginTop: hp(-3.5),
@@ -294,8 +323,15 @@ export default StyleSheet.create({
         borderRadius: hp(1.5),
         flexDirection: 'row',
     },
+    recordinNormalSpaceTop: {
+        marginTop: hp(1.82),
+    },
     dropDownFormInput: {
         width: '50%',
+    },
+    duedateBox: {
+        width: '47.8%',
+        marginLeft: hp(1.82),
     },
     dropDown: {
         flexDirection: 'row',
@@ -333,6 +369,7 @@ export default StyleSheet.create({
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 1,
@@ -345,7 +382,6 @@ export default StyleSheet.create({
         paddingRight: hp('2.0%'),
         paddingTop: hp('2.0%'),
         paddingBottom: hp('2.0%'),
-        fontFamily: FONTS.fontRegular,
     },
     textBox: {
         flexDirection: 'row',
@@ -377,7 +413,23 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
     },
-    dateTime:{
+    commonInputTextareaNormal: {
+        width: '100%',
+        height: hp(10.67),
+        borderWidth: 1,
+        borderColor: COLORS.commonBorderColor,
+        borderRadius: hp(1.3),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        paddingRight: hp(1.5),
+        paddingLeft: hp(1.5),
+        marginTop: hp(1.3),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(2.60),
+        fontFamily: FONTS.fontRegular,
+    },
+    dateTime: {
         paddingTop: hp(1.5),
         paddingBottom: hp(1.5),
         paddingRight: hp(1.5),
@@ -392,7 +444,247 @@ export default StyleSheet.create({
         width: '31.5%',
         marginRight: hp(2.1),
     },
-    blockSpaceBottom:{
-        marginBottom:hp(2.6),
-    }
+    blockSpaceBottom: {
+        marginBottom: hp(2.6),
+    },
+    uploadBlock: {
+        alignItems: 'center',
+    },
+    checkBoxGroup: {
+
+    },
+    dueDateWrap: {
+        borderRightWidth: 2,
+        borderRightColor: COLORS.commonBorderColor,
+        marginRight: hp(1.82),
+        paddingRight: hp(1.82),
+    },
+    dueDateText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        paddingTop: hp(1.7),
+        paddingBottom: hp(1.7),
+    },
+    dropDownSmallWrapNormal: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        borderColor: COLORS.commonBorderColor,
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
+    },
+    videoRecording: {
+        flexDirection: 'row',
+        marginTop: hp(1.6),
+    },
+    videoRecordSpace: {
+        marginRight: hp(1.6),
+    },
+    // Grid Table
+    pupilTable: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        height: hp(3.60),
+        lineHeight: hp(3.60),
+    },
+    pupilDashboard: {
+        paddingLeft: hp(3.125),
+        paddingTop: hp(2.21),
+        paddingRight: hp(2.21),
+        paddingBottom: hp(3.51),
+    },
+    pupilTableHeadingMain: {
+        width: hp(15.80),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+    },
+    tabpupil2: {
+        width: hp(17.97),
+    },
+    tabpupil3: {
+        width: hp(20.18),
+        marginRight: hp(9.50),
+    },
+    tabpupil4: {
+        width: hp(18.22),
+    },
+    pupilTableHeadingMainTitle: {
+        fontSize: hp(1.5),
+        lineHeight: hp(2.60),
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontSemiBold,
+        textTransform: 'uppercase',
+    },
+    pupilTableHeadingMainsubTitle: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
+        lineHeight: hp(2.08),
+        marginRight: hp(2.60),
+    },
+    pupilTableHeadingMainsubTitlestar: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
+        lineHeight: hp(2.08),
+        marginRight: hp(0.91),
+    },
+    pupilTableHeadingsubMain: {
+        flexDirection: 'row',
+    },
+    pupilhrCustomMargin: {
+        marginTop: hp(1.95),
+        marginBottom: hp(1.30),
+    },
+    pupilData: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1, },
+        elevation: 3,
+        borderRadius: hp(1.95),
+        height: hp(8.85),
+        borderRadius: hp(2.0),
+    },
+    pupilProfile: {
+        width: hp(15.80),
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    groupColumnmain: {
+        width: hp(17.97),
+    },
+    groupColumn: {
+        width: hp(5.59),
+        alignItems: 'center',
+    },
+    pupilgroupName: {
+        textAlign: 'center',
+    },
+    perfomanceColumn: {
+        flexDirection: 'row',
+        width: hp(20.18),
+        marginRight: hp(9.50),
+    },
+    perfomanceDotmain: {
+        width: hp(10.80),
+        alignItems: 'center',
+        marginRight: hp(2.60),
+    },
+    perfomanceDotmainTwo: {
+        width: hp(7),
+        alignItems: 'center',
+    },
+    perfomanceDots: {
+        width: hp(1.1),
+        height: hp(1.1),
+        borderRadius: hp(100),
+    },
+    purpleDot: {
+        backgroundColor: COLORS.purpleDark,
+    },
+    yellowDot: {
+        backgroundColor: COLORS.yellowDark,
+    },
+    rewardColumn: {
+        flexDirection: 'row',
+    },
+    rewardStar: {
+        width: hp(5.5),
+        marginRight: hp(0.91),
+    },
+    rewardStartIcon: {
+        width: hp(2.15),
+        resizeMode: 'contain',
+        alignSelf: 'center',
+    },
+    pupilDetailLink: {
+        width: hp(10),
+        alignItems: 'flex-end',
+    },
+    pupilDetaillinkIcon: {
+        width: hp(1),
+        resizeMode: 'contain',
+    },
+    pupilImage: {
+        width: hp(3.7),
+        height: hp(3.7),
+        borderRadius: hp(100),
+        backgroundColor: COLORS.lightGrayPupil,
+        marginRight: hp(1.69),
+    },
+    pupilName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    pupilgroupName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    border: {
+        height: hp(5.85),
+        backgroundColor: '#71C4E4',
+        padding: 3,
+        borderRadius: hp(5),
+        marginRight: hp(2.1),
+        marginLeft: hp(1.8),
+        width: hp(0.5),
+        position: 'absolute',
+        top: hp(-1.5),
+    },
+    firstColumn: {
+        paddingLeft: hp(4.5),
+        width: hp(34.55),
+    },
+    secoundColumn: {
+        width: hp(22.55),
+    },
+    lastColumn: {
+        width: hp(20.55),
+        justifyContent: 'space-between',
+    },
+    yesText: {
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.dashboardPupilBlue,
+        fontSize: hp(1.82),
+    },
+    noText: {
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.yellowDark,
+        fontSize: hp(1.82),
+    },
+    markText: {
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.purpleDark,
+        fontSize: hp(1.82),
+    },
+    whiteBg: {
+        backgroundColor: COLORS.backgroundColorCommon,
+        paddingLeft: hp(2.0),
+        paddingRight: hp(2.0),
+        paddingBottom: hp(2.0),
+        paddingTop: hp(2.0),
+    },
+    userStamp: {
+        height: hp(3.64),
+        width: hp(3.64),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
+        marginRight: hp(2.1),
+        position: 'absolute',
+        top: hp(-0.5),
+        left: hp(3.5),
+    },
+    userStampName: {
+        paddingLeft:hp(4.0),
+    },
 });
