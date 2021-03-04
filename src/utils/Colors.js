@@ -31,7 +31,7 @@ const COLORS = {
     lightGrayPupil: '#ECEDF0',
     dashboardHomeWorkPurple: '#BC8BFD',
     videoLinkBorder: '#E7E9EF',
-    greyplaceholder: '#262626',
+    greyplaceholder: '#4E4E4E',
 }
 
 export default COLORS;

@@ -9,6 +9,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import TLDetail from './lessonplan/TeacherLessonDetail';
 import TLDetailEdit from './lessonplan/TeacherLessonDetailEdit';
+import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -37,7 +38,8 @@ const TeacherLessonDetail = (props) => {
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     {/* <TLDetail /> */}
-                    <TLDetailEdit />
+                    {/* <TLDetailEdit /> */}
+                    <TLDetailAdd />
                 </ScrollView>
 
             </View>
