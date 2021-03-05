@@ -13,6 +13,8 @@ import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
 import TLHomeWork from './lessonhomework/TeacherLessonHomeWork';
 import TLHomeWorkInstructionalVideoAdded from './lessonhomework/TeacherLessonHomeWorkInstructionalVideoAdded';
 import TLHomeWorkSubmitted from './homeworksubmitted/TeacherLessonHomeWorkSubmitted';
+import TLHomeWorkSubmittedDetail from './homeworksubmitted/TeacherLessonHomeWorkSubmittedDetail';
+import TLHomeWorkSubmittedDetailConfirmation from './homeworksubmitted/TeacherLessonHomeWorkSubmittedConfirmation';
 
 
 const TeacherLessonDetail = (props) => {
@@ -46,7 +48,9 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLDetailAdd /> */}
                     {/* <TLHomeWork /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                    <TLHomeWorkSubmitted />
+                    {/* <TLHomeWorkSubmitted /> */}
+                    {/* <TLHomeWorkSubmittedDetail /> */}
+                    <TLHomeWorkSubmittedDetailConfirmation />
                 </ScrollView>
 
             </View>
