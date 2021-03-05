@@ -158,7 +158,7 @@ const TLDetail = (props) => {
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch isOn={true} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>

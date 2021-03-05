@@ -827,4 +827,44 @@ export default StyleSheet.create({
     centerStar:{
         alignItems:'center',
     },
+    videoTitle:{
+        fontFamily:FONTS.fontSemiBold,
+        fontSize:hp(2.08),
+        color: COLORS.darkGray,
+    },
+    videoWrap:{
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        flexWrap:'wrap',
+    },  
+    videoThumb:{
+        position:'relative',
+        flexDirection:'row',
+        marginRight:hp(1.56),
+    },
+    videoThumbnail:{        
+        width:hp(26.17),
+        resizeMode:'contain',
+    },
+    videoPlay:{
+        width:hp(5.20),
+        resizeMode:'contain',
+        position:'absolute',
+        top:hp(9.5),
+        left:hp(11.32),
+    },
+    videoSelected:{
+        width:hp(2.17),
+        resizeMode:'contain',
+        position:'absolute',
+        bottom:hp(5.24),
+        right:hp(2.5),
+    },
+    videoSubTitle:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color: COLORS.darkGray,
+        flexDirection:'row',
+        lineHeight:hp(1.82),
+    },
 });

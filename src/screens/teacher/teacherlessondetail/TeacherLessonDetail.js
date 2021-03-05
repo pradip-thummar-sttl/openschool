@@ -10,11 +10,13 @@ import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import TLDetail from './lessonplan/TeacherLessonDetail';
 import TLDetailEdit from './lessonplan/TeacherLessonDetailEdit';
 import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
+import TLVideoGallery from './lessonplan/TeacherLessonVideoGallery';
 import TLHomeWork from './lessonhomework/TeacherLessonHomeWork';
 import TLHomeWorkInstructionalVideoAdded from './lessonhomework/TeacherLessonHomeWorkInstructionalVideoAdded';
 import TLHomeWorkSubmitted from './homeworksubmitted/TeacherLessonHomeWorkSubmitted';
 import TLHomeWorkSubmittedDetail from './homeworksubmitted/TeacherLessonHomeWorkSubmittedDetail';
 import TLHomeWorkSubmittedDetailConfirmation from './homeworksubmitted/TeacherLessonHomeWorkSubmittedConfirmation';
+
 
 
 const TeacherLessonDetail = (props) => {
@@ -47,10 +49,12 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
                     {/* <TLHomeWork /> */}
+                    <TLVideoGallery />
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
                     {/* <TLHomeWorkSubmitted /> */}
                     {/* <TLHomeWorkSubmittedDetail /> */}
-                    <TLHomeWorkSubmittedDetailConfirmation />
+                    {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                    {/* <Popupaddnewdata /> */}
                 </ScrollView>
 
             </View>
