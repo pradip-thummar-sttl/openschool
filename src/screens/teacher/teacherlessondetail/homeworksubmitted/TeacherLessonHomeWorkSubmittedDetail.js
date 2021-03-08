@@ -51,42 +51,42 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
+                            <CheckBox
+                                    style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
+                                    onCheckColor={'#50A7F0'}
+                                    onTintColor={'#50A7F0'}
+                                    tintColor={'#50A7F0'}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
+                            <CheckBox
+                                    style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
+                                    onCheckColor={'#50A7F0'}
+                                    onTintColor={'#50A7F0'}
+                                    tintColor={'#50A7F0'}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
+                            <CheckBox
+                                    style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
+                                    onCheckColor={'#50A7F0'}
+                                    onTintColor={'#50A7F0'}
+                                    tintColor={'#50A7F0'}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
+                            <CheckBox
+                                    style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
+                                    onCheckColor={'#50A7F0'}
+                                    onTintColor={'#50A7F0'}
+                                    tintColor={'#50A7F0'}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
