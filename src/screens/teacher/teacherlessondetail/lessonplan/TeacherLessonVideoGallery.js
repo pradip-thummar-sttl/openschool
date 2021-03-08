@@ -30,7 +30,7 @@ const TLVideoGallery = (props) => {
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/tick-selected2.png')} />
                 </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                <Text style={PAGESTYLE.videoSubTitle}>TED-ED. Conserving the Amazo…</Text>
                 </View>
                 <View>
                 <View style={PAGESTYLE.videoThumb}>
@@ -38,15 +38,15 @@ const TLVideoGallery = (props) => {
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
                 </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                <Text style={PAGESTYLE.videoSubTitle}>Scratch Garden. Plants and Inse…</Text>
                 </View>
                 <View>
-                <View style={PAGESTYLE.videoThumb}>
+                <View style={[PAGESTYLE.videoThumb, PAGESTYLE.rightSpaceNone]}>
                     <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/amazing-rainforest2.png')} />
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
                 </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                <Text style={PAGESTYLE.videoSubTitle}>Amazing Rainforest: Birds &amp; Inse…</Text>
                 </View>
                 <View>
                 <View style={PAGESTYLE.videoThumb}>
@@ -54,7 +54,7 @@ const TLVideoGallery = (props) => {
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
                 </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                <Text style={PAGESTYLE.videoSubTitle}>DreamWorksTV: 25 Facts about…</Text>
                 </View>
                 <View>
                 <View style={PAGESTYLE.videoThumb}>
@@ -62,7 +62,7 @@ const TLVideoGallery = (props) => {
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
                 </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                <Text style={PAGESTYLE.videoSubTitle}>Scratch Garden. Plants and Inse…</Text>
                 </View>
                 <View>
                 <View style={PAGESTYLE.videoThumb}>
@@ -70,10 +70,10 @@ const TLVideoGallery = (props) => {
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
                 </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                <Text style={PAGESTYLE.videoSubTitle}>Nat Geo Kids: What comes from…</Text>
                 </View>
             </View>
-            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Videos</Text>
+            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Games &amp; Quizes</Text>
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.videoWrap}>
                 <View>
@@ -101,7 +101,7 @@ const TLVideoGallery = (props) => {
                 <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
                 </View>
                 <View>
-                <View style={PAGESTYLE.videoThumb}>
+                <View style={[PAGESTYLE.videoThumb, PAGESTYLE.rightSpaceNone]}>
                     <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/amazing-rainforest2.png')} />
                     <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
                     <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
