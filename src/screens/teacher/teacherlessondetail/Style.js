@@ -844,21 +844,22 @@ export default StyleSheet.create({
     },
     videoThumbnail:{        
         width:hp(26.17),
+        height:hp(17.83),
         resizeMode:'contain',
     },
     videoPlay:{
         width:hp(5.20),
         resizeMode:'contain',
         position:'absolute',
-        top:hp(9.5),
+        top:hp(5.5),
         left:hp(11.32),
     },
     videoSelected:{
         width:hp(2.17),
         resizeMode:'contain',
         position:'absolute',
-        bottom:hp(5.24),
-        right:hp(2.5),
+        bottom:hp(1),
+        right:hp(1.24),
     },
     videoSubTitle:{
         fontFamily:FONTS.fontRegular,
@@ -866,5 +867,10 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         flexDirection:'row',
         lineHeight:hp(1.82),
+        paddingTop:hp(1.5),
+        paddingBottom:hp(1.5),
+    },
+    spaceTop:{
+        marginTop:hp(3.5),
     },
 });
