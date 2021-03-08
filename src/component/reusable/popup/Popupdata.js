@@ -83,8 +83,8 @@ const Popupdata = (props) => {
                                         <Image style={styles.uploadCalIcon} source={require('../../../assets/images/upload-calendar2.png')} />
                                     </TouchableOpacity>
                                     <View style={styles.lessonstartButton}>
-                                        <TouchableOpacity style={styles.buttonGrp}><Text style={[STYLE.commonButtonBordered, styles.greenBordered]}>Mark as Absent</Text></TouchableOpacity>
-                                        <TouchableOpacity style={styles.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
+                                        <TouchableOpacity style={styles.buttonGrp}><Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text></TouchableOpacity>
+                                        <TouchableOpacity style={styles.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
                                     </View>
                                 </View>
                             </View>
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
         paddingTop: hp(0.5),
     },
     titleTab: {
-        fontSize: hp(3.125),
-        fontFamily: FONTS.fontBold,
+        fontSize: hp(2.86),
+        fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(4.55),
         color: COLORS.darkGray,
         marginBottom: hp(0.2),
@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     },
     requirementofClass: {
         marginTop: hp(4.81),
+        marginBottom: hp(1.81),
     },
     requireText: {
         fontSize: hp(2.08),
