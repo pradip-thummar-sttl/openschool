@@ -17,11 +17,12 @@ import Header from './src/component/reusable/header/Header';
 import LessonandHomeworkPlanner from './src/screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
 import NotificationDrawer from './src/component/reusable/notificationdrawer/NotificationDrawer';
 import LessonandHomeworkPlannerDashboard from './src/screens/teacher/lessonandhomeworkplannerdashboard/Lessonandhomeworkplannerdashboard';
-import TeacherLessonEmpty from './src/screens/teacher/teacherlessonempty/TeacherLessonEmpty';
+import PupilLessonEmpty from './src/screens/pupil/pupillessonempty/PupilLessonEmpty';
 import PupuilDashboard from './src/screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from './src/screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from './src/screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from './src/screens/teacher/teacherlessondetail/TeacherLessonDetail';
+import TeacherLessonEmpty from './src/screens/teacher/teacherlessonempty/TeacherLessonEmpty';
 import combineReducers from './src/reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import STYLE from './src/utils/Style';
@@ -63,7 +64,11 @@ function ScreenStack() {
       {/* <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} /> */}
       {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
-      <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} /> 
+    <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} /> 
+      {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
+      {/* <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />  */}
+      {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
+      <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
     </Stack.Navigator>
   );
 }
