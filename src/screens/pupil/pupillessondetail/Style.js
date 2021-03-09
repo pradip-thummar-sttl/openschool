@@ -481,6 +481,7 @@ export default StyleSheet.create({
     dueDateTextBold: {
         fontFamily: FONTS.fontSemiBold,
         fontSize: hp(1.82),
+        marginLeft: hp(0.5),
     },
     dropDownSmallWrapNormal: {
         flexDirection: 'row',

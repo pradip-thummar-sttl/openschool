@@ -45,16 +45,15 @@ const TeacherLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    <TLDetail />
+                    {/* <TLDetail /> */}
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
-                    {/* <TLHomeWork /> */}
+                    <TLHomeWork />
                     {/* <TLVideoGallery /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
                     {/* <TLHomeWorkSubmitted /> */}
                     {/* <TLHomeWorkSubmittedDetail /> */}
                     {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
-                    {/* <Popupaddnewdata /> */}
                 </ScrollView>
 
             </View>

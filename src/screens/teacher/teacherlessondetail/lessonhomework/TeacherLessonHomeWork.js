@@ -9,7 +9,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
 
 const TLHomeWork = (props) => {
     const [date, setDate] = useState(new Date());
@@ -67,7 +67,7 @@ const TLHomeWork = (props) => {
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>
                             <Image source={require('../../../../assets/images/recording-icon2.png')} style={PAGESTYLE.recordingLinkIcon} />
-                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                            <Popupaddrecording />
                         </View>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
