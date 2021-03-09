@@ -1051,4 +1051,27 @@ export default StyleSheet.create({
     markSubmittedSpaceLeft:{
         marginLeft:hp(3.5),
     },
+    videoThumbMedium:{
+        width:hp(14.71),
+        height:hp(10.02),
+        resizeMode:'contain',
+        marginRight:hp(1.5),
+    },
+    feedbackVideoBlock:{
+        flexDirection:'row',
+        borderColor:COLORS.borderGrp,
+        borderWidth:1,
+        padding:hp(1.2),
+        width:'39%',
+        marginLeft:hp(1.2),
+        borderRadius:hp(0.8),
+    },
+    lessonDesc:{
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+    },
+    lineLength:{
+        width:'80%',        
+    }
 });
