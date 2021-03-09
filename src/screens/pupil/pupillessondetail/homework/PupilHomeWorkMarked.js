@@ -105,6 +105,9 @@ the Amazon Rainforest</Text>
                     </View>
                 </View>
             </View>
+            <View style={PAGESTYLE.containerWrap}>
+                <Text>Test</Text>
+            </View>
 
         </View>
     );
