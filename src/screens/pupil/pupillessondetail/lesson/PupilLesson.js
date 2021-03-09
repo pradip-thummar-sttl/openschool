@@ -5,11 +5,9 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
-import CheckBox from '@react-native-community/checkbox';
-import ToggleSwitch from 'toggle-switch-react-native';
 
 
-const TLVideoGallery = (props) => {
+const PupilLesson = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
@@ -138,4 +136,4 @@ const TLVideoGallery = (props) => {
 
     );
 }
-export default TLVideoGallery;
+export default PupilLesson;

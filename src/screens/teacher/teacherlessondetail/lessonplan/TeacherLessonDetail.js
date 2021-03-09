@@ -32,21 +32,22 @@ const TLDetail = (props) => {
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
-                            <View style={PAGESTYLE.subjectDateTime}>
-                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} />
-                                <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
+                            <View style={PAGESTYLE.alignRow}>                               
+                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} /> 
+                                <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>                               
                             </View>
+                            
                         </View>
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
-                            <View style={PAGESTYLE.subjectDateTime}>
+                            <View style={PAGESTYLE.alignRow}>   
                                 <Image style={PAGESTYLE.timeIcon} source={require('../../../../assets/images/clock2.png')} />
                                 <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
                             </View>
                         </View>
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                            <View style={PAGESTYLE.subjectDateTime}>
+                            <View style={PAGESTYLE.alignRow}>   
                                 <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/group2.png')} />
                                 <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
                             </View>

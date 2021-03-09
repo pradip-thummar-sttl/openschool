@@ -32,6 +32,7 @@ const COLORS = {
     dashboardHomeWorkPurple: '#BC8BFD',
     videoLinkBorder: '#E7E9EF',
     greyplaceholder: '#4E4E4E',
+    blueLightStrip: '#95D3FD',
 }
 
 export default COLORS;

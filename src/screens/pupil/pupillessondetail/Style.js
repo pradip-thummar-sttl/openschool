@@ -62,7 +62,7 @@ export default StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'center',
-       width:'100%',
+        width: '100%',
     },
     datetimeText: {
         fontSize: hp(1.82),
@@ -96,6 +96,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
         fontSize: hp(1.8),
+        marginBottom:hp(1.5),
     },
     lessonText: {
         flexDirection: 'row',
@@ -199,16 +200,26 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
+    checkBoxLabelBox: {
+        flexDirection: 'row',
+        width: 'auto',
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius:hp(1.5),
+        padding:hp(1.5),
+        marginBottom:hp(2),
+        justifyContent:'space-between',
+    },
     checkBoxLabelText: {
         lineHeight: hp(2.82),
         fontSize: hp(1.85),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(2),
-        paddingRight: hp(2.5),
+        paddingLeft: hp(1.2),
     },
-    checkBoxcommon: {
-        position: 'absolute',
-        top: hp(0.7),
+    checkMark: {
+        width: hp(2.8),
+        height: hp(2.8),
+        top: hp(0),
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -243,11 +254,12 @@ export default StyleSheet.create({
         paddingLeft: hp(1.43),
         paddingRight: hp(1.43),
         paddingTop: hp(1),
-        paddingBottom: hp(0.3),
+        paddingBottom: hp(1),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.5),
         marginBottom: hp(1.04),
+        height:hp(5),
     },
     downloadIcon: {
         width: hp(1.95),
@@ -256,7 +268,7 @@ export default StyleSheet.create({
     fileName: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.85),
-        lineHeight: hp(3.60),
+        lineHeight: hp(2.60),
     },
     containerWrap: {
         justifyContent: 'space-between',
@@ -465,6 +477,10 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         paddingTop: hp(1.7),
         paddingBottom: hp(1.7),
+    },
+    dueDateTextBold: {
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.82),
     },
     dropDownSmallWrapNormal: {
         flexDirection: 'row',
@@ -690,7 +706,7 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         borderWidth:1,
-        borderColor:COLORS.lightGrayPupil,
+        borderColor:COLORS.blueLightStrip,
         borderRadius:hp(1.5),
         marginBottom:hp(2),
         padding:hp(1),
@@ -703,11 +719,11 @@ export default StyleSheet.create({
         marginRight:hp(1.30),
     },
     userLeft:{
-       width:'55%',
+       width:'50%',
        flexDirection: 'row',
     },
     userRight:{
-        width:'45%',
+        width:'50%',
         flexDirection: 'row',
     },
     userTopName:{
@@ -744,7 +760,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginRight:hp(9.63),
-        marginTop:hp(1.5),
+        marginTop:hp(1.0),
     },
     markedText:{
         fontFamily: FONTS.fontRegular,
@@ -754,7 +770,7 @@ export default StyleSheet.create({
     },
     dateNameBlock:{
         marginRight:hp(2.21),
-        marginTop:hp(1),
+        marginTop:hp(0.6),
     },
     feedbackBlock:{
         width:'60%',
@@ -880,19 +896,159 @@ export default StyleSheet.create({
     rightSpaceNone:{
         marginRight:hp(0),
     },
-    alignRow:{
+    descriptionText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color: COLORS.darkGray,
+    },
+    dateBlockRow:{
+        flexDirection:'row',
+        marginBottom:hp(3.5),
+    },
+    calander:{
+        width:hp(1.76),
+        resizeMode:'contain',
+        marginRight:hp(0.5),
+    },
+    daterow:{
         flexDirection:'row',
     },
-    closeNotificationbar:{
-        position:'absolute',
-        right:hp(0.8),
-        top:hp(0.8),
+    dateTitleNormal:{
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.menuLightFonts,
     },
-    checkMark:{
-        margin:0,
-        padding:0,
-        width:hp(2.5),
-        height:hp(2.5),
-        top:hp(0.2),
+    thumbSmall:{
+        width:hp(3), 
+        height:hp(3), 
+        backgroundColor: COLORS.lightGrayPupil,  
+        borderRadius: hp(5), 
+        marginRight:hp(0.5),
+    },
+    alignRow:{
+        flexDirection:'row',
+        width:'68.5%',
+    },
+    spaceSmallUserName:{
+        marginRight:hp(10),
+    },
+    largeVideo:{
+        width:'100%',
+        height:hp(46.87),
+        resizeMode:'contain',        
+    },
+    largeVideoBlock:{
+        
+    },
+    moreIcon:{
+        width:hp(2.41),
+        resizeMode:'contain',
+        top:hp(1),
+    },
+    lightGreyText:{
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.menuLightFonts,
+    },
+    videoTitleLine:{
+       flexDirection:'row',
+       justifyContent:'space-between',       
+    },
+    bookMarkOn:{
+        width:hp(2.43),
+        resizeMode:'contain',
+    },
+    bookMark:{
+        alignItems:'center',
+        width:hp(4.5),
+    },
+    videoMainTitle:{
+        fontFamily: FONTS.fontSemiBold,
+        fontSize:hp(2.08),
+        color:COLORS.darkGray,
+    },
+    videoPublishDate:{
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.menuLightFonts,
+    },
+    userNameMain:{
+        paddingTop:hp(3),
+        paddingBottom:hp(1.5),
+        marginBottom:hp(3),
+        borderBottomColor:COLORS.dashboardBorder,
+        borderBottomWidth:1,
+        flexDirection:'row',
+    },
+    userMainThumb:{
+        width:hp(3.6), 
+        height:hp(3.6), 
+        backgroundColor: COLORS.lightGrayPupil,  
+        borderRadius: hp(5), 
+        marginRight:hp(0.5),
+    },
+    mainNameText:{
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+        lineHeight:hp(3.5),
+        paddingLeft:hp(1),
+    },
+    submittedBlueStrip:{
+        backgroundColor:COLORS.blueLightStrip,
+        borderTopLeftRadius:hp(1.5),
+        borderBottomLeftRadius:hp(1.5),
+        marginLeft:hp(-1),
+        marginTop:hp(-1),
+        marginBottom:hp(-1),
+        position:'relative',
+    },
+    submittedIcon:{
+        width:hp(1.89),
+        resizeMode:'contain',
+        marginRight:hp(1),
+    },
+    bookLightBlue:{
+        width:hp(13.76),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1),
+        top:hp(-5.5),
+    },
+    bookPurpleStip:{
+        width:hp(13.76),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1),
+        top:hp(-5.5),
+    },
+    blueStripText:{
+        fontFamily: FONTS.fontSemiBold,
+        fontSize:hp(2.08),
+        color:COLORS.white,
+        paddingLeft:hp(1.5),
+        paddingTop:hp(2.3),
+    },
+    markedPurpleStrip:{
+        backgroundColor:COLORS.dashboardHomeWorkPurple,
+        borderTopLeftRadius:hp(1.5),
+        borderBottomLeftRadius:hp(1.5),
+        marginLeft:hp(-1),
+        marginTop:hp(-1),
+        marginBottom:hp(-1),
+        position:'relative',
+    },    
+    containerWrapTopPurple: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        borderWidth:1,
+        borderColor:COLORS.dashboardHomeWorkPurple,
+        borderRadius:hp(1.5),
+        marginBottom:hp(2),
+        padding:hp(1),
+    },
+    markSubmittedSpaceLeft:{
+        marginLeft:hp(3.5),
     },
 });
