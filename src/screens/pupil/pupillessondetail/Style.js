@@ -852,8 +852,6 @@ export default StyleSheet.create({
     },
     videoWrap:{
         flexDirection:'row',
-        justifyContent:'flex-start',
-        flexWrap:'wrap',
     },  
     videoThumb:{
         position:'relative',
@@ -861,9 +859,17 @@ export default StyleSheet.create({
         marginRight:hp(4.10),
     },
     videoThumbnail:{        
-        width:hp(26.17),
-        height:hp(17.83),
+        width:hp(28.25),
+        height:hp(13.54),
         resizeMode:'contain',
+        borderRadius: hp(0.26),
+    },
+    videoShadow:{
+        width:hp(27.8),
+        resizeMode:'contain',
+        position: 'absolute',
+        top: hp(-1.8),
+        left: hp(0.26),
     },
     videoPlay:{
         width:hp(5.20),
@@ -1057,6 +1063,16 @@ export default StyleSheet.create({
         height:hp(10.02),
         resizeMode:'contain',
         marginRight:hp(1.5),
+        position: 'relative',
+    },
+    videoDate:{
+        position: 'absolute',
+        top: hp(1),
+        left: hp(1),
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontRegular,
+        zIndex:10,
     },
     feedbackVideoBlock:{
         flexDirection:'row',

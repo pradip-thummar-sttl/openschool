@@ -5,6 +5,7 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
+import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
 import {
     Menu,
     MenuOptions,
@@ -18,6 +19,7 @@ const HeaderWhite = (props) => {
                 <Text style={styles.mainTitle}>Lesson and homework planner</Text>
                 <View style={styles.headerRight}>
                     <Popuphomework />
+                    <Popupsubmithomework />
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
                     </TouchableOpacity>
