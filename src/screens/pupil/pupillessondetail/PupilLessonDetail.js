@@ -8,6 +8,7 @@ import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import PupilLesson from './lesson/PupilLesson';
+import PupilLessonDue from './lesson/PupilLessonDue';
 import PupilLessonDetailInternal from './lesson/PupilLessonDetail';
 import PupilHomeWorkDetail from './homework/PupilHomeWorkDetail';
 import PupilHomeWorkSubmitted from './homework/PupilHomeWorkSubmitted';
@@ -38,7 +39,8 @@ const PupilLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    <PupilLesson />
+                    {/* <PupilLesson /> */}
+                    <PupilLessonDue />
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}

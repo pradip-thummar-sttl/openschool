@@ -1074,6 +1074,15 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         zIndex:10,
     },
+    videoDateBlack:{
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontRegular,
+        zIndex:10,
+        lineHeight:hp(3.5),
+        paddingLeft:hp(1),
+        paddingTop:hp(1),
+    },
     feedbackVideoBlock:{
         flexDirection:'row',
         borderColor:COLORS.borderGrp,
@@ -1092,10 +1101,10 @@ export default StyleSheet.create({
         width:'80%',        
     },
     videoCard:{
-        shadowColor: "#000",
-        shadowOffset: {width: 0,height: 5,},
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
+        // shadowColor: "#000",
+        // shadowOffset: {width: 0,height: 5,},
+        // shadowOpacity: 0.2,
+        // shadowRadius: 10,
         borderColor:COLORS.borderGrp,
         borderWidth:1,
         width:hp(28.5),
@@ -1116,8 +1125,8 @@ export default StyleSheet.create({
         paddingLeft:hp(1.5),
     },
     videoUserSpaceLeft:{
-        marginTop:hp(3.5),
-        marginBottom:hp(2.5),
+        marginTop:hp(1.5),
+        marginBottom:hp(1.5),
         paddingLeft:hp(1.5),
     },
     videoUserName:{
@@ -1134,9 +1143,38 @@ export default StyleSheet.create({
         top: hp(0.3),
         right: hp(1.4),
     },
+    bookMarkLabelDue:{
+        width:hp(1.91),
+        resizeMode:'contain',
+        position: 'absolute',
+        top: hp(1.3),
+        right: hp(1.4),
+    },
     videoCardThumb:{
         position:'relative',
         flexDirection:'row',
         width:hp(28.5),
+    },
+    lessonDue:{
+        height:hp(13.5),
+        marginTop:hp(3.5),
+    },
+    dueIcon:{
+        width:hp(1.89),
+        resizeMode:'contain',
+        marginLeft:hp(1.5),
+        marginTop:hp(1),
+    },
+    lightSkyBlueDue:{
+        backgroundColor:COLORS.lightSkyBlueDue,
+    },
+    lightYellowDue:{
+        backgroundColor:COLORS.lightYellowDue,
+    },
+    lightPurpleDue:{
+        backgroundColor:COLORS.lightPurpleDue,
+    },
+    lightOrangeDue:{
+        backgroundColor:COLORS.lightOrangeDue,
     },
 });
