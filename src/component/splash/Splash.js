@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import IMAGES from '../../utils/Images';
 export default class Splash extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,7 @@ export default class Splash extends Component {
                 <ImageBackground source={require('../../assets/images/teacher_intro_screen_bg2.png')} style={styles.image}>
                     <Image
                         style={styles.logo}
-                        source={require('../../assets/images/logo2.png')} />
+                        source={IMAGES.Logo} />
                 </ImageBackground>
             </View>
         );

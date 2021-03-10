@@ -11,126 +11,20 @@ const PupilLesson = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
-            <Text style={PAGESTYLE.videoTitle}>Videos</Text>
+            <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning - 07/09/20</Text>
             <View style={STYLE.hrCommon}></View>
-            <View style={PAGESTYLE.videoWrap}>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/bbc-video2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/tick-selected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/ted-video2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/tick-selected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>TED-ED. Conserving the Amazo…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/scratch-garden2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>Scratch Garden. Plants and Inse…</Text>
-                </View>
-                <View>
-                <View style={[PAGESTYLE.videoThumb, PAGESTYLE.rightSpaceNone]}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/amazing-rainforest2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>Amazing Rainforest: Birds &amp; Inse…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/dream-works2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>DreamWorksTV: 25 Facts about…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/scratch-garden-new2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>Scratch Garden. Plants and Inse…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/kids-nat-geo2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>Nat Geo Kids: What comes from…</Text>
-                </View>
-            </View>
-            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Games &amp; Quizes</Text>
-            <View style={STYLE.hrCommon}></View>
-            <View style={PAGESTYLE.videoWrap}>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/bbc-video2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/tick-selected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/ted-video2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/tick-selected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/scratch-garden2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={[PAGESTYLE.videoThumb, PAGESTYLE.rightSpaceNone]}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/amazing-rainforest2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/dream-works2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/scratch-garden-new2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-                <View>
-                <View style={PAGESTYLE.videoThumb}>
-                    <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/kids-nat-geo2.png')} />
-                    <Image style={PAGESTYLE.videoPlay} source={require('../../../../assets/images/play-transparent-icon2.png')} />
-                    <Image style={PAGESTYLE.videoSelected} source={require('../../../../assets/images/unselected2.png')} />
-                </View>
-                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                </View>
-            </View>
+            <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
+                <TouchableOpacity style={PAGESTYLE.videoCard}>
+                    <View style={PAGESTYLE.videoThumb}>
+                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
+                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
+                    </View>
+                    <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
+                </TouchableOpacity>                
+            </ScrollView>
+            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons from last week - 28/08/20</Text>
+            <View style={STYLE.hrCommon}></View>            
         </View>
 
 

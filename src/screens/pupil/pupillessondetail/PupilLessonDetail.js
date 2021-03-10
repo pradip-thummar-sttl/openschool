@@ -38,9 +38,9 @@ const PupilLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    {/* <PupilLesson /> */}
+                    <PupilLesson />
                     {/* <PupilLessonDetailInternal /> */}
-                    <PupilHomeWorkDetail />
+                    {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}
                     {/* <PupilHomeWorkMarked /> */}
                 </ScrollView>
