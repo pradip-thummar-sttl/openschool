@@ -1,10 +1,17 @@
 react-native-view-slider
-dot.js
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+/node_modules/react-native-view-slider/dots.js
+dotContainer: {
+    marginVertical: hp('2.0%'),
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   dot: {
-    marginHorizontal: 10,
-    height: 25,
-    width: 25,
-    padding: 5,
-    borderRadius: 100,
+    marginHorizontal: hp('1.2%'),
+    padding: hp('1.6%'),
+    borderRadius: hp('100.0%'),
   }
-========================
+==========================================================
+react-native-svg-image
+node_modules/react-native-svg-image/index.js
+import WebView from 'react-native-webview';  -- new added in node_modules
