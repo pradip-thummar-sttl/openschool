@@ -1090,5 +1090,53 @@ export default StyleSheet.create({
     },
     lineLength:{
         width:'80%',        
-    }
+    },
+    videoCard:{
+        shadowColor: "#000",
+        shadowOffset: {width: 0,height: 5,},
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        borderColor:COLORS.borderGrp,
+        borderWidth:1,
+        width:hp(28.5),
+        borderRadius:hp(1.08),
+        marginRight:hp(1.5),
+    },
+    videoSubTitleNormal:{
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+        paddingTop:hp(1.5),
+        paddingLeft:hp(1.5),
+    },
+    videoSubTitleBold:{
+        fontFamily: FONTS.fontSemiBold,
+        fontSize:hp(2.08),
+        color:COLORS.darkGray,
+        paddingLeft:hp(1.5),
+    },
+    videoUserSpaceLeft:{
+        marginTop:hp(3.5),
+        marginBottom:hp(2.5),
+        paddingLeft:hp(1.5),
+    },
+    videoUserName:{
+        fontFamily: FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+        lineHeight:hp(3.6),
+        paddingLeft:hp(1.5),
+    },
+    bookMarkLabel:{
+        width:hp(1.91),
+        resizeMode:'contain',
+        position: 'absolute',
+        top: hp(0.3),
+        right: hp(1.4),
+    },
+    videoCardThumb:{
+        position:'relative',
+        flexDirection:'row',
+        width:hp(28.5),
+    },
 });

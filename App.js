@@ -51,7 +51,7 @@ export default function App() {
 function ScreenStack() {
   return (
     <Stack.Navigator headerMode='none'>
-      <Stack.Screen name="Splash" component={Splash} />
+      {/* <Stack.Screen name="Splash" component={Splash} /> */}
       {/* <Stack.Screen name="Users" component={Users} /> */}
       {/* <Stack.Screen name="Introduction" component={Introduction} /> */}
       {/* <Stack.Screen name="Login" component={Login} /> */}
@@ -67,7 +67,7 @@ function ScreenStack() {
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
       {/* <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />  */}
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
-      {/* <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />  */}
+      <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} /> 
       {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
       {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
     </Stack.Navigator>
