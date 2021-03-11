@@ -33,6 +33,10 @@ const COLORS = {
     videoLinkBorder: '#E7E9EF',
     greyplaceholder: '#4E4E4E',
     blueLightStrip: '#95D3FD',
+    lightSkyBlueDue:'#DEF6FF',
+    lightYellowDue:'#FEF1A0',
+    lightPurpleDue:'#F1E5FF',
+    lightOrangeDue:'#FFE5D5',
 }
 
 export default COLORS;
