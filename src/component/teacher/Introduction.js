@@ -16,10 +16,10 @@ export default class Introduction extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('../../assets/images/teacher_intro_screen_bg2.png')} style={styles.image}>
+                <ImageBackground source={Images.GradientBack} style={styles.image}>
                     <Image
                         style={styles.logo}
-                        source={require('../../assets/images/logo2.png')} />
+                        source={Images.Logo} />
                 </ImageBackground>
                 <ViewSlider
                     renderSlides={
@@ -32,7 +32,7 @@ export default class Introduction extends Component {
                     style={styles.slider}
                     slideCount={3}
                     dots={true}
-                    dotActiveColor='#12aefb'
+                    dotActiveColor={COLORS.dotActive}
                     dotInactiveColor={COLORS.white}
                     dotsContainerStyle={styles.dotContainer}
                 />

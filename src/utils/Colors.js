@@ -1,6 +1,7 @@
 const COLORS = {
     black: '#000000',
     white: '#FFFFFF',
+    dotActive: '#12aefb',
     transparent: 'transparent',
     lightplaceholder: '#676693',
     blueButton: '#5381F8',
@@ -10,6 +11,8 @@ const COLORS = {
     lightGray: '#9699A5',
     buttonGreen: '#049160',
     menuLightFonts: '#B4B6BE',
+    borderLesoon: '#71C4E4',
+    linkLightPurple: '#676794',
     bottomProfileLightBorder:'#F1F2F7',
     backgroundColorCommon: '#F9FAFC',
     red: '#FF200D',

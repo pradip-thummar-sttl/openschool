@@ -11,26 +11,26 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('../../assets/images/teacher_intro_screen_bg2.png')} style={styles.image}>
+                <ImageBackground source={Images.GradientBack} style={styles.image}>
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/userIcon.png')} />
+                                    source={Images.UserIcon} />
                                 <Text style={styles.text}>School</Text>
                             </View>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/userIcon.png')} />
+                                    source={Images.UserIcon} />
                                 <Text style={styles.text}>Teacher</Text>
                             </View>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/userIcon.png')} />
+                                    source={Images.UserIcon} />
                                 <Text style={styles.text}>Pupil</Text>
                             </View>
                         </View>
