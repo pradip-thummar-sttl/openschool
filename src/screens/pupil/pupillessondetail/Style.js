@@ -1157,7 +1157,7 @@ export default StyleSheet.create({
     },
     lessonDue:{
         height:hp(13.5),
-        marginTop:hp(3.5),
+        marginTop:hp(1.5),
     },
     dueIcon:{
         width:hp(1.89),
