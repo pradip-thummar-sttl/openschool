@@ -237,4 +237,12 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.3),
     },
+    recordLinkText: {
+        fontSize: hp(1.85),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGray,
+        lineHeight: hp(3.60),
+        marginLeft: hp(1.56),
+        textTransform: 'uppercase',
+    },
 });

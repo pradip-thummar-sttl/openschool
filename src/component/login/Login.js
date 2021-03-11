@@ -8,6 +8,7 @@ import STYLE from '../../utils/Style';
 import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Images from '../../utils/Images';
 
 
 export default class Login extends Component {
@@ -19,7 +20,7 @@ export default class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <ImageBackground source={require('../../assets/images/sign_in_screen_bg2.png')} style={styles.image}>
+                    <ImageBackground source={Images.LoginBack} style={styles.image}>
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
@@ -29,7 +30,7 @@ export default class Login extends Component {
                             <View style={styles.field}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/icouser2.png')} />
+                                    source={Images.UserIconLogin} />
                                 <TextInput
                                     style={STYLE.commonInput}
                                     placeholder="Enter email or phone"
@@ -41,7 +42,7 @@ export default class Login extends Component {
                             <View style={styles.field}>
                                 <Image
                                     style={styles.userIcon}
-                                    source={require('../../assets/images/icopassword2.png')} />
+                                    source={Images.Password} />
                                 <TextInput
                                     style={STYLE.commonInputPassword}
                                     placeholder="Password"
@@ -51,16 +52,16 @@ export default class Login extends Component {
                                     onChangeText={text => this.setState({ password: text })} />
                                 <Image
                                     style={styles.viewIcon}
-                                    source={require('../../assets/images/icoview2.png')} />
+                                    source={Images.ShowPassword} />
                             </View>
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
                                         style={STYLE.checkBoxcommon}
                                         value={false}
-                                        onCheckColor={'#03014C'}
-                                        onTintColor={'#03014C'}
-                                        tintColor={'#676693'}
+                                        onCheckColor={COLORS.themeBlue}
+                                        onTintColor={COLORS.themeBlue}
+                                        tintColor={COLORS.lightplaceholder}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     },
     titleLogin: {
         textAlign: 'center',
-        color: '#03014C',
+        color: COLORS.themeBlue,
         fontSize: hp('4.8%'),
         marginBottom: hp('8.0%'),
         fontFamily: FONTS.fontBold,
@@ -141,14 +142,14 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: hp('1.8%'),
-        color: '#676794',
+        color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
         marginLeft: hp('1.0%'),
         fontFamily: FONTS.fontBold,
     },
     forgotPass: {
         fontSize: hp('1.8%'),
-        color: '#676794',
+        color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontBold,
     },

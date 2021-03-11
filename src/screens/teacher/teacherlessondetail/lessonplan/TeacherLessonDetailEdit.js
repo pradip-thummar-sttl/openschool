@@ -8,14 +8,20 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-const placeholder = {
-    label: 'English',
-    value: null,
-    color: '#262626',
-    fontSize: hp(2),
-    fontFamily: FONTS.fontRegular,
-};
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+
 const TLDetailEdit = (props) => {
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
     return (
 
         <View style={PAGESTYLE.whiteBg}>
@@ -27,7 +33,7 @@ const TLDetailEdit = (props) => {
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
                                 <RNPickerSelect style={PAGESTYLE.dropDown}
                                     onValueChange={(value) => console.log(value)}
-                                    placeholder={placeholder}
+
                                     items={[
                                         { label: 'English', value: 'English' },
                                         { label: 'Geography', value: 'Geography' },
@@ -52,52 +58,41 @@ const TLDetailEdit = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.timedateGrp}>
-                        <View style={PAGESTYLE.dateWhiteBoard}>
+                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} />
                                 <View style={PAGESTYLE.subjectDateTime}>
-                                    <RNPickerSelect style={PAGESTYLE.dropDownSmall}
-                                        onValueChange={(value) => console.log(value)}
-                                        placeholder={placeholder}
-                                        items={[
-                                            { label: 'English', value: 'English' },
-                                            { label: 'Geography', value: 'Geography' },
-                                            { label: 'History', value: 'History' },
-                                            { label: 'Science', value: 'Science' },
-                                            { label: 'Math', value: 'Math' },
-                                        ]}
+                                    <DateTimePicker
+                                        style={PAGESTYLE.dateTime}
+                                        value={date}
+                                        mode="date"
+                                        textColor={{ color: COLORS.darkGray }}
                                     />
                                 </View>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.timeIcon} source={require('../../../../assets/images/clock2.png')} />
                                 <View style={[PAGESTYLE.subjectDateTime]}>
-                                    <RNPickerSelect
-                                        onValueChange={(value) => console.log(value)}
-                                        placeholder={placeholder}
-                                        items={[
-                                            { label: 'English', value: 'English' },
-                                            { label: 'Geography', value: 'Geography' },
-                                            { label: 'History', value: 'History' },
-                                            { label: 'Science', value: 'Science' },
-                                            { label: 'Math', value: 'Math' },
-                                        ]}
+                                    <DateTimePicker
+                                        style={PAGESTYLE.dateTime}
+                                        value={date}
+                                        mode="time"
+                                        textColor={{ color: COLORS.darkGray }}
                                     />
                                 </View>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/group2.png')} />
                                 <View style={[PAGESTYLE.subjectDateTime]}>
                                     <RNPickerSelect style={PAGESTYLE.dropDownSmall}
                                         onValueChange={(value) => console.log(value)}
-                                        placeholder={placeholder}
                                         items={[
                                             { label: 'English', value: 'English' },
                                             { label: 'Geography', value: 'Geography' },
@@ -191,7 +186,7 @@ const TLDetailEdit = (props) => {
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch isOn={true} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>

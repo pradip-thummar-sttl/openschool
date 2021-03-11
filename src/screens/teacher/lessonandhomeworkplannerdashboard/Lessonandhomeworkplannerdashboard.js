@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -41,12 +42,12 @@ const Pupillist = ({ style }) => (
             <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={require('../../../assets/images/bronze-star2.png')} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={require('../../../assets/images/silver-star2.png')} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={require('../../../assets/images/gold-star2.png')} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
         </View>
         <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
-            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={require('../../../assets/images/right-arrow2.png')} />
+            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </TouchableOpacity>
     </View>
 );

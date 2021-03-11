@@ -4,6 +4,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Popuphomework from '../../reusable/popup/Popuphomework';
+import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
 import {
     Menu,
     MenuOptions,
@@ -16,6 +18,8 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>Lesson and homework planner</Text>
                 <View style={styles.headerRight}>
+                    <Popuphomework />
+                    <Popupsubmithomework />
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
                     </TouchableOpacity>
@@ -35,16 +39,20 @@ const HeaderWhite = (props) => {
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger style={styles.commonButtonBorderedheader} text='by subject' />
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption>
+                            <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
                                     <Text style={styles.filterListText}>Subject</Text>
                                     <Image source={require('../../../assets/images/check-icon2.png')} style={styles.checkMark} />
                                 </View>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
                                     <Text style={styles.filterListText}>Date</Text>
                                 </View>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
                                     <Text style={styles.filterListText}>Name</Text>
                                 </View>
@@ -122,6 +130,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
+        fontSize: hp(1.5),
     },
     buttonGroup: {
         position: 'relative',
@@ -160,21 +169,33 @@ const styles = StyleSheet.create({
         left: hp(1.8),
         zIndex: 9,
     },
+    iconTop: {
+        top: hp(4.2),
+    },
+    borderList: {
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
+    },
     filterList: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderBottomColor: COLORS.bottomProfileLightBorder,
-        borderBottomWidth: 1,
-        lineHeight: hp(4.94),
+        paddingTop: hp(1),
         paddingBottom: hp(1),
-        marginBottom: hp(1),
-        borderRadius: hp(0.78),
     },
     filterListWrap: {
-        paddingLeft: hp(1.21),
-        paddingRight: hp(1.21),
-        paddingTop: hp(0.25),
-        paddingBottom: hp(0.25),
+        paddingTop: hp(1),
+        paddingLeft: hp(1.2),
+        paddingRight: hp(1.2),
+        paddingBottom: hp(1),
+        position: 'absolute',
+        backgroundColor: COLORS.white,
+        top: hp(5.5),
+        width: hp(30.98),
+        borderRadius: hp(1),
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: hp(1), },
+        shadowOpacity: 0.15,
+        shadowRadius: hp(1),
     },
     checkMark: {
         width: hp(1.48),
@@ -184,5 +205,9 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
+    },
+    headerRight: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
 });

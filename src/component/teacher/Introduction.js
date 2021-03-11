@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dime
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../utils/Colors';
+import Images from '../../utils/Images';
 import STYLE from '../../utils/Style';
 import Introduction1 from '../reusable/introduction/Inroduction1';
 import Introduction2 from '../reusable/introduction/Inroduction2';
@@ -16,10 +17,10 @@ export default class Introduction extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('../../assets/images/teacher_intro_screen_bg2.png')} style={styles.image}>
+                <ImageBackground source={Images.GradientBack} style={styles.image}>
                     <Image
                         style={styles.logo}
-                        source={require('../../assets/images/logo2.png')} />
+                        source={Images.Logo} />
                 </ImageBackground>
                 <ViewSlider
                     renderSlides={
@@ -32,7 +33,7 @@ export default class Introduction extends Component {
                     style={styles.slider}
                     slideCount={3}
                     dots={true}
-                    dotActiveColor='#12aefb'
+                    dotActiveColor={COLORS.dotActive}
                     dotInactiveColor={COLORS.white}
                     dotsContainerStyle={styles.dotContainer}
                 />

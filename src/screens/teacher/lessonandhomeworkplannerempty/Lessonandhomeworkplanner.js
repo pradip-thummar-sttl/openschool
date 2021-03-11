@@ -7,6 +7,7 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
+import Images from "../../../utils/Images";
 
 const LessonandHomeworkPlanner = (props) => {
     const [isHide, action] = useState(true);
@@ -37,7 +38,7 @@ const LessonandHomeworkPlanner = (props) => {
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.myDay}>
                         <View style={[STYLE.viewRow]}>
-                            <Image style={PAGESTYLE.dayIcon} source={require('../../../assets/images/myDay3.png')} />
+                            <Image style={PAGESTYLE.dayIcon} source={Images.DayIcon} />
                             <Text H3 style={PAGESTYLE.dayTitle}>My Day</Text>
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
@@ -47,7 +48,7 @@ const LessonandHomeworkPlanner = (props) => {
                             </View>
                             <View>
                                 <TouchableOpacity>
-                                    <Image style={PAGESTYLE.moreDashboard} source={require('../../../assets/images/dashBoardMorelink2.png')} />
+                                    <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -57,13 +58,13 @@ const LessonandHomeworkPlanner = (props) => {
                     </View>
                     <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                         <View style={[STYLE.viewRow]}>
-                            <Image style={PAGESTYLE.dayIcon} source={require('../../../assets/images/pupilIcon2.png')} />
+                            <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} />
                             <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
                             <View>
                                 <TouchableOpacity>
-                                    <Image style={PAGESTYLE.moreDashboard} source={require('../../../assets/images/dashBoardMorelink2.png')} />
+                                    <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
                                 </TouchableOpacity>
                             </View>
                         </View>
