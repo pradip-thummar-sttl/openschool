@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     commonButtonGreen: {
-        backgroundColor: '#00A36B',
+        backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp('2.4%'),
         fontWeight: '800',
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         bottom: hp('12%'),
         position: 'absolute',
-        shadowColor: "#000",
+        shadowColor: COLORS.black,
         shadowOffset: {width: 0,height: 50,},
         shadowOpacity: 0.16,
         shadowRadius: 13,
