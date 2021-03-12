@@ -8,15 +8,27 @@ import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
-const Popupdata = (props) => {
+import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
+import MESSAGE from "../../../utils/Messages";
+
+const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
+
+    const [event, setEvent] = useState('');
     const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
+    const [time, setTime] = useState(new Date());
+    const [location, setLocation] = useState('');
+    const [note, setnote] = useState('');
+    const [theme, setTheme] = useState('');
+
+    this.state = {
+        userName: '',
+        password: '',
+    }
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -36,6 +48,21 @@ const Popupdata = (props) => {
     const showTimepicker = () => {
         showMode('time');
     };
+
+    const isFieldsValidated = () => {
+        if (!event) {
+            showMessage(MESSAGE.event)
+            return false;
+        } else if (!location) {
+            showMessage(MESSAGE.location);
+            return false;
+        } else if (!note) {
+            showMessage(MESSAGE.note);
+            return false;
+        }
+        return true;
+    }
+
     return (
         <View>
             <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity>
@@ -57,7 +84,7 @@ const Popupdata = (props) => {
                                                 placeholder='Name of event'
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
-                                            />
+                                                onChangeText={eventName => setEvent(eventName)} />
                                         </View>
                                     </View>
                                     <View style={styles.fieldWidthtwoMain}>
@@ -69,6 +96,7 @@ const Popupdata = (props) => {
                                                         style={styles.commonInputTextarea}
                                                         value={date}
                                                         mode="date"
+                                                        minimumDate={new Date()}
                                                         textColor={{ color: COLORS.darkGray }}
                                                     />
                                                 </View>
@@ -81,6 +109,7 @@ const Popupdata = (props) => {
                                                     style={styles.commonInputTextarea}
                                                     value={date}
                                                     mode="time"
+                                                    minimumDate={new Date()}
                                                     textColor={{ color: COLORS.darkGray }}
                                                 />
                                             </View>
@@ -94,7 +123,7 @@ const Popupdata = (props) => {
                                                 placeholder='Enter Location'
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
-                                            />
+                                                onChangeText={location => setLocation(location)} />
                                         </View>
                                     </View>
                                     <View style={styles.field}>
@@ -104,7 +133,7 @@ const Popupdata = (props) => {
                                                 multiline={false}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
-                                            />
+                                                onChangeText={notes => setnote(notes)} />
                                             <RNPickerSelect
                                                 onValueChange={(value) => console.log(value)}
                                                 items={[
@@ -120,7 +149,14 @@ const Popupdata = (props) => {
                                             <Image style={styles.uploadCalIcon} source={require('../../../assets/images/upload-calendar2.png')} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
-                                            <TouchableOpacity style={styles.buttonGrp}><Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} /><Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text></TouchableOpacity>
+                                            <TouchableOpacity 
+                                            onPress={isFieldsValidated}
+                                            style={styles.buttonGrp}
+                                                activeOpacity={opacity}>
+                                                <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
+                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                            </TouchableOpacity>
+
                                         </View>
                                     </View>
                                 </View>
@@ -132,7 +168,7 @@ const Popupdata = (props) => {
         </View>
     );
 }
-export default Popupdata;
+export default PopupdataSecond;
 
 const styles = StyleSheet.create({
     cancelButton: {

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
 import COLORS from '../../utils/Colors';
 import FONTS from '../../utils/Fonts';
 import Images from '../../utils/Images';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { opacity } from '../../utils/Constant';
+
 export default class Users extends Component {
     constructor(props) {
         super(props);
@@ -16,23 +19,35 @@ export default class Users extends Component {
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
-                            <TouchableOpacity style={styles.user}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIcon} />
-                                <Text style={styles.text}>School</Text>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => this.props.navigation.navigate('Login')}>
+                                <View style={styles.user}>
+                                    <Image
+                                        style={styles.userIcon}
+                                        source={Images.UserIcon} />
+                                    <Text style={styles.text}>School</Text>
+                                </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.user} onPress={()=>this.props.navigation.replace('Login')}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIcon} />
-                                <Text style={styles.text}>Teacher</Text>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => this.props.navigation.navigate('Login')}>
+                                <View style={styles.user}>
+                                    <Image
+                                        style={styles.userIcon}
+                                        source={Images.UserIcon} />
+                                    <Text style={styles.text}>Teacher</Text>
+                                </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.user}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIcon} />
-                                <Text style={styles.text}>Pupil</Text>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => this.props.navigation.replace('')}>
+                                <View style={styles.user}>
+                                    <Image
+                                        style={styles.userIcon}
+                                        source={Images.UserIcon} />
+                                    <Text style={styles.text}>Pupil</Text>
+                                </View>
                             </TouchableOpacity>
                         </View>
                     </View>

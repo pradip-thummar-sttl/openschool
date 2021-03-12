@@ -9,8 +9,22 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { showMessage } from "../../../../utils/Constant";
+import MESSAGE from "../../../../utils/Messages";
 
 const TLHomeWorkSubmittedDetail = (props) => {
+
+    const [feedBack, setFeedback] = useState('')
+
+    const isFieldsValidated = () => {
+        if (!feedback) {
+            showMessage(MESSAGE.feedback)
+            return false;
+        }
+
+        return true;
+    }
+
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrapTop}>
@@ -51,7 +65,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     onCheckColor={'#50A7F0'}
@@ -61,7 +75,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     onCheckColor={'#50A7F0'}
@@ -71,7 +85,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     onCheckColor={'#50A7F0'}
@@ -81,7 +95,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     onCheckColor={'#50A7F0'}
@@ -112,7 +126,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             numberOfLines={4}
                             defaultValue='Leave feedback here'
                             style={PAGESTYLE.commonInputTextarea}
-                        />
+                            onChangeText={feedback => setFeedback(feedback)} />
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>
