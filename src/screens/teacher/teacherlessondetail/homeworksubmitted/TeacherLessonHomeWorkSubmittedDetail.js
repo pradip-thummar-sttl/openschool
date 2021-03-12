@@ -55,6 +55,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -65,6 +66,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -75,6 +77,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -85,6 +88,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -98,7 +102,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={PAGESTYLE.rightSideBar}>
+                <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
                     <View style={PAGESTYLE.uploadBoardBlock}>
                         <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
                     </View>

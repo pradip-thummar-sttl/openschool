@@ -82,6 +82,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -92,6 +93,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -102,6 +104,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
@@ -112,6 +115,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    boxType={'square'}
                                     onCheckColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}

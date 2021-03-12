@@ -50,9 +50,9 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLDetailAdd /> */}
                     {/* <TLHomeWork /> */}
                     {/* <TLVideoGallery /> */}
-                    {/* <TLHomeWorkInstructionalVideoAdded /> */}
+                    <TLHomeWorkInstructionalVideoAdded />
                     {/* <TLHomeWorkSubmitted /> */}
-                    <TLHomeWorkSubmittedDetail />
+                    {/* <TLHomeWorkSubmittedDetail /> */}
                     {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
                 </ScrollView>
 

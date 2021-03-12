@@ -170,7 +170,9 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
+        alignItems: 'center',
         flexDirection: 'row',
+        paddingLeft: hp(2),
     },
     videoLinkBlockSpaceTop: {
         marginTop: hp(4.81),
@@ -259,6 +261,9 @@ export default StyleSheet.create({
         borderLeftWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2.5),
+    },
+    borderNone: {
+        borderLeftWidth:0,
     },
     fileGrp: {
         flexDirection: 'row',
@@ -718,10 +723,12 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         borderWidth:1,
+        alignItems: 'center',
         borderColor:COLORS.lightGrayPupil,
         borderRadius:hp(1.5),
         marginBottom:hp(2),
         padding:hp(1),
+        top: hp(2),
     },
     userThumb:{
         width:hp(6.25), 
@@ -772,7 +779,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginRight:hp(9.63),
-        marginTop:hp(1.5),
+        alignItems: 'center',
     },
     markedText:{
         fontFamily: FONTS.fontRegular,
@@ -782,14 +789,15 @@ export default StyleSheet.create({
     },
     dateNameBlock:{
         marginRight:hp(2.21),
-        marginTop:hp(1),
     },
     feedbackBlock:{
         width:'60%',
+        marginTop: hp(2.5),
     },
     ratingBlock:{
         width:'40%',
         marginLeft:hp(1.95),
+        marginTop: hp(2.5),
     },
     lessonTitleBold:{
         fontFamily: FONTS.fontSemiBold,
