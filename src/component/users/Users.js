@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import COLORS from '../../utils/Colors';
 import FONTS from '../../utils/Fonts';
 import Images from '../../utils/Images';
@@ -16,24 +16,24 @@ export default class Users extends Component {
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
-                            <View style={styles.user}>
+                            <TouchableOpacity style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
                                     source={Images.UserIcon} />
                                 <Text style={styles.text}>School</Text>
-                            </View>
-                            <View style={styles.user}>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.user} onPress={()=>this.props.navigation.replace('Login')}>
                                 <Image
                                     style={styles.userIcon}
                                     source={Images.UserIcon} />
                                 <Text style={styles.text}>Teacher</Text>
-                            </View>
-                            <View style={styles.user}>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
                                     source={Images.UserIcon} />
                                 <Text style={styles.text}>Pupil</Text>
-                            </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ImageBackground>

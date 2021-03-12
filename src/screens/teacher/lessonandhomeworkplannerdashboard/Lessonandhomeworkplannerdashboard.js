@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -8,6 +8,9 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
+import { showMessage } from "../../../utils/Constant";
 
 const Item = ({ onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>        
@@ -52,6 +55,21 @@ const Pupillist = ({ style }) => (
     </View>
 );
 const LessonandHomeworkPlannerDashboard = (props) => {
+    useEffect(() => {
+        console.log('hello')
+        Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+
+        })
+        return () => {
+        }
+    }, [])
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
     const pupilRender = ({ item }) => {
