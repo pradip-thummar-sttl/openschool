@@ -11,9 +11,10 @@ import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { showMessage } from "../../../utils/Constant";
+import { connect, useSelector } from "react-redux";
 
 const Item = ({ onPress, style }) => (
-    <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>        
+    <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
         <View style={PAGESTYLE.classSubject}>
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
@@ -55,6 +56,11 @@ const Pupillist = ({ style }) => (
     </View>
 );
 const LessonandHomeworkPlannerDashboard = (props) => {
+    const userAuthData = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.userAuthData
+    })
+    console.log('userdata', userAuthData)
     useEffect(() => {
         console.log('hello')
         Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
@@ -74,26 +80,26 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [selectedId, setSelectedId] = useState(null);
     const pupilRender = ({ item }) => {
         return (
-          <Pupillist
-            item={item}
-          />
+            <Pupillist
+                item={item}
+            />
         );
-    }; 
+    };
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-    
+
         return (
-          <Item
-            item={item}
-            onPress={() => setSelectedId(item.id)}
-            style={{ backgroundColor }}
-          />
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+                style={{ backgroundColor }}
+            />
         );
-    }; 
+    };
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar hide={() => action(!isHide)} />
-            <View style={{width: isHide? '93%' : '78%'}}>
+            <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.dashBoardBoxes}>
@@ -250,7 +256,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 </View>
                             </View>
                         </View>
-                        <View style={[STYLE.hrCommon,PAGESTYLE.pupilhrCustomMargin]}></View>
+                        <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
@@ -267,4 +273,5 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         </View>
     );
 }
+
 export default LessonandHomeworkPlannerDashboard;
