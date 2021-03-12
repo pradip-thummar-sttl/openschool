@@ -9,11 +9,28 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-
+import { showMessage } from '../../utils/Constant';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            userName: '',
+            password: '',
+        }
+    }
+
+    isFieldsValidated = () => {
+        const { userName, password } = this.state;
+
+        if (!userName) {
+            showMessage('Please enter email or phone')
+            return false;
+        } else if (!password) {
+            showMessage('Please enter password');
+            return false;
+        }
+        return true;
     }
 
     render() {
@@ -37,7 +54,7 @@ export default class Login extends Component {
                                     autoCapitalize={false}
                                     maxLength={40}
                                     placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={text => this.setState({ email: text })} />
+                                    onChangeText={userName => this.setState({ userName })} />
                             </View>
                             <View style={styles.field}>
                                 <Image
@@ -49,7 +66,7 @@ export default class Login extends Component {
                                     maxLength={30}
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     secureTextEntry={true}
-                                    onChangeText={text => this.setState({ password: text })} />
+                                    onChangeText={password => this.setState({ password })} />
                                 <Image
                                     style={styles.viewIcon}
                                     source={Images.ShowPassword} />
@@ -69,7 +86,11 @@ export default class Login extends Component {
                                     <Text style={styles.forgotPass} onPress={() => Alert.alert('Do you Really want to process?')}>Forgot Password?</Text>
                                 </View>
                             </View>
-                            <View style={styles.loginButtonView}><Text onPress={() => Alert.alert('Login Success')} style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text></View>
+                            <View style={styles.loginButtonView}>
+                                <Text
+                                    onPress={() => this.isFieldsValidated()}
+                                    style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
+                            </View>
                         </View>
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>

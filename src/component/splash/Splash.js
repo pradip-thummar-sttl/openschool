@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import Images from '../../utils/Images';
+import { View, StyleSheet, Image, ImageBackground, Animated } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export default class Splash extends Component {
     constructor(props) {
         super(props);
+        this.springValue = new Animated.Value(0.3)
+    }
+
+    componentDidMount() {
+        this.runAnimation()
+        
+        setTimeout(() => {
+            this.launchNextScreen()
+        }, 3000);
+    }
+
+    runAnimation() {
+        Animated.spring(
+            this.springValue,
+            {
+                toValue: 1,
+                friction: 2.5,
+            }
+        ).start()
+    }
+
+    launchNextScreen(){
+        this.props.navigation.replace('Users')
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={Images.GradientBack} style={styles.image}>
-                    <Image
-                        style={styles.logo}
-                        source={Images.Logo} />
+                <ImageBackground source={require('../../assets/images/teacher_intro_screen_bg2.png')} style={styles.image}>
+                    <Animated.Image
+                        style={[styles.logo, { transform: [{ scale: this.springValue }] }]}
+                        source={require('../../assets/images/logo2.png')} />
                 </ImageBackground>
             </View>
         );
