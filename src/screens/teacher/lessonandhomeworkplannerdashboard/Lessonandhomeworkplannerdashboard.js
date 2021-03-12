@@ -82,31 +82,31 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
                             <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                 <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
-                                <ImageBackground style={PAGESTYLE.imageIcon} source={require('../../../assets/images/callDashboard2.png')}></ImageBackground>
+                                <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
                             <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.yellowBox]}>
                                 <Text H3 style={PAGESTYLE.titleBox}>New lesson</Text>
-                                <ImageBackground style={PAGESTYLE.imageIcon} source={require('../../../assets/images/lessonIcon2.png')}></ImageBackground>
+                                <ImageBackground style={PAGESTYLE.imageIcon} source={Images.LessonIcon}></ImageBackground>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
                             <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.purpleBox]}>
                                 <Text H3 style={PAGESTYLE.titleBox}>New calendar {"\n"}entry</Text>
-                                <ImageBackground style={PAGESTYLE.imageIcon} source={require('../../../assets/images/calenderIcon2.png')}></ImageBackground>
+                                <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
                             <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                 <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
-                                <ImageBackground style={PAGESTYLE.imageIcon} source={require('../../../assets/images/pupilgrpIcon2.png')}></ImageBackground>
+                                <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground>
                             </View>
                         </TouchableOpacity>
                     </View>
                     <View style={PAGESTYLE.myDay}>
                         <View style={[STYLE.viewRow]}>
-                            <Image style={PAGESTYLE.dayIcon} source={require('../../../assets/images/myDay3.png')} />
+                            <Image style={PAGESTYLE.dayIcon} source={Images.Myday} />
                             <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
@@ -116,7 +116,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                             </View>
                             <View>
                                 <TouchableOpacity>
-                                    <Image style={PAGESTYLE.moreDashboard} source={require('../../../assets/images/dashBoardMorelink2.png')} />
+                                    <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -137,15 +137,15 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
                                     <View style={PAGESTYLE.timedateGrp}>
                                         <View style={PAGESTYLE.dateWhiteBoard}>
-                                            <Image style={PAGESTYLE.calIcon} source={require('../../../assets/images/calendar-small-icon2.png')} />
+                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                             <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
                                         </View>
                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                            <Image style={PAGESTYLE.timeIcon} source={require('../../../assets/images/clock2.png')} />
+                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                                             <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
                                         </View>
                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                            <Image style={PAGESTYLE.calIcon} source={require('../../../assets/images/group2.png')} />
+                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                                             <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
                                         </View>
                                     </View>
@@ -168,7 +168,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <Text style={PAGESTYLE.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
                                     <View style={PAGESTYLE.attchmentSectionwithLink}>
                                         <TouchableOpacity style={PAGESTYLE.attachment}>
-                                            <Image style={PAGESTYLE.attachmentIcon} source={require('../../../assets/images/attachment2.png')} />
+                                            <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                             <Text style={PAGESTYLE.attachmentText}>1 Attachment</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity>
@@ -178,11 +178,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <View style={PAGESTYLE.requirementofClass}>
                                         <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
                                         <View style={PAGESTYLE.lessonPoints}>
-                                            <Image source={require('../../../assets/images/check-icon2.png')} style={PAGESTYLE.checkIcon} />
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                                             <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
                                         </View>
                                         <View style={PAGESTYLE.lessonPoints}>
-                                            <Image source={require('../../../assets/images/check-icon2.png')} style={PAGESTYLE.checkIcon} />
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                                             <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
                                         </View>
                                     </View>
@@ -196,13 +196,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     </View>
                     <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                         <View style={[STYLE.viewRow]}>
-                            <Image style={PAGESTYLE.dayIcon} source={require('../../../assets/images/pupilIcon2.png')} />
+                            <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} />
                             <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
                             <View>
                                 <TouchableOpacity>
-                                    <Image style={PAGESTYLE.moreDashboard} source={require('../../../assets/images/dashBoardMorelink2.png')} />
+                                    <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
                                 </TouchableOpacity>
                             </View>
                         </View>
