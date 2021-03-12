@@ -9,11 +9,17 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { showMessage, msgTopic, msgDescription } from "../../../../utils/Constant";
+import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
+import MESSAGE from "../../../../utils/Messages";
 
 
 const TLDetailAdd = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
+
+    const [lessonTopic, setLessonTopic] = useState('');
+    const [description, setDescription] = useState('');
 
     const showDatepicker = () => {
         showMode('date');
@@ -22,8 +28,19 @@ const TLDetailAdd = (props) => {
     const showTimepicker = () => {
         showMode('time');
     };
-    return (
 
+    const isFieldsValidated = () => {
+        if (!lessonTopic) {
+            showMessage(MESSAGE.topic)
+            return false;
+        } else if (!description) {
+            showMessage(MESSAGE.description);
+            return false;
+        }
+        return true;
+    }
+
+    return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
@@ -52,12 +69,12 @@ const TLDetailAdd = (props) => {
                                     autoCapitalize={false}
                                     maxLength={40}
                                     placeholderTextColor={COLORS.greyplaceholder}
-                                    onChangeText={text => this.setState({ email: text })} />
+                                    onChangeText={topic => setLessonTopic(topic)} />
                             </View>
                         </View>
                     </View>
                     <View style={PAGESTYLE.timedateGrp}>
-                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} />
@@ -112,7 +129,7 @@ const TLDetailAdd = (props) => {
                             numberOfLines={4}
                             defaultValue='Briefly explain what the lesson is about'
                             style={PAGESTYLE.commonInputTextarea}
-                        />
+                            onChangeText={description => setDescription(description)} />
                     </View>
                     <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Image source={require('../../../../assets/images/recording-icon2.png')} style={PAGESTYLE.recordingLinkIcon} />
@@ -161,7 +178,7 @@ const TLDetailAdd = (props) => {
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
                     </View>
-                    
+
                 </View>
             </View>
         </View>
