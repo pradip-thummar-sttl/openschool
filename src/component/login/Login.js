@@ -10,6 +10,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
 import { showMessage } from '../../utils/Constant';
+import { Service } from '../../service/Service';
+import { EndPoints } from '../../service/EndPoints';
 
 export default class Login extends Component {
     constructor(props) {
@@ -30,7 +32,28 @@ export default class Login extends Component {
             showMessage('Please enter password');
             return false;
         }
-        return true;
+
+        let data = {
+            Email: userName,
+            Password: password,
+            PushToken: "Test",
+            Device: "M",
+            OS: "AD",
+            AccessedVia: "tes",
+        }
+        Service.post(data, EndPoints.Login, (res) => {
+            console.log('response Login', res)
+            if (res.code == 200){
+                // showMessage(res.message)
+                this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+            }else{
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response Login error', err)
+        })
+
+        // return true;
     }
 
     render() {
