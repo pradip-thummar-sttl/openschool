@@ -4,6 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -41,7 +42,7 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={()=>this.toggleAnimation()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={require('../../../assets/images/profileBack.png')} />
+                    <Image style={styles.headerProfile} source={Images.ProfileBack} />
                     {
                         isSmall? null:
                         <View style={styles.profileTextMain}>
@@ -54,7 +55,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
                         <Image
                             style={styles.menuIcon}
-                            source={require('../../../assets/images/dashboard2.png')}
+                            source={Images.Dashboard}
                         />
                         {
                             isSmall? null:
@@ -64,7 +65,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={require('../../../assets/images/teachers2.png')}
+                            source={Images.Teacher}
                         />
                         {
                             isSmall? null:
@@ -74,7 +75,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={require('../../../assets/images/pupils2.png')}
+                            source={Images.Pupil}
                         />
                         {
                             isSmall? null:
@@ -84,7 +85,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={require('../../../assets/images/messaging.png')}
+                            source={Images.Messaging}
                         />
                         {
                             isSmall? null:
@@ -94,7 +95,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={require('../../../assets/images/parents2.png')}
+                            source={Images.Parents}
                         />
                          {
                             isSmall? null:
@@ -104,7 +105,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={require('../../../assets/images/faq2.png')}
+                            source={Images.Faqs}
                         />
                         {
                             isSmall? null:
@@ -113,7 +114,7 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
-                    <Image style={styles.bottomUser} source={require('../../../assets/images/profileBack.png')} />
+                    <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
                     {
                         isSmall? null:
                         <>
@@ -121,7 +122,7 @@ const Sidebar = (props) => {
                                 <Text style={styles.profileTitleBottom}>Johney Depp</Text>
                             </View>
                             <TouchableOpacity style={styles.moreMenu}>
-                                <Image style={styles.moreIcon} source={require('../../../assets/images/more2.png')} />
+                                <Image style={styles.moreIcon} source={Images.SidebarMore} />
                             </TouchableOpacity>
                         </>
                     }
@@ -135,10 +136,10 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:'#002211',
+        backgroundColor:COLORS.SidebarHeaderBack,
         zIndex: 9,
         position: 'relative',
-        shadowColor: '#152232',
+        shadowColor: COLORS.SidebarHeaderShadow,
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
         shadowRadius: 1,
@@ -186,10 +187,10 @@ const styles = StyleSheet.create({
         marginBottom: hp(0.9),
     },
     menuItemSelected: {
-        backgroundColor: '#F3F5F9',
+        backgroundColor: COLORS.MenuSelectedback,
     },
     selectedMenuText: {
-        color: '#262626',
+        color: COLORS.darkGray,
     },
     menuText: {
         fontSize: hp(1.8),

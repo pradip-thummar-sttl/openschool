@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -32,7 +33,7 @@ const Pupillist = ({ style }) => (
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>No</Text>
             <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={require('../../../assets/images/right-arrow2.png')} />
+                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
     </View>

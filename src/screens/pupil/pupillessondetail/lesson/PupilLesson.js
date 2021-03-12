@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 
@@ -16,10 +17,10 @@ const PupilLesson = (props) => {
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
@@ -30,10 +31,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>  
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
@@ -44,10 +45,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
@@ -58,10 +59,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
@@ -72,10 +73,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>   
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
@@ -86,10 +87,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>  
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
@@ -100,10 +101,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
@@ -114,10 +115,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
@@ -132,10 +133,10 @@ const PupilLesson = (props) => {
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
@@ -146,10 +147,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>  
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
@@ -160,10 +161,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
@@ -174,10 +175,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
@@ -188,10 +189,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>   
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
@@ -202,10 +203,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>  
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
@@ -216,10 +217,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
@@ -230,10 +231,10 @@ const PupilLesson = (props) => {
                 </TouchableOpacity> 
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Image style={PAGESTYLE.videoThumbnail} source={require('../../../../assets/images/video-back2.png')} />
-                        <Image style={PAGESTYLE.videoShadow} source={require('../../../../assets/images/video-shadow2.png')} />
+                        <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
+                        <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                         <Text style={PAGESTYLE.videoDate}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabel} />
+                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
                     </View>
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
