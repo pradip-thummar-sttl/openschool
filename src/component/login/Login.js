@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
 import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -9,9 +9,11 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-import { showMessage } from '../../utils/Constant';
+import { opacity, showMessage } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
+import MESSAGE from '../../utils/Messages';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class Login extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ export default class Login extends Component {
         this.state = {
             userName: '',
             password: '',
+            isLoading: false,
         }
     }
 
@@ -26,12 +29,14 @@ export default class Login extends Component {
         const { userName, password } = this.state;
 
         if (!userName) {
-            showMessage('Please enter email or phone')
+            showMessage(MESSAGE.email)
             return false;
         } else if (!password) {
-            showMessage('Please enter password');
+            showMessage(MESSAGE.password);
             return false;
         }
+
+        this.setLoading(true)
 
         let data = {
             Email: userName,
@@ -43,17 +48,24 @@ export default class Login extends Component {
         }
         Service.post(data, EndPoints.Login, (res) => {
             console.log('response Login', res)
-            if (res.code == 200){
+            if (res.code == 200) {
+                this.setLoading(false)
                 // showMessage(res.message)
                 this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
-            }else{
+            } else {
+                this.setLoading(false)
                 showMessage(res.message)
             }
         }, (err) => {
+            this.setLoading(false)
             console.log('response Login error', err)
         })
 
         // return true;
+    }
+
+    setLoading(flag) {
+        this.setState({ isLoading: flag });
     }
 
     render() {
@@ -72,6 +84,8 @@ export default class Login extends Component {
                                     style={styles.userIcon}
                                     source={Images.UserIconLogin} />
                                 <TextInput
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { this.t2.focus(); }}
                                     style={STYLE.commonInput}
                                     placeholder="Enter email or phone"
                                     autoCapitalize={false}
@@ -84,6 +98,7 @@ export default class Login extends Component {
                                     style={styles.userIcon}
                                     source={Images.Password} />
                                 <TextInput
+                                    ref={(input) => { this.t2 = input; }}
                                     style={STYLE.commonInputPassword}
                                     placeholder="Password"
                                     maxLength={30}
@@ -110,9 +125,19 @@ export default class Login extends Component {
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>
-                                <Text
-                                    onPress={() => this.isFieldsValidated()}
-                                    style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => this.isFieldsValidated()}>
+                                    {this.state.isLoading ?
+                                        <ActivityIndicator
+                                            style={STYLE.fullWidthPrimaryButton}
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.white} />
+                                        :
+                                        <Text
+                                            style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
+                                    }
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.bottomLoginIntro}>
