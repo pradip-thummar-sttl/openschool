@@ -60,10 +60,10 @@ function ScreenStack() {
       {/* <Stack.Screen name="Sidebar" component={Sidebar} /> */}
       {/* <Stack.Screen name="Header" component={Header} /> */}
       {/* <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} /> */}
-      <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
+      {/* <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} /> */}
       {/* <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> */}
       {/* <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} /> */}
-      {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
+      <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
       {/* <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />  */}
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
