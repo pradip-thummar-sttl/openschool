@@ -74,7 +74,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
-
         })
         return () => {
         }
