@@ -12,10 +12,12 @@ import Images from '../../utils/Images';
 import { opacity, showMessage } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
+import { connect } from 'react-redux';
+import { setUserAuthData } from '../../actions/action';
 import MESSAGE from '../../utils/Messages';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,6 +53,7 @@ export default class Login extends Component {
             if (res.code == 200) {
                 this.setLoading(false)
                 // showMessage(res.message)
+                this.props.setUserAuthData(res.data)
                 this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
             } else {
                 this.setLoading(false)
@@ -151,6 +154,18 @@ export default class Login extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.authReducer
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setUserAuthData: (data) => dispatch(setUserAuthData(data))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
