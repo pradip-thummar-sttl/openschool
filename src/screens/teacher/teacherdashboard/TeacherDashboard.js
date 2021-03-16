@@ -100,9 +100,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('LessonandHomeworkPlannerDashboard')}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header />
                 <ScrollView style={STYLE.padLeftRight}>
@@ -153,7 +153,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={STYLE.viewRow}>
                             <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                 <FlatList
-                                    data={[1]}
+                                    data={[1, 2, 3, 4, 5]}
                                     renderItem={renderItem}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}
@@ -264,7 +264,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
-                                    data={[1]}
+                                    data={[1, 2, 3, 4, 5]}
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}

@@ -9,16 +9,16 @@ const TimeTable = (props) => {
 
     const [isHide, action] = useState(true);
 
-    let days = ['', 'MONDAY', 'TUESDAYTUESDAY', 'WEDNESDAY', 'THRUSDAYTHRUSDAY', 'FRIDAY', 'SATURDAYSATURDAY'];
+    let days = ['', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THRUSDAY', 'FRIDAY', 'SATURDAY'];
     let time = ['9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30'];
 
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('LessonandHomeworkPlannerDashboard')}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
 
@@ -44,8 +44,11 @@ const TimeTable = (props) => {
                                             <View style={{ backgroundColor: COLORS.white, height: 100, width: 0 }}></View>
 
                                             :
-                                            <View style={{ ...styles.day, zIndex: 1, width: dayKey % 2 == 0 ? 200 : 100, backgroundColor: 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')' }}>
-                                                <Text style={{ width: dayKey % 2 == 0 ? 200 : 100, backgroundColor: 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')' }}>{data}</Text>
+                                            // <View style={{ ...styles.day, zIndex: 1, width: dayKey % 2 == 0 ? 200 : 100, backgroundColor: 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')' }}>
+                                            //     <Text style={{ width: dayKey % 2 == 0 ? 200 : 100, backgroundColor: 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')' }}>{data}</Text>
+                                            // </View>
+                                            <View style={{ ...styles.day, zIndex: 1, width: dayKey % 2 == 0 ? 200 : 100, }}>
+                                                <Text style={{ width: dayKey % 2 == 0 ? 200 : 100,  }}>{}</Text>
                                             </View>
                                         :
                                         null
