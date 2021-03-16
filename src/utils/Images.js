@@ -77,5 +77,10 @@ const Images = {
     VideoShadow: require('../assets/images/video-shadow2.png'),
     BookmarkIcon: require('../assets/images/bookmark-on2.png'),
     UserProfilePopup: require('../assets/images/userProfilePopup.png'),
+    MyLessons: require('../assets/images/my-lessons2.png'),
+    MyAchievements: require('../assets/images/my-achievements2.png'),
+    MyAvatar: require('../assets/images/my-avatar2.png'),
+    OpenSchool: require('../assets/images/open-school2.png'),
+    cartoon: require('../assets/images/cartoon2.png'),
 }
 export default Images;
