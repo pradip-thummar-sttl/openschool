@@ -12,7 +12,7 @@ const Images = {
     PupilDashIcon: require('../assets/images/pupilIcon2.png'),
     BronzeStar: require('../assets/images/bronze-star2.png'),
     SilverStar: require('../assets/images/silver-star2.png'),
-    GoldStar: require('../assets/images/gold-star2.png'),
+    GoldStar: require('../assets/images/goldUnselected2.png'),
     DashboardRightArrow: require('../assets/images/right-arrow2.png'),
     DashboardCallIcon: require('../assets/images/callDashboard2.png'),
     LessonIcon: require('../assets/images/lessonIcon2.png'),
@@ -82,5 +82,6 @@ const Images = {
     MyAvatar: require('../assets/images/my-avatar2.png'),
     OpenSchool: require('../assets/images/open-school2.png'),
     cartoon: require('../assets/images/cartoon2.png'),
+    DropArrow: require('../assets/images/down-arrow2.png'),
 }
 export default Images;

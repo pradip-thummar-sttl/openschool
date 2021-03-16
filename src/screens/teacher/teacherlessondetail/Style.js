@@ -65,7 +65,7 @@ export default StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'center',
-       width:'100%',
+        width:'100%',
     },
     datetimeText: {
         fontSize: hp(1.82),
@@ -73,6 +73,7 @@ export default StyleSheet.create({
         marginLeft: hp(0.9),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+        marginLeft: hp(1.56),
     },
     labelTextMain: {
         fontSize: hp(1.82),
@@ -101,6 +102,7 @@ export default StyleSheet.create({
         color: COLORS.lightGray,
         fontSize: hp(1.8),
         marginBottom: hp(0.8),
+        marginLeft: hp(1.56),
     },
     lessonText: {
         flexDirection: 'row',
@@ -147,7 +149,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(4.81),
+        marginTop: hp(4.68),
     },
     videoLinkBlock: {
         width: hp(36.84),
@@ -210,8 +212,8 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        paddingBottom: hp(1.30),
-        marginBottom: hp(1.04),
+        paddingBottom: hp(2.2),
+        marginBottom: hp(2.2),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -292,7 +294,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
     },
     grpThumbVideo: {
-        width: hp(31.90),
+        width: wp(26.68),
         resizeMode: 'contain',
         alignItems: 'center',
     },
@@ -309,6 +311,7 @@ export default StyleSheet.create({
     addIcon: {
         width: hp(1.56),
         resizeMode: 'contain',
+        marginLeft:hp(1.56),
     },
     addItem: {
         flexDirection: 'row',
@@ -541,6 +544,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: hp(3.60),
         lineHeight: hp(3.60),
+        marginTop:hp(3.5),
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -746,6 +750,10 @@ export default StyleSheet.create({
         marginBottom:hp(2),
         padding:hp(1),
         top: hp(2),
+        shadowColor: COLORS.lightGrayPupil,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
     },
     userThumb:{
         width:hp(6.25), 
@@ -755,11 +763,11 @@ export default StyleSheet.create({
         marginRight:hp(1.30),
     },
     userLeft:{
-       width:'55%',
+       width:'52.5%',
        flexDirection: 'row',
     },
     userRight:{
-        width:'45%',
+        width:'47.5%',
         flexDirection: 'row',
     },
     userTopName:{
@@ -955,5 +963,30 @@ export default StyleSheet.create({
     borderRight:{
         borderRightWidth:1,
         borderRightColor:COLORS.bottomProfileLightBorder,
+    },
+    dropHolderImg:{
+        width: wp(26.68),
+        resizeMode: 'contain',
+        alignItems: 'center',
+    },
+    thumbVideo:{
+        // marginTop:hp(6.38),
+        // marginBottom:hp(2.99),
+    },
+    topSpaceRecording:{
+        marginTop:hp(1.401),
+    },
+    dropDownArrow:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.4),
+        top:hp(2.1),
+    },
+    plainBg:{
+        paddingLeft: hp(3.5),
+        paddingRight: hp(3.5),
+        paddingBottom: hp(2),
+        paddingTop: hp(0),
     },
 });

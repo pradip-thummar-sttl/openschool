@@ -44,6 +44,7 @@ const TLDetailAdd = (props) => {
                                         { label: 'Math', value: 'Math' },
                                     ]}
                                 />
+                                <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                             </View>
                         </View>
                         <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
@@ -105,6 +106,7 @@ const TLDetailAdd = (props) => {
                                         ]}
                                     />
                                 </View>
+                                <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                             </View>
                         </View>
                     </View>
