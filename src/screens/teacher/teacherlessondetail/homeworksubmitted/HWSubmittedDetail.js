@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -37,7 +38,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 </View>
                 <View style={PAGESTYLE.userRight}>
                     <View style={PAGESTYLE.markedLabel}>
-                        <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
+                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
                         <Text style={PAGESTYLE.markedText}>Marked</Text>
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
@@ -68,9 +69,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                             </View>
@@ -78,9 +80,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
@@ -88,9 +91,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
@@ -98,22 +102,23 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={require('../../../../assets/images/add2.png')} style={PAGESTYLE.addIcon} />
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={PAGESTYLE.rightSideBar}>
+                <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
                     <View style={PAGESTYLE.uploadBoardBlock}>
-                        <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} />
+                        <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
                     </View>
                 </View>
             </View>
@@ -130,7 +135,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={require('../../../../assets/images/recording-icon2.png')} style={PAGESTYLE.recordingLinkIcon} />
+                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                             <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                         </View>
                     </View>
@@ -140,15 +145,15 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     <View style={PAGESTYLE.achivementBox}>
                         <View style={PAGESTYLE.rewardStarMark}>
                             <View style={PAGESTYLE.centerText}>
-                                <Image source={require('../../../../assets/images/bronzeStar2.png')} style={[PAGESTYLE.starSelected]} />
+                                <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
                                 <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                             </View>
                             <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                <Image source={require('../../../../assets/images/silver-star2.png')} style={[PAGESTYLE.starSelected]} />
+                                <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
                                 <Text style={PAGESTYLE.starText}>Silver stars</Text>
                             </View>
                             <View style={PAGESTYLE.centerText}>
-                                <Image source={require('../../../../assets/images/goldUnselected2.png')} style={[PAGESTYLE.starSelected]} />
+                                <Image source={Images.GoldStar} style={[PAGESTYLE.starSelected]} />
                                 <Text style={PAGESTYLE.starText}>Gold stars</Text>
                             </View>
                         </View>

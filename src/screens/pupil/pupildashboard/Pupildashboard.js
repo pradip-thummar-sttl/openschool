@@ -6,7 +6,7 @@ import STYLE from '../../../utils/Style';
 import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
@@ -44,7 +44,7 @@ const PupuilDashboard = (props) => {
     );
     return (
         <View style={PAGESTYLE.mainPage} >
-            <Sidebar hide={() => action(!isHide)}  />
+            <Sidebarpupil hide={() => action(!isHide)} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
                 <ScrollView>

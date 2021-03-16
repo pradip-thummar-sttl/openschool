@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -42,7 +43,7 @@ const Popupdata = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
+                        <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
@@ -50,11 +51,11 @@ const Popupdata = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
                                 <View style={styles.entryContentMain}>
                                     <TouchableOpacity style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={require('../../../assets/images/new-lesson2.png')} />
+                                        <Image style={styles.entryIcon} source={Images.NewLessons} />
                                         <Text style={styles.entryTitle}>New Lesson</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={require('../../../assets/images/new-event2.png')} />
+                                        <Image style={styles.entryIcon} source={Images.NewEvents} />
                                         <Text style={styles.entryTitle}>New Event</Text>
                                     </TouchableOpacity>
                                 </View>
