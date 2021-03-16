@@ -44,11 +44,11 @@ const PupuilDashboard = (props) => {
     );
     return (
         <View style={PAGESTYLE.mainPage} >
-            <Sidebar hide={() => action(!isHide)} />
+            <Sidebar hide={() => action(!isHide)}  />
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
                 <ScrollView>
-                    <Header STYLE={STYLE.pupilHeader} />
+                    <Header onAlertPress={()=>props.navigation.openDrawer()} STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>

@@ -104,9 +104,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     };
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar hide={() => action(!isHide)} />
+            <Sidebar 
+            navigateTime={()=>props.navigation.navigate('')}
+            hide={() => action(!isHide)} 
+            />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header />
+                <Header onAlertPress={()=>props.navigation.openDrawer()} />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.dashBoardBoxes}>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>

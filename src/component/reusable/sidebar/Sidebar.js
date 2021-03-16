@@ -61,7 +61,7 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem} onPress={()=>{props.navigateTime()}}>
                         <Image
                             style={styles.menuIcon}
                             source={require('../../../assets/images/teachers2.png')}
