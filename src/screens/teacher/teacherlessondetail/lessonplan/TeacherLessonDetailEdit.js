@@ -27,7 +27,9 @@ const TLDetailEdit = (props) => {
 
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
-                <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                    <View style={STYLE.hrCommon}></View>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dropDownFormInput}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
@@ -59,7 +61,7 @@ const TLDetailEdit = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.timedateGrp}>
-                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -113,7 +115,7 @@ const TLDetailEdit = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Rainforests are one of the oldest ecosystems on Earth and are fundamental to all life on the planet. You will learn all about different forms of physical geography, including different world ecosystems. You will also learn about everyday items that come from the Amazon Rainforest.'
-                            style={PAGESTYLE.commonInputTextarea}
+                            style={PAGESTYLE.commonInputTextareaNormal}
                         />
                     </View>
                     <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
@@ -121,7 +123,8 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
-                        <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items that your class may need</Text>
                         <View style={PAGESTYLE.lessonPoints}>
                             <TextInput
                                 style={PAGESTYLE.commonInput}
@@ -193,11 +196,11 @@ const TLDetailEdit = (props) => {
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
                         <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View>

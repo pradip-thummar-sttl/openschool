@@ -109,10 +109,10 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
-        width: '69%',
+        width: '67%',
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
-         paddingRight: hp(2.60),
+         paddingRight: hp(3.9),
          paddingTop: hp(2.5),
     },
     requireText: {
@@ -255,11 +255,11 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width: '31%',
+        width:'33%',
         justifyContent: 'flex-start',
-        paddingLeft: hp(2.99),
-        borderLeftWidth: 1,
-        borderColor: COLORS.borderGrp,
+        paddingLeft: hp(2.86),
+        //borderLeftWidth: 1,
+        //borderColor: COLORS.borderGrp,
         paddingTop: hp(2.5),
     },
     borderNone: {
@@ -299,6 +299,7 @@ export default StyleSheet.create({
     subLineTitle: {
         marginTop: hp(-3.5),
         zIndex: 9,
+        paddingRight:hp(1.5),
     },
     closeIconSmall: {
         width: hp(2.8),
@@ -433,9 +434,25 @@ export default StyleSheet.create({
     },
     commonInputTextarea: {
         width: '100%',
-        height: hp(10.67),
+        height: hp(12.67),
         borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1.3),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        paddingRight: hp(1.5),
+        paddingLeft: hp(1.5),
+        marginTop: hp(1.3),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(2.60),
+        fontFamily: FONTS.fontSemiBold,
+    },
+    commonInputTextareaBoldGrey: {
+        width: '100%',
+        height: hp(12.67),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
         paddingTop: hp(1.5),
         paddingBottom: hp(1.5),
@@ -449,9 +466,9 @@ export default StyleSheet.create({
     },
     commonInputTextareaNormal: {
         width: '100%',
-        height: hp(10.67),
+        height: hp(12.67),
         borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
         paddingTop: hp(1.5),
         paddingBottom: hp(1.5),
@@ -755,7 +772,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         fontSize:hp(1.82),
-        color:COLORS.menuLightFonts,
+        color:COLORS.darkGray,
     },
     dateTitle:{
         flexDirection: 'row',
@@ -934,5 +951,9 @@ export default StyleSheet.create({
         width:hp(2.5),
         height:hp(2.5),
         top:hp(0.2),
+    },
+    borderRight:{
+        borderRightWidth:1,
+        borderRightColor:COLORS.bottomProfileLightBorder,
     },
 });

@@ -27,7 +27,9 @@ const TLDetailAdd = (props) => {
 
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
-                <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                    <View style={STYLE.hrCommon}></View>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dropDownFormInput}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
@@ -58,7 +60,7 @@ const TLDetailAdd = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.timedateGrp}>
-                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -68,6 +70,7 @@ const TLDetailAdd = (props) => {
                                         value={date}
                                         mode="date"
                                         textColor={{ color: COLORS.darkGray }}
+                                        placeHolderTextStyle={{ color: COLORS.darkGray }}
                                     />
                                 </View>
                             </View>
@@ -112,7 +115,7 @@ const TLDetailAdd = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Briefly explain what the lesson is about'
-                            style={PAGESTYLE.commonInputTextarea}
+                            style={PAGESTYLE.commonInputTextareaBoldGrey}
                         />
                     </View>
                     <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
@@ -162,7 +165,7 @@ const TLDetailAdd = (props) => {
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
                     </View>
-                    
+
                 </View>
             </View>
         </View>

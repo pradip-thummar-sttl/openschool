@@ -116,7 +116,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Leave feedback here'
-                            style={PAGESTYLE.commonInputTextarea}
+                            style={PAGESTYLE.commonInputTextareaNormal}
                         />
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
