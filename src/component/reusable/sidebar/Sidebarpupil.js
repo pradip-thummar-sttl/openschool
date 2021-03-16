@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     },
     cartoon: {
         position: 'absolute',
-        bottom: hp(0),
+        bottom: hp(1.5),
         right: hp(-10.5),
     },
 });
