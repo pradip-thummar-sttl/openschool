@@ -22,7 +22,6 @@ import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomewor
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
-import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import STYLE from '../utils/Style';
 
 import { MenuProvider } from 'react-native-popup-menu';
@@ -30,6 +29,7 @@ import combineReducers from '../reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
 import TimeTable from '../screens/teacher/timetable/TimeTable';
+import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -47,7 +47,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="PupilLessonDetail">
+        <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Introduction" component={Introduction} />

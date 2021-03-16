@@ -19,6 +19,7 @@ import PupilHomeWorkMarked from './homework/PupilHomeWorkMarked';
 
 const PupilLessonDetail = (props) => {
     const [isHide, action] = useState(true);
+    const [isLesson, setLesson] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)} />
@@ -27,11 +28,11 @@ const PupilLessonDetail = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
-                            <TouchableOpacity style={PAGESTYLE.tabs}>
-                                <Text style={[PAGESTYLE.tabsText, PAGESTYLE.tabsTextSelected]}>Lesson</Text>
+                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={()=>setLesson(true)}>
+                                <Text style={[PAGESTYLE.tabsText,{color:isLesson? COLORS.buttonGreen:COLORS.menuLightFonts} ]}>Lesson</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={PAGESTYLE.tabsText}>Homework</Text>
+                            <TouchableOpacity onPress={()=>setLesson(false)}>
+                                <Text style={[PAGESTYLE.tabsText,{color:!isLesson? COLORS.buttonGreen:COLORS.menuLightFonts}]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.lessonstartButton}>
@@ -40,9 +41,10 @@ const PupilLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    {/* <PupilLesson /> */}
-                    {/* <PupilLessonDue /> */}
-                    <PupilLessonDetailInternal />
+                    {
+                        isLesson?<PupilLesson />:<PupilLessonDue />
+                    }
+                    {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}
                     {/* <PupilHomeWorkMarked /> */}
