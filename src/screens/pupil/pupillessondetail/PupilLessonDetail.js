@@ -22,17 +22,20 @@ const PupilLessonDetail = (props) => {
     const [isLesson, setLesson] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)} />
+            <Sidebarpupil hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
+                navigateToTimetable={() => props.navigation.navigate('TimeTable')}
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
-                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={()=>setLesson(true)}>
-                                <Text style={[PAGESTYLE.tabsText,{color:isLesson? COLORS.buttonGreen:COLORS.menuLightFonts} ]}>Lesson</Text>
+                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => setLesson(true)}>
+                                <Text style={[PAGESTYLE.tabsText, { color: isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Lesson</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={()=>setLesson(false)}>
-                                <Text style={[PAGESTYLE.tabsText,{color:!isLesson? COLORS.buttonGreen:COLORS.menuLightFonts}]}>Homework</Text>
+                            <TouchableOpacity onPress={() => setLesson(false)}>
+                                <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.lessonstartButton}>
@@ -42,7 +45,11 @@ const PupilLessonDetail = (props) => {
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     {
-                        isLesson?<PupilLesson />:<PupilLessonDue />
+                        isLesson ?
+                            <PupilLesson
+                                navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
+                            :
+                            <PupilLessonDue />
                     }
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}

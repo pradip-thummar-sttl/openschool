@@ -7,12 +7,15 @@ import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
+import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
 const PupilLessonDetailInternal = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
+            <HeaderWhite />
+
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
 
