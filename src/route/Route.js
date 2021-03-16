@@ -29,6 +29,7 @@ import { MenuProvider } from 'react-native-popup-menu';
 import combineReducers from '../reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
+import TimeTable from '../screens/teacher/timetable/TimeTable';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -55,6 +56,7 @@ function ScreenStack() {
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
             <Stack.Screen name="Header" component={Header} />
+            <Stack.Screen name="TimeTable" component={TimeTable} />
             <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} />
             <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> 

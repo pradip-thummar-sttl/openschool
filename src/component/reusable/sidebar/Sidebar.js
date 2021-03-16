@@ -5,6 +5,7 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
+import { opacity } from "../../../utils/Constant";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -44,72 +45,85 @@ const Sidebar = (props) => {
                 <TouchableOpacity onPress={()=>this.toggleAnimation()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.ProfileBack} />
                     {
-                        isSmall? null:
-                        <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
-                        </View>
+                        isSmall ? null :
+                            <View style={styles.profileTextMain}>
+                                <Text style={styles.profileTitle}>Johney Depp</Text>
+                                <Text style={styles.profileDesi}>Administrator</Text>
+                            </View>
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
-                    <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, styles.menuItemSelected]}
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToDashboard()}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToTimetable()}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Teachers</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>My Calender</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToLessonAndHomework()}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Pupils</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>Lesson Planner</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}
+                        activeOpacity={opacity}
+                        onPress={() => props.props.navigation.replace('')}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Pupil Management</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>Pupil Management</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}
+                        activeOpacity={opacity}
+                        onPress={() => props.props.navigation.replace('')}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
                         />
-                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Parents</Text>
+                        {
+                            isSmall ? null :
+                                <Text style={styles.menuText}>Parents</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}
+                        activeOpacity={opacity}
+                        onPress={() => props.props.navigation.replace('')}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>FAQ</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>FAQ</Text>
                         }
                     </TouchableOpacity>
                 </View>
