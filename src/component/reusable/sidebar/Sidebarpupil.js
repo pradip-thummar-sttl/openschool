@@ -75,43 +75,46 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Pupil}
+                            source={Images.MyLessons}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>Pupils</Text>
+                            <Text style={styles.menuText}>My Lessons</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Messaging}
+                            source={Images.MyAchievements}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>Pupil Management</Text>
+                            <Text style={styles.menuText}>My Achievements</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Parents}
+                            source={Images.MyAvatar}
                         />
                          {
                             isSmall? null:
-                            <Text style={styles.menuText}>Parents</Text>
+                            <Text style={styles.menuText}>My Avatar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Faqs}
+                            source={Images.OpenSchool}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>FAQ</Text>
+                            <Text style={styles.menuText}>Open School</Text>
                         }
                     </TouchableOpacity>
+                </View>
+                <View style={styles.cartoon}>
+                    <Image source={Images.cartoon} style={styles.cartoonIcon} />
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
     },
     userInfobottom: {
         position: 'absolute',
-        bottom: hp(6),
+        bottom: hp(1),
         borderWidth: 1,
         left: -1,
         width: hp(29.6),
@@ -223,11 +226,21 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     menuIcon: {
-        width: hp(3.25),
-        height: hp(3.25)
+        width: hp(3.5),
+        height: hp(3.5),
+        resizeMode: 'contain',
     },
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
+    },
+    cartoonIcon: {
+        width: hp(21.5),
+        resizeMode: 'contain',
+    },
+    cartoon: {
+        position: 'absolute',
+        bottom: hp(1.5),
+        right: hp(-10.5),
     },
 });

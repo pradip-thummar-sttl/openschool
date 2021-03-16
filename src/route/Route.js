@@ -6,9 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Users from '../component/users/Users';
-import Introduction from '../component/teacher/Introduction';
-import Login from '../component/login/Login';
+import Users from '../screens/users/Users';
+import Introduction from '../screens/introduction/Introduction';
+import Login from '../screens/login/Login';
 import Popup from '../component/reusable/popup/Popup';
 import Popupuser from '../component/reusable/popup/Popupuser';
 import Sidebar from '../component/reusable/sidebar/Sidebar';
@@ -28,7 +28,7 @@ import STYLE from '../utils/Style';
 import { MenuProvider } from 'react-native-popup-menu';
 import combineReducers from '../reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Splash from '../component/splash/Splash';
+import Splash from '../screens/splash/Splash';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 

@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
 import FONTS from '../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
@@ -21,7 +22,7 @@ const HeaderWhite = (props) => {
                     <Popuphomework />
                     <Popupsubmithomework />
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
+                        <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -29,7 +30,7 @@ const HeaderWhite = (props) => {
                 <View style={styles.field}>
                     <Image
                         style={styles.userIcon}
-                        source={require('../../../assets/images/search2.png')} />
+                        source={Images.SearchIcon} />
                     <TextInput
                         style={[STYLE.commonInput, styles.searchHeader]}
                         placeholder="Search subject, class, etc"
@@ -44,7 +45,7 @@ const HeaderWhite = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
                                     <Text style={styles.filterListText}>Subject</Text>
-                                    <Image source={require('../../../assets/images/check-icon2.png')} style={styles.checkMark} />
+                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
                                 </View>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
@@ -59,10 +60,10 @@ const HeaderWhite = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={styles.filterIcon} source={require('../../../assets/images/filter2.png')} />
+                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={require('../../../assets/images/addIcon2.png')} />
+                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
                 </TouchableOpacity>
             </View>
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     },
     borderList: {
         borderBottomColor: COLORS.bottomProfileLightBorder,
-        borderBottomWidth: 1,
+        borderBottomWidth: hp(0.26),
     },
     filterList: {
         flexDirection: 'row',
@@ -192,9 +193,9 @@ const styles = StyleSheet.create({
         top: hp(5.5),
         width: hp(30.98),
         borderRadius: hp(1),
-        shadowColor: "#000",
+        shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.15,
+        shadowOpacity: 0.05,
         shadowRadius: hp(1),
     },
     checkMark: {

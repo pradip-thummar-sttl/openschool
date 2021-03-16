@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 
 const Popupdata = (props) => {
@@ -19,7 +20,7 @@ const Popupdata = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
+                        <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
@@ -29,15 +30,15 @@ const Popupdata = (props) => {
                                 <View style={styles.yellowHrTag}></View>
                                 <View style={styles.timedateGrp}>
                                     <View style={styles.dateWhiteBoard}>
-                                        <Image style={styles.calIcon} source={require('../../../assets/images/calendar-small-icon2.png')} />
+                                        <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
                                         <Text style={styles.datetimeText}>14/09/2020</Text>
                                     </View>
                                     <View style={[styles.dateWhiteBoard, styles.time]}>
-                                        <Image style={styles.timeIcon} source={require('../../../assets/images/clock2.png')} />
+                                        <Image style={styles.timeIcon} source={Images.Clock} />
                                         <Text style={styles.datetimeText}>09:00 - 09:30</Text>
                                     </View>
                                     <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                        <Image style={styles.calIcon} source={require('../../../assets/images/group2.png')} />
+                                        <Image style={styles.calIcon} source={Images.Group} />
                                         <Text style={styles.datetimeText}>Group 2A</Text>
                                     </View>
                                 </View>
@@ -60,7 +61,7 @@ const Popupdata = (props) => {
                                 <Text style={styles.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with…</Text>
                                 <View style={styles.attchmentSectionwithLink}>
                                     <TouchableOpacity style={styles.attachment}>
-                                        <Image style={styles.attachmentIcon} source={require('../../../assets/images/attachment2.png')} />
+                                        <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
                                         <Text style={styles.attachmentText}>1 Attachment</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity>
@@ -70,17 +71,17 @@ const Popupdata = (props) => {
                                 <View style={styles.requirementofClass}>
                                     <Text style={styles.requireText}>Items that your class will need</Text>
                                     <View style={styles.lessonPoints}>
-                                        <Image source={require('../../../assets/images/check-icon2.png')} style={styles.checkIcon} />
+                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
                                         <Text style={styles.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
                                     </View>
                                     <View style={styles.lessonPoints}>
-                                        <Image source={require('../../../assets/images/check-icon2.png')} style={styles.checkIcon} />
+                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
                                         <Text style={styles.lessonPointText}>Drawing work sheet.</Text>
                                     </View>
                                 </View>
                                 <View style={styles.uploadCalendar}>
                                     <TouchableOpacity>
-                                        <Image style={styles.uploadCalIcon} source={require('../../../assets/images/upload-calendar2.png')} />
+                                        <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                     </TouchableOpacity>
                                     <View style={styles.lessonstartButton}>
                                         <TouchableOpacity style={styles.buttonGrp}><Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text></TouchableOpacity>
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
         width: hp(4.16),
         height: hp(4.16),
         borderRadius: hp(200),
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         borderColor: COLORS.lightGrayPupil,
         borderWidth: 1,
         justifyContent: 'center',
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
         top: hp(5.85),
         left: hp(-3.90),
         borderTopColor: 'transparent',
-        borderRightColor: '#fff',
+        borderRightColor: COLORS.white,
         borderBottomColor: 'transparent',
         borderLeftColor: 'transparent',
     },
