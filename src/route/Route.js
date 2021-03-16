@@ -15,13 +15,13 @@ import Sidebar from '../component/reusable/sidebar/Sidebar';
 import Header from '../component/reusable/header/Header';
 import LessonandHomeworkPlanner from '../screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
 import NotificationDrawer from '../component/reusable/notificationdrawer/NotificationDrawer';
-import LessonandHomeworkPlannerDashboard from '../screens/teacher/lessonandhomeworkplannerdashboard/Lessonandhomeworkplannerdashboard';
+import LessonandHomeworkPlannerDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
 import PupilLessonEmpty from '../screens/pupil/pupillessonempty/PupilLessonEmpty';
 import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
-import TeacherLessonEmpty from '../screens/teacher/teacherlessonempty/TeacherLessonEmpty';
+import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import STYLE from '../utils/Style';
 
@@ -29,6 +29,7 @@ import { MenuProvider } from 'react-native-popup-menu';
 import combineReducers from '../reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
+import TimeTable from '../screens/teacher/timetable/TimeTable';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -55,9 +56,9 @@ function ScreenStack() {
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
             <Stack.Screen name="Header" component={Header} />
-            <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} />
+            <Stack.Screen name="TimeTable" component={TimeTable} />
             <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
-            <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> 
+            <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
             <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
             <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />

@@ -93,6 +93,7 @@ class Login extends Component {
                                     placeholder="Enter email or phone"
                                     autoCapitalize={false}
                                     maxLength={40}
+                                    // value={'patel.dhruv@silvertouch.com'}
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
@@ -104,6 +105,7 @@ class Login extends Component {
                                     ref={(input) => { this.t2 = input; }}
                                     style={STYLE.commonInputPassword}
                                     placeholder="Password"
+                                    // value={'SIlver@#098'}
                                     maxLength={30}
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     secureTextEntry={true}
@@ -130,7 +132,10 @@ class Login extends Component {
                             <View style={styles.loginButtonView}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => this.isFieldsValidated()}>
+                                    onPress={() => {
+                                        // this.isFieldsValidated()
+                                        this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                                    }}>
                                     {this.state.isLoading ?
                                         <ActivityIndicator
                                             style={STYLE.fullWidthPrimaryButton}
