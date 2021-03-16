@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -32,23 +33,23 @@ const TLDetail = (props) => {
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
-                            <View style={PAGESTYLE.alignRow}>                               
-                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} /> 
-                                <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>                               
+                            <View style={PAGESTYLE.alignRow}>
+                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
                             </View>
-                            
+
                         </View>
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
-                            <View style={PAGESTYLE.alignRow}>   
-                                <Image style={PAGESTYLE.timeIcon} source={require('../../../../assets/images/clock2.png')} />
+                            <View style={PAGESTYLE.alignRow}>
+                                <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                                 <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
                             </View>
                         </View>
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                            <View style={PAGESTYLE.alignRow}>   
-                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/group2.png')} />
+                            <View style={PAGESTYLE.alignRow}>
+                                <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                                 <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
                             </View>
                         </View>
@@ -57,19 +58,19 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                         <Text style={PAGESTYLE.lessonText}>Rainforests are one of the oldest ecosystems on Earth and are fundamental to all life on the planet. You will learn all about different forms of physical geography, including different world ecosystems. You will also learn about everyday items that come from the Amazon Rainforest.</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                        <Image source={require('../../../../assets/images/playIcon2.png')} style={PAGESTYLE.videoLinkIcon} />
+                    <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                        <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
                         <Text style={PAGESTYLE.videoLinkText}>Geography - Instructional video</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                         <View style={PAGESTYLE.lessonPoints}>
-                            <Image source={require('../../../../assets/images/check-icon2.png')} style={PAGESTYLE.checkIcon} />
+                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                             <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
                         </View>
                         <View style={PAGESTYLE.lessonPoints}>
-                            <Image source={require('../../../../assets/images/check-icon2.png')} style={PAGESTYLE.checkIcon} />
+                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                             <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
                         </View>
                     </View>
@@ -79,73 +80,31 @@ const TLDetail = (props) => {
                         <View style={PAGESTYLE.checkBoxGrp}>
 
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Reuel Pardesi</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Gene Aw</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Janice Williamson</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Jovan Singh</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Sophia Lauren</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Mark Mitchell</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Madeline Ghenea</Text>
                             </View>
                         </View>
@@ -172,30 +131,30 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.requireText}>Learning material</Text>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                     </View>
 
                     <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
 
                     </View>
                     <View style={[PAGESTYLE.thumbVideo, PAGESTYLE.videoLinkBlockSpaceBottom]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         <View style={PAGESTYLE.videoLinkBlock}>
-                            <Image source={require('../../../../assets/images/playIcon2.png')} style={PAGESTYLE.videoLinkIcon} />
+                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
                             <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
                         </View>
                     </View>
@@ -203,19 +162,19 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
                     </View>
                 </View>

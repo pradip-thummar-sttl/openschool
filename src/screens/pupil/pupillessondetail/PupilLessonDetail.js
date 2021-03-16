@@ -3,9 +3,10 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import PupilLesson from './lesson/PupilLesson';
 import PupilLessonDue from './lesson/PupilLessonDue';
@@ -20,7 +21,7 @@ const PupilLessonDetail = (props) => {
     const [isHide, action] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar hide={() => action(!isHide)} />
+            <Sidebarpupil hide={() => action(!isHide)} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
                 <View style={PAGESTYLE.whiteBg}>
@@ -39,7 +40,7 @@ const PupilLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    <PupilLesson />
+                    {/* <PupilLesson /> */}
                     {/* <PupilLessonDue /> */}
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}

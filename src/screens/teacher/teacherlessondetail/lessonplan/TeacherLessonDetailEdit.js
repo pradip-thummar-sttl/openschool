@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, Scro
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -26,7 +27,9 @@ const TLDetailEdit = (props) => {
 
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
-                <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                    <View style={STYLE.hrCommon}></View>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dropDownFormInput}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
@@ -58,10 +61,10 @@ const TLDetailEdit = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.timedateGrp}>
-                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} />
+                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                 <View style={PAGESTYLE.subjectDateTime}>
                                     <DateTimePicker
                                         style={PAGESTYLE.dateTime}
@@ -75,7 +78,7 @@ const TLDetailEdit = (props) => {
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                <Image style={PAGESTYLE.timeIcon} source={require('../../../../assets/images/clock2.png')} />
+                                <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                                 <View style={[PAGESTYLE.subjectDateTime]}>
                                     <DateTimePicker
                                         style={PAGESTYLE.dateTime}
@@ -89,7 +92,7 @@ const TLDetailEdit = (props) => {
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/group2.png')} />
+                                <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                                 <View style={[PAGESTYLE.subjectDateTime]}>
                                     <RNPickerSelect style={PAGESTYLE.dropDownSmall}
                                         onValueChange={(value) => console.log(value)}
@@ -112,15 +115,16 @@ const TLDetailEdit = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Rainforests are one of the oldest ecosystems on Earth and are fundamental to all life on the planet. You will learn all about different forms of physical geography, including different world ecosystems. You will also learn about everyday items that come from the Amazon Rainforest.'
-                            style={PAGESTYLE.commonInputTextarea}
+                            style={PAGESTYLE.commonInputTextareaNormal}
                         />
                     </View>
                     <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                        <Image source={require('../../../../assets/images/recording-icon2.png')} style={PAGESTYLE.recordingLinkIcon} />
+                        <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                         <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
-                        <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items that your class may need</Text>
                         <View style={PAGESTYLE.lessonPoints}>
                             <TextInput
                                 style={PAGESTYLE.commonInput}
@@ -140,7 +144,7 @@ const TLDetailEdit = (props) => {
                                 onChangeText={text => this.setState({ email: text })} />
                         </View>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={require('../../../../assets/images/add2.png')} style={PAGESTYLE.addIcon} />
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                         </TouchableOpacity>
                     </View>
@@ -150,30 +154,18 @@ const TLDetailEdit = (props) => {
                         <View style={PAGESTYLE.checkBoxGrp}>
 
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Reuel Pardesi</Text>
-                                <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                                <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabel}>
-                                <CheckBox
-                                    style={[STYLE.checkBoxcommon, PAGESTYLE.checkBoxcommon]}
-                                    value={false}
-                                    onCheckColor={'#03014C'}
-                                    onTintColor={'#03014C'}
-                                    tintColor={'#676693'}
-                                />
+                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Gene Aw</Text>
-                                <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                                <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                             </View>
                         </View>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={require('../../../../assets/images/add2.png')} style={PAGESTYLE.addIcon} />
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                         </TouchableOpacity>
                     </View>
@@ -200,20 +192,20 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                     </View>
                     <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={require('../../../../assets/images/dropHolder2.png')} style={PAGESTYLE.grpThumbVideo} />
+                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
                         <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View>
                     <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
@@ -221,7 +213,7 @@ const TLDetailEdit = (props) => {
                     <View style={[PAGESTYLE.thumbVideo, PAGESTYLE.videoLinkBlockSpaceBottom]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         <View style={PAGESTYLE.videoLinkBlock}>
-                            <Image source={require('../../../../assets/images/playIcon2.png')} style={PAGESTYLE.videoLinkIcon} />
+                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
                             <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
                         </View>
                     </View>
@@ -229,19 +221,19 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
                         </View>
                     </View>
                 </View>

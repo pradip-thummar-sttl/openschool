@@ -47,8 +47,8 @@ const TeacherLessonDetail = (props) => {
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     {/* <TLDetail /> */}
                     {/* <TLDetailEdit /> */}
-                    {/* <TLDetailAdd /> */}
-                    <TLHomeWork />
+                    <TLDetailAdd />
+                    {/* <TLHomeWork /> */}
                     {/* <TLVideoGallery /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
                     {/* <TLHomeWorkSubmitted /> */}
