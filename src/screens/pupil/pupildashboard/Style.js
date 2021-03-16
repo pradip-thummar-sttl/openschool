@@ -178,12 +178,12 @@ export default StyleSheet.create({
         height: hp(11.86),
     },
     leftTabbing: {
-        width: hp(45.30),
+        width: '40%',
         borderRightWidth:1,
         borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
-        width: hp(71.39),
+        width: '60%',
     },
     item: {
         flexDirection: 'row',

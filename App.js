@@ -6,10 +6,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Splash from './src/component/splash/Splash';
-import Users from './src/component/users/Users';
-import Introduction from './src/component/teacher/Introduction';
-import Login from './src/component/login/Login';
+import Splash from './src/screens/splash/Splash';
+import Users from './src/screens/users/Users';
+import Introduction from './src/screens/introduction/Introduction';
+import Login from './src/screens/login/Login';
 import Popup from './src/component/reusable/popup/Popup';
 import Popupuser from './src/component/reusable/popup/Popupuser';
 import Sidebar from './src/component/reusable/sidebar/Sidebar';
@@ -61,13 +61,13 @@ function ScreenStack() {
       {/* <Stack.Screen name="Header" component={Header} /> */}
       {/* <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} /> */}
       {/* <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} /> */}
-      {/* <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> */}
+      <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
       {/* <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} /> */}
       {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
       {/* <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />  */}
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
-      <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} /> 
+      {/* <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />  */}
       {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
       {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
     </Stack.Navigator>

@@ -5,9 +5,9 @@ import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../utils/Colors';
 import Images from '../../utils/Images';
 import STYLE from '../../utils/Style';
-import Introduction1 from '../reusable/introduction/Inroduction1';
-import Introduction2 from '../reusable/introduction/Inroduction2';
-import Introduction3 from '../reusable/introduction/Inroduction3';
+import Introduction1 from '../../component/reusable/introduction/Inroduction1';
+import Introduction2 from '../../component/reusable/introduction/Inroduction2';
+import Introduction3 from '../../component/reusable/introduction/Inroduction3';
 
 export default class Introduction extends Component {
     constructor(props) {
