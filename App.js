@@ -41,7 +41,6 @@ export default function App() {
     </Provider>
   )
 }
-}
 
 function ScreenStack() {
   return (
