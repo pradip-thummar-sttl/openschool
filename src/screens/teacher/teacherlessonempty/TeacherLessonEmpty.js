@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -36,12 +37,13 @@ const styles = StyleSheet.create({
         borderRadius: hp(1.95),
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
-        shadowColor: "#000",
+        shadowColor: COLORS.black,
         shadowOffset: {width: 0,height: hp(0.2),},
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
         overflow: 'hidden',
         height: hp(65),
         padding: hp(5),
+        marginTop: hp(4),
     },
 });

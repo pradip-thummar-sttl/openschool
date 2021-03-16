@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -33,7 +34,7 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.toggleGrpBox}>
                                     <Text style={PAGESTYLE.toggleText}>Include homework</Text>
                                     <ToggleSwitch
-                                        isOn={true} color="#00A36B" onToggle={isOn => true}
+                                        isOn={true} color={COLORS.dashboardGreenButton} onToggle={isOn => true}
                                     />
                                 </View>
                             </View>
@@ -43,7 +44,7 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.dueDateWrap}>
                                     <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                 </View>
-                                <Image style={PAGESTYLE.calIcon} source={require('../../../../assets/images/calendar-small-icon2.png')} />
+                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                 <View style={PAGESTYLE.subjectDateTime}>
                                     <DateTimePicker
                                         style={PAGESTYLE.dateTime}
@@ -66,7 +67,7 @@ const TLHomeWork = (props) => {
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={require('../../../../assets/images/recording-icon2.png')} style={PAGESTYLE.recordingLinkIcon} />
+                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                             <Popupaddrecording />
                         </View>
                     </View>
@@ -77,9 +78,10 @@ const TLHomeWork = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                             </View>
@@ -87,9 +89,10 @@ const TLHomeWork = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
@@ -97,9 +100,10 @@ const TLHomeWork = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
@@ -107,15 +111,16 @@ const TLHomeWork = (props) => {
                             <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
-                                    onCheckColor={'#50A7F0'}
-                                    onTintColor={'#50A7F0'}
-                                    tintColor={'#50A7F0'}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={require('../../../../assets/images/add2.png')} style={PAGESTYLE.addIcon} />
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                         </TouchableOpacity>
                     </View>
@@ -126,20 +131,20 @@ const TLHomeWork = (props) => {
                         <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                     </View>
                     <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={require('../../../../assets/images/dropHolder2.png')} style={PAGESTYLE.grpThumbVideo} />
+                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View>
                     <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>

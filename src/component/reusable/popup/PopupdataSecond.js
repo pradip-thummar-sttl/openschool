@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -43,7 +44,7 @@ const Popupdata = (props) => {
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                            <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
+                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -105,22 +106,22 @@ const Popupdata = (props) => {
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                             />
-                                            <RNPickerSelect
+                                            {/* <RNPickerSelect
                                                 onValueChange={(value) => console.log(value)}
                                                 items={[
                                                     { label: 'Red', value: 'Red' },
                                                     { label: 'Yellow', value: 'Yellow' },
                                                     { label: 'Green', value: 'Green' },
                                                 ]}
-                                            />
+                                            /> */}
                                         </View>
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={require('../../../assets/images/upload-calendar2.png')} />
+                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
-                                            <TouchableOpacity style={styles.buttonGrp}><Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} /><Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text></TouchableOpacity>
+                                            <TouchableOpacity style={styles.buttonGrp}><Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} /><Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text></TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
