@@ -20,7 +20,7 @@ const PupilLessonEmpty = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilLessonEmpty')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()}/>
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={styles.whiteBoard}>
                         <View><Popupdata /></View>

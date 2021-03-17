@@ -27,7 +27,7 @@ const PupilLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilLessonEmpty')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>

@@ -14,7 +14,7 @@ const PupilLessonDetailInternal = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
-            <HeaderWhite />
+            <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()} />
 
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
