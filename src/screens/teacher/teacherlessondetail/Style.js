@@ -296,7 +296,6 @@ export default StyleSheet.create({
     grpThumbVideo: {
         width: wp(26.68),
         resizeMode: 'contain',
-        alignItems: 'center',
     },
     subLineTitle: {
         marginTop: hp(-3.5),
@@ -500,12 +499,6 @@ export default StyleSheet.create({
     },
     blockSpaceBottom: {
         marginBottom: hp(2.6),
-    },
-    uploadBlock: {
-        alignItems: 'center',
-    },
-    checkBoxGroup: {
-
     },
     dueDateWrap: {
         borderRightWidth: 2,
@@ -989,4 +982,5 @@ export default StyleSheet.create({
         paddingBottom: hp(2),
         paddingTop: hp(0),
     },
+
 });

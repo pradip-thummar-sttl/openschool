@@ -212,7 +212,7 @@ const TLDetailEdit = (props) => {
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
                     </View>
-                    <View style={[PAGESTYLE.thumbVideo, PAGESTYLE.videoLinkBlockSpaceBottom]}>
+                    <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         <View style={PAGESTYLE.videoLinkBlock}>
                             <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />

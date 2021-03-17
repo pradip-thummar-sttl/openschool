@@ -48,65 +48,69 @@ const PupilHomeWorkDetail = (props) => {
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelBox}>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
-                                    <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from 
+                                    <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
 the Amazon Rainforest</Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelBox}>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelBox}>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Take Photo</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Take Photo</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                         </View>
                     </View>
