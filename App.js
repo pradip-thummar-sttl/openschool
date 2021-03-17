@@ -29,7 +29,7 @@ function ScreenStack() {
   return (
     <Stack.Navigator headerMode='none'>
       {/* <Stack.Screen name="Splash" component={Splash} /> */}
-      {/* <Stack.Screen name="Users" component={Users} /> */}
+      <Stack.Screen name="Users" component={Users} />
       {/* <Stack.Screen name="Introduction" component={Introduction} /> */}
       {/* <Stack.Screen name="Login" component={Login} /> */}
       {/* <Stack.Screen name="Popup" component={Popup} /> */}
@@ -38,7 +38,7 @@ function ScreenStack() {
       {/* <Stack.Screen name="Header" component={Header} /> */}
       {/* <Stack.Screen name="LessonandHomeworkPlanner" component={LessonandHomeworkPlanner} /> */}
       {/* <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} /> */}
-      <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
+      {/* <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} /> */}
       {/* <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} /> */}
       {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
       {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
@@ -50,5 +50,3 @@ function ScreenStack() {
     </Stack.Navigator>
   );
 }
-
-
