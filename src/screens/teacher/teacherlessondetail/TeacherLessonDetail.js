@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import HeaderWhitewithoutsearch from "../../../component/reusable/header/HeaderWhitewithoutsearch";
+import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
+
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import { opacity } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
@@ -21,7 +24,7 @@ const TeacherLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <HeaderWhitewithoutsearch />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
