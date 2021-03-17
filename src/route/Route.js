@@ -31,6 +31,7 @@ import Splash from '../screens/splash/Splash';
 import TimeTable from '../screens/teacher/timetable/TimeTable';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import PupilLessonDetailInternal from '../screens/pupil/pupillessondetail/lesson/PupilLessonDetail';
+import PupilHomeWorkMarked from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkMarked';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -68,6 +69,7 @@ function ScreenStack() {
             <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
             <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} />
             <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
+            <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
             {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
         </Stack.Navigator>
     );

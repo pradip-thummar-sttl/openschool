@@ -24,7 +24,7 @@ const PupilLessonDetail = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('TimeTable')}
+                navigateToTimetable={() => props.navigation.navigate('PupilLessonEmpty')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
@@ -49,7 +49,8 @@ const PupilLessonDetail = (props) => {
                             <PupilLesson
                                 navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
                             :
-                            <PupilLessonDue />
+                            <PupilLessonDue
+                                navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
                     }
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
