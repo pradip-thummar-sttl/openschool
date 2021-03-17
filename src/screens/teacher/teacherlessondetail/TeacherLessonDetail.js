@@ -5,31 +5,46 @@ import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhitewithoutsearch from "../../../component/reusable/header/HeaderWhitewithoutsearch";
 import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
-import TLDetail from './lessonplan/TeacherLessonDetail';
 
+import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
+import { opacity } from "../../../utils/Constant";
+import TLDetail from "./lessonplan/TeacherLessonDetail";
+import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
+import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
+    const [tabIndex, setSelectedTab] = useState(0);
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('LessonandHomeworkPlannerDashboard')}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhitewithoutsearch />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
-                            <TouchableOpacity style={PAGESTYLE.tabs}>
-                                <Text style={[PAGESTYLE.tabsText, PAGESTYLE.tabsTextSelected]}>lesson plan</Text>
+                            <TouchableOpacity
+                                style={PAGESTYLE.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(0)}>
+                                <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson plan</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={PAGESTYLE.tabs}>
-                                <Text style={PAGESTYLE.tabsText}>lesson homework</Text>
+                            <TouchableOpacity
+                                style={PAGESTYLE.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(1)}>
+                                <Text style={[PAGESTYLE.tabsText, tabIndex == 1 ? PAGESTYLE.tabsTextSelected : null]}>lesson homework</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={PAGESTYLE.tabsText}>homework submitted</Text>
+                            <TouchableOpacity
+                                style={PAGESTYLE.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(2)}>
+                                <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.lessonstartButton}>
@@ -38,13 +53,17 @@ const TeacherLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    <TLDetail />
+                    {tabIndex == 0 ?
+                        <TLDetail />
+                        : tabIndex == 1 ?
+                            <TLHomeWork />
+                            :
+                            <TLHomeWorkSubmitted />
+                    }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
-                    {/* <TLHomeWork /> */}
                     {/* <TLVideoGallery /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                    {/* <TLHomeWorkSubmitted /> */}
                     {/* <TLHomeWorkSubmittedDetail /> */}
                     {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
                 </ScrollView>

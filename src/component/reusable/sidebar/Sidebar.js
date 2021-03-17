@@ -10,6 +10,7 @@ import { opacity } from "../../../utils/Constant";
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
     const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
+    const [moduleIndex, setSelectedIndex] = useState(0);
     // const isHide = () => {
     //     action(!isSmall)
     //     props.hide();
@@ -42,7 +43,7 @@ const Sidebar = (props) => {
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={()=>this.toggleAnimation()} style={styles.userInfo}>
+                <TouchableOpacity onPress={() => this.toggleAnimation()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.ProfileBack} />
                     {
                         isSmall ? null :
@@ -54,9 +55,9 @@ const Sidebar = (props) => {
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
                     <TouchableOpacity
-                        style={[styles.menuItem, styles.menuItemSelected]}
+                        style={[styles.menuItem, moduleIndex == 0 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToDashboard()}>
+                        onPress={() => { setSelectedIndex(0); props.navigateToDashboard() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
@@ -66,9 +67,10 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToTimetable()}>
+                        onPress={() => { setSelectedIndex(1); props.navigateToTimetable() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
@@ -78,9 +80,10 @@ const Sidebar = (props) => {
                                 <Text style={styles.menuText}>My Calender</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 2 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToLessonAndHomework()}>
+                        onPress={() => { setSelectedIndex(2); props.navigateToLessonAndHomework() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
@@ -90,9 +93,10 @@ const Sidebar = (props) => {
                                 <Text style={styles.menuText}>Lesson Planner</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => props.props.navigation.replace('')}>
+                        onPress={() => { setSelectedIndex(3); }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
@@ -102,9 +106,10 @@ const Sidebar = (props) => {
                                 <Text style={styles.menuText}>Pupil Management</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 4 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => props.props.navigation.replace('')}>
+                        onPress={() => { setSelectedIndex(4); }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
@@ -114,9 +119,10 @@ const Sidebar = (props) => {
                                 <Text style={styles.menuText}>Parents</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 5 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => props.props.navigation.replace('')}>
+                        onPress={() => { setSelectedIndex(5); }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
@@ -130,15 +136,15 @@ const Sidebar = (props) => {
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
                     {
-                        isSmall? null:
-                        <>
-                            <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitleBottom}>Johney Depp</Text>
-                            </View>
-                            <TouchableOpacity style={styles.moreMenu}>
-                                <Image style={styles.moreIcon} source={Images.SidebarMore} />
-                            </TouchableOpacity>
-                        </>
+                        isSmall ? null :
+                            <>
+                                <View style={styles.profileTextMain}>
+                                    <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                                </View>
+                                <TouchableOpacity style={styles.moreMenu}>
+                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                </TouchableOpacity>
+                            </>
                     }
                 </View>
             </Animated.View>
@@ -150,7 +156,7 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:COLORS.SidebarHeaderBack,
+        backgroundColor: COLORS.SidebarHeaderBack,
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,

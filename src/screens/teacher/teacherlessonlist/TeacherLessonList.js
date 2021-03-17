@@ -8,8 +8,9 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
+import { opacity } from "../../../utils/Constant";
 
-const Pupillist = ({ style }) => (
+const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
             <View style={PAGESTYLE.border}></View>
@@ -32,7 +33,10 @@ const Pupillist = ({ style }) => (
         </View>
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>No</Text>
-            <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+            <TouchableOpacity 
+            style={PAGESTYLE.pupilDetailLink}
+            activeOpacity={opacity}
+            onPress={()=>props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
@@ -56,6 +60,7 @@ const TeacherLessonList = (props) => {
         return (
             <Pupillist
                 item={item}
+                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail')}
             />
         );
     };
@@ -63,9 +68,9 @@ const TeacherLessonList = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('LessonandHomeworkPlannerDashboard')}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>

@@ -39,9 +39,9 @@ const LessonandHomeworkPlanner = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('LessonandHomeworkPlannerDashboard')}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header />
                 <ScrollView style={STYLE.padLeftRight}>

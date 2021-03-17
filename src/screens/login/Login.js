@@ -54,7 +54,7 @@ class Login extends Component {
                 this.setLoading(false)
                 // showMessage(res.message)
                 this.props.setUserAuthData(res.data)
-                this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                this.props.navigation.replace('TeacherDashboard')
             } else {
                 this.setLoading(false)
                 showMessage(res.message)
@@ -134,7 +134,7 @@ class Login extends Component {
                                     activeOpacity={opacity}
                                     onPress={() => {
                                         // this.isFieldsValidated()
-                                        this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                                        this.props.navigation.replace('TeacherDashboard')
                                     }}>
                                     {this.state.isLoading ?
                                         <ActivityIndicator
