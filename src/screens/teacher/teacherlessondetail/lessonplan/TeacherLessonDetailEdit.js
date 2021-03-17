@@ -12,6 +12,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { opacity } from "../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
+import HeaderUpdate from "./header/HeaderUpdate";
 
 
 const TLDetailEdit = (props) => {
@@ -28,6 +29,7 @@ const TLDetailEdit = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
+            <HeaderUpdate />
             <View style={PAGESTYLE.containerWrap}>
                 <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                     <View style={STYLE.hrCommon}></View>

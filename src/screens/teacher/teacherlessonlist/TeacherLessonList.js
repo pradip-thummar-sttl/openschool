@@ -9,6 +9,7 @@ import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import { opacity } from "../../../utils/Constant";
+import Header from "./Header";
 
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
@@ -72,7 +73,7 @@ const TeacherLessonList = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <Header navigateToAddSubject={() => props.navigation.replace('TLDetailAdd')} />
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>

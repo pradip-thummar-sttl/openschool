@@ -14,6 +14,7 @@ import { showMessage, msgTopic, msgDescription, opacity } from "../../../../util
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
+import HeaderAddNew from "./header/HeaderAddNew";
 
 
 const TLDetailAdd = (props) => {
@@ -44,6 +45,7 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.whiteBg}>
+            <HeaderAddNew />
             <View style={PAGESTYLE.containerWrap}>
                 <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                     <View style={STYLE.hrCommon}></View>
@@ -184,7 +186,7 @@ const TLDetailAdd = (props) => {
                         <TouchableOpacity
                             style={PAGESTYLE.buttonGrp}
                             activeOpacity={opacity}
-                            onPress={()=> props.navigation.navigate('TLVideoGallery')}>
+                            onPress={() => props.navigation.navigate('TLVideoGallery')}>
                             <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                         </TouchableOpacity>
                     </View>

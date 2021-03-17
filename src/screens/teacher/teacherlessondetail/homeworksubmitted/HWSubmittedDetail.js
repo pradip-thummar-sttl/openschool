@@ -13,6 +13,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
+import HeaderSave from "./header/HeaderSave";
 
 const TLHomeWorkSubmittedDetail = (props) => {
 
@@ -29,6 +30,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.whiteBg}>
+            <HeaderSave/>
             <View style={PAGESTYLE.containerWrapTop}>
                 <View style={PAGESTYLE.userLeft}>
                     <View style={PAGESTYLE.userThumb}></View>

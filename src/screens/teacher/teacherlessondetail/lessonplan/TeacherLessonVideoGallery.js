@@ -9,12 +9,14 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import { opacity } from "../../../../utils/Constant";
+import HeaderGallery from "./header/HeaderGallery";
 
 
 const TLVideoGallery = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
+            <HeaderGallery />
             <Text style={PAGESTYLE.videoTitle}>Videos</Text>
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.videoWrap}>

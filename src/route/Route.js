@@ -26,6 +26,7 @@ import TLDetailEdit from '../screens/teacher/teacherlessondetail/lessonplan/Teac
 import TLVideoGallery from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery';
 import TLDetail from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetail';
 import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/homeworksubmitted/HWSubmittedDetail';
+import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -43,7 +44,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="Splash">
+        <Stack.Navigator headerMode='none' initialRouteName="TeacherLessonList">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Introduction" component={Introduction} />
@@ -62,6 +63,7 @@ function ScreenStack() {
             <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} />
             <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
             <Stack.Screen name="TLDetail" component={TLDetail} />
+            <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
             <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
         </Stack.Navigator>

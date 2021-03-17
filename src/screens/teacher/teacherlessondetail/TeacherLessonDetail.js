@@ -11,6 +11,9 @@ import { opacity } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
 import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
 import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
+import HeaderLP from "./header/HeaderLP";
+import HeaderHW from "./header/HeaderHW";
+import HeaderHWS from "./header/HeaderHWS";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -24,7 +27,14 @@ const TeacherLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhitewithoutsearch />
+                {/* <HeaderWhitewithoutsearch /> */}
+                {tabIndex == 0 ?
+                        <HeaderLP />
+                        : tabIndex == 1 ?
+                            <HeaderHW/>
+                            :
+                            <HeaderHWS/>
+                    }
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
