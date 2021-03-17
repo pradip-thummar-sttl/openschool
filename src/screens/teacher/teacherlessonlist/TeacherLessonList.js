@@ -33,10 +33,10 @@ const Pupillist = (props, { style }) => (
         </View>
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>No</Text>
-            <TouchableOpacity 
-            style={PAGESTYLE.pupilDetailLink}
-            activeOpacity={opacity}
-            onPress={()=>props.navigateToDetail()}>
+            <TouchableOpacity
+                style={PAGESTYLE.pupilDetailLink}
+                activeOpacity={opacity}
+                onPress={() => props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
@@ -101,7 +101,7 @@ const TeacherLessonList = (props) => {
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
-                                    data={[1]}
+                                    data={[1, 2, 3, 4, 5]}
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}

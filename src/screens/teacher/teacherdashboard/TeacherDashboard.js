@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { showMessage } from "../../../utils/Constant";
+import { isDesignBuild, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 
 const Item = ({ onPress, style }) => (
@@ -62,7 +62,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     })
     console.log('userdata', userAuthData)
     useEffect(() => {
-        console.log('hello')
+        if(isDesignBuild)
+            return true
+
         Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

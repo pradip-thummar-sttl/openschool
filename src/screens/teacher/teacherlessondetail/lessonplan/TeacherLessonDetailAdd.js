@@ -10,9 +10,10 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { showMessage, msgTopic, msgDescription } from "../../../../utils/Constant";
+import { showMessage, msgTopic, msgDescription, opacity } from "../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
+import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 
 
 const TLDetailAdd = (props) => {
@@ -137,7 +138,7 @@ const TLDetailAdd = (props) => {
                     </View>
                     <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                        <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                        <Popupaddrecording />
                     </TouchableOpacity>
                     <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
                         <Text style={PAGESTYLE.requireText}>Items your class may need</Text>
@@ -180,7 +181,12 @@ const TLDetailAdd = (props) => {
                         <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            style={PAGESTYLE.buttonGrp}
+                            activeOpacity={opacity}
+                            onPress={()=> props.navigation.navigate('TLVideoGallery')}>
+                            <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                        </TouchableOpacity>
                     </View>
 
                 </View>

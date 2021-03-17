@@ -48,7 +48,12 @@ const TeacherLessonDetail = (props) => {
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.lessonstartButton}>
-                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text></TouchableOpacity>
+                            <TouchableOpacity
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}
+                                onPress={() => props.navigation.navigate('TLDetailEdit')}>
+                                <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -56,9 +61,9 @@ const TeacherLessonDetail = (props) => {
                     {tabIndex == 0 ?
                         <TLDetail />
                         : tabIndex == 1 ?
-                            <TLHomeWork />
+                            <TLHomeWork navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
-                            <TLHomeWorkSubmitted />
+                            <TLHomeWorkSubmitted navigateToDetail={() => props.navigation.navigate('TLHomeWorkSubmittedDetail')} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}

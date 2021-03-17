@@ -10,6 +10,8 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { opacity } from "../../../../utils/Constant";
+import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 
 
 const TLDetailEdit = (props) => {
@@ -120,8 +122,9 @@ const TLDetailEdit = (props) => {
                     </View>
                     <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                        <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                        <Popupaddrecording />
                     </View>
+                    
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items that your class may need</Text>
@@ -208,7 +211,12 @@ const TLDetailEdit = (props) => {
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            style={PAGESTYLE.buttonGrp}
+                            activeOpacity={opacity}
+                            onPress={()=> props.navigation.navigate('TLVideoGallery')}>
+                            <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={[PAGESTYLE.thumbVideo, PAGESTYLE.videoLinkBlockSpaceBottom]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>

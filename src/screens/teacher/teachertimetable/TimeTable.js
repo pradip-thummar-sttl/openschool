@@ -5,7 +5,7 @@ import Sidebar from '../../../component/reusable/sidebar/Sidebar';
 import COLORS from '../../../utils/Colors';
 import PAGESTYLE from './Style';
 
-const TimeTable = (props) => {
+const TeacherTimeTable = (props) => {
 
     const [isHide, action] = useState(true);
 
@@ -64,7 +64,7 @@ const TimeTable = (props) => {
     )
 }
 
-export default TimeTable
+export default TeacherTimeTable
 
 const styles = StyleSheet.create({
     container: {

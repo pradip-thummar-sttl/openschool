@@ -9,7 +9,7 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-import { opacity, showMessage } from '../../utils/Constant';
+import { opacity, showMessage, isDesignBuild } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
 import { connect } from 'react-redux';
@@ -133,8 +133,11 @@ class Login extends Component {
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => {
-                                        // this.isFieldsValidated()
-                                        this.props.navigation.replace('TeacherDashboard')
+                                        isDesignBuild ?
+                                            this.props.navigation.replace('TeacherDashboard')
+                                            :
+                                            this.isFieldsValidated()
+
                                     }}>
                                     {this.state.isLoading ?
                                         <ActivityIndicator

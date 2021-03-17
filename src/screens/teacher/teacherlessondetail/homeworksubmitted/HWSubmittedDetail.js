@@ -12,6 +12,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
+import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 
 const TLHomeWorkSubmittedDetail = (props) => {
 
@@ -136,7 +137,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>
                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                            <Popupaddrecording />
                         </View>
                     </View>
                 </View>
