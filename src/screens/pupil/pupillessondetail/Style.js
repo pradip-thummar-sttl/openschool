@@ -32,27 +32,6 @@ export default StyleSheet.create({
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
-    lessonPlanTop: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    lessonPlanTab: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: hp(1.90),
-    },
-    tabs: {
-        paddingRight: hp(3.90),
-    },
-    tabsText: {
-        color: COLORS.menuLightFonts,
-        fontFamily: FONTS.fontSemiBold,
-        fontSize: hp(1.56),
-        textTransform: 'uppercase',
-    },
-    tabsTextSelected: {
-        color: COLORS.buttonGreen,
-    },
     timedateGrp: {
         flexDirection: 'row',
         marginBottom: hp(4.94),

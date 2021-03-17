@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
-import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
-import TLDetail from './lessonplan/TeacherLessonDetail';
-import TLDetailEdit from './lessonplan/TeacherLessonDetailEdit';
+import HeaderWhitewithoutsearch from "../../../component/reusable/header/HeaderWhitewithoutsearch";
 import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
 import TLVideoGallery from './lessonplan/TeacherLessonVideoGallery';
 import TLHomeWork from './lessonhomework/LessonHW';
@@ -17,6 +12,7 @@ import TLHomeWorkSubmitted from './homeworksubmitted/HWSubmitted';
 import TLHomeWorkSubmittedDetail from './homeworksubmitted/HWSubmittedDetail';
 import TLHomeWorkSubmittedDetailConfirmation from './homeworksubmitted/HWSubmittedConfirmation';
 
+import TLDetail from './lessonplan/TeacherLessonDetail';
 
 
 const TeacherLessonDetail = (props) => {
@@ -29,7 +25,7 @@ const TeacherLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <HeaderWhitewithoutsearch />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
@@ -49,9 +45,9 @@ const TeacherLessonDetail = (props) => {
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    {/* <TLDetail /> */}
+                    <TLDetail />
                     {/* <TLDetailEdit /> */}
-                    <TLDetailAdd />
+                    {/* <TLDetailAdd /> */}
                     {/* <TLHomeWork /> */}
                     {/* <TLVideoGallery /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
