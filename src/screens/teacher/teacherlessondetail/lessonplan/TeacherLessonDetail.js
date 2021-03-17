@@ -15,7 +15,7 @@ const TLDetail = (props) => {
 
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
-                <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
@@ -151,9 +151,9 @@ const TLDetail = (props) => {
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
 
                     </View>
-                    <View style={[PAGESTYLE.thumbVideo, PAGESTYLE.videoLinkBlockSpaceBottom]}>
+                    <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                        <View style={PAGESTYLE.videoLinkBlock}>
+                        <View style={PAGESTYLE.videoLinkBlockRight}>
                             <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
                             <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
                         </View>

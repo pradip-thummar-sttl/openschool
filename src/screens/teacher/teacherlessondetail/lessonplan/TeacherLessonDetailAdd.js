@@ -52,10 +52,10 @@ const TLDetailAdd = (props) => {
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                 <TextInput
                                     style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
-                                    placeholder="Grammar"
+                                    placeholder="e.g. Grammar, Fractions, etc"
                                     autoCapitalize={false}
                                     maxLength={40}
-                                    placeholderTextColor={COLORS.greyplaceholder}
+                                    placeholderTextColor={COLORS.menuLightFonts}
                                     onChangeText={text => this.setState({ email: text })} />
                             </View>
                         </View>
@@ -120,12 +120,13 @@ const TLDetailAdd = (props) => {
                             style={PAGESTYLE.commonInputTextareaBoldGrey}
                         />
                     </View>
-                    <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                    <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                         <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                         <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                     </TouchableOpacity>
                     <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                        <Text style={PAGESTYLE.requireText}>Items your class may need</Text>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
                             <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>

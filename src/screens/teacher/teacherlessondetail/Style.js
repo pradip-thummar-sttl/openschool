@@ -24,12 +24,12 @@ export default StyleSheet.create({
         height: hp(65),
     },
     toggleBoxGrpWrap:{
-        marginTop: hp(3),        
+        // marginTop: hp(3),        
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        paddingLeft: hp(3.5),
-        paddingRight: hp(3.5),
+        // paddingLeft: hp(3.5),
+        // paddingRight: hp(3.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         borderBottomColor: COLORS.borderGrp,
@@ -38,6 +38,8 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        paddingLeft:hp(4.42),
+        paddingRight:hp(2.99),
     },
     lessonPlanTab: {
         flexDirection: 'row',
@@ -58,7 +60,7 @@ export default StyleSheet.create({
     },
     timedateGrp: {
         flexDirection: 'row',
-        marginBottom: hp(4.94),
+        marginBottom: hp(3.90),
     },
     dateWhiteBoard: {
         marginRight: hp(8.7),
@@ -84,10 +86,12 @@ export default StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
+        marginRight:hp(1.04),
     },
     timeIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
+        marginRight:hp(1.04),
     },
     subjectText: {
         flexDirection: 'row',
@@ -101,8 +105,14 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginBottom: hp(0.8),
         marginLeft: hp(1.56),
+    },
+    lessonTitleWithoutTextArea: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.lightGray,
+        fontSize: hp(1.8),
+        marginBottom: hp(1.56),
     },
     lessonText: {
         flexDirection: 'row',
@@ -111,11 +121,12 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
-        width: '67%',
+        width: hp(83.72),
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
-         paddingRight: hp(3.9),
+         paddingRight: hp(3.90),
          paddingTop: hp(2.5),
+         paddingLeft:hp(4.42),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -126,8 +137,7 @@ export default StyleSheet.create({
     },
     lessonPoints: {
         flexDirection: 'row',
-        paddingBottom: hp(1.5),
-        marginBottom: hp(1),
+        marginBottom: hp(1.04),
     },
     lessonPointsBorder: {
         flexDirection: 'row',
@@ -152,7 +162,23 @@ export default StyleSheet.create({
         marginTop: hp(4.68),
     },
     videoLinkBlock: {
-        width: hp(36.84),
+        width: hp(38),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        paddingRight: hp(2),
+        paddingLeft: hp(2),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        flexDirection: 'row',
+        alignItems: 'center',
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: hp(0.2), },
+        shadowOpacity: 0.16,
+        shadowRadius: hp(1.95),
+    },
+    videoLinkBlockRight: {
+        width: hp(31.51),
         paddingTop: hp(1),
         paddingBottom: hp(1),
         paddingRight: hp(2),
@@ -257,9 +283,10 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width:'33%',
+        width:hp(40.10),
         justifyContent: 'flex-start',
-        paddingLeft: hp(2.86),
+        paddingLeft: hp(3.125),
+        paddingRight: hp(5.33),
         //borderLeftWidth: 1,
         //borderColor: COLORS.borderGrp,
         paddingTop: hp(2.5),
@@ -294,7 +321,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
     },
     grpThumbVideo: {
-        width: wp(26.68),
+        width: hp(31.90),
         resizeMode: 'contain',
     },
     subLineTitle: {
@@ -431,12 +458,12 @@ export default StyleSheet.create({
     },
     rightBlockText: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.85),
+        fontSize: hp(1.82),
         lineHeight: hp(2.8),
     },
     commonInputTextarea: {
         width: '100%',
-        height: hp(12.67),
+        height: hp(14.84),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
@@ -452,7 +479,7 @@ export default StyleSheet.create({
     },
     commonInputTextareaBoldGrey: {
         width: '100%',
-        height: hp(12.67),
+        height: hp(14.84),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
@@ -468,7 +495,7 @@ export default StyleSheet.create({
     },
     commonInputTextareaNormal: {
         width: '100%',
-        height: hp(12.67),
+        height: hp(14.84),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
@@ -747,6 +774,8 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.8,
         shadowRadius: 1,
+        marginLeft:hp(3.25),
+        marginRight:hp(3.25),
     },
     userThumb:{
         width:hp(6.25), 
@@ -756,11 +785,11 @@ export default StyleSheet.create({
         marginRight:hp(1.30),
     },
     userLeft:{
-       width:'52.5%',
+       width:hp(64.19),
        flexDirection: 'row',
     },
     userRight:{
-        width:'47.5%',
+        width:hp(53.12),
         flexDirection: 'row',
     },
     userTopName:{
@@ -809,13 +838,15 @@ export default StyleSheet.create({
         marginRight:hp(2.21),
     },
     feedbackBlock:{
-        width:'60%',
+        width:hp(70.31),
         marginTop: hp(2.5),
+        marginLeft:hp(4.03),
     },
     ratingBlock:{
-        width:'40%',
+        width:hp(43.35),
         marginLeft:hp(1.95),
         marginTop: hp(2.5),
+        marginRight:hp(3.9),
     },
     lessonTitleBold:{
         fontFamily: FONTS.fontSemiBold,
@@ -850,13 +881,14 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         alignItems:'center',
         alignSelf: 'center',
+        marginBottom:hp(1.5),
     },
     rewardStarMark:{
         justifyContent: 'space-around',
         width:'100%',
         flexDirection: 'row',
-        paddingTop:hp(1.8),
-        paddingBottom:hp(1.8),
+        paddingTop:hp(3.05),
+        paddingBottom:hp(3.05),
     },
     centerText:{
         alignItems:'center',
@@ -944,7 +976,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(2),
-        top: hp(0),
+        top: hp(0.8),
     },
     checkMark:{
         margin:0,
@@ -982,5 +1014,13 @@ export default StyleSheet.create({
         paddingBottom: hp(2),
         paddingTop: hp(0),
     },
-
+    commonInputFull:{
+        width:'100%',
+    },
+    lessonDesc:{
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(2.60),
+        fontFamily: FONTS.fontRegular,
+    },
 });

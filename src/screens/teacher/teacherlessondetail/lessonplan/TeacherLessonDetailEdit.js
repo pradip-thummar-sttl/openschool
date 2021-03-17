@@ -98,11 +98,11 @@ const TLDetailEdit = (props) => {
                                     <RNPickerSelect style={PAGESTYLE.dropDownSmall}
                                         onValueChange={(value) => console.log(value)}
                                         items={[
-                                            { label: 'English', value: 'English' },
-                                            { label: 'Geography', value: 'Geography' },
-                                            { label: 'History', value: 'History' },
-                                            { label: 'Science', value: 'Science' },
-                                            { label: 'Math', value: 'Math' },
+                                            { label: 'Group 1A', value: 'Group 1A' },
+                                            { label: 'Group 1B', value: 'Group 1B' },
+                                            { label: 'Group 1C', value: 'Group 1C' },
+                                            { label: 'Group 1D', value: 'Group 1D' },
+                                            { label: 'Group 1E', value: 'Group 1E' },
                                         ]}
                                     />
                                 </View>
@@ -120,7 +120,7 @@ const TLDetailEdit = (props) => {
                             style={PAGESTYLE.commonInputTextareaNormal}
                         />
                     </View>
-                    <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                    <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                         <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                         <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                     </View>
@@ -129,7 +129,7 @@ const TLDetailEdit = (props) => {
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items that your class may need</Text>
                         <View style={PAGESTYLE.lessonPoints}>
                             <TextInput
-                                style={PAGESTYLE.commonInput}
+                                style={[PAGESTYLE.commonInput, PAGESTYLE.commonInputFull]}
                                 placeholder="Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens."
                                 autoCapitalize={false}
                                 maxLength={40}
@@ -138,7 +138,7 @@ const TLDetailEdit = (props) => {
                         </View>
                         <View style={PAGESTYLE.lessonPoints}>
                             <TextInput
-                                style={PAGESTYLE.commonInput}
+                                style={[PAGESTYLE.commonInput, PAGESTYLE.commonInputFull]}
                                 placeholder="Drawing work sheet"
                                 autoCapitalize={false}
                                 maxLength={40}

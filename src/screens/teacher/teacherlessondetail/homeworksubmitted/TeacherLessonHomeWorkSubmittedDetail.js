@@ -49,10 +49,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         />
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
-                        <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -63,7 +62,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -74,7 +73,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -85,7 +84,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -96,10 +95,6 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
@@ -116,7 +111,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Leave feedback here'
-                            style={PAGESTYLE.commonInputTextarea}
+                            style={PAGESTYLE.commonInputTextareaBoldGrey}
                         />
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
