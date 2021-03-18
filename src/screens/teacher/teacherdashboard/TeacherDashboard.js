@@ -62,8 +62,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     })
     console.log('userdata', userAuthData)
     useEffect(() => {
-        if(isDesignBuild)
-            return true
+        // if(isDesignBuild)
+        //     return true
 
         Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
             if (res.code == 200) {
