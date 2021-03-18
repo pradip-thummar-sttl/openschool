@@ -1,16 +1,9 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 import { opacity } from "../../../../utils/Constant";
 const HeaderHWS = (props) => {
     return (
@@ -21,65 +14,22 @@ const HeaderHWS = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title</Text>
+                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
+                    {/* <TouchableOpacity style={styles.buttonGrp}>
+                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonGroup}>
+                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonGroup}>
+                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
-            </View>
-            <View style={styles.filterbarMain}>
-                <View style={styles.lessonPlanTop}>
-                    <View style={styles.lessonPlanTab}>
-                        <TouchableOpacity style={styles.tabs}>
-                            <Text style={[styles.tabsText, styles.tabsTextSelected]}>Lesson</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={styles.tabsText}>Homework</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.flexEnd}>
-                    <View style={styles.field}>
-                        <Image
-                            style={styles.userIcon}
-                            source={Images.SearchIcon} />
-                        <TextInput
-                            style={[STYLE.commonInput, styles.searchHeader]}
-                            placeholder="Search subject, class, etc"
-                            maxLength={50}
-                            placeholderTextColor={COLORS.menuLightFonts}
-                        />
-                    </View>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Menu style={styles.filterGroup}>
-                            <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
-                            <MenuOptions style={styles.filterListWrap}>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                    </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                    </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                    </View>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                        <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                    </TouchableOpacity>
-                </View>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
             </View>
         </View>
     );
@@ -146,11 +96,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingLeft: hp(2.2),
         paddingRight: hp(4),
-        paddingTop: hp(1.2),
+        paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'capitalize',
-        fontFamily: FONTS.fontRegular,
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
@@ -170,6 +120,23 @@ const styles = StyleSheet.create({
         top: hp(1.19),
     },
     commonButtonGreenheader: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        height: hp(5.20),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        marginLeft: hp(2),
+    },
+    commonButtonGreenheaderwithicon: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
