@@ -9,7 +9,9 @@ import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
-const Popupdata = (props) => {
+import { opacity } from "../../../utils/Constant";
+import PopupdataSecond from "./PopupdataSecond";
+const PopupAddNewData = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -39,7 +41,13 @@ const Popupdata = (props) => {
     };
     return (
         <View>
-            <Text style={STYLE.openClassLink} onPress={toggleModal}>Add a new entry Popup</Text>
+            <TouchableOpacity
+                style={styles.buttonGroup}
+                activeOpacity={opacity}
+                onPress={toggleModal}>
+                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
+            </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
@@ -54,10 +62,7 @@ const Popupdata = (props) => {
                                         <Image style={styles.entryIcon} source={Images.NewLessons} />
                                         <Text style={styles.entryTitle}>New Lesson</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={Images.NewEvents} />
-                                        <Text style={styles.entryTitle}>New Event</Text>
-                                    </TouchableOpacity>
+                                    <PopupdataSecond />
                                 </View>
                             </View>
                         </View>
@@ -67,7 +72,7 @@ const Popupdata = (props) => {
         </View>
     );
 }
-export default Popupdata;
+export default PopupAddNewData;
 
 const styles = StyleSheet.create({
     cancelButton: {
@@ -117,5 +122,35 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    buttonGroup: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
+    },
+    addIcon: {
+        width: hp(1.55),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(1.29),
+        left: hp(1.8),
+        zIndex: 9,
+    },
+    commonButtonGreenheader: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
 });

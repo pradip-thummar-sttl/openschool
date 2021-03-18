@@ -17,17 +17,21 @@ import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomewor
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
+import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
+import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import STYLE from '../utils/Style';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
-import TimeTable from '../screens/teacher/timetable/TimeTable';
 import TLDetailEdit from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit';
+import TLVideoGallery from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery';
 import TLDetail from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetail';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import PupilLessonDetailInternal from '../screens/pupil/pupillessondetail/lesson/PupilLessonDetail';
 import PupilHomeWorkMarked from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkMarked';
 import PupilHomeWorkDetail from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkDetail';
+import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/homeworksubmitted/HWSubmittedDetail';
+import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -54,11 +58,10 @@ function ScreenStack() {
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
             <Stack.Screen name="Header" component={Header} />
-            <Stack.Screen name="TimeTable" component={TimeTable} />
             <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
-            <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
+            <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
             <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
             <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
             <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
@@ -69,6 +72,9 @@ function ScreenStack() {
             <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
             <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
             {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
+            <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
+            <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
+            <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
         </Stack.Navigator>
     );
 }

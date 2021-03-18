@@ -5,7 +5,7 @@ import Sidebar from '../../../component/reusable/sidebar/Sidebar';
 import COLORS from '../../../utils/Colors';
 import PAGESTYLE from './Style';
 
-const TimeTable = (props) => {
+const TeacherTimeTable = (props) => {
 
     const [isHide, action] = useState(true);
 
@@ -17,7 +17,7 @@ const TimeTable = (props) => {
             <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TimeTable')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
@@ -64,7 +64,7 @@ const TimeTable = (props) => {
     )
 }
 
-export default TimeTable
+export default TeacherTimeTable__
 
 const styles = StyleSheet.create({
     container: {

@@ -11,6 +11,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
+import { opacity } from "../../../../utils/Constant";
 
 const TLHomeWork = (props) => {
     const [date, setDate] = useState(new Date());
@@ -147,7 +148,12 @@ const TLHomeWork = (props) => {
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            style={PAGESTYLE.buttonGrp}
+                            activeOpacity={opacity}
+                            onPress={()=> props.navigateToVideoGallery()}>
+                            <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

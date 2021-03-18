@@ -78,7 +78,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
-                                                data={[1]}
+                                                data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
@@ -171,7 +171,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
-                                                data={[1]}
+                                                data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}

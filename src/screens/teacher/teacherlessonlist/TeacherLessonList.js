@@ -9,6 +9,7 @@ import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import { opacity } from "../../../utils/Constant";
+import Header from "./Header";
 
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
@@ -33,10 +34,10 @@ const Pupillist = (props, { style }) => (
         </View>
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>No</Text>
-            <TouchableOpacity 
-            style={PAGESTYLE.pupilDetailLink}
-            activeOpacity={opacity}
-            onPress={()=>props.navigateToDetail()}>
+            <TouchableOpacity
+                style={PAGESTYLE.pupilDetailLink}
+                activeOpacity={opacity}
+                onPress={() => props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
@@ -69,10 +70,11 @@ const TeacherLessonList = (props) => {
             <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TimeTable')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <Header
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')} />
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>
@@ -101,7 +103,7 @@ const TeacherLessonList = (props) => {
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
-                                    data={[1]}
+                                    data={[1, 2, 3, 4, 5]}
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}

@@ -19,6 +19,9 @@ import { opacity } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
 import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
 import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
+import HeaderLP from "./header/HeaderLP";
+import HeaderHW from "./header/HeaderHW";
+import HeaderHWS from "./header/HeaderHWS";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -29,10 +32,17 @@ const TeacherLessonDetail = (props) => {
             <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TimeTable')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhitewithoutsearch />
+                {/* <HeaderWhitewithoutsearch /> */}
+                {tabIndex == 0 ?
+                        <HeaderLP navigateToBack={() => props.navigation.goBack()}/>
+                        : tabIndex == 1 ?
+                            <HeaderHW navigateToBack={() => props.navigation.goBack()}/>
+                            :
+                            <HeaderHWS navigateToBack={() => props.navigation.goBack()}/>
+                    }
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
@@ -56,7 +66,12 @@ const TeacherLessonDetail = (props) => {
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.lessonstartButton}>
-                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text></TouchableOpacity>
+                            <TouchableOpacity
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}
+                                onPress={() => props.navigation.navigate('TLDetailEdit')}>
+                                <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -64,9 +79,9 @@ const TeacherLessonDetail = (props) => {
                     {tabIndex == 0 ?
                         <TLDetail />
                         : tabIndex == 1 ?
-                            <TLHomeWork />
+                            <TLHomeWork navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
-                            <TLHomeWorkSubmitted />
+                            <TLHomeWorkSubmitted navigateToDetail={() => props.navigation.navigate('TLHomeWorkSubmittedDetail')} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}

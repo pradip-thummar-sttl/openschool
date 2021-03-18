@@ -10,8 +10,9 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { opacity } from "../../../../utils/Constant";
 
-const Pupillist = ({ style }) => (
+const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
             <View style={PAGESTYLE.userStamp}></View>
@@ -25,10 +26,13 @@ const Pupillist = ({ style }) => (
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
             <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
-        </View>       
+        </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.markText}>Yes</Text>
-            <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+            <TouchableOpacity
+                style={PAGESTYLE.pupilDetailLink}
+                activeOpacity={opacity}
+                onPress={() => props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
@@ -37,7 +41,7 @@ const Pupillist = ({ style }) => (
 
 const TLHomeWorkSubmitted = (props) => {
     const [isHide, action] = useState(true);
-const [selectedId, setSelectedId] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
         return (
@@ -52,6 +56,7 @@ const [selectedId, setSelectedId] = useState(null);
         return (
             <Pupillist
                 item={item}
+                navigateToDetail={() => props.navigateToDetail()}
             />
         );
     };
@@ -78,7 +83,7 @@ const [selectedId, setSelectedId] = useState(null);
             <View style={PAGESTYLE.pupilTabledata}>
                 <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                     <FlatList
-                        data={[1]}
+                        data={[1, 2, 3, 4, 5]}
                         renderItem={pupilRender}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}

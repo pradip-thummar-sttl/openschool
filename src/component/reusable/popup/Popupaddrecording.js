@@ -8,6 +8,7 @@ import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
+import { opacity } from "../../../utils/Constant";
 const Popupaddrecording = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -38,7 +39,11 @@ const Popupaddrecording = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity><Text style={STYLE.recordLinkText} onPress={toggleModal}>Add recording</Text></TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={opacity}
+                onPress={toggleModal}>
+                <Text style={STYLE.recordLinkText}>Add recording</Text>
+            </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
