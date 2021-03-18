@@ -15,18 +15,33 @@ import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 
 const Item = ({ onPress, style, item }) => (
+    // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
+    //     <View style={PAGESTYLE.classSubject}>
+    //         <View style={PAGESTYLE.subjecRow}>
+    //             <View style={PAGESTYLE.border}></View>
+    //             <View>
+    //                 <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+    //                 {/* <Text style={PAGESTYLE.subject}>Grammar</Text> */}
+    //             </View>
+    //         </View>
+    //         <View style={PAGESTYLE.timingMain}>
+    //             <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+    //             <Text style={PAGESTYLE.timing}>{item.Time}</Text>
+    //         </View>
+    //     </View>
+    // </TouchableOpacity>
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
         <View style={PAGESTYLE.classSubject}>
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
                 <View>
-                    <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                    {/* <Text style={PAGESTYLE.subject}>Grammar</Text> */}
+                    <Text style={PAGESTYLE.subjectName}>English</Text>
+                    <Text style={PAGESTYLE.subject}>Grammar</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.timingMain}>
-                <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
-                <Text style={PAGESTYLE.timing}>{item.Time}</Text>
+                <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
+                <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
             </View>
         </View>
     </TouchableOpacity>
@@ -169,7 +184,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                             </SafeAreaView>
                             <View style={PAGESTYLE.rightTabContent}>
                                 <View style={PAGESTYLE.arrowSelectedTab}></View>
-                                <View style={PAGESTYLE.tabcontent}>
+                                {/* <View style={PAGESTYLE.tabcontent}>
                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                     <View style={PAGESTYLE.timedateGrp}>
                                         <View style={PAGESTYLE.dateWhiteBoard}>
@@ -206,6 +221,64 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         <TouchableOpacity style={PAGESTYLE.attachment}>
                                             <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                             <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList?dataOfSubView.MaterialList.length:0} Attachment</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity>
+                                            <Text style={PAGESTYLE.linkText}>see more</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={PAGESTYLE.requirementofClass}>
+                                        <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                        <View style={PAGESTYLE.lessonPoints}>
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                            <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.lessonPoints}>
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                            <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
+                                        </View>
+                                    </View>
+                                    <View style={PAGESTYLE.lessonstartButton}>
+                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Lesson</Text></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                    </View>
+                                </View> */}
+                                <View style={PAGESTYLE.tabcontent}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
+                                    <View style={PAGESTYLE.timedateGrp}>
+                                        <View style={PAGESTYLE.dateWhiteBoard}>
+                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                            <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                            <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                            <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
+                                        </View>
+                                    </View>
+                                    <View style={STYLE.hrCommon}></View>
+                                    <View style={PAGESTYLE.mediaMain}>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
+                                    </View>
+                                    <Text style={PAGESTYLE.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
+                                    <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                        <TouchableOpacity style={PAGESTYLE.attachment}>
+                                            <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                            <Text style={PAGESTYLE.attachmentText}>1 Attachment</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity>
                                             <Text style={PAGESTYLE.linkText}>see more</Text>
