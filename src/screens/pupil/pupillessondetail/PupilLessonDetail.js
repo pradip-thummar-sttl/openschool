@@ -15,7 +15,7 @@ import PupilLessonDetailInternal from './lesson/PupilLessonDetail';
 import PupilHomeWorkDetail from './homework/PupilHomeWorkDetail';
 import PupilHomeWorkSubmitted from './homework/PupilHomeWorkSubmitted';
 import PupilHomeWorkMarked from './homework/PupilHomeWorkMarked';
-
+import Header4 from '../../../component/reusable/header/bulck/Header4'
 
 
 const PupilLessonDetail = (props) => {
@@ -28,7 +28,7 @@ const PupilLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilLessonEmpty')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()} />
+                <Header4 onAlertPress={()=>props.navigation.openDrawer()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
@@ -39,9 +39,9 @@ const PupilLessonDetail = (props) => {
                                 <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={PAGESTYLE.lessonstartButton}>
+                        {/* <View style={PAGESTYLE.lessonstartButton}>
                             <Text>Dynamic Search Goes Here</Text>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
@@ -53,6 +53,7 @@ const PupilLessonDetail = (props) => {
                             <PupilLessonDue
                                 navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
                     }
+                    {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}

@@ -7,14 +7,18 @@ import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
-import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
+import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
 
 
 const PupilLessonDetailInternal = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
-            <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()} />
+            <HeaderWhitewithoutsearch
+                goBack={() => props.navigation.goBack()}
+                onAlertPress={() => props.navigation.openDrawer()}
+                onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}
+            />
 
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>

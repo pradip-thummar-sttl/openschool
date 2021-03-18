@@ -15,11 +15,11 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
+            {/* <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
                 <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
                 <Text style={styles.commonButtonGreenheader}>Submit homework</Text>
-            </TouchableOpacity>
-            <Modal isVisible={isModalVisible}>
+            </TouchableOpacity> */}
+            <Modal isVisible={true}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
@@ -28,7 +28,9 @@ const Popuphomework = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>yes, submit my homework</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>props.OnSubmitHomeworkPress()}>
+                            <Text style={STYLE.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

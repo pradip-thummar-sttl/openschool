@@ -10,6 +10,7 @@ import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
+import Header3 from '../../../component/reusable/header/bulck/Header3'
 
 const PupilLessonEmpty = (props) => {
     const [isHide, action] = useState(true);
@@ -20,7 +21,8 @@ const PupilLessonEmpty = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilLessonEmpty')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()}/>
+                {/* <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()}/> */}
+                <Header3/>
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={styles.whiteBoard}>
                         <View><Popupdata /></View>
