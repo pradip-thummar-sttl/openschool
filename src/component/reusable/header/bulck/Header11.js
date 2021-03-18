@@ -17,7 +17,7 @@ const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />

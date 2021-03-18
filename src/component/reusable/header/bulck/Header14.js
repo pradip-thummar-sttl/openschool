@@ -17,9 +17,9 @@ const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={()=>props.onSubmitHomework()} style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
                     </TouchableOpacity>
@@ -35,8 +35,8 @@ export default HeaderWhite;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        // paddingLeft: hp(3.25),
+        // paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
        // marginBottom: hp(5.85),
     },

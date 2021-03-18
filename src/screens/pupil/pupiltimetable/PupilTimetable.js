@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import COLORS from "../../../utils/Colors";
+import { View, Text, ScrollView } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderTT from "./header/HeaderTT";
-import { opacity } from "../../../utils/Constant";
-import Popupdata from "../../../component/reusable/popup/Popupdata";
-import Popup from "../../../component/reusable/popup/Popup";
-const TeacherTimeTable = (props) => {
+
+import Popupdata from "../../../component/reusable/popup/Popupdata"
+import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
+import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
+import Header3 from '../../../component/reusable/header/bulck/Header3'
+
+const PupilTimetable = (props) => {
     const [isHide, action] = useState(true);
 
     const setData = (dayKey, timneKey) => {
@@ -98,13 +98,12 @@ const TeacherTimeTable = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
+            <Sidebarpupil hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
+                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderTT />
+                <Header3 onAlertPress={() => props.navigation.openDrawer()} />
 
                 <View style={PAGESTYLE.mainPage}>
                     <View style={PAGESTYLE.days}>
@@ -143,4 +142,4 @@ const TeacherTimeTable = (props) => {
         </View>
     );
 }
-export default TeacherTimeTable;
+export default PupilTimetable;

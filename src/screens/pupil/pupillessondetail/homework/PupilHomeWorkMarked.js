@@ -10,11 +10,13 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
+import Header15 from '../../../../component/reusable/header/bulck/Header15'
 
 const PupilHomeWorkMarked = (props) => {
     return (
         <View style={PAGESTYLE.wrapper}>
             <View style={PAGESTYLE.whiteBg}>
+                <Header15 goBack={()=>props.navigation.goBack()} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTopPurple}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>

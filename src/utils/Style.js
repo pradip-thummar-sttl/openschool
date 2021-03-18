@@ -17,10 +17,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     padLeftRight: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
-        width: '100%',
-
+        flex: 1
     },
     commonInput: {
         color:COLORS.themeBlue,

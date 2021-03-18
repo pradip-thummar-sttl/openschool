@@ -14,7 +14,7 @@ const PupilLessonDue = (props) => {
             <Text style={PAGESTYLE.videoTitle}>Homework due</Text>
             <View style={STYLE.hrCommon}></View>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
+                <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilHomeworkesubmited()}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
                         <Text style={PAGESTYLE.videoDateBlack}>Due: Today</Text>

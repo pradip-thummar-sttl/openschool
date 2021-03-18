@@ -10,10 +10,26 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { showMessage } from "../../../utils/Constant";
+import { isDesignBuild, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
+import moment from 'moment';
 
-const Item = ({ onPress, style }) => (
+const Item = ({ onPress, style, item }) => (
+    // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
+    //     <View style={PAGESTYLE.classSubject}>
+    //         <View style={PAGESTYLE.subjecRow}>
+    //             <View style={PAGESTYLE.border}></View>
+    //             <View>
+    //                 <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+    //                 {/* <Text style={PAGESTYLE.subject}>Grammar</Text> */}
+    //             </View>
+    //         </View>
+    //         <View style={PAGESTYLE.timingMain}>
+    //             <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+    //             <Text style={PAGESTYLE.timing}>{item.Time}</Text>
+    //         </View>
+    //     </View>
+    // </TouchableOpacity>
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
         <View style={PAGESTYLE.classSubject}>
             <View style={PAGESTYLE.subjecRow}>
@@ -60,24 +76,28 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
+    const [dashData, setdashData] = useState([])
     console.log('userdata', userAuthData)
     useEffect(() => {
-        console.log('hello')
+        // if(isDesignBuild)
+        //     return true
+
         Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
+                setdashData(res.data)
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
-
         })
         return () => {
         }
     }, [])
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
+    const [dataOfSubView, setDataOfSubView] = useState([])
     const pupilRender = ({ item }) => {
         return (
             <Pupillist
@@ -85,13 +105,16 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             />
         );
     };
-    const renderItem = ({ item }) => {
+    const setData = (index) => {
+        setDataOfSubView(dashData[index])
+    }
+    const renderItem = ({ item, index }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
         return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => setData(index)}
                 style={{ backgroundColor }}
             />
         );
@@ -100,11 +123,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('LessonandHomeworkPlannerDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('LessonandHomeworkPlanner')} />
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header />
+                <Header onAlertPress={()=>props.navigation.openDrawer()} />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.dashBoardBoxes}>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
@@ -139,8 +162,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
                             <View style={[PAGESTYLE.datePosition]}>
-                                <Text style={PAGESTYLE.date}>25</Text>
-                                <Text style={PAGESTYLE.month}>Sept</Text>
+                                <Text style={PAGESTYLE.date}>{moment().format('D')}</Text>
+                                <Text style={PAGESTYLE.month}>{moment().format('MMM')}</Text>
                             </View>
                             <View>
                                 <TouchableOpacity>
@@ -153,7 +176,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={STYLE.viewRow}>
                             <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                 <FlatList
-                                    data={[1]}
+                                    data={dashData}
                                     renderItem={renderItem}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}
@@ -161,6 +184,64 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                             </SafeAreaView>
                             <View style={PAGESTYLE.rightTabContent}>
                                 <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                {/* <View style={PAGESTYLE.tabcontent}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                    <View style={PAGESTYLE.timedateGrp}>
+                                        <View style={PAGESTYLE.dateWhiteBoard}>
+                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.Time}</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={STYLE.hrCommon}></View>
+                                    <View style={PAGESTYLE.mediaMain}>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
+                                    </View>
+                                    <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
+                                    <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                        <TouchableOpacity style={PAGESTYLE.attachment}>
+                                            <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                            <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList?dataOfSubView.MaterialList.length:0} Attachment</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity>
+                                            <Text style={PAGESTYLE.linkText}>see more</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={PAGESTYLE.requirementofClass}>
+                                        <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                        <View style={PAGESTYLE.lessonPoints}>
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                            <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.lessonPoints}>
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                            <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
+                                        </View>
+                                    </View>
+                                    <View style={PAGESTYLE.lessonstartButton}>
+                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Lesson</Text></TouchableOpacity>
+                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                    </View>
+                                </View> */}
                                 <View style={PAGESTYLE.tabcontent}>
                                     <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
                                     <View style={PAGESTYLE.timedateGrp}>
@@ -264,7 +345,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
-                                    data={[1]}
+                                    data={[1, 2, 3, 4, 5]}
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}

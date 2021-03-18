@@ -12,7 +12,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
 
-const PopupdataSecond = (props) => {
+const PopupdataSecondPupil = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -67,12 +67,12 @@ const PopupdataSecond = (props) => {
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity> */}
-            <TouchableOpacity
-                style={styles.entryData}
+            <TouchableOpacity 
+            style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Image style={styles.entryIcon} source={Images.NewEvents} />
-                <Text style={styles.entryTitle}>New Event</Text>
+                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
@@ -183,7 +183,7 @@ const PopupdataSecond = (props) => {
         </View>
     );
 }
-export default PopupdataSecond;
+export default PopupdataSecondPupil;
 
 const styles = StyleSheet.create({
     cancelButton: {
@@ -298,5 +298,35 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    commonButtonGreenheader: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    addIcon: {
+        width: hp(1.55),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(1.29),
+        left: hp(1.8),
+        zIndex: 9,
+    },
+    buttonGroup: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
     },
 });

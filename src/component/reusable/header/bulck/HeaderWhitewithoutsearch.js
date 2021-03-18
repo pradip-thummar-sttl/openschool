@@ -17,12 +17,12 @@ const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={()=>props.onSeeHomeworkPress()} style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}>

@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import React from "react";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
-import FONTS from '../../../../utils/Fonts';
-import Popuphomework from '../../../reusable/popup/Popuphomework';
-import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
+import COLORS from "../../../utils/Colors";
+import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
+import FONTS from '../../../utils/Fonts';
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-const HeaderWhite = (props) => {
+import { opacity } from "../../../utils/Constant";
+import { useLinkProps } from "@react-navigation/native";
+const Header = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>Common Title</Text>
+                <Text style={styles.mainTitle}>Lesson & homework planner</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity> */}
-                    <TouchableOpacity onPress={()=>props.onAlertPress()}  style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
@@ -63,15 +63,18 @@ const HeaderWhite = (props) => {
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </TouchableOpacity>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
+                <TouchableOpacity 
+                style={styles.buttonGroup}
+                activeOpacity={opacity}
+                onPress={()=>props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
         </View>
     );
 }
-export default HeaderWhite;
+export default Header;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {

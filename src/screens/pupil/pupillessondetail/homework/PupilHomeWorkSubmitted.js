@@ -10,11 +10,12 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
+import Header13 from '../../../../component/reusable/header/bulck/Header13'
 
 const PupilHomeWorkSubmitted = (props) => {
     return (
         <View style={PAGESTYLE.whiteBg}>
-
+            {/* <Header13 /> */}
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.containerWrapTop}>
                     <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>

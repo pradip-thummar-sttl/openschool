@@ -1,84 +1,39 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import React from "react";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
-import Popuphomework from '../../../reusable/popup/Popuphomework';
-import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
-const HeaderWhite = (props) => {
+import Popuphomework from "../../../../component/reusable/popup/Popuphomework";
+import { opacity } from "../../../../utils/Constant";
+const HeaderHW = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>Common Title</Text>
+                <Text style={styles.mainTitle}>
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToBack()}>
+                        <Image style={styles.arrow} source={Images.backArrow} />
+                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
-                    </TouchableOpacity> */}
-                    <TouchableOpacity onPress={()=>props.onAlertPress()}  style={styles.notificationBar}>
+                    <Popuphomework />
+                    <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
-                <View style={styles.field}>
-                    <Image
-                        style={styles.userIcon}
-                        source={Images.SearchIcon} />
-                    <TextInput
-                        style={[STYLE.commonInput, styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                    />
-                </View>
-                <TouchableOpacity style={styles.buttonGroup}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Subject</Text>
-                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Date</Text>
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Name</Text>
-                                </View>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
-            </View>
         </View>
     );
 }
-export default HeaderWhite;
+export default HeaderHW;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -88,23 +43,27 @@ const styles = StyleSheet.create({
     mainTitle: {
         fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
-    },
-    date: {
-        fontSize: hp(2.86),
-        fontFamily: FONTS.fontRegular,
+        alignItems: 'center',
     },
     massagesIcon: {
         width: wp(5.20),
         resizeMode: 'contain',
     },
+    calnderDashHeaderIcon: {
+        width: wp(5.20),
+        resizeMode: 'contain',
+        height: hp(5.20),
+    },
     filterbarMain: {
         flexDirection: 'row',
-        marginBottom: hp(2.60),
+        justifyContent: 'space-between',
+        borderBottomWidth: 1,
+        borderColor: COLORS.borderGrp,
+        paddingBottom: hp(1.5),
     },
     field: {
         position: 'relative',
-        width: hp(81.11),
-        marginRight: hp(1.69),
+        width: hp(41),
     },
     searchHeader: {
         height: hp(5.20),
@@ -128,15 +87,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingLeft: hp(2.2),
         paddingRight: hp(4),
-        paddingTop: hp(1.2),
+        paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
-        fontFamily: FONTS.fontSemiBold,
+        fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
-        fontSize: hp(1.82),
+        fontSize: hp(1.5),
     },
     buttonGroup: {
         position: 'relative',
@@ -158,6 +117,23 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        height: hp(5.20),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        marginLeft: hp(2),
+    },
+    commonButtonGreenheaderwithicon: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
@@ -171,7 +147,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
+        top: hp(1.5),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -196,6 +172,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: COLORS.white,
         top: hp(5.5),
+        right: 0,
         width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
@@ -216,9 +193,38 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    calnderDashHeaderIcon: {
-        width: wp(5.20),
+    lessonPlanTop: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    lessonPlanTab: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: hp(1.90),
+    },
+    tabs: {
+        paddingRight: hp(3.90),
+    },
+    tabsText: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.56),
+        textTransform: 'uppercase',
+    },
+    tabsTextSelected: {
+        color: COLORS.buttonGreen,
+    },
+    flexEnd: {
+        alignSelf: 'flex-end',
+        flexDirection: 'row',
+    },
+    arrow: {
+        width: hp(2.34),
         resizeMode: 'contain',
-        height: hp(5.20),
+        marginRight: hp(1),
+    },
+    commonText: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
 });

@@ -10,6 +10,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Images from "../../../../utils/Images";
+import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 
 const TLHomeWorkSubmittedDetailConfirmation = (props) => {
     return (
@@ -121,7 +122,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                         </View>
                         <View style={PAGESTYLE.recordLinkBlock}>
                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                            <Popupaddrecording />
                         </View>
                     </View>
                 </View>

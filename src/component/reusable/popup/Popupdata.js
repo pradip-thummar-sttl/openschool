@@ -7,6 +7,8 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
+import { opacity } from "../../../utils/Constant";
+import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 
 const Popupdata = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -16,7 +18,15 @@ const Popupdata = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Details</Text></TouchableOpacity>
+            {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Details</Text></TouchableOpacity> */}
+            <TouchableOpacity
+            style={STYLE.openClassLink}
+                activeOpacity={opacity}
+                onPress={toggleModal}>
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: 200 * props.span, backgroundColor: COLORS.white, borderStartColor: COLORS.black, borderStartWidth: 3, }}>
+                    <Text style={{ ...PAGESTYLE.lable, width: 200 * props.span, backgroundColor: COLORS.white, }}>{props.title}</Text>
+                </View>
+            </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>

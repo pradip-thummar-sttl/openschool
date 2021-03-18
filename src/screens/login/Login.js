@@ -9,13 +9,15 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-import { opacity, showMessage } from '../../utils/Constant';
+import { opacity, showMessage, isDesignBuild } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
 import { connect } from 'react-redux';
 import { setUserAuthData } from '../../actions/action';
 import MESSAGE from '../../utils/Messages';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { User } from '../../utils/Model';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Login extends Component {
     constructor(props) {
@@ -53,8 +55,12 @@ class Login extends Component {
             if (res.code == 200) {
                 this.setLoading(false)
                 // showMessage(res.message)
+                AsyncStorage.setItem('user', JSON.stringify(res.data))
                 this.props.setUserAuthData(res.data)
-                this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                this.props.navigation.replace('TeacherDashboard')
+
+                User.user = res.data
+                // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
             } else {
                 this.setLoading(false)
                 showMessage(res.message)
@@ -133,8 +139,11 @@ class Login extends Component {
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => {
-                                        // this.isFieldsValidated()
-                                        this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                                        isDesignBuild ?
+                                            this.props.navigation.replace('TeacherDashboard')
+                                            :
+                                            this.isFieldsValidated()
+
                                     }}>
                                     {this.state.isLoading ?
                                         <ActivityIndicator

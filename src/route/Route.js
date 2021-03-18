@@ -1,11 +1,7 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Users from '../screens/users/Users';
 import Introduction from '../screens/introduction/Introduction';
 import Login from '../screens/login/Login';
@@ -13,23 +9,30 @@ import Popup from '../component/reusable/popup/Popup';
 import Popupuser from '../component/reusable/popup/Popupuser';
 import Sidebar from '../component/reusable/sidebar/Sidebar';
 import Header from '../component/reusable/header/Header';
-import LessonandHomeworkPlanner from '../screens/teacher/lessonandhomeworkplannerempty/Lessonandhomeworkplanner';
 import NotificationDrawer from '../component/reusable/notificationdrawer/NotificationDrawer';
-import LessonandHomeworkPlannerDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
+import TeacherDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
 import PupilLessonEmpty from '../screens/pupil/pupillessonempty/PupilLessonEmpty';
 import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
-import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
+import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
 import STYLE from '../utils/Style';
 
-import { MenuProvider } from 'react-native-popup-menu';
-import combineReducers from '../reducer/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
-import TimeTable from '../screens/teacher/timetable/TimeTable';
+import TLDetailEdit from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit';
+import TLVideoGallery from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery';
+import TLDetail from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetail';
+// import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
+import PupilLessonDetailInternal from '../screens/pupil/pupillessondetail/lesson/PupilLessonDetail';
+import PupilHomeWorkMarked from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkMarked';
+import PupilHomeWorkDetail from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkDetail';
+import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/homeworksubmitted/HWSubmittedDetail';
+import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
+import PupilTimetable from '../screens/pupil/pupiltimetable/PupilTimetable';
+import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -56,17 +59,24 @@ function ScreenStack() {
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
             <Stack.Screen name="Header" component={Header} />
-            <Stack.Screen name="TimeTable" component={TimeTable} />
-            <Stack.Screen name="LessonandHomeworkPlannerDashboard" component={LessonandHomeworkPlannerDashboard} />
+            <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
-            <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
+            <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
             <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
             <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
-            {/* <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} /> */}
             <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
-            <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} />
+            {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
+            <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
+            <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
+            <Stack.Screen name="TLDetail" component={TLDetail} />
+            <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
+            <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
+            <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
             {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
+            <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
+            <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
+            <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
         </Stack.Navigator>
     );
 }
