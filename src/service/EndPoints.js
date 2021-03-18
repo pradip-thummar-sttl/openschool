@@ -1,4 +1,5 @@
 export const EndPoints = {
     Login:'login',
-    GetLessionById:'getalllesson'
+    GetLessionById:'getalllesson',
+    PupilByTeacherId:'pupilbyteacherid'
 }
