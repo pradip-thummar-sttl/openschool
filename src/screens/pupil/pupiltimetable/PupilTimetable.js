@@ -7,6 +7,7 @@ import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header3 from '../../../component/reusable/header/bulck/Header3'
+import { Var } from "../../../utils/Constant";
 
 const PupilTimetable = (props) => {
     const [isHide, action] = useState(true);
@@ -38,7 +39,7 @@ const PupilTimetable = (props) => {
         if (flag) {
             return (
                 // <View style={{ backgroundColor: COLORS.black, height: 100, width: 10 }}></View>
-                <Popupdata span={span} title={title}/>
+                <Popupdata span={span} title={title} />
             );
         } else {
             return (
@@ -103,7 +104,9 @@ const PupilTimetable = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header3 onAlertPress={() => props.navigation.openDrawer()} />
+                <Header3
+                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
 
                 <View style={PAGESTYLE.mainPage}>
                     <View style={PAGESTYLE.days}>

@@ -6,6 +6,10 @@ import { Alert } from "react-native";
 export const opacity = 0.5;
 export const isDesignBuild = true;
 
+export class Var {
+    static isCalender = false;
+}
+
 export const showMessage = (message) => {
     Alert.alert(message);
 }

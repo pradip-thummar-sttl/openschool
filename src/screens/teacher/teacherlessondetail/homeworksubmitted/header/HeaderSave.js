@@ -17,8 +17,11 @@ const HeaderSave = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
-                    <PopupHomeWorkSave/>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <PopupHomeWorkSave />
+                    <TouchableOpacity
+                        style={styles.notificationBar}
+                        onPress={() => props.onAlertPress()}
+                        activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>

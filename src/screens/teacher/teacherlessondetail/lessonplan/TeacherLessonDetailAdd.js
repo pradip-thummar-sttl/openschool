@@ -15,11 +15,13 @@ import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderAddNew from "./header/HeaderAddNew";
+import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 
 
 const TLDetailAdd = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
+    const [isHide, action] = useState(true);
 
     const [lessonTopic, setLessonTopic] = useState('');
     const [description, setDescription] = useState('');
@@ -44,154 +46,165 @@ const TLDetailAdd = (props) => {
     }
 
     return (
-        <View style={PAGESTYLE.whiteBg}>
-            <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
-            <View style={PAGESTYLE.containerWrap}>
-                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                    <View style={STYLE.hrCommon}></View>
-                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
-                    <View style={PAGESTYLE.timedateGrp}>
-                        <View style={PAGESTYLE.dropDownFormInput}>
-                            <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                <RNPickerSelect style={PAGESTYLE.dropDown}
-                                    onValueChange={(value) => console.log(value)}
-                                    items={[
-                                        { label: 'English', value: 'English' },
-                                        { label: 'Geography', value: 'Geography' },
-                                        { label: 'History', value: 'History' },
-                                        { label: 'Science', value: 'Science' },
-                                        { label: 'Math', value: 'Math' },
-                                    ]}
+        <View style={PAGESTYLE.mainPage}>
+            <Sidebar
+                hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
+                <HeaderAddNew
+                    navigateToBack={() => { props.navigation.goBack() }}
+                    onAlertPress={() => props.navigation.openDrawer()} />
+                <ScrollView style={STYLE.padLeftRight}>
+                    <View style={PAGESTYLE.containerWrap}>
+                        <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                            <View style={STYLE.hrCommon}></View>
+                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                            <View style={PAGESTYLE.timedateGrp}>
+                                <View style={PAGESTYLE.dropDownFormInput}>
+                                    <Text style={PAGESTYLE.subjectText}>Subject</Text>
+                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
+                                        <RNPickerSelect style={PAGESTYLE.dropDown}
+                                            onValueChange={(value) => console.log(value)}
+                                            items={[
+                                                { label: 'English', value: 'English' },
+                                                { label: 'Geography', value: 'Geography' },
+                                                { label: 'History', value: 'History' },
+                                                { label: 'Science', value: 'Science' },
+                                                { label: 'Math', value: 'Math' },
+                                            ]}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
+                                    <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
+                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
+                                        <TextInput
+                                            style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                                            placeholder="Grammar"
+                                            autoCapitalize={false}
+                                            maxLength={40}
+                                            placeholderTextColor={COLORS.greyplaceholder}
+                                            onChangeText={topic => setLessonTopic(topic)} />
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={PAGESTYLE.timedateGrp}>
+                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                                    <Text style={PAGESTYLE.subjectText}>Date</Text>
+                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                        <View style={PAGESTYLE.subjectDateTime}>
+                                            <DateTimePicker
+                                                style={PAGESTYLE.dateTime}
+                                                value={date}
+                                                mode="date"
+                                                textColor={{ color: COLORS.darkGray }}
+                                                placeHolderTextStyle={{ color: COLORS.darkGray }}
+                                            />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                                    <Text style={PAGESTYLE.subjectText}>Time</Text>
+                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                        <View style={[PAGESTYLE.subjectDateTime]}>
+                                            <DateTimePicker
+                                                style={PAGESTYLE.dateTime}
+                                                value={date}
+                                                mode="time"
+                                                textColor={{ color: COLORS.darkGray }}
+                                            />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                                    <Text style={PAGESTYLE.subjectText}>Participants</Text>
+                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                        <View style={[PAGESTYLE.subjectDateTime]}>
+                                            <RNPickerSelect style={PAGESTYLE.dropDownSmall}
+                                                onValueChange={(value) => console.log(value)}
+                                                items={[
+                                                    { label: 'English', value: 'English' },
+                                                    { label: 'Geography', value: 'Geography' },
+                                                    { label: 'History', value: 'History' },
+                                                    { label: 'Science', value: 'Science' },
+                                                    { label: 'Math', value: 'Math' },
+                                                ]}
+                                            />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+
+                            <View style={PAGESTYLE.lessonDesc}>
+                                <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
+                                <TextInput
+                                    multiline={true}
+                                    numberOfLines={4}
+                                    defaultValue='Briefly explain what the lesson is about'
+                                    style={PAGESTYLE.commonInputTextareaBoldGrey}
                                 />
                             </View>
-                        </View>
-                        <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
-                            <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
-                                <TextInput
-                                    style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
-                                    placeholder="Grammar"
-                                    autoCapitalize={false}
-                                    maxLength={40}
-                                    placeholderTextColor={COLORS.greyplaceholder}
-                                    onChangeText={topic => setLessonTopic(topic)} />
+                            <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                                <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                                <Popupaddrecording />
+                            </TouchableOpacity>
+                            <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
+                                <Text style={PAGESTYLE.requireText}>Items your class may need</Text>
+                                <TouchableOpacity style={PAGESTYLE.addItem}>
+                                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                                </TouchableOpacity>
                             </View>
-                        </View>
-                    </View>
-                    <View style={PAGESTYLE.timedateGrp}>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
-                            <Text style={PAGESTYLE.subjectText}>Date</Text>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                <View style={PAGESTYLE.subjectDateTime}>
-                                    <DateTimePicker
-                                        style={PAGESTYLE.dateTime}
-                                        value={date}
-                                        mode="date"
-                                        textColor={{ color: COLORS.darkGray }}
-                                        placeHolderTextStyle={{ color: COLORS.darkGray }}
-                                    />
+                            <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
+                                <View style={STYLE.hrCommon}></View>
+                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                                <TouchableOpacity style={PAGESTYLE.addItem}>
+                                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={PAGESTYLE.toggleBoxGrpWrap}>
+                                <View style={STYLE.hrCommon}></View>
+                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                <View style={PAGESTYLE.toggleGrp}>
+                                    <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
+                                    <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                </View>
+                                <View style={PAGESTYLE.toggleGrp}>
+                                    <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
+                                    <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                </View>
+                                <View style={PAGESTYLE.toggleGrp}>
+                                    <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
+                                    <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
                                 </View>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
-                            <Text style={PAGESTYLE.subjectText}>Time</Text>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                <View style={[PAGESTYLE.subjectDateTime]}>
-                                    <DateTimePicker
-                                        style={PAGESTYLE.dateTime}
-                                        value={date}
-                                        mode="time"
-                                        textColor={{ color: COLORS.darkGray }}
-                                    />
-                                </View>
+                        <View style={PAGESTYLE.rightSideBar}>
+                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                <Text style={PAGESTYLE.requireText}>Learning material</Text>
+                                <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                             </View>
-                        </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
-                            <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                <View style={[PAGESTYLE.subjectDateTime]}>
-                                    <RNPickerSelect style={PAGESTYLE.dropDownSmall}
-                                        onValueChange={(value) => console.log(value)}
-                                        items={[
-                                            { label: 'English', value: 'English' },
-                                            { label: 'Geography', value: 'Geography' },
-                                            { label: 'History', value: 'History' },
-                                            { label: 'Science', value: 'Science' },
-                                            { label: 'Math', value: 'Math' },
-                                        ]}
-                                    />
-                                </View>
+                            <View style={PAGESTYLE.uploadBlock}>
+                                <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
                             </View>
-                        </View>
-                    </View>
+                            <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                                <TouchableOpacity
+                                    style={PAGESTYLE.buttonGrp}
+                                    activeOpacity={opacity}
+                                    onPress={() => props.navigation.navigate('TLVideoGallery')}>
+                                    <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                                </TouchableOpacity>
+                            </View>
 
-                    <View style={PAGESTYLE.lessonDesc}>
-                        <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={4}
-                            defaultValue='Briefly explain what the lesson is about'
-                            style={PAGESTYLE.commonInputTextareaBoldGrey}
-                        />
-                    </View>
-                    <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                        <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                        <Popupaddrecording />
-                    </TouchableOpacity>
-                    <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                        <Text style={PAGESTYLE.requireText}>Items your class may need</Text>
-                        <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                        <View style={STYLE.hrCommon}></View>
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
-                        <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={PAGESTYLE.toggleBoxGrpWrap}>
-                        <View style={STYLE.hrCommon}></View>
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
-                        <View style={PAGESTYLE.toggleGrp}>
-                            <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
-                        </View>
-                        <View style={PAGESTYLE.toggleGrp}>
-                            <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
-                        </View>
-                        <View style={PAGESTYLE.toggleGrp}>
-                            <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                     </View>
-                </View>
-                <View style={PAGESTYLE.rightSideBar}>
-                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                        <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
-                    </View>
-                    <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                    </View>
-                    <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                        <TouchableOpacity
-                            style={PAGESTYLE.buttonGrp}
-                            activeOpacity={opacity}
-                            onPress={() => props.navigation.navigate('TLVideoGallery')}>
-                            <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </View>
+                </ScrollView>
             </View>
         </View>
 

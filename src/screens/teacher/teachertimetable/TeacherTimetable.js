@@ -5,7 +5,7 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderTT from "./header/HeaderTT";
-import { opacity } from "../../../utils/Constant";
+import { opacity, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
 const TeacherTimeTable = (props) => {
@@ -38,7 +38,7 @@ const TeacherTimeTable = (props) => {
         if (flag) {
             return (
                 // <View style={{ backgroundColor: COLORS.black, height: 100, width: 10 }}></View>
-                <Popupdata span={span} title={title}/>
+                <Popupdata span={span} title={title} />
             );
         } else {
             return (
@@ -104,7 +104,9 @@ const TeacherTimeTable = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderTT />
+                <HeaderTT
+                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
 
                 <View style={PAGESTYLE.mainPage}>
                     <View style={PAGESTYLE.days}>
