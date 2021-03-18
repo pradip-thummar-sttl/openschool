@@ -49,7 +49,8 @@ const PupilHomeWorkDetail = (props) => {
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -66,7 +67,8 @@ const PupilHomeWorkDetail = (props) => {
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -84,7 +86,8 @@ the Amazon Rainforest</Text>
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -101,7 +104,8 @@ the Amazon Rainforest</Text>
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />

@@ -50,9 +50,10 @@ const PupilHomeWorkSubmitted = (props) => {
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -65,7 +66,8 @@ const PupilHomeWorkSubmitted = (props) => {
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -76,9 +78,10 @@ const PupilHomeWorkSubmitted = (props) => {
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -89,9 +92,10 @@ const PupilHomeWorkSubmitted = (props) => {
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
