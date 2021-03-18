@@ -16,6 +16,8 @@ import { connect } from 'react-redux';
 import { setUserAuthData } from '../../actions/action';
 import MESSAGE from '../../utils/Messages';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { User } from '../../utils/Model';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Login extends Component {
     constructor(props) {
@@ -53,8 +55,12 @@ class Login extends Component {
             if (res.code == 200) {
                 this.setLoading(false)
                 // showMessage(res.message)
+                AsyncStorage.setItem('user', JSON.stringify(res.data))
                 this.props.setUserAuthData(res.data)
                 this.props.navigation.replace('TeacherDashboard')
+
+                User.user = res.data
+                // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
             } else {
                 this.setLoading(false)
                 showMessage(res.message)

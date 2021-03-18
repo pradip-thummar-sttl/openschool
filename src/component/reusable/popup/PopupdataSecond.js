@@ -142,6 +142,7 @@ const PopupdataSecond = (props) => {
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={notes => setnote(notes)} />
+                                            {/* <RNPickerSelect/> */}
                                             {/* <RNPickerSelect
                                             /> */}
                                             <RNPickerSelect

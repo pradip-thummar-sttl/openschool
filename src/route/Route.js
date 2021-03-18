@@ -16,6 +16,7 @@ import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
+import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
 import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import STYLE from '../utils/Style';
@@ -25,6 +26,10 @@ import Splash from '../screens/splash/Splash';
 import TLDetailEdit from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit';
 import TLVideoGallery from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery';
 import TLDetail from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetail';
+import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
+import PupilLessonDetailInternal from '../screens/pupil/pupillessondetail/lesson/PupilLessonDetail';
+import PupilHomeWorkMarked from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkMarked';
+import PupilHomeWorkDetail from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkDetail';
 import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/homeworksubmitted/HWSubmittedDetail';
 import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
 const Stack = createStackNavigator()
@@ -63,6 +68,10 @@ function ScreenStack() {
             <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} />
             <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
             <Stack.Screen name="TLDetail" component={TLDetail} />
+            <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
+            <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
+            <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
+            {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
             <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
             <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
