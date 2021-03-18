@@ -25,7 +25,7 @@ const Pupillist = ({ style }) => (
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
             <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
-        </View>       
+        </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.markText}>Yes</Text>
             <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
@@ -37,7 +37,7 @@ const Pupillist = ({ style }) => (
 
 const TLHomeWorkSubmitted = (props) => {
     const [isHide, action] = useState(true);
-const [selectedId, setSelectedId] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
         return (
@@ -57,7 +57,7 @@ const [selectedId, setSelectedId] = useState(null);
     };
     return (
 
-        <View style={PAGESTYLE.whiteBg}>
+        <View style={PAGESTYLE.plainBg}>
             <View style={PAGESTYLE.pupilTable}>
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Pupil name</Text>

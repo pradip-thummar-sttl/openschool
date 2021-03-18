@@ -27,12 +27,12 @@ const PupilLessonDetail = (props) => {
                 {/* <HeaderWhitepupil /> */}
                 <HeaderWhitewithoutsearch />
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    <PupilLesson />
+                    {/* <PupilLesson /> */}
                     {/* <PupilLessonDue /> */}
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}
-                    {/* <PupilHomeWorkMarked /> */}
+                    <PupilHomeWorkMarked />
                 </ScrollView>
 
             </View>

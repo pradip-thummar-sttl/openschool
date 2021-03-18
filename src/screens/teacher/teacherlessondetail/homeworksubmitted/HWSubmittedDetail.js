@@ -63,7 +63,6 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         />
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
-                        <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                 <CheckBox
@@ -110,10 +109,6 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
@@ -130,8 +125,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Leave feedback here'
-                            style={PAGESTYLE.commonInputTextarea}
-                            onChangeText={feedback => setFeedback(feedback)} />
+                            style={PAGESTYLE.commonInputTextareaBoldGrey}
+                        />
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>

@@ -46,7 +46,7 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
                     {/* <TLHomeWorkSubmitted /> */}
                     {/* <TLHomeWorkSubmittedDetail /> */}
-                    {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                    <TLHomeWorkSubmittedDetailConfirmation />
                 </ScrollView>
 
             </View>
