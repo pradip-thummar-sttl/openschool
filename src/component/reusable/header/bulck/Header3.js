@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import React from "react";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
-import Popuphomework from '../../../reusable/popup/Popuphomework';
-import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-const HeaderWhite = (props) => {
+import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
+const HeaderWhite = () => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -63,10 +62,11 @@ const HeaderWhite = (props) => {
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonGroup}>
+                {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <PopupdataSecondPupil />
             </View>
         </View>
     );
