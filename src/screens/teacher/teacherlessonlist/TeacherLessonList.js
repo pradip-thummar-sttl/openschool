@@ -73,7 +73,8 @@ const TeacherLessonList = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header navigateToAddSubject={() => props.navigation.replace('TLDetailAdd')} />
+                <Header
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')} />
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>

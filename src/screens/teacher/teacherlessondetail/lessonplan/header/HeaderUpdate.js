@@ -5,14 +5,16 @@ import COLORS from "../../../../../utils/Colors";
 import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
+import { useLinkProps } from "@react-navigation/native";
 
-const HeaderUpdate = () => {
+const HeaderUpdate = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
-                        activeOpacity={opacity}>
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>

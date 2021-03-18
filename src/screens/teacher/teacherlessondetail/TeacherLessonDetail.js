@@ -29,11 +29,11 @@ const TeacherLessonDetail = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 {/* <HeaderWhitewithoutsearch /> */}
                 {tabIndex == 0 ?
-                        <HeaderLP />
+                        <HeaderLP navigateToBack={() => props.navigation.goBack()}/>
                         : tabIndex == 1 ?
-                            <HeaderHW/>
+                            <HeaderHW navigateToBack={() => props.navigation.goBack()}/>
                             :
-                            <HeaderHWS/>
+                            <HeaderHWS navigateToBack={() => props.navigation.goBack()}/>
                     }
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>

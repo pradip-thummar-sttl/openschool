@@ -29,7 +29,7 @@ const TLDetailEdit = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
-            <HeaderUpdate />
+            <HeaderUpdate navigateToBack={() => props.navigation.goBack()}/>
             <View style={PAGESTYLE.containerWrap}>
                 <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                     <View style={STYLE.hrCommon}></View>

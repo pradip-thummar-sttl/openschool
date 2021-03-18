@@ -5,18 +5,24 @@ import COLORS from "../../../../utils/Colors";
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from "../../../../component/reusable/popup/Popuphomework";
-const HeaderHW = () => {
+import { opacity } from "../../../../utils/Constant";
+const HeaderHW = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                <Text style={styles.mainTitle}>
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToBack()}>
+                        <Image style={styles.arrow} source={Images.backArrow} />
+                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
-                    <Popuphomework/>
+                    <Popuphomework />
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
-            </View>           
+            </View>
         </View>
     );
 }
@@ -27,7 +33,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -210,7 +216,7 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.34),

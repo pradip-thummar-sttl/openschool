@@ -30,7 +30,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.whiteBg}>
-            <HeaderSave/>
+            <HeaderSave navigateToBack={() => props.navigation.goBack()}/>
             <View style={PAGESTYLE.containerWrapTop}>
                 <View style={PAGESTYLE.userLeft}>
                     <View style={PAGESTYLE.userThumb}></View>

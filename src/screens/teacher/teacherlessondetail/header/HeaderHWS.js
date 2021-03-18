@@ -11,11 +11,17 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-const HeaderHWS = () => {
+import { opacity } from "../../../../utils/Constant";
+const HeaderHWS = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+                <Text style={styles.mainTitle}>
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToBack()}>
+                        <Image style={styles.arrow} source={Images.backArrow} />
+                    </TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
@@ -85,7 +91,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -252,7 +258,7 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.34),

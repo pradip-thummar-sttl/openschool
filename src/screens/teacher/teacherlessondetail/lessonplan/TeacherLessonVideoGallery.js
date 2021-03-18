@@ -16,7 +16,7 @@ const TLVideoGallery = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
-            <HeaderGallery />
+            <HeaderGallery navigateToBack={() => props.navigation.goBack()} />
             <Text style={PAGESTYLE.videoTitle}>Videos</Text>
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.videoWrap}>
