@@ -29,11 +29,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
                         <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                        <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
                         <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                        <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                     </View>
                 </View>
             </View>
