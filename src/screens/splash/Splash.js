@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Animated } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { User } from '../../utils/Model';
 
 export default class Splash extends Component {
     constructor(props) {
@@ -10,9 +12,16 @@ export default class Splash extends Component {
 
     componentDidMount() {
         this.runAnimation()
-        
+
         setTimeout(() => {
-            this.launchNextScreen()
+            AsyncStorage.getItem('user').then((user) => {
+                if (user) {
+                    User.user = user
+                    this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                } else {
+                    this.launchNextScreen()
+                }
+            })
         }, 3000);
     }
 
@@ -26,7 +35,7 @@ export default class Splash extends Component {
         ).start()
     }
 
-    launchNextScreen(){
+    launchNextScreen() {
         this.props.navigation.replace('Users')
     }
 

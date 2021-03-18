@@ -10,11 +10,13 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
-
+import Header14 from '../../../../component/reusable/header/bulck/Header14'
+import Popuphomework from "../../../../component/reusable/popup/Popupsubmithomework";
 const PupilHomeWorkDetail = (props) => {
+    const [isSubmitPopup, setSubmitPopup] = useState(false)
     return (
-        <View style={PAGESTYLE.whiteBg}>
-
+        <View style={PAGESTYLE.whiteBg}>     
+            <Header14 goBack={()=>props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
 
@@ -53,11 +55,11 @@ const PupilHomeWorkDetail = (props) => {
                                         tintColor={'#50A7F0'}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelBox}>
                                 <View style={PAGESTYLE.alignRow}>
@@ -68,13 +70,13 @@ const PupilHomeWorkDetail = (props) => {
                                         onTintColor={'#50A7F0'}
                                         tintColor={'#50A7F0'}
                                     />
-                                    <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from 
+                                    <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
 the Amazon Rainforest</Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelBox}>
                                 <View style={PAGESTYLE.alignRow}>
@@ -86,11 +88,11 @@ the Amazon Rainforest</Text>
                                         tintColor={'#50A7F0'}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelBox}>
                                 <View style={PAGESTYLE.alignRow}>
@@ -102,11 +104,11 @@ the Amazon Rainforest</Text>
                                         tintColor={'#50A7F0'}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                </View>                                
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Take Photo</Text></TouchableOpacity>
-                                    </View>
-                                
+                                </View>
+                                <View style={PAGESTYLE.lessonstartButton}>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Take Photo</Text></TouchableOpacity>
+                                </View>
+
                             </View>
                         </View>
                     </View>
@@ -117,7 +119,9 @@ the Amazon Rainforest</Text>
                     </View>
                 </View>
             </View>
-
+            {
+                isSubmitPopup?<Popuphomework OnSubmitHomeworkPress={()=>setSubmitPopup(false)} />:null
+            } 
         </View>
     );
 }

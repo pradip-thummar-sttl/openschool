@@ -10,7 +10,7 @@ const Header = (props) => {
         <View style={styles.headerMain}>
             <Text style={styles.mainTitle}>Dashboard</Text>
             <View style={styles.headerRight}>
-                <TouchableOpacity style={styles.notificationBar}>
+                <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onAlertPress()}>
                     <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
                 </TouchableOpacity>
             </View>

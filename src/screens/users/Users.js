@@ -41,7 +41,7 @@ export default class Users extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.replace('')}>
+                                onPress={() => this.props.navigation.replace('PupuilDashboard')}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
