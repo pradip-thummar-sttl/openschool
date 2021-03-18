@@ -103,7 +103,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TimeTable')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header />

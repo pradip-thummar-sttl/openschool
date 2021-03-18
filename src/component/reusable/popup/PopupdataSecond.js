@@ -66,7 +66,14 @@ const PopupdataSecond = (props) => {
 
     return (
         <View>
-            <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity>
+            {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity> */}
+            <TouchableOpacity
+                style={styles.entryData}
+                activeOpacity={opacity}
+                onPress={toggleModal}>
+                <Image style={styles.entryIcon} source={Images.NewEvents} />
+                <Text style={styles.entryTitle}>New Event</Text>
+            </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
@@ -135,16 +142,16 @@ const PopupdataSecond = (props) => {
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={notes => setnote(notes)} />
-                                            <RNPickerSelect
-                                            />
                                             {/* <RNPickerSelect
+                                            /> */}
+                                            <RNPickerSelect
                                                 onValueChange={(value) => console.log(value)}
                                                 items={[
                                                     { label: 'Red', value: 'Red' },
                                                     { label: 'Yellow', value: 'Yellow' },
                                                     { label: 'Green', value: 'Green' },
                                                 ]}
-                                            /> */}
+                                            />
                                         </View>
                                     </View>
                                     <View style={styles.uploadCalendar}>
@@ -152,15 +159,18 @@ const PopupdataSecond = (props) => {
                                             <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
-                                            <TouchableOpacity 
-                                            onPress={isFieldsValidated}
-                                            style={styles.buttonGrp}
+                                            <TouchableOpacity
+                                                onPress={isFieldsValidated}
+                                                style={styles.buttonGrp}
                                                 activeOpacity={opacity}>
                                                 <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity style={styles.buttonGrp}><Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} /><Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text></TouchableOpacity>
+                                            {/* <TouchableOpacity style={styles.buttonGrp}>
+                                                <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
+                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                                </TouchableOpacity> */}
                                         </View>
                                     </View>
                                 </View>
@@ -270,5 +280,22 @@ const styles = StyleSheet.create({
         width: '50%',
         paddingLeft: hp(0.9),
         paddingRight: hp(0.9),
+    },
+    entryData: {
+        paddingLeft: hp(4.23),
+        paddingRight: hp(4.23),
+    },
+    entryIcon: {
+        width: hp(11.19),
+        height: hp(11.19),
+        resizeMode: 'contain',
+        marginBottom: hp(2.6),
+    },
+    entryTitle: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontBold,
+        color: COLORS.darkGray,
+        textAlign: 'center',
+        textTransform: 'uppercase',
     },
 });

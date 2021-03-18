@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
     lable: {
         fontSize: 18,
-        padding: 5,
+        padding: 8,
         fontWeight: 'bold'
     },
     whiteBoard: {

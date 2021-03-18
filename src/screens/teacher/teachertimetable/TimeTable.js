@@ -17,7 +17,7 @@ const TeacherTimeTable = (props) => {
             <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TimeTable')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderWhite />
@@ -64,7 +64,7 @@ const TeacherTimeTable = (props) => {
     )
 }
 
-export default TeacherTimeTable
+export default TeacherTimeTable__
 
 const styles = StyleSheet.create({
     container: {

@@ -16,7 +16,7 @@ import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
-import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
+import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import STYLE from '../utils/Style';
 
@@ -56,7 +56,7 @@ function ScreenStack() {
             <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
-            <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} />
+            <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
             <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
             <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
             <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
