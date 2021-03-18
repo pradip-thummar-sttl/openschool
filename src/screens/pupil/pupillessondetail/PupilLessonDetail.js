@@ -25,7 +25,7 @@ const PupilLessonDetail = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilLessonEmpty')}
+                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header4 onAlertPress={()=>props.navigation.openDrawer()} />

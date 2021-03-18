@@ -18,7 +18,6 @@ import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLesso
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
 import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
-import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import STYLE from '../utils/Style';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -32,6 +31,7 @@ import PupilHomeWorkMarked from '../screens/pupil/pupillessondetail/homework/Pup
 import PupilHomeWorkDetail from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkDetail';
 import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/homeworksubmitted/HWSubmittedDetail';
 import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
+import PupilTimetable from '../screens/pupil/pupiltimetable/PupilTimetable';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -65,7 +65,8 @@ function ScreenStack() {
             <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
             <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
             <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
-            <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} />
+            {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
+            <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
             <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
             <Stack.Screen name="TLDetail" component={TLDetail} />
             <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
