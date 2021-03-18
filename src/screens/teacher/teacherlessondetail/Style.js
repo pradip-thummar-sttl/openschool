@@ -88,10 +88,18 @@ export default StyleSheet.create({
         width: hp(1.76),
         marginRight:hp(1.04),
     },
+    calIconNoInput: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+    },
     timeIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
+    },
+    timeIconNoInput: {
+        resizeMode: 'contain',
+        width: hp(1.76),
     },
     subjectText: {
         flexDirection: 'row',
@@ -308,7 +316,7 @@ export default StyleSheet.create({
         marginBottom: hp(1.04),
     },
     downloadIcon: {
-        width: hp(1.95),
+        width: hp(2.01),
         resizeMode: 'contain',
     },
     fileName: {
@@ -860,14 +868,13 @@ export default StyleSheet.create({
         alignItems:'center',
         backgroundColor:COLORS.white,
         borderRadius:hp(1.8),
-        overflow:'hidden',
-        shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 5,},
-        shadowOpacity: 0.08,
-        shadowRadius: 10,
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        shadowColor: COLORS.lightGrayPupil,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
     },
     starSelectedText:{
         fontFamily: FONTS.fontBold,
@@ -1023,4 +1030,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
+    timeSpace:{
+        marginLeft:hp(12.83),
+    }
 });

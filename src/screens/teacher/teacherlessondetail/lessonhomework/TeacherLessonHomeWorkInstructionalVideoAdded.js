@@ -83,7 +83,8 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -94,7 +95,8 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -105,7 +107,8 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -116,7 +119,8 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />

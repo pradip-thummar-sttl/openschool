@@ -10,35 +10,53 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
 
-const TLHomeWorkSubmittedDetail = (props) => {
+
+const TLHomeWorkInstructionalVideoWithRecording = (props) => {
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
     return (
+
         <View style={PAGESTYLE.whiteBg}>
-            <View style={PAGESTYLE.containerWrapTop}>
-                <View style={PAGESTYLE.userLeft}>
-                    <View style={PAGESTYLE.userThumb}></View>
-                    <View>
-                        <Text style={PAGESTYLE.userTopName}>Reuel Pardesi</Text>
-                        <Text style={PAGESTYLE.userTopGroup}>Group: 1A</Text>
-                    </View>
-                </View>
-                <View style={PAGESTYLE.userRight}>
-                    <View style={PAGESTYLE.markedLabel}>
-                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
-                        <Text style={PAGESTYLE.markedText}>Marked</Text>
-                    </View>
-                    <View style={PAGESTYLE.dateNameBlock}>
-                        <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
-                    </View>
-                    <View style={PAGESTYLE.dateNameBlock}>
-                        <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
-                    </View>
-                </View>
-            </View>
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
+                    <View style={PAGESTYLE.timedateGrp}>
+                        <View style={PAGESTYLE.dropDownFormInput}>
+                            <View style={PAGESTYLE.toggleBox}>
+                                <View style={PAGESTYLE.toggleGrpBox}>
+                                    <Text style={PAGESTYLE.toggleText}>Include homework</Text>
+                                    <ToggleSwitch
+                                        isOn={true} color={COLORS.dashboardGreenButton} onToggle={isOn => true}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                        <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time]}>
+                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrapNormal]}>
+                                <View style={PAGESTYLE.dueDateWrap}>
+                                    <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
+                                </View>
+                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                <View style={PAGESTYLE.subjectDateTime}>
+                                    <DateTimePicker
+                                        style={PAGESTYLE.dateTime}
+                                        value={date}
+                                        mode="date"
+                                        textColor={{ color: COLORS.darkGray }}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
                     <View style={PAGESTYLE.lessonDesc}>
                         <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
                         <TextInput
@@ -48,7 +66,18 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             style={PAGESTYLE.commonInputTextareaNormal}
                         />
                     </View>
+                    <View style={PAGESTYLE.videoRecording}>
+                        <View style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoRecordSpace]}>
+                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                            <Text style={PAGESTYLE.videoLinkText}>The Amazon Rainforest...</Text>
+                        </View>
+                        <View style={PAGESTYLE.recordLinkBlock}>
+                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                            <Popupaddrecording />
+                        </View>
+                    </View>
                     <View style={PAGESTYLE.requirementofClass}>
+                        <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                 <CheckBox
@@ -99,53 +128,40 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
                         </View>
+                        <TouchableOpacity style={PAGESTYLE.addItem}>
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
-                    <View style={PAGESTYLE.uploadBoardBlock}>
-                        <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                <View style={PAGESTYLE.rightSideBar}>
+                    <View style={PAGESTYLE.fileBoxGrpWrap}>
+                        <Text style={PAGESTYLE.requireText}>Learning material</Text>
+                        <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                     </View>
-                </View>
-            </View>
-            <View style={PAGESTYLE.containerWrap}>
-                <View style={PAGESTYLE.feedbackBlock}>
-                    <View style={PAGESTYLE.lessonDesc}>
-                        <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={4}
-                            defaultValue='Leave feedback here'
-                            style={PAGESTYLE.commonInputTextareaBoldGrey}
-                        />
+                    <View style={PAGESTYLE.uploadBlock}>
+                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
                     </View>
-                    <View style={PAGESTYLE.videoRecording}>
-                        <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                    <View style={PAGESTYLE.fileBoxGrpWrap}>
+                        <View style={PAGESTYLE.fileGrp}>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                        </View>
+                        <View style={PAGESTYLE.fileGrp}>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View>
-                </View>
-                <View style={PAGESTYLE.ratingBlock}>
-                    <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
-                    <View style={PAGESTYLE.achivementBox}>
-                        <View style={PAGESTYLE.rewardStarMark}>
-                            <View style={PAGESTYLE.centerText}>
-                                <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
-                                <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                            </View>
-                            <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
-                                <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                            </View>
-                            <View style={PAGESTYLE.centerText}>
-                                <Image source={Images.GoldStar} style={[PAGESTYLE.starSelected]} />
-                                <Text style={PAGESTYLE.starText}>Gold stars</Text>
-                            </View>
-                        </View>
+                    <View style={PAGESTYLE.thumbVideo}>
+                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                    </View>
+                    <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
         </View>
+
     );
 }
-export default TLHomeWorkSubmittedDetail;
+export default TLHomeWorkInstructionalVideoWithRecording;

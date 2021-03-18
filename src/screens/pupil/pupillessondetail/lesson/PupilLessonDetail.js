@@ -14,7 +14,7 @@ const PupilLessonDetailInternal = (props) => {
 
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
-                <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
 
                     <View style={PAGESTYLE.largeVideoBlock}>
                         <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
@@ -26,7 +26,7 @@ const PupilLessonDetailInternal = (props) => {
                         </View>
                         <View style={PAGESTYLE.bookMark}>
                             <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
-                            <Text>Saved!</Text>
+                            <Text style={PAGESTYLE.saveBookMarkText}>Saved!</Text>
                         </View>
                     </View>
                     <View style={PAGESTYLE.userNameMain}>
@@ -67,22 +67,22 @@ const PupilLessonDetailInternal = (props) => {
 
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <Text style={PAGESTYLE.lightGreyText}>Saved workspaces</Text>
+                        <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                            <Image source={require('../../../../assets/images/more2.png')} style={PAGESTYLE.moreIcon} />
+                            <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                            <Image source={require('../../../../assets/images/more2.png')} style={PAGESTYLE.moreIcon} />
+                            <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                            <Image source={require('../../../../assets/images/more2.png')} style={PAGESTYLE.moreIcon} />
+                            <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                            <Image source={require('../../../../assets/images/more2.png')} style={PAGESTYLE.moreIcon} />
+                            <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                         </View>
                     </View>
                 </View>

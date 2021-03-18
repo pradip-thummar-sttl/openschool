@@ -24,15 +24,15 @@ const PupilHomeWorkMarked = (props) => {
                         <View style={PAGESTYLE.userRight}>
                             <View style={[PAGESTYLE.markedLabel, PAGESTYLE.markSubmittedSpaceLeft]}>
                                 <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
-                                <Text style={PAGESTYLE.markedText}>Submitted</Text>
+                                <Text style={PAGESTYLE.markedText}>Marked</Text>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                <Text style={PAGESTYLE.dateText}>08/03/21</Text>
+                                <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                <Text style={PAGESTYLE.dateText}>08/03/21</Text>
+                                <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                             </View>
                         </View>
                     </View>
@@ -45,7 +45,6 @@ const PupilHomeWorkMarked = (props) => {
                         </View>
                         <View style={PAGESTYLE.requirementofClass}>
 
-                            <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
                             <View style={PAGESTYLE.checkBoxGroup}>
                                 <View style={PAGESTYLE.checkBoxLabelLine}>
                                     <View style={PAGESTYLE.alignRow}>
@@ -121,8 +120,8 @@ the Amazon Rainforest</Text>
                     <View style={PAGESTYLE.feedbackVideoBlock}>
                         <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
                         <View>
-                            <Text style={[PAGESTYLE.lessonDesc, PAGESTYLE.lineLength]}>Reuel Pardesi - Feedback for English </Text>
-                            <Text style={PAGESTYLE.lessonTitle}>Miss Barker</Text>
+                            <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Reuel Pardesi - Feedback for English </Text>
+                            <Text style={PAGESTYLE.techerName}>Miss Barker</Text>
                         </View>
                     </View>
                 </View>

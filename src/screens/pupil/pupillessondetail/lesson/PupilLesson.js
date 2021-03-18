@@ -11,9 +11,8 @@ import FONTS from '../../../../utils/Fonts';
 const PupilLesson = (props) => {
     return (
 
-        <View style={PAGESTYLE.whiteBg}>
+        <View style={[PAGESTYLE.whiteBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning - 07/09/20</Text>
-            <View style={STYLE.hrCommon}></View>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
@@ -25,7 +24,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>  
@@ -39,7 +38,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -53,7 +52,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -67,7 +66,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>   
@@ -81,7 +80,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>  
@@ -95,7 +94,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -109,7 +108,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -123,13 +122,12 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>              
             </ScrollView>
             <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons from last week - 28/08/20</Text>
-            <View style={STYLE.hrCommon}></View>  
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
@@ -141,7 +139,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>  
@@ -155,7 +153,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -169,7 +167,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -183,7 +181,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>   
@@ -197,7 +195,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>  
@@ -211,7 +209,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -225,7 +223,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity> 
@@ -239,7 +237,7 @@ const PupilLesson = (props) => {
                     <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                     <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>              

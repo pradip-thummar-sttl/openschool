@@ -13,6 +13,7 @@ import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
 import TLVideoGallery from './lessonplan/TeacherLessonVideoGallery';
 import TLHomeWork from './lessonhomework/TeacherLessonHomeWork';
 import TLHomeWorkInstructionalVideoAdded from './lessonhomework/TeacherLessonHomeWorkInstructionalVideoAdded';
+import TLHomeWorkInstructionalVideoWithRecording from './lessonhomework/TeacherLessonHomeWorkInstructionalVideoWithRecording';
 import TLHomeWorkSubmitted from './homeworksubmitted/TeacherLessonHomeWorkSubmitted';
 import TLHomeWorkSubmittedDetail from './homeworksubmitted/TeacherLessonHomeWorkSubmittedDetail';
 import TLHomeWorkSubmittedDetailConfirmation from './homeworksubmitted/TeacherLessonHomeWorkSubmittedConfirmation';
@@ -50,10 +51,11 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLDetailAdd /> */}
                     {/* <TLHomeWork /> */}
                     {/* <TLVideoGallery /> */}
+                    {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                    {/* <TLHomeWorkSubmitted /> */}
+                    <TLHomeWorkSubmitted />
                     {/* <TLHomeWorkSubmittedDetail /> */}
-                    <TLHomeWorkSubmittedDetailConfirmation />
+                    {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
                 </ScrollView>
 
             </View>
