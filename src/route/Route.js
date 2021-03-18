@@ -32,6 +32,7 @@ import PupilHomeWorkDetail from '../screens/pupil/pupillessondetail/homework/Pup
 import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/homeworksubmitted/HWSubmittedDetail';
 import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
 import PupilTimetable from '../screens/pupil/pupiltimetable/PupilTimetable';
+import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
