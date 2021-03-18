@@ -103,7 +103,7 @@ const PupilTimetable = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header3 />
+                <Header3 onAlertPress={() => props.navigation.openDrawer()} />
 
                 <View style={PAGESTYLE.mainPage}>
                     <View style={PAGESTYLE.days}>

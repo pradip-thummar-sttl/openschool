@@ -22,7 +22,7 @@ const HeaderWhite = (props) => {
                     {/* <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity> */}
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity onPress={()=>props.onAlertPress()}  style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
@@ -63,10 +63,10 @@ const HeaderWhite = (props) => {
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonGroup}>
+                {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </View>
     );
