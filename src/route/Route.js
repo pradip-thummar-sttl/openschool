@@ -26,7 +26,7 @@ import Splash from '../screens/splash/Splash';
 import TLDetailEdit from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit';
 import TLVideoGallery from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery';
 import TLDetail from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetail';
-import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
+// import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import PupilLessonDetailInternal from '../screens/pupil/pupillessondetail/lesson/PupilLessonDetail';
 import PupilHomeWorkMarked from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkMarked';
 import PupilHomeWorkDetail from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkDetail';

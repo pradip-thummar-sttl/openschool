@@ -6,13 +6,13 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhitewithoutsearch from "../../../component/reusable/header/HeaderWhitewithoutsearch";
 import TLDetailAdd from './lessonplan/TeacherLessonDetailAdd';
 import TLVideoGallery from './lessonplan/TeacherLessonVideoGallery';
-import TLHomeWork from './lessonhomework/LessonHW';
+// import TLHomeWork from './lessonhomework/LessonHW';
 import TLHomeWorkInstructionalVideoAdded from './lessonhomework/LessonHWInstructionalVideoAdded';
-import TLHomeWorkSubmitted from './homeworksubmitted/HWSubmitted';
+// import TLHomeWorkSubmitted from './homeworksubmitted/HWSubmitted';
 import TLHomeWorkSubmittedDetail from './homeworksubmitted/HWSubmittedDetail';
 import TLHomeWorkSubmittedDetailConfirmation from './homeworksubmitted/HWSubmittedConfirmation';
 
-import TLDetail from './lessonplan/TeacherLessonDetail';
+// import TLDetail from './lessonplan/TeacherLessonDetail';
 
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
 import { opacity } from "../../../utils/Constant";
