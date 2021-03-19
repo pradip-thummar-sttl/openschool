@@ -25,7 +25,7 @@ const PupilHomeWorkDetail = (props) => {
                             <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                             <View style={PAGESTYLE.daterow}>
                                 <Image source={require('../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
-                                <Text style={PAGESTYLE.dueDateTextBold}>05/02/21</Text>
+                                <Text style={PAGESTYLE.dueDateTextBold}>14/09/2020</Text>
                             </View>
                         </View>
                         <View style={PAGESTYLE.dateNameBlock}>
@@ -39,7 +39,7 @@ const PupilHomeWorkDetail = (props) => {
 
                     <View style={PAGESTYLE.lessonDesc}>
                         <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                        <Text style={PAGESTYLE.descriptionText}> Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                        <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
 
@@ -50,9 +50,11 @@ const PupilHomeWorkDetail = (props) => {
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                                 </View>
@@ -66,9 +68,11 @@ const PupilHomeWorkDetail = (props) => {
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
 the Amazon Rainforest</Text>
@@ -83,9 +87,11 @@ the Amazon Rainforest</Text>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                                 </View>
@@ -99,9 +105,11 @@ the Amazon Rainforest</Text>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
                                         value={false}
-                                        onCheckColor={'#50A7F0'}
-                                        onTintColor={'#50A7F0'}
-                                        tintColor={'#50A7F0'}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                                 </View>

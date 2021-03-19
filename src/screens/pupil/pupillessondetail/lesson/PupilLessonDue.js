@@ -10,9 +10,8 @@ import FONTS from '../../../../utils/Fonts';
 const PupilLessonDue = (props) => {
     return (
 
-        <View style={PAGESTYLE.whiteBg}>
+        <View style={[PAGESTYLE.whiteBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Homework due</Text>
-            <View style={STYLE.hrCommon}></View>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilHomeworkesubmited()}>
                     <View style={PAGESTYLE.videoCardThumb}>
@@ -24,8 +23,8 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
@@ -38,8 +37,8 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
@@ -52,8 +51,8 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
@@ -66,185 +65,74 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
-                    </View>
-                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
+                
             </ScrollView>
             <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Submitted homework</Text>
-            <View style={STYLE.hrCommon}></View>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Due: Today</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Submitted: 14/09/2020</Text>
                     </View>
                     <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Submitted: 14/09/2020</Text>
                     </View>
                     <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightYellowDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Submitted: 14/09/2020</Text>
                     </View>
                     <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightPurpleDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Submitted: 14/09/2020</Text>
                     </View>
                     <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightOrangeDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                    </View>
-                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
+                
             </ScrollView>
             <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Homework marked</Text>
-            <View style={STYLE.hrCommon}></View>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
@@ -255,8 +143,8 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
@@ -269,8 +157,8 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
@@ -283,8 +171,8 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
@@ -297,67 +185,12 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
+                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                        <View style={PAGESTYLE.lessonThumb}></View>
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
-                    </View>
-                    <View style={PAGESTYLE.lessonDue}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
-                    <View style={PAGESTYLE.videoCardThumb}>
-                        <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
-                    </View>
-                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
-                        <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
-                        <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
-                    </View>
-                    <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                        <View style={PAGESTYLE.thumbSmall}></View>
-                        <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
-                    </View>
-                </TouchableOpacity>
+               
             </ScrollView>
         </View>
 

@@ -30,24 +30,19 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
                         <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                        <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
                         <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                        <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                     </View>
                 </View>
             </View>
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
                     <View style={PAGESTYLE.lessonDesc}>
-                        <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={4}
-                            defaultValue='Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.'
-                            style={PAGESTYLE.commonInputTextareaNormal}
-                        />
+                        <Text style={PAGESTYLE.lessonTitleWithoutTextArea}>Homework Description</Text>
+                        <Text style={PAGESTYLE.lessonDesc}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
@@ -57,7 +52,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -68,7 +64,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -79,7 +76,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -90,7 +88,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -117,7 +116,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                             multiline={true}
                             numberOfLines={4}
                             defaultValue='Leave feedback here'
-                            style={PAGESTYLE.commonInputTextareaNormal}
+                            style={PAGESTYLE.commonInputTextareaBoldGrey}
                         />
                     </View>
                     <View style={PAGESTYLE.videoRecording}>

@@ -17,7 +17,6 @@ import Popupaddrecording from "../../../../component/reusable/popup/Popupaddreco
 import HeaderAddNew from "./header/HeaderAddNew";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 
-
 const TLDetailAdd = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -53,10 +52,8 @@ const TLDetailAdd = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
-                <HeaderAddNew
-                    navigateToBack={() => { props.navigation.goBack() }}
-                    onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView style={STYLE.padLeftRight}>
+                <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
+                <ScrollView>
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                             <View style={STYLE.hrCommon}></View>
@@ -75,6 +72,7 @@ const TLDetailAdd = (props) => {
                                                 { label: 'Math', value: 'Math' },
                                             ]}
                                         />
+                                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                                     </View>
                                 </View>
                                 <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
@@ -82,11 +80,11 @@ const TLDetailAdd = (props) => {
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                         <TextInput
                                             style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
-                                            placeholder="Grammar"
+                                            placeholder="e.g. Grammar, Fractions, etc"
                                             autoCapitalize={false}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.greyplaceholder}
-                                            onChangeText={topic => setLessonTopic(topic)} />
+                                            placeholderTextColor={COLORS.menuLightFonts}
+                                            onChangeText={text => this.setState({ email: text })} />
                                     </View>
                                 </View>
                             </View>
@@ -128,14 +126,15 @@ const TLDetailAdd = (props) => {
                                             <RNPickerSelect style={PAGESTYLE.dropDownSmall}
                                                 onValueChange={(value) => console.log(value)}
                                                 items={[
-                                                    { label: 'English', value: 'English' },
-                                                    { label: 'Geography', value: 'Geography' },
-                                                    { label: 'History', value: 'History' },
-                                                    { label: 'Science', value: 'Science' },
-                                                    { label: 'Math', value: 'Math' },
+                                                    { label: 'Group 1A', value: 'Group 1A' },
+                                                    { label: 'Group 1B', value: 'Group 1B' },
+                                                    { label: 'Group 1C', value: 'Group 1C' },
+                                                    { label: 'Group 1D', value: 'Group 1D' },
+                                                    { label: 'Group 1E', value: 'Group 1E' },
                                                 ]}
                                             />
                                         </View>
+                                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                                     </View>
                                 </View>
                             </View>
@@ -149,12 +148,13 @@ const TLDetailAdd = (props) => {
                                     style={PAGESTYLE.commonInputTextareaBoldGrey}
                                 />
                             </View>
-                            <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                            <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                 <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                <Popupaddrecording />
+                                <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                             </TouchableOpacity>
                             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                                <Text style={PAGESTYLE.requireText}>Items your class may need</Text>
+                                <View style={STYLE.hrCommon}></View>
+                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                                 <TouchableOpacity style={PAGESTYLE.addItem}>
                                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
@@ -194,12 +194,7 @@ const TLDetailAdd = (props) => {
                                 <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
                             </View>
                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                                <TouchableOpacity
-                                    style={PAGESTYLE.buttonGrp}
-                                    activeOpacity={opacity}
-                                    onPress={() => props.navigation.navigate('TLVideoGallery')}>
-                                    <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
-                                </TouchableOpacity>
+                                <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
                             </View>
 
                         </View>

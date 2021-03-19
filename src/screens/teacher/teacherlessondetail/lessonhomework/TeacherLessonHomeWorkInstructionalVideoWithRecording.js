@@ -10,11 +10,10 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity } from "../../../../utils/Constant";
-import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
+import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
 
 
-const TLHomeWorkInstructionalVideoAdded = (props) => {
+const TLHomeWorkInstructionalVideoWithRecording = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
 
@@ -68,9 +67,9 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                         />
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
-                        <View style={[PAGESTYLE.videoLinkBlockSmall, PAGESTYLE.videoRecordSpace]}>
+                        <View style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoRecordSpace]}>
                             <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                            <Text style={PAGESTYLE.videoLinkText}>Instructional video</Text>
+                            <Text style={PAGESTYLE.videoLinkText}>The Amazon Rainforest...</Text>
                         </View>
                         <View style={PAGESTYLE.recordLinkBlock}>
                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
@@ -157,12 +156,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                        <TouchableOpacity
-                            style={PAGESTYLE.buttonGrp}
-                            activeOpacity={opacity}
-                            onPress={()=> props.navigation.navigate('TLVideoGallery')}>
-                            <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
-                        </TouchableOpacity>
+                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -170,4 +164,4 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
 
     );
 }
-export default TLHomeWorkInstructionalVideoAdded;
+export default TLHomeWorkInstructionalVideoWithRecording;
