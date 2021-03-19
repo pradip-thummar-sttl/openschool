@@ -16,7 +16,7 @@ const PupilHomeWorkMarked = (props) => {
     return (
         <View style={PAGESTYLE.wrapper}>
             <View style={PAGESTYLE.whiteBg}>
-                <Header15 goBack={()=>props.navigation.goBack()} />
+                <Header15 onAlertPress={()=>props.navigation.openDrawer()} goBack={()=>props.navigation.goBack()} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTopPurple}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
