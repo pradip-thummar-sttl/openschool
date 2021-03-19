@@ -1033,5 +1033,8 @@ export default StyleSheet.create({
     },
     timeSpace:{
         marginLeft:hp(12.83),
-    }
+    },
+    leftSpace:{
+        paddingLeft:hp(3.5),
+    },
 });
