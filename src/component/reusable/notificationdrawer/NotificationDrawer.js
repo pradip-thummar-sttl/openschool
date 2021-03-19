@@ -10,6 +10,8 @@ import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/Pixe
 import { Calendar } from 'react-native-calendars';
 import { Var } from '../../../utils/Constant';
 
+const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
+const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
 const NotificationDrawer = (props) => {
     return (
         <View style={styles.drawerMain}>
@@ -17,7 +19,69 @@ const NotificationDrawer = (props) => {
                 <View>
                     {Var.isCalender = false}
                     <Calendar
-                        minDate={new Date()} />
+                        minDate={new Date()}
+
+                        firstDay={1}
+                        dayComponent={({ date, state, marking }) => {
+                            return (
+                                <View>
+                                    {
+                                        periodDate.includes(date.dateString) ?
+                                            date.dateString == periodDate[0] || date.dateString == periodDate[periodDate.length - 1] ?
+                                                date.dateString == periodDate[0] ?
+                                                    <View style={styles.datemainView1}>
+                                                        < View style={styles.dateSubVIew1}>
+                                                            <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                        </View>
+                                                    </View>
+                                                    :
+                                                    <View style={styles.dateMainView2}>
+                                                        < View style={styles.dateSubVIew1}>
+                                                            <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                        </View>
+                                                    </View>
+                                                :
+                                                <View style={styles.dateMAinView3}>
+                                                    < View style={styles.dateSubView2}>
+                                                        <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                    </View>
+                                                </View>
+                                            :
+                                            <View style={styles.datemainView4}>
+                                                < View style={styles.dateSubView3}>
+                                                    <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                </View>
+                                            </View>
+                                    }
+                                    {
+                                        markdate.includes(date.dateString) ?
+                                            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} />
+                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', }} />
+                                            </View> : null
+                                    }
+
+                                </View>
+                            )
+                        }}
+                    />
+
+                    <View style={{ paddingLeft: hp(1.97), marginTop: hp(8) }}>
+                        <View style={styles.colorView}>
+                            <View style={[styles.colorBox, { backgroundColor: COLORS.blueButton }]} />
+                            <Text>Class</Text>
+                        </View>
+
+                        <View style={styles.colorView}>
+                            <View style={[styles.colorBox, { backgroundColor: COLORS.yellowDark }]} />
+                            <Text>Homework</Text>
+                        </View>
+
+                        <View style={styles.colorView}>
+                            <View style={[styles.colorBox, { backgroundColor: COLORS.purpleDark }]} />
+                            <Text>Personal</Text>
+                        </View>
+                    </View>
                 </View>
                 :
                 <View>
@@ -89,7 +153,7 @@ const NotificationDrawer = (props) => {
                     </ScrollView>
                 </View>
             }
-        </View>
+        </View >
 
     );
 }
@@ -180,4 +244,14 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
     },
+    datemainView1: { borderTopLeftRadius: 35, borderBottomLeftRadius: 35, marginVertical: 10, height: 35, width: 45, backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
+    dateMainView2: { borderTopRightRadius: 35, borderBottomRightRadius: 35, marginVertical: 10, height: 35, width: 45, backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
+    dateMAinView3: { marginVertical: 10, height: 35, width: 50, backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center', },
+    datemainView4: { marginVertical: 10, height: 35, width: 50, justifyContent: 'center', alignItems: 'center', },
+    dateSubVIew1: { marginVertical: 10, borderRadius: 20, height: 40, width: 40, backgroundColor: COLORS.buttonGreen, justifyContent: 'center', alignItems: 'center', },
+    dateSubView2: { marginVertical: 10, borderRadius: 17.5, height: 35, width: 35, justifyContent: 'center', alignItems: 'center', },
+    dateSubView3: { marginVertical: 10, borderRadius: 17.5, height: 35, width: 35, backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
+
+    colorBox: { height: 20, width: 20, borderRadius: 5, marginRight: 10 },
+    colorView:{ flexDirection: 'row', marginVertical:10 },
 });
