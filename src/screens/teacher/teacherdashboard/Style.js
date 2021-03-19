@@ -399,6 +399,7 @@ export default StyleSheet.create({
     pupilData: {
         flexDirection: 'row',
         alignItems: 'center',
+        paddingVertical:10
     },
     pupilProfile: {
         width: hp(35.80),
@@ -442,6 +443,7 @@ export default StyleSheet.create({
     },
     rewardColumn: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
     rewardStar: {
         width: hp(5.5),

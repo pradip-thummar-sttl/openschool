@@ -46,15 +46,15 @@ const Item = ({ onPress, style, item }) => (
         </View>
     </TouchableOpacity>
 );
-const Pupillist = ({ style }) => (
+const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <View style={PAGESTYLE.pupilImage}></View>
-            <Text style={PAGESTYLE.pupilName}>Janice Williamson</Text>
+            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
         </View>
         <View style={PAGESTYLE.groupColumnmain}>
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>1A</Text>
+                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName?item.GroupName:'1A'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.perfomanceColumn}>
@@ -71,18 +71,45 @@ const Pupillist = ({ style }) => (
         </TouchableOpacity>
     </View>
 );
+// const Pupillist = ({ style }) => (
+//     <View style={[PAGESTYLE.pupilData]}>
+//         <View style={PAGESTYLE.pupilProfile}>
+//             <View style={PAGESTYLE.pupilImage}></View>
+//             <Text style={PAGESTYLE.pupilName}>Janice Williamson</Text>
+//         </View>
+//         <View style={PAGESTYLE.groupColumnmain}>
+//             <View style={PAGESTYLE.groupColumn}>
+//                 <Text style={PAGESTYLE.pupilgroupName}>1A</Text>
+//             </View>
+//         </View>
+//         <View style={PAGESTYLE.perfomanceColumn}>
+//             <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+//             <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
+//         </View>
+//         <View style={PAGESTYLE.rewardColumn}>
+//             <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+//             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+//             <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+//         </View>
+//         <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+//             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+//         </TouchableOpacity>
+//     </View>
+// );
 const LessonandHomeworkPlannerDashboard = (props) => {
     const userAuthData = useSelector(state => {
         // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
     const [dashData, setdashData] = useState([])
+    const [pupilData, setPupilData] = useState([])
     console.log('userdata', userAuthData)
     useEffect(() => {
         // if(isDesignBuild)
         //     return true
 
         Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+            console.log('response of get all lesson', res)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setdashData(res.data)
@@ -91,6 +118,17 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
+        })
+
+        Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+            if (res.code == 200) {
+                console.log('response of get all pupil data', res)
+                setPupilData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all pupil error', err)
         })
         return () => {
         }
@@ -127,7 +165,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header onAlertPress={()=>props.navigation.openDrawer()} />
+                <Header onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.dashBoardBoxes}>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
@@ -345,7 +383,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
-                                    data={[1, 2, 3, 4, 5]}
+                                    data={pupilData}
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}

@@ -18,7 +18,10 @@ const HeaderHW = (props) => {
                     </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
                     <Popuphomework />
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity
+                        style={styles.notificationBar}
+                        onPress={() => props.onAlertPress()}
+                        activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>

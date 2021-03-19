@@ -83,7 +83,7 @@ const Images = {
     MyAvatar: require('../assets/images/my-avatar2.png'),
     OpenSchool: require('../assets/images/open-school2.png'),
     cartoon: require('../assets/images/cartoon2.png'),
-    DropArrow: require('../assets/images/down-arrow2.png'),
     backArrow: require('../assets/images/back-arrow2.png'),
+    DropArrow: require('../assets/images/down-arrow2.png'),
 }
 export default Images;

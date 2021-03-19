@@ -12,16 +12,23 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
+import { opacity } from "../../../../utils/Constant";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>Time Table - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity
+                        onPress={() => props.onCalenderPress()}
+                        style={styles.notificationBar}
+                        activeOpacity={opacity}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    <TouchableOpacity
+                        onPress={() => props.onAlertPress()}
+                        style={styles.notificationBar}
+                        activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
@@ -78,7 +85,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',

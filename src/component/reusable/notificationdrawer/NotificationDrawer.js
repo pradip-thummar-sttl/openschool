@@ -7,77 +7,90 @@ import FONTS from '../../../utils/Fonts';
 import PopupUser from '../../../component/reusable/popup/Popupuser';
 import { ScrollView } from "react-native-gesture-handler";
 import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/PixelRatio";
+import { Calendar } from 'react-native-calendars';
+import { Var } from '../../../utils/Constant';
 
 const NotificationDrawer = (props) => {
     return (
         <View style={styles.drawerMain}>
-            <View style={styles.drawerTitleMain}>
-                <Text style={styles.drawerTitle} >My Notifications</Text>
-                <TouchableOpacity style={styles.closeNotificationbarMain}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIcon} /></TouchableOpacity>
-            </View>
-            <ScrollView>
+            {Var.isCalender ?
                 <View>
-                    <Text style={styles.notificationsText}>Live Classes</Text>
-                    <View style={styles.classDetail}>
-                        <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
-                        <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
-                        <View style={styles.timingJoinClass}>
-                            <View style={styles.timing}>
-                                <Image source={require('../../../assets/images/clock2.png')} style={styles.timingClass} />
-                                <Text style={styles.timingText}>09:00 - 09:30</Text>
-                            </View>
-                            <TouchableOpacity>
-                                <Text style={STYLE.openClassLink}>{[<PopupUser />]}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    {Var.isCalender = false}
+                    <Calendar
+                        minDate={new Date()} />
                 </View>
+                :
                 <View>
-                    <Text style={styles.notificationsText}>Homework</Text>
-                    <View style={styles.classDetail}>
-                        <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
-                        <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
-                        <View style={styles.timingJoinClass}>
-                            <View style={styles.timing}>
-                                <Text style={styles.timingText}>6 submitted</Text>
-                            </View>
-                            <TouchableOpacity>
-                                <Text style={STYLE.openClassLink}>Check</Text>
-                            </TouchableOpacity>
-                        </View>
+                    <View style={styles.drawerTitleMain}>
+                        <Text style={styles.drawerTitle} >My Notifications</Text>
+                        <TouchableOpacity style={styles.closeNotificationbarMain}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIcon} /></TouchableOpacity>
                     </View>
-                </View>
-                <View>
-                    <Text style={styles.notificationsText}>Personal</Text>
-                    <View style={styles.classDetail}>
-                        <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
-                        <Text style={styles.classsummary}>You have a new message from</Text>
-                        <View style={styles.timingJoinClass}>
-                            <View style={styles.timing}>
-                                <Text style={styles.timingText}>Mrs Ann Le-Paradesi</Text>
+                    <ScrollView>
+                        <View>
+                            <Text style={styles.notificationsText}>Live Classes</Text>
+                            <View style={styles.classDetail}>
+                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
+                                <View style={styles.timingJoinClass}>
+                                    <View style={styles.timing}>
+                                        <Image source={require('../../../assets/images/clock2.png')} style={styles.timingClass} />
+                                        <Text style={styles.timingText}>09:00 - 09:30</Text>
+                                    </View>
+                                    <TouchableOpacity>
+                                        <Text style={STYLE.openClassLink}>{[<PopupUser />]}</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                            <TouchableOpacity>
-                                <Text style={STYLE.openClassLink}>Read</Text>
-                            </TouchableOpacity>
                         </View>
-                    </View>
-                </View>
-                <View>
-                    <View style={styles.classDetail}>
-                        <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
-                        <Text style={styles.classsummary}>You have a new message from</Text>
-                        <View style={styles.timingJoinClass}>
-                            <View style={styles.timing}>
-                                <Text style={styles.timingText}>Mr Harminder Singh</Text>
+                        <View>
+                            <Text style={styles.notificationsText}>Homework</Text>
+                            <View style={styles.classDetail}>
+                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
+                                <View style={styles.timingJoinClass}>
+                                    <View style={styles.timing}>
+                                        <Text style={styles.timingText}>6 submitted</Text>
+                                    </View>
+                                    <TouchableOpacity>
+                                        <Text style={STYLE.openClassLink}>Check</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                            <TouchableOpacity>
-                                <Text style={STYLE.openClassLink}>Read</Text>
-                            </TouchableOpacity>
                         </View>
-                    </View>
+                        <View>
+                            <Text style={styles.notificationsText}>Personal</Text>
+                            <View style={styles.classDetail}>
+                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <Text style={styles.classsummary}>You have a new message from</Text>
+                                <View style={styles.timingJoinClass}>
+                                    <View style={styles.timing}>
+                                        <Text style={styles.timingText}>Mrs Ann Le-Paradesi</Text>
+                                    </View>
+                                    <TouchableOpacity>
+                                        <Text style={STYLE.openClassLink}>Read</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                        <View>
+                            <View style={styles.classDetail}>
+                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <Text style={styles.classsummary}>You have a new message from</Text>
+                                <View style={styles.timingJoinClass}>
+                                    <View style={styles.timing}>
+                                        <Text style={styles.timingText}>Mr Harminder Singh</Text>
+                                    </View>
+                                    <TouchableOpacity>
+                                        <Text style={STYLE.openClassLink}>Read</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </ScrollView>
                 </View>
-            </ScrollView>
+            }
         </View>
+
     );
 }
 export default NotificationDrawer;
