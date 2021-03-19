@@ -171,7 +171,7 @@ const TLDetailEdit = (props) => {
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={PAGESTYLE.toggleBoxGrpWrap}>
+                    <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                         <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                         <View style={PAGESTYLE.toggleGrp}>

@@ -98,11 +98,11 @@ const TLDetailAdd = (props) => {
                                     <RNPickerSelect style={PAGESTYLE.dropDownSmall}
                                         onValueChange={(value) => console.log(value)}
                                         items={[
-                                            { label: 'English', value: 'English' },
-                                            { label: 'Geography', value: 'Geography' },
-                                            { label: 'History', value: 'History' },
-                                            { label: 'Science', value: 'Science' },
-                                            { label: 'Math', value: 'Math' },
+                                            { label: 'Group 1A', value: 'Group 1A' },
+                                            { label: 'Group 1B', value: 'Group 1B' },
+                                            { label: 'Group 1C', value: 'Group 1C' },
+                                            { label: 'Group 1D', value: 'Group 1D' },
+                                            { label: 'Group 1E', value: 'Group 1E' },
                                         ]}
                                     />
                                 </View>
