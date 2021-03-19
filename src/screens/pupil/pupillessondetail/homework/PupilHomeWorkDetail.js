@@ -16,7 +16,7 @@ const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
     return (
         <View style={PAGESTYLE.whiteBg}>     
-            <Header14 goBack={()=>props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
+            <Header14 onAlertPress={()=>props.navigation.openDrawer()}  goBack={()=>props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
 
