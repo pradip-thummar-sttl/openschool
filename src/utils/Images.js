@@ -8,6 +8,7 @@ const Images = {
     Password: require('../assets/images/icopassword2.png'),
     ShowPassword: require('../assets/images/icoview2.png'),
     DayIcon: require('../assets/images/myDay3.png'),
+    calnderDashHeaderIcon: require('../assets/images/calendar-dashboard2.png'),
     MoreLinks: require('../assets/images/dashBoardMorelink2.png'),
     PupilDashIcon: require('../assets/images/pupilIcon2.png'),
     BronzeStar: require('../assets/images/bronze-star2.png'),
@@ -83,5 +84,6 @@ const Images = {
     OpenSchool: require('../assets/images/open-school2.png'),
     cartoon: require('../assets/images/cartoon2.png'),
     DropArrow: require('../assets/images/down-arrow2.png'),
+    backArrow: require('../assets/images/back-arrow2.png'),
 }
 export default Images;

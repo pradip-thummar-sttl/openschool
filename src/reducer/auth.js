@@ -4,12 +4,10 @@ const initialState = {
     userAuthData: {}
 };
 
-export const AuthReucer = (state=initialState, action)=> {
+export const AuthReducer = (state=initialState, action)=> {
     switch (action.type) {
         case AUTH_ACTIONS_TYPE.LOGIN:
-            
-            break;
-    
+            return { ...state, userAuthData: action.userAuthData, }    
         default:
             return state;
     }

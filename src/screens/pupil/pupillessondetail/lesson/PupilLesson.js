@@ -6,6 +6,7 @@ import STYLE from '../../../../utils/Style';
 import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
+import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
 const PupilLesson = (props) => {
@@ -14,7 +15,7 @@ const PupilLesson = (props) => {
         <View style={[PAGESTYLE.whiteBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning - 07/09/20</Text>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
+                <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilLessonDetailInternal()}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
                         <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />

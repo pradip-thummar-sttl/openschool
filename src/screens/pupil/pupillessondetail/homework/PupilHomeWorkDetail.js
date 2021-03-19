@@ -10,11 +10,13 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
-
+import Header14 from '../../../../component/reusable/header/bulck/Header14'
+import Popuphomework from "../../../../component/reusable/popup/Popupsubmithomework";
 const PupilHomeWorkDetail = (props) => {
+    const [isSubmitPopup, setSubmitPopup] = useState(false)
     return (
-        <View style={PAGESTYLE.whiteBg}>
-
+        <View style={PAGESTYLE.whiteBg}>     
+            <Header14 goBack={()=>props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
 
@@ -125,7 +127,9 @@ the Amazon Rainforest</Text>
                     </View>
                 </View>
             </View>
-
+            {
+                isSubmitPopup?<Popuphomework OnSubmitHomeworkPress={()=>setSubmitPopup(false)} />:null
+            } 
         </View>
     );
 }

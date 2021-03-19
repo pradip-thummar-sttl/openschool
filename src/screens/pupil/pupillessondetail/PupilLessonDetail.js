@@ -7,41 +7,53 @@ import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
-import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
+import HeaderWhitepupil from "../../../component/reusable/header/HeaderWhitepupil";
+import HeaderWhitewithoutsearch from "../../../component/reusable/header/HeaderWhitewithoutsearch";
 import PupilLesson from './lesson/PupilLesson';
 import PupilLessonDue from './lesson/PupilLessonDue';
 import PupilLessonDetailInternal from './lesson/PupilLessonDetail';
 import PupilHomeWorkDetail from './homework/PupilHomeWorkDetail';
 import PupilHomeWorkSubmitted from './homework/PupilHomeWorkSubmitted';
 import PupilHomeWorkMarked from './homework/PupilHomeWorkMarked';
-
+import Header4 from '../../../component/reusable/header/bulck/Header4'
 
 
 const PupilLessonDetail = (props) => {
     const [isHide, action] = useState(true);
+    const [isLesson, setLesson] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)} />
+            <Sidebarpupil hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
+                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <Header4 onAlertPress={()=>props.navigation.openDrawer()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
-                            <TouchableOpacity style={PAGESTYLE.tabs}>
-                                <Text style={[PAGESTYLE.tabsText, PAGESTYLE.tabsTextSelected]}>Lesson</Text>
+                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => setLesson(true)}>
+                                <Text style={[PAGESTYLE.tabsText, { color: isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Lesson</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={PAGESTYLE.tabsText}>Homework</Text>
+                            <TouchableOpacity onPress={() => setLesson(false)}>
+                                <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={PAGESTYLE.lessonstartButton}>
+                        {/* <View style={PAGESTYLE.lessonstartButton}>
                             <Text>Dynamic Search Goes Here</Text>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
-                    <PupilLesson />
-                    {/* <PupilLessonDue /> */}
+                    {
+                        isLesson ?
+                            <PupilLesson
+                                navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
+                            :
+                            <PupilLessonDue
+                                navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
+                    }
+                    {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}

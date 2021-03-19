@@ -5,10 +5,12 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
+import { opacity } from "../../../utils/Constant";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
     const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
+    const [moduleIndex, setSelectedIndex] = useState(0);
     // const isHide = () => {
     //     action(!isSmall)
     //     props.hide();
@@ -41,90 +43,108 @@ const Sidebar = (props) => {
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={()=>this.toggleAnimation()} style={styles.userInfo}>
+                <TouchableOpacity onPress={() => this.toggleAnimation()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.ProfileBack} />
                     {
-                        isSmall? null:
-                        <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
-                        </View>
+                        isSmall ? null :
+                            <View style={styles.profileTextMain}>
+                                <Text style={styles.profileTitle}>Johney Depp</Text>
+                                <Text style={styles.profileDesi}>Administrator</Text>
+                            </View>
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
-                    <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 0 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { setSelectedIndex(0); props.navigateToDashboard() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 1 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { setSelectedIndex(1); props.navigateToTimetable() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Teachers</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>My Calender</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 2 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { setSelectedIndex(2); props.navigateToLessonAndHomework() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Pupils</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>Lesson Planner</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 3 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { setSelectedIndex(3); }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Pupil Management</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>Pupil Management</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 4 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { setSelectedIndex(4); }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
                         />
-                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>Parents</Text>
+                        {
+                            isSmall ? null :
+                                <Text style={styles.menuText}>Parents</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity
+                        style={[styles.menuItem, moduleIndex == 5 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { setSelectedIndex(5); }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
                         />
                         {
-                            isSmall? null:
-                            <Text style={styles.menuText}>FAQ</Text>
+                            isSmall ? null :
+                                <Text style={styles.menuText}>FAQ</Text>
                         }
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
                     {
-                        isSmall? null:
-                        <>
-                            <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitleBottom}>Johney Depp</Text>
-                            </View>
-                            <TouchableOpacity style={styles.moreMenu}>
-                                <Image style={styles.moreIcon} source={Images.SidebarMore} />
-                            </TouchableOpacity>
-                        </>
+                        isSmall ? null :
+                            <>
+                                <View style={styles.profileTextMain}>
+                                    <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                                </View>
+                                <TouchableOpacity style={styles.moreMenu}>
+                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                </TouchableOpacity>
+                            </>
                     }
                 </View>
             </Animated.View>
@@ -136,7 +156,7 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:COLORS.SidebarHeaderBack,
+        backgroundColor: COLORS.SidebarHeaderBack,
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,

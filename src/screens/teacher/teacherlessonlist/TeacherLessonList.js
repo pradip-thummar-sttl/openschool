@@ -8,8 +8,10 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
+import { opacity } from "../../../utils/Constant";
+import Header from "./Header";
 
-const Pupillist = ({ style }) => (
+const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
             <View style={PAGESTYLE.border}></View>
@@ -32,7 +34,10 @@ const Pupillist = ({ style }) => (
         </View>
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>No</Text>
-            <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+            <TouchableOpacity
+                style={PAGESTYLE.pupilDetailLink}
+                activeOpacity={opacity}
+                onPress={() => props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
@@ -56,14 +61,20 @@ const TeacherLessonList = (props) => {
         return (
             <Pupillist
                 item={item}
+                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail')}
             />
         );
     };
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar hide={() => action(!isHide)} />
+            <Sidebar
+                hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <HeaderWhite />
+                <Header
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')} />
                 <ScrollView style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>
@@ -92,7 +103,7 @@ const TeacherLessonList = (props) => {
                         <View style={PAGESTYLE.pupilTabledata}>
                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                 <FlatList
-                                    data={[1]}
+                                    data={[1, 2, 3, 4, 5]}
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}

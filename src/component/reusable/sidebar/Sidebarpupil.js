@@ -52,7 +52,7 @@ const Sidebar = (props) => {
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
-                    <TouchableOpacity style={[styles.menuItem, styles.menuItemSelected]}>
+                    <TouchableOpacity onPress={()=>props.navigateToDashboard()} style={[styles.menuItem, styles.menuItemSelected]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
@@ -62,7 +62,7 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity onPress={()=>props.navigateToTimetable()} style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
@@ -72,7 +72,7 @@ const Sidebar = (props) => {
                             <Text style={styles.menuText}>Teachers</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity onPress={()=>props.onLessonAndHomework()} style={styles.menuItem}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     },
     cartoon: {
         position: 'absolute',
-        bottom: hp(0),
+        bottom: hp(1.5),
         right: hp(-10.5),
     },
 });

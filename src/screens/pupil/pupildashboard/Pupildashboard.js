@@ -6,7 +6,7 @@ import STYLE from '../../../utils/Style';
 import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
@@ -44,11 +44,14 @@ const PupuilDashboard = (props) => {
     );
     return (
         <View style={PAGESTYLE.mainPage} >
-            <Sidebar hide={() => action(!isHide)} />
+            <Sidebarpupil hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
+                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
                 <ScrollView>
-                    <Header STYLE={STYLE.pupilHeader} />
+                    <Header onAlertPress={() => props.navigation.openDrawer()} STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>
@@ -75,7 +78,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
-                                                data={[1]}
+                                                data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
@@ -168,7 +171,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
-                                                data={[1]}
+                                                data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
