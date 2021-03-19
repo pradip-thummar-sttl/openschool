@@ -25,7 +25,7 @@ const HeaderWhite = (props) => {
                     <TouchableOpacity onPress={()=>props.onSeeHomeworkPress()} style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
