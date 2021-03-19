@@ -22,7 +22,9 @@ const Header = (props) => {
                     {/* <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity> */}
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar}
+                        onPress={() => props.onAlertPress()}
+                        activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
@@ -63,10 +65,10 @@ const Header = (props) => {
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity 
-                style={styles.buttonGroup}
-                activeOpacity={opacity}
-                onPress={()=>props.navigateToAddSubject()}>
+                <TouchableOpacity
+                    style={styles.buttonGroup}
+                    activeOpacity={opacity}
+                    onPress={() => props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
                 </TouchableOpacity>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',

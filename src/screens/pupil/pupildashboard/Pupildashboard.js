@@ -10,6 +10,7 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
+import { Var } from "../../../utils/Constant";
 
 const PupuilDashboard = (props) => {
     const [isHide, action] = useState(true);
@@ -51,7 +52,7 @@ const PupuilDashboard = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
                 <ScrollView>
-                    <Header onAlertPress={() => props.navigation.openDrawer()} STYLE={STYLE.pupilHeader} />
+                    <Header onAlertPress={() => {props.navigation.openDrawer()}} STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>
