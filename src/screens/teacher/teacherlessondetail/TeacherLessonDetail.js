@@ -80,6 +80,7 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
                     {/* <TLVideoGallery /> */}
+                    {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
                     {/* <TLHomeWorkInstructionalVideoAdded /> */}
                     {/* <TLHomeWorkSubmittedDetail /> */}
                     {/* <TLHomeWorkSubmittedDetailConfirmation /> */}

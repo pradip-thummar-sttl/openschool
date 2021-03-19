@@ -30,11 +30,11 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
                         <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                        <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
                         <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                        <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                        <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                     </View>
                 </View>
             </View>
@@ -52,7 +52,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -63,7 +64,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -74,7 +76,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
@@ -85,7 +88,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
-                                    onCheckColor={COLORS.dashboardPupilBlue}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />

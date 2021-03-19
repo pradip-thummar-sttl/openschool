@@ -25,7 +25,7 @@ const PupilHomeWorkDetail = (props) => {
                             <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                             <View style={PAGESTYLE.daterow}>
                                 <Image source={require('../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
-                                <Text style={PAGESTYLE.dueDateTextBold}>05/02/21</Text>
+                                <Text style={PAGESTYLE.dueDateTextBold}>14/09/2020</Text>
                             </View>
                         </View>
                         <View style={PAGESTYLE.dateNameBlock}>
@@ -39,7 +39,7 @@ const PupilHomeWorkDetail = (props) => {
 
                     <View style={PAGESTYLE.lessonDesc}>
                         <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                        <Text style={PAGESTYLE.descriptionText}> Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                        <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
 
@@ -51,7 +51,8 @@ const PupilHomeWorkDetail = (props) => {
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -68,7 +69,8 @@ const PupilHomeWorkDetail = (props) => {
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -86,7 +88,8 @@ the Amazon Rainforest</Text>
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -103,7 +106,8 @@ the Amazon Rainforest</Text>
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
