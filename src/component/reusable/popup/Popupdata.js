@@ -7,7 +7,7 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { opacity } from "../../../utils/Constant";
+import { cellWidth, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 
 const Popupdata = (props) => {
@@ -20,11 +20,12 @@ const Popupdata = (props) => {
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Details</Text></TouchableOpacity> */}
             <TouchableOpacity
-            style={STYLE.openClassLink}
+                style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: 200 * props.span, backgroundColor: COLORS.white, borderStartColor: COLORS.black, borderStartWidth: 3, }}>
-                    <Text style={{ ...PAGESTYLE.lable, width: 200 * props.span, backgroundColor: COLORS.white, }}>{props.title}</Text>
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth * props.span, backgroundColor: COLORS.white, borderStartColor: COLORS.black, borderStartWidth: 3, }}>
+                    <Text style={{ ...PAGESTYLE.lable, width: cellWidth * props.span, backgroundColor: COLORS.white, }}>{props.title}</Text>
+                    <Text style={{ ...PAGESTYLE.lable, width: cellWidth * props.span, backgroundColor: COLORS.white, }}>{props.time}</Text>
                 </View>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
@@ -33,7 +34,7 @@ const Popupdata = (props) => {
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
-                        <View style={styles.tabcontent}>
+                        {/* <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={styles.titleTab}>Cartoon Drawings</Text>
                                 <Text h3 style={styles.subTitleTab}>Art Subject</Text>
@@ -88,6 +89,75 @@ const Popupdata = (props) => {
                                         <Image source={Images.CheckIcon} style={styles.checkIcon} />
                                         <Text style={styles.lessonPointText}>Drawing work sheet.</Text>
                                     </View>
+                                </View>
+                                <View style={styles.uploadCalendar}>
+                                    <TouchableOpacity>
+                                        <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                    </TouchableOpacity>
+                                    <View style={styles.lessonstartButton}>
+                                        <TouchableOpacity style={styles.buttonGrp}><Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text></TouchableOpacity>
+                                        <TouchableOpacity style={styles.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </View> */}
+                        <View style={styles.tabcontent}>
+                            <View style={styles.beforeBorder}>
+                                <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
+                                <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
+                                <View style={styles.yellowHrTag}></View>
+                                <View style={styles.timedateGrp}>
+                                    <View style={styles.dateWhiteBoard}>
+                                        <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                        <Text style={styles.datetimeText}>14/09/2020</Text>
+                                    </View>
+                                    <View style={[styles.dateWhiteBoard, styles.time]}>
+                                        <Image style={styles.timeIcon} source={Images.Clock} />
+                                        <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                    </View>
+                                    <View style={[styles.dateWhiteBoard, styles.grp]}>
+                                        <Image style={styles.calIcon} source={Images.Group} />
+                                        <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={STYLE.hrCommon}></View>
+                            <View style={styles.afterBorder}>
+                                <View style={styles.mediaMain}>
+                                    {props.data.Allpupillist ?
+                                        props.data.Allpupillist.map((data, index) => (
+                                            <TouchableOpacity
+                                                style={styles.mediabarTouch}
+                                                activeOpacity={opacity}>
+                                                <View style={styles.mediabar}></View>
+                                            </TouchableOpacity>
+                                        ))
+                                        :
+                                        null
+                                    }
+                                </View>
+                                <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
+                                <View style={styles.attchmentSectionwithLink}>
+                                    <TouchableOpacity style={styles.attachment}>
+                                        <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
+                                        <Text style={styles.attachmentText}>1 Attachment</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity>
+                                        <Text style={styles.linkText}>see more</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.requirementofClass}>
+                                    <Text style={styles.requireText}>Items that your class will need</Text>
+                                    {props.data.CheckList ?
+                                        props.data.CheckList.map((data, index) => (
+                                            <View style={styles.lessonPoints}>
+                                                <Image source={Images.CheckIcon} style={styles.checkIcon} />
+                                                <Text style={styles.lessonPointText}>{data.ItemName}</Text>
+                                            </View>
+                                        ))
+                                        :
+                                        null
+                                    }
                                 </View>
                                 <View style={styles.uploadCalendar}>
                                     <TouchableOpacity>

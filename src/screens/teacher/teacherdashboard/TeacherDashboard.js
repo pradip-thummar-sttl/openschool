@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -10,41 +10,41 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { isDesignBuild, showMessage } from "../../../utils/Constant";
+import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 
 const Item = ({ onPress, style, item }) => (
-    // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
-    //     <View style={PAGESTYLE.classSubject}>
-    //         <View style={PAGESTYLE.subjecRow}>
-    //             <View style={PAGESTYLE.border}></View>
-    //             <View>
-    //                 <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-    //                 {/* <Text style={PAGESTYLE.subject}>Grammar</Text> */}
-    //             </View>
-    //         </View>
-    //         <View style={PAGESTYLE.timingMain}>
-    //             <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
-    //             <Text style={PAGESTYLE.timing}>{item.Time}</Text>
-    //         </View>
-    //     </View>
-    // </TouchableOpacity>
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
         <View style={PAGESTYLE.classSubject}>
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
                 <View>
-                    <Text style={PAGESTYLE.subjectName}>English</Text>
-                    <Text style={PAGESTYLE.subject}>Grammar</Text>
+                    <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+                    <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.timingMain}>
-                <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
-                <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
+                <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
             </View>
         </View>
     </TouchableOpacity>
+    // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
+    //     <View style={PAGESTYLE.classSubject}>
+    //         <View style={PAGESTYLE.subjecRow}>
+    //             <View style={PAGESTYLE.border}></View>
+    //             <View>
+    //                 <Text style={PAGESTYLE.subjectName}>English</Text>
+    //                 <Text style={PAGESTYLE.subject}>Grammar</Text>
+    //             </View>
+    //         </View>
+    //         <View style={PAGESTYLE.timingMain}>
+    //             <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
+    //             <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
+    //         </View>
+    //     </View>
+    // </TouchableOpacity>
 );
 const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
@@ -54,7 +54,7 @@ const Pupillist = ({ item }) => (
         </View>
         <View style={PAGESTYLE.groupColumnmain}>
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName?item.GroupName:'1A'}</Text>
+                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.perfomanceColumn}>
@@ -103,16 +103,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     })
     const [dashData, setdashData] = useState([])
     const [pupilData, setPupilData] = useState([])
-    console.log('userdata', userAuthData)
+    const [isDashDataLoading, setDashDataLoading] = useState(true)
+    const [isPupilDataLoading, setPupilDataLoading] = useState(true)
+
     useEffect(() => {
         // if(isDesignBuild)
         //     return true
 
         Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
-            console.log('response of get all lesson', res)
+            setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setdashData(res.data)
+                setDataOfSubView(res.data[0])
             } else {
                 showMessage(res.message)
             }
@@ -121,6 +124,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         })
 
         Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setPupilDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all pupil data', res)
                 setPupilData(res.data)
@@ -211,76 +215,83 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.whiteBoard}>
-                        <View style={STYLE.viewRow}>
-                            <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                                <FlatList
-                                    data={dashData}
-                                    renderItem={renderItem}
-                                    keyExtractor={(item) => item.id}
-                                    extraData={selectedId}
-                                />
-                            </SafeAreaView>
-                            <View style={PAGESTYLE.rightTabContent}>
-                                <View style={PAGESTYLE.arrowSelectedTab}></View>
-                                {/* <View style={PAGESTYLE.tabcontent}>
-                                    <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                    <View style={PAGESTYLE.timedateGrp}>
-                                        <View style={PAGESTYLE.dateWhiteBoard}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                        {isDashDataLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.yellowDark} />
+                            :
+                            dashData.length > 0 ?
+                                <View style={STYLE.viewRow}>
+                                    <SafeAreaView style={PAGESTYLE.leftTabbing}>
+                                        <FlatList
+                                            data={dashData}
+                                            renderItem={renderItem}
+                                            keyExtractor={(item) => item.id}
+                                            extraData={selectedId}
+                                        />
+                                    </SafeAreaView>
+                                    <View style={PAGESTYLE.rightTabContent}>
+                                        <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                        <View style={PAGESTYLE.tabcontent}>
+                                            <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                            <View style={PAGESTYLE.timedateGrp}>
+                                                <View style={PAGESTYLE.dateWhiteBoard}>
+                                                    <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                </View>
+                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                                    <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
+                                                </View>
+                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                    <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                </View>
+                                            </View>
+                                            <View style={STYLE.hrCommon}></View>
+                                            <View style={PAGESTYLE.mediaMain}>
+                                                {dataOfSubView.Allpupillist ?
+                                                    dataOfSubView.Allpupillist.map((data, index) => (
+                                                        <TouchableOpacity
+                                                            style={PAGESTYLE.mediabarTouch}
+                                                            activeOpacity={opacity}>
+                                                            <View style={PAGESTYLE.mediabar}></View>
+                                                        </TouchableOpacity>
+                                                    ))
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                            <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
+                                            <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                                <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                    <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                                    <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity>
+                                                    <Text style={PAGESTYLE.linkText}>see more</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={PAGESTYLE.requirementofClass}>
+                                                <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+
+                                                {dataOfSubView.CheckList ?
+                                                    dataOfSubView.CheckList.map((data, index) => (
+                                                        <View style={PAGESTYLE.lessonPoints}>
+                                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                            <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
+                                                        </View>
+                                                    ))
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                            <View style={PAGESTYLE.lessonstartButton}>
+                                                <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Lesson</Text></TouchableOpacity>
+                                                <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                            </View>
                                         </View>
-                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.Time}</Text>
-                                        </View>
-                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={STYLE.hrCommon}></View>
-                                    <View style={PAGESTYLE.mediaMain}>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
-                                    </View>
-                                    <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
-                                    <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                        <TouchableOpacity style={PAGESTYLE.attachment}>
-                                            <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                            <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList?dataOfSubView.MaterialList.length:0} Attachment</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <Text style={PAGESTYLE.linkText}>see more</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={PAGESTYLE.requirementofClass}>
-                                        <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
-                                        <View style={PAGESTYLE.lessonPoints}>
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                            <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.lessonPoints}>
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                            <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Lesson</Text></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
-                                    </View>
-                                </View> */}
-                                <View style={PAGESTYLE.tabcontent}>
+                                        {/* <View style={PAGESTYLE.tabcontent}>
                                     <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
                                     <View style={PAGESTYLE.timedateGrp}>
                                         <View style={PAGESTYLE.dateWhiteBoard}>
@@ -337,9 +348,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Lesson</Text></TouchableOpacity>
                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
                                     </View>
+                                </View> */}
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
+                                :
+                                <View style={{height: 100, justifyContent:'center'}}>
+                                    <Text style={{ alignItems:'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                </View>
+                        }
                     </View>
                     <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                         <View style={[STYLE.viewRow]}>
@@ -355,41 +371,55 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         </View>
                     </View>
                     <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>
-                        <View style={PAGESTYLE.pupilTable}>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
-                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
-                                <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
+                        {isPupilDataLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.blueButton} />
+                            :
+                            pupilData.length > 0 ?
+                                <View>
+                                    <View style={PAGESTYLE.pupilTable}>
+                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
+                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
+                                            </View>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
+                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
+                                    <View style={PAGESTYLE.pupilTabledata}>
+                                        <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
+                                            <FlatList
+                                                data={pupilData}
+                                                renderItem={pupilRender}
+                                                keyExtractor={(item) => item.id}
+                                                extraData={selectedId}
+                                            />
+                                        </SafeAreaView>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
-                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                :
+
+                                <View>
+                                    <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                 </View>
-                            </View>
-                        </View>
-                        <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
-                        <View style={PAGESTYLE.pupilTabledata}>
-                            <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                                <FlatList
-                                    data={pupilData}
-                                    renderItem={pupilRender}
-                                    keyExtractor={(item) => item.id}
-                                    extraData={selectedId}
-                                />
-                            </SafeAreaView>
-                        </View>
+                        }
                     </View>
                 </ScrollView>
             </View>
