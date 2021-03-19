@@ -17,7 +17,10 @@ const HeaderGallery = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> Recommended Content</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity
+                        style={styles.notificationBar}
+                        onPress={() => props.onAlertPress()}
+                        activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>

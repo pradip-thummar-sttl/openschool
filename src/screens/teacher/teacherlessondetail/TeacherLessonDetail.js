@@ -25,12 +25,18 @@ const TeacherLessonDetail = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 {tabIndex == 0 ?
-                        <HeaderLP navigateToBack={() => props.navigation.goBack()}/>
-                        : tabIndex == 1 ?
-                            <HeaderHW navigateToBack={() => props.navigation.goBack()}/>
-                            :
-                            <HeaderHWS navigateToBack={() => props.navigation.goBack()}/>
-                    }
+                    <HeaderLP
+                        navigateToBack={() => props.navigation.goBack()}
+                        onAlertPress={() => props.navigation.openDrawer()} />
+                    : tabIndex == 1 ?
+                        <HeaderHW
+                            navigateToBack={() => props.navigation.goBack()}
+                            onAlertPress={() => props.navigation.openDrawer()} />
+                        :
+                        <HeaderHWS
+                            navigateToBack={() => props.navigation.goBack()}
+                            onAlertPress={() => props.navigation.openDrawer()} />
+                }
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
