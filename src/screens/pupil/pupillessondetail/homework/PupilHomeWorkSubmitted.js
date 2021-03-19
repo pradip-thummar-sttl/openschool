@@ -29,11 +29,11 @@ const PupilHomeWorkSubmitted = (props) => {
                         </View>
                         <View style={PAGESTYLE.dateNameBlock}>
                             <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                            <Text style={PAGESTYLE.dateText}>08/03/21</Text>
+                            <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                         </View>
                         <View style={PAGESTYLE.dateNameBlock}>
                             <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                            <Text style={PAGESTYLE.dateText}>08/03/21</Text>
+                            <Text style={PAGESTYLE.dateText}>19/20/2020</Text>
                         </View>
                     </View>
                 </View>
@@ -42,19 +42,19 @@ const PupilHomeWorkSubmitted = (props) => {
                 <View style={PAGESTYLE.teacherDetailLeft}>
                     <View style={PAGESTYLE.lessonDesc}>
                         <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                        <Text style={PAGESTYLE.descriptionText}> Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                        <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
 
-                        <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -67,21 +67,22 @@ const PupilHomeWorkSubmitted = (props) => {
                                         style={PAGESTYLE.checkMark}
                                         value={false}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
-                                    <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
-the Amazon Rainforest</Text>
+                                    <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />
@@ -92,9 +93,10 @@ the Amazon Rainforest</Text>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
-                                        onCheckColor={COLORS.dashboardPupilBlue}
+                                        onCheckColor={COLORS.white}
+                                        onFillColor={COLORS.dashboardPupilBlue}
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                     />

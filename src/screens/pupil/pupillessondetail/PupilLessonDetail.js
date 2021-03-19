@@ -57,7 +57,7 @@ const PupilLessonDetail = (props) => {
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}
-                    <PupilHomeWorkMarked />
+                    {/* <PupilHomeWorkMarked /> */}
                 </ScrollView>
 
             </View>

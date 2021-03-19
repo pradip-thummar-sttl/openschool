@@ -88,10 +88,18 @@ export default StyleSheet.create({
         width: hp(1.76),
         marginRight:hp(1.04),
     },
+    calIconNoInput: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+    },
     timeIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
+    },
+    timeIconNoInput: {
+        resizeMode: 'contain',
+        width: hp(1.76),
     },
     subjectText: {
         flexDirection: 'row',
@@ -298,8 +306,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(1.43),
-        paddingRight: hp(1.43),
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
         paddingTop: hp(1),
         paddingBottom: hp(1),
         borderWidth: 1,
@@ -308,7 +316,7 @@ export default StyleSheet.create({
         marginBottom: hp(1.04),
     },
     downloadIcon: {
-        width: hp(1.95),
+        width: hp(2.01),
         resizeMode: 'contain',
     },
     fileName: {
@@ -356,7 +364,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
@@ -401,17 +409,17 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '95%',
         color: COLORS.darkGray,
-        fontSize: hp('1.9%'),
+        fontSize: 18,
         borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
-        borderRadius: hp('1.0%'),
+        borderRadius: hp(1.0),
         lineHeight: hp(2.3),
-        height: hp('6%'),
-        paddingLeft: hp('2.0%'),
-        paddingRight: hp('2.0%'),
-        paddingTop: hp('2.0%'),
-        paddingBottom: hp('2.0%'),
+        height: hp(6),
+        paddingLeft: hp(2.0),
+        paddingRight: hp(2.0),
+        paddingTop: hp(2.0),
+        paddingBottom: hp(2.0),
         fontFamily: FONTS.fontRegular,
     },
     dropDownSmall: {
@@ -627,6 +635,7 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(2.0),
+        marginBottom:hp(0.78),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -724,7 +733,7 @@ export default StyleSheet.create({
         width: hp(22.55),
     },
     lastColumn: {
-        width: hp(20.55),
+        width: hp(18.55),
         justifyContent: 'space-between',
     },
     yesText: {
@@ -860,14 +869,13 @@ export default StyleSheet.create({
         alignItems:'center',
         backgroundColor:COLORS.white,
         borderRadius:hp(1.8),
-        overflow:'hidden',
-        shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 5,},
-        shadowOpacity: 0.08,
-        shadowRadius: 10,
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        shadowColor: COLORS.lightGrayPupil,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
     },
     starSelectedText:{
         fontFamily: FONTS.fontBold,
@@ -1023,4 +1031,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
+    timeSpace:{
+        marginLeft:hp(12.83),
+    }
 });
