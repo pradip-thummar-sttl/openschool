@@ -4,13 +4,17 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import { opacity } from "../../../utils/Constant";
 
 const Header = (props) => {
     return (
         <View style={styles.headerMain}>
             <Text style={styles.mainTitle}>Dashboard</Text>
             <View style={styles.headerRight}>
-                <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onAlertPress()}>
+                <TouchableOpacity
+                    style={styles.notificationBar}
+                    onPress={() => props.onAlertPress()}
+                    activeOpacity={opacity}>
                     <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
                 </TouchableOpacity>
             </View>
