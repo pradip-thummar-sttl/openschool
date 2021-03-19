@@ -156,7 +156,12 @@ const TLHomeWorkInstructionalVideoWithRecording = (props) => {
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            style={PAGESTYLE.buttonGrp}
+                            activeOpacity={opacity}
+                            onPress={() => props.navigateToVideoGallery()}>
+                            <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
