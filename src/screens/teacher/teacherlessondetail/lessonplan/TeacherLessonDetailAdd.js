@@ -46,49 +46,27 @@ const TLDetailAdd = (props) => {
     }
 
     return (
-        <View style={PAGESTYLE.mainPage}>
-            <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
-                <HeaderAddNew
-                    navigateToBack={() => { props.navigation.goBack() }}
-                    onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView style={STYLE.padLeftRight}>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                            <View style={STYLE.hrCommon}></View>
-                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
-                            <View style={PAGESTYLE.timedateGrp}>
-                                <View style={PAGESTYLE.dropDownFormInput}>
-                                    <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                        <RNPickerSelect style={PAGESTYLE.dropDown}
-                                            onValueChange={(value) => console.log(value)}
-                                            items={[
-                                                { label: 'English', value: 'English' },
-                                                { label: 'Geography', value: 'Geography' },
-                                                { label: 'History', value: 'History' },
-                                                { label: 'Science', value: 'Science' },
-                                                { label: 'Math', value: 'Math' },
-                                            ]}
-                                        />
-                                    </View>
-                                </View>
-                                <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
-                                    <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
-                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
-                                        <TextInput
-                                            style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
-                                            placeholder="Grammar"
-                                            autoCapitalize={false}
-                                            maxLength={40}
-                                            placeholderTextColor={COLORS.greyplaceholder}
-                                            onChangeText={topic => setLessonTopic(topic)} />
-                                    </View>
-                                </View>
+        <View style={PAGESTYLE.whiteBg}>
+            <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
+            <View style={PAGESTYLE.containerWrap}>
+                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                    <View style={STYLE.hrCommon}></View>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                    <View style={PAGESTYLE.timedateGrp}>
+                        <View style={PAGESTYLE.dropDownFormInput}>
+                            <Text style={PAGESTYLE.subjectText}>Subject</Text>
+                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
+                                <RNPickerSelect style={PAGESTYLE.dropDown}
+                                    onValueChange={(value) => console.log(value)}
+                                    items={[
+                                        { label: 'English', value: 'English' },
+                                        { label: 'Geography', value: 'Geography' },
+                                        { label: 'History', value: 'History' },
+                                        { label: 'Science', value: 'Science' },
+                                        { label: 'Math', value: 'Math' },
+                                    ]}
+                                />
+                                <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                             </View>
                             <View style={PAGESTYLE.timedateGrp}>
                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
@@ -143,11 +121,12 @@ const TLDetailAdd = (props) => {
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                 <TextInput
-                                    multiline={true}
-                                    numberOfLines={4}
-                                    defaultValue='Briefly explain what the lesson is about'
-                                    style={PAGESTYLE.commonInputTextareaBoldGrey}
-                                />
+                                    style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                                    placeholder="e.g. Grammar, Fractions, etc"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    placeholderTextColor={COLORS.menuLightFonts}
+                                    onChangeText={text => this.setState({ email: text })} />
                             </View>
                             <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
                                 <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
@@ -183,6 +162,7 @@ const TLDetailAdd = (props) => {
                                     <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
                                     <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
                                 </View>
+                                <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                             </View>
                         </View>
                         <View style={PAGESTYLE.rightSideBar}>
@@ -202,6 +182,45 @@ const TLDetailAdd = (props) => {
                                 </TouchableOpacity>
                             </View>
 
+                    <View style={PAGESTYLE.lessonDesc}>
+                        <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
+                        <TextInput
+                            multiline={true}
+                            numberOfLines={4}
+                            defaultValue='Briefly explain what the lesson is about'
+                            style={PAGESTYLE.commonInputTextareaBoldGrey}
+                        />
+                    </View>
+                    <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                        <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                        <Popupaddrecording />
+                    </TouchableOpacity>
+                    <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                        <TouchableOpacity style={PAGESTYLE.addItem}>
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                        <TouchableOpacity style={PAGESTYLE.addItem}>
+                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={PAGESTYLE.toggleBoxGrpWrap}>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                        <View style={PAGESTYLE.toggleGrp}>
+                            <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
+                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                        </View>
+                        <View style={PAGESTYLE.toggleGrp}>
+                            <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
+                            <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                     </View>
                 </ScrollView>

@@ -73,9 +73,11 @@ const PupilLessonDue = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
+                        <Image source={require('../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: Today</Text>
+                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     </View>
@@ -86,10 +88,10 @@ const PupilLessonDue = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
                         <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightYellowDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     </View>
@@ -100,10 +102,10 @@ const PupilLessonDue = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
+                        <Image source={require('../../../../assets/images/bookmarkOff2.png')} style={PAGESTYLE.bookMarkLabelDue} />
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightPurpleDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     </View>
@@ -114,10 +116,10 @@ const PupilLessonDue = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
-                        <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
+                        <Image source={require('../../../../assets/images/bookmarkOff2.png')} style={PAGESTYLE.bookMarkLabelDue} />
                     </View>
-                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightOrangeDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     </View>
@@ -189,9 +191,9 @@ const PupilLessonDue = (props) => {
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: Today</Text>
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     </View>
@@ -203,9 +205,9 @@ const PupilLessonDue = (props) => {
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightYellowDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     </View>
@@ -217,9 +219,9 @@ const PupilLessonDue = (props) => {
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightPurpleDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     </View>
@@ -231,9 +233,9 @@ const PupilLessonDue = (props) => {
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                        <Text style={PAGESTYLE.videoDateBlack}>14/09/2020</Text>
+                        <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
                     </View>
-                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightOrangeDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     </View>
@@ -307,7 +309,7 @@ const PupilLessonDue = (props) => {
                         <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
                         <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>English</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Grammar</Text>
                     </View>
@@ -321,7 +323,7 @@ const PupilLessonDue = (props) => {
                         <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
                         <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightYellowDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Art</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Cartoon Drawing</Text>
                     </View>
@@ -335,7 +337,7 @@ const PupilLessonDue = (props) => {
                         <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
                         <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
                     </View>
-                    <View style={PAGESTYLE.lessonDue}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightPurpleDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>Mathematics</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>Timetables</Text>
                     </View>
@@ -349,7 +351,7 @@ const PupilLessonDue = (props) => {
                         <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
                         <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
                     </View>
-                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
+                    <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightOrangeDue]}>
                         <Text style={PAGESTYLE.videoSubTitleNormal}>PE</Text>
                         <Text style={PAGESTYLE.videoSubTitleBold}>With Joe Hicks</Text>
                     </View>

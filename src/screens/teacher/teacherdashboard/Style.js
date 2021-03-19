@@ -443,6 +443,7 @@ export default StyleSheet.create({
     },
     rewardColumn: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
     rewardStar: {
         width: hp(5.5),

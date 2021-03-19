@@ -62,7 +62,7 @@ const TLHomeWorkSubmitted = (props) => {
     };
     return (
 
-        <View style={PAGESTYLE.whiteBg}>
+        <View style={PAGESTYLE.plainBg}>
             <View style={PAGESTYLE.pupilTable}>
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Pupil name</Text>
