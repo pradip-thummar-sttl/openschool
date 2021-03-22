@@ -635,6 +635,7 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(2.0),
+        marginBottom:hp(0.78),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -732,7 +733,7 @@ export default StyleSheet.create({
         width: hp(22.55),
     },
     lastColumn: {
-        width: hp(20.55),
+        width: hp(18.55),
         justifyContent: 'space-between',
     },
     yesText: {
@@ -1032,5 +1033,8 @@ export default StyleSheet.create({
     },
     timeSpace:{
         marginLeft:hp(12.83),
-    }
+    },
+    leftSpace:{
+        paddingLeft:hp(3.5),
+    },
 });
