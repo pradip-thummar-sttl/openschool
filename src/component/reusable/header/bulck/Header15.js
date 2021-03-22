@@ -38,8 +38,8 @@ export default HeaderWhite;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        // paddingLeft: hp(3.25),
-        // paddingRight: hp(2.0),
+        paddingLeft: hp(3.25),
+        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
        // marginBottom: hp(5.85),
     },
