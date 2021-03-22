@@ -8,10 +8,16 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
+import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 
 
 const PupilLessonDetailInternal = (props) => {
     return (
+        <View style={PAGESTYLE.mainPage}>
+        <Sidebarpupil hide={() => action(!isHide)}
+            navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
+            navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
+            onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
 
         <View style={PAGESTYLE.whiteBg}>
             <HeaderWhitewithoutsearch
@@ -95,7 +101,7 @@ const PupilLessonDetailInternal = (props) => {
                 </View>
             </View>
         </View>
-
+</View>
     );
 }
 export default PupilLessonDetailInternal;
