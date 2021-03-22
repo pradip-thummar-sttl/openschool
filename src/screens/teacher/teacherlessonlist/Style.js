@@ -88,6 +88,7 @@ export default StyleSheet.create({
         elevation: 3,
         borderRadius: hp(1.95),
         height:hp(8.85),
+        marginBottom: hp(1.5),
         borderRadius:hp(2.0),
     },
     pupilProfile: {

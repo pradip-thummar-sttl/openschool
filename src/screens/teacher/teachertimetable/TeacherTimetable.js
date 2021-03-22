@@ -1,58 +1,20 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderTT from "./header/HeaderTT";
-import { opacity, Var } from "../../../utils/Constant";
+import { cellWidth, opacity, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
+import { EndPoints } from "../../../service/EndPoints";
+import { Service } from "../../../service/Service";
 const TeacherTimeTable = (props) => {
-    const [isHide, action] = useState(true);
-
-    const setData = (dayKey, timneKey) => {
-        let flag = false, span = 1, title = '';
-
-        timeTableData.forEach(element => {
-
-            if (element.day == days[dayKey]) {
-                if (time[timneKey] == (element.startTime)) {
-
-                    let startTime = Number(element.startTime.replace(':', ''));
-                    let endTime = Number(element.endTime.replace(':', ''));
-
-                    startTime = (startTime >= 100 && startTime < 900) ? (startTime + 1200) : startTime
-                    endTime = (endTime >= 100 && endTime < 900) ? (endTime + 1200) : endTime
-
-                    let timeSpan = (endTime - startTime);
-                    span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
-
-                    title = element.title;
-                    flag = true;
-                    return;
-                }
-            }
-        });
-
-        if (flag) {
-            return (
-                // <View style={{ backgroundColor: COLORS.black, height: 100, width: 10 }}></View>
-                <Popupdata span={span} title={title} />
-            );
-        } else {
-            return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: 200, }}>
-
-                </View>
-            );
-        }
-    }
-
     const days = ['', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THRUSDAY', 'FRIDAY', 'SATURDAY'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
 
-    const timeTableData = [
+    const timeTableData__ = [
         {
             title: 'English - Grammer',
             day: 'MONDAY',
@@ -96,6 +58,64 @@ const TeacherTimeTable = (props) => {
         },
     ]
 
+    const [isHide, action] = useState(true);
+    const [timeTableData, setTimeTableData] = useState([])
+    const [isTimeTableLoading, setTimeTableLoading] = useState(true)
+
+    const setData = (dayKey, timneKey) => {
+        let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
+
+        timeTableData.forEach(element => {
+
+            const day = new Date(element.Date).getDay();
+            const dayOfWeek = isNaN(day) ? null : days[day];
+
+            if (dayOfWeek == days[dayKey]) {
+                if (time[timneKey] == (element.StartTime)) {
+
+                    let startTime = Number(element.StartTime.replace(':', ''));
+                    let endTime = Number(element.EndTime.replace(':', ''));
+
+                    startTime = (startTime >= 100 && startTime < 900) ? (startTime + 1200) : startTime
+                    endTime = (endTime >= 100 && endTime < 900) ? (endTime + 1200) : endTime
+
+                    let timeSpan = (endTime - startTime);
+                    span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
+
+                    lblTitle = `${element.SubjectName} - ${element.LessonTopic}`;
+                    lblTime = `${element.StartTime} - ${element.EndTime}`;
+                    data = element;
+                    flag = true;
+                    return;
+                }
+            }
+        });
+
+        if (flag) {
+            return (
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} />
+            );
+        } else {
+            return (
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }} />
+            );
+        }
+    }
+
+    useEffect(() => {
+        Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setTimeTableLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setTimeTableData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }, [])
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -108,38 +128,48 @@ const TeacherTimeTable = (props) => {
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
 
-                <View style={PAGESTYLE.mainPage}>
-                    <View style={PAGESTYLE.days}>
-                        {days.map((data) => (
-                            <View style={PAGESTYLE.day}>
-                                <Text style={PAGESTYLE.lable}>{data}</Text>
-                            </View>
-                        ))}
-                    </View>
-
-                    <ScrollView style={STYLE.padLeftRight}
-                        horizontal={true}>
-                        {/* <View style={PAGESTYLE.whiteBoard}>
-                        <View><Popupaddnewdata /></View>
-                        <View style={{top: 20,}}><Popupdatasecond /></View>
-                        <View style={{top: 40,}}><Popupdata /></View>
-                    </View> */}
-                        {time.map((data, timneKey) => (
-                            <View style={{ width: 200 }}>
-                                <Text style={{ ...PAGESTYLE.lable, height: 100 }}>{data}</Text>
-
-                                <View>
-                                    {days.map((data, dayKey) => (
-                                        dayKey != 0 ?
-                                            setData(dayKey, timneKey)
-                                            :
-                                            null
-
+                <View style={{ flex: 1 }}>
+                    {isTimeTableLoading ?
+                        <ActivityIndicator
+                            style={{ flex: 1 }}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.yellowDark} />
+                        :
+                        timeTableData.length > 0 ?
+                            <View style={{ ...PAGESTYLE.mainPage }}>
+                                <View style={PAGESTYLE.days}>
+                                    {days.map((data) => (
+                                        <View style={PAGESTYLE.day}>
+                                            <Text style={PAGESTYLE.lable}>{data}</Text>
+                                        </View>
                                     ))}
                                 </View>
+
+                                <ScrollView style={STYLE.padLeftRight}
+                                    horizontal={true}>
+
+                                    {time.map((data, timneKey) => (
+                                        <View style={{ width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable, height: 100 }}>{data}</Text>
+
+                                            <View>
+                                                {days.map((data, dayKey) => (
+                                                    dayKey != 0 ?
+                                                        setData(dayKey, timneKey)
+                                                        :
+                                                        null
+
+                                                ))}
+                                            </View>
+                                        </View>
+                                    ))}
+                                </ScrollView>
                             </View>
-                        ))}
-                    </ScrollView>
+                            :
+                            <View style={{ height: 100, justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            </View>
+                    }
                 </View>
             </View>
         </View>

@@ -12,9 +12,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header14 from '../../../../component/reusable/header/bulck/Header14'
 import Popuphomework from "../../../../component/reusable/popup/Popupsubmithomework";
+import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
     return (
+        <View style={PAGESTYLE.mainPage}>
+        <Sidebarpupil hide={() => action(!isHide)}
+            navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
+            navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
+            onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
         <View style={PAGESTYLE.whiteBg}>     
             <Header14 onAlertPress={()=>props.navigation.openDrawer()}  goBack={()=>props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
             <View style={PAGESTYLE.containerWrap}>
@@ -130,6 +136,7 @@ the Amazon Rainforest</Text>
             {
                 isSubmitPopup?<Popuphomework OnSubmitHomeworkPress={()=>setSubmitPopup(false)} />:null
             } 
+        </View>
         </View>
     );
 }
