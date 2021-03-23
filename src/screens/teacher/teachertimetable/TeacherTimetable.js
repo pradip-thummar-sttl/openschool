@@ -16,45 +16,45 @@ const TeacherTimeTable = (props) => {
 
     const timeTableData__ = [
         {
-            title: 'English - Grammer',
-            day: 'MONDAY',
-            startTime: '09:30',
-            endTime: '10:30',
+            Title: 'English - Grammer',
+            StartTime: '09:30',
+            EndTime: '10:30',
             color: '',
+            Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'Drawing - Grammer',
-            day: 'TUESDAY',
-            startTime: '01:30',
-            endTime: '02:30',
+            Title: 'Drawing - Grammer',
+            StartTime: '01:30',
+            EndTime: '02:30',
             color: '',
+            Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'Math - Grammer',
-            day: 'MONDAY',
-            startTime: '10:30',
-            endTime: '11:00',
+            Title: 'Math - Grammer',
+            StartTime: '10:30',
+            EndTime: '11:00',
             color: '',
+            Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'Science - Grammer',
-            day: 'WEDNESDAY',
-            startTime: '09:00',
-            endTime: '09:30',
+            Title: 'Science - Grammer',
+            StartTime: '09:00',
+            EndTime: '09:30',
             color: '',
+            Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'English - Grammer',
-            day: 'SATURDAY',
-            startTime: '10:00',
-            endTime: '10:30',
+            Title: 'English - Grammer',
+            StartTime: '10:00',
+            EndTime: '10:30',
             color: '',
+            Date: '2021-03-24T00:00:00.000Z'
         },
         {
-            title: 'English - Grammer',
-            day: 'FRIDAY',
-            startTime: '09:00',
-            endTime: '09:30'
+            Title: 'English - Grammer',
+            StartTime: '09:00',
+            EndTime: '09:30',
+            Date: '2021-03-23T00:00:00.000Z'
         },
     ]
 
@@ -139,8 +139,8 @@ const TeacherTimeTable = (props) => {
                             <View style={{ ...PAGESTYLE.mainPage }}>
                                 <View style={PAGESTYLE.days}>
                                     {days.map((data) => (
-                                        <View style={PAGESTYLE.day}>
-                                            <Text style={PAGESTYLE.lable}>{data}</Text>
+                                        <View style={PAGESTYLE.dayLeft}>
+                                            <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}
                                 </View>
@@ -149,10 +149,10 @@ const TeacherTimeTable = (props) => {
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
-                                        <View style={{ width: cellWidth }}>
-                                            <Text style={{ ...PAGESTYLE.lable, height: 100 }}>{data}</Text>
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
 
-                                            <View>
+                                            <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (
                                                     dayKey != 0 ?
                                                         setData(dayKey, timneKey)

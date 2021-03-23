@@ -10,6 +10,9 @@ const store = createStore(combineReducers)
 
 
 import Route from './src/route/Route'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (

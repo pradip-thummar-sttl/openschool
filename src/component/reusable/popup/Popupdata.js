@@ -23,9 +23,13 @@ const Popupdata = (props) => {
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth * props.span, backgroundColor: COLORS.white, borderStartColor: COLORS.black, borderStartWidth: 3, }}>
-                    <Text style={{ ...PAGESTYLE.lable, width: cellWidth * props.span, backgroundColor: COLORS.white, }}>{props.title}</Text>
-                    <Text style={{ ...PAGESTYLE.lable, width: cellWidth * props.span, backgroundColor: COLORS.white, }}>{props.time}</Text>
+                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: COLORS.borderLesoon, borderStartWidth: 3, }}>
+                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: COLORS.borderLesoon, width: cellWidth * props.span }}></View>
+                    <Text style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span }}>{props.title}</Text>
+                    <View style={PAGESTYLE.row}>
+                        <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
+                        <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>
+                    </View>
                 </View>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
