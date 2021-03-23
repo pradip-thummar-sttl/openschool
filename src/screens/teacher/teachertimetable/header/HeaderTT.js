@@ -11,7 +11,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import PopupAddNewData from "../../../../component/reusable/popup/PopupAddNewData";
+import PopupAddNewData from "../../../../component/reusable/popup/Popupaddnewdata";
 import { opacity } from "../../../../utils/Constant";
 const HeaderTT = (props) => {
     return (

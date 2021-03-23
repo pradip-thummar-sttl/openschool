@@ -10,15 +10,16 @@ const store = createStore(combineReducers)
 
 
 import Route from './src/route/Route'
+import { View } from 'react-native';
 
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <MenuProvider>
           <Route />
         </MenuProvider>
-      </SafeAreaView>
+      </View>
     </Provider>
   )
 }

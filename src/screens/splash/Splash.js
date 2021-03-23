@@ -17,7 +17,7 @@ export default class Splash extends Component {
             AsyncStorage.getItem('user').then((user) => {
                 if (user) {
                     User.user = user
-                    this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                    this.props.navigation.replace('TeacherDashboard')
                 } else {
                     this.launchNextScreen()
                 }

@@ -46,40 +46,15 @@ const Item = ({ onPress, style, item }) => (
     //     </View>
     // </TouchableOpacity>
 );
-const Pupillist = ({ item }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile}>
-            <View style={PAGESTYLE.pupilImage}></View>
-            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
-        </View>
-        <View style={PAGESTYLE.groupColumnmain}>
-            <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
-            </View>
-        </View>
-        <View style={PAGESTYLE.perfomanceColumn}>
-            <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
-            <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
-        </View>
-        <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
-        </View>
-        <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
-            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </TouchableOpacity>
-    </View>
-);
-// const Pupillist = ({ style }) => (
+// const Pupillist = ({ item }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
 //         <View style={PAGESTYLE.pupilProfile}>
 //             <View style={PAGESTYLE.pupilImage}></View>
-//             <Text style={PAGESTYLE.pupilName}>Janice Williamson</Text>
+//             <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
 //         </View>
 //         <View style={PAGESTYLE.groupColumnmain}>
 //             <View style={PAGESTYLE.groupColumn}>
-//                 <Text style={PAGESTYLE.pupilgroupName}>1A</Text>
+//                 <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
 //             </View>
 //         </View>
 //         <View style={PAGESTYLE.perfomanceColumn}>
@@ -96,6 +71,31 @@ const Pupillist = ({ item }) => (
 //         </TouchableOpacity>
 //     </View>
 // );
+const Pupillist = ({ style }) => (
+    <View style={[PAGESTYLE.pupilData]}>
+        <View style={PAGESTYLE.pupilProfile}>
+            <View style={PAGESTYLE.pupilImage}></View>
+            <Text style={PAGESTYLE.pupilName}>Janice Williamson</Text>
+        </View>
+        <View style={PAGESTYLE.groupColumnmain}>
+            <View style={PAGESTYLE.groupColumn}>
+                <Text style={PAGESTYLE.pupilgroupName}>1A</Text>
+            </View>
+        </View>
+        <View style={PAGESTYLE.perfomanceColumn}>
+            <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+            <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
+        </View>
+        <View style={PAGESTYLE.rewardColumn}>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+        </View>
+        <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+        </TouchableOpacity>
+    </View>
+);
 const LessonandHomeworkPlannerDashboard = (props) => {
     const userAuthData = useSelector(state => {
         // console.log('state of user',state)
