@@ -26,6 +26,7 @@ class Login extends Component {
             userName: '',
             password: '',
             isLoading: false,
+            isPasswordHide: true
         }
     }
 
@@ -77,6 +78,10 @@ class Login extends Component {
         this.setState({ isLoading: flag });
     }
 
+    setPasswordVisibility = () => {
+        this.setState({ isPasswordHide: !this.state.isPasswordHide });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -107,18 +112,26 @@ class Login extends Component {
                                 <Image
                                     style={styles.userIcon}
                                     source={Images.Password} />
-                                <TextInput
-                                    ref={(input) => { this.t2 = input; }}
-                                    style={STYLE.commonInputPassword}
-                                    placeholder="Password"
-                                    // value={'SIlver@#098'}
-                                    maxLength={30}
-                                    placeholderTextColor={COLORS.lightplaceholder}
-                                    secureTextEntry={true}
-                                    onChangeText={password => this.setState({ password })} />
-                                <Image
-                                    style={styles.viewIcon}
-                                    source={Images.ShowPassword} />
+                                <View style={styles.eyeParent}>
+                                    <TextInput
+                                        ref={(input) => { this.t2 = input; }}
+                                        style={STYLE.commonInputPassword}
+                                        placeholder="Password"
+                                        // value={'SIlver@#098'}
+                                        maxLength={30}
+                                        placeholderTextColor={COLORS.lightplaceholder}
+                                        secureTextEntry={this.state.isPasswordHide}
+                                        onChangeText={password => this.setState({ password })} />
+
+                                    <View style={styles.eye}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => this.setPasswordVisibility()}>
+                                            <Image
+                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.AddIcon} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
                             </View>
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
@@ -224,6 +237,13 @@ const styles = StyleSheet.create({
     viewIcon: {
         position: 'absolute',
         top: hp(0),
+        resizeMode: 'contain',
+        width: hp(2.5),
+        height: hp(8)
+    },
+    viewIconParent: {
+        position: 'absolute',
+        top: hp(0),
         right: hp('3%'),
         resizeMode: 'contain',
         width: hp(2.5),
@@ -262,4 +282,12 @@ const styles = StyleSheet.create({
         paddingLeft: hp('7%'),
         paddingRight: hp('7%'),
     },
+    eye: {
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        right: 20
+    },
+    eyeParent: {
+        justifyContent: 'center'
+    }
 });

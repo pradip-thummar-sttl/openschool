@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../utils/Colors";
@@ -11,6 +11,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -25,29 +27,17 @@ const PopupdataSecond = (props) => {
     const [location, setLocation] = useState('');
     const [note, setnote] = useState('');
     const [theme, setTheme] = useState('');
+    const [isLoading, setLoading] = useState(false)
 
     this.state = {
         userName: '',
         password: '',
     }
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-    };
 
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
-    };
-
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
     };
 
     const isFieldsValidated = () => {
@@ -61,7 +51,34 @@ const PopupdataSecond = (props) => {
             showMessage(MESSAGE.note);
             return false;
         }
-        return true;
+        insertEvent()
+    }
+
+    const insertEvent = () => {
+        setLoading(true)
+        let data = {
+            EventName: event,
+            EventDate: date,
+            EventTime: time,
+            EventLocation: location,
+            EventTypeId: "604b5aac006a0306d00ab87c",
+            CreatedBy: "6041cf525ff1ce52e5d4d398"
+        }
+
+        console.log(data);
+        return;
+
+        Service.post(null, `${EndPoints.CalenderEvent}`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                showMessage(MESSAGE.eventAdded);
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
     }
 
     return (
@@ -105,6 +122,7 @@ const PopupdataSecond = (props) => {
                                                         value={date}
                                                         mode="date"
                                                         minimumDate={new Date()}
+                                                        onChange={(event, selectedDate) => { setDate(selectedDate) }}
                                                         textColor={{ color: COLORS.darkGray }}
                                                     />
                                                 </View>
@@ -118,6 +136,7 @@ const PopupdataSecond = (props) => {
                                                     value={date}
                                                     mode="time"
                                                     minimumDate={new Date()}
+                                                    onChange={(event, selectedTime) => { setTime(selectedTime) }}
                                                     textColor={{ color: COLORS.darkGray }}
                                                 />
                                             </View>
@@ -160,13 +179,20 @@ const PopupdataSecond = (props) => {
                                             <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
-                                            <TouchableOpacity
-                                                onPress={isFieldsValidated}
-                                                style={styles.buttonGrp}
-                                                activeOpacity={opacity}>
-                                                <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
-                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
-                                            </TouchableOpacity>
+                                            {isLoading ?
+                                                <ActivityIndicator
+                                                    style={{ ...styles.buttonGrp, right: 30 }}
+                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                    color={COLORS.buttonGreen} />
+                                                :
+                                                <TouchableOpacity
+                                                    onPress={isFieldsValidated}
+                                                    style={styles.buttonGrp}
+                                                    activeOpacity={opacity}>
+                                                    <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
+                                                    <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                                </TouchableOpacity>
+                                            }
 
                                             {/* <TouchableOpacity style={styles.buttonGrp}>
                                                 <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
