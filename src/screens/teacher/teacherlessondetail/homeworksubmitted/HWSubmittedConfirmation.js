@@ -45,7 +45,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                         <Text style={PAGESTYLE.lessonDesc}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.</Text>
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
-                        <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
+                        {/* <Text style={PAGESTYLE.requireText}>Create Checklist</Text> */}
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                 <CheckBox

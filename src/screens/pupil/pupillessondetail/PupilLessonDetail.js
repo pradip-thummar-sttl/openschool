@@ -45,7 +45,7 @@ const PupilLessonDetail = (props) => {
                         </View> */}
                     </View>
                 </View>
-                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView  showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {
                         isLesson ?
                             <PupilLesson

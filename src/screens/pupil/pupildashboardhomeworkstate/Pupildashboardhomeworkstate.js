@@ -45,7 +45,7 @@ const PupuilDashboardHomeWorkState = (props) => {
             <Sidebar hide={() => action(!isHide)} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <Header STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
@@ -73,6 +73,7 @@ const PupuilDashboardHomeWorkState = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                showsVerticalScrollIndicator={false}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
@@ -166,6 +167,7 @@ const PupuilDashboardHomeWorkState = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                showsVerticalScrollIndicator={false}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}

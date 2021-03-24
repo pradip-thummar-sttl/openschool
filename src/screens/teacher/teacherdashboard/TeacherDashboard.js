@@ -175,7 +175,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView style={STYLE.padLeftRight}>
+                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.dashBoardBoxes}>
                         <TouchableOpacity style={PAGESTYLE.boxDash}>
                             <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
@@ -234,6 +234,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             renderItem={renderItem}
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
+                                            showsVerticalScrollIndicator={false}
                                         />
                                     </SafeAreaView>
                                     <View style={PAGESTYLE.rightTabContent}>
@@ -421,6 +422,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 renderItem={pupilRender}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
+                                                showsVerticalScrollIndicator={false}
                                             />
                                         </SafeAreaView>
                                     </View>

@@ -77,7 +77,7 @@ const TeacherLessonList = (props) => {
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')} />
-                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>
                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
@@ -109,6 +109,7 @@ const TeacherLessonList = (props) => {
                                     renderItem={pupilRender}
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}
+                                    showsVerticalScrollIndicator={false}
                                 />
                             </SafeAreaView>
                         </View>

@@ -44,7 +44,7 @@ const LessonandHomeworkPlanner = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header />
-                <ScrollView style={STYLE.padLeftRight}>
+                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.myDay}>
                         <View style={[STYLE.viewRow]}>
                             <Image style={PAGESTYLE.dayIcon} source={Images.DayIcon} />

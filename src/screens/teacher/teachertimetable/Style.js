@@ -25,6 +25,8 @@ export default StyleSheet.create({
     lable: {
         width: hp(16),
         height: hp(8.59),
+        fontFamily:FONTS.fontRegular,
+        color:COLORS.lightGray,
     },
     dayRightmain: {
         width: hp(16),
@@ -47,7 +49,7 @@ export default StyleSheet.create({
         paddingTop: hp(1),
     },
     lableDay: {
-        fontFamily:FONTS.fontRegular,
+        fontFamily:FONTS.fontSemiBold,
         fontSize:hp(1.82),
         color:COLORS.darkGray,
         textAlign: 'center',
@@ -79,9 +81,10 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     timeLabel:{
-        fontFamily:FONTS.fontRegular,
+        fontFamily:FONTS.fontSemiBold,
         fontSize:hp(1.82),
-        color:COLORS.lightGray,
+        color:COLORS.darkGray,
+        top:hp(5.5),
     },
     spaceTop:{
         marginTop:hp(3.25),

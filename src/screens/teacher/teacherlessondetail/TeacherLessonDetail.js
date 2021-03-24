@@ -70,7 +70,7 @@ const TeacherLessonDetail = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {tabIndex == 0 ?
                         <TLDetail />
                         : tabIndex == 1 ?

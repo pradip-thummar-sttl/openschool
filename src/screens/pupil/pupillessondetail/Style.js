@@ -233,7 +233,7 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(2.2),
         height: hp(2.2),
-        top: hp(0.5),
+        top: hp(0.55),
         fontFamily:FONTS.fontBold,
     },
     toggleGrp: {

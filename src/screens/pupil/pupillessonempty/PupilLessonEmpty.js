@@ -23,8 +23,8 @@ const PupilLessonEmpty = (props) => {
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 {/* <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()}/> */}
-                <Header3 />
-                <ScrollView style={STYLE.padLeftRight}>
+                <Header3/>
+                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}>
                     <View style={styles.whiteBoard}>
                         <View><Popupdata /></View>
                         <View style={{ top: 20, }}><Popupdatasecond /></View>
