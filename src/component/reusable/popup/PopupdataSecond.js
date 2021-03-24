@@ -12,6 +12,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { FlatList } from "react-native-gesture-handler";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -26,11 +27,11 @@ const PopupdataSecond = (props) => {
     const [location, setLocation] = useState('');
     const [note, setnote] = useState('');
     const [theme, setTheme] = useState('');
-
-    this.state = {
-        userName: '',
-        password: '',
-    }
+const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
+    // this.state = {
+    //     userName: '',
+    //     password: '',
+    // }
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -179,6 +180,20 @@ const PopupdataSecond = (props) => {
                                 </View>
                             </View>
                         </View>
+
+                        <View style={styles.colorDropView}>
+                            <FlatList
+                                data={colorArr}
+                                renderItem={({ item, index }) => {
+                                    return (
+                                        <TouchableOpacity style={styles.colorButton}>
+                                            <Image style={{width:30, height:30, borderRadius:5, backgroundColor:item}}/>
+                                            <Text>{item}</Text>
+                                        </TouchableOpacity>
+                                    )
+                                }}
+                            />
+                        </View>
                     </View>
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
@@ -309,7 +324,7 @@ const styles = StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width:'100%',
+        width: '100%',
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
@@ -330,12 +345,12 @@ const styles = StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         bottom: hp(0.4),
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width:'100%',
+        width: '100%',
     },
     dateTimetextdummy: {
         fontSize: hp(1.82),
@@ -343,11 +358,14 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         bottom: hp(0.3),
     },
-    dropDownArrowdatetime:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.6),
-        top:hp(0.2),
+    dropDownArrowdatetime: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
+        top: hp(0.2),
     },
+
+    colorDropView:{ position: "absolute",alignSelf:'center', height: 300, width: 150, borderRadius: 10, backgroundColor:COLORS.dashboardBorder, right:15, bottom:80, padding:15 },
+    colorButton:{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical:10 },
 });
