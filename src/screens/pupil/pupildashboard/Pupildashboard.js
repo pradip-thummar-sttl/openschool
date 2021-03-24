@@ -51,7 +51,7 @@ const PupuilDashboard = (props) => {
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <Header onAlertPress={() => {props.navigation.openDrawer()}} STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
@@ -79,6 +79,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                showsVerticalScrollIndicator={false}
                                                 style={PAGESTYLE.ScrollViewFlatlist}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
@@ -173,6 +174,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                showsVerticalScrollIndicator={false}
                                                 style={PAGESTYLE.ScrollViewFlatlist}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}

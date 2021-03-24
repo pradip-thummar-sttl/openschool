@@ -117,7 +117,7 @@ const PupilTimetable = (props) => {
                         ))}
                     </View>
 
-                    <ScrollView style={STYLE.padLeftRight}
+                    <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
                         horizontal={true}>
                         {/* <View style={PAGESTYLE.whiteBoard}>
                         <View><Popupaddnewdata /></View>

@@ -42,7 +42,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 <HeaderSave
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => { props.navigation.openDrawer() }} />
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.containerWrapTop}>
                             <View style={PAGESTYLE.userLeft}>

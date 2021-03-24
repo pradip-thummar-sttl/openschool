@@ -151,7 +151,7 @@ const TeacherTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView style={STYLE.padLeftRight}
+                                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
