@@ -98,28 +98,26 @@ const PopupdataSecond = (props) => {
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What event is it?</Text>
-                                            <View style={styles.copyInputParent}>
-                                                <View style={styles.copyInputParent}>
-                                                    <DateTimePicker
-                                                        style={styles.commonInputTextarea}
-                                                        value={date}
-                                                        mode="date"
-                                                        minimumDate={new Date()}
-                                                        textColor={{ color: COLORS.darkGray }}
-                                                    />
+                                            <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                <View style={styles.subjectDateTime}>
+                                                    <TouchableOpacity>
+                                                        <Text style={styles.dateTimetextdummy}>14/09/2020</Text>
+                                                    </TouchableOpacity>
+                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
                                             </View>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
-                                            <View style={styles.copyInputParent}>
-                                                <DateTimePicker
-                                                    style={styles.commonInputTextarea}
-                                                    value={date}
-                                                    mode="time"
-                                                    minimumDate={new Date()}
-                                                    textColor={{ color: COLORS.darkGray }}
-                                                />
+                                            <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <Image style={styles.calIcon} source={Images.Clock} />
+                                                <View style={styles.subjectDateTime}>
+                                                    <TouchableOpacity>
+                                                        <Text style={styles.dateTimetextdummy}>09:00-09:30</Text>
+                                                    </TouchableOpacity>
+                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                </View>
                                             </View>
                                         </View>
                                     </View>
@@ -142,17 +140,6 @@ const PopupdataSecond = (props) => {
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={notes => setnote(notes)} />
-                                            {/* <RNPickerSelect/> */}
-                                            {/* <RNPickerSelect
-                                            /> */}
-                                            <RNPickerSelect
-                                                onValueChange={(value) => console.log(value)}
-                                                items={[
-                                                    { label: 'Red', value: 'Red' },
-                                                    { label: 'Yellow', value: 'Yellow' },
-                                                    { label: 'Green', value: 'Green' },
-                                                ]}
-                                            />
                                         </View>
                                     </View>
                                     <View style={styles.uploadCalendar}>
@@ -298,5 +285,48 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    subjectDateTime: {
+        alignItems: 'flex-start',
+        width:'100%',
+    },
+    dropDownSmallWrap: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        borderColor: COLORS.commonBorderColor,
+        borderRadius: hp('1.0%'),
+        lineHeight: hp(2.3),
+        height: hp('6%'),
+        marginTop: hp(1.3),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
+        paddingTop: hp('2.0%'),
+        paddingBottom: hp('2.0%'),
+    },
+    calIcon: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+        marginRight:hp(1.04),
+        bottom: hp(0.4),
+    },
+    subjectDateTime: {
+        alignItems: 'flex-start',
+        width:'100%',
+    },
+    dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        bottom: hp(0.3),
+    },
+    dropDownArrowdatetime:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.6),
+        top:hp(0.2),
     },
 });

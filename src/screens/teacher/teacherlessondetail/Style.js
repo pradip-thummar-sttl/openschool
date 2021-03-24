@@ -975,7 +975,7 @@ export default StyleSheet.create({
     videoThumb:{
         position:'relative',
         flexDirection:'row',
-        marginRight:hp(4.10),
+        marginRight:hp(1.56),
     },
     videoThumbnail:{        
         width:hp(26.17),
@@ -1006,7 +1006,7 @@ export default StyleSheet.create({
         paddingBottom:hp(1.5),
         width:hp(26.17),
         flexWrap:'wrap',
-        marginBottom:hp(1.20),
+        marginBottom: hp(2),
     },
     spaceTop:{
         marginTop:hp(3.5),
