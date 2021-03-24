@@ -86,5 +86,6 @@ const Images = {
     backArrow: require('../assets/images/back-arrow2.png'),
     DropArrow: require('../assets/images/down-arrow2.png'),
     timeTableClock: require('../assets/images/timetable-clock2.png'),
+    trashIcon: require('../assets/images/trash2.png'),
 }
 export default Images;
