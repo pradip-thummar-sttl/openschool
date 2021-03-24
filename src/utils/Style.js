@@ -19,7 +19,7 @@ export default StyleSheet.create({
     padLeftRight: {
         flex: 1,
         paddingLeft: hp(2.5),
-        paddingRight: hp(2.5),
+        paddingRight: hp(4.0),
     },
     commonInput: {
         color:COLORS.themeBlue,
@@ -51,7 +51,7 @@ export default StyleSheet.create({
     checkBoxcommon: {
         width: hp(1.6),
         height: hp(1.6),
-        top: 7,
+        top: 0,
     },
     fullWidthPrimaryButton: {
         backgroundColor: COLORS.blueButton,

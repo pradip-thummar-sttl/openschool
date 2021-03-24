@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
         marginRight: hp(5.5),
     },
     userIcon: {
-        width: hp(25.0),
+        width: hp(25),
+        height: hp(35),
         resizeMode: "contain",
         alignSelf: 'center',
         marginBottom: hp(2),

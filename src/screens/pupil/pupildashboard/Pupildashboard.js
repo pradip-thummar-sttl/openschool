@@ -79,6 +79,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                style={PAGESTYLE.ScrollViewFlatlist}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
@@ -172,6 +173,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                style={PAGESTYLE.ScrollViewFlatlist}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
