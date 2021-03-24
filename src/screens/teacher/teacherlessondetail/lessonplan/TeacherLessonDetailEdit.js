@@ -47,19 +47,11 @@ const TLDetailEdit = (props) => {
                     <View style={PAGESTYLE.timedateGrp}>
                         <View style={PAGESTYLE.dropDownFormInput}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                <RNPickerSelect style={PAGESTYLE.dropDown}
-                                    onValueChange={(value) => console.log(value)}
-
-                                    items={[
-                                        { label: 'English', value: 'English' },
-                                        { label: 'Geography', value: 'Geography' },
-                                        { label: 'History', value: 'History' },
-                                        { label: 'Science', value: 'Science' },
-                                        { label: 'Math', value: 'Math' },
-                                    ]}
-                                />
-                                <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                            <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDown]}>
+                                <TouchableOpacity>
+                                    <Text style={PAGESTYLE.dateTimetextdummy}>English</Text>
+                                </TouchableOpacity>
+                                <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />
                             </View>
                         </View>
                         <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
@@ -81,12 +73,10 @@ const TLDetailEdit = (props) => {
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                 <View style={PAGESTYLE.subjectDateTime}>
-                                    <DateTimePicker
-                                        style={PAGESTYLE.dateTime}
-                                        value={date}
-                                        mode="date"
-                                        textColor={{ color: COLORS.darkGray }}
-                                    />
+                                    <TouchableOpacity>
+                                        <Text style={PAGESTYLE.dateTimetextdummy}>14/09/2020</Text>
+                                    </TouchableOpacity>
+                                    <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                 </View>
                             </View>
                         </View>
@@ -95,12 +85,10 @@ const TLDetailEdit = (props) => {
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                                 <View style={[PAGESTYLE.subjectDateTime]}>
-                                    <DateTimePicker
-                                        style={PAGESTYLE.dateTime}
-                                        value={date}
-                                        mode="time"
-                                        textColor={{ color: COLORS.darkGray }}                                        
-                                    />
+                                    <TouchableOpacity>
+                                        <Text style={PAGESTYLE.dateTimetextdummy}>09:00-09:30</Text>
+                                    </TouchableOpacity>
+                                    <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                 </View>
                             </View>
                         </View>
@@ -109,18 +97,11 @@ const TLDetailEdit = (props) => {
                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                 <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                                 <View style={[PAGESTYLE.subjectDateTime]}>
-                                    <RNPickerSelect style={PAGESTYLE.dropDownSmall}
-                                        onValueChange={(value) => console.log(value)}
-                                        items={[
-                                            { label: 'Group 1A', value: 'Group 1A' },
-                                            { label: 'Group 1B', value: 'Group 1B' },
-                                            { label: 'Group 1C', value: 'Group 1C' },
-                                            { label: 'Group 1D', value: 'Group 1D' },
-                                            { label: 'Group 1E', value: 'Group 1E' },
-                                        ]}
-                                    />
+                                    <TouchableOpacity>
+                                        <Text style={PAGESTYLE.dateTimetextdummy}>Group A1</Text>
+                                    </TouchableOpacity>
+                                    <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                 </View>
-                                <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                             </View>
                         </View>
                     </View>
