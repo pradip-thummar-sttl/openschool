@@ -122,7 +122,6 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
                                             </TouchableOpacity>
-
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
@@ -150,12 +149,24 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
                                     </View>
                                     <View style={styles.field}>
                                         <Text label style={STYLE.labelCommon}>Notes</Text>
-                                        <View style={styles.copyInputParent}>
-                                            <TextInput
-                                                multiline={false}
-                                                placeholderStyle={styles.somePlaceholderStyle}
-                                                style={styles.commonInputTextarea}
-                                                onChangeText={notes => setnote(notes)} />
+                                        <View style={styles.notes}>
+                                            <View style={[styles.copyInputParent, styles.noteInput]}>
+                                                <TextInput
+                                                    multiline={false}
+                                                    placeholderStyle={styles.somePlaceholderStyle}
+                                                    style={styles.commonInputTextarea}
+                                                    onChangeText={notes => setnote(notes)} />
+                                            </View>
+                                            <View style={[styles.copyInputParent, styles.colorPicker]}>
+                                                <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                    <View style={styles.subjectDateTime}>
+                                                        <TouchableOpacity>
+                                                            <View style={styles.colorSelect}></View>
+                                                        </TouchableOpacity>
+                                                        <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
                                     </View>
                                     <View style={styles.uploadCalendar}>
@@ -170,7 +181,6 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
                                                 <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
                                             </TouchableOpacity>
-
                                             {/* <TouchableOpacity style={styles.buttonGrp}>
                                                 <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
@@ -324,7 +334,8 @@ const styles = StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width: '100%',
+        width:'100%',
+        position:'relative',
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
@@ -332,10 +343,10 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderColor: COLORS.borderGrp,
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
-        height: hp('6%'),
+        height: hp(5.20),
         marginTop: hp(1.3),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
@@ -347,7 +358,7 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight:hp(1.04),
         position: 'absolute',
-        top: hp(1.4),
+        top: hp(1.1),
         left: hp(1.4),
     },
     subjectDateTime: {
@@ -358,16 +369,36 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        top: hp(-0.39),
+        top: hp(-0.75),
         left: hp(2.5),
         position: 'absolute'
     },
-    dropDownArrowdatetime: {
-        width: hp(1.51),
-        resizeMode: 'contain',
+    dropDownArrowdatetime:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(0),
+        top:hp(-0.2),
+    },
+    notes: {
+        flexDirection: 'row',
+    },
+    noteInput: {
+        width: '80%',
+    },
+    colorPicker:{
+        width: '18%',
+        marginLeft: '2%',
+        alignSelf: 'flex-end',
+    },
+    colorSelect: {
+        width: hp(2.86),
+        height: hp(3.51),
+        backgroundColor: COLORS.yellowBorder,
+        borderRadius: hp(0.8),
+        left: hp(-0.78),
         position: 'absolute',
-        right: hp(1.6),
-        top: hp(0.2),
+        top: hp(-1.3),
     },
 
     colorDropView:{ position: "absolute",alignSelf:'center', height: 300, width: 150, borderRadius: 10, backgroundColor:COLORS.dashboardBorder, right:15, bottom:80, padding:15 },

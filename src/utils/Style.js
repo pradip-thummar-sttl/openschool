@@ -235,6 +235,7 @@ export default StyleSheet.create({
         color: COLORS.lightGray,
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.3),
+        width: '100%',
     },
     recordLinkText: {
         fontSize: hp(1.85),
