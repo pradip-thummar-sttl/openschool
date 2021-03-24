@@ -125,6 +125,7 @@ const TeacherTimeTable = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
+                moduleIndex={1}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
@@ -134,7 +135,7 @@ const TeacherTimeTable = (props) => {
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
 
-                <View style={{...PAGESTYLE.backgroundTable, flex: 1 }}>
+                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
@@ -155,8 +156,8 @@ const TeacherTimeTable = (props) => {
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
-                                        <View style={{...PAGESTYLE.spaceTop, width: cellWidth}}>
-                                            <Text style={{ ...PAGESTYLE.lable}}>{data}</Text>
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
 
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (

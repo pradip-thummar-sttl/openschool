@@ -7,14 +7,15 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import DateTimePicker from '@react-native-community/datetimepicker';
+// import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
-
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -64,6 +65,19 @@ const PopupdataSecond = (props) => {
         return true;
     }
 
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        hideDatePicker();
+    };
+
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity> */}
@@ -98,28 +112,31 @@ const PopupdataSecond = (props) => {
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What event is it?</Text>
-                                            <View style={styles.copyInputParent}>
-                                                <View style={styles.copyInputParent}>
-                                                    <DateTimePicker
+                                            <TouchableOpacity onPress={showDatePicker} style={styles.copyInputParent}>
+                                                <View style={[styles.copyInputParent,{width:50, height:50}]}>
+                                                    {/* <DateTimePicker
                                                         style={styles.commonInputTextarea}
                                                         value={date}
                                                         mode="date"
                                                         minimumDate={new Date()}
                                                         textColor={{ color: COLORS.darkGray }}
-                                                    />
+                                                    /> */}
+
+
                                                 </View>
-                                            </View>
+                                            </TouchableOpacity>
+
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <View style={styles.copyInputParent}>
-                                                <DateTimePicker
+                                                {/* <DateTimePicker
                                                     style={styles.commonInputTextarea}
                                                     value={date}
                                                     mode="time"
                                                     minimumDate={new Date()}
                                                     textColor={{ color: COLORS.darkGray }}
-                                                />
+                                                /> */}
                                             </View>
                                         </View>
                                     </View>
@@ -178,6 +195,12 @@ const PopupdataSecond = (props) => {
                             </View>
                         </View>
                     </View>
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                    />
                 </KeyboardAwareScrollView>
             </Modal>
         </View>

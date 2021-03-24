@@ -17,12 +17,13 @@ const PupilLessonEmpty = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
+                moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 {/* <HeaderWhite onAlertPress={()=>props.navigation.openDrawer()}/> */}
-                <Header3/>
+                <Header3 />
                 <ScrollView style={STYLE.padLeftRight}>
                     <View style={styles.whiteBoard}>
                         <View><Popupdata /></View>

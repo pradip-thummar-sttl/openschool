@@ -16,6 +16,7 @@ import moment from 'moment';
 
 const Item = ({ onPress, style, item }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
+
         <View style={PAGESTYLE.classSubject}>
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
@@ -29,6 +30,8 @@ const Item = ({ onPress, style, item }) => (
                 <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
             </View>
         </View>
+        <View style={PAGESTYLE.arrowSelectedTab}></View>
+
     </TouchableOpacity>
     // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
     //     <View style={PAGESTYLE.classSubject}>
@@ -138,7 +141,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         }
     }, [])
     const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(null);
+    const [selectedId, setSelectedId] = useState(0);
     const [dataOfSubView, setDataOfSubView] = useState([])
     const pupilRender = ({ item }) => {
         return (
@@ -148,10 +151,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         );
     };
     const setData = (index) => {
+        setSelectedId(index)
         setDataOfSubView(dashData[index])
     }
     const renderItem = ({ item, index }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
+        const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
         return (
             <Item
@@ -164,6 +168,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
+                moduleIndex={0}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
@@ -232,7 +237,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         />
                                     </SafeAreaView>
                                     <View style={PAGESTYLE.rightTabContent}>
-                                        <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                        {/* {
+                                            console.log('hello222222222', dashData.indexOf(dataOfSubView), selectedId),
+                                            dashData.indexOf(dataOfSubView) == selectedId ?
+                                                <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                                : null
+                                        } */}
                                         <View style={PAGESTYLE.tabcontent}>
                                             <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                             <View style={PAGESTYLE.timedateGrp}>
@@ -353,8 +363,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     </View>
                                 </View>
                                 :
-                                <View style={{height: 100, justifyContent:'center'}}>
-                                    <Text style={{ alignItems:'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                <View style={{ height: 100, justifyContent: 'center' }}>
+                                    <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                 </View>
                         }
                     </View>
