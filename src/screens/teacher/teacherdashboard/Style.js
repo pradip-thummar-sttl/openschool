@@ -72,8 +72,9 @@ export default StyleSheet.create({
         borderBottomWidth: hp(1.95),
         borderLeftWidth: hp(1.95),
         position: 'absolute',
-        top: hp(3.90),
-        left: hp(-3.90),
+        right: 0,
+        // top: hp(3.90),
+        // left: hp(-3.90),
         borderTopColor: 'transparent',
         borderRightColor: COLORS.white,
         borderBottomColor: 'transparent',
@@ -294,7 +295,7 @@ export default StyleSheet.create({
     },
     attachment: {
         flexDirection: 'row',
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
     attachmentText: {
         fontSize: hp(1.82),

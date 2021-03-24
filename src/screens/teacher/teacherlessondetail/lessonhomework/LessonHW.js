@@ -41,19 +41,17 @@ const TLHomeWork = (props) => {
                             </View>
                         </View>
                         <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time]}>
-                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrapNormal]}>
+                            <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDownSmallWrapNormal]}>
                                 <View style={PAGESTYLE.dueDateWrap}>
                                     <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                 </View>
-                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                <View style={PAGESTYLE.subjectDateTime}>
-                                    <DateTimePicker
-                                        style={PAGESTYLE.dateTime}
-                                        value={date}
-                                        mode="date"
-                                        textColor={{ color: COLORS.darkGray }}
-                                    />
+                                <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} />
+                                <View style={PAGESTYLE.subjectDateTimeHomework}>
+                                    <TouchableOpacity>
+                                        <Text style={PAGESTYLE.dateTimetextdummy}>14/09/2020</Text>
+                                    </TouchableOpacity>
                                 </View>
+                                <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />
                             </View>
                         </View>
                     </View>

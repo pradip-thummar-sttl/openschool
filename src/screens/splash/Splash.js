@@ -22,7 +22,7 @@ export default class Splash extends Component {
                     this.launchNextScreen()
                 }
             })
-        }, 3000);
+        }, 5000);
     }
 
     runAnimation() {

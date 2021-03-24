@@ -7,16 +7,17 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import DateTimePicker from '@react-native-community/datetimepicker';
+// import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
-
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -81,6 +82,19 @@ const PopupdataSecond = (props) => {
         })
     }
 
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        hideDatePicker();
+    };
+
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity> */}
@@ -115,30 +129,26 @@ const PopupdataSecond = (props) => {
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What event is it?</Text>
-                                            <View style={styles.copyInputParent}>
-                                                <View style={styles.copyInputParent}>
-                                                    <DateTimePicker
-                                                        style={styles.commonInputTextarea}
-                                                        value={date}
-                                                        mode="date"
-                                                        minimumDate={new Date()}
-                                                        onChange={(event, selectedDate) => { setDate(selectedDate) }}
-                                                        textColor={{ color: COLORS.darkGray }}
-                                                    />
+                                            <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                <View style={styles.subjectDateTime}>
+                                                    <TouchableOpacity>
+                                                        <Text style={styles.dateTimetextdummy}>14/09/2020</Text>
+                                                    </TouchableOpacity>
+                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
-                                            </View>
+                                            </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
-                                            <View style={styles.copyInputParent}>
-                                                <DateTimePicker
-                                                    style={styles.commonInputTextarea}
-                                                    value={date}
-                                                    mode="time"
-                                                    minimumDate={new Date()}
-                                                    onChange={(event, selectedTime) => { setTime(selectedTime) }}
-                                                    textColor={{ color: COLORS.darkGray }}
-                                                />
+                                            <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <Image style={styles.calIcon} source={Images.Clock} />
+                                                <View style={styles.subjectDateTime}>
+                                                    <TouchableOpacity>
+                                                        <Text style={styles.dateTimetextdummy}>09:00-09:30</Text>
+                                                    </TouchableOpacity>
+                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                </View>
                                             </View>
                                         </View>
                                     </View>
@@ -155,23 +165,24 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.field}>
                                         <Text label style={STYLE.labelCommon}>Notes</Text>
-                                        <View style={styles.copyInputParent}>
-                                            <TextInput
-                                                multiline={false}
-                                                placeholderStyle={styles.somePlaceholderStyle}
-                                                style={styles.commonInputTextarea}
-                                                onChangeText={notes => setnote(notes)} />
-                                            {/* <RNPickerSelect/> */}
-                                            {/* <RNPickerSelect
-                                            /> */}
-                                            <RNPickerSelect
-                                                onValueChange={(value) => console.log(value)}
-                                                items={[
-                                                    { label: 'Red', value: 'Red' },
-                                                    { label: 'Yellow', value: 'Yellow' },
-                                                    { label: 'Green', value: 'Green' },
-                                                ]}
-                                            />
+                                        <View style={styles.notes}>
+                                            <View style={[styles.copyInputParent, styles.noteInput]}>
+                                                <TextInput
+                                                    multiline={false}
+                                                    placeholderStyle={styles.somePlaceholderStyle}
+                                                    style={styles.commonInputTextarea}
+                                                    onChangeText={notes => setnote(notes)} />
+                                            </View>
+                                            <View style={[styles.copyInputParent, styles.colorPicker]}>
+                                                <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                    <View style={styles.subjectDateTime}>
+                                                        <TouchableOpacity>
+                                                            <View style={styles.colorSelect}></View>
+                                                        </TouchableOpacity>
+                                                        <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
                                     </View>
                                     <View style={styles.uploadCalendar}>
@@ -204,6 +215,12 @@ const PopupdataSecond = (props) => {
                             </View>
                         </View>
                     </View>
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                    />
                 </KeyboardAwareScrollView>
             </Modal>
         </View>
@@ -324,5 +341,73 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    subjectDateTime: {
+        alignItems: 'flex-start',
+        width:'100%',
+        position:'relative',
+    },
+    dropDownSmallWrap: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp('1.0%'),
+        lineHeight: hp(2.3),
+        height: hp(5.20),
+        marginTop: hp(1.3),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
+        paddingTop: hp('2.0%'),
+        paddingBottom: hp('2.0%'),
+    },
+    calIcon: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+        marginRight:hp(1.04),
+        position: 'absolute',
+        top: hp(1.1),
+        left: hp(1.4),
+    },
+    subjectDateTime: {
+        alignItems: 'flex-start',
+        width:'100%',
+    },
+    dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        top: hp(-0.75),
+        left: hp(2.5),
+        position: 'absolute'
+    },
+    dropDownArrowdatetime:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(0),
+        top:hp(-0.2),
+    },
+    notes: {
+        flexDirection: 'row',
+    },
+    noteInput: {
+        width: '80%',
+    },
+    colorPicker:{
+        width: '18%',
+        marginLeft: '2%',
+        alignSelf: 'flex-end',
+    },
+    colorSelect: {
+        width: hp(2.86),
+        height: hp(3.51),
+        backgroundColor: COLORS.yellowBorder,
+        borderRadius: hp(0.8),
+        left: hp(-0.78),
+        position: 'absolute',
+        top: hp(-1.3),
     },
 });

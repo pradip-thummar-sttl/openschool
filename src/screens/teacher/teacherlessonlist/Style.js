@@ -84,12 +84,13 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor:COLORS.white,
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0, height: 1,},
+        shadowOffset: {width: 0, height: 2,},
         elevation: 3,
+        shadowOpacity: 0.10,
         borderRadius: hp(1.95),
         height:hp(8.85),
-        marginBottom: hp(1.5),
-        borderRadius:hp(2.0),
+        marginBottom: hp(1),
+        borderRadius:hp(1),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -144,7 +145,7 @@ export default StyleSheet.create({
         alignSelf:'center',
     },
     pupilDetailLink: {
-        width: hp(10),
+        width: hp(12),
         alignItems: 'flex-end',
     },
     pupilDetaillinkIcon: {
@@ -181,10 +182,10 @@ export default StyleSheet.create({
     },
     firstColumn:{
       paddingLeft: hp(4.5),
-      width:hp(15.55),
+      width:hp(18),
     },
     secoundColumn:{
-        width:hp(17.55),
+        width:hp(20),
     },
     lastColumn:{
         width:hp(30.55),
@@ -205,8 +206,5 @@ export default StyleSheet.create({
         paddingRight:hp(2.0),
         paddingBottom: hp(2.0),
         paddingTop: hp(2.0),
-    },
-    teacherLessonGrid:{
-       
     },
 });

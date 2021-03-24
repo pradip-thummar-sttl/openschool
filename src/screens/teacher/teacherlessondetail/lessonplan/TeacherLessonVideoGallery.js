@@ -27,7 +27,7 @@ const TLVideoGallery = (props) => {
                 <HeaderGallery
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={[PAGESTYLE.whiteBg, PAGESTYLE.leftSpace]}>
                         <Text style={PAGESTYLE.videoTitle}>Videos</Text>
                         <View style={STYLE.hrCommon}></View>

@@ -87,6 +87,7 @@ const TLHomeWorkSubmitted = (props) => {
                         renderItem={pupilRender}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
+                        showsVerticalScrollIndicator={false}
                     />
                 </SafeAreaView>
             </View>

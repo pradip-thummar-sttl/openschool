@@ -19,6 +19,7 @@ const TeacherLessonDetail = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
+                moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
@@ -69,7 +70,7 @@ const TeacherLessonDetail = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {tabIndex == 0 ?
                         <TLDetail />
                         : tabIndex == 1 ?

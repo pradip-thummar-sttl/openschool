@@ -41,7 +41,7 @@ const Sidebar = (props) => {
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={()=>this.toggleAnimation()} style={styles.userInfo}>
+                <TouchableOpacity onPress={()=>toggleAnimation()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.ProfileBack} />
                     {
                         isSmall? null:
@@ -52,64 +52,65 @@ const Sidebar = (props) => {
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
-                    <TouchableOpacity onPress={()=>props.navigateToDashboard()} style={[styles.menuItem, styles.menuItemSelected]}>
+                    
+                    <TouchableOpacity onPress={()=>props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         />
                         {
                             isSmall? null:
-                            <Text style={[styles.menuText, styles.selectedMenuText]}>Dashboard</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.navigateToTimetable()} style={styles.menuItem}>
+                    <TouchableOpacity onPress={()=>props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>Teachers</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onLessonAndHomework()} style={styles.menuItem}>
+                    <TouchableOpacity onPress={()=>props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>My Lessons</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>My Achievements</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyAvatar}
                         />
                          {
                             isSmall? null:
-                            <Text style={styles.menuText}>My Avatar</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.OpenSchool}
                         />
                         {
                             isSmall? null:
-                            <Text style={styles.menuText}>Open School</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         }
                     </TouchableOpacity>
                 </View>

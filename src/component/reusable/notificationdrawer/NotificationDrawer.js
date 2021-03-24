@@ -8,7 +8,8 @@ import PopupUser from '../../../component/reusable/popup/Popupuser';
 import { ScrollView } from "react-native-gesture-handler";
 import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/PixelRatio";
 import { Calendar } from 'react-native-calendars';
-import { Var } from '../../../utils/Constant';
+import { opacity, Var } from '../../../utils/Constant';
+import Images from "../../../utils/Images";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
@@ -87,9 +88,14 @@ const NotificationDrawer = (props) => {
                 <View>
                     <View style={styles.drawerTitleMain}>
                         <Text style={styles.drawerTitle} >My Notifications</Text>
-                        <TouchableOpacity style={styles.closeNotificationbarMain}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIcon} /></TouchableOpacity>
+                        <TouchableOpacity style={styles.closeNotificationbarMain}
+                            activeOpacity={opacity}
+                            onPress={() => props.navigation.closeDrawer()}
+                        >
+                            <Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIcon} />
+                        </TouchableOpacity>
                     </View>
-                    <ScrollView>
+                    <ScrollView style={styles.notificationmain} showsVerticalScrollIndicator={false}>
                         <View>
                             <Text style={styles.notificationsText}>Live Classes</Text>
                             <View style={styles.classDetail}>
@@ -151,6 +157,12 @@ const NotificationDrawer = (props) => {
                             </View>
                         </View>
                     </ScrollView>
+                    <View style={styles.bottomButton}>
+                        <TouchableOpacity style={styles.buttonTrash}>
+                            <Image source={Images.trashIcon} style={styles.trashIcon} />
+                            <Text style={styles.clearText}>Clear all notifications</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             }
         </View >
@@ -253,5 +265,41 @@ const styles = StyleSheet.create({
     dateSubView3: { marginVertical: 10, borderRadius: 17.5, height: 35, width: 35, backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
 
     colorBox: { height: 20, width: 20, borderRadius: 5, marginRight: 10 },
-    colorView:{ flexDirection: 'row', marginVertical:10 },
+    colorView: { flexDirection: 'row', marginVertical: 10 },
+    bottomButton: {
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+    },
+    notificationmain: {
+        height: '90%',
+    },
+    buttonTrash: {
+        flexDirection: 'row',
+        textAlign: 'center',
+        alignItems: 'center',
+        width: '100%',
+        justifyContent: 'center',
+        paddingTop: hp(1.82),
+        paddingBottom: hp(1.82),
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -1 },
+        shadowOpacity: 0.2,
+        shadowRadius: hp(3.125),
+        elevation: 10,
+        backgroundColor: COLORS.white,
+    },
+    trashIcon: {
+        width: hp(2),
+        resizeMode: 'contain',
+        height: hp(2.25),
+        marginRight: hp(0.65),
+    },
+    clearText: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
 });

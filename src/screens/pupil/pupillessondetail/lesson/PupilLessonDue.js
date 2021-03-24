@@ -12,7 +12,7 @@ const PupilLessonDue = (props) => {
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Homework due</Text>
-            <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilHomeworkesubmited()}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
@@ -28,7 +28,7 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
+                <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilHomeworkemarked()}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
                         <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
@@ -73,7 +73,7 @@ const PupilLessonDue = (props) => {
                 
             </ScrollView>
             <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Submitted homework</Text>
-            <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
@@ -133,7 +133,7 @@ const PupilLessonDue = (props) => {
                 
             </ScrollView>
             <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Homework marked</Text>
-            <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />

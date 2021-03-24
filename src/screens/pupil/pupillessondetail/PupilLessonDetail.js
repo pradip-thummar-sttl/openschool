@@ -24,11 +24,12 @@ const PupilLessonDetail = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
+                moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header4 onAlertPress={()=>props.navigation.openDrawer()} />
+                <Header4 onAlertPress={() => props.navigation.openDrawer()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
@@ -44,14 +45,15 @@ const PupilLessonDetail = (props) => {
                         </View> */}
                     </View>
                 </View>
-                <ScrollView style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView  showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {
                         isLesson ?
                             <PupilLesson
                                 navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
                             :
                             <PupilLessonDue
-                                navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
+                                navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkSubmitted') }}
+                                navigatePupilHomeworkemarked={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
                     }
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}

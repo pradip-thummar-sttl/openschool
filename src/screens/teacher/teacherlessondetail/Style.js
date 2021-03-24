@@ -26,6 +26,10 @@ export default StyleSheet.create({
     toggleBoxGrpWrap:{
         // marginTop: hp(3),        
     },
+    commonWidth: {
+        alignSelf: 'flex-end',
+        width: '80%'
+    },
     whiteBg: {
         backgroundColor: COLORS.white,
         // paddingLeft: hp(3.5),
@@ -66,8 +70,12 @@ export default StyleSheet.create({
         marginRight: hp(8.7),
     },
     subjectDateTime: {
-        alignItems: 'center',
+        alignItems: 'flex-start',
         width:'100%',
+    },
+    subjectDateTimeHomework: {
+        alignSelf: 'center',
+        width: '100%'
     },
     datetimeText: {
         fontSize: hp(1.82),
@@ -87,6 +95,13 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
+        bottom: hp(0.4),
+    },
+    calIconHomeWork: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+        marginRight:hp(1.04),
+        top: hp(1.5),
     },
     calIconNoInput: {
         resizeMode: 'contain',
@@ -96,6 +111,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
+        bottom: hp(0.4),
     },
     timeIconNoInput: {
         resizeMode: 'contain',
@@ -104,7 +120,7 @@ export default StyleSheet.create({
     subjectText: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        color: COLORS.menuLightFonts,
+        color: COLORS.lightGray,
         fontSize: hp(1.8),
         marginBottom: hp(0.8),
     },
@@ -245,10 +261,10 @@ export default StyleSheet.create({
     },
     checkBoxLabelNone: {
         flexDirection: 'row',
-        paddingLeft: hp(1),
-        paddingRight: hp(1),
-        paddingTop: hp(1.43),
-        paddingBottom: hp(1.43),
+        paddingLeft: hp(0.8),
+        paddingRight: hp(0.8),
+        paddingTop: hp(1.2),
+        paddingBottom: hp(1.2),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
@@ -274,9 +290,9 @@ export default StyleSheet.create({
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
-        fontSize: hp(1.85),
+        fontSize: hp(1.8),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.3),
+        paddingLeft: hp(1),
     },
     checkBoxcommon: {
         position: 'absolute',
@@ -284,8 +300,8 @@ export default StyleSheet.create({
         backgroundColor: COLORS.borderGrp
     },
     userIconPupil: {
-        width: hp(3),
-        height: hp(3),
+        width: hp(2.5),
+        height: hp(2.5),
         resizeMode: 'contain',
     },
     toggleGrp: {
@@ -466,7 +482,6 @@ export default StyleSheet.create({
         fontSize: hp('1.9%'),
         borderWidth: 1,
         borderColor: COLORS.commonBorderColor,
-        overflow: 'hidden',
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
         height: hp('6%'),
@@ -547,6 +562,13 @@ export default StyleSheet.create({
         fontSize: hp('1.9%'),
         fontFamily: FONTS.fontRegular,
         lineHeight: hp(2.3),
+        backgroundColor: COLORS.transparent,
+    },
+    dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        bottom: hp(0.3),
     },
     timeField: {
         width: '31.5%',
@@ -652,9 +674,10 @@ export default StyleSheet.create({
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: 1, },
         elevation: 3,
+        shadowOpacity: 0.1,
         borderRadius: hp(1.95),
         height: hp(8.85),
-        borderRadius: hp(2.0),
+        borderRadius: hp(0.6),
         marginBottom:hp(0.78),
     },
     pupilProfile: {
@@ -795,7 +818,7 @@ export default StyleSheet.create({
         borderWidth:1,
         alignItems: 'center',
         borderColor:COLORS.lightGrayPupil,
-        borderRadius:hp(1.5),
+        borderRadius:hp(0.9),
         marginBottom:hp(2),
         padding:hp(1),
         top: hp(2),
@@ -956,7 +979,7 @@ export default StyleSheet.create({
     videoThumb:{
         position:'relative',
         flexDirection:'row',
-        marginRight:hp(4.10),
+        marginRight:hp(1.56),
     },
     videoThumbnail:{        
         width:hp(26.17),
@@ -987,7 +1010,7 @@ export default StyleSheet.create({
         paddingBottom:hp(1.5),
         width:hp(26.17),
         flexWrap:'wrap',
-        marginBottom:hp(1.20),
+        marginBottom: hp(2),
     },
     spaceTop:{
         marginTop:hp(3.5),
@@ -1009,9 +1032,9 @@ export default StyleSheet.create({
     checkMark:{
         margin:0,
         padding:0,
-        width:hp(2.5),
-        height:hp(2.5),
-        top:hp(0.2),
+        width: hp(2.2),
+        height: hp(2.2),
+        top:hp(0.52),
     },
     borderRight:{
         borderRightWidth:1,
@@ -1036,11 +1059,26 @@ export default StyleSheet.create({
         right:hp(1.4),
         top:hp(2.1),
     },
+    dropDownArrowdatetime:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.6),
+        top:hp(0.2),
+    },
+    dropDownArrowdatetimehomeWork:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.6),
+        top:hp(2),
+    },
     plainBg:{
         paddingLeft: hp(3.5),
         paddingRight: hp(3.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
+        backgroundColor: COLORS.backgroundColorCommon,
     },
     commonInputFull:{
         width:'100%',

@@ -14,18 +14,26 @@ import { Var } from "../../../utils/Constant";
 
 const PupuilDashboard = (props) => {
     const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(null);
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
+    // const [selectedId, setSelectedId] = useState(null);
+    const [selectedId, setSelectedId] = useState(0);
+    const [dashData, setdashData] = useState([])
+
+    const [dataOfSubView, setDataOfSubView] = useState([])
+    const renderItem = ({ item, index }) => {
+        const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
         return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => setData(index)}
                 style={{ backgroundColor }}
             />
         );
     };
+    const setData = (index) => {
+        setSelectedId(index)
+        setDataOfSubView(dashData[index])
+    }
     const Item = ({ onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
@@ -41,17 +49,20 @@ const PupuilDashboard = (props) => {
                     <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
                 </View>
             </View>
+            <View style={PAGESTYLE.arrowSelectedTab}></View>
+
         </TouchableOpacity>
     );
     return (
         <View style={PAGESTYLE.mainPage} >
             <Sidebarpupil hide={() => action(!isHide)}
+                moduleIndex={0}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <Header onAlertPress={() => {props.navigation.openDrawer()}} STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
@@ -79,6 +90,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                showsVerticalScrollIndicator={false}
                                                 style={PAGESTYLE.ScrollViewFlatlist}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
@@ -87,7 +99,7 @@ const PupuilDashboard = (props) => {
                                             />
                                         </SafeAreaView>
                                         <View style={PAGESTYLE.rightTabContent}>
-                                            <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                            {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                             <View style={PAGESTYLE.tabcontent}>
                                                 <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
                                                 <View style={PAGESTYLE.timedateGrp}>
@@ -173,6 +185,7 @@ const PupuilDashboard = (props) => {
                                     <View style={STYLE.viewRow}>
                                         <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                             <FlatList
+                                                showsVerticalScrollIndicator={false}
                                                 style={PAGESTYLE.ScrollViewFlatlist}
                                                 data={[1, 2, 3, 4, 5]}
                                                 renderItem={renderItem}
