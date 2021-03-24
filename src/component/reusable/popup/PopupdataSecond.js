@@ -345,8 +345,10 @@ const styles = StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight: hp(1.04),
-        bottom: hp(0.4),
+        marginRight:hp(1.04),
+        position: 'absolute',
+        top: hp(1.4),
+        left: hp(1.4),
     },
     subjectDateTime: {
         alignItems: 'flex-start',
@@ -356,7 +358,9 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        bottom: hp(0.3),
+        top: hp(-0.39),
+        left: hp(2.5),
+        position: 'absolute'
     },
     dropDownArrowdatetime: {
         width: hp(1.51),
