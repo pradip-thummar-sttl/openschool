@@ -84,6 +84,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingTop: hp(3),
+        paddingBottom: hp(2),
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -94,7 +96,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -115,8 +118,9 @@ const styles = StyleSheet.create({
     },
     userIcon: {
         position: 'absolute',
-        top: hp(1.1),
-        width: hp(1.9),
+        top: hp(1.8),
+        width: hp(1.62),
+        height:hp(1.62),
         resizeMode: 'contain',
         left: hp(1.43),
     },
@@ -146,10 +150,11 @@ const styles = StyleSheet.create({
     },
     filterIcon: {
         width: hp(1.74),
+        height: hp(1.50),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.30),
-        top: hp(1.19),
+        top: hp(1.85),
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -205,6 +210,7 @@ const styles = StyleSheet.create({
     },
     checkMark: {
         width: hp(1.48),
+        height:hp(1.48),
         resizeMode: 'contain',
     },
     filterListText: {

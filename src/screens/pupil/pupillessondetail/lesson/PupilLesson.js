@@ -6,13 +6,13 @@ import STYLE from '../../../../utils/Style';
 import Images from '../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
-import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
+//import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
 const PupilLesson = (props) => {
     return (
 
-        <View style={[PAGESTYLE.whiteBg, PAGESTYLE.videoSliderSpace]}>
+        <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning - 07/09/20</Text>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilLessonDetailInternal()}>
