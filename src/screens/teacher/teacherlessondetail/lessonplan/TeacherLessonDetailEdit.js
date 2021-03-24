@@ -99,7 +99,7 @@ const TLDetailEdit = (props) => {
                                         style={PAGESTYLE.dateTime}
                                         value={date}
                                         mode="time"
-                                        textColor={{ color: COLORS.darkGray }}
+                                        textColor={{ color: COLORS.darkGray }}                                        
                                     />
                                 </View>
                             </View>
