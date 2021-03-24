@@ -10,18 +10,18 @@ const store = createStore(combineReducers)
 
 
 import Route from './src/route/Route'
-import { LogBox } from 'react-native';
+import { LogBox, View } from 'react-native';
 
 LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <MenuProvider>
           <Route />
         </MenuProvider>
-      </SafeAreaView>
+      </View>
     </Provider>
   )
 }
