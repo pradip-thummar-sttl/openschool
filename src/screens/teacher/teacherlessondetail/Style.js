@@ -26,6 +26,10 @@ export default StyleSheet.create({
     toggleBoxGrpWrap:{
         // marginTop: hp(3),        
     },
+    commonWidth: {
+        alignSelf: 'flex-end',
+        width: '80%'
+    },
     whiteBg: {
         backgroundColor: COLORS.white,
         // paddingLeft: hp(3.5),
