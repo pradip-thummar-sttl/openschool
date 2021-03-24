@@ -38,7 +38,7 @@ const Popupdata = (props) => {
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
-                        {/* <View style={styles.tabcontent}>
+                        <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={styles.titleTab}>Cartoon Drawings</Text>
                                 <Text h3 style={styles.subTitleTab}>Art Subject</Text>
@@ -104,8 +104,8 @@ const Popupdata = (props) => {
                                     </View>
                                 </View>
                             </View>
-                        </View> */}
-                        <View style={styles.tabcontent}>
+                        </View>
+                        {/* <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
                                 <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
@@ -173,7 +173,7 @@ const Popupdata = (props) => {
                                     </View>
                                 </View>
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
             </Modal>

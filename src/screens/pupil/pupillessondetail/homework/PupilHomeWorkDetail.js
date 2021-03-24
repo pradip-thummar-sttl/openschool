@@ -21,7 +21,7 @@ const PupilHomeWorkDetail = (props) => {
             navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
             navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
             onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
-        <View style={PAGESTYLE.whiteBg}>     
+        <View style={PAGESTYLE.commonBg}>     
             <Header14 onAlertPress={()=>props.navigation.openDrawer()}  goBack={()=>props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
@@ -55,7 +55,7 @@ const PupilHomeWorkDetail = (props) => {
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
                                         onCheckColor={COLORS.white}
                                         onFillColor={COLORS.dashboardPupilBlue}
@@ -73,7 +73,7 @@ const PupilHomeWorkDetail = (props) => {
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
                                         onCheckColor={COLORS.white}
                                         onFillColor={COLORS.dashboardPupilBlue}
@@ -92,7 +92,7 @@ the Amazon Rainforest</Text>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
                                         onCheckColor={COLORS.white}
                                         onFillColor={COLORS.dashboardPupilBlue}
@@ -110,7 +110,7 @@ the Amazon Rainforest</Text>
                                 <View style={PAGESTYLE.alignRow}>
                                     <CheckBox
                                         style={PAGESTYLE.checkMark}
-                                        value={false}
+                                        value={true}
                                         boxType={'square'}
                                         onCheckColor={COLORS.white}
                                         onFillColor={COLORS.dashboardPupilBlue}

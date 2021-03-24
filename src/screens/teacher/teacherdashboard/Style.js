@@ -59,6 +59,26 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginBottom: hp(0.3),
     },
+    ScrollViewFlatlist:{
+        height: hp(60),
+    },
+    arrowSelectedTab: {
+        width: 0,
+        height: 0,
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderTopWidth: hp(1.95),
+        borderRightWidth: hp(1.95),
+        borderBottomWidth: hp(1.95),
+        borderLeftWidth: hp(1.95),
+        position: 'absolute',
+        top: hp(3.90),
+        left: hp(-3.90),
+        borderTopColor: 'transparent',
+        borderRightColor: COLORS.white,
+        borderBottomColor: 'transparent',
+        borderLeftColor: 'transparent',
+    },
     month: {
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
@@ -141,12 +161,12 @@ export default StyleSheet.create({
         height: hp(11.86),
     },
     leftTabbing: {
-        width: hp(45.57),
+        width: '38%',
         borderRightWidth:1,
         borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
-        width: hp(72.39),
+        width: '62%',
     },
     item: {
         flexDirection: 'row',
@@ -164,7 +184,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.borderLesoon,
         padding: hp(0.39),
         borderRadius: hp(5),
-        marginRight: hp(2.1),
+        marginRight: hp(2.1),        
     },
     classSubject: {
         flexDirection: 'row',
@@ -274,7 +294,7 @@ export default StyleSheet.create({
     },
     attachment: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
     attachmentText: {
         fontSize: hp(1.82),
@@ -292,23 +312,6 @@ export default StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: hp(1.56),
         fontFamily: FONTS.fontBold,
-    },
-    arrowSelectedTab: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderTopWidth: hp(1.95),
-        borderRightWidth: hp(1.95),
-        borderBottomWidth: hp(1.95),
-        borderLeftWidth: hp(1.95),
-        position: 'absolute',
-        top: hp(5.85),
-        left: hp(-3.90),
-        borderTopColor: 'transparent',
-        borderRightColor: COLORS.white,
-        borderBottomColor: 'transparent',
-        borderLeftColor: 'transparent',
     },
     requirementofClass: {
         marginTop: hp(4.81),
@@ -455,7 +458,7 @@ export default StyleSheet.create({
         alignSelf:'center',
     },
     pupilDetailLink: {
-        width: hp(10),
+        width: hp(8),
         alignItems: 'flex-end',
     },
     pupilDetaillinkIcon: {

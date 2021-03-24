@@ -19,7 +19,7 @@ const PupilLessonDetailInternal = (props) => {
             navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
             onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
 
-        <View style={PAGESTYLE.whiteBg}>
+        <View style={PAGESTYLE.commonBg}>
             <HeaderWhitewithoutsearch
                 goBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}

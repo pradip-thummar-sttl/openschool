@@ -96,10 +96,10 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={PAGESTYLE.addItem}>
+                        {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                             <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>

@@ -14,7 +14,7 @@ const TeacherTimeTable = (props) => {
     const days = ['', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THRUSDAY', 'FRIDAY', 'SATURDAY'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
 
-    const timeTableData__ = [
+    const timeTableData = [
         {
             Title: 'English - Grammer',
             StartTime: '09:30',
@@ -59,8 +59,8 @@ const TeacherTimeTable = (props) => {
     ]
 
     const [isHide, action] = useState(true);
-    const [timeTableData, setTimeTableData] = useState([])
-    const [isTimeTableLoading, setTimeTableLoading] = useState(true)
+    // const [timeTableData, setTimeTableData] = useState([])
+    const [isTimeTableLoading, setTimeTableLoading] = useState(false)
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
@@ -103,17 +103,17 @@ const TeacherTimeTable = (props) => {
     }
 
     useEffect(() => {
-        Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
-            setTimeTableLoading(false)
-            if (res.code == 200) {
-                console.log('response of get all lesson', res)
-                setTimeTableData(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('response of get all lesson error', err)
-        })
+        // Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        //     setTimeTableLoading(false)
+        //     if (res.code == 200) {
+        //         console.log('response of get all lesson', res)
+        //         setTimeTableData(res.data)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     console.log('response of get all lesson error', err)
+        // })
     }, [])
 
     return (
@@ -128,7 +128,7 @@ const TeacherTimeTable = (props) => {
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
 
-                <View style={{ flex: 1 }}>
+                <View style={{...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
