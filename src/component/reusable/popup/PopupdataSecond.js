@@ -14,6 +14,7 @@ import MESSAGE from "../../../utils/Messages";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { FlatList } from "react-native-gesture-handler";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -30,11 +31,7 @@ const PopupdataSecond = (props) => {
     const [theme, setTheme] = useState('');
     const [isLoading, setLoading] = useState(false)
 
-    this.state = {
-        userName: '',
-        password: '',
-    }
-
+    const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
 
     const showMode = (currentMode) => {
         setShow(true);
@@ -214,6 +211,20 @@ const PopupdataSecond = (props) => {
                                 </View>
                             </View>
                         </View>
+
+                        <View style={styles.colorDropView}>
+                            <FlatList
+                                data={colorArr}
+                                renderItem={({ item, index }) => {
+                                    return (
+                                        <TouchableOpacity style={styles.colorButton}>
+                                            <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item }} />
+                                            <Text>{item}</Text>
+                                        </TouchableOpacity>
+                                    )
+                                }}
+                            />
+                        </View>
                     </View>
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
@@ -344,8 +355,8 @@ const styles = StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width:'100%',
-        position:'relative',
+        width: '100%',
+        position: 'relative',
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
@@ -366,14 +377,14 @@ const styles = StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         position: 'absolute',
         top: hp(1.1),
         left: hp(1.4),
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width:'100%',
+        width: '100%',
     },
     dateTimetextdummy: {
         fontSize: hp(1.82),
@@ -383,12 +394,12 @@ const styles = StyleSheet.create({
         left: hp(2.5),
         position: 'absolute'
     },
-    dropDownArrowdatetime:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(0),
-        top:hp(-0.2),
+    dropDownArrowdatetime: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(0),
+        top: hp(-0.2),
     },
     notes: {
         flexDirection: 'row',
@@ -396,7 +407,7 @@ const styles = StyleSheet.create({
     noteInput: {
         width: '80%',
     },
-    colorPicker:{
+    colorPicker: {
         width: '18%',
         marginLeft: '2%',
         alignSelf: 'flex-end',
@@ -410,4 +421,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(-1.3),
     },
+
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 300, width: 150, borderRadius: 10, backgroundColor: COLORS.dashboardBorder, right: 15, bottom: 80, padding: 15 },
+    colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
 });
