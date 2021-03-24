@@ -104,7 +104,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        fontSize: hp(1.8),
+        fontSize: hp(1.82),
         marginBottom:hp(1.5),
     },
     lessonText: {
@@ -809,6 +809,7 @@ export default StyleSheet.create({
         fontSize:hp(2.08),
         color:COLORS.darkGray,
         paddingTop:hp(2.5),
+        paddingBottom:hp(1.2),
     },
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
@@ -1008,6 +1009,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         fontSize:hp(2.08),
         color:COLORS.darkGray,
+        marginBottom:hp(1),
     },
     videoPublishDate:{
         fontFamily: FONTS.fontRegular,
