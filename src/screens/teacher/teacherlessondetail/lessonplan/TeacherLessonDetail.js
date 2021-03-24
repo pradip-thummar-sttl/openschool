@@ -79,33 +79,33 @@ const TLDetail = (props) => {
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
                         <View style={PAGESTYLE.checkBoxGrp}>
 
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Reuel Pardesi</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Reuel Pardesi123</Text>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Gene Aw</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Gene Aw</Text>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Janice Williamson</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Janice Williamson</Text>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Jovan Singh</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Jovan Singh</Text>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Sophia Lauren</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Sophia Lauren</Text>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Mark Mitchell</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Mark Mitchell</Text>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabel}>
+                            <View style={PAGESTYLE.checkBoxLabelNone}>
                                 <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Madeline Ghenea</Text>
+                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Madeline Ghenea</Text>
                             </View>
                         </View>
                     </View>

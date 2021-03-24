@@ -44,7 +44,8 @@ const COLORS = {
     SidebarHeaderBack: '#002211',
     SidebarHeaderShadow: '#152232',
     MenuSelectedback: '#F3F5F9',
-    periodColor:'rgba(207,237,254,1)'
+    periodColor:'rgba(207,237,254,1)',
+    daySelect:'#EDF0F6',
 }
 
 export default COLORS;

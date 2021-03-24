@@ -27,6 +27,9 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    ScrollViewFlatlist:{
+        height: hp(60),
+    },
     dayIcon: {
         width: hp(4),
         resizeMode: 'contain',

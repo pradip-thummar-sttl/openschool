@@ -10,7 +10,7 @@ import FONTS from '../../../../utils/Fonts';
 const PupilLessonDue = (props) => {
     return (
 
-        <View style={[PAGESTYLE.whiteBg, PAGESTYLE.videoSliderSpace]}>
+        <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Homework due</Text>
             <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilHomeworkesubmited()}>

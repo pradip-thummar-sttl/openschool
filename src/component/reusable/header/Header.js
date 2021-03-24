@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
+        paddingTop: hp(3),
+        paddingBottom: hp(2)
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -39,7 +41,8 @@ const styles = StyleSheet.create({
         marginLeft: hp(1.25),
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: wp(6),
+        height: hp(6),
         resizeMode: 'contain',
     },
 });

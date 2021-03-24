@@ -219,13 +219,15 @@ const styles = StyleSheet.create({
         left: hp('3%'),
         resizeMode: 'contain',
         width: hp(1.7),
+        height: hp(2)
     },
     viewIcon: {
         position: 'absolute',
-        top: hp('2.5%'),
+        top: hp(0),
         right: hp('3%'),
         resizeMode: 'contain',
         width: hp(2.5),
+        height: hp(8)
     },
     bottomLoginFeild: {
         flexDirection: 'row',
@@ -233,6 +235,7 @@ const styles = StyleSheet.create({
     rememberFeild: {
         flexDirection: 'row',
         width: '50%',
+        alignItems: 'center',
     },
     forgotLink: {
         width: '50%',

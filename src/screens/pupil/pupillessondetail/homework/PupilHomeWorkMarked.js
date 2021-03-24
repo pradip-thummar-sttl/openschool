@@ -21,7 +21,7 @@ const PupilHomeWorkMarked = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.wrapper}>
-                <View style={PAGESTYLE.whiteBg}>
+                <View style={PAGESTYLE.commonBg}>
                     <Header15 onAlertPress={() => props.navigation.openDrawer()} goBack={() => props.navigation.goBack()} />
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.containerWrapTopPurple}>
@@ -121,7 +121,7 @@ the Amazon Rainforest</Text>
                         </View>
                     </View>
                 </View>
-                <View style={PAGESTYLE.whiteBg}>
+                <View style={PAGESTYLE.commonBg}>
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.feedbackBlock}>
                             <View style={PAGESTYLE.lessonDesc}>

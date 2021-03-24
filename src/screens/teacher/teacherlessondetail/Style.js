@@ -243,6 +243,20 @@ export default StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
     },
+    checkBoxLabelNone: {
+        flexDirection: 'row',
+        paddingLeft: hp(1),
+        paddingRight: hp(1),
+        paddingTop: hp(1.43),
+        paddingBottom: hp(1.43),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        marginRight: hp(1.04),
+        marginBottom: hp(1.04),
+        position: 'relative',
+        alignItems: 'center',
+    },
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
@@ -257,6 +271,12 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.3),
         paddingRight: hp(1.1),
+    },
+    checkBoxLabelTextNone: {
+        lineHeight: hp(2.82),
+        fontSize: hp(1.85),
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: hp(1.3),
     },
     checkBoxcommon: {
         position: 'absolute',
