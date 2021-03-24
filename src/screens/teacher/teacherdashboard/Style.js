@@ -294,7 +294,7 @@ export default StyleSheet.create({
     },
     attachment: {
         flexDirection: 'row',
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
     attachmentText: {
         fontSize: hp(1.82),

@@ -53,7 +53,7 @@ const TLDetailAdd = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
                 <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                             <View style={STYLE.hrCommon}></View>
@@ -62,16 +62,9 @@ const TLDetailAdd = (props) => {
                                 <View style={PAGESTYLE.dropDownFormInput}>
                                     <Text style={PAGESTYLE.subjectText}>Subject</Text>
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                        <RNPickerSelect style={PAGESTYLE.dropDown}
-                                            onValueChange={(value) => console.log(value)}
-                                            items={[
-                                                { label: 'English', value: 'English' },
-                                                { label: 'Geography', value: 'Geography' },
-                                                { label: 'History', value: 'History' },
-                                                { label: 'Science', value: 'Science' },
-                                                { label: 'Math', value: 'Math' },
-                                            ]}
-                                        />
+                                        <TouchableOpacity>
+                                            <Text style={PAGESTYLE.dateTimetextdummy}>English</Text>
+                                        </TouchableOpacity>
                                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                                     </View>
                                 </View>
@@ -94,13 +87,10 @@ const TLDetailAdd = (props) => {
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                         <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                         <View style={PAGESTYLE.subjectDateTime}>
-                                            <DateTimePicker
-                                                style={PAGESTYLE.dateTime}
-                                                value={date}
-                                                mode="date"
-                                                textColor={{ color: COLORS.darkGray }}
-                                                placeHolderTextStyle={{ color: COLORS.darkGray }}
-                                            />
+                                            <TouchableOpacity>
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                                            </TouchableOpacity>
+                                            <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                         </View>
                                     </View>
                                 </View>
@@ -109,12 +99,10 @@ const TLDetailAdd = (props) => {
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                                         <View style={[PAGESTYLE.subjectDateTime]}>
-                                            <DateTimePicker
-                                                style={PAGESTYLE.dateTime}
-                                                value={date}
-                                                mode="time"
-                                                textColor={{ color: COLORS.darkGray }}
-                                            />
+                                            <TouchableOpacity>
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                                            </TouchableOpacity>
+                                            <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                         </View>
                                     </View>
                                 </View>
@@ -123,16 +111,9 @@ const TLDetailAdd = (props) => {
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                                         <View style={[PAGESTYLE.subjectDateTime]}>
-                                            <RNPickerSelect style={PAGESTYLE.dropDownSmall}
-                                                onValueChange={(value) => console.log(value)}
-                                                items={[
-                                                    { label: 'Group 1A', value: 'Group 1A' },
-                                                    { label: 'Group 1B', value: 'Group 1B' },
-                                                    { label: 'Group 1C', value: 'Group 1C' },
-                                                    { label: 'Group 1D', value: 'Group 1D' },
-                                                    { label: 'Group 1E', value: 'Group 1E' },
-                                                ]}
-                                            />
+                                            <TouchableOpacity>
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                                            </TouchableOpacity>
                                         </View>
                                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                                     </View>
