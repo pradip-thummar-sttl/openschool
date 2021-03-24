@@ -28,7 +28,7 @@ const PupilLessonDue = (props) => {
                         <Text style={PAGESTYLE.videoUserName}>Miss Barker</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={PAGESTYLE.videoCard}>
+                <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilHomeworkemarked()}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Text style={PAGESTYLE.videoDateBlack}>Due: 14/09/2020</Text>
                         <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
