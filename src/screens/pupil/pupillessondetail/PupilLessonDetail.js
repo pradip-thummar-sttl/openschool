@@ -52,7 +52,8 @@ const PupilLessonDetail = (props) => {
                                 navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
                             :
                             <PupilLessonDue
-                                navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
+                                navigatePupilHomeworkesubmited={() => { props.navigation.navigate('PupilHomeWorkSubmitted') }}
+                                navigatePupilHomeworkemarked={() => { props.navigation.navigate('PupilHomeWorkMarked') }} />
                     }
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
