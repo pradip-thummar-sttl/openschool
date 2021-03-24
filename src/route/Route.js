@@ -33,6 +33,7 @@ import TLHomeWorkSubmittedDetail from '../screens/teacher/teacherlessondetail/ho
 import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailAdd';
 import PupilTimetable from '../screens/pupil/pupiltimetable/PupilTimetable';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
+import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkSubmitted';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -72,6 +73,7 @@ function ScreenStack() {
             <Stack.Screen name="TLDetail" component={TLDetail} />
             <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
             <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
+            <Stack.Screen name="PupilHomeWorkSubmitted" component={PupilHomeWorkSubmitted} />
             <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
             {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
             <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
