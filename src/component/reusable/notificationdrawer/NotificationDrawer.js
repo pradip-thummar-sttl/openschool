@@ -89,7 +89,7 @@ const NotificationDrawer = (props) => {
                         <Text style={styles.drawerTitle} >My Notifications</Text>
                         <TouchableOpacity style={styles.closeNotificationbarMain}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIcon} /></TouchableOpacity>
                     </View>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View>
                             <Text style={styles.notificationsText}>Live Classes</Text>
                             <View style={styles.classDetail}>

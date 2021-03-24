@@ -3,7 +3,7 @@ export const baseUrl = "http://14.143.90.233:3000/"; //public
 import { Alert } from "react-native";
 
 export const opacity = 0.5;
-export const isDesignBuild = false;
+export const isDesignBuild = true;
 export const cellWidth = 300;
 
 export class Var {

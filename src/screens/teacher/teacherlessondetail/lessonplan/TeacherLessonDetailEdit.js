@@ -39,7 +39,7 @@ const TLDetailEdit = (props) => {
                 <HeaderUpdate
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={PAGESTYLE.containerWrap}>
                 <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                     <View style={STYLE.hrCommon}></View>

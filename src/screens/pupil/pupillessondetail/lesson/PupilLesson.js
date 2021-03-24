@@ -14,7 +14,7 @@ const PupilLesson = (props) => {
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
             <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning - 07/09/20</Text>
-            <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard} onPress={()=>props.navigatePupilLessonDetailInternal()}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
@@ -129,7 +129,7 @@ const PupilLesson = (props) => {
                 </TouchableOpacity>              
             </ScrollView>
             <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons from last week - 28/08/20</Text>
-            <ScrollView horizontal={true} style={PAGESTYLE.videoWrap}>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                 <TouchableOpacity style={PAGESTYLE.videoCard}>
                     <View style={PAGESTYLE.videoCardThumb}>
                         <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />

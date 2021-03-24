@@ -22,7 +22,7 @@ import Header14 from '../header/bulck/Header14';
 const Header = (props) => {
     return (
         <View style={styles.headerMain}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.borderPadd}><Header1 /></View>
                 <View style={styles.borderPadd}><Header2 /></View>
                 <View style={styles.borderPadd}><Header3 /></View>
