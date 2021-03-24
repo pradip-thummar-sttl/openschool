@@ -224,6 +224,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 <View style={STYLE.viewRow}>
                                     <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                         <FlatList
+                                            style={PAGESTYLE.ScrollViewFlatlist}
                                             data={dashData}
                                             renderItem={renderItem}
                                             keyExtractor={(item) => item.id}
