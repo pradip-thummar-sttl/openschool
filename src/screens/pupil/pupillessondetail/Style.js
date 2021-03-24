@@ -32,6 +32,13 @@ export default StyleSheet.create({
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
+    commonBg: {
+        backgroundColor: COLORS.backgroundColorCommon,
+        paddingBottom: hp(2),
+        paddingTop: hp(2),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
+    },
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -112,7 +119,7 @@ export default StyleSheet.create({
         // borderColor: COLORS.borderGrp,
         paddingRight: hp(3.90),
         paddingTop: hp(2.5),
-        paddingLeft:hp(4.42),
+        paddingLeft:hp(3.25),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -224,9 +231,10 @@ export default StyleSheet.create({
         paddingLeft: hp(1.2),
     },
     checkMark: {
-        width: hp(2.8),
-        height: hp(2.8),
-        top: hp(0),
+        width: hp(2.2),
+        height: hp(2.2),
+        top: hp(0.5),
+        fontFamily:FONTS.fontBold,
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -800,6 +808,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         fontSize:hp(2.08),
         color:COLORS.darkGray,
+        paddingTop:hp(2.5),
     },
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
@@ -963,8 +972,8 @@ export default StyleSheet.create({
         height:hp(46.87),
         resizeMode:'contain', 
         position:'absolute', 
-        left:hp(-4.4),
-        top:hp(-4.4),      
+        left:hp(-3),
+        top:hp(0),      
     },
     largeVideoBlock:{
         width:'100%',
@@ -983,7 +992,8 @@ export default StyleSheet.create({
     },
     videoTitleLine:{
        flexDirection:'row',
-       justifyContent:'space-between',       
+       justifyContent:'space-between', 
+       marginTop:hp(3.77),      
     },
     bookMarkOn:{
         width:hp(2.43),
@@ -1052,7 +1062,7 @@ export default StyleSheet.create({
         width:hp(13.76),
         resizeMode:'contain',
         position:'absolute',
-        right:hp(1),
+        right:hp(1.5),
         top:hp(-5.5),
     },
     blueStripText:{
@@ -1121,6 +1131,7 @@ export default StyleSheet.create({
         width:hp(52.08),
         borderRadius:hp(0.8),
         marginRight:hp(3.90),
+        marginTop:hp(2.5),
     },
     lessonDesc:{
         fontFamily: FONTS.fontRegular,

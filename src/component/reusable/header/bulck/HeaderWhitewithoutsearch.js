@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
@@ -227,8 +228,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     arrow: {
-        width: hp(2.34),
+        width: hp(2.57),
+        height: hp(2.23),
         resizeMode: 'contain',
         marginRight: hp(1),
+        top:hp(-0.3),
     },
 });
