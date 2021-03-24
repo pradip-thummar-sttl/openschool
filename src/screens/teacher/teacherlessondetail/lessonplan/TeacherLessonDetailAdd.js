@@ -56,7 +56,7 @@ const TLDetailAdd = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                            <View style={STYLE.hrCommon}></View>
+                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
                             <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                             <View style={PAGESTYLE.timedateGrp}>
                                 <View style={PAGESTYLE.dropDownFormInput}>
