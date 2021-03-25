@@ -7,7 +7,7 @@ export const isDesignBuild = true;
 export const cellWidth = 300;
 
 export class Var {
-    static isCalender = false;
+     static isCalender = false;
 }
 
 export const showMessage = (message) => {

@@ -3,4 +3,5 @@ export const EndPoints = {
     GetLessionById: 'getalllesson',
     PupilByTeacherId: 'pupilbyteacherid',
     GetTimeTable: 'gettimetable',
+    CalenderEvent:'calenderevent/'
 }
