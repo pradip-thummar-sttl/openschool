@@ -15,10 +15,12 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
+import moment from "moment";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -30,6 +32,16 @@ const PopupdataSecond = (props) => {
     const [note, setnote] = useState('');
     const [theme, setTheme] = useState('');
     const [isLoading, setLoading] = useState(false)
+    const [selectedColor, setSelectColor] = useState(COLORS.yellowBorder)
+    const [isColorDropOpen, setColorDropOpen] = useState(false)
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
+    const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
+
+    const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
+    // this.state = {
+    //     userName: '',
+    //     password: '',
+    // }
 
     const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
 
@@ -37,6 +49,14 @@ const PopupdataSecond = (props) => {
         setShow(true);
         setMode(currentMode);
     };
+
+    // const showDatepicker = () => {
+    //     showMode('date');
+    // };
+
+    // const showTimepicker = () => {
+    //     showMode('time');
+    // };
 
     const isFieldsValidated = () => {
         if (!event) {
@@ -78,6 +98,10 @@ const PopupdataSecond = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
+    const selectColor = (item) => {
+        setSelectColor(item)
+        setColorDropOpen(false)
+    }
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -88,8 +112,22 @@ const PopupdataSecond = (props) => {
     };
 
     const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
+    };
+
+    const showTimePicker = () => {
+        setTimePickerVisibility(true);
+    };
+
+    const hideTimePicker = () => {
+        setTimePickerVisibility(false);
+    };
+
+    const handleTimeConfirm = (time) => {
+        setSelectedTime(moment(time).format('hh:mm'))
+        hideTimePicker();
     };
 
     return (
@@ -126,27 +164,27 @@ const PopupdataSecond = (props) => {
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What event is it?</Text>
-                                            <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                            <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
                                                 <View style={styles.subjectDateTime}>
-                                                    <TouchableOpacity>
-                                                        <Text style={styles.dateTimetextdummy}>14/09/2020</Text>
-                                                    </TouchableOpacity>
+                                                    <View>
+                                                        <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
+                                                    </View>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
-                                            <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                            <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
-                                                    <TouchableOpacity>
-                                                        <Text style={styles.dateTimetextdummy}>09:00-09:30</Text>
-                                                    </TouchableOpacity>
+                                                    <View>
+                                                        <Text style={styles.dateTimetextdummy}>{selectTime}</Text>
+                                                    </View>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
-                                            </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     <View style={styles.field}>
@@ -171,10 +209,10 @@ const PopupdataSecond = (props) => {
                                                     onChangeText={notes => setnote(notes)} />
                                             </View>
                                             <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                                <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <TouchableOpacity>
-                                                            <View style={styles.colorSelect}></View>
+                                                            <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                         </TouchableOpacity>
                                                         <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                     </View>
@@ -212,25 +250,35 @@ const PopupdataSecond = (props) => {
                             </View>
                         </View>
 
-                        <View style={styles.colorDropView}>
-                            <FlatList
-                                data={colorArr}
-                                renderItem={({ item, index }) => {
-                                    return (
-                                        <TouchableOpacity style={styles.colorButton}>
-                                            <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item }} />
-                                            <Text>{item}</Text>
-                                        </TouchableOpacity>
-                                    )
-                                }}
-                            />
-                        </View>
+                        {
+                            isColorDropOpen ?
+                                <View style={styles.colorDropView}>
+                                    <FlatList
+                                        data={colorArr}
+                                        renderItem={({ item, index }) => {
+                                            return (
+                                                <TouchableOpacity onPress={() => selectColor(item)} style={styles.colorButton}>
+                                                    <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item }} />
+                                                    <Text>{item}</Text>
+                                                </TouchableOpacity>
+                                            )
+                                        }}
+                                    />
+                                </View> : null
+                        }
                     </View>
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
+                    />
+
+                    <DateTimePickerModal
+                        isVisible={isTimePickerVisible}
+                        mode="time"
+                        onConfirm={handleTimeConfirm}
+                        onCancel={hideTimePicker}
                     />
                 </KeyboardAwareScrollView>
             </Modal>
@@ -415,7 +463,6 @@ const styles = StyleSheet.create({
     colorSelect: {
         width: hp(2.86),
         height: hp(3.51),
-        backgroundColor: COLORS.yellowBorder,
         borderRadius: hp(0.8),
         left: hp(-0.78),
         position: 'absolute',
