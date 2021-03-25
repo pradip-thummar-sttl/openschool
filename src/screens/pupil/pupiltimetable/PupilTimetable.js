@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -7,20 +7,74 @@ import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header3 from '../../../component/reusable/header/bulck/Header3';
+import { EndPoints } from "../../../service/EndPoints";
+import { Service } from "../../../service/Service";
 
 const PupilTimetable = (props) => {
+    const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
+
+    const timeTableData__ = [
+        {
+            Title: 'English - Grammer',
+            StartTime: '09:30',
+            EndTime: '10:30',
+            color: '',
+            Date: '2021-03-23T00:00:00.000Z'
+        },
+        {
+            Title: 'Drawing - Grammer',
+            StartTime: '01:30',
+            EndTime: '02:30',
+            color: '',
+            Date: '2021-03-23T00:00:00.000Z'
+        },
+        {
+            Title: 'Math - Grammer',
+            StartTime: '10:30',
+            EndTime: '11:00',
+            color: '',
+            Date: '2021-03-23T00:00:00.000Z'
+        },
+        {
+            Title: 'Science - Grammer',
+            StartTime: '09:00',
+            EndTime: '09:30',
+            color: '',
+            Date: '2021-03-23T00:00:00.000Z'
+        },
+        {
+            Title: 'English - Grammer',
+            StartTime: '10:00',
+            EndTime: '10:30',
+            color: '',
+            Date: '2021-03-24T00:00:00.000Z'
+        },
+        {
+            Title: 'English - Grammer',
+            StartTime: '09:00',
+            EndTime: '09:30',
+            Date: '2021-03-23T00:00:00.000Z'
+        },
+    ]
+
     const [isHide, action] = useState(true);
+    const [timeTableData, setTimeTableData] = useState([])
+    const [isTimeTableLoading, setTimeTableLoading] = useState(true)
 
     const setData = (dayKey, timneKey) => {
-        let flag = false, span = 1, title = '';
+        let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
 
         timeTableData.forEach(element => {
 
-            if (element.day == days[dayKey]) {
-                if (time[timneKey] == (element.startTime)) {
+            const day = new Date(element.Date).getDay();
+            const dayOfWeek = isNaN(day) ? null : days[day];
 
-                    let startTime = Number(element.startTime.replace(':', ''));
-                    let endTime = Number(element.endTime.replace(':', ''));
+            if (dayOfWeek == days[dayKey]) {
+                if (time[timneKey] == (element.StartTime)) {
+
+                    let startTime = Number(element.StartTime.replace(':', ''));
+                    let endTime = Number(element.EndTime.replace(':', ''));
 
                     startTime = (startTime >= 100 && startTime < 900) ? (startTime + 1200) : startTime
                     endTime = (endTime >= 100 && endTime < 900) ? (endTime + 1200) : endTime
@@ -28,7 +82,10 @@ const PupilTimetable = (props) => {
                     let timeSpan = (endTime - startTime);
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
-                    title = element.title;
+                    lblTitle = `${element.SubjectName} - ${element.LessonTopic}`;
+                    console.log('lblTitle', lblTitle);
+                    lblTime = `${element.StartTime} - ${element.EndTime}`;
+                    data = element;
                     flag = true;
                     return;
                 }
@@ -37,64 +94,28 @@ const PupilTimetable = (props) => {
 
         if (flag) {
             return (
-                // <View style={{ backgroundColor: COLORS.black, height: 100, width: 10 }}></View>
-                <Popupdata span={span} title={title} />
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} />
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }}>
-
-                </View>
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }} />
             );
         }
     }
 
-    const days = ['', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THRUSDAY', 'FRIDAY', 'SATURDAY'];
-    const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
-
-    const timeTableData = [
-        {
-            title: 'English - Grammer',
-            day: 'MONDAY',
-            startTime: '09:30',
-            endTime: '10:30',
-            color: '',
-        },
-        {
-            title: 'Drawing - Grammer',
-            day: 'TUESDAY',
-            startTime: '01:30',
-            endTime: '02:30',
-            color: '',
-        },
-        {
-            title: 'Math - Grammer',
-            day: 'MONDAY',
-            startTime: '10:30',
-            endTime: '11:00',
-            color: '',
-        },
-        {
-            title: 'Science - Grammer',
-            day: 'WEDNESDAY',
-            startTime: '09:00',
-            endTime: '09:30',
-            color: '',
-        },
-        {
-            title: 'English - Grammer',
-            day: 'SATURDAY',
-            startTime: '10:00',
-            endTime: '10:30',
-            color: '',
-        },
-        {
-            title: 'English - Grammer',
-            day: 'FRIDAY',
-            startTime: '09:00',
-            endTime: '09:30'
-        },
-    ]
+    useEffect(() => {
+        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setTimeTableLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setTimeTableData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }, [])
 
     return (
         <View style={PAGESTYLE.mainPage}>
