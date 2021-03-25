@@ -61,6 +61,8 @@ const TeacherTimeTable = (props) => {
     const [isHide, action] = useState(true);
     const [timeTableData, setTimeTableData] = useState([])
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterBy, setFilterBy] = useState('')
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
@@ -104,7 +106,17 @@ const TeacherTimeTable = (props) => {
     }
 
     useEffect(() => {
-        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setTimeTableLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        Service.post(data, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -115,7 +127,7 @@ const TeacherTimeTable = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-    }, [])
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -128,7 +140,10 @@ const TeacherTimeTable = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderTT
                     onAlertPress={() => { props.navigation.openDrawer() }}
-                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onClearSearch={() => fetchRecord('', '')} />
 
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?

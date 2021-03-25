@@ -70,27 +70,21 @@ const TeacherLessonList = (props) => {
 
     const [lessonData, setLessonData] = useState([])
     const [isLessonLoading, setLessonLoading] = useState(true)
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterBy, setFilterBy] = useState('')
 
     useEffect(() => {
-        Service.post({}, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
-            setLessonLoading(false)
-            if (res.code == 200) {
-                console.log('response of get all lesson', res)
-                setLessonData(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('response of get all lesson error', err)
-        })
+        fetchRecord('', '')
     }, [])
 
-    const filterRecordsBy = (searchBy, filterBy) => {
+    const fetchRecord = (searchBy, filterBy) => {
+        setLessonLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-        Service.getWithBody(data, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+
+        Service.post(data, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -114,7 +108,11 @@ const TeacherLessonList = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')} />
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')}
+                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onClearSearch={() => fetchRecord('', '')}
+                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.pupilTable}>

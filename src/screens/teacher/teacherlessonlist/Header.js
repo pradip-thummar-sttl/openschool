@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -13,7 +13,25 @@ import {
 } from 'react-native-popup-menu';
 import { opacity } from "../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
+import { useState } from "react";
 const Header = (props) => {
+    const [isSearchActive, setSearchActive] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+
+    useEffect(() => {
+        if (!isSearchActive) {
+            props.onClearSearch()
+            this.textInput.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
+
+    useEffect(() => {
+        props.onFilter(filterBy)
+    }, [filterBy])
+
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -31,36 +49,75 @@ const Header = (props) => {
             </View>
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
-                    <Image
-                        style={styles.userIcon}
-                        source={Images.SearchIcon} />
                     <TextInput
+                        ref={input => { this.textInput = input }}
                         style={[STYLE.commonInput, styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
-                    />
+                        onChangeText={keyword => {
+                            props.onSearchKeyword(keyword);
+                        }} />
+                    <TouchableOpacity
+                        style={styles.userIcon1Parent}
+                        activeOpacity={opacity}
+                        onPress={() => {
+                            isSearchActive ?
+                                setSearchActive(false)
+                                :
+                                setSearchActive(true)
+                        }}>
+                        <Image
+                            style={styles.userIcon1}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Subject</Text>
-                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                </View>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => {setFilterBy('Subject'); setSelectedIndex(0)}}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Subject</Text>
+                                        {selectedIndex == 0 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Date</Text>
-                                </View>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => {setFilterBy('Date'); setSelectedIndex(1)}}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Date</Text>
+                                        {selectedIndex == 1 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
                             </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Name</Text>
-                                </View>
-                            </MenuOption>
+                            {/* <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => setSelectedIndex(2)}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Name</Text>
+                                        {selectedIndex == 2 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption> */}
                         </MenuOptions>
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
@@ -109,11 +166,12 @@ const styles = StyleSheet.create({
     field: {
         position: 'relative',
         width: hp(81.11),
+        justifyContent: 'center',
         marginRight: hp(1.69),
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: hp(4.6),
+        paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
@@ -124,6 +182,18 @@ const styles = StyleSheet.create({
         width: hp(1.9),
         resizeMode: 'contain',
         left: hp(1.43),
+    },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: hp(1.43),
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: hp(1.43),
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -192,6 +262,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: hp(1),
         paddingBottom: hp(1),
+        flex: 1,
     },
     filterListWrap: {
         paddingTop: hp(1),
