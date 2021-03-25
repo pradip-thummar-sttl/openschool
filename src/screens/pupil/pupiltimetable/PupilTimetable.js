@@ -7,7 +7,6 @@ import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header3 from '../../../component/reusable/header/bulck/Header3'
-import { Var } from "../../../utils/Constant";
 import { useDispatch } from "react-redux";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
