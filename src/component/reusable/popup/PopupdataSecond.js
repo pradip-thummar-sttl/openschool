@@ -43,8 +43,6 @@ const PopupdataSecond = (props) => {
     //     password: '',
     // }
 
-    const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
-
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
@@ -69,32 +67,32 @@ const PopupdataSecond = (props) => {
             showMessage(MESSAGE.note);
             return false;
         }
-        insertEvent()
+        saveEvent()
     }
 
-    const insertEvent = () => {
+    const saveEvent = () => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: date,
-            EventTime: time,
+            EventDate: selectDate,
+            EventTime: selectTime,
             EventLocation: location,
             EventTypeId: "604b5aac006a0306d00ab87c",
-            CreatedBy: "6041cf525ff1ce52e5d4d398"
+            CreatedBy: "603f7af4f5dc5d4bb4892df0"
         }
-
         console.log(data);
-        return;
 
-        Service.post(null, `${EndPoints.CalenderEvent}`, (res) => {
+        Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                showMessage(MESSAGE.eventAdded);
+                setDefaults()
+                showMessage(MESSAGE.eventAdded)
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
+            setLoading(false)
             console.log('response of get all lesson error', err)
         })
     }
@@ -113,7 +111,7 @@ const PopupdataSecond = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('DD/MM/yyyy'))
+        setSelectedDate(moment(date).format('yyyy-MM-DD'))
         hideDatePicker();
     };
 
@@ -128,6 +126,12 @@ const PopupdataSecond = (props) => {
     const handleTimeConfirm = (time) => {
         setSelectedTime(moment(time).format('hh:mm'))
         hideTimePicker();
+    };
+
+    const setDefaults = () => {
+        setLocation('')
+        setEvent('')
+        setnote('')
     };
 
     return (
@@ -156,6 +160,7 @@ const PopupdataSecond = (props) => {
                                             <TextInput
                                                 multiline={false}
                                                 placeholder='Name of event'
+                                                value={event}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={eventName => setEvent(eventName)} />
@@ -163,7 +168,7 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What event is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
                                                 <View style={styles.subjectDateTime}>
@@ -175,7 +180,7 @@ const PopupdataSecond = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>What time is it?</Text>
                                             <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
@@ -193,6 +198,7 @@ const PopupdataSecond = (props) => {
                                             <TextInput
                                                 multiline={false}
                                                 placeholder='Enter Location'
+                                                value={location}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={location => setLocation(location)} />
@@ -204,6 +210,7 @@ const PopupdataSecond = (props) => {
                                             <View style={[styles.copyInputParent, styles.noteInput]}>
                                                 <TextInput
                                                     multiline={false}
+                                                    value={note}
                                                     placeholderStyle={styles.somePlaceholderStyle}
                                                     style={styles.commonInputTextarea}
                                                     onChangeText={notes => setnote(notes)} />

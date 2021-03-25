@@ -72,7 +72,7 @@ const TeacherLessonList = (props) => {
     const [isLessonLoading, setLessonLoading] = useState(true)
 
     useEffect(() => {
-        Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post({}, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -84,6 +84,24 @@ const TeacherLessonList = (props) => {
             console.log('response of get all lesson error', err)
         })
     }, [])
+
+    const filterRecordsBy = (searchBy, filterBy) => {
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+        Service.getWithBody(data, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setLessonLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setLessonData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>

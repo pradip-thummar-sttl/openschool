@@ -113,7 +113,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // if(isDesignBuild)
         //     return true
 
-        Service.get(`${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post({}, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

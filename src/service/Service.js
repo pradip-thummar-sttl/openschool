@@ -25,8 +25,8 @@ export const Service = {
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {
-                // 'Content-Type': 'application/json'
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "Authorization":"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYWRpcC50aHVtbWFyQHNpbHZlcnRvdWNoLmNvbSIsImZ1bGxOYW1lIjoiUHJhZGlwIiwiX2lkIjoiNjA0YjEzYmViNGViY2MxN2QxNjljZmM0IiwiaWF0IjoxNjE1NTQwMjUwfQ.SBz5MoEZYZPhzd851CgOyzXy-nzzrYTD2tv7kg1VjlA"
             },
             body: JSON.stringify(data),
         }).then((res) => res.json()).then((res) => {
