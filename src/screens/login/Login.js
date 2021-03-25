@@ -116,9 +116,10 @@ class Login extends Component {
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     secureTextEntry={true}
                                     onChangeText={password => this.setState({ password })} />
-                                <Image
+                                {/* <Image
                                     style={styles.viewIcon}
-                                    source={Images.ShowPassword} />
+                                    source={Images.ShowPassword} /> */}
+                                <Image style={styles.viewIcon} source={Images.HidePassword} />
                             </View>
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
