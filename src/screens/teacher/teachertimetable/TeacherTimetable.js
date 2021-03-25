@@ -156,7 +156,7 @@ const TeacherTimeTable = (props) => {
                             <View style={{ ...PAGESTYLE.mainPage }}>
                                 <View style={PAGESTYLE.days}>
                                     {days.map((data) => (
-                                        <View style={PAGESTYLE.dayLeft}>
+                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}
