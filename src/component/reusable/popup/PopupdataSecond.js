@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../utils/Colors";
@@ -11,6 +11,8 @@ import Modal from 'react-native-modal';
 import RNPickerSelect from 'react-native-picker-select';
 import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
@@ -29,6 +31,7 @@ const PopupdataSecond = (props) => {
     const [location, setLocation] = useState('');
     const [note, setnote] = useState('');
     const [theme, setTheme] = useState('');
+    const [isLoading, setLoading] = useState(false)
     const [selectedColor, setSelectColor] = useState(COLORS.yellowBorder)
     const [isColorDropOpen, setColorDropOpen] = useState(false)
     const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
@@ -39,12 +42,6 @@ const PopupdataSecond = (props) => {
     //     userName: '',
     //     password: '',
     // }
-
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-    };
 
     const showMode = (currentMode) => {
         setShow(true);
@@ -70,7 +67,34 @@ const PopupdataSecond = (props) => {
             showMessage(MESSAGE.note);
             return false;
         }
-        return true;
+        saveEvent()
+    }
+
+    const saveEvent = () => {
+        setLoading(true)
+        let data = {
+            EventName: event,
+            EventDate: selectDate,
+            EventTime: selectTime,
+            EventLocation: location,
+            EventTypeId: "604b5aac006a0306d00ab87c",
+            CreatedBy: "603f7af4f5dc5d4bb4892df0"
+        }
+        console.log(data);
+
+        Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setDefaults()
+                showMessage(MESSAGE.eventAdded)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
     }
     const selectColor = (item) => {
         setSelectColor(item)
@@ -87,7 +111,7 @@ const PopupdataSecond = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('DD/MM/yyyy'))
+        setSelectedDate(moment(date).format('yyyy-MM-DD'))
         hideDatePicker();
     };
 
@@ -102,6 +126,12 @@ const PopupdataSecond = (props) => {
     const handleTimeConfirm = (time) => {
         setSelectedTime(moment(time).format('hh:mm'))
         hideTimePicker();
+    };
+
+    const setDefaults = () => {
+        setLocation('')
+        setEvent('')
+        setnote('')
     };
 
     return (
@@ -130,6 +160,7 @@ const PopupdataSecond = (props) => {
                                             <TextInput
                                                 multiline={false}
                                                 placeholder='Name of event'
+                                                value={event}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={eventName => setEvent(eventName)} />
@@ -137,7 +168,7 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What event is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
                                                 <View style={styles.subjectDateTime}>
@@ -149,7 +180,7 @@ const PopupdataSecond = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>What time is it?</Text>
                                             <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
@@ -167,6 +198,7 @@ const PopupdataSecond = (props) => {
                                             <TextInput
                                                 multiline={false}
                                                 placeholder='Enter Location'
+                                                value={location}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={location => setLocation(location)} />
@@ -178,6 +210,7 @@ const PopupdataSecond = (props) => {
                                             <View style={[styles.copyInputParent, styles.noteInput]}>
                                                 <TextInput
                                                     multiline={false}
+                                                    value={note}
                                                     placeholderStyle={styles.somePlaceholderStyle}
                                                     style={styles.commonInputTextarea}
                                                     onChangeText={notes => setnote(notes)} />
@@ -199,13 +232,21 @@ const PopupdataSecond = (props) => {
                                             <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
-                                            <TouchableOpacity
-                                                onPress={isFieldsValidated}
-                                                style={styles.buttonGrp}
-                                                activeOpacity={opacity}>
-                                                <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
-                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
-                                            </TouchableOpacity>
+                                            {isLoading ?
+                                                <ActivityIndicator
+                                                    style={{ ...styles.buttonGrp, right: 30 }}
+                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                    color={COLORS.buttonGreen} />
+                                                :
+                                                <TouchableOpacity
+                                                    onPress={isFieldsValidated}
+                                                    style={styles.buttonGrp}
+                                                    activeOpacity={opacity}>
+                                                    <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
+                                                    <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                                </TouchableOpacity>
+                                            }
+
                                             {/* <TouchableOpacity style={styles.buttonGrp}>
                                                 <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>

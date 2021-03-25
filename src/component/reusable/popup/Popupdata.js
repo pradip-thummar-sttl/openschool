@@ -16,6 +16,7 @@ const Popupdata = (props) => {
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
+    console.log('props.data.Color', props.data)
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Details</Text></TouchableOpacity> */}
@@ -23,9 +24,9 @@ const Popupdata = (props) => {
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: COLORS.borderLesoon, borderStartWidth: 3, }}>
-                    <View style={{...PAGESTYLE.backOpacity, backgroundColor: COLORS.borderLesoon, width: cellWidth * props.span}}></View>
-                    <Text style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span}}>{props.title}</Text>
+                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Color, borderStartWidth: 3, }}>
+                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Color, width: cellWidth * props.span }}></View>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>
@@ -38,7 +39,7 @@ const Popupdata = (props) => {
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
-                        <View style={styles.tabcontent}>
+                        {/* <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={styles.titleTab}>Cartoon Drawings</Text>
                                 <Text h3 style={styles.subTitleTab}>Art Subject</Text>
@@ -104,8 +105,8 @@ const Popupdata = (props) => {
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                        {/* <View style={styles.tabcontent}>
+                        </View> */}
+                        <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
                                 <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
@@ -173,7 +174,7 @@ const Popupdata = (props) => {
                                     </View>
                                 </View>
                             </View>
-                        </View> */}
+                        </View>
                     </View>
                 </View>
             </Modal>

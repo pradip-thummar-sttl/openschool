@@ -7,6 +7,7 @@ const MESSAGE = {
     feedback: "Please enter feedback",
     topic: "Please enter lesson topic",
     description: "Please enter description",
+    eventAdded: "Event added successfully",
 }
 
 export default MESSAGE;
