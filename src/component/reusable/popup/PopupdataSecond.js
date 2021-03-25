@@ -13,10 +13,12 @@ import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../u
 import MESSAGE from "../../../utils/Messages";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
+import moment from "moment";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -27,7 +29,12 @@ const PopupdataSecond = (props) => {
     const [location, setLocation] = useState('');
     const [note, setnote] = useState('');
     const [theme, setTheme] = useState('');
-const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
+    const [selectedColor, setSelectColor] = useState(COLORS.yellowBorder)
+    const [isColorDropOpen, setColorDropOpen] = useState(false)
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
+    const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
+
+    const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
     // this.state = {
     //     userName: '',
     //     password: '',
@@ -44,13 +51,13 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
         setMode(currentMode);
     };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
+    // const showDatepicker = () => {
+    //     showMode('date');
+    // };
 
-    const showTimepicker = () => {
-        showMode('time');
-    };
+    // const showTimepicker = () => {
+    //     showMode('time');
+    // };
 
     const isFieldsValidated = () => {
         if (!event) {
@@ -65,6 +72,10 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
         }
         return true;
     }
+    const selectColor = (item) => {
+        setSelectColor(item)
+        setColorDropOpen(false)
+    }
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -75,8 +86,22 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
     };
 
     const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
+    };
+
+    const showTimePicker = () => {
+        setTimePickerVisibility(true);
+    };
+
+    const hideTimePicker = () => {
+        setTimePickerVisibility(false);
+    };
+
+    const handleTimeConfirm = (time) => {
+        setSelectedTime(moment(time).format('hh:mm'))
+        hideTimePicker();
     };
 
     return (
@@ -113,27 +138,27 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What event is it?</Text>
-                                            <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                            <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
                                                 <View style={styles.subjectDateTime}>
-                                                    <TouchableOpacity>
-                                                        <Text style={styles.dateTimetextdummy}>14/09/2020</Text>
-                                                    </TouchableOpacity>
+                                                    <View>
+                                                        <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
+                                                    </View>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
-                                            <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                            <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
-                                                    <TouchableOpacity>
-                                                        <Text style={styles.dateTimetextdummy}>09:00-09:30</Text>
-                                                    </TouchableOpacity>
+                                                    <View>
+                                                        <Text style={styles.dateTimetextdummy}>{selectTime}</Text>
+                                                    </View>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
-                                            </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     <View style={styles.field}>
@@ -158,10 +183,10 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
                                                     onChangeText={notes => setnote(notes)} />
                                             </View>
                                             <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                                <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <TouchableOpacity>
-                                                            <View style={styles.colorSelect}></View>
+                                                            <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                         </TouchableOpacity>
                                                         <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                     </View>
@@ -191,25 +216,35 @@ const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COL
                             </View>
                         </View>
 
-                        <View style={styles.colorDropView}>
-                            <FlatList
-                                data={colorArr}
-                                renderItem={({ item, index }) => {
-                                    return (
-                                        <TouchableOpacity style={styles.colorButton}>
-                                            <Image style={{width:30, height:30, borderRadius:5, backgroundColor:item}}/>
-                                            <Text>{item}</Text>
-                                        </TouchableOpacity>
-                                    )
-                                }}
-                            />
-                        </View>
+                        {
+                            isColorDropOpen ?
+                                <View style={styles.colorDropView}>
+                                    <FlatList
+                                        data={colorArr}
+                                        renderItem={({ item, index }) => {
+                                            return (
+                                                <TouchableOpacity onPress={() => selectColor(item)} style={styles.colorButton}>
+                                                    <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item }} />
+                                                    <Text>{item}</Text>
+                                                </TouchableOpacity>
+                                            )
+                                        }}
+                                    />
+                                </View> : null
+                        }
                     </View>
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
+                    />
+
+                    <DateTimePickerModal
+                        isVisible={isTimePickerVisible}
+                        mode="time"
+                        onConfirm={handleTimeConfirm}
+                        onCancel={hideTimePicker}
                     />
                 </KeyboardAwareScrollView>
             </Modal>
@@ -334,8 +369,8 @@ const styles = StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width:'100%',
-        position:'relative',
+        width: '100%',
+        position: 'relative',
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
@@ -356,7 +391,7 @@ const styles = StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         position: 'absolute',
         top: hp(1.1),
         left: hp(1.4),
@@ -373,12 +408,12 @@ const styles = StyleSheet.create({
         left: hp(2.5),
         position: 'absolute'
     },
-    dropDownArrowdatetime:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(0),
-        top:hp(-0.2),
+    dropDownArrowdatetime: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(0),
+        top: hp(-0.2),
     },
     notes: {
         flexDirection: 'row',
@@ -386,7 +421,7 @@ const styles = StyleSheet.create({
     noteInput: {
         width: '80%',
     },
-    colorPicker:{
+    colorPicker: {
         width: '18%',
         marginLeft: '2%',
         alignSelf: 'flex-end',
@@ -394,13 +429,12 @@ const styles = StyleSheet.create({
     colorSelect: {
         width: hp(2.86),
         height: hp(3.51),
-        backgroundColor: COLORS.yellowBorder,
         borderRadius: hp(0.8),
         left: hp(-0.78),
         position: 'absolute',
         top: hp(-1.3),
     },
 
-    colorDropView:{ position: "absolute",alignSelf:'center', height: 300, width: 150, borderRadius: 10, backgroundColor:COLORS.dashboardBorder, right:15, bottom:80, padding:15 },
-    colorButton:{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical:10 },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 300, width: 150, borderRadius: 10, backgroundColor: COLORS.dashboardBorder, right: 15, bottom: 80, padding: 15 },
+    colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
 });
