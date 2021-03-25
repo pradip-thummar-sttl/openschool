@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
-
+import { cellWidth, opacity, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
-import Header3 from '../../../component/reusable/header/bulck/Header3'
-import { Var } from "../../../utils/Constant";
+import Header3 from '../../../component/reusable/header/bulck/Header3';
 
 const PupilTimetable = (props) => {
     const [isHide, action] = useState(true);
@@ -43,7 +42,7 @@ const PupilTimetable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: 200, }}>
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }}>
 
                 </View>
             );
@@ -112,8 +111,10 @@ const PupilTimetable = (props) => {
                 <View style={PAGESTYLE.mainPage}>
                     <View style={PAGESTYLE.days}>
                         {days.map((data) => (
-                            <View style={PAGESTYLE.day}>
-                                <Text style={PAGESTYLE.lable}>{data}</Text>
+                            <View style={PAGESTYLE.days}>
+                                <View style={PAGESTYLE.dayLeft}>
+                                    <Text style={PAGESTYLE.lableDay}>{data}</Text>
+                                </View>
                             </View>
                         ))}
                     </View>
@@ -126,10 +127,10 @@ const PupilTimetable = (props) => {
                         <View style={{top: 40,}}><Popupdata /></View>
                     </View> */}
                         {time.map((data, timneKey) => (
-                            <View style={{ width: 200 }}>
-                                <Text style={{ ...PAGESTYLE.lable, height: 100 }}>{data}</Text>
+                            <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
 
-                                <View>
+                                <View style={PAGESTYLE.timeLabel}>
                                     {days.map((data, dayKey) => (
                                         dayKey != 0 ?
                                             setData(dayKey, timneKey)
