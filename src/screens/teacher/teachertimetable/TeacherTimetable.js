@@ -11,53 +11,47 @@ import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 const TeacherTimeTable = (props) => {
-    const days = ['', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THRUSDAY', 'FRIDAY', 'SATURDAY'];
+    const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
 
-    const timeTableData = [
+    const timeTableData__ = [
         {
-            title: 'English - Grammer',
-            day: 'MONDAY',
+            Title: 'English - Grammer',
             StartTime: '09:30',
             EndTime: '10:30',
             color: '',
             Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'Drawing - Grammer',
-            day: 'TUESDAY',
+            Title: 'Drawing - Grammer',
             StartTime: '01:30',
             EndTime: '02:30',
             color: '',
             Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'Math - Grammer',
-            day: 'MONDAY',
+            Title: 'Math - Grammer',
             StartTime: '10:30',
             EndTime: '11:00',
             color: '',
             Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'Science - Grammer',
-            day: 'WEDNESDAY',
+            Title: 'Science - Grammer',
             StartTime: '09:00',
             EndTime: '09:30',
             color: '',
             Date: '2021-03-23T00:00:00.000Z'
         },
         {
-            title: 'English - Grammer',
-            day: 'SATURDAY',
+            Title: 'English - Grammer',
             StartTime: '10:00',
             EndTime: '10:30',
             color: '',
             Date: '2021-03-24T00:00:00.000Z'
         },
         {
-            title: 'English - Grammer',
-            day: 'FRIDAY',
+            Title: 'English - Grammer',
             StartTime: '09:00',
             EndTime: '09:30',
             Date: '2021-03-23T00:00:00.000Z'
@@ -65,8 +59,8 @@ const TeacherTimeTable = (props) => {
     ]
 
     const [isHide, action] = useState(true);
-    // const [timeTableData, setTimeTableData] = useState([])
-    const [isTimeTableLoading, setTimeTableLoading] = useState(false)
+    const [timeTableData, setTimeTableData] = useState([])
+    const [isTimeTableLoading, setTimeTableLoading] = useState(true)
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
@@ -89,6 +83,7 @@ const TeacherTimeTable = (props) => {
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
                     lblTitle = `${element.SubjectName} - ${element.LessonTopic}`;
+                    console.log('lblTitle', lblTitle);
                     lblTime = `${element.StartTime} - ${element.EndTime}`;
                     data = element;
                     flag = true;
@@ -109,17 +104,17 @@ const TeacherTimeTable = (props) => {
     }
 
     useEffect(() => {
-        // Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
-        //     setTimeTableLoading(false)
-        //     if (res.code == 200) {
-        //         console.log('response of get all lesson', res)
-        //         setTimeTableData(res.data)
-        //     } else {
-        //         showMessage(res.message)
-        //     }
-        // }, (err) => {
-        //     console.log('response of get all lesson error', err)
-        // })
+        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setTimeTableLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setTimeTableData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
     }, [])
 
     return (

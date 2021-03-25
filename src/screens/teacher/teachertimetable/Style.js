@@ -52,7 +52,6 @@ export default StyleSheet.create({
         fontFamily:FONTS.fontSemiBold,
         fontSize:hp(1.82),
         color:COLORS.darkGray,
-        textAlign: 'center',
     },
     labelTime: {
         fontFamily:FONTS.fontRegular,
