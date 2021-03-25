@@ -17,11 +17,10 @@ const NotificationDrawer = (props) => {
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
-                <View>
+                <View style={styles.datepickerDrwaer}>
                     {Var.isCalender = false}
                     <Calendar
                         minDate={new Date()}
-
                         firstDay={1}
                         dayComponent={({ date, state, marking }) => {
                             return (
@@ -32,33 +31,33 @@ const NotificationDrawer = (props) => {
                                                 date.dateString == periodDate[0] ?
                                                     <View style={styles.datemainView1}>
                                                         < View style={styles.dateSubVIew1}>
-                                                            <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                            <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
                                                         </View>
                                                     </View>
                                                     :
                                                     <View style={styles.dateMainView2}>
                                                         < View style={styles.dateSubVIew1}>
-                                                            <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                            <Text style={{ fontSize: hp(1.82),textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
                                                         </View>
                                                     </View>
                                                 :
                                                 <View style={styles.dateMAinView3}>
                                                     < View style={styles.dateSubView2}>
-                                                        <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                        <Text style={{ fontSize: hp(1.82),textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                                     </View>
                                                 </View>
                                             :
                                             <View style={styles.datemainView4}>
                                                 < View style={styles.dateSubView3}>
-                                                    <Text style={{ textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                    <Text style={{ fontSize: hp(1.82),textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                                 </View>
                                             </View>
                                     }
                                     {
                                         markdate.includes(date.dateString) ?
-                                            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} />
-                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', }} />
+                                            <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: hp(0.3) }}>
+                                                <View style={{ height: hp(0.65), width: hp(0.65), borderRadius: hp(0.325), backgroundColor: 'purple', marginRight: hp(0.26) }} />
+                                                <View style={{ height: hp(0.65), width: hp(0.65), borderRadius: hp(0.325), backgroundColor: 'purple', }} />
                                             </View> : null
                                     }
 
@@ -67,20 +66,20 @@ const NotificationDrawer = (props) => {
                         }}
                     />
 
-                    <View style={{ paddingLeft: hp(1.97), marginTop: hp(8) }}>
+                    <View style={{ paddingLeft: hp(1.97), marginTop: hp(6.0) }}>
                         <View style={styles.colorView}>
                             <View style={[styles.colorBox, { backgroundColor: COLORS.blueButton }]} />
-                            <Text>Class</Text>
+                            <Text style={styles.labelColor}>Class</Text>
                         </View>
 
                         <View style={styles.colorView}>
                             <View style={[styles.colorBox, { backgroundColor: COLORS.yellowDark }]} />
-                            <Text>Homework</Text>
+                            <Text style={styles.labelColor}>Homework</Text>
                         </View>
 
                         <View style={styles.colorView}>
                             <View style={[styles.colorBox, { backgroundColor: COLORS.purpleDark }]} />
-                            <Text>Personal</Text>
+                            <Text style={styles.labelColor}>Personal</Text>
                         </View>
                     </View>
                 </View>
@@ -191,6 +190,11 @@ const styles = StyleSheet.create({
         lineHeight: hp(2.86),
         color: COLORS.darkGray,
     },
+    datepickerDrwaer:{
+        paddingTop: hp(4.55),
+        paddingLeft: hp(2.60),
+        paddingRight: hp(2.60),
+    },
     closeNotificationbarMain: {
         position: 'absolute',
         top: hp(2.7),
@@ -256,16 +260,16 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
     },
-    datemainView1: { borderTopLeftRadius: 35, borderBottomLeftRadius: 35, marginVertical: 10, height: 35, width: 45, backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
-    dateMainView2: { borderTopRightRadius: 35, borderBottomRightRadius: 35, marginVertical: 10, height: 35, width: 45, backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
-    dateMAinView3: { marginVertical: 10, height: 35, width: 50, backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center', },
-    datemainView4: { marginVertical: 10, height: 35, width: 50, justifyContent: 'center', alignItems: 'center', },
-    dateSubVIew1: { marginVertical: 10, borderRadius: 20, height: 40, width: 40, backgroundColor: COLORS.buttonGreen, justifyContent: 'center', alignItems: 'center', },
-    dateSubView2: { marginVertical: 10, borderRadius: 17.5, height: 35, width: 35, justifyContent: 'center', alignItems: 'center', },
-    dateSubView3: { marginVertical: 10, borderRadius: 17.5, height: 35, width: 35, backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
-
-    colorBox: { height: 20, width: 20, borderRadius: 5, marginRight: 10 },
-    colorView: { flexDirection: 'row', marginVertical: 10 },
+    datemainView1: { borderTopLeftRadius: hp(50), borderBottomLeftRadius: hp(50), marginVertical: hp(0.30), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
+    dateMainView2: { borderTopRightRadius: hp(50), borderBottomRightRadius: hp(50), marginVertical: hp(0.30), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
+    dateMAinView3: { marginVertical: hp(0.30), height: hp(4.55), width: hp(6.51), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center', },
+    datemainView4: { marginVertical: hp(0.30), height: hp(4.55), width: hp(6.51), justifyContent: 'center', alignItems: 'center', },
+    dateSubVIew1: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.dashboardGreenButton, justifyContent: 'center', alignItems: 'center', },
+    dateSubView2: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), justifyContent: 'center', alignItems: 'center', },
+    dateSubView3: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
+    labelColor:{color:COLORS.menuLightFonts,fontSize: hp(1.56),},
+    colorBox: { height: hp(2.60), width: hp(2.60), borderRadius: hp(0.65), marginRight: hp(1.30) },
+    colorView: { flexDirection: 'row', marginBottom: hp(1.95),alignItems: 'center' },
     bottomButton: {
         position: 'absolute',
         alignSelf: 'flex-end',
