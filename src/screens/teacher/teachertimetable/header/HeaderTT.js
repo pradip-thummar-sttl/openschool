@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -14,6 +14,20 @@ import {
 import PopupAddNewData from "../../../../component/reusable/popup/Popupaddnewdata";
 import { opacity } from "../../../../utils/Constant";
 const HeaderTT = (props) => {
+
+    const [isSearchActive, setSearchActive] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+
+    useEffect(() => {
+        if (!isSearchActive) {
+            props.onClearSearch()
+            this.textInput.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
+
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -35,17 +49,30 @@ const HeaderTT = (props) => {
             </View>
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
-                    <Image
-                        style={styles.userIcon}
-                        source={Images.SearchIcon} />
                     <TextInput
+                        ref={input => { this.textInput = input }}
                         style={[STYLE.commonInput, styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
-                    />
+                        onChangeText={keyword => {
+                            props.onSearchKeyword(keyword);
+                        }} />
+                    <TouchableOpacity
+                        style={styles.userIcon1Parent}
+                        activeOpacity={opacity}
+                        onPress={() => {
+                            isSearchActive ?
+                                setSearchActive(false)
+                                :
+                                setSearchActive(true)
+                        }}>
+                        <Image
+                            style={styles.userIcon1}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.buttonGroup}>
+                {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
                         <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
@@ -68,7 +95,7 @@ const HeaderTT = (props) => {
                         </MenuOptions>
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
@@ -111,11 +138,12 @@ const styles = StyleSheet.create({
     field: {
         position: 'relative',
         width: hp(81.11),
+        justifyContent: 'center',
         marginRight: hp(1.69),
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: hp(4.6),
+        paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
@@ -126,6 +154,18 @@ const styles = StyleSheet.create({
         width: hp(1.9),
         resizeMode: 'contain',
         left: hp(1.43),
+    },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: hp(1.43),
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: hp(1.43),
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
