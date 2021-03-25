@@ -10,9 +10,12 @@ import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
+import { useDispatch } from "react-redux";
+import { setCalendarEventData } from "../../../actions/action";
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
+    const dispatch = useDispatch()
 
     const timeTableData__ = [
         {
@@ -116,11 +119,12 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post(data, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setTimeTableData(res.data)
+                dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
             }

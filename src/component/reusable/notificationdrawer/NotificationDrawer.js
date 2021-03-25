@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -10,10 +10,19 @@ import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/Pixe
 import { Calendar } from 'react-native-calendars';
 import { opacity, Var } from '../../../utils/Constant';
 import Images from "../../../utils/Images";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
 const NotificationDrawer = (props) => {
+    const calEventData = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.calEventData
+    })
+    console.log('cal event data', calEventData)
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
@@ -54,11 +63,16 @@ const NotificationDrawer = (props) => {
                                             </View>
                                     }
                                     {
-                                        markdate.includes(date.dateString) ?
-                                            <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: hp(0.3) }}>
-                                                <View style={{ height: hp(0.65), width: hp(0.65), borderRadius: hp(0.325), backgroundColor: 'purple', marginRight: hp(0.26) }} />
-                                                <View style={{ height: hp(0.65), width: hp(0.65), borderRadius: hp(0.325), backgroundColor: 'purple', }} />
-                                            </View> : null
+                                        calEventData.map((item) => {
+                                            return (
+                                                moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
+                                                    <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                                        {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
+                                                        <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: item.EventColor, }} />
+                                                    </View> : null
+                                            )
+                                        })
+
                                     }
 
                                 </View>

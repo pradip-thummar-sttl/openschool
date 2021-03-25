@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -6,9 +6,11 @@ import { cellWidth, opacity, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
-import Header3 from '../../../component/reusable/header/bulck/Header3';
-import { EndPoints } from "../../../service/EndPoints";
+import Header3 from '../../../component/reusable/header/bulck/Header3'
+import { Var } from "../../../utils/Constant";
+import { useDispatch } from "react-redux";
 import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
 
 const PupilTimetable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -59,6 +61,30 @@ const PupilTimetable = (props) => {
     ]
 
     const [isHide, action] = useState(true);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        // Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        //     setTimeTableLoading(false)
+        //     if (res.code == 200) {
+        //         console.log('response of get all lesson', res)
+        //         setTimeTableData(res.data)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     console.log('response of get all lesson error', err)
+        // })
+
+        Service.get(`${EndPoints.CalenderEvent}6041cf525ff1ce52e5d4d398`, (res) => {
+            console.log('response of calender event is:', res)
+            if (res.code == 200) {
+                dispatch(setCalendarEventData(res.data))
+            }
+        }, (err) => {
+            console.log('response of calender event eror is:', err)
+        })
+    }, [])
     const [timeTableData, setTimeTableData] = useState([])
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
 
