@@ -48,8 +48,8 @@ class Login extends Component {
             Password: password,
             PushToken: "Test",
             Device: "M",
-            OS: "AD",
-            AccessedVia: "tes",
+            OS: Platform.OS,
+            AccessedVia: "Mobile",
         }
         Service.post(data, EndPoints.Login, (res) => {
             console.log('response Login', res)
@@ -128,7 +128,7 @@ class Login extends Component {
                                             activeOpacity={opacity}
                                             onPress={() => this.setPasswordVisibility()}>
                                             <Image
-                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.AddIcon} />
+                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                         </TouchableOpacity>
                                     </View>
                                 </View>
