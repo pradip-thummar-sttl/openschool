@@ -7,6 +7,7 @@ const Images = {
     UserIconLogin: require('../assets/images/icouser2.png'),
     Password: require('../assets/images/icopassword2.png'),
     ShowPassword: require('../assets/images/icoview2.png'),
+    HidePassword: require('../assets/images/hide-password2.png'),
     DayIcon: require('../assets/images/myDay3.png'),
     calnderDashHeaderIcon: require('../assets/images/calendar-dashboard2.png'),
     MoreLinks: require('../assets/images/dashBoardMorelink2.png'),
