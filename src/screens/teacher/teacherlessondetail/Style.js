@@ -494,6 +494,9 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
     },
+    textBox1: {
+        width: '100%',
+    },
     placeholderStyle: {
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
@@ -1095,4 +1098,22 @@ export default StyleSheet.create({
     leftSpace:{
         paddingLeft:hp(3.5),
     },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: 10,
+    },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+    },
+    autocompleteContainer: {
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        zIndex: 10
+      },
 });

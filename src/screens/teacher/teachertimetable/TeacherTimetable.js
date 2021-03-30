@@ -12,6 +12,7 @@ import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../actions/action";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
@@ -73,10 +74,11 @@ const TeacherTimeTable = (props) => {
         timeTableData.forEach(element => {
 
             const day = new Date(element.Date).getDay();
+            console.log('day', element.SubjectName, day);
             const dayOfWeek = isNaN(day) ? null : days[day];
 
             if (dayOfWeek == days[dayKey]) {
-                if (time[timneKey] == (element.StartTime)) {
+                if (time[timneKey].includes(element.StartTime)) {
 
                     let startTime = Number(element.StartTime.replace(':', ''));
                     let endTime = Number(element.EndTime.replace(':', ''));
@@ -103,7 +105,7 @@ const TeacherTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }} />
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59)}} />
             );
         }
     }
@@ -119,7 +121,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post(data, `${EndPoints.GetTimeTable}/605c8a0ba6f46d1225ddaee7`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -134,7 +136,7 @@ const TeacherTimeTable = (props) => {
     }
 
     return (
-        <View style={PAGESTYLE.mainPage}>
+        <View style={{...PAGESTYLE.mainPage, backgroundColor:COLORS.backgroundColorCommon}}>
             <Sidebar
                 moduleIndex={1}
                 hide={() => action(!isHide)}
@@ -149,7 +151,7 @@ const TeacherTimeTable = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => fetchRecord('', '')} />
 
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
+                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top:20, left: 10 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}

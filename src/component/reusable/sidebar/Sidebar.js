@@ -54,8 +54,8 @@ const Sidebar = (props) => {
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitle}>Johney Depp</Text>
-                                <Text style={styles.profileDesi}>Administrator</Text>
+                                <Text style={styles.profileTitle}>Mike Diesel</Text>
+                                <Text style={styles.profileDesi}>Teacher</Text>
                             </View>
                     }
                 </TouchableOpacity>
@@ -145,7 +145,7 @@ const Sidebar = (props) => {
                         isSmall ? null :
                             <>
                                 <View style={styles.profileTextMain}>
-                                    <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                                    <Text style={styles.profileTitleBottom}>Mike Diesel</Text>
                                 </View>
                                 <TouchableOpacity style={styles.moreMenu}>
                                     <Image style={styles.moreIcon} source={Images.SidebarMore} />
