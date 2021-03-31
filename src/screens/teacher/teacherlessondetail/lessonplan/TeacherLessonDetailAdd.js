@@ -17,7 +17,13 @@ import Popupaddrecording from "../../../../component/reusable/popup/Popupaddreco
 import HeaderAddNew from "./header/HeaderAddNew";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import AutoTags from 'react-native-tag-autocomplete';
+import { useEffect } from "react";
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
 
 const TLDetailAdd = (props) => {
     const [date, setDate] = useState(new Date());
@@ -30,8 +36,8 @@ const TLDetailAdd = (props) => {
     const [newItem, setNewItem] = useState('');
     const [itemCheckList, setItemCheckList] = useState([]);
 
-    const [suggestions, setSuggestions] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
-    const [tagsSelected, setTagsSelected] = useState([])
+    const [pupils, setPupils] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
+    const [selectedPupils, setSelectedPupils] = useState([])
 
     const showDatepicker = () => {
         showMode('date');
@@ -51,14 +57,14 @@ const TLDetailAdd = (props) => {
         setItemCheckList(newList)
     }
 
-    const handleDelete = index => {
-        let _tagsSelected = tagsSelected;
-        _tagsSelected.splice(index, 1);
-        setTagsSelected(_tagsSelected)
-    }
-
-    const handleAddition = suggestion => {
-        setTagsSelected(tagsSelected.concat([suggestion]))
+    const pushPupilItem = (isSelected, _index) => {
+        console.log('isSelected', isSelected, _index);
+        if (!isSelected) {
+            const newList = selectedPupils.filter((item, index) => item.name !== pupils[_index].name);
+            setSelectedPupils(newList)
+        } else {
+            setSelectedPupils([...selectedPupils, pupils[_index]])
+        }
     }
 
     const isFieldsValidated = () => {
@@ -71,6 +77,171 @@ const TLDetailAdd = (props) => {
         }
         return true;
     }
+
+    const itemCheckListView = () => {
+        return (
+            <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
+                <View style={STYLE.hrCommon}></View>
+                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                <FlatList
+                    data={itemCheckList}
+                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    renderItem={({ item, index }) => (
+                        <View style={{ margin: 8, }}>
+                            <Text style={{ fontSize: 22 }}>{item}</Text>
+                            <TouchableOpacity
+                                style={PAGESTYLE.userIcon1Parent}
+                                activeOpacity={opacity}
+                                onPress={() => { removeCheckListItem(index) }}>
+                                <Image
+                                    style={PAGESTYLE.userIcon1}
+                                    source={Images.PopupCloseIcon} />
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+                <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
+                    <TextInput
+                        ref={input => { this.item = input }}
+                        style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                        placeholder="Add items your pupil need to prepare before class"
+                        autoCapitalize={false}
+                        maxLength={40}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={text => { setNewItem(text) }} />
+                    <TouchableOpacity
+                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        opacity={opacity}
+                        onPress={() => pushCheckListItem()}>
+                        <Text>ADD ITEM</Text>
+                    </TouchableOpacity>
+                </View>
+                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
+                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                </TouchableOpacity> */}
+            </View>
+        );
+    };
+
+    const pupilListView = () => {
+        return (
+            <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
+                <View style={STYLE.hrCommon}></View>
+                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
+                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                </TouchableOpacity> */}
+                <FlatList
+                    data={pupils}
+                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    renderItem={({ item, index }) => (
+                        <View style={PAGESTYLE.alignRow}>
+                            <CheckBox
+                                style={PAGESTYLE.checkMark}
+                                boxType={'square'}
+                                onCheckColor={COLORS.white}
+                                onFillColor={COLORS.dashboardPupilBlue}
+                                onTintColor={COLORS.dashboardPupilBlue}
+                                tintColor={COLORS.dashboardPupilBlue}
+                                onValueChange={(newValue) => pushPupilItem(newValue, index)}
+                            />
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.name}</Text>
+                        </View>
+                    )}
+                    numColumns={3}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </View>
+        );
+    };
+
+    const subjectsDropDown = () => {
+        return (
+            <View style={PAGESTYLE.dropDownFormInput}>
+                <Text style={PAGESTYLE.subjectText}>Subject</Text>
+                <Menu>
+                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>Select Subject</Text>
+                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 30, } }}>
+                        <MenuOption style={{ padding: 15 }} text='Science'></MenuOption>
+                        <MenuOption style={{ padding: 15 }} text='Math'></MenuOption>
+                        <MenuOption style={{ padding: 15 }} text='English'></MenuOption>
+                        <MenuOption style={{ padding: 15 }} text='Physics'></MenuOption>
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
+    const participantsDropDown = () => {
+        return (
+            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
+                <Text style={PAGESTYLE.subjectText}>Participants</Text>
+                <Menu>
+                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                        <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='Group 2A'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='Group 3B'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='Group C5'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
+    const fromTimeDropDown = () => {
+        return (
+            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                <Text style={PAGESTYLE.subjectText}>Time</Text>
+                <Menu>
+                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                    <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        <Text style={PAGESTYLE.dateTimetextdummy}>From</Text>
+                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
+    const toTimeDropDown = () => {
+        return (
+            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                <Text style={PAGESTYLE.subjectText}> </Text>
+                <Menu>
+                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                    <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        <Text style={PAGESTYLE.dateTimetextdummy}>To</Text>
+                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -88,15 +259,9 @@ const TLDetailAdd = (props) => {
                                 <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
                                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                                 <View style={PAGESTYLE.timedateGrp}>
-                                    <View style={PAGESTYLE.dropDownFormInput}>
-                                        <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                            <TouchableOpacity>
-                                                <Text style={PAGESTYLE.dateTimetextdummy}>English</Text>
-                                            </TouchableOpacity>
-                                            <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
-                                        </View>
-                                    </View>
+
+                                    {subjectsDropDown()}
+
                                     <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
@@ -111,7 +276,7 @@ const TLDetailAdd = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.timedateGrp}>
-                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -123,30 +288,13 @@ const TLDetailAdd = (props) => {
                                             </View>
                                         </View>
                                     </View>
-                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
-                                        <Text style={PAGESTYLE.subjectText}>Time</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                            <View style={[PAGESTYLE.subjectDateTime]}>
-                                                <TouchableOpacity>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
-                                                </TouchableOpacity>
-                                                <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
-                                        <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                            <View style={[PAGESTYLE.subjectDateTime]}>
-                                                <TouchableOpacity>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                            <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
-                                        </View>
-                                    </View>
+                                    
+                                    {fromTimeDropDown()}
+
+                                    {toTimeDropDown()}
+
+                                    {participantsDropDown()}
+
                                 </View>
 
                                 <View style={PAGESTYLE.lessonDesc}>
@@ -162,65 +310,11 @@ const TLDetailAdd = (props) => {
                                     <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                     <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                                 </TouchableOpacity>
-                                <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                                    <View style={STYLE.hrCommon}></View>
-                                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
-                                    <FlatList
-                                        data={itemCheckList}
-                                        style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
-                                        renderItem={({ item, index }) => (
-                                            <View style={{ margin: 8, }}>
-                                                <Text style={{ fontSize: 22 }}>{item}</Text>
-                                                <TouchableOpacity
-                                                    style={PAGESTYLE.userIcon1Parent}
-                                                    activeOpacity={opacity}
-                                                    onPress={() => { removeCheckListItem(index) }}>
-                                                    <Image
-                                                        style={PAGESTYLE.userIcon1}
-                                                        source={Images.PopupCloseIcon} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        )}
-                                        keyExtractor={(item, index) => index.toString()}
-                                    />
-                                    <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
-                                        <TextInput
-                                            ref={input => { this.item = input }}
-                                            style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
-                                            placeholder="Add items your pupil need to prepare before class"
-                                            autoCapitalize={false}
-                                            maxLength={40}
-                                            placeholderTextColor={COLORS.menuLightFonts}
-                                            onChangeText={text => { setNewItem(text) }} />
-                                        <TouchableOpacity
-                                            style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
-                                            opacity={opacity}
-                                            onPress={() => pushCheckListItem()}>
-                                            <Text>ADD</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <TouchableOpacity style={PAGESTYLE.addItem}>
-                                        <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                                        <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                                    <View style={STYLE.hrCommon}></View>
-                                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
-                                    {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                                        <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                                        <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                                    </TouchableOpacity> */}
-                                    <View style={PAGESTYLE.autocompleteContainer}>
-                                        <AutoTags
-                                            suggestions={suggestions}
-                                            tagsSelected={tagsSelected}
-                                            handleAddition={handleAddition}
-                                            handleDelete={handleDelete}
-                                            autoFocus={false}
-                                            placeholder="Add a contact.." />
-                                    </View>
-                                </View>
+
+                                {itemCheckListView()}
+
+                                {pupilListView()}
+
                                 <View style={PAGESTYLE.toggleBoxGrpWrap}>
                                     <View style={STYLE.hrCommon}></View>
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
