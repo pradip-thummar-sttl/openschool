@@ -1,5 +1,6 @@
 const COLORS = {
     black: '#000000',
+    bottomSlideUpBack: 'rgba(0, 0, 0, 0.8)',
     white: '#FFFFFF',
     dotActive: '#12aefb',
     transparent: 'transparent',
@@ -18,6 +19,7 @@ const COLORS = {
     backgroundColorCommon: '#F9FAFC',
     red: '#FF200D',
     orage: '#FFB100',
+    dashBoard: '#F0F1F5',
     dashboardBorder: '#ECEDF2',
     dashboardPupilBlue: '#50A7F0',
     lightGreen: '#C4F7D2',

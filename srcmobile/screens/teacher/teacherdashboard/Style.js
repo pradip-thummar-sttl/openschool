@@ -10,6 +10,13 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
     },
+    padLeftRight: {
+        flex: 1,
+    },
+    paddMainDash: {
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+    },
     myDay: {
         backgroundColor: COLORS.orage,
         paddingRight: hp(2.60),
@@ -17,19 +24,22 @@ export default StyleSheet.create({
         flexDirection: 'row',
         borderRadius: hp(1),
         justifyContent: 'space-between',
-        height: hp(8.5),
+        height: hp(7),
+    },
+    rowProfile: {
+        flexDirection: 'row',
     },
     rightContent: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     dayIcon: {
-        width: hp(4),
+        width: hp(2.86),
         resizeMode: 'contain',
     },
     dayTitle: {
         color: COLORS.white,
-        fontSize: hp(2.6),
+        fontSize: hp(2.03),
         fontFamily: FONTS.fontBold,
         paddingLeft: hp(1.30),
     },
@@ -37,57 +47,45 @@ export default StyleSheet.create({
         backgroundColor: COLORS.white,
         position: 'absolute',
         top: 0,
-        right: hp(5.20),
+        right: hp(3),
         textAlign: 'center',
         borderBottomLeftRadius: hp(1.04),
         borderBottomRightRadius: hp(1.04),
         paddingBottom: hp(2.04),
         paddingLeft: hp(1.04),
         paddingRight: hp(1.04),
-        paddingTop: hp(1.1),
-        width: hp(6.9),
-        height: hp(7.3),
+        paddingTop: hp(0.65),
+        width: hp(6.5),
+        height: hp(6.25),
         shadowColor: COLORS.black,
         shadowOffset: {width: 0,height: hp(1.03),},
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
+    },
+    timingMain: {
+        marginLeft: hp(2)
+    },
+    groupPupil: {
+        left: hp(5.2),
+        bottom: hp(0.6),
     },
     date: {
         fontSize: hp(1.82),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
-        marginBottom: hp(0.3),
     },
     ScrollViewFlatlist:{
-        height: hp(60),
-    },
-    arrowSelectedTab: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderTopWidth: hp(1.95),
-        borderRightWidth: hp(1.95),
-        borderBottomWidth: hp(1.95),
-        borderLeftWidth: hp(1.95),
-        position: 'absolute',
-        right: 0,
-        // top: hp(3.90),
-        // left: hp(-3.90),
-        borderTopColor: 'transparent',
-        borderRightColor: COLORS.white,
-        borderBottomColor: 'transparent',
-        borderLeftColor: 'transparent',
+        height: hp(60.28),
     },
     month: {
-        fontSize: hp(1.82),
+        fontSize: hp(1.56),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         textAlign: 'center',
     },
     moreDashboard: {
-        width: hp(0.9),
+        width: hp(0.7),
         resizeMode: 'contain',
     },
     whiteBoard: {
@@ -108,9 +106,11 @@ export default StyleSheet.create({
     },
     dashBoardBoxes: {
         flexDirection: 'row',
-        marginBottom: hp(5.85),
+        marginBottom: hp(3.90),
         marginLeft: hp(-0.97),
         marginRight: hp(-0.97),
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
     },
     boxDash: {
         paddingLeft: hp(0.97),
@@ -124,6 +124,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         position: 'relative',
         height: hp(12),
+        width: hp(27.86),
     },
     greenBox: {
         backgroundColor: COLORS.lightGreen,
@@ -143,10 +144,10 @@ export default StyleSheet.create({
     },
     calIcon: {
         resizeMode:'contain',
-        width: hp(1.76),
+        width: hp(1.7),
     },
     titleBox: {
-        fontSize: hp(2.08),
+        fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
         position: 'relative',
         zIndex: 9,
@@ -162,18 +163,19 @@ export default StyleSheet.create({
         height: hp(11.86),
     },
     leftTabbing: {
-        width: '38%',
+        width: '100%',
         borderRightWidth:1,
         borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
-        width: '62%',
+        width: '100%',
+        position:'relative',
     },
     item: {
         flexDirection: 'row',
-        paddingLeft: hp(2.21),
+        paddingLeft: hp(1.95),
         paddingTop: hp(2.60),
-        paddingRight: hp(2.21),
+        paddingRight: hp(1.95),
         paddingBottom: hp(2.60),
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -183,9 +185,9 @@ export default StyleSheet.create({
     border: {
         height: hp(5.85),
         backgroundColor: COLORS.borderLesoon,
-        padding: hp(0.39),
+        padding: hp(0.3),
         borderRadius: hp(5),
-        marginRight: hp(2.1),        
+        marginRight: hp(1.95),        
     },
     classSubject: {
         flexDirection: 'row',
@@ -195,20 +197,23 @@ export default StyleSheet.create({
     subjectName: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
-        fontFamily: FONTS.fontSemiBold,
+        fontFamily: FONTS.fontRegular,
+    },
+    subjectMain: {
+        right: hp(0.5),
     },
     subject: {
-        fontSize: hp(2),
+        fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
     },
     subjecRow: {
-        marginLeft: hp(0.8),
+        marginLeft: hp(0),
         flexDirection: 'row',
         alignItems: 'center',
     },
     groupName: {
-        borderWidth: 2,
+        borderWidth: hp(0.26),
         borderColor: COLORS.borderGrp,
         borderRadius: hp(0.7),
         color: COLORS.grpColor,
@@ -226,15 +231,17 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     tabcontent: {
-        padding: hp(3.90),
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
         paddingBottom: hp(2.60),
+        paddingTop: hp(3),
     },
     titleTab: {
-        fontSize: hp(3.125),
-        fontFamily: FONTS.fontBold,
-        lineHeight: hp(4.55),
+        fontSize: hp(2.86),
+        fontFamily: FONTS.fontSemiBold,
+        lineHeight: hp(3.38),
         color: COLORS.darkGray,
-        marginBottom: hp(1.95),
+        marginBottom: hp(1.56),
     },
     timedateGrp: {
         flexDirection: 'row',
@@ -242,12 +249,12 @@ export default StyleSheet.create({
     dateWhiteBoard: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(3.25),
+        marginRight: hp(1.69),
     },
     datetimeText: {
         fontSize: hp(1.82),
-        lineHeight: hp(2.60),
-        marginLeft: hp(0.9),
+        lineHeight: hp(2),
+        marginLeft: hp(0.6),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
     },
@@ -316,6 +323,7 @@ export default StyleSheet.create({
     },
     requirementofClass: {
         marginTop: hp(4.81),
+        marginBottom: hp(13),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -342,21 +350,21 @@ export default StyleSheet.create({
     },
     lessonstartButton: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
         alignItems: 'center',
-    },
-    buttonGrp: {
-        marginLeft: hp(2.21),
+        justifyContent: 'space-between',
+        backgroundColor: COLORS.white,
+        borderTopWidth: 1,
+        borderColor: COLORS.borderGrp,
+        paddingTop: hp(2),
+        paddingBottom: hp(2),
     },
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
     },
     pupilDashboard: {
-        paddingLeft: hp(3.125),
-        paddingTop: hp(2.21),
-        paddingRight: hp(2.21),
-        paddingBottom: hp(3.51),
+        paddingLeft: hp(1.3),
+        paddingRight: hp(1.3),
     },
     pupilTableHeadingMain: {
         width: hp(35.80),
@@ -403,12 +411,13 @@ export default StyleSheet.create({
     pupilData: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical:10
+        paddingBottom:hp(2),
+        paddingTop:hp(2),
+        borderBottomWidth: 1,
+        borderColor: COLORS.dashBoard,
     },
     pupilProfile: {
-        width: hp(35.80),
-        flexDirection: 'row',
-        alignItems: 'center',
+        width: hp(26),
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -450,32 +459,37 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     rewardStar: {
-        width: hp(5.5),
-        marginRight: hp(0.91),
+        width: hp(2.60),
+        marginRight: hp(1),
     },
     rewardStartIcon: {
-        width: hp(2.15),
+        width: hp(2),
         resizeMode: 'contain',
         alignSelf:'center',
     },
     pupilDetailLink: {
-        width: hp(8),
+        width: hp(1.95),
         alignItems: 'flex-end',
     },
     pupilDetaillinkIcon: {
-        width: hp(1),
+        width: hp(0.9),
         resizeMode: 'contain',
     },
+    topListingArrow: {
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
     pupilImage: {
-        width: hp(3.7),
-        height: hp(3.7),
+        width: hp(3.64),
+        height: hp(3.64),
         borderRadius: hp(100),
         backgroundColor: COLORS.lightGrayPupil,
-        marginRight: hp(1.69),
+        marginRight: hp(1.5),
+        top: hp(1.1),
     },
     pupilName: {
         fontSize: hp(1.82),
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
     },
     pupilgroupName: {

@@ -100,13 +100,13 @@ const NotificationDrawer = (props) => {
                 :
                 <View>
                     <View style={styles.drawerTitleMain}>
-                        <Text style={styles.drawerTitle} >My Notifications</Text>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
                             onPress={() => props.navigation.closeDrawer()}
                         >
-                            <Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIcon} />
+                            <Image source={Images.backArrow} style={styles.closeIcon} />
                         </TouchableOpacity>
+                        <Text style={styles.drawerTitle} >My Notifications</Text>
                     </View>
                     <ScrollView style={styles.notificationmain} showsVerticalScrollIndicator={false}>
                         <View>
@@ -192,11 +192,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.commonBorderColor,
         paddingLeft: hp(1.95),
-        paddingTop: hp(3.25),
-        paddingBottom: hp(3.25),
+        paddingTop: hp(5.2),
+        paddingBottom: hp(1.6),
         paddingRight: hp(1.95),
         position: 'relative',
         zIndex: 9,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     drawerTitle: {
         fontSize: hp(2.08),
@@ -210,14 +212,12 @@ const styles = StyleSheet.create({
         paddingRight: hp(2.60),
     },
     closeNotificationbarMain: {
-        position: 'absolute',
-        top: hp(2.7),
+        position: 'relative',        
         zIndex: 9,
-        right: hp(1.95),
-        zIndex: 9,
+        marginRight: hp(2),
     },
     closeIcon: {
-        width: hp(3),
+        width: hp(2.4),
         resizeMode: 'contain',
     },
     classDetail: {
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         left: 0,
         bottom: 0,
-        width: '100%',
+        width: '100%',        
     },
     notificationmain: {
         height: '90%',
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         paddingTop: hp(1.82),
-        paddingBottom: hp(1.82),
+        paddingBottom: hp(4.2),
         shadowColor: '#000',
         shadowOffset: { width: 0, height: -1 },
         shadowOpacity: 0.2,

@@ -21,8 +21,6 @@ const Popupuser = (props) => {
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
-                    <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
-                    <View style={STYLE.userProfile}><Image style={STYLE.userProfileimage} source={require('../../../assets/images/userProfilePopup.png')} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={STYLE.popupTitle}>You are starting an instant call</Text>
                         <Text style={STYLE.popupText}>Share these joining info with others you want in the call:</Text>
@@ -50,11 +48,11 @@ export default Popupuser;
 const styles = StyleSheet.create({
     field: {
         width: hp(42.96),
-        marginBottom: hp(5.85),
+        marginBottom: hp(3),
     },
     commonInputTextarea: {
-        width: hp(36.97),
-        height: hp(10.67),
+        width: '75%',
+        height: hp(11),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1.3),
@@ -71,11 +69,11 @@ const styles = StyleSheet.create({
     copyInputParent: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
     },
     copyIcon: {
         width: hp(1.98),
         resizeMode: 'contain',
+        marginLeft: hp(2),
     },
     copyIconMain: {
         top: hp(0.75),

@@ -32,22 +32,30 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
-        paddingTop: hp(3),
-        paddingBottom: hp(2)
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        paddingTop: hp(5),
+        paddingBottom: hp(1),
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: 2,},
+        shadowOpacity: 0.01,
+        shadowRadius: 5,
+        elevation: 1,
+        marginBottom: hp(1.95),
+        backgroundColor: COLORS.white,
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.34),
         fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGray,
     },
     notificationBar: {
         marginLeft: hp(1.25),
     },
     massagesIcon: {
-        width: wp(6),
-        height: hp(6),
-        resizeMode: 'contain',
+        width: hp(5.20),
+        height: hp(5.20),
+        resizeMode: 'cover',
     },
     menuIconWithTitle:{
         flexDirection: 'row',
@@ -56,6 +64,6 @@ const styles = StyleSheet.create({
     menuIcon: {
         width: hp(2.60),
         resizeMode: 'contain',
-        marginRight: hp(2.60),
+        marginRight: hp(1.56),
     },
 });
