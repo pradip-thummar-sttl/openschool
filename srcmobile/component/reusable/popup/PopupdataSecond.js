@@ -162,6 +162,7 @@ const PopupdataSecond = (props) => {
                                                 placeholder='Name of event'
                                                 value={event}
                                                 placeholderStyle={styles.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.lightGray}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={eventName => setEvent(eventName)} />
                                         </View>
