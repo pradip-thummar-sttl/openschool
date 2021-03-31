@@ -12,6 +12,7 @@ import { opacity } from "../../../utils/Constant";
 import Header from "./Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import { User } from "../../../utils/Model";
 var moment = require('moment');
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>

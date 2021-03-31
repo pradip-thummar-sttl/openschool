@@ -16,14 +16,51 @@ import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderAddNew from "./header/HeaderAddNew";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
+import DocumentPicker from 'react-native-document-picker';
 
 const TLDetailAdd = (props) => {
+    const [materialArr, setMaterialArr] = useState([])
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [isHide, action] = useState(true);
-
     const [lessonTopic, setLessonTopic] = useState('');
     const [description, setDescription] = useState('');
+
+    const addMaterial = () => {
+        var arr = [...materialArr]
+        try {
+            DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.allFiles],
+            }).then((results) => {
+                for (const res of results) {
+                    console.log(
+                        res.uri,
+                        res.type, // mime type
+                        res.name,
+                        res.size
+                    );
+                    arr.push(res)
+                    
+                }
+                console.log('hello response arr', arr)
+                setMaterialArr(arr)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const removeObject = (index1, item) => {
+        var array = [...materialArr];
+        array.splice(index1, 1);
+        setMaterialArr(array)
+        console.log('hello material', array)
+    }
 
     const showDatepicker = () => {
         showMode('date');
@@ -171,14 +208,29 @@ const TLDetailAdd = (props) => {
                                 <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                 <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                             </View>
-                            <View style={PAGESTYLE.uploadBlock}>
+                            <TouchableOpacity onPress={() => addMaterial()} style={PAGESTYLE.uploadBlock}>
                                 <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                            </View>
+                            </TouchableOpacity>
+
+                            {
+                                materialArr.map((item, index) => {
+                                    return (
+                                        <View style={PAGESTYLE.fileGrp}>
+                                            <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                            </TouchableOpacity>
+                                        </View>
+                                    )
+                                })
+                            }
+
+
                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                 <TouchableOpacity
                                     style={PAGESTYLE.buttonGrp}
                                     activeOpacity={opacity}
-                                    onPress={()=> props.navigation.navigate('TLVideoGallery')}>
+                                    onPress={() => props.navigation.navigate('TLVideoGallery')}>
                                     <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                                 </TouchableOpacity>
                             </View>
