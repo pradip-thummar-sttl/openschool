@@ -13,6 +13,7 @@ import { EndPoints } from "../../../service/EndPoints";
 import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
+import { User } from "../../../utils/Model";
 
 const Item = ({ onPress, style, item }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
@@ -113,7 +114,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // if(isDesignBuild)
         //     return true
 
-        Service.post({}, `${EndPoints.GetLessionById}/605c8a0ba6f46d1225ddaee7`, (res) => {
+        Service.post({}, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -126,7 +127,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.log('response of get all lesson error', err)
         })
 
-        Service.get(`${EndPoints.PupilByTeacherId}/605c8a0ba6f46d1225ddaee7`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all pupil data', res)

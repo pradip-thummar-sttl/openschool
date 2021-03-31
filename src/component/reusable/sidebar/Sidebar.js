@@ -6,6 +6,8 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { opacity } from "../../../utils/Constant";
+import Users from "../../../screens/users/Users";
+import { User } from "../../../utils/Model";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -54,8 +56,8 @@ const Sidebar = (props) => {
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitle}>Mike Diesel</Text>
-                                <Text style={styles.profileDesi}>Teacher</Text>
+                                <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text style={styles.profileDesi}>{User.user.UserType}</Text>
                             </View>
                     }
                 </TouchableOpacity>

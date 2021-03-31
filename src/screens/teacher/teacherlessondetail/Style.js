@@ -353,6 +353,7 @@ export default StyleSheet.create({
     },
     downloadIcon: {
         width: hp(2.01),
+        padding:wp(0.5),
         resizeMode: 'contain',
     },
     fileName: {
@@ -366,7 +367,9 @@ export default StyleSheet.create({
     },
     grpThumbVideo: {
         width: hp(31.90),
-        resizeMode: 'contain',
+        height:wp(13),
+        marginVertical:wp(2),
+        resizeMode: 'stretch',
     },
     subLineTitle: {
         marginTop: hp(-3.5),
@@ -1152,5 +1155,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
+    },
+    uploadBlock: {
+        alignItems: 'center',
     },
 });

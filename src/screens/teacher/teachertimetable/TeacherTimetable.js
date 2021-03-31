@@ -13,6 +13,7 @@ import { Service } from "../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { User } from "../../../utils/Model";
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
@@ -121,7 +122,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post(data, `${EndPoints.GetTimeTable}/605c8a0ba6f46d1225ddaee7`, (res) => {
+        Service.post({}, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
