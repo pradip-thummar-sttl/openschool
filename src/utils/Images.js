@@ -88,5 +88,11 @@ const Images = {
     DropArrow: require('../assets/images/down-arrow2.png'),
     timeTableClock: require('../assets/images/timetable-clock2.png'),
     trashIcon: require('../assets/images/trash2.png'),
+    ScreenAndCameraRecordingBack: require('../assets/images/image-amazon2.png'),
+    recordingTimerIcon: require('../assets/images/recording-timer2.png'),
+    moreHorizontal: require('../assets/images/more-horizontal2.png'),
+    recordButton: require('../assets/images/stop2.png'),
+    pauseButton: require('../assets/images/play-pause2.png'),
+    userVideo: require('../assets/images/teacher-user2.png'),
 }
 export default Images;
