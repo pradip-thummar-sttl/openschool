@@ -64,7 +64,7 @@ const TeacherLessonList = (props) => {
         return (
             <Pupillist
                 item={item}
-                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail')}
+                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { 'data': item })}
             />
         );
     };

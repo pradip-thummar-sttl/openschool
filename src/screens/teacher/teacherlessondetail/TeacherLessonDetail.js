@@ -15,6 +15,7 @@ import HeaderHWS from "./header/HeaderHWS";
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
+    const [lessonData, setLessonData] = useState(props.route.params.data);
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -27,6 +28,7 @@ const TeacherLessonDetail = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 {tabIndex == 0 ?
                     <HeaderLP
+                        lessonData={lessonData}
                         navigateToBack={() => props.navigation.goBack()}
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
@@ -64,7 +66,7 @@ const TeacherLessonDetail = (props) => {
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.navigate('TLDetailEdit')}>
+                                onPress={() => props.navigation.navigate('TLDetailEdit', {'data': lessonData})}>
                                 <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
                             </TouchableOpacity>
                         </View>
@@ -72,7 +74,7 @@ const TeacherLessonDetail = (props) => {
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {tabIndex == 0 ?
-                        <TLDetail />
+                        <TLDetail lessonData={lessonData} />
                         : tabIndex == 1 ?
                             <TLHomeWork navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
