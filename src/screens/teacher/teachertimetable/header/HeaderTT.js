@@ -13,6 +13,8 @@ import {
 } from 'react-native-popup-menu';
 import PopupAddNewData from "../../../../component/reusable/popup/Popupaddnewdata";
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderTT = (props) => {
 
     const [isSearchActive, setSearchActive] = useState(false)
@@ -31,7 +33,7 @@ const HeaderTT = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                <Text style={styles.mainTitle}>TimeTable - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity
                         onPress={() => props.onCalenderPress()}

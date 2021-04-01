@@ -91,6 +91,7 @@ const PopupdataSecondPupil = (props) => {
                                                 multiline={false}
                                                 placeholder='Name of event'
                                                 placeholderStyle={styles.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.lightGray}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={eventName => setEvent(eventName)} />
                                         </View>

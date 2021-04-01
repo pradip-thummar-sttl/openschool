@@ -15,8 +15,8 @@ import { EndPoints } from "../../../service/EndPoints";
 import { useSelector } from "react-redux";
 import moment from "moment";
 
-const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
-const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
+const markdate = ["2021-03-26", "2021-03-27"]
+const periodDate = ["2021-03-22", "2021-03-23", "2021-03-24", "2021-03-25", "2021-03-26", "2021-03-27", "2021-03-28"]
 const NotificationDrawer = (props) => {
     const calEventData = useSelector(state => {
         // console.log('state of user',state)
@@ -46,32 +46,37 @@ const NotificationDrawer = (props) => {
                                                     :
                                                     <View style={styles.dateMainView2}>
                                                         < View style={styles.dateSubVIew1}>
-                                                            <Text style={{ fontSize: hp(1.82),textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                            <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
                                                         </View>
                                                     </View>
                                                 :
                                                 <View style={styles.dateMAinView3}>
                                                     < View style={styles.dateSubView2}>
-                                                        <Text style={{ fontSize: hp(1.82),textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                        <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                                     </View>
                                                 </View>
                                             :
                                             <View style={styles.datemainView4}>
                                                 < View style={styles.dateSubView3}>
-                                                    <Text style={{ fontSize: hp(1.82),textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                    <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                                 </View>
                                             </View>
                                     }
                                     {
-                                        calEventData.map((item) => {
-                                            return (
-                                                moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
-                                                    <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                                                        {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
-                                                        <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: item.EventColor, }} />
-                                                    </View> : null
-                                            )
-                                        })
+                                        // calEventData.map((item) => {
+                                        //     return (
+                                        //         moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
+                                        //             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                        //                 {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
+                                        //                 <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: item.EventColor, }} />
+                                        //             </View> : null
+                                        //     )
+                                        // })
+                                        markdate.includes(date.dateString) ?
+                                            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} />
+                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: '#FF0022', }} />
+                                            </View> : null
 
                                     }
 
@@ -204,7 +209,7 @@ const styles = StyleSheet.create({
         lineHeight: hp(2.86),
         color: COLORS.darkGray,
     },
-    datepickerDrwaer:{
+    datepickerDrwaer: {
         paddingTop: hp(4.55),
         paddingLeft: hp(2.60),
         paddingRight: hp(2.60),
@@ -281,9 +286,9 @@ const styles = StyleSheet.create({
     dateSubVIew1: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.dashboardGreenButton, justifyContent: 'center', alignItems: 'center', },
     dateSubView2: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), justifyContent: 'center', alignItems: 'center', },
     dateSubView3: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
-    labelColor:{color:COLORS.menuLightFonts,fontSize: hp(1.56),},
+    labelColor: { color: COLORS.menuLightFonts, fontSize: hp(1.56), },
     colorBox: { height: hp(2.60), width: hp(2.60), borderRadius: hp(0.65), marginRight: hp(1.30) },
-    colorView: { flexDirection: 'row', marginBottom: hp(1.95),alignItems: 'center' },
+    colorView: { flexDirection: 'row', marginBottom: hp(1.95), alignItems: 'center' },
     bottomButton: {
         position: 'absolute',
         alignSelf: 'flex-end',

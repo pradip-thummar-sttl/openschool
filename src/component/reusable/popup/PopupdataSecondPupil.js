@@ -91,6 +91,7 @@ const PopupdataSecondPupil = (props) => {
                                                 multiline={false}
                                                 placeholder='Name of event'
                                                 placeholderStyle={styles.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.lightGray}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={eventName => setEvent(eventName)} />
                                         </View>
@@ -128,6 +129,7 @@ const PopupdataSecondPupil = (props) => {
                                                 multiline={false}
                                                 placeholder='Enter Location'
                                                 placeholderStyle={styles.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.lightGray}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={location => setLocation(location)} />
                                         </View>

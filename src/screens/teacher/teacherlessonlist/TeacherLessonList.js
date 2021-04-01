@@ -12,6 +12,7 @@ import { opacity } from "../../../utils/Constant";
 import Header from "./Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import { User } from "../../../utils/Model";
 var moment = require('moment');
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
@@ -84,7 +85,7 @@ const TeacherLessonList = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post(data, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
