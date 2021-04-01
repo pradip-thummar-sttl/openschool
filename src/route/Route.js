@@ -34,6 +34,7 @@ import TLDetailAdd from '../screens/teacher/teacherlessondetail/lessonplan/Teach
 import PupilTimetable from '../screens/pupil/pupiltimetable/PupilTimetable';
 import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
 import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkSubmitted';
+import ScreenAndCameraRecording from '../screens/teacher/screenandcamera/ScreenandCamera';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -51,7 +52,8 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="Splash">
+        <Stack.Navigator headerMode='none' initialRouteName="ScreenAndCameraRecording">
+            <Stack.Screen name="ScreenAndCameraRecording" component={ScreenAndCameraRecording} />
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Introduction" component={Introduction} />

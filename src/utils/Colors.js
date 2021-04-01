@@ -46,6 +46,7 @@ const COLORS = {
     MenuSelectedback: '#F3F5F9',
     periodColor:'rgba(207,237,254,1)',
     daySelect:'#EDF0F6',
+    controlBack: 'rgba(37,40,42,0.5)',
 }
 
 export default COLORS;
