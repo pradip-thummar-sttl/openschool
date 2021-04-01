@@ -37,16 +37,22 @@ const TLDetailAdd = (props) => {
     const [description, setDescription] = useState('');
 
     const [newItem, setNewItem] = useState('');
-    const [itemCheckList, setItemCheckList] = useState([]);
-
-    const [pupils, setPupils] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
-    const [selectedPupils, setSelectedPupils] = useState([])
 
     const [subjects, setSubjects] = useState([])
-    const [pupilss, setPupilss] = useState([])
     const [participants, setParticipants] = useState([])
+    const [itemCheckList, setItemCheckList] = useState([]);
+    const [pupils, setPupils] = useState([]);
+
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+
+    const [selectedSubject, setSelectedSubject] = useState('')
+    const [selectedFromTime, setSelectedFromTime] = useState('')
+    const [selectedToTime, setSelectedToTime] = useState('')
+    const [selectedParticipants, setSelectedParticipants] = useState('')
+    const [selectedPupils, setSelectedPupils] = useState('')
+
     useEffect(() => {
-        Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             console.log('response of GetSubjectBySchoolId response', res)
             if (res.code == 200) {
                 setSubjects(res.data)
@@ -71,7 +77,7 @@ const TLDetailAdd = (props) => {
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             console.log('response of GetPupilByTeacherId response', res)
             if (res.code == 200) {
-                setPupilss(res.data)
+                setPupils(res.data)
             } else {
                 showMessage(res.message)
             }
@@ -228,7 +234,7 @@ const TLDetailAdd = (props) => {
                                 tintColor={COLORS.dashboardPupilBlue}
                                 onValueChange={(newValue) => pushPupilItem(newValue, index)}
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.name}</Text>
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
                     )}
                     numColumns={3}
@@ -242,16 +248,18 @@ const TLDetailAdd = (props) => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                        <Text style={PAGESTYLE.dateTimetextdummy}>Select Subject</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 30, } }}>
-                        <MenuOption style={{ padding: 15 }} text='Science'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='Math'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='English'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='Physics'></MenuOption>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={subjects}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -262,17 +270,18 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedParticipants(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 2A'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 3B'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group C5'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
+                        <FlatList
+                            data={participants}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -283,18 +292,19 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>From</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -305,23 +315,36 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}> </Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>To</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
         );
     };
+
+    const saveLesson = () => {
+        console.log('CLICKED', selectedSubject);
+        console.log('CLICKED', selectedFromTime);
+        console.log('CLICKED', selectedToTime);
+        console.log('CLICKED', selectedSubject);
+        console.log('CLICKED', selectedParticipants);
+
+        if (isFieldsValidated()) {
+            // Call Add Lesson API
+        }
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -331,7 +354,9 @@ const TLDetailAdd = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
-                <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
+                <HeaderAddNew
+                    navigateToBack={() => { props.navigation.goBack() }}
+                    saveLesson={() => { saveLesson() }} />
                 <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>

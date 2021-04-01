@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity } from "../../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
@@ -22,6 +22,11 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { useEffect } from "react";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import MESSAGE from "../../../../utils/Messages";
+
 
 const TLDetailEdit = (props) => {
     const [date, setDate] = useState(new Date());
@@ -35,11 +40,60 @@ const TLDetailEdit = (props) => {
         }
     }, [lessonData])
 
+    const [lessonTopic, setLessonTopic] = useState('');
+    const [description, setDescription] = useState('');
+
     const [newItem, setNewItem] = useState('');
     const [itemCheckList, setItemCheckList] = useState([]);
 
-    const [pupils, setPupils] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
-    const [selectedPupils, setSelectedPupils] = useState([])
+    const [subjects, setSubjects] = useState([])
+    const [participants, setParticipants] = useState([])
+    const [pupils, setPupils] = useState([]);
+
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+
+    const [selectedSubject, setSelectedSubject] = useState('')
+    const [selectedFromTime, setSelectedFromTime] = useState('')
+    const [selectedToTime, setSelectedToTime] = useState('')
+    const [selectedParticipants, setSelectedParticipants] = useState('')
+    const [selectedPupils, setSelectedPupils] = useState('')
+
+    useEffect(() => {
+        Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setSubjects(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+
+        Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
+            console.log('response of GetParticipants response', res)
+            if (res.code == 200) {
+                setParticipants(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetParticipants', err)
+        })
+
+        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+            console.log('response of GetPupilByTeacherId response', res)
+            if (res.code == 200) {
+                setPupils(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetPupilByTeacherId', err)
+        })
+
+
+    }, [])
 
     const showDatepicker = () => {
         showMode('date');
@@ -57,6 +111,17 @@ const TLDetailEdit = (props) => {
     const removeCheckListItem = (_index) => {
         const newList = itemCheckList.filter((item, index) => index !== _index);
         setItemCheckList(newList)
+    }
+
+    const isFieldsValidated = () => {
+        if (!lessonTopic) {
+            showMessage(MESSAGE.topic)
+            return false;
+        } else if (!description) {
+            showMessage(MESSAGE.description);
+            return false;
+        }
+        return true;
     }
 
     const itemCheckListView = () => {
@@ -129,7 +194,7 @@ const TLDetailEdit = (props) => {
                                 tintColor={COLORS.dashboardPupilBlue}
                                 onValueChange={(newValue) => pushPupilItem(newValue, index)}
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.name}</Text>
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
                     )}
                     numColumns={3}
@@ -143,16 +208,18 @@ const TLDetailEdit = (props) => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                        <Text style={PAGESTYLE.dateTimetextdummy}>Select Subject</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 30, } }}>
-                        <MenuOption style={{ padding: 15 }} text='Science'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='Math'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='English'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='Physics'></MenuOption>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={subjects}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -163,17 +230,18 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedParticipants(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{lessonData.GroupName}</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 2A'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 3B'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group C5'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
+                        <FlatList
+                            data={participants}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -184,18 +252,19 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{lessonData.StartTime}</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -206,23 +275,36 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}> </Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{lessonData.EndTime}</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
         );
     };
+
+    const saveLesson = () => {
+        console.log('CLICKED', selectedSubject);
+        console.log('CLICKED', selectedFromTime);
+        console.log('CLICKED', selectedToTime);
+        console.log('CLICKED', selectedSubject);
+        console.log('CLICKED', selectedParticipants);
+
+        if (isFieldsValidated()) {
+            // Call Add Lesson API
+        }
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -235,22 +317,17 @@ const TLDetailEdit = (props) => {
                 <HeaderUpdate
                     lessonData={lessonData}
                     navigateToBack={() => props.navigation.goBack()}
-                    onAlertPress={() => props.navigation.openDrawer()} />
+                    onAlertPress={() => props.navigation.openDrawer()}
+                    saveLesson={() => { saveLesson() }} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                             <View style={STYLE.hrCommon}></View>
                             <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                             <View style={PAGESTYLE.timedateGrp}>
-                                <View style={PAGESTYLE.dropDownFormInput}>
-                                    <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                                    <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDown]}>
-                                        <TouchableOpacity>
-                                            <Text style={PAGESTYLE.dateTimetextdummy}>{lessonData.SubjectName}</Text>
-                                        </TouchableOpacity>
-                                        <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />
-                                    </View>
-                                </View>
+
+                                {subjectsDropDown()}
+
                                 <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
                                     <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
@@ -347,9 +424,21 @@ const TLDetailEdit = (props) => {
                                     null
                                 }
                             </View>
-                            <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                            </View>
+                            {lessonData.RecommendedList.length > 0 ?
+                                <FlatList
+                                    data={lessonData.RecommendedList}
+                                    style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                    renderItem={({ item, index }) => (
+                                        <View style={PAGESTYLE.thumbVideo}>
+                                            <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                                        </View>
+                                    )}
+                                    numColumns={2}
+                                    keyExtractor={(item, index) => index.toString()}
+                                />
+                                :
+                                null
+                            }
                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                 <TouchableOpacity
                                     style={PAGESTYLE.buttonGrp}

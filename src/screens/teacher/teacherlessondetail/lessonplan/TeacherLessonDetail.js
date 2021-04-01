@@ -138,9 +138,21 @@ const TLDetail = (props) => {
                         }
                     </View>
 
-                    <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                    </View>
+                    {props.lessonData.RecommendedList.length > 0 ?
+                        <FlatList
+                            data={props.lessonData.RecommendedList}
+                            style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                            renderItem={({ item, index }) => (
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                                </View>
+                            )}
+                            numColumns={2}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                        :
+                        null
+                    }
                     <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         {props.lessonData.RecordedLessonName ?

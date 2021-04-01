@@ -24,7 +24,10 @@ const HeaderAddNew = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity
+                        style={styles.buttonGroup}
+                        activeOpacity={opacity}
+                        onPress={() => props.saveLesson()}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                     </TouchableOpacity>
