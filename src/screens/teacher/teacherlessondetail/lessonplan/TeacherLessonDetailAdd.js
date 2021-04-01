@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -17,7 +17,6 @@ import Popupaddrecording from "../../../../component/reusable/popup/Popupaddreco
 import HeaderAddNew from "./header/HeaderAddNew";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { useEffect } from "react";
 import {
     Menu,
     MenuOptions,
@@ -25,6 +24,9 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import DocumentPicker from 'react-native-document-picker';
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
 
 const TLDetailAdd = (props) => {
     const [materialArr, setMaterialArr] = useState([])
@@ -39,6 +41,47 @@ const TLDetailAdd = (props) => {
 
     const [pupils, setPupils] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
     const [selectedPupils, setSelectedPupils] = useState([])
+
+    const [subjects, setSubjects] = useState([])
+    const [pupilss, setPupilss] = useState([])
+    const [participants, setParticipants] = useState([])
+    useEffect(() => {
+        Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user._id}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setSubjects(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+
+        Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
+            console.log('response of GetParticipants response', res)
+            if (res.code == 200) {
+                setParticipants(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetParticipants', err)
+        })
+
+        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+            console.log('response of GetPupilByTeacherId response', res)
+            if (res.code == 200) {
+                setPupilss(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetPupilByTeacherId', err)
+        })
+
+
+    }, [])
+
     const addMaterial = () => {
         console.log('hihihihihihi')
         var arr = [...materialArr]
