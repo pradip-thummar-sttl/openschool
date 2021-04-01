@@ -8,6 +8,7 @@ import HeaderSixteen from "../../../component/reusable/header/bulck/Header16";
 import PAGESTYLE from './Style';
 import Images from '../../../utils/Images';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { RNCamera, FaceDetector } from 'react-native-camera';
 
 export default class ScreenAndCameraRecording extends Component {
     render() {
