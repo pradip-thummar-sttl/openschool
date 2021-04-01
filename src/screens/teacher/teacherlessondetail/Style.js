@@ -67,7 +67,7 @@ export default StyleSheet.create({
         marginBottom: hp(3.90),
     },
     dateWhiteBoard: {
-        marginRight: hp(8.7),
+        marginRight: 10
     },
     subjectDateTime: {
         alignItems: 'flex-start',
@@ -497,6 +497,9 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
     },
+    textBox1: {
+        width: '100%',
+    },
     placeholderStyle: {
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
@@ -573,9 +576,14 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         bottom: hp(0.3),
     },
+    dateField: {
+        flex: 0.30
+    },
     timeField: {
-        width: '31.5%',
-        marginRight: hp(2.1),
+        flex: 0.20
+    },
+    participantsField: {
+        flex: 0.30
     },
     blockSpaceBottom: {
         marginBottom: hp(2.6),
@@ -1023,6 +1031,7 @@ export default StyleSheet.create({
     },
     alignRow:{
         flexDirection:'row',
+        margin: 5,
     },
     closeNotificationbar:{
         width: hp(1),
@@ -1067,7 +1076,7 @@ export default StyleSheet.create({
         resizeMode:'contain',
         position:'absolute',
         right:hp(1.6),
-        top:hp(0.2),
+        alignSelf: 'center'
     },
     dropDownArrowdatetimehomeWork:{
         width:hp(1.51),
@@ -1097,6 +1106,55 @@ export default StyleSheet.create({
     },
     leftSpace:{
         paddingLeft:hp(3.5),
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: 10,
+    },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+    },
+    autocompleteContainer: {
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        zIndex: 10
+      },
+      borderList: {
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: hp(0.26),
+    },
+    filterList: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        flex: 1,
+    },
+    filterListWrap: {
+        paddingTop: hp(1),
+        paddingLeft: hp(1.2),
+        paddingRight: hp(1.2),
+        paddingBottom: hp(1),
+        position: 'absolute',
+        backgroundColor: COLORS.white,
+        top: hp(5.5),
+        width: hp(30.98),
+        borderRadius: hp(1),
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: hp(1), },
+        shadowOpacity: 0.05,
+        shadowRadius: hp(1),
+    },
+    filterListText: {
+        color: COLORS.darkGray,
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
     },
     uploadBlock: {
         alignItems: 'center',
