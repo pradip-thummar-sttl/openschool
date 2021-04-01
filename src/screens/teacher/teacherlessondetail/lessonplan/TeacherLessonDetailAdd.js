@@ -40,6 +40,7 @@ const TLDetailAdd = (props) => {
     const [pupils, setPupils] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
     const [selectedPupils, setSelectedPupils] = useState([])
     const addMaterial = () => {
+        console.log('hihihihihihi')
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
@@ -373,9 +374,24 @@ const TLDetailAdd = (props) => {
                                     <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                     <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                                 </View>
-                                <View style={PAGESTYLE.uploadBlock}>
+                                <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                     <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                                </View>
+                                </TouchableOpacity>
+
+                                {
+                                    materialArr.length != 0 ? materialArr.map((item, index) => {
+                                        return (
+                                            <View style={PAGESTYLE.fileGrp}>
+                                                <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                </TouchableOpacity>
+                                            </View>
+                                        )
+                                    }) : null
+                                }
+
+
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}
@@ -386,38 +402,7 @@ const TLDetailAdd = (props) => {
                                 </View>
                             </View>
                         </View>
-                        <View style={PAGESTYLE.rightSideBar}>
-                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                                <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
-                            </View>
-                            <TouchableOpacity onPress={() => addMaterial()} style={PAGESTYLE.uploadBlock}>
-                                <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                            </TouchableOpacity>
 
-                            {
-                                materialArr.map((item, index) => {
-                                    return (
-                                        <View style={PAGESTYLE.fileGrp}>
-                                            <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                            </TouchableOpacity>
-                                        </View>
-                                    )
-                                })
-                            }
-
-
-                            <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                                <TouchableOpacity
-                                    style={PAGESTYLE.buttonGrp}
-                                    activeOpacity={opacity}
-                                    onPress={() => props.navigation.navigate('TLVideoGallery')}>
-                                    <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
                     </ScrollView>
                 </KeyboardAwareScrollView>
             </View >
