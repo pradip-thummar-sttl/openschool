@@ -11,8 +11,8 @@ const Header = (props) => {
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
-                <TouchableOpacity><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
-                <Text style={styles.mainTitle}>Dashboard</Text>
+                <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
+                <Text style={styles.mainTitle}>Title</Text>
             </View>
             <View style={styles.headerRight}>
                 <TouchableOpacity

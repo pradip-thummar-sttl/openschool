@@ -8,6 +8,7 @@ import Login from '../screens/login/Login';
 import Popup from '../component/reusable/popup/Popup';
 import Popupuser from '../component/reusable/popup/Popupuser';
 import Sidebar from '../component/reusable/sidebar/Sidebar';
+import SidebarPupil from '../component/reusable/sidebar/Sidebarpupil';
 import Header from '../component/reusable/header/Header';
 import NotificationDrawer from '../component/reusable/notificationdrawer/NotificationDrawer';
 import TeacherDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
@@ -41,8 +42,10 @@ export default function Route() {
     return (
 
         <NavigationContainer drawerPosition='right'>
-            <Stack.Navigator headerMode='none'>
+            <Stack.Navigator headerMode='none' initialRouteName={'MyDrawerMenu'}>
                 <Stack.Screen name="MyDrawer" component={MyDrawer} />
+                <Stack.Screen name="MyDrawerMenu" component={MyDrawerMenu} />
+                <Stack.Screen name="MyDrawerMenuPupil" component={MyDrawerMenuPupil} />
             </Stack.Navigator>
         </NavigationContainer>
 
@@ -59,6 +62,7 @@ function ScreenStack() {
             <Stack.Screen name="Popup" component={Popup} />
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
+            <Stack.Screen name="SidebarPupil" component={SidebarPupil} />
             <Stack.Screen name="Header" component={Header} />
             <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
@@ -91,6 +95,28 @@ function MyDrawer() {
             drawerPosition='right'
             headerMode='none'
             drawerStyle={STYLE.drawerWidth} >
+            <Drawer.Screen name="ScreenStack" component={ScreenStack} />
+        </Drawer.Navigator>
+    );
+}
+function MyDrawerMenu() {
+    return (
+        <Drawer.Navigator
+            drawerContent={props => <Sidebar {...props} />}
+            drawerPosition='left'
+            headerMode='none'
+            drawerStyle={STYLE.drawerWidthSidebar} >
+            <Drawer.Screen name="ScreenStack" component={ScreenStack} />
+        </Drawer.Navigator>
+    );
+}
+function MyDrawerMenuPupil() {
+    return (
+        <Drawer.Navigator
+            drawerContent={props => <SidebarPupil {...props} />}
+            drawerPosition='left'
+            headerMode='none'
+            drawerStyle={STYLE.drawerWidthSidebar} >
             <Drawer.Screen name="ScreenStack" component={ScreenStack} />
         </Drawer.Navigator>
     );

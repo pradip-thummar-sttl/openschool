@@ -206,6 +206,9 @@ export default StyleSheet.create({
     drawerWidth: {
         width: '100%',
     },
+    drawerWidthSidebar: {
+        width: '85%',
+    },
     openClassLink: {
         color: COLORS.buttonGreen,
         textTransform: 'uppercase',
