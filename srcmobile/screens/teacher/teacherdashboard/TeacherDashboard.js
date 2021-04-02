@@ -247,6 +247,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 ref={refRBSheet}
                                                 closeOnDragDown={true}
                                                 height={[hp(85)]}
+                                                style={{position: 'relative',}}
                                                 closeOnPressMask={true}
                                                 customStyles={{
                                                     wrapper: {

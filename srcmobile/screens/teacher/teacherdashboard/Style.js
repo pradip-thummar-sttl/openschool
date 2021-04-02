@@ -169,7 +169,6 @@ export default StyleSheet.create({
     },
     rightTabContent: {
         width: '100%',
-        position:'relative',
     },
     item: {
         flexDirection: 'row',
@@ -235,6 +234,8 @@ export default StyleSheet.create({
         paddingRight: hp(1.95),
         paddingBottom: hp(2.60),
         paddingTop: hp(3),
+        position:'relative',
+        height: '100%',
     },
     titleTab: {
         fontSize: hp(2.86),
@@ -356,7 +357,11 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(2),
+        paddingBottom: hp(5),
+        position: 'absolute',
+        bottom: hp(1.5),
+        width: '100%',
+        left: hp(1.95),
     },
     pupilTable: {
         flexDirection: 'row',
