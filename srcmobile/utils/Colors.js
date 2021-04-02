@@ -1,6 +1,6 @@
 const COLORS = {
     black: '#000000',
-    bottomSlideUpBack: 'rgba(0, 0, 0, 0.8)',
+    bottomSlideUpBack: 'rgba(0, 0, 0, 0.5)',
     white: '#FFFFFF',
     dotActive: '#12aefb',
     transparent: 'transparent',
