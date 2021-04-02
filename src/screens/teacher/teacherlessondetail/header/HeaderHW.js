@@ -17,7 +17,11 @@ const HeaderHW = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
-                    <Popuphomework />
+                    {/* <TouchableOpacity onPress={()=>{}} style={styles.buttonGroup}>
+                        <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
+                        <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                    </TouchableOpacity> */}
+                    <Popuphomework setHomework={()=>props.setHomework()} />
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
@@ -155,7 +159,7 @@ const styles = StyleSheet.create({
         zIndex: 9,
     },
     iconTop: {
-        top: hp(4.2),
+        left: wp(2),
     },
     borderList: {
         borderBottomColor: COLORS.bottomProfileLightBorder,

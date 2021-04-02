@@ -29,7 +29,7 @@ const Popuphomework = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are setting homework for this class</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing set homework the pupils in this class will be notified. You can edit this class homework at any time. </Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>ok, set homework</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>props.setHomework(), toggleModal}><Text style={STYLE.commonButtonGreenDashboardSide}>ok, set homework</Text></TouchableOpacity>
                     </View>
                 </View>
             </Modal>

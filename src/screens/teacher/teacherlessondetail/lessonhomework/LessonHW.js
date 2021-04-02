@@ -12,18 +12,122 @@ import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
 import { opacity } from "../../../../utils/Constant";
+import DocumentPicker from 'react-native-document-picker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment";
+import { Addhomework } from "../../../../utils/Model";
+var checkItem = [
+    {
+        ItemName: "Watch The BBC Bitesize Video",
+        IsCheck: false
+    },
+    {
+        ItemName: "Write a list of all the everyday items that come from the Amazon Rainforest",
+        IsCheck: false
+    },
+    {
+        ItemName: "Write a short story about where those items come from in the the forest and what they mean to you.",
+        IsCheck: false
+    },
+    {
+        ItemName: "Take a photo of your work and upload here",
+        IsCheck: false
+    },
+]
 
 const TLHomeWork = (props) => {
+    const [materialArr, setMaterialArr] = useState([])
+    const [isAddRecording, setAddRecording] = useState(false)
+    const [description, setDescription] = useState("")
+    const [isSwitch, setSwitch] = useState(true)
+
+
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
+
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
 
-    const showDatepicker = () => {
-        showMode('date');
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
     };
 
-    const showTimepicker = () => {
-        showMode('time');
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
     };
+
+    const handleConfirm = (date) => {
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        Addhomework.DueDate = selectDate
+        hideDatePicker();
+    };
+
+    const addMaterial = () => {
+        console.log('hihihihihihi')
+        var arr = [...materialArr]
+        try {
+            DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.allFiles],
+            }).then((results) => {
+                for (const res of results) {
+                    console.log(
+                        res.uri,
+                        res.type, // mime type
+                        res.name,
+                        res.size
+                    );
+                    arr.push(res)
+
+                }
+                console.log('hello response arr', arr)
+                setMaterialArr(arr)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const removeObject = (index1, item) => {
+        var array = [...materialArr];
+        array.splice(index1, 1);
+        setMaterialArr(array)
+        console.log('hello material', array)
+    }
+
+    const onCheckList = (index) => {
+        checkItem[index].IsCheck = !checkItem[index].IsCheck
+        console.log('check item', checkItem)
+        Addhomework.CheckList = checkItem
+    }
+    const onScreeCamera = () => {
+        setAddRecording(false)
+        props.navigateScreeCamera()
+    }
+    const onScreeVoice = () => {
+        setAddRecording(false)
+
+    }
+    const onCameraOnly = () => {
+        setAddRecording(false)
+
+    }
+
+    const switchOnOff = (isOn) => {
+        setSwitch(isOn)
+        Addhomework.IsIncluded = isOn
+    }
+    const setDesc = (text) => {
+        setDescription(text)
+        Addhomework.HomeworkDescription = description
+    }
+
     return (
 
         <View style={PAGESTYLE.whiteBg}>
@@ -35,7 +139,7 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.toggleGrpBox}>
                                     <Text style={PAGESTYLE.toggleText}>Include homework</Text>
                                     <ToggleSwitch
-                                        isOn={true} color={COLORS.dashboardGreenButton} onToggle={isOn => true}
+                                        isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
                                     />
                                 </View>
                             </View>
@@ -46,11 +150,11 @@ const TLHomeWork = (props) => {
                                     <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                 </View>
                                 <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} />
-                                <View style={PAGESTYLE.subjectDateTimeHomework}>
-                                    <TouchableOpacity>
-                                        <Text style={PAGESTYLE.dateTimetextdummy}>14/09/2020</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
+                                    <View>
+                                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectDate}</Text>
+                                    </View>
+                                </TouchableOpacity>
                                 <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />
                             </View>
                         </View>
@@ -60,33 +164,47 @@ const TLHomeWork = (props) => {
                         <TextInput
                             multiline={true}
                             numberOfLines={4}
-                            defaultValue='Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.'
+                            value={description}
                             style={PAGESTYLE.commonInputTextareaNormal}
+                            onChangeText={(text) => setDesc(text)}
                         />
                     </View>
-                    <View style={PAGESTYLE.videoRecording}>
+                    {/* <View style={PAGESTYLE.videoRecording}>
                         <View style={PAGESTYLE.recordLinkBlock}>
                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                             <Popupaddrecording />
                         </View>
-                    </View>
+                    </View> */}
+                    <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                        <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                        <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                    </TouchableOpacity>
                     <View style={PAGESTYLE.requirementofClass}>
                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
-                            <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
-                                    style={PAGESTYLE.checkMark}
-                                    value={false}
-                                    boxType={'square'}
-                                    onCheckColor={COLORS.white}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                            {
+                                checkItem.map((item, index) => {
+                                    return (
+                                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                                            <CheckBox
+                                                style={PAGESTYLE.checkMark}
+                                                value={item.IsCheck}
+                                                boxType={'square'}
+                                                onCheckColor={COLORS.white}
+                                                onFillColor={COLORS.dashboardPupilBlue}
+                                                onTintColor={COLORS.dashboardPupilBlue}
+                                                tintColor={COLORS.dashboardPupilBlue}
+                                                onChange={() => onCheckList(index)}
+
+                                            />
+                                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                        </View>
+                                    )
+                                })
+                            }
+
+                            {/* <View style={PAGESTYLE.checkBoxLabelLine}>
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -98,7 +216,7 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -110,7 +228,7 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -120,7 +238,7 @@ const TLHomeWork = (props) => {
                                     tintColor={COLORS.dashboardPupilBlue}
                                 />
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                            </View>
+                            </View> */}
                         </View>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
                             <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
@@ -133,19 +251,27 @@ const TLHomeWork = (props) => {
                         <Text style={PAGESTYLE.requireText}>Learning material</Text>
                         <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                     </View>
-                    <View style={PAGESTYLE.uploadBlock}>
+                    {/* <View style={PAGESTYLE.uploadBlock}>
                         <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                    </View>
-                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
-                        </View>
-                    </View>
+                    </View> */}
+
+                    <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
+                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                    </TouchableOpacity>
+
+                    {
+                        materialArr.length != 0 ? materialArr.map((item, index) => {
+                            return (
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                    <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                        <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }) : null
+                    }
+
                     <View style={PAGESTYLE.thumbVideo}>
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
@@ -153,12 +279,23 @@ const TLHomeWork = (props) => {
                         <TouchableOpacity
                             style={PAGESTYLE.buttonGrp}
                             activeOpacity={opacity}
-                            onPress={()=> props.navigateToVideoGallery()}>
+                            onPress={() => props.navigateToVideoGallery()}>
                             <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
+            <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                onScreeCamera={() => onScreeCamera()}
+                onScreeVoice={() => onScreeVoice()}
+                onCameraOnly={() => onCameraOnly()} />
+
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
         </View>
 
     );
