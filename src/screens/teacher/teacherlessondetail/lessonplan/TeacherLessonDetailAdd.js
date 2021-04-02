@@ -150,24 +150,28 @@ const TLDetailAdd = (props) => {
     }
 
     onScreeCamera = () => {
-        RecordScreen.startRecording().catch((error) => console.error(error));
-        setTimeout(() => {
+        // RecordScreen.startRecording().catch((error) => console.error(error));
+        // setTimeout(() => {
 
-            RecordScreen.stopRecording().then((res) => {
-                if (res) {
-                    console.log('response of recording', res)
-                    const url = res.result.outputURL;
-                }
-            }).catch((error) =>
-                console.warn(error)
-            );
+        //     RecordScreen.stopRecording().then((res) => {
+        //         if (res) {
+        //             console.log('response of recording', res)
+        //             const url = res.result.outputURL;
+        //         }
+        //     }).catch((error) =>
+        //         console.warn(error)
+        //     );
 
-        }, 4000);
+        // }, 4000);
+        setAddRecording(false)
+        props.navigation.navigate('ScreenAndCameraRecording')
     }
     onScreeVoice = () => {
+        setAddRecording(false)
 
     }
     onCameraOnly = () => {
+        setAddRecording(false)
 
     }
 
