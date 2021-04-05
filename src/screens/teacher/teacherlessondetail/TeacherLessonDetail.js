@@ -18,8 +18,13 @@ import { EndPoints } from "../../../service/EndPoints";
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
+    const [isVisiblePopup, setVisiblePopup] = useState(false)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(false)
+
     console.log('props of detail lesson', props.route.params.item._id)
     const onAddHomework = () => {
+        setHomeworkLoading(true)
+
         const data = {
             LessonId: props.route.params.item._id,
             IsIncluded: Addhomework.IsIncluded,
@@ -30,8 +35,12 @@ const TeacherLessonDetail = (props) => {
         }
         Service.post(data, EndPoints.Homework, (res) => {
             console.log('response of add homework', res)
+            setHomeworkLoading(false)
+            setVisiblePopup(false)
         }, (err) => {
-            console.log('response of add homework err',err)
+            console.log('response of add homework err', err)
+            setHomeworkLoading(false)
+            setVisiblePopup(false)
 
         })
     }
@@ -52,7 +61,13 @@ const TeacherLessonDetail = (props) => {
                         <HeaderHW
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
-                            onAlertPress={() => props.navigation.openDrawer()} />
+                            onAlertPress={() => props.navigation.openDrawer()}
+                            onClose={() => setVisiblePopup(false)}
+                            isVisible={isVisiblePopup}
+                            onOpenPopup={()=>setVisiblePopup(true)}
+                            isHomeworkLoading={isHomeworkLoading}
+                        />
+
                         :
                         <HeaderHWS
                             navigateToBack={() => props.navigation.goBack()}
