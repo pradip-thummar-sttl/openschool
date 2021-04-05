@@ -52,8 +52,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="ScreenAndCameraRecording">
-            <Stack.Screen name="ScreenAndCameraRecording" component={ScreenAndCameraRecording} />
+        <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Introduction" component={Introduction} />
@@ -81,6 +80,8 @@ function ScreenStack() {
             <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
             <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
+            <Stack.Screen name="ScreenAndCameraRecording" component={ScreenAndCameraRecording} />
+
         </Stack.Navigator>
     );
 }

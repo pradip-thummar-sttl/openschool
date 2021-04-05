@@ -3,5 +3,12 @@ export const EndPoints = {
     GetLessionById: 'getalllesson',
     PupilByTeacherId: 'pupilbyteacherid',
     GetTimeTable: 'gettimetable',
-    CalenderEvent:'calenderevent/'
+    CalenderEvent:'calenderevent/',
+    GetSubjectBySchoolId:'subjectbyschoolid/',
+    GetParticipants:'getparticipants/',
+    GetPupilByTeacherId:'pupilbyteacherid/',
+    Homework:"homework",
+    Lesson: 'lesson',
+    LessonUpdate: 'lessonupdate/',
+    LessonMaterialUpload: 'lessonmaterialupload/',
 }

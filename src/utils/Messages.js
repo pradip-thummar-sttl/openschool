@@ -8,6 +8,9 @@ const MESSAGE = {
     topic: "Please enter lesson topic",
     description: "Please enter description",
     eventAdded: "Event added successfully",
+    lessonAdded: "Lesson added successfully",
+    lessonUpdated: "Lesson updated successfully",
+    selectPupil: "Please select at least one pupil.",
 }
 
 export default MESSAGE;

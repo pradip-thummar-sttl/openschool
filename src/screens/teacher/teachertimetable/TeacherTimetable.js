@@ -72,11 +72,13 @@ const TeacherTimeTable = (props) => {
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
 
+        console.log('==================================');
         timeTableData.forEach(element => {
 
             const day = new Date(element.Date).getDay();
-            console.log('day', element.SubjectName, day);
             const dayOfWeek = isNaN(day) ? null : days[day];
+
+            console.log('element.Date', element.Date, day, element.LessonTopic);
 
             if (dayOfWeek == days[dayKey]) {
                 if (time[timneKey].includes(element.StartTime)) {
@@ -91,7 +93,6 @@ const TeacherTimeTable = (props) => {
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
                     lblTitle = `${element.SubjectName} - ${element.LessonTopic}`;
-                    console.log('lblTitle', lblTitle);
                     lblTime = `${element.StartTime} - ${element.EndTime}`;
                     data = element;
                     flag = true;
@@ -122,7 +123,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post({}, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
+        Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

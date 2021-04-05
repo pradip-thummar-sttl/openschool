@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -9,7 +9,6 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { showMessage, msgTopic, msgDescription, opacity } from "../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
@@ -17,7 +16,6 @@ import Popupaddrecording from "../../../../component/reusable/popup/Popupaddreco
 import HeaderAddNew from "./header/HeaderAddNew";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { useEffect } from "react";
 import {
     Menu,
     MenuOptions,
@@ -25,20 +23,102 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import DocumentPicker from 'react-native-document-picker';
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import RecordScreen from 'react-native-record-screen';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment";
 
 const TLDetailAdd = (props) => {
     const [materialArr, setMaterialArr] = useState([])
+    const [recordingArr, setRecordingArr] = useState([])
+    const [isAddRecording, setAddRecording] = useState(false)
+
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [isHide, action] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [lessonTopic, setLessonTopic] = useState('');
     const [description, setDescription] = useState('');
 
     const [newItem, setNewItem] = useState('');
-    const [itemCheckList, setItemCheckList] = useState([]);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [selectedDate, setSelectedDate] = useState('')
 
-    const [pupils, setPupils] = useState([{ name: 'Dhruv' }, { name: 'Hiyaan' }, { name: 'Gopal' }, { name: 'Pradip' },]);
-    const [selectedPupils, setSelectedPupils] = useState([])
+    const [subjects, setSubjects] = useState([])
+    const [participants, setParticipants] = useState([])
+    const [itemCheckList, setItemCheckList] = useState([]);
+    const [pupils, setPupils] = useState([]);
+
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+
+    const [selectedSubject, setSelectedSubject] = useState('')
+    const [selectedFromTime, setSelectedFromTime] = useState('')
+    const [selectedToTime, setSelectedToTime] = useState('')
+    const [selectedParticipants, setSelectedParticipants] = useState('')
+    const [selectedPupils, setSelectedPupils] = useState('')
+
+    const [IsDeliveredLive, setDeliveredLive] = useState(false);
+    const [IsPublishBeforeSesson, setPublishBeforeSesson] = useState(false);
+    const [IsVotingEnabled, setVotingEnabled] = useState(false);
+
+    useEffect(() => {
+        Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setSubjects(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+
+        Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
+            console.log('response of GetParticipants response', res)
+            if (res.code == 200) {
+                setParticipants(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetParticipants', err)
+        })
+
+        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+            console.log('response of GetPupilByTeacherId response', res)
+            if (res.code == 200) {
+                let newData = []
+                res.data.forEach(element => {
+                    element.PupilId = element._id
+                    newData.push(element)
+                });
+                setPupils(newData)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetPupilByTeacherId', err)
+        })
+
+
+    }, [])
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        hideDatePicker();
+    };
+
     const addMaterial = () => {
         console.log('hihihihihihi')
         var arr = [...materialArr]
@@ -46,8 +126,9 @@ const TLDetailAdd = (props) => {
             DocumentPicker.pickMultiple({
                 type: [DocumentPicker.types.allFiles],
             }).then((results) => {
+                console.log('results', results);
                 for (const res of results) {
-                    console.log(
+                    console.log('KDKDKD',
                         res.uri,
                         res.type, // mime type
                         res.name,
@@ -85,7 +166,10 @@ const TLDetailAdd = (props) => {
     };
 
     const pushCheckListItem = () => {
-        setItemCheckList([...itemCheckList, newItem])
+        let temp = {
+            ItemName: newItem
+        }
+        setItemCheckList([...itemCheckList, temp])
         this.item.clear()
     }
 
@@ -102,6 +186,32 @@ const TLDetailAdd = (props) => {
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
         }
+    }
+
+    onScreeCamera = () => {
+        // RecordScreen.startRecording().catch((error) => console.error(error));
+        // setTimeout(() => {
+
+        //     RecordScreen.stopRecording().then((res) => {
+        //         if (res) {
+        //             console.log('response of recording', res)
+        //             const url = res.result.outputURL;
+        //         }
+        //     }).catch((error) =>
+        //         console.warn(error)
+        //     );
+
+        // }, 4000);
+        setAddRecording(false)
+        props.navigation.navigate('ScreenAndCameraRecording')
+    }
+    onScreeVoice = () => {
+        setAddRecording(false)
+
+    }
+    onCameraOnly = () => {
+        setAddRecording(false)
+
     }
 
     const isFieldsValidated = () => {
@@ -125,7 +235,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: 22 }}>{item}</Text>
+                            <Text style={{ fontSize: 22 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -185,7 +295,7 @@ const TLDetailAdd = (props) => {
                                 tintColor={COLORS.dashboardPupilBlue}
                                 onValueChange={(newValue) => pushPupilItem(newValue, index)}
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.name}</Text>
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
                     )}
                     numColumns={3}
@@ -199,16 +309,18 @@ const TLDetailAdd = (props) => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.subjectText}>Subject</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                        <Text style={PAGESTYLE.dateTimetextdummy}>Select Subject</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 30, } }}>
-                        <MenuOption style={{ padding: 15 }} text='Science'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='Math'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='English'></MenuOption>
-                        <MenuOption style={{ padding: 15 }} text='Physics'></MenuOption>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={subjects}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -219,17 +331,18 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedParticipants(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 2A'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 3B'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group C5'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='Group 1A'></MenuOption>
+                        <FlatList
+                            data={participants}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -240,18 +353,19 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>From</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -262,23 +376,116 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}> </Text>
-                <Menu>
+                <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>To</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
-                        <MenuOption style={{ padding: 10 }} text='09:00'></MenuOption>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 200 }} />
                     </MenuOptions>
                 </Menu>
             </View>
         );
     };
+
+    const saveLesson = () => {
+        if (!lessonTopic) {
+            showMessage(MESSAGE.topic)
+            return false;
+        } else if (!description) {
+            showMessage(MESSAGE.description);
+            return false;
+        } else if (selectedPupils.length == 0) {
+            showMessage(MESSAGE.selectPupil);
+            return false;
+        }
+
+        setLoading(true)
+
+        let data = {
+            SubjectId: selectedSubject._id,
+            LessonTopic: lessonTopic,
+            LessonDate: selectedDate,
+            LessonEndTime: selectedToTime,
+            LessonStartTime: selectedFromTime,
+            PupilGroupId: selectedParticipants._id,
+            LessonDescription: description,
+            RecordingName: '',
+            RecordedLessonName: '',
+            ChatTranscript: '',
+            IsDeliveredLive: IsDeliveredLive,
+            IsPublishBeforeSesson: IsPublishBeforeSesson,
+            IsVotingEnabled: IsVotingEnabled,
+            CreatedBy: User.user._id,
+            PupilList: selectedPupils,
+            CheckList: itemCheckList
+        }
+
+        console.log('postData', data);
+        Service.post(data, `${EndPoints.Lesson}`, (res) => {
+            if (res.code == 200) {
+                console.log('response of save lesson', res)
+                uploadMatirial(res.data._id)
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+            setLoading(false)
+        })
+    }
+
+    const uploadMatirial = (lessionId) => {
+        let data = new FormData();
+
+        materialArr.forEach(element => {
+            data.append('materiallist', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        });
+
+        recordingArr.forEach(element => {
+            data.append('recording', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
+            showMessage(MESSAGE.lessonAdded)
+            setLoading(false)
+            return
+        }
+
+        console.log('data', data._parts, lessionId);
+
+        Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
+            setLoading(false)
+            console.log('res', res);
+            if (res.code == 200) {
+                console.log('response of save lesson', res)
+                // setDefaults()
+                showMessage(MESSAGE.lessonAdded)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -288,7 +495,10 @@ const TLDetailAdd = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
-                <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
+                <HeaderAddNew
+                    isLoading={isLoading}
+                    navigateToBack={() => { props.navigation.goBack() }}
+                    saveLesson={() => { saveLesson() }} />
                 <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
@@ -308,7 +518,7 @@ const TLDetailAdd = (props) => {
                                                 autoCapitalize={false}
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.menuLightFonts}
-                                                onChangeText={text => this.setState({ email: text })} />
+                                                onChangeText={text => setLessonTopic(text)} />
                                         </View>
                                     </View>
                                 </View>
@@ -318,8 +528,8 @@ const TLDetailAdd = (props) => {
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                             <View style={PAGESTYLE.subjectDateTime}>
-                                                <TouchableOpacity>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy}>Select</Text>
+                                                <TouchableOpacity onPress={() => showDatePicker()}>
+                                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                 </TouchableOpacity>
                                                 <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                             </View>
@@ -339,11 +549,11 @@ const TLDetailAdd = (props) => {
                                     <TextInput
                                         multiline={true}
                                         numberOfLines={4}
-                                        defaultValue='Briefly explain what the lesson is about'
+                                        placeholder='Briefly explain what the lesson is about'
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}
-                                    />
+                                        onChangeText={text => setDescription(text)} />
                                 </View>
-                                <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                     <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                     <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                                 </TouchableOpacity>
@@ -352,20 +562,20 @@ const TLDetailAdd = (props) => {
 
                                 {pupilListView()}
 
-                                <View style={PAGESTYLE.toggleBoxGrpWrap}>
+                                <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                     <View style={STYLE.hrCommon}></View>
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                        <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                        <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                        <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                        <ToggleSwitch isOn={false} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                        <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                     </View>
                                 </View>
                             </View>
@@ -403,10 +613,31 @@ const TLDetailAdd = (props) => {
                             </View>
                         </View>
 
+
                     </ScrollView>
+                    {
+
+                        // isAddRecording ?
+                        //     <View style={{ position: 'absolute' }}>
+                        <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                            onScreeCamera={() => onScreeCamera()}
+                            onScreeVoice={() => onScreeVoice()}
+                            onCameraOnly={() => onCameraOnly()} />
+                        // </View>
+                        // : null
+                    }
+
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                    />
                 </KeyboardAwareScrollView>
             </View >
         </View>
     );
+
+
 }
 export default TLDetailAdd;

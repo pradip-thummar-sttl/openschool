@@ -16,7 +16,7 @@ const Popupdata = (props) => {
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
-    console.log('props.data.Color', props.data)
+
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Details</Text></TouchableOpacity> */}

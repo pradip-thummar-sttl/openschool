@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import Images from '../../../../../utils/Images';
@@ -24,10 +24,20 @@ const HeaderAddNew = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity>
+                    {props.isLoading ?
+                        <ActivityIndicator
+                            style={styles.commonButtonGreenheaderwithouticon}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.white} />
+                        :
+                        <TouchableOpacity
+                            style={styles.buttonGroup}
+                            activeOpacity={opacity}
+                            onPress={() => props.saveLesson()}>
+                            <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                            <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
+                        </TouchableOpacity>
+                    }
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
@@ -156,6 +166,16 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+    },
+    commonButtonGreenheaderwithouticon: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        padding: hp(1.4),
+        height: hp(5.20),
+        width: hp(20.20),
+        alignSelf: 'center',
     },
     addIcon: {
         width: hp(1.55),

@@ -6,6 +6,7 @@ import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
+import moment from 'moment';
 
 const HeaderUpdate = (props) => {
     return (
@@ -16,7 +17,7 @@ const HeaderUpdate = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                    </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
@@ -24,7 +25,10 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity
+                        style={styles.buttonGroup}
+                        activeOpacity={opacity}
+                        onPress={() => props.saveLesson()}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
                     </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -15,13 +15,13 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
+            <TouchableOpacity onPress={() => props.onOpenPopup()} style={styles.buttonGroup}>
                 <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
                 <Text style={styles.commonButtonGreenheader}>set homework</Text>
             </TouchableOpacity>
-            <Modal isVisible={isModalVisible}>
+            <Modal isVisible={props.isVisible}>
                 <View style={styles.popupCard}>
-                    <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
+                    <TouchableOpacity style={STYLE.cancelButton} onPress={() => props.onClose()}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
@@ -29,7 +29,16 @@ const Popuphomework = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are setting homework for this class</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing set homework the pupils in this class will be notified. You can edit this class homework at any time. </Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>ok, set homework</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.setHomework()}>
+                            {props.isHomeworkLoading ?
+                                <ActivityIndicator
+                                    style={{ alignSelf:'center' }}
+                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                    color={COLORS.dashboardGreenButton} />
+                                :
+                                <Text style={STYLE.commonButtonGreenDashboardSide}>ok, set homework</Text>
+                            }
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

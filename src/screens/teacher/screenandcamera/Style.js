@@ -35,6 +35,11 @@ export default StyleSheet.create({
         height: hp(7.29),
         resizeMode: 'contain',
     },
+    callrecordIcon: {
+        width: hp(7),
+        height: hp(7),
+        resizeMode: 'stretch',
+    },
     recordingTimer: {
         flexDirection: 'row',
         paddingLeft: hp(3.90),
@@ -55,8 +60,8 @@ export default StyleSheet.create({
         transform: [{ translateX: '-100%' }],
     },
     userVideoMain: {
-        right: hp(9.5),
-        bottom: hp(7.5),
+        right: hp(16),
+        bottom: hp(12),
         width: hp(14.71),
         height: hp(10.15),
         resizeMode: 'contain',
