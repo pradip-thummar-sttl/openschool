@@ -35,7 +35,7 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={PAGESTYLE.alignRow}>
                                 <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} />
-                                <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('DD/MM/yyyy')}</Text>
+                                <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('yyyy-MM-DD')}</Text>
                             </View>
 
                         </View>
@@ -126,11 +126,10 @@ const TLDetail = (props) => {
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.fileGrp}>
-                                        <Text style={PAGESTYLE.fileName}>{item.FileName}</Text>
+                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
                                         <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                     </View>
                                 )}
-                                numColumns={3}
                                 keyExtractor={(item, index) => index.toString()}
                             />
                             :
@@ -147,7 +146,6 @@ const TLDetail = (props) => {
                                     <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                                 </View>
                             )}
-                            numColumns={2}
                             keyExtractor={(item, index) => index.toString()}
                         />
                         :

@@ -43,5 +43,25 @@ export const Service = {
 
             return error(err)
         })
+    },
+
+    postFormData: (data, endPoint, success, error) => {
+        console.log('`${baseUrl}${endPoint}`', `${baseUrl}${endPoint}`);
+        fetch(`${baseUrl}${endPoint}`, {
+            method: 'POST',
+            headers: {
+                "Content-type": "multipart/form-data",
+                "Authorization": `JWT ${User.user.Token}`
+            },
+            body: data,
+        }).then((res) => res.json()).then((res) => {
+            // console.log('response login', res)
+
+            return success(res)
+        }).catch((err) => {
+            console.log('errr1', err)
+
+            return error(err)
+        })
     }
 }

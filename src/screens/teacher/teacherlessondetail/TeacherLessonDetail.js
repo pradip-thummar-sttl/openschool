@@ -22,12 +22,12 @@ const TeacherLessonDetail = (props) => {
     const [isVisiblePopup, setVisiblePopup] = useState(false)
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
 
-    console.log('props of detail lesson', props.route.params.item._id)
+    console.log('props of detail lesson', props.route.params.data._id)
     const onAddHomework = () => {
         setHomeworkLoading(true)
 
         const data = {
-            LessonId: props.route.params.item._id,
+            LessonId: props.route.params.data._id,
             IsIncluded: Addhomework.IsIncluded,
             DueDate: Addhomework.DueDate,
             HomeworkDescription: Addhomework.HomeworkDescription,
@@ -101,7 +101,7 @@ const TeacherLessonDetail = (props) => {
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.navigate('TLDetailEdit', {'data': lessonData})}>
+                                onPress={() => props.navigation.replace('TLDetailEdit', {'data': lessonData})}>
                                 <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
                             </TouchableOpacity>
                         </View>

@@ -28,6 +28,8 @@ import { User } from "../../../../utils/Model";
 import MESSAGE from "../../../../utils/Messages";
 import DocumentPicker from 'react-native-document-picker';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const TLDetailEdit = (props) => {
     const [date, setDate] = useState(new Date());
@@ -37,15 +39,27 @@ const TLDetailEdit = (props) => {
     useEffect(() => {
         if (itemCheckList.length == 0) {
             setItemCheckList(lessonData.CheckList)
-            console.log('YES', lessonData.CheckList);
         }
+        setPublishBeforeSesson(lessonData.Publish)
+        setDeliveredLive(lessonData.LiveSession)
+        setVotingEnabled(lessonData.IsVotingEnabled)
+        setDescription(lessonData.LessonDescription)
+        setLessonTopic(lessonData.LessonTopic)
+        setSelectedDate(moment(lessonData.Date).format('yyyy-MM-DD'))
+        setSelectedFromTime(lessonData.StartTime)
+        setSelectedToTime(lessonData.EndTime)
+        setMaterialArr(lessonData.MaterialList)
     }, [lessonData])
 
     const [lessonTopic, setLessonTopic] = useState('');
     const [description, setDescription] = useState('');
+    const [materialArr, setMaterialArr] = useState([])
+    const [recordingArr, setRecordingArr] = useState([])
 
     const [newItem, setNewItem] = useState('');
     const [itemCheckList, setItemCheckList] = useState([]);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [selectedDate, setSelectedDate] = useState('')
 
     const [subjects, setSubjects] = useState([])
     const [participants, setParticipants] = useState([])
@@ -57,13 +71,23 @@ const TLDetailEdit = (props) => {
     const [selectedFromTime, setSelectedFromTime] = useState('')
     const [selectedToTime, setSelectedToTime] = useState('')
     const [selectedParticipants, setSelectedParticipants] = useState('')
-    const [selectedPupils, setSelectedPupils] = useState('')
+    const [selectedPupils, setSelectedPupils] = useState([])
+
+    const [IsDeliveredLive, setDeliveredLive] = useState(false);
+    const [IsPublishBeforeSesson, setPublishBeforeSesson] = useState(false);
+    const [IsVotingEnabled, setVotingEnabled] = useState(false);
 
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
             if (res.code == 200) {
+                console.log('res.data', res.data);
                 setSubjects(res.data)
+                res.data.forEach(element => {
+                    if (element._id == lessonData.SubjectId) {
+                        setSelectedSubject(element)
+                        return;
+                    }
+                });
             } else {
                 showMessage(res.message)
             }
@@ -72,9 +96,14 @@ const TLDetailEdit = (props) => {
         })
 
         Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
-            console.log('response of GetParticipants response', res)
             if (res.code == 200) {
                 setParticipants(res.data)
+                res.data.forEach(element => {
+                    if (element._id == lessonData.PupilGroupId) {
+                        setSelectedParticipants(element)
+                        return;
+                    }
+                });
             } else {
                 showMessage(res.message)
             }
@@ -83,9 +112,13 @@ const TLDetailEdit = (props) => {
         })
 
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
-            console.log('response of GetPupilByTeacherId response', res)
             if (res.code == 200) {
-                setPupils(res.data)
+                let newData = []
+                res.data.forEach(element => {
+                    element.PupilId = element._id
+                    newData.push(element)
+                });
+                setPupils(newData)
             } else {
                 showMessage(res.message)
             }
@@ -95,18 +128,26 @@ const TLDetailEdit = (props) => {
 
 
     }, [])
-    const [materialArr, setMaterialArr] = useState([])
 
-    const showDatepicker = () => {
-        showMode('date');
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
     };
 
-    const showTimepicker = () => {
-        showMode('time');
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        hideDatePicker();
     };
 
     const pushCheckListItem = () => {
-        setItemCheckList([...itemCheckList, newItem])
+        let temp = {
+            ItemName: newItem
+        }
+        setItemCheckList([...itemCheckList, temp])
         this.item.clear()
     }
 
@@ -115,15 +156,14 @@ const TLDetailEdit = (props) => {
         setItemCheckList(newList)
     }
 
-    const isFieldsValidated = () => {
-        if (!lessonTopic) {
-            showMessage(MESSAGE.topic)
-            return false;
-        } else if (!description) {
-            showMessage(MESSAGE.description);
-            return false;
+    const pushPupilItem = (isSelected, _index) => {
+        console.log('isSelected', isSelected, _index);
+        if (!isSelected) {
+            const newList = selectedPupils.filter((item, index) => item.name !== pupils[_index].name);
+            setSelectedPupils(newList)
+        } else {
+            setSelectedPupils([...selectedPupils, pupils[_index]])
         }
-        return true;
     }
 
     const itemCheckListView = () => {
@@ -157,7 +197,7 @@ const TLDetailEdit = (props) => {
                         autoCapitalize={false}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem({ 'ItemName': text }) }} />
+                        onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
                         opacity={opacity}
@@ -297,15 +337,88 @@ const TLDetailEdit = (props) => {
     };
 
     const saveLesson = () => {
-        console.log('CLICKED', selectedSubject);
-        console.log('CLICKED', selectedFromTime);
-        console.log('CLICKED', selectedToTime);
-        console.log('CLICKED', selectedSubject);
-        console.log('CLICKED', selectedParticipants);
-
-        if (isFieldsValidated()) {
-            // Call Add Lesson API
+        if (!lessonTopic) {
+            showMessage(MESSAGE.topic)
+            return false;
+        } else if (!description) {
+            showMessage(MESSAGE.description);
+            return false;
+        } else if (selectedPupils.length == 0) {
+            showMessage(MESSAGE.selectPupil);
+            return false;
         }
+
+        let data = {
+            SubjectId: selectedSubject._id,
+            LessonTopic: lessonTopic,
+            LessonDate: selectedDate,
+            LessonEndTime: selectedToTime,
+            LessonStartTime: selectedFromTime,
+            PupilGroupId: selectedParticipants._id,
+            LessonDescription: description,
+            RecordingName: '',
+            RecordedLessonName: '',
+            ChatTranscript: '',
+            IsDeliveredLive: IsDeliveredLive,
+            IsPublishBeforeSesson: IsPublishBeforeSesson,
+            IsVotingEnabled: IsVotingEnabled,
+            CreatedBy: User.user._id,
+            PupilList: selectedPupils,
+            CheckList: itemCheckList
+        }
+
+        console.log('postData', data);
+        Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
+            // setLoading(false)
+            if (res.code == 200) {
+                console.log('response of save lesson', res)
+                // setDefaults()
+                uploadMatirial(res.data._id)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            // setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const uploadMatirial = (lessionId) => {
+        let data = new FormData();
+        
+        materialArr.forEach(element => {
+            data.append('materiallist', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        });
+
+        recordingArr.forEach(element => {
+            data.append('recording', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        console.log('data', data._parts, lessionId);
+
+        Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
+            // setLoading(false)
+            console.log('res', res);
+            if (res.code == 200) {
+                console.log('response of save lesson', res)
+                // setDefaults()
+                showMessage(MESSAGE.lessonAdded)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            // setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+        
     }
 
     const addMaterial = () => {
@@ -316,6 +429,7 @@ const TLDetailEdit = (props) => {
                 type: [DocumentPicker.types.allFiles],
             }).then((results) => {
                 for (const res of results) {
+                    res.originalname = res.name
                     console.log(
                         res.uri,
                         res.type, // mime type
@@ -357,6 +471,7 @@ const TLDetailEdit = (props) => {
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
                     saveLesson={() => { saveLesson() }} />
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
@@ -376,7 +491,7 @@ const TLDetailEdit = (props) => {
                                             autoCapitalize={false}
                                             maxLength={40}
                                             placeholderTextColor={COLORS.greyplaceholder}
-                                            onChangeText={text => this.setState({ email: text })} />
+                                            onChangeText={text => setLessonTopic(text)} />
                                     </View>
                                 </View>
                             </View>
@@ -386,8 +501,8 @@ const TLDetailEdit = (props) => {
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                         <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                         <View style={PAGESTYLE.subjectDateTime}>
-                                            <TouchableOpacity>
-                                                <Text style={PAGESTYLE.dateTimetextdummy}>{moment(lessonData.Date).format('DD/MM/yyyy')}</Text>
+                                            <TouchableOpacity onPress={() => showDatePicker()}>
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
                                             </TouchableOpacity>
                                             <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                         </View>
@@ -408,7 +523,7 @@ const TLDetailEdit = (props) => {
                                     numberOfLines={4}
                                     defaultValue={lessonData.LessonDescription}
                                     style={PAGESTYLE.commonInputTextareaNormal}
-                                />
+                                    onChangeText={text => setDescription(text)} />
                             </View>
                             <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                 <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
@@ -424,15 +539,15 @@ const TLDetailEdit = (props) => {
                                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                 <View style={PAGESTYLE.toggleGrp}>
                                     <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                    <ToggleSwitch isOn={lessonData.LiveSession} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                    <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                 </View>
                                 <View style={PAGESTYLE.toggleGrp}>
                                     <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                    <ToggleSwitch isOn={lessonData.Publish} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                    <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                 </View>
                                 <View style={PAGESTYLE.toggleGrp}>
                                     <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                    <ToggleSwitch isOn={lessonData.IsVotingEnabled} onToggle={isOn => console.log("changed to : ", isOn)} />
+                                    <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                 </View>
                             </View>
                         </View>
@@ -450,7 +565,7 @@ const TLDetailEdit = (props) => {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
                                         <View style={PAGESTYLE.fileGrp}>
-                                            <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                            <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
                                             <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                 <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
                                             </TouchableOpacity>
@@ -509,6 +624,13 @@ const TLDetailEdit = (props) => {
                         </View>
                     </View>
                 </ScrollView>
+                <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                    />
+                </KeyboardAwareScrollView>
             </View>
         </View >
 
