@@ -9,55 +9,21 @@ import { opacity } from "../../../utils/Constant";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
-    const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
-    const [moduleIndex, setSelectedIndex] = useState(0);
-    const isHide = () => {
-        action(!isSmall)
-        props.hide();
-    }
-
-    toggleAnimation = () => {
-
-        if (isSmall) {
-            Animated.timing(animationValue, {
-                toValue: hp(29.42),
-                duration: 500
-            }).start(() => {
-                action(false)
-            });
-        }
-        else {
-            Animated.timing(animationValue, {
-                toValue: hp(9.50),
-                duration: 500
-            }).start(() => {
-                action(true)
-            });
-        }
-    }
-
-    const animatedStyle = {
-        width: animationValue,
-    }
-
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
-        // setSelectedIndex(1);
+        setSelectedIndex(1);
     }
 
     console.log('module index', props.moduleIndex)
     return (
         <View style={styles.sidebarHeader}>
-            <Animated.View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
+            <View style={[styles.sideBarAside]}>
+                <TouchableOpacity style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.ProfileBack} />
-                    {
-                        isSmall ? null :
-                            <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitle}>Johney Depp</Text>
-                                <Text style={styles.profileDesi}>Administrator</Text>
-                            </View>
-                    }
+                    <View style={styles.profileTextMain}>
+                        <Text style={styles.profileTitle}>Johney Depp</Text>
+                        <Text style={styles.profileDesi}>Administrator</Text>
+                    </View>
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
                     <TouchableOpacity
@@ -68,10 +34,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
-                        }
+                        <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
@@ -81,10 +44,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
-                        }
+                       <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
@@ -94,10 +54,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Pupil}
                         />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>Lesson Planner</Text>
-                        }
+                        <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>Lesson Planner</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
@@ -107,10 +64,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Messaging}
                         />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>Pupil Management</Text>
-                        }
+                        <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>Pupil Management</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
@@ -120,10 +74,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Parents}
                         />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>Parents</Text>
-                        }
+                        <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>Parents</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
@@ -133,27 +84,19 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Faqs}
                         />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
-                        }
+                        <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
-                    {
-                        isSmall ? null :
-                            <>
-                                <View style={styles.profileTextMain}>
-                                    <Text style={styles.profileTitleBottom}>Johney Depp</Text>
-                                </View>
-                                <TouchableOpacity style={styles.moreMenu}>
-                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
-                                </TouchableOpacity>
-                            </>
-                    }
+                    <View style={styles.profileTextMain}>
+                        <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                    </View>
+                    <TouchableOpacity style={styles.moreMenu}>
+                        <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                    </TouchableOpacity>
                 </View>
-            </Animated.View>
+            </View>
         </View>
     );
 }
@@ -169,6 +112,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
         shadowRadius: 1,
+        flex: 1,
+        width: '100%',
     },
     sideBarAside: {
         backgroundColor: COLORS.white,
@@ -176,13 +121,14 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.0),
         paddingRight: hp(1.0),
         overflow: 'hidden',
+        width: '100%',
     },
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: hp(1.5),
+        paddingTop: hp(3),
         paddingBottom: hp(2.0),
-        paddingLeft: hp(1.5),
+        paddingLeft: hp(2.5),
     },
     profileTextMain: {
         paddingLeft: hp(1.5),
@@ -200,7 +146,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     mainMenu: {
-        paddingTop: hp(4.5),
+        paddingTop: hp(2),
     },
     menuItem: {
         flexDirection: 'row',
@@ -233,8 +179,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: hp(6),
         borderWidth: 1,
-        left: -1,
-        width: hp(29.6),
+        left: 0,
+        right:0,
         borderColor: COLORS.bottomProfileLightBorder,
         paddingTop: hp(1),
         paddingBottom: hp(1),
@@ -255,5 +201,9 @@ const styles = StyleSheet.create({
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
+    },
+    moreMenu:{
+        position: 'absolute',
+        right: hp(3)
     },
 });
