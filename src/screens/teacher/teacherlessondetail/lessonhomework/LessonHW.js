@@ -11,9 +11,10 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
-import { opacity } from "../../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
 import DocumentPicker from 'react-native-document-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import ImagePicker, { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import moment from "moment";
 import { Addhomework } from "../../../../utils/Model";
 var checkItem = [
@@ -40,6 +41,7 @@ const TLHomeWork = (props) => {
     const [isAddRecording, setAddRecording] = useState(false)
     const [description, setDescription] = useState("")
     const [isSwitch, setSwitch] = useState(true)
+    const [cameraResponse, setCameraResponse] = useState({})
 
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -115,6 +117,15 @@ const TLHomeWork = (props) => {
 
     }
     const onCameraOnly = () => {
+        launchCamera({ mediaType: 'video' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                setCameraResponse(response)
+            }
+
+        })
         setAddRecording(false)
 
     }
