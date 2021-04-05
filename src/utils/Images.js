@@ -93,6 +93,7 @@ const Images = {
     moreHorizontal: require('../assets/images/more-horizontal2.png'),
     recordButton: require('../assets/images/stop2.png'),
     pauseButton: require('../assets/images/play-pause2.png'),
+    Play3Icon:require('../assets/images/play3.png'),
     userVideo: require('../assets/images/teacher-user2.png'),
 }
 export default Images;

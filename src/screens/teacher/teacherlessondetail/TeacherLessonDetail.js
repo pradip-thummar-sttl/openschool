@@ -11,12 +11,40 @@ import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubm
 import HeaderLP from "./header/HeaderLP";
 import HeaderHW from "./header/HeaderHW";
 import HeaderHWS from "./header/HeaderHWS";
+import { Service } from "../../../service/Service";
+import { Addhomework, User } from "../../../utils/Model";
+import { EndPoints } from "../../../service/EndPoints";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
     const [lessonData, setLessonData] = useState(props.route.params.data);
+    const [isVisiblePopup, setVisiblePopup] = useState(false)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(false)
 
+    console.log('props of detail lesson', props.route.params.item._id)
+    const onAddHomework = () => {
+        setHomeworkLoading(true)
+
+        const data = {
+            LessonId: props.route.params.item._id,
+            IsIncluded: Addhomework.IsIncluded,
+            DueDate: Addhomework.DueDate,
+            HomeworkDescription: Addhomework.HomeworkDescription,
+            CreatedBy: User.user._id,
+            CheckList: Addhomework.CheckList,
+        }
+        Service.post(data, EndPoints.Homework, (res) => {
+            console.log('response of add homework', res)
+            setHomeworkLoading(false)
+            setVisiblePopup(false)
+        }, (err) => {
+            console.log('response of add homework err', err)
+            setHomeworkLoading(false)
+            setVisiblePopup(false)
+
+        })
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -33,8 +61,15 @@ const TeacherLessonDetail = (props) => {
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
+                            setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
-                            onAlertPress={() => props.navigation.openDrawer()} />
+                            onAlertPress={() => props.navigation.openDrawer()}
+                            onClose={() => setVisiblePopup(false)}
+                            isVisible={isVisiblePopup}
+                            onOpenPopup={()=>setVisiblePopup(true)}
+                            isHomeworkLoading={isHomeworkLoading}
+                        />
+
                         :
                         <HeaderHWS
                             navigateToBack={() => props.navigation.goBack()}
@@ -76,7 +111,9 @@ const TeacherLessonDetail = (props) => {
                     {tabIndex == 0 ?
                         <TLDetail lessonData={lessonData} />
                         : tabIndex == 1 ?
-                            <TLHomeWork navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
+                            <TLHomeWork
+                                navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
+                                navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
                             <TLHomeWorkSubmitted navigateToDetail={() => props.navigation.navigate('TLHomeWorkSubmittedDetail')} />
                     }

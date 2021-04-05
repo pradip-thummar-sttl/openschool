@@ -27,9 +27,11 @@ import DocumentPicker from 'react-native-document-picker';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
+import RecordScreen from 'react-native-record-screen';
 
 const TLDetailAdd = (props) => {
     const [materialArr, setMaterialArr] = useState([])
+    const [isAddRecording, setAddRecording] = useState(false)
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [isHide, action] = useState(true);
@@ -151,6 +153,32 @@ const TLDetailAdd = (props) => {
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
         }
+    }
+
+    onScreeCamera = () => {
+        // RecordScreen.startRecording().catch((error) => console.error(error));
+        // setTimeout(() => {
+
+        //     RecordScreen.stopRecording().then((res) => {
+        //         if (res) {
+        //             console.log('response of recording', res)
+        //             const url = res.result.outputURL;
+        //         }
+        //     }).catch((error) =>
+        //         console.warn(error)
+        //     );
+
+        // }, 4000);
+        setAddRecording(false)
+        props.navigation.navigate('ScreenAndCameraRecording')
+    }
+    onScreeVoice = () => {
+        setAddRecording(false)
+
+    }
+    onCameraOnly = () => {
+        setAddRecording(false)
+
     }
 
     const isFieldsValidated = () => {
@@ -411,7 +439,7 @@ const TLDetailAdd = (props) => {
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}
                                     />
                                 </View>
-                                <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                     <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                     <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                                 </TouchableOpacity>
@@ -471,10 +499,24 @@ const TLDetailAdd = (props) => {
                             </View>
                         </View>
 
+
                     </ScrollView>
+                    {
+
+                        // isAddRecording ?
+                        //     <View style={{ position: 'absolute' }}>
+                        <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                            onScreeCamera={() => onScreeCamera()}
+                            onScreeVoice={() => onScreeVoice()}
+                            onCameraOnly={() => onCameraOnly()} />
+                        // </View>
+                        // : null
+                    }
                 </KeyboardAwareScrollView>
             </View >
         </View>
     );
+
+
 }
 export default TLDetailAdd;

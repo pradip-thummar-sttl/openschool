@@ -6,5 +6,6 @@ export const EndPoints = {
     CalenderEvent:'calenderevent/',
     GetSubjectBySchoolId:'subjectbyschoolid/',
     GetParticipants:'getparticipants/',
-    GetPupilByTeacherId:'pupilbyteacherid/'
+    GetPupilByTeacherId:'pupilbyteacherid/',
+    Homework:"homework",
 }

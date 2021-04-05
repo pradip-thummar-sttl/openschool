@@ -17,14 +17,18 @@ const HeaderSixteen = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}>The Amazon Rainforest: Everyday items</Text>
+                <Text style={styles.mainTitle}>The Amazon Rainforest: Everyday items</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>save recording</Text>
-                    </TouchableOpacity>
+                    {
+                        props.isSaveRecord ?
+                            <TouchableOpacity onPress={()=>props.onSave()} style={styles.buttonGroup}>
+                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                                <Text style={styles.commonButtonGreenheaderwithicon}>save recording</Text>
+                            </TouchableOpacity> : null
+                    }
+
                 </View>
-            </View>            
+            </View>
         </View>
     );
 }
@@ -221,7 +225,7 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.34),

@@ -26,6 +26,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
 import MESSAGE from "../../../../utils/Messages";
+import DocumentPicker from 'react-native-document-picker';
 
 
 const TLDetailEdit = (props) => {
@@ -94,6 +95,7 @@ const TLDetailEdit = (props) => {
 
 
     }, [])
+    const [materialArr, setMaterialArr] = useState([])
 
     const showDatepicker = () => {
         showMode('date');
@@ -306,6 +308,42 @@ const TLDetailEdit = (props) => {
         }
     }
 
+    const addMaterial = () => {
+        console.log('hihihihihihi')
+        var arr = [...materialArr]
+        try {
+            DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.allFiles],
+            }).then((results) => {
+                for (const res of results) {
+                    console.log(
+                        res.uri,
+                        res.type, // mime type
+                        res.name,
+                        res.size
+                    );
+                    arr.push(res)
+
+                }
+                console.log('hello response arr', arr)
+                setMaterialArr(arr)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const removeObject = (index1, item) => {
+        var array = [...materialArr];
+        array.splice(index1, 1);
+        setMaterialArr(array)
+        console.log('hello material', array)
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -403,42 +441,40 @@ const TLDetailEdit = (props) => {
                                 <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                 <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                             </View>
-                            <View style={PAGESTYLE.uploadBlock}>
+
+                            <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                 <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                            </View>
-                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                {lessonData.MaterialList.length > 0 ?
-                                    <FlatList
-                                        data={lessonData.MaterialList}
-                                        style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
-                                        renderItem={({ item, index }) => (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={PAGESTYLE.fileName}>{item.FileName}</Text>
-                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                            </View>
-                                        )}
-                                        numColumns={3}
-                                        keyExtractor={(item, index) => index.toString()}
-                                    />
-                                    :
-                                    null
-                                }
-                            </View>
-                            {lessonData.RecommendedList.length > 0 ?
-                                <FlatList
-                                    data={lessonData.RecommendedList}
-                                    style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
-                                    renderItem={({ item, index }) => (
-                                        <View style={PAGESTYLE.thumbVideo}>
-                                            <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                            </TouchableOpacity>
+
+                            {
+                                materialArr.length != 0 ? materialArr.map((item, index) => {
+                                    return (
+                                        <View style={PAGESTYLE.fileGrp}>
+                                            <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                            </TouchableOpacity>
                                         </View>
-                                    )}
-                                    numColumns={2}
-                                    keyExtractor={(item, index) => index.toString()}
-                                />
-                                :
-                                null
+                                    )
+                                }) : null
                             }
+
+                            {/* <View style={PAGESTYLE.uploadBlock}>
+                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                    </View>
+                    <View style={PAGESTYLE.fileBoxGrpWrap}>
+                        <View style={PAGESTYLE.fileGrp}>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                        </View>
+                        <View style={PAGESTYLE.fileGrp}>
+                            <Text style={PAGESTYLE.fileName}>Material</Text>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                        </View>
+                    </View> */}
+                            <View style={PAGESTYLE.thumbVideo}>
+                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                            </View>
                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                 <TouchableOpacity
                                     style={PAGESTYLE.buttonGrp}
