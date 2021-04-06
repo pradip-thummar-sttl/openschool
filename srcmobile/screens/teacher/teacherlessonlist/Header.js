@@ -35,7 +35,11 @@ const Header = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
+            <View style={styles.menuIconWithTitle}>
+                <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
                 <Text style={styles.mainTitle}>Lesson & homework planner</Text>
+            </View>
+                
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
@@ -49,16 +53,7 @@ const Header = (props) => {
             </View>
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
-                    <TextInput
-                        ref={input => { this.textInput = input }}
-                        style={[STYLE.commonInput, styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            props.onSearchKeyword(keyword);
-                        }} />
-                    <TouchableOpacity
+                <TouchableOpacity
                         style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
@@ -71,8 +66,19 @@ const Header = (props) => {
                             style={styles.userIcon1}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
+                    <TextInput
+                        ref={input => { this.textInput = input }}
+                        style={[STYLE.commonInput, styles.searchHeader]}
+                        placeholder="Search subject, class, etc"
+                        maxLength={50}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => {
+                            props.onSearchKeyword(keyword);
+                        }} />
+                   
+                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </View>
-                <TouchableOpacity style={styles.buttonGroup}>
+                <TouchableOpacity style={[styles.buttonGroup]}>
                     <Menu style={styles.filterGroup}>
                         <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
@@ -120,14 +126,14 @@ const Header = (props) => {
                             </MenuOption> */}
                         </MenuOptions>
                     </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                    
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+                    <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -137,8 +143,8 @@ export default Header;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+         paddingLeft: wp(5.33),
+         paddingRight: wp(4),
         backgroundColor: COLORS.white,
         // marginBottom: hp(5.85),
     },
@@ -148,7 +154,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
     },
     date: {
@@ -156,7 +162,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(4.92),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -165,13 +171,13 @@ const styles = StyleSheet.create({
     },
     field: {
         position: 'relative',
-        width: hp(81.11),
+        width: hp(35.94),
         justifyContent: 'center',
-        marginRight: hp(1.69),
+        marginRight:hp(1.2),
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: 15,
+        paddingLeft: hp(4.43),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
@@ -185,15 +191,16 @@ const styles = StyleSheet.create({
     },
     userIcon1: {
         position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
+        width: hp(1.66),
+        resizeMode: 'contain',
+       // height: 25,
+        left: hp(0),
     },
     userIcon1Parent: {
         position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
+        width: hp(1.66),
+        top:hp(0.8),
+        left: hp(1.5),
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -217,7 +224,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+        //marginRight: hp(1.69),
     },
     filterIcon: {
         width: hp(1.74),
@@ -234,13 +241,14 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
+        paddingRight: hp(1),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+        
     },
     addIcon: {
         width: hp(1.55),
@@ -272,7 +280,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: COLORS.white,
         top: hp(5.5),
-        width: hp(30.98),
+        width: wp(77.86),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -296,5 +304,17 @@ const styles = StyleSheet.create({
         width: wp(5.20),
         resizeMode: 'contain',
         height: hp(5.20),
+    },
+    filterGroup:{
+        display:'none',
+    },
+    menuIconWithTitle:{
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    menuIcon: {
+        width: hp(2.60),
+        resizeMode: 'contain',
+        marginRight: hp(1.56),
     },
 });

@@ -42,8 +42,10 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:hp(4.42),
-        paddingRight:hp(2.99),
+        paddingLeft:wp(5.33),
+        paddingRight:wp(5.33),
+        borderTopColor: COLORS.borderGrp,
+        borderTopWidth: 1,
     },
     lessonPlanTab: {
         flexDirection: 'row',
@@ -63,11 +65,14 @@ export default StyleSheet.create({
         color: COLORS.buttonGreen,
     },
     timedateGrp: {
+        flexDirection: 'column',
+    },
+    timedateGrpRow: {
         flexDirection: 'row',
         marginBottom: hp(3.90),
     },
     dateWhiteBoard: {
-        marginRight: hp(8.7),
+        width:hp(20.68),
     },
     subjectDateTime: {
         alignItems: 'flex-start',
@@ -145,12 +150,12 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
-        width: hp(83.72),
+        width: hp(46.18),
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
-         paddingRight: hp(3.90),
+         paddingRight: hp(2.46),
          paddingTop: hp(2.5),
-         paddingLeft:hp(4.42),
+         paddingLeft:hp(2.46),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -327,10 +332,10 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width:hp(40.10),
+        width:hp(46.12),
         justifyContent: 'flex-start',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(5.33),
+        paddingLeft: hp(2.46),
+        paddingRight: hp(2.46),
         //borderLeftWidth: 1,
         //borderColor: COLORS.borderGrp,
         paddingTop: hp(2.5),
@@ -362,14 +367,14 @@ export default StyleSheet.create({
     },
     containerWrap: {
         justifyContent: 'space-between',
-        flexDirection: 'row',
+        flexDirection: 'column',
     },
     grpThumbVideo: {
         width: hp(31.90),
         resizeMode: 'contain',
     },
     subLineTitle: {
-        marginTop: hp(-3.5),
+       // marginTop: hp(-3.5),
         zIndex: 9,
         paddingRight:hp(1.5),
     },
@@ -435,7 +440,8 @@ export default StyleSheet.create({
         marginTop: hp(1.82),
     },
     dropDownFormInput: {
-        width: '50%',
+        width: '100%',
+        marginBottom:hp(3.5),
     },
     duedateBox: {
         width: '47.8%',
@@ -443,7 +449,7 @@ export default StyleSheet.create({
     },
     dropDown: {
         flexDirection: 'row',
-        width: '95%',
+        width: '100%',
         color: COLORS.darkGray,
         fontSize: 18,
         borderWidth: 1,
@@ -569,9 +575,10 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
         bottom: hp(0.3),
+        height:hp(2.5),
     },
     timeField: {
-        width: '31.5%',
+        width: '47.2%',
         marginRight: hp(2.1),
     },
     blockSpaceBottom: {
@@ -1013,7 +1020,7 @@ export default StyleSheet.create({
         marginBottom: hp(2),
     },
     spaceTop:{
-        marginTop:hp(3.5),
+        marginTop:wp(1),
     },
     rightSpaceNone:{
         marginRight:hp(0),
@@ -1027,7 +1034,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(2),
-        top: hp(0.8),
+        top: hp(0),
     },
     checkMark:{
         margin:0,
@@ -1046,8 +1053,11 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     thumbVideo:{
-        // marginTop:hp(6.38),
-        // marginBottom:hp(2.99),
+        marginRight:hp(1),
+        marginBottom:hp(1),
+        width:wp(39.2),
+        flexWrap:'wrap',
+        flexDirection:'row',
     },
     topSpaceRecording:{
         marginTop:hp(1.401),
@@ -1095,4 +1105,28 @@ export default StyleSheet.create({
     leftSpace:{
         paddingLeft:hp(3.5),
     },
+    mobileUpload:{
+        width:hp(41.31),
+        resizeMode:'contain',
+    },
+    mobileUploadLink:{
+        width:wp(89.46),
+        resizeMode:'contain',
+    },
+    smlThumbVideo:{
+        width:wp(39.2),
+        height:wp(25.33),
+        resizeMode:'contain',
+        marginBottom:wp(1.5),
+    },
+    smlThumbVideoText:{
+        fontSize: wp(3.46),
+        color: COLORS.lightGray,
+        lineHeight: wp(4.25),
+        fontFamily: FONTS.fontRegular,
+    },
+    videoScroll:{
+       marginBottom:wp(6.5), 
+       marginTop:wp(3.5), 
+    }
 });

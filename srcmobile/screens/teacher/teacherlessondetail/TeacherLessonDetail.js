@@ -18,15 +18,16 @@ const TeacherLessonDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ width: isHide ? '100%' : '100%' }}>
                 {tabIndex == 0 ?
                     <HeaderLP
+                        navigateToEdit={()=> props.navigation.navigate('TLDetailEdit')}
                         navigateToBack={() => props.navigation.goBack()}
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
@@ -40,6 +41,7 @@ const TeacherLessonDetail = (props) => {
                 }
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
+                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.lessonPlanTab}>
                             <TouchableOpacity
                                 style={PAGESTYLE.tabs}
@@ -60,14 +62,7 @@ const TeacherLessonDetail = (props) => {
                                 <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={PAGESTYLE.lessonstartButton}>
-                            <TouchableOpacity
-                                style={PAGESTYLE.buttonGrp}
-                                activeOpacity={opacity}
-                                onPress={() => props.navigation.navigate('TLDetailEdit')}>
-                                <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
-                            </TouchableOpacity>
-                        </View>
+                       </ScrollView> 
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
