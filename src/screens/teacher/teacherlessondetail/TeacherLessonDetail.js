@@ -66,7 +66,7 @@ const TeacherLessonDetail = (props) => {
                             onAlertPress={() => props.navigation.openDrawer()}
                             onClose={() => setVisiblePopup(false)}
                             isVisible={isVisiblePopup}
-                            onOpenPopup={()=>setVisiblePopup(true)}
+                            onOpenPopup={() => setVisiblePopup(true)}
                             isHomeworkLoading={isHomeworkLoading}
                         />
 
@@ -101,7 +101,7 @@ const TeacherLessonDetail = (props) => {
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.replace('TLDetailEdit', {'data': lessonData})}>
+                                onPress={() => props.navigation.replace('TLDetailEdit', { onGoBack: () => {}, 'data': lessonData })}>
                                 <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
                             </TouchableOpacity>
                         </View>

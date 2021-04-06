@@ -64,7 +64,7 @@ const TeacherLessonList = (props) => {
         return (
             <Pupillist
                 item={item}
-                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { 'data': item })}
+                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': item })}
             />
         );
     };
@@ -98,6 +98,11 @@ const TeacherLessonList = (props) => {
         })
     }
 
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -109,7 +114,7 @@ const TeacherLessonList = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')}
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', {onGoBack: () => refresh()})}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => fetchRecord('', '')}

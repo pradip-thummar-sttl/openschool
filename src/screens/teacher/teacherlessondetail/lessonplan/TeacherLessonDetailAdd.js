@@ -490,6 +490,7 @@ const TLDetailAdd = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
+                moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
@@ -497,7 +498,10 @@ const TLDetailAdd = (props) => {
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
                 <HeaderAddNew
                     isLoading={isLoading}
-                    navigateToBack={() => { props.navigation.goBack() }}
+                    navigateToBack={() => {
+                        props.route.params.onGoBack();
+                        props.navigation.goBack()
+                    }}
                     saveLesson={() => { saveLesson() }} />
                 <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
