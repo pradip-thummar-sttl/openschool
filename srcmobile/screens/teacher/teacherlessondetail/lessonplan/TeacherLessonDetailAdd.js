@@ -46,17 +46,16 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <HeaderAddNew navigateToBack={() => { props.navigation.goBack() }} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.containerWrap}>
-                        <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                        <View style={PAGESTYLE.teacherDetailLeft}>
                             <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
                             <View style={PAGESTYLE.timedateGrp}>
                                 <View style={PAGESTYLE.dropDownFormInput}>
@@ -81,7 +80,7 @@ const TLDetailAdd = (props) => {
                                     </View>
                                 </View>
                             </View>
-                            <View style={PAGESTYLE.timedateGrp}>
+                            <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                                     <Text style={PAGESTYLE.subjectText}>Date</Text>
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
@@ -106,6 +105,8 @@ const TLDetailAdd = (props) => {
                                         </View>
                                     </View>
                                 </View>
+                            </View>
+                            <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                                     <Text style={PAGESTYLE.subjectText}>Participants</Text>
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
@@ -119,7 +120,6 @@ const TLDetailAdd = (props) => {
                                     </View>
                                 </View>
                             </View>
-
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                 <TextInput
@@ -172,13 +172,13 @@ const TLDetailAdd = (props) => {
                                 <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                             </View>
                             <View style={PAGESTYLE.uploadBlock}>
-                                <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                                <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} />
                             </View>
                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                 <TouchableOpacity
                                     style={PAGESTYLE.buttonGrp}
                                     activeOpacity={opacity}
-                                    onPress={()=> props.navigation.navigate('TLVideoGallery')}>
+                                    onPress={() => props.navigation.navigate('TLVideoGallery')}>
                                     <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                                 </TouchableOpacity>
                             </View>

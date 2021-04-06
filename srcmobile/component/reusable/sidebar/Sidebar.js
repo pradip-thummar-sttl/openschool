@@ -29,7 +29,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToDashboard() }}>
+                        onPress={() => { props.navigation.replace('TeacherDashboard') }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
@@ -39,17 +39,17 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { navigateSidebarIndex() }}>
+                        onPress={() => { props.navigation.replace('TeacherTimeTable') }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
-                       <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
+                        <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToLessonAndHomework() }}>
+                        onPress={() => { props.navigation.replace('TeacherLessonList') }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
@@ -59,7 +59,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {  }}>
+                        onPress={() => { }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
@@ -69,7 +69,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {  }}>
+                        onPress={() => { }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
@@ -79,7 +79,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {  }}>
+                        onPress={() => { }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         bottom: hp(6),
         borderWidth: 1,
         left: 0,
-        right:0,
+        right: 0,
         borderColor: COLORS.bottomProfileLightBorder,
         paddingTop: hp(1),
         paddingBottom: hp(1),
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         width: hp(3),
         resizeMode: 'contain',
     },
-    moreMenu:{
+    moreMenu: {
         position: 'absolute',
         right: hp(3)
     },

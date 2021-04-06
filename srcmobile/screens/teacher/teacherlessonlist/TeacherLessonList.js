@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -7,161 +7,152 @@ import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
-import { opacity } from "../../../utils/Constant";
 import Header from "./Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-var moment = require('moment');
-const Pupillist = (props, { style }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            <View style={PAGESTYLE.border}></View>
-            <Text style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.LessonTopic}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('YYYY-MM-DD')}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.LiveSession).toString()}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.Publish).toString()}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>{props.item.HomeWork}</Text>
-            <TouchableOpacity
-                style={PAGESTYLE.pupilDetailLink}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToDetail()}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-            </TouchableOpacity>
-        </View>
-    </View>
-);
-
+import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { connect, useSelector } from "react-redux";
+import moment from 'moment';
+import RBSheet from "react-native-raw-bottom-sheet";
 const TeacherLessonList = (props) => {
-    const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(null);
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-            />
-        );
-    };
-    const pupilRender = ({ item }) => {
-        return (
-            <Pupillist
-                item={item}
-                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail')}
-            />
-        );
-    };
-
-    const [lessonData, setLessonData] = useState([])
-    const [isLessonLoading, setLessonLoading] = useState(true)
-    const [searchKeyword, setSearchKeyword] = useState('')
-    const [filterBy, setFilterBy] = useState('')
-
+    const refRBSheet = useRef();
+    const userAuthData = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.userAuthData
+    })
+    const [dashData, setdashData] = useState([])
+    const [pupilData, setPupilData] = useState([])
+    const [isDashDataLoading, setDashDataLoading] = useState(true)
+    const [isPupilDataLoading, setPupilDataLoading] = useState(true)
     useEffect(() => {
-        fetchRecord('', '')
-    }, [])
+        // if(isDesignBuild)
+        //     return true
 
-    const fetchRecord = (searchBy, filterBy) => {
-        setLessonLoading(true)
-        let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
-        }
-
-        Service.post(data, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
-            setLessonLoading(false)
+        Service.post({}, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                setLessonData(res.data)
+                setdashData(res.data)
+                setDataOfSubView(res.data[0])
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-    }
 
+        Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+            setPupilDataLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all pupil data', res)
+                setPupilData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all pupil error', err)
+        })
+        return () => {
+        }
+    }, [])
+    const [isHide, action] = useState(true);
+    const [selectedId, setSelectedId] = useState(0);
+    const [dataOfSubView, setDataOfSubView] = useState([])
+    const setData = (index) => {
+        setSelectedId(index)
+        setDataOfSubView(dashData[index])
+    }
+    const renderItem = ({ item, index }) => {
+        const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
+        return (
+            <Item
+                item={item}
+                onPress={() => setData(index)}
+                style={{ backgroundColor }}
+            />
+        );
+    };
+   
+    const Item = ({ onPress, style, item }) => (
+        <TouchableOpacity style={[PAGESTYLE.item, style]}>
+
+            <View style={PAGESTYLE.classSubject}>
+                <View style={PAGESTYLE.subjecRow}>
+                    <View style={PAGESTYLE.border}></View>
+                    <View style={PAGESTYLE.subjectMain}>
+                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                    </View>
+                </View>
+                <View style={PAGESTYLE.timingMain}>
+                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
+                </View>
+                <TouchableOpacity
+                    style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
+                    activeOpacity={opacity}
+                    onPress={() => props.navigation.navigate('TeacherLessonDetail')}>
+                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                </TouchableOpacity>
+            </View>
+            <View style={PAGESTYLE.row}>
+                <View style={PAGESTYLE.checkMarkedText}>
+                    <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />
+                    <Text style={PAGESTYLE.tickText}>Live Lesson</Text>
+                </View>
+                <View style={PAGESTYLE.checkMarkedText}>
+                    <Image style={PAGESTYLE.tickIcon} source={Images.CheckIconGrey} />
+                    <Text style={PAGESTYLE.tickText}>Published</Text>
+                </View>
+                <View style={PAGESTYLE.checkMarkedText}>
+                    <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />
+                    <Text style={PAGESTYLE.tickText}>Homework</Text>
+                </View>
+            </View>
+
+        </TouchableOpacity>
+    );
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ width: isHide ? '100%' : '100%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => fetchRecord('', '')}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
-                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
-                    <View style={PAGESTYLE.whiteBg}>
-                        <View style={PAGESTYLE.pupilTable}>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Subject</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Lesson Topic</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Live Lesson</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Published</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Homework</Text>
-                            </View>
-                        </View>
-                        <View style={PAGESTYLE.pupilTabledata}>
-                            <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                                {isLessonLoading ?
-                                    <ActivityIndicator
-                                        style={{ flex: 1 }}
-                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                        color={COLORS.yellowDark} />
-                                    :
-                                    lessonData.length > 0 ?
-                                        <FlatList
-                                            data={lessonData}
-                                            renderItem={pupilRender}
-                                            keyExtractor={(item) => item.id}
-                                            extraData={selectedId}
-                                            showsVerticalScrollIndicator={false}
-                                        />
-                                        :
-                                        <View style={{ height: 100, justifyContent: 'center' }}>
-                                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        </View>
-                                }
-                            </SafeAreaView>
-                        </View>
+                    onSearch={() => { }}
+                    onClearSearch={() => { }}
+                    onFilter={(filterBy) => { }} />
+                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
+                    <View>
+                        {isDashDataLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.yellowDark} />
+                            :
+                            dashData.length > 0 ?
+                                <SafeAreaView style={PAGESTYLE.leftTabbing}>
+                                    <FlatList
+                                        style={PAGESTYLE.ScrollViewFlatlist}
+                                        data={dashData}
+                                        renderItem={renderItem}
+                                        keyExtractor={(item) => item.id}
+                                        extraData={selectedId}
+                                        showsVerticalScrollIndicator={false}
+                                    />
+                                </SafeAreaView>
+                                :
+                                <View style={{ height: 100, justifyContent: 'center' }}>
+                                    <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                </View>
+                        }
                     </View>
+
                 </ScrollView>
             </View>
         </View>

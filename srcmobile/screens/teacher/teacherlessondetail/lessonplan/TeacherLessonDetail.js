@@ -15,54 +15,59 @@ const TLDetail = (props) => {
 
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
-                <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                    <View style={PAGESTYLE.timedateGrp}>
+                <View style={PAGESTYLE.teacherDetailLeft}>
+                    <View style={PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <Text style={PAGESTYLE.labelTextMain}>Geography</Text>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeSpace]}>
+                        <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <Text style={PAGESTYLE.labelTextMain}>The Amazon Forest </Text>
                             </View>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.timedateGrp}>
+                    <View style={PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
-                            <View style={PAGESTYLE.alignRow}>
-                                <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} />
-                                <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
+                            <View style={PAGESTYLE.subjectDateTime}>
+                                <View style={PAGESTYLE.alignRow}>
+                                    <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} />
+                                    <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
+                                </View>
                             </View>
-
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                        <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
-                            <View style={PAGESTYLE.alignRow}>
-                                <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} />
-                                <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
+                            <View style={PAGESTYLE.subjectDateTime}>
+                                <View style={PAGESTYLE.alignRow}>
+                                    <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} />
+                                    <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
+                                </View>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                            <Text style={PAGESTYLE.subjectText}>Participants</Text>
+                    </View>
+                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                        <Text style={PAGESTYLE.subjectText}>Participants</Text>
+                        <View style={PAGESTYLE.subjectDateTime}>
                             <View style={PAGESTYLE.alignRow}>
                                 <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} />
                                 <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.lessonDesc}>
+                    <View style={PAGESTYLE.lessonDesc, PAGESTYLE.spaceTop}>
                         <Text style={PAGESTYLE.lessonTitleWithoutTextArea}>Lesson Description</Text>
                         <Text style={PAGESTYLE.lessonText}>Rainforests are one of the oldest ecosystems on Earth and are fundamental to all life on the planet. You will learn all about different forms of physical geography, including different world ecosystems. You will also learn about everyday items that come from the Amazon Rainforest.</Text>
                     </View>
-                    <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                    <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop, PAGESTYLE.videoLinkBlockSpaceBottom]}>
                         <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
                         <Text style={PAGESTYLE.videoLinkText}>Geography - Instructional video</Text>
                     </TouchableOpacity>
-                    <View style={PAGESTYLE.requirementofClass}>
+                    {/* <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                         <View style={PAGESTYLE.checkBoxLabelLine}>
@@ -73,41 +78,44 @@ const TLDetail = (props) => {
                             <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                             <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
                         </View>
-                    </View>
+                    </View> */}
+                    <View style={STYLE.hrCommon}></View>
                     <View style={PAGESTYLE.checkBoxGrpWrap}>
-                        <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
-                        <View style={PAGESTYLE.checkBoxGrp}>
 
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Reuel Pardesi123</Text>
+                        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+                            <View style={PAGESTYLE.checkBoxGrp}>
+
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Reuel Pardesi123</Text>
+                                </View>
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Gene Aw</Text>
+                                </View>
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Janice Williamson</Text>
+                                </View>
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Jovan Singh</Text>
+                                </View>
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Sophia Lauren</Text>
+                                </View>
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Mark Mitchell</Text>
+                                </View>
+                                <View style={PAGESTYLE.checkBoxLabelNone}>
+                                    <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
+                                    <Text style={PAGESTYLE.checkBoxLabelTextNone}>Madeline Ghenea</Text>
+                                </View>
                             </View>
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Gene Aw</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Janice Williamson</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Jovan Singh</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Sophia Lauren</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Mark Mitchell</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelNone}>
-                                <Image source={Images.UserProfilePopup} style={PAGESTYLE.userIconPupil} />
-                                <Text style={PAGESTYLE.checkBoxLabelTextNone}>Madeline Ghenea</Text>
-                            </View>
-                        </View>
+                        </ScrollView>
                     </View>
                     <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                         <View style={STYLE.hrCommon}></View>
@@ -150,7 +158,7 @@ const TLDetail = (props) => {
                     <View style={PAGESTYLE.thumbVideo}>
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                     </View>
-                    <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                    {/* <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         <View style={PAGESTYLE.videoLinkBlockRight}>
                             <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
@@ -175,7 +183,7 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.fileName}>Filename</Text>
                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                         </View>
-                    </View>
+                    </View> */}
                 </View>
             </View>
         </View>

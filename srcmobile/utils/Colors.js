@@ -13,7 +13,7 @@ const COLORS = {
     lightGray: '#9699A5',
     buttonGreen: '#049160',
     menuLightFonts: '#B4B6BE',
-    borderLesoon: '#71C4E4',
+    borderLesoon: '#FFCC22',
     linkLightPurple: '#676794',
     bottomProfileLightBorder:'#F1F2F7',
     backgroundColorCommon: '#F9FAFC',
