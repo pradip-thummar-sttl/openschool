@@ -50,7 +50,7 @@ const PopupAddNewData = (props) => {
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
@@ -58,7 +58,10 @@ const PopupAddNewData = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
                                 <View style={styles.entryContentMain}>
-                                    <TouchableOpacity style={styles.entryData}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        style={styles.entryData}
+                                        onPress={() => { setModalVisible(false); props.navigateToAddLesson() }}>
                                         <Image style={styles.entryIcon} source={Images.NewLessons} />
                                         <Text style={styles.entryTitle}>New Lesson</Text>
                                     </TouchableOpacity>

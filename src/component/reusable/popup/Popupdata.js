@@ -7,7 +7,7 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { cellWidth, opacity } from "../../../utils/Constant";
+import { cellWidth, Lesson, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 
 const Popupdata = (props) => {
@@ -24,8 +24,8 @@ const Popupdata = (props) => {
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Color, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Color, width: cellWidth * props.span }}></View>
+                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
+                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, width: cellWidth * props.span }}></View>
                     <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
