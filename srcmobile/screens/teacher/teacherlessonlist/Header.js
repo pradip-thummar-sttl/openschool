@@ -35,11 +35,11 @@ const Header = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <View style={styles.menuIconWithTitle}>
-                <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
-                <Text style={styles.mainTitle}>Lesson & homework planner</Text>
-            </View>
-                
+                <View style={styles.menuIconWithTitle}>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                    <Text style={styles.mainTitle}>Lesson & homework planner</Text>
+                </View>
+
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
@@ -53,7 +53,7 @@ const Header = (props) => {
             </View>
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
-                <TouchableOpacity
+                    <TouchableOpacity
                         style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
@@ -75,7 +75,7 @@ const Header = (props) => {
                         onChangeText={keyword => {
                             props.onSearchKeyword(keyword);
                         }} />
-                   
+
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </View>
                 <TouchableOpacity style={[styles.buttonGroup]}>
@@ -85,7 +85,7 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {setFilterBy('Subject'); setSelectedIndex(0)}}>
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
@@ -99,7 +99,7 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {setFilterBy('Date'); setSelectedIndex(1)}}>
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
@@ -126,7 +126,7 @@ const Header = (props) => {
                             </MenuOption> */}
                         </MenuOptions>
                     </Menu>
-                    
+
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonGroup}
@@ -143,8 +143,8 @@ export default Header;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-         paddingLeft: wp(5.33),
-         paddingRight: wp(4),
+        paddingLeft: wp(5.33),
+        paddingRight: wp(4),
         backgroundColor: COLORS.white,
         // marginBottom: hp(5.85),
     },
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: hp(35.94),
         justifyContent: 'center',
-        marginRight:hp(1.2),
+        marginRight: hp(1.2),
     },
     searchHeader: {
         height: hp(5.20),
@@ -193,13 +193,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: hp(1.66),
         resizeMode: 'contain',
-       // height: 25,
+        // height: 25,
         left: hp(0),
     },
     userIcon1Parent: {
         position: 'absolute',
         width: hp(1.66),
-        top:hp(0.8),
+        top: hp(0.8),
         left: hp(1.5),
     },
     commonButtonBorderedheader: {
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        
+
     },
     addIcon: {
         width: hp(1.55),
@@ -305,10 +305,10 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         height: hp(5.20),
     },
-    filterGroup:{
-        display:'none',
+    filterGroup: {
+        display: 'none',
     },
-    menuIconWithTitle:{
+    menuIconWithTitle: {
         flexDirection: 'row',
         alignItems: 'center',
     },

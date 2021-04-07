@@ -17,20 +17,26 @@ const HeaderGallery = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> Recommended Content</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity
+                        style={styles.notificationBar}
+                        onPress={() => props.onAlertPress()}
+                        activeOpacity={opacity}>
+                        <Image style={styles.infoIcon} source={Images.InfoIcon} />
+                    </TouchableOpacity> 
                 </View>
             </View>
             <View style={styles.filterbarMain}>
-                <View style={styles.lessonPlanTop}>
+                {/* <View style={styles.lessonPlanTop}>
                     <View style={styles.lessonPlanTab}>
                         <Text style={styles.commonText}>Our AI has shortlisted the following content to help you to deliver your lesson</Text>
                     </View>
-                </View>
+                </View> */}
                 <View style={styles.flexEnd}>
                     <View style={styles.field}>
                         <Image
@@ -55,15 +61,16 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        paddingTop: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom:hp(2.5),
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: wp(4.26),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
@@ -79,8 +86,6 @@ const styles = StyleSheet.create({
     filterbarMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderBottomWidth: 1,
-        borderColor: COLORS.borderGrp,
         paddingBottom: hp(1.5),
     },
     field: {
@@ -244,9 +249,15 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+        top:hp(1.2),
     },
     commonText: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
+    },
+    infoIcon:{
+        width: wp(6.18),
+        resizeMode: 'contain',
+        top:hp(1.2),
     },
 });

@@ -11,7 +11,7 @@ const HeaderAddNew = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <View style={styles.titleRow}>
+                <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
@@ -50,10 +50,9 @@ export default HeaderAddNew;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-       
-       // paddingRight: hp(2.46),
+        paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        marginTop: hp(5.85),
+        paddingTop: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',

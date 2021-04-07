@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.46),
         paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        marginTop: hp(3.85),
+        paddingTop: hp(2.85),
     },
     headerMain: {
         flexDirection: 'row',

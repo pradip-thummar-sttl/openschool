@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
         paddingLeft: wp(5.33),
         paddingRight: wp(2.0),
         backgroundColor: COLORS.white,
-        marginTop: hp(5.85),
+        paddingTop: hp(5.85),
         paddingBottom: hp(1.5),
-        borderBottomWidth:1,
-        borderColor:COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
     },
     headerMain: {
         flexDirection: 'row',

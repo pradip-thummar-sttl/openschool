@@ -17,7 +17,7 @@ const Popuphomework = (props) => {
         <View>
             <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
                 <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                <Text style={styles.commonButtonGreenheader}></Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
+        paddingRight: hp(1),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),

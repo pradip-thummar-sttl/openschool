@@ -100,7 +100,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        bottom: hp(0.4),
+        bottom: hp(0.8),
     },
     calIconHomeWork: {
         resizeMode: 'contain',
@@ -188,7 +188,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(4.68),
+        marginTop: hp(3.68),
     },
     videoLinkBlock: {
         width: hp(38),
@@ -320,11 +320,9 @@ export default StyleSheet.create({
     toggleGrpBox: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderColor: COLORS.videoLinkBorder,
-        borderWidth: 1,
-        marginBottom: hp(1.8),
-        padding: hp(1.1),
-        borderRadius: hp(1.5),
+        borderBottomColor: COLORS.videoLinkBorder,
+        borderBottomWidth: 1,
+        paddingBottom: hp(2.2),
     },
     toggleText: {
         fontFamily: FONTS.fontRegular,
@@ -458,7 +456,7 @@ export default StyleSheet.create({
         borderRadius: hp(1.0),
         lineHeight: hp(2.3),
         height: hp(6),
-        paddingLeft: hp(2.0),
+        paddingLeft: hp(1.5),
         paddingRight: hp(2.0),
         paddingTop: hp(2.0),
         paddingBottom: hp(2.0),
@@ -976,7 +974,8 @@ export default StyleSheet.create({
         fontFamily:FONTS.fontSemiBold,
         fontSize:hp(2.08),
         color: COLORS.darkGray,
-        marginTop: hp(2),
+        marginTop: hp(3.5),
+        marginBottom: hp(1),
     },
     videoWrap:{
         flexDirection:'row',
@@ -986,26 +985,26 @@ export default StyleSheet.create({
     videoThumb:{
         position:'relative',
         flexDirection:'row',
-        marginRight:hp(1.56),
     },
     videoThumbnail:{        
-        width:hp(26.17),
-        height:hp(17.83),
-        resizeMode:'contain',
+       width:'100%',
+       resizeMode:'contain',
+       height:wp(62.08),
+       marginBottom:wp(1.5),
     },
     videoPlay:{
-        width:hp(5.20),
+        width:wp(12.8),
         resizeMode:'contain',
         position:'absolute',
-        top:hp(5.5),
-        left:hp(11.32),
+        top:hp(11.13),
+        left:hp(18.88),
     },
     videoSelected:{
         width:hp(2.9),
         resizeMode:'contain',
         position:'absolute',
-        bottom:hp(0.2),
-        right:hp(1),
+        bottom:hp(3.2),
+        right:hp(2),
     },
     videoSubTitle:{
         fontFamily:FONTS.fontRegular,
@@ -1013,11 +1012,9 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         flexDirection:'row',
         lineHeight:hp(2.6),
-        paddingTop:hp(1.5),
-        paddingBottom:hp(1.5),
-        width:hp(26.17),
+        paddingBottom:wp(6.5),
+        width:wp(89.33),
         flexWrap:'wrap',
-        marginBottom: hp(2),
     },
     spaceTop:{
         marginTop:wp(1),
@@ -1128,5 +1125,13 @@ export default StyleSheet.create({
     videoScroll:{
        marginBottom:wp(6.5), 
        marginTop:wp(3.5), 
-    }
+    },
+    mobileGalleryHolder:{
+        paddingLeft:wp(5.33),
+        paddingRight:wp(5.33),
+    },
+    mobilePupilProfile:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+    },
 });
