@@ -61,6 +61,7 @@ const TeacherLessonDetail = (props) => {
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
+                            SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
                             onAlertPress={() => props.navigation.openDrawer()}
@@ -97,14 +98,18 @@ const TeacherLessonDetail = (props) => {
                                 <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={PAGESTYLE.lessonstartButton}>
-                            <TouchableOpacity
-                                style={PAGESTYLE.buttonGrp}
-                                activeOpacity={opacity}
-                                onPress={() => props.navigation.replace('TLDetailEdit', { onGoBack: () => {}, 'data': lessonData })}>
-                                <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
-                            </TouchableOpacity>
-                        </View>
+                        {tabIndex == 0 ?
+                            <View style={PAGESTYLE.lessonstartButton}>
+                                <TouchableOpacity
+                                    style={PAGESTYLE.buttonGrp}
+                                    activeOpacity={opacity}
+                                    onPress={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })}>
+                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            null
+                        }
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
