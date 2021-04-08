@@ -15,7 +15,7 @@ const HeaderTimeTable = (props) => {
 
     useEffect(() => {
         if (!isSearchActive) {
-            props.onClearSearch()
+            // props.onClearSearch()
             this.textInput.clear()
         } else {
             props.onSearch()

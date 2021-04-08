@@ -74,7 +74,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // if(isDesignBuild)
         //     return true
 
-        Service.post({}, `${EndPoints.GetLessionById}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post({}, `${EndPoints.GetLessionById}/604b09139dc64117024690c3`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -87,7 +87,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.log('response of get all lesson error', err)
         })
 
-        Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/604b09139dc64117024690c3`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all pupil data', res)

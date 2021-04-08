@@ -15,30 +15,34 @@ import { opacity } from "../../../../utils/Constant";
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.mobilePupilProfile}>
-            <View>
+            <View style={PAGESTYLE.thumbAlign}>
                 <View style={PAGESTYLE.userStamp}></View>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Reuel Pardesi</Text>
-                <Text style={PAGESTYLE.pupilName}>Group 1A</Text>
+                <View>
+                    <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Reuel Pardesi</Text>
+                    <Text style={PAGESTYLE.pupilName}>Group 1A</Text>
+                </View>
             </View>
             <View>
                 <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
             </View>
         </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>   
-        </View>
-        <View>
-            <View>
-                <Text style={PAGESTYLE.pupilName}>Submitted</Text>
+        <View style={PAGESTYLE.rowLine}>
+            <View style={PAGESTYLE.checkMarkedText}>
+                <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />
+                <Text style={PAGESTYLE.tickText}>Submitted</Text>
+            </View>
+            <View style={PAGESTYLE.checkMarkedText}>
+                <Image style={PAGESTYLE.tickIcon} source={Images.CheckIconGrey} />
+                <Text style={PAGESTYLE.tickText}>Marked</Text>
             </View>
             <View>
-                <Text style={PAGESTYLE.pupilName}>Marked</Text>
-            </View>
             <TouchableOpacity
                 style={PAGESTYLE.pupilDetailLink}
                 activeOpacity={opacity}
                 onPress={() => props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
+            </View>
         </View>
     </View>
 );

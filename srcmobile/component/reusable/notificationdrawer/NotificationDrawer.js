@@ -26,9 +26,18 @@ const NotificationDrawer = (props) => {
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
-                <View style={styles.datepickerDrwaer}>
+                <View>
                     {Var.isCalender = false}
+                    <View style={styles.drawerTitleMainDate}>
+                        <TouchableOpacity style={styles.closeNotificationbarMain}
+                            activeOpacity={opacity}
+                            onPress={() => props.navigation.closeDrawer()}
+                        >
+                            <Image source={Images.backArrow} style={styles.closeIcon} />
+                        </TouchableOpacity>
+                    </View>
                     <Calendar
+                        style={styles.datepickerDrwaer}
                         minDate={new Date()}
                         firstDay={1}
                         dayComponent={({ date, state, marking }) => {
@@ -68,7 +77,7 @@ const NotificationDrawer = (props) => {
                                                 moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
                                                     <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                         {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
-                                                        <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: item.EventColor, }} />
+                                                        <View style={{ position: 'absolute', top: hp(0.1), left:hp(-0.26), height: hp(0.77), width: hp(0.77), borderRadius: hp(0.77), backgroundColor: item.EventColor, }} />
                                                     </View> : null
                                             )
                                         })
@@ -188,6 +197,14 @@ const styles = StyleSheet.create({
     drawerMain: {
         flex: 1,
     },
+    drawerTitleMainDate:{
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.commonBorderColor,
+        paddingLeft: hp(2.6),
+        paddingTop: hp(4.55),
+        paddingBottom: hp(1.6),
+        paddingRight: hp(1.6),
+    },
     drawerTitleMain: {
         borderWidth: 1,
         borderColor: COLORS.commonBorderColor,
@@ -207,12 +224,12 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
     },
     datepickerDrwaer:{
-        paddingTop: hp(4.55),
-        paddingLeft: hp(2.60),
-        paddingRight: hp(2.60),
+        paddingTop: hp(1),
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
     },
     closeNotificationbarMain: {
-        position: 'relative',        
+        position: 'relative',
         zIndex: 9,
         marginRight: hp(2),
     },
@@ -276,14 +293,14 @@ const styles = StyleSheet.create({
     },
     datemainView1: { borderTopLeftRadius: hp(50), borderBottomLeftRadius: hp(50), marginVertical: hp(0.30), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
     dateMainView2: { borderTopRightRadius: hp(50), borderBottomRightRadius: hp(50), marginVertical: hp(0.30), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center' },
-    dateMAinView3: { marginVertical: hp(0.30), height: hp(4.55), width: hp(6.51), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center', },
-    datemainView4: { marginVertical: hp(0.30), height: hp(4.55), width: hp(6.51), justifyContent: 'center', alignItems: 'center', },
+    dateMAinView3: { marginVertical: hp(0.30), height: hp(4.55), width: hp(7.9), backgroundColor: COLORS.periodColor, justifyContent: 'center', alignItems: 'center', },
+    datemainView4: { marginVertical: hp(0.30), height: hp(4.55), width: hp(7.9), justifyContent: 'center', alignItems: 'center', },
     dateSubVIew1: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.dashboardGreenButton, justifyContent: 'center', alignItems: 'center', },
     dateSubView2: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), justifyContent: 'center', alignItems: 'center', },
     dateSubView3: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
     labelColor:{color:COLORS.menuLightFonts,fontSize: hp(1.56),},
     colorBox: { height: hp(2.60), width: hp(2.60), borderRadius: hp(0.65), marginRight: hp(1.30) },
-    colorView: { flexDirection: 'row', marginBottom: hp(1.95),alignItems: 'center' },
+    colorView: { flexDirection: 'row', marginBottom: hp(2.62),alignItems: 'center' },
     bottomButton: {
         position: 'absolute',
         alignSelf: 'flex-end',

@@ -42,8 +42,7 @@ const TLDetailAdd = (props) => {
             return false;
         }
         return true;
-    }
-
+    }   
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar

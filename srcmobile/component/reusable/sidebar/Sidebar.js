@@ -29,7 +29,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigation.replace('TeacherDashboard') }}>
+                        onPress={() => { props.navigation.replace('TeacherDashboard'); props.navigation.closeDrawer() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
@@ -39,7 +39,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigation.replace('TeacherTimeTable') }}>
+                        onPress={() => { props.navigation.replace('TeacherTimeTable'); props.navigation.closeDrawer() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
@@ -49,7 +49,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigation.replace('TeacherLessonList') }}>
+                        onPress={() => { props.navigation.replace('TeacherLessonList'); props.navigation.closeDrawer() }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}

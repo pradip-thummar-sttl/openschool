@@ -397,13 +397,13 @@ const styles = StyleSheet.create({
         paddingRight: hp(4.23),
     },
     entryIcon: {
-        width: hp(11.19),
-        height: hp(11.19),
+        width: hp(10),
+        height: hp(10),
         resizeMode: 'contain',
-        marginBottom: hp(2.6),
+        marginBottom: hp(2.28),
     },
     entryTitle: {
-        fontSize: hp(1.56),
+        fontSize: hp(1.37),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
