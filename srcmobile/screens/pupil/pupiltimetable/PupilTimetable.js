@@ -63,7 +63,7 @@ const PupilTimetable = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        // Service.get(`${EndPoints.GetTimeTable}/604b09139dc64117024690c3`, (res) => {
         //     setTimeTableLoading(false)
         //     if (res.code == 200) {
         //         console.log('response of get all lesson', res)
@@ -75,7 +75,7 @@ const PupilTimetable = (props) => {
         //     console.log('response of get all lesson error', err)
         // })
 
-        Service.get(`${EndPoints.CalenderEvent}6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.get(`${EndPoints.CalenderEvent}604b09139dc64117024690c3`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
@@ -129,7 +129,7 @@ const PupilTimetable = (props) => {
     }
 
     useEffect(() => {
-        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post({}, `${EndPoints.GetTimeTable}/604b09139dc64117024690c3`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

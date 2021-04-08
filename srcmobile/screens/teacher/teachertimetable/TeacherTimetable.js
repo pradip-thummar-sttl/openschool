@@ -4,7 +4,7 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderTimeTable from "../../../component/reusable/header/HeaderTimeTable";
+import HeaderTT from "./header/HeaderTT";
 import { cellWidth, opacity, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
@@ -119,7 +119,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.post({}, `${EndPoints.GetTimeTable}/604b09139dc64117024690c3`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -142,7 +142,9 @@ const TeacherTimeTable = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderTimeTable onAlertPress={() => props.navigation.openDrawer()} />
+                <HeaderTT
+                    onAlertPress={() => props.navigation.openDrawer()}
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator

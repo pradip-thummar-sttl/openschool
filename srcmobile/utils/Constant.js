@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 
 export const opacity = 0.5;
 export const isDesignBuild = true;
-export const cellWidth = 300;
+export const cellWidth = 167;
 
 export class Var {
      static isCalender = false;

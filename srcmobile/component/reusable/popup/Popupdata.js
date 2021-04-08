@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -9,8 +9,9 @@ import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import { cellWidth, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
-
+import RBSheet from "react-native-raw-bottom-sheet";
 const Popupdata = (props) => {
+    const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -23,7 +24,7 @@ const Popupdata = (props) => {
             <TouchableOpacity
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
-                onPress={toggleModal}>
+                onPress={() => refRBSheet.current.open()}>
                 <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Color, borderStartWidth: 3, }}>
                     <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Color, width: cellWidth * props.span }}></View>
                     <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span }}>{props.title}</Text>
@@ -33,7 +34,21 @@ const Popupdata = (props) => {
                     </View>
                 </View>
             </TouchableOpacity>
-            <Modal isVisible={isModalVisible}>
+            <RBSheet
+                    ref={refRBSheet}
+                    closeOnDragDown={true}
+                    height={[hp(87)]}
+                    style={{ position: 'relative', }}
+                    closeOnPressMask={true}
+                    customStyles={{
+                        wrapper: {
+                            backgroundColor: COLORS.bottomSlideUpBack
+                        },
+                        draggableIcon: {
+                            backgroundColor: COLORS.darkGray
+                        }
+                    }}
+                >
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
@@ -177,7 +192,7 @@ const Popupdata = (props) => {
                         </View>
                     </View>
                 </View>
-            </Modal>
+                </RBSheet>
         </View>
     );
 }
@@ -192,15 +207,12 @@ const styles = StyleSheet.create({
     },
     popupCard: {
         backgroundColor: COLORS.white,
-        borderRadius: hp(2),
-        width: hp(60.54),
+        width: '100%',
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
         fontFamily: FONTS.fontRegular,
         position: 'relative',
-        borderWidth: hp(0.26),
-        borderColor: COLORS.yellowBorder,
     },
     popupContent: {
         width: '100%',
