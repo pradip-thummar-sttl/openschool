@@ -75,12 +75,11 @@ const Header = (props) => {
                         onChangeText={keyword => {
                             props.onSearchKeyword(keyword);
                         }} />
-
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </View>
-                <TouchableOpacity style={[styles.buttonGroup]}>
+<TouchableOpacity>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                        <MenuTrigger><Image style={styles.filterIcon} source={Images.mobileFilter} />
+                        {/* <Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text> */}
+                        </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -128,6 +127,9 @@ const Header = (props) => {
                     </Menu>
 
                 </TouchableOpacity>
+                    
+                </View>
+                
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
@@ -306,7 +308,7 @@ const styles = StyleSheet.create({
         height: hp(5.20),
     },
     filterGroup: {
-        display: 'none',
+    marginTop:wp(-11.5),
     },
     menuIconWithTitle: {
         flexDirection: 'row',

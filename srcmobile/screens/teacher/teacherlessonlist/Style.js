@@ -61,6 +61,7 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
+        width:wp(45),
     },
     subjectMain: {
         right: hp(0.5),

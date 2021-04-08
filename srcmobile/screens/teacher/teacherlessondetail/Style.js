@@ -673,17 +673,17 @@ export default StyleSheet.create({
         marginBottom: hp(1.30),
     },
     pupilData: {
-        flexDirection: 'row',
+       // flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: COLORS.white,
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: 1, },
         elevation: 3,
         shadowOpacity: 0.1,
-        borderRadius: hp(1.95),
-        height: hp(8.85),
+        borderRadius: hp(1.95),       
         borderRadius: hp(0.6),
-        marginBottom:hp(0.78),
+        marginTop:hp(2.5),
+        padding:wp(2.5),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -805,12 +805,12 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightGrayPupil,
         borderRadius: hp(5),
         marginRight: hp(2.1),
-        position: 'absolute',
-        top: hp(-0.5),
-        left: hp(3.5),
+        // position: 'absolute',
+        // top: hp(-0.5),
+        // left: hp(0),
     },
     userStampName: {
-        paddingLeft:hp(4.0),
+       // paddingLeft:hp(4.0),
     },
     uploadBoard:{
         width:hp(33.07),
@@ -820,19 +820,12 @@ export default StyleSheet.create({
     containerWrapTop: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderWidth:1,
+        borderBottomWidth:1,
         alignItems: 'center',
-        borderColor:COLORS.lightGrayPupil,
-        borderRadius:hp(0.9),
+        borderBottomColor:COLORS.lightGrayPupil,
         marginBottom:hp(2),
         padding:hp(1),
         top: hp(2),
-        shadowColor: COLORS.lightGrayPupil,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.8,
-        shadowRadius: 1,
-        marginLeft:hp(3.25),
-        marginRight:hp(3.25),
     },
     userThumb:{
         width:hp(6.25), 
@@ -842,12 +835,12 @@ export default StyleSheet.create({
         marginRight:hp(1.30),
     },
     userLeft:{
-       width:hp(64.19),
-       flexDirection: 'row',
+    //    width:hp(64.19),
+    //    flexDirection: 'row',
     },
     userRight:{
-        width:hp(53.12),
-        flexDirection: 'row',
+        // width:hp(53.12),
+        // flexDirection: 'row',
     },
     userTopName:{
         flexDirection: 'row',
@@ -1081,8 +1074,8 @@ export default StyleSheet.create({
         top:hp(2),
     },
     plainBg:{
-        paddingLeft: hp(3.5),
-        paddingRight: hp(3.5),
+        paddingLeft: hp(2.5),
+        paddingRight: hp(2.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         backgroundColor: COLORS.backgroundColorCommon,
@@ -1133,5 +1126,37 @@ export default StyleSheet.create({
     mobilePupilProfile:{
         flexDirection:'row',
         justifyContent:'space-between',
+        width:'100%',
     },
+    thumbAlign:{
+        flexDirection:'row',
+       // width:'100%',
+        justifyContent:'space-between',
+    },
+    rowLine:{
+        flexDirection:'row',
+        width:'100%',
+        justifyContent:'space-between',
+        paddingLeft:wp(12.5),
+    },
+    tickIcon:{
+        width: hp(1.40),
+        resizeMode: 'contain',
+        marginRight:hp(1),
+    },
+    checkMarkedText:{
+        flexDirection:'row',
+    },
+    tickText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:wp(3.46),
+        color:COLORS.lightGray,
+    },
+    topListingArrow:{
+        top:hp(3.2),
+    },
+    userInfoTop:{
+        paddingLeft:wp(5.33),
+        paddingRight:wp(5.33),
+    }
 });

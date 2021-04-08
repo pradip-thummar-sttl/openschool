@@ -94,5 +94,6 @@ const Images = {
     MobileUpload: require('../assets/images/mobile-upload2.png'),
     VideoSmlThumb: require('../assets/images/thumbVideoSml2.png'),
     InfoIcon: require('../assets/images/information-button2.png'),
+    mobileFilter: require('../assets/images/pupilfilter2.png'),
 }
 export default Images;

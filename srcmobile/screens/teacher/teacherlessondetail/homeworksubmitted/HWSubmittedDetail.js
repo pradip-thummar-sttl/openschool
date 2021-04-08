@@ -32,31 +32,32 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
 
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderSave
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => { props.navigation.openDrawer() }} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.containerWrapTop}>
-                            <View style={PAGESTYLE.userLeft}>
-                                <View style={PAGESTYLE.userThumb}></View>
-                                <View>
-                                    <Text style={PAGESTYLE.userTopName}>Reuel Pardesi</Text>
-                                    <Text style={PAGESTYLE.userTopGroup}>Group: 1A</Text>
-                                </View>
+                            <View style={PAGESTYLE.userInfoTop}>
+                                <Text style={PAGESTYLE.userTopName}>Reuel Pardesi</Text>
+                                <Text style={PAGESTYLE.userTopGroup}>Group: 1A</Text>
                             </View>
-                            <View style={PAGESTYLE.userRight}>
+                            <View>
                                 <View style={PAGESTYLE.markedLabel}>
                                     <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
                                     <Text style={PAGESTYLE.markedText}>Marked</Text>
                                 </View>
+                            </View>
+                        </View>
+                        <View style={PAGESTYLE.containerWrapTop}>
+                            <View style={PAGESTYLE.userInfoDate}>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
                                     <Text style={PAGESTYLE.dateText}>05/02/21</Text>
