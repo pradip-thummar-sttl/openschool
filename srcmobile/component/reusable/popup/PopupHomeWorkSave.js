@@ -28,8 +28,8 @@ const PopupHomeWorkSave = (props) => {
                     <View style={styles.userProfile}><Image style={styles.userProfileimage} source={require('../../../assets/images/userProfilePopup.png')} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
-                        <Text style={[styles.popupText, STYLE.centerText]}>By pressing save pupil will be notified. You can edit your feedback at any time. </Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text></TouchableOpacity>
+                        <Text style={[styles.popupText, STYLE.centerText]}>By pressing save this pupil will be notified of your feedback. You can edit your feedback at anytime.</Text>
+                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>Save Feedback</Text></TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
-        width: hp(69.66),
+        width: wp(89.33),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -119,12 +119,17 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(2.6),
+        textAlign:'center',
+        paddingLeft:wp(5.5),
+        paddingRight:wp(5.5),
     },
     popupText: {
-        fontSize: hp(1.9),
+        fontSize: wp(3.46),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         marginBottom: hp(3.5),
         lineHeight: hp(2.6),
+        paddingLeft:wp(7.5),
+        paddingRight:wp(7.5),
     },
 });
