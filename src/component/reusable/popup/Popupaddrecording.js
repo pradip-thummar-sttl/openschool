@@ -39,14 +39,14 @@ const Popupaddrecording = (props) => {
     };
     return (
         <View>
-            {/* <TouchableOpacity
+            <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={toggleModal}>
                 <Text style={STYLE.recordLinkText}>Add recording</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={()=>props.onClose()}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => props.onClose()}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
@@ -55,15 +55,15 @@ const Popupaddrecording = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
-                                    <TouchableOpacity onPress={()=>props.onScreeCamera()} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => props.onScreeCamera()} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-camera2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={()=>props.onScreeVoice()} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => props.onScreeVoice()} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={()=>props.onCameraOnly()} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => props.onCameraOnly()} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>

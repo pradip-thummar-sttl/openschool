@@ -12,4 +12,5 @@ export const EndPoints = {
     LessonUpdate: 'lessonupdate/',
     LessonMaterialUpload: 'lessonmaterialupload/',
     EventType: 'eventtype',
+    HomeworkSubmited: 'homeworksubmited/'
 }

@@ -13,69 +13,61 @@ import { EndPoints } from "../../../service/EndPoints";
 import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import RBSheet from "react-native-raw-bottom-sheet";
+import { User } from "../../../utils/Model";
+
 const TeacherLessonList = (props) => {
-    const refRBSheet = useRef();
     const userAuthData = useSelector(state => {
         // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
-    const [dashData, setdashData] = useState([])
-    const [pupilData, setPupilData] = useState([])
-    const [isDashDataLoading, setDashDataLoading] = useState(true)
-    const [isPupilDataLoading, setPupilDataLoading] = useState(true)
-    useEffect(() => {
-        // if(isDesignBuild)
-        //     return true
+    const [lessonData, setLessonData] = useState([])
+    const [isLessonLoading, setLessonLoading] = useState(true)
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterBy, setFilterBy] = useState('')
 
-        Service.post({}, `${EndPoints.GetLessionById}/604b09139dc64117024690c3`, (res) => {
-            setDashDataLoading(false)
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setLessonLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
+            setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                setdashData(res.data)
-                setDataOfSubView(res.data[0])
+                setLessonData(res.data)
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
+    }
 
-        Service.get(`${EndPoints.PupilByTeacherId}/604b09139dc64117024690c3`, (res) => {
-            setPupilDataLoading(false)
-            if (res.code == 200) {
-                console.log('response of get all pupil data', res)
-                setPupilData(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('response of get all pupil error', err)
-        })
-        return () => {
-        }
-    }, [])
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
-    const [dataOfSubView, setDataOfSubView] = useState([])
-    const setData = (index) => {
-        setSelectedId(index)
-        setDataOfSubView(dashData[index])
-    }
+
     const renderItem = ({ item, index }) => {
-        const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
         return (
             <Item
                 item={item}
-                onPress={() => setData(index)}
-                style={{ backgroundColor }}
+                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': item })}
+                style={{ backgroundColor: COLORS.white }}
             />
         );
     };
-   
-    const Item = ({ onPress, style, item }) => (
-        <TouchableOpacity style={[PAGESTYLE.item, style]}>
 
+    const Item = ({ navigateToDetail, style, item }) => (
+        <View style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
@@ -91,26 +83,25 @@ const TeacherLessonList = (props) => {
                 <TouchableOpacity
                     style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
                     activeOpacity={opacity}
-                    onPress={() => props.navigation.navigate('TeacherLessonDetail')}>
+                    onPress={() => navigateToDetail()}>
                     <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
                 </TouchableOpacity>
             </View>
             <View style={PAGESTYLE.row}>
                 <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />
+                    <Image style={PAGESTYLE.tickIcon} source={item.LiveSession ? Images.CheckIcon : Images.CheckIconGrey} />
                     <Text style={PAGESTYLE.tickText}>Live Lesson</Text>
                 </View>
                 <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={Images.CheckIconGrey} />
+                    <Image style={PAGESTYLE.tickIcon} source={item.Publish ? Images.CheckIcon : Images.CheckIconGrey} />
                     <Text style={PAGESTYLE.tickText}>Published</Text>
                 </View>
                 <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />
+                    <Image style={PAGESTYLE.tickIcon} source={item.HomeWork == 'Yes' ? Images.CheckIcon : Images.CheckIconGrey} />
                     <Text style={PAGESTYLE.tickText}>Homework</Text>
                 </View>
             </View>
-
-        </TouchableOpacity>
+        </View>
     );
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -123,23 +114,23 @@ const TeacherLessonList = (props) => {
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd')}
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => { }}
-                    onClearSearch={() => { }}
-                    onFilter={(filterBy) => { }} />
+                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onClearSearch={() => fetchRecord('', '')}
+                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <View>
-                        {isDashDataLoading ?
+                        {isLessonLoading ?
                             <ActivityIndicator
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.yellowDark} />
                             :
-                            dashData.length > 0 ?
+                            lessonData.length > 0 ?
                                 <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                     <FlatList
                                         style={PAGESTYLE.ScrollViewFlatlist}
-                                        data={dashData}
+                                        data={lessonData}
                                         renderItem={renderItem}
                                         keyExtractor={(item) => item.id}
                                         extraData={selectedId}

@@ -25,13 +25,44 @@ class Login extends Component {
         this.state = {
             userName: '',
             password: '',
+            PushToken: "Test",
+            Device: "M",
+            OS: Platform.OS,
+            AccessedVia: "Mobile",
             isLoading: false,
-            isPasswordHide: true
+            isPasswordHide: true,
+            isRemember: false
         }
     }
 
+    componentDidMount() {
+        const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
+        AsyncStorage.getItem('user').then((value) => {
+            var user = JSON.parse(value)
+            if (user.isRemember) {
+                console.log('user of async', user)
+
+                this.setState({
+                    userName: user.Email,
+                    password: user.Password,
+                    PushToken: user.PushToken,
+                    Device: user.Device,
+                    OS: user.OS,
+                    AccessedVia: user.AccessedVia,
+                    isRemember: user.isRemember
+                })
+            } else {
+            }
+        })
+        if (isRemember) {
+
+
+        }
+
+    }
+
     isFieldsValidated = () => {
-        const { userName, password } = this.state;
+        const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
         if (!userName) {
             showMessage(MESSAGE.email)
@@ -42,21 +73,23 @@ class Login extends Component {
         }
 
         this.setLoading(true)
-
-        let data = {
+        // console.log('Base64.encode(password)', Base64.encode(password))
+        var data = {
             Email: userName,
             Password: password,
-            PushToken: "Test",
-            Device: "M",
-            OS: Platform.OS,
-            AccessedVia: "Mobile",
+            PushToken: PushToken,
+            Device: Device,
+            OS: OS,
+            AccessedVia: AccessedVia,
         }
         Service.post(data, EndPoints.Login, (res) => {
             console.log('response Login', res)
             if (res.code == 200) {
                 this.setLoading(false)
                 // showMessage(res.message)
-                AsyncStorage.setItem('user', JSON.stringify(res.data))
+                data.isRemember = isRemember
+                console.log('data of login', data, 'OOO' + isRemember)
+                AsyncStorage.setItem('user', JSON.stringify(data))
                 this.props.setUserAuthData(res.data)
                 this.props.navigation.replace('TeacherDashboard')
 
@@ -104,7 +137,7 @@ class Login extends Component {
                                     placeholder="Enter email or phone"
                                     autoCapitalize={false}
                                     maxLength={40}
-                                    // value={'patel.dhruv@silvertouch.com'}
+                                    value={this.state.userName}
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
@@ -117,7 +150,7 @@ class Login extends Component {
                                         ref={(input) => { this.t2 = input; }}
                                         style={STYLE.commonInputPassword}
                                         placeholder="Password"
-                                        // value={'SIlver@#098'}
+                                        value={this.state.password}
                                         maxLength={30}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                         secureTextEntry={this.state.isPasswordHide}
@@ -137,10 +170,11 @@ class Login extends Component {
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
                                         style={STYLE.checkBoxcommon}
-                                        value={false}
+                                        value={this.state.isRemember}
                                         onCheckColor={COLORS.themeBlue}
                                         onTintColor={COLORS.themeBlue}
                                         tintColor={COLORS.lightplaceholder}
+                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>

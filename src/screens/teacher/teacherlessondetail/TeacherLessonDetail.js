@@ -73,6 +73,7 @@ const TeacherLessonDetail = (props) => {
 
                         :
                         <HeaderHWS
+                            subjectName={lessonData.SubjectName}
                             navigateToBack={() => props.navigation.goBack()}
                             onAlertPress={() => props.navigation.openDrawer()} />
                 }
@@ -120,7 +121,9 @@ const TeacherLessonDetail = (props) => {
                                 navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
                                 navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
-                            <TLHomeWorkSubmitted navigateToDetail={() => props.navigation.navigate('TLHomeWorkSubmittedDetail')} />
+                            <TLHomeWorkSubmitted
+                                lessonId={lessonData._id}
+                                navigateToDetail={(item, selectedIndex) => props.navigation.navigate('TLHomeWorkSubmittedDetail', {'item': item, 'selectedIndex': selectedIndex})} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
