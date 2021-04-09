@@ -37,7 +37,7 @@ export default StyleSheet.create({
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
         borderRadius:hp(1.5),
-        marginBottom:hp(1.5),
+        marginTop:hp(1.5),
         width:'100%',
         flex: 1,
     },
