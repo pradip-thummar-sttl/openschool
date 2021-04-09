@@ -15,6 +15,7 @@ import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
+import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
 
 const TLHomeWorkSubmittedDetail = (props) => {
 
@@ -72,15 +73,16 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <View style={PAGESTYLE.teacherDetailLeft}>
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                    <TextInput
+                                    <Text style={PAGESTYLE.descNormalText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.</Text>
+                                    {/* <TextInput
                                         multiline={true}
                                         numberOfLines={4}
                                         defaultValue='Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.'
                                         style={PAGESTYLE.commonInputTextareaNormal}
-                                    />
+                                    /> */}
                                 </View>
                                 <View style={PAGESTYLE.requirementofClass}>
-                                    <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
+                                    {/* <Text style={PAGESTYLE.requireText}>Create Checklist</Text> */}
                                     <View style={PAGESTYLE.checkBoxGroup}>
                                         <View style={PAGESTYLE.checkBoxLabelLine}>
                                             <CheckBox
@@ -139,10 +141,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             </View>
                             <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
                                 <View style={PAGESTYLE.uploadBoardBlock}>
-                                    <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                                    <Image source={Images.UploadHomeWorkMobile} style={PAGESTYLE.uploadBoardMobile} />
                                 </View>
                             </View>
                         </View>
+                        <View style={STYLE.hrCommon}></View>
                         <View style={PAGESTYLE.containerWrap}>
                             <View style={PAGESTYLE.feedbackBlock}>
                                 <View style={PAGESTYLE.lessonDesc}>
@@ -151,7 +154,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         multiline={true}
                                         numberOfLines={4}
                                         defaultValue='Leave feedback here'
-                                        style={PAGESTYLE.commonInputTextarea}
+                                        style={PAGESTYLE.commonInputTextareaBoldGrey}
                                         onChangeText={feedback => setFeedback(feedback)} />
                                 </View>
                                 <View style={PAGESTYLE.videoRecording}>
@@ -178,6 +181,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                         </View>
                                     </View>
+                                </View>
+                                <View style={PAGESTYLE.submitBtnWrap}>
+                                    <PopupHomeWorkSave />
                                 </View>
                             </View>
                         </View>

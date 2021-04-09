@@ -16,8 +16,8 @@ const PopupHomeWorkSave = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
-                <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} /> */}
+                <Text style={styles.commonButtonGreenheader}>Submit as homework</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+       // marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
@@ -106,14 +106,13 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+        width:'100%',
     },
     popupTitle: {
         fontSize: hp(2.34),

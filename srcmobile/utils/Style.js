@@ -197,8 +197,8 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
         width: '100%',
-        marginTop: hp(1),
-        marginBottom: hp(3.5),
+        marginTop: hp(1.5),
+        marginBottom: hp(1.5),
     },
     centerText: {
         textAlign: 'center',

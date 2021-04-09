@@ -134,7 +134,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginLeft: hp(1.56),
+        marginBottom: wp(1.5),
     },
     lessonTitleWithoutTextArea: {
         flexDirection: 'row',
@@ -525,8 +525,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     commonInputTextareaBoldGrey: {
-        width: '100%',
-        height: hp(14.84),
+        width: wp(89.33),
+        height: wp(49.06),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
@@ -753,8 +753,6 @@ export default StyleSheet.create({
         marginRight: hp(1.69),
     },
     pupilName: {
-        fontSize: hp(1.82),
-        fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
     },
     pupilgroupName: {
@@ -811,6 +809,8 @@ export default StyleSheet.create({
     },
     userStampName: {
        // paddingLeft:hp(4.0),
+       fontSize:wp(3.73),
+       fontFamily:FONTS.fontSemiBold,
     },
     uploadBoard:{
         width:hp(33.07),
@@ -889,14 +889,14 @@ export default StyleSheet.create({
     },
     feedbackBlock:{
         width:hp(70.31),
-        marginTop: hp(2.5),
-        marginLeft:hp(4.03),
+        marginTop: hp(2),
+        paddingLeft:wp(5.33),
     },
     ratingBlock:{
-        width:hp(43.35),
-        marginLeft:hp(1.95),
+        width:'100%',
+        paddingLeft:wp(5.33),
         marginTop: hp(2.5),
-        marginRight:hp(3.9),
+        paddingRight:wp(5.33),
     },
     lessonTitleBold:{
         fontFamily: FONTS.fontSemiBold,
@@ -906,7 +906,7 @@ export default StyleSheet.create({
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        width :hp(43.48),
+        width:'100%',
         alignItems:'center',
         backgroundColor:COLORS.white,
         borderRadius:hp(1.8),
@@ -1146,6 +1146,7 @@ export default StyleSheet.create({
     },
     checkMarkedText:{
         flexDirection:'row',
+        justifyContent:'space-between',
     },
     tickText:{
         fontFamily:FONTS.fontRegular,
@@ -1158,5 +1159,37 @@ export default StyleSheet.create({
     userInfoTop:{
         paddingLeft:wp(5.33),
         paddingRight:wp(5.33),
+    },
+    dateLesson:{
+        fontFamily:FONTS.fontSemiBold,
+        fontSize:wp(3.2),
+        color:COLORS.lightGray,
+    },
+    groupName:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:wp(3.46),
+        color:COLORS.darkGray,
+    },
+    userInfoDate:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        paddingLeft:wp(5.33),
+        paddingRight:wp(5.33),
+    },
+    descNormalText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:wp(3.73),
+        color:COLORS.darkGray,
+        lineHeight:wp(4.5),
+    },
+    uploadBoardMobile:{
+        width:wp(89.13),
+        height:wp(47.17),
+        resizeMode:'contain',
+        marginBottom:wp(5.5),
+    },
+    submitBtnWrap:{
+        paddingTop:wp(5.33),
+        paddingBottom:wp(10),
     }
 });
