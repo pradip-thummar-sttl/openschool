@@ -7,7 +7,7 @@ import { User } from "../utils/Model"
 export const Service = {
 
     get: (endPoint, success, error) => {
-
+        
         fetch(`${baseUrl}${endPoint}`, {
             method: 'GET',
             headers: {

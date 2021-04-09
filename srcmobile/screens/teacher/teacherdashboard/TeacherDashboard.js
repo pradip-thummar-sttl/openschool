@@ -14,6 +14,8 @@ import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
+import { User } from "../../../utils/Model";
+
 // const Pupillist = ({ item }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
 //         <View style={PAGESTYLE.pupilProfile}>
@@ -39,15 +41,15 @@ import RBSheet from "react-native-raw-bottom-sheet";
 //         </TouchableOpacity>
 //     </View>
 // );
-const Pupillist = ({ style }) => (
+const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <View style={PAGESTYLE.rowProfile}>
                 <View style={PAGESTYLE.pupilImage}></View>
-                <Text style={PAGESTYLE.pupilName}>Janice Williamson</Text>
+                <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
-                <Text style={PAGESTYLE.groupName}>Group 2A</Text>
+                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
@@ -70,11 +72,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [pupilData, setPupilData] = useState([])
     const [isDashDataLoading, setDashDataLoading] = useState(true)
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
+
     useEffect(() => {
         // if(isDesignBuild)
         //     return true
-
-        Service.post({}, `${EndPoints.GetLessionById}/604b09139dc64117024690c3`, (res) => {
+        console.log('User', User);
+        Service.post({}, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -87,7 +90,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.log('response of get all lesson error', err)
         })
 
-        Service.get(`${EndPoints.PupilByTeacherId}/604b09139dc64117024690c3`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all pupil data', res)
@@ -101,6 +104,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         return () => {
         }
     }, [])
+
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
     const [dataOfSubView, setDataOfSubView] = useState([])
@@ -114,6 +118,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const setData = (index) => {
         setSelectedId(index)
         setDataOfSubView(dashData[index])
+        refRBSheet.current.open()
     }
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
@@ -122,12 +127,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             <Item
                 item={item}
                 onPress={() => setData(index)}
-                style={{ backgroundColor }}
             />
         );
     };
     const Item = ({ onPress, style, item }) => (
-        <TouchableOpacity onPress={() => refRBSheet.current.open()} style={[PAGESTYLE.item, style]}>
+        <TouchableOpacity onPress={() => onPress()} style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
@@ -247,7 +251,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 ref={refRBSheet}
                                                 closeOnDragDown={true}
                                                 height={[hp(85)]}
-                                                style={{position: 'relative',}}
+                                                style={{ position: 'relative', }}
                                                 closeOnPressMask={true}
                                                 customStyles={{
                                                     wrapper: {
@@ -260,21 +264,21 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                        <View style={PAGESTYLE.timedateGrp}>
-                                                            <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                                <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                                <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                                <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
-                                                            </View>
+                                                    <View style={PAGESTYLE.timedateGrp}>
+                                                        <View style={PAGESTYLE.dateWhiteBoard}>
+                                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
                                                         </View>
-                                                        <View style={STYLE.hrCommon}></View>
+                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
+                                                        </View>
+                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                        </View>
+                                                    </View>
+                                                    <View style={STYLE.hrCommon}></View>
                                                     <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
                                                         <View style={PAGESTYLE.mediaMain}>
                                                             {dataOfSubView.Allpupillist ?

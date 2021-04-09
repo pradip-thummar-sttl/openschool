@@ -5,6 +5,8 @@ import COLORS from "../../../../utils/Colors";
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderHWS = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -14,7 +16,7 @@ const HeaderHWS = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                    </TouchableOpacity> {props.subjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
