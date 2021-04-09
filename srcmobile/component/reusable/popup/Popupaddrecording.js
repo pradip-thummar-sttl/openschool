@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     },
     popupLarge: {
         backgroundColor: COLORS.white,
-        borderRadius: hp(2),
-        width: hp(94.40),
+        //borderRadius: hp(2),
+        width: wp(100),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -105,14 +105,12 @@ const styles = StyleSheet.create({
         marginTop: hp(4.5),
     },
     entryContentMain: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        marginLeft: hp(-4.23),
-        marginRight: hp(-4.23),
     },
     entryData: {
-        paddingLeft: hp(4.23),
-        paddingRight: hp(4.23),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
     },
     entryIcon: {
         width: hp(11.19),
