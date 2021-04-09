@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -35,26 +35,21 @@ const Popupdata = (props) => {
                 </View>
             </TouchableOpacity>
             <RBSheet
-                    ref={refRBSheet}
-                    closeOnDragDown={true}
-                    height={[hp(87)]}
-                    style={{ position: 'relative', }}
-                    closeOnPressMask={true}
-                    customStyles={{
-                        wrapper: {
-                            backgroundColor: COLORS.bottomSlideUpBack
-                        },
-                        draggableIcon: {
-                            backgroundColor: COLORS.darkGray
-                        }
-                    }}
-                >
-                <View style={styles.popupCard}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
-                    </TouchableOpacity>
-                    <View style={styles.popupContent}>
-                        {/* <View style={styles.tabcontent}>
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                height={[hp(87)]}
+                style={{ position: 'relative', }}
+                closeOnPressMask={true}
+                customStyles={{
+                    wrapper: {
+                        backgroundColor: COLORS.bottomSlideUpBack
+                    },
+                    draggableIcon: {
+                        backgroundColor: COLORS.darkGray
+                    }
+                }}
+            >
+                {/* <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={styles.titleTab}>Cartoon Drawings</Text>
                                 <Text h3 style={styles.subTitleTab}>Art Subject</Text>
@@ -121,78 +116,78 @@ const Popupdata = (props) => {
                                 </View>
                             </View>
                         </View> */}
-                        <View style={styles.tabcontent}>
-                            <View style={styles.beforeBorder}>
-                                <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
-                                <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
-                                <View style={styles.yellowHrTag}></View>
-                                <View style={styles.timedateGrp}>
-                                    <View style={styles.dateWhiteBoard}>
-                                        <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                        <Text style={styles.datetimeText}>14/09/2020</Text>
-                                    </View>
-                                    <View style={[styles.dateWhiteBoard, styles.time]}>
-                                        <Image style={styles.timeIcon} source={Images.Clock} />
-                                        <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
-                                    </View>
-                                    <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                        <Image style={styles.calIcon} source={Images.Group} />
-                                        <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
-                                    </View>
-                                </View>
+                <View style={styles.tabcontent}>
+                    <View style={styles.beforeBorder}>
+                        <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
+                        <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
+                        <View style={styles.yellowHrTag}></View>
+                        <View style={styles.timedateGrp}>
+                            <View style={styles.dateWhiteBoard}>
+                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                <Text style={styles.datetimeText}>14/09/2020</Text>
                             </View>
-                            <View style={STYLE.hrCommon}></View>
-                            <View style={styles.afterBorder}>
-                                <View style={styles.mediaMain}>
-                                    {props.data.Allpupillist ?
-                                        props.data.Allpupillist.map((data, index) => (
-                                            <TouchableOpacity
-                                                style={styles.mediabarTouch}
-                                                activeOpacity={opacity}>
-                                                <View style={styles.mediabar}></View>
-                                            </TouchableOpacity>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </View>
-                                <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
-                                <View style={styles.attchmentSectionwithLink}>
-                                    <TouchableOpacity style={styles.attachment}>
-                                        <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                        <Text style={styles.attachmentText}>1 Attachment</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity>
-                                        <Text style={styles.linkText}>see more</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.requirementofClass}>
-                                    <Text style={styles.requireText}>Items that your class will need</Text>
-                                    {props.data.CheckList ?
-                                        props.data.CheckList.map((data, index) => (
-                                            <View style={styles.lessonPoints}>
-                                                <Image source={Images.CheckIcon} style={styles.checkIcon} />
-                                                <Text style={styles.lessonPointText}>{data.ItemName}</Text>
-                                            </View>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </View>
-                                <View style={styles.uploadCalendar}>
-                                    <TouchableOpacity>
-                                        <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
-                                    </TouchableOpacity>
-                                    <View style={styles.lessonstartButton}>
-                                        <TouchableOpacity style={styles.buttonGrp}><Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text></TouchableOpacity>
-                                        <TouchableOpacity style={styles.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
-                                    </View>
-                                </View>
+                            <View style={[styles.dateWhiteBoard, styles.time]}>
+                                <Image style={styles.timeIcon} source={Images.Clock} />
+                                <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                            </View>
+                            <View style={[styles.dateWhiteBoard, styles.grp]}>
+                                <Image style={styles.calIcon} source={Images.Group} />
+                                <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
                             </View>
                         </View>
                     </View>
+                    <View style={STYLE.hrCommon}></View>
+                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
+                        <View style={styles.afterBorder}>
+                            <View style={styles.mediaMain}>
+                                {props.data.Allpupillist ?
+                                    props.data.Allpupillist.map((data, index) => (
+                                        <TouchableOpacity
+                                            style={styles.mediabarTouch}
+                                            activeOpacity={opacity}>
+                                            <View style={styles.mediabar}></View>
+                                        </TouchableOpacity>
+                                    ))
+                                    :
+                                    null
+                                }
+                            </View>
+                            <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
+                            <View style={styles.attchmentSectionwithLink}>
+                                <TouchableOpacity style={styles.attachment}>
+                                    <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
+                                    <Text style={styles.attachmentText}>1 Attachment</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Text style={styles.linkText}>see more</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.requirementofClass}>
+                                <Text style={styles.requireText}>Items that your class will need</Text>
+                                {props.data.CheckList ?
+                                    props.data.CheckList.map((data, index) => (
+                                        <View style={styles.lessonPoints}>
+                                            <Image source={Images.CheckIcon} style={styles.checkIcon} />
+                                            <Text style={styles.lessonPointText}>{data.ItemName}</Text>
+                                        </View>
+                                    ))
+                                    :
+                                    null
+                                }
+                            </View>
+                        </View>
+                        <View style={styles.uploadCalendar}>
+                            <TouchableOpacity>
+                                <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                    <View style={styles.lessonstartButton}>
+                        <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButton]}>Edit Lesson</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text></TouchableOpacity>
+                    </View>
                 </View>
-                </RBSheet>
+            </RBSheet>
         </View>
     );
 }
@@ -217,14 +212,6 @@ const styles = StyleSheet.create({
     popupContent: {
         width: '100%',
     },
-    beforeBorder: {
-        padding: hp(2.60),
-        paddingBottom: hp(0.5),
-    },
-    afterBorder: {
-        padding: hp(2.60),
-        paddingTop: hp(0.5),
-    },
     titleTab: {
         fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
@@ -241,7 +228,7 @@ const styles = StyleSheet.create({
     },
     yellowHrTag: {
         width: '100%',
-        height: hp(1.43),
+        height: hp(0.61),
         backgroundColor: COLORS.yellowBorder,
         marginBottom: hp(2.34),
     },
@@ -251,11 +238,11 @@ const styles = StyleSheet.create({
     dateWhiteBoard: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(3.25),
+        marginRight: hp(2.8),
     },
     datetimeText: {
-        fontSize: hp(1.82),
-        lineHeight: hp(2.60),
+        fontSize: hp(1.72),
+        lineHeight: hp(2.46),
         marginLeft: hp(0.9),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
@@ -264,7 +251,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: hp(-0.39),
         marginRight: hp(-0.39),
-        marginBottom: hp(5),
+        marginBottom: hp(4),
     },
     mediabarTouch: {
         paddingLeft: hp(0.39),
@@ -323,23 +310,6 @@ const styles = StyleSheet.create({
         fontSize: hp(1.56),
         fontFamily: FONTS.fontBold,
     },
-    arrowSelectedTab: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderTopWidth: hp(1.95),
-        borderRightWidth: hp(1.95),
-        borderBottomWidth: hp(1.95),
-        borderLeftWidth: hp(1.95),
-        position: 'absolute',
-        top: hp(5.85),
-        left: hp(-3.90),
-        borderTopColor: 'transparent',
-        borderRightColor: COLORS.white,
-        borderBottomColor: 'transparent',
-        borderLeftColor: 'transparent',
-    },
     requirementofClass: {
         marginTop: hp(4.81),
         marginBottom: hp(1.81),
@@ -369,11 +339,67 @@ const styles = StyleSheet.create({
     },
     lessonstartButton: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: COLORS.white,
+        borderTopWidth: 1,
+        borderColor: COLORS.borderGrp,
+        paddingTop: hp(2),
+        paddingBottom: hp(6),
+        position: 'absolute',
+        bottom: hp(1.47),
+        width: '100%',
+        left: hp(1.95),
     },
-    buttonGrp: {
-        marginLeft: hp(2.21),
+    bottomDrwerButton: {
+        width: hp(20),
+        height: hp(5.41),
+        backgroundColor: COLORS.transparent,
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        fontWeight: '800',
+        borderRadius: hp(0.9),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingTop: hp(1.45),
+        paddingBottom: hp(1.45),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+    },
+    bottomDrwerButtonGreen: {
+        width: hp(20),
+        height: hp(5.41),
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        fontWeight: '800',
+        borderRadius: hp(0.9),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingTop: hp(1.45),
+        paddingBottom: hp(1.45),
+        alignSelf: 'center',
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: 50,},
+        shadowOpacity: 0.16,
+        shadowRadius: 13,
+        elevation: 4,
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    rightTabContent: {
+        width: '100%',
+    },
+    tabcontent: {
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        paddingBottom: hp(2.60),
+        paddingTop: hp(3),
+        position: 'relative',
+        height: '100%',
     },
     calIcon: {
         width: hp(1.8),
@@ -390,10 +416,5 @@ const styles = StyleSheet.create({
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
-    },
-    uploadCalendar: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
     },
 });
