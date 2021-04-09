@@ -16,8 +16,8 @@ const PopupHomeWorkSave = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
-                <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} /> */}
+                <Text style={styles.commonButtonGreenheader}>Submit as homework</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
@@ -28,8 +28,8 @@ const PopupHomeWorkSave = (props) => {
                     <View style={styles.userProfile}><Image style={styles.userProfileimage} source={require('../../../assets/images/userProfilePopup.png')} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
-                        <Text style={[styles.popupText, STYLE.centerText]}>By pressing save pupil will be notified. You can edit your feedback at any time. </Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text></TouchableOpacity>
+                        <Text style={[styles.popupText, STYLE.centerText]}>By pressing save this pupil will be notified of your feedback. You can edit your feedback at anytime.</Text>
+                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>Save Feedback</Text></TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
-        width: hp(69.66),
+        width: wp(89.33),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+       // marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
@@ -106,26 +106,30 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+        width:'100%',
     },
     popupTitle: {
         fontSize: hp(2.34),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(2.6),
+        textAlign:'center',
+        paddingLeft:wp(5.5),
+        paddingRight:wp(5.5),
     },
     popupText: {
-        fontSize: hp(1.9),
+        fontSize: wp(3.46),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         marginBottom: hp(3.5),
         lineHeight: hp(2.6),
+        paddingLeft:wp(7.5),
+        paddingRight:wp(7.5),
     },
 });

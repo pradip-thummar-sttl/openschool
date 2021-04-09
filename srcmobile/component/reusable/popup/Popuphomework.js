@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
-        width: hp(69.66),
+        width: wp(89.33),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -120,12 +120,17 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(2.6),
+        paddingLeft:wp(7.5),
+        paddingRight:wp(7.5),
+        textAlign:'center',
     },
     popupText: {
-        fontSize: hp(1.9),
+        fontSize: wp(3.46),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         marginBottom: hp(3.5),
         lineHeight: hp(2.6),
+        paddingLeft:wp(8.5),
+        paddingRight:wp(8.5),
     },
 });

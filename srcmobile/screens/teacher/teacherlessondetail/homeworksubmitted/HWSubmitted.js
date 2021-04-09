@@ -19,13 +19,14 @@ const Pupillist = (props, { style }) => (
                 <View style={PAGESTYLE.userStamp}></View>
                 <View>
                     <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Reuel Pardesi</Text>
-                    <Text style={PAGESTYLE.pupilName}>Group 1A</Text>
+                    <Text style={PAGESTYLE.groupName}>Group 1A</Text>
                 </View>
             </View>
             <View>
-                <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
+                <Text style={PAGESTYLE.dateLesson}>14/09/2020</Text>
             </View>
         </View>
+        <View style={STYLE.hrCommon}></View>
         <View style={PAGESTYLE.rowLine}>
             <View style={PAGESTYLE.checkMarkedText}>
                 <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />

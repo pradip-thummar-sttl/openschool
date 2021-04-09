@@ -166,11 +166,9 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     popupContentMain: {
-        paddingLeft: hp(9),
-        paddingRight: hp(3),
         paddingTop: hp(3),
         paddingBottom: hp(3),
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
     popupTitle: {
         fontSize: hp(2),
@@ -197,8 +195,8 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
         width: '100%',
-        marginTop: hp(1),
-        marginBottom: hp(3.5),
+        marginTop: hp(1.5),
+        marginBottom: hp(1.5),
     },
     centerText: {
         textAlign: 'center',
