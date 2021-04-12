@@ -14,34 +14,35 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row'
     },
-    days: {
-        flexDirection: 'column'
-    },
-    day: {
-        width: 200,
-        height: 100
+    backOpacity:{
+        opacity: 0.4,
+        position: 'absolute',
+        top: 0,
+        left:0,
+        width: hp(7),
+        height: hp(9),
     },
     lable: {
-        width: hp(16),
-        height: hp(8.59),
+        width: hp(7),
+        height: hp(9),
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
     },
     dayRightmain: {
-        width: hp(16),
-        height: hp(8.59),
-        paddingLeft: hp(1.56),
-        paddingTop: hp(1.7),
+        width: hp(7),
+        height: hp(9),
+        paddingLeft: hp(1.48),
+        paddingTop: hp(1.48),
     },
     labledataTitle: {
-        fontSize: hp(1.82),
+        fontSize: hp(1.6),
         marginBottom: hp(0.3),
         color: COLORS.darkGray,
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
     },
     dayLeft: {
-        width: hp(16),
-        height: hp(8.59),
+        width: hp(7),
+        height: hp(9),
         alignItems: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
@@ -49,13 +50,12 @@ export default StyleSheet.create({
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(1.82),
+        fontSize:hp(1.6),
         color:COLORS.darkGray,
-        textAlign: 'center',
     },
     labelTime: {
         fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
+        fontSize:hp(1.6),
         color:COLORS.darkGray,
     },
     whiteBoard: {
@@ -67,18 +67,8 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
-        overflow: 'hidden',
-        height: hp(65),
         padding: hp(5),
         marginTop: hp(4),
-    },
-    backOpacity:{
-        opacity: 0.4,
-        position: 'absolute',
-        top: 0,
-        left:0,
-        width: hp(16),
-        height: hp(8.59),
     },
     timeIcon:{
         width:hp(1.8),
@@ -91,7 +81,7 @@ export default StyleSheet.create({
     },
     timeLabel:{
         fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(1.82),
+        fontSize:hp(1.6),
         color:COLORS.darkGray,
         top:hp(5.5),
     },
