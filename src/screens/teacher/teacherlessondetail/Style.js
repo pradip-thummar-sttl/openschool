@@ -374,7 +374,7 @@ export default StyleSheet.create({
         resizeMode: 'stretch',
     },
     subLineTitle: {
-        marginTop: hp(-3.5),
+        marginTop: hp(-4.5),
         zIndex: 9,
         paddingRight:hp(1.5),
     },
@@ -1160,5 +1160,12 @@ export default StyleSheet.create({
     },
     uploadBlock: {
         alignItems: 'center',
+    },
+    hrCommon: {
+        // borderBottomWidth: 1,
+        borderColor: COLORS.commonBorderColor,
+        width: '100%',
+        marginTop: hp(0),
+        marginBottom: hp(2),
     },
 });

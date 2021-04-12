@@ -6,6 +6,7 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
+import { Addhomework } from "../../../utils/Model";
 
 const Popuphomework = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -17,7 +18,7 @@ const Popuphomework = (props) => {
         <View>
             <TouchableOpacity onPress={() => props.onOpenPopup()} style={styles.buttonGroup}>
                 <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                <Text style={styles.commonButtonGreenheader}>{props.hwBtnName}</Text>
             </TouchableOpacity>
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupCard}>

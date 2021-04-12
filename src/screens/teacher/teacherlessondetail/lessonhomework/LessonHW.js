@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -17,6 +17,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import ImagePicker, { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import moment from "moment";
 import { Addhomework } from "../../../../utils/Model";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -42,6 +44,8 @@ const TLHomeWork = (props) => {
     const [description, setDescription] = useState("")
     const [isSwitch, setSwitch] = useState(true)
     const [cameraResponse, setCameraResponse] = useState({})
+    const [itemCheckList, setItemCheckList] = useState([]);
+    const [newItem, setNewItem] = useState('');
 
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -50,6 +54,34 @@ const TLHomeWork = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
 
+    useEffect(() => {
+        Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
+            console.log('response of homework by lesson id', res)
+            if (res.flag == true) {
+                Addhomework.IsIncluded = res.data.IsIncluded
+                Addhomework.HomeworkDescription = res.data.HomeworkDescription
+                Addhomework.LessonId = res.data.LessonId
+                Addhomework.CheckList = res.data.CheckList
+                Addhomework.CreatedBy = res.data.CreatedBy
+                Addhomework.IsUpdate = true
+                Addhomework.HwId = res.data._id
+                setSelectedDate(moment(res.data.DueDate).format('yyyy-MM-DD'))
+                setMaterialArr(res.data.MaterialList)
+                setDescription(res.data.HomeworkDescription)
+                setSwitch(res.data.IsIncluded)
+                setItemCheckList(res.data.CheckList)
+                props.updateBtnName(true)
+            } else {
+                Addhomework.IsUpdate = false
+                props.updateBtnName(false)
+
+
+            }
+        }, (err) => {
+            console.log('Error of homework by lesson id', err)
+
+        })
+    }, [])
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -104,9 +136,9 @@ const TLHomeWork = (props) => {
     }
 
     const onCheckList = (index) => {
-        checkItem[index].IsCheck = !checkItem[index].IsCheck
-        console.log('check item', checkItem)
-        Addhomework.CheckList = checkItem
+        itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
+        console.log('check item', itemCheckList)
+        Addhomework.CheckList = itemCheckList
     }
     const onScreeCamera = () => {
         setAddRecording(false)
@@ -138,6 +170,81 @@ const TLHomeWork = (props) => {
         setDescription(text)
         Addhomework.HomeworkDescription = description
     }
+    const removeCheckListItem = (_index) => {
+        const newList = itemCheckList.filter((item, index) => index !== _index);
+        setItemCheckList(newList)
+    }
+    const pushCheckListItem = () => {
+        let temp = {
+            ItemName: newItem
+        }
+        setItemCheckList([...itemCheckList, temp])
+        this.item.clear()
+    }
+    const itemCheckListView = () => {
+        return (
+            <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
+                <View style={PAGESTYLE.hrCommon}></View>
+                {
+                    itemCheckList.length == 0 ?
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>No item added</Text>
+                        : null
+                }
+                <FlatList
+                    data={itemCheckList}
+                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    renderItem={({ item, index }) => (
+                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                            <CheckBox
+                                style={PAGESTYLE.checkMark}
+                                value={item.IsCheck}
+                                boxType={'square'}
+                                onCheckColor={COLORS.white}
+                                onFillColor={COLORS.dashboardPupilBlue}
+                                onTintColor={COLORS.dashboardPupilBlue}
+                                tintColor={COLORS.dashboardPupilBlue}
+                                onChange={() => onCheckList(index)}
+
+                            />
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                        </View>
+                        // <View style={{ margin: 8, }}>
+                        //     <Text style={{ fontSize: 22, paddingRight: 50 }}>{item.ItemName}</Text>
+                        //     <TouchableOpacity
+                        //         style={PAGESTYLE.userIcon1Parent}
+                        //         activeOpacity={opacity}
+                        //         onPress={() => { removeCheckListItem(index) }}>
+                        //         <Image
+                        //             style={PAGESTYLE.userIcon1}
+                        //             source={Images.PopupCloseIcon} />
+                        //     </TouchableOpacity>
+                        // </View>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+                <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
+                    <TextInput
+                        ref={input => { this.item = input }}
+                        style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                        placeholder="Add items your pupil need to prepare before class"
+                        autoCapitalize={false}
+                        maxLength={40}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={text => { setNewItem(text) }} />
+                    <TouchableOpacity
+                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        opacity={opacity}
+                        onPress={() => pushCheckListItem()}>
+                        <Text>ADD ITEM</Text>
+                    </TouchableOpacity>
+                </View>
+                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
+                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
+                </TouchableOpacity> */}
+            </View>
+        );
+    };
 
     return (
 
@@ -194,24 +301,26 @@ const TLHomeWork = (props) => {
                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             {
-                                checkItem.map((item, index) => {
-                                    return (
-                                        <View style={PAGESTYLE.checkBoxLabelLine}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={item.IsCheck}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                                onChange={() => onCheckList(index)}
+                                // checkItem.map((item, index) => {
+                                //     return (
+                                // <View style={PAGESTYLE.checkBoxLabelLine}>
+                                //     <CheckBox
+                                //         style={PAGESTYLE.checkMark}
+                                //         value={item.IsCheck}
+                                //         boxType={'square'}
+                                //         onCheckColor={COLORS.white}
+                                //         onFillColor={COLORS.dashboardPupilBlue}
+                                //         onTintColor={COLORS.dashboardPupilBlue}
+                                //         tintColor={COLORS.dashboardPupilBlue}
+                                //         onChange={() => onCheckList(index)}
 
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
-                                        </View>
-                                    )
-                                })
+                                //     />
+                                //     <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                // </View>
+                                //     )
+                                // })
+
+                                itemCheckListView()
                             }
 
                             {/* <View style={PAGESTYLE.checkBoxLabelLine}>
@@ -251,10 +360,10 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
                             </View> */}
                         </View>
-                        <TouchableOpacity style={PAGESTYLE.addItem}>
+                        {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                             <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>

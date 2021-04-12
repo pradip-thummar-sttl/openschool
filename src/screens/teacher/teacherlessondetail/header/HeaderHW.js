@@ -21,7 +21,7 @@ const HeaderHW = (props) => {
                         <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
                         <Text style={styles.commonButtonGreenheader}>set homework</Text>
                     </TouchableOpacity> */}
-                    <Popuphomework isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={()=>props.onOpenPopup()} isVisible={props.isVisible} onClose={()=>props.onClose()} setHomework={()=>props.setHomework()} />
+                    <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}

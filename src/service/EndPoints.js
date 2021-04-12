@@ -8,6 +8,7 @@ export const EndPoints = {
     GetParticipants:'getparticipants/',
     GetPupilByTeacherId:'pupilbyteacherid/',
     Homework:"homework",
+    HomeworkUpdate:'homeworkupdate',
     Lesson: 'lesson',
     LessonUpdate: 'lessonupdate/',
     LessonMaterialUpload: 'lessonmaterialupload/',
