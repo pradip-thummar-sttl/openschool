@@ -264,28 +264,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-<<<<<<< Updated upstream
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                                             <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
-=======
-                                                    <Text h3 style={PAGESTYLE.subTitleTab}>Art Subject</Text>
-                                                    <View style={PAGESTYLE.yellowHrTag}></View>
-                                                        <View style={PAGESTYLE.timedateGrp}>
-                                                            <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                                <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                                <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                                <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
-                                                            </View>
->>>>>>> Stashed changes
                                                         </View>
                                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                                                             <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
