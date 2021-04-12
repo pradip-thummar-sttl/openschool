@@ -17,6 +17,19 @@ export default StyleSheet.create({
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
     },
+    yellowHrTag: {
+        width: '100%',
+        height: hp(0.61),
+        backgroundColor: COLORS.yellowBorder,
+        marginBottom: hp(2.34),
+    },
+    subTitleTab: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        lineHeight: hp(2.60),
+        color: COLORS.darkGray,
+        marginBottom: hp(2.34),
+    },
     myDay: {
         backgroundColor: COLORS.orage,
         paddingRight: hp(2.60),
@@ -63,7 +76,7 @@ export default StyleSheet.create({
         shadowRadius: hp(1.95),
     },
     timingMain: {
-        marginLeft: hp(2)
+        marginLeft: hp(2),
     },
     groupPupil: {
         left: hp(5.2),
@@ -211,18 +224,19 @@ export default StyleSheet.create({
         marginLeft: hp(0),
         flexDirection: 'row',
         alignItems: 'center',
+        width: hp(21),
     },
     groupName: {
-        borderWidth: hp(0.26),
+        borderWidth: hp(0.24),
         borderColor: COLORS.borderGrp,
         borderRadius: hp(0.7),
         color: COLORS.grpColor,
         fontSize: hp(1.4),
         fontFamily: FONTS.fontSemiBold,
         textAlign: 'center',
-        width: hp(9),
-        paddingTop: hp(0.1),
-        paddingBottom: hp(0.1),
+        paddingTop: hp(0.05),
+        paddingBottom: hp(0.04),
+        width: hp(7.5),
         marginBottom: hp(0.5),
     },
     timing: {
@@ -243,7 +257,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(3.38),
         color: COLORS.darkGray,
-        marginBottom: hp(1.56),
+        marginBottom: hp(0.1),
     },
     timedateGrp: {
         flexDirection: 'row',
@@ -254,8 +268,7 @@ export default StyleSheet.create({
         marginRight: hp(1.69),
     },
     datetimeText: {
-        fontSize: hp(1.82),
-        lineHeight: hp(2),
+        fontSize: hp(1.72),
         marginLeft: hp(0.6),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
@@ -332,7 +345,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(2.86),
         color: COLORS.darkGray,
-        marginBottom: hp(1.95),
+        marginBottom: hp(1.4),
     },
     lessonPoints: {
         flexDirection: 'row',
