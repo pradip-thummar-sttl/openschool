@@ -185,7 +185,7 @@ const PupuilDashboard = (props) => {
                                                             </TouchableOpacity>
                                                         </View>
                                                         <View style={PAGESTYLE.requirementofClass}>
-                                                            <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                                            <Text style={PAGESTYLE.requireText}>What you will need</Text>
                                                             <View style={PAGESTYLE.lessonPoints}>
                                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                                                                 <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
