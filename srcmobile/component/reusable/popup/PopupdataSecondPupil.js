@@ -406,21 +406,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(-1.3),
     },
-    colorDropView:{
-         position: "absolute",
-         alignSelf:'center',
-         height: 300,
-         width: 150,
-         borderRadius: 10,
-         backgroundColor:COLORS.dashboardBorder,
-         right:15,
-         bottom:80,
-         padding:15
-    },
-    colorButton:{
-         flexDirection: 'row',
-         justifyContent: 'space-between',
-         alignItems: 'center',
-         paddingVertical:10 
-    },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(16), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1) },
 });

@@ -166,11 +166,9 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     popupContentMain: {
-        paddingLeft: hp(9),
-        paddingRight: hp(3),
         paddingTop: hp(3),
         paddingBottom: hp(3),
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
     popupTitle: {
         fontSize: hp(2),
@@ -197,8 +195,8 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
         width: '100%',
-        marginTop: hp(2),
-        marginBottom: hp(2),
+        marginTop: hp(1.5),
+        marginBottom: hp(1.5),
     },
     centerText: {
         textAlign: 'center',
@@ -217,7 +215,7 @@ export default StyleSheet.create({
     },
     commonButtonBorderedGreen: {
         backgroundColor: COLORS.transparent,
-        color: COLORS.buttonGreen,
+        color: COLORS.dashboardGreenButton,
         fontSize: hp(1.56),
         fontWeight: '800',
         borderRadius: hp(1),
@@ -231,7 +229,8 @@ export default StyleSheet.create({
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
-        borderColor: COLORS.buttonGreen,
+        borderColor: COLORS.dashboardGreenButton,
+        width:'100%',
     },
     labelCommon: {
         fontSize: hp(1.82),

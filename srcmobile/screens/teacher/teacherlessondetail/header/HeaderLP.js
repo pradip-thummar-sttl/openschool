@@ -6,15 +6,23 @@ import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 const HeaderLP = (props) => {
+    console.log('props', props);
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
+                <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={styles.mainTitle}>
+                            Common Title
+                    </Text>
+                        <Text style={styles.date}>14/09/2020</Text>
+                    </View>
+                </View>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
@@ -27,10 +35,9 @@ const HeaderLP = (props) => {
                         <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                     </TouchableOpacity> */}
                     <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        activeOpacity={opacity}
+                        onPress={() => props.navigateToEdit()}>
+                        <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -41,10 +48,10 @@ export default HeaderLP;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingLeft: hp(2.46),
+        paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        paddingTop: hp(2.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -52,12 +59,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(1.97),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(4.92),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
@@ -234,5 +241,8 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+    },
+    titleRow: {
+        flexDirection: 'row',
     },
 });

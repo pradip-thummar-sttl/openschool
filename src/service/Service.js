@@ -7,7 +7,7 @@ import { User } from "../utils/Model"
 export const Service = {
 
     get: (endPoint, success, error) => {
-
+        
         fetch(`${baseUrl}${endPoint}`, {
             method: 'GET',
             headers: {
@@ -26,7 +26,7 @@ export const Service = {
     },
 
     post: (data, endPoint, success, error) => {
-        console.log('dta of json', JSON.stringify(data), `${baseUrl}${endPoint}`)
+        // console.log('dta of json', JSON.stringify(data), `${baseUrl}${endPoint}`)
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {

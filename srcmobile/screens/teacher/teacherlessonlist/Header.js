@@ -35,7 +35,11 @@ const Header = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>Lesson & homework planner</Text>
+                <View style={styles.menuIconWithTitle}>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                    <Text style={styles.mainTitle}>Lesson & homework planner</Text>
+                </View>
+
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
@@ -58,6 +62,7 @@ const Header = (props) => {
                         onChangeText={keyword => {
                             props.onSearchKeyword(keyword);
                         }} />
+
                     <TouchableOpacity
                         style={styles.userIcon1Parent}
                         activeOpacity={opacity}
@@ -71,15 +76,14 @@ const Header = (props) => {
                             style={styles.userIcon1}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
-                </View>
-                <TouchableOpacity style={styles.buttonGroup}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+
+                    <Menu style={{ ...styles.filterIcon }}>
+                        <MenuTrigger><Image style={styles.filterIcon1} source={Images.mobileFilter} /></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {setFilterBy('Subject'); setSelectedIndex(0)}}>
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
@@ -93,9 +97,9 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {setFilterBy('Date'); setSelectedIndex(1)}}>
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
+                                        <Text style={styles.filterListText}>Date {selectedIndex}</Text>
                                         {selectedIndex == 1 ?
                                             <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             :
@@ -120,14 +124,13 @@ const Header = (props) => {
                             </MenuOption> */}
                         </MenuOptions>
                     </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
+                </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+                    <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -137,8 +140,8 @@ export default Header;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingLeft: wp(5.33),
+        paddingRight: wp(4),
         backgroundColor: COLORS.white,
         // marginBottom: hp(5.85),
     },
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
     },
     date: {
@@ -156,7 +159,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(4.92),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -165,13 +168,13 @@ const styles = StyleSheet.create({
     },
     field: {
         position: 'relative',
-        width: hp(81.11),
+        width: hp(35.94),
         justifyContent: 'center',
-        marginRight: hp(1.69),
+        marginRight: hp(1.2),
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: 15,
+        paddingLeft: hp(4.43),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
@@ -185,15 +188,15 @@ const styles = StyleSheet.create({
     },
     userIcon1: {
         position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
+        width: 18,
+        resizeMode: 'contain',
+        height: 30,
     },
     userIcon1Parent: {
         position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
+        width: hp(1.66),
+        top: hp(0.8),
+        left: hp(1.5),
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -217,7 +220,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+        //marginRight: hp(1.69),
     },
     filterIcon: {
         width: hp(1.74),
@@ -225,6 +228,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.30),
         top: hp(1.19),
+    },
+    filterIcon1: {
+        width: hp(1.74),
+        resizeMode: 'contain',
+        position: 'absolute',
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -234,13 +242,14 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
+        paddingRight: hp(1),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+
     },
     addIcon: {
         width: hp(1.55),
@@ -272,7 +281,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: COLORS.white,
         top: hp(5.5),
-        width: hp(30.98),
+        width: 250,
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -282,6 +291,7 @@ const styles = StyleSheet.create({
     checkMark: {
         width: hp(1.48),
         resizeMode: 'contain',
+        right: 10
     },
     filterListText: {
         color: COLORS.darkGray,
@@ -296,5 +306,17 @@ const styles = StyleSheet.create({
         width: wp(5.20),
         resizeMode: 'contain',
         height: hp(5.20),
+    },
+    filterGroup: {
+    marginTop:wp(-11.5),
+    },
+    menuIconWithTitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    menuIcon: {
+        width: hp(2.60),
+        resizeMode: 'contain',
+        marginRight: hp(1.56),
     },
 });

@@ -98,24 +98,24 @@ const PopupdataSecondPupil = (props) => {
                                     </View>
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What event is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
-                                                        <Text style={styles.dateTimetextdummy}>14/09/2020</Text>
+                                                        <Text style={styles.dateTimetextdummy}>Select</Text>
                                                     </TouchableOpacity>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>What time is it?</Text>
                                             <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
-                                                        <Text style={styles.dateTimetextdummy}>09:00-09:30</Text>
+                                                        <Text style={styles.dateTimetextdummy}>Select</Text>
                                                     </TouchableOpacity>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
@@ -407,21 +407,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(-1.3),
     },
-    colorDropView:{
-         position: "absolute",
-         alignSelf:'center',
-         height: 300,
-         width: 150,
-         borderRadius: 10,
-         backgroundColor:COLORS.dashboardBorder,
-         right:15,
-         bottom:80,
-         padding:15
-    },
-    colorButton:{
-         flexDirection: 'row',
-         justifyContent: 'space-between',
-         alignItems: 'center',
-         paddingVertical:10 
-    },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
 });

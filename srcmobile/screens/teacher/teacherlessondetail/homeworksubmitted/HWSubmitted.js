@@ -14,27 +14,36 @@ import { opacity } from "../../../../utils/Constant";
 
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            <View style={PAGESTYLE.userStamp}></View>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Reuel Pardesi</Text>
+        <View style={PAGESTYLE.mobilePupilProfile}>
+            <View style={PAGESTYLE.thumbAlign}>
+                <View style={PAGESTYLE.userStamp}></View>
+                <View>
+                    <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Reuel Pardesi</Text>
+                    <Text style={PAGESTYLE.groupName}>Group 1A</Text>
+                </View>
+            </View>
+            <View>
+                <Text style={PAGESTYLE.dateLesson}>14/09/2020</Text>
+            </View>
         </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>Group 1A</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>Yes</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.markText}>Yes</Text>
+        <View style={STYLE.hrCommon}></View>
+        <View style={PAGESTYLE.rowLine}>
+            <View style={PAGESTYLE.checkMarkedText}>
+                <Image style={PAGESTYLE.tickIcon} source={Images.CheckIcon} />
+                <Text style={PAGESTYLE.tickText}>Submitted</Text>
+            </View>
+            <View style={PAGESTYLE.checkMarkedText}>
+                <Image style={PAGESTYLE.tickIcon} source={Images.CheckIconGrey} />
+                <Text style={PAGESTYLE.tickText}>Marked</Text>
+            </View>
+            <View>
             <TouchableOpacity
                 style={PAGESTYLE.pupilDetailLink}
                 activeOpacity={opacity}
                 onPress={() => props.navigateToDetail()}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
+            </View>
         </View>
     </View>
 );
@@ -63,7 +72,7 @@ const TLHomeWorkSubmitted = (props) => {
     return (
 
         <View style={PAGESTYLE.plainBg}>
-            <View style={PAGESTYLE.pupilTable}>
+            {/* <View style={PAGESTYLE.pupilTable}>
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Pupil name</Text>
                 </View>
@@ -79,7 +88,7 @@ const TLHomeWorkSubmitted = (props) => {
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
                 </View>
-            </View>
+            </View> */}
             <View style={PAGESTYLE.pupilTabledata}>
                 <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                     <FlatList

@@ -15,6 +15,7 @@ import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
+import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
 
 const TLHomeWorkSubmittedDetail = (props) => {
 
@@ -32,31 +33,32 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
 
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderSave
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => { props.navigation.openDrawer() }} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.containerWrapTop}>
-                            <View style={PAGESTYLE.userLeft}>
-                                <View style={PAGESTYLE.userThumb}></View>
-                                <View>
-                                    <Text style={PAGESTYLE.userTopName}>Reuel Pardesi</Text>
-                                    <Text style={PAGESTYLE.userTopGroup}>Group: 1A</Text>
-                                </View>
+                            <View style={PAGESTYLE.userInfoTop}>
+                                <Text style={PAGESTYLE.userTopName}>Reuel Pardesi</Text>
+                                <Text style={PAGESTYLE.userTopGroup}>Group: 1A</Text>
                             </View>
-                            <View style={PAGESTYLE.userRight}>
+                            <View>
                                 <View style={PAGESTYLE.markedLabel}>
                                     <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
                                     <Text style={PAGESTYLE.markedText}>Marked</Text>
                                 </View>
+                            </View>
+                        </View>
+                        <View style={PAGESTYLE.containerWrapTop}>
+                            <View style={PAGESTYLE.userInfoDate}>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
                                     <Text style={PAGESTYLE.dateText}>05/02/21</Text>
@@ -71,15 +73,16 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <View style={PAGESTYLE.teacherDetailLeft}>
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                    <TextInput
+                                    <Text style={PAGESTYLE.descNormalText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.</Text>
+                                    {/* <TextInput
                                         multiline={true}
                                         numberOfLines={4}
                                         defaultValue='Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.'
                                         style={PAGESTYLE.commonInputTextareaNormal}
-                                    />
+                                    /> */}
                                 </View>
                                 <View style={PAGESTYLE.requirementofClass}>
-                                    <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
+                                    {/* <Text style={PAGESTYLE.requireText}>Create Checklist</Text> */}
                                     <View style={PAGESTYLE.checkBoxGroup}>
                                         <View style={PAGESTYLE.checkBoxLabelLine}>
                                             <CheckBox
@@ -138,10 +141,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             </View>
                             <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
                                 <View style={PAGESTYLE.uploadBoardBlock}>
-                                    <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                                    <Image source={Images.UploadHomeWorkMobile} style={PAGESTYLE.uploadBoardMobile} />
                                 </View>
                             </View>
                         </View>
+                        <View style={STYLE.hrCommon}></View>
                         <View style={PAGESTYLE.containerWrap}>
                             <View style={PAGESTYLE.feedbackBlock}>
                                 <View style={PAGESTYLE.lessonDesc}>
@@ -150,7 +154,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         multiline={true}
                                         numberOfLines={4}
                                         defaultValue='Leave feedback here'
-                                        style={PAGESTYLE.commonInputTextarea}
+                                        style={PAGESTYLE.commonInputTextareaBoldGrey}
                                         onChangeText={feedback => setFeedback(feedback)} />
                                 </View>
                                 <View style={PAGESTYLE.videoRecording}>
@@ -177,6 +181,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                         </View>
                                     </View>
+                                </View>
+                                <View style={PAGESTYLE.submitBtnWrap}>
+                                    <PopupHomeWorkSave />
                                 </View>
                             </View>
                         </View>

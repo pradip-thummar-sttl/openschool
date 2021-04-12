@@ -6,6 +6,8 @@ import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from "../../../../component/reusable/popup/Popuphomework";
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderHW = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -15,7 +17,7 @@ const HeaderHW = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                    </TouchableOpacity> {props.SubjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity onPress={()=>{}} style={styles.buttonGroup}>
                         <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />

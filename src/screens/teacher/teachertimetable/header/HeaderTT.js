@@ -102,7 +102,9 @@ const HeaderTT = (props) => {
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
                 </TouchableOpacity> */}
-                <PopupAddNewData />
+                <PopupAddNewData
+                    navigateToAddLesson={() => props.navigateToAddLesson()}
+                    refreshList={() => props.refreshList()} />
             </View>
         </View>
     );

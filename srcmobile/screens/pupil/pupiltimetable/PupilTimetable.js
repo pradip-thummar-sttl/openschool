@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
+import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import HeaderTT from "./header/HeaderTT";
 import { cellWidth, opacity, Var } from "../../../utils/Constant";
-import Popupdata from "../../../component/reusable/popup/Popupdata"
-import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
-import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
-import Header3 from '../../../component/reusable/header/bulck/Header3'
-import { useDispatch } from "react-redux";
-import { Service } from "../../../service/Service";
+import Popupdata from "../../../component/reusable/popup/Popupdata";
+import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../service/EndPoints";
-
-const PupilTimetable = (props) => {
+import { Service } from "../../../service/Service";
+import { useDispatch } from "react-redux";
+import { setCalendarEventData } from "../../../actions/action";
+const PupilTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
+    const dispatch = useDispatch()
 
     const timeTableData__ = [
         {
@@ -60,32 +62,10 @@ const PupilTimetable = (props) => {
     ]
 
     const [isHide, action] = useState(true);
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        // Service.get(`${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
-        //     setTimeTableLoading(false)
-        //     if (res.code == 200) {
-        //         console.log('response of get all lesson', res)
-        //         setTimeTableData(res.data)
-        //     } else {
-        //         showMessage(res.message)
-        //     }
-        // }, (err) => {
-        //     console.log('response of get all lesson error', err)
-        // })
-
-        Service.get(`${EndPoints.CalenderEvent}6041cf525ff1ce52e5d4d398`, (res) => {
-            console.log('response of calender event is:', res)
-            if (res.code == 200) {
-                dispatch(setCalendarEventData(res.data))
-            }
-        }, (err) => {
-            console.log('response of calender event eror is:', err)
-        })
-    }, [])
     const [timeTableData, setTimeTableData] = useState([])
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterBy, setFilterBy] = useState('')
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
@@ -129,68 +109,87 @@ const PupilTimetable = (props) => {
     }
 
     useEffect(() => {
-        Service.post({}, `${EndPoints.GetTimeTable}/6041cf525ff1ce52e5d4d398`, (res) => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setTimeTableLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        Service.post({}, `${EndPoints.GetTimeTable}/604b09139dc64117024690c3`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setTimeTableData(res.data)
+                dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-    }, [])
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebar
                 moduleIndex={1}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header3
-                    onAlertPress={() => { props.navigation.openDrawer() }}
+                hide={() => action(!isHide)}
+                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
+                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ width: isHide ? '100%' : '100%' }}>
+                <HeaderTT
+                    onAlertPress={() => props.navigation.openDrawer()}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
-
-                <View style={PAGESTYLE.mainPage}>
-                    <View style={PAGESTYLE.days}>
-                        {days.map((data) => (
-                            <View style={PAGESTYLE.days}>
-                                <View style={PAGESTYLE.dayLeft}>
-                                    <Text style={PAGESTYLE.lableDay}>{data}</Text>
-                                </View>
-                            </View>
-                        ))}
-                    </View>
-
-                    <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
-                        horizontal={true}>
-                        {/* <View style={PAGESTYLE.whiteBoard}>
-                        <View><Popupaddnewdata /></View>
-                        <View style={{top: 20,}}><Popupdatasecond /></View>
-                        <View style={{top: 40,}}><Popupdata /></View>
-                    </View> */}
-                        {time.map((data, timneKey) => (
-                            <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
-
-                                <View style={PAGESTYLE.timeLabel}>
-                                    {days.map((data, dayKey) => (
-                                        dayKey != 0 ?
-                                            setData(dayKey, timneKey)
-                                            :
-                                            null
-
+                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
+                    {isTimeTableLoading ?
+                        <ActivityIndicator
+                            style={{ flex: 1 }}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.yellowDark} />
+                        :
+                        timeTableData.length > 0 ?
+                            <View style={{ ...PAGESTYLE.mainPage }}>
+                                <View style={PAGESTYLE.days}>
+                                    {days.map((data) => (
+                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null }}>
+                                            <Text style={PAGESTYLE.lableDay}>{data}</Text>
+                                        </View>
                                     ))}
                                 </View>
+
+                                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
+                                    horizontal={true}>
+
+                                    {time.map((data, timneKey) => (
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
+
+                                            <View style={PAGESTYLE.timeLabel}>
+                                                {days.map((data, dayKey) => (
+                                                    dayKey != 0 ?
+                                                        setData(dayKey, timneKey)
+                                                        :
+                                                        null
+
+                                                ))}
+                                            </View>
+                                        </View>
+                                    ))}
+                                </ScrollView>
                             </View>
-                        ))}
-                    </ScrollView>
+                            :
+                            <View style={{ height: 100, justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            </View>
+                    }
                 </View>
             </View>
         </View>
     );
 }
-export default PupilTimetable;
+export default PupilTimeTable;

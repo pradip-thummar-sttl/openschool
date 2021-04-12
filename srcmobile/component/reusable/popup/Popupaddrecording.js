@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -9,7 +9,9 @@ import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../utils/Constant";
+import RBSheet from "react-native-raw-bottom-sheet";
 const Popupaddrecording = (props) => {
+    const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -41,14 +43,28 @@ const Popupaddrecording = (props) => {
         <View>
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={toggleModal}>
+                onPress={() => refRBSheet.current.open()}>
                 <Text style={STYLE.recordLinkText}>Add recording</Text>
             </TouchableOpacity>
-            <Modal isVisible={isModalVisible}>
+            <RBSheet
+                    ref={refRBSheet}
+                    closeOnDragDown={true}
+                    height={[wp(175.5)]}
+                    style={{ position: 'relative', }}
+                    closeOnPressMask={true}
+                    customStyles={{
+                        wrapper: {
+                            backgroundColor: COLORS.bottomSlideUpBack
+                        },
+                        draggableIcon: {
+                            backgroundColor: COLORS.darkGray
+                        }
+                    }}
+                >
                 <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
+                    {/* <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
@@ -72,7 +88,8 @@ const Popupaddrecording = (props) => {
                         </View>
                     </View>
                 </View>
-            </Modal>
+                </RBSheet>
+            
         </View>
     );
 }
@@ -87,8 +104,8 @@ const styles = StyleSheet.create({
     },
     popupLarge: {
         backgroundColor: COLORS.white,
-        borderRadius: hp(2),
-        width: hp(94.40),
+        //borderRadius: hp(2),
+        width: wp(100),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -105,14 +122,12 @@ const styles = StyleSheet.create({
         marginTop: hp(4.5),
     },
     entryContentMain: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        marginLeft: hp(-4.23),
-        marginRight: hp(-4.23),
     },
     entryData: {
-        paddingLeft: hp(4.23),
-        paddingRight: hp(4.23),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
     },
     entryIcon: {
         width: hp(11.19),

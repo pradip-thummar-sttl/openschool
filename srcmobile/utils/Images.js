@@ -89,5 +89,12 @@ const Images = {
     timeTableClock: require('../assets/images/timetable-clock2.png'),
     trashIcon: require('../assets/images/trash2.png'),
     menuIconTop: require('../assets/images/hamburger-menu.png'),
+    CheckIconGrey: require('../assets/images/checkicongrey2.png'),
+    MobileEditIcon: require('../assets/images/editIcon2.png'),
+    MobileUpload: require('../assets/images/mobile-upload2.png'),
+    VideoSmlThumb: require('../assets/images/thumbVideoSml2.png'),
+    InfoIcon: require('../assets/images/information-button2.png'),
+    mobileFilter: require('../assets/images/pupilfilter2.png'),
+    UploadHomeWorkMobile: require('../assets/images/upload-hw-mobile2.png'),
 }
 export default Images;

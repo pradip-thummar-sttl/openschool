@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -16,6 +16,7 @@ import { EndPoints } from "../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
+import { User } from "../../../utils/Model";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -23,6 +24,11 @@ const PopupdataSecond = (props) => {
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
+        setFromDropOpen(false)
+        setToDropOpen(false)
+        setColorDropOpen(false)
+        setSelectedToTime('')
+        setSelectedFromTime('')
     };
 
     const [event, setEvent] = useState('');
@@ -33,11 +39,19 @@ const PopupdataSecond = (props) => {
     const [theme, setTheme] = useState('');
     const [isLoading, setLoading] = useState(false)
     const [selectedColor, setSelectColor] = useState(COLORS.yellowBorder)
+    const [selectColorId, setSelectColorId] = useState('')
+    const [isFromDropOpen, setFromDropOpen] = useState(false)
+    const [isToDropOpen, setToDropOpen] = useState(false)
     const [isColorDropOpen, setColorDropOpen] = useState(false)
     const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
     const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
 
-    const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
+    const [selectedFromTime, setSelectedFromTime] = useState('')
+    const [selectedToTime, setSelectedToTime] = useState('')
+
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [colorArr, setColorArr] = useState([])
+
     // this.state = {
     //     userName: '',
     //     password: '',
@@ -60,6 +74,15 @@ const PopupdataSecond = (props) => {
         if (!event) {
             showMessage(MESSAGE.event)
             return false;
+        } else if (!selectDate) {
+            showMessage(MESSAGE.date);
+            return false;
+        } else if (!selectedFromTime) {
+            showMessage(MESSAGE.fromTime);
+            return false;
+        } else if (!selectedToTime) {
+            showMessage(MESSAGE.toTime);
+            return false;
         } else if (!location) {
             showMessage(MESSAGE.location);
             return false;
@@ -70,15 +93,33 @@ const PopupdataSecond = (props) => {
         saveEvent()
     }
 
+    useEffect(() => {
+        setLoading(true)
+        Service.get(`${EndPoints.EventType}`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setColorArr(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+    }, [])
+
     const saveEvent = () => {
         setLoading(true)
         let data = {
             EventName: event,
             EventDate: selectDate,
-            EventTime: selectTime,
+            EventStartTime: selectedFromTime,
+            EventEndTime: selectedToTime,
             EventLocation: location,
-            EventTypeId: "604b5aac006a0306d00ab87c",
-            CreatedBy: "603f7af4f5dc5d4bb4892df0"
+            EventDescription: note,
+            EventTypeId: selectColorId,
+            CreatedBy: User.user._id
         }
         console.log(data);
 
@@ -97,7 +138,7 @@ const PopupdataSecond = (props) => {
         })
     }
     const selectColor = (item) => {
-        setSelectColor(item)
+        setSelectColor(item.EventColor)
         setColorDropOpen(false)
     }
 
@@ -132,6 +173,75 @@ const PopupdataSecond = (props) => {
         setLocation('')
         setEvent('')
         setnote('')
+        setFromDropOpen(false)
+        setToDropOpen(false)
+        setColorDropOpen(false)
+        setSelectedToTime('')
+        setSelectedFromTime('')
+    };
+
+    const fromTimeDropDown = () => {
+        return (
+            <View style={[styles.dateWhiteBoard, styles.timeField]}>
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    onPress={() => { setFromDropOpen(true) }}>
+                    <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
+                        <Image style={styles.timeIcon} source={Images.Clock} />
+                        <Text style={styles.dateTimetextdummy1}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
+                        <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                    </View>
+                </TouchableOpacity>
+                {isFromDropOpen ?
+                    <View style={styles.colorDropView}>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFromDropOpen(false); setSelectedFromTime(item) }}>
+                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                </TouchableOpacity>
+                            )}
+                            style={{ height: 200 }} />
+                    </View>
+                    :
+                    null
+                }
+            </View>
+        );
+    };
+
+    const toTimeDropDown = () => {
+        return (
+            <View style={[styles.dateWhiteBoard, styles.timeField]}>
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    onPress={() => { setToDropOpen(true) }}>
+                    <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
+                        <Image style={styles.timeIcon} source={Images.Clock} />
+                        <Text style={styles.dateTimetextdummy1}>{selectedToTime ? selectedToTime : 'To'}</Text>
+                        <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                    </View>
+                </TouchableOpacity>
+                {isToDropOpen ?
+                    <View style={styles.colorDropView}>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setToDropOpen(false); setSelectedToTime(item) }}>
+                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                </TouchableOpacity>
+                            )}
+                            style={{ height: 200 }} />
+                    </View>
+                    :
+                    null
+                }
+            </View>
+        );
     };
 
     return (
@@ -180,9 +290,9 @@ const PopupdataSecond = (props) => {
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
-                                        <View style={styles.fieldWidthtwo}>
+                                        <View style={styles.fieldWidthtwo1}>
                                             <Text label style={STYLE.labelCommon}>What time is it?</Text>
-                                            <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                            {/* <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
                                                     <View>
@@ -190,7 +300,12 @@ const PopupdataSecond = (props) => {
                                                     </View>
                                                     <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
+                                            {fromTimeDropDown()}
+                                        </View>
+                                        <View style={styles.fieldWidthtwo2}>
+                                            <Text label style={STYLE.labelCommon}> </Text>
+                                            {toTimeDropDown()}
                                         </View>
                                     </View>
                                     <View style={styles.field}>
@@ -266,9 +381,9 @@ const PopupdataSecond = (props) => {
                                         data={colorArr}
                                         renderItem={({ item, index }) => {
                                             return (
-                                                <TouchableOpacity onPress={() => selectColor(item)} style={styles.colorButton}>
-                                                    <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item }} />
-                                                    <Text>{item}</Text>
+                                                <TouchableOpacity onPress={() => {setSelectColorId(item._id); selectColor(item)}} style={styles.colorButton}>
+                                                    <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
+                                                    <Text>{item.EventType}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }}
@@ -389,7 +504,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     fieldWidthtwo: {
-        width: '50%',
+        width: '40%',
+        paddingLeft: hp(0.9),
+        paddingRight: hp(0.9),
+    },
+    fieldWidthtwo1: {
+        width: '30%',
+        paddingLeft: hp(0.9),
+        paddingRight: hp(0.9),
+    },
+    fieldWidthtwo2: {
+        width: '30%',
         paddingLeft: hp(0.9),
         paddingRight: hp(0.9),
     },
@@ -430,6 +555,20 @@ const styles = StyleSheet.create({
         paddingRight: hp('2.0%'),
         paddingTop: hp('2.0%'),
         paddingBottom: hp('2.0%'),
+    },
+    dropDownSmallWrap1: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp('1.0%'),
+        lineHeight: hp(2.3),
+        height: hp(5.20),
+        marginTop: hp(1.3),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
     },
     calIcon: {
         resizeMode: 'contain',
@@ -477,7 +616,40 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(-1.3),
     },
+    // colorDropView: { position: "absolute", alignSelf: 'center', height: 200, width: 150, borderRadius: 10, backgroundColor: COLORS.white, right: 15, bottom: 80, padding: 15, borderColor: COLORS.dashboardBorder, borderWidth: 1.5 },
+    // colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
+    timeField: {
+        flex: 0.20
+    },
+    dateWhiteBoard: {
+    },
+    subjectText: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.lightGray,
+        fontSize: hp(1.8),
+        marginBottom: hp(0.8),
+    },
+    timeIcon: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+        marginRight: hp(1.04),
+        alignSelf: 'center'
+    },
+    dateTimetextdummy1: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+    },
+    dropDownArrowdatetime1: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
+        alignSelf: 'center'
+    },
 
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 300, width: 150, borderRadius: 10, backgroundColor: COLORS.dashboardBorder, right: 15, bottom: 80, padding: 15 },
-    colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
 });

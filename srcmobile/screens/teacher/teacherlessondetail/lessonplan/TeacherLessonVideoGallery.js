@@ -18,19 +18,18 @@ const TLVideoGallery = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderGallery
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
-                    <View style={[PAGESTYLE.whiteBg, PAGESTYLE.leftSpace]}>
+                    <View style={PAGESTYLE.whiteBg, PAGESTYLE.mobileGalleryHolder}>
                         <Text style={PAGESTYLE.videoTitle}>Videos</Text>
-                        <View style={STYLE.hrCommon}></View>
                         <View style={PAGESTYLE.videoWrap}>
                             <View>
                                 <View style={PAGESTYLE.videoThumb}>

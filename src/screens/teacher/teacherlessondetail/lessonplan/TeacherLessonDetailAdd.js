@@ -464,21 +464,21 @@ const TLDetailAdd = (props) => {
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
             showMessage(MESSAGE.lessonAdded)
-            setLoading(false)
+            setLoading(null)
             return
         }
 
         console.log('data', data._parts, lessionId);
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
-            setLoading(false)
-            console.log('res', res);
             if (res.code == 200) {
+                setLoading(null)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessage(MESSAGE.lessonAdded)
             } else {
                 showMessage(res.message)
+                setLoading(false)
             }
         }, (err) => {
             setLoading(false)
@@ -490,6 +490,7 @@ const TLDetailAdd = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
+                moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
@@ -497,7 +498,10 @@ const TLDetailAdd = (props) => {
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
                 <HeaderAddNew
                     isLoading={isLoading}
-                    navigateToBack={() => { props.navigation.goBack() }}
+                    navigateToBack={() => {
+                        props.route.params.onGoBack();
+                        props.navigation.goBack()
+                    }}
                     saveLesson={() => { saveLesson() }} />
                 <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                     <ScrollView showsVerticalScrollIndicator={false}>

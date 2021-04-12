@@ -23,6 +23,19 @@ export default StyleSheet.create({
         height: hp(8.5),
         zIndex: 9,
     },
+    yellowHrTag: {
+        width: '100%',
+        height: hp(0.61),
+        backgroundColor: COLORS.yellowBorder,
+        marginBottom: hp(2.34),
+    },
+    subTitleTab: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        lineHeight: hp(2.60),
+        color: COLORS.darkGray,
+        marginBottom: hp(2.34),
+    },
     rightContent: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -60,12 +73,6 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginBottom: hp(0.3),
     },
-    month: {
-        fontSize: hp(1.82),
-        fontFamily: FONTS.fontRegular,
-        color: COLORS.darkGray,
-        textAlign: 'center',
-    },
     whiteBoard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
@@ -101,7 +108,7 @@ export default StyleSheet.create({
     },
     month: {
         fontSize: hp(1.82),
-        fontFamily: FONTS.fontBold,
+        fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         textAlign: 'center',
     },
@@ -125,11 +132,11 @@ export default StyleSheet.create({
     },
     timeIcon: {
         resizeMode:'contain',
-        width: hp(1.76),
+        width: hp(1.66),
     },
     calIcon: {
         resizeMode:'contain',
-        width: hp(1.76),
+        width: hp(1.66),
     },
     pupilBoard: {
         marginTop: hp(5),
@@ -235,16 +242,16 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     groupName: {
-        borderWidth: hp(0.26),
+        borderWidth: hp(0.24),
         borderColor: COLORS.borderGrp,
         borderRadius: hp(0.7),
         color: COLORS.grpColor,
         fontSize: hp(1.4),
         fontFamily: FONTS.fontSemiBold,
         textAlign: 'center',
-        width: hp(9),
-        paddingTop: hp(0.1),
-        paddingBottom: hp(0.1),
+        paddingTop: hp(0.05),
+        paddingBottom: hp(0.04),
+        width: hp(7.5),
         marginBottom: hp(0.5),
     },
     timing: {
@@ -265,7 +272,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(3.38),
         color: COLORS.darkGray,
-        marginBottom: hp(1.56),
+        marginBottom: hp(0.1),
+    },
+    titleTabSecond: {
+        marginBottom: hp(1.5),
     },
     timedateGrp: {
         flexDirection: 'row',
@@ -276,8 +286,7 @@ export default StyleSheet.create({
         marginRight: hp(1.69),
     },
     datetimeText: {
-        fontSize: hp(1.82),
-        lineHeight: hp(2),
+        fontSize: hp(1.72),
         marginLeft: hp(0.6),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
@@ -317,7 +326,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         lineHeight: hp(2.60),
         color: COLORS.darkGray,
-        marginBottom: hp(0.6),
+        marginBottom: hp(3.7),
+    },
+    lessondesciptionSecond: {
+        marginBottom: hp(2),
     },
     attchmentSectionwithLink: {
         flexDirection: 'row',
@@ -346,8 +358,11 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     requirementofClass: {
-        marginTop: hp(1.5),
+        marginTop: hp(5),
         marginBottom: hp(13),
+    },
+    requirementofClassSecond: {
+        marginTop: hp(0),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -359,7 +374,7 @@ export default StyleSheet.create({
     lessonPoints: {
         flexDirection: 'row',
         paddingBottom: hp(1.2),
-        paddingTop: hp(1.2),
+        paddingTop: hp(0.5),
     },
     lessonPointsBorder: {
         borderBottomColor: COLORS.commonBorderColor,
@@ -498,17 +513,15 @@ export default StyleSheet.create({
         top:hp(-0.5),
     },
     achivementWrap:{
-        flexDirection: 'row',
+        flexDirection: 'column',
         marginTop:hp(7.5),
-        marginBottom:hp(7.5),
+        marginBottom:hp(0),
         width:'100%',
         alignItems: 'center',
     },
     achivementRobot:{
-        width:hp(57.86),
-        resizeMode: 'contain',
-        shadowColor: COLORS.transparent,
-        marginLeft: hp(7.55),
+        width: '100%',
+        marginTop: hp(6),
     },
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
@@ -578,8 +591,8 @@ export default StyleSheet.create({
     cartoon:{
         resizeMode: 'contain',
         alignItems:'center',
-        width:hp(57.51),
-        height:hp(35.18),
+        width:hp(41.25),
+        height:hp(35.71),
     },
     starText:{
         fontFamily: FONTS.fontRegular,

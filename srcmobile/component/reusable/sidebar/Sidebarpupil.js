@@ -14,34 +14,34 @@ const Sidebar = (props) => {
     //     props.hide();
     // }
 
-    toggleAnimation = () => {
+    // toggleAnimation = () => {
 
-        if (isSmall) {
-            Animated.timing(animationValue, {
-                toValue: hp(29.42),
-                duration: 500
-            }).start(() => {
-                action(false)
-            });
-        }
-        else {
-            Animated.timing(animationValue, {
-                toValue: hp(9.50),
-                duration: 500
-            }).start(() => {
-                action(true)
-            });
-        }
-    }
+    //     if (isSmall) {
+    //         Animated.timing(animationValue, {
+    //             toValue: hp(29.42),
+    //             duration: 500
+    //         }).start(() => {
+    //             action(false)
+    //         });
+    //     }
+    //     else {
+    //         Animated.timing(animationValue, {
+    //             toValue: hp(9.50),
+    //             duration: 500
+    //         }).start(() => {
+    //             action(true)
+    //         });
+    //     }
+    // }
 
-    const animatedStyle = {
-        width: animationValue,
-    }
+    // const animatedStyle = {
+    //     width: animationValue,
+    // }
 
     return (
         <View style={styles.sidebarHeader}>
-            <View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={()=>toggleAnimation()} style={styles.userInfo}>
+            <View style={[styles.sideBarAside]}>
+                <TouchableOpacity style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.ProfileBack} />
                     <View style={styles.profileTextMain}>
                         <Text style={styles.profileTitle}>Johney Depp</Text>

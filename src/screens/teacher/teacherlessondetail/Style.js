@@ -67,7 +67,8 @@ export default StyleSheet.create({
         marginBottom: hp(3.90),
     },
     dateWhiteBoard: {
-        marginRight: 10
+        marginRight: 10,
+flex: 1,
     },
     subjectDateTime: {
         alignItems: 'flex-start',

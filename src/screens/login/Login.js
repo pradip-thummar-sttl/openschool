@@ -73,7 +73,7 @@ class Login extends Component {
         }
 
         this.setLoading(true)
-// console.log('Base64.encode(password)', Base64.encode(password))
+        // console.log('Base64.encode(password)', Base64.encode(password))
         var data = {
             Email: userName,
             Password: password,
@@ -151,8 +151,6 @@ class Login extends Component {
                                         style={STYLE.commonInputPassword}
                                         placeholder="Password"
                                         value={this.state.password}
-
-                                        // value={'SIlver@#098'}
                                         maxLength={30}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                         secureTextEntry={this.state.isPasswordHide}

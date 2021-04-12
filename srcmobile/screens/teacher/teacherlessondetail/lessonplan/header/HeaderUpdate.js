@@ -11,12 +11,19 @@ const HeaderUpdate = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
+                <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={styles.mainTitle}>
+                            Common Title
+                    </Text>
+                        <Text style={styles.date}>14/09/2020</Text>
+                    </View>
+                </View>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
@@ -26,14 +33,14 @@ const HeaderUpdate = (props) => {
                     </TouchableOpacity>*/}
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
+                        <Text style={styles.commonButtonGreenheaderwithicon}></Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         </View>
@@ -43,10 +50,13 @@ export default HeaderUpdate;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingLeft: wp(5.33),
+        paddingRight: wp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        paddingTop: hp(5.85),
+        paddingBottom: hp(1.5),
+        borderBottomWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
     },
     headerMain: {
         flexDirection: 'row',
@@ -54,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: wp(4.26),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
@@ -149,7 +159,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
+        paddingRight: hp(1.0),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
@@ -236,5 +246,8 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+    },
+    titleRow: {
+        flexDirection: 'row',
     },
 });

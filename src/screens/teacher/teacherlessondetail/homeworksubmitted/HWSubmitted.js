@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -11,24 +11,27 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { opacity } from "../../../../utils/Constant";
+import { EndPoints } from "../../../../service/EndPoints";
+import { Service } from "../../../../service/Service";
+var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
             <View style={PAGESTYLE.userStamp}></View>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Reuel Pardesi</Text>
+            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>Group 1A</Text>
+            <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>Yes</Text>
+            <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
+            <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.markText}>Yes</Text>
+            <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
             <TouchableOpacity
                 style={PAGESTYLE.pupilDetailLink}
                 activeOpacity={opacity}
@@ -42,6 +45,9 @@ const Pupillist = (props, { style }) => (
 const TLHomeWorkSubmitted = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
+    const [isLoading, setLoading] = useState(true);
+    const [homeworkData, setHomeworkData] = useState();
+
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
         return (
@@ -52,14 +58,45 @@ const TLHomeWorkSubmitted = (props) => {
             />
         );
     };
-    const pupilRender = ({ item }) => {
+    const pupilRender = ({ item, index }) => {
         return (
             <Pupillist
                 item={item}
-                navigateToDetail={() => props.navigateToDetail()}
+                navigateToDetail={() => props.navigateToDetail(homeworkData, index)}
             />
         );
     };
+
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        // Service.get(`${EndPoints.HomeworkSubmited}${props.lessonId}`, (res) => {
+        Service.get(`${EndPoints.HomeworkSubmited}606c76a37f60340b3ca42539`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                setHomeworkData(res.data[0])
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
+
     return (
 
         <View style={PAGESTYLE.plainBg}>
@@ -82,13 +119,25 @@ const TLHomeWorkSubmitted = (props) => {
             </View>
             <View style={PAGESTYLE.pupilTabledata}>
                 <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                    <FlatList
-                        data={[1, 2, 3, 4, 5]}
-                        renderItem={pupilRender}
-                        keyExtractor={(item) => item.id}
-                        extraData={selectedId}
-                        showsVerticalScrollIndicator={false}
-                    />
+                    {isLoading ?
+                        <ActivityIndicator
+                            style={{ flex: 1 }}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.yellowDark} />
+                        :
+                        homeworkData && homeworkData.PupilList.length > 0 ?
+                            <FlatList
+                                data={homeworkData.PupilList}
+                                renderItem={pupilRender}
+                                keyExtractor={(item) => item.id}
+                                extraData={selectedId}
+                                showsVerticalScrollIndicator={false}
+                            />
+                            :
+                            <View style={{ height: 100, justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            </View>
+                    }
                 </SafeAreaView>
             </View>
         </View>

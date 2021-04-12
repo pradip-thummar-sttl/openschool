@@ -14,15 +14,15 @@ export default class Splash extends Component {
         this.runAnimation()
 
         setTimeout(() => {
-            AsyncStorage.getItem('user').then((user) => {
-                if (user) {
-                    User.user = user
-                    this.props.navigation.replace('TeacherDashboard')
-                } else {
+            // AsyncStorage.getItem('user').then((user) => {
+            //     if (user) {
+            //         User.user = user
+            //         this.props.navigation.replace('TeacherDashboard')
+            //     } else {
                     this.launchNextScreen()
-                }
-            })
-        }, 5000);
+                // }
+            // })
+        }, 3000);
     }
 
     runAnimation() {

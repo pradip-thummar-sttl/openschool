@@ -40,18 +40,16 @@ const TLHomeWork = (props) => {
                                 </View>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time]}>
-                            <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDownSmallWrapNormal]}>
-                                <View style={PAGESTYLE.dueDateWrap}>
-                                    <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
-                                </View>
-                                <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} />
-                                <View style={PAGESTYLE.subjectDateTimeHomework}>
+                        <View style={PAGESTYLE.timedateGrp}>
+                            <View style={PAGESTYLE.dropDownFormInput}>
+                                <Text style={PAGESTYLE.subjectText}>Due Date</Text>
+                                <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
+                                    <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                     <TouchableOpacity>
                                         <Text style={PAGESTYLE.dateTimetextdummy}>14/09/2020</Text>
                                     </TouchableOpacity>
+                                    <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                                 </View>
-                                <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />
                             </View>
                         </View>
                     </View>
@@ -70,11 +68,13 @@ const TLHomeWork = (props) => {
                             <Popupaddrecording />
                         </View>
                     </View>
+
                     <View style={PAGESTYLE.requirementofClass}>
+                        <View style={STYLE.hrCommon}></View>
                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                         <View style={PAGESTYLE.checkBoxGroup}>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -86,7 +86,7 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -98,7 +98,7 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -110,7 +110,7 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
                             </View>
                             <View style={PAGESTYLE.checkBoxLabelLine}>
-                            <CheckBox
+                                <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
@@ -134,7 +134,9 @@ const TLHomeWork = (props) => {
                         <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                     </View>
                     <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                        <TouchableOpacity>
+                            <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} />
+                        </TouchableOpacity>
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
                         <View style={PAGESTYLE.fileGrp}>
@@ -146,14 +148,39 @@ const TLHomeWork = (props) => {
                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                    <View style={PAGESTYLE.videoScroll}>
+                        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+                            <TouchableOpacity>
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
+                                    <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
+                                    <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
+                                    <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
+                                    <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </ScrollView>
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity
                             style={PAGESTYLE.buttonGrp}
                             activeOpacity={opacity}
-                            onPress={()=> props.navigateToVideoGallery()}>
+                            onPress={() => props.navigateToVideoGallery()}>
                             <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                         </TouchableOpacity>
                     </View>

@@ -81,6 +81,7 @@ const TeacherLessonDetail = (props) => {
                     : tabIndex == 1 ?
                         <HeaderHW
                             hwBtnName={Addhomework.IsUpdate?'Update Homework':'Set Homework'}
+                            SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
                             onAlertPress={() => props.navigation.openDrawer()}
@@ -92,6 +93,7 @@ const TeacherLessonDetail = (props) => {
 
                         :
                         <HeaderHWS
+                            subjectName={lessonData.SubjectName}
                             navigateToBack={() => props.navigation.goBack()}
                             onAlertPress={() => props.navigation.openDrawer()} />
                 }
@@ -117,14 +119,18 @@ const TeacherLessonDetail = (props) => {
                                 <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={PAGESTYLE.lessonstartButton}>
-                            <TouchableOpacity
-                                style={PAGESTYLE.buttonGrp}
-                                activeOpacity={opacity}
-                                onPress={() => props.navigation.replace('TLDetailEdit', { 'data': lessonData })}>
-                                <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
-                            </TouchableOpacity>
-                        </View>
+                        {tabIndex == 0 ?
+                            <View style={PAGESTYLE.lessonstartButton}>
+                                <TouchableOpacity
+                                    style={PAGESTYLE.buttonGrp}
+                                    activeOpacity={opacity}
+                                    onPress={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })}>
+                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            null
+                        }
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
@@ -137,7 +143,9 @@ const TeacherLessonDetail = (props) => {
                                 navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
                                 navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
-                            <TLHomeWorkSubmitted navigateToDetail={() => props.navigation.navigate('TLHomeWorkSubmittedDetail')} />
+                            <TLHomeWorkSubmitted
+                                lessonId={lessonData._id}
+                                navigateToDetail={(item, selectedIndex) => props.navigation.navigate('TLHomeWorkSubmittedDetail', {'item': item, 'selectedIndex': selectedIndex})} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}

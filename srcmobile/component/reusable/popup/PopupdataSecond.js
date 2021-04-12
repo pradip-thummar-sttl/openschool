@@ -153,7 +153,32 @@ const PopupdataSecond = (props) => {
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
                                 <View style={styles.beforeBorder}>
-                                    <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
+                                    <View style={styles.titleSave}>
+                                        <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
+                                        <View style={styles.uploadCalendar}>
+                                            <View style={styles.lessonstartButton}>
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...styles.buttonGrp, right: 30 }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.buttonGreen} />
+                                                    :
+                                                    <TouchableOpacity
+                                                        onPress={isFieldsValidated}
+                                                        style={[styles.buttonGrp, styles.newCheckButton]}
+                                                        activeOpacity={opacity}>
+                                                        <Image style={[styles.checkWhiteIcon]} source={require('../../../assets/images/white-check-icon2.png')} />
+                                                        {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
+                                                    </TouchableOpacity>
+                                                }
+
+                                                {/* <TouchableOpacity style={styles.buttonGrp}>
+                                                <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
+                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                                </TouchableOpacity> */}
+                                            </View>
+                                        </View>
+                                    </View>
                                     <View style={styles.field}>
                                         <Text label style={STYLE.labelCommon}>What event is it?</Text>
                                         <View style={styles.copyInputParent}>
@@ -217,7 +242,7 @@ const PopupdataSecond = (props) => {
                                                     onChangeText={notes => setnote(notes)} />
                                             </View>
                                             <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                                <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <TouchableOpacity>
                                                             <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
@@ -225,33 +250,10 @@ const PopupdataSecond = (props) => {
                                                         <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                     </View>
                                                 </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={styles.uploadCalendar}>
-                                        <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
-                                        </TouchableOpacity>
-                                        <View style={styles.lessonstartButton}>
-                                            {isLoading ?
-                                                <ActivityIndicator
-                                                    style={{ ...styles.buttonGrp, right: 30 }}
-                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                    color={COLORS.buttonGreen} />
-                                                :
-                                                <TouchableOpacity
-                                                    onPress={isFieldsValidated}
-                                                    style={styles.buttonGrp}
-                                                    activeOpacity={opacity}>
-                                                    <Image style={styles.checkWhiteIcon} source={require('../../../assets/images/white-check-icon2.png')} />
-                                                    <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                                <TouchableOpacity>
+                                                    <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                                 </TouchableOpacity>
-                                            }
-
-                                            {/* <TouchableOpacity style={styles.buttonGrp}>
-                                                <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
-                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
-                                                </TouchableOpacity> */}
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
@@ -300,23 +302,24 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.5),
         zIndex: 9,
-        top: hp(1),
+        top: hp(0),
     },
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(2),
-        width: hp(60.54),
+        width: '100%',
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
         fontFamily: FONTS.fontRegular,
         position: 'relative',
+        top: hp(8),
     },
     popupContent: {
         width: '100%',
     },
     beforeBorder: {
-        padding: hp(2.60),
+        padding: hp(1.95),
         paddingBottom: hp(0.5),
     },
     afterBorder: {
@@ -324,15 +327,19 @@ const styles = StyleSheet.create({
         paddingTop: hp(0.5),
     },
     titleTab: {
-        fontSize: hp(3.125),
-        fontFamily: FONTS.fontBold,
-        lineHeight: hp(4.55),
+        fontSize: hp(2.21),
+        fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        marginBottom: hp(6.51),
+        marginBottom: hp(3),
+        marginTop: hp(3),
     },
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
+    },
+    dateandColor: {
+        marginRight: hp(1.84),
+        bottom: hp(0.5),
     },
     uploadCalendar: {
         flexDirection: 'row',
@@ -344,13 +351,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
+    newCheckButton: {
+        width: hp(4.92),
+        height: hp(4.92),
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: hp(0.9),
+        overflow: 'hidden',
+        paddingTop: hp(1.7),
+        paddingLeft: hp(1.7),
+        paddingRight: hp(1.7),
+        paddingBottom: hp(1.7),
+    },
     checkWhiteIcon: {
         width: hp(1.48),
         resizeMode: 'contain',
-        position: 'absolute',
-        left: hp(1.7),
-        top: 'auto',
-        zIndex: 9,
+        alignSelf: 'center',
     },
     popupCustomButton: {
         paddingLeft: hp(4.42),
@@ -397,13 +412,13 @@ const styles = StyleSheet.create({
         paddingRight: hp(4.23),
     },
     entryIcon: {
-        width: hp(11.19),
-        height: hp(11.19),
+        width: hp(10),
+        height: hp(10),
         resizeMode: 'contain',
-        marginBottom: hp(2.6),
+        marginBottom: hp(2.28),
     },
     entryTitle: {
-        fontSize: hp(1.56),
+        fontSize: hp(1.37),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
@@ -443,10 +458,10 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     dateTimetextdummy: {
-        fontSize: hp(1.82),
+        fontSize: hp(1.7),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        top: hp(-0.75),
+        top: hp(-0.65),
         left: hp(2.5),
         position: 'absolute'
     },
@@ -454,19 +469,17 @@ const styles = StyleSheet.create({
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(0),
+        right: hp(-0.8),
         top: hp(-0.2),
     },
-    notes: {
-        flexDirection: 'row',
-    },
     noteInput: {
-        width: '80%',
+        width: '100%',
     },
     colorPicker: {
-        width: '18%',
-        marginLeft: '2%',
-        alignSelf: 'flex-end',
+        width: '22%',
+        alignSelf: 'flex-start',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     colorSelect: {
         width: hp(2.86),
@@ -476,7 +489,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(-1.3),
     },
-
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 300, width: 150, borderRadius: 10, backgroundColor: COLORS.dashboardBorder, right: 15, bottom: 80, padding: 15 },
-    colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
+    titleSave:{
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1) },
 });

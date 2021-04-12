@@ -57,7 +57,7 @@ const PupuilDashboard = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
+                    <Text style={PAGESTYLE.groupName}>Group A1</Text>
                     <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
                 </View>
             </View>
@@ -78,7 +78,7 @@ const PupuilDashboard = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
+                    <Text style={PAGESTYLE.groupName}>Group A1</Text>
                     <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
                 </View>
             </View>
@@ -96,7 +96,7 @@ const PupuilDashboard = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <Header onAlertPress={() => {props.navigation.openDrawer()}} STYLE={STYLE.pupilHeader} />
+                <Header onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
@@ -133,24 +133,26 @@ const PupuilDashboard = (props) => {
                                             />
                                         </SafeAreaView>
                                         <RBSheet
-                                                ref={refRBSheet}
-                                                closeOnDragDown={true}
-                                                height={[hp(85)]}
-                                                style={{position: 'relative',}}
-                                                closeOnPressMask={true}
-                                                customStyles={{
-                                                    wrapper: {
-                                                        backgroundColor: COLORS.bottomSlideUpBack
-                                                    },
-                                                    draggableIcon: {
-                                                        backgroundColor: COLORS.darkGray
-                                                    }
-                                                }}
+                                            ref={refRBSheet}
+                                            closeOnDragDown={true}
+                                            height={[hp(85)]}
+                                            style={{ position: 'relative', }}
+                                            closeOnPressMask={true}
+                                            customStyles={{
+                                                wrapper: {
+                                                    backgroundColor: COLORS.bottomSlideUpBack
+                                                },
+                                                draggableIcon: {
+                                                    backgroundColor: COLORS.darkGray
+                                                }
+                                            }}
                                         >
                                             <View style={PAGESTYLE.rightTabContent}>
                                                 {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
+                                                    <Text h3 style={PAGESTYLE.subTitleTab}>Art Subject</Text>
+                                                    <View style={PAGESTYLE.yellowHrTag}></View>
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -165,7 +167,7 @@ const PupuilDashboard = (props) => {
                                                             <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
                                                         </View>
                                                     </View>
-                                                        <View style={STYLE.hrCommon}></View>
+                                                    <View style={STYLE.hrCommon}></View>
                                                     <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
                                                         <View style={PAGESTYLE.mediaMain}>
                                                             <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
@@ -183,9 +185,12 @@ const PupuilDashboard = (props) => {
                                                                 <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                                                 <Text style={PAGESTYLE.attachmentText}>1 Attachment</Text>
                                                             </TouchableOpacity>
+                                                            <TouchableOpacity>
+                                                                <Text style={PAGESTYLE.linkText}>see more</Text>
+                                                            </TouchableOpacity>
                                                         </View>
                                                         <View style={PAGESTYLE.requirementofClass}>
-                                                            <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                                            <Text style={PAGESTYLE.requireText}>What you will need</Text>
                                                             <View style={PAGESTYLE.lessonPoints}>
                                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
                                                                 <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
@@ -241,24 +246,24 @@ const PupuilDashboard = (props) => {
                                             />
                                         </SafeAreaView>
                                         <RBSheet
-                                                ref={refRBSheetTwo}
-                                                closeOnDragDown={true}
-                                                height={[hp(85)]}
-                                                style={{position: 'relative',}}
-                                                closeOnPressMask={true}
-                                                customStyles={{
-                                                    wrapper: {
-                                                        backgroundColor: COLORS.bottomSlideUpBack
-                                                    },
-                                                    draggableIcon: {
-                                                        backgroundColor: COLORS.darkGray
-                                                    }
-                                                }}
+                                            ref={refRBSheetTwo}
+                                            closeOnDragDown={true}
+                                            height={[hp(85)]}
+                                            style={{ position: 'relative', }}
+                                            closeOnPressMask={true}
+                                            customStyles={{
+                                                wrapper: {
+                                                    backgroundColor: COLORS.bottomSlideUpBack
+                                                },
+                                                draggableIcon: {
+                                                    backgroundColor: COLORS.darkGray
+                                                }
+                                            }}
                                         >
                                             <View style={PAGESTYLE.rightTabContent}>
                                                 <View style={PAGESTYLE.arrowSelectedTab}></View>
                                                 <View style={PAGESTYLE.tabcontent}>
-                                                    <Text h2 style={PAGESTYLE.titleTab}>Grammar</Text>
+                                                    <Text h2 style={[PAGESTYLE.titleTab, PAGESTYLE.titleTabSecond]}>Grammar</Text>
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
@@ -266,14 +271,14 @@ const PupuilDashboard = (props) => {
                                                         </View>
                                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
-                                                            <Text style={PAGESTYLE.datetimeText}>English Subject</Text>
+                                                            <Text style={PAGESTYLE.datetimeText}>English</Text>
                                                         </View>
                                                     </View>
                                                     <View style={STYLE.hrCommon}></View>
                                                     <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
-                                                        <Text style={PAGESTYLE.lessondesciption}>Write a short story from your imagination. You can use the help sheet to plan your story. Your story should be one page long and can be about anything you choose. Make sure correct grammar is used as explained in the lesson.</Text>
+                                                        <Text style={[PAGESTYLE.lessondesciption, PAGESTYLE.lessondesciptionSecond]}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
                                                         <View style={STYLE.hrCommon}></View>
-                                                        <View style={PAGESTYLE.requirementofClass}>
+                                                        <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.requirementofClassSecond]}>
                                                             <TouchableOpacity><Text style={PAGESTYLE.requireText}>Make sure you:</Text></TouchableOpacity>
                                                             <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
                                                                 <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
@@ -331,7 +336,7 @@ const PupuilDashboard = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.lessonstartButtonBottom}>
                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondBottomButton]}>tertiary cta</Text></TouchableOpacity>
-                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondBottomButton]}>edit avatar</Text></TouchableOpacity>
+                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondBottomButton]}>View avatar</Text></TouchableOpacity>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.achivementRobot}>
