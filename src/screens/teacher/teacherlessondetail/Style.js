@@ -577,7 +577,7 @@ flex: 1,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        bottom: hp(0.3),
+        bottom: hp(0.1),
     },
     dateField: {
         flex: 0.30

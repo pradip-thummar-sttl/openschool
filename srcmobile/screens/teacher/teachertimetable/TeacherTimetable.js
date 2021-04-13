@@ -144,7 +144,9 @@ const TeacherTimeTable = (props) => {
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
-                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                    navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd')}
+                    navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent')} />
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
