@@ -112,21 +112,22 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
 
-                        <TouchableOpacity onPress={() => {}} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilDashboard'); props.navigation.closeDrawer() }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}
                             />
                             <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); props.navigation.closeDrawer() }} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
+                            
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Teacher}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {props.navigation.replace('PupilLesson'); props.navigation.closeDrawer()}} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => {props.navigation.replace('TeacherLessonList'); props.navigation.closeDrawer()}} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}
@@ -155,9 +156,9 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.cartoon}>
+                    {/* <View style={styles.cartoon}>
                         <Image source={Images.cartoon} style={styles.cartoonIcon} />
-                    </View>
+                    </View> */}
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
                         <View style={styles.profileTextMain}>
