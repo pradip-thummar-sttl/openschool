@@ -21,6 +21,7 @@ const HeaderTT = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
+    const [isModalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         if (!isSearchActive) {
@@ -165,11 +166,16 @@ const HeaderTT = (props) => {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             style={styles.entryData}
-                                            onPress={() => { setModalVisible(false); props.navigateToAddLesson() }}>
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
                                             <Image style={styles.entryIcon} source={Images.NewLessons} />
                                             <Text style={styles.entryTitle}>New Lesson</Text>
                                         </TouchableOpacity>
-                                        <PopupdataSecond />
+                                        <TouchableOpacity
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
+                                            <Text style={styles.entryTitle}>New Event</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>

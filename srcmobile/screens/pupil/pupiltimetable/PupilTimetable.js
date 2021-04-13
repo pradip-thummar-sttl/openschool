@@ -144,6 +144,7 @@ const PupilTimeTable = (props) => {
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
+                    navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent')}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
