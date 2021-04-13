@@ -112,7 +112,7 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
 
-                        <TouchableOpacity onPress={() => {}} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}
@@ -126,7 +126,7 @@ const Sidebar = (props) => {
                             />
                             <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {props.navigation.replace('PupilLesson'); props.navigation.closeDrawer()}} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}

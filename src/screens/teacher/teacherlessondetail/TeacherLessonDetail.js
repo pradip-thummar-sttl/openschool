@@ -123,7 +123,7 @@ const TeacherLessonDetail = (props) => {
                             :
                             <TLHomeWorkSubmitted
                                 lessonId={lessonData._id}
-                                navigateToDetail={(item, selectedIndex) => props.navigation.navigate('TLHomeWorkSubmittedDetail', {'item': item, 'selectedIndex': selectedIndex})} />
+                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', {'item': data})} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
