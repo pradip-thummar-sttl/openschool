@@ -4,7 +4,7 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
-import { opacity } from "../../../utils/Constant";
+import { opacity, showMessage } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
 import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
 import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
@@ -21,11 +21,12 @@ const TeacherLessonDetail = (props) => {
     const [lessonData, setLessonData] = useState(props.route.params.data);
     const [isVisiblePopup, setVisiblePopup] = useState(false)
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
+    const [updateFlag, setUpdate] = useState(false)
 
     console.log('props of detail lesson', props.route.params.data._id)
     const onAddHomework = () => {
         setHomeworkLoading(true)
-
+        console.log('add homework', Addhomework.CheckList)
         const data = {
             LessonId: props.route.params.data._id,
             IsIncluded: Addhomework.IsIncluded,
@@ -34,16 +35,34 @@ const TeacherLessonDetail = (props) => {
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
-        Service.post(data, EndPoints.Homework, (res) => {
-            console.log('response of add homework', res)
-            setHomeworkLoading(false)
-            setVisiblePopup(false)
-        }, (err) => {
-            console.log('response of add homework err', err)
-            setHomeworkLoading(false)
-            setVisiblePopup(false)
+        if (Addhomework.IsUpdate) {
+            Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
+                console.log('response of update homework', res)
+                setHomeworkLoading(false)
+                setVisiblePopup(false)
+                showMessage('Homework update successfully')
+            }, (err) => {
+                console.log('response of update homework err', err)
+                setHomeworkLoading(false)
+                setVisiblePopup(false)
 
-        })
+            })
+        } else {
+            Service.post(data, EndPoints.Homework, (res) => {
+                console.log('response of add homework', res)
+                setHomeworkLoading(false)
+                setVisiblePopup(false)
+                showMessage('Homework added successfully')
+
+            }, (err) => {
+                console.log('response of add homework err', err)
+                setHomeworkLoading(false)
+                setVisiblePopup(false)
+
+            })
+        }
+
+
     }
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -61,6 +80,7 @@ const TeacherLessonDetail = (props) => {
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
+                            hwBtnName={Addhomework.IsUpdate?'Update Homework':'Set Homework'}
                             SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
@@ -118,6 +138,8 @@ const TeacherLessonDetail = (props) => {
                         <TLDetail lessonData={lessonData} />
                         : tabIndex == 1 ?
                             <TLHomeWork
+                                id={props.route.params.data._id}
+                                updateBtnName={(flag)=>setUpdate(flag)}
                                 navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
                                 navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :

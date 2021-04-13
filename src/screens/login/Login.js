@@ -74,35 +74,66 @@ class Login extends Component {
 
         this.setLoading(true)
         // console.log('Base64.encode(password)', Base64.encode(password))
-        var data = {
-            Email: userName,
-            Password: password,
-            PushToken: PushToken,
-            Device: Device,
-            OS: OS,
-            AccessedVia: AccessedVia,
-        }
-        Service.post(data, EndPoints.Login, (res) => {
-            console.log('response Login', res)
-            if (res.code == 200) {
-                this.setLoading(false)
-                // showMessage(res.message)
-                data.isRemember = isRemember
-                console.log('data of login', data)
-                AsyncStorage.setItem('user', JSON.stringify(data))
-                this.props.setUserAuthData(res.data)
-                this.props.navigation.replace('TeacherDashboard')
 
-                User.user = res.data
-                // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+        Service.get(EndPoints.GetAllUserType, (res) => {
+
+            if (res.flag) {
+                console.log('user type of', res)
+
+                var userData = res.data
+                var userType = ""
+                userData.map((item) => {
+                    if (item.Name === this.props.route.params.userType) {
+                        userType = item._id
+                    }
+                })
+
+                console.log('user type of', userType)
+                var data = {
+                    Email: userName,
+                    Password: password,
+                    PushToken: PushToken,
+                    Device: Device,
+                    OS: OS,
+                    AccessedVia: AccessedVia,
+                    UserType: userType
+                }
+                Service.post(data, EndPoints.Login, (res) => {
+                    console.log('response Login', res)
+                    if (res.code == 200) {
+                        this.setLoading(false)
+                        // showMessage(res.message)
+                        data.isRemember = isRemember
+                        console.log('data of login', data)
+                        AsyncStorage.setItem('user', JSON.stringify(data))
+                        this.props.setUserAuthData(res.data)
+                        if (res.data.UserType === "Teacher") {
+                            this.props.navigation.replace('TeacherDashboard')
+                        } else if (res.data.UserType === "Pupil") {
+                            this.props.navigation.replace('PupuilDashboard')
+                        } else {
+                            this.props.navigation.replace('PupuilDashboard')
+                        }
+                        User.user = res.data
+                        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                    } else {
+                        this.setLoading(false)
+                        showMessage(res.message)
+                    }
+                }, (err) => {
+                    this.setLoading(false)
+                    console.log('response Login error', err)
+                })
             } else {
                 this.setLoading(false)
                 showMessage(res.message)
             }
+
         }, (err) => {
             this.setLoading(false)
-            console.log('response Login error', err)
+
         })
+
 
         // return true;
     }

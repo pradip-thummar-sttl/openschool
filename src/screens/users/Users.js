@@ -21,7 +21,7 @@ export default class Users extends Component {
                         <View style={styles.userMain}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login')}>
+                                onPress={() => this.props.navigation.navigate('Login',{userType:"School"})}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
@@ -31,7 +31,7 @@ export default class Users extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login')}>
+                                onPress={() => this.props.navigation.navigate('Login',{userType:"Teacher"})}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
@@ -41,7 +41,7 @@ export default class Users extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.replace('PupuilDashboard')}>
+                                onPress={() => this.props.navigation.navigate('Login',{userType:"Pupil"}) }>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}

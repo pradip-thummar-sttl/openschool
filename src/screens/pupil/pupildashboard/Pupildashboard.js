@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -10,7 +10,10 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { Var } from "../../../utils/Constant";
+import { showMessage, Var } from "../../../utils/Constant";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
+import { User } from "../../../utils/Model";
 
 const PupuilDashboard = (props) => {
     const [isHide, action] = useState(true);
@@ -19,6 +22,32 @@ const PupuilDashboard = (props) => {
     const [dashData, setdashData] = useState([])
 
     const [dataOfSubView, setDataOfSubView] = useState([])
+    const [myDay, setMyDay] = useState([])
+    const [HomeworkList, setPupilHomeworkList] = useState([])
+
+
+    useEffect(() => {
+        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user._id}`, (res) => {
+            console.log('response of my day', res)
+            if (res.flag === true) {
+                setMyDay(res.data)
+            }else{
+                showMessage(res.message)
+            }
+        }, (err) => {
+        })
+
+        Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user._id}`, (res) => {
+            console.log('response of pupil homework list', res)
+            if (res.flag === true) {
+                setPupilHomeworkList(res.data)
+            }else{
+                showMessage(res.message)
+            }
+        }, (err) => {
+        })
+    }, [])
+
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
@@ -63,7 +92,7 @@ const PupuilDashboard = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
 
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Header onAlertPress={() => {props.navigation.openDrawer()}} STYLE={STYLE.pupilHeader} />
+                    <Header onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>
