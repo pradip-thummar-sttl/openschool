@@ -103,7 +103,7 @@ const PupuilDashboard = (props) => {
 
         </TouchableOpacity>
     );
-    
+
     return (
         <View style={PAGESTYLE.mainPage} >
             <Sidebarpupil hide={() => action(!isHide)}
@@ -247,19 +247,19 @@ const PupuilDashboard = (props) => {
                                         <View style={PAGESTYLE.rightTabContent}>
                                             <View style={PAGESTYLE.arrowSelectedTab}></View>
                                             <View style={PAGESTYLE.tabcontent}>
-                                                <Text h2 style={PAGESTYLE.titleTab}>Grammar</Text>
+                                                <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
                                                 <View style={PAGESTYLE.timedateGrp}>
                                                     <View style={PAGESTYLE.dateWhiteBoard}>
                                                         <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
-                                                        <Text style={PAGESTYLE.datetimeText}>Today</Text>
+                                                        <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
                                                     </View>
                                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                         <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
-                                                        <Text style={PAGESTYLE.datetimeText}>English Subject</Text>
+                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
                                                     </View>
                                                 </View>
                                                 <View style={STYLE.hrCommon}></View>
-                                                <Text style={PAGESTYLE.lessondesciption}>Write a short story from your imagination. You can use the help sheet to plan your story. Your story should be one page long and can be about anything you choose. Make sure correct grammar is used as explained in the lesson.</Text>
+                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfHWSubView.HomeworkDescription}</Text>
                                                 <View style={PAGESTYLE.requirementofClass}>
                                                     <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
                                                     <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
