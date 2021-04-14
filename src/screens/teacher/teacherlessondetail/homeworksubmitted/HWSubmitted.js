@@ -47,6 +47,27 @@ const TLHomeWorkSubmitted = (props) => {
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const [homeworkData, setHomeworkData] = useState([]);
+    const [filterBy, setFilterBy] = useState('')
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [isSearchActive, setSearchActive] = useState(false)
+
+    React.useEffect(() => { 
+        setFilterBy(props.filterBy)
+        setSearchKeyword(props.searchKeyword)
+        setSearchActive(props.searchActive)
+    });
+
+    useEffect(() => {
+        fetchRecord('', filterBy)
+    }, [filterBy])
+
+    useEffect(() => {
+        if (isSearchActive) {
+            fetchRecord(searchKeyword, filterBy)   
+        } else {
+            fetchRecord('', '')   
+        }
+    }, [isSearchActive])
 
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
@@ -77,9 +98,9 @@ const TLHomeWorkSubmitted = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-
+        console.log('data', data);
         // Service.post(`${EndPoints.HomeworkSubmited}${props.lessonId}`, (res) => {
-        Service.post(data,`${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
+        Service.post(data, `${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 setHomeworkData(res.data)
