@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -14,6 +14,15 @@ import HeaderHWS from "./header/HeaderHWS";
 import { Service } from "../../../service/Service";
 import { Addhomework, User } from "../../../utils/Model";
 import { EndPoints } from "../../../service/EndPoints";
+import { TextInput } from "react-native-gesture-handler";
+import Images from '../../../utils/Images';
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
+import COLORS from "../../../utils/Colors";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -23,7 +32,17 @@ const TeacherLessonDetail = (props) => {
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
     const [updateFlag, setUpdate] = useState(false)
 
-    console.log('props of detail lesson', props.route.params.data._id)
+    const [isSearchActive, setSearchActive] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+    const [searchKeyword, setSearchKeyword] = useState('')
+
+    useEffect(() => {
+        if (!isSearchActive) {
+            this.textInput.clear()
+        }
+    }, [isSearchActive])
+
     const onAddHomework = () => {
         setHomeworkLoading(true)
         console.log('add homework', Addhomework.CheckList)
@@ -64,6 +83,20 @@ const TeacherLessonDetail = (props) => {
 
 
     }
+
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         this.textInput.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
+
+    // useEffect(() => {
+    //     props.onFilter(filterBy)
+    // }, [filterBy])
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -80,7 +113,7 @@ const TeacherLessonDetail = (props) => {
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
-                            hwBtnName={Addhomework.IsUpdate?'Update Homework':'Set Homework'}
+                            hwBtnName={Addhomework.IsUpdate ? 'Update Homework' : 'Set Homework'}
                             SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
@@ -131,6 +164,72 @@ const TeacherLessonDetail = (props) => {
                             :
                             null
                         }
+                        {tabIndex == 2 ?
+                            <View style={PAGESTYLE.filterbarMain}>
+                                <View style={PAGESTYLE.field}>
+                                    <TextInput
+                                        ref={input => { this.textInput = input }}
+                                        style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
+                                        placeholder="Search pupil"
+                                        maxLength={50}
+                                        placeholderTextColor={COLORS.menuLightFonts}
+                                        onChangeText={keyword => {
+                                            setSearchKeyword(keyword);
+                                        }} />
+                                    <TouchableOpacity
+                                        style={PAGESTYLE.userIcon1Parent}
+                                        activeOpacity={opacity}
+                                        onPress={() => {
+                                            isSearchActive ?
+                                                setSearchActive(false)
+                                                :
+                                                setSearchActive(true)
+                                        }}>
+                                        <Image
+                                            style={PAGESTYLE.userIcon1}
+                                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                                    </TouchableOpacity>
+                                </View>
+                                <TouchableOpacity style={PAGESTYLE.buttonGroup}>
+                                    <Menu style={PAGESTYLE.filterGroup}>
+                                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                                        <MenuOptions style={PAGESTYLE.filterListWrap}>
+                                            <MenuOption style={PAGESTYLE.borderList}>
+                                                <TouchableOpacity
+                                                    activeOpacity={opacity}
+                                                    onPress={() => { setFilterBy('Pupil Name'); setSelectedIndex(0) }}>
+                                                    <View style={PAGESTYLE.filterList}>
+                                                        <Text style={PAGESTYLE.filterListText}>Pupil Name</Text>
+                                                        {selectedIndex == 0 ?
+                                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                            :
+                                                            null
+                                                        }
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </MenuOption>
+                                            <MenuOption style={PAGESTYLE.borderList}>
+                                                <TouchableOpacity
+                                                    activeOpacity={opacity}
+                                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                                    <View style={PAGESTYLE.filterList}>
+                                                        <Text style={PAGESTYLE.filterListText}>Date</Text>
+                                                        {selectedIndex == 1 ?
+                                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                            :
+                                                            null
+                                                        }
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </MenuOption>
+                                        </MenuOptions>
+                                    </Menu>
+                                    <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} />
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            null
+                        }
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
@@ -139,13 +238,16 @@ const TeacherLessonDetail = (props) => {
                         : tabIndex == 1 ?
                             <TLHomeWork
                                 id={props.route.params.data._id}
-                                updateBtnName={(flag)=>setUpdate(flag)}
+                                updateBtnName={(flag) => setUpdate(flag)}
                                 navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
                                 navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
                             <TLHomeWorkSubmitted
                                 lessonId={lessonData._id}
-                                navigateToDetail={(item, selectedIndex) => props.navigation.navigate('TLHomeWorkSubmittedDetail', {'item': item, 'selectedIndex': selectedIndex})} />
+                                searchKeyword={searchKeyword}
+                                filterBy={filterBy}
+                                searchActive={isSearchActive}
+                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { 'item': data })} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}

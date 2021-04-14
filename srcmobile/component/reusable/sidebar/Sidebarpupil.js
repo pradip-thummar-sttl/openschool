@@ -8,7 +8,7 @@ import Images from '../../../utils/Images';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
-    const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
+    // const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
     // const isHide = () => {
     //     action(!isSmall)
     //     props.hide();
@@ -49,22 +49,22 @@ const Sidebar = (props) => {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
-                    
-                    <TouchableOpacity onPress={()=>props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+
+                    <TouchableOpacity onPress={() => props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         />
                         <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
-                       <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
+                        <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
@@ -114,7 +114,7 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:COLORS.SidebarHeaderBack,
+        backgroundColor: COLORS.SidebarHeaderBack,
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,

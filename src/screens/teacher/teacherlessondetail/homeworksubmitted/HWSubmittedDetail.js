@@ -19,7 +19,6 @@ var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
     var data = props.route.params.item
-    var pupilData = data.PupilList[props.route.params.selectedIndex]
 
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
@@ -43,6 +42,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderSave
+                    isMarked={data.Marked ? true : false }
+                    label={`${data.SubjectName} ${data.LessonTopic}`}
                     navigateToBack={() => props.navigation.goBack()}
                     onAlertPress={() => { props.navigation.openDrawer() }} />
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -51,14 +52,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <View style={PAGESTYLE.userLeft}>
                                 <View style={PAGESTYLE.userThumb}></View>
                                 <View>
-                                    <Text style={PAGESTYLE.userTopName}>{pupilData.PupilName}</Text>
-                                    <Text style={PAGESTYLE.userTopGroup}>{pupilData.GroupName}</Text>
+                                    <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
+                                    <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.userRight}>
                                 <View style={PAGESTYLE.markedLabel}>
                                     <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
-                                    <Text style={PAGESTYLE.markedText}>{pupilData.Marked ? 'Marked' : 'Not Marked'}</Text>
+                                    <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
@@ -66,7 +67,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                    <Text style={PAGESTYLE.dateText}>{pupilData.SubmitedDate ? moment(pupilData.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
+                                    <Text style={PAGESTYLE.dateText}>{data.SubmitedDate ? moment(data.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
                                 </View>
                             </View>
                         </View>
@@ -77,7 +78,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     <TextInput
                                         multiline={true}
                                         numberOfLines={4}
-                                        defaultValue={pupilData.HomeworkDescription}
+                                        defaultValue={data.HomeworkDescription}
                                         style={PAGESTYLE.commonInputTextareaNormal}
                                     />
                                 </View>

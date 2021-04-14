@@ -15,9 +15,9 @@ const HeaderSave = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title</Text>
+                    </TouchableOpacity> {props.label} Homework</Text>
                 <View style={styles.headerRight}>
-                    <PopupHomeWorkSave />
+                    <PopupHomeWorkSave isMarked={props.isMarked} />
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}

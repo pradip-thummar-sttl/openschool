@@ -413,6 +413,7 @@ const TLHomeWork = (props) => {
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
+                minimumDate={new Date()}
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
             />
