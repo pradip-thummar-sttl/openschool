@@ -14,6 +14,7 @@ import { showMessage, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
+import moment from "moment";
 
 const PupuilDashboard = (props) => {
     const [isHide, action] = useState(true);
@@ -22,25 +23,29 @@ const PupuilDashboard = (props) => {
     const [dashData, setdashData] = useState([])
 
     const [dataOfSubView, setDataOfSubView] = useState([])
+    const [dataOfHWSubView, setDataOfHomeworkSubView] = useState([])
     const [myDay, setMyDay] = useState([])
     const [HomeworkList, setPupilHomeworkList] = useState([])
 
 
     useEffect(() => {
-        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag === true) {
                 setMyDay(res.data)
+                setDataOfSubView(res.data[0])
+
             }else{
                 showMessage(res.message)
             }
         }, (err) => {
         })
 
-        Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of pupil homework list', res)
             if (res.flag === true) {
                 setPupilHomeworkList(res.data)
+                setDataOfHomeworkSubView(res.data[0])
             }else{
                 showMessage(res.message)
             }
@@ -59,29 +64,46 @@ const PupuilDashboard = (props) => {
             />
         );
     };
+
+    const renderItemHomework = ({ item, index }) => {
+        const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
+
+        return (
+            <Item
+                item={item}
+                onPress={() => setDataHomework(index)}
+                style={{ backgroundColor }}
+            />
+        );
+    };
+    const setDataHomework = (index) => {
+        setSelectedId(index)
+        setDataOfHomeworkSubView(HomeworkList[index])
+    }
     const setData = (index) => {
         setSelectedId(index)
-        setDataOfSubView(dashData[index])
+        setDataOfSubView(myDay[index])
     }
-    const Item = ({ onPress, style }) => (
+    const Item = ({ item,onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View>
-                        <Text style={PAGESTYLE.subjectName}>English</Text>
-                        <Text style={PAGESTYLE.subject}>Grammar</Text>
+                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
-                    <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
+                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.arrowSelectedTab}></View>
 
         </TouchableOpacity>
     );
+    
     return (
         <View style={PAGESTYLE.mainPage} >
             <Sidebarpupil hide={() => action(!isHide)}
@@ -103,8 +125,8 @@ const PupuilDashboard = (props) => {
                                     <View style={[PAGESTYLE.rightContent]}>
                                         <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} />
                                         <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
-                                            <Text style={PAGESTYLE.date}>25</Text>
-                                            <Text style={PAGESTYLE.month}>Sept</Text>
+                                            <Text style={PAGESTYLE.date}>{moment().format('D')}</Text>
+                                            <Text style={PAGESTYLE.month}>{moment().format('MMM')}</Text>
                                         </ImageBackground>
                                         <View>
                                             <TouchableOpacity>
@@ -121,7 +143,7 @@ const PupuilDashboard = (props) => {
                                             <FlatList
                                                 showsVerticalScrollIndicator={false}
                                                 style={PAGESTYLE.ScrollViewFlatlist}
-                                                data={[1, 2, 3, 4, 5]}
+                                                data={myDay}
                                                 renderItem={renderItem}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
@@ -130,19 +152,19 @@ const PupuilDashboard = (props) => {
                                         <View style={PAGESTYLE.rightTabContent}>
                                             {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                             <View style={PAGESTYLE.tabcontent}>
-                                                <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
+                                                <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                 <View style={PAGESTYLE.timedateGrp}>
                                                     <View style={PAGESTYLE.dateWhiteBoard}>
                                                         <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                        <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
+                                                        <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
                                                     </View>
                                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                                                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                        <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
+                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                     </View>
                                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                        <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
+                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
                                                     </View>
                                                 </View>
                                                 <View style={STYLE.hrCommon}></View>
@@ -161,11 +183,11 @@ const PupuilDashboard = (props) => {
                                                     <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
                                                     <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
                                                 </View>
-                                                <Text style={PAGESTYLE.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
+                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                 <View style={PAGESTYLE.attchmentSectionwithLink}>
                                                     <TouchableOpacity style={PAGESTYLE.attachment}>
                                                         <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                        <Text style={PAGESTYLE.attachmentText}>1 Attachment</Text>
+                                                        <Text style={PAGESTYLE.attachmentText}>{0} Attachment</Text>
                                                     </TouchableOpacity>
                                                 </View>
                                                 <View style={PAGESTYLE.requirementofClass}>
@@ -216,8 +238,8 @@ const PupuilDashboard = (props) => {
                                             <FlatList
                                                 showsVerticalScrollIndicator={false}
                                                 style={PAGESTYLE.ScrollViewFlatlist}
-                                                data={[1, 2, 3, 4, 5]}
-                                                renderItem={renderItem}
+                                                data={HomeworkList}
+                                                renderItem={renderItemHomework}
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
                                             />

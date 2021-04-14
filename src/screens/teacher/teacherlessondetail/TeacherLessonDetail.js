@@ -38,9 +38,17 @@ const TeacherLessonDetail = (props) => {
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
                 console.log('response of update homework', res)
-                setHomeworkLoading(false)
-                setVisiblePopup(false)
-                showMessage('Homework update successfully')
+                if (res.flag) {
+                    setHomeworkLoading(false)
+                    setVisiblePopup(false)
+                    showMessage('Homework update successfully')
+                }else{
+                    setHomeworkLoading(false)
+                    setVisiblePopup(false)
+                    showMessage(res.message)
+
+                }
+
             }, (err) => {
                 console.log('response of update homework err', err)
                 setHomeworkLoading(false)
@@ -50,6 +58,7 @@ const TeacherLessonDetail = (props) => {
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
                 console.log('response of add homework', res)
+                Addhomework.IsUpdate = true
                 setHomeworkLoading(false)
                 setVisiblePopup(false)
                 showMessage('Homework added successfully')
@@ -80,7 +89,7 @@ const TeacherLessonDetail = (props) => {
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
-                            hwBtnName={Addhomework.IsUpdate?'Update Homework':'Set Homework'}
+                            hwBtnName={Addhomework.IsUpdate ? 'Update Homework' : 'Set Homework'}
                             SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
@@ -139,13 +148,13 @@ const TeacherLessonDetail = (props) => {
                         : tabIndex == 1 ?
                             <TLHomeWork
                                 id={props.route.params.data._id}
-                                updateBtnName={(flag)=>setUpdate(flag)}
+                                updateBtnName={(flag) => setUpdate(flag)}
                                 navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
                                 navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
                             :
                             <TLHomeWorkSubmitted
                                 lessonId={lessonData._id}
-                                navigateToDetail={(item, selectedIndex) => props.navigation.navigate('TLHomeWorkSubmittedDetail', {'item': item, 'selectedIndex': selectedIndex})} />
+                                navigateToDetail={(item, selectedIndex) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { 'item': item, 'selectedIndex': selectedIndex })} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}
