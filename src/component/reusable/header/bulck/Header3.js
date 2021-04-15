@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -13,11 +13,27 @@ import {
 } from 'react-native-popup-menu';
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderWhite = (props) => {
+
+    const [isSearchActive, setSearchActive] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+
+    useEffect(() => {
+        if (!isSearchActive) {
+            props.onClearSearch()
+            this.textInput.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
+
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>Time Table - <Text style={styles.date}>14/09/2020</Text></Text>
+                <Text style={styles.mainTitle}>TimeTable - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity
                         onPress={() => props.onCalenderPress()}
@@ -35,17 +51,30 @@ const HeaderWhite = (props) => {
             </View>
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
-                    <Image
-                        style={styles.userIcon}
-                        source={Images.SearchIcon} />
                     <TextInput
+                        ref={input => { this.textInput = input }}
                         style={[STYLE.commonInput, styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
-                    />
+                        onChangeText={keyword => {
+                            props.onSearchKeyword(keyword);
+                        }} />
+                    <TouchableOpacity
+                        style={styles.userIcon1Parent}
+                        activeOpacity={opacity}
+                        onPress={() => {
+                            isSearchActive ?
+                                setSearchActive(false)
+                                :
+                                setSearchActive(true)
+                        }}>
+                        <Image
+                            style={styles.userIcon1}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.buttonGroup}>
+                {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
                         <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
@@ -68,12 +97,14 @@ const HeaderWhite = (props) => {
                         </MenuOptions>
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
                 </TouchableOpacity> */}
-                <PopupdataSecondPupil />
+                <PopupdataSecondPupil
+                    navigateToAddLesson={() => props.navigateToAddLesson()}
+                    refreshList={() => props.refreshList()} />
             </View>
         </View>
     );
@@ -111,6 +142,7 @@ const styles = StyleSheet.create({
     field: {
         position: 'relative',
         width: hp(81.11),
+        justifyContent: 'center',
         marginRight: hp(1.69),
     },
     searchHeader: {
@@ -227,5 +259,17 @@ const styles = StyleSheet.create({
         width: wp(5.20),
         resizeMode: 'contain',
         height: hp(5.20),
+    },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: hp(1.43),
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: hp(1.43),
     },
 });
