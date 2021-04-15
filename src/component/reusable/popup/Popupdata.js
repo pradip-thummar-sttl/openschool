@@ -9,6 +9,7 @@ import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import { cellWidth, Lesson, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
+import moment from 'moment';
 
 const Popupdata = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -114,7 +115,7 @@ const Popupdata = (props) => {
                                 <View style={styles.timedateGrp}>
                                     <View style={styles.dateWhiteBoard}>
                                         <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                        <Text style={styles.datetimeText}>14/09/2020</Text>
+                                        <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
                                     </View>
                                     <View style={[styles.dateWhiteBoard, styles.time]}>
                                         <Image style={styles.timeIcon} source={Images.Clock} />

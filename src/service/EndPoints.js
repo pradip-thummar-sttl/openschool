@@ -16,10 +16,9 @@ export const EndPoints = {
     LessonMaterialUpload: 'lessonmaterialupload/',
     EventType: 'eventtype',
     HomeworkSubmited: 'homeworksubmited/',
-
+    
     //Pupil
     GetListOfPupilMyDay: "getmydaypupil",
-    GetAllHomeworkListByPupil:"pupilhomeworklist",
-
-
+    GetAllHomeworkListByPupil:"allpupilhomeworklist",
+    GetTimeTablePupil:'gettimetablepupil',
 }

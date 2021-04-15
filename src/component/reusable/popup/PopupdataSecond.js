@@ -335,9 +335,7 @@ const PopupdataSecond = (props) => {
                                             <View style={[styles.copyInputParent, styles.colorPicker]}>
                                                 <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
-                                                        <TouchableOpacity>
                                                             <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
-                                                        </TouchableOpacity>
                                                         <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                                     </View>
                                                 </TouchableOpacity>
