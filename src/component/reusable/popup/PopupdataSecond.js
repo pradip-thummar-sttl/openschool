@@ -381,7 +381,7 @@ const PopupdataSecond = (props) => {
                                         data={colorArr}
                                         renderItem={({ item, index }) => {
                                             return (
-                                                <TouchableOpacity onPress={() => {setSelectColorId(item._id); selectColor(item)}} style={styles.colorButton}>
+                                                <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                                     <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
                                                     <Text>{item.EventType}</Text>
                                                 </TouchableOpacity>
@@ -394,6 +394,7 @@ const PopupdataSecond = (props) => {
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
+                        minimumDate={new Date()}
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
                     />
@@ -618,7 +619,7 @@ const styles = StyleSheet.create({
     },
     // colorDropView: { position: "absolute", alignSelf: 'center', height: 200, width: 150, borderRadius: 10, backgroundColor: COLORS.white, right: 15, bottom: 80, padding: 15, borderColor: COLORS.dashboardBorder, borderWidth: 1.5 },
     // colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
     timeField: {
         flex: 0.20

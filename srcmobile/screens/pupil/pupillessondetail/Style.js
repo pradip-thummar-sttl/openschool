@@ -25,10 +25,7 @@ export default StyleSheet.create({
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        // paddingLeft: hp(3.5),
-        // paddingRight: hp(3.5),
         paddingBottom: hp(2),
-        paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
@@ -42,8 +39,8 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:hp(4.42),
-        paddingRight:hp(2.99),
+        paddingLeft:hp(2.3),
+        paddingRight:hp(2),
     },
     lessonPlanTab: {
         flexDirection: 'row',
@@ -51,16 +48,13 @@ export default StyleSheet.create({
         paddingTop: hp(1.90),
     },
     tabs: {
-        paddingRight: hp(3.90),
+        paddingRight: hp(3.7),
     },
     tabsText: {
         color: COLORS.menuLightFonts,
-        fontFamily: FONTS.fontSemiBold,
-        fontSize: hp(1.56),
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.47),
         textTransform: 'uppercase',
-    },
-    tabsTextSelected: {
-        color: COLORS.buttonGreen,
     },
     timedateGrp: {
         flexDirection: 'row',

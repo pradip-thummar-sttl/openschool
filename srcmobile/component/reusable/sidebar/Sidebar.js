@@ -127,7 +127,7 @@ const Sidebar = (props) => {
                             />
                             <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {props.navigation.replace('TeacherLessonList'); props.navigation.closeDrawer()}} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => {props.navigation.replace('PupilLessonDetail'); props.navigation.closeDrawer()}} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}

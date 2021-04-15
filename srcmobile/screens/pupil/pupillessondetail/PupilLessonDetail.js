@@ -23,21 +23,21 @@ const PupilLessonDetail = (props) => {
     const [isLesson, setLesson] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
+            <View>
                 <Header4 onAlertPress={() => props.navigation.openDrawer()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
                             <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => setLesson(true)}>
-                                <Text style={[PAGESTYLE.tabsText, { color: isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Lesson</Text>
+                                <Text style={[PAGESTYLE.tabsText, { color: isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts, fontFamily: isLesson ? FONTS.fontSemiBold : FONTS.fontRegular }]}>Lesson</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => setLesson(false)}>
-                                <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts }]}>Homework</Text>
+                                <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts, fontFamily: !isLesson ? FONTS.fontSemiBold : FONTS.fontRegular }]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
                         {/* <View style={PAGESTYLE.lessonstartButton}>

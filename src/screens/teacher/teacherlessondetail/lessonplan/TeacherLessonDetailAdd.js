@@ -502,7 +502,8 @@ const TLDetailAdd = (props) => {
                         props.route.params.onGoBack();
                         props.navigation.goBack()
                     }}
-                    saveLesson={() => { saveLesson() }} />
+                    saveLesson={() => { saveLesson() }}
+                    onAlertPress={() => { props.navigation.openDrawer() }} />
                 <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
@@ -529,15 +530,15 @@ const TLDetailAdd = (props) => {
                                 <View style={PAGESTYLE.timedateGrp}>
                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                            <View style={PAGESTYLE.subjectDateTime}>
-                                                <TouchableOpacity onPress={() => showDatePicker()}>
+                                        <TouchableOpacity onPress={() => showDatePicker()}>
+                                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                <View style={PAGESTYLE.subjectDateTime}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                </TouchableOpacity>
-                                                <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                </View>
                                             </View>
-                                        </View>
+                                        </TouchableOpacity>
                                     </View>
 
                                     {fromTimeDropDown()}
@@ -634,6 +635,7 @@ const TLDetailAdd = (props) => {
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
+                        minimumDate={new Date()}
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
                     />

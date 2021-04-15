@@ -15,10 +15,14 @@ const PopupHomeWorkSave = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
-                <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                <Text style={styles.commonButtonGreenheader}>set homework</Text>
-            </TouchableOpacity>
+            {!props.isMarked ?
+                <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
+                    <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
+                    <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                </TouchableOpacity>
+                :
+                null
+            }
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
