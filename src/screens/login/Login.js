@@ -19,6 +19,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { User } from '../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Base64 } from 'js-base64';
+import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
+
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +29,7 @@ class Login extends Component {
             userName: '',
             password: '',
             PushToken: "Test",
-            Device: "M",
+            Device: getBrand() + ', ' + getModel() + ', ' + getSystemVersion(),
             OS: Platform.OS,
             AccessedVia: "Mobile",
             isLoading: false,
@@ -98,6 +101,7 @@ class Login extends Component {
                     AccessedVia: AccessedVia,
                     UserType: userType
                 }
+
                 Service.post(data, EndPoints.Login, (res) => {
                     console.log('response Login', res)
                     if (res.code == 200) {
