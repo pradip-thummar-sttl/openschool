@@ -19,7 +19,7 @@ export const EndPoints = {
 
     //Pupil
     GetListOfPupilMyDay: "getmydaypupil",
-    GetAllHomeworkListByPupil:"pupilhomeworklist",
-
+    GetHomeworkListByPupil:"pupilhomeworklist",
+    GetAllHomeworkListByPupil:"allpupilhomeworklist"
 
 }

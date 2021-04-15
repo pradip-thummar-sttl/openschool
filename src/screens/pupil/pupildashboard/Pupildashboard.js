@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -26,7 +26,8 @@ const PupuilDashboard = (props) => {
     const [dataOfHWSubView, setDataOfHomeworkSubView] = useState([])
     const [myDay, setMyDay] = useState([])
     const [HomeworkList, setPupilHomeworkList] = useState([])
-
+    const [isMyDayLoading, setMyDayLoading] = useState(true)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(true)
 
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
@@ -34,20 +35,25 @@ const PupuilDashboard = (props) => {
             if (res.flag === true) {
                 setMyDay(res.data)
                 setDataOfSubView(res.data[0])
-
-            }else{
+                setMyDayLoading(false)
+            } else {
                 showMessage(res.message)
+                setMyDayLoading(false)
+
             }
         }, (err) => {
         })
 
-        Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of pupil homework list', res)
             if (res.flag === true) {
                 setPupilHomeworkList(res.data)
                 setDataOfHomeworkSubView(res.data[0])
-            }else{
+                setHomeworkLoading(false)
+            } else {
                 showMessage(res.message)
+                setHomeworkLoading(false)
+
             }
         }, (err) => {
         })
@@ -84,14 +90,14 @@ const PupuilDashboard = (props) => {
         setSelectedId(index)
         setDataOfSubView(myDay[index])
     }
-    const Item = ({ item,onPress, style }) => (
+    const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View>
                         <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                        <Text style={PAGESTYLE.subject}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -138,76 +144,92 @@ const PupuilDashboard = (props) => {
                             </View>
                             <View style={PAGESTYLE.orangeBoxBottom}>
                                 <View style={PAGESTYLE.whiteBoard}>
-                                    <View style={STYLE.viewRow}>
-                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                                            <FlatList
-                                                showsVerticalScrollIndicator={false}
-                                                style={PAGESTYLE.ScrollViewFlatlist}
-                                                data={myDay}
-                                                renderItem={renderItem}
-                                                keyExtractor={(item) => item.id}
-                                                extraData={selectedId}
-                                            />
-                                        </SafeAreaView>
-                                        <View style={PAGESTYLE.rightTabContent}>
-                                            {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
-                                            <View style={PAGESTYLE.tabcontent}>
-                                                <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                <View style={PAGESTYLE.timedateGrp}>
-                                                    <View style={PAGESTYLE.dateWhiteBoard}>
-                                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                        <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                    {isMyDayLoading ?
+                                        <ActivityIndicator
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.yellowDark} />
+                                        :
+
+                                        <View style={STYLE.viewRow}>
+                                            {
+                                                myDay.length > 0 ?
+                                                    <>
+                                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
+                                                            <FlatList
+                                                                showsVerticalScrollIndicator={false}
+                                                                style={PAGESTYLE.ScrollViewFlatlist}
+                                                                data={myDay}
+                                                                renderItem={renderItem}
+                                                                keyExtractor={(item) => item.id}
+                                                                extraData={selectedId}
+                                                            />
+                                                        </SafeAreaView>
+                                                        <View style={PAGESTYLE.rightTabContent}>
+                                                            {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
+                                                            <View style={PAGESTYLE.tabcontent}>
+                                                                <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                                <View style={PAGESTYLE.timedateGrp}>
+                                                                    <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                        <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                                    </View>
+                                                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                                                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
+                                                                    </View>
+                                                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                                    </View>
+                                                                </View>
+                                                                <View style={STYLE.hrCommon}></View>
+                                                                <View style={PAGESTYLE.mediaMain}>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
+                                                                </View>
+                                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
+                                                                <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                                                    <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                                        <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                                                        <Text style={PAGESTYLE.attachmentText}>{0} Attachment</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <View style={PAGESTYLE.requirementofClass}>
+                                                                    <Text style={PAGESTYLE.requireText}>What you will need</Text>
+                                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                        <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
+                                                                    </View>
+                                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                        <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
+                                                                    </View>
+                                                                </View>
+                                                                <View style={PAGESTYLE.lessonstartButton}>
+                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
+                                                                </View>
+                                                            </View>
+                                                        </View>
+                                                    </>
+                                                    :
+                                                    <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                        <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                     </View>
-                                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
-                                                    </View>
-                                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
-                                                    </View>
-                                                </View>
-                                                <View style={STYLE.hrCommon}></View>
-                                                <View style={PAGESTYLE.mediaMain}>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
-                                                </View>
-                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
-                                                <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                    <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                        <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                        <Text style={PAGESTYLE.attachmentText}>{0} Attachment</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                                <View style={PAGESTYLE.requirementofClass}>
-                                                    <Text style={PAGESTYLE.requireText}>What you will need</Text>
-                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                        <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
-                                                    </View>
-                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                        <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
-                                                    </View>
-                                                </View>
-                                                <View style={PAGESTYLE.lessonstartButton}>
-                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
-                                                </View>
-                                            </View>
+                                            }
                                         </View>
-                                    </View>
+                                    }
                                 </View>
                             </View>
                         </View>
@@ -233,60 +255,76 @@ const PupuilDashboard = (props) => {
                             </View>
                             <View style={PAGESTYLE.orangeBoxBottom}>
                                 <View style={PAGESTYLE.whiteBoard}>
-                                    <View style={STYLE.viewRow}>
-                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                                            <FlatList
-                                                showsVerticalScrollIndicator={false}
-                                                style={PAGESTYLE.ScrollViewFlatlist}
-                                                data={HomeworkList}
-                                                renderItem={renderItemHomework}
-                                                keyExtractor={(item) => item.id}
-                                                extraData={selectedId}
-                                            />
-                                        </SafeAreaView>
-                                        <View style={PAGESTYLE.rightTabContent}>
-                                            <View style={PAGESTYLE.arrowSelectedTab}></View>
-                                            <View style={PAGESTYLE.tabcontent}>
-                                                <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
-                                                <View style={PAGESTYLE.timedateGrp}>
-                                                    <View style={PAGESTYLE.dateWhiteBoard}>
-                                                        <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
-                                                        <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
+                                    {isHomeworkLoading ?
+                                        <ActivityIndicator
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.yellowDark} />
+                                        :
+                                        <View style={STYLE.viewRow}>
+                                            {
+                                                HomeworkList.length > 0 ?
+                                                    <>
+                                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
+                                                            <FlatList
+                                                                showsVerticalScrollIndicator={false}
+                                                                style={PAGESTYLE.ScrollViewFlatlist}
+                                                                data={HomeworkList}
+                                                                renderItem={renderItemHomework}
+                                                                keyExtractor={(item) => item.id}
+                                                                extraData={selectedId}
+                                                            />
+                                                        </SafeAreaView>
+                                                        <View style={PAGESTYLE.rightTabContent}>
+                                                            <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                                            <View style={PAGESTYLE.tabcontent}>
+                                                                <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
+                                                                <View style={PAGESTYLE.timedateGrp}>
+                                                                    <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                        <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
+                                                                        <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
+                                                                    </View>
+                                                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                        <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
+                                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
+                                                                    </View>
+                                                                </View>
+                                                                <View style={STYLE.hrCommon}></View>
+                                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfHWSubView.HomeworkDescription}</Text>
+                                                                <View style={PAGESTYLE.requirementofClass}>
+                                                                    <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
+                                                                    <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
+                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                        <Text style={PAGESTYLE.lessonPointText}>Watch The BBC Bitesize Video.</Text>
+                                                                    </View>
+                                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                        <Text style={PAGESTYLE.lessonPointText}>Write a list of all the everyday items that come from the Amazon Rainforest.</Text>
+                                                                    </View>
+                                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                        <Text style={PAGESTYLE.lessonPointText}>Write a short story about where those items come from in the the forest and what they mean to you.</Text>
+                                                                    </View>
+                                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                        <Text style={PAGESTYLE.lessonPointText}>Take a photo of your work and upload here.</Text>
+                                                                    </View>
+                                                                </View>
+                                                                <View style={PAGESTYLE.lessonstartButton}>
+                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>See Homework</Text></TouchableOpacity>
+                                                                </View>
+                                                            </View>
+                                                        </View>
+                                                    </> :
+                                                    <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                        <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                     </View>
-                                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                        <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
-                                                        <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
-                                                    </View>
-                                                </View>
-                                                <View style={STYLE.hrCommon}></View>
-                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfHWSubView.HomeworkDescription}</Text>
-                                                <View style={PAGESTYLE.requirementofClass}>
-                                                    <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
-                                                    <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                        <Text style={PAGESTYLE.lessonPointText}>Watch The BBC Bitesize Video.</Text>
-                                                    </View>
-                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                        <Text style={PAGESTYLE.lessonPointText}>Write a list of all the everyday items that come from the Amazon Rainforest.</Text>
-                                                    </View>
-                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                        <Text style={PAGESTYLE.lessonPointText}>Write a short story about where those items come from in the the forest and what they mean to you.</Text>
-                                                    </View>
-                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                        <Text style={PAGESTYLE.lessonPointText}>Take a photo of your work and upload here.</Text>
-                                                    </View>
-                                                </View>
-                                                <View style={PAGESTYLE.lessonstartButton}>
-                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity>
-                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>See Homework</Text></TouchableOpacity>
-                                                </View>
-                                            </View>
+                                            }
+
                                         </View>
-                                    </View>
+                                    }
                                 </View>
+
                             </View>
                         </View>
                         <View style={PAGESTYLE.achivementWrap}>

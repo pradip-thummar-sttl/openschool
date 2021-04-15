@@ -27,7 +27,7 @@ const HeaderWhite = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
+            {/* <View style={styles.filterbarMain}>
                 <View style={styles.field}>
                     <Image
                         style={styles.userIcon}
@@ -62,12 +62,12 @@ const HeaderWhite = (props) => {
                         </MenuOptions>
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 {/* <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
                 </TouchableOpacity> */}
-            </View>
+            {/* </View> */}
         </View>
     );
 }
