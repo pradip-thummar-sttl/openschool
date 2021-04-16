@@ -143,6 +143,8 @@ export default StyleSheet.create({
     },
     requirementofClass: {
         marginTop: hp(4.81),
+        paddingLeft:wp(4.55),
+        paddingRight:wp(4.55),
     },
     videoLinkBlock: {
         width: hp(36.84),
@@ -201,7 +203,7 @@ export default StyleSheet.create({
         borderBottomColor: COLORS.videoLinkBorder,
     },
     checkBoxLabelBox: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         width: 'auto',
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
@@ -715,8 +717,8 @@ export default StyleSheet.create({
         paddingLeft:hp(4.0),
     },
     uploadBoard:{
-        width:hp(33.07),
-        height:hp(45.05),
+        width:'100%',
+        height:wp(48),
         resizeMode:'contain',
     },
     containerWrapTop: {
@@ -937,6 +939,10 @@ export default StyleSheet.create({
     dateBlockRow:{
         flexDirection:'row',
         marginBottom:hp(4.55),
+        borderTopWidth:1,
+        borderTopColor:COLORS.borderGrp,
+        borderBottomWidth:1,
+        borderBottomColor:COLORS.borderGrp,
     },
     calander:{
         width:hp(1.76),
@@ -962,10 +968,11 @@ export default StyleSheet.create({
     },
     alignRow:{
         flexDirection:'row',
-        width:'68.5%',
+        width:'95%',
     },
     spaceSmallUserName:{
-        marginRight:hp(14.32),
+        marginRight:wp(14.32),
+        marginLeft:wp(15.3),
     },
     largeVideo:{
         width: hp(46.18),
@@ -1130,6 +1137,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize:hp(1.82),
         color:COLORS.darkGray,
+        paddingLeft:wp(4.55),
     },
     lineLength:{
         width:'80%',        
@@ -1252,4 +1260,32 @@ export default StyleSheet.create({
         paddingTop:hp(2.46),
         paddingLeft:hp(2),
     },
+    lessonstartButton:{
+        marginTop:wp(15),
+    },
+    commonButtonGreenheader: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        height: hp(5.20),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        width:'100%',
+        marginTop:wp(10),
+        marginBottom:wp(10),
+    },
+    rightSideBar:{
+        paddingTop:hp(2.46),
+    },
+    uploadBoardBlock:{
+        height:wp(48),
+    }
 });
