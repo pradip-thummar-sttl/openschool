@@ -39,7 +39,6 @@ const PupuilDashboard = (props) => {
             } else {
                 showMessage(res.message)
                 setMyDayLoading(false)
-
             }
         }, (err) => {
         })
@@ -53,7 +52,6 @@ const PupuilDashboard = (props) => {
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
-
             }
         }, (err) => {
         })

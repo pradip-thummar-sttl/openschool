@@ -14,6 +14,7 @@ import Header13 from '../../../../component/reusable/header/bulck/Header13'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 
 const PupilHomeWorkSubmitted = (props) => {
+    const {item } = props.route.params
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
@@ -22,7 +23,7 @@ const PupilHomeWorkSubmitted = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.whiteBg}>
-                {/* <Header13 /> */}
+                <Header13 goBack={()=>props.navigation.goBack()}/>
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>

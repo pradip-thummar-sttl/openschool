@@ -10,7 +10,6 @@ import moment from "moment";
 
 const PupilLessonDue = (props) => {
 
-    console.log('duehomework', props)
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
@@ -22,7 +21,7 @@ const PupilLessonDue = (props) => {
                         {
                             props.DueHomeWork.map((item) => {
                                 return (
-                                    <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeworkesubmited(item)}>
+                                    <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeWorkDetail(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>
                                             <Image source={require('../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
                                             <Text style={PAGESTYLE.videoDateBlack}>Due: {moment(item.DueDate).format('dd/mm/yyyy')}</Text>
