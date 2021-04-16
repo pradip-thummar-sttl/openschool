@@ -360,9 +360,27 @@ const TLDetailEdit = (props) => {
         );
     };
 
-    console.log('selectedPupils count', selectedPupils);
     const saveLesson = () => {
-        if (!lessonTopic) {
+
+        if (!selectedSubject) {
+            showMessage(MESSAGE.subject)
+            return false;
+        } else if (!selectedDate) {
+            showMessage(MESSAGE.date)
+            return false;
+        } else if (!selectedFromTime) {
+            showMessage(MESSAGE.fromTime)
+            return false;
+        } else if (!selectedToTime) {
+            showMessage(MESSAGE.toTime)
+            return false;
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+            showMessage(MESSAGE.invalidTo)
+            return false
+        } else if (!selectedParticipants) {
+            showMessage(MESSAGE.participants)
+            return false;
+        } else if (!lessonTopic) {
             showMessage(MESSAGE.topic)
             return false;
         } else if (!description) {

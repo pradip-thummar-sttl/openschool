@@ -15,21 +15,55 @@ import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
     var data = props.route.params.item
+    console.log('data', data);
 
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
+    const [recordingArr, setRecordingArr] = useState([])
+    const [isLoading, setLoading] = useState(false);
 
     const isFieldsValidated = () => {
-        if (!feedback) {
+        if (!feedBack) {
             showMessage(MESSAGE.feedback)
             return false;
         }
 
-        return true;
+        let formData = new FormData();
+
+        recordingArr.forEach(element => {
+            formData.append('recording', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        formData.append("Feedback", feedBack);
+        formData.append("Rewards", '1');
+
+        console.log('data', formData._parts, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`);
+
+        Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
+            if (res.code == 200) {
+                setLoading(false)
+                console.log('response of save lesson', res)
+                // setDefaults()
+                showMessage(MESSAGE.homeworkMarked)
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
     }
 
     return (
@@ -42,116 +76,120 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderSave
-                    isMarked={data.Marked ? true : false }
+                    isMarked={data.Marked ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
                     navigateToBack={() => props.navigation.goBack()}
-                    onAlertPress={() => { props.navigation.openDrawer() }} />
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={PAGESTYLE.whiteBg}>
-                        <View style={PAGESTYLE.containerWrapTop}>
-                            <View style={PAGESTYLE.userLeft}>
-                                <View style={PAGESTYLE.userThumb}></View>
-                                <View>
-                                    <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
-                                    <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
+                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onSetHomework={() => isFieldsValidated()} />
+                <KeyboardAwareScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={PAGESTYLE.whiteBg}>
+                            <View style={PAGESTYLE.containerWrapTop}>
+                                <View style={PAGESTYLE.userLeft}>
+                                    <View style={PAGESTYLE.userThumb}></View>
+                                    <View>
+                                        <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
+                                        <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={PAGESTYLE.userRight}>
-                                <View style={PAGESTYLE.markedLabel}>
-                                    <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
-                                    <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
-                                </View>
-                                <View style={PAGESTYLE.dateNameBlock}>
-                                    <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                    <Text style={PAGESTYLE.dateText}>{data.HomeWorkDate ? moment(data.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
-                                </View>
-                                <View style={PAGESTYLE.dateNameBlock}>
-                                    <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                    <Text style={PAGESTYLE.dateText}>{data.SubmitedDate ? moment(data.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={PAGESTYLE.containerWrap}>
-                            <View style={PAGESTYLE.teacherDetailLeft}>
-                                <View style={PAGESTYLE.lessonDesc}>
-                                    <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                    <TextInput
-                                        multiline={true}
-                                        numberOfLines={4}
-                                        defaultValue={data.HomeworkDescription}
-                                        style={PAGESTYLE.commonInputTextareaNormal}
-                                    />
-                                </View>
-                                <View style={PAGESTYLE.requirementofClass}>
-                                    <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
-                                    <View style={PAGESTYLE.checkBoxGroup}>
-                                        <FlatList
-                                            data={data.CheckList}
-                                            renderItem={({ item }) => (
-                                                <View style={PAGESTYLE.checkBoxLabelLine}>
-                                                    <CheckBox
-                                                        style={PAGESTYLE.checkMark}
-                                                        value={item.IsCheck}
-                                                        disabled
-                                                        boxType={'square'}
-                                                        onCheckColor={COLORS.white}
-                                                        onFillColor={COLORS.dashboardPupilBlue}
-                                                        onTintColor={COLORS.dashboardPupilBlue}
-                                                        tintColor={COLORS.dashboardPupilBlue}
-                                                    />
-                                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
-                                                </View>
-                                            )}
-                                            style={{ height: 200 }} />
+                                <View style={PAGESTYLE.userRight}>
+                                    <View style={PAGESTYLE.markedLabel}>
+                                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
+                                        <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.dateNameBlock}>
+                                        <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
+                                        <Text style={PAGESTYLE.dateText}>{data.HomeWorkDate ? moment(data.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.dateNameBlock}>
+                                        <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
+                                        <Text style={PAGESTYLE.dateText}>{data.SubmitedDate ? moment(data.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
                                     </View>
                                 </View>
                             </View>
-                            <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
-                                <View style={PAGESTYLE.uploadBoardBlock}>
-                                    <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={PAGESTYLE.containerWrap}>
-                            <View style={PAGESTYLE.feedbackBlock}>
-                                <View style={PAGESTYLE.lessonDesc}>
-                                    <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
-                                    <TextInput
-                                        multiline={true}
-                                        numberOfLines={4}
-                                        defaultValue='Leave feedback here'
-                                        style={PAGESTYLE.commonInputTextarea}
-                                        onChangeText={feedback => setFeedback(feedback)} />
-                                </View>
-                                <View style={PAGESTYLE.videoRecording}>
-                                    <View style={PAGESTYLE.recordLinkBlock}>
-                                        <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                        <Popupaddrecording />
+                            <View style={PAGESTYLE.containerWrap}>
+                                <View style={PAGESTYLE.teacherDetailLeft}>
+                                    <View style={PAGESTYLE.lessonDesc}>
+                                        <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
+                                        <TextInput
+                                            multiline={true}
+                                            numberOfLines={4}
+                                            defaultValue={data.HomeworkDescription}
+                                            style={PAGESTYLE.commonInputTextareaNormal}
+                                        />
                                     </View>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.ratingBlock}>
-                                <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
-                                <View style={PAGESTYLE.achivementBox}>
-                                    <View style={PAGESTYLE.rewardStarMark}>
-                                        <View style={PAGESTYLE.centerText}>
-                                            <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
-                                            <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                                        </View>
-                                        <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                            <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
-                                            <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.centerText}>
-                                            <Image source={Images.GoldStar} style={[PAGESTYLE.starSelected]} />
-                                            <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                    <View style={PAGESTYLE.requirementofClass}>
+                                        <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
+                                        <View style={PAGESTYLE.checkBoxGroup}>
+                                            <FlatList
+                                                data={data.CheckList}
+                                                renderItem={({ item }) => (
+                                                    <View style={PAGESTYLE.checkBoxLabelLine}>
+                                                        <CheckBox
+                                                            style={PAGESTYLE.checkMark}
+                                                            value={item.IsCheck}
+                                                            disabled
+                                                            boxType={'square'}
+                                                            onCheckColor={COLORS.white}
+                                                            onFillColor={COLORS.dashboardPupilBlue}
+                                                            onTintColor={COLORS.dashboardPupilBlue}
+                                                            tintColor={COLORS.dashboardPupilBlue}
+                                                        />
+                                                        <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                    </View>
+                                                )}
+                                                style={{ height: 200 }} />
                                         </View>
                                     </View>
                                 </View>
+                                <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
+                                    <View style={PAGESTYLE.uploadBoardBlock}>
+                                        <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={PAGESTYLE.containerWrap}>
+                                <View style={PAGESTYLE.feedbackBlock}>
+                                    <View style={PAGESTYLE.lessonDesc}>
+                                        <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
+                                        <TextInput
+                                            multiline={true}
+                                            numberOfLines={4}
+                                            placeholder='Leave feedback here'
+                                            style={PAGESTYLE.commonInputTextarea}
+                                            returnKeyType={"next"}
+                                            onChangeText={feedback => setFeedback(feedback)} />
+                                    </View>
+                                    <View style={PAGESTYLE.videoRecording}>
+                                        <View style={PAGESTYLE.recordLinkBlock}>
+                                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                                            <Popupaddrecording />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.ratingBlock}>
+                                    <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
+                                    <View style={PAGESTYLE.achivementBox}>
+                                        <View style={PAGESTYLE.rewardStarMark}>
+                                            <View style={PAGESTYLE.centerText}>
+                                                <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                            </View>
+                                            <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
+                                                <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                <Text style={PAGESTYLE.starText}>Silver stars</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.centerText}>
+                                                <Image source={Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                </ScrollView>
+                    </ScrollView>
+                </KeyboardAwareScrollView>
             </View>
         </View>
     );

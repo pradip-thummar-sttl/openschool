@@ -8,20 +8,20 @@ import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
 
 const Popuphomework = (props) => {
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(true);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
     return (
         <View>
-            <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
+            {/* <TouchableOpacity onPress={toggleModal()} style={styles.buttonGroup}>
                 <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
                 <Text style={styles.commonButtonGreenheader}></Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
-                    <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
+                    <TouchableOpacity style={STYLE.cancelButton} onPress={()=> {props.OnSubmitHomeworkPress(); toggleModal()}}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />

@@ -16,17 +16,13 @@ import {
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={styles.headerMain}>                  
             <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
-                <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.onSubmitHomework()} style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
-                    </TouchableOpacity>
+                {/* <View style={styles.headerRight}>
                     <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>           
         </View>
     );
@@ -38,7 +34,8 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        paddingTop: hp(3.85),
+        paddingBottom: hp(3.85),
     },
     headerMain: {
         flexDirection: 'row',

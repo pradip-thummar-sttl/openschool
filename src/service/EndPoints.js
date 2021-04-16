@@ -14,12 +14,14 @@ export const EndPoints = {
     Lesson: 'lesson',
     LessonUpdate: 'lessonupdate/',
     LessonMaterialUpload: 'lessonmaterialupload/',
+    TeacherMarkedHomework: 'teacherMarkedHomework',
     EventType: 'eventtype',
     HomeworkSubmited: 'homeworksubmited/',
-    
+
     //Pupil
     GetListOfPupilMyDay: "getmydaypupil",
     GetHomeworkListByPupil:"pupilhomeworklist",
     GetAllHomeworkListByPupil:"allpupilhomeworklist",
     GetTimeTablePupil:'gettimetablepupil',
+    GetAllPupilLessonList:'allpupillessonlist',
 }

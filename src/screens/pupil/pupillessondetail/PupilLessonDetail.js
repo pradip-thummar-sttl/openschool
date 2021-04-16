@@ -25,6 +25,8 @@ import {
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
+import moment from "moment";
+import { opacity } from "../../../utils/Constant";
 
 const PupilLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -33,9 +35,54 @@ const PupilLessonDetail = (props) => {
     const [DueHomeWork, setDueHomeWork] = useState([]);
     const [SubmitHomeWork, setSubmitHomeWork] = useState([]);
     const [MarkedHomeWork, setMarkedHomeWork] = useState([]);
+    const [currentWeekLesson, setCurrentWeekLesson] = useState([]);
+    const [lastWeekLesson, setLastWeekLesson] = useState([]);
+
+
+    const [isSearchActive, setSearchActive] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+    const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
-        Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
+        if (!isSearchActive) {
+            setKeyword('')
+            if (isLesson) {
+                getLessonData('', '')
+            } else {
+                getHomeworkData('', '')
+            }
+            this.textInput.clear()
+        } else {
+            if (isLesson) {
+                getLessonData(keyword, '')
+            } else {
+                getHomeworkData(keyword, '')
+            }
+        }
+    }, [isSearchActive])
+
+    useEffect(() => {
+        if (isLesson) {
+            getLessonData(keyword, filterBy)
+        } else {
+            getHomeworkData(keyword, filterBy)
+        }
+    }, [filterBy])
+
+    useEffect(() => {
+        getHomeworkData('', '')
+        getLessonData('', '')
+    }, [])
+
+    const getHomeworkData = (searchBy, filterBy) => {
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        console.log('data', data);
+        Service.post(data, `${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of all pupil homework list', res)
             if (res.flag) {
                 var due = []
@@ -60,41 +107,92 @@ const PupilLessonDetail = (props) => {
         }, (err) => {
 
         })
-    }, [])
+    }
+
+    const getLessonData = (searchBy, filterBy) => {
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        console.log('data', data);
+        Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
+            console.log('Get All Pupil LessonList response', res)
+            var startDate = moment().startOf('week');
+            var endDate = moment().endOf('week');
+            var current = []
+            var last = []
+            res.data.map((item) => {
+                const date = moment(item.LessonDate).format('DD/MM/YYYY')
+                if (startDate.format('DD/MM/YYYY') <= date && endDate.format('DD/MM/YYYY') >= date) {
+                    current.push(item)
+                } else {
+                    last.push(item)
+                }
+            })
+
+            setCurrentWeekLesson(current)
+            setLastWeekLesson(last)
+        }, (err) => {
+
+        })
+    }
 
     const searchHeader = () => {
         return (
             <View style={PAGESTYLE.filterbarMain}>
                 <View style={PAGESTYLE.field}>
-                    <Image
-                        style={PAGESTYLE.userIcon}
-                        source={Images.SearchIcon} />
                     <TextInput
+                        ref={input => { this.textInput = input }}
                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                        placeholder="Search subject, class, etc"
+                        placeholder="Search subject, topic nmae, teacher name, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => { setKeyword(keyword) }}
                     />
+                    <TouchableOpacity
+                        style={PAGESTYLE.userIcon1Parent}
+                        activeOpacity={opacity}
+                        onPress={() => {
+                            isSearchActive ?
+                                setSearchActive(false)
+                                :
+                                setSearchActive(true)
+                        }}>
+                        <Image
+                            style={PAGESTYLE.userIcon}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={PAGESTYLE.buttonGroup}>
                     <Menu style={PAGESTYLE.filterGroup}>
-                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
+                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
-                            <MenuOption style={PAGESTYLE.borderList}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                 <View style={PAGESTYLE.filterList}>
                                     <Text style={PAGESTYLE.filterListText}>Subject</Text>
-                                    <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                    {selectedIndex == 0 ?
+                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                        :
+                                        null
+                                    }
                                 </View>
-                            </MenuOption>
+                            </TouchableOpacity>
                             <MenuOption style={PAGESTYLE.borderList}>
-                                <View style={PAGESTYLE.filterList}>
-                                    <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={PAGESTYLE.borderList}>
-                                <View style={PAGESTYLE.filterList}>
-                                    <Text style={PAGESTYLE.filterListText}>Name</Text>
-                                </View>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Date</Text>
+                                        {selectedIndex == 1 ?
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
@@ -138,15 +236,17 @@ const PupilLessonDetail = (props) => {
                     {
                         isLesson ?
                             <PupilLesson
-                                data={lessonData}
-                                navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
+                                currentWeekLesson={currentWeekLesson}
+                                lastWeekLesson={lastWeekLesson}
+                                navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
                             :
                             <PupilLessonDue
                                 DueHomeWork={DueHomeWork}
                                 SubmitHomeWork={SubmitHomeWork}
                                 MarkedHomeWork={MarkedHomeWork}
-                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted',{item:item}) }}
-                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked',{item:item}) }} />
+                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item })}
+                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
+                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                     }
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}

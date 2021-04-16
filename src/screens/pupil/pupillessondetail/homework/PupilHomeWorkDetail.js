@@ -13,8 +13,11 @@ import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/Deprecate
 import Header14 from '../../../../component/reusable/header/bulck/Header14'
 import Popuphomework from "../../../../component/reusable/popup/Popupsubmithomework";
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
+import moment from "moment";
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
+    const {item} = props.route.params
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
@@ -32,21 +35,21 @@ const PupilHomeWorkDetail = (props) => {
                                 <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                                 <View style={PAGESTYLE.daterow}>
                                     <Image source={require('../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
-                                    <Text style={PAGESTYLE.dueDateTextBold}>14/09/2020</Text>
+                                    <Text style={PAGESTYLE.dueDateTextBold}>{moment(item.DueDate).format('DD/MM/yyyy')}</Text>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                 <View style={PAGESTYLE.daterow}>
-                                    <View style={PAGESTYLE.thumbSmall}></View>
-                                    <Text style={PAGESTYLE.dueDateTextBold}>Miss Barker</Text>
+                                    <Image style={PAGESTYLE.thumbSmall} source={{uri:item.TeacherProfile}}></Image>
+                                    <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                             </View>
                         </View>
 
                         <View style={PAGESTYLE.lessonDesc}>
                             <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                            <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                            <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
                         </View>
                         <View style={PAGESTYLE.requirementofClass}>
 

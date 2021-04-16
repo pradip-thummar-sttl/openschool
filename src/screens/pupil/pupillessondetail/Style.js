@@ -1273,7 +1273,8 @@ export default StyleSheet.create({
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: hp(4.6),
+        paddingLeft: hp(2.6),
+        paddingRight: hp(5),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
@@ -1284,7 +1285,13 @@ export default StyleSheet.create({
         width: hp(1.62),
         height:hp(1.62),
         resizeMode: 'contain',
-        left: hp(1.43),
+        right: hp(1.43),
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 30,
+        height: 30,
+        right: hp(1.43),
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,

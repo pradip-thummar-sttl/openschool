@@ -8,7 +8,7 @@ import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
 
 const Popuphomework = (props) => {
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(true);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
-        width: hp(69.40),
+        width: wp(89.33),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -117,16 +117,21 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     popupTitle: {
-        fontSize: hp(2.86),
+        fontSize: wp(4.8),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(2.6),
+        textAlign:'center',
+        paddingLeft:wp(4.55),
+        paddingRight:wp(4.55),
     },
     popupText: {
         fontSize: hp(1.9),
         fontFamily: FONTS.fontRegular,
-        color: COLORS.darkGray,
+        color: COLORS.lightGray,
         marginBottom: hp(3.5),
         lineHeight: hp(2.6),
+        paddingLeft:wp(2.55),
+        paddingRight:wp(2.55),
     },
 });
