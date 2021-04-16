@@ -6,11 +6,12 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
+import { opacity } from "../../../utils/Constant";
 
 const PopupHomeWorkSave = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
-    const toggleModal = () => {
+    const toggleModal = (props) => {
         setModalVisible(!isModalVisible);
     };
     return (
@@ -33,7 +34,10 @@ const PopupHomeWorkSave = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing save pupil will be notified. You can edit your feedback at any time. </Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text></TouchableOpacity>
+                        <TouchableOpacity activeOpacity={opacity}
+                            onPress={() => {toggleModal(); props.onSetHomework()}}>
+                            <Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

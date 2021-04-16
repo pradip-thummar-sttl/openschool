@@ -57,7 +57,7 @@ const TLHomeWork = (props) => {
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
-            if (res.flag) {
+            if (res.flag == 'true') {
                 Addhomework.IsIncluded = res.data.IsIncluded
                 Addhomework.HomeworkDescription = res.data.HomeworkDescription
                 Addhomework.LessonId = res.data.LessonId

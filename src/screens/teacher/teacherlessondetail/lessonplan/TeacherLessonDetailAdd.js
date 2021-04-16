@@ -181,7 +181,7 @@ const TLDetailAdd = (props) => {
     const pushPupilItem = (isSelected, _index) => {
         console.log('isSelected', isSelected, _index);
         if (!isSelected) {
-            const newList = selectedPupils.filter((item, index) => item.name !== pupils[_index].name);
+            const newList = selectedPupils.filter((item, index) => item._id !== pupils[_index]._id);
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
@@ -396,7 +396,25 @@ const TLDetailAdd = (props) => {
     };
 
     const saveLesson = () => {
-        if (!lessonTopic) {
+        if (!selectedSubject) {
+            showMessage(MESSAGE.subject)
+            return false;
+        } else if (!selectedDate) {
+            showMessage(MESSAGE.date)
+            return false;
+        } else if (!selectedFromTime) {
+            showMessage(MESSAGE.fromTime)
+            return false;
+        } else if (!selectedToTime) {
+            showMessage(MESSAGE.toTime)
+            return false;
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+            showMessage(MESSAGE.invalidTo)
+            return false
+        } else if (!selectedParticipants) {
+            showMessage(MESSAGE.participants)
+            return false;
+        } else if (!lessonTopic) {
             showMessage(MESSAGE.topic)
             return false;
         } else if (!description) {
@@ -624,10 +642,10 @@ const TLDetailAdd = (props) => {
 
                         // isAddRecording ?
                         //     <View style={{ position: 'absolute' }}>
-                        <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                            onScreeCamera={() => onScreeCamera()}
-                            onScreeVoice={() => onScreeVoice()}
-                            onCameraOnly={() => onCameraOnly()} />
+                        // <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                        //     onScreeCamera={() => onScreeCamera()}
+                        //     onScreeVoice={() => onScreeVoice()}
+                        //     onCameraOnly={() => onCameraOnly()} />
                         // </View>
                         // : null
                     }

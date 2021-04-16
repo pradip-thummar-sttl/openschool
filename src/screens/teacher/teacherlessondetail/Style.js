@@ -288,6 +288,7 @@ flex: 1,
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.3),
         paddingRight: hp(1.1),
+        marginLeft: 15,
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),

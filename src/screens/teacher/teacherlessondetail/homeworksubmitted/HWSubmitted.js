@@ -98,9 +98,9 @@ const TLHomeWorkSubmitted = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-        console.log('data', data);
-        // Service.post(`${EndPoints.HomeworkSubmited}${props.lessonId}`, (res) => {
-        Service.post(data, `${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
+        console.log('props.lessonId', props.lessonId);
+        Service.post(data, `${EndPoints.HomeworkSubmited}${props.lessonId}`, (res) => {
+        // Service.post(data, `${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 setHomeworkData(res.data)

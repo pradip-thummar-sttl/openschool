@@ -65,6 +65,9 @@ const PopupdataSecondPupil = (props) => {
         } else if (!selectedToTime) {
             showMessage(MESSAGE.toTime);
             return false;
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+            showMessage(MESSAGE.invalidTo)
+            return false
         } else if (!location) {
             showMessage(MESSAGE.location);
             return false;
