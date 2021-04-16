@@ -12,6 +12,8 @@ import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 
 
 const PupilLessonDetailInternal = (props) => {
+    // console.log('props routes',props)
+    const { item } = props.route.params
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
@@ -35,7 +37,7 @@ const PupilLessonDetailInternal = (props) => {
                         </View>
                         <View style={PAGESTYLE.videoTitleLine}>
                             <View>
-                                <Text style={PAGESTYLE.videoMainTitle}>Grammar: How to use conjunctions to join two words together</Text>
+                                <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}: How to use conjunctions to join two words together</Text>
                                 <Text style={PAGESTYLE.videoPublishDate}>Published on 29 July 2020</Text>
                             </View>
                             <View style={PAGESTYLE.bookMark}>
@@ -44,11 +46,11 @@ const PupilLessonDetailInternal = (props) => {
                             </View>
                         </View>
                         <View style={PAGESTYLE.userNameMain}>
-                            <View style={PAGESTYLE.userMainThumb}></View>
-                            <Text style={PAGESTYLE.mainNameText}>Miss Barker</Text>
+                            <Image style={PAGESTYLE.userMainThumb} source={{ uri: item.TeacherProfile }}></Image>
+                            <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                         </View>
                         <View style={PAGESTYLE.lessonDesc}>
-                            <Text style={PAGESTYLE.lessonText}>In this lesson, we will learn all about conjunctions: what they are and how to use them. You will learn your first 7 conjunctions and I would like you to complete the homework that comes with it. This lesson is worth 5 gold stars!</Text>
+                            <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
                         </View>
 
 
@@ -58,22 +60,19 @@ const PupilLessonDetailInternal = (props) => {
                     <View style={PAGESTYLE.rightSideBar}>
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                            </View>
+                            {
+                                item.MaterialList.length > 0 ?
+                                    item.MaterialList.map((obj) => {
+                                        return (
+                                            <View style={PAGESTYLE.fileGrp}>
+                                                <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                                <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                            </View>
+                                        )
+                                    }) :
+                                    <Text style={{ alignSelf: 'center' }}>No material</Text>
+                            }
+
                         </View>
 
                         <View style={PAGESTYLE.thumbVideo}>
