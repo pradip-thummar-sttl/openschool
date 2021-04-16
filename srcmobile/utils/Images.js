@@ -96,5 +96,6 @@ const Images = {
     InfoIcon: require('../assets/images/information-button2.png'),
     mobileFilter: require('../assets/images/pupilfilter2.png'),
     UploadHomeWorkMobile: require('../assets/images/upload-hw-mobile2.png'),
+    bookmarkOff: require('../assets/images/bookmarkOff2.png'),
 }
 export default Images;
