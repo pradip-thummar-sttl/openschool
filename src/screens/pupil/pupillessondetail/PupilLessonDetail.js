@@ -25,6 +25,7 @@ import {
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
+import moment from "moment";
 
 const PupilLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -33,6 +34,9 @@ const PupilLessonDetail = (props) => {
     const [DueHomeWork, setDueHomeWork] = useState([]);
     const [SubmitHomeWork, setSubmitHomeWork] = useState([]);
     const [MarkedHomeWork, setMarkedHomeWork] = useState([]);
+    const [currentWeekLesson, setCurrentWeekLesson] = useState([]);
+    const [lastWeekLesson, setLastWeekLesson] = useState([]);
+
 
     useEffect(() => {
         Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
@@ -57,6 +61,26 @@ const PupilLessonDetail = (props) => {
             } else {
 
             }
+        }, (err) => {
+
+        })
+        Service.get(`${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
+            console.log('Get All Pupil LessonList response', res)
+            var startDate = moment().startOf('week');
+            var endDate = moment().endOf('week');
+            var current = []
+            var last = []
+            res.data.map((item) => {
+                const date = moment(item.LessonDate).format('DD/MM/YYYY')
+                if (startDate.format('DD/MM/YYYY') <= date && endDate.format('DD/MM/YYYY') >= date) {
+                    current.push(item)
+                } else {
+                    last.push(item)
+                }
+            })
+
+            setCurrentWeekLesson(current)
+            setLastWeekLesson(last)
         }, (err) => {
 
         })
@@ -138,16 +162,17 @@ const PupilLessonDetail = (props) => {
                     {
                         isLesson ?
                             <PupilLesson
-                                data={lessonData}
-                                navigatePupilLessonDetailInternal={() => { props.navigation.navigate('PupilLessonDetailInternal') }} />
+                                currentWeekLesson={currentWeekLesson}
+                                lastWeekLesson={lastWeekLesson}
+                                navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal',{item:item}) }} />
                             :
                             <PupilLessonDue
                                 DueHomeWork={DueHomeWork}
                                 SubmitHomeWork={SubmitHomeWork}
                                 MarkedHomeWork={MarkedHomeWork}
-                                navigatePupilHomeWorkDetail={(item)=> props.navigation.navigate('PupilHomeWorkDetail',{item:item})}
-                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted',{item:item}) }}
-                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked',{item:item}) }} />
+                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item })}
+                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
+                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                     }
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
