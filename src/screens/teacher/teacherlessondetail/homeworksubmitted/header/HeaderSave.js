@@ -17,7 +17,9 @@ const HeaderSave = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> {props.label} Homework</Text>
                 <View style={styles.headerRight}>
-                    <PopupHomeWorkSave isMarked={props.isMarked} />
+                    <PopupHomeWorkSave
+                        isMarked={props.isMarked}
+                        onSetHomework={() => props.onSetHomework()} />
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
