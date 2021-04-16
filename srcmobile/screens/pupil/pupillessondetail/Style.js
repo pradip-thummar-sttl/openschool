@@ -102,10 +102,12 @@ export default StyleSheet.create({
         marginBottom:hp(1.5),
     },
     lessonText: {
-        flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        fontSize: hp(1.8),
+        fontSize: hp(1.7),
+        flex: 0.9,
+        lineHeight: hp(2.46),
+        paddingBottom: hp(1.95),
     },
     teacherDetailLeft: {
         width: '100%',    
@@ -384,17 +386,12 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingTop:hp(3),
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
         paddingBottom:hp(1.84),
-        paddingTop:hp(1.84),
         marginBottom:hp(2.46),
-        marginTop:hp(2.46),
         borderBottomColor:COLORS.dashboardBorder,
-        borderTopColor:COLORS.dashboardBorder,
         borderBottomWidth:1,
-        borderTopWidth:1,
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
@@ -987,9 +984,13 @@ export default StyleSheet.create({
         color:COLORS.menuLightFonts,
     },
     videoTitleLine:{
-       marginTop:hp(3.69),   
-       paddingLeft: hp(1.95),   
-       paddingRight: hp(3)
+        marginTop:hp(3.69),
+        paddingBottom:hp(1.84),
+        marginBottom:hp(1.84),
+        paddingLeft: hp(1.95),   
+        paddingRight: hp(3),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.bottomProfileLightBorder,
     },
     bookMarkOn:{
         width:hp(1.81),
@@ -1126,11 +1127,6 @@ export default StyleSheet.create({
         marginRight:hp(3.90),
         marginTop:hp(2.5),
     },
-    lessonDesc:{
-        fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-    },
     lineLength:{
         width:'80%',        
     },
@@ -1251,5 +1247,35 @@ export default StyleSheet.create({
     videoSliderSpace:{
         paddingTop:hp(2.46),
         paddingLeft:hp(2),
+    },
+    headerText:{
+        fontSize: hp(1.72),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontSemiBold,
+        lineHeight: hp(2.46),
+    },
+    header: {
+        flexDirection: 'row',
+        height: hp(6),
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        backgroundColor: COLORS.white,
+        marginBottom: hp(0.98),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
+    },
+    arrowAccordion: {
+        width: hp(1.43),
+        resizeMode: 'contain'
+    },
+    content: {
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        backgroundColor: COLORS.white,
+        marginTop: hp(0.98),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
     },
 });

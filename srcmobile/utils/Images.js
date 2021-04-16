@@ -97,5 +97,6 @@ const Images = {
     mobileFilter: require('../assets/images/pupilfilter2.png'),
     UploadHomeWorkMobile: require('../assets/images/upload-hw-mobile2.png'),
     bookmarkOff: require('../assets/images/bookmarkOff2.png'),
+    videoBanner: require('../assets/images/videoLarge2.png'),
 }
 export default Images;

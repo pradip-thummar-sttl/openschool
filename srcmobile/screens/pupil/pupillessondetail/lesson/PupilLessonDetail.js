@@ -14,42 +14,49 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
-
-    const SECTIONS = [
+    const NEW = [
         {
-            title: 'First',
-            content: 'Lorem ipsum...',
+            title: 'Description',
         },
         {
-            title: 'Second',
-            content: 'Lorem ipsum...',
+            title: 'Learning material',
         },
-    ];
-
-    const _renderSectionTitle = section => {
+        {
+            title: 'Saved workspaces',
+        },
+    ]
+    const _renderHeader = section => {
         return (
-          <View style={PAGESTYLE.content}>
-            <Text>{section.title}</Text>
-          </View>
+            <View style={PAGESTYLE.header}>
+                <Text style={PAGESTYLE.headerText}>{section.title}</Text>
+                <Image source={Images.DropArrow} style={PAGESTYLE.arrowAccordion} />
+            </View>
         );
-      };
-    
-      const _renderHeader = section => {
+    };
+    const _renderContent = section => {
+        console.log('activeSections', activeSections);
         return (
-          <View style={PAGESTYLE.header}>
-            <Text style={PAGESTYLE.headerText}>{section.title}</Text>
-          </View>
+            activeSections.includes(0) ?
+                <View style={PAGESTYLE.content}>
+                    <View style={PAGESTYLE.lessonDesc}>
+                        <Text style={PAGESTYLE.lessonText}>In this lesson, we will learn all about conjunctions: what they are and how to use them. You will learn your first 7 conjunctions and I would like you to complete the homework that comes with it. This lesson is worth 5 gold stars!</Text>
+                    </View>
+                </View>
+                :
+                activeSections.includes(1) ?
+                    <View style={PAGESTYLE.content}>
+                        <View style={PAGESTYLE.lessonDesc}>
+                            <Text style={PAGESTYLE.lessonText}>Pratik</Text>
+                        </View>
+                    </View>
+                    :
+                    <View style={PAGESTYLE.content}>
+                        <View style={PAGESTYLE.lessonDesc}>
+                            <Text style={PAGESTYLE.lessonText}>Pradip</Text>
+                        </View>
+                    </View>
         );
-      };
-    
-      const _renderContent = section => {
-        return (
-          <View style={PAGESTYLE.content}>
-            <Text>{section.content}</Text>
-          </View>
-        );
-      };
-
+    };
     const _updateSections = (activeSections) => {
         setActiveSections(activeSections)
     };
@@ -57,12 +64,12 @@ const PupilLessonDetailInternal = (props) => {
         <View style={PAGESTYLE.mainPage}>
             <View style={PAGESTYLE.commonBg}>
                 <Header6 />
-                <ScrollView>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={[PAGESTYLE.teacherDetailLeft]}>
-                            <View style={PAGESTYLE.largeVideoBlock}>
-                                <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
-                            </View>
+                <View style={PAGESTYLE.containerWrap}>
+                    <View style={[PAGESTYLE.teacherDetailLeft]}>
+                        <View style={PAGESTYLE.largeVideoBlock}>
+                            <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                        </View>
+                        <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.videoTitleLine}>
                                 <View>
                                     <Text style={PAGESTYLE.videoMainTitle}>Grammar: How to use conjunctions to join two words together</Text>
@@ -79,16 +86,17 @@ const PupilLessonDetailInternal = (props) => {
                                     <Image source={Images.bookmarkOff} style={PAGESTYLE.bookMarkOn} />
                                 </View>
                             </View>
-                            <View style={PAGESTYLE.lessonDesc}>
-                                <Text style={PAGESTYLE.lessonText}>In this lesson, we will learn all about conjunctions: what they are and how to use them. You will learn your first 7 conjunctions and I would like you to complete the homework that comes with it. This lesson is worth 5 gold stars!</Text>
+                            <View style={PAGESTYLE.accordionMain}>
+                                <Accordion
+                                    activeSections={activeSections}
+                                    sections={NEW}
+                                    renderHeader={_renderHeader}
+                                    renderContent={_renderContent}
+                                    onChange={_updateSections}
+                                    underlayColor={COLORS.white}
+                                    style={PAGESTYLE.accordion}
+                                />
                             </View>
-                            <Accordion
-                                activeSections={activeSections}
-                                sections={SECTIONS}
-                                renderHeader={_renderHeader}
-                                renderContent={_renderContent}
-                                onChange={_updateSections}
-                            />
                             <View style={PAGESTYLE.fileBoxGrpWrap}>
                                 <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                 <View style={PAGESTYLE.fileGrp}>
@@ -108,7 +116,6 @@ const PupilLessonDetailInternal = (props) => {
                                     <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
                                 </View>
                             </View>
-
                             <View style={PAGESTYLE.thumbVideo}>
                                 <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
 
@@ -132,9 +139,9 @@ const PupilLessonDetailInternal = (props) => {
                                     <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                                 </View>
                             </View>
-                        </View>
+                        </ScrollView>
                     </View>
-                </ScrollView>
+                </View>
             </View>
         </View>
     );
