@@ -47,6 +47,7 @@ const COLORS = {
     periodColor:'rgba(207,237,254,1)',
     daySelect:'#EDF0F6',
     controlBack: 'rgba(37,40,42,0.5)',
+    hwmatColor:'rgba(248,249,251,1)',
 }
 
 export default COLORS;
