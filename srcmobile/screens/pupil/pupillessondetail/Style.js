@@ -738,7 +738,7 @@ export default StyleSheet.create({
         marginRight:hp(1.30),
     },
     userLeft:{
-       width:hp(56.77),
+       width:wp(100),
        flexDirection: 'row',
     },
     userRight:{
@@ -946,9 +946,6 @@ export default StyleSheet.create({
         resizeMode:'contain',
         marginRight:hp(0.5),
     },
-    daterow:{
-        flexDirection:'row',
-    },
     dateTitleNormal:{
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
@@ -1064,35 +1061,24 @@ export default StyleSheet.create({
         resizeMode:'contain',
         position:'absolute',
         right:hp(1.5),
-        top:hp(-5.5),
+        top:hp(-7.5),
     },
     blueStripText:{
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
+        fontSize:wp(3.73),
         color:COLORS.white,
         paddingLeft:hp(2.21),
-        paddingTop:hp(2.60),
+        paddingTop:hp(3.2),
     },
     markedPurpleStrip:{
         backgroundColor:COLORS.dashboardHomeWorkPurple,
-        borderTopLeftRadius:hp(1.5),
-        borderBottomLeftRadius:hp(1.5),
-        marginTop:hp(-1),
-        // marginLeft:hp(0),
-        // 
-        // marginBottom:hp(-1),
-         position:'relative',
+        position:'relative',
         height:hp(8.46),
     },    
     containerWrapTopPurple: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderWidth:1,
-        borderColor:COLORS.dashboardHomeWorkPurple,
-        borderRadius:hp(1.5),
-        marginLeft:hp(3.25),
-        marginRight:hp(2.99),
-        marginBottom:hp(1),
+        marginBottom:wp(10),
         paddingTop:hp(1),
         height:hp(8.46),
     },
@@ -1318,5 +1304,11 @@ export default StyleSheet.create({
     },
     uploadBoardBlock:{
         height:wp(48),
+    },
+    daterow:{
+        flexDirection:'row',
+        borderTopWidth:1,
+        borderTopColor:COLORS.borderGrp,
+        paddingLeft:wp(15),
     }
 });
