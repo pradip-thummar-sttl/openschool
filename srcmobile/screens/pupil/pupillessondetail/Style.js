@@ -282,6 +282,10 @@ export default StyleSheet.create({
         width: hp(31.90),
         resizeMode: 'contain',
         alignItems: 'center',
+        marginRight: hp(1),
+    },
+    thumbVideo: {
+        flexDirection: 'row',
     },
     subLineTitle: {
         marginTop: hp(-3.5),
@@ -1124,7 +1128,6 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize:hp(1.82),
         color:COLORS.darkGray,
-        paddingLeft:wp(4.55),
     },
     lineLength:{
         width:'80%',        
@@ -1305,10 +1308,4 @@ export default StyleSheet.create({
     uploadBoardBlock:{
         height:wp(48),
     },
-    daterow:{
-        flexDirection:'row',
-        borderTopWidth:1,
-        borderTopColor:COLORS.borderGrp,
-        paddingLeft:wp(15),
-    }
 });
