@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
+import moment from 'moment';
 
 const HeaderUpdate = (props) => {
     return (
@@ -19,9 +20,9 @@ const HeaderUpdate = (props) => {
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
-                            Common Title
-                    </Text>
-                        <Text style={styles.date}>14/09/2020</Text>
+                            {props.lessonData.SubjectName}
+                        </Text>
+                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
@@ -31,10 +32,23 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}></Text>
-                    </TouchableOpacity>
+                    {props.isLoading ?
+                        <ActivityIndicator
+                            style={styles.commonButtonGreenheaderwithouticon}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.white} />
+                        :
+                        props.isLoading == null ?
+                            null
+                            :
+                            <TouchableOpacity
+                                style={styles.buttonGroup}
+                                activeOpacity={opacity}
+                                onPress={() => props.saveLesson()}>
+                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                                <Text style={styles.commonButtonGreenheaderwithicon}></Text>
+                            </TouchableOpacity>
+                    }
                     {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}

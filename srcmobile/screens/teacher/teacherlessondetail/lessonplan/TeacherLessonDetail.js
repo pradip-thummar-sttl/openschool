@@ -11,6 +11,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 
 const TLDetail = (props) => {
+    console.log('props', props);
     return (
 
         <View style={PAGESTYLE.whiteBg}>
@@ -63,10 +64,14 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.lessonTitleWithoutTextArea}>Lesson Description</Text>
                         <Text style={PAGESTYLE.lessonText}>{props.lessonData.LessonDescription}</Text>
                     </View>
-                    <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop, PAGESTYLE.videoLinkBlockSpaceBottom]}>
-                        <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                        <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingName}</Text>
-                    </TouchableOpacity>
+                    {props.lessonData.RecordingName ?
+                        <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                            <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingName}</Text>
+                        </TouchableOpacity>
+                        :
+                        null
+                    }
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
@@ -123,27 +128,60 @@ const TLDetail = (props) => {
                 <View style={PAGESTYLE.rightSideBar}>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
                         <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
+                        {props.lessonData.MaterialList.length > 0 ?
+                            <FlatList
+                                data={props.lessonData.MaterialList}
+                                style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                renderItem={({ item, index }) => (
+                                    <View style={PAGESTYLE.fileGrp}>
+                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                    </View>
+                                )}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                            :
+                            <Text style={{ textAlign: 'center' }}>No material uploaded!</Text>
+                        }
                     </View>
 
-                    <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                    {props.lessonData.RecommendedList.length > 0 ?
+                        <FlatList
+                            data={props.lessonData.RecommendedList}
+                            style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                            renderItem={({ item, index }) => (
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                                </View>
+                            )}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                        :
+                        null
+                    }
+                    <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                        <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
+                        {props.lessonData.RecordedLessonName ?
+                            <View style={PAGESTYLE.videoLinkBlockRight}>
+                                <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                                <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
+                            </View>
+                            :
+                            <Text style={{ textAlign: 'center' }}>No lesson recording found!</Text>
+                        }
                     </View>
+                    <View style={PAGESTYLE.fileBoxGrpWrap}>
+                        <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
+                        {props.lessonData.ChatTranscript ?
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                            </View>
+                            :
+                            <Text style={{ textAlign: 'center' }}>No chat transcript found!</Text>
+                        }
+                    </View>
+                    
                     {/* <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         <View style={PAGESTYLE.videoLinkBlockRight}>

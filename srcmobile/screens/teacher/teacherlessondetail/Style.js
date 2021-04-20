@@ -116,7 +116,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        bottom: hp(0.4),
+        alignSelf: 'center',
     },
     timeIconNoInput: {
         resizeMode: 'contain',
@@ -308,6 +308,8 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         resizeMode: 'contain',
+        backgroundColor: COLORS.greyplaceholder,
+        borderRadius: 20,
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -1064,7 +1066,7 @@ export default StyleSheet.create({
         resizeMode:'contain',
         position:'absolute',
         right:hp(1.6),
-        top:hp(0.2),
+        alignSelf: 'center',
     },
     dropDownArrowdatetimehomeWork:{
         width:hp(1.51),
@@ -1191,5 +1193,16 @@ export default StyleSheet.create({
     submitBtnWrap:{
         paddingTop:wp(5.33),
         paddingBottom:wp(10),
-    }
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        right: 10,
+    },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+    },
 });

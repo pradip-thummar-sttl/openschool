@@ -5,8 +5,10 @@ import COLORS from "../../../../utils/Colors";
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderLP = (props) => {
-    console.log('props', props);
+    
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -17,10 +19,8 @@ const HeaderLP = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>
-                            Common Title
-                    </Text>
-                        <Text style={styles.date}>14/09/2020</Text>
+                        <Text style={styles.mainTitle}>{props.lessonData.SubjectName}</Text>
+                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>

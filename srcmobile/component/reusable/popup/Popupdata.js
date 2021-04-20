@@ -7,12 +7,16 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { cellWidth, opacity } from "../../../utils/Constant";
+import { cellWidth, Lesson, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import RBSheet from "react-native-raw-bottom-sheet";
+import moment from 'moment';
+
 const Popupdata = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
+
+    console.log('props.data', props.data);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -25,8 +29,8 @@ const Popupdata = (props) => {
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={() => refRBSheet.current.open()}>
-                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Color, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Color, width: cellWidth * props.span }}></View>
+                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
+                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, width: cellWidth * props.span }}></View>
                     <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
@@ -124,7 +128,7 @@ const Popupdata = (props) => {
                         <View style={styles.timedateGrp}>
                             <View style={styles.dateWhiteBoard}>
                                 <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                <Text style={styles.datetimeText}>14/09/2020</Text>
+                                <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
                             </View>
                             <View style={[styles.dateWhiteBoard, styles.time]}>
                                 <Image style={styles.timeIcon} source={Images.Clock} />

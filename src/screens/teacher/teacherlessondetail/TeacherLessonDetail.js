@@ -89,8 +89,6 @@ const TeacherLessonDetail = (props) => {
 
             })
         }
-
-
     }
 
     // useEffect(() => {

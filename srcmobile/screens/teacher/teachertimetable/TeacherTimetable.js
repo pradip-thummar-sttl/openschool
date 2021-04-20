@@ -12,6 +12,10 @@ import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../actions/action";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { User } from "../../../utils/Model";
+import { Lesson } from "../../../utils/Constant";
+
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
@@ -70,26 +74,32 @@ const TeacherTimeTable = (props) => {
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
 
+        console.log('==================================');
         timeTableData.forEach(element => {
 
-            const day = new Date(element.Date).getDay();
+            const day = new Date(element.Type == Lesson ? element.Date : element.EventDate).getDay();
             const dayOfWeek = isNaN(day) ? null : days[day];
 
+
             if (dayOfWeek == days[dayKey]) {
-                if (time[timneKey] == (element.StartTime)) {
+                let startTime = element.Type == Lesson ? element.StartTime : element.EventStartTime
+                let endTime = element.Type == Lesson ? element.EndTime : element.EventEndTime
+                let subName = element.Type == Lesson ? element.SubjectName : element.EventType
+                let lessonTopic = element.Type == Lesson ? element.LessonTopic : element.EventLocation
 
-                    let startTime = Number(element.StartTime.replace(':', ''));
-                    let endTime = Number(element.EndTime.replace(':', ''));
+                if (time[timneKey].includes(startTime)) {
 
-                    startTime = (startTime >= 100 && startTime < 900) ? (startTime + 1200) : startTime
-                    endTime = (endTime >= 100 && endTime < 900) ? (endTime + 1200) : endTime
+                    let st = Number(startTime.replace(':', ''));
+                    let et = Number(endTime.replace(':', ''));
 
-                    let timeSpan = (endTime - startTime);
+                    st = (st >= 100 && st < 900) ? (st + 1200) : st
+                    et = (et >= 100 && et < 900) ? (et + 1200) : et
+
+                    let timeSpan = (et - st);
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
-                    lblTitle = `${element.SubjectName} - ${element.LessonTopic}`;
-                    console.log('lblTitle', lblTitle);
-                    lblTime = `${element.StartTime} - ${element.EndTime}`;
+                    lblTitle = `${subName} - ${lessonTopic}`;
+                    lblTime = `${startTime} - ${endTime}`;
                     data = element;
                     flag = true;
                     return;
@@ -103,7 +113,7 @@ const TeacherTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }} />
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
             );
         }
     }
@@ -119,7 +129,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post({}, `${EndPoints.GetTimeTable}/604b09139dc64117024690c3`, (res) => {
+        Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -131,6 +141,11 @@ const TeacherTimeTable = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
+    }
+
+    const refresh = () => {
+        console.log('Refreshed');
+        fetchRecord('', '')
     }
 
     return (
@@ -145,8 +160,12 @@ const TeacherTimeTable = (props) => {
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                    navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd')}
-                    navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent')} />
+                    navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent', { onGoBack: () => refresh() })}
+                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onClearSearch={() => fetchRecord('', '')}
+                    navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
+                    refreshList={() => refresh()} />
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator

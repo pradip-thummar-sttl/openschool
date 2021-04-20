@@ -6,6 +6,9 @@ export const opacity = 0.5;
 export const isDesignBuild = false;
 export const cellWidth = 167;
 
+export const Lesson = 'Lesson';
+export const Event = 'Event';
+
 export class Var {
      static isCalender = false;
 }

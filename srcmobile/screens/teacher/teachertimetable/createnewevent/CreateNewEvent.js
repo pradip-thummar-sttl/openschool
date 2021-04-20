@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -16,11 +16,14 @@ import { EndPoints } from "../../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
+import { User } from "../../../../utils/Model";
 
 const CreateNewEvent = (props) => {
+    console.log('props', props);
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -33,11 +36,18 @@ const CreateNewEvent = (props) => {
     const [theme, setTheme] = useState('');
     const [isLoading, setLoading] = useState(false)
     const [selectedColor, setSelectColor] = useState(COLORS.yellowBorder)
+    const [selectColorId, setSelectColorId] = useState('')
+    const [isFromDropOpen, setFromDropOpen] = useState(false)
+    const [isToDropOpen, setToDropOpen] = useState(false)
     const [isColorDropOpen, setColorDropOpen] = useState(false)
     const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
     const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
 
-    const colorArr = [COLORS.blueButton, COLORS.yellowBorder, COLORS.purpleDark, COLORS.red, COLORS.buttonGreen]
+    const [selectedFromTime, setSelectedFromTime] = useState('')
+    const [selectedToTime, setSelectedToTime] = useState('')
+
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [colorArr, setColorArr] = useState([])
     // this.state = {
     //     userName: '',
     //     password: '',
@@ -60,6 +70,18 @@ const CreateNewEvent = (props) => {
         if (!event) {
             showMessage(MESSAGE.event)
             return false;
+        } else if (!selectDate) {
+            showMessage(MESSAGE.date);
+            return false;
+        } else if (!selectedFromTime) {
+            showMessage(MESSAGE.fromTime);
+            return false;
+        } else if (!selectedToTime) {
+            showMessage(MESSAGE.toTime);
+            return false;
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+            showMessage(MESSAGE.invalidTo)
+            return false
         } else if (!location) {
             showMessage(MESSAGE.location);
             return false;
@@ -70,15 +92,33 @@ const CreateNewEvent = (props) => {
         saveEvent()
     }
 
+    useEffect(() => {
+        setLoading(true)
+        Service.get(`${EndPoints.EventType}`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setColorArr(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+    }, [])
+
     const saveEvent = () => {
         setLoading(true)
         let data = {
             EventName: event,
             EventDate: selectDate,
-            EventTime: selectTime,
+            EventStartTime: selectedFromTime,
+            EventEndTime: selectedToTime,
             EventLocation: location,
-            EventTypeId: "604b5aac006a0306d00ab87c",
-            CreatedBy: "603f7af4f5dc5d4bb4892df0"
+            EventDescription: note,
+            EventTypeId: selectColorId,
+            CreatedBy: User.user._id
         }
         console.log(data);
 
@@ -97,7 +137,7 @@ const CreateNewEvent = (props) => {
         })
     }
     const selectColor = (item) => {
-        setSelectColor(item)
+        setSelectColor(item.EventColor)
         setColorDropOpen(false)
     }
 
@@ -132,6 +172,73 @@ const CreateNewEvent = (props) => {
         setLocation('')
         setEvent('')
         setnote('')
+        setFromDropOpen(false)
+        setToDropOpen(false)
+        setColorDropOpen(false)
+        setSelectedToTime('')
+        setSelectedFromTime('')
+    };
+
+    const fromTimeDropDown = () => {
+        return (
+            <View>
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
+                    onPress={() => { setFromDropOpen(true) }}>
+                    <Image style={styles.calIcon} source={Images.Clock} />
+                    <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
+                    <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                </TouchableOpacity>
+                {isFromDropOpen ?
+                    <View style={styles.colorDropView}>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFromDropOpen(false); setSelectedFromTime(item) }}>
+                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                </TouchableOpacity>
+                            )}
+                            style={{ height: 200 }} />
+                    </View>
+                    :
+                    null
+                }
+            </View>
+        );
+    };
+
+    const toTimeDropDown = () => {
+        return (
+            <View>
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
+                    onPress={() => { setToDropOpen(true) }}>
+                    <Image style={styles.calIcon} source={Images.Clock} />
+                    <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
+                    <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                </TouchableOpacity>
+                {isToDropOpen ?
+                    <View style={styles.colorDropView}>
+                        <FlatList
+                            data={timeSlot}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setToDropOpen(false); setSelectedToTime(item) }}>
+                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                </TouchableOpacity>
+                            )}
+                            style={{ height: 200 }} />
+                    </View>
+                    :
+                    null
+                }
+            </View>
+        );
     };
 
     return (
@@ -144,7 +251,7 @@ const CreateNewEvent = (props) => {
                             <View style={styles.titleSave}>
                                 <Text h2 style={styles.titleTab}><TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => props.navigation.goBack()}>
+                                    onPress={() => { props.route.params.onGoBack(); props.navigation.goBack(); }}>
                                     <Image style={styles.arrow} source={Images.backArrow} />
                                 </TouchableOpacity>
                                     Add a calendar entry
@@ -187,7 +294,7 @@ const CreateNewEvent = (props) => {
                                 </View>
                             </View>
                             <View style={styles.fieldWidthtwoMain}>
-                                <View style={styles.fieldWidthtwo}>
+                                <View style={styles.fieldWidthtwo1}>
                                     <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                     <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                         <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
@@ -199,7 +306,7 @@ const CreateNewEvent = (props) => {
                                         </View>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={styles.fieldWidthtwo}>
+                                {/* <View style={styles.fieldWidthtwo}>
                                     <Text label style={STYLE.labelCommon}>What time is it?</Text>
                                     <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                         <Image style={styles.calIcon} source={Images.Clock} />
@@ -210,6 +317,16 @@ const CreateNewEvent = (props) => {
                                             <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
                                         </View>
                                     </TouchableOpacity>
+                                </View> */}
+                            </View>
+                            <View style={styles.fieldWidthtwoMain}>
+                                <View style={styles.fieldWidthtwo}>
+                                    <Text label style={STYLE.labelCommon}>What time is it?</Text>
+                                    {fromTimeDropDown()}
+                                </View>
+                                <View style={styles.fieldWidthtwo}>
+                                    <Text label style={STYLE.labelCommon}></Text>
+                                    {toTimeDropDown()}
                                 </View>
                             </View>
                             <View style={styles.field}>
@@ -261,9 +378,9 @@ const CreateNewEvent = (props) => {
                                 data={colorArr}
                                 renderItem={({ item, index }) => {
                                     return (
-                                        <TouchableOpacity onPress={() => selectColor(item)} style={styles.colorButton}>
-                                            <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item }} />
-                                            <Text>{item}</Text>
+                                        <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
+                                            <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
+                                            <Text>{item.EventType}</Text>
                                         </TouchableOpacity>
                                     )
                                 }}
@@ -400,6 +517,11 @@ const styles = StyleSheet.create({
         paddingLeft: hp(0.9),
         paddingRight: hp(0.9),
     },
+    fieldWidthtwo1: {
+        width: '100%',
+        paddingLeft: hp(0.9),
+        paddingRight: hp(0.9),
+    },
     entryData: {
         paddingLeft: hp(4.23),
         paddingRight: hp(4.23),
@@ -450,6 +572,20 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         width: '100%',
     },
+    dropDownSmallWrap1: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp('1.0%'),
+        lineHeight: hp(2.3),
+        height: hp(5.20),
+        marginTop: hp(1.3),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
+    },
     dateTimetextdummy: {
         fontSize: hp(1.7),
         color: COLORS.darkGray,
@@ -464,6 +600,16 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(-0.8),
         top: hp(-0.2),
+    },
+    dropDownArrowdatetime1: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
+        alignSelf: 'center'
+    },
+    timeField: {
+        flex: 0.20
     },
     noteInput: {
         width: '100%',
@@ -495,4 +641,10 @@ const styles = StyleSheet.create({
     },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1) },
+    dateTimetextdummy1: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+    },
 });
