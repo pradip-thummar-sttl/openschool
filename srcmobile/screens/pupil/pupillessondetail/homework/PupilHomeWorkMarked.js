@@ -16,25 +16,17 @@ import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 const PupilHomeWorkMarked = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.wrapper}>
-                <View style={PAGESTYLE.commonBg}>
+                <View style={PAGESTYLE.whiteBg}>
                     <Header15 onAlertPress={() => props.navigation.openDrawer()} goBack={() => props.navigation.goBack()} />
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={PAGESTYLE.containerWrapTopPurple}>
-                            <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
-                                <Image source={require('../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookPurpleStip} />
-                                <Text style={PAGESTYLE.blueStripText}>Homework has been marked!</Text>
-                            </View>
-                            <View style={PAGESTYLE.userRight}>
-                                <View style={[PAGESTYLE.markedLabel, PAGESTYLE.markSubmittedSpaceLeft]}>
-                                    <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
-                                    <Text style={PAGESTYLE.markedText}>Marked</Text>
-                                </View>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={PAGESTYLE.containerWrap}>
+                            <View style={PAGESTYLE.daterow}>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
                                     <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
@@ -44,100 +36,110 @@ const PupilHomeWorkMarked = (props) => {
                                     <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
                                 </View>
                             </View>
-                        </View>
-                    </View>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={PAGESTYLE.teacherDetailLeft}>
-                            <View style={PAGESTYLE.lessonDesc}>
-                                <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
-                            </View>
-                            <View style={PAGESTYLE.requirementofClass}>
-
-                                <View style={PAGESTYLE.checkBoxGroup}>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={false}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
-the Amazon Rainforest</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                        </View>
+                            <View style={PAGESTYLE.containerWrapTopPurple}>
+                                <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
+                                    <Image source={require('../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookPurpleStip} />
+                                    <Text style={PAGESTYLE.blueStripText}>Homework has been marked!</Text>
+                                </View>
+                                <View style={PAGESTYLE.userRight}>
+                                    <View style={[PAGESTYLE.markedLabel, PAGESTYLE.markSubmittedSpaceLeft]}>
+                                        <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
+                                        <Text style={PAGESTYLE.markedText}>Marked</Text>
                                     </View>
                                 </View>
                             </View>
                         </View>
-                        <View style={PAGESTYLE.rightSideBar}>
-                            <View style={PAGESTYLE.uploadBoardBlock}>
-                                <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} />
+                        <View style={PAGESTYLE.containerWrap}>
+                            <View style={PAGESTYLE.teacherDetailLeft}>
+                                <View style={PAGESTYLE.lessonDesc}>
+                                    <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
+                                    <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                                </View>
+                                <View style={PAGESTYLE.requirementofClass}>
+
+                                    <View style={PAGESTYLE.checkBoxGroup}>
+                                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <CheckBox
+                                                    style={PAGESTYLE.checkMark}
+                                                    value={true}
+                                                    boxType={'square'}
+                                                    onCheckColor={COLORS.white}
+                                                    onFillColor={COLORS.dashboardPupilBlue}
+                                                    onTintColor={COLORS.dashboardPupilBlue}
+                                                    tintColor={COLORS.dashboardPupilBlue}
+                                                />
+                                                <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <CheckBox
+                                                    style={PAGESTYLE.checkMark}
+                                                    value={false}
+                                                    boxType={'square'}
+                                                    onCheckColor={COLORS.white}
+                                                    onFillColor={COLORS.dashboardPupilBlue}
+                                                    onTintColor={COLORS.dashboardPupilBlue}
+                                                    tintColor={COLORS.dashboardPupilBlue}
+                                                />
+                                                <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
+the Amazon Rainforest</Text>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <CheckBox
+                                                    style={PAGESTYLE.checkMark}
+                                                    value={true}
+                                                    boxType={'square'}
+                                                    onCheckColor={COLORS.white}
+                                                    onFillColor={COLORS.dashboardPupilBlue}
+                                                    onTintColor={COLORS.dashboardPupilBlue}
+                                                    tintColor={COLORS.dashboardPupilBlue}
+                                                />
+                                                <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <CheckBox
+                                                    style={PAGESTYLE.checkMark}
+                                                    value={true}
+                                                    boxType={'square'}
+                                                    onCheckColor={COLORS.white}
+                                                    onFillColor={COLORS.dashboardPupilBlue}
+                                                    onTintColor={COLORS.dashboardPupilBlue}
+                                                    tintColor={COLORS.dashboardPupilBlue}
+                                                />
+                                                <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={PAGESTYLE.rightSideBar}>
+                                <View style={PAGESTYLE.uploadBoardBlock}>
+                                    <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} />
+                                </View>
                             </View>
                         </View>
-                    </View>
-                </View>
-                <View style={PAGESTYLE.commonBg}>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={PAGESTYLE.feedbackBlock}>
-                            <View style={PAGESTYLE.lessonDesc}>
-                                <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
-                                <Text style={PAGESTYLE.descriptionText}>Well done Reuel. Your story was very well written and constructed. Excellent use of grammar and punctuation. Watch the video for more comments</Text>
+                        <View style={PAGESTYLE.containerWrap}>
+                            <View style={PAGESTYLE.feedbackBlock}>
+                                <View style={PAGESTYLE.lessonDesc}>
+                                    <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
+                                    <Text style={PAGESTYLE.descriptionText}>Well done Reuel. Your story was very well written and constructed. Excellent use of grammar and punctuation. Watch the video for more comments</Text>
+                                </View>
+                            </View>
+                            <View style={PAGESTYLE.feedbackVideoBlock}>
+                                <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
+                                <View>
+                                    <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Reuel Pardesi - Feedback for English </Text>
+                                    <Text style={PAGESTYLE.techerName}>Miss Barker</Text>
+                                </View>
                             </View>
                         </View>
-                        <View style={PAGESTYLE.feedbackVideoBlock}>
-                            <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
-                            <View>
-                                <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Reuel Pardesi - Feedback for English </Text>
-                                <Text style={PAGESTYLE.techerName}>Miss Barker</Text>
-                            </View>
-                        </View>
-                    </View>
+                    </ScrollView>
                 </View>
             </View>
         </View>

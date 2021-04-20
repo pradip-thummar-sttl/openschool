@@ -14,55 +14,139 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
-
-    const SECTIONS = [
+    const NEW = [
         {
-            title: 'First',
-            content: 'Lorem ipsum...',
+            title: 'Description',
         },
         {
-            title: 'Second',
-            content: 'Lorem ipsum...',
+            title: 'Learning material',
         },
-    ];
-
-    const _renderSectionTitle = section => {
+        {
+            title: 'Saved workspaces',
+        },
+    ]
+    const _renderHeader = section => {
         return (
-          <View style={PAGESTYLE.content}>
-            <Text>{section.title}</Text>
-          </View>
+            <View style={PAGESTYLE.header}>
+                <Text style={PAGESTYLE.headerText}>{section.title}</Text>
+                <Image source={Images.DropArrow} style={PAGESTYLE.arrowAccordion} />
+            </View>
         );
-      };
-    
-      const _renderHeader = section => {
+    };
+    const _renderContent = section => {
+        console.log('activeSections', activeSections);
         return (
-          <View style={PAGESTYLE.header}>
-            <Text style={PAGESTYLE.headerText}>{section.title}</Text>
-          </View>
+            activeSections.includes(0) ?
+                <View style={PAGESTYLE.content}>
+                    <View style={PAGESTYLE.lessonDesc}>
+                        <Text style={PAGESTYLE.lessonText}>
+                            In this lesson, we will learn all about conjunctions: what they are and how to use them. You will learn your first 7 conjunctions and I would like you to complete the homework that comes with it. This lesson is worth 5 gold stars!{"\n"}
+                        Instructions: {"\n"}
+                        1. Go through all learning materials{"\n"}
+                        2. Watch all BBC Bitesize videos{"\n"}
+                        3. Make notes using your workspaces{"\n"}
+                        Have fun!
+                        </Text>
+                    </View>
+                </View>
+                :
+                activeSections.includes(1) ?
+                    <View style={PAGESTYLE.content}>
+                        <View style={PAGESTYLE.lessonDesc}>
+                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                            </View>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <View style={PAGESTYLE.thumbVideo}>
+                                    <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                                    <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                                </View>
+                            </ScrollView>
+                        </View>
+                    </View>
+                    :
+                    <View style={PAGESTYLE.content}>
+                        <View style={PAGESTYLE.fileBoxGrpWrap}>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                            <View style={PAGESTYLE.fileGrp}>
+                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                            </View>
+                        </View>
+                    </View>
         );
-      };
-    
-      const _renderContent = section => {
-        return (
-          <View style={PAGESTYLE.content}>
-            <Text>{section.content}</Text>
-          </View>
-        );
-      };
-
+    };
     const _updateSections = (activeSections) => {
         setActiveSections(activeSections)
     };
     return (
-        <View style={PAGESTYLE.mainPage}>
+        <View style={{ ...PAGESTYLE.mainPage, height: '100%' }}>
             <View style={PAGESTYLE.commonBg}>
-                <Header6 />
-                <ScrollView>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={[PAGESTYLE.teacherDetailLeft]}>
-                            <View style={PAGESTYLE.largeVideoBlock}>
-                                <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
-                            </View>
+                <Header6 goBack={() => props.navigation.goBack()} />
+                <View style={PAGESTYLE.containerWrap}>
+                    <View style={{ height: '100%', paddingBottom: hp(18.8), }}>
+                        <View style={PAGESTYLE.largeVideoBlock}>
+                            <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                        </View>
+                        <ScrollView style={{ top: 0, height: '100%' }} showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.videoTitleLine}>
                                 <View>
                                     <Text style={PAGESTYLE.videoMainTitle}>Grammar: How to use conjunctions to join two words together</Text>
@@ -79,62 +163,24 @@ const PupilLessonDetailInternal = (props) => {
                                     <Image source={Images.bookmarkOff} style={PAGESTYLE.bookMarkOn} />
                                 </View>
                             </View>
-                            <View style={PAGESTYLE.lessonDesc}>
-                                <Text style={PAGESTYLE.lessonText}>In this lesson, we will learn all about conjunctions: what they are and how to use them. You will learn your first 7 conjunctions and I would like you to complete the homework that comes with it. This lesson is worth 5 gold stars!</Text>
+                            <View style={PAGESTYLE.accordionMain}>
+                                <Accordion
+                                    activeSections={activeSections}
+                                    sections={NEW}
+                                    renderHeader={_renderHeader}
+                                    renderContent={_renderContent}
+                                    onChange={_updateSections}
+                                    underlayColor={COLORS.white}
+                                    style={PAGESTYLE.accordion}
+                                />
                             </View>
-                            <Accordion
-                                activeSections={activeSections}
-                                sections={SECTIONS}
-                                renderHeader={_renderHeader}
-                                renderContent={_renderContent}
-                                onChange={_updateSections}
-                            />
-                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                            </View>
-
-                            <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
-
-                            </View>
-                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                    <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                    <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                    <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                    <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                </View>
-                            </View>
+                        </ScrollView>
+                        <View style={PAGESTYLE.lessonstartButtonPupil}>
+                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fixedButton]}>open workspace</Text></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.fixedButton]}>see homework</Text></TouchableOpacity>
                         </View>
                     </View>
-                </ScrollView>
+                </View>
             </View>
         </View>
     );

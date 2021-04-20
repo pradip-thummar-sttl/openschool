@@ -10,25 +10,16 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
-import Header13 from '../../../../component/reusable/header/bulck/Header13'
+import Header7 from '../../../../component/reusable/header/bulck/Header7'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 
 const PupilHomeWorkSubmitted = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={2}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.whiteBg}>
-                {/* <Header13 /> */}
+                <Header7 />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
-                        <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
-                            <Image source={require('../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} />
-                            <Text style={PAGESTYLE.blueStripText}>Homework submitted on time!</Text>
-                        </View>
                         <View style={PAGESTYLE.userRight}>
                             <View style={PAGESTYLE.markedLabel}>
                                 <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.submittedIcon} />
@@ -42,6 +33,10 @@ const PupilHomeWorkSubmitted = (props) => {
                                 <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
                                 <Text style={PAGESTYLE.dateText}>19/20/2020</Text>
                             </View>
+                        </View>
+                        <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
+                            <Image source={require('../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} />
+                            <Text style={PAGESTYLE.blueStripText}>Homework submitted on time!</Text>
                         </View>
                     </View>
                 </View>

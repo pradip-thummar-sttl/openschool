@@ -26,9 +26,9 @@ const HeaderWhite = (props) => {
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
                     </TouchableOpacity> */}
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    {/* <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>           
         </View>
@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        paddingTop: hp(3.85),
+        paddingBottom: hp(1.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: wp(4.26),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
@@ -230,6 +231,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+        top:wp(2.5),
     },
     commonText: {
         fontSize: hp(1.82),
