@@ -144,9 +144,8 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(3.69),
-        paddingLeft:hp(1.95),
-        paddingRight:hp(1.95),
+        marginTop: hp(4.92),
+        paddingRight:hp(1.5),
     },
     videoLinkBlock: {
         width: hp(36.84),
@@ -199,8 +198,8 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        paddingBottom: hp(2.2),
-        marginBottom: hp(2.2),
+        paddingBottom: hp(1.5),
+        marginBottom: hp(1.5),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -226,11 +225,16 @@ export default StyleSheet.create({
         minHeight: hp(6),
         paddingRight: hp(1),
     },
+    checkBoxLabelTextSubmit: {
+        lineHeight: hp(2.4),
+        fontSize: hp(1.72),
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: hp(1.5),
+    },
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
         top: hp(0.35),
-        marginLeft: hp(0.6),
         fontFamily:FONTS.fontBold,
     },
     toggleGrp: {
@@ -500,6 +504,9 @@ export default StyleSheet.create({
         color:COLORS.darkGray,
         marginLeft: hp(0.5),
     },
+    dueDateTextBoldSubmit: {
+        margin:0,
+    },
     dropDownSmallWrapNormal: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
@@ -720,9 +727,21 @@ export default StyleSheet.create({
         height:wp(48),
         resizeMode:'contain',
     },
+    uploadBoardsubmit:{
+        width: '100%',
+        height: hp(21.78),
+        resizeMode:'contain',
+    },
     containerWrap:{
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+    },
+    containerWrapMarked: {
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        marginTop: hp(4),
+        borderTopColor: COLORS.borderGrp,
+        borderTopWidth: 1,
     },
     containerWrapTop: {
         borderWidth:1,
@@ -737,7 +756,7 @@ export default StyleSheet.create({
         marginRight:hp(1.30),
     },
     userLeft:{
-       width:wp(100),
+       width: '100%',
        flexDirection: 'row',
     },
     userRight:{
@@ -786,11 +805,6 @@ export default StyleSheet.create({
         fontSize:hp(1.82),
         color:COLORS.darkGray,
         lineHeight:hp(3.2),
-    },
-    feedbackBlock:{
-        width:hp(67.57),
-        paddingLeft:hp(4.29),
-        paddingRight:hp(7.29),
     },
     ratingBlock:{
         width:'40%',
@@ -945,6 +959,28 @@ export default StyleSheet.create({
         shadowOpacity: 0.06,
         shadowRadius: 4,
     },
+    containerWrapSubmit: {
+        marginBottom: hp(4.31),
+    },
+    dateBlockRowSubmitted:{
+        flexDirection:'row',
+        justifyContent: 'center',
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        borderTopWidth:1,
+        borderTopColor:COLORS.dashBoard,
+        borderBottomWidth:1,
+        borderBottomColor:COLORS.dashBoard,
+        backgroundColor: COLORS.white,
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: hp(0.24)},
+        shadowOpacity: 0.06,
+        shadowRadius: 4,
+    },
+    dateNameBlockSubmitted: {
+        paddingLeft: hp(1.2),
+        paddingRight: hp(1.2),
+    },
     calander:{
         width:hp(1.76),
         resizeMode:'contain',
@@ -1036,13 +1072,9 @@ export default StyleSheet.create({
     },
     submittedBlueStrip:{
         backgroundColor:COLORS.blueLightStrip,
-        borderTopLeftRadius:hp(1.5),
-        borderBottomLeftRadius:hp(1.5),
-        marginLeft:hp(-1),
-        marginTop:hp(-1),
-        marginBottom:hp(-1),
         position:'relative',
-        height:hp(8.46),
+        height:hp(8),
+        alignItems: 'center',
     },
     submittedIcon:{
         width:hp(1.89),
@@ -1050,11 +1082,11 @@ export default StyleSheet.create({
         marginRight:hp(1),
     },
     bookLightBlue:{
-        width:hp(13.76),
+        width:hp(13.5),
         resizeMode:'contain',
         position:'absolute',
         right:hp(1),
-        top:hp(-5.5),
+        top:hp(-6.4),
     },
     bookPurpleStip:{
         width:hp(13.76),
@@ -1065,15 +1097,15 @@ export default StyleSheet.create({
     },
     blueStripText:{
         fontFamily: FONTS.fontSemiBold,
-        fontSize:wp(3.73),
+        fontSize: hp(1.72),
         color:COLORS.white,
-        paddingLeft:hp(2.21),
-        paddingTop:hp(3.2),
+        paddingLeft:hp(2),
     },
     markedPurpleStrip:{
         backgroundColor:COLORS.dashboardHomeWorkPurple,
         position:'relative',
-        height:hp(8.46),
+        height:hp(8),
+        alignItems: 'center',
     },    
     containerWrapTopPurple: {
         justifyContent: 'space-between',
@@ -1114,11 +1146,10 @@ export default StyleSheet.create({
         flexDirection:'row',
         borderColor:COLORS.borderGrp,
         borderWidth:1,
-        padding:hp(1.2),
-        width:hp(52.08),
+        padding:hp(1),
         borderRadius:hp(0.8),
-        marginRight:hp(3.90),
         marginTop:hp(2.5),
+        marginBottom:hp(2.5),
     },
     lessonDesc:{
         fontFamily: FONTS.fontRegular,
@@ -1128,9 +1159,6 @@ export default StyleSheet.create({
     lessonPupilHomeWorkDetail: {
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-    },
-    lineLength:{
-        width:'80%',        
     },
     videoCard:{
          shadowColor: COLORS.darkGray,
@@ -1237,7 +1265,7 @@ export default StyleSheet.create({
     },
     lessonFeedDesc:{
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(1.82),
+        fontSize:hp(1.72),
         color:COLORS.darkGray,
     },
     techerName:{
@@ -1317,10 +1345,7 @@ export default StyleSheet.create({
         width:'100%',
     },
     rightSideBar:{
-        paddingTop:hp(2.46),
-    },
-    uploadBoardBlock:{
-        height:wp(48),
+        paddingTop:hp(3.5),
     },
     daterow:{
         flexDirection:'row',

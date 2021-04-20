@@ -98,5 +98,6 @@ const Images = {
     UploadHomeWorkMobile: require('../assets/images/upload-hw-mobile2.png'),
     bookmarkOff: require('../assets/images/bookmarkOff2.png'),
     videoBanner: require('../assets/images/videoLarge2.png'),
+    submittedLogo: require('../assets/images/submitted2.png'),
 }
 export default Images;
