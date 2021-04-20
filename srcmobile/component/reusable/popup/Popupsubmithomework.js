@@ -15,21 +15,17 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            {/* <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
-                <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                <Text style={styles.commonButtonGreenheader}>Submit homework</Text>
-            </TouchableOpacity> */}
             <Modal isVisible={true}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
-                    <View style={STYLE.popupContentMain}>
+                    <View style={styles.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
                         <TouchableOpacity onPress={()=>props.OnSubmitHomeworkPress()}>
-                            <Text style={STYLE.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
+                            <Text style={styles.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -40,6 +36,11 @@ const Popuphomework = (props) => {
 export default Popuphomework;
 
 const styles = StyleSheet.create({
+    popupContentMain: {
+        paddingTop: hp(4.31),
+        paddingBottom: hp(6.77),
+        alignItems: 'center',
+    },
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
@@ -100,19 +101,19 @@ const styles = StyleSheet.create({
         left: hp(1.8),
         zIndex: 9,
     },
-    commonButtonGreenheader: {
+    commonButtonGreenDashboardSide: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
-        borderRadius: hp(1),
+        fontSize: hp(1.5),
+        borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
-        height: hp(5.20),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
+        paddingTop: hp(1.6),
+        paddingBottom: hp(1.6),
+        paddingLeft: hp(3.125),
+        paddingRight: hp(3.125),
         alignSelf: 'center',
+        height: hp(5.41),
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
@@ -126,12 +127,12 @@ const styles = StyleSheet.create({
         paddingRight:wp(4.55),
     },
     popupText: {
-        fontSize: hp(1.9),
+        fontSize: hp(1.6),
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         marginBottom: hp(3.5),
-        lineHeight: hp(2.6),
-        paddingLeft:wp(2.55),
-        paddingRight:wp(2.55),
+        lineHeight: hp(1.97),
+        paddingLeft:hp(2.46),
+        paddingRight:hp(2.46),
     },
 });

@@ -32,10 +32,9 @@ const PupilHomeWorkDetail = (props) => {
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.whiteBg}>
                 <Header14 onAlertPress={() => props.navigation.openDrawer()} goBack={() => props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
-                <View style={PAGESTYLE.containerWrap}>
+                <View style={{ ...PAGESTYLE.containerWrap, paddingBottom: hp(24) }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.teacherDetailLeft}>
-
                             <View style={PAGESTYLE.dateBlockRow}>
                                 <View style={[PAGESTYLE.dateNameBlock, PAGESTYLE.spaceSmallUserName]}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
@@ -52,13 +51,11 @@ const PupilHomeWorkDetail = (props) => {
                                     </View>
                                 </View>
                             </View>
-
-                            <View style={PAGESTYLE.lessonDesc}>
+                            <View style={[PAGESTYLE.lessonDesc, PAGESTYLE.lessonPupilHomeWorkDetail]}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
                                 <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
                             </View>
                             <View style={PAGESTYLE.requirementofClass}>
-
                                 <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
                                 <View style={PAGESTYLE.checkBoxGroup}>
                                     <View style={PAGESTYLE.checkBoxLabelBox}>
@@ -77,7 +74,6 @@ const PupilHomeWorkDetail = (props) => {
                                         <View style={PAGESTYLE.lessonstartButton}>
                                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
                                         </View>
-
                                     </View>
                                     <View style={PAGESTYLE.checkBoxLabelBox}>
                                         <View style={PAGESTYLE.alignRow}>
@@ -138,16 +134,13 @@ const PupilHomeWorkDetail = (props) => {
                                     <View style={PAGESTYLE.uploadBoardBlock}>
                                         <Image source={require('../../../../assets/images/upload-hw-mobile2.png')} style={PAGESTYLE.uploadBoard} />
                                     </View>
-                                    <TouchableOpacity onPress={() => setSubmitPopup(true)}>
-                                        <Text style={PAGESTYLE.commonButtonGreenheader}>submit homework</Text>
-                                    </TouchableOpacity>
                                 </View>
+                            </View>
                         </View>
-
-                        </View>
-
-
                     </ScrollView>
+                    <View style={[PAGESTYLE.fullButtonMain]}>
+                        <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.buttonGrp}><Text style={[PAGESTYLE.commonButtonGreenheaderFullWidth, PAGESTYLE.fullButton]}>submit homework</Text></TouchableOpacity>
+                    </View>
                 </View>
                 {
                     isSubmitPopup ? <Popupsubmithomework OnSubmitHomeworkPress={() => setSubmitPopup(false)} /> : null
