@@ -17,17 +17,43 @@ const Headerseven = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <TouchableOpacity style={styles.widthBackArrow} onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
-                <View style={styles.titles}>
-                    <Text style={styles.mainTitle}>English Grammar Homework{"\n"}Homework</Text>
+                <View style={styles.headerMainInner}>
+                    <TouchableOpacity style={styles.widthBackArrow} onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
+                    <View style={styles.titles}>
+                        <Text style={styles.mainTitle}>English Grammar {"\n"}Homework Homework</Text>
+                    </View>
                 </View>
-            </View>            
+                <View style={styles.submittedLogo}>
+                    <Image source={Images.submittedLogo} style={styles.submittedLogoImage} />
+                    <Text style={styles.submittedText}>Submitted</Text>
+                </View>
+            </View>
         </View>
     );
 }
 export default Headerseven;
 
 const styles = StyleSheet.create({
+    submittedLogo: {
+        alignItems: 'center',
+        right: hp(0),
+        position: 'absolute',
+    },
+    headerMainInner: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        position: 'relative',
+    },
+    submittedText: {
+        fontSize: hp(1.72),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    submittedLogoImage: {
+        width: hp(2),
+        height: hp(2.2),
+        resizeMode: 'contain'
+    },
     headerBarMainWhite: {
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
@@ -37,6 +63,7 @@ const styles = StyleSheet.create({
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         marginTop: hp(3),
         marginBottom: hp(2.46),
     },
