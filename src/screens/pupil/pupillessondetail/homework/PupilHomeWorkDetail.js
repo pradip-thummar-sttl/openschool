@@ -26,7 +26,7 @@ const PupilHomeWorkDetail = (props) => {
     const { item } = props.route.params
     const [materialArr, setMaterialArr] = useState([])
     const [isLoading, setLoading] = useState(false);
-
+console.log('props of homewor', props.route.params);
 
     onSubmitHomework = () => {
         let formData = new FormData();
@@ -51,6 +51,7 @@ const PupilHomeWorkDetail = (props) => {
                 // setDefaults()
                 showMessage(res.message)
                 setSubmitPopup(false)
+                // props.route.params.goBack()
             } else {
                 showMessage(res.message)
                 setLoading(false)
