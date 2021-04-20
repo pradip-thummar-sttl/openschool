@@ -17,7 +17,7 @@ const Header6 = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
+                <TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
                 <View style={styles.titles}>
                     <Text style={styles.mainTitle}>English Grammar</Text>
                     <Text style={styles.date}>14/09/2020</Text>

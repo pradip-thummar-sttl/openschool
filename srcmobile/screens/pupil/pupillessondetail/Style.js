@@ -98,8 +98,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        fontSize: hp(1.82),
-        marginBottom:hp(1.5),
+        fontSize: hp(1.72),
+        marginBottom:hp(1.47),
     },
     lessonText: {
         fontFamily: FONTS.fontRegular,
@@ -144,9 +144,9 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(4.81),
-        paddingLeft:wp(4.55),
-        paddingRight:wp(4.55),
+        marginTop: hp(3.69),
+        paddingLeft:hp(1.95),
+        paddingRight:hp(1.95),
     },
     videoLinkBlock: {
         width: hp(36.84),
@@ -211,22 +211,26 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius:hp(1.5),
         paddingLeft:hp(1.30),
-        paddingRight:hp(2.21),
+        paddingRight:hp(1.30),
         paddingTop:hp(2.60),
         paddingBottom:hp(2.60),
-        marginBottom:hp(1.04),
+        marginBottom:hp(1.5),
         justifyContent:'space-between',
     },
     checkBoxLabelText: {
         lineHeight: hp(2.82),
-        fontSize: hp(1.85),
+        fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.2),
+        paddingLeft: hp(1.5),
+        marginBottom: hp(2),
+        minHeight: hp(6),
+        paddingRight: hp(1),
     },
     checkMark: {
-        width: hp(2.2),
-        height: hp(2.2),
-        top: hp(0.55),
+        width: hp(1.84),
+        height: hp(1.84),
+        top: hp(0.35),
+        marginLeft: hp(0.6),
         fontFamily:FONTS.fontBold,
     },
     toggleGrp: {
@@ -274,18 +278,14 @@ export default StyleSheet.create({
         fontSize: hp(1.85),
         lineHeight: hp(2.60),
     },
-    // containerWrap: {
-    //     justifyContent: 'space-between',
-    //     flexDirection: 'row',
-    // },
     grpThumbVideo: {
-        width: hp(31.90),
+        width: hp(32),
         resizeMode: 'contain',
         alignItems: 'center',
         marginRight: hp(1),
     },
     thumbVideo: {
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     subLineTitle: {
         marginTop: hp(-3.5),
@@ -481,10 +481,7 @@ export default StyleSheet.create({
     },
     uploadBlock: {
         alignItems: 'center',
-    },
-    checkBoxGroup: {
-
-    },
+    },    
     dueDateWrap: {
         borderRightWidth: 2,
         borderRightColor: COLORS.commonBorderColor,
@@ -498,8 +495,9 @@ export default StyleSheet.create({
         paddingBottom: hp(1.7),
     },
     dueDateTextBold: {
-        fontFamily: FONTS.fontSemiBold,
+        fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
+        color:COLORS.darkGray,
         marginLeft: hp(0.5),
     },
     dropDownSmallWrapNormal: {
@@ -722,17 +720,14 @@ export default StyleSheet.create({
         height:wp(48),
         resizeMode:'contain',
     },
+    containerWrap:{
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+    },
     containerWrapTop: {
-        justifyContent: 'space-between',
-        flexDirection: 'row',
         borderWidth:1,
         borderColor:COLORS.blueLightStrip,
         borderRadius:hp(1.5),
-        marginLeft:hp(3.25),
-        marginRight:hp(2.99),
-        marginBottom:hp(1),
-        padding:hp(1),
-        height:hp(8.46),
     },
     userThumb:{
         width:hp(6.25), 
@@ -791,10 +786,6 @@ export default StyleSheet.create({
         fontSize:hp(1.82),
         color:COLORS.darkGray,
         lineHeight:hp(3.2),
-    },
-    dateNameBlock:{
-        marginRight:hp(2.21),
-        marginTop:hp(0.6),
     },
     feedbackBlock:{
         width:hp(67.57),
@@ -934,16 +925,25 @@ export default StyleSheet.create({
     },
     descriptionText:{
         fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
+        fontSize:hp(1.72),
         color: COLORS.darkGray,
+        lineHeight: hp(2.46),
     },
     dateBlockRow:{
         flexDirection:'row',
-        marginBottom:hp(4.55),
+        justifyContent: 'space-around',
+        marginBottom:hp(4.31),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
         borderTopWidth:1,
-        borderTopColor:COLORS.borderGrp,
+        borderTopColor:COLORS.dashBoard,
         borderBottomWidth:1,
-        borderBottomColor:COLORS.borderGrp,
+        borderBottomColor:COLORS.dashBoard,
+        backgroundColor: COLORS.white,
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: hp(0.24)},
+        shadowOpacity: 0.06,
+        shadowRadius: 4,
     },
     calander:{
         width:hp(1.76),
@@ -953,7 +953,7 @@ export default StyleSheet.create({
     dateTitleNormal:{
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
+        fontSize:hp(1.6),
         color:COLORS.menuLightFonts,
         paddingBottom:hp(0.8),
     },
@@ -966,11 +966,7 @@ export default StyleSheet.create({
     },
     alignRow:{
         flexDirection:'row',
-        width:'95%',
-    },
-    spaceSmallUserName:{
-        marginRight:wp(14.32),
-        marginLeft:wp(15.3),
+        width:'100%',
     },
     largeVideo:{
         width: hp(46.18),
@@ -1107,10 +1103,10 @@ export default StyleSheet.create({
     },
     videoDateBlack:{
         color: COLORS.darkGray,
-        fontSize: hp(1.56),
+        fontSize: hp(1.47),
         fontFamily: FONTS.fontRegular,
         zIndex:10,
-        lineHeight:hp(3.5),
+        lineHeight:hp(3.7),
         paddingLeft:hp(1),
         paddingTop:hp(1),
     },
@@ -1128,6 +1124,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize:hp(1.82),
         color:COLORS.darkGray,
+    },
+    lessonPupilHomeWorkDetail: {
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
     },
     lineLength:{
         width:'80%',        
@@ -1178,11 +1178,11 @@ export default StyleSheet.create({
         right: hp(1.84),
     },
     bookMarkLabelDue:{
-        width:hp(1.91),
+        width:hp(1.81),
         resizeMode:'contain',
         position: 'absolute',
         top: hp(1.3),
-        right: hp(1.4),
+        right: hp(1.6),
     },
     videoCardThumb:{
         position:'relative',
@@ -1190,11 +1190,11 @@ export default StyleSheet.create({
         width:hp(28.25),
     },
     lessonDue:{
-        height:hp(17.44),
+        height:hp(16.62),
         marginTop:hp(2.73),
     },
     dueIcon:{
-        width:hp(1.89),
+        width:hp(1.79),
         resizeMode:'contain',
         marginLeft:hp(1.5),
         marginTop:hp(1),
@@ -1280,9 +1280,6 @@ export default StyleSheet.create({
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
-    lessonstartButton:{
-        marginTop:wp(15),
-    },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
@@ -1302,10 +1299,76 @@ export default StyleSheet.create({
         marginTop:wp(10),
         marginBottom:wp(10),
     },
+    commonButtonGreenheaderFullWidth: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.5),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.6),
+        paddingBottom: hp(1.6),
+        height: hp(5.41),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        width:'100%',
+    },
     rightSideBar:{
         paddingTop:hp(2.46),
     },
     uploadBoardBlock:{
         height:wp(48),
+    },
+    daterow:{
+        flexDirection:'row',
+        alignItems: 'center',
+    },
+    lessonstartButtonPupil: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: COLORS.white,
+        borderTopWidth: 1,
+        borderColor: COLORS.borderGrp,
+        paddingTop: hp(2),
+        paddingBottom: hp(2),
+        position: 'absolute',
+        bottom: hp(9.5),
+        width: '100%',
+        left: hp(0),
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+    }, 
+    fullButton:{
+        width: '100%',
+    },
+    fullButtonMain: {
+        backgroundColor: COLORS.white,
+        borderTopWidth: 1,
+        borderColor: COLORS.borderGrp,
+        paddingTop: hp(2),
+        paddingBottom: hp(2),
+        position: 'absolute',
+        bottom: hp(13.5),
+        width: '100%',
+        left: hp(0),
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+    },
+    lessonstartButtonBottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    fixedButton: {
+        width: hp(19.70),
+        paddingLeft: hp(1),
+        paddingRight: hp(1),
+        height: hp(5.41),
+        paddingTop: hp(1.6),
+        paddingBottom: hp(1.6),
     },
 });
