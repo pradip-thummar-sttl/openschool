@@ -14,7 +14,8 @@ import Header13 from '../../../../component/reusable/header/bulck/Header13'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 
 const PupilHomeWorkSubmitted = (props) => {
-    const {item } = props.route.params
+    const { item } = props.route.params
+    const [materialArr, setMaterialArr] = useState(item.HomeworkList)
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
@@ -23,7 +24,7 @@ const PupilHomeWorkSubmitted = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.whiteBg}>
-                <Header13 goBack={()=>props.navigation.goBack()}/>
+                <Header13 goBack={() => props.navigation.goBack()} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
@@ -116,7 +117,18 @@ const PupilHomeWorkSubmitted = (props) => {
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
                         <View style={PAGESTYLE.uploadBoardBlock}>
-                            <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} />
+                            {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
+                            <View style={PAGESTYLE.homeworkView} >
+                                <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
+                                <View style={PAGESTYLE.docView}>
+                                    {materialArr.length > 0 ? materialArr.map((item) => {
+                                        return (
+                                            <Image style={{ marginRight: 10, marginBottom: 10 }} source={require('../../../../assets/images/Bg.png')} />
+                                        )
+                                    }) : null}
+                                </View>
+
+                            </View>
                         </View>
                     </View>
                 </View>
