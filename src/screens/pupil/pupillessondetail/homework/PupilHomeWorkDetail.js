@@ -14,9 +14,84 @@ import Header14 from '../../../../component/reusable/header/bulck/Header14'
 import Popuphomework from "../../../../component/reusable/popup/Popupsubmithomework";
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import moment from "moment";
+import DocumentPicker from 'react-native-document-picker';
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import { showMessage } from "../../../../utils/Constant";
+import MESSAGE from "../../../../utils/Messages";
+
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
-    const {item} = props.route.params
+    const { item } = props.route.params
+    const [materialArr, setMaterialArr] = useState([])
+    const [isLoading, setLoading] = useState(false);
+console.log('props of homewor', props.route.params);
+
+    onSubmitHomework = () => {
+        let formData = new FormData();
+
+        materialArr.forEach(element => {
+            formData.append('materiallist', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        // formData.append("Feedback", feedBack);
+        // formData.append("Rewards", '1');
+
+        console.log('data',formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`);
+
+        Service.postFormData(formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                setLoading(false)
+                console.log('response of save Homework', res)
+                // setDefaults()
+                showMessage(res.message)
+                setSubmitPopup(false)
+                // props.route.params.goBack()
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+                setSubmitPopup(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+            setSubmitPopup(false)
+        })
+    }
+    const addMaterial = () => {
+        console.log('hihihihihihi')
+        var arr = [...materialArr]
+        try {
+            DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.allFiles],
+            }).then((results) => {
+                for (const res of results) {
+                    console.log(
+                        res.uri,
+                        res.type, // mime type
+                        res.name,
+                        res.size
+                    );
+                    arr.push(res)
+
+                }
+                console.log('hello response arr', arr)
+                setMaterialArr(arr)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -41,7 +116,7 @@ const PupilHomeWorkDetail = (props) => {
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                 <View style={PAGESTYLE.daterow}>
-                                    <Image style={PAGESTYLE.thumbSmall} source={{uri:item.TeacherProfile}}></Image>
+                                    <Image style={PAGESTYLE.thumbSmall} source={{ uri: item.TeacherProfile }}></Image>
                                     <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                             </View>
@@ -133,12 +208,24 @@ the Amazon Rainforest</Text>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
                         <View style={PAGESTYLE.uploadBoardBlock}>
-                            <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} />
+                            {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
+
+                            <TouchableOpacity style={PAGESTYLE.homeworkView} onPress={() => addMaterial()}>
+                                <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
+                                <View style={PAGESTYLE.docView}>
+                                    {materialArr.map((item) => {
+                                        return (
+                                            <Image style={{ marginRight: 10, marginBottom: 10 }} source={require('../../../../assets/images/Bg.png')} />
+                                        )
+                                    })}
+                                </View>
+
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
                 {
-                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => setSubmitPopup(false)} /> : null
+                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} /> : null
                 }
             </View>
         </View>

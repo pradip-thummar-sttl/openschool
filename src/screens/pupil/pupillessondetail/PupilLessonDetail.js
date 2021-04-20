@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,  } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -71,9 +71,15 @@ const PupilLessonDetail = (props) => {
     }, [filterBy])
 
     useEffect(() => {
-        getHomeworkData('', '')
-        getLessonData('', '')
-    }, [])
+       
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            getHomeworkData('', '')
+            getLessonData('', '')
+          });
+          return () => {
+            unsubscribe;
+          }
+    }, [props.navigation])
 
     const getHomeworkData = (searchBy, filterBy) => {
         let data = {
@@ -246,7 +252,9 @@ const PupilLessonDetail = (props) => {
                                 DueHomeWork={DueHomeWork}
                                 SubmitHomeWork={SubmitHomeWork}
                                 MarkedHomeWork={MarkedHomeWork}
-                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item })}
+                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', {
+                                    item: item,
+                                })}
                                 navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
                                 navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                     }

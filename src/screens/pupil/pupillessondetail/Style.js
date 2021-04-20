@@ -42,8 +42,8 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:hp(4.42),
-        paddingRight:hp(2.99),
+        paddingLeft: hp(4.42),
+        paddingRight: hp(2.99),
     },
     lessonPlanTab: {
         flexDirection: 'row',
@@ -105,7 +105,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
         fontSize: hp(1.82),
-        marginBottom:hp(1.5),
+        marginBottom: hp(1.5),
     },
     lessonText: {
         flexDirection: 'row',
@@ -119,7 +119,7 @@ export default StyleSheet.create({
         // borderColor: COLORS.borderGrp,
         paddingRight: hp(3.90),
         paddingTop: hp(2.5),
-        paddingLeft:hp(3.25),
+        paddingLeft: hp(3.25),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -216,13 +216,13 @@ export default StyleSheet.create({
         width: 'auto',
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
-        borderRadius:hp(1.5),
-        paddingLeft:hp(1.30),
-        paddingRight:hp(2.21),
-        paddingTop:hp(2.60),
-        paddingBottom:hp(2.60),
-        marginBottom:hp(1.04),
-        justifyContent:'space-between',
+        borderRadius: hp(1.5),
+        paddingLeft: hp(1.30),
+        paddingRight: hp(2.21),
+        paddingTop: hp(2.60),
+        paddingBottom: hp(2.60),
+        marginBottom: hp(1.04),
+        justifyContent: 'space-between',
     },
     checkBoxLabelText: {
         lineHeight: hp(2.82),
@@ -234,7 +234,7 @@ export default StyleSheet.create({
         width: hp(2.2),
         height: hp(2.2),
         top: hp(0.55),
-        fontFamily:FONTS.fontBold,
+        fontFamily: FONTS.fontBold,
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -259,7 +259,7 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width:hp(40.10),
+        width: hp(40.10),
         justifyContent: 'flex-start',
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
@@ -276,12 +276,12 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         marginBottom: hp(1.04),
-        height:hp(5),
+        height: hp(5),
     },
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
-        top:hp(-0.5),
+        top: hp(-0.5),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -714,551 +714,551 @@ export default StyleSheet.create({
         left: hp(3.5),
     },
     userStampName: {
-        paddingLeft:hp(4.0),
+        paddingLeft: hp(4.0),
     },
-    uploadBoard:{
-        width:hp(33.07),
-        height:hp(45.05),
-        resizeMode:'contain',
+    uploadBoard: {
+        width: hp(33.07),
+        height: hp(45.05),
+        resizeMode: 'contain',
     },
     containerWrapTop: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderWidth:1,
-        borderColor:COLORS.blueLightStrip,
-        borderRadius:hp(1.5),
-        marginLeft:hp(3.25),
-        marginRight:hp(2.99),
-        marginBottom:hp(1),
-        padding:hp(1),
-        height:hp(8.46),
+        borderWidth: 1,
+        borderColor: COLORS.blueLightStrip,
+        borderRadius: hp(1.5),
+        marginLeft: hp(3.25),
+        marginRight: hp(2.99),
+        marginBottom: hp(1),
+        padding: hp(1),
+        height: hp(8.46),
     },
-    userThumb:{
-        width:hp(6.25), 
-        height:hp(6.25), 
-        backgroundColor: COLORS.lightGrayPupil,  
-        borderRadius: hp(5), 
-        marginRight:hp(1.30),
+    userThumb: {
+        width: hp(6.25),
+        height: hp(6.25),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
+        marginRight: hp(1.30),
     },
-    userLeft:{
-       width:hp(56.77),
-       flexDirection: 'row',
-    },
-    userRight:{
-        width:hp(60.41),
+    userLeft: {
+        width: hp(56.77),
         flexDirection: 'row',
     },
-    userTopName:{
+    userRight: {
+        width: hp(60.41),
         flexDirection: 'row',
-        fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
     },
-    userTopGroup:{
-        flexDirection: 'row',
-        fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.menuLightFonts,
-    },
-    dateTitle:{
+    userTopName: {
         flexDirection: 'row',
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(1.56),
-        color:COLORS.menuLightFonts,
-        textTransform:'uppercase',
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
     },
-    dateText:{
+    userTopGroup: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.menuLightFonts,
     },
-    markedIcon:{
-        width:hp(2.13),
-        resizeMode:'contain',
-        marginRight:hp(1),
+    dateTitle: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.56),
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
     },
-    markedLabel:{
+    dateText: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+    },
+    markedIcon: {
+        width: hp(2.13),
+        resizeMode: 'contain',
+        marginRight: hp(1),
+    },
+    markedLabel: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft:hp(6.19),
-        marginRight:hp(9.63),
-        marginTop:hp(1.0),
+        marginLeft: hp(6.19),
+        marginRight: hp(9.63),
+        marginTop: hp(1.0),
     },
-    markedText:{
+    markedText: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        lineHeight:hp(3.2),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(3.2),
     },
-    dateNameBlock:{
-        marginRight:hp(2.21),
-        marginTop:hp(0.6),
+    dateNameBlock: {
+        marginRight: hp(2.21),
+        marginTop: hp(0.6),
     },
-    feedbackBlock:{
-        width:hp(67.57),
-        paddingLeft:hp(4.29),
-        paddingRight:hp(7.29),
+    feedbackBlock: {
+        width: hp(67.57),
+        paddingLeft: hp(4.29),
+        paddingRight: hp(7.29),
     },
-    ratingBlock:{
-        width:'40%',
-        marginLeft:hp(1.95),
+    ratingBlock: {
+        width: '40%',
+        marginLeft: hp(1.95),
     },
-    lessonTitleBold:{
+    lessonTitleBold: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
-        paddingTop:hp(2.5),
-        paddingBottom:hp(1.2),
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
+        paddingTop: hp(2.5),
+        paddingBottom: hp(1.2),
     },
-    achivementBox:{
+    achivementBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        width :hp(43.48),
-        alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
-        overflow:'hidden',
+        width: hp(43.48),
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.8),
+        overflow: 'hidden',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 5,},
+        shadowOffset: { width: 0, height: 5, },
         shadowOpacity: 0.08,
         shadowRadius: 10,
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
     },
-    starSelectedText:{
+    starSelectedText: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.white,
+        color: COLORS.white,
         fontSize: hp(1.82),
         lineHeight: hp(5.1),
     },
-    starSelected:{
-        width:hp(4.94),
-        height:hp(4.68),
+    starSelected: {
+        width: hp(4.94),
+        height: hp(4.68),
         resizeMode: 'contain',
-        alignItems:'center',
+        alignItems: 'center',
         alignSelf: 'center',
     },
-    rewardStarMark:{
+    rewardStarMark: {
         justifyContent: 'space-around',
-        width:'100%',
+        width: '100%',
         flexDirection: 'row',
-        paddingTop:hp(1.8),
-        paddingBottom:hp(1.8),
+        paddingTop: hp(1.8),
+        paddingBottom: hp(1.8),
     },
-    centerText:{
-        alignItems:'center',
+    centerText: {
+        alignItems: 'center',
     },
-    starText:{
+    starText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    ratingTitle:{
+    ratingTitle: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
-        color:COLORS.menuLightFonts,
-        paddingBottom:hp(1.5),
+        color: COLORS.menuLightFonts,
+        paddingBottom: hp(1.5),
     },
-    separater:{
-        borderLeftWidth:1,
-        borderLeftColor:COLORS.dashboardBorder,
-        borderRightWidth:1,
-        borderRightColor:COLORS.dashboardBorder,
-        width:hp(14.32),
+    separater: {
+        borderLeftWidth: 1,
+        borderLeftColor: COLORS.dashboardBorder,
+        borderRightWidth: 1,
+        borderRightColor: COLORS.dashboardBorder,
+        width: hp(14.32),
     },
-    centerStar:{
-        alignItems:'center',
+    centerStar: {
+        alignItems: 'center',
     },
-    videoTitle:{
-        fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(2.08),
+    videoTitle: {
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(2.08),
         color: COLORS.darkGray,
-        marginBottom:hp(2.86),
+        marginBottom: hp(2.86),
     },
-    videoWrap:{
-        flexDirection:'row',
-    },  
-    videoThumb:{
-        position:'relative',
-        flexDirection:'row',
-        marginRight:hp(4.10),
+    videoWrap: {
+        flexDirection: 'row',
     },
-    videoThumbnail:{        
-        width:hp(28.25),
-        height:hp(13.54),
-        resizeMode:'contain',
+    videoThumb: {
+        position: 'relative',
+        flexDirection: 'row',
+        marginRight: hp(4.10),
+    },
+    videoThumbnail: {
+        width: hp(28.25),
+        height: hp(13.54),
+        resizeMode: 'contain',
         borderRadius: hp(0.26),
     },
-    videoShadow:{
-        width:hp(27.8),
-        resizeMode:'contain',
+    videoShadow: {
+        width: hp(27.8),
+        resizeMode: 'contain',
         position: 'absolute',
         top: hp(-1.8),
         left: hp(0.26),
     },
-    videoPlay:{
-        width:hp(5.20),
-        resizeMode:'contain',
-        position:'absolute',
-        top:hp(5.5),
-        left:hp(11.32),
+    videoPlay: {
+        width: hp(5.20),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(5.5),
+        left: hp(11.32),
     },
-    videoSelected:{
-        width:hp(2.17),
-        resizeMode:'contain',
-        position:'absolute',
-        bottom:hp(1),
-        right:hp(1.24),
+    videoSelected: {
+        width: hp(2.17),
+        resizeMode: 'contain',
+        position: 'absolute',
+        bottom: hp(1),
+        right: hp(1.24),
     },
-    videoSubTitle:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
+    videoSubTitle: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
         color: COLORS.darkGray,
-        flexDirection:'row',
-        lineHeight:hp(1.82),
-        paddingTop:hp(1.5),
-        paddingBottom:hp(1.5),
-        width:hp(26.17),
-        flexWrap:'wrap',
-        marginBottom:hp(1.20),
+        flexDirection: 'row',
+        lineHeight: hp(1.82),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        width: hp(26.17),
+        flexWrap: 'wrap',
+        marginBottom: hp(1.20),
     },
-    spaceTop:{
-        marginTop:hp(3.5),
+    spaceTop: {
+        marginTop: hp(3.5),
     },
-    rightSpaceNone:{
-        marginRight:hp(0),
+    rightSpaceNone: {
+        marginRight: hp(0),
     },
-    descriptionText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
+    descriptionText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    dateBlockRow:{
-        flexDirection:'row',
-        marginBottom:hp(4.55),
+    dateBlockRow: {
+        flexDirection: 'row',
+        marginBottom: hp(4.55),
     },
-    calander:{
-        width:hp(1.76),
-        resizeMode:'contain',
-        marginRight:hp(0.5),
+    calander: {
+        width: hp(1.76),
+        resizeMode: 'contain',
+        marginRight: hp(0.5),
     },
-    daterow:{
-        flexDirection:'row',
+    daterow: {
+        flexDirection: 'row',
     },
-    dateTitleNormal:{
+    dateTitleNormal: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.menuLightFonts,
-        paddingBottom:hp(0.8),
+        fontSize: hp(1.82),
+        color: COLORS.menuLightFonts,
+        paddingBottom: hp(0.8),
     },
-    thumbSmall:{
-        width:hp(3), 
-        height:hp(3), 
-        backgroundColor: COLORS.lightGrayPupil,  
-        borderRadius: hp(5), 
-        marginRight:hp(0.5),
+    thumbSmall: {
+        width: hp(3),
+        height: hp(3),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
+        marginRight: hp(0.5),
     },
-    alignRow:{
-        flexDirection:'row',
-        width:'68.5%',
+    alignRow: {
+        flexDirection: 'row',
+        width: '68.5%',
     },
-    spaceSmallUserName:{
-        marginRight:hp(14.32),
+    spaceSmallUserName: {
+        marginRight: hp(14.32),
     },
-    largeVideo:{
-        width:hp(83.72),
-        height:hp(46.87),
-        resizeMode:'contain', 
-        position:'absolute', 
-        left:hp(-3),
-        top:hp(0),      
+    largeVideo: {
+        width: hp(83.72),
+        height: hp(46.87),
+        resizeMode: 'contain',
+        position: 'absolute',
+        left: hp(-3),
+        top: hp(0),
     },
-    largeVideoBlock:{
-        width:'100%',
-        position:'relative',
-        height:hp(46.87),
+    largeVideoBlock: {
+        width: '100%',
+        position: 'relative',
+        height: hp(46.87),
     },
-    moreIcon:{
-        width:hp(2.41),
-        resizeMode:'contain',
-        top:hp(1),
+    moreIcon: {
+        width: hp(2.41),
+        resizeMode: 'contain',
+        top: hp(1),
     },
-    lightGreyText:{
+    lightGreyText: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.menuLightFonts,
+        fontSize: hp(1.82),
+        color: COLORS.menuLightFonts,
     },
-    videoTitleLine:{
-       flexDirection:'row',
-       justifyContent:'space-between', 
-       marginTop:hp(3.77),      
+    videoTitleLine: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: hp(3.77),
     },
-    bookMarkOn:{
-        width:hp(2.43),
-        resizeMode:'contain',
+    bookMarkOn: {
+        width: hp(2.43),
+        resizeMode: 'contain',
     },
-    bookMark:{
-        alignItems:'center',
-        width:hp(6.2),
-        marginRight:hp(-1.2),
+    bookMark: {
+        alignItems: 'center',
+        width: hp(6.2),
+        marginRight: hp(-1.2),
     },
-    videoMainTitle:{
+    videoMainTitle: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
-        marginBottom:hp(1),
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
+        marginBottom: hp(1),
     },
-    videoPublishDate:{
+    videoPublishDate: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.menuLightFonts,
+        fontSize: hp(1.82),
+        color: COLORS.menuLightFonts,
     },
-    userNameMain:{
-        paddingTop:hp(3),
-        paddingBottom:hp(1.5),
-        marginBottom:hp(3),
-        borderBottomColor:COLORS.dashboardBorder,
-        borderBottomWidth:1,
-        flexDirection:'row',
+    userNameMain: {
+        paddingTop: hp(3),
+        paddingBottom: hp(1.5),
+        marginBottom: hp(3),
+        borderBottomColor: COLORS.dashboardBorder,
+        borderBottomWidth: 1,
+        flexDirection: 'row',
     },
-    userMainThumb:{
-        width:hp(3.6), 
-        height:hp(3.6), 
-        backgroundColor: COLORS.lightGrayPupil,  
-        borderRadius: hp(5), 
-        marginRight:hp(0.5),
+    userMainThumb: {
+        width: hp(3.6),
+        height: hp(3.6),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
+        marginRight: hp(0.5),
     },
-    mainNameText:{
+    mainNameText: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        lineHeight:hp(3.5),
-        paddingLeft:hp(1),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(3.5),
+        paddingLeft: hp(1),
     },
-    submittedBlueStrip:{
-        backgroundColor:COLORS.blueLightStrip,
-        borderTopLeftRadius:hp(1.5),
-        borderBottomLeftRadius:hp(1.5),
-        marginLeft:hp(-1),
-        marginTop:hp(-1),
-        marginBottom:hp(-1),
-        position:'relative',
-        height:hp(8.46),
+    submittedBlueStrip: {
+        backgroundColor: COLORS.blueLightStrip,
+        borderTopLeftRadius: hp(1.5),
+        borderBottomLeftRadius: hp(1.5),
+        marginLeft: hp(-1),
+        marginTop: hp(-1),
+        marginBottom: hp(-1),
+        position: 'relative',
+        height: hp(8.46),
     },
-    submittedIcon:{
-        width:hp(1.89),
-        resizeMode:'contain',
-        marginRight:hp(1),
+    submittedIcon: {
+        width: hp(1.89),
+        resizeMode: 'contain',
+        marginRight: hp(1),
     },
-    bookLightBlue:{
-        width:hp(13.76),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1),
-        top:hp(-5.5),
+    bookLightBlue: {
+        width: hp(13.76),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1),
+        top: hp(-5.5),
     },
-    bookPurpleStip:{
-        width:hp(13.76),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.5),
-        top:hp(-5.5),
+    bookPurpleStip: {
+        width: hp(13.76),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.5),
+        top: hp(-5.5),
     },
-    blueStripText:{
+    blueStripText: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.white,
-        paddingLeft:hp(2.21),
-        paddingTop:hp(2.60),
+        fontSize: hp(2.08),
+        color: COLORS.white,
+        paddingLeft: hp(2.21),
+        paddingTop: hp(2.60),
     },
-    markedPurpleStrip:{
-        backgroundColor:COLORS.dashboardHomeWorkPurple,
-        borderTopLeftRadius:hp(1.5),
-        borderBottomLeftRadius:hp(1.5),
-        marginTop:hp(-1),
+    markedPurpleStrip: {
+        backgroundColor: COLORS.dashboardHomeWorkPurple,
+        borderTopLeftRadius: hp(1.5),
+        borderBottomLeftRadius: hp(1.5),
+        marginTop: hp(-1),
         // marginLeft:hp(0),
         // 
         // marginBottom:hp(-1),
-         position:'relative',
-        height:hp(8.46),
-    },    
+        position: 'relative',
+        height: hp(8.46),
+    },
     containerWrapTopPurple: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderWidth:1,
-        borderColor:COLORS.dashboardHomeWorkPurple,
-        borderRadius:hp(1.5),
-        marginLeft:hp(3.25),
-        marginRight:hp(2.99),
-        marginBottom:hp(1),
-        paddingTop:hp(1),
-        height:hp(8.46),
+        borderWidth: 1,
+        borderColor: COLORS.dashboardHomeWorkPurple,
+        borderRadius: hp(1.5),
+        marginLeft: hp(3.25),
+        marginRight: hp(2.99),
+        marginBottom: hp(1),
+        paddingTop: hp(1),
+        height: hp(8.46),
     },
-    markSubmittedSpaceLeft:{
-        marginLeft:hp(7.16),
+    markSubmittedSpaceLeft: {
+        marginLeft: hp(7.16),
     },
-    videoThumbMedium:{
-        width:hp(14.71),
-        height:hp(10.02),
-        resizeMode:'contain',
-        marginRight:hp(1.5),
+    videoThumbMedium: {
+        width: hp(14.71),
+        height: hp(10.02),
+        resizeMode: 'contain',
+        marginRight: hp(1.5),
         position: 'relative',
     },
-    videoDate:{
+    videoDate: {
         position: 'absolute',
         top: hp(1.42),
         left: hp(1.82),
         color: COLORS.white,
         fontSize: hp(1.56),
         fontFamily: FONTS.fontRegular,
-        zIndex:10,
+        zIndex: 10,
     },
-    videoDateBlack:{
+    videoDateBlack: {
         color: COLORS.darkGray,
         fontSize: hp(1.56),
         fontFamily: FONTS.fontRegular,
-        zIndex:10,
-        lineHeight:hp(3.5),
-        paddingLeft:hp(1),
-        paddingTop:hp(1),
+        zIndex: 10,
+        lineHeight: hp(3.5),
+        paddingLeft: hp(1),
+        paddingTop: hp(1),
     },
-    feedbackVideoBlock:{
-        flexDirection:'row',
-        borderColor:COLORS.borderGrp,
-        borderWidth:1,
-        padding:hp(1.2),
-        width:hp(52.08),
-        borderRadius:hp(0.8),
-        marginRight:hp(3.90),
-        marginTop:hp(2.5),
+    feedbackVideoBlock: {
+        flexDirection: 'row',
+        borderColor: COLORS.borderGrp,
+        borderWidth: 1,
+        padding: hp(1.2),
+        width: hp(52.08),
+        borderRadius: hp(0.8),
+        marginRight: hp(3.90),
+        marginTop: hp(2.5),
     },
-    lessonDesc:{
+    lessonDesc: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    lineLength:{
-        width:'80%',        
+    lineLength: {
+        width: '80%',
     },
-    videoCard:{
-         shadowColor: COLORS.darkGray,
-         shadowOffset: {width: 0, height: 0.5,},
-         shadowOpacity: 0.15,
-         shadowRadius: hp(0.5),
-        borderColor:COLORS.borderGrp,
-        borderWidth:1,
-        width:hp(28.25),
-        borderRadius:hp(1.08),
-        marginRight:hp(1.04),
-        backgroundColor:COLORS.white,
-        marginBottom:hp(1.5),
+    videoCard: {
+        shadowColor: COLORS.darkGray,
+        shadowOffset: { width: 0, height: 0.5, },
+        shadowOpacity: 0.15,
+        shadowRadius: hp(0.5),
+        borderColor: COLORS.borderGrp,
+        borderWidth: 1,
+        width: hp(28.25),
+        borderRadius: hp(1.08),
+        marginRight: hp(1.04),
+        backgroundColor: COLORS.white,
+        marginBottom: hp(1.5),
     },
-    videoSubTitleNormal:{
+    videoSubTitleNormal: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        paddingTop:hp(2.73),
-        paddingLeft:hp(2.21),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        paddingTop: hp(2.73),
+        paddingLeft: hp(2.21),
     },
-    videoSubTitleBold:{
+    videoSubTitleBold: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
-        paddingLeft:hp(2.21),
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
+        paddingLeft: hp(2.21),
     },
-    videoUserSpaceLeft:{
-        marginTop:hp(4.85),
-        marginBottom:hp(1.5),
-        paddingLeft:hp(1.5),
+    videoUserSpaceLeft: {
+        marginTop: hp(4.85),
+        marginBottom: hp(1.5),
+        paddingLeft: hp(1.5),
     },
-    videoUserName:{
+    videoUserName: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        lineHeight:hp(3.6),
-        paddingLeft:hp(0.91),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(3.6),
+        paddingLeft: hp(0.91),
     },
-    bookMarkLabel:{
-        width:hp(1.91),
-        resizeMode:'contain',
+    bookMarkLabel: {
+        width: hp(1.91),
+        resizeMode: 'contain',
         position: 'absolute',
         top: hp(1.22),
         right: hp(1.82),
     },
-    bookMarkLabelDue:{
-        width:hp(1.91),
-        resizeMode:'contain',
+    bookMarkLabelDue: {
+        width: hp(1.91),
+        resizeMode: 'contain',
         position: 'absolute',
         top: hp(1.3),
         right: hp(1.4),
     },
-    videoCardThumb:{
-        position:'relative',
-        flexDirection:'row',
-        width:hp(28.25),
+    videoCardThumb: {
+        position: 'relative',
+        flexDirection: 'row',
+        width: hp(28.25),
     },
-    lessonDue:{
-        height:hp(17.44),
-        marginTop:hp(2.73),
+    lessonDue: {
+        height: hp(17.44),
+        marginTop: hp(2.73),
     },
-    dueIcon:{
-        width:hp(1.89),
-        resizeMode:'contain',
-        marginLeft:hp(1.5),
-        marginTop:hp(1),
+    dueIcon: {
+        width: hp(1.89),
+        resizeMode: 'contain',
+        marginLeft: hp(1.5),
+        marginTop: hp(1),
     },
-    lightSkyBlueDue:{
-        backgroundColor:COLORS.lightSkyBlueDue,
+    lightSkyBlueDue: {
+        backgroundColor: COLORS.lightSkyBlueDue,
     },
-    lightYellowDue:{
-        backgroundColor:COLORS.lightYellowDue,
+    lightYellowDue: {
+        backgroundColor: COLORS.lightYellowDue,
     },
-    lightPurpleDue:{
-        backgroundColor:COLORS.lightPurpleDue,
+    lightPurpleDue: {
+        backgroundColor: COLORS.lightPurpleDue,
     },
-    lightOrangeDue:{
-        backgroundColor:COLORS.lightOrangeDue,
+    lightOrangeDue: {
+        backgroundColor: COLORS.lightOrangeDue,
     },
-    lessonThumb:{
-        width:hp(3.64),
-        width:hp(3.64),
-        backgroundColor: COLORS.lightGrayPupil,  
-        borderRadius: hp(5), 
+    lessonThumb: {
+        width: hp(3.64),
+        width: hp(3.64),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
     },
-    dueVideoUserSpace:{
-        paddingLeft:hp(1.04),
-        paddingTop:hp(1.04),
-        paddingBottom:hp(1.04),
+    dueVideoUserSpace: {
+        paddingLeft: hp(1.04),
+        paddingTop: hp(1.04),
+        paddingBottom: hp(1.04),
     },
-    saveBookMarkText:{
+    saveBookMarkText: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    borderRight:{
-        borderRightWidth:1,
-        borderRightColor:COLORS.bottomProfileLightBorder,
+    borderRight: {
+        borderRightWidth: 1,
+        borderRightColor: COLORS.bottomProfileLightBorder,
     },
-    titleSpace:{
-        marginBottom:hp(2.34),
+    titleSpace: {
+        marginBottom: hp(2.34),
     },
-    lessonFeedDesc:{
+    lessonFeedDesc: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    techerName:{
+    techerName: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.lightGray,
-        paddingTop:hp(1.7),
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingTop: hp(1.7),
     },
-    videoSliderSpace:{
-        paddingTop:hp(3.51),
-        paddingLeft:hp(3.25),
+    videoSliderSpace: {
+        paddingTop: hp(3.51),
+        paddingLeft: hp(3.25),
     },
 
     //
@@ -1283,7 +1283,7 @@ export default StyleSheet.create({
         position: 'absolute',
         top: hp(1.8),
         width: hp(1.62),
-        height:hp(1.62),
+        height: hp(1.62),
         resizeMode: 'contain',
         right: hp(1.43),
     },
@@ -1380,7 +1380,7 @@ export default StyleSheet.create({
     },
     checkMark: {
         width: hp(1.48),
-        height:hp(1.48),
+        height: hp(1.48),
         resizeMode: 'contain',
     },
     filterListText: {
@@ -1397,4 +1397,28 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         height: hp(5.20),
     },
+    homeworkView: {
+        width: hp(35),
+        backgroundColor: COLORS.hwmatColor,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderStyle: 'dashed',
+        borderColor: COLORS.lightBlue
+    },
+    HomeText: {
+        alignSelf: 'center',
+        marginVertical: wp(1),
+        color: COLORS.lightGray,
+        fontSize: hp(1.50),
+        fontFamily: FONTS.fontRegular,
+    },
+    docView: {
+        flexDirection: 'row',
+        // paddingHorizontal: hp(1),
+        // paddingVertical:wp(0.5),
+        flexWrap:'wrap',
+        alignSelf:'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 });
