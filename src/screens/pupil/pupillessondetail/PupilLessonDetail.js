@@ -168,18 +168,20 @@ const PupilLessonDetail = (props) => {
                     <Menu style={PAGESTYLE.filterGroup}>
                         <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                <View style={PAGESTYLE.filterList}>
-                                    <Text style={PAGESTYLE.filterListText}>Subject</Text>
-                                    {selectedIndex == 0 ?
-                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                        :
-                                        null
-                                    }
-                                </View>
-                            </TouchableOpacity>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Subject</Text>
+                                        {selectedIndex == 0 ?
+                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}

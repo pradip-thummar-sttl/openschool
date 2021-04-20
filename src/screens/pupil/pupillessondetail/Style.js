@@ -1370,6 +1370,7 @@ export default StyleSheet.create({
         position: 'absolute',
         backgroundColor: COLORS.white,
         top: hp(5.5),
+        right: 0,
         width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
