@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
-import FONTS from '../../../../utils/Fonts';
-import Popuphomework from '../../../reusable/popup/Popuphomework';
-import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
+import COLORS from "../../../utils/Colors";
+import STYLE from '../../../utils/Style';
+import Images from '../../../utils/Images';
+import FONTS from '../../../utils/Fonts';
+
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-const HeaderWhite = (props) => {
+const WorkSpaceHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
             <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.onOpenWorkSpacePress()} style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onSeeHomeworkPress()} style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
+                    <TouchableOpacity onPress={()=>props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
+                        <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
@@ -33,13 +29,14 @@ const HeaderWhite = (props) => {
         </View>
     );
 }
-export default HeaderWhite;
+export default WorkSpaceHeader;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
         paddingRight: hp(4.5),
         backgroundColor: COLORS.white,
+        paddingVertical:wp(1)
        // marginBottom: hp(5.85),
     },
     headerMain: {

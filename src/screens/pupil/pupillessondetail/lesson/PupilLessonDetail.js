@@ -26,6 +26,7 @@ const PupilLessonDetailInternal = (props) => {
                 <HeaderWhitewithoutsearch
                     goBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
+                    onOpenWorkSpacePress={()=>props.navigation.navigate('WorkSpace')}
                     onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}
                 />
 
