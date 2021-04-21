@@ -343,6 +343,14 @@ flex: 1,
     borderNone: {
         borderLeftWidth:0,
     },
+    uploadBoardBlock: {
+        backgroundColor: COLORS.greyBack,
+        width:hp(33.07),
+        height:hp(45.05),
+        borderRadius: 10,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+    },
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -866,6 +874,8 @@ flex: 1,
     userRight:{
         width:hp(53.12),
         flexDirection: 'row',
+        right: 0,
+        position: 'absolute',
     },
     userTopName:{
         flexDirection: 'row',
@@ -893,9 +903,13 @@ flex: 1,
         color:COLORS.darkGray,
     },
     markedIcon:{
-        width:hp(2.13),
+        width:80,
         resizeMode:'contain',
-        marginRight:hp(1),
+    },
+    uploaded: {
+        alignSelf: 'center', 
+        marginVertical: 8, 
+        color: COLORS.greyplaceholder
     },
     markedLabel:{
         flexDirection: 'row',
@@ -1043,7 +1057,7 @@ flex: 1,
     },
     alignRow:{
         flexDirection:'row',
-        margin: 5,
+        marginVertical: 5
     },
     closeNotificationbar:{
         width: hp(1),

@@ -20,7 +20,7 @@ const HeaderWhite = (props) => {
             <Text style={styles.mainTitle}>
                 <TouchableOpacity onPress={()=>props.goBack()}>
                 <Image style={styles.arrow} source={Images.backArrow} />
-                </TouchableOpacity> Common Title</Text>
+                </TouchableOpacity> {props.title}</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity onPress={()=>props.onSubmitHomework()} style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
