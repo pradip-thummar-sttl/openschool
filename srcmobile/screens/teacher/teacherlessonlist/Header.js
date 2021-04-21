@@ -99,7 +99,7 @@ const Header = (props) => {
                                     activeOpacity={opacity}
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date {selectedIndex}</Text>
+                                        <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
                                             <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             :

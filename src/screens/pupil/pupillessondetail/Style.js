@@ -225,7 +225,6 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
     },
     checkBoxLabelText: {
-        lineHeight: hp(2.82),
         fontSize: hp(1.85),
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.2),
@@ -264,6 +263,19 @@ export default StyleSheet.create({
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
         paddingTop: hp(2.5),
+    },
+    uploadBoardBlock: {
+        backgroundColor: COLORS.greyBack,
+        width:hp(33.07),
+        height:hp(45.05),
+        borderRadius: 10,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+    },
+    uploaded: {
+        alignSelf: 'center', 
+        marginVertical: 8, 
+        color: COLORS.greyplaceholder
     },
     fileGrp: {
         flexDirection: 'row',
@@ -773,10 +785,9 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    markedIcon: {
-        width: hp(2.13),
-        resizeMode: 'contain',
-        marginRight: hp(1),
+    markedIcon:{
+        width:80,
+        resizeMode:'contain',
     },
     markedLabel: {
         flexDirection: 'row',
@@ -964,6 +975,10 @@ export default StyleSheet.create({
     alignRow: {
         flexDirection: 'row',
         width: '68.5%',
+    },
+    alignRow1: {
+        flexDirection: 'row',
+        marginVertical: 5
     },
     spaceSmallUserName: {
         marginRight: hp(14.32),
@@ -1378,11 +1393,11 @@ export default StyleSheet.create({
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
     },
-    checkMark: {
-        width: hp(1.48),
-        height: hp(1.48),
-        resizeMode: 'contain',
-    },
+    // checkMark: {
+    //     width: hp(1.48),
+    //     height: hp(1.48),
+    //     resizeMode: 'contain',
+    // },
     filterListText: {
         color: COLORS.darkGray,
         fontSize: hp(1.82),
@@ -1416,8 +1431,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         // paddingHorizontal: hp(1),
         // paddingVertical:wp(0.5),
-        flexWrap:'wrap',
-        alignSelf:'center',
+        flexWrap: 'wrap',
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
     }

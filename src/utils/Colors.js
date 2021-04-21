@@ -48,6 +48,8 @@ const COLORS = {
     daySelect:'#EDF0F6',
     controlBack: 'rgba(37,40,42,0.5)',
     hwmatColor:'rgba(248,249,251,1)',
+    blueBorder: '#57ABF0',
+    greyBack: '#F9FAFC',
 }
 
 export default COLORS;

@@ -99,5 +99,6 @@ const Images = {
     bookmarkOff: require('../assets/images/bookmarkOff2.png'),
     videoBanner: require('../assets/images/videoLarge2.png'),
     submittedLogo: require('../assets/images/submitted2.png'),
+    pdfIcon: require('../assets/images/pdfIcon.png'),
 }
 export default Images;

@@ -551,10 +551,8 @@ const TLDetailAdd = (props) => {
                                         <TouchableOpacity onPress={() => showDatePicker()}>
                                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                <View style={PAGESTYLE.subjectDateTime}>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                    <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
-                                                </View>
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
+                                                <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                             </View>
                                         </TouchableOpacity>
                                     </View>

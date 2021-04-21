@@ -40,23 +40,44 @@ class Login extends Component {
 
     componentDidMount() {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
-        AsyncStorage.getItem('user').then((value) => {
-            var user = JSON.parse(value)
-            if (user.isRemember) {
-                console.log('user of async', user)
 
-                this.setState({
-                    userName: user.Email,
-                    password: user.Password,
-                    PushToken: user.PushToken,
-                    Device: user.Device,
-                    OS: user.OS,
-                    AccessedVia: user.AccessedVia,
-                    isRemember: user.isRemember
-                })
-            } else {
-            }
-        })
+        if (this.props.route.params.userType == 'Pupil') {
+            AsyncStorage.getItem('pupil').then((value) => {
+                var user = JSON.parse(value)
+                if (user.isRemember) {
+                    console.log('user of async', user)
+
+                    this.setState({
+                        userName: user.Email,
+                        password: user.Password,
+                        PushToken: user.PushToken,
+                        Device: user.Device,
+                        OS: user.OS,
+                        AccessedVia: user.AccessedVia,
+                        isRemember: user.isRemember
+                    })
+                } else {
+                }
+            })
+        } else {
+            AsyncStorage.getItem('user').then((value) => {
+                var user = JSON.parse(value)
+                if (user.isRemember) {
+                    console.log('user of async', user)
+
+                    this.setState({
+                        userName: user.Email,
+                        password: user.Password,
+                        PushToken: user.PushToken,
+                        Device: user.Device,
+                        OS: user.OS,
+                        AccessedVia: user.AccessedVia,
+                        isRemember: user.isRemember
+                    })
+                } else {
+                }
+            })
+        }
         if (isRemember) {
 
 
@@ -109,7 +130,11 @@ class Login extends Component {
                         // showMessage(res.message)
                         data.isRemember = isRemember
                         console.log('data of login', data)
-                        AsyncStorage.setItem('user', JSON.stringify(data))
+                        if (this.props.route.params.userType == 'Pupil') {
+                            AsyncStorage.setItem('pupil', JSON.stringify(data))
+                        } else {
+                            AsyncStorage.setItem('user', JSON.stringify(data))
+                        }                        
                         this.props.setUserAuthData(res.data)
                         if (res.data.UserType === "Teacher") {
                             this.props.navigation.replace('TeacherDashboard')
@@ -159,7 +184,7 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-                        <Text h3 style={styles.titleLogin}>Teacher & School Login</Text>
+                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
                                 <Image
@@ -252,13 +277,14 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.authReducer
+        user: state.authReducer,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        setUserAuthData: (data) => dispatch(setUserAuthData(data))
+        setUserAuthData: (data) => dispatch(setUserAuthData(data)),
+        setPupilAuthData: (data) => dispatch(setPupilAuthData(data)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

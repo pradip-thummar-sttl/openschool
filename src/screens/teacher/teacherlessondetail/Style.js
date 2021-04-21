@@ -3,6 +3,7 @@ import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { back } from 'react-native/Libraries/Animated/src/Easing';
 
 const { width, height } = Dimensions.get('window');
 
@@ -96,7 +97,7 @@ flex: 1,
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        bottom: hp(0.4),
+        alignSelf: 'center',
     },
     calIconHomeWork: {
         resizeMode: 'contain',
@@ -112,7 +113,7 @@ flex: 1,
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        bottom: hp(0.4),
+        alignSelf: 'center',
     },
     timeIconNoInput: {
         resizeMode: 'contain',
@@ -342,6 +343,14 @@ flex: 1,
     borderNone: {
         borderLeftWidth:0,
     },
+    uploadBoardBlock: {
+        backgroundColor: COLORS.greyBack,
+        width:hp(33.07),
+        height:hp(45.05),
+        borderRadius: 10,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+    },
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -494,8 +503,7 @@ flex: 1,
         height: hp('6%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
-        paddingTop: hp('2.0%'),
-        paddingBottom: hp('2.0%'),
+        alignSelf: 'center',
     },
     textBox: {
         flexDirection: 'row',
@@ -578,7 +586,15 @@ flex: 1,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        bottom: hp(0.1),
+        alignSelf: 'center',
+    },
+    dateTimetextdummy1: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        justifyContent: 'center',
+        height: '100%',
+        
     },
     dateField: {
         flex: 0.30
@@ -858,6 +874,8 @@ flex: 1,
     userRight:{
         width:hp(53.12),
         flexDirection: 'row',
+        right: 0,
+        position: 'absolute',
     },
     userTopName:{
         flexDirection: 'row',
@@ -885,9 +903,13 @@ flex: 1,
         color:COLORS.darkGray,
     },
     markedIcon:{
-        width:hp(2.13),
+        width:80,
         resizeMode:'contain',
-        marginRight:hp(1),
+    },
+    uploaded: {
+        alignSelf: 'center', 
+        marginVertical: 8, 
+        color: COLORS.greyplaceholder
     },
     markedLabel:{
         flexDirection: 'row',
@@ -1035,7 +1057,7 @@ flex: 1,
     },
     alignRow:{
         flexDirection:'row',
-        margin: 5,
+        marginVertical: 5
     },
     closeNotificationbar:{
         width: hp(1),
@@ -1080,7 +1102,7 @@ flex: 1,
         resizeMode:'contain',
         position:'absolute',
         right:hp(1.6),
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     dropDownArrowdatetimehomeWork:{
         width:hp(1.51),

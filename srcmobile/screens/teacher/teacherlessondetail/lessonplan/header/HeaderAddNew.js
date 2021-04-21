@@ -6,6 +6,8 @@ import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
+import moment from "moment";
+
 const HeaderAddNew = (props) => {
     console.log('props', props);
     return (
@@ -19,9 +21,9 @@ const HeaderAddNew = (props) => {
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
-                            Common Title
+                            Add New Lesson
                     </Text>
-                        <Text style={styles.date}>14/09/2020</Text>
+                        <Text style={styles.date}>{moment().format('MM/DD/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
@@ -31,7 +33,9 @@ const HeaderAddNew = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity style={styles.buttonGroup}
+                        activeOpacity={opacity}
+                        onPress={() => props.saveLesson()}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}></Text>
                     </TouchableOpacity>

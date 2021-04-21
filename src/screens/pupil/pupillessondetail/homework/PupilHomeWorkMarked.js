@@ -12,8 +12,11 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header15 from '../../../../component/reusable/header/bulck/Header15'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
+import Images from "../../../../utils/Images";
+var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
+    const { item } = props.route.params.item;
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
@@ -23,7 +26,10 @@ const PupilHomeWorkMarked = (props) => {
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.wrapper}>
                 <View style={PAGESTYLE.commonBg}>
-                    <Header15 onAlertPress={() => props.navigation.openDrawer()} goBack={() => props.navigation.goBack()} />
+                    <Header15
+                        onAlertPress={() => props.navigation.openDrawer()}
+                        goBack={() => props.navigation.goBack()}
+                        title={item.SubjectName + ' ' + item.LessonTopic} />
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.containerWrapTopPurple}>
                             <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
@@ -37,11 +43,11 @@ const PupilHomeWorkMarked = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                    <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
+                                    <Text style={PAGESTYLE.dateText}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                    <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
+                                    <Text style={PAGESTYLE.dateText}>{item.SubmitedDate ? moment(item.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
                                 </View>
                             </View>
                         </View>
@@ -50,74 +56,47 @@ const PupilHomeWorkMarked = (props) => {
                         <View style={PAGESTYLE.teacherDetailLeft}>
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
                             </View>
                             <View style={PAGESTYLE.requirementofClass}>
 
                                 <View style={PAGESTYLE.checkBoxGroup}>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={false}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
-the Amazon Rainforest</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                        </View>
-                                    </View>
+                                    <FlatList
+                                        data={item.CheckList}
+                                        renderItem={({ item }) => (
+                                            <View style={PAGESTYLE.checkBoxLabelLine}>
+                                                <View style={PAGESTYLE.alignRow}>
+                                                    <CheckBox
+                                                        style={PAGESTYLE.checkMark}
+                                                        value={item.IsCheck}
+                                                        boxType={'square'}
+                                                        onCheckColor={COLORS.white}
+                                                        onFillColor={COLORS.dashboardPupilBlue}
+                                                        onTintColor={COLORS.dashboardPupilBlue}
+                                                        tintColor={COLORS.dashboardPupilBlue}
+                                                    />
+                                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                </View>
+                                            </View>
+                                        )}
+                                        style={{ height: 200 }} />
                                 </View>
                             </View>
                         </View>
                         <View style={PAGESTYLE.rightSideBar}>
                             <View style={PAGESTYLE.uploadBoardBlock}>
-                                <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} />
+                                <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
+                                <FlatList
+                                    data={item.HomeworkList}
+                                    style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                    renderItem={({ item, index }) => (
+                                        <View style={PAGESTYLE.alignRow1}>
+                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                        </View>
+                                    )}
+                                    numColumns={4}
+                                    keyExtractor={(item, index) => index.toString()}
+                                />
                             </View>
                         </View>
                     </View>
@@ -127,7 +106,7 @@ the Amazon Rainforest</Text>
                         <View style={PAGESTYLE.feedbackBlock}>
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
-                                <Text style={PAGESTYLE.descriptionText}>Well done Reuel. Your story was very well written and constructed. Excellent use of grammar and punctuation. Watch the video for more comments</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.Feedback}</Text>
                             </View>
                         </View>
                         <View style={PAGESTYLE.feedbackVideoBlock}>

@@ -12,6 +12,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header13 from '../../../../component/reusable/header/bulck/Header13'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
+import Images from "../../../../utils/Images";
+var moment = require('moment');
 
 const PupilHomeWorkSubmitted = (props) => {
     const { item } = props.route.params
@@ -24,7 +26,9 @@ const PupilHomeWorkSubmitted = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.whiteBg}>
-                <Header13 goBack={() => props.navigation.goBack()} />
+                <Header13 
+                    goBack={() => props.navigation.goBack()}
+                    title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
@@ -38,11 +42,11 @@ const PupilHomeWorkSubmitted = (props) => {
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                <Text style={PAGESTYLE.dateText}>19/02/2020</Text>
+                                <Text style={PAGESTYLE.dateText}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                <Text style={PAGESTYLE.dateText}>19/20/2020</Text>
+                                <Text style={PAGESTYLE.dateText}>{item.SubmitedDate ? moment(item.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
                             </View>
                         </View>
                     </View>
@@ -51,84 +55,48 @@ const PupilHomeWorkSubmitted = (props) => {
                     <View style={PAGESTYLE.teacherDetailLeft}>
                         <View style={PAGESTYLE.lessonDesc}>
                             <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                            <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                            <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
                         </View>
                         <View style={PAGESTYLE.requirementofClass}>
 
                             <View style={PAGESTYLE.checkBoxGroup}>
-                                <View style={PAGESTYLE.checkBoxLabelLine}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={true}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.checkBoxLabelLine}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={false}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.checkBoxLabelLine}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={true}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.checkBoxLabelLine}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={true}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                    </View>
-                                </View>
+                                <FlatList
+                                    data={item.CheckList}
+                                    renderItem={({ item }) => (
+                                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <CheckBox
+                                                    style={PAGESTYLE.checkMark}
+                                                    value={item.IsCheck}
+                                                    boxType={'square'}
+                                                    onCheckColor={COLORS.white}
+                                                    onFillColor={COLORS.dashboardPupilBlue}
+                                                    onTintColor={COLORS.dashboardPupilBlue}
+                                                    tintColor={COLORS.dashboardPupilBlue}
+                                                />
+                                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                            </View>
+                                        </View>
+                                    )}
+                                    style={{ height: 200 }} />
                             </View>
                         </View>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
                         <View style={PAGESTYLE.uploadBoardBlock}>
-                            {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
-                            <View style={PAGESTYLE.homeworkView} >
-                                <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
-                                <View style={PAGESTYLE.docView}>
-                                    {materialArr.length > 0 ? materialArr.map((item) => {
-                                        return (
-                                            <Image style={{ marginRight: 10, marginBottom: 10 }} source={require('../../../../assets/images/Bg.png')} />
-                                        )
-                                    }) : null}
-                                </View>
+                            <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
+                            <FlatList
+                                data={item.HomeworkList}
+                                style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                renderItem={({ item, index }) => (
+                                    <View style={PAGESTYLE.alignRow1}>
+                                        <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                    </View>
+                                )}
+                                numColumns={4}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
 
-                            </View>
                         </View>
                     </View>
                 </View>

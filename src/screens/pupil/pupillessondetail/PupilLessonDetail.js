@@ -121,7 +121,7 @@ const PupilLessonDetail = (props) => {
             Filterby: filterBy,
         }
 
-        console.log('data', data);
+        console.log('data', data, User.user.UserDetialId);
         Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
             console.log('Get All Pupil LessonList response', res)
             var startDate = moment().startOf('week');

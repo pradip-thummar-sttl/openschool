@@ -144,9 +144,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                     <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
-                <TouchableOpacity style={PAGESTYLE.topListingArrow}>
+                <View style={PAGESTYLE.topListingArrow}>
                     <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                </TouchableOpacity>
+                </View>
             </View>
         </TouchableOpacity>
         // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>

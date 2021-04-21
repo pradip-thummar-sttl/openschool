@@ -25,7 +25,7 @@ const HeaderTT = (props) => {
 
     useEffect(() => {
         if (!isSearchActive) {
-            // props.onClearSearch()
+            props.onClearSearch()
             this.textInput.clear()
         } else {
             props.onSearch()
@@ -81,7 +81,7 @@ const HeaderTT = (props) => {
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
 
-                    <Menu style={{ ...styles.filterIcon }}>
+                    {/* <Menu style={{ ...styles.filterIcon }}>
                         <MenuTrigger><Image style={styles.filterIcon1} source={Images.mobileFilter} /></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
@@ -112,22 +112,8 @@ const HeaderTT = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
                         </MenuOptions>
-                    </Menu>
+                    </Menu> */}
                 </View>
                 <TouchableOpacity style={[styles.buttonGroup]}>
                     <Menu style={styles.filterGroup}>

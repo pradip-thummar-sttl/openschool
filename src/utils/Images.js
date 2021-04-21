@@ -95,5 +95,6 @@ const Images = {
     pauseButton: require('../assets/images/play-pause2.png'),
     Play3Icon:require('../assets/images/play3.png'),
     userVideo: require('../assets/images/teacher-user2.png'),
+    pdfIcon: require('../assets/images/pdfIcon.png'),
 }
 export default Images;
