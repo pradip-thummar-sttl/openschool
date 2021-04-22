@@ -57,10 +57,6 @@ const PupilLessonDetailInternal = (props) => {
                         <View style={PAGESTYLE.lessonDesc}>
                             <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
                         </View>
-
-
-
-
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
                         <View style={PAGESTYLE.fileBoxGrpWrap}>

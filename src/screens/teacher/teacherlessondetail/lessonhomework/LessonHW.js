@@ -65,6 +65,7 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = res.data.CheckList
                 Addhomework.CreatedBy = res.data.CreatedBy
                 Addhomework.IsUpdate = true
+                Addhomework.DueDate = moment(res.data.DueDate).format('yyyy-MM-DD')
                 Addhomework.HwId = res.data._id
                 setSelectedDate(moment(res.data.DueDate).format('yyyy-MM-DD'))
                 setMaterialArr(res.data.MaterialList)
@@ -79,6 +80,7 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = []
                 Addhomework.CreatedBy = ""
                 Addhomework.HwId = ""
+                Addhomework.DueDate = moment().format('yyyy-MM-DD')
                 Addhomework.IsUpdate = false
                 setSelectedDate(moment().format('yyyy-MM-DD'))
                 props.updateBtnName(false)
