@@ -26,7 +26,7 @@ const PupilHomeWorkDetail = (props) => {
     const { item } = props.route.params
     const [materialArr, setMaterialArr] = useState([])
     const [isLoading, setLoading] = useState(false);
-console.log('props of homewor', props.route.params);
+    console.log('props of homewor', props.route.params);
 
     onSubmitHomework = () => {
         let formData = new FormData();
@@ -42,7 +42,7 @@ console.log('props of homewor', props.route.params);
         // formData.append("Feedback", feedBack);
         // formData.append("Rewards", '1');
 
-        console.log('data',formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`);
+        console.log('data', formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`);
 
         Service.postFormData(formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
@@ -101,7 +101,11 @@ console.log('props of homewor', props.route.params);
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.commonBg}>
-                <Header14 onAlertPress={() => props.navigation.openDrawer()} goBack={() => props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
+                <Header14
+                    onAlertPress={() => props.navigation.openDrawer()}
+                    goBack={() => props.navigation.goBack()}
+                    onSubmitHomework={() => setSubmitPopup(true)}
+                    title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
 
@@ -110,7 +114,7 @@ console.log('props of homewor', props.route.params);
                                 <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                                 <View style={PAGESTYLE.daterow}>
                                     <Image source={require('../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
-                                    <Text style={PAGESTYLE.dueDateTextBold}>{moment(item.DueDate).format('DD/MM/yyyy')}</Text>
+                                    <Text style={PAGESTYLE.dueDateTextBold}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
@@ -130,62 +134,26 @@ console.log('props of homewor', props.route.params);
 
                             <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
                             <View style={PAGESTYLE.checkBoxGroup}>
-                                <View style={PAGESTYLE.checkBoxLabelBox}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={true}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
-                                    </View>
-
-                                </View>
-                                <View style={PAGESTYLE.checkBoxLabelBox}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={true}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from
-the Amazon Rainforest</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                    </View>
-
-                                </View>
-                                <View style={PAGESTYLE.checkBoxLabelBox}>
-                                    <View style={PAGESTYLE.alignRow}>
-                                        <CheckBox
-                                            style={PAGESTYLE.checkMark}
-                                            value={true}
-                                            boxType={'square'}
-                                            onCheckColor={COLORS.white}
-                                            onFillColor={COLORS.dashboardPupilBlue}
-                                            onTintColor={COLORS.dashboardPupilBlue}
-                                            tintColor={COLORS.dashboardPupilBlue}
-                                        />
-                                        <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                    </View>
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                    </View>
-
-                                </View>
-                                <View style={PAGESTYLE.checkBoxLabelBox}>
+                                <FlatList
+                                    data={item.CheckList}
+                                    renderItem={({ item }) => (
+                                        <View style={PAGESTYLE.checkBoxLabelBox}>
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <CheckBox
+                                                    style={PAGESTYLE.checkMark}
+                                                    value={item.IsCheck}
+                                                    boxType={'square'}
+                                                    onCheckColor={COLORS.white}
+                                                    onFillColor={COLORS.dashboardPupilBlue}
+                                                    onTintColor={COLORS.dashboardPupilBlue}
+                                                    tintColor={COLORS.dashboardPupilBlue}
+                                                />
+                                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                            </View>
+                                        </View>
+                                    )}
+                                    style={{ height: 200 }} />
+                                {/* <View style={PAGESTYLE.checkBoxLabelBox}>
                                     <View style={PAGESTYLE.alignRow}>
                                         <CheckBox
                                             style={PAGESTYLE.checkMark}
@@ -202,7 +170,7 @@ the Amazon Rainforest</Text>
                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Take Photo</Text></TouchableOpacity>
                                     </View>
 
-                                </View>
+                                </View> */}
                             </View>
                         </View>
                     </View>
@@ -210,7 +178,9 @@ the Amazon Rainforest</Text>
                         <View style={PAGESTYLE.uploadBoardBlock}>
                             {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
 
-                            <TouchableOpacity style={PAGESTYLE.homeworkView} onPress={() => addMaterial()}>
+                            <TouchableOpacity
+                                style={PAGESTYLE.homeworkView}
+                                onPress={() => addMaterial()}>
                                 <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
                                 <View style={PAGESTYLE.docView}>
                                     {materialArr.map((item) => {

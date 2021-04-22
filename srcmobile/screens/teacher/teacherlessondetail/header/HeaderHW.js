@@ -6,6 +6,8 @@ import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from "../../../../component/reusable/popup/Popuphomework";
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderHW = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -18,13 +20,13 @@ const HeaderHW = (props) => {
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
-                            Common Title
+                        {props.SubjectName}
                     </Text>
-                        <Text style={styles.date}>14/09/2020</Text>
+                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    <Popuphomework />
+                    <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
                     {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}

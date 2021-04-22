@@ -48,8 +48,6 @@ const TLHomeWorkSubmittedDetail = (props) => {
         formData.append("Feedback", feedBack);
         formData.append("Rewards", '1');
 
-        console.log('data', formData._parts, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`);
-
         Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
@@ -78,7 +76,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 <HeaderSave
                     isMarked={data.Marked ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
-                    navigateToBack={() => props.navigation.goBack()}
+                    navigateToBack={() => { props.navigation.goBack() }}
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onSetHomework={() => isFieldsValidated()} />
                 <KeyboardAwareScrollView>
@@ -144,7 +142,18 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 </View>
                                 <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
                                     <View style={PAGESTYLE.uploadBoardBlock}>
-                                        <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                                        <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
+                                        <FlatList
+                                            data={data.HomeworkList}
+                                            style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                            renderItem={({ item, index }) => (
+                                                <View style={PAGESTYLE.alignRow}>
+                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                </View>
+                                            )}
+                                            numColumns={4}
+                                            keyExtractor={(item, index) => index.toString()}
+                                        />
                                     </View>
                                 </View>
                             </View>

@@ -182,37 +182,37 @@ const PupuilDashboard = (props) => {
                                                                 </View>
                                                                 <View style={STYLE.hrCommon}></View>
                                                                 <View style={PAGESTYLE.mediaMain}>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
+                                                                    <FlatList
+                                                                        data={dataOfSubView.PupilList}
+                                                                        style={{ width: '100%' }}
+                                                                        renderItem={({ item, index }) => (
+                                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                        )}
+                                                                        horizontal
+                                                                        keyExtractor={(item, index) => index.toString()}
+                                                                    />
                                                                 </View>
                                                                 <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                                 <View style={PAGESTYLE.attchmentSectionwithLink}>
                                                                     <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                         <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                        <Text style={PAGESTYLE.attachmentText}>{0} Attachment</Text>
+                                                                        <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment</Text>
                                                                     </TouchableOpacity>
                                                                 </View>
                                                                 <View style={PAGESTYLE.requirementofClass}>
                                                                     <Text style={PAGESTYLE.requireText}>What you will need</Text>
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
-                                                                    </View>
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
-                                                                    </View>
+                                                                    <FlatList
+                                                                        data={dataOfSubView.CheckList}
+                                                                        style={{ width: '100%' }}
+                                                                        renderItem={({ item, index }) => (
+                                                                            <View style={PAGESTYLE.lessonPoints}>
+                                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                            </View>
+                                                                        )}
+                                                                        numColumns={4}
+                                                                        keyExtractor={(item, index) => index.toString()}
+                                                                    />
                                                                 </View>
                                                                 <View style={PAGESTYLE.lessonstartButton}>
                                                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
@@ -290,22 +290,17 @@ const PupuilDashboard = (props) => {
                                                                 <Text style={PAGESTYLE.lessondesciption}>{dataOfHWSubView.HomeworkDescription}</Text>
                                                                 <View style={PAGESTYLE.requirementofClass}>
                                                                     <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
-                                                                    <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>Watch The BBC Bitesize Video.</Text>
-                                                                    </View>
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>Write a list of all the everyday items that come from the Amazon Rainforest.</Text>
-                                                                    </View>
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>Write a short story about where those items come from in the the forest and what they mean to you.</Text>
-                                                                    </View>
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>Take a photo of your work and upload here.</Text>
-                                                                    </View>
+                                                                    <FlatList
+                                                                        data={dataOfHWSubView.CheckList}
+                                                                        style={{ width: '100%' }}
+                                                                        renderItem={({ item, index }) => (
+                                                                            <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
+                                                                                <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                                <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                            </View>
+                                                                        )}
+                                                                        keyExtractor={(item, index) => index.toString()}
+                                                                    />
                                                                 </View>
                                                                 <View style={PAGESTYLE.lessonstartButton}>
                                                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity>
