@@ -57,7 +57,7 @@ const TLHomeWork = (props) => {
 
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
-            console.log('response of homework by lesson id', res)
+            console.log('response of homework by lesson id', res.flag)
             if (res.flag) {
                 Addhomework.IsIncluded = res.data.IsIncluded
                 Addhomework.HomeworkDescription = res.data.HomeworkDescription
@@ -73,11 +73,17 @@ const TLHomeWork = (props) => {
                 setItemCheckList(res.data.CheckList)
                 props.updateBtnName(true)
             } else {
+                Addhomework.IsIncluded = true
+                Addhomework.HomeworkDescription = ""
+                Addhomework.LessonId = ""
+                Addhomework.CheckList = []
+                Addhomework.CreatedBy = ""
+                Addhomework.HwId = ""
                 Addhomework.IsUpdate = false
                 props.updateBtnName(false)
-
-
             }
+            console.log('response of homework by lesson id', Addhomework)
+
         }, (err) => {
             console.log('Error of homework by lesson id', err)
 

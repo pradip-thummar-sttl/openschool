@@ -120,7 +120,7 @@ const TeacherLessonDetail = (props) => {
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
-                            hwBtnName={Addhomework.IsUpdate ? 'Update Homework' : 'Set Homework'}
+                            hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                             SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
