@@ -115,10 +115,10 @@ const TeacherLessonList = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', {onGoBack: () => refresh()})}
+                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => fetchRecord('', '')}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg}>

@@ -596,6 +596,11 @@ flex: 1,
         height: '100%',
         
     },
+    dateTimetextdummy2: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+    },
     dateField: {
         flex: 0.30
     },

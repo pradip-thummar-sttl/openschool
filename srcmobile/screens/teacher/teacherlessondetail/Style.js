@@ -343,6 +343,19 @@ export default StyleSheet.create({
     borderNone: {
         borderLeftWidth:0,
     },
+    uploadBoardBlock: {
+        backgroundColor: COLORS.greyBack,
+        width:'100%',
+        height:hp(30.05),
+        borderRadius: 10,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+    },
+    uploaded: {
+        alignSelf: 'center', 
+        marginVertical: 8, 
+        color: COLORS.greyplaceholder
+    },
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -873,6 +886,15 @@ export default StyleSheet.create({
         width:hp(2.13),
         resizeMode:'contain',
         marginRight:hp(1),
+    },
+    markedIcon1:{
+        width:80,
+        resizeMode:'contain',
+    },
+    uploaded: {
+        alignSelf: 'center', 
+        marginVertical: 8, 
+        color: COLORS.greyplaceholder
     },
     markedLabel:{
         flexDirection: 'row',

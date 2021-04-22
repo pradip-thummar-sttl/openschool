@@ -9,7 +9,7 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { showMessage, msgTopic, msgDescription, opacity } from "../../../../utils/Constant";
+import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack } from "../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
@@ -29,11 +29,13 @@ import { User } from "../../../../utils/Model";
 import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import { launchCamera } from "react-native-image-picker";
 
 const TLDetailAdd = (props) => {
     const [materialArr, setMaterialArr] = useState([])
     const [recordingArr, setRecordingArr] = useState([])
     const [isAddRecording, setAddRecording] = useState(false)
+    const [cameraResponse, setCameraResponse] = useState({})
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -166,6 +168,11 @@ const TLDetailAdd = (props) => {
     };
 
     const pushCheckListItem = () => {
+        if (!newItem) {
+            showMessage(MESSAGE.addItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }
@@ -188,7 +195,7 @@ const TLDetailAdd = (props) => {
         }
     }
 
-    onScreeCamera = () => {
+    const onScreeCamera = () => {
         // RecordScreen.startRecording().catch((error) => console.error(error));
         // setTimeout(() => {
 
@@ -205,11 +212,11 @@ const TLDetailAdd = (props) => {
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
-    onScreeVoice = () => {
+    const onScreeVoice = () => {
         setAddRecording(false)
 
     }
-    onCameraOnly = () => {
+    const onCameraOnly = () => {
         setAddRecording(false)
 
     }
@@ -481,7 +488,10 @@ const TLDetailAdd = (props) => {
         })
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
-            showMessage(MESSAGE.lessonAdded)
+            showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                props.route.params.onGoBack();
+                props.navigation.goBack()
+            })
             setLoading(null)
             return
         }
@@ -493,7 +503,10 @@ const TLDetailAdd = (props) => {
                 setLoading(null)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessage(MESSAGE.lessonAdded)
+                showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                    props.route.params.onGoBack();
+                    props.navigation.goBack()
+                })
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -647,7 +660,10 @@ const TLDetailAdd = (props) => {
                         // </View>
                         // : null
                     }
-
+                    <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                        onScreeCamera={() => onScreeCamera()}
+                        onScreeVoice={() => onScreeVoice()}
+                        onCameraOnly={() => onCameraOnly()} />
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"

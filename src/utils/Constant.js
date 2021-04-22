@@ -10,9 +10,16 @@ export const Lesson = 'Lesson';
 export const Event = 'Event';
 
 export class Var {
-     static isCalender = false;
+    static isCalender = false;
 }
 
 export const showMessage = (message) => {
     Alert.alert(message);
+}
+
+export const showMessageWithCallBack = (message, callBack) => {
+    Alert.alert(message, null,
+        [
+            { text: 'OK', onPress: () => { callBack() } },
+        ]);
 }

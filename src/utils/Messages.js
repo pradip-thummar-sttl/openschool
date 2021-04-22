@@ -18,6 +18,8 @@ const MESSAGE = {
     lessonUpdated: "Lesson updated successfully",
     selectPupil: "Please select at least one pupil.",
     homeworkMarked: "Homework marked successfully",
+    checkList: 'Please add at least one item in checklist',
+    addItem: 'Please enter item your pupil may need',
 }
 
 export default MESSAGE;

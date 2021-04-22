@@ -5,6 +5,8 @@ import COLORS from "../../../../utils/Colors";
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
+import moment from 'moment';
+
 const HeaderHWS = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -17,9 +19,9 @@ const HeaderHWS = (props) => {
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
-                            Common Title
+                        {props.subjectName}
                     </Text>
-                        <Text style={styles.date}>14/09/2020</Text>
+                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
