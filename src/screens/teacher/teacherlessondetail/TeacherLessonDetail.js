@@ -54,6 +54,7 @@ const TeacherLessonDetail = (props) => {
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
+        console.log('add homework data',data)
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
                 console.log('response of update homework', res)

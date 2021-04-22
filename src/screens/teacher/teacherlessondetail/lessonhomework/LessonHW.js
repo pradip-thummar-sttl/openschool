@@ -57,7 +57,7 @@ const TLHomeWork = (props) => {
 
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
-            console.log('response of homework by lesson id', res.flag)
+            console.log('response of homework by lesson id', res)
             if (res.flag) {
                 Addhomework.IsIncluded = res.data.IsIncluded
                 Addhomework.HomeworkDescription = res.data.HomeworkDescription
@@ -80,6 +80,7 @@ const TLHomeWork = (props) => {
                 Addhomework.CreatedBy = ""
                 Addhomework.HwId = ""
                 Addhomework.IsUpdate = false
+                setSelectedDate(moment().format('yyyy-MM-DD'))
                 props.updateBtnName(false)
             }
             console.log('response of homework by lesson id', Addhomework)
@@ -100,9 +101,10 @@ const TLHomeWork = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
-        Addhomework.DueDate = selectDate
+        var d = moment(date).format('yyyy-MM-DD')
+        setSelectedDate(d)
         hideDatePicker();
+        Addhomework.DueDate = d
     };
 
     const addMaterial = () => {

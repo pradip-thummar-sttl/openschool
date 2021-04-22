@@ -1275,4 +1275,10 @@ flex: 1,
         height: hp(5.20),
         fontSize: hp(1.82),
     },
+    downloaBtn:{
+        alignItems:'center',
+        justifyContent: 'center',
+        width:hp(5),
+        height:'100%',
+    }
 });

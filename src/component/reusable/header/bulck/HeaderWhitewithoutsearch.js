@@ -17,7 +17,7 @@ const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity><Text style={styles.date}>{props.title}</Text></Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={()=>props.onOpenWorkSpacePress()} style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>

@@ -9,6 +9,9 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
+import moment from "moment";
+import Images from "../../../../utils/Images";
+import { Download } from "../../../../utils/Download";
 
 
 const PupilLessonDetailInternal = (props) => {
@@ -24,9 +27,10 @@ const PupilLessonDetailInternal = (props) => {
 
             <View style={PAGESTYLE.commonBg}>
                 <HeaderWhitewithoutsearch
+                    title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
                     goBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
-                    onOpenWorkSpacePress={()=>props.navigation.navigate('WorkSpace')}
+                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace')}
                     onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}
                 />
 
@@ -38,8 +42,8 @@ const PupilLessonDetailInternal = (props) => {
                         </View>
                         <View style={PAGESTYLE.videoTitleLine}>
                             <View>
-                                <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}: How to use conjunctions to join two words together</Text>
-                                <Text style={PAGESTYLE.videoPublishDate}>Published on 29 July 2020</Text>
+                                <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
+                                <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
                             </View>
                             <View style={PAGESTYLE.bookMark}>
                                 <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
@@ -66,8 +70,11 @@ const PupilLessonDetailInternal = (props) => {
                                     item.MaterialList.map((obj) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                                <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
+                                                <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
+                                                <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
+                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                </TouchableOpacity>
+                                                {/* <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
                                             </View>
                                         )
                                     }) :
@@ -82,7 +89,20 @@ const PupilLessonDetailInternal = (props) => {
                         </View>
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
-                            <View style={PAGESTYLE.fileGrp}>
+                            {
+                                item.WorkSpacelist.length > 0 ?
+                                    item.WorkSpacelist.map((obj) => {
+                                        return (
+                                            <View style={PAGESTYLE.fileGrp}>
+                                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                            </View>
+                                        )
+                                    }) :
+                                    <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
+                            }
+
+                            {/* <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
                                 <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View>
@@ -97,7 +117,7 @@ const PupilLessonDetailInternal = (props) => {
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
                                 <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
+                            </View> */}
                         </View>
                     </View>
                 </View>

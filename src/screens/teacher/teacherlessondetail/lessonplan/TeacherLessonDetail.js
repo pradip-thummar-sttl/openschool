@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, PermissionsAndroid, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -9,10 +9,10 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
-
+import { Download } from "../../../../utils/Download";
 const TLDetail = (props) => {
+   
     return (
-
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
                 <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
@@ -127,7 +127,9 @@ const TLDetail = (props) => {
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.fileGrp}>
                                         <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
-                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                        </TouchableOpacity>
                                     </View>
                                 )}
                                 keyExtractor={(item, index) => index.toString()}
