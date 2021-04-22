@@ -42,7 +42,7 @@ const Popupaddrecording = (props) => {
             <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Text style={STYLE.recordLinkText}>Add recording</Text>
+                {/* <Text style={STYLE.recordLinkText}>Add recording</Text> */}
             </TouchableOpacity>
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupLarge}>

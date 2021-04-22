@@ -15,10 +15,10 @@ const HeaderSave = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Common Title</Text>
+                    </TouchableOpacity> {props.label} Homework</Text>
                 <View style={styles.headerRight}>
-                    {/* <PopupHomeWorkSave />
-                    <TouchableOpacity
+                    {/* <PopupHomeWorkSave /> */}
+                    {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-      //  paddingBottom: hp(3.85),
+        paddingBottom: hp(1),
         paddingTop: hp(3.85),
     },
     headerMain: {
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top:wp(2.6),
+        top: wp(2.6),
     },
     commonText: {
         fontSize: hp(1.82),

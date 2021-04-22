@@ -168,6 +168,11 @@ const TLDetailEdit = (props) => {
     };
 
     const pushCheckListItem = () => {
+        if (!newItem) {
+            showMessage(MESSAGE.addItem)
+            return
+        }
+        
         let temp = {
             ItemName: newItem
         }
