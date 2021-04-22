@@ -196,17 +196,17 @@ const PopupdataSecond = (props) => {
                     </View>
                 </TouchableOpacity>
                 {isFromDropOpen ?
-                    <View style={styles.colorDropView}>
+                    <View style={styles.colorDropView2}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFromDropOpen(false); setSelectedFromTime(item) }}>
-                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                    <Text style={{ padding: hp(1.23) }}>{item}</Text>
                                 </TouchableOpacity>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(24.63) }} />
                     </View>
                     :
                     null
@@ -228,7 +228,7 @@ const PopupdataSecond = (props) => {
                     </View>
                 </TouchableOpacity>
                 {isToDropOpen ?
-                    <View style={styles.colorDropView}>
+                    <View style={styles.colorDropView2}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
@@ -339,7 +339,7 @@ const PopupdataSecond = (props) => {
                                                 <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                             <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
-                                                        <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                        <Image style={styles.dropDownArrowdatetime2} source={Images.DropArrow} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
@@ -544,6 +544,7 @@ const styles = StyleSheet.create({
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
+        alignItems:'center',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
@@ -555,8 +556,8 @@ const styles = StyleSheet.create({
         marginTop: hp(1.3),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
-        paddingTop: hp('2.0%'),
-        paddingBottom: hp('2.0%'),
+        paddingTop: hp('1%'),
+        paddingBottom: hp('1%'),
     },
     dropDownSmallWrap1: {
         flexDirection: 'row',
@@ -577,7 +578,7 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        top: hp(1.1),
+        //top: hp(1.1),
         left: hp(1.4),
     },
     subjectDateTime: {
@@ -588,16 +589,23 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        top: hp(-0.75),
+        // top: hp(-0.75),
         left: hp(2.5),
-        position: 'absolute'
+        // position: 'absolute'
     },
     dropDownArrowdatetime: {
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(0),
-        top: hp(-0.2),
+        top: hp(0.5),
+    },
+    dropDownArrowdatetime2: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(0),
+        top: hp(-0.8),
     },
     notes: {
         flexDirection: 'row',
@@ -616,11 +624,12 @@ const styles = StyleSheet.create({
         borderRadius: hp(0.8),
         left: hp(-0.78),
         position: 'absolute',
-        top: hp(-1.3),
+        top: hp(-1.75),
     },
     // colorDropView: { position: "absolute", alignSelf: 'center', height: 200, width: 150, borderRadius: 10, backgroundColor: COLORS.white, right: 15, bottom: 80, padding: 15, borderColor: COLORS.dashboardBorder, borderWidth: 1.5 },
     // colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(2.6), bottom: hp(19.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView2: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(0), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
     timeField: {
         flex: 0.20
