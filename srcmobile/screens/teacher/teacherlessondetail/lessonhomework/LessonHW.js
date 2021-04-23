@@ -20,6 +20,7 @@ import { Addhomework } from "../../../../utils/Model";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import MESSAGE from "../../../../utils/Messages";
 
 const TLHomeWork = (props) => {
 
@@ -159,6 +160,11 @@ const TLHomeWork = (props) => {
         setItemCheckList(newList)
     }
     const pushCheckListItem = () => {
+        if (!newItem) {
+            showMessage(MESSAGE.addItem)
+            return
+        }
+        
         let temp = {
             ItemName: newItem
         }

@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity, showMessage } from "../../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
@@ -30,6 +30,7 @@ import DocumentPicker from 'react-native-document-picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { launchCamera } from "react-native-image-picker";
 
 const TLDetailEdit = (props) => {
     const [date, setDate] = useState(new Date());
@@ -37,6 +38,9 @@ const TLDetailEdit = (props) => {
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(false);
     const [lessonData, setLessonData] = useState(props.route.params.data);
+    const [isAddRecording, setAddRecording] = useState(false)
+    const [cameraResponse, setCameraResponse] = useState({})
+
     var tempPupil = [];
     useEffect(() => {
         if (itemCheckList.length == 0) {
@@ -166,6 +170,11 @@ const TLDetailEdit = (props) => {
     };
 
     const pushCheckListItem = () => {
+        if (!newItem) {
+            showMessage(MESSAGE.addItem)
+            return
+        }
+        
         let temp = {
             ItemName: newItem
         }
@@ -187,6 +196,28 @@ const TLDetailEdit = (props) => {
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
         }
+    }
+
+    const onScreeCamera = () => {
+        setAddRecording(false)
+        props.navigateScreeCamera()
+    }
+    const onScreeVoice = () => {
+        setAddRecording(false)
+
+    }
+    const onCameraOnly = () => {
+        launchCamera({ mediaType: 'video' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                setCameraResponse(response)
+            }
+
+        })
+        setAddRecording(false)
+
     }
 
     const itemCheckListView = () => {
@@ -446,7 +477,10 @@ const TLDetailEdit = (props) => {
         })
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
-            showMessage(MESSAGE.lessonUpdated)
+            showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
+                props.route.params.onGoBack();
+                props.navigation.goBack()
+            })
             setLoading(null)
             return
         }
@@ -456,7 +490,10 @@ const TLDetailEdit = (props) => {
                 setLoading(null)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessage(MESSAGE.lessonUpdated)
+                showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
+                    props.route.params.onGoBack();
+                    props.navigation.goBack()
+                })
             } else {
                 setLoading(false)
                 showMessage(res.message)
@@ -550,15 +587,13 @@ const TLDetailEdit = (props) => {
                                 <View style={PAGESTYLE.timedateGrp}>
                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                            <View style={PAGESTYLE.subjectDateTime}>
-                                                <TouchableOpacity onPress={() => showDatePicker()}>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => showDatePicker()}>
+                                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                 <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                             </View>
-                                        </View>
+                                        </TouchableOpacity>
                                     </View>
 
                                     {fromTimeDropDown()}
@@ -577,10 +612,10 @@ const TLDetailEdit = (props) => {
                                         style={PAGESTYLE.commonInputTextareaNormal}
                                         onChangeText={text => setDescription(text)} />
                                 </View>
-                                <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                     <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                     <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                </View>
+                                </TouchableOpacity>
 
                                 {itemCheckListView()}
 
@@ -676,6 +711,11 @@ const TLDetailEdit = (props) => {
                             </View>
                         </View>
                     </ScrollView>
+                    <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                        onScreeCamera={() => onScreeCamera()}
+                        onScreeVoice={() => onScreeVoice()}
+                        onCameraOnly={() => onCameraOnly()} />
+
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"

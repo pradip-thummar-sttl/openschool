@@ -18,10 +18,12 @@ const Header = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
+    const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
+            setKeyword('')
             this.textInput.clear()
         } else {
             props.onSearch()
@@ -56,16 +58,21 @@ const Header = (props) => {
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
+                            console.log(keyword);
+                            setKeyword(keyword);
                             props.onSearchKeyword(keyword);
                         }} />
                     <TouchableOpacity
                         style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
+                            keyword ?
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
                                 :
-                                setSearchActive(true)
+                                null
                         }}>
                         <Image
                             style={styles.userIcon1}
@@ -79,7 +86,7 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {setFilterBy('Subject'); setSelectedIndex(0)}}>
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
@@ -93,7 +100,7 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {setFilterBy('Date'); setSelectedIndex(1)}}>
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?

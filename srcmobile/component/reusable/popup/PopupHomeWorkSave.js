@@ -29,7 +29,10 @@ const PopupHomeWorkSave = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing save this pupil will be notified of your feedback. You can edit your feedback at anytime.</Text>
-                        <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>Save Feedback</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => { toggleModal(); props.onSetHomework() }}>
+                            <Text style={STYLE.commonButtonGreenDashboardSide}>Save Feedback</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-       // marginRight: hp(1.69),
+        // marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
@@ -112,16 +115,16 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        width:'100%',
+        width: '100%',
     },
     popupTitle: {
         fontSize: hp(2.34),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(2.6),
-        textAlign:'center',
-        paddingLeft:wp(5.5),
-        paddingRight:wp(5.5),
+        textAlign: 'center',
+        paddingLeft: wp(5.5),
+        paddingRight: wp(5.5),
     },
     popupText: {
         fontSize: wp(3.46),
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         marginBottom: hp(3.5),
         lineHeight: hp(2.6),
-        paddingLeft:wp(7.5),
-        paddingRight:wp(7.5),
+        paddingLeft: wp(7.5),
+        paddingRight: wp(7.5),
     },
 });

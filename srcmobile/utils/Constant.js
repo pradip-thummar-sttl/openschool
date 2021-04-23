@@ -16,3 +16,10 @@ export class Var {
 export const showMessage = (message) => {
     Alert.alert(message);
 }
+
+export const showMessageWithCallBack = (message, callBack) => {
+    Alert.alert(message, null,
+        [
+            { text: 'OK', onPress: () => { callBack() } },
+        ]);
+}

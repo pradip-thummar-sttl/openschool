@@ -20,6 +20,7 @@ import { Addhomework } from "../../../../utils/Model";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import MESSAGE from "../../../../utils/Messages";
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -186,6 +187,11 @@ const TLHomeWork = (props) => {
         setItemCheckList(newList)
     }
     const pushCheckListItem = () => {
+        if (!newItem) {
+            showMessage(MESSAGE.addItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }
@@ -218,6 +224,14 @@ const TLHomeWork = (props) => {
 
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                            <TouchableOpacity
+                                style={PAGESTYLE.userIcon1Parent}
+                                activeOpacity={opacity}
+                                onPress={() => { removeCheckListItem(index) }}>
+                                <Image
+                                    style={PAGESTYLE.userIcon1}
+                                    source={Images.PopupCloseIcon} />
+                            </TouchableOpacity>
                         </View>
                         // <View style={{ margin: 8, }}>
                         //     <Text style={{ fontSize: 22, paddingRight: 50 }}>{item.ItemName}</Text>
@@ -282,7 +296,7 @@ const TLHomeWork = (props) => {
                                     <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} />
                                     <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
                                         <View>
-                                            <Text style={PAGESTYLE.dateTimetextdummy}>{selectDate}</Text>
+                                            <Text style={PAGESTYLE.dateTimetextdummy2}>{selectDate}</Text>
                                         </View>
                                     </TouchableOpacity>
                                     <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />

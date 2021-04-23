@@ -23,6 +23,7 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import COLORS from "../../../utils/Colors";
+import MESSAGE from "../../../utils/Messages";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -43,9 +44,21 @@ const TeacherLessonDetail = (props) => {
         }
     }, [isSearchActive])
 
+    const isFiedlsValidated = () => {
+        console.log('Addhomework', Addhomework);
+        if (!Addhomework.HomeworkDescription) {
+            showMessage(MESSAGE.description)
+            return
+        } else if (Addhomework.CheckList.length == 0) {
+            showMessage(MESSAGE.checkList)
+            return
+        }
+
+        setVisiblePopup(true)
+    }
+
     const onAddHomework = () => {
         setHomeworkLoading(true)
-        console.log('add homework', Addhomework.CheckList)
         const data = {
             LessonId: props.route.params.data._id,
             IsIncluded: Addhomework.IsIncluded,
@@ -61,7 +74,7 @@ const TeacherLessonDetail = (props) => {
                 if (res.flag) {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
-                    showMessage('Homework update successfully')
+                    showMessage('Homework updated successfully')
                 }else{
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
@@ -128,7 +141,7 @@ const TeacherLessonDetail = (props) => {
                             onAlertPress={() => props.navigation.openDrawer()}
                             onClose={() => setVisiblePopup(false)}
                             isVisible={isVisiblePopup}
-                            onOpenPopup={() => setVisiblePopup(true)}
+                            onOpenPopup={() => isFiedlsValidated()}
                             isHomeworkLoading={isHomeworkLoading}
                         />
 

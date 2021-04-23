@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -15,21 +15,57 @@ import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
+var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
 
+    var data = props.route.params.item
+    console.log('data', data);
+
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
+    const [recordingArr, setRecordingArr] = useState([])
+    const [isLoading, setLoading] = useState(false);
 
     const isFieldsValidated = () => {
-        if (!feedback) {
+        if (!feedBack) {
             showMessage(MESSAGE.feedback)
             return false;
         }
 
-        return true;
+        let formData = new FormData();
+
+        recordingArr.forEach(element => {
+            formData.append('recording', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        formData.append("Feedback", feedBack);
+        formData.append("Rewards", '1');
+
+        Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
+            if (res.code == 200) {
+                setLoading(false)
+                console.log('response of save lesson', res)
+                // setDefaults()
+                showMessage(MESSAGE.homeworkMarked)
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
     }
+
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -41,19 +77,22 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderSave
-                    navigateToBack={() => props.navigation.goBack()}
-                    onAlertPress={() => { props.navigation.openDrawer() }} />
+                    isMarked={data.Marked ? true : false}
+                    label={`${data.SubjectName} ${data.LessonTopic}`}
+                    navigateToBack={() => { props.navigation.goBack() }}
+                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onSetHomework={() => isFieldsValidated()} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.containerWrapTop}>
                             <View style={PAGESTYLE.userInfoTop}>
-                                <Text style={PAGESTYLE.userTopName}>Reuel Pardesi</Text>
-                                <Text style={PAGESTYLE.userTopGroup}>Group: 1A</Text>
+                                <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
+                                <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
                             </View>
                             <View>
                                 <View style={PAGESTYLE.markedLabel}>
                                     <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
-                                    <Text style={PAGESTYLE.markedText}>Marked</Text>
+                                    <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
                                 </View>
                             </View>
                         </View>
@@ -61,11 +100,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <View style={PAGESTYLE.userInfoDate}>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                    <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                                    <Text style={PAGESTYLE.dateText}>{data.HomeWorkDate ? moment(data.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                    <Text style={PAGESTYLE.dateText}>05/02/21</Text>
+                                    <Text style={PAGESTYLE.dateText}>{data.SubmitedDate ? moment(data.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
                                 </View>
                             </View>
                         </View>
@@ -73,7 +112,12 @@ const TLHomeWorkSubmittedDetail = (props) => {
                             <View style={PAGESTYLE.teacherDetailLeft}>
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                    <Text style={PAGESTYLE.descNormalText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest its from.</Text>
+                                    <TextInput
+                                        multiline={true}
+                                        numberOfLines={4}
+                                        defaultValue={data.HomeworkDescription}
+                                        style={PAGESTYLE.commonInputTextareaNormal}
+                                    />
                                     {/* <TextInput
                                         multiline={true}
                                         numberOfLines={4}
@@ -84,64 +128,44 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <View style={PAGESTYLE.requirementofClass}>
                                     {/* <Text style={PAGESTYLE.requireText}>Create Checklist</Text> */}
                                     <View style={PAGESTYLE.checkBoxGroup}>
-                                        <View style={PAGESTYLE.checkBoxLabelLine}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={false}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.checkBoxLabelLine}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={false}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.checkBoxLabelLine}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={false}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                        </View>
-                                        <View style={PAGESTYLE.checkBoxLabelLine}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={false}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                        </View>
+                                        <FlatList
+                                            data={data.CheckList}
+                                            renderItem={({ item }) => (
+                                                <View style={PAGESTYLE.checkBoxLabelLine}>
+                                                    <CheckBox
+                                                        style={PAGESTYLE.checkMark}
+                                                        value={item.IsCheck}
+                                                        disabled
+                                                        boxType={'square'}
+                                                        onCheckColor={COLORS.white}
+                                                        onFillColor={COLORS.dashboardPupilBlue}
+                                                        onTintColor={COLORS.dashboardPupilBlue}
+                                                        tintColor={COLORS.dashboardPupilBlue}
+                                                    />
+                                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                </View>
+                                            )}
+                                            style={{ height: 200 }} />
                                     </View>
-                                    <TouchableOpacity style={PAGESTYLE.addItem}>
-                                        <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                                        <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
-                                <View style={PAGESTYLE.uploadBoardBlock}>
+                                {/* <View style={PAGESTYLE.uploadBoardBlock}>
                                     <Image source={Images.UploadHomeWorkMobile} style={PAGESTYLE.uploadBoardMobile} />
+                                </View> */}
+                                <View style={PAGESTYLE.uploadBoardBlock}>
+                                    <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
+                                    <FlatList
+                                        data={data.HomeworkList}
+                                        style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                        renderItem={({ item, index }) => (
+                                            <View style={PAGESTYLE.alignRow}>
+                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon1} />
+                                            </View>
+                                        )}
+                                        numColumns={4}
+                                        keyExtractor={(item, index) => index.toString()}
+                                    />
                                 </View>
                             </View>
                         </View>
@@ -183,7 +207,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.submitBtnWrap}>
-                                    <PopupHomeWorkSave />
+                                    <PopupHomeWorkSave
+                                        onSetHomework={() => isFieldsValidated()}
+                                        isMarked={props.isMarked} />
                                 </View>
                             </View>
                         </View>
