@@ -28,6 +28,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [feedBack, setFeedback] = useState('')
     const [recordingArr, setRecordingArr] = useState([])
     const [isLoading, setLoading] = useState(false);
+    const [isAddRecording, setAddRecording] = useState(false)
 
     const isFieldsValidated = () => {
         if (!feedBack) {
@@ -171,8 +172,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.videoRecording}>
                                         <View style={PAGESTYLE.recordLinkBlock}>
-                                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                            <Popupaddrecording />
+                                            <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                                <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                                                <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
