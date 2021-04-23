@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: hp(5.85),
+        paddingTop: hp(4),
     },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom:hp(2.5),
+        marginBottom:hp(2),
     },
     mainTitle: {
         fontSize: wp(4.26),

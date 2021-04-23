@@ -141,7 +141,7 @@ const PupilLessonDetailInternal = (props) => {
         <View style={{ ...PAGESTYLE.mainPage, height: '100%' }}>
             <View style={PAGESTYLE.commonBg}>
                 <Header6 goBack={() => props.navigation.goBack()} />
-                <View style={PAGESTYLE.containerWrap}>
+                <View>
                     <View style={{ height: '100%', paddingBottom: hp(18.8), }}>
                         <View style={PAGESTYLE.largeVideoBlock}>
                             <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />

@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(1),
+        paddingRight: hp(2),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),

@@ -51,7 +51,7 @@ const PupilHomeWorkDetail = (props) => {
                                     </View>
                                 </View>
                             </View>
-                            <View style={[PAGESTYLE.lessonDesc, PAGESTYLE.lessonPupilHomeWorkDetail]}>
+                            <View style={[PAGESTYLE.lessonDesc]}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
                                 <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
                             </View>

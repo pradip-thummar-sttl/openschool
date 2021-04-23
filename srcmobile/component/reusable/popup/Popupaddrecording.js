@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -41,10 +42,9 @@ const Popupaddrecording = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity
-                activeOpacity={opacity}
-                onPress={() => refRBSheet.current.open()}>
-                <Text style={STYLE.recordLinkText}>Add recording</Text>
+            <TouchableOpacity activeOpacity={opacity} onPress={() => refRBSheet.current.open()} style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                <Text style={styles.recordLinkText}>Add recording</Text>
             </TouchableOpacity>
             <RBSheet
                     ref={refRBSheet}
@@ -141,6 +141,31 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
+        textTransform: 'uppercase',
+    },
+    recordLinkBlock: {
+        width: hp(23.5),
+        padding: hp(1.43),
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    topSpaceRecording:{
+        marginTop:hp(1.401),
+    },
+    recordingLinkIcon: {
+        width: hp(2.34),
+        resizeMode: 'contain',
+    },
+    recordLinkText: {
+        fontSize: hp(1.85),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGray,
+        marginLeft: hp(1.56),
         textTransform: 'uppercase',
     },
 });
