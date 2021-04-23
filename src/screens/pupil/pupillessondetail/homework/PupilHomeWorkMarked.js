@@ -16,7 +16,7 @@ import Images from "../../../../utils/Images";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
-    const { item } = props.route.params.item;
+    const { item } = props.route.params;
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
