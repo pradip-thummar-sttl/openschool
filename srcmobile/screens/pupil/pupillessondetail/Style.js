@@ -958,6 +958,8 @@ export default StyleSheet.create({
         shadowOffset: {width: 0,height: hp(0.24)},
         shadowOpacity: 0.06,
         shadowRadius: 4,
+        marginLeft: hp(-3),
+        marginRight: hp(-3),
     },
     containerWrapSubmit: {
         marginBottom: hp(4.31),

@@ -321,23 +321,26 @@ const TLHomeWork = (props) => {
                                 }) : null
                             }
                         </View>
-                        <View style={PAGESTYLE.thumbVideo}>
-                            <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                        </View>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                            <View style={PAGESTYLE.thumbVideo}>
+                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                            </View>
+                        </ScrollView>
                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}
                                 onPress={() => props.navigateToVideoGallery()}>
-                                <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                                <Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fullWidthButton]}>find me learning material</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                {/* <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
                     onScreeCamera={() => onScreeCamera()}
                     onScreeVoice={() => onScreeVoice()}
-                    onCameraOnly={() => onCameraOnly()} />
+                    onCameraOnly={() => onCameraOnly()} /> */}
 
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}

@@ -11,6 +11,9 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
     },
+    fullWidthButton: {
+        width:'100%',
+    },
     whiteBoard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.95),
@@ -100,7 +103,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        bottom: hp(0.8),
+        bottom: hp(0.55),
     },
     calIconHomeWork: {
         resizeMode: 'contain',
@@ -289,9 +292,10 @@ export default StyleSheet.create({
     checkBoxLabelText: {
         lineHeight: hp(2.82),
         fontSize: hp(1.85),
+        top: hp(0.5),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.3),
-        paddingRight: hp(1.1),
+        paddingLeft: hp(0.8),
+        paddingRight: hp(2),
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -372,6 +376,7 @@ export default StyleSheet.create({
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
+        top: hp(0.2),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -385,6 +390,7 @@ export default StyleSheet.create({
     grpThumbVideo: {
         width: hp(31.90),
         resizeMode: 'contain',
+        marginRight: hp(1),
     },
     subLineTitle: {
        // marginTop: hp(-3.5),
@@ -584,6 +590,13 @@ export default StyleSheet.create({
         backgroundColor: COLORS.transparent,
     },
     dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        bottom: hp(-0.1),
+        height:hp(2.5),
+    },
+    dateTimetextdummy2: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
@@ -1041,6 +1054,9 @@ export default StyleSheet.create({
     },
     alignRow:{
         flexDirection:'row',
+        alignItems:'center',
+        marginBottom: hp(0.5),
+        marginTop:hp(1),
     },
     closeNotificationbar:{
         width: hp(1),
@@ -1067,11 +1083,9 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     thumbVideo:{
+        width: '100%',
+        flexDirection:'column',
         marginRight:hp(1),
-        marginBottom:hp(1),
-        width:wp(39.2),
-        flexWrap:'wrap',
-        flexDirection:'row',
     },
     topSpaceRecording:{
         marginTop:hp(1.401),
@@ -1088,6 +1102,14 @@ export default StyleSheet.create({
         resizeMode:'contain',
         position:'absolute',
         right:hp(1.6),
+        alignSelf: 'center',
+    },
+    dropDownArrowdatetime2:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.6),
+        top: hp(0.3),
         alignSelf: 'center',
     },
     dropDownArrowdatetimehomeWork:{
@@ -1135,8 +1157,10 @@ export default StyleSheet.create({
     },
     smlThumbVideoText:{
         fontSize: wp(3.46),
+        width: hp(19),
         color: COLORS.lightGray,
         lineHeight: wp(4.25),
+        marginTop: hp(1),
         fontFamily: FONTS.fontRegular,
     },
     videoScroll:{

@@ -181,12 +181,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}
                                         onChangeText={feedback => setFeedback(feedback)} />
                                 </View>
-                                <View style={PAGESTYLE.videoRecording}>
-                                    <View style={PAGESTYLE.recordLinkBlock}>
-                                        <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                        <Popupaddrecording />
-                                    </View>
-                                </View>
+                                <Popupaddrecording />
                             </View>
                             <View style={PAGESTYLE.ratingBlock}>
                                 <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
         backgroundColor: COLORS.white,
+        paddingTop: hp(3),
         // marginBottom: hp(5.85),
     },
     headerMain: {
@@ -165,6 +166,7 @@ const styles = StyleSheet.create({
     filterbarMain: {
         flexDirection: 'row',
         marginBottom: hp(2.60),
+        marginTop: hp(-1.5),
     },
     field: {
         position: 'relative',
@@ -287,6 +289,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
+        right: hp(-1),
     },
     checkMark: {
         width: hp(1.48),

@@ -306,7 +306,7 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => setSelectedParticipants(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
                         <FlatList
@@ -328,7 +328,7 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
@@ -351,7 +351,7 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
+                        <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
@@ -560,9 +560,9 @@ const TLDetailEdit = (props) => {
                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
                                             <View style={PAGESTYLE.subjectDateTime}>
                                                 <TouchableOpacity onPress={() => showDatePicker()}>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
+                                                    <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                 </TouchableOpacity>
-                                                <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                <Image style={PAGESTYLE.dropDownArrowdatetime2} source={Images.DropArrow} />
                                             </View>
                                         </View>
                                     </View>
@@ -668,7 +668,7 @@ const TLDetailEdit = (props) => {
                                         style={PAGESTYLE.buttonGrp}
                                         activeOpacity={opacity}
                                         onPress={() => props.navigation.navigate('TLVideoGallery')}>
-                                        <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                                        <Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fullWidthButton]}>find me learning material</Text>
                                     </TouchableOpacity>
                                 </View>
                                 {lessonData.RecordedLessonName ?
