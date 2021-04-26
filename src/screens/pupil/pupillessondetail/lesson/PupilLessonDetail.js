@@ -30,7 +30,7 @@ const PupilLessonDetailInternal = (props) => {
                     title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
                     goBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
-                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace')}
+                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace',{id:item.LessonId,isWorkspace:true})}
                     onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}
                 />
 
@@ -89,10 +89,10 @@ const PupilLessonDetailInternal = (props) => {
                                 item.WorkSpacelist.length > 0 ?
                                     item.WorkSpacelist.map((obj) => {
                                         return (
-                                            <View style={PAGESTYLE.fileGrp}>
+                                            <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})}>
                                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
                                                 <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                            </View>
+                                            </TouchableOpacity>
                                         )
                                     }) :
                                     <Text style={{ alignSelf: 'center' }}>No Workspace</Text>

@@ -24,5 +24,6 @@ export const EndPoints = {
     GetAllHomeworkListByPupil:"allpupilhomeworklist",
     GetTimeTablePupil:'gettimetablepupil',
     GetAllPupilLessonList:'allpupillessonlist',
-    PupilUploadHomework:"uploadhomework"
+    PupilUploadHomework:"uploadhomework",
+    UploadWorkspace:'uploadWorkspace',
 }
