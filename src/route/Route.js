@@ -36,6 +36,7 @@ import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDet
 import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkSubmitted';
 import ScreenAndCameraRecording from '../screens/teacher/screenandcamera/ScreenandCamera';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
+import TeacherMaster from '../screens/teacher/teachermaster/TeacherMaster';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -58,6 +59,7 @@ function ScreenStack() {
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Introduction" component={Introduction} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="TeacherMaster" component={TeacherMaster} />
             <Stack.Screen name="Popup" component={Popup} />
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />

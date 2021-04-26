@@ -14,7 +14,6 @@ export default StyleSheet.create({
     },
     viewRow: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
     padLeftRight: {
         flex: 1,

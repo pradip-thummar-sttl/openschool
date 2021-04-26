@@ -187,7 +187,7 @@ const TLHomeWork = (props) => {
         setItemCheckList(newList)
     }
     const pushCheckListItem = () => {
-        if (!newItem) {
+        if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
             return
         }
@@ -197,6 +197,7 @@ const TLHomeWork = (props) => {
         }
         setItemCheckList([...itemCheckList, temp])
         this.item.clear()
+        setNewItem('')
     }
     const itemCheckListView = () => {
         return (

@@ -51,7 +51,7 @@ const WorkSpace = (props) => {
                     // }}
                     eraseComponent={<Image source={require('../../../assets/images/drawEraser.png')} />}
                     strokeComponent={color => (
-                        <Image source={require('../../../assets/images/drawPencil.png')} />
+                        <View style={[{ backgroundColor: color, height: 30, width: 30 }]} />
                     )}
                     strokeSelectedComponent={(color, index, changed) => {
                         return (

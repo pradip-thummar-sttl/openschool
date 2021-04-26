@@ -58,7 +58,6 @@ const Header = (props) => {
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
-                            console.log(keyword);
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
                         }} />

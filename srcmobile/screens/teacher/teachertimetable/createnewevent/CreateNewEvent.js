@@ -98,6 +98,7 @@ const CreateNewEvent = (props) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
+                setSelectColorId(res.data[0]._id)
                 setColorArr(res.data)
             } else {
                 showMessage(res.message)

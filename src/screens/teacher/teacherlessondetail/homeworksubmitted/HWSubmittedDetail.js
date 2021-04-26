@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { showMessage } from "../../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
@@ -29,6 +29,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [recordingArr, setRecordingArr] = useState([])
     const [isLoading, setLoading] = useState(false);
     const [isAddRecording, setAddRecording] = useState(false)
+
+    const [isBronze, setBronze] = useState(false);
+    const [isSilver, setSilver] = useState(false);
+    const [isGold, setGold] = useState(false);
 
     const isFieldsValidated = () => {
         if (!feedBack) {
@@ -183,18 +187,24 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
                                     <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
-                                            <View style={PAGESTYLE.centerText}>
-                                                <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
-                                                <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                                            </View>
-                                            <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
-                                                <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.centerText}>
-                                                <Image source={Images.GoldStar} style={[PAGESTYLE.starSelected]} />
-                                                <Text style={PAGESTYLE.starText}>Gold stars</Text>
-                                            </View>
+                                            <TouchableOpacity onPress={() => setBronze(!isBronze)} activeOpacity={opacity}>
+                                                <View style={PAGESTYLE.centerText}>
+                                                    <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                    <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity onPress={() => setSilver(!isSilver)} activeOpacity={opacity}>
+                                                <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
+                                                    <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    <Text style={PAGESTYLE.starText}>Silver stars</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity onPress={() => setGold(!isGold)} activeOpacity={opacity}>
+                                                <View style={PAGESTYLE.centerText}>
+                                                    <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                    <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                                </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>

@@ -9,7 +9,7 @@ import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 // import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
-import { msgEvent, msgLocation, msgNote, opacity, showMessage } from "../../../utils/Constant";
+import { msgEvent, msgLocation, msgNote, opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
@@ -43,7 +43,7 @@ const PopupdataSecond = (props) => {
     const [isFromDropOpen, setFromDropOpen] = useState(false)
     const [isToDropOpen, setToDropOpen] = useState(false)
     const [isColorDropOpen, setColorDropOpen] = useState(false)
-    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
+    const [selectDate, setSelectedDate] = useState(moment().format('yyyy-MM-DD'))
     const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
 
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -103,6 +103,7 @@ const PopupdataSecond = (props) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setSelectColorId(res.data[0]._id)
+                setSelectColor(res.data[0].EventColor)
                 setColorArr(res.data)
             } else {
                 showMessage(res.message)
@@ -132,7 +133,9 @@ const PopupdataSecond = (props) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setDefaults()
-                showMessage(MESSAGE.eventAdded)
+                showMessageWithCallBack(MESSAGE.eventAdded, () => {
+                    toggleModal()
+                })
             } else {
                 showMessage(res.message)
             }

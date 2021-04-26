@@ -168,7 +168,7 @@ const TLDetailEdit = (props) => {
     };
 
     const pushCheckListItem = () => {
-        if (!newItem) {
+        if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
             return
         }
@@ -178,6 +178,7 @@ const TLDetailEdit = (props) => {
         }
         setItemCheckList([...itemCheckList, temp])
         this.item.clear()
+        setNewItem('')
     }
 
     const removeCheckListItem = (_index) => {
