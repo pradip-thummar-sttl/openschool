@@ -126,7 +126,11 @@ const TLDetailAdd = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.allFiles],
+                type: [DocumentPicker.types.pdf, 
+                    DocumentPicker.types.doc, 
+                    DocumentPicker.types.xls, 
+                    DocumentPicker.types.images,
+                    DocumentPicker.types.plainText],
             }).then((results) => {
                 console.log('results', results);
                 for (const res of results) {
@@ -168,7 +172,7 @@ const TLDetailAdd = (props) => {
     };
 
     const pushCheckListItem = () => {
-        if (!newItem) {
+        if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
             return
         }
@@ -178,6 +182,7 @@ const TLDetailAdd = (props) => {
         }
         setItemCheckList([...itemCheckList, temp])
         this.item.clear()
+        setNewItem('')
     }
 
     const removeCheckListItem = (_index) => {
@@ -242,7 +247,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: 22 }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: 18 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -258,9 +263,10 @@ const TLDetailAdd = (props) => {
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
                         ref={input => { this.item = input }}
+                        returnKeyType={"done"}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -549,9 +555,11 @@ const TLDetailAdd = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                             <TextInput
+                                                returnKeyType={"next"}
+                                                onSubmitEditing={() => { this.t2.focus(); }}
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                 placeholder="e.g. Grammar, Fractions, etc"
-                                                autoCapitalize={false}
+                                                autoCapitalize={'sentences'}
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.menuLightFonts}
                                                 onChangeText={text => setLessonTopic(text)} />
@@ -581,7 +589,11 @@ const TLDetailAdd = (props) => {
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
+                                        ref={(input) => { this.t2 = input; }}
+                                        returnKeyType={"next"}
+                                        onSubmitEditing={() => { this.item.focus(); }}
                                         multiline={true}
+                                        autoCapitalize={'sentences'}
                                         numberOfLines={4}
                                         placeholder='Briefly explain what the lesson is about'
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}

@@ -16,7 +16,7 @@ const WorkSpaceHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title - <Text style={styles.date}>14/09/2020</Text></Text>
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
                 <View style={styles.headerRight}>
                     {
                         props.isWorkspace ?

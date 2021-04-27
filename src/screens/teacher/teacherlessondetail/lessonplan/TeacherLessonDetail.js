@@ -11,7 +11,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 import { Download } from "../../../../utils/Download";
 const TLDetail = (props) => {
-   
+
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
@@ -121,19 +121,16 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.requireText}>Learning material</Text>
 
                         {props.lessonData.MaterialList.length > 0 ?
-                            <FlatList
-                                data={props.lessonData.MaterialList}
-                                style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
-                                renderItem={({ item, index }) => (
-                                    <View style={PAGESTYLE.fileGrp}>
+                            props.lessonData.MaterialList.map((item, index) => {
+                                return (
+                                    <View style={{...PAGESTYLE.fileGrp, height: 60}}>
                                         <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>
                                     </View>
-                                )}
-                                keyExtractor={(item, index) => index.toString()}
-                            />
+                                )
+                            })
                             :
                             <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No material uploaded!</Text>
                         }

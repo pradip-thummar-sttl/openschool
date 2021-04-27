@@ -10,7 +10,7 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { showMessage, Var } from "../../../utils/Constant";
+import { opacity, showMessage, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
@@ -304,7 +304,11 @@ const PupuilDashboard = (props) => {
                                                                 </View>
                                                                 <View style={PAGESTYLE.lessonstartButton}>
                                                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>See Homework</Text></TouchableOpacity>
+                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}
+                                                                        activeOpacity={opacity}
+                                                                        onPress={() => props.navigation.navigate('PupilHomeWorkDetail', { item: dataOfHWSubView })}>
+                                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>See Homework</Text>
+                                                                    </TouchableOpacity>
                                                                 </View>
                                                             </View>
                                                         </View>

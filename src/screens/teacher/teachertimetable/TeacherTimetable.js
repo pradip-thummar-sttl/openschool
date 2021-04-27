@@ -109,7 +109,8 @@ const TeacherTimeTable = (props) => {
 
         if (flag) {
             return (
-                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} />
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data}
+                    navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })} />
             );
         } else {
             return (
@@ -161,7 +162,7 @@ const TeacherTimeTable = (props) => {
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => fetchRecord('', '')}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
 
