@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity, showMessage } from "../../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
@@ -58,7 +58,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessage(MESSAGE.homeworkMarked)
+                showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
+                    props.route.params.onGoBack();
+                    props.navigation.goBack()
+                })
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -172,6 +175,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             placeholder='Leave feedback here'
                                             style={PAGESTYLE.commonInputTextarea}
                                             returnKeyType={"next"}
+                                            defaultValue={data.Feedback}
+                                            editable={!data.Marked}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
                                     <View style={PAGESTYLE.videoRecording}>

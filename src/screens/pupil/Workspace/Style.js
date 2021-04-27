@@ -20,7 +20,7 @@ export default StyleSheet.create({
     bottomView: {
         position: 'absolute',
         bottom: 0,
-        width: '100%'
+        width: wp(95)
     },
     editorView: {
         flexDirection: 'row',

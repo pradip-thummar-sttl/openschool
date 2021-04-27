@@ -513,7 +513,11 @@ const TLDetailEdit = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.allFiles],
+                type: [DocumentPicker.types.pdf, 
+                    DocumentPicker.types.doc, 
+                    DocumentPicker.types.xls, 
+                    DocumentPicker.types.images,
+                    DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     res.originalname = res.name
@@ -662,9 +666,13 @@ const TLDetailEdit = (props) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
                                                 <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                                </TouchableOpacity>
+                                                {item.uri ?
+                                                    <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                        <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    null
+                                                }
                                             </View>
                                         )
                                     }) : null

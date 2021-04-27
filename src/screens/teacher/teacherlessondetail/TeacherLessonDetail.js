@@ -37,6 +37,7 @@ const TeacherLessonDetail = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [searchKeyword, setSearchKeyword] = useState('')
+    const [isHSDataChanged, setHSDataChanged] = useState(false)
 
     useEffect(() => {
         if (!isSearchActive && tabIndex == 2 && !this.textInput) {
@@ -67,7 +68,7 @@ const TeacherLessonDetail = (props) => {
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
-        console.log('add homework data',data)
+        console.log('add homework data', data)
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
                 console.log('response of update homework', res)
@@ -75,7 +76,7 @@ const TeacherLessonDetail = (props) => {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
                     showMessage('Homework updated successfully')
-                }else{
+                } else {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
                     showMessage(res.message)
@@ -268,7 +269,8 @@ const TeacherLessonDetail = (props) => {
                                 searchKeyword={searchKeyword}
                                 filterBy={filterBy}
                                 searchActive={isSearchActive}
-                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { 'item': data })} />
+                                dataChanged={isHSDataChanged}
+                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}

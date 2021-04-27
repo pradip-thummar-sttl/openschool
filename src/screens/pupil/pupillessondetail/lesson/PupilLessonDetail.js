@@ -12,11 +12,31 @@ import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import moment from "moment";
 import Images from "../../../../utils/Images";
 import { Download } from "../../../../utils/Download";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
 
 
 const PupilLessonDetailInternal = (props) => {
     // console.log('props routes',props)
-    const { item } = props.route.params
+    const [item, setItem] = useState(props.route.params.item)
+    console.log('props.route.params', props.route.params.item);
+
+    const refresh = () => {
+        console.log(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`);
+
+        Service.get(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setItem(res.data[0])
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebarpupil hide={() => action(!isHide)}
@@ -30,8 +50,8 @@ const PupilLessonDetailInternal = (props) => {
                     title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
                     goBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
-                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: true })}
-                    onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}
+                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}
+                    onSeeHomeworkPress={() => null}
                 />
 
                 <View style={PAGESTYLE.containerWrap}>
@@ -62,7 +82,7 @@ const PupilLessonDetailInternal = (props) => {
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={PAGESTYLE.requireText}>Learning material</Text>
                             {
-                                item.MaterialList.length > 0 ?
+                                item != undefined && item.MaterialList.length > 0 ?
                                     item.MaterialList.map((obj) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
@@ -85,20 +105,22 @@ const PupilLessonDetailInternal = (props) => {
                         </View>
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
-                            {
-                                item.WorkSpacelist.length > 0 ?
-                                    item.WorkSpacelist.map((obj, index) => {
-                                        return (
-                                            <TouchableOpacity
-                                                style={PAGESTYLE.fileGrp}
-                                                onPress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: false, item: item.WorkSpacelist, tappedItem: index })}>
-                                                <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
-                                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                            </TouchableOpacity>
-                                        )
-                                    }) :
-                                    <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
-                            }
+                            <ScrollView style={{height: '50%'}} showsVerticalScrollIndicator={false}>
+                                {
+                                    item != undefined && item.WorkSpacelist.length > 0 ?
+                                        item.WorkSpacelist.map((obj, index) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    style={PAGESTYLE.fileGrp}
+                                                    onPress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: false, item: item.WorkSpacelist, tappedItem: index })}>
+                                                    <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
+                                                    <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                                </TouchableOpacity>
+                                            )
+                                        }) :
+                                        <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
+                                }
+                            </ScrollView>
 
                             {/* <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>

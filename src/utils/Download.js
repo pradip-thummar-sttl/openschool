@@ -81,6 +81,8 @@ export const downloadFile = (item) => {
         fromUrl: item.filename,
         toFile: localFile
     };
+    // .replace('14.143.90.233', '192.168.0.218'),
+    console.log('options', options);
     RNFS.downloadFile(options).promise
         .then((res) => {
             console.log('hello res', res)

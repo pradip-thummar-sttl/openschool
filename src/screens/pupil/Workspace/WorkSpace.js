@@ -10,6 +10,7 @@ import { User } from "../../../utils/Model";
 import { getFileExtention } from "../../../utils/Download";
 import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
+import { ScrollView } from "react-native-gesture-handler";
 const WorkSpace = (props) => {
     const workspaceList = props.route.params.item
     const [example, setExample] = useState(0)
@@ -35,13 +36,11 @@ const WorkSpace = (props) => {
             type: `image/${ext[0]}`
         })
 
-        console.log('data', data._parts);
-
-
         Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.route.params.id}/${User.user.UserDetialId}`, (res) => {
             console.log('response of upload workspace', res)
             if (res.flag) {
                 showMessageWithCallBack(MESSAGE.workspaceAdded, () => {
+                    props.route.params.onGoBack()
                     props.navigation.goBack()
                 })
             } else {
@@ -63,7 +62,9 @@ const WorkSpace = (props) => {
             <SafeAreaView />
             <WorkSpaceHeader
                 isWorkspace={props.route.params.isWorkspace}
-                goBack={() => props.navigation.goBack()}
+                goBack={() => {
+                    props.navigation.goBack()
+                }}
                 onAlertPress={() => props.navigation.openDrawer()}
                 onSaveWorkSpacePress={() => { onSubmitWorkspace() }} />
             {
@@ -155,23 +156,29 @@ const WorkSpace = (props) => {
                         <View>
                             <Image
                                 style={{ height: '100%', width: '100%' }}
-                                source={{ uri: workspaceList[selectedWorkSpace].filename.replace('14.143.90.233', '192.168.0.218') }} />
+                                source={{ uri: workspaceList[selectedWorkSpace].filename }} />
+                            {/* .replace('14.143.90.233', '192.168.0.218') */}
                         </View>
                         <View style={PAGESTYLE.bottomView}>
                             <View style={PAGESTYLE.wsView}>
-                                {
-                                    workspaceList.map((item, index) => {
-                                        return (
-                                            <TouchableOpacity
-                                                activeOpacity={opacity}
-                                                onPress={() => setSelectedWorkSpace(index)}>
-                                                <View style={PAGESTYLE.fileGrp}>
-                                                    <Text style={{ ...PAGESTYLE.fileName, fontWeight: selectedWorkSpace == index ? 'bold' : 'normal' }}>Workspace {index + 1}</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        )
-                                    })
-                                }
+                                <ScrollView
+                                    style={{ }}
+                                    showsVerticalScrollIndicator={false}
+                                    horizontal={true}>
+                                    {
+                                        workspaceList.map((item, index) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    activeOpacity={opacity}
+                                                    onPress={() => setSelectedWorkSpace(index)}>
+                                                    <View style={PAGESTYLE.fileGrp}>
+                                                        <Text style={{ ...PAGESTYLE.fileName, fontWeight: selectedWorkSpace == index ? 'bold' : 'normal' }}>Workspace {index + 1}</Text>
+                                                    </View>
+                                                </TouchableOpacity>
+                                            )
+                                        })
+                                    }
+                                </ScrollView>
 
                             </View>
                         </View>
