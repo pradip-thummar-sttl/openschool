@@ -23,10 +23,9 @@ import MESSAGE from "../../../../utils/Messages";
 
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
-    const { item } = props.route.params
+    const { item } = props
     const [materialArr, setMaterialArr] = useState([])
     const [isLoading, setLoading] = useState(false);
-    console.log('props of homewor', props.route.params);
 
     onSubmitHomework = () => {
         let formData = new FormData();
@@ -95,15 +94,15 @@ const PupilHomeWorkDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.commonBg}>
                 <Header14
                     onAlertPress={() => props.navigation.openDrawer()}
-                    goBack={() => props.navigation.goBack()}
+                    goBack={() => props.goBack()}
                     onSubmitHomework={() => setSubmitPopup(true)}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>

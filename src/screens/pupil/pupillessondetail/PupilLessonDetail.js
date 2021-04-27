@@ -1,4 +1,4 @@
-import React, { useEffect, useState,  } from "react";
+import React, { useEffect, useState, } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -29,14 +29,23 @@ import moment from "moment";
 import { opacity } from "../../../utils/Constant";
 
 const PupilLessonDetail = (props) => {
+    console.log('props of homework', props.navigation)
     const [isHide, action] = useState(true);
+
     const [isLesson, setLesson] = useState(true);
+    const [isLessonDetail, setLessonDetail] = useState(false);
+    const [isHomeworkDetail, setHomeworkDetail] = useState(false);
+    const [isHomeWorkSubmitted, setHomeWorkSubmitted] = useState(false);
+    const [isHomeWorkMarked, setHomeWorkMarked] = useState(false);
+
     const [lessonData, setLessonData] = useState([]);
     const [DueHomeWork, setDueHomeWork] = useState([]);
     const [SubmitHomeWork, setSubmitHomeWork] = useState([]);
     const [MarkedHomeWork, setMarkedHomeWork] = useState([]);
     const [currentWeekLesson, setCurrentWeekLesson] = useState([]);
     const [lastWeekLesson, setLastWeekLesson] = useState([]);
+
+    const [item, setItem] = useState([]);
 
 
     const [isSearchActive, setSearchActive] = useState(false)
@@ -52,7 +61,7 @@ const PupilLessonDetail = (props) => {
             } else {
                 getHomeworkData('', '')
             }
-            this.textInput.clear()
+            textInput.clear()
         } else {
             if (isLesson) {
                 getLessonData(keyword, '')
@@ -71,15 +80,14 @@ const PupilLessonDetail = (props) => {
     }, [filterBy])
 
     useEffect(() => {
-       
         const unsubscribe = props.navigation.addListener('focus', () => {
-            getHomeworkData('', '')
             getLessonData('', '')
-          });
-          return () => {
-            unsubscribe;
-          }
-    }, [props.navigation])
+            getHomeworkData('', '')
+        });
+        // return () => {
+        //     unsubscribe;
+        // }
+    }, [])
 
     const getHomeworkData = (searchBy, filterBy) => {
         let data = {
@@ -94,7 +102,7 @@ const PupilLessonDetail = (props) => {
                 var due = []
                 var submit = []
                 var marked = []
-                res.data.map((item) => {
+                res.data.forEach(item => {
                     if (item.Marked && item.Submited) {
                         marked.push(item)
                     } else if (!item.Marked && !item.Submited) {
@@ -102,13 +110,14 @@ const PupilLessonDetail = (props) => {
                     } else {
                         submit.push(item)
                     }
-                })
+                });
+               
                 console.log('tripple array', marked, due, submit)
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
                 setMarkedHomeWork(marked)
             } else {
-
+                console.log('else part')
             }
         }, (err) => {
 
@@ -149,9 +158,9 @@ const PupilLessonDetail = (props) => {
             <View style={PAGESTYLE.filterbarMain}>
                 <View style={PAGESTYLE.field}>
                     <TextInput
-                        ref={input => { this.textInput = input }}
+                        ref={input => { textInput = input }}
                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                        placeholder="Search subject, topic nmae, teacher name, etc"
+                        placeholder="Search subject, topic name, teacher name, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }}
@@ -213,14 +222,9 @@ const PupilLessonDetail = (props) => {
             </View>
         )
     }
-    return (
-        <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={2}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+    const lessonRender = () => {
+        return (
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 <Header4 onAlertPress={() => props.navigation.openDrawer()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
@@ -236,8 +240,8 @@ const PupilLessonDetail = (props) => {
                             searchHeader()
                         }
                         {/* <View style={PAGESTYLE.lessonstartButton}>
-                            <Text>Dynamic Search Goes Here</Text>
-                        </View> */}
+                        <Text>Dynamic Search Goes Here</Text>
+                    </View> */}
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
@@ -246,17 +250,15 @@ const PupilLessonDetail = (props) => {
                             <PupilLesson
                                 currentWeekLesson={currentWeekLesson}
                                 lastWeekLesson={lastWeekLesson}
-                                navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
+                                navigatePupilLessonDetailInternal={(item) => { setItem(item), setLessonDetail(true) }} />
                             :
                             <PupilLessonDue
                                 DueHomeWork={DueHomeWork}
                                 SubmitHomeWork={SubmitHomeWork}
                                 MarkedHomeWork={MarkedHomeWork}
-                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', {
-                                    item: item,
-                                })}
-                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
-                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
+                                navigatePupilHomeWorkDetail={(item) => { setItem(item), setHomeworkDetail(true) }}
+                                navigatePupilHomeworkesubmited={(item) => { setItem(item), setHomeWorkSubmitted(true) }}
+                                navigatePupilHomeworkemarked={(item) => { setItem(item), setHomeWorkMarked(true) }} />
                     }
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
@@ -266,6 +268,25 @@ const PupilLessonDetail = (props) => {
                 </ScrollView>
 
             </View>
+        )
+    }
+    return (
+        <View style={PAGESTYLE.mainPage}>
+            {
+                isLessonDetail ?
+                    <PupilLessonDetailInternal item={item} goBack={() => setLessonDetail(false)} />
+                    : isHomeworkDetail ?
+                        <PupilHomeWorkDetail item={item} goBack={() => setHomeworkDetail(false)} />
+                        :
+                        isHomeWorkSubmitted ?
+                            <PupilHomeWorkSubmitted item={item} goBack={() => setHomeWorkSubmitted(false)} />
+                            : isHomeWorkMarked ?
+                                <PupilHomeWorkMarked item={item} goBack={() => setHomeWorkMarked(false)} />
+                                :
+                                lessonRender()
+            }
+
+
         </View>
     );
 }

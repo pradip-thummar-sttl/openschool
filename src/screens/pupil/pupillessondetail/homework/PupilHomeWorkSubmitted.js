@@ -16,18 +16,18 @@ import Images from "../../../../utils/Images";
 var moment = require('moment');
 
 const PupilHomeWorkSubmitted = (props) => {
-    const { item } = props.route.params
+    const { item } = props
     const [materialArr, setMaterialArr] = useState(item.HomeworkList)
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.whiteBg}>
                 <Header13 
-                    goBack={() => props.navigation.goBack()}
+                    goBack={() => props.goBack()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>

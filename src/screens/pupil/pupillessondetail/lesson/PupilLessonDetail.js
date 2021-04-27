@@ -16,19 +16,19 @@ import { Download } from "../../../../utils/Download";
 
 const PupilLessonDetailInternal = (props) => {
     // console.log('props routes',props)
-    const { item } = props.route.params
+    const { item } = props
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
 
             <View style={PAGESTYLE.commonBg}>
                 <HeaderWhitewithoutsearch
                     title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
-                    goBack={() => props.navigation.goBack()}
+                    goBack={() => props.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
                     onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace',{id:item.LessonId,isWorkspace:true})}
                     onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}

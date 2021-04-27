@@ -157,12 +157,12 @@ const PupilTimetable = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={1}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 <Header3
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
