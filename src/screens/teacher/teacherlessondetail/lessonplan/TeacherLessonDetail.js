@@ -123,7 +123,7 @@ const TLDetail = (props) => {
                         {props.lessonData.MaterialList.length > 0 ?
                             <FlatList
                                 data={props.lessonData.MaterialList}
-                                style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.fileGrp}>
                                         <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
@@ -135,14 +135,14 @@ const TLDetail = (props) => {
                                 keyExtractor={(item, index) => index.toString()}
                             />
                             :
-                            <Text style={{ textAlign: 'center' }}>No material uploaded!</Text>
+                            <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No material uploaded!</Text>
                         }
                     </View>
 
                     {props.lessonData.RecommendedList.length > 0 ?
                         <FlatList
                             data={props.lessonData.RecommendedList}
-                            style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                            style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
                             renderItem={({ item, index }) => (
                                 <View style={PAGESTYLE.thumbVideo}>
                                     <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
@@ -161,7 +161,7 @@ const TLDetail = (props) => {
                                 <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
                             </View>
                             :
-                            <Text style={{ textAlign: 'center' }}>No lesson recording found!</Text>
+                            <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No lesson recording found!</Text>
                         }
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
@@ -172,7 +172,7 @@ const TLDetail = (props) => {
                                 <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                             </View>
                             :
-                            <Text style={{ textAlign: 'center' }}>No chat transcript found!</Text>
+                            <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No chat transcript found!</Text>
                         }
                     </View>
                 </View>
