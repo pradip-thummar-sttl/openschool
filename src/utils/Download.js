@@ -1,5 +1,7 @@
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
+import FileViewer from 'react-native-file-viewer';
+import RNFS from 'react-native-fs';
 export const Download = (item) => {
     if (Platform.OS === 'ios') {
         downloadFile(item);
@@ -31,44 +33,68 @@ export const Download = (item) => {
 }
 
 export const downloadFile = (item) => {
-    console.log("--------------------");
+    // console.log("--------------------");
 
-    // Get today's date to add the time suffix in filename
-    let date = new Date();
-    // File URL which we want to download
-    let FILE_URL = item.filename;
-    // Function to get extention of the file url
-    let file_ext = getFileExtention(FILE_URL);
+    // // Get today's date to add the time suffix in filename
+    // let date = new Date();
+    // // File URL which we want to download
+    // let FILE_URL = item.filename;
+    // // Function to get extention of the file url
+    // let file_ext = getFileExtention(FILE_URL);
 
-    file_ext = '.' + file_ext[0];
+    // file_ext = '.' + file_ext[0];
 
-    // config: To get response by passing the downloading related options
-    // fs: Root directory path to download
-    const { config, fs } = RNFetchBlob;
-    let RootDir = fs.dirs.PictureDir;
-    let options = {
-        fileCache: true,
-        addAndroidDownloads: {
-            path:
-                RootDir +
-                '/file_' +
-                Math.floor(date.getTime() + date.getSeconds() / 2) +
-                file_ext,
-            description: 'downloading file...',
-            notification: true,
-            // useDownloadManager works with Android only
-            useDownloadManager: true,
-        },
+    // // config: To get response by passing the downloading related options
+    // // fs: Root directory path to download
+    // const { config, fs } = RNFetchBlob;
+    // let RootDir = fs.dirs.PictureDir;
+    // let options = {
+    //     fileCache: true,
+    //     addAndroidDownloads: {
+    //         path:
+    //             RootDir +
+    //             '/file_' +
+    //             Math.floor(date.getTime() + date.getSeconds() / 2) +
+    //             file_ext,
+    //         description: 'downloading file...',
+    //         notification: true,
+    //         // useDownloadManager works with Android only
+    //         useDownloadManager: true,
+    //     },
+    // };
+    // config(options)
+    //     .fetch('GET', FILE_URL)
+    //     .then(res => {
+    //         // Alert after successful downloading
+    //         console.log('res -> ', JSON.stringify(res));
+    //         FileViewer.open(res.data)
+    //         Alert.alert('File Downloaded Successfully.');
+    //     }).catch((err) => {
+    //         console.log("++++" + err);
+    //         Alert.alert(err.toString());
+    //     });
+    const { config, fs } = RNFetchBlob
+    const fileName = item.filename.split('/')
+    const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
+
+    const options = {
+        fromUrl: item.filename,
+        toFile: localFile
     };
-    config(options)
-        .fetch('GET', FILE_URL)
-        .then(res => {
-            // Alert after successful downloading
-            console.log('res -> ', JSON.stringify(res));
-            Alert.alert('File Downloaded Successfully.');
-        }).catch((err) => {
-            console.log("++++" + err);
-            Alert.alert(err.toString());
+    RNFS.downloadFile(options).promise
+        .then((res) => {
+            console.log('hello res', res)
+            FileViewer.open(localFile)
+        })
+        .then(() => {
+            // success
+            console.log('hello avy')
+        })
+        .catch(error => {
+            // error
+        }).catch(error=>{
+            console.log('hello error')
+
         });
 };
 
