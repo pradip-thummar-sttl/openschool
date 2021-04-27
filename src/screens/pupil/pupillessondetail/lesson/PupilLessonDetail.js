@@ -30,7 +30,7 @@ const PupilLessonDetailInternal = (props) => {
                     title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
                     goBack={() => props.navigation.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()}
-                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace')}
+                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: true })}
                     onSeeHomeworkPress={() => props.navigation.navigate('PupilHomeWorkDetail')}
                 />
 
@@ -87,12 +87,14 @@ const PupilLessonDetailInternal = (props) => {
                             <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
                             {
                                 item.WorkSpacelist.length > 0 ?
-                                    item.WorkSpacelist.map((obj) => {
+                                    item.WorkSpacelist.map((obj, index) => {
                                         return (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.fileGrp}
+                                                onPress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: false, item: item.WorkSpacelist, tappedItem: index })}>
+                                                <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
                                                 <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                            </View>
+                                            </TouchableOpacity>
                                         )
                                     }) :
                                     <Text style={{ alignSelf: 'center' }}>No Workspace</Text>

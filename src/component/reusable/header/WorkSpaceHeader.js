@@ -16,16 +16,21 @@ const WorkSpaceHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    {
+                        props.isWorkspace ?
+                            <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
+                                <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
+                            </TouchableOpacity>
+                            : null
+                    }
+
+                    <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
-            </View>            
+            </View>
         </View>
     );
 }
@@ -36,8 +41,8 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(4.5),
         backgroundColor: COLORS.white,
-        paddingVertical:wp(1)
-       // marginBottom: hp(5.85),
+        paddingVertical: wp(1)
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -222,13 +227,13 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.57),
         height: hp(2.23),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top:hp(-0.3),
+        top: hp(-0.3),
     },
 });

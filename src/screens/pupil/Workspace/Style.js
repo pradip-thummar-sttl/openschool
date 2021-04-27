@@ -43,21 +43,22 @@ export default StyleSheet.create({
     },
     wsView: {
         width: '100%',
-        height:wp(5),
-        borderTopWidth:1,
-        borderColor:'rgba(0,0,0,0.2)',
-        flexDirection:'row',
-        alignItems:"center"
+        height: wp(5),
+        borderTopWidth: 1,
+        borderColor: 'rgba(0,0,0,0.2)',
+        flexDirection: 'row',
+        alignItems: "center"
     },
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems:'center',
-        width:hp(25),
+        alignItems: 'center',
+        width: hp(20),
+        justifyContent: 'center',
         height: '100%',
-        borderRightWidth:1,
-        borderColor:'rgba(0,0,0,0.2)',
-        paddingHorizontal:hp(2)
+        borderRightWidth: 1,
+        borderColor: 'rgba(0,0,0,0.2)',
+        paddingHorizontal: hp(2)
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -67,12 +68,12 @@ export default StyleSheet.create({
     moreIcon: {
         width: hp(2.41),
         resizeMode: 'contain',
-        
+
     },
     //
     strokeColorButton: {
-        marginHorizontal: 2.5,
-        marginVertical: 8,
+        marginHorizontal: 5,
+        marginVertical: 10,
         width: 30,
         height: 30,
         borderRadius: 15,
@@ -81,21 +82,39 @@ export default StyleSheet.create({
         marginHorizontal: 2.5,
         marginVertical: 8,
         width: 50,
-        height: 30,
+        height: 40,
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#39579A'
+        backgroundColor: '#39579A',
+        marginRight: 10,
     },
     functionButton: {
         marginHorizontal: 2.5,
         marginVertical: 8,
-        height: 30,
-        width: 60,
+        height: 40,
+        width: 70,
         backgroundColor: '#39579A',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
+        marginRight: 10,
+    },
+    functionGreenButton: {
+        marginHorizontal: 2.5,
+        marginVertical: 8,
+        height: 40,
+        width: 70,
+        backgroundColor: COLORS.buttonGreen,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        marginRight: 10,
+    },
+    functionText: {
+        color: 'white', 
+        fontSize: 18,
+        fontWeight: 'bold'
     },
 
 })
