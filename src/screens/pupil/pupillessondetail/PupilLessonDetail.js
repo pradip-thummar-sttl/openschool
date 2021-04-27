@@ -80,10 +80,10 @@ const PupilLessonDetail = (props) => {
     }, [filterBy])
 
     useEffect(() => {
-        const unsubscribe = props.navigation.addListener('focus', () => {
+        // const unsubscribe = props.navigation.addListener('focus', () => {
             getLessonData('', '')
             getHomeworkData('', '')
-        });
+        // });
         // return () => {
         //     unsubscribe;
         // }
