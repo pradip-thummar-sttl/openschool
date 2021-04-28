@@ -5,13 +5,16 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderTT from "./header/HeaderTT";
-import { cellWidth, opacity, Var } from "../../../utils/Constant";
+import { cellWidth, Lesson, opacity, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../actions/action";
+import { User } from "../../../utils/Model";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+
 const PupilTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
@@ -72,24 +75,29 @@ const PupilTimeTable = (props) => {
 
         timeTableData.forEach(element => {
 
-            const day = new Date(element.Date).getDay();
+            const day = new Date(element.Type == Lesson ? element.Date : element.EventDate).getDay();
             const dayOfWeek = isNaN(day) ? null : days[day];
 
+
             if (dayOfWeek == days[dayKey]) {
-                if (time[timneKey] == (element.StartTime)) {
+                let startTime = element.Type == Lesson ? element.StartTime : element.EventStartTime
+                let endTime = element.Type == Lesson ? element.EndTime : element.EventEndTime
+                let subName = element.Type == Lesson ? element.SubjectName : element.EventType
+                let lessonTopic = element.Type == Lesson ? element.LessonTopic : element.EventLocation
 
-                    let startTime = Number(element.StartTime.replace(':', ''));
-                    let endTime = Number(element.EndTime.replace(':', ''));
+                if (time[timneKey].includes(startTime)) {
 
-                    startTime = (startTime >= 100 && startTime < 900) ? (startTime + 1200) : startTime
-                    endTime = (endTime >= 100 && endTime < 900) ? (endTime + 1200) : endTime
+                    let st = Number(startTime.replace(':', ''));
+                    let et = Number(endTime.replace(':', ''));
 
-                    let timeSpan = (endTime - startTime);
+                    st = (st >= 100 && st < 900) ? (st + 1200) : st
+                    et = (et >= 100 && et < 900) ? (et + 1200) : et
+
+                    let timeSpan = (et - st);
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
-                    lblTitle = `${element.SubjectName} - ${element.LessonTopic}`;
-                    console.log('lblTitle', lblTitle);
-                    lblTime = `${element.StartTime} - ${element.EndTime}`;
+                    lblTitle = `${subName} - ${lessonTopic}`;
+                    lblTime = `${startTime} - ${endTime}`;
                     data = element;
                     flag = true;
                     return;
@@ -103,13 +111,22 @@ const PupilTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, }} />
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
             );
         }
     }
 
     useEffect(() => {
         fetchRecord('', '')
+
+        Service.get(`${EndPoints.CalenderEvent}${User.user.UserDetialId}`, (res) => {
+            console.log('response of calender event is:', res)
+            if (res.code == 200) {
+                dispatch(setCalendarEventData(res.data))
+            }
+        }, (err) => {
+            console.log('response of calender event eror is:', err)
+        })
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
@@ -118,8 +135,9 @@ const PupilTimeTable = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
+        console.log('data', data);
 
-        Service.post({}, `${EndPoints.GetTimeTable}/604b09139dc64117024690c3`, (res) => {
+        Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -133,6 +151,10 @@ const PupilTimeTable = (props) => {
         })
     }
 
+    const refresh = () => {
+        fetchRecord('', '')
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -143,9 +165,14 @@ const PupilTimeTable = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderTT
-                    onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent')}
-                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }} />
+                    navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEventPupil', { onGoBack: () => refresh() })}
+                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                    navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
+                    refreshList={() => refresh()} />
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator

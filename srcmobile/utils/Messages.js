@@ -20,6 +20,9 @@ const MESSAGE = {
     homeworkMarked: "Homework marked successfully",
     checkList: 'Please add at least one item in checklist',
     addItem: 'Please enter item your pupil may need',
+    selectMaterial: "Please select at least one document",
+    saveWorkSpace: 'Please save workspace first',
+    workspaceAdded: 'Workspace saved successfully',
 }
 
 export default MESSAGE;
