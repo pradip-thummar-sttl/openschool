@@ -11,9 +11,31 @@ import Header6 from '../../../../component/reusable/header/bulck/Header6'
 import Images from "../../../../utils/Images";
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
+import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
+import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
+import moment from "moment";
+import { Download } from "../../../../utils/Download";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import { opacity } from "../../../../utils/Constant";
 
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
+    const [item, setItem] = useState(props.route.params.item)
+
+    const refresh = () => {
+        Service.get(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setItem(res.data[0])
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
     const NEW = [
         {
             title: 'Description',
@@ -39,14 +61,7 @@ const PupilLessonDetailInternal = (props) => {
             activeSections.includes(0) ?
                 <View style={PAGESTYLE.content}>
                     <View style={PAGESTYLE.lessonDesc}>
-                        <Text style={PAGESTYLE.lessonText}>
-                            In this lesson, we will learn all about conjunctions: what they are and how to use them. You will learn your first 7 conjunctions and I would like you to complete the homework that comes with it. This lesson is worth 5 gold stars!{"\n"}
-                        Instructions: {"\n"}
-                        1. Go through all learning materials{"\n"}
-                        2. Watch all BBC Bitesize videos{"\n"}
-                        3. Make notes using your workspaces{"\n"}
-                        Have fun!
-                        </Text>
+                        <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
                     </View>
                 </View>
                 :
@@ -54,38 +69,20 @@ const PupilLessonDetailInternal = (props) => {
                     <View style={PAGESTYLE.content}>
                         <View style={PAGESTYLE.lessonDesc}>
                             <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} />
-                                </View>
+                                {
+                                    item != undefined && item.MaterialList.length > 0 ?
+                                        item.MaterialList.map((obj) => {
+                                            return (
+                                                <View style={PAGESTYLE.fileGrp}>
+                                                    <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
+                                                    <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
+                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                    </TouchableOpacity>
+                                                </View>
+                                            )
+                                        }) :
+                                        <Text style={{ alignSelf: 'center' }}>No material</Text>
+                                }
                             </View>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <View style={PAGESTYLE.thumbVideo}>
@@ -98,38 +95,20 @@ const PupilLessonDetailInternal = (props) => {
                     :
                     <View style={PAGESTYLE.content}>
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
+                            {
+                                item != undefined && item.WorkSpacelist.length > 0 ?
+                                    item.WorkSpacelist.map((obj, index) => {
+                                        return (
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.fileGrp}
+                                                onPress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: false, item: item.WorkSpacelist, tappedItem: index })}>
+                                                <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
+                                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                            </TouchableOpacity>
+                                        )
+                                    }) :
+                                    <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
+                            }
                         </View>
                     </View>
         );
@@ -140,7 +119,13 @@ const PupilLessonDetailInternal = (props) => {
     return (
         <View style={{ ...PAGESTYLE.mainPage, height: '100%' }}>
             <View style={PAGESTYLE.commonBg}>
-                <Header6 goBack={() => props.navigation.goBack()} />
+                <Header6
+                    title={` ${item.SubjectName}`}
+                    date={moment(item.LessonDate).format('DD/MM/YYYY')}
+                    goBack={() => props.navigation.goBack()}
+                    onAlertPress={() => props.navigation.openDrawer()}
+                    onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}
+                    onSeeHomeworkPress={() => null} />
                 <View>
                     <View style={{ height: '100%', paddingBottom: hp(18.8), }}>
                         <View style={PAGESTYLE.largeVideoBlock}>
@@ -149,14 +134,14 @@ const PupilLessonDetailInternal = (props) => {
                         <ScrollView style={{ top: 0, height: '100%' }} showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.videoTitleLine}>
                                 <View>
-                                    <Text style={PAGESTYLE.videoMainTitle}>Grammar: How to use conjunctions to join two words together</Text>
-                                    <Text style={PAGESTYLE.videoPublishDate}>Published on 29 July 2020</Text>
+                                    <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
+                                    <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.bookmarkuserNameMain}>
                                 <View style={PAGESTYLE.userNameMain}>
                                     <View style={PAGESTYLE.userMainThumb}></View>
-                                    <Text style={PAGESTYLE.mainNameText}>Miss Barker</Text>
+                                    <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                                 <View style={PAGESTYLE.bookMark}>
                                     <Text style={PAGESTYLE.saveBookMarkText}>Save</Text>
@@ -176,7 +161,11 @@ const PupilLessonDetailInternal = (props) => {
                             </View>
                         </ScrollView>
                         <View style={PAGESTYLE.lessonstartButtonPupil}>
-                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fixedButton]}>open workspace</Text></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}
+                                onPress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}>
+                                <Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fixedButton]}>open workspace</Text>
+                            </TouchableOpacity>
                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.fixedButton]}>see homework</Text></TouchableOpacity>
                         </View>
                     </View>

@@ -16,7 +16,7 @@ const Popupdata = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
 
-    console.log('props.data', props.data);
+    console.log('props.data', props);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
