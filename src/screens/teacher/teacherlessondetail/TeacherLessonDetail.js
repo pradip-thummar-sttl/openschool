@@ -28,7 +28,7 @@ import MESSAGE from "../../../utils/Messages";
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
-    const [lessonData, setLessonData] = useState(props.route.params.data);
+    const [lessonData, setLessonData] = useState(props.data);
     const [isVisiblePopup, setVisiblePopup] = useState(false)
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
     const [updateFlag, setUpdate] = useState(false)
@@ -60,7 +60,7 @@ const TeacherLessonDetail = (props) => {
     const onAddHomework = () => {
         setHomeworkLoading(true)
         const data = {
-            LessonId: props.route.params.data._id,
+            LessonId: lessonData._id,
             IsIncluded: Addhomework.IsIncluded,
             DueDate: Addhomework.DueDate,
             HomeworkDescription: Addhomework.HomeworkDescription,
@@ -120,17 +120,17 @@ const TeacherLessonDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 {tabIndex == 0 ?
                     <HeaderLP
                         lessonData={lessonData}
-                        navigateToBack={() => props.navigation.goBack()}
+                        navigateToBack={() => props.goBack()}
                         onAlertPress={() => props.navigation.openDrawer()} />
                     : tabIndex == 1 ?
                         <HeaderHW
@@ -148,7 +148,7 @@ const TeacherLessonDetail = (props) => {
                         :
                         <HeaderHWS
                             subjectName={lessonData.SubjectName}
-                            navigateToBack={() => props.navigation.goBack()}
+                            navigateToBack={() => props.goBack()}
                             onAlertPress={() => props.navigation.openDrawer()} />
                 }
                 <View style={PAGESTYLE.whiteBg}>

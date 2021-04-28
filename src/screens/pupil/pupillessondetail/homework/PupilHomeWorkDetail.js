@@ -174,7 +174,7 @@ const PupilHomeWorkDetail = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
-                        <View style={PAGESTYLE.uploadBoardBlock}>
+                        {/* <View style={PAGESTYLE.uploadBoardBlock}> */}
                             {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
 
                             <TouchableOpacity
@@ -190,7 +190,7 @@ const PupilHomeWorkDetail = (props) => {
                                 </View>
 
                             </TouchableOpacity>
-                        </View>
+                        {/* </View> */}
                     </View>
                 </View>
                 {

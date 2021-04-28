@@ -10,11 +10,10 @@ import { User } from "../../../utils/Model";
 import { getFileExtention } from "../../../utils/Download";
 import { showMessage } from "../../../utils/Constant";
 const WorkSpace = (props) => {
-    const [example, setExample] = useState(0)
     const [workSpace, setWorkSpace] = useState([])
     const [workSpacePath, setWorkSpacePath] = useState("")
-    // const { item } = props.route.params
-console.log('props.route.params.item',props.route.params.item)
+    console.log('props of workspace', props)
+  
     const onSubmitWorkspace = () => {
         const pathArr = workSpacePath.split('/')
         const ext = getFileExtention(workSpacePath)
@@ -25,7 +24,7 @@ console.log('props.route.params.item',props.route.params.item)
             name: pathArr[pathArr.length - 1],
             type: `image/${ext[0]}`
         })
-        Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.route.params.id}/${User.user.UserDetialId}`, (res) => {
+        Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.id}/${User.user.UserDetialId}`, (res) => {
             console.log('response of upload workspace', res)
             if (res.flag) {
                 showMessage("upload Successfully")
@@ -44,9 +43,9 @@ console.log('props.route.params.item',props.route.params.item)
     return (
         <View style={{ flex: 1 }}>
             <SafeAreaView />
-            <WorkSpaceHeader isWorkspace={props.route.params.isWorkspace} goBack={() => props.navigation.goBack()} onAlertPress={() => props.navigation.openDrawer()} onSaveWorkSpacePress={() => { onSubmitWorkspace() }} />
+            <WorkSpaceHeader isWorkspace={props.isWorkspace} goBack={() => props.goBack()} onAlertPress={() => props.navigation.openDrawer()} onSaveWorkSpacePress={() => { onSubmitWorkspace() }} />
             {
-                props.route.params.isWorkspace ?
+                props.isWorkspace ?
                     <View style={PAGESTYLE.workSpaceView}>
                         {/* <Image style={PAGESTYLE.smallVideoImg} source={require('../../../assets/images/videoSmall.png')} /> */}
                         {/* <SketchCanvas
@@ -158,7 +157,7 @@ console.log('props.route.params.item',props.route.params.item)
                     </View>
                     :
                     <View style={PAGESTYLE.workSpaceView}>
-                        <Image style={{height:'100%', width:'100%'}} source={{uri:props.route.params.item}} />
+                        <Image style={{height:'100%', width:'100%'}} source={{uri:props.item}} />
                     </View>
             }
 
