@@ -46,6 +46,7 @@ const TeacherLessonDetail = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [searchKeyword, setSearchKeyword] = useState('')
+    const [isHSDataChanged, setHSDataChanged] = useState(false)
 
     useEffect(() => {
         if (!isSearchActive && tabIndex == 2 && !textInput) {

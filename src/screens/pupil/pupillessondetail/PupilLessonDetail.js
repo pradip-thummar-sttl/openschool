@@ -169,10 +169,13 @@ const PupilLessonDetail = (props) => {
                         style={PAGESTYLE.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
+                            keyword ?
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
                                 :
-                                setSearchActive(true)
+                                null
                         }}>
                         <Image
                             style={PAGESTYLE.userIcon}

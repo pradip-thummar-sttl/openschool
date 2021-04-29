@@ -21,14 +21,15 @@ const WorkSpaceHeader = (props) => {
                     {
                         props.isWorkspace ?
                             <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
-                                <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
+                                {/* <Text style={styles.commonButtonGreenheader}>Save Workspace</Text> */}
+                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                             </TouchableOpacity>
                             : null
                     }
 
-                    <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
+                    {/* <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         </View>
@@ -112,7 +113,11 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+        backgroundColor: COLORS.buttonGreen,
+        height: 40,
+        width: 40,
+        borderRadius: 5,
+        marginVertical: 4,
     },
     filterIcon: {
         width: hp(1.74),
@@ -159,7 +164,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         top: hp(1.29),
-        left: hp(1.8),
+        left: hp(1.4),
         zIndex: 9,
     },
     iconTop: {

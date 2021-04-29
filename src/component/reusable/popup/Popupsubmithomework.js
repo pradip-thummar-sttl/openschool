@@ -8,7 +8,7 @@ import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
 
 const Popuphomework = (props) => {
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(true);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -19,16 +19,16 @@ const Popuphomework = (props) => {
                 <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
                 <Text style={styles.commonButtonGreenheader}>Submit homework</Text>
             </TouchableOpacity> */}
-            <Modal isVisible={true}>
+            <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
-                    <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
+                    <TouchableOpacity style={STYLE.cancelButton} onPress={() => { props.onPopupClosed(!isModalVisible); toggleModal() }}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
-                        <TouchableOpacity onPress={()=>props.OnSubmitHomeworkPress()}>
+                        <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}>
                             <Text style={STYLE.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
                         </TouchableOpacity>
                     </View>

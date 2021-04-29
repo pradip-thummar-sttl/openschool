@@ -112,7 +112,7 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
 
-                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilDashboard'); props.navigation.closeDrawer() }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); props.navigation.closeDrawer() }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}

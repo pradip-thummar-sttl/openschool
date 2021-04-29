@@ -10,7 +10,7 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { showMessage, Var } from "../../../utils/Constant";
+import { opacity, showMessage, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";

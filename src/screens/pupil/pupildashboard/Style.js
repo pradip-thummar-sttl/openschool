@@ -25,7 +25,6 @@ export default StyleSheet.create({
     },
     rightContent: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
     ScrollViewFlatlist:{
         height: hp(60),

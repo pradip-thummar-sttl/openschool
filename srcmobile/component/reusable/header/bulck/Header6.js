@@ -14,13 +14,14 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 const Header6 = (props) => {
+    console.log('props', props);
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
                 <View style={styles.titles}>
-                    <Text style={styles.mainTitle}>English Grammar</Text>
-                    <Text style={styles.date}>14/09/2020</Text>
+                    <Text style={styles.mainTitle}>{props.title}</Text>
+                    <Text style={styles.date}>{props.date}</Text>
                 </View>
             </View>            
         </View>

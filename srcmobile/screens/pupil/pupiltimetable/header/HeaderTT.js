@@ -22,10 +22,12 @@ const HeaderTT = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
+    const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
         if (!isSearchActive) {
-            // props.onClearSearch()
+            props.onClearSearch()
+            setKeyword('')
             this.textInput.clear()
         } else {
             props.onSearch()
@@ -64,6 +66,7 @@ const HeaderTT = (props) => {
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
+                            setKeyword(keyword);
                             props.onSearchKeyword(keyword);
                         }} />
 
@@ -71,10 +74,13 @@ const HeaderTT = (props) => {
                         style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
+                            keyword ?
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
                                 :
-                                setSearchActive(true)
+                                null
                         }}>
                         <Image
                             style={styles.userIcon1}
@@ -82,7 +88,9 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
 
                     <Menu style={{ ...styles.filterIcon }}>
-                        <MenuTrigger><Image style={styles.filterIcon1} source={Images.mobileFilter} /></MenuTrigger>
+                        <MenuTrigger>
+                            {/* <Image style={styles.filterIcon1} source={Images.mobileFilter} /> */}
+                            </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -103,7 +111,7 @@ const HeaderTT = (props) => {
                                     activeOpacity={opacity}
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date {selectedIndex}</Text>
+                                        <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
                                             <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             :
@@ -181,7 +189,7 @@ const HeaderTT = (props) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonGroup}
-                    onPress={() => refRBSheet.current.open()}>
+                    onPress={() => props.navigateToCreateNewEvent()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
