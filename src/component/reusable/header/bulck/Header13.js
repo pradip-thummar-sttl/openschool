@@ -19,10 +19,10 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
             <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> {props.title}</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.buttonGroup}>
+                    {/* <TouchableOpacity style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>save workspace</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>

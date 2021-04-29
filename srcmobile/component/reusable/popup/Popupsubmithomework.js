@@ -17,14 +17,14 @@ const Popuphomework = (props) => {
         <View>
             <Modal isVisible={true}>
                 <View style={styles.popupCard}>
-                    <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
+                    <TouchableOpacity style={STYLE.cancelButton} onPress={() => { props.onPopupClosed(!isModalVisible); toggleModal() }}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
                     <View style={styles.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
-                        <TouchableOpacity onPress={()=>props.OnSubmitHomeworkPress()}>
+                        <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}>
                             <Text style={styles.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
                         </TouchableOpacity>
                     </View>
@@ -122,9 +122,9 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(2.6),
-        textAlign:'center',
-        paddingLeft:wp(4.55),
-        paddingRight:wp(4.55),
+        textAlign: 'center',
+        paddingLeft: wp(4.55),
+        paddingRight: wp(4.55),
     },
     popupText: {
         fontSize: hp(1.6),
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         color: COLORS.lightGray,
         marginBottom: hp(3.5),
         lineHeight: hp(1.97),
-        paddingLeft:hp(2.46),
-        paddingRight:hp(2.46),
+        paddingLeft: hp(2.46),
+        paddingRight: hp(2.46),
     },
 });

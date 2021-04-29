@@ -13,6 +13,7 @@ import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/Deprecate
 import Header13 from '../../../../component/reusable/header/bulck/Header13'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../utils/Images";
+import { Download } from "../../../../utils/Download";
 var moment = require('moment');
 
 const PupilHomeWorkSubmitted = (props) => {
@@ -26,7 +27,7 @@ const PupilHomeWorkSubmitted = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
             <View style={PAGESTYLE.whiteBg}>
-                <Header13 
+                <Header13
                     goBack={() => props.navigation.goBack()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
@@ -89,9 +90,11 @@ const PupilHomeWorkSubmitted = (props) => {
                                 data={item.HomeworkList}
                                 style={{ alignSelf: 'center', width: '100%', top: 10 }}
                                 renderItem={({ item, index }) => (
-                                    <View style={PAGESTYLE.alignRow1}>
-                                        <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                    </View>
+                                    <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                        <View style={PAGESTYLE.alignRow1}>
+                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                        </View>
+                                    </TouchableOpacity>
                                 )}
                                 numColumns={4}
                                 keyExtractor={(item, index) => index.toString()}

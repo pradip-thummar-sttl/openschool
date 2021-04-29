@@ -901,7 +901,8 @@ export default StyleSheet.create({
         marginRight:hp(1),
     },
     markedIcon1:{
-        width:80,
+        width: 60,
+        height: 60,
         resizeMode:'contain',
     },
     uploaded: {

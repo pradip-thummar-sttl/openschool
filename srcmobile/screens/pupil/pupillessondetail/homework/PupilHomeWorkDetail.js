@@ -11,18 +11,108 @@ import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header14 from '../../../../component/reusable/header/bulck/Header14'
+import Popuphomework from "../../../../component/reusable/popup/Popupsubmithomework";
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
-import Popuphomework from '../../../../component/reusable/popup/Popuphomework';
-import Popupsubmithomework from '../../../../component/reusable/popup/Popupsubmithomework';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
+import moment from "moment";
+import DocumentPicker from 'react-native-document-picker';
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import MESSAGE from "../../../../utils/Messages";
+import Images from "../../../../utils/Images";
 
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
+    const { item } = props.route.params
+    const [materialArr, setMaterialArr] = useState([])
+    const [isLoading, setLoading] = useState(false);
+    console.log('props of homewor', props.route.params);
+
+    const isFieldsValidated = () => {
+        if (materialArr.length <= 0) {
+            showMessage(MESSAGE.selectMaterial)
+            return false
+        }
+        console.log(isSubmitPopup);
+        setSubmitPopup(true)
+    }
+
+    const onSubmitHomework = () => {
+        let formData = new FormData();
+
+        materialArr.forEach(element => {
+            formData.append('materiallist', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        // formData.append("Feedback", feedBack);
+        // formData.append("Rewards", '1');
+
+        Service.postFormData(formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`, (res) => {
+            console.log('res', res);
+            if (res.code == 200) {
+                setLoading(false)
+                console.log('response of save Homework', res)
+                // setDefaults()
+                showMessageWithCallBack(res.message, () => {
+                    props.navigation.goBack()
+                })
+                setSubmitPopup(false)
+                // props.route.params.goBack()
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+                setSubmitPopup(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+            setSubmitPopup(false)
+        })
+    }
+    const addMaterial = () => {
+        console.log('hihihihihihi')
+        var arr = [...materialArr]
+        try {
+            DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
+            }).then((results) => {
+                for (const res of results) {
+                    console.log(
+                        res.uri,
+                        res.type, // mime type
+                        res.name,
+                        res.size
+                    );
+                    arr.push(res)
+
+                }
+                console.log('hello response arr', arr)
+                setMaterialArr(arr)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const removeDocument = (_index) => {
+        const newList = materialArr.filter((item, index) => index !== _index);
+        setMaterialArr(newList)
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -31,7 +121,11 @@ const PupilHomeWorkDetail = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.whiteBg}>
-                <Header14 onAlertPress={() => props.navigation.openDrawer()} goBack={() => props.navigation.goBack()} onSubmitHomework={() => setSubmitPopup(true)} />
+                <Header14
+                    onAlertPress={() => props.navigation.openDrawer()}
+                    goBack={() => props.navigation.goBack()}
+                    onSubmitHomework={() => isFieldsValidated()}
+                    title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={{ ...PAGESTYLE.containerWrap, paddingBottom: hp(24) }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.teacherDetailLeft}>
@@ -40,99 +134,69 @@ const PupilHomeWorkDetail = (props) => {
                                     <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                                     <View style={PAGESTYLE.daterow}>
                                         <Image source={require('../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
-                                        <Text style={PAGESTYLE.dueDateTextBold}>14/09/2020</Text>
+                                        <Text style={PAGESTYLE.dueDateTextBold}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                     <View style={PAGESTYLE.daterow}>
                                         <View style={PAGESTYLE.thumbSmall}></View>
-                                        <Text style={PAGESTYLE.dueDateTextBold}>Miss Barker</Text>
+                                        <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                     </View>
                                 </View>
                             </View>
                             <View style={[PAGESTYLE.lessonDesc]}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                <Text style={PAGESTYLE.descriptionText}>Watch the BBC Bitesize video and write down a list of all of the everyday items that come from the Amazon Rainforest.  Write a short story about the items that you can find in your house and what they mean to you. Write about what you can do with the item and which part of the Amazon Rainforest it comes from.</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
                             </View>
                             <View style={PAGESTYLE.requirementofClass}>
                                 <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
                                 <View style={PAGESTYLE.checkBoxGroup}>
-                                    <View style={PAGESTYLE.checkBoxLabelBox}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Watch The BBC Bitesize Video</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.lessonstartButton}>
-                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Watch Video</Text></TouchableOpacity>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelBox}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.lessonstartButton}>
-                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                        </View>
-
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelBox}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                                        </View>
-                                        <View style={PAGESTYLE.lessonstartButton}>
-                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Upload File</Text></TouchableOpacity>
-                                        </View>
-
-                                    </View>
-                                    <View style={PAGESTYLE.checkBoxLabelBox}>
-                                        <View style={PAGESTYLE.alignRow}>
-                                            <CheckBox
-                                                style={PAGESTYLE.checkMark}
-                                                value={true}
-                                                boxType={'square'}
-                                                onCheckColor={COLORS.white}
-                                                onFillColor={COLORS.dashboardPupilBlue}
-                                                onTintColor={COLORS.dashboardPupilBlue}
-                                                tintColor={COLORS.dashboardPupilBlue}
-                                            />
-                                            <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.lessonstartButton}>
-                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Take Photo</Text></TouchableOpacity>
-                                        </View>
-
-                                    </View>
+                                    <FlatList
+                                        data={item.CheckList}
+                                        renderItem={({ item }) => (
+                                            <View style={PAGESTYLE.checkBoxLabelBox}>
+                                                <View style={PAGESTYLE.alignRow}>
+                                                    <CheckBox
+                                                        style={PAGESTYLE.checkMark}
+                                                        value={item.IsCheck}
+                                                        boxType={'square'}
+                                                        onCheckColor={COLORS.white}
+                                                        onFillColor={COLORS.dashboardPupilBlue}
+                                                        onTintColor={COLORS.dashboardPupilBlue}
+                                                        tintColor={COLORS.dashboardPupilBlue}
+                                                    />
+                                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                </View>
+                                            </View>
+                                        )}
+                                        style={{ height: 200 }} />
                                 </View>
+
                                 <View style={PAGESTYLE.rightSideBar}>
                                     <View style={PAGESTYLE.uploadBoardBlock}>
-                                        <Image source={require('../../../../assets/images/upload-hw-mobile2.png')} style={PAGESTYLE.uploadBoard} />
+                                        {/* <Image source={require('../../../../assets/images/upload-hw-mobile2.png')} style={PAGESTYLE.uploadBoard} /> */}
+
+                                        <TouchableOpacity
+                                            style={PAGESTYLE.homeworkView}
+                                            onPress={() => addMaterial()}>
+                                            <Text style={PAGESTYLE.HomeText}>Upload Homework</Text>
+                                        </TouchableOpacity>
+                                        <View style={PAGESTYLE.docView}>
+                                            {materialArr.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        style={PAGESTYLE.homeworkView}
+                                                        activeOpacity={opacity}
+                                                        onPress={() => removeDocument(index)}>
+                                                        <View style={PAGESTYLE.alignRow1}>
+                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                            <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                )
+                                            })}
+                                        </View>
                                     </View>
                                 </View>
                             </View>
@@ -143,7 +207,7 @@ const PupilHomeWorkDetail = (props) => {
                     </View>
                 </View>
                 {
-                    isSubmitPopup ? <Popupsubmithomework OnSubmitHomeworkPress={() => setSubmitPopup(false)} /> : null
+                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
                 }
             </View>
         </View>

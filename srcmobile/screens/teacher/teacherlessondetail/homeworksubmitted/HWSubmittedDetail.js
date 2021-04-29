@@ -19,6 +19,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
+import { Download } from "../../../../utils/Download";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
@@ -159,9 +160,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         data={data.HomeworkList}
                                         style={{ alignSelf: 'center', width: '100%', top: 10 }}
                                         renderItem={({ item, index }) => (
-                                            <View style={PAGESTYLE.alignRow}>
-                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon1} />
-                                            </View>
+                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                <View style={PAGESTYLE.alignRow}>
+                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon1} />
+                                                </View>
+                                            </TouchableOpacity>
                                         )}
                                         numColumns={4}
                                         keyExtractor={(item, index) => index.toString()}

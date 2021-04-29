@@ -905,7 +905,8 @@ flex: 1,
         color:COLORS.darkGray,
     },
     markedIcon:{
-        width:80,
+        width: 60,
+        height: 60,
         resizeMode:'contain',
     },
     uploaded: {

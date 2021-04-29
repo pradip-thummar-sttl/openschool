@@ -109,7 +109,7 @@ const TeacherTimeTable = (props) => {
 
         if (flag) {
             return (
-                <Popupdata span={span} title={lblTitle} time={lblTime} data={data}
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
                     navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })} />
             );
         } else {

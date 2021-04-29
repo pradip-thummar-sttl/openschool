@@ -13,7 +13,7 @@ import MESSAGE from "../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
 const WorkSpace = (props) => {
     const workspaceList = props.route.params.item
-    const [example, setExample] = useState(0)
+    const [pathCount, setPathCount] = useState(0)
     const [workSpace, setWorkSpace] = useState([])
     const [workSpacePath, setWorkSpacePath] = useState("")
     const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.route.params.tappedItem)
@@ -23,6 +23,9 @@ const WorkSpace = (props) => {
     const onSubmitWorkspace = () => {
         if (!workSpacePath) {
             showMessage(MESSAGE.saveWorkSpace)
+            return
+        } else if(pathCount == 0){
+            showMessage(MESSAGE.blankWorkspace)
             return
         }
 
@@ -124,7 +127,7 @@ const WorkSpace = (props) => {
 
                             }}
                             onPathsChange={(pathsCount) => {
-                                console.log('pathsCount', pathsCount)
+                                setPathCount(pathsCount)
                             }}
                         />
 
