@@ -21,7 +21,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
-    var data = props.route.params.item
+    var data = props.item
     console.log('data', data);
 
     const [isHide, action] = useState(true);
@@ -67,13 +67,13 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
 
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 <HeaderSave
                     isMarked={data.Marked ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
