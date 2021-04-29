@@ -52,7 +52,7 @@ const PupilLessonDetailInternal = (props) => {
             {
                 console.log('isworkspace on or off', isWorkspace),
                 isWorkspace ?
-                    <WorkSpace goBack={() => setWorkSpace(false)} isWorkspace={isWorkspaceEdit} id={item.LessonId} item={fileUrl} />
+                    <WorkSpace goBack={() => setWorkSpace(false)} isWorkspace={isWorkspaceEdit} id={item.LessonId} tappedItem={fileUrl} item={item.WorkSpacelist} />
                     :
                     <View style={PAGESTYLE.commonBg}>
                         <HeaderWhitewithoutsearch
@@ -134,7 +134,7 @@ const PupilLessonDetailInternal = (props) => {
                                         item.WorkSpacelist.map((obj) => {
                                             return (
                                                 // props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})
-                                                <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setFileUrl(obj.filename), setWorkSpaceEdit(false), setWorkSpace(true) }}>
+                                                <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setFileUrl(obj), setWorkSpaceEdit(false), setWorkSpace(true) }}>
                                                     <Text style={PAGESTYLE.fileName}>Workspace</Text>
                                                     <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                                                 </TouchableOpacity>

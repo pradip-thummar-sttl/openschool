@@ -16,9 +16,9 @@ const WorkSpace = (props) => {
     const [workSpacePath, setWorkSpacePath] = useState("")
     console.log('props of workspace', props)
   
-    const workspaceList = props.route.params.item
+    const workspaceList = props.item
     const [example, setExample] = useState(0)
-    const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.route.params.tappedItem)
+    const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.tappedItem)
 
     console.log('====', workspaceList)
 
