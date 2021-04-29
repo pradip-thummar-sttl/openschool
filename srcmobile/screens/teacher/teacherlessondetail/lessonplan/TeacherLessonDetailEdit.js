@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity, showMessage } from "../../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
@@ -39,6 +39,7 @@ const TLDetailEdit = (props) => {
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(false);
     const [lessonData, setLessonData] = useState(props.route.params.data);
+    const [isAddRecording, setAddRecording] = useState(false)
     var tempPupil = [];
     useEffect(() => {
         if (itemCheckList.length == 0) {
@@ -223,9 +224,11 @@ const TLDetailEdit = (props) => {
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
                         ref={input => { this.item = input }}
+                        returnKeyType={"done"}
+                        onSubmitEditing={() => { this.item.focus(); }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -454,7 +457,10 @@ const TLDetailEdit = (props) => {
         })
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
-            showMessage(MESSAGE.lessonUpdated)
+            showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
+                props.route.params.onGoBack();
+                props.navigation.goBack()
+            })
             setLoading(null)
             return
         }
@@ -464,7 +470,10 @@ const TLDetailEdit = (props) => {
                 setLoading(null)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessage(MESSAGE.lessonUpdated)
+                showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
+                    props.route.params.onGoBack();
+                    props.navigation.goBack()
+                })
             } else {
                 setLoading(false)
                 showMessage(res.message)
@@ -548,10 +557,12 @@ const TLDetailEdit = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                             <TextInput
+                                                returnKeyType={"next"}
+                                                onSubmitEditing={() => { this.t2.focus(); }}
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                 placeholder="e.g. Grammar"
                                                 defaultValue={lessonData.LessonTopic}
-                                                autoCapitalize={false}
+                                                autoCapitalize={'sentences'}
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.greyplaceholder}
                                                 onChangeText={text => setLessonTopic(text)} />
@@ -583,16 +594,19 @@ const TLDetailEdit = (props) => {
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
+                                        ref={(input) => { this.t2 = input; }}
+                                        returnKeyType={"next"}
+                                        onSubmitEditing={() => { this.item.focus(); }}
                                         multiline={true}
-                                        numberOfLines={4}
+                                        autoCapitalize={'sentences'}
                                         defaultValue={lessonData.LessonDescription}
                                         style={PAGESTYLE.commonInputTextareaNormal}
                                         onChangeText={text => setDescription(text)} />
                                 </View>
-                                <View style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                                    <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                    <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                </View>
+                                <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                        onScreeCamera={() => onScreeCamera()}
+                        onScreeVoice={() => onScreeVoice()}
+                        onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
 
@@ -630,11 +644,13 @@ const TLDetailEdit = (props) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
                                                 <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
-                                                <TouchableOpacity
-                                                    onPress={() => removeObject(index, item)}
-                                                    style={PAGESTYLE.closeNotificationbar}>
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                                </TouchableOpacity>
+                                                {item.uri ?
+                                                    <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                        <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    null
+                                                }
                                             </View>
                                         )
                                     }) : null

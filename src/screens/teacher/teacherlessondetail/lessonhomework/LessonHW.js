@@ -257,7 +257,7 @@ const TLHomeWork = (props) => {
                         ref={input => { this.item = input }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />

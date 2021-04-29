@@ -88,11 +88,11 @@ const TLHomeWork = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     console.log(
@@ -168,7 +168,7 @@ const TLHomeWork = (props) => {
             showMessage(MESSAGE.addItem)
             return
         }
-        
+
         let temp = {
             ItemName: newItem
         }
@@ -222,7 +222,7 @@ const TLHomeWork = (props) => {
                         ref={input => { this.item = input }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -318,9 +318,13 @@ const TLHomeWork = (props) => {
                                     return (
                                         <View style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                            </TouchableOpacity>
+                                            {item.uri ?
+                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                </TouchableOpacity>
+                                                :
+                                                null
+                                            }
                                         </View>
                                     )
                                 }) : null
@@ -328,7 +332,6 @@ const TLHomeWork = (props) => {
                         </View>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                                 <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                             </View>
                         </ScrollView>

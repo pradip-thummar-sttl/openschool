@@ -84,6 +84,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
             <View style={{ width: isHide ? '93%' : '78%' }}>
                 <HeaderSave
                     isMarked={data.Marked ? true : false}
+                    isSubmitted={data.Submited ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
                     navigateToBack={() => { props.navigation.goBack() }}
                     onAlertPress={() => { props.navigation.openDrawer() }}

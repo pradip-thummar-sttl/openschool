@@ -117,7 +117,7 @@ const TeacherLessonList = (props) => {
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => fetchRecord('', '')}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <View>

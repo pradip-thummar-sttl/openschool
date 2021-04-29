@@ -9,16 +9,20 @@ import Modal from 'react-native-modal';
 
 const PopupHomeWorkSave = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
-
+    console.log('props', props);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
     return (
         <View>
-            <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
-                {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} /> */}
-                <Text style={styles.commonButtonGreenheader}>Submit as homework</Text>
-            </TouchableOpacity>
+            {!props.isMarked && props.isSubmitted ?
+                <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
+                    {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} /> */}
+                    <Text style={styles.commonButtonGreenheader}>Submit as homework</Text>
+                </TouchableOpacity>
+                :
+                null
+            }
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
