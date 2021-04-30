@@ -43,7 +43,7 @@ export default StyleSheet.create({
     },
     wsView: {
         width: '100%',
-        height: wp(5),
+        height: 50,
         borderTopWidth: 1,
         borderColor: 'rgba(0,0,0,0.2)',
         flexDirection: 'row',

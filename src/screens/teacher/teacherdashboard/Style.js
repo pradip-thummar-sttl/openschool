@@ -26,12 +26,14 @@ export default StyleSheet.create({
     dayIcon: {
         width: hp(4),
         resizeMode: 'contain',
+        alignSelf: 'center',
     },
     dayTitle: {
         color: COLORS.white,
         fontSize: hp(2.6),
         fontFamily: FONTS.fontBold,
         paddingLeft: hp(1.30),
+        alignSelf: 'center',
     },
     datePosition: {
         backgroundColor: COLORS.white,

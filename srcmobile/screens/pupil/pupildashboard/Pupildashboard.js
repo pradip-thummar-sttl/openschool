@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -10,7 +10,11 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { Var } from "../../../utils/Constant";
+import { opacity, showMessage, Var } from "../../../utils/Constant";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
+import { User } from "../../../utils/Model";
+import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 const PupuilDashboard = (props) => {
     const refRBSheet = useRef();
@@ -21,6 +25,39 @@ const PupuilDashboard = (props) => {
     const [dashData, setdashData] = useState([])
 
     const [dataOfSubView, setDataOfSubView] = useState([])
+    const [dataOfHWSubView, setDataOfHomeworkSubView] = useState([])
+    const [myClass, setMyClass] = useState([])
+    const [HomeworkList, setPupilHomeworkList] = useState([])
+    const [isMyDayLoading, setMyDayLoading] = useState(true)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(true)
+
+    useEffect(() => {
+        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of my day', res)
+            if (res.flag === true) {
+                setMyClass(res.data)
+                setDataOfSubView(res.data[0])
+                setMyDayLoading(false)
+            } else {
+                showMessage(res.message)
+                setMyDayLoading(false)
+            }
+        }, (err) => {
+        })
+
+        Service.get(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of pupil homework list', res)
+            if (res.flag === true) {
+                setPupilHomeworkList(res.data)
+                setDataOfHomeworkSubView(res.data[0])
+                setHomeworkLoading(false)
+            } else {
+                showMessage(res.message)
+                setHomeworkLoading(false)
+            }
+        }, (err) => {
+        })
+    }, [])
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
@@ -32,33 +69,40 @@ const PupuilDashboard = (props) => {
             />
         );
     };
-    const homeWorkItem = ({ item, index }) => {
+
+    const renderItemHomework = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
+
         return (
             <HomeWorkItem
                 item={item}
-                onPress={() => setData(index)}
+                onPress={() => setDataHomework(index)}
                 style={{ backgroundColor }}
             />
         );
     };
+    const setDataHomework = (index) => {
+        setSelectedId(index)
+        setDataOfHomeworkSubView(HomeworkList[index])
+    }
     const setData = (index) => {
         setSelectedId(index)
-        setDataOfSubView(dashData[index])
+        setDataOfSubView(myClass[index])
     }
-    const Item = ({ onPress, style }) => (
-        <TouchableOpacity onPress={() => refRBSheet.current.open()} style={[PAGESTYLE.item, style]}>
+
+    const Item = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={() => { onPress(); refRBSheet.current.open() }} style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text style={PAGESTYLE.subjectName}>English</Text>
-                        <Text style={PAGESTYLE.subject}>Grammar</Text>
+                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+                        <Text style={PAGESTYLE.subject}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>Group A1</Text>
-                    <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
+                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
             </View>
             <TouchableOpacity style={PAGESTYLE.topListingArrow}>
@@ -67,19 +111,19 @@ const PupuilDashboard = (props) => {
 
         </TouchableOpacity>
     );
-    const HomeWorkItem = ({ onPress, style }) => (
-        <TouchableOpacity onPress={() => refRBSheetTwo.current.open()} style={[PAGESTYLE.item, style]}>
+    const HomeWorkItem = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={() => { onPress(); refRBSheetTwo.current.open() }} style={[PAGESTYLE.item, style]}>
             <View style={PAGESTYLE.classSubject}>
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text style={PAGESTYLE.subjectName}>English</Text>
-                        <Text style={PAGESTYLE.subject}>Grammar</Text>
+                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>Group A1</Text>
-                    <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
+                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
             </View>
             <TouchableOpacity style={PAGESTYLE.topListingArrow}>
@@ -121,94 +165,114 @@ const PupuilDashboard = (props) => {
                             </View>
                             <View style={PAGESTYLE.orangeBoxBottom}>
                                 <View style={PAGESTYLE.whiteBoard}>
-                                    <View>
-                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                                            <FlatList
-                                                showsVerticalScrollIndicator={false}
-                                                style={PAGESTYLE.ScrollViewFlatlist}
-                                                data={[1, 2, 3, 4, 5, 6, 7]}
-                                                renderItem={renderItem}
-                                                keyExtractor={(item) => item.id}
-                                                extraData={selectedId}
-                                            />
-                                        </SafeAreaView>
-                                        <RBSheet
-                                            ref={refRBSheet}
-                                            closeOnDragDown={true}
-                                            height={[hp(85)]}
-                                            style={{ position: 'relative', }}
-                                            closeOnPressMask={true}
-                                            customStyles={{
-                                                wrapper: {
-                                                    backgroundColor: COLORS.bottomSlideUpBack
-                                                },
-                                                draggableIcon: {
-                                                    backgroundColor: COLORS.darkGray
-                                                }
-                                            }}
-                                        >
-                                            <View style={PAGESTYLE.rightTabContent}>
-                                                {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
-                                                <View style={PAGESTYLE.tabcontent}>
-                                                    <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
-                                                    <Text h3 style={PAGESTYLE.subTitleTab}>Art Subject</Text>
-                                                    <View style={PAGESTYLE.yellowHrTag}></View>
-                                                    <View style={PAGESTYLE.timedateGrp}>
-                                                        <View style={PAGESTYLE.dateWhiteBoard}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                            <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                            <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                            <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
-                                                        </View>
-                                                    </View>
-                                                    <View style={STYLE.hrCommon}></View>
-                                                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
-                                                        <View style={PAGESTYLE.mediaMain}>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                                            <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
-                                                        </View>
-                                                        <Text style={PAGESTYLE.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
-                                                        <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                            <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                                <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                <Text style={PAGESTYLE.attachmentText}>1 Attachment</Text>
-                                                            </TouchableOpacity>
-                                                            <TouchableOpacity>
-                                                                <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                        <View style={PAGESTYLE.requirementofClass}>
-                                                            <Text style={PAGESTYLE.requireText}>What you will need</Text>
-                                                            <View style={PAGESTYLE.lessonPoints}>
-                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
+                                    {isMyDayLoading ?
+                                        <ActivityIndicator
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.yellowDark} />
+                                        :
+                                        <View>
+                                            {
+                                                myClass.length > 0 ?
+                                                    <>
+                                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
+                                                            <FlatList
+                                                                showsVerticalScrollIndicator={false}
+                                                                style={PAGESTYLE.ScrollViewFlatlist}
+                                                                data={myClass}
+                                                                renderItem={renderItem}
+                                                                keyExtractor={(item) => item.id}
+                                                                extraData={selectedId}
+                                                            />
+                                                        </SafeAreaView>
+                                                        <RBSheet
+                                                            ref={refRBSheet}
+                                                            closeOnDragDown={true}
+                                                            height={[hp(85)]}
+                                                            style={{ position: 'relative', }}
+                                                            closeOnPressMask={true}
+                                                            customStyles={{
+                                                                wrapper: {
+                                                                    backgroundColor: COLORS.bottomSlideUpBack
+                                                                },
+                                                                draggableIcon: {
+                                                                    backgroundColor: COLORS.darkGray
+                                                                }
+                                                            }}
+                                                        >
+                                                            <View style={PAGESTYLE.rightTabContent}>
+                                                                {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
+                                                                <View style={PAGESTYLE.tabcontent}>
+                                                                    <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.SubjectName}</Text>
+                                                                    <Text h3 style={PAGESTYLE.subTitleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                                    <View style={PAGESTYLE.yellowHrTag}></View>
+                                                                    <View style={PAGESTYLE.timedateGrp}>
+                                                                        <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                                        </View>
+                                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
+                                                                        </View>
+                                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                                        </View>
+                                                                    </View>
+                                                                    <View style={STYLE.hrCommon}></View>
+                                                                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
+                                                                        <View style={PAGESTYLE.mediaMain}>
+                                                                            <FlatList
+                                                                                data={dataOfSubView.PupilList}
+                                                                                style={{ width: '100%' }}
+                                                                                renderItem={({ item, index }) => (
+                                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                                )}
+                                                                                horizontal
+                                                                                keyExtractor={(item, index) => index.toString()}
+                                                                            />
+                                                                        </View>
+                                                                        <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
+                                                                        <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                                                            <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                                                <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment</Text>
+                                                                            </TouchableOpacity>
+                                                                            <TouchableOpacity>
+                                                                                <Text style={PAGESTYLE.linkText}>see more</Text>
+                                                                            </TouchableOpacity>
+                                                                        </View>
+                                                                        <View style={PAGESTYLE.requirementofClass}>
+                                                                            <Text style={PAGESTYLE.requireText}>What you will need</Text>
+                                                                            <FlatList
+                                                                                data={dataOfSubView.CheckList}
+                                                                                style={{ width: '100%' }}
+                                                                                renderItem={({ item, index }) => (
+                                                                                    <View style={PAGESTYLE.lessonPoints}>
+                                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                        <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                                    </View>
+                                                                                )}
+                                                                                numColumns={4}
+                                                                                keyExtractor={(item, index) => index.toString()}
+                                                                            />
+                                                                        </View>
+                                                                    </ScrollView>
+                                                                    <View style={PAGESTYLE.lessonstartButton}>
+                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
+                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
+                                                                    </View>
+                                                                </View>
                                                             </View>
-                                                            <View style={PAGESTYLE.lessonPoints}>
-                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
-                                                            </View>
-                                                        </View>
-                                                    </ScrollView>
-                                                    <View style={PAGESTYLE.lessonstartButton}>
-                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
+                                                        </RBSheet>
+                                                    </>
+                                                    :
+                                                    <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                        <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                     </View>
-                                                </View>
-                                            </View>
-                                        </RBSheet>
-                                    </View>
+                                            }
+                                        </View>
+                                    }
                                 </View>
                             </View>
                         </View>
@@ -234,78 +298,87 @@ const PupuilDashboard = (props) => {
                             </View>
                             <View style={PAGESTYLE.orangeBoxBottom}>
                                 <View style={PAGESTYLE.whiteBoard}>
-                                    <View>
-                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                                            <FlatList
-                                                showsVerticalScrollIndicator={false}
-                                                style={PAGESTYLE.ScrollViewFlatlist}
-                                                data={[1, 2, 3, 4, 5, 6, 7]}
-                                                renderItem={homeWorkItem}
-                                                keyExtractor={(item) => item.id}
-                                                extraData={selectedId}
-                                            />
-                                        </SafeAreaView>
-                                        <RBSheet
-                                            ref={refRBSheetTwo}
-                                            closeOnDragDown={true}
-                                            height={[hp(85)]}
-                                            style={{ position: 'relative', }}
-                                            closeOnPressMask={true}
-                                            customStyles={{
-                                                wrapper: {
-                                                    backgroundColor: COLORS.bottomSlideUpBack
-                                                },
-                                                draggableIcon: {
-                                                    backgroundColor: COLORS.darkGray
-                                                }
-                                            }}
-                                        >
-                                            <View style={PAGESTYLE.rightTabContent}>
-                                                <View style={PAGESTYLE.arrowSelectedTab}></View>
-                                                <View style={PAGESTYLE.tabcontent}>
-                                                    <Text h2 style={[PAGESTYLE.titleTab, PAGESTYLE.titleTabSecond]}>Grammar</Text>
-                                                    <View style={PAGESTYLE.timedateGrp}>
-                                                        <View style={PAGESTYLE.dateWhiteBoard}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
-                                                            <Text style={PAGESTYLE.datetimeText}>Today</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
-                                                            <Text style={PAGESTYLE.datetimeText}>English</Text>
-                                                        </View>
+                                    {isHomeworkLoading ?
+                                        <ActivityIndicator
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.yellowDark} />
+                                        :
+                                        <View>
+                                            {
+                                                HomeworkList.length > 0 ?
+                                                    <>
+                                                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
+                                                            <FlatList
+                                                                showsVerticalScrollIndicator={false}
+                                                                style={PAGESTYLE.ScrollViewFlatlist}
+                                                                data={HomeworkList}
+                                                                renderItem={renderItemHomework}
+                                                                keyExtractor={(item) => item.id}
+                                                                extraData={selectedId}
+                                                            />
+                                                        </SafeAreaView>
+                                                        <RBSheet
+                                                            ref={refRBSheetTwo}
+                                                            closeOnDragDown={true}
+                                                            height={[hp(85)]}
+                                                            style={{ position: 'relative', }}
+                                                            closeOnPressMask={true}
+                                                            customStyles={{
+                                                                wrapper: {
+                                                                    backgroundColor: COLORS.bottomSlideUpBack
+                                                                },
+                                                                draggableIcon: {
+                                                                    backgroundColor: COLORS.darkGray
+                                                                }
+                                                            }}
+                                                        >
+                                                            <View style={PAGESTYLE.rightTabContent}>
+                                                                <View style={PAGESTYLE.arrowSelectedTab}></View>
+                                                                <View style={PAGESTYLE.tabcontent}>
+                                                                    <Text h2 style={[PAGESTYLE.titleTab, PAGESTYLE.titleTabSecond]}>{dataOfHWSubView.LessonTopic}</Text>
+                                                                    <View style={PAGESTYLE.timedateGrp}>
+                                                                        <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                            <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
+                                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.lessonDate).format('ll')}</Text>
+                                                                        </View>
+                                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                            <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
+                                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
+                                                                        </View>
+                                                                    </View>
+                                                                    <View style={STYLE.hrCommon}></View>
+                                                                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
+                                                                        <Text style={[PAGESTYLE.lessondesciption, PAGESTYLE.lessondesciptionSecond]}>{dataOfHWSubView.HomeworkDescription}</Text>
+                                                                        <View style={STYLE.hrCommon}></View>
+                                                                        <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.requirementofClassSecond]}>
+                                                                            <TouchableOpacity><Text style={PAGESTYLE.requireText}>Make sure you:</Text></TouchableOpacity>
+                                                                            <FlatList
+                                                                                data={dataOfHWSubView.CheckList}
+                                                                                style={{ width: '100%' }}
+                                                                                renderItem={({ item, index }) => (
+                                                                                    <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
+                                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                                        <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                                    </View>
+                                                                                )}
+                                                                                keyExtractor={(item, index) => index.toString()}
+                                                                            />
+                                                                        </View>
+                                                                    </ScrollView>
+                                                                    <View style={PAGESTYLE.lessonstartButton}>
+                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity>
+                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondButton]}>See Homework</Text></TouchableOpacity>
+                                                                    </View>
+                                                                </View>
+                                                            </View>
+                                                        </RBSheet>
+                                                    </> :
+                                                    <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                        <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                     </View>
-                                                    <View style={STYLE.hrCommon}></View>
-                                                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
-                                                        <Text style={[PAGESTYLE.lessondesciption, PAGESTYLE.lessondesciptionSecond]}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
-                                                        <View style={STYLE.hrCommon}></View>
-                                                        <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.requirementofClassSecond]}>
-                                                            <TouchableOpacity><Text style={PAGESTYLE.requireText}>Make sure you:</Text></TouchableOpacity>
-                                                            <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                <Text style={PAGESTYLE.lessonPointText}>Watch The BBC Bitesize Video.</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                <Text style={PAGESTYLE.lessonPointText}>Write a list of all the everyday items that come from the Amazon Rainforest.</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                <Text style={PAGESTYLE.lessonPointText}>Write a short story about where those items come from in the the forest and what they mean to you.</Text>
-                                                            </View>
-                                                            <View style={PAGESTYLE.lessonPoints}>
-                                                                <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                <Text style={PAGESTYLE.lessonPointText}>Take a photo of your work and upload here.</Text>
-                                                            </View>
-                                                        </View>
-                                                    </ScrollView>
-                                                    <View style={PAGESTYLE.lessonstartButton}>
-                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity>
-                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondButton]}>See Homework</Text></TouchableOpacity>
-                                                    </View>
-                                                </View>
-                                            </View>
-                                        </RBSheet>
-                                    </View>
+                                            }
+                                        </View>
+                                    }
                                 </View>
                             </View>
                         </View>

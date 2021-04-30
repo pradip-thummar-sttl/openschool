@@ -168,7 +168,7 @@ const TLDetailEdit = (props) => {
     };
 
     const pushCheckListItem = () => {
-        if (!newItem) {
+        if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
             return
         }
@@ -178,6 +178,7 @@ const TLDetailEdit = (props) => {
         }
         setItemCheckList([...itemCheckList, temp])
         this.item.clear()
+        setNewItem('')
     }
 
     const removeCheckListItem = (_index) => {
@@ -480,7 +481,11 @@ const TLDetailEdit = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.allFiles],
+                type: [DocumentPicker.types.pdf, 
+                    DocumentPicker.types.doc, 
+                    DocumentPicker.types.xls, 
+                    DocumentPicker.types.images,
+                    DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     res.originalname = res.name

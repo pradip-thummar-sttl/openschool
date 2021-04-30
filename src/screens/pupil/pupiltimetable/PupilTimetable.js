@@ -12,6 +12,7 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import COLORS from "../../../utils/Colors";
+import { setCalendarEventData } from "../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 const PupilTimetable = (props) => {
@@ -66,7 +67,7 @@ const PupilTimetable = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Service.get(`${EndPoints.CalenderEvent}604b09139dc64117024690c3`, (res) => {
+        Service.get(`${EndPoints.CalenderEvent}${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
@@ -84,7 +85,6 @@ const PupilTimetable = (props) => {
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
 
-        console.log('==================================');
         timeTableData.forEach(element => {
 
             const day = new Date(element.Type == Lesson ? element.Date : element.EventDate).getDay();
@@ -137,10 +137,13 @@ const PupilTimetable = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
+
+        console.log('data', EndPoints.GetTimeTablePupil + '/' + User.user.UserDetialId);
+
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response', res.data)
                 setTimeTableData(res.data)
                 dispatch(setCalendarEventData(res.data))
             } else {
@@ -157,20 +160,20 @@ const PupilTimetable = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={1}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 <Header3
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => fetchRecord('', '')}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()}/>
+                    refreshList={() => refresh()} />
 
                 <View style={{ ...PAGESTYLE.backgroundTable, flex: 1,}}>
                     {isTimeTableLoading ?

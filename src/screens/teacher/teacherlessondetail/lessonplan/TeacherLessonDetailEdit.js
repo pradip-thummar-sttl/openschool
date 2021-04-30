@@ -38,7 +38,7 @@ const TLDetailEdit = (props) => {
     const [mode, setMode] = useState('date');
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(false);
-    const [lessonData, setLessonData] = useState(props.route.params.data);
+    const [lessonData, setLessonData] = useState(props.data);
     const [isAddRecording, setAddRecording] = useState(false)
     const [cameraResponse, setCameraResponse] = useState({})
 
@@ -171,16 +171,17 @@ const TLDetailEdit = (props) => {
     };
 
     const pushCheckListItem = () => {
-        if (!newItem) {
+        if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
             return
         }
-        
+
         let temp = {
             ItemName: newItem
         }
         setItemCheckList([...itemCheckList, temp])
         this.item.clear()
+        setNewItem('')
     }
 
     const removeCheckListItem = (_index) => {
@@ -248,9 +249,11 @@ const TLDetailEdit = (props) => {
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center', marginTop: hp(2), }}>
                     <TextInput
                         ref={input => { this.item = input }}
+                        returnKeyType={"done"}
+                        onSubmitEditing={() => { this.item.focus(); }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -480,8 +483,8 @@ const TLDetailEdit = (props) => {
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
             showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
-                props.route.params.onGoBack();
-                props.navigation.goBack()
+                // props.route.params.onGoBack();
+                props.goBack()
             })
             setLoading(null)
             return
@@ -493,8 +496,8 @@ const TLDetailEdit = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
-                    props.route.params.onGoBack();
-                    props.navigation.goBack()
+                    // props.route.params.onGoBack();
+                    props.goBack()
                 })
             } else {
                 setLoading(false)
@@ -512,7 +515,11 @@ const TLDetailEdit = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.allFiles],
+                type: [DocumentPicker.types.pdf, 
+                    DocumentPicker.types.doc, 
+                    DocumentPicker.types.xls, 
+                    DocumentPicker.types.images,
+                    DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     res.originalname = res.name
@@ -546,19 +553,19 @@ const TLDetailEdit = (props) => {
     }
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
                 <HeaderUpdate
                     isLoading={isLoading}
                     lessonData={lessonData}
                     navigateToBack={() => {
-                        props.route.params.onGoBack();
-                        props.navigation.goBack()
+                        // props.route.params.onGoBack();
+                        props.goBack()
                     }}
                     onAlertPress={() => props.navigation.openDrawer()}
                     saveLesson={() => { saveLesson() }} />
@@ -576,10 +583,12 @@ const TLDetailEdit = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                             <TextInput
+                                                returnKeyType={"next"}
+                                                onSubmitEditing={() => { this.t2.focus(); }}
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                 placeholder="e.g. Grammar"
                                                 defaultValue={lessonData.LessonTopic}
-                                                autoCapitalize={false}
+                                                autoCapitalize={'sentences'}
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.greyplaceholder}
                                                 onChangeText={text => setLessonTopic(text)} />
@@ -608,7 +617,11 @@ const TLDetailEdit = (props) => {
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
+                                        ref={(input) => { this.t2 = input; }}
+                                        returnKeyType={"next"}
+                                        onSubmitEditing={() => { this.item.focus(); }}
                                         multiline={true}
+                                        autoCapitalize={'sentences'}
                                         numberOfLines={4}
                                         defaultValue={lessonData.LessonDescription}
                                         style={PAGESTYLE.commonInputTextareaNormal}
@@ -655,9 +668,13 @@ const TLDetailEdit = (props) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
                                                 <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                                </TouchableOpacity>
+                                                {item.uri ?
+                                                    <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                        <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    null
+                                                }
                                             </View>
                                         )
                                     }) : null

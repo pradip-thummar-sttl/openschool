@@ -18,7 +18,7 @@ import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
 import { User } from "../../../../utils/Model";
 
-const CreateNewEvent = (props) => {
+const CreateNewEventPupil = (props) => {
     console.log('props', props);
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -120,9 +120,8 @@ const CreateNewEvent = (props) => {
             EventLocation: location,
             EventDescription: note,
             EventTypeId: selectColorId,
-            CreatedBy: User.user._id
+            CreatedBy: User.user.UserDetialId
         }
-        console.log(data);
 
         Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
             setLoading(false)
@@ -411,7 +410,7 @@ const CreateNewEvent = (props) => {
         </View>
     );
 }
-export default CreateNewEvent;
+export default CreateNewEventPupil;
 
 const styles = StyleSheet.create({
     cancelButton: {

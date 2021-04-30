@@ -126,7 +126,11 @@ const TLDetailAdd = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.allFiles],
+                type: [DocumentPicker.types.pdf, 
+                    DocumentPicker.types.doc, 
+                    DocumentPicker.types.xls, 
+                    DocumentPicker.types.images,
+                    DocumentPicker.types.plainText],
             }).then((results) => {
                 console.log('results', results);
                 for (const res of results) {
@@ -168,7 +172,7 @@ const TLDetailAdd = (props) => {
     };
 
     const pushCheckListItem = () => {
-        if (!newItem) {
+        if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
             return
         }
@@ -178,6 +182,7 @@ const TLDetailAdd = (props) => {
         }
         setItemCheckList([...itemCheckList, temp])
         this.item.clear()
+        setNewItem('')
     }
 
     const removeCheckListItem = (_index) => {
@@ -242,7 +247,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: 22 }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: 18 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -258,9 +263,10 @@ const TLDetailAdd = (props) => {
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
                         ref={input => { this.item = input }}
+                        returnKeyType={"done"}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -489,8 +495,8 @@ const TLDetailAdd = (props) => {
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
             showMessageWithCallBack(MESSAGE.lessonAdded, () => {
-                props.route.params.onGoBack();
-                props.navigation.goBack()
+                // props.route.params.onGoBack();
+                props.goBack()
             })
             setLoading(null)
             return
@@ -504,8 +510,8 @@ const TLDetailAdd = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonAdded, () => {
-                    props.route.params.onGoBack();
-                    props.navigation.goBack()
+                    // props.route.params.onGoBack();
+                    props.goBack()
                 })
             } else {
                 showMessage(res.message)
@@ -520,18 +526,14 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
+           
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
                 <HeaderAddNew
                     isLoading={isLoading}
                     navigateToBack={() => {
-                        props.route.params.onGoBack();
-                        props.navigation.goBack()
+                        props.goBack()
+                        // props.route.params.onGoBack();
+                        // props.navigation.goBack()
                     }}
                     saveLesson={() => { saveLesson() }}
                     onAlertPress={() => { props.navigation.openDrawer() }} />
@@ -549,9 +551,11 @@ const TLDetailAdd = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                             <TextInput
+                                                returnKeyType={"next"}
+                                                onSubmitEditing={() => { this.t2.focus(); }}
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                 placeholder="e.g. Grammar, Fractions, etc"
-                                                autoCapitalize={false}
+                                                autoCapitalize={'sentences'}
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.menuLightFonts}
                                                 onChangeText={text => setLessonTopic(text)} />
@@ -581,7 +585,11 @@ const TLDetailAdd = (props) => {
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
+                                        ref={(input) => { this.t2 = input; }}
+                                        returnKeyType={"next"}
+                                        onSubmitEditing={() => { this.item.focus(); }}
                                         multiline={true}
+                                        autoCapitalize={'sentences'}
                                         numberOfLines={4}
                                         placeholder='Briefly explain what the lesson is about'
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}

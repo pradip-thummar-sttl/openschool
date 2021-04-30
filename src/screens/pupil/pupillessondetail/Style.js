@@ -1413,7 +1413,7 @@ export default StyleSheet.create({
         height: hp(5.20),
     },
     homeworkView: {
-        width: hp(35),
+        width: hp(32.5),
         backgroundColor: COLORS.hwmatColor,
         borderRadius: 5,
         borderWidth: 1,

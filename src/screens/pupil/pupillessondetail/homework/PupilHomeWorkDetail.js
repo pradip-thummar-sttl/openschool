@@ -18,15 +18,23 @@ import DocumentPicker from 'react-native-document-picker';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import { showMessage } from "../../../../utils/Constant";
+import { showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
-    const { item } = props.route.params
+    const { item } = props
     const [materialArr, setMaterialArr] = useState([])
     const [isLoading, setLoading] = useState(false);
-    console.log('props of homewor', props.route.params);
+
+    const isFieldsValidated = () => {
+        if (materialArr.length <= 0) {
+            showMessage(MESSAGE.selectMaterial)
+            return false
+        }
+        console.log(isSubmitPopup);
+        setSubmitPopup(true)
+    }
 
     onSubmitHomework = () => {
         let formData = new FormData();
@@ -42,14 +50,14 @@ const PupilHomeWorkDetail = (props) => {
         // formData.append("Feedback", feedBack);
         // formData.append("Rewards", '1');
 
-        console.log('data', formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`);
-
         Service.postFormData(formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
                 console.log('response of save Homework', res)
                 // setDefaults()
-                showMessage(res.message)
+                showMessageWithCallBack(res.message, () => {
+                    props.navigation.goBack()
+                })
                 setSubmitPopup(false)
                 // props.route.params.goBack()
             } else {
@@ -68,7 +76,11 @@ const PupilHomeWorkDetail = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.allFiles],
+                type: [DocumentPicker.types.pdf, 
+                    DocumentPicker.types.doc, 
+                    DocumentPicker.types.xls, 
+                    DocumentPicker.types.images,
+                    DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     console.log(
@@ -95,15 +107,15 @@ const PupilHomeWorkDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.commonBg}>
                 <Header14
                     onAlertPress={() => props.navigation.openDrawer()}
-                    goBack={() => props.navigation.goBack()}
+                    goBack={() => props.goBack()}
                     onSubmitHomework={() => setSubmitPopup(true)}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
@@ -175,7 +187,7 @@ const PupilHomeWorkDetail = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
-                        <View style={PAGESTYLE.uploadBoardBlock}>
+                        {/* <View style={PAGESTYLE.uploadBoardBlock}> */}
                             {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
 
                             <TouchableOpacity
@@ -191,11 +203,11 @@ const PupilHomeWorkDetail = (props) => {
                                 </View>
 
                             </TouchableOpacity>
-                        </View>
+                        {/* </View> */}
                     </View>
                 </View>
                 {
-                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} /> : null
+                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag)=> setSubmitPopup(flag)} /> : null
                 }
             </View>
         </View>

@@ -12,13 +12,11 @@ import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Co
 import MESSAGE from "../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
 const WorkSpace = (props) => {
+    const workspaceList = props.route.params.item
+    const [example, setExample] = useState(0)
     const [workSpace, setWorkSpace] = useState([])
     const [workSpacePath, setWorkSpacePath] = useState("")
-    console.log('props of workspace', props)
-  
-    const workspaceList = props.item
-    const [example, setExample] = useState(0)
-    const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.tappedItem)
+    const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.route.params.tappedItem)
 
     console.log('====', workspaceList)
 
@@ -37,7 +35,8 @@ const WorkSpace = (props) => {
             name: pathArr[pathArr.length - 1],
             type: `image/${ext[0]}`
         })
-        Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.id}/${User.user.UserDetialId}`, (res) => {
+
+        Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.route.params.id}/${User.user.UserDetialId}`, (res) => {
             console.log('response of upload workspace', res)
             if (res.flag) {
                 showMessageWithCallBack(MESSAGE.workspaceAdded, () => {
@@ -61,9 +60,15 @@ const WorkSpace = (props) => {
     return (
         <View style={{ flex: 1 }}>
             <SafeAreaView />
-            <WorkSpaceHeader isWorkspace={props.isWorkspace} goBack={() => props.goBack()} onAlertPress={() => props.navigation.openDrawer()} onSaveWorkSpacePress={() => { onSubmitWorkspace() }} />
+            <WorkSpaceHeader
+                isWorkspace={props.route.params.isWorkspace}
+                goBack={() => {
+                    props.navigation.goBack()
+                }}
+                onAlertPress={() => props.navigation.openDrawer()}
+                onSaveWorkSpacePress={() => { onSubmitWorkspace() }} />
             {
-                props.isWorkspace ?
+                props.route.params.isWorkspace ?
                     <View style={PAGESTYLE.workSpaceView}>
                         {/* <Image style={PAGESTYLE.smallVideoImg} source={require('../../../assets/images/videoSmall.png')} />
                         <SketchCanvas

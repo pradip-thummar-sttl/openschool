@@ -586,7 +586,7 @@ flex: 1,
         backgroundColor: COLORS.transparent,
     },
     dateTimetextdummy: {
-        fontSize: hp(1.82),
+        fontSize: 18,
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
         alignSelf: 'center',
