@@ -127,7 +127,7 @@ const PupilLessonDetailInternal = (props) => {
                     onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}
                     onSeeHomeworkPress={() => null} />
                 <View>
-                    <View style={{ height: '100%', paddingBottom: hp(18.8), }}>
+                    <View style={{ height: '93%', bottom: 20 }}>
                         <View style={PAGESTYLE.largeVideoBlock}>
                             <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
                         </View>
@@ -160,7 +160,8 @@ const PupilLessonDetailInternal = (props) => {
                                 />
                             </View>
                         </ScrollView>
-                        <View style={PAGESTYLE.lessonstartButtonPupil}>
+                    </View>
+                    <View style={PAGESTYLE.lessonstartButtonPupil}>
                             <TouchableOpacity style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}
                                 onPress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}>
@@ -168,7 +169,6 @@ const PupilLessonDetailInternal = (props) => {
                             </TouchableOpacity>
                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.fixedButton]}>see homework</Text></TouchableOpacity>
                         </View>
-                    </View>
                 </View>
             </View>
         </View>

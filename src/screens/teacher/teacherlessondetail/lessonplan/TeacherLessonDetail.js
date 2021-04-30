@@ -11,7 +11,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 import { Download } from "../../../../utils/Download";
 const TLDetail = (props) => {
-
+console.log('props', props);
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>

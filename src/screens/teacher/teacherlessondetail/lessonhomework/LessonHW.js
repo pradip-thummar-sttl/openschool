@@ -59,6 +59,7 @@ const TLHomeWork = (props) => {
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
+            
             if (res.flag) {
                 Addhomework.IsIncluded = res.data.IsIncluded
                 Addhomework.HomeworkDescription = res.data.HomeworkDescription
@@ -133,6 +134,7 @@ const TLHomeWork = (props) => {
                 }
                 console.log('hello response arr', arr)
                 setMaterialArr(arr)
+                Addhomework.MaterialArr = arr
             });
 
         } catch (err) {
@@ -257,7 +259,7 @@ const TLHomeWork = (props) => {
                         ref={input => { this.item = input }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />

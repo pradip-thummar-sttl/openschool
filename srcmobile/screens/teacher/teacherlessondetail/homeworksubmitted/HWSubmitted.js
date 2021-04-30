@@ -59,16 +59,22 @@ const TLHomeWorkSubmitted = (props) => {
     const [filterBy, setFilterBy] = useState('')
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isSearchActive, setSearchActive] = useState(false)
+    const [dataChanged, setDataChanged] = useState(false)
 
     React.useEffect(() => {
         setFilterBy(props.filterBy)
         setSearchKeyword(props.searchKeyword)
         setSearchActive(props.searchActive)
+        setDataChanged(props.dataChanged)
     });
 
     useEffect(() => {
         fetchRecord('', filterBy)
     }, [filterBy])
+
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [dataChanged])
 
     useEffect(() => {
         if (isSearchActive) {

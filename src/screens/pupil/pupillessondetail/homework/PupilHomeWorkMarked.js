@@ -13,6 +13,7 @@ import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/Deprecate
 import Header15 from '../../../../component/reusable/header/bulck/Header15'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../utils/Images";
+import { Download } from "../../../../utils/Download";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
@@ -90,9 +91,11 @@ const PupilHomeWorkMarked = (props) => {
                                     data={item.HomeworkList}
                                     style={{ alignSelf: 'center', width: '100%', top: 10 }}
                                     renderItem={({ item, index }) => (
-                                        <View style={PAGESTYLE.alignRow1}>
-                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                        </View>
+                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                            <View style={PAGESTYLE.alignRow1}>
+                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                            </View>
+                                        </TouchableOpacity>
                                     )}
                                     numColumns={4}
                                     keyExtractor={(item, index) => index.toString()}
@@ -112,8 +115,8 @@ const PupilHomeWorkMarked = (props) => {
                         <View style={PAGESTYLE.feedbackVideoBlock}>
                             <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
                             <View>
-                                <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Reuel Pardesi - Feedback for English </Text>
-                                <Text style={PAGESTYLE.techerName}>Miss Barker</Text>
+                                <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Feedback for {item.SubjectName} </Text>
+                                <Text style={PAGESTYLE.techerName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                             </View>
                         </View>
                     </View>

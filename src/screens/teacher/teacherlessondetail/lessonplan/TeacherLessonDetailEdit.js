@@ -564,7 +564,7 @@ const TLDetailEdit = (props) => {
                     isLoading={isLoading}
                     lessonData={lessonData}
                     navigateToBack={() => {
-                        // props.route.params.onGoBack();
+                        props.onRefresh();
                         props.goBack()
                     }}
                     onAlertPress={() => props.navigation.openDrawer()}

@@ -9,7 +9,7 @@ export default StyleSheet.create({
         marginVertical: wp(2),
         backgroundColor: 'white',
         height: hp(84),
-        width: wp(95),
+        width: wp(90),
         alignSelf: 'center',
         borderRadius: 5
     },

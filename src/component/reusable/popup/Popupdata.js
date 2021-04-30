@@ -170,10 +170,16 @@ const Popupdata = (props) => {
                                         <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                     </TouchableOpacity>
                                     <View style={styles.lessonstartButton}>
-                                        <TouchableOpacity 
-                                        style={styles.buttonGrp}
-                                        activeOpacity={opacity}
-                                        onPress={() => {toggleModal(); props.navigateToDetail()}}><Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text></TouchableOpacity>
+                                        {!props.isPupil ?
+                                            <TouchableOpacity
+                                                style={styles.buttonGrp}
+                                                activeOpacity={opacity}
+                                                onPress={() => { toggleModal(); props.navigateToDetail() }}>
+                                                <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
+                                            </TouchableOpacity>
+                                            :
+                                            <View style={{ width: hp(20) }}></View>
+                                        }
                                         <TouchableOpacity style={styles.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
                                     </View>
                                 </View>

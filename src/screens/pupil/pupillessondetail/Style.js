@@ -266,15 +266,15 @@ export default StyleSheet.create({
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
-        width:hp(33.07),
-        height:hp(45.05),
+        width: hp(33.07),
+        height: hp(45.05),
         borderRadius: 10,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
     },
     uploaded: {
-        alignSelf: 'center', 
-        marginVertical: 8, 
+        alignSelf: 'center',
+        marginVertical: 8,
         color: COLORS.greyplaceholder
     },
     fileGrp: {
@@ -785,9 +785,19 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    markedIcon:{
-        width:80,
-        resizeMode:'contain',
+    markedIcon: {
+        width: 60,
+        height: 60,
+        resizeMode: 'contain',
+    },
+    removeIcon: {
+        height: 30,
+        width: 30,
+        right: -5,
+        top: -5,
+        alignSelf: 'flex-end',
+        resizeMode: 'contain',
+        position: 'absolute',
     },
     markedLabel: {
         flexDirection: 'row',
