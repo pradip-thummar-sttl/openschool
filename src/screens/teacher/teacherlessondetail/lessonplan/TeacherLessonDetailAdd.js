@@ -437,8 +437,6 @@ const TLDetailAdd = (props) => {
             showMessage(MESSAGE.selectPupil);
             return false;
         }
-        return
-
         setLoading(true)
 
         let data = {

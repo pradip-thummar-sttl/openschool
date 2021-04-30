@@ -57,7 +57,7 @@ const PupilHomeWorkDetail = (props) => {
                 console.log('response of save Homework', res)
                 // setDefaults()
                 showMessageWithCallBack(res.message, () => {
-                    props.navigation.goBack()
+                    props.goBack()
                 })
                 setSubmitPopup(false)
                 // props.route.params.goBack()
@@ -122,7 +122,7 @@ const PupilHomeWorkDetail = (props) => {
                 <Header14
                     onAlertPress={() => props.navigation.openDrawer()}
                     goBack={() => props.goBack()}
-                    onSubmitHomework={() => setSubmitPopup(true)}
+                    onSubmitHomework={() => isFieldsValidated()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>

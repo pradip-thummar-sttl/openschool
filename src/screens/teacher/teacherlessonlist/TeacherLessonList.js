@@ -8,7 +8,7 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
-import { opacity } from "../../../utils/Constant";
+import { opacity, showMessage } from "../../../utils/Constant";
 import Header from "./Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
@@ -70,7 +70,7 @@ const TeacherLessonList = (props) => {
         return (
             <Pupillist
                 item={item}
-                navigateToDetail={() => {setItem(item),setTLDetail(true)}}
+                navigateToDetail={() => { setItem(item), setTLDetail(true) }}
             />
         );
     };
@@ -80,7 +80,7 @@ const TeacherLessonList = (props) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
 
-    
+
 
 
     useEffect(() => {
@@ -111,14 +111,14 @@ const TeacherLessonList = (props) => {
         console.log('refreshed');
         fetchRecord('', '')
     }
-   
+
 
     const renderList = () => {
         return (
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToAddSubject={() => {setAddSubject(true)}}
+                    navigateToAddSubject={() => { setAddSubject(true) }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
@@ -179,12 +179,15 @@ const TeacherLessonList = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             {
-                isAddSubject?
-                <TLDetailAdd goBack={()=>{refresh(),setAddSubject(false)}} />
-                :isTLDetail?
-                <TeacherLessonDetail data={data} goBack={()=>{refresh(),setTLDetail(false)}} />
-                :
-                renderList()
+                isAddSubject ?
+                    <TLDetailAdd
+                        goBack={() => { refresh(), setAddSubject(false) }} />
+                    : isTLDetail ?
+                        <TeacherLessonDetail
+                            data={data}
+                            goBack={() => { refresh(), setTLDetail(false) }} />
+                        :
+                        renderList()
             }
         </View>
     );

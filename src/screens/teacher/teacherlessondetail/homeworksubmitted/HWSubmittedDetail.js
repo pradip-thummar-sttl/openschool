@@ -60,8 +60,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
-                    props.route.params.onGoBack();
-                    props.navigation.goBack()
+                    props.onGoBack();
+                    props.goBack()
                 })
             } else {
                 showMessage(res.message)
@@ -86,7 +86,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     isMarked={data.Marked ? true : false}
                     isSubmitted={data.Submited ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
-                    navigateToBack={() => { props.navigation.goBack() }}
+                    navigateToBack={() => { props.goBack() }}
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onSetHomework={() => isFieldsValidated()} />
                 <KeyboardAwareScrollView>
@@ -102,7 +102,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.userRight}>
                                     <View style={PAGESTYLE.markedLabel}>
-                                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
+                                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon1} />
                                         <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
                                     </View>
                                     <View style={PAGESTYLE.dateNameBlock}>
