@@ -31,6 +31,7 @@ import DocumentPicker from 'react-native-document-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
+import { PanGestureHandler } from "react-native-gesture-handler";
 
 const TLDetailEdit = (props) => {
     const [date, setDate] = useState(new Date());
@@ -224,13 +225,14 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
                 <View style={STYLE.hrCommon}></View>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Items your class may need</Text>
+                <View style={PAGESTYLE.hrCommon2}></View>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%' }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: 22, paddingRight: 50 }}>{item.ItemName}</Text>
+                        <View style={{ margin: hp(1), }}>
+                            <Text style={{ fontSize: hp(2), paddingRight: hp(6.5) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -243,7 +245,7 @@ const TLDetailEdit = (props) => {
                     )}
                     keyExtractor={(item, index) => index.toString()}
                 />
-                <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
+                <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center', marginTop: hp(2), }}>
                     <TextInput
                         ref={input => { this.item = input }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
@@ -270,19 +272,19 @@ const TLDetailEdit = (props) => {
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <View style={STYLE.hrCommon}></View>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Add Pupils</Text>
+                <View style={PAGESTYLE.hrCommon2}></View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                 </TouchableOpacity> */}
                 <FlatList
                     data={pupils}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%',}}
                     renderItem={({ item, index }) => (
                         <View style={PAGESTYLE.alignRow}>
                             <CheckBox
-                                style={PAGESTYLE.checkMark}
+                                style={{...PAGESTYLE.checkMarkTool}}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
@@ -310,13 +312,13 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(26) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -332,13 +334,13 @@ const TLDetailEdit = (props) => {
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(26) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -355,13 +357,13 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(26) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -378,13 +380,13 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(26) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -622,8 +624,8 @@ const TLDetailEdit = (props) => {
                                 {pupilListView()}
 
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
-                                    <View style={STYLE.hrCommon}></View>
-                                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Class Settings</Text>
+                                    <View style={PAGESTYLE.hrCommon2}></View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
                                         <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />

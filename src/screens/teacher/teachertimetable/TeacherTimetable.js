@@ -165,7 +165,7 @@ const TeacherTimeTable = (props) => {
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
 
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top: 20, left: 10 }}>
+                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
@@ -182,7 +182,7 @@ const TeacherTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingTop: hp(1.5),}}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
@@ -203,8 +203,8 @@ const TeacherTimeTable = (props) => {
                                 </ScrollView>
                             </View>
                             :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            <View style={{ height: hp(13), justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
                             </View>
                     }
                 </View>
