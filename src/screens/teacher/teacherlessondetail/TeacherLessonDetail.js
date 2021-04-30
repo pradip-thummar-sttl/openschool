@@ -157,7 +157,7 @@ const TeacherLessonDetail = (props) => {
                                             hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                                             SubjectName={lessonData.SubjectName}
                                             setHomework={() => onAddHomework()}
-                                            navigateToBack={() => props.navigation.goBack()}
+                                            navigateToBack={() => props.goBack()}
                                             onAlertPress={() => props.navigation.openDrawer()}
                                             onClose={() => setVisiblePopup(false)}
                                             isVisible={isVisiblePopup}

@@ -84,7 +84,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 <HeaderSave
                     isMarked={data.Marked ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
-                    navigateToBack={() => { props.navigation.goBack() }}
+                    navigateToBack={() => { props.goBack() }}
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onSetHomework={() => isFieldsValidated()} />
                 <KeyboardAwareScrollView>

@@ -24,8 +24,8 @@ const PupilLessonDetailInternal = (props) => {
     const [isWorkspaceEdit, setWorkSpaceEdit] = useState(false)
     const [fileUrl, setFileUrl] = useState("")
     const { item } = props
-    const [item, setItem] = useState(props.route.params.item)
-    console.log('props.route.params', props.route.params.item);
+    // const [item, setItem] = useState(props.route.params.item)
+    // console.log('props.route.params', props.route.params.item);
 
     const refresh = () => {
         console.log(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`);
