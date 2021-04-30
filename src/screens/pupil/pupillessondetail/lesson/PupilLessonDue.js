@@ -9,7 +9,7 @@ import moment from "moment";
 
 
 const PupilLessonDue = (props) => {
-
+console.log('props of homework',props)
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>

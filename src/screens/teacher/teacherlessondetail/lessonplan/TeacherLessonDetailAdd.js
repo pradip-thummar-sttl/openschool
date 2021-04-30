@@ -496,8 +496,8 @@ const TLDetailAdd = (props) => {
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
             showMessageWithCallBack(MESSAGE.lessonAdded, () => {
-                props.route.params.onGoBack();
-                props.navigation.goBack()
+                // props.route.params.onGoBack();
+                props.goBack()
             })
             setLoading(null)
             return
@@ -511,8 +511,8 @@ const TLDetailAdd = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonAdded, () => {
-                    props.route.params.onGoBack();
-                    props.navigation.goBack()
+                    // props.route.params.onGoBack();
+                    props.goBack()
                 })
             } else {
                 showMessage(res.message)
@@ -527,18 +527,14 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
+           
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
                 <HeaderAddNew
                     isLoading={isLoading}
                     navigateToBack={() => {
-                        props.route.params.onGoBack();
-                        props.navigation.goBack()
+                        props.goBack()
+                        // props.route.params.onGoBack();
+                        // props.navigation.goBack()
                     }}
                     saveLesson={() => { saveLesson() }}
                     onAlertPress={() => { props.navigation.openDrawer() }} />

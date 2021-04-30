@@ -37,7 +37,7 @@ const TLDetailEdit = (props) => {
     const [mode, setMode] = useState('date');
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(false);
-    const [lessonData, setLessonData] = useState(props.route.params.data);
+    const [lessonData, setLessonData] = useState(props.data);
     const [isAddRecording, setAddRecording] = useState(false)
     const [cameraResponse, setCameraResponse] = useState({})
 
@@ -481,8 +481,8 @@ const TLDetailEdit = (props) => {
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
             showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
-                props.route.params.onGoBack();
-                props.navigation.goBack()
+                // props.route.params.onGoBack();
+                props.goBack()
             })
             setLoading(null)
             return
@@ -494,8 +494,8 @@ const TLDetailEdit = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
-                    props.route.params.onGoBack();
-                    props.navigation.goBack()
+                    // props.route.params.onGoBack();
+                    props.goBack()
                 })
             } else {
                 setLoading(false)
@@ -551,19 +551,19 @@ const TLDetailEdit = (props) => {
     }
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar
+            {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '93%' : '78%' }}>
+                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
                 <HeaderUpdate
                     isLoading={isLoading}
                     lessonData={lessonData}
                     navigateToBack={() => {
-                        props.route.params.onGoBack();
-                        props.navigation.goBack()
+                        // props.route.params.onGoBack();
+                        props.goBack()
                     }}
                     onAlertPress={() => props.navigation.openDrawer()}
                     saveLesson={() => { saveLesson() }} />

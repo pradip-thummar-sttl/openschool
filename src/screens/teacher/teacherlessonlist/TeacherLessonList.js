@@ -13,6 +13,8 @@ import Header from "./Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
+import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
+import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
@@ -51,6 +53,9 @@ const Pupillist = (props, { style }) => (
 const TeacherLessonList = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
+    const [isAddSubject, setAddSubject] = useState(false)
+    const [isTLDetail, setTLDetail] = useState(false)
+    const [data, setItem] = useState([])
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
         return (
@@ -65,7 +70,7 @@ const TeacherLessonList = (props) => {
         return (
             <Pupillist
                 item={item}
-                navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': item })}
+                navigateToDetail={() => {setItem(item),setTLDetail(true)}}
             />
         );
     };
@@ -74,6 +79,9 @@ const TeacherLessonList = (props) => {
     const [isLessonLoading, setLessonLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+
+    
+
 
     useEffect(() => {
         fetchRecord('', '')
@@ -103,19 +111,14 @@ const TeacherLessonList = (props) => {
         console.log('refreshed');
         fetchRecord('', '')
     }
+   
 
-    return (
-        <View style={PAGESTYLE.mainPage}>
-            <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+    const renderList = () => {
+        return (
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
-                    navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
+                    navigateToAddSubject={() => {setAddSubject(true)}}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
@@ -171,6 +174,18 @@ const TeacherLessonList = (props) => {
                     </View>
                 </ScrollView>
             </View>
+        )
+    }
+    return (
+        <View style={PAGESTYLE.mainPage}>
+            {
+                isAddSubject?
+                <TLDetailAdd goBack={()=>{refresh(),setAddSubject(false)}} />
+                :isTLDetail?
+                <TeacherLessonDetail data={data} goBack={()=>{refresh(),setTLDetail(false)}} />
+                :
+                renderList()
+            }
         </View>
     );
 }

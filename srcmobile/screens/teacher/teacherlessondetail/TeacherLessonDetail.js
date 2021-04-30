@@ -24,6 +24,8 @@ import {
 } from 'react-native-popup-menu';
 import COLORS from "../../../utils/Colors";
 import MESSAGE from "../../../utils/Messages";
+import ScreenAndCameraRecording from "../../../../src/screens/teacher/screenandcamera/ScreenandCamera";
+import TLVideoGallery from "../../../../src/screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -32,6 +34,9 @@ const TeacherLessonDetail = (props) => {
     const [isVisiblePopup, setVisiblePopup] = useState(false)
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
     const [updateFlag, setUpdate] = useState(false)
+
+    const [isScreenAndCameraRecording, setScreenAndCameraRecording] = useState(false)
+    const [isTLVideoGallery, setTLVideoGallery] = useState(false)
 
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -114,7 +119,13 @@ const TeacherLessonDetail = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+           { 
+           isScreenAndCameraRecording?
+           <ScreenAndCameraRecording goBack={()=>setScreenAndCameraRecording(false)}/>
+           :isTLVideoGallery?
+           <TLVideoGallery goBack={()=>setTLVideoGallery(false)}/>
+           :
+           <View style={{ width: isHide ? '100%' : '100%' }}>
                 {tabIndex == 0 ?
                     <HeaderLP
                         lessonData={lessonData}
@@ -172,8 +183,8 @@ const TeacherLessonDetail = (props) => {
                             <TLHomeWork
                                 id={props.route.params.data._id}
                                 updateBtnName={(flag) => setUpdate(flag)}
-                                navigateScreeCamera={() => props.navigation.navigate('ScreenAndCameraRecording')}
-                                navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery')} />
+                                navigateScreeCamera={() => setScreenAndCameraRecording(true)}
+                                navigateToVideoGallery={() => setTLVideoGallery(true)} />
                             :
                             <TLHomeWorkSubmitted
                                 lessonId={lessonData._id}
@@ -192,7 +203,7 @@ const TeacherLessonDetail = (props) => {
                     {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
                 </ScrollView>
 
-            </View>
+            </View>}
         </View>
     );
 }

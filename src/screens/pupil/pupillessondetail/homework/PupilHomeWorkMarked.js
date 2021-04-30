@@ -17,19 +17,19 @@ import { Download } from "../../../../utils/Download";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
-    const { item } = props.route.params;
+    const { item } = props;
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.wrapper}>
                 <View style={PAGESTYLE.commonBg}>
                     <Header15
                         onAlertPress={() => props.navigation.openDrawer()}
-                        goBack={() => props.navigation.goBack()}
+                        goBack={() => props.goBack()}
                         title={item.SubjectName + ' ' + item.LessonTopic} />
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.containerWrapTopPurple}>

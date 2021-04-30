@@ -24,10 +24,9 @@ import Images from "../../../../../srcmobile/utils/Images";
 
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
-    const { item } = props.route.params
+    const { item } = props
     const [materialArr, setMaterialArr] = useState([])
     const [isLoading, setLoading] = useState(false);
-    console.log('props of homewor', props.route.params);
 
     const isFieldsValidated = () => {
         if (materialArr.length <= 0) {
@@ -114,16 +113,16 @@ const PupilHomeWorkDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebarpupil hide={() => action(!isHide)}
+            {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} />
+                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.commonBg}>
                 <Header14
                     onAlertPress={() => props.navigation.openDrawer()}
-                    goBack={() => props.navigation.goBack()}
-                    onSubmitHomework={() => isFieldsValidated()}
+                    goBack={() => props.goBack()}
+                    onSubmitHomework={() => setSubmitPopup(true)}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
@@ -194,7 +193,7 @@ const PupilHomeWorkDetail = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
-                        <View style={PAGESTYLE.uploadBoardBlock}>
+                        {/* <View style={PAGESTYLE.uploadBoardBlock}> */}
                             {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
 
                             <TouchableOpacity
@@ -224,7 +223,6 @@ const PupilHomeWorkDetail = (props) => {
                     isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
                 }
             </View>
-        </View>
     );
 }
 export default PupilHomeWorkDetail;
