@@ -15,3 +15,13 @@ dotContainer: {
 react-native-svg-image
 node_modules/react-native-svg-image/index.js
 import WebView from 'react-native-webview';  -- new added in node_modules
+
+==========================================================
+
+CheckBox
+node_modules/@react-native-community/checkbox/dist/CheckBox.ios.js
+rctCheckBox: {
+        height: hp(2.34),
+        width: hp(2.34),
+        backgroundColor: 'transparent',
+},
