@@ -23,6 +23,7 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import COLORS from "../../../utils/Colors";
+import MESSAGE from "../../../utils/Messages";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -36,12 +37,26 @@ const TeacherLessonDetail = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [searchKeyword, setSearchKeyword] = useState('')
+    const [isHSDataChanged, setHSDataChanged] = useState(false)
 
     useEffect(() => {
         if (!isSearchActive && tabIndex == 2 && !this.textInput) {
             this.textInput.clear()
         }
     }, [isSearchActive])
+
+    const isFiedlsValidated = () => {
+        console.log('Addhomework', Addhomework);
+        if (!Addhomework.HomeworkDescription) {
+            showMessage(MESSAGE.description)
+            return
+        } else if (Addhomework.CheckList.length == 0) {
+            showMessage(MESSAGE.checkList)
+            return
+        }
+
+        setVisiblePopup(true)
+    }
 
     const onAddHomework = () => {
         setHomeworkLoading(true)
@@ -108,14 +123,14 @@ const TeacherLessonDetail = (props) => {
                         navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
                     : tabIndex == 1 ?
                         <HeaderHW
-                            hwBtnName={Addhomework.IsUpdate ? 'Update Homework' : 'Set Homework'}
+                            hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                             SubjectName={lessonData.SubjectName}
                             setHomework={() => onAddHomework()}
                             navigateToBack={() => props.navigation.goBack()}
                             onAlertPress={() => props.navigation.openDrawer()}
                             onClose={() => setVisiblePopup(false)}
                             isVisible={isVisiblePopup}
-                            onOpenPopup={() => setVisiblePopup(true)}
+                            onOpenPopup={() => isFiedlsValidated()}
                             isHomeworkLoading={isHomeworkLoading}
                         />
                         :
@@ -165,7 +180,8 @@ const TeacherLessonDetail = (props) => {
                                 searchKeyword={searchKeyword}
                                 filterBy={filterBy}
                                 searchActive={isSearchActive}
-                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { 'item': data })} />
+                                dataChanged={isHSDataChanged}
+                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
                     }
                     {/* <TLDetailEdit /> */}
                     {/* <TLDetailAdd /> */}

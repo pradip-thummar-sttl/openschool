@@ -181,6 +181,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             returnKeyType={"next"}
                                             defaultValue={data.Feedback}
                                             editable={!data.Marked}
+                                            autoCapitalize={'sentences'}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
                                     <View style={PAGESTYLE.videoRecording}>
