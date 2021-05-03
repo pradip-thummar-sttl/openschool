@@ -24,7 +24,7 @@ console.log('props of homework',props)
                                     <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeWorkDetail(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>
                                             <Image source={require('../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
-                                            <Text style={PAGESTYLE.videoDateBlack}>Due: {moment(item.DueDate).format('dd/mm/yyyy')}</Text>
+                                            <Text style={PAGESTYLE.videoDateBlack}>Due: {moment(item.DueDate).format('DD/MM/YYYY')}</Text>
                                             <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
                                         </View>
                                         <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
