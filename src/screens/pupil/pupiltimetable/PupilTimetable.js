@@ -67,7 +67,7 @@ const PupilTimetable = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Service.get(`${EndPoints.CalenderEvent}${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.CalenderEvent}/${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
@@ -142,8 +142,10 @@ const PupilTimetable = (props) => {
 
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)
+            console.log('response ', res)
+
             if (res.code == 200) {
-                console.log('response', res.data)
+                console.log('response ', res.data)
                 setTimeTableData(res.data)
                 dispatch(setCalendarEventData(res.data))
             } else {
