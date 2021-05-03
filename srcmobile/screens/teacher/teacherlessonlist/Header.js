@@ -18,10 +18,12 @@ const Header = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
+    const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
+            setKeyword('')
             this.textInput.clear()
         } else {
             props.onSearch()
@@ -60,17 +62,21 @@ const Header = (props) => {
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
+                            setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }}/>
 
                     <TouchableOpacity
                         style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
+                            keyword ?
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
                                 :
-                                setSearchActive(true)
+                                null
                         }}>
                         <Image
                             style={styles.userIcon1}

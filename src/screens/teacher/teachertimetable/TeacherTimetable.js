@@ -5,7 +5,7 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderTT from "./header/HeaderTT";
-import { cellWidth, opacity, Var } from "../../../utils/Constant";
+import { cellWidth, opacity, showMessage, Var } from "../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../service/EndPoints";
@@ -15,6 +15,9 @@ import { setCalendarEventData } from "../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { User } from "../../../utils/Model";
 import { Lesson } from "../../../utils/Constant";
+import TLDetail from "../teacherlessondetail/lessonplan/TeacherLessonDetail";
+import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
+import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -64,7 +67,9 @@ const TeacherTimeTable = (props) => {
             Date: '2021-03-23T00:00:00.000Z'
         },
     ]
-
+    const [isTeacherLessonDetail, setTeacherLessonDetail] = useState(false)
+    const [isTeacherLessonAdd, setTeacherLessonAdd] = useState(false)
+    const [teacherDetailData, setTeacherDetailData] = useState({})
     const [isHide, action] = useState(true);
     const [timeTableData, setTimeTableData] = useState([])
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
@@ -109,8 +114,8 @@ const TeacherTimeTable = (props) => {
 
         if (flag) {
             return (
-                <Popupdata span={span} title={lblTitle} time={lblTime} data={data}
-                    navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })} />
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
+                    navigateToDetail={() => { setTeacherLessonDetail(true); setTeacherDetailData(data) }} />
             );
         } else {
             return (
@@ -156,61 +161,74 @@ const TeacherTimeTable = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '78%' }}>
-                <HeaderTT
-                    onAlertPress={() => { props.navigation.openDrawer() }}
-                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                    navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()} />
-
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top: 20, left: 10 }}>
-                    {isTimeTableLoading ?
-                        <ActivityIndicator
-                            style={{ flex: 1 }}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.yellowDark} />
+            {
+                isTeacherLessonDetail ?
+                    <TLDetailEdit
+                        goBack={() => setTeacherLessonDetail(false)}
+                        onRefresh={() => refresh()}
+                        data={teacherDetailData} />
+                    :
+                    isTeacherLessonAdd ?
+                        <TLDetailAdd
+                            goBack={() => setTeacherLessonAdd(false)}
+                            onRefresh={() => refresh()} />
                         :
-                        timeTableData.length > 0 ?
-                            <View style={{ ...PAGESTYLE.mainPage }}>
-                                <View style={PAGESTYLE.days}>
-                                    {days.map((data) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null }}>
-                                            <Text style={PAGESTYLE.lableDay}>{data}</Text>
-                                        </View>
-                                    ))}
-                                </View>
+                        <View style={{ width: isHide ? '100%' : '78%' }}>
+                            <HeaderTT
+                                onAlertPress={() => { props.navigation.openDrawer() }}
+                                onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                                onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                                onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                                navigateToAddLesson={() => setTeacherLessonAdd(true)}
+                                refreshList={() => refresh()} />
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
-                                    horizontal={true}>
-
-                                    {time.map((data, timneKey) => (
-                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                            <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
-
-                                            <View style={PAGESTYLE.timeLabel}>
-                                                {days.map((data, dayKey) => (
-                                                    dayKey != 0 ?
-                                                        setData(dayKey, timneKey)
-                                                        :
-                                                        null
-
+                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top: 20, left: 10 }}>
+                                {isTimeTableLoading ?
+                                    <ActivityIndicator
+                                        style={{ flex: 1 }}
+                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                        color={COLORS.yellowDark} />
+                                    :
+                                    timeTableData.length > 0 ?
+                                        <View style={{ ...PAGESTYLE.mainPage }}>
+                                            <View style={PAGESTYLE.days}>
+                                                {days.map((data) => (
+                                                    <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null }}>
+                                                        <Text style={PAGESTYLE.lableDay}>{data}</Text>
+                                                    </View>
                                                 ))}
                                             </View>
+
+                                            <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingTop: hp(1.5), }}
+                                                horizontal={true}>
+
+                                                {time.map((data, timneKey) => (
+                                                    <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                                        <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
+
+                                                        <View style={PAGESTYLE.timeLabel}>
+                                                            {days.map((data, dayKey) => (
+                                                                dayKey != 0 ?
+                                                                    setData(dayKey, timneKey)
+                                                                    :
+                                                                    null
+
+                                                            ))}
+                                                        </View>
+                                                    </View>
+                                                ))}
+                                            </ScrollView>
                                         </View>
-                                    ))}
-                                </ScrollView>
+                                        :
+                                        <View style={{ height: hp(13), justifyContent: 'center' }}>
+                                            <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
+                                        </View>
+                                }
                             </View>
-                            :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
-                    }
-                </View>
-            </View>
-        </View>
+                        </View>
+            }
+        </View >
     );
 }
 export default TeacherTimeTable;

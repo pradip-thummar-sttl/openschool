@@ -49,6 +49,7 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = res.data.CheckList
                 Addhomework.CreatedBy = res.data.CreatedBy
                 Addhomework.IsUpdate = true
+                Addhomework.DueDate = moment(res.data.DueDate).format('yyyy-MM-DD')
                 Addhomework.HwId = res.data._id
                 setSelectedDate(moment(res.data.DueDate).format('yyyy-MM-DD'))
                 setMaterialArr(res.data.MaterialList)
@@ -57,10 +58,16 @@ const TLHomeWork = (props) => {
                 setItemCheckList(res.data.CheckList)
                 props.updateBtnName(true)
             } else {
+                Addhomework.IsIncluded = true
+                Addhomework.HomeworkDescription = ""
+                Addhomework.LessonId = ""
+                Addhomework.CheckList = []
+                Addhomework.CreatedBy = ""
+                Addhomework.HwId = ""
+                Addhomework.DueDate = moment().format('yyyy-MM-DD')
                 Addhomework.IsUpdate = false
+                setSelectedDate(moment().format('yyyy-MM-DD'))
                 props.updateBtnName(false)
-
-
             }
         }, (err) => {
             console.log('Error of homework by lesson id', err)
@@ -78,9 +85,10 @@ const TLHomeWork = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
-        Addhomework.DueDate = selectDate
+        var d = moment(date).format('yyyy-MM-DD')
+        setSelectedDate(d)
         hideDatePicker();
+        Addhomework.DueDate = d
     };
 
     const addMaterial = () => {
@@ -88,11 +96,11 @@ const TLHomeWork = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     console.log(
@@ -168,7 +176,7 @@ const TLHomeWork = (props) => {
             showMessage(MESSAGE.addItem)
             return
         }
-        
+
         let temp = {
             ItemName: newItem
         }
@@ -222,7 +230,7 @@ const TLHomeWork = (props) => {
                         ref={input => { this.item = input }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -318,9 +326,13 @@ const TLHomeWork = (props) => {
                                     return (
                                         <View style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                            </TouchableOpacity>
+                                            {item.uri ?
+                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                </TouchableOpacity>
+                                                :
+                                                null
+                                            }
                                         </View>
                                     )
                                 }) : null
@@ -328,7 +340,6 @@ const TLHomeWork = (props) => {
                         </View>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                                 <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                             </View>
                         </ScrollView>

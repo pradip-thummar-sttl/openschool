@@ -18,6 +18,7 @@ import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Download } from "../../../../utils/Download";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
@@ -59,8 +60,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
-                    props.route.params.onGoBack();
-                    props.navigation.goBack()
+                    props.onGoBack();
+                    props.goBack()
                 })
             } else {
                 showMessage(res.message)
@@ -83,6 +84,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <HeaderSave
                     isMarked={data.Marked ? true : false}
+                    isSubmitted={data.Submited ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
                     navigateToBack={() => { props.goBack() }}
                     onAlertPress={() => { props.navigation.openDrawer() }}
@@ -100,7 +102,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.userRight}>
                                     <View style={PAGESTYLE.markedLabel}>
-                                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
+                                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon1} />
                                         <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
                                     </View>
                                     <View style={PAGESTYLE.dateNameBlock}>
@@ -155,9 +157,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             data={data.HomeworkList}
                                             style={{ alignSelf: 'center', width: '100%', top: 10 }}
                                             renderItem={({ item, index }) => (
-                                                <View style={PAGESTYLE.alignRow}>
-                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                                </View>
+                                                <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                    <View style={PAGESTYLE.alignRow}>
+                                                        <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                    </View>
+                                                </TouchableOpacity>
                                             )}
                                             numColumns={4}
                                             keyExtractor={(item, index) => index.toString()}
@@ -177,6 +181,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             returnKeyType={"next"}
                                             defaultValue={data.Feedback}
                                             editable={!data.Marked}
+                                            autoCapitalize={'sentences'}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
                                     <View style={PAGESTYLE.videoRecording}>

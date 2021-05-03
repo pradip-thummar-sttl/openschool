@@ -19,6 +19,7 @@ const HeaderSave = (props) => {
                 <View style={styles.headerRight}>
                     <PopupHomeWorkSave
                         isMarked={props.isMarked}
+                        isSubmitted={props.isSubmitted}
                         onSetHomework={() => props.onSetHomework()} />
                     <TouchableOpacity
                         style={styles.notificationBar}

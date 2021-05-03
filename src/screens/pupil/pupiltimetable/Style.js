@@ -40,12 +40,12 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     dayLeft: {
-        width: hp(16),
+        width: hp(15),
         height: hp(8.59),
         alignItems: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
-        paddingTop: hp(1),
+        paddingTop: hp(2.5),
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,

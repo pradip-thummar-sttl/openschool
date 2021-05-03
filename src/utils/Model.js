@@ -10,6 +10,8 @@ export var Addhomework={
     DueDate: "",
     HomeworkDescription: "",
     CreatedBy: "",
-    CheckList: []
+    CheckList: [],
+    MaterialArr: [],
+    RecordingArr: [],
 }
  

@@ -9,7 +9,7 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { showMessage, msgTopic, msgDescription, opacity } from "../../../../utils/Constant";
+import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack } from "../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
@@ -124,11 +124,11 @@ const TLDetailAdd = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 console.log('results', results);
                 for (const res of results) {
@@ -174,7 +174,7 @@ const TLDetailAdd = (props) => {
             showMessage(MESSAGE.addItem)
             return
         }
-        
+
         let temp = {
             ItemName: newItem
         }
@@ -198,7 +198,7 @@ const TLDetailAdd = (props) => {
         }
     }
 
-    onScreeCamera = () => {
+    const onScreeCamera = () => {
         // RecordScreen.startRecording().catch((error) => console.error(error));
         // setTimeout(() => {
 
@@ -215,11 +215,11 @@ const TLDetailAdd = (props) => {
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
-    onScreeVoice = () => {
+    const onScreeVoice = () => {
         setAddRecording(false)
 
     }
-    onCameraOnly = () => {
+    const onCameraOnly = () => {
         setAddRecording(false)
 
     }
@@ -261,9 +261,10 @@ const TLDetailAdd = (props) => {
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
                         ref={input => { this.item = input }}
+                        returnKeyType={"done"}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
-                        autoCapitalize={false}
+                        autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
@@ -491,7 +492,10 @@ const TLDetailAdd = (props) => {
         })
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
-            showMessage(MESSAGE.lessonAdded)
+            showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                props.route.params.onGoBack();
+                props.navigation.goBack()
+            })
             setLoading(null)
             return
         }
@@ -503,7 +507,10 @@ const TLDetailAdd = (props) => {
                 setLoading(null)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessage(MESSAGE.lessonAdded)
+                showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                    props.route.params.onGoBack();
+                    props.navigation.goBack()
+                })
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -543,9 +550,11 @@ const TLDetailAdd = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                             <TextInput
+                                                returnKeyType={"next"}
+                                                onSubmitEditing={() => { this.t2.focus(); }}
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                 placeholder="e.g. Grammar, Fractions, etc"
-                                                autoCapitalize={false}
+                                                autoCapitalize={'sentences'}
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.menuLightFonts}
                                                 onChangeText={text => setLessonTopic(text)} />
@@ -565,7 +574,7 @@ const TLDetailAdd = (props) => {
                                             </View>
                                         </TouchableOpacity>
                                     </View>
-                                    
+
                                     {participantsDropDown()}
 
                                 </View>
@@ -577,16 +586,20 @@ const TLDetailAdd = (props) => {
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
+                                        ref={(input) => { this.t2 = input; }}
+                                        returnKeyType={"next"}
+                                        onSubmitEditing={() => { this.item.focus(); }}
                                         multiline={true}
+                                        autoCapitalize={'sentences'}
                                         numberOfLines={4}
                                         placeholder='Briefly explain what the lesson is about'
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}
                                         onChangeText={text => setDescription(text)} />
                                 </View>
-                                <TouchableOpacity style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                                    <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                    <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                </TouchableOpacity>
+                                <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                                    onScreeCamera={() => onScreeCamera()}
+                                    onScreeVoice={() => onScreeVoice()}
+                                    onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
 

@@ -187,7 +187,16 @@ const Popupdata = (props) => {
                         </View>
                     </ScrollView>
                     <View style={styles.lessonstartButton}>
-                        <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButton]}>Edit Lesson</Text></TouchableOpacity>
+                        {!props.isPupil ?
+                            <TouchableOpacity
+                                style={styles.buttonGrp}
+                                activeOpacity={opacity}
+                                onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
+                                <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
+                            </TouchableOpacity>
+                            :
+                            <View style={{ width: hp(20) }}></View>
+                        }
                         <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -387,7 +396,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.45),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,

@@ -18,8 +18,9 @@ import DocumentPicker from 'react-native-document-picker';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import { showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
+import Images from "../../../../../srcmobile/utils/Images";
 
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
@@ -36,7 +37,7 @@ const PupilHomeWorkDetail = (props) => {
         setSubmitPopup(true)
     }
 
-    onSubmitHomework = () => {
+    const onSubmitHomework = () => {
         let formData = new FormData();
 
         materialArr.forEach(element => {
@@ -56,7 +57,7 @@ const PupilHomeWorkDetail = (props) => {
                 console.log('response of save Homework', res)
                 // setDefaults()
                 showMessageWithCallBack(res.message, () => {
-                    props.navigation.goBack()
+                    props.goBack()
                 })
                 setSubmitPopup(false)
                 // props.route.params.goBack()
@@ -76,11 +77,11 @@ const PupilHomeWorkDetail = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     console.log(
@@ -105,6 +106,11 @@ const PupilHomeWorkDetail = (props) => {
         }
     }
 
+    const removeDocument = (_index) => {
+        const newList = materialArr.filter((item, index) => index !== _index);
+        setMaterialArr(newList)
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -116,7 +122,7 @@ const PupilHomeWorkDetail = (props) => {
                 <Header14
                     onAlertPress={() => props.navigation.openDrawer()}
                     goBack={() => props.goBack()}
-                    onSubmitHomework={() => setSubmitPopup(true)}
+                    onSubmitHomework={() => isFieldsValidated()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
@@ -193,24 +199,30 @@ const PupilHomeWorkDetail = (props) => {
                             <TouchableOpacity
                                 style={PAGESTYLE.homeworkView}
                                 onPress={() => addMaterial()}>
-                                <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
-                                <View style={PAGESTYLE.docView}>
-                                    {materialArr.map((item) => {
-                                        return (
-                                            <Image style={{ marginRight: 10, marginBottom: 10 }} source={require('../../../../assets/images/Bg.png')} />
-                                        )
-                                    })}
-                                </View>
-
+                                <Text style={PAGESTYLE.HomeText}>Upload Homework</Text>
                             </TouchableOpacity>
-                        {/* </View> */}
+                            <View style={PAGESTYLE.docView}>
+                                {materialArr.map((item, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            
+                                            activeOpacity={opacity}
+                                            onPress={() => removeDocument(index)}>
+                                            <View style={PAGESTYLE.alignRow1}>
+                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
+                                            </View>
+                                        </TouchableOpacity>
+                                    )
+                                })}
+                            </View>
+                        </View>
                     </View>
                 </View>
                 {
-                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag)=> setSubmitPopup(flag)} /> : null
+                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
                 }
             </View>
-        </View>
     );
 }
 export default PupilHomeWorkDetail;

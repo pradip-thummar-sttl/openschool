@@ -12,10 +12,13 @@ import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Co
 import MESSAGE from "../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
 const WorkSpace = (props) => {
+    const [pathCount, setPathCount] = useState(-1)
     const [workSpace, setWorkSpace] = useState([])
     const [workSpacePath, setWorkSpacePath] = useState("")
     console.log('props of workspace', props)
-  
+
+    // const workspaceList = props.item
+    // const workspaceList = props.route.params.item
     const workspaceList = props.item
     const [example, setExample] = useState(0)
     const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.tappedItem)
@@ -23,8 +26,12 @@ const WorkSpace = (props) => {
     console.log('====', workspaceList)
 
     const onSubmitWorkspace = () => {
+        console.log(pathCount);
         if (!workSpacePath) {
             showMessage(MESSAGE.saveWorkSpace)
+            return
+        } else if (pathCount == 0) {
+            showMessage(MESSAGE.blankWorkspace)
             return
         }
 
@@ -41,8 +48,8 @@ const WorkSpace = (props) => {
             console.log('response of upload workspace', res)
             if (res.flag) {
                 showMessageWithCallBack(MESSAGE.workspaceAdded, () => {
-                    props.route.params.onGoBack()
-                    props.navigation.goBack()
+                    props.onGoBack()
+                    props.goBack()
                 })
             } else {
                 showMessage(res.message)
@@ -119,7 +126,8 @@ const WorkSpace = (props) => {
 
                             }}
                             onPathsChange={(pathsCount) => {
-                                console.log('pathsCount', pathsCount)
+                                console.log('ioioio', pathsCount);
+                                setPathCount(pathsCount)
                             }}
                         />
 
@@ -157,7 +165,7 @@ const WorkSpace = (props) => {
                         <View style={PAGESTYLE.bottomView}>
                             <View style={PAGESTYLE.wsView}>
                                 <ScrollView
-                                    style={{ }}
+                                    style={{}}
                                     showsVerticalScrollIndicator={false}
                                     horizontal={true}>
                                     {
