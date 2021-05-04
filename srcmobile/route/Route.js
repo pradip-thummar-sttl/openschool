@@ -38,6 +38,7 @@ import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/
 import CreateNewEvent from '../screens/teacher/teachertimetable/createnewevent/CreateNewEvent';
 import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/CreateNewEventPupil';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
+import Calendars from '../component/reusable/Calendar/Calendar';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -89,6 +90,7 @@ function ScreenStack() {
             <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
             <Stack.Screen name="WorkSpace" component={WorkSpace} />
+            <Stack.Screen name="Calendars" component={Calendars} />
         </Stack.Navigator>
     );
 }

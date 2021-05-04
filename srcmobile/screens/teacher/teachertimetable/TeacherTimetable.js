@@ -135,6 +135,17 @@ const TeacherTimeTable = (props) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setTimeTableData(res.data)
+                // dispatch(setCalendarEventData(res.data))
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+        Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
+            setTimeTableLoading(false)
+            if (res.code == 200) {
+                console.log('response of get calandar event:', res)
                 dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
@@ -160,7 +171,7 @@ const TeacherTimeTable = (props) => {
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
-                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                    onCalenderPress={() => { props.navigation.navigate('Calendars') }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}

@@ -86,7 +86,7 @@ const NotificationDrawer = (props) => {
 
                                 </View>
                             )
-                        }}
+                        }}  
                     />
 
                     <View style={{ paddingLeft: hp(1.97), marginTop: hp(6.0) }}>
