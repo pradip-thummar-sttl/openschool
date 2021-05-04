@@ -293,11 +293,11 @@ const styles = StyleSheet.create({
     },
     userIcon: {
         position: 'absolute',
-        top: hp('2.3%'),
-        left: hp('3%'),
+        top: Platform.OS == 'android' ? hp(2.5) : hp('2.3%'),
+        left: Platform.OS == 'android' ? hp(2.75) : hp('3%'),
         resizeMode: 'contain',
-        width: hp(1.7),
-        height: hp(2)
+        width: Platform.OS == 'android' ? hp(2) : hp(1.7),
+        height: Platform.OS == 'android' ? hp(2.3) : hp(2),
     },
     viewIcon: {
         resizeMode: 'contain',
@@ -328,8 +328,9 @@ const styles = StyleSheet.create({
         fontSize: hp('1.8%'),
         color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
-        marginLeft: hp('1.0%'),
+        marginLeft: Platform.OS == 'android' ? hp(3) : hp('1.0%'),
         fontFamily: FONTS.fontBold,
+        top:Platform.OS == 'android' ? hp(0.35) : hp(0),
     },
     forgotPass: {
         fontSize: hp('1.8%'),
