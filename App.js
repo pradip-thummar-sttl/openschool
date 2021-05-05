@@ -11,22 +11,25 @@ const store = createStore(combineReducers)
 
 import RouteTablet from './src/route/Route'
 import RouteMobile from './srcmobile/route/Route'
-import { LogBox, View } from 'react-native';
+import { LogBox, View, StatusBar } from 'react-native';
 
 LogBox.ignoreAllLogs();
 import { isTablet } from 'react-native-device-info';
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <View style={{ flex: 1 }}>
-        <MenuProvider>
-          {isTablet() ?
-            <RouteTablet />:
-            <RouteMobile />
-          }          
-        </MenuProvider>
-      </View>
-    </Provider>
+    <>
+      {/* <StatusBar hidden /> */}
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <MenuProvider>
+            {isTablet() ?
+              <RouteTablet /> :
+              <RouteMobile />
+            }
+          </MenuProvider>
+        </View>
+      </Provider>
+    </>
   )
 }

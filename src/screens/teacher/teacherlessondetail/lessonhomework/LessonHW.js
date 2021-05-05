@@ -207,8 +207,8 @@ const TLHomeWork = (props) => {
     }
     const itemCheckListView = () => {
         return (
-            <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                <View style={PAGESTYLE.hrCommon}></View>
+            <View style={[PAGESTYLE.blockSpaceBottom]}>
+                {/* <View style={PAGESTYLE.hrCommon}></View> */}
                 {
                     itemCheckList.length == 0 ?
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>No item added</Text>
@@ -264,7 +264,7 @@ const TLHomeWork = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftWidth:1,borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text>ADD ITEM</Text>
