@@ -16,6 +16,11 @@ import WorkSpace from "../../Workspace/WorkSpace";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
+import PupilHomeWorkSubmitted from "../homework/PupilHomeWorkSubmitted";
+import PupilHomeWorkMarked from "../homework/PupilHomeWorkMarked";
+import PupilHomeWorkDetail from "../homework/PupilHomeWorkDetail";
+import { showMessage } from "../../../../utils/Constant";
+import MESSAGE from "../../../../utils/Messages";
 
 
 const PupilLessonDetailInternal = (props) => {
@@ -23,6 +28,11 @@ const PupilLessonDetailInternal = (props) => {
     const [isWorkspace, setWorkSpace] = useState(false)
     const [isWorkspaceEdit, setWorkSpaceEdit] = useState(false)
     const [tappedItem, setTappedItem] = useState(0)
+    const [isHWDetail, setHWDetail] = useState(false)
+    const [isHWSubmitted, setHWSubmitted] = useState(false)
+    const [isHWMarked, setHWMArked] = useState(false)
+    const [hwData, setHWData] = useState({})
+    const [isHomeworkLoading, setHomeworkLoading] = useState(false)
     // const { item } = props
     // const [item, setItem] = useState(props.route.params.item)
     const [item, setItem] = useState(props.item)
@@ -39,6 +49,33 @@ const PupilLessonDetailInternal = (props) => {
                 showMessage(res.message)
             }
         }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const getHomeWork = () => {
+        setHomeworkLoading(true)
+        Service.get(`${EndPoints.GetPupilHomework}/${item._id}/${User.user.UserDetialId}`, (res) => {
+            setHomeworkLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all homework', res)
+                if (res.data._id) {
+                    setHWData(res.data)
+                    if (res.data.Submited) {
+                        setHWSubmitted(true)
+                    } else if (res.data.Marked) {
+                        setHWMArked(true)
+                    } else {
+                        setHWDetail(true)
+                    }
+                } else {
+                    showMessage(MESSAGE.noHomework)
+                }
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setHomeworkLoading(false)
             console.log('response of get all lesson error', err)
         })
     }
@@ -61,82 +98,97 @@ const PupilLessonDetailInternal = (props) => {
                         tappedItem={tappedItem}
                         item={item.WorkSpacelist} />
                     :
-                    <View style={PAGESTYLE.commonBg}>
-                        <HeaderWhitewithoutsearch
-                            title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
-                            goBack={() => { props.goBack() }}
-                            onAlertPress={() => props.navigation.openDrawer()}
-                            onOpenWorkSpacePress={() => { setWorkSpaceEdit(true), setWorkSpace(true) }}
-                            onSeeHomeworkPress={() => null} />
-                        {/* onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })} */}
+                    isHWSubmitted ?
+                        <PupilHomeWorkSubmitted
+                            goBack={() => setHWSubmitted(false)}
+                            item={hwData} />
+                        :
+                        isHWMarked ?
+                            <PupilHomeWorkMarked
+                                goBack={() => setHWMArked(false)}
+                                item={hwData} />
+                            :
+                            isHWDetail ?
+                                <PupilHomeWorkDetail
+                                    goBack={() => setHWMArked(false)}
+                                    item={hwData} />
+                                :
+                                <View style={PAGESTYLE.commonBg}>
+                                    <HeaderWhitewithoutsearch
+                                        title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
+                                        goBack={() => { props.goBack() }}
+                                        onAlertPress={() => props.navigation.openDrawer()}
+                                        onOpenWorkSpacePress={() => { setWorkSpaceEdit(true), setWorkSpace(true) }}
+                                        onSeeHomeworkPress={() => getHomeWork()} />
+                                    {/* onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })} */}
 
-                        <View style={PAGESTYLE.containerWrap}>
-                            <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                                    <View style={PAGESTYLE.containerWrap}>
+                                        <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
 
-                                <View style={PAGESTYLE.largeVideoBlock}>
-                                    <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
-                                </View>
-                                <View style={PAGESTYLE.videoTitleLine}>
-                                    <View>
-                                        <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
-                                        <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.bookMark}>
-                                        <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
-                                        <Text style={PAGESTYLE.saveBookMarkText}>Saved!</Text>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.userNameMain}>
-                                    <Image style={PAGESTYLE.userMainThumb} source={{ uri: item.TeacherProfile }}></Image>
-                                    <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
-                                </View>
-                                <View style={PAGESTYLE.lessonDesc}>
-                                    <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.rightSideBar}>
-                                <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                    <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                                    {
-                                        item != undefined && item.MaterialList.length > 0 ?
-                                            item.MaterialList.map((obj) => {
-                                                return (
-                                                    <View style={PAGESTYLE.fileGrp}>
-                                                        <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
-                                                        <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
-                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                        </TouchableOpacity>
-                                                        {/* <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
-                                                    </View>
-                                                )
-                                            }) :
-                                            <Text style={{ alignSelf: 'center' }}>No material</Text>
-                                    }
+                                            <View style={PAGESTYLE.largeVideoBlock}>
+                                                <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
+                                            </View>
+                                            <View style={PAGESTYLE.videoTitleLine}>
+                                                <View>
+                                                    <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
+                                                    <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.bookMark}>
+                                                    <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
+                                                    <Text style={PAGESTYLE.saveBookMarkText}>Saved!</Text>
+                                                </View>
+                                            </View>
+                                            <View style={PAGESTYLE.userNameMain}>
+                                                <Image style={PAGESTYLE.userMainThumb} source={{ uri: item.TeacherProfile }}></Image>
+                                                <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.lessonDesc}>
+                                                <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.rightSideBar}>
+                                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                <Text style={PAGESTYLE.requireText}>Learning material</Text>
+                                                {
+                                                    item != undefined && item.MaterialList.length > 0 ?
+                                                        item.MaterialList.map((obj) => {
+                                                            return (
+                                                                <View style={PAGESTYLE.fileGrp}>
+                                                                    <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
+                                                                    <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
+                                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                    </TouchableOpacity>
+                                                                    {/* <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
+                                                                </View>
+                                                            )
+                                                        }) :
+                                                        <Text style={{ alignSelf: 'center' }}>No material</Text>
+                                                }
 
-                                </View>
+                                            </View>
 
-                                <View style={PAGESTYLE.thumbVideo}>
-                                    <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                                            <View style={PAGESTYLE.thumbVideo}>
+                                                <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
 
-                                </View>
-                                <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                    <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
-                                    <ScrollView style={{ height: '50%' }} showsVerticalScrollIndicator={false}>
-                                        {
-                                            item.WorkSpacelist.length > 0 ?
-                                                item.WorkSpacelist.map((obj, index) => {
-                                                    return (
-                                                        // props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})
-                                                        <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setTappedItem(index), setWorkSpaceEdit(false), setWorkSpace(true) }}>
-                                                            <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
-                                                            <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                                                        </TouchableOpacity>
-                                                    )
-                                                }) :
-                                                <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
-                                        }
-                                    </ScrollView>
-                                        {/* <View style={PAGESTYLE.fileGrp}>
+                                            </View>
+                                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
+                                                <ScrollView style={{ height: '50%' }} showsVerticalScrollIndicator={false}>
+                                                    {
+                                                        item.WorkSpacelist.length > 0 ?
+                                                            item.WorkSpacelist.map((obj, index) => {
+                                                                return (
+                                                                    // props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})
+                                                                    <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setTappedItem(index), setWorkSpaceEdit(false), setWorkSpace(true) }}>
+                                                                        <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
+                                                                        <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                                                    </TouchableOpacity>
+                                                                )
+                                                            }) :
+                                                            <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
+                                                    }
+                                                </ScrollView>
+                                                {/* <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
                                 <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View>
@@ -152,10 +204,10 @@ const PupilLessonDetailInternal = (props) => {
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
                                 <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View> */}
+                                            </View>
+                                        </View>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
-                    </View>
             }
         </View >
     );

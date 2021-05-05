@@ -69,7 +69,7 @@ const TeacherLessonDetail = (props) => {
         const data = {
             LessonId: props.route.params.data._id,
             IsIncluded: Addhomework.IsIncluded,
-            DueDate: Addhomework.DueDate,
+            DueDate: moment(Addhomework.DueDate).format('yyyy-MM-DD'),
             HomeworkDescription: Addhomework.HomeworkDescription,
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,

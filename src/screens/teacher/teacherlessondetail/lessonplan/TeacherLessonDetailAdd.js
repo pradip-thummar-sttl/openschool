@@ -30,8 +30,10 @@ import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
+import TLVideoGallery from "./TeacherLessonVideoGallery";
 
 const TLDetailAdd = (props) => {
+    const [isVideoGallery, setVideoGallery] = useState(false)
     const [materialArr, setMaterialArr] = useState([])
     const [recordingArr, setRecordingArr] = useState([])
     const [isAddRecording, setAddRecording] = useState(false)
@@ -117,7 +119,7 @@ const TLDetailAdd = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -126,11 +128,11 @@ const TLDetailAdd = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 console.log('results', results);
                 for (const res of results) {
@@ -197,6 +199,18 @@ const TLDetailAdd = (props) => {
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
+        }
+    }
+
+    const isPupilChecked = (_index) => {
+        if (selectedPupils.length > 0) {
+            if (selectedPupils.some(ele => ele._id == pupils[_index]._id)) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
         }
     }
 
@@ -306,6 +320,7 @@ const TLDetailAdd = (props) => {
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
+                                value={isPupilChecked(index)}
                                 onValueChange={(newValue) => pushPupilItem(newValue, index)}
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
@@ -442,7 +457,7 @@ const TLDetailAdd = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: selectedDate,
+            LessonDate: moment(selectedDate).format('yyyy-MM-DD'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,
@@ -525,161 +540,165 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-           
-            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
-                <HeaderAddNew
-                    isLoading={isLoading}
-                    navigateToBack={() => {
-                        props.goBack()
-                        // props.route.params.onGoBack();
-                        // props.navigation.goBack()
-                    }}
-                    saveLesson={() => { saveLesson() }}
-                    onAlertPress={() => { props.navigation.openDrawer() }} />
-                <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={PAGESTYLE.containerWrap}>
-                            <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                                <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
-                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
-                                <View style={PAGESTYLE.timedateGrp}>
+            {
+                isVideoGallery ?
+                    <TLVideoGallery goBack={() => setVideoGallery(false)} />
+                    :
+                    <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
+                        <HeaderAddNew
+                            isLoading={isLoading}
+                            navigateToBack={() => {
+                                props.goBack()
+                                // props.route.params.onGoBack();
+                                // props.navigation.goBack()
+                            }}
+                            saveLesson={() => { saveLesson() }}
+                            onAlertPress={() => { props.navigation.openDrawer() }} />
+                        <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+                            <ScrollView showsVerticalScrollIndicator={false}>
+                                <View style={PAGESTYLE.containerWrap}>
+                                    <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
+                                        <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                        <View style={PAGESTYLE.timedateGrp}>
 
-                                    {subjectsDropDown()}
+                                            {subjectsDropDown()}
 
-                                    <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
-                                        <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
+                                            <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
+                                                <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
+                                                <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
+                                                    <TextInput
+                                                        returnKeyType={"next"}
+                                                        onSubmitEditing={() => { this.t2.focus(); }}
+                                                        style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                                                        placeholder="e.g. Grammar, Fractions, etc"
+                                                        autoCapitalize={'sentences'}
+                                                        maxLength={40}
+                                                        placeholderTextColor={COLORS.menuLightFonts}
+                                                        onChangeText={text => setLessonTopic(text)} />
+                                                </View>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.timedateGrp}>
+                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
+                                                <Text style={PAGESTYLE.subjectText}>Date</Text>
+                                                <TouchableOpacity onPress={() => showDatePicker()}>
+                                                    <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
+                                                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </View>
+
+                                            {fromTimeDropDown()}
+
+                                            {toTimeDropDown()}
+
+                                            {participantsDropDown()}
+
+                                        </View>
+
+                                        <View style={PAGESTYLE.lessonDesc}>
+                                            <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                             <TextInput
+                                                ref={(input) => { this.t2 = input; }}
                                                 returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.t2.focus(); }}
-                                                style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
-                                                placeholder="e.g. Grammar, Fractions, etc"
+                                                onSubmitEditing={() => { this.item.focus(); }}
+                                                multiline={true}
                                                 autoCapitalize={'sentences'}
-                                                maxLength={40}
-                                                placeholderTextColor={COLORS.menuLightFonts}
-                                                onChangeText={text => setLessonTopic(text)} />
+                                                numberOfLines={4}
+                                                placeholder='Briefly explain what the lesson is about'
+                                                style={PAGESTYLE.commonInputTextareaBoldGrey}
+                                                onChangeText={text => setDescription(text)} />
+                                        </View>
+                                        <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
+                                        </TouchableOpacity>
+
+                                        {itemCheckListView()}
+
+                                        {pupilListView()}
+
+                                        <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
+                                            <View style={STYLE.hrCommon}></View>
+                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                            <View style={PAGESTYLE.toggleGrp}>
+                                                <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
+                                                <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                            </View>
+                                            <View style={PAGESTYLE.toggleGrp}>
+                                                <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
+                                                <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
+                                            </View>
+                                            <View style={PAGESTYLE.toggleGrp}>
+                                                <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
+                                                <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={PAGESTYLE.rightSideBar}>
+                                        <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                            <Text style={PAGESTYLE.requireText}>Learning material</Text>
+                                            <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
+                                        </View>
+                                        <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
+                                            <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                                        </TouchableOpacity>
+
+                                        {
+                                            materialArr.length != 0 ? materialArr.map((item, index) => {
+                                                return (
+                                                    <View style={PAGESTYLE.fileGrp}>
+                                                        <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                                        <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                            <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                )
+                                            }) : null
+                                        }
+
+
+                                        <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.buttonGrp}
+                                                activeOpacity={opacity}
+                                                onPress={() => setVideoGallery(true)}>
+                                                <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
-                                <View style={PAGESTYLE.timedateGrp}>
-                                    <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
-                                        <Text style={PAGESTYLE.subjectText}>Date</Text>
-                                        <TouchableOpacity onPress={() => showDatePicker()}>
-                                            <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
-
-                                    {fromTimeDropDown()}
-
-                                    {toTimeDropDown()}
-
-                                    {participantsDropDown()}
-
-                                </View>
-
-                                <View style={PAGESTYLE.lessonDesc}>
-                                    <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
-                                    <TextInput
-                                        ref={(input) => { this.t2 = input; }}
-                                        returnKeyType={"next"}
-                                        onSubmitEditing={() => { this.item.focus(); }}
-                                        multiline={true}
-                                        autoCapitalize={'sentences'}
-                                        numberOfLines={4}
-                                        placeholder='Briefly explain what the lesson is about'
-                                        style={PAGESTYLE.commonInputTextareaBoldGrey}
-                                        onChangeText={text => setDescription(text)} />
-                                </View>
-                                <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                                    <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                    <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                </TouchableOpacity>
-
-                                {itemCheckListView()}
-
-                                {pupilListView()}
-
-                                <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
-                                    <View style={STYLE.hrCommon}></View>
-                                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
-                                    <View style={PAGESTYLE.toggleGrp}>
-                                        <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                    </View>
-                                    <View style={PAGESTYLE.toggleGrp}>
-                                        <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                        <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
-                                    </View>
-                                    <View style={PAGESTYLE.toggleGrp}>
-                                        <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                        <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.rightSideBar}>
-                                <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                    <Text style={PAGESTYLE.requireText}>Learning material</Text>
-                                    <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
-                                </View>
-                                <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                    <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                                </TouchableOpacity>
-
-                                {
-                                    materialArr.length != 0 ? materialArr.map((item, index) => {
-                                        return (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        )
-                                    }) : null
-                                }
 
 
-                                <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                                    <TouchableOpacity
-                                        style={PAGESTYLE.buttonGrp}
-                                        activeOpacity={opacity}
-                                        onPress={() => props.navigation.navigate('TLVideoGallery')}>
-                                        <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
+                            </ScrollView>
+                            {
 
-
-                    </ScrollView>
-                    {
-
-                        // isAddRecording ?
-                        //     <View style={{ position: 'absolute' }}>
-                        // <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                        //     onScreeCamera={() => onScreeCamera()}
-                        //     onScreeVoice={() => onScreeVoice()}
-                        //     onCameraOnly={() => onCameraOnly()} />
-                        // </View>
-                        // : null
-                    }
-                    <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                        onScreeCamera={() => onScreeCamera()}
-                        onScreeVoice={() => onScreeVoice()}
-                        onCameraOnly={() => onCameraOnly()} />
-                    <DateTimePickerModal
-                        isVisible={isDatePickerVisible}
-                        mode="date"
-                        minimumDate={new Date()}
-                        onConfirm={handleConfirm}
-                        onCancel={hideDatePicker}
-                    />
-                </KeyboardAwareScrollView>
-            </View >
+                                // isAddRecording ?
+                                //     <View style={{ position: 'absolute' }}>
+                                // <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                                //     onScreeCamera={() => onScreeCamera()}
+                                //     onScreeVoice={() => onScreeVoice()}
+                                //     onCameraOnly={() => onCameraOnly()} />
+                                // </View>
+                                // : null
+                            }
+                            <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                                onScreeCamera={() => onScreeCamera()}
+                                onScreeVoice={() => onScreeVoice()}
+                                onCameraOnly={() => onCameraOnly()} />
+                            <DateTimePickerModal
+                                isVisible={isDatePickerVisible}
+                                mode="date"
+                                minimumDate={new Date()}
+                                onConfirm={handleConfirm}
+                                onCancel={hideDatePicker}
+                            />
+                        </KeyboardAwareScrollView>
+                    </View >
+            }
         </View>
     );
 

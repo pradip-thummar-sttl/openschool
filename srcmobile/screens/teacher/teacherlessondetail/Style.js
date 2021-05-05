@@ -294,7 +294,7 @@ export default StyleSheet.create({
         fontSize: hp(1.85),
         top: hp(0.5),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(0.8),
+        paddingLeft: 10,
         paddingRight: hp(2),
     },
     checkBoxLabelTextNone: {
@@ -1070,8 +1070,8 @@ export default StyleSheet.create({
     checkMark:{
         margin:0,
         padding:0,
-        width: hp(2.2),
-        height: hp(2.2),
+        width: 20,
+        height: 20,
         top:hp(0.52),
     },
     borderRight:{

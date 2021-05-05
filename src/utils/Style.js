@@ -52,6 +52,11 @@ export default StyleSheet.create({
         height: hp(1.6),
         top: 0,
     },
+    checkBoxcommon1: {
+        width: 20,
+        height: 20,
+        top: 0,
+    },
     fullWidthPrimaryButton: {
         backgroundColor: COLORS.blueButton,
         color: COLORS.white,

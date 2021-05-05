@@ -18,7 +18,11 @@ const Sidebar = (props) => {
     //     props.hide();
     // }
 
-    toggleAnimation = () => {
+    toggleAnimation = (flag) => {
+
+        if (flag && isSmall) {
+            return
+        }
 
         if (isSmall) {
             Animated.timing(animationValue, {
@@ -65,7 +69,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToDashboard() }}>
+                        onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
@@ -78,7 +82,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { navigateSidebarIndex() }}>
+                        onPress={() => { navigateSidebarIndex(); toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
@@ -91,7 +95,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToLessonAndHomework() }}>
+                        onPress={() => { props.navigateToLessonAndHomework(); toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
@@ -104,7 +108,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {  }}>
+                        onPress={() => { toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
@@ -117,7 +121,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {  }}>
+                        onPress={() => { toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
@@ -130,7 +134,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {  }}>
+                        onPress={() => { toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}

@@ -51,7 +51,7 @@ const TLHomeWork = (props) => {
 
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [selectDate, setSelectedDate] = useState(moment().format('yyyy-MM-DD'))
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -59,7 +59,7 @@ const TLHomeWork = (props) => {
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
-            
+
             if (res.flag) {
                 Addhomework.IsIncluded = res.data.IsIncluded
                 Addhomework.HomeworkDescription = res.data.HomeworkDescription
@@ -67,9 +67,9 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = res.data.CheckList
                 Addhomework.CreatedBy = res.data.CreatedBy
                 Addhomework.IsUpdate = true
-                Addhomework.DueDate = moment(res.data.DueDate).format('yyyy-MM-DD')
+                Addhomework.DueDate = moment(res.data.DueDate).format('DD/MM/yyyy')
                 Addhomework.HwId = res.data._id
-                setSelectedDate(moment(res.data.DueDate).format('yyyy-MM-DD'))
+                setSelectedDate(moment(res.data.DueDate).format('DD/MM/yyyy'))
                 setMaterialArr(res.data.MaterialList)
                 setDescription(res.data.HomeworkDescription)
                 setSwitch(res.data.IsIncluded)
@@ -82,9 +82,9 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = []
                 Addhomework.CreatedBy = ""
                 Addhomework.HwId = ""
-                Addhomework.DueDate = moment().format('yyyy-MM-DD')
+                Addhomework.DueDate = moment().format('DD/MM/yyyy')
                 Addhomework.IsUpdate = false
-                setSelectedDate(moment().format('yyyy-MM-DD'))
+                setSelectedDate(moment().format('DD/MM/yyyy'))
                 props.updateBtnName(false)
             }
             console.log('response of homework by lesson id', Addhomework)
@@ -105,7 +105,7 @@ const TLHomeWork = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        var d = moment(date).format('yyyy-MM-DD')
+        var d = moment(date).format('DD/MM/yyyy')
         setSelectedDate(d)
         hideDatePicker();
         Addhomework.DueDate = d
@@ -116,11 +116,11 @@ const TLHomeWork = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     console.log(
@@ -186,7 +186,7 @@ const TLHomeWork = (props) => {
     }
     const setDesc = (text) => {
         setDescription(text)
-        Addhomework.HomeworkDescription = description
+        Addhomework.HomeworkDescription = text
     }
     const removeCheckListItem = (_index) => {
         const newList = itemCheckList.filter((item, index) => index !== _index);
@@ -317,7 +317,7 @@ const TLHomeWork = (props) => {
                                 numberOfLines={4}
                                 value={description}
                                 style={PAGESTYLE.commonInputTextareaNormal}
-                                onChangeText={(text) => setDesc(text)}
+                                onChangeText={(text) => { console.log('text', text); setDesc(text) }}
                             />
                         </View>
                         {/* <View style={PAGESTYLE.videoRecording}>

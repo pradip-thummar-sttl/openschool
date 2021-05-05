@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -17,19 +17,19 @@ const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity><Text style={styles.date}>{props.title}</Text></Text>
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity><Text style={styles.date}>{props.title}</Text></Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.onOpenWorkSpacePress()} style={styles.buttonGrp}>
+                    <TouchableOpacity onPress={() => props.onOpenWorkSpacePress()} style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onSeeHomeworkPress()} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onSeeHomeworkPress()} style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
-            </View>            
+            </View>
         </View>
     );
 }
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(4.5),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -225,13 +225,13 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.57),
         height: hp(2.23),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top:hp(-0.3),
+        top: hp(-0.3),
     },
 });

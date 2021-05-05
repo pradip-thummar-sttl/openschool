@@ -34,7 +34,7 @@ const TLHomeWork = (props) => {
 
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [selectDate, setSelectedDate] = useState(moment().format('yyyy-MM-DD'))
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -49,9 +49,9 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = res.data.CheckList
                 Addhomework.CreatedBy = res.data.CreatedBy
                 Addhomework.IsUpdate = true
-                Addhomework.DueDate = moment(res.data.DueDate).format('yyyy-MM-DD')
+                Addhomework.DueDate = moment(res.data.DueDate).format('DD/MM/yyyy')
                 Addhomework.HwId = res.data._id
-                setSelectedDate(moment(res.data.DueDate).format('yyyy-MM-DD'))
+                setSelectedDate(moment(res.data.DueDate).format('DD/MM/yyyy'))
                 setMaterialArr(res.data.MaterialList)
                 setDescription(res.data.HomeworkDescription)
                 setSwitch(res.data.IsIncluded)
@@ -64,9 +64,9 @@ const TLHomeWork = (props) => {
                 Addhomework.CheckList = []
                 Addhomework.CreatedBy = ""
                 Addhomework.HwId = ""
-                Addhomework.DueDate = moment().format('yyyy-MM-DD')
+                Addhomework.DueDate = moment().format('DD/MM/yyyy')
                 Addhomework.IsUpdate = false
-                setSelectedDate(moment().format('yyyy-MM-DD'))
+                setSelectedDate(moment().format('DD/MM/yyyy'))
                 props.updateBtnName(false)
             }
         }, (err) => {
@@ -85,7 +85,7 @@ const TLHomeWork = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        var d = moment(date).format('yyyy-MM-DD')
+        var d = moment(date).format('DD/MM/yyyy')
         setSelectedDate(d)
         hideDatePicker();
         Addhomework.DueDate = d
@@ -137,6 +137,7 @@ const TLHomeWork = (props) => {
         console.log('check item', itemCheckList)
         Addhomework.CheckList = itemCheckList
     }
+
     const onScreeCamera = () => {
         setAddRecording(false)
         props.navigateScreeCamera()

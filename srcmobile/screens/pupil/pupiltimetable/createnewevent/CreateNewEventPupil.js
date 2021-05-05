@@ -40,7 +40,7 @@ const CreateNewEventPupil = (props) => {
     const [isFromDropOpen, setFromDropOpen] = useState(false)
     const [isToDropOpen, setToDropOpen] = useState(false)
     const [isColorDropOpen, setColorDropOpen] = useState(false)
-    const [selectDate, setSelectedDate] = useState(moment().format('yyyy-MM-DD'))
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
     const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
 
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -114,7 +114,7 @@ const CreateNewEventPupil = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: selectDate,
+            EventDate: moment(selectDate).format('yyyy-MM-DD'),
             EventStartTime: selectedFromTime,
             EventEndTime: selectedToTime,
             EventLocation: location,
@@ -155,7 +155,7 @@ const CreateNewEventPupil = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
