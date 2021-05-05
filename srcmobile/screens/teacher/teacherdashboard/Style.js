@@ -76,7 +76,7 @@ export default StyleSheet.create({
         shadowRadius: hp(1.95),
     },
     timingMain: {
-        marginLeft: hp(2),
+        marginLeft: Platform.OS == 'android' ? hp(14) : hp(2),
     },
     groupPupil: {
         left: hp(5.2),
@@ -96,6 +96,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         textAlign: 'center',
+        bottom: Platform.OS == 'android' ? hp(0.75) : hp(0),
     },
     moreDashboard: {
         width: hp(0.7),
@@ -349,6 +350,7 @@ export default StyleSheet.create({
     },
     lessonPoints: {
         flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: hp(1.95),
     },
     checkIcon: {
@@ -436,7 +438,7 @@ export default StyleSheet.create({
         borderColor: COLORS.dashBoard,
     },
     pupilProfile: {
-        width: hp(26),
+        width: Platform.OS == 'android' ? hp(39.5) : hp(26),
     },
     groupColumnmain: {
         width: hp(17.97),

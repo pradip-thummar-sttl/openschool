@@ -282,7 +282,8 @@ flex: 1,
         flexDirection: 'row',
         width: 'auto',
         paddingBottom: hp(2.2),
-        marginBottom: hp(2.2),
+        marginBottom: hp(1.1),
+        marginTop: hp(1.1),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -615,6 +616,7 @@ flex: 1,
     },
     blockSpaceBottom: {
         marginBottom: hp(2.6),
+        marginTop: hp(2),
     },
     dueDateWrap: {
         borderRightWidth: 2,
@@ -1145,7 +1147,8 @@ flex: 1,
     },
     userIcon1Parent: {
         position: 'absolute',
-        right: hp(1.30),
+        right: hp(1.60),
+        top: hp(0.5)
     },
     userIcon1: {
         position: 'absolute',
@@ -1267,6 +1270,8 @@ flex: 1,
     checkMark: {
         width: hp(1.48),
         resizeMode: 'contain',
+        left: hp(0.4),
+        top: hp(0.28)
     },
     checkMarkTool: {
         marginLeft:hp(0.2),
@@ -1299,5 +1304,9 @@ flex: 1,
         justifyContent: 'center',
         width:hp(5),
         height:'100%',
-    }
+    },
+    checkBoxGroup: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 });
