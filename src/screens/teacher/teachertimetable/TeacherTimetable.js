@@ -126,6 +126,18 @@ const TeacherTimeTable = (props) => {
 
     useEffect(() => {
         fetchRecord('', '')
+
+        Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
+            // setTimeTableLoading(false)
+            if (res.code == 200) {
+                console.log('response of get calandar event:', res)
+                dispatch(setCalendarEventData(res.data))
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get calander error', err)
+        })
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
@@ -148,17 +160,7 @@ const TeacherTimeTable = (props) => {
             console.log('response of get all lesson error', err)
         })
 
-        Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
-            setTimeTableLoading(false)
-            if (res.code == 200) {
-                console.log('response of get calandar event:', res)
-                dispatch(setCalendarEventData(res.data))
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('response of get all lesson error', err)
-        })
+
     }
 
     const refresh = () => {
