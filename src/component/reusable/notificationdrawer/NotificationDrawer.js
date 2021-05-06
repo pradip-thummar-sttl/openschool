@@ -85,7 +85,7 @@ const NotificationDrawer = (props) => {
                                         {
                                             calEventData.map((item) => {
                                                 return (
-                                                    moment(item.EventDate).format('DD/MM/YYYY') === date.dateString ?
+                                                    moment(new Date(item.EventDate)).format('yyyy-DD-MM') === date.dateString ?
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                             {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
                                                             <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: item.EventColor, }} />

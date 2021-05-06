@@ -74,7 +74,7 @@ const TeacherLessonDetail = (props) => {
         const data = {
             LessonId: lessonData._id,
             IsIncluded: Addhomework.IsIncluded,
-            DueDate: moment(Addhomework.DueDate).format('yyyy-MM-DD'),
+            DueDate: moment(new Date(Addhomework.DueDate)).format('yyyy-DD-MM'),
             HomeworkDescription: Addhomework.HomeworkDescription,
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
@@ -82,34 +82,30 @@ const TeacherLessonDetail = (props) => {
         console.log('add homework data', data)
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
-                console.log('response of update homework', res)
+                console.log('res', res);
                 if (res.flag) {
                     // setHomeworkLoading(false)
                     setVisiblePopup(false)
                     // showMessage('Homework updated successfully')
 
-                    uploadMatirial(res.data.LessonId)
+                    uploadMatirial(res.data._id)
                 } else {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
                     showMessage(res.message)
-
                 }
-
             }, (err) => {
                 console.log('response of update homework err', err)
                 setHomeworkLoading(false)
                 setVisiblePopup(false)
-
             })
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
-                console.log('response of add homework', res)
                 Addhomework.IsUpdate = true
                 // setHomeworkLoading(false)
                 setVisiblePopup(false)
                 // showMessage('Homework added successfully')
-                uploadMatirial(res.data.LessonId)
+                uploadMatirial(res.data._id)
             }, (err) => {
                 console.log('response of add homework err', err)
                 setHomeworkLoading(false)
@@ -119,7 +115,7 @@ const TeacherLessonDetail = (props) => {
         }
     }
 
-    const uploadMatirial = (lessionId) => {
+    const uploadMatirial = (homeworkId) => {
         let data = new FormData();
 
         Addhomework.MaterialArr.forEach(element => {
@@ -138,7 +134,7 @@ const TeacherLessonDetail = (props) => {
             });
         })
 
-        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && lessionId) {
+        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && homeworkId) {
             if (Addhomework.IsUpdate) {
                 showMessage(MESSAGE.lessonUpdated)
             } else {
@@ -148,13 +144,12 @@ const TeacherLessonDetail = (props) => {
             return
         }
 
-        console.log('data', data._parts, lessionId);
+        console.log('data', data._parts, homeworkId);
 
-        Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
+        Service.postFormData(data, `${EndPoints.HomeworkMaterialUpload}${homeworkId}`, (res) => {
             console.log('res.code', res.code);
             if (res.code == 200) {
                 setHomeworkLoading(false)
-                console.log('response of save lesson', res)
                 // setDefaults()
                 if (Addhomework.IsUpdate) {
                     showMessage(MESSAGE.lessonUpdated)

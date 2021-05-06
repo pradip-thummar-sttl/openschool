@@ -454,7 +454,7 @@ const TLDetailAdd = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: moment(selectedDate).format('yyyy-MM-DD'),
+            LessonDate: moment(new Date(selectedDate)).format('yyyy-DD-MM'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,

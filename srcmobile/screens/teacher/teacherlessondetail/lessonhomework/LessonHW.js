@@ -21,6 +21,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import MESSAGE from "../../../../utils/Messages";
+import { Download } from "../../../../utils/Download";
 
 const TLHomeWork = (props) => {
 
@@ -114,6 +115,7 @@ const TLHomeWork = (props) => {
                 }
                 console.log('hello response arr', arr)
                 setMaterialArr(arr)
+                Addhomework.MaterialArr = arr
             });
 
         } catch (err) {
@@ -166,7 +168,7 @@ const TLHomeWork = (props) => {
     }
     const setDesc = (text) => {
         setDescription(text)
-        Addhomework.HomeworkDescription = description
+        Addhomework.HomeworkDescription = text
     }
     const removeCheckListItem = (_index) => {
         const newList = itemCheckList.filter((item, index) => index !== _index);
@@ -326,13 +328,15 @@ const TLHomeWork = (props) => {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
                                         <View style={PAGESTYLE.fileGrp}>
-                                            <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                            <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
                                                 <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                     <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
                                                 </TouchableOpacity>
                                                 :
-                                                null
+                                                <TouchableOpacity onPress={() => Download(item)}>
+                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                            </TouchableOpacity>
                                             }
                                         </View>
                                     )

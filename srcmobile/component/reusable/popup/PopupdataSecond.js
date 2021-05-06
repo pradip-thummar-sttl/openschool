@@ -74,7 +74,7 @@ const PopupdataSecond = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: moment(selectDate).format('yyyy-MM-DD'),
+            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
             EventTime: selectTime,
             EventLocation: location,
             EventTypeId: "604b5aac006a0306d00ab87c",

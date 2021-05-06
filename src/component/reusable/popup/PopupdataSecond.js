@@ -123,7 +123,7 @@ const PopupdataSecond = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: moment(selectDate).format('yyyy-MM-DD'),
+            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
             EventStartTime: selectedFromTime,
             EventEndTime: selectedToTime,
             EventLocation: location,
@@ -131,7 +131,7 @@ const PopupdataSecond = (props) => {
             EventTypeId: selectColorId,
             CreatedBy: User.user._id
         }
-        console.log(data);
+        console.log(data, selectDate);
 
         Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
             setLoading(false)

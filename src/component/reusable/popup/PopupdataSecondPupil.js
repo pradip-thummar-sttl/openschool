@@ -100,7 +100,7 @@ const PopupdataSecondPupil = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: moment(selectDate).format('yyyy-MM-DD'),
+            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
             EventStartTime: selectedFromTime,
             EventEndTime: selectedToTime,
             EventLocation: location,

@@ -21,6 +21,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import MESSAGE from "../../../../utils/Messages";
+import { Download } from "../../../../utils/Download";
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -87,7 +88,6 @@ const TLHomeWork = (props) => {
                 setSelectedDate(moment().format('DD/MM/yyyy'))
                 props.updateBtnName(false)
             }
-            console.log('response of homework by lesson id', Addhomework)
 
         }, (err) => {
             console.log('Error of homework by lesson id', err)
@@ -264,7 +264,7 @@ const TLHomeWork = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftWidth:1,borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftWidth: 1, borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text>ADD ITEM</Text>
@@ -416,13 +416,15 @@ const TLHomeWork = (props) => {
                             materialArr.length != 0 ? materialArr.map((item, index) => {
                                 return (
                                     <View style={PAGESTYLE.fileGrp}>
-                                        <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                        <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                         {item.uri ?
                                             <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                 <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
                                             </TouchableOpacity>
                                             :
-                                            null
+                                            <TouchableOpacity onPress={() => Download(item)}>
+                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                            </TouchableOpacity>
                                         }
                                     </View>
                                 )
