@@ -15,7 +15,6 @@ const Sidebar = (props) => {
         setSelectedIndex(1);
     }
 
-    console.log(User.user.UserType);
     return (
         User.user.UserType == 'Teacher' ?
             <View style={styles.sidebarHeader}>
@@ -23,8 +22,8 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.userInfo}>
                         <Image style={styles.headerProfile} source={Images.ProfileBack} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
+                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -92,7 +91,7 @@ const Sidebar = (props) => {
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                            <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
                         <TouchableOpacity style={styles.moreMenu}>
                             <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -106,8 +105,8 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.userInfo}>
                         <Image style={styles.headerProfile} source={Images.ProfileBack} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
+                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -162,7 +161,7 @@ const Sidebar = (props) => {
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                            <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
                         <TouchableOpacity style={styles.moreMenu}>
                             <Image style={styles.moreIcon} source={Images.SidebarMore} />

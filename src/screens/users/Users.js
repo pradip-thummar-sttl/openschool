@@ -21,7 +21,7 @@ export default class Users extends Component {
                         <View style={styles.userMain}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login', { userType: "School" })}>
+                                onPress={() => null}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}

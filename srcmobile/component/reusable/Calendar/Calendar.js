@@ -66,7 +66,7 @@ const Calendars = (props) => {
                             {
                                 calEventData.map((item) => {
                                     return (
-                                        moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
+                                        moment(new Date(item.EventDate)).format('yyyy-DD-MM') === date.dateString ?
                                             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                 {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
                                                 <View style={{ position: 'absolute', top: hp(0.1), left: hp(-0.26), height: hp(0.77), width: hp(0.77), borderRadius: hp(0.77), backgroundColor: item.EventColor, }} />

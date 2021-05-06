@@ -115,7 +115,7 @@ const TLDetailAdd = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -195,6 +195,18 @@ const TLDetailAdd = (props) => {
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
+        }
+    }
+
+    const isPupilChecked = (_index) => {
+        if (selectedPupils.length > 0) {
+            if (selectedPupils.some(ele => ele._id == pupils[_index]._id)) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
         }
     }
 
@@ -304,7 +316,8 @@ const TLDetailAdd = (props) => {
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
-                                onValueChange={(newValue) => pushPupilItem(newValue, index)}
+                                value={isPupilChecked(index)}
+                                onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
@@ -441,7 +454,7 @@ const TLDetailAdd = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: selectedDate,
+            LessonDate: moment(new Date(selectedDate)).format('yyyy-DD-MM'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,

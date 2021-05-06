@@ -23,7 +23,8 @@ const MESSAGE = {
     selectMaterial: "Please select at least one document",
     saveWorkSpace: 'Please save workspace first',
     workspaceAdded: 'Workspace saved successfully',
-    blankWorkspace: 'Workspace connot be blank',
+    blankWorkspace: 'Workspace cannot be blank',
+    noHomework: 'Homework has not assigned yet',
 }
 
 export default MESSAGE;

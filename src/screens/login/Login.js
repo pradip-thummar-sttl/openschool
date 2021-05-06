@@ -134,7 +134,7 @@ class Login extends Component {
                             AsyncStorage.setItem('pupil', JSON.stringify(data))
                         } else {
                             AsyncStorage.setItem('user', JSON.stringify(data))
-                        }                        
+                        }
                         this.props.setUserAuthData(res.data)
                         if (res.data.UserType === "Teacher") {
                             this.props.navigation.replace('TeacherDashboard')
@@ -229,7 +229,7 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                        style={STYLE.checkBoxcommon}
+                                        style={STYLE.checkBoxcommon1}
                                         value={this.state.isRemember}
                                         onCheckColor={COLORS.themeBlue}
                                         onTintColor={COLORS.themeBlue}
@@ -239,7 +239,7 @@ class Login extends Component {
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
                                 <View style={styles.forgotLink}>
-                                    <Text style={styles.forgotPass} onPress={() => Alert.alert('Do you Really want to process?')}>Forgot Password?</Text>
+                                    <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>

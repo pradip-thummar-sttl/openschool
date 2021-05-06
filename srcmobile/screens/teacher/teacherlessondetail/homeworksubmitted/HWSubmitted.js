@@ -26,7 +26,7 @@ const Pupillist = (props, { style }) => (
                 </View>
             </View>
             <View>
-                <Text style={PAGESTYLE.dateLesson}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
+                <Text style={PAGESTYLE.dateLesson}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
             </View>
         </View>
         <View style={STYLE.hrCommon}></View>

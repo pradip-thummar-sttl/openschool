@@ -187,7 +187,7 @@ const Popupdata = (props) => {
                         </View>
                     </ScrollView>
                     <View style={styles.lessonstartButton}>
-                        {!props.isPupil ?
+                        {!props.isPupil && props.data.Type == Lesson?
                             <TouchableOpacity
                                 style={styles.buttonGrp}
                                 activeOpacity={opacity}

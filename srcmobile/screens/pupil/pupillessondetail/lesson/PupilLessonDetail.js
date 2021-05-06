@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, PAGESTYLEheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, PAGESTYLEheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -18,11 +18,13 @@ import { Download } from "../../../../utils/Download";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import { opacity } from "../../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
+import MESSAGE from "../../../../utils/Messages";
 
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
     const [item, setItem] = useState(props.route.params.item)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(false)
 
     const refresh = () => {
         Service.get(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`, (res) => {
@@ -36,6 +38,33 @@ const PupilLessonDetailInternal = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
+
+    const getHomeWork = () => {
+        setHomeworkLoading(true)
+        Service.get(`${EndPoints.GetPupilHomework}/${item._id}/${User.user.UserDetialId}`, (res) => {
+            setHomeworkLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all homework', res)
+                if (res.data._id) {
+                    if (res.data.Submited) {
+                        props.navigation.navigate('PupilHomeWorkSubmitted', { item: res.data })
+                    } else if (res.data.Marked) {
+                        props.navigation.navigate('PupilHomeWorkMarked', { item: res.data })
+                    } else {
+                        props.navigation.navigate('PupilHomeWorkDetail', { item: res.data, })
+                    }
+                } else {
+                    showMessage(MESSAGE.noHomework)
+                }
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setHomeworkLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+    }
+    
     const NEW = [
         {
             title: 'Description',
@@ -162,13 +191,26 @@ const PupilLessonDetailInternal = (props) => {
                         </ScrollView>
                     </View>
                     <View style={PAGESTYLE.lessonstartButtonPupil}>
-                            <TouchableOpacity style={PAGESTYLE.buttonGrp}
+                        <TouchableOpacity
+                            style={PAGESTYLE.buttonGrp}
+                            activeOpacity={opacity}
+                            onPress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}>
+                            <Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fixedButton]}>open workspace</Text>
+                        </TouchableOpacity>
+                        {isHomeworkLoading ?
+                            <ActivityIndicator
+                                style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.fixedButton]}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <TouchableOpacity
+                                style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}>
-                                <Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fixedButton]}>open workspace</Text>
+                                onPress={() => getHomeWork()}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.fixedButton]}>see homework</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.fixedButton]}>see homework</Text></TouchableOpacity>
-                        </View>
+                        }
+                    </View>
                 </View>
             </View>
         </View>
