@@ -83,9 +83,7 @@ const NotificationDrawer = (props) => {
                                                 </View>
                                         }
                                         {
-                                            // console.log('uitem',Object.keys(calEventData))
                                             Object.keys(calEventData).map((item) => {
-                                                // console.log('uitem',item)
                                                 return (
                                                     moment(item).format('yyyy-MM-DD') === date.dateString ?
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
