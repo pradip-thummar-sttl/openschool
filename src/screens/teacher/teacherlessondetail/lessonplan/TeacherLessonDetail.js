@@ -35,7 +35,7 @@ console.log('props', props);
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={PAGESTYLE.alignRow}>
                                 <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} />
-                                <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('yyyy-MM-DD')}</Text>
+                                <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('DD/MM/yyyy')}</Text>
                             </View>
 
                         </View>

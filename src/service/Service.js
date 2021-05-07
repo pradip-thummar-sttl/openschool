@@ -56,7 +56,7 @@ export const Service = {
             },
             body: data,
         }).then((res) => res.json()).then((res) => {
-            // console.log('response login', res)
+            console.log('response', res)
 
             return success(res)
         }).catch((err) => {

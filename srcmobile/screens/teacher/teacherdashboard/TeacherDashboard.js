@@ -184,13 +184,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity
+                                style={PAGESTYLE.boxDash}
+                                activeOpacity={opacity}
+                                onPress={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => null })}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.yellowBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>New lesson</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.LessonIcon}></ImageBackground>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity
+                                style={PAGESTYLE.boxDash}
+                                activeOpacity={opacity}
+                                onPress={() => props.navigation.navigate('CreateNewEvent', { onGoBack: () => null })}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.purpleBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>New calendar {"\n"}entry</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>

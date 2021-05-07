@@ -50,7 +50,7 @@ const TLDetailEdit = (props) => {
         setVotingEnabled(lessonData.IsVotingEnabled)
         setDescription(lessonData.LessonDescription)
         setLessonTopic(lessonData.LessonTopic)
-        setSelectedDate(moment(lessonData.Date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(lessonData.Date).format('DD/MM/yyyy'))
         setSelectedFromTime(lessonData.StartTime)
         setSelectedToTime(lessonData.EndTime)
         setMaterialArr(lessonData.MaterialList)
@@ -164,7 +164,7 @@ const TLDetailEdit = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -195,6 +195,18 @@ const TLDetailEdit = (props) => {
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
+        }
+    }
+
+    const isPupilChecked = (_index) => {
+        if (selectedPupils.length > 0) {
+            if (selectedPupils.some(ele => ele._id == pupils[_index]._id)) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
         }
     }
 
@@ -268,7 +280,7 @@ const TLDetailEdit = (props) => {
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
-                                value={item.isSelected}
+                                value={isPupilChecked(index)}
                                 onValueChange={(newValue) => pushPupilItem(newValue, index)}
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
@@ -407,7 +419,7 @@ const TLDetailEdit = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: selectedDate,
+            LessonDate: moment(new Date(selectedDate)).format('yyyy-DD-MM'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,

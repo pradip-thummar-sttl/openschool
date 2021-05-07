@@ -111,11 +111,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <View style={PAGESTYLE.userInfoDate}>
                                     <View style={PAGESTYLE.dateNameBlock}>
                                         <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                        <Text style={PAGESTYLE.dateText}>{data.HomeWorkDate ? moment(data.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
+                                        <Text style={PAGESTYLE.dateText}>{data.HomeWorkDate ? moment(data.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
                                     </View>
                                     <View style={PAGESTYLE.dateNameBlock}>
                                         <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                        <Text style={PAGESTYLE.dateText}>{data.SubmitedDate ? moment(data.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
+                                        <Text style={PAGESTYLE.dateText}>{data.SubmitedDate ? moment(data.SubmitedDate).format('DD/MM/yyyy') : '-'}</Text>
                                     </View>
                                 </View>
                             </View>

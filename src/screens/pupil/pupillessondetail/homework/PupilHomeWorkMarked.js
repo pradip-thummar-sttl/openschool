@@ -44,11 +44,11 @@ const PupilHomeWorkMarked = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Homework Date</Text>
-                                    <Text style={PAGESTYLE.dateText}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
+                                    <Text style={PAGESTYLE.dateText}>{item.DueDate ? moment(item.DueDate).format('DD/MM/yyyy') : '-'}</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitle}>Submitted On</Text>
-                                    <Text style={PAGESTYLE.dateText}>{item.SubmitedDate ? moment(item.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
+                                    <Text style={PAGESTYLE.dateText}>{item.SubmitedDate ? moment(item.SubmitedDate).format('DD/MM/yyyy') : '-'}</Text>
                                 </View>
                             </View>
                         </View>

@@ -79,7 +79,6 @@ const TeacherTimeTable = (props) => {
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
 
-        console.log('==================================');
         timeTableData.forEach(element => {
 
             const day = new Date(element.Type == Lesson ? element.Date : element.EventDate).getDay();
@@ -147,6 +146,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
+        console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {

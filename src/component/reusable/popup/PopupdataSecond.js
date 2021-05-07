@@ -19,7 +19,9 @@ import moment from "moment";
 import { User } from "../../../utils/Model";
 
 const PopupdataSecond = (props) => {
-    const [isModalVisible, setModalVisible] = useState(false);
+    const isFromDashboard = props.isFromDashboard
+    console.log('isFromDashboard', isFromDashboard);
+    const [isModalVisible, setModalVisible] = useState(isFromDashboard == true);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const toggleModal = () => {
@@ -29,6 +31,9 @@ const PopupdataSecond = (props) => {
         setColorDropOpen(false)
         setSelectedToTime('')
         setSelectedFromTime('')
+        if (props.goBack != undefined) {
+            props.goBack()   
+        }
     };
 
     const [event, setEvent] = useState('');
@@ -43,7 +48,7 @@ const PopupdataSecond = (props) => {
     const [isFromDropOpen, setFromDropOpen] = useState(false)
     const [isToDropOpen, setToDropOpen] = useState(false)
     const [isColorDropOpen, setColorDropOpen] = useState(false)
-    const [selectDate, setSelectedDate] = useState(moment().format('yyyy-MM-DD'))
+    const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
     const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
 
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -118,7 +123,7 @@ const PopupdataSecond = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: selectDate,
+            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
             EventStartTime: selectedFromTime,
             EventEndTime: selectedToTime,
             EventLocation: location,
@@ -126,7 +131,7 @@ const PopupdataSecond = (props) => {
             EventTypeId: selectColorId,
             CreatedBy: User.user._id
         }
-        console.log(data);
+        console.log(data, selectDate);
 
         Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
             setLoading(false)
@@ -159,7 +164,7 @@ const PopupdataSecond = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -254,13 +259,18 @@ const PopupdataSecond = (props) => {
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity> */}
-            <TouchableOpacity
-                style={styles.entryData}
-                activeOpacity={opacity}
-                onPress={toggleModal}>
-                <Image style={styles.entryIcon} source={Images.NewEvents} />
-                <Text style={styles.entryTitle}>New Event</Text>
-            </TouchableOpacity>
+            {
+                isFromDashboard == true ?
+                    null
+                    :
+                    <TouchableOpacity
+                        style={styles.entryData}
+                        activeOpacity={opacity}
+                        onPress={toggleModal}>
+                        <Image style={styles.entryIcon} source={Images.NewEvents} />
+                        <Text style={styles.entryTitle}>New Event</Text>
+                    </TouchableOpacity>
+            }
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
@@ -342,7 +352,7 @@ const PopupdataSecond = (props) => {
                                             <View style={[styles.copyInputParent, styles.colorPicker]}>
                                                 <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
-                                                            <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
+                                                        <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                         <Image style={styles.dropDownArrowdatetime2} source={Images.DropArrow} />
                                                     </View>
                                                 </TouchableOpacity>
@@ -548,7 +558,7 @@ const styles = StyleSheet.create({
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),

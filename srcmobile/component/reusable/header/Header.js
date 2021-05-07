@@ -6,13 +6,14 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { opacity } from "../../../utils/Constant";
+import { User } from "../../../utils/Model";
 
 const Header = (props) => {
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
                 <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
-                <Text style={styles.mainTitle}>Title</Text>
+                <Text style={styles.mainTitle}>Welcome, {User.user.FirstName} {User.user.LastName}!</Text>
             </View>
             <View style={styles.headerRight}>
                 <TouchableOpacity
