@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { User } from "../../../utils/Model";
@@ -60,7 +60,7 @@ const Item = ({ onPress, style, item }) => (
 const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
-            <View style={PAGESTYLE.pupilImage}></View>
+            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
             <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
         </View>
         <View style={PAGESTYLE.groupColumnmain}>
@@ -189,12 +189,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 isTeacherLessonDetail ?
                     <TLDetailEdit
                         goBack={() => setTeacherLessonDetail(false)}
+                        onAlertPress={() => props.navigation.openDrawer()}
                         onRefresh={() => null}
                         data={dataOfSubView} />
                     :
                     isAddSubject ?
                         <TLDetailAdd
-                            goBack={() => { setAddSubject(false) }} />
+                            goBack={() => { setAddSubject(false) }}
+                            onAlertPress={() => props.navigation.openDrawer()} />
                         :
                         selectedIndex == 0 ?
                             <View style={{ width: isHide ? '93%' : '78%' }}>
@@ -298,7 +300,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                             <TouchableOpacity
                                                                                 style={PAGESTYLE.mediabarTouch}
                                                                                 activeOpacity={opacity}>
-                                                                                <View style={PAGESTYLE.mediabar}></View>
+                                                                                <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
                                                                             </TouchableOpacity>
                                                                         ))
                                                                         :

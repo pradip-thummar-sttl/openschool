@@ -10,6 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 import { Download } from "../../../../utils/Download";
+import { baseUrl } from "../../../../utils/Constant";
 
 const TLDetail = (props) => {
     console.log('props', props);
@@ -99,7 +100,7 @@ const TLDetail = (props) => {
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.checkBoxLabelNone}>
-                                        <Image source={{ uri: item.ProfilePicture }} style={PAGESTYLE.userIconPupil} />
+                                        <Image source={{ uri: baseUrl + item.ProfilePicture }} style={PAGESTYLE.userIconPupil} />
                                         <Text style={PAGESTYLE.checkBoxLabelTextNone}>{item.PupilName}</Text>
                                     </View>
                                 )}

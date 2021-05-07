@@ -3,7 +3,7 @@ const MESSAGE = {
     password: "Please enter password",
     event: "Please enter event name",
     location: "Please enter location",
-    date: "Please select day",
+    date: "Please select date",
     note: "Please enter note",
     feedback: "Please enter feedback",
     topic: "Please enter lesson topic",

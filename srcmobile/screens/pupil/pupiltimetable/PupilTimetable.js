@@ -135,7 +135,6 @@ const PupilTimeTable = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-        console.log('data', data);
 
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)

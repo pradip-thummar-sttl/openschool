@@ -388,6 +388,9 @@ const TLDetailEdit = (props) => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
             return false;
+        } else if (!lessonTopic.trim()) {
+            showMessage(MESSAGE.topic)
+            return false;
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
@@ -403,10 +406,7 @@ const TLDetailEdit = (props) => {
         } else if (!selectedParticipants) {
             showMessage(MESSAGE.participants)
             return false;
-        } else if (!lessonTopic) {
-            showMessage(MESSAGE.topic)
-            return false;
-        } else if (!description) {
+        } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
         } else if (selectedPupils.length == 0) {
@@ -419,7 +419,7 @@ const TLDetailEdit = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: moment(new Date(selectedDate)).format('yyyy-DD-MM'),
+            LessonDate: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,

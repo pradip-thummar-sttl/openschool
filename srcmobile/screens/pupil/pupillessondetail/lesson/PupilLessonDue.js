@@ -6,6 +6,7 @@ import STYLE from '../../../../utils/Style';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import moment from "moment";
+import { baseUrl } from "../../../../utils/Constant";
 
 
 const PupilLessonDue = (props) => {
@@ -31,7 +32,7 @@ const PupilLessonDue = (props) => {
                                             <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
                                         </View>
                                         <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
-                                            <Image style={PAGESTYLE.lessonThumb} source={{uri:item.TeacherProfile}}></Image>
+                                            <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                             <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -58,7 +59,7 @@ const PupilLessonDue = (props) => {
                                             <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
                                         </View>
                                         <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
-                                            <Image style={PAGESTYLE.lessonThumb} source={{uri:item.TeacherProfile}}></Image>
+                                            <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                             <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -86,7 +87,7 @@ const PupilLessonDue = (props) => {
                                             <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
                                         </View>
                                         <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
-                                            <Image style={PAGESTYLE.lessonThumb} source={{uri:item.TeacherProfile}}></Image>
+                                            <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                             <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                         </View>
                                     </TouchableOpacity>

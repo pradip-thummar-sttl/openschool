@@ -18,7 +18,7 @@ import { Download } from "../../../../utils/Download";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import { opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 
 const PupilLessonDetailInternal = (props) => {
@@ -169,7 +169,7 @@ const PupilLessonDetailInternal = (props) => {
                             </View>
                             <View style={PAGESTYLE.bookmarkuserNameMain}>
                                 <View style={PAGESTYLE.userNameMain}>
-                                    <View style={PAGESTYLE.userMainThumb}></View>
+                                    <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                     <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                                 <View style={PAGESTYLE.bookMark}>

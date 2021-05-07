@@ -5,7 +5,7 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
-import { opacity } from "../../../utils/Constant";
+import { baseUrl, opacity } from "../../../utils/Constant";
 import { User } from "../../../utils/Model";
 
 const Sidebar = (props) => {
@@ -20,7 +20,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={Images.ProfileBack} />
+                        <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text style={styles.profileDesi}>{User.user.UserType}</Text>
@@ -89,7 +89,7 @@ const Sidebar = (props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.userInfo, styles.userInfobottom]}>
-                        <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
+                        <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
@@ -103,7 +103,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={Images.ProfileBack} />
+                        <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text style={styles.profileDesi}>{User.user.UserType}</Text>
@@ -159,7 +159,7 @@ const Sidebar = (props) => {
                         <Image source={Images.cartoon} style={styles.cartoonIcon} />
                     </View> */}
                     <View style={[styles.userInfo, styles.userInfobottom]}>
-                        <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
+                        <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
     },
     headerProfile: {
         width: hp(5.40),
+        height: hp(5.40),
         resizeMode: 'contain',
     },
     userInfobottom: {

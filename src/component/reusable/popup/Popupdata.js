@@ -7,7 +7,7 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { cellWidth, Lesson, opacity } from "../../../utils/Constant";
+import { baseUrl, cellWidth, Lesson, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import moment from 'moment';
 
@@ -135,7 +135,7 @@ const Popupdata = (props) => {
                                             <TouchableOpacity
                                                 style={styles.mediabarTouch}
                                                 activeOpacity={opacity}>
-                                                <View style={styles.mediabar}></View>
+                                                <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
                                             </TouchableOpacity>
                                         ))
                                         :

@@ -81,8 +81,8 @@ const PupilLessonDetail = (props) => {
 
     useEffect(() => {
         // const unsubscribe = props.navigation.addListener('focus', () => {
-            getLessonData('', '')
-            getHomeworkData('', '')
+        getLessonData('', '')
+        getHomeworkData('', '')
         // });
         // return () => {
         //     unsubscribe;
@@ -111,7 +111,7 @@ const PupilLessonDetail = (props) => {
                         submit.push(item)
                     }
                 });
-               
+
                 console.log('tripple array', marked, due, submit)
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
@@ -277,14 +277,27 @@ const PupilLessonDetail = (props) => {
         <View style={PAGESTYLE.mainPage}>
             {
                 isLessonDetail ?
-                    <PupilLessonDetailInternal item={item} goBack={() => setLessonDetail(false)} />
+                    <PupilLessonDetailInternal
+                        item={item}
+                        goBack={() => setLessonDetail(false)}
+                        onAlertPress={() => props.navigation.openDrawer()}
+                    />
                     : isHomeworkDetail ?
-                        <PupilHomeWorkDetail item={item} goBack={() => setHomeworkDetail(false)} />
+                        <PupilHomeWorkDetail
+                            item={item}
+                            goBack={() => setHomeworkDetail(false)}
+                            onAlertPress={() => props.navigation.openDrawer()} />
                         :
                         isHomeWorkSubmitted ?
-                            <PupilHomeWorkSubmitted item={item} goBack={() => setHomeWorkSubmitted(false)} />
+                            <PupilHomeWorkSubmitted
+                                item={item}
+                                goBack={() => setHomeWorkSubmitted(false)}
+                                onAlertPress={() => props.navigation.openDrawer()} />
                             : isHomeWorkMarked ?
-                                <PupilHomeWorkMarked item={item} goBack={() => setHomeWorkMarked(false)} />
+                                <PupilHomeWorkMarked
+                                    item={item}
+                                    goBack={() => setHomeWorkMarked(false)}
+                                    onAlertPress={() => props.navigation.openDrawer()} />
                                 :
                                 lessonRender()
             }

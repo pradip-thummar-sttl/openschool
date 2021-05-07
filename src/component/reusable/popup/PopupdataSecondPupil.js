@@ -53,7 +53,7 @@ const PopupdataSecondPupil = (props) => {
     const [colorArr, setColorArr] = useState([])
 
     const isFieldsValidated = () => {
-        if (!event) {
+        if (!event.trim()) {
             showMessage(MESSAGE.event)
             return false;
         } else if (!selectDate) {
@@ -68,10 +68,10 @@ const PopupdataSecondPupil = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
-        } else if (!location) {
+        } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
-        } else if (!note) {
+        } else if (!note.trim()) {
             showMessage(MESSAGE.note);
             return false;
         }
@@ -100,7 +100,7 @@ const PopupdataSecondPupil = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
+            EventDate: moment(selectDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             EventStartTime: selectedFromTime,
             EventEndTime: selectedToTime,
             EventLocation: location,

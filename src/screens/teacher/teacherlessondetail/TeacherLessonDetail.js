@@ -192,31 +192,35 @@ const TeacherLessonDetail = (props) => {
                 isTLHomeWorkSubmittedDetail ?
                     <TLHomeWorkSubmittedDetail
                         item={data}
-                        goBack={() => { setTLHomeWorkSubmittedDetail(false) }} />
+                        goBack={() => { setTLHomeWorkSubmittedDetail(false) }}
+                        onAlertPress={() => { props.onAlertPress() }} />
                     : isTLDetailEdit ?
                         <TLDetailEdit
                             goBack={() => { props.goBack(); setTLDetailEdit(false) }}
+                            onAlertPress={() => { props.onAlertPress() }}
                             data={lessonData}
                             onRefresh={() => null} />
                         : isScreenAndCameraRecording ?
                             <ScreenAndCameraRecording
-                                goBack={() => { setScreenAndCameraRecording(false) }} />
+                                goBack={() => { setScreenAndCameraRecording(false) }}
+                                onAlertPress={() => { props.onAlertPress() }} />
                             : isTLVideoGallery ?
-                                <TLVideoGallery goBack={() => { setTLVideoGallery(false) }} />
+                                <TLVideoGallery goBack={() => { setTLVideoGallery(false) }}
+                                onAlertPress={() => { props.onAlertPress() }} />
                                 :
                                 <View style={{ width: isHide ? '100%' : '78%' }}>
                                     {tabIndex == 0 ?
                                         <HeaderLP
                                             lessonData={lessonData}
                                             navigateToBack={() => props.goBack()}
-                                            onAlertPress={() => props.navigation.openDrawer()} />
+                                            onAlertPress={() => { props.onAlertPress() }} />
                                         : tabIndex == 1 ?
                                             <HeaderHW
                                                 hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                                                 SubjectName={lessonData.SubjectName}
                                                 setHomework={() => onAddHomework()}
                                                 navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => props.navigation.openDrawer()}
+                                                onAlertPress={() => { props.onAlertPress() }}
                                                 onClose={() => setVisiblePopup(false)}
                                                 isVisible={isVisiblePopup}
                                                 onOpenPopup={() => isFiedlsValidated()}
@@ -227,7 +231,7 @@ const TeacherLessonDetail = (props) => {
                                             <HeaderHWS
                                                 subjectName={lessonData.SubjectName}
                                                 navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => props.navigation.openDrawer()} />
+                                                onAlertPress={() => { props.onAlertPress() }} />
                                     }
                                     <View style={PAGESTYLE.whiteBg}>
                                         <View style={PAGESTYLE.lessonPlanTop}>

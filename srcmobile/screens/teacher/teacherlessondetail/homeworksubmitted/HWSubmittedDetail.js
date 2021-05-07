@@ -37,7 +37,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isGold, setGold] = useState(false);
 
     const isFieldsValidated = () => {
-        if (!feedBack) {
+        if (!feedBack.trim()) {
             showMessage(MESSAGE.feedback)
             return false;
         }

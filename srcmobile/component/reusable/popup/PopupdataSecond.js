@@ -57,13 +57,13 @@ const PopupdataSecond = (props) => {
     // };
 
     const isFieldsValidated = () => {
-        if (!event) {
+        if (!event.trim()) {
             showMessage(MESSAGE.event)
             return false;
-        } else if (!location) {
+        } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
-        } else if (!note) {
+        } else if (!note.trim()) {
             showMessage(MESSAGE.note);
             return false;
         }
@@ -74,7 +74,7 @@ const PopupdataSecond = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
+            EventDate: moment(selectDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             EventTime: selectTime,
             EventLocation: location,
             EventTypeId: "604b5aac006a0306d00ab87c",

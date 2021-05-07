@@ -28,7 +28,7 @@ const PupilHomeWorkMarked = (props) => {
             <View style={PAGESTYLE.wrapper}>
                 <View style={PAGESTYLE.commonBg}>
                     <Header15
-                        onAlertPress={() => props.navigation.openDrawer()}
+                        onAlertPress={() => props.onAlertPress()}
                         goBack={() => props.goBack()}
                         title={item.SubjectName + ' ' + item.LessonTopic} />
                     <View style={PAGESTYLE.containerWrap}>

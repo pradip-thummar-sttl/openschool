@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -45,7 +45,7 @@ const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <View style={PAGESTYLE.rowProfile}>
-                <View style={PAGESTYLE.pupilImage}></View>
+            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
                 <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
@@ -292,7 +292,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <TouchableOpacity
                                                                         style={PAGESTYLE.mediabarTouch}
                                                                         activeOpacity={opacity}>
-                                                                        <View style={PAGESTYLE.mediabar}></View>
+                                                                        <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
                                                                     </TouchableOpacity>
                                                                 ))
                                                                 :

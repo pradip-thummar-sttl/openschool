@@ -2,6 +2,7 @@ import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
+import { baseUrl } from './Constant';
 export const Download = (item) => {
     if (Platform.OS === 'ios') {
         downloadFile(item);
@@ -78,10 +79,9 @@ export const downloadFile = (item) => {
     const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
 
     const options = {
-        fromUrl: item.filename,
+        fromUrl: baseUrl + item.filename,
         toFile: localFile
     };
-    // .replace('14.143.90.233', '192.168.0.218'),
     console.log('options', options);
     RNFS.downloadFile(options).promise
         .then((res) => {

@@ -18,7 +18,7 @@ import DocumentPicker from 'react-native-document-picker';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Images from "../../../../../srcmobile/utils/Images";
 
@@ -120,7 +120,7 @@ const PupilHomeWorkDetail = (props) => {
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.commonBg}>
                 <Header14
-                    onAlertPress={() => props.navigation.openDrawer()}
+                    onAlertPress={() => props.onAlertPress()}
                     goBack={() => props.goBack()}
                     onSubmitHomework={() => isFieldsValidated()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
@@ -138,7 +138,7 @@ const PupilHomeWorkDetail = (props) => {
                             <View style={PAGESTYLE.dateNameBlock}>
                                 <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                 <View style={PAGESTYLE.daterow}>
-                                    <Image style={PAGESTYLE.thumbSmall} source={{ uri: item.TeacherProfile }}></Image>
+                                    <Image style={PAGESTYLE.thumbSmall} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                     <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                             </View>

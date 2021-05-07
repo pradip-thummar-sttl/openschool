@@ -124,12 +124,9 @@ const TeacherTimeTable = (props) => {
     }
 
     useEffect(() => {
-        fetchRecord('', '')
-
         Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
             // setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get calandar event:', res)
                 dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
@@ -150,7 +147,7 @@ const TeacherTimeTable = (props) => {
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson event:', res)
+                // console.log('response of get all lesson event:', res)
                 setTimeTableData(res.data)
                 // dispatch(setCalendarEventData(res.data))
             } else {
