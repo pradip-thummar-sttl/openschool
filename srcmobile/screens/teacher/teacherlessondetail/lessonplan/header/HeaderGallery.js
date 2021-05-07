@@ -25,7 +25,7 @@ const HeaderGallery = (props) => {
                     </TouchableOpacity> */}
                     <TouchableOpacity
                         style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
+                        onPress={() => null}
                         activeOpacity={opacity}>
                         <Image style={styles.infoIcon} source={Images.InfoIcon} />
                     </TouchableOpacity> 

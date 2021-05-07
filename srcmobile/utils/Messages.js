@@ -16,6 +16,8 @@ const MESSAGE = {
     eventAdded: "Event added successfully",
     lessonAdded: "Lesson added successfully",
     lessonUpdated: "Lesson updated successfully",
+    homeworkAdded: "Homework added successfully",
+    homeworkUpdated: "Homework updated successfully",
     selectPupil: "Please select at least one pupil.",
     homeworkMarked: "Homework marked successfully",
     checkList: 'Please add at least one item in checklist',

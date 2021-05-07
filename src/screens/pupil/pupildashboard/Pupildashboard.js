@@ -211,7 +211,7 @@ const PupuilDashboard = (props) => {
                                                                             <View style={PAGESTYLE.attchmentSectionwithLink}>
                                                                                 <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                                     <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                                    <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment</Text>
+                                                                                    <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
                                                                                 </TouchableOpacity>
                                                                             </View>
                                                                             <View style={PAGESTYLE.requirementofClass}>

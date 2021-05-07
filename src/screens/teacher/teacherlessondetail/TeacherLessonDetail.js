@@ -136,9 +136,9 @@ const TeacherLessonDetail = (props) => {
 
         if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && homeworkId) {
             if (Addhomework.IsUpdate) {
-                showMessage(MESSAGE.lessonUpdated)
+                showMessage(MESSAGE.homeworkUpdated)
             } else {
-                showMessage(MESSAGE.lessonAdded)
+                showMessage(MESSAGE.homeworkAdded)
             }
             setHomeworkLoading(false)
             return
@@ -152,9 +152,9 @@ const TeacherLessonDetail = (props) => {
                 setHomeworkLoading(false)
                 // setDefaults()
                 if (Addhomework.IsUpdate) {
-                    showMessage(MESSAGE.lessonUpdated)
+                    showMessage(MESSAGE.homeworkUpdated)
                 } else {
-                    showMessage(MESSAGE.lessonAdded)
+                    showMessage(MESSAGE.homeworkAdded)
                 }
             } else {
                 showMessage(res.message)

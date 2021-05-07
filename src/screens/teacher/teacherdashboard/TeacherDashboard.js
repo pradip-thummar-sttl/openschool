@@ -311,7 +311,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 <View style={PAGESTYLE.attchmentSectionwithLink}>
                                                                     <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                         <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                        <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment</Text>
+                                                                        <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
                                                                     </TouchableOpacity>
                                                                     <TouchableOpacity>
                                                                         <Text style={PAGESTYLE.linkText}>see more</Text>
