@@ -95,43 +95,68 @@ class Login extends Component {
 
         this.setLoading(true)
         // console.log('Base64.encode(password)', Base64.encode(password))
-        var data = {
-            Email: userName,
-            Password: password,
-            PushToken: PushToken,
-            Device: Device,
-            OS: OS,
-            AccessedVia: AccessedVia,
-        }
-        Service.post(data, EndPoints.Login, (res) => {
-            console.log('response Login', res)
-            if (res.code == 200) {
-                this.setLoading(false)
-                // showMessage(res.message)
-                data.isRemember = isRemember
+        Service.get(EndPoints.GetAllUserType, (res) => {
 
-                if (this.props.route.params.userType == 'Pupil') {
-                    AsyncStorage.setItem('pupil', JSON.stringify(data))
-                } else {
-                    AsyncStorage.setItem('user', JSON.stringify(data))
-                }                        
-                this.props.setUserAuthData(res.data)
-                if (res.data.UserType === "Teacher") {
-                    this.props.navigation.replace('TeacherDashboard')
-                } else if (res.data.UserType === "Pupil") {
-                    this.props.navigation.replace('PupuilDashboard')
-                } else {
-                    this.props.navigation.replace('PupuilDashboard')
+            if (res.flag) {
+                console.log('user type of', res)
+
+                var userData = res.data
+                var userType = ""
+                userData.map((item) => {
+                    if (item.Name === this.props.route.params.userType) {
+                        userType = item._id
+                    }
+                })
+
+                console.log('user type of', userType)
+                var data = {
+                    Email: userName,
+                    Password: password,
+                    PushToken: PushToken,
+                    Device: Device,
+                    OS: OS,
+                    AccessedVia: AccessedVia,
+                    UserType: userType
                 }
-                User.user = res.data
-                // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+
+                Service.post(data, EndPoints.Login, (res) => {
+                    console.log('response Login', res)
+                    if (res.code == 200) {
+                        this.setLoading(false)
+                        // showMessage(res.message)
+                        data.isRemember = isRemember
+                        console.log('data of login', data)
+                        if (this.props.route.params.userType == 'Pupil') {
+                            AsyncStorage.setItem('pupil', JSON.stringify(data))
+                        } else {
+                            AsyncStorage.setItem('user', JSON.stringify(data))
+                        }
+                        this.props.setUserAuthData(res.data)
+                        if (res.data.UserType === "Teacher") {
+                            this.props.navigation.replace('TeacherDashboard')
+                        } else if (res.data.UserType === "Pupil") {
+                            this.props.navigation.replace('PupuilDashboard')
+                        } else {
+                            this.props.navigation.replace('PupuilDashboard')
+                        }
+                        User.user = res.data
+                        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+                    } else {
+                        this.setLoading(false)
+                        showMessage(res.message)
+                    }
+                }, (err) => {
+                    this.setLoading(false)
+                    console.log('response Login error', err)
+                })
             } else {
                 this.setLoading(false)
                 showMessage(res.message)
             }
+
         }, (err) => {
             this.setLoading(false)
-            console.log('response Login error', err)
+
         })
 
         // return true;
@@ -199,7 +224,7 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                        style={STYLE.checkBoxcommon}
+                                        style={STYLE.checkBoxcommon1}
                                         value={this.state.isRemember}
                                         onCheckColor={COLORS.themeBlue}
                                         onTintColor={COLORS.themeBlue}
@@ -209,7 +234,7 @@ class Login extends Component {
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
                                 <View style={styles.forgotLink}>
-                                    <Text style={styles.forgotPass} onPress={() => Alert.alert('Do you Really want to process?')}>Forgot Password?</Text>
+                                    <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>
@@ -328,9 +353,9 @@ const styles = StyleSheet.create({
         fontSize: hp('1.8%'),
         color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
-        marginLeft: Platform.OS == 'android' ? hp(3) : hp('1.0%'),
+        marginLeft: Platform.OS == 'android' ? hp(2.0) : hp('1.0%'),
         fontFamily: FONTS.fontBold,
-        top:Platform.OS == 'android' ? hp(0.35) : hp(0),
+        top: Platform.OS == 'android' ? hp(0.35) : hp(0),
     },
     forgotPass: {
         fontSize: hp('1.8%'),

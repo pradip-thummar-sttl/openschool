@@ -170,7 +170,7 @@ const Popupdata = (props) => {
                                         <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
                                     </TouchableOpacity>
                                     <View style={styles.lessonstartButton}>
-                                        {!props.isPupil ?
+                                        {!props.isPupil && props.data.Type == Lesson ?
                                             <TouchableOpacity
                                                 style={styles.buttonGrp}
                                                 activeOpacity={opacity}

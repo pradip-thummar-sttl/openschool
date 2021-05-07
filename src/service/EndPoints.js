@@ -16,6 +16,7 @@ export const EndPoints = {
     Lesson: 'lesson',
     LessonUpdate: 'lessonupdate/',
     LessonMaterialUpload: 'lessonmaterialupload/',
+    HomeworkMaterialUpload: 'homeworkmaterialupload/',
     TeacherMarkedHomework: 'teacherMarkedHomework',
     EventType: 'eventtype',
     HomeworkSubmited: 'homeworksubmited/',
@@ -29,4 +30,5 @@ export const EndPoints = {
     PupilUploadHomework:"uploadhomework",
     UploadWorkspace:'uploadWorkspace',
     GetPupilLesson: 'getpupillesson',
+    GetPupilHomework: 'getpupilhomework'
 }

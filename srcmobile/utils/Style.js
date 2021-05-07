@@ -49,8 +49,13 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     checkBoxcommon: {
-        width: hp(1.6),
-        height: hp(1.6),
+        width: 20,
+        height: 20,
+        top: 0,
+    },
+    checkBoxcommon1: {
+        width: 20,
+        height: 20,
         top: 0,
     },
     fullWidthPrimaryButton: {

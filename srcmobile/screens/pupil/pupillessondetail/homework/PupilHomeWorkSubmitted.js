@@ -32,13 +32,13 @@ const PupilHomeWorkSubmitted = (props) => {
                             <View style={[PAGESTYLE.dateNameBlockSubmitted, PAGESTYLE.spaceSmallUserName]}>
                                 <Text style={PAGESTYLE.dateTitleNormal}>Homework Date</Text>
                                 <View style={PAGESTYLE.daterow}>
-                                    <Text style={PAGESTYLE.dueDateTextBoldSubmit}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
+                                    <Text style={PAGESTYLE.dueDateTextBoldSubmit}>{item.DueDate ? moment(item.DueDate).format('DD/MM/yyyy') : '-'}</Text>
                                 </View>
                             </View>
                             <View style={[PAGESTYLE.dateNameBlockSubmitted, PAGESTYLE.spaceSmallUserName]}>
                                 <Text style={PAGESTYLE.dateTitleNormal}>Submitted On</Text>
                                 <View style={PAGESTYLE.daterow}>
-                                    <Text style={PAGESTYLE.dueDateTextBoldSubmit}>{item.SubmitedDate ? moment(item.SubmitedDate).format('YYYY-MM-DD') : '-'}</Text>
+                                    <Text style={PAGESTYLE.dueDateTextBoldSubmit}>{item.SubmitedDate ? moment(item.SubmitedDate).format('DD/MM/yyyy') : '-'}</Text>
                                 </View>
                             </View>
                         </View>

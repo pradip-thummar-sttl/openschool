@@ -27,7 +27,7 @@ const Pupillist = (props, { style }) => (
             <Text style={PAGESTYLE.pupilName}>{props.item.LessonTopic}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('YYYY-MM-DD')}</Text>
+            <Text style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>

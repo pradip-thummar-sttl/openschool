@@ -5,11 +5,12 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import { opacity } from "../../../utils/Constant";
+import { User } from "../../../utils/Model";
 
 const Header = (props) => {
     return (
         <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}>Dashboard</Text>
+            <Text style={styles.mainTitle}>Welcome, {User.user.FirstName} {User.user.LastName}!</Text>
             <View style={styles.headerRight}>
                 <TouchableOpacity
                     style={styles.notificationBar}

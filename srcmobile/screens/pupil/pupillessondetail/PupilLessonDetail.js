@@ -252,9 +252,7 @@ const PupilLessonDetail = (props) => {
                                 DueHomeWork={DueHomeWork}
                                 SubmitHomeWork={SubmitHomeWork}
                                 MarkedHomeWork={MarkedHomeWork}
-                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', {
-                                    item: item,
-                                })}
+                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
                                 navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
                                 navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                     }

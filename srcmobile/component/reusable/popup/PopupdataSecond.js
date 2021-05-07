@@ -74,7 +74,7 @@ const PopupdataSecond = (props) => {
         setLoading(true)
         let data = {
             EventName: event,
-            EventDate: selectDate,
+            EventDate: moment(new Date(selectDate)).format('yyyy-DD-MM'),
             EventTime: selectTime,
             EventLocation: location,
             EventTypeId: "604b5aac006a0306d00ab87c",
@@ -111,7 +111,7 @@ const PopupdataSecond = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setSelectedDate(moment(date).format('yyyy-MM-DD'))
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 

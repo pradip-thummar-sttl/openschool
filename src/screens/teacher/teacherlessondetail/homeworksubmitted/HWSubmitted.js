@@ -28,7 +28,7 @@ const Pupillist = (props, { style }) => (
             <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('YYYY-MM-DD') : '-'}</Text>
+            <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
             <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>

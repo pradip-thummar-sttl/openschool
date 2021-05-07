@@ -26,6 +26,7 @@ import COLORS from "../../../utils/Colors";
 import MESSAGE from "../../../utils/Messages";
 import ScreenAndCameraRecording from "../../../../src/screens/teacher/screenandcamera/ScreenandCamera";
 import TLVideoGallery from "../../../../src/screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
+import moment from "moment";
 
 const TeacherLessonDetail = (props) => {
     const [isHide, action] = useState(true);
@@ -65,44 +66,41 @@ const TeacherLessonDetail = (props) => {
 
     const onAddHomework = () => {
         setHomeworkLoading(true)
-        console.log('add homework', Addhomework.CheckList)
         const data = {
-            LessonId: props.route.params.data._id,
+            LessonId: lessonData._id,
             IsIncluded: Addhomework.IsIncluded,
-            DueDate: Addhomework.DueDate,
+            DueDate: moment(new Date(Addhomework.DueDate)).format('yyyy-DD-MM'),
             HomeworkDescription: Addhomework.HomeworkDescription,
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
-        console.log('data', data);
+        console.log('add homework data', data)
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
-                console.log('response of update homework', res)
+                console.log('res', res);
                 if (res.flag) {
-                    setHomeworkLoading(false)
+                    // setHomeworkLoading(false)
                     setVisiblePopup(false)
-                    showMessage('Homework update successfully')
+                    // showMessage('Homework updated successfully')
+
+                    uploadMatirial(res.data._id)
                 } else {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
                     showMessage(res.message)
-
                 }
-
             }, (err) => {
                 console.log('response of update homework err', err)
                 setHomeworkLoading(false)
                 setVisiblePopup(false)
-
             })
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
-                console.log('response of add homework', res)
                 Addhomework.IsUpdate = true
-                setHomeworkLoading(false)
+                // setHomeworkLoading(false)
                 setVisiblePopup(false)
-                showMessage('Homework added successfully')
-
+                // showMessage('Homework added successfully')
+                uploadMatirial(res.data._id)
             }, (err) => {
                 console.log('response of add homework err', err)
                 setHomeworkLoading(false)
@@ -111,6 +109,59 @@ const TeacherLessonDetail = (props) => {
             })
         }
     }
+
+    const uploadMatirial = (homeworkId) => {
+        let data = new FormData();
+
+        Addhomework.MaterialArr.forEach(element => {
+            data.append('materiallist', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        });
+
+        Addhomework.RecordingArr.forEach(element => {
+            data.append('recording', {
+                uri: element.uri,
+                name: element.name,
+                type: element.type
+            });
+        })
+
+        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && homeworkId) {
+            if (Addhomework.IsUpdate) {
+                showMessage(MESSAGE.lessonUpdated)
+            } else {
+                showMessage(MESSAGE.lessonAdded)
+            }
+            setHomeworkLoading(false)
+            return
+        }
+
+        console.log('data', data._parts, homeworkId);
+
+        Service.postFormData(data, `${EndPoints.HomeworkMaterialUpload}${homeworkId}`, (res) => {
+            console.log('res.code', res.code);
+            if (res.code == 200) {
+                setHomeworkLoading(false)
+                // setDefaults()
+                if (Addhomework.IsUpdate) {
+                    showMessage(MESSAGE.lessonUpdated)
+                } else {
+                    showMessage(MESSAGE.lessonAdded)
+                }
+            } else {
+                showMessage(res.message)
+                setHomeworkLoading(false)
+            }
+        }, (err) => {
+            setHomeworkLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
+    }
+    
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar

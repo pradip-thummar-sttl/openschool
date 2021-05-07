@@ -134,7 +134,7 @@ const PupilHomeWorkDetail = (props) => {
                                     <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                                     <View style={PAGESTYLE.daterow}>
                                         <Image source={require('../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
-                                        <Text style={PAGESTYLE.dueDateTextBold}>{item.DueDate ? moment(item.DueDate).format('YYYY-MM-DD') : '-'}</Text>
+                                        <Text style={PAGESTYLE.dueDateTextBold}>{item.DueDate ? moment(item.DueDate).format('DD/MM/yyyy') : '-'}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
