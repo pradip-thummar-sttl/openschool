@@ -83,12 +83,20 @@ const NotificationDrawer = (props) => {
                                                 </View>
                                         }
                                         {
-                                            calEventData.map((item) => {
+                                            // console.log('uitem',Object.keys(calEventData))
+                                            Object.keys(calEventData).map((item) => {
+                                                // console.log('uitem',item)
                                                 return (
-                                                    moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
+                                                    moment(item).format('yyyy-MM-DD') === date.dateString ?
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                                                            {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
-                                                            <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: item.EventColor, }} />
+                                                            {
+                                                                calEventData[`${item}`].map((obj) => {
+                                                                console.log('uitem 2',calEventData[`${item}`])
+                                                                    return (
+                                                                        <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
+                                                                    )
+                                                                })
+                                                            }
                                                         </View> : null
                                                 )
                                             })
