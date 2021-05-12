@@ -76,7 +76,9 @@ export default StyleSheet.create({
         shadowRadius: hp(1.95),
     },
     timingMain: {
-        marginLeft: Platform.OS == 'android' ? hp(14) : hp(2),
+        right: hp(4),
+        textAlign: 'left',
+        position: 'absolute',
     },
     groupPupil: {
         left: hp(5.2),
@@ -225,7 +227,7 @@ export default StyleSheet.create({
         marginLeft: hp(0),
         flexDirection: 'row',
         alignItems: 'center',
-        width: hp(21),
+        width: 'auto',
     },
     groupName: {
         borderWidth: hp(0.24),
@@ -499,6 +501,8 @@ export default StyleSheet.create({
     topListingArrow: {
         alignItems: 'center',
         alignSelf: 'center',
+        right: 0,
+        position: 'absolute'
     },
     pupilImage: {
         width: hp(3.64),
