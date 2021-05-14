@@ -435,7 +435,9 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingBottom:hp(2),
+        justifyContent: 'space-between',
         paddingTop:hp(2),
+        width: '100%',
         borderBottomWidth: 1,
         borderColor: COLORS.dashBoard,
     },
@@ -480,6 +482,8 @@ export default StyleSheet.create({
     rewardColumn: {
         flexDirection: 'row',
         alignItems: 'center',
+        position: 'absolute',
+        right: hp(2),
     },
     rewardStar: {
         width: hp(2.60),
@@ -493,6 +497,8 @@ export default StyleSheet.create({
     pupilDetailLink: {
         width: hp(1.95),
         alignItems: 'flex-end',
+        position: 'absolute',
+        right: hp(0.5),
     },
     pupilDetaillinkIcon: {
         width: hp(0.9),
