@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-        paddingTop: hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(1) : hp(5),
         paddingBottom: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: {width: 0,height: 2,},
