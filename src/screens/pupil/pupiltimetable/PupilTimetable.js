@@ -67,7 +67,7 @@ const PupilTimetable = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Service.get(`${EndPoints.CalenderEvent}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))

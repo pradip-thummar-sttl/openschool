@@ -119,7 +119,7 @@ const PupilTimeTable = (props) => {
     useEffect(() => {
         fetchRecord('', '')
 
-        Service.get(`${EndPoints.CalenderEvent}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
