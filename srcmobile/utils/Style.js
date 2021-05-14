@@ -66,6 +66,7 @@ export default StyleSheet.create({
         borderRadius: hp('1.0%'),
         fontSize: hp('2.2%'),
         height: hp('7.0%'),
+        textAlignVertical: 'center',
         lineHeight: hp('7.0%'),
         fontWeight: 'bold',
         paddingLeft: hp(5),
