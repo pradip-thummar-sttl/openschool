@@ -100,6 +100,7 @@ const TeacherTimeTable = (props) => {
                     et = (et >= 100 && et < 900) ? (et + 1200) : et
 
                     let timeSpan = (et - st);
+                    console.log('timeSpan', timeSpan, et, st);
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
                     lblTitle = `${subName} - ${lessonTopic}`;

@@ -82,6 +82,9 @@ const CreateNewEvent = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+            showMessage(MESSAGE.invalidFrom)
+            return false
         } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
@@ -387,7 +390,7 @@ const CreateNewEvent = (props) => {
                                     return (
                                         <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                             <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                            <Text>{item.EventType}</Text>
+                                            <Text style={{ justifyContent: 'center' }}>   {item.EventType}</Text>
                                         </TouchableOpacity>
                                     )
                                 }}
@@ -647,7 +650,7 @@ const styles = StyleSheet.create({
         top: hp(0.65),
     },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
-    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1) },
+    colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1) },
     dateTimetextdummy1: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,

@@ -40,6 +40,7 @@ const NotificationDrawer = (props) => {
             // })
         }
     }, [])
+    console.log('event data', calEventData);
     return (
         <View style={styles.drawerMain}>
             {

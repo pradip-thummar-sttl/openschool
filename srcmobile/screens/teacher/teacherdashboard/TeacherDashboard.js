@@ -287,8 +287,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <View style={STYLE.hrCommon}></View>
                                                     <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
                                                         <View style={PAGESTYLE.mediaMain}>
-                                                            {dataOfSubView.Allpupillist ?
-                                                                dataOfSubView.Allpupillist.map((data, index) => (
+                                                            {dataOfSubView.PupilList ?
+                                                                dataOfSubView.PupilList.map((data, index) => (
                                                                     <TouchableOpacity
                                                                         style={PAGESTYLE.mediabarTouch}
                                                                         activeOpacity={opacity}>

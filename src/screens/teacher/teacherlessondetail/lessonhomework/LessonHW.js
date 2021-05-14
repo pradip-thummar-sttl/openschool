@@ -198,10 +198,12 @@ const TLHomeWork = (props) => {
             return
         }
 
-        let temp = {
-            ItemName: newItem
-        }
-        setItemCheckList([...itemCheckList, temp])
+        let temp = [...itemCheckList, {
+            ItemName: newItem,
+            IsCheck: false
+        }]
+        setItemCheckList(temp)
+        Addhomework.CheckList = temp
         this.item.clear()
         setNewItem('')
     }

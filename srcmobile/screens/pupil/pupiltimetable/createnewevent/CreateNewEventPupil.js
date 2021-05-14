@@ -82,6 +82,9 @@ const CreateNewEventPupil = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+            showMessage(MESSAGE.invalidFrom)
+            return false
         } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;

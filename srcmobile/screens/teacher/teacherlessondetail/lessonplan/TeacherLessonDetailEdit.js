@@ -403,6 +403,9 @@ const TLDetailEdit = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+            showMessage(MESSAGE.invalidFrom)
+            return false
         } else if (!selectedParticipants) {
             showMessage(MESSAGE.participants)
             return false;
@@ -476,6 +479,8 @@ const TLDetailEdit = (props) => {
             setLoading(null)
             return
         }
+
+        console.log('KD', data, lessionId)
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {

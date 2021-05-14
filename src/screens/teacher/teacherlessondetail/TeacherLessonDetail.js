@@ -4,7 +4,7 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
-import { opacity, showMessage } from "../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
 import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
 import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
@@ -62,7 +62,7 @@ const TeacherLessonDetail = (props) => {
             showMessage(MESSAGE.description)
             return
         } else if (Addhomework.CheckList.length == 0) {
-            showMessage(MESSAGE.checkList)
+            showMessage(MESSAGE.checkList1)
             return
         }
 
@@ -74,7 +74,7 @@ const TeacherLessonDetail = (props) => {
         const data = {
             LessonId: lessonData._id,
             IsIncluded: Addhomework.IsIncluded,
-            DueDate: moment(new Date(Addhomework.DueDate)).format('yyyy-DD-MM'),
+            DueDate: moment(Addhomework.DueDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             HomeworkDescription: Addhomework.HomeworkDescription,
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
@@ -134,12 +134,16 @@ const TeacherLessonDetail = (props) => {
             });
         })
 
-        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && homeworkId) {
+        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
+            let msg
             if (Addhomework.IsUpdate) {
-                showMessage(MESSAGE.homeworkUpdated)
+                msg = MESSAGE.homeworkUpdated
             } else {
-                showMessage(MESSAGE.homeworkAdded)
+                msg = MESSAGE.homeworkAdded
             }
+            showMessageWithCallBack(msg, () => {
+                props.goBack()
+            })
             setHomeworkLoading(false)
             return
         }
@@ -151,11 +155,15 @@ const TeacherLessonDetail = (props) => {
             if (res.code == 200) {
                 setHomeworkLoading(false)
                 // setDefaults()
+                let msg
                 if (Addhomework.IsUpdate) {
-                    showMessage(MESSAGE.homeworkUpdated)
+                    msg = MESSAGE.homeworkUpdated
                 } else {
-                    showMessage(MESSAGE.homeworkAdded)
+                    msg = MESSAGE.homeworkAdded
                 }
+                showMessageWithCallBack(msg, () => {
+                    props.goBack()
+                })
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
@@ -206,18 +214,20 @@ const TeacherLessonDetail = (props) => {
                                 onAlertPress={() => { props.onAlertPress() }} />
                             : isTLVideoGallery ?
                                 <TLVideoGallery goBack={() => { setTLVideoGallery(false) }}
-                                onAlertPress={() => { props.onAlertPress() }} />
+                                    onAlertPress={() => { props.onAlertPress() }} />
                                 :
                                 <View style={{ width: isHide ? '100%' : '78%' }}>
                                     {tabIndex == 0 ?
                                         <HeaderLP
                                             lessonData={lessonData}
+                                            date={lessonData.Date}
                                             navigateToBack={() => props.goBack()}
                                             onAlertPress={() => { props.onAlertPress() }} />
                                         : tabIndex == 1 ?
                                             <HeaderHW
                                                 hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                                                 SubjectName={lessonData.SubjectName}
+                                                date={lessonData.Date}
                                                 setHomework={() => onAddHomework()}
                                                 navigateToBack={() => props.goBack()}
                                                 onAlertPress={() => { props.onAlertPress() }}
@@ -230,6 +240,7 @@ const TeacherLessonDetail = (props) => {
                                             :
                                             <HeaderHWS
                                                 subjectName={lessonData.SubjectName}
+                                                date={lessonData.Date}
                                                 navigateToBack={() => props.goBack()}
                                                 onAlertPress={() => { props.onAlertPress() }} />
                                     }

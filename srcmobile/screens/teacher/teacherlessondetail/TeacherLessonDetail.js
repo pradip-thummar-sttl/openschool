@@ -4,7 +4,7 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
-import { opacity, showMessage } from "../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
 import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
 import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
@@ -52,12 +52,12 @@ const TeacherLessonDetail = (props) => {
     }, [isSearchActive])
 
     const isFiedlsValidated = () => {
-        console.log('Addhomework', Addhomework);
+        console.log('Addhomework', Addhomework, User.user._id);
         if (!Addhomework.HomeworkDescription) {
             showMessage(MESSAGE.description)
             return
         } else if (Addhomework.CheckList.length == 0) {
-            showMessage(MESSAGE.checkList)
+            showMessage(MESSAGE.checkList1)
             return
         }
 
@@ -69,7 +69,7 @@ const TeacherLessonDetail = (props) => {
         const data = {
             LessonId: lessonData._id,
             IsIncluded: Addhomework.IsIncluded,
-            DueDate: moment(new Date(Addhomework.DueDate)).format('yyyy-DD-MM'),
+            DueDate: moment(Addhomework.DueDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             HomeworkDescription: Addhomework.HomeworkDescription,
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
@@ -100,6 +100,7 @@ const TeacherLessonDetail = (props) => {
                 // setHomeworkLoading(false)
                 setVisiblePopup(false)
                 // showMessage('Homework added successfully')
+                console.log('res First', res);
                 uploadMatirial(res.data._id)
             }, (err) => {
                 console.log('response of add homework err', err)
@@ -129,28 +130,38 @@ const TeacherLessonDetail = (props) => {
             });
         })
 
-        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && homeworkId) {
+        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
+            let msg
             if (Addhomework.IsUpdate) {
-                showMessage(MESSAGE.homeworkUpdated)
+                msg = MESSAGE.homeworkUpdated
             } else {
-                showMessage(MESSAGE.homeworkAdded)
+                msg = MESSAGE.homeworkAdded
             }
+            showMessageWithCallBack(msg, () => {
+                props.route.params.onGoBack()
+                props.navigation.goBack()
+            })
             setHomeworkLoading(false)
             return
         }
 
-        console.log('data', data._parts, homeworkId);
+        console.log('data', data._parts, homeworkId, Addhomework.MaterialArr.length, Addhomework.RecordingArr.length);
 
         Service.postFormData(data, `${EndPoints.HomeworkMaterialUpload}${homeworkId}`, (res) => {
-            console.log('res.code', res.code);
+            console.log('res11', res);
             if (res.code == 200) {
                 setHomeworkLoading(false)
                 // setDefaults()
+                let msg
                 if (Addhomework.IsUpdate) {
-                    showMessage(MESSAGE.homeworkUpdated)
+                    msg = MESSAGE.homeworkUpdated
                 } else {
-                    showMessage(MESSAGE.homeworkAdded)
+                    msg = MESSAGE.homeworkAdded
                 }
+                showMessageWithCallBack(msg, () => {
+                    props.route.params.onGoBack()
+                    props.navigation.goBack()
+                })
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
@@ -161,7 +172,7 @@ const TeacherLessonDetail = (props) => {
         })
 
     }
-    
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -170,91 +181,94 @@ const TeacherLessonDetail = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-           { 
-           isScreenAndCameraRecording?
-           <ScreenAndCameraRecording goBack={()=>setScreenAndCameraRecording(false)}/>
-           :isTLVideoGallery?
-           <TLVideoGallery goBack={()=>setTLVideoGallery(false)}/>
-           :
-           <View style={{ width: isHide ? '100%' : '100%' }}>
-                {tabIndex == 0 ?
-                    <HeaderLP
-                        lessonData={lessonData}
-                        navigateToBack={() => props.navigation.goBack()}
-                        onAlertPress={() => props.navigation.openDrawer()}
-                        navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
-                    : tabIndex == 1 ?
-                        <HeaderHW
-                            hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
-                            SubjectName={lessonData.SubjectName}
-                            setHomework={() => onAddHomework()}
-                            navigateToBack={() => props.navigation.goBack()}
-                            onAlertPress={() => props.navigation.openDrawer()}
-                            onClose={() => setVisiblePopup(false)}
-                            isVisible={isVisiblePopup}
-                            onOpenPopup={() => isFiedlsValidated()}
-                            isHomeworkLoading={isHomeworkLoading}
-                        />
+            {
+                isScreenAndCameraRecording ?
+                    <ScreenAndCameraRecording goBack={() => setScreenAndCameraRecording(false)} />
+                    : isTLVideoGallery ?
+                        <TLVideoGallery goBack={() => setTLVideoGallery(false)} />
                         :
-                        <HeaderHWS
-                            subjectName={lessonData.SubjectName}
-                            navigateToBack={() => props.navigation.goBack()}
-                            onAlertPress={() => props.navigation.openDrawer()} />
-                }
-                <View style={PAGESTYLE.whiteBg}>
-                    <View style={PAGESTYLE.lessonPlanTop}>
-                        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                            <View style={PAGESTYLE.lessonPlanTab}>
-                                <TouchableOpacity
-                                    style={PAGESTYLE.tabs}
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedTab(0)}>
-                                    <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson plan</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={PAGESTYLE.tabs}
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedTab(1)}>
-                                    <Text style={[PAGESTYLE.tabsText, tabIndex == 1 ? PAGESTYLE.tabsTextSelected : null]}>lesson homework</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={PAGESTYLE.tabs}
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedTab(2)}>
-                                    <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
-                                </TouchableOpacity>
+                        <View style={{ width: isHide ? '100%' : '100%' }}>
+                            {tabIndex == 0 ?
+                                <HeaderLP
+                                    lessonData={lessonData}
+                                    date={lessonData.Date}
+                                    navigateToBack={() => props.navigation.goBack()}
+                                    onAlertPress={() => props.navigation.openDrawer()}
+                                    navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
+                                : tabIndex == 1 ?
+                                    <HeaderHW
+                                        hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
+                                        SubjectName={lessonData.SubjectName}
+                                        date={lessonData.Date}
+                                        setHomework={() => onAddHomework()}
+                                        navigateToBack={() => props.navigation.goBack()}
+                                        onAlertPress={() => props.navigation.openDrawer()}
+                                        onClose={() => setVisiblePopup(false)}
+                                        isVisible={isVisiblePopup}
+                                        onOpenPopup={() => isFiedlsValidated()}
+                                        isHomeworkLoading={isHomeworkLoading}
+                                    />
+                                    :
+                                    <HeaderHWS
+                                        subjectName={lessonData.SubjectName}
+                                        date={lessonData.Date}
+                                        navigateToBack={() => props.navigation.goBack()}
+                                        onAlertPress={() => props.navigation.openDrawer()} />
+                            }
+                            <View style={PAGESTYLE.whiteBg}>
+                                <View style={PAGESTYLE.lessonPlanTop}>
+                                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+                                        <View style={PAGESTYLE.lessonPlanTab}>
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.tabs}
+                                                activeOpacity={opacity}
+                                                onPress={() => setSelectedTab(0)}>
+                                                <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson plan</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.tabs}
+                                                activeOpacity={opacity}
+                                                onPress={() => setSelectedTab(1)}>
+                                                <Text style={[PAGESTYLE.tabsText, tabIndex == 1 ? PAGESTYLE.tabsTextSelected : null]}>lesson homework</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.tabs}
+                                                activeOpacity={opacity}
+                                                onPress={() => setSelectedTab(2)}>
+                                                <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </ScrollView>
+                                </View>
                             </View>
-                        </ScrollView>
-                    </View>
-                </View>
-                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
-                    {tabIndex == 0 ?
-                        <TLDetail lessonData={lessonData} />
-                        : tabIndex == 1 ?
-                            <TLHomeWork
-                                id={props.route.params.data._id}
-                                updateBtnName={(flag) => setUpdate(flag)}
-                                navigateScreeCamera={() => setScreenAndCameraRecording(true)}
-                                navigateToVideoGallery={() => setTLVideoGallery(true)} />
-                            :
-                            <TLHomeWorkSubmitted
-                                lessonId={lessonData._id}
-                                searchKeyword={searchKeyword}
-                                filterBy={filterBy}
-                                searchActive={isSearchActive}
-                                dataChanged={isHSDataChanged}
-                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
-                    }
-                    {/* <TLDetailEdit /> */}
-                    {/* <TLDetailAdd /> */}
-                    {/* <TLVideoGallery /> */}
-                    {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                    {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                    {/* <TLHomeWorkSubmittedDetail /> */}
-                    {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
-                </ScrollView>
+                            <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
+                                {tabIndex == 0 ?
+                                    <TLDetail lessonData={lessonData} />
+                                    : tabIndex == 1 ?
+                                        <TLHomeWork
+                                            id={props.route.params.data._id}
+                                            updateBtnName={(flag) => setUpdate(flag)}
+                                            navigateScreeCamera={() => setScreenAndCameraRecording(true)}
+                                            navigateToVideoGallery={() => setTLVideoGallery(true)} />
+                                        :
+                                        <TLHomeWorkSubmitted
+                                            lessonId={lessonData._id}
+                                            searchKeyword={searchKeyword}
+                                            filterBy={filterBy}
+                                            searchActive={isSearchActive}
+                                            dataChanged={isHSDataChanged}
+                                            navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
+                                }
+                                {/* <TLDetailEdit /> */}
+                                {/* <TLDetailAdd /> */}
+                                {/* <TLVideoGallery /> */}
+                                {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
+                                {/* <TLHomeWorkInstructionalVideoAdded /> */}
+                                {/* <TLHomeWorkSubmittedDetail /> */}
+                                {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                            </ScrollView>
 
-            </View>}
+                        </View>}
         </View>
     );
 }

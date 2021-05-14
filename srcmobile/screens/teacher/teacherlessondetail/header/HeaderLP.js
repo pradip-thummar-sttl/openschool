@@ -8,7 +8,6 @@ import { opacity } from "../../../../utils/Constant";
 import moment from 'moment';
 
 const HeaderLP = (props) => {
-    
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -20,7 +19,7 @@ const HeaderLP = (props) => {
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>{props.lessonData.SubjectName}</Text>
-                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
+                        <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>

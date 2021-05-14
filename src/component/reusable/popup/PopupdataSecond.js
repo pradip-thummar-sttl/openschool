@@ -76,6 +76,7 @@ const PopupdataSecond = (props) => {
     // };
 
     const isFieldsValidated = () => {
+        console.log(timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime));
         if (!event.trim()) {
             showMessage(MESSAGE.event)
             return false;
@@ -91,6 +92,9 @@ const PopupdataSecond = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+            showMessage(MESSAGE.invalidFrom)
+            return false
         } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
@@ -100,7 +104,7 @@ const PopupdataSecond = (props) => {
         }
         saveEvent()
     }
-
+    
     useEffect(() => {
         setLoading(true)
         Service.get(`${EndPoints.EventType}`, (res) => {
@@ -398,7 +402,7 @@ const PopupdataSecond = (props) => {
                                             return (
                                                 <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                                     <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                                    <Text>{item.EventType}</Text>
+                                                    <Text style={{justifyContent: 'center'}}>   {item.EventType}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }}
@@ -644,7 +648,7 @@ const styles = StyleSheet.create({
     // colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(2.6), bottom: hp(19.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorDropView2: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(0), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
-    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
+    colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1.30) },
     timeField: {
         flex: 0.20
     },
