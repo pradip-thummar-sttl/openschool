@@ -23,6 +23,12 @@ const NotificationDrawer = (props) => {
         // console.log('state of user',state)
         return state.AuthReducer.calEventData
     })
+    const today = moment();
+    // const begginingOfCurrentWeek = today.startOf('week');
+    // const endOfWeek = today.endOf('week');
+    var startDate = moment().startOf('isoWeek');
+    var endDate = moment().endOf('isoWeek');
+    // console.log('date of week', moment(today).format('YYYY-MM-DD'), moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'))
     // const [calEventData, setcalEventData] = useState([])
     useEffect(() => {
         if (Var.isCalender) {
@@ -43,7 +49,7 @@ const NotificationDrawer = (props) => {
     return (
         <View style={styles.drawerMain}>
             {
-                console.log('cal event data----------->', calEventData),
+                // console.log('cal event data----------->', calEventData),
 
                 Var.isCalender ?
                     <View style={styles.datepickerDrwaer}>
@@ -55,9 +61,9 @@ const NotificationDrawer = (props) => {
                                 return (
                                     <View>
                                         {
-                                            periodDate.includes(date.dateString) ?
-                                                date.dateString == periodDate[0] || date.dateString == periodDate[periodDate.length - 1] ?
-                                                    date.dateString == periodDate[0] ?
+                                            moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
+                                                date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD')  ?
+                                                    date.dateString == moment(startDate).format('YYYY-MM-DD') ?
                                                         <View style={styles.datemainView1}>
                                                             < View style={styles.dateSubVIew1}>
                                                                 <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
@@ -81,6 +87,34 @@ const NotificationDrawer = (props) => {
                                                         <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                                     </View>
                                                 </View>
+
+
+                                            // begginingOfCurrentWeek >= date.dateString && endOfWeek <= date.dateString ?
+                                            //     // date.dateString == periodDate[0] || date.dateString == periodDate[periodDate.length - 1] ?
+                                            //         date.dateString == begginingOfCurrentWeek ?
+                                            // <View style={styles.datemainView1}>
+                                            //     < View style={styles.dateSubVIew1}>
+                                            //         <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                            //     </View>
+                                            // </View>
+                                            //             :
+                                            // <View style={styles.dateMainView2}>
+                                            //     < View style={styles.dateSubVIew1}>
+                                            //         <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                            //     </View>
+                                            // </View>
+                                            //         :
+                                            // <View style={styles.dateMAinView3}>
+                                            //     < View style={styles.dateSubView2}>
+                                            //         <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                            //     </View>
+                                            // </View>
+                                            //     :
+                                            // <View style={styles.datemainView4}>
+                                            //     < View style={styles.dateSubView3}>
+                                            //         <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                            //     </View>
+                                            // </View>
                                         }
                                         {
                                             Object.keys(calEventData).map((item) => {
@@ -89,7 +123,7 @@ const NotificationDrawer = (props) => {
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                             {
                                                                 calEventData[`${item}`].map((obj) => {
-                                                                console.log('uitem 2',calEventData[`${item}`])
+                                                                    // console.log('uitem 2', calEventData[`${item}`])
                                                                     return (
                                                                         <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
                                                                     )
