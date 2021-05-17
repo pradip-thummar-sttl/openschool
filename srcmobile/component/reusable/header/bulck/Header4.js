@@ -47,7 +47,7 @@ const HeaderFour = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
+                        onPress={() => null}
                         activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>

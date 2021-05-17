@@ -63,7 +63,7 @@ const TeacherLessonDetail = (props) => {
             showMessage(MESSAGE.description)
             return
         } else if (Addhomework.CheckList.length == 0) {
-            showMessage(MESSAGE.checkList1)
+            showMessage(MESSAGE.checkList)
             return
         }
 

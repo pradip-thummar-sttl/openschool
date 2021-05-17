@@ -21,7 +21,7 @@ const HeaderWhite = (props) => {
                 <View style={styles.headerRight}>
                     <Popuphomework />
                     <Popupsubmithomework />
-                    <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onAlertPress()}>
+                    <TouchableOpacity style={styles.notificationBar} onPress={()=>null}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
