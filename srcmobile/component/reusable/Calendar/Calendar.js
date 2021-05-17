@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity,Image, } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, } from 'react-native';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
@@ -18,7 +18,7 @@ const Calendars = (props) => {
     })
     console.log('cal  event data', calEventData)
     return (
-        <View style={{backgroundColor:'white', flex:1}}>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
 
             <View style={styles.drawerTitleMainDate}>
                 <TouchableOpacity style={styles.closeNotificationbarMain}
@@ -64,15 +64,31 @@ const Calendars = (props) => {
                                     </View>
                             }
                             {
-                                calEventData.map((item) => {
+                                Object.keys(calEventData).map((item) => {
                                     return (
-                                        moment(new Date(item.EventDate)).format('yyyy-DD-MM') === date.dateString ?
+                                        moment(item).format('yyyy-MM-DD') === date.dateString ?
                                             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                                                {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
-                                                <View style={{ position: 'absolute', top: hp(0.1), left: hp(-0.26), height: hp(0.77), width: hp(0.77), borderRadius: hp(0.77), backgroundColor: item.EventColor, }} />
+                                                {
+                                                    calEventData[`${item}`].map((obj) => {
+                                                        console.log('uitem 2', calEventData[`${item}`])
+                                                        return (
+                                                            <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
+                                                        )
+                                                    })
+                                                }
                                             </View> : null
                                     )
                                 })
+
+                                // calEventData.map((item) => {
+                                //     return (
+                                //         moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
+                                //             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                //                 {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
+                                //                 <View style={{ position: 'absolute', top: hp(0.1), left: hp(-0.26), height: hp(0.77), width: hp(0.77), borderRadius: hp(0.77), backgroundColor: item.EventColor, }} />
+                                //             </View> : null
+                                //     )
+                                // })
 
                             }
 
@@ -105,7 +121,7 @@ const styles = StyleSheet.create({
     drawerMain: {
         flex: 1,
     },
-    drawerTitleMainDate:{
+    drawerTitleMainDate: {
         borderBottomWidth: 1,
         borderBottomColor: COLORS.commonBorderColor,
         paddingLeft: hp(2.6),
@@ -131,7 +147,7 @@ const styles = StyleSheet.create({
         lineHeight: hp(2.86),
         color: COLORS.darkGray,
     },
-    datepickerDrwaer:{
+    datepickerDrwaer: {
         paddingTop: hp(1),
         paddingLeft: hp(1.6),
         paddingRight: hp(1.6),
@@ -206,15 +222,15 @@ const styles = StyleSheet.create({
     dateSubVIew1: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.dashboardGreenButton, justifyContent: 'center', alignItems: 'center', },
     dateSubView2: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), justifyContent: 'center', alignItems: 'center', },
     dateSubView3: { marginVertical: hp(0.30), borderRadius: hp(50), height: hp(4.55), width: hp(4.55), backgroundColor: COLORS.lightGrayPupil, justifyContent: 'center', alignItems: 'center', },
-    labelColor:{color:COLORS.menuLightFonts,fontSize: hp(1.56),},
+    labelColor: { color: COLORS.menuLightFonts, fontSize: hp(1.56), },
     colorBox: { height: hp(2.60), width: hp(2.60), borderRadius: hp(0.65), marginRight: hp(1.30) },
-    colorView: { flexDirection: 'row', marginBottom: hp(2.62),alignItems: 'center' },
+    colorView: { flexDirection: 'row', marginBottom: hp(2.62), alignItems: 'center' },
     bottomButton: {
         position: 'absolute',
         alignSelf: 'flex-end',
         left: 0,
         bottom: 0,
-        width: '100%',        
+        width: '100%',
     },
     notificationmain: {
         height: '90%',

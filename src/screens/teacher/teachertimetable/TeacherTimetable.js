@@ -125,7 +125,9 @@ const TeacherTimeTable = (props) => {
     }
 
     useEffect(() => {
-        Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
+        fetchRecord('', '')
+
+        Service.get(`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
             // setTimeTableLoading(false)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))

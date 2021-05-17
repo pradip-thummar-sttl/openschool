@@ -141,7 +141,7 @@ const TeacherTimeTable = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-        Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.GetAllPupilLessonList}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
