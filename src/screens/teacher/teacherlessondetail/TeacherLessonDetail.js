@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -31,6 +31,7 @@ import moment from 'moment';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const TeacherLessonDetail = (props) => {
+    const textInput = useRef(null);
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
     const [lessonData, setLessonData] = useState(props.data);
@@ -51,7 +52,7 @@ const TeacherLessonDetail = (props) => {
 
     useEffect(() => {
         if (!isSearchActive && tabIndex == 2) {
-            this.textInput.clear()
+            textInput.current.clear()
             setSearchKeyword('');
         }
     }, [isSearchActive])
@@ -283,7 +284,7 @@ const TeacherLessonDetail = (props) => {
                                                 <View style={PAGESTYLE.filterbarMain}>
                                                     <View style={PAGESTYLE.field}>
                                                         <TextInput
-                                                            ref={input => { this.textInput = input }}
+                                                            ref={textInput}
                                                             style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
                                                             placeholder="Search pupil"
                                                             maxLength={50}

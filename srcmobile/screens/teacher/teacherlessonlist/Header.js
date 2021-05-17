@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -15,6 +15,7 @@ import { opacity } from "../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 const Header = (props) => {
+    const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
@@ -24,7 +25,7 @@ const Header = (props) => {
         if (!isSearchActive) {
             props.onClearSearch()
             setKeyword('')
-            this.textInput.clear()
+            textInput.current.clear()
         } else {
             props.onSearch()
         }
@@ -56,7 +57,7 @@ const Header = (props) => {
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
                     <TextInput
-                        ref={input => { this.textInput = input }}
+                        ref={textInput}
                         style={[STYLE.commonInput, styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}

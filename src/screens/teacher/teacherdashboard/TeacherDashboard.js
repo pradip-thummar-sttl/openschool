@@ -268,6 +268,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 keyExtractor={(item) => item.id}
                                                                 extraData={selectedId}
                                                                 showsVerticalScrollIndicator={false}
+                                                                nestedScrollEnabled
                                                             />
                                                         </SafeAreaView>
                                                         <View style={PAGESTYLE.rightTabContent}>
@@ -460,6 +461,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     keyExtractor={(item) => item.id}
                                                                     extraData={selectedId}
                                                                     showsVerticalScrollIndicator={false}
+                                                                    nestedScrollEnabled
                                                                 />
                                                             </SafeAreaView>
                                                         </View>

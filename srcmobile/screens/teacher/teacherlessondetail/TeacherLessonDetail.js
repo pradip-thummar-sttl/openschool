@@ -96,7 +96,6 @@ const TeacherLessonDetail = (props) => {
             })
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
-                Addhomework.IsUpdate = true
                 // setHomeworkLoading(false)
                 setVisiblePopup(false)
                 // showMessage('Homework added successfully')
