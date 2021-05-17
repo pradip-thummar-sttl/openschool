@@ -139,7 +139,6 @@ const PupilLessonDetail = (props) => {
                     last.push(item)
                 }
             })
-
             setCurrentWeekLesson(current)
             setLastWeekLesson(last)
         }, (err) => {

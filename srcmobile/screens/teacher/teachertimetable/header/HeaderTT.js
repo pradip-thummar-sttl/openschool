@@ -60,7 +60,7 @@ const HeaderTT = (props) => {
                 <View style={styles.field}>
                     <TextInput
                         ref={textInput}
-                        style={[STYLE.commonInput, styles.searchHeader]}
+                        style={[styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -269,10 +269,16 @@ const styles = StyleSheet.create({
         marginRight: hp(1.2),
     },
     searchHeader: {
-        height: hp(5.20),
-        paddingLeft: hp(4.43),
-        borderColor: COLORS.borderGrp,
-        fontSize: hp(1.82),
+        color:COLORS.themeBlue,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        borderColor: COLORS.InoutBorder,
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        lineHeight:hp(2.6),
+        height: hp('5%'),
+        paddingLeft: hp('4.43%'),
+        paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontSemiBold,
     },
     userIcon: {
@@ -286,7 +292,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: hp(1.66),
         resizeMode: 'contain',
-        // height: 25,
+        height: hp(3.5),
         left: hp(0),
     },
     filterIcon: {
