@@ -76,8 +76,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     useEffect(() => {
         // if(isDesignBuild)
         //     return true
-        console.log('User', User);
-        Service.post({}, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

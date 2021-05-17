@@ -3,6 +3,7 @@ export const EndPoints = {
     Login: 'login',
     // Teacher
     GetLessionById: 'getalllesson',
+    GetMyDayByTeacherId: 'getmydayteacher',
     PupilByTeacherId: 'pupilbyteacherid',
     GetTimeTable: 'gettimetable',
     CalenderEvent: 'calenderevent',
