@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useRef, useState, } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -32,6 +32,7 @@ const PupilLessonDetail = (props) => {
     console.log('props of homework', props.navigation)
     const [isHide, action] = useState(true);
 
+    const textInput = useRef(null);
     const [isLesson, setLesson] = useState(true);
     const [isLessonDetail, setLessonDetail] = useState(false);
     const [isHomeworkDetail, setHomeworkDetail] = useState(false);
@@ -61,7 +62,7 @@ const PupilLessonDetail = (props) => {
             } else {
                 getHomeworkData('', '')
             }
-            textInput.clear()
+            textInput.current.clear()
         } else {
             if (isLesson) {
                 getLessonData(keyword, '')
@@ -158,7 +159,7 @@ const PupilLessonDetail = (props) => {
             <View style={PAGESTYLE.filterbarMain}>
                 <View style={PAGESTYLE.field}>
                     <TextInput
-                        ref={input => { textInput = input }}
+                        ref={textInput}
                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
                         placeholder="Search subject, topic name, teacher name, etc"
                         maxLength={50}
