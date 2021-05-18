@@ -237,10 +237,10 @@ const TLDetailAdd = (props) => {
     }
 
     const isFieldsValidated = () => {
-        if (!lessonTopic) {
+        if (!lessonTopic.trim()) {
             showMessage(MESSAGE.topic)
             return false;
-        } else if (!description) {
+        } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
         }
@@ -423,6 +423,9 @@ const TLDetailAdd = (props) => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
             return false;
+        } else if (!lessonTopic.trim()) {
+            showMessage(MESSAGE.topic)
+            return false;
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
@@ -435,13 +438,13 @@ const TLDetailAdd = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+            showMessage(MESSAGE.invalidFrom)
+            return false
         } else if (!selectedParticipants) {
             showMessage(MESSAGE.participants)
             return false;
-        } else if (!lessonTopic) {
-            showMessage(MESSAGE.topic)
-            return false;
-        } else if (!description) {
+        } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
         } else if (selectedPupils.length == 0) {
@@ -454,7 +457,7 @@ const TLDetailAdd = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: moment(new Date(selectedDate)).format('yyyy-DD-MM'),
+            LessonDate: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,

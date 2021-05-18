@@ -74,7 +74,6 @@ const TeacherTimeTable = (props) => {
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
 
-        console.log('==================================');
         timeTableData.forEach(element => {
 
             const day = new Date(element.Type == Lesson ? element.Date : element.EventDate).getDay();
@@ -119,9 +118,9 @@ const TeacherTimeTable = (props) => {
         }
     }
 
-    useEffect(() => {
-        fetchRecord('', '')
-    }, [])
+    // useEffect(() => {
+    //     fetchRecord('', '')
+    // }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
         setTimeTableLoading(true)
@@ -130,10 +129,10 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
         }
 
+        console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
                 setTimeTableData(res.data)
                 // dispatch(setCalendarEventData(res.data))
             } else {
@@ -142,10 +141,9 @@ const TeacherTimeTable = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-        Service.get(`${EndPoints.GetAllPupilLessonList}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get calandar event:', res)
                 dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)

@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -45,7 +45,7 @@ const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <View style={PAGESTYLE.rowProfile}>
-                <View style={PAGESTYLE.pupilImage}></View>
+            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
                 <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
@@ -76,8 +76,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     useEffect(() => {
         // if(isDesignBuild)
         //     return true
-        console.log('User', User);
-        Service.post({}, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -244,6 +243,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 keyExtractor={(item) => item.id}
                                                 extraData={selectedId}
                                                 showsVerticalScrollIndicator={false}
+                                                nestedScrollEnabled
                                             />
                                         </SafeAreaView>
                                         <View style={PAGESTYLE.rightTabContent}>
@@ -287,12 +287,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <View style={STYLE.hrCommon}></View>
                                                     <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
                                                         <View style={PAGESTYLE.mediaMain}>
-                                                            {dataOfSubView.Allpupillist ?
-                                                                dataOfSubView.Allpupillist.map((data, index) => (
+                                                            {dataOfSubView.PupilList ?
+                                                                dataOfSubView.PupilList.map((data, index) => (
                                                                     <TouchableOpacity
                                                                         style={PAGESTYLE.mediabarTouch}
                                                                         activeOpacity={opacity}>
-                                                                        <View style={PAGESTYLE.mediabar}></View>
+                                                                        <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
                                                                     </TouchableOpacity>
                                                                 ))
                                                                 :
@@ -303,7 +303,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         <View style={PAGESTYLE.attchmentSectionwithLink}>
                                                             <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                 <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment</Text>
+                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
                                                             </TouchableOpacity>
                                                             <TouchableOpacity>
                                                                 <Text style={PAGESTYLE.linkText}>see more</Text>
@@ -425,6 +425,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     keyExtractor={(item) => item.id}
                                                     extraData={selectedId}
                                                     showsVerticalScrollIndicator={false}
+                                                    nestedScrollEnabled
                                                 />
                                             </SafeAreaView>
                                         </View>

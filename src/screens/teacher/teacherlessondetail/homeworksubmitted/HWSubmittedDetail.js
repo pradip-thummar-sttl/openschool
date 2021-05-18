@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderSave from "./header/HeaderSave";
@@ -36,7 +36,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isGold, setGold] = useState(false);
 
     const isFieldsValidated = () => {
-        if (!feedBack) {
+        if (!feedBack.trim()) {
             showMessage(MESSAGE.feedback)
             return false;
         }
@@ -87,14 +87,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     isSubmitted={data.Submited ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
                     navigateToBack={() => { props.goBack() }}
-                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onAlertPress={() => { props.onAlertPress() }}
                     onSetHomework={() => isFieldsValidated()} />
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.whiteBg}>
                             <View style={PAGESTYLE.containerWrapTop}>
                                 <View style={PAGESTYLE.userLeft}>
-                                    <View style={PAGESTYLE.userThumb}></View>
+                                <Image source={{ uri: baseUrl + data.ProfilePicture }} style={PAGESTYLE.userThumb} />
                                     <View>
                                         <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
                                         <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>

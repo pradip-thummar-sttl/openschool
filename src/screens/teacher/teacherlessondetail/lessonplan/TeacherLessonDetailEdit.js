@@ -69,7 +69,7 @@ const TLDetailEdit = (props) => {
     const [newItem, setNewItem] = useState('');
     const [itemCheckList, setItemCheckList] = useState([]);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [selectedDate, setSelectedDate] = useState('')
+    const [selectedDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
 
     const [subjects, setSubjects] = useState([])
     const [participants, setParticipants] = useState([])
@@ -415,6 +415,9 @@ const TLDetailEdit = (props) => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
             return false;
+        } else if (!lessonTopic.trim()) {
+            showMessage(MESSAGE.topic)
+            return false;
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
@@ -427,13 +430,13 @@ const TLDetailEdit = (props) => {
         } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
             showMessage(MESSAGE.invalidTo)
             return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+            showMessage(MESSAGE.invalidFrom)
+            return false
         } else if (!selectedParticipants) {
             showMessage(MESSAGE.participants)
             return false;
-        } else if (!lessonTopic) {
-            showMessage(MESSAGE.topic)
-            return false;
-        } else if (!description) {
+        } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
         } else if (selectedPupils.length == 0) {
@@ -446,7 +449,7 @@ const TLDetailEdit = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: moment(new Date(selectedDate)).format('yyyy-DD-MM'),
+            LessonDate: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,
@@ -462,7 +465,9 @@ const TLDetailEdit = (props) => {
             CheckList: itemCheckList
         }
 
-        console.log('postData', data);
+        console.log('postData', data.LessonDate, lessonData._id);
+        // return
+
         Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
             if (res.code == 200) {
                 uploadMatirial(res.data._id)
@@ -585,7 +590,7 @@ const TLDetailEdit = (props) => {
                                 props.onRefresh();
                                 props.goBack()
                             }}
-                            onAlertPress={() => props.navigation.openDrawer()}
+                            onAlertPress={() => { props.onAlertPress() }}
                             saveLesson={() => { saveLesson() }} />
                         <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                             <ScrollView showsVerticalScrollIndicator={false}>

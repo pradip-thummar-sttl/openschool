@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity } from "../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 var moment = require('moment');
@@ -18,7 +18,7 @@ var moment = require('moment');
 const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            <View style={PAGESTYLE.userStamp}></View>
+        <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
             <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
@@ -90,6 +90,7 @@ const TLHomeWorkSubmitted = (props) => {
             <Pupillist
                 item={item}
                 navigateToDetail={() => props.navigateToDetail(item)}
+                onAlertPress={() => { props.onAlertPress() }}
             />
         );
     };

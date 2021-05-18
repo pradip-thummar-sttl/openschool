@@ -51,13 +51,13 @@ const PopupdataSecondPupil = (props) => {
     };
 
     const isFieldsValidated = () => {
-        if (!event) {
+        if (!event.trim()) {
             showMessage(MESSAGE.event)
             return false;
-        } else if (!location) {
+        } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
-        } else if (!note) {
+        } else if (!note.trim()) {
             showMessage(MESSAGE.note);
             return false;
         }

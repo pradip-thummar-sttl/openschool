@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
-import { opacity, showMessage } from "../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import TLDetail from "./lessonplan/TeacherLessonDetail";
 import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
 import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
@@ -31,6 +31,7 @@ import moment from 'moment';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const TeacherLessonDetail = (props) => {
+    const textInput = useRef(null);
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
     const [lessonData, setLessonData] = useState(props.data);
@@ -51,7 +52,7 @@ const TeacherLessonDetail = (props) => {
 
     useEffect(() => {
         if (!isSearchActive && tabIndex == 2) {
-            this.textInput.clear()
+            textInput.current.clear()
             setSearchKeyword('');
         }
     }, [isSearchActive])
@@ -74,7 +75,7 @@ const TeacherLessonDetail = (props) => {
         const data = {
             LessonId: lessonData._id,
             IsIncluded: Addhomework.IsIncluded,
-            DueDate: moment(new Date(Addhomework.DueDate)).format('yyyy-DD-MM'),
+            DueDate: moment(Addhomework.DueDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             HomeworkDescription: Addhomework.HomeworkDescription,
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
@@ -134,12 +135,16 @@ const TeacherLessonDetail = (props) => {
             });
         })
 
-        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0 && homeworkId) {
+        if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
+            let msg
             if (Addhomework.IsUpdate) {
-                showMessage(MESSAGE.lessonUpdated)
+                msg = MESSAGE.homeworkUpdated
             } else {
-                showMessage(MESSAGE.lessonAdded)
+                msg = MESSAGE.homeworkAdded
             }
+            showMessageWithCallBack(msg, () => {
+                props.goBack()
+            })
             setHomeworkLoading(false)
             return
         }
@@ -151,11 +156,15 @@ const TeacherLessonDetail = (props) => {
             if (res.code == 200) {
                 setHomeworkLoading(false)
                 // setDefaults()
+                let msg
                 if (Addhomework.IsUpdate) {
-                    showMessage(MESSAGE.lessonUpdated)
+                    msg = MESSAGE.homeworkUpdated
                 } else {
-                    showMessage(MESSAGE.lessonAdded)
+                    msg = MESSAGE.homeworkAdded
                 }
+                showMessageWithCallBack(msg, () => {
+                    props.goBack()
+                })
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
@@ -192,31 +201,37 @@ const TeacherLessonDetail = (props) => {
                 isTLHomeWorkSubmittedDetail ?
                     <TLHomeWorkSubmittedDetail
                         item={data}
-                        goBack={() => { setTLHomeWorkSubmittedDetail(false) }} />
+                        goBack={() => { setTLHomeWorkSubmittedDetail(false) }}
+                        onAlertPress={() => { props.onAlertPress() }} />
                     : isTLDetailEdit ?
                         <TLDetailEdit
                             goBack={() => { props.goBack(); setTLDetailEdit(false) }}
+                            onAlertPress={() => { props.onAlertPress() }}
                             data={lessonData}
                             onRefresh={() => null} />
                         : isScreenAndCameraRecording ?
                             <ScreenAndCameraRecording
-                                goBack={() => { setScreenAndCameraRecording(false) }} />
+                                goBack={() => { setScreenAndCameraRecording(false) }}
+                                onAlertPress={() => { props.onAlertPress() }} />
                             : isTLVideoGallery ?
-                                <TLVideoGallery goBack={() => { setTLVideoGallery(false) }} />
+                                <TLVideoGallery goBack={() => { setTLVideoGallery(false) }}
+                                    onAlertPress={() => { props.onAlertPress() }} />
                                 :
                                 <View style={{ width: isHide ? '100%' : '78%' }}>
                                     {tabIndex == 0 ?
                                         <HeaderLP
                                             lessonData={lessonData}
+                                            date={lessonData.Date}
                                             navigateToBack={() => props.goBack()}
-                                            onAlertPress={() => props.navigation.openDrawer()} />
+                                            onAlertPress={() => { props.onAlertPress() }} />
                                         : tabIndex == 1 ?
                                             <HeaderHW
                                                 hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                                                 SubjectName={lessonData.SubjectName}
+                                                date={lessonData.Date}
                                                 setHomework={() => onAddHomework()}
                                                 navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => props.navigation.openDrawer()}
+                                                onAlertPress={() => { props.onAlertPress() }}
                                                 onClose={() => setVisiblePopup(false)}
                                                 isVisible={isVisiblePopup}
                                                 onOpenPopup={() => isFiedlsValidated()}
@@ -226,8 +241,9 @@ const TeacherLessonDetail = (props) => {
                                             :
                                             <HeaderHWS
                                                 subjectName={lessonData.SubjectName}
+                                                date={lessonData.Date}
                                                 navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => props.navigation.openDrawer()} />
+                                                onAlertPress={() => { props.onAlertPress() }} />
                                     }
                                     <View style={PAGESTYLE.whiteBg}>
                                         <View style={PAGESTYLE.lessonPlanTop}>
@@ -268,7 +284,7 @@ const TeacherLessonDetail = (props) => {
                                                 <View style={PAGESTYLE.filterbarMain}>
                                                     <View style={PAGESTYLE.field}>
                                                         <TextInput
-                                                            ref={input => { this.textInput = input }}
+                                                            ref={textInput}
                                                             style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
                                                             placeholder="Search pupil"
                                                             maxLength={50}

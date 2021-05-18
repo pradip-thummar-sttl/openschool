@@ -29,7 +29,8 @@ const PupilHomeWorkSubmitted = (props) => {
             <View style={PAGESTYLE.whiteBg}>
                 <Header13 
                     goBack={() => props.goBack()}
-                    title={item.SubjectName + ' ' + item.LessonTopic} />
+                    title={item.SubjectName + ' ' + item.LessonTopic}
+                    onAlertPress={() => props.onAlertPress()} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>

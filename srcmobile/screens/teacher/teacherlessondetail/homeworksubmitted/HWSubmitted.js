@@ -10,16 +10,16 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity } from "../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 var moment = require('moment');
 
-const Pupillist = (props, { style }) => (
+const Pupillist = (props, item) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.mobilePupilProfile}>
             <View style={PAGESTYLE.thumbAlign}>
-                <View style={PAGESTYLE.userStamp}></View>
+                <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                 <View>
                     <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
                     <Text style={PAGESTYLE.groupName}>{props.item.GroupName}</Text>

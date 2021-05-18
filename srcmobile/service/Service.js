@@ -45,7 +45,7 @@ export const Service = {
     },
 
     postFormData: (data, endPoint, success, error) => {
-        console.log('`${baseUrl}${endPoint}`', `${baseUrl}${endPoint}`);
+        console.log('`${baseUrl}${endPoint}`___', `${baseUrl}${endPoint}`, User.user.Token);
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {
@@ -56,6 +56,7 @@ export const Service = {
         }).then((res) => res.json()).then((res) => {
             // console.log('response login', res)
 
+            console.log('res', res);
             return success(res)
         }).catch((err) => {
             console.log('errr1', err)

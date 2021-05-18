@@ -180,10 +180,12 @@ const TLHomeWork = (props) => {
             return
         }
 
-        let temp = {
-            ItemName: newItem
-        }
-        setItemCheckList([...itemCheckList, temp])
+        let temp = [...itemCheckList, {
+            ItemName: newItem,
+            IsCheck: false
+        }]
+        setItemCheckList(temp)
+        Addhomework.CheckList = temp
         this.item.clear()
         setNewItem('')
     }
@@ -264,7 +266,7 @@ const TLHomeWork = (props) => {
                                     <View style={PAGESTYLE.toggleGrpBox}>
                                         <Text style={PAGESTYLE.toggleText}>Include homework</Text>
                                         <ToggleSwitch
-                                            isOn={true} color={COLORS.dashboardGreenButton} onToggle={isOn => true}
+                                            isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
                                         />
                                     </View>
                                 </View>

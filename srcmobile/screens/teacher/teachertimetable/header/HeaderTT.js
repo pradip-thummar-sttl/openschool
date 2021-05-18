@@ -18,6 +18,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
+    const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
@@ -26,7 +27,7 @@ const HeaderTT = (props) => {
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
-            // this.textInput.clear()
+            textInput.current.clear()
         } else {
             props.onSearch()
         }
@@ -49,7 +50,7 @@ const HeaderTT = (props) => {
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
+                        onPress={() => null}
                         activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
@@ -58,7 +59,7 @@ const HeaderTT = (props) => {
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
                     <TextInput
-                        // ref={input => { this.textInput = input }}
+                        ref={textInput}
                         style={[styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}

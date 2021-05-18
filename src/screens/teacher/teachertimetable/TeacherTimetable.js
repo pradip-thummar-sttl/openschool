@@ -100,6 +100,7 @@ const TeacherTimeTable = (props) => {
                     et = (et >= 100 && et < 900) ? (et + 1200) : et
 
                     let timeSpan = (et - st);
+                    console.log('timeSpan', timeSpan, et, st);
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
 
                     lblTitle = `${subName} - ${lessonTopic}`;
@@ -129,7 +130,6 @@ const TeacherTimeTable = (props) => {
         Service.get(`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
             // setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get calandar event:', res)
                 dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
@@ -150,7 +150,7 @@ const TeacherTimeTable = (props) => {
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson event:', res)
+                // console.log('response of get all lesson event:', res)
                 setTimeTableData(res.data)
                 // dispatch(setCalendarEventData(res.data))
             } else {

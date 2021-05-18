@@ -22,7 +22,7 @@ const HeaderHW = (props) => {
                         <Text style={styles.mainTitle}>
                         {props.SubjectName}
                     </Text>
-                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
+                        <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>

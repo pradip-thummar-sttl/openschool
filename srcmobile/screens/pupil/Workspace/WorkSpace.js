@@ -8,7 +8,7 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import { getFileExtention } from "../../../utils/Download";
-import { opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
 const WorkSpace = (props) => {
@@ -159,8 +159,7 @@ const WorkSpace = (props) => {
                         <View>
                             <Image
                                 style={{ height: '100%', width: '100%' }}
-                                source={{ uri: workspaceList[selectedWorkSpace].filename }} />
-                            {/* .replace('14.143.90.233', '192.168.0.218') */}
+                                source={{ uri: baseUrl + workspaceList[selectedWorkSpace].filename }} />
                         </View>
                         <View style={PAGESTYLE.bottomView}>
                             <View style={PAGESTYLE.wsView}>

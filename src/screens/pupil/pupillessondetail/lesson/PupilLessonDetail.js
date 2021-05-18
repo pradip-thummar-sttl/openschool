@@ -19,7 +19,7 @@ import { User } from "../../../../utils/Model";
 import PupilHomeWorkSubmitted from "../homework/PupilHomeWorkSubmitted";
 import PupilHomeWorkMarked from "../homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../homework/PupilHomeWorkDetail";
-import { showMessage } from "../../../../utils/Constant";
+import { baseUrl, showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 
 
@@ -96,28 +96,32 @@ const PupilLessonDetailInternal = (props) => {
                         isWorkspace={isWorkspaceEdit}
                         id={item.LessonId}
                         tappedItem={tappedItem}
-                        item={item.WorkSpacelist} />
+                        item={item.WorkSpacelist}
+                        onAlertPress={() => props.onAlertPress()} />
                     :
                     isHWSubmitted ?
                         <PupilHomeWorkSubmitted
                             goBack={() => setHWSubmitted(false)}
-                            item={hwData} />
+                            item={hwData}
+                            onAlertPress={() => props.onAlertPress()} />
                         :
                         isHWMarked ?
                             <PupilHomeWorkMarked
                                 goBack={() => setHWMArked(false)}
-                                item={hwData} />
+                                item={hwData}
+                                onAlertPress={() => props.onAlertPress()} />
                             :
                             isHWDetail ?
                                 <PupilHomeWorkDetail
                                     goBack={() => setHWMArked(false)}
-                                    item={hwData} />
+                                    item={hwData}
+                                    onAlertPress={() => props.onAlertPress()} />
                                 :
                                 <View style={PAGESTYLE.commonBg}>
                                     <HeaderWhitewithoutsearch
                                         title={` ${item.SubjectName} - ${moment(item.LessonDate).format('DD/MM/YYYY')}`}
                                         goBack={() => { props.goBack() }}
-                                        onAlertPress={() => props.navigation.openDrawer()}
+                                        onAlertPress={() => props.onAlertPress()}
                                         onOpenWorkSpacePress={() => { setWorkSpaceEdit(true), setWorkSpace(true) }}
                                         onSeeHomeworkPress={() => getHomeWork()} />
                                     {/* onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })} */}
@@ -139,7 +143,7 @@ const PupilLessonDetailInternal = (props) => {
                                                 </View>
                                             </View>
                                             <View style={PAGESTYLE.userNameMain}>
-                                                <Image style={PAGESTYLE.userMainThumb} source={{ uri: item.TeacherProfile }}></Image>
+                                                <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                                 <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                             </View>
                                             <View style={PAGESTYLE.lessonDesc}>

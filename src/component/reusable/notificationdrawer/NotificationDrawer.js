@@ -46,11 +46,10 @@ const NotificationDrawer = (props) => {
             // })
         }
     }, [])
+    console.log('event data', calEventData);
     return (
         <View style={styles.drawerMain}>
             {
-                // console.log('cal event data----------->', calEventData),
-
                 Var.isCalender ?
                     <View style={styles.datepickerDrwaer}>
                         {Var.isCalender = false}

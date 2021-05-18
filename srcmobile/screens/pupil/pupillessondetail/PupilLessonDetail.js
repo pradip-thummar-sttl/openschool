@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useRef, useState, } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -31,6 +31,7 @@ import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
 
 
 const PupilLessonDetail = (props) => {
+    const textInput = useRef(null);
     const [isHide, action] = useState(true);
     const [isLesson, setLesson] = useState(true);
     const [lessonData, setLessonData] = useState([]);
@@ -54,7 +55,7 @@ const PupilLessonDetail = (props) => {
             } else {
                 getHomeworkData('', '')
             }
-            this.textInput.clear()
+            textInput.current.clear()
         } else {
             if (isLesson) {
                 getLessonData(keyword, '')
@@ -150,7 +151,7 @@ const PupilLessonDetail = (props) => {
             <View style={PAGESTYLE.filterbarMain}>
                 <View style={PAGESTYLE.field}>
                     <TextInput
-                        ref={input => { this.textInput = input }}
+                        ref={textInput}
                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
                         placeholder="Search subject, topic nmae etc"
                         maxLength={50}

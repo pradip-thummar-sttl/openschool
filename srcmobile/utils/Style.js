@@ -62,6 +62,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.blueButton,
         color: COLORS.white,
         textAlign: 'center',
+        textAlignVertical: 'center',
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
         fontSize: hp('2.2%'),

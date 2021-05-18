@@ -10,7 +10,7 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { opacity, showMessage, Var } from "../../../utils/Constant";
+import { baseUrl, opacity, showMessage, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
@@ -226,7 +226,9 @@ const PupuilDashboard = (props) => {
                                                                                 data={dataOfSubView.PupilList}
                                                                                 style={{ width: '100%' }}
                                                                                 renderItem={({ item, index }) => (
-                                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
+                                                                                    <TouchableOpacity style={PAGESTYLE.mediabarTouch}>
+                                                                                        <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                                                                                    </TouchableOpacity>
                                                                                 )}
                                                                                 horizontal
                                                                                 keyExtractor={(item, index) => index.toString()}
@@ -236,7 +238,7 @@ const PupuilDashboard = (props) => {
                                                                         <View style={PAGESTYLE.attchmentSectionwithLink}>
                                                                             <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                                 <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment</Text>
+                                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
                                                                             </TouchableOpacity>
                                                                             <TouchableOpacity>
                                                                                 <Text style={PAGESTYLE.linkText}>see more</Text>

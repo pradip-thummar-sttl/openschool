@@ -181,11 +181,13 @@ const TeacherLessonList = (props) => {
             {
                 isAddSubject ?
                     <TLDetailAdd
-                        goBack={() => { refresh(), setAddSubject(false) }} />
+                        goBack={() => { refresh(), setAddSubject(false) }}
+                        onAlertPress={() => props.navigation.openDrawer()} />
                     : isTLDetail ?
                         <TeacherLessonDetail
                             data={data}
-                            goBack={() => { refresh(), setTLDetail(false) }} />
+                            goBack={() => { refresh(), setTLDetail(false) }}
+                            onAlertPress={() => props.navigation.openDrawer()} />
                         :
                         renderList()
             }

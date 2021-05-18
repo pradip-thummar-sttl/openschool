@@ -5,6 +5,8 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
+import { baseUrl } from "../../../utils/Constant";
+import { User } from "../../../utils/Model";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -42,12 +44,12 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={()=>toggleAnimation()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={Images.ProfileBack} />
+                    <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                     {
                         isSmall? null:
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>Johney Depp</Text>
-                            <Text style={styles.profileDesi}>Administrator</Text>
+                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
                         </View>
                     }
                 </TouchableOpacity>
@@ -118,12 +120,12 @@ const Sidebar = (props) => {
                     <Image source={Images.cartoon} style={styles.cartoonIcon} />
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
-                    <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
+                    <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                     {
                         isSmall? null:
                         <>
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitleBottom}>Johney Depp</Text>
+                                <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                             </View>
                             <TouchableOpacity style={styles.moreMenu}>
                                 <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -205,6 +207,7 @@ const styles = StyleSheet.create({
     },
     headerProfile: {
         width: hp(5.40),
+        height: hp(5.40),
         resizeMode: 'contain',
     },
     userInfobottom: {
