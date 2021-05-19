@@ -76,7 +76,7 @@ export default StyleSheet.create({
         shadowRadius: hp(1.95),
     },
     timingMain: {
-        right: hp(4),
+        right: Platform.OS == 'android' ? hp(3) : hp(4),
         textAlign: 'left',
         position: 'absolute',
     },
@@ -85,7 +85,7 @@ export default StyleSheet.create({
         bottom: hp(0.6),
     },
     date: {
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
@@ -94,7 +94,7 @@ export default StyleSheet.create({
         height: hp(60.28),
     },
     month: {
-        fontSize: hp(1.56),
+        fontSize: Platform.OS == 'android' ? hp(1.3) : hp(1.56),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         textAlign: 'center',
@@ -237,9 +237,10 @@ export default StyleSheet.create({
         fontSize: hp(1.4),
         fontFamily: FONTS.fontSemiBold,
         textAlign: 'center',
+        textAlignVertical: 'center',
         paddingTop: hp(0.05),
-        paddingBottom: hp(0.04),
-        width: hp(7.5),
+        paddingBottom: hp(0.0),
+        width: Platform.OS == 'android' ? hp(10) : hp(7.5),
         marginBottom: hp(0.5),
     },
     timing: {

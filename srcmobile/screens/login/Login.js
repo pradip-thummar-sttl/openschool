@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
         marginTop: hp('3.0%'),
     },
     bottomLoginIntro: {
-        top: hp(15),
+        top: Platform.OS == 'android' ? hp(11) : hp(15),
         paddingLeft: hp('2%'),
         paddingRight: hp('2%'),
     },
