@@ -45,7 +45,7 @@ const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <View style={PAGESTYLE.rowProfile}>
-            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
                 <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
@@ -325,7 +325,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                     </ScrollView>
                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
+                                                        <TouchableOpacity
+                                                            style={PAGESTYLE.buttonGrp}
+                                                            onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
+                                                            <Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
                                                     </View>
                                                 </View>

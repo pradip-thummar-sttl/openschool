@@ -175,6 +175,19 @@ const TLDetailAdd = (props) => {
             return
         }
 
+        let flag = false;
+        itemCheckList.forEach(element => {
+            if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
+                flag = true
+                return
+            }
+        });
+
+        if (flag) {
+            showMessage(MESSAGE.duplicateItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }
@@ -257,7 +270,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: hp(2.08) }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: hp(1.85) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -322,7 +335,6 @@ const TLDetailAdd = (props) => {
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
                     )}
-                    numColumns={2}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>

@@ -192,7 +192,7 @@ const CreateNewEventPupil = (props) => {
                 <TouchableOpacity
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
-                    onPress={() => { setFromDropOpen(true) }}>
+                    onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                     <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
@@ -223,7 +223,7 @@ const CreateNewEventPupil = (props) => {
                 <TouchableOpacity
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
-                    onPress={() => { setToDropOpen(true) }}>
+                    onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
                     <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
@@ -361,7 +361,7 @@ const CreateNewEventPupil = (props) => {
                                                 onChangeText={notes => setnote(notes)} />
                                         </View>
                                         <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                            <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
+                                            <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
@@ -389,7 +389,7 @@ const CreateNewEventPupil = (props) => {
                                     return (
                                         <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                             <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                            <Text>{item.EventType}</Text>
+                                            <Text style={{ marginLeft: 5 }}>{item.EventType}</Text>
                                         </TouchableOpacity>
                                     )
                                 }}
@@ -649,7 +649,7 @@ const styles = StyleSheet.create({
         top: hp(0.65),
     },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
-    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1) },
+    colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1) },
     dateTimetextdummy1: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,

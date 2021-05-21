@@ -173,7 +173,20 @@ const TLDetailEdit = (props) => {
             showMessage(MESSAGE.addItem)
             return
         }
-        
+
+        let flag = false;
+        itemCheckList.forEach(element => {
+            if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
+                flag = true
+                return
+            }   
+        });
+
+        if (flag) {
+            showMessage(MESSAGE.duplicateItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }
@@ -220,7 +233,7 @@ const TLDetailEdit = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: 22, paddingRight: 50 }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: hp(1.85), paddingRight: 50 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -286,7 +299,6 @@ const TLDetailEdit = (props) => {
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
                     )}
-                    numColumns={3}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>
@@ -507,11 +519,11 @@ const TLDetailEdit = (props) => {
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf, 
-                    DocumentPicker.types.doc, 
-                    DocumentPicker.types.xls, 
-                    DocumentPicker.types.images,
-                    DocumentPicker.types.plainText],
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
             }).then((results) => {
                 for (const res of results) {
                     res.originalname = res.name
@@ -621,9 +633,9 @@ const TLDetailEdit = (props) => {
                                         onChangeText={text => setDescription(text)} />
                                 </View>
                                 <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                        onScreeCamera={() => onScreeCamera()}
-                        onScreeVoice={() => onScreeVoice()}
-                        onCameraOnly={() => onCameraOnly()} />
+                                    onScreeCamera={() => onScreeCamera()}
+                                    onScreeVoice={() => onScreeVoice()}
+                                    onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
 

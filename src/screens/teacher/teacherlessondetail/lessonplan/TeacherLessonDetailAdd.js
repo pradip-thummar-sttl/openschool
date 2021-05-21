@@ -179,6 +179,19 @@ const TLDetailAdd = (props) => {
             return
         }
 
+        let flag = false;
+        itemCheckList.forEach(element => {
+            if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
+                flag = true
+                return
+            }   
+        });
+
+        if (flag) {
+            showMessage(MESSAGE.duplicateItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }

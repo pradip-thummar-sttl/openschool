@@ -90,6 +90,7 @@ const WorkSpace = (props) => {
                             containerStyle={{ height: '100%' }}
                             canvasStyle={{ backgroundColor: 'transparent', flex: 1 }}
                             onStrokeEnd={data => {
+                                setPathCount(1)
                                 console.log('stroke data', data)
                             }}
                             undoComponent={<View style={PAGESTYLE.functionButton}><Text style={PAGESTYLE.functionText}>Undo</Text></View>}

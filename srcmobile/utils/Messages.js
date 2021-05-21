@@ -24,6 +24,7 @@ const MESSAGE = {
     checkList: 'Please add at least one item in checklist',
     checkList1: 'Please add at least one item from checklist',
     addItem: 'Please enter item your pupil may need',
+    duplicateItem: 'Duplicate items are not allowed',
     selectMaterial: "Please select at least one document",
     saveWorkSpace: 'Please save workspace first',
     workspaceAdded: 'Workspace saved successfully',
