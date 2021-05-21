@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-        paddingTop: Platform.OS == 'android' ? hp(1) : hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
         paddingBottom: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: {width: 0,height: 2,},
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
     },
     mainTitle: {
-        fontSize: hp(2.34),
+        fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
     },
