@@ -104,6 +104,7 @@ const TLDetail = (props) => {
                                         <Text style={PAGESTYLE.checkBoxLabelTextNone}>{item.PupilName}</Text>
                                     </View>
                                 )}
+                                numColumns={2}
                                 keyExtractor={(item, index) => index.toString()}
                             />
                             </View>

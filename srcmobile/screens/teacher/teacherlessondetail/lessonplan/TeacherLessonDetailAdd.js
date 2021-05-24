@@ -335,6 +335,7 @@ const TLDetailAdd = (props) => {
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                         </View>
                     )}
+                    numColumns={2}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>
