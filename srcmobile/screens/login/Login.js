@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
 import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -19,6 +19,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { User } from '../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
+
+const { LoginModule } = NativeModules;
 
 class Login extends Component {
     constructor(props) {
@@ -81,6 +83,20 @@ class Login extends Component {
         }
 
     }
+
+    onSubmit = async () => {
+        try {
+            const eventId = await LoginModule.qbLogin(
+                'patel.dhruv3@silvertouch.com',
+                'Admin@123456',
+                ['Xyz1', 'Xyz2']
+            );
+            console.log(`Successfully logged with ID: ${eventId}`);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
 
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
@@ -244,6 +260,7 @@ class Login extends Component {
                                         isDesignBuild ?
                                             this.props.navigation.replace('TeacherDashboard')
                                             :
+                                            // this.onSubmit()
                                             this.isFieldsValidated()
 
                                     }}>

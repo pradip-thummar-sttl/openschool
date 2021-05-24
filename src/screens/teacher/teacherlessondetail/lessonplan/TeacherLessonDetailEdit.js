@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -35,6 +35,8 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 
 const TLDetailEdit = (props) => {
+    const item = useRef(null)
+    const t2 = useRef(null)
     const [isVideoGallery, setVideoGallery] = useState(false)
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -183,19 +185,19 @@ const TLDetailEdit = (props) => {
             if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
                 flag = true
                 return
-            }   
+            }
         });
 
         if (flag) {
             showMessage(MESSAGE.duplicateItem)
             return
-        }        
+        }
 
         let temp = {
             ItemName: newItem
         }
         setItemCheckList([...itemCheckList, temp])
-        this.item.clear()
+        item.current.clear()
         setNewItem('')
     }
 
@@ -236,12 +238,16 @@ const TLDetailEdit = (props) => {
 
     }
     const onCameraOnly = () => {
-        launchCamera({ mediaType: 'video' }, (response) => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
             // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else {
-                setCameraResponse(response)
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
             }
 
         })
@@ -275,9 +281,9 @@ const TLDetailEdit = (props) => {
                 />
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center', marginTop: hp(2), }}>
                     <TextInput
-                        ref={input => { this.item = input }}
+                        ref={item}
                         returnKeyType={"done"}
-                        onSubmitEditing={() => { this.item.focus(); }}
+                        onSubmitEditing={() => { item.current.focus(); }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
                         autoCapitalize={'sentences'}
@@ -506,10 +512,12 @@ const TLDetailEdit = (props) => {
         });
 
         recordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             data.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 
@@ -620,7 +628,7 @@ const TLDetailEdit = (props) => {
                                                 <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                                     <TextInput
                                                         returnKeyType={"next"}
-                                                        onSubmitEditing={() => { this.t2.focus(); }}
+                                                        onSubmitEditing={() => { t2.current.focus(); }}
                                                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                         placeholder="e.g. Grammar"
                                                         defaultValue={lessonData.LessonTopic}
@@ -653,9 +661,9 @@ const TLDetailEdit = (props) => {
                                         <View style={PAGESTYLE.lessonDesc}>
                                             <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                             <TextInput
-                                                ref={(input) => { this.t2 = input; }}
+                                                ref={t2}
                                                 returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.item.focus(); }}
+                                                onSubmitEditing={() => { item.current.focus(); }}
                                                 multiline={true}
                                                 autoCapitalize={'sentences'}
                                                 numberOfLines={4}
@@ -663,10 +671,17 @@ const TLDetailEdit = (props) => {
                                                 style={PAGESTYLE.commonInputTextareaNormal}
                                                 onChangeText={text => setDescription(text)} />
                                         </View>
-                                        <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                        {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                             <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                        </TouchableOpacity>
+                                        </TouchableOpacity> */}
+                                        <Popupaddrecording
+                                            recordingArr={recordingArr}
+                                            isVisible={isAddRecording}
+                                            onClose={() => setAddRecording(false)}
+                                            onScreeCamera={() => onScreeCamera()}
+                                            onScreeVoice={() => onScreeVoice()}
+                                            onCameraOnly={() => onCameraOnly()} />
 
                                         {itemCheckListView()}
 
@@ -766,10 +781,6 @@ const TLDetailEdit = (props) => {
                                     </View>
                                 </View>
                             </ScrollView>
-                            <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                                onScreeCamera={() => onScreeCamera()}
-                                onScreeVoice={() => onScreeVoice()}
-                                onCameraOnly={() => onCameraOnly()} />
 
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}

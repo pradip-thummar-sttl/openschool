@@ -34,8 +34,6 @@ export const Download = (item) => {
 }
 
 export const downloadFile = (item) => {
-    // console.log("--------------------");
-
     // // Get today's date to add the time suffix in filename
     // let date = new Date();
     // // File URL which we want to download
@@ -74,7 +72,7 @@ export const downloadFile = (item) => {
     //         console.log("++++" + err);
     //         Alert.alert(err.toString());
     //     });
-    const { config, fs } = RNFetchBlob
+    // const { config, fs } = RNFetchBlob
     const fileName = item.filename.split('/')
     const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
 

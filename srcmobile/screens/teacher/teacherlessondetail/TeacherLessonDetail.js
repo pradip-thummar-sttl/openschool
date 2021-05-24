@@ -122,10 +122,12 @@ const TeacherLessonDetail = (props) => {
         });
 
         Addhomework.RecordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             data.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 

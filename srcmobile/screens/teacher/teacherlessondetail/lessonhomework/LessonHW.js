@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -24,12 +24,12 @@ import MESSAGE from "../../../../utils/Messages";
 import { Download } from "../../../../utils/Download";
 
 const TLHomeWork = (props) => {
-
+    const textInput = useRef(null);
     const [materialArr, setMaterialArr] = useState([])
     const [isAddRecording, setAddRecording] = useState(false)
     const [description, setDescription] = useState("")
     const [isSwitch, setSwitch] = useState(true)
-    const [cameraResponse, setCameraResponse] = useState({})
+    const [recordingArr, setRecordingArr] = useState([])
     const [itemCheckList, setItemCheckList] = useState([]);
     const [newItem, setNewItem] = useState('');
 
@@ -41,6 +41,7 @@ const TLHomeWork = (props) => {
     const [mode, setMode] = useState('date');
 
     useEffect(() => {
+        console.log('`${EndPoints.Homework}/${props.id}`', `${EndPoints.Homework}/${props.id}`);
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
             if (res.flag) {
@@ -54,6 +55,7 @@ const TLHomeWork = (props) => {
                 Addhomework.HwId = res.data._id
                 setSelectedDate(moment(res.data.DueDate).format('DD/MM/yyyy'))
                 setMaterialArr(res.data.MaterialList)
+                setRecordingArr(res.data.RecordingList)
                 setDescription(res.data.HomeworkDescription)
                 setSwitch(res.data.IsIncluded)
                 setItemCheckList(res.data.CheckList)
@@ -113,7 +115,6 @@ const TLHomeWork = (props) => {
                     arr.push(res)
 
                 }
-                console.log('hello response arr', arr)
                 setMaterialArr(arr)
                 Addhomework.MaterialArr = arr
             });
@@ -131,12 +132,10 @@ const TLHomeWork = (props) => {
         var array = [...materialArr];
         array.splice(index1, 1);
         setMaterialArr(array)
-        console.log('hello material', array)
     }
 
     const onCheckList = (index) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
-        console.log('check item', itemCheckList)
         Addhomework.CheckList = itemCheckList
     }
 
@@ -149,12 +148,17 @@ const TLHomeWork = (props) => {
 
     }
     const onCameraOnly = () => {
-        launchCamera({ mediaType: 'video' }, (response) => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
             // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else {
-                setCameraResponse(response)
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+                Addhomework.RecordingArr = arr
             }
 
         })
@@ -185,7 +189,7 @@ const TLHomeWork = (props) => {
             if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
                 flag = true
                 return
-            }   
+            }
         });
 
         if (flag) {
@@ -199,7 +203,7 @@ const TLHomeWork = (props) => {
         }]
         setItemCheckList(temp)
         Addhomework.CheckList = temp
-        this.item.clear()
+        textInput.current.clear()
         setNewItem('')
     }
     const itemCheckListView = () => {
@@ -245,7 +249,7 @@ const TLHomeWork = (props) => {
                 />
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
-                        ref={input => { this.item = input }}
+                        ref={textInput}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
                         autoCapitalize={'sentences'}
@@ -314,10 +318,14 @@ const TLHomeWork = (props) => {
                                 <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                 <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                             </TouchableOpacity> */}
-                            <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                            <Popupaddrecording
+                                recordingArr={recordingArr}
+                                isVisible={isAddRecording}
+                                onClose={() => setAddRecording(false)}
                                 onScreeCamera={() => onScreeCamera()}
                                 onScreeVoice={() => onScreeVoice()}
-                                onCameraOnly={() => onCameraOnly()} />
+                                onCameraOnly={() => onCameraOnly()}
+                                onRemoveRecording={() => { setRecordingArr([]); Addhomework.RecordingArr = [] }} />
                         </View>
 
                         <View style={PAGESTYLE.requirementofClass}>
@@ -350,8 +358,8 @@ const TLHomeWork = (props) => {
                                                 </TouchableOpacity>
                                                 :
                                                 <TouchableOpacity onPress={() => Download(item)}>
-                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                            </TouchableOpacity>
+                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                </TouchableOpacity>
                                             }
                                         </View>
                                     )
