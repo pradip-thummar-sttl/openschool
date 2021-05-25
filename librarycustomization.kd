@@ -25,3 +25,9 @@ rctCheckBox: {
         width: hp(2.34),
         backgroundColor: 'transparent',
 },
+
+==========================================================
+
+public static String fileNamePrefix = "MYED_Recording";
+
+String filename = fileNamePrefix  + "." + fileType;

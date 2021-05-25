@@ -21,6 +21,7 @@ const WorkSpace = (props) => {
     console.log('====', workspaceList)
 
     const onSubmitWorkspace = () => {
+        console.log(pathCount, hasStroke);
         if (!workSpacePath) {
             showMessage(MESSAGE.saveWorkSpace)
             return
@@ -28,6 +29,8 @@ const WorkSpace = (props) => {
             showMessage(MESSAGE.blankWorkspace)
             return
         }
+
+        return
 
         const pathArr = workSpacePath.split('/')
         const ext = getFileExtention(workSpacePath)
@@ -87,6 +90,7 @@ const WorkSpace = (props) => {
                             containerStyle={{ height: '100%' }}
                             canvasStyle={{ backgroundColor: 'transparent', flex: 1 }}
                             onStrokeEnd={data => {
+                                setPathCount(1)
                                 console.log('stroke data', data)
                             }}
                             undoComponent={<View style={PAGESTYLE.functionButton}><Text style={PAGESTYLE.functionText}>Undo</Text></View>}

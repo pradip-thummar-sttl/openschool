@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 import { Download } from "../../../../utils/Download";
-import { baseUrl } from "../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../utils/Constant";
 
 const TLDetail = (props) => {
     console.log('props', props);
@@ -66,13 +66,16 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.lessonTitleWithoutTextArea}>Lesson Description</Text>
                         <Text style={PAGESTYLE.lessonText}>{props.lessonData.LessonDescription}</Text>
                     </View>
-                    {props.lessonData.RecordingName ?
-                        <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                    {props.lessonData.RecordingList.length > 0 ?
+                        <TouchableOpacity
+                            style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}
+                            activeOpacity={opacity}
+                            onPress={() => Download(props.lessonData.RecordingList[0])}>
                             <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                            <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingName}</Text>
+                            <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingList[0].originalname}</Text>
                         </TouchableOpacity>
                         :
-                        null
+                            null
                     }
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
@@ -95,18 +98,18 @@ const TLDetail = (props) => {
 
                         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                             <View style={PAGESTYLE.checkBoxGrp}>
-                            <FlatList
-                                data={props.lessonData.PupilList}
-                                style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
-                                renderItem={({ item, index }) => (
-                                    <View style={PAGESTYLE.checkBoxLabelNone}>
-                                        <Image source={{ uri: baseUrl + item.ProfilePicture }} style={PAGESTYLE.userIconPupil} />
-                                        <Text style={PAGESTYLE.checkBoxLabelTextNone}>{item.PupilName}</Text>
-                                    </View>
-                                )}
-                                numColumns={3}
-                                keyExtractor={(item, index) => index.toString()}
-                            />
+                                <FlatList
+                                    data={props.lessonData.PupilList}
+                                    style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                    renderItem={({ item, index }) => (
+                                        <View style={PAGESTYLE.checkBoxLabelNone}>
+                                            <Image source={{ uri: baseUrl + item.ProfilePicture }} style={PAGESTYLE.userIconPupil} />
+                                            <Text style={PAGESTYLE.checkBoxLabelTextNone}>{item.PupilName}</Text>
+                                        </View>
+                                    )}
+                                    numColumns={2}
+                                    keyExtractor={(item, index) => index.toString()}
+                                />
                             </View>
                         </ScrollView>
                     </View>
@@ -185,7 +188,7 @@ const TLDetail = (props) => {
                             <Text style={{ textAlign: 'center' }}>No chat transcript found!</Text>
                         }
                     </View>
-                    
+
                     {/* <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                         <View style={PAGESTYLE.videoLinkBlockRight}>

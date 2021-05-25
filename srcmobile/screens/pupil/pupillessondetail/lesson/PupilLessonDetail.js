@@ -177,7 +177,7 @@ const PupilLessonDetailInternal = (props) => {
                                     <Image source={Images.bookmarkOff} style={PAGESTYLE.bookMarkOn} />
                                 </View>
                             </View>
-                            <View style={PAGESTYLE.accordionMain}>
+                            <View style={{paddingBottom: 80}}>
                                 <Accordion
                                     activeSections={activeSections}
                                     sections={NEW}

@@ -22,6 +22,7 @@ const MESSAGE = {
     selectPupil: "Please select at least one pupil.",
     homeworkMarked: "Homework marked successfully",
     checkList: 'Please add at least one item in checklist',
+    duplicateItem: 'Duplicate items are not allowed',
     checkList1: 'Please add at least one item from checklist',
     addItem: 'Please enter item your pupil may need',
     selectMaterial: "Please select at least one document",

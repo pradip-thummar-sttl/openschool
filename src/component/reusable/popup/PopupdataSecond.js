@@ -201,7 +201,7 @@ const PopupdataSecond = (props) => {
             <View style={[styles.dateWhiteBoard, styles.timeField]}>
                 <TouchableOpacity
                     activeOpacity={opacity}
-                    onPress={() => { setFromDropOpen(true) }}>
+                    onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
                         <Image style={styles.timeIcon} source={Images.Clock} />
                         <Text style={styles.dateTimetextdummy1}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
@@ -233,7 +233,7 @@ const PopupdataSecond = (props) => {
             <View style={[styles.dateWhiteBoard, styles.timeField]}>
                 <TouchableOpacity
                     activeOpacity={opacity}
-                    onPress={() => { setToDropOpen(true) }}>
+                    onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
                         <Image style={styles.timeIcon} source={Images.Clock} />
                         <Text style={styles.dateTimetextdummy1}>{selectedToTime ? selectedToTime : 'To'}</Text>
@@ -354,7 +354,7 @@ const PopupdataSecond = (props) => {
                                                     onChangeText={notes => setnote(notes)} />
                                             </View>
                                             <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                                <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                         <Image style={styles.dropDownArrowdatetime2} source={Images.DropArrow} />

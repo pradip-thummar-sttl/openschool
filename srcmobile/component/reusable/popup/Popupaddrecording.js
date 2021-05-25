@@ -11,6 +11,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../utils/Constant";
 import RBSheet from "react-native-raw-bottom-sheet";
+import { Download } from "../../../utils/Download";
 const Popupaddrecording = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
@@ -42,25 +43,37 @@ const Popupaddrecording = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity activeOpacity={opacity} onPress={() => refRBSheet.current.open()} style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
-                <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
-                <Text style={styles.recordLinkText}>Add recording</Text>
-            </TouchableOpacity>
+            {props.recordingArr.length == 0 ?
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    onPress={() => refRBSheet.current.open()}
+                    style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                    <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                    <Text style={styles.recordLinkText}>Add Recording</Text>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    onPress={() => Download(props.recordingArr[0])}
+                    style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
+                    <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                </TouchableOpacity>
+            }
             <RBSheet
-                    ref={refRBSheet}
-                    closeOnDragDown={true}
-                    height={[wp(175.5)]}
-                    style={{ position: 'relative', }}
-                    closeOnPressMask={true}
-                    customStyles={{
-                        wrapper: {
-                            backgroundColor: COLORS.bottomSlideUpBack
-                        },
-                        draggableIcon: {
-                            backgroundColor: COLORS.darkGray
-                        }
-                    }}
-                >
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                height={[wp(175.5)]}
+                style={{ position: 'relative', }}
+                closeOnPressMask={true}
+                customStyles={{
+                    wrapper: {
+                        backgroundColor: COLORS.bottomSlideUpBack
+                    },
+                    draggableIcon: {
+                        backgroundColor: COLORS.darkGray
+                    }
+                }}
+            >
                 <View style={styles.popupLarge}>
                     {/* <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
@@ -71,15 +84,18 @@ const Popupaddrecording = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
-                                    <TouchableOpacity style={styles.entryData}>
+                                    <TouchableOpacity style={styles.entryData}
+                                        onPress={() => { refRBSheet.current.close(); props.onScreeCamera() }}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-camera2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={styles.entryData}>
+                                    <TouchableOpacity style={styles.entryData}
+                                        onPress={() => { refRBSheet.current.close(); props.onScreeVoice() }}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={styles.entryData}>
+                                    <TouchableOpacity style={styles.entryData}
+                                        onPress={() => { refRBSheet.current.close(); props.onCameraOnly() }}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
@@ -88,8 +104,8 @@ const Popupaddrecording = (props) => {
                         </View>
                     </View>
                 </View>
-                </RBSheet>
-            
+            </RBSheet>
+
         </View>
     );
 }
@@ -154,8 +170,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
-    topSpaceRecording:{
-        marginTop:hp(1.401),
+    recordLinkBlock1: {
+        width: hp(30.5),
+        padding: hp(1.43),
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    topSpaceRecording: {
+        marginTop: hp(1.401),
     },
     recordingLinkIcon: {
         width: hp(2.34),

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -42,11 +42,12 @@ var checkItem = [
 ]
 
 const TLHomeWork = (props) => {
+    const textInput = useRef(null);
     const [materialArr, setMaterialArr] = useState([])
     const [isAddRecording, setAddRecording] = useState(false)
     const [description, setDescription] = useState("")
     const [isSwitch, setSwitch] = useState(true)
-    const [cameraResponse, setCameraResponse] = useState({})
+    const [recordingArr, setRecordingArr] = useState({})
     const [itemCheckList, setItemCheckList] = useState([]);
     const [newItem, setNewItem] = useState('');
 
@@ -167,12 +168,16 @@ const TLHomeWork = (props) => {
 
     }
     const onCameraOnly = () => {
-        launchCamera({ mediaType: 'video' }, (response) => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
             // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else {
-                setCameraResponse(response)
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
             }
 
         })
@@ -198,13 +203,26 @@ const TLHomeWork = (props) => {
             return
         }
 
+        let flag = false;
+        itemCheckList.forEach(element => {
+            if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
+                flag = true
+                return
+            }
+        });
+
+        if (flag) {
+            showMessage(MESSAGE.duplicateItem)
+            return
+        }
+
         let temp = [...itemCheckList, {
             ItemName: newItem,
             IsCheck: false
         }]
         setItemCheckList(temp)
         Addhomework.CheckList = temp
-        this.item.clear()
+        textInput.current.clear()
         setNewItem('')
     }
     const itemCheckListView = () => {
@@ -258,7 +276,7 @@ const TLHomeWork = (props) => {
                 />
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
-                        ref={input => { this.item = input }}
+                        ref={textInput}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
                         autoCapitalize={'sentences'}
@@ -328,10 +346,18 @@ const TLHomeWork = (props) => {
                             <Popupaddrecording />
                         </View>
                     </View> */}
-                        <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                        {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                             <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+                        <Popupaddrecording
+                            recordingArr={recordingArr}
+                            isVisible={isAddRecording}
+                            onClose={() => setAddRecording(false)}
+                            onScreeCamera={() => onScreeCamera()}
+                            onScreeVoice={() => onScreeVoice()}
+                            onCameraOnly={() => onCameraOnly()} />
+
                         <View style={PAGESTYLE.requirementofClass}>
                             <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                             <View style={PAGESTYLE.checkBoxGroup}>
@@ -446,10 +472,6 @@ const TLHomeWork = (props) => {
                         </View>
                     </View>
                 </View>
-                <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                    onScreeCamera={() => onScreeCamera()}
-                    onScreeVoice={() => onScreeVoice()}
-                    onCameraOnly={() => onCameraOnly()} />
 
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}

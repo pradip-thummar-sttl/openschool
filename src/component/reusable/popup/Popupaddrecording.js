@@ -39,11 +39,22 @@ const Popupaddrecording = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity
-                activeOpacity={opacity}
-                onPress={toggleModal}>
-                {/* <Text style={STYLE.recordLinkText}>Add recording</Text> */}
-            </TouchableOpacity>
+            {props.recordingArr.length == 0 ?
+                <TouchableOpacity
+                    activeOpacity={opacity}
+                    onPress={toggleModal}
+                    style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                    <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                    <Text style={styles.recordLinkText}>Add Recording</Text>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity
+                    // activeOpacity={opacity}
+                    // onPress={() => props.onRemoveRecording()}
+                    style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
+                    <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                </TouchableOpacity>
+            }
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => props.onClose()}>

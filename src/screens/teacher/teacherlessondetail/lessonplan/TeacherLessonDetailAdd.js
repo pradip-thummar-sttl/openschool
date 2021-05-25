@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -33,6 +33,8 @@ import { launchCamera } from "react-native-image-picker";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 
 const TLDetailAdd = (props) => {
+    const item = useRef(null)
+    const t2 = useRef(null)
     const [isVideoGallery, setVideoGallery] = useState(false)
     const [materialArr, setMaterialArr] = useState([])
     const [recordingArr, setRecordingArr] = useState([])
@@ -179,11 +181,24 @@ const TLDetailAdd = (props) => {
             return
         }
 
+        let flag = false;
+        itemCheckList.forEach(element => {
+            if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
+                flag = true
+                return
+            }
+        });
+
+        if (flag) {
+            showMessage(MESSAGE.duplicateItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }
         setItemCheckList([...itemCheckList, temp])
-        this.item.clear()
+        item.current.clear()
         setNewItem('')
     }
 
@@ -236,6 +251,19 @@ const TLDetailAdd = (props) => {
 
     }
     const onCameraOnly = () => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+            }
+
+        })
         setAddRecording(false)
 
     }
@@ -276,7 +304,7 @@ const TLDetailAdd = (props) => {
                 />
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
-                        ref={input => { this.item = input }}
+                        ref={item}
                         returnKeyType={"done"}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
@@ -460,7 +488,7 @@ const TLDetailAdd = (props) => {
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
-            LessonDate: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),         
+            LessonDate: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             LessonEndTime: selectedToTime,
             LessonStartTime: selectedFromTime,
             PupilGroupId: selectedParticipants._id,
@@ -503,10 +531,12 @@ const TLDetailAdd = (props) => {
         });
 
         recordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             data.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 
@@ -572,7 +602,7 @@ const TLDetailAdd = (props) => {
                                                 <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                                     <TextInput
                                                         returnKeyType={"next"}
-                                                        onSubmitEditing={() => { this.t2.focus(); }}
+                                                        onSubmitEditing={() => { t2.current.focus(); }}
                                                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                         placeholder="e.g. Grammar, Fractions, etc"
                                                         autoCapitalize={'sentences'}
@@ -605,9 +635,9 @@ const TLDetailAdd = (props) => {
                                         <View style={PAGESTYLE.lessonDesc}>
                                             <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                             <TextInput
-                                                ref={(input) => { this.t2 = input; }}
+                                                ref={t2}
                                                 returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.item.focus(); }}
+                                                onSubmitEditing={() => { item.current.focus(); }}
                                                 multiline={true}
                                                 autoCapitalize={'sentences'}
                                                 numberOfLines={4}
@@ -615,10 +645,17 @@ const TLDetailAdd = (props) => {
                                                 style={PAGESTYLE.commonInputTextareaBoldGrey}
                                                 onChangeText={text => setDescription(text)} />
                                         </View>
-                                        <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
+                                        {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                             <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                             <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                        </TouchableOpacity>
+                                        </TouchableOpacity> */}
+                                        <Popupaddrecording
+                                            recordingArr={recordingArr}
+                                            isVisible={isAddRecording}
+                                            onClose={() => setAddRecording(false)}
+                                            onScreeCamera={() => onScreeCamera()}
+                                            onScreeVoice={() => onScreeVoice()}
+                                            onCameraOnly={() => onCameraOnly()} />
 
                                         {itemCheckListView()}
 
@@ -688,10 +725,7 @@ const TLDetailAdd = (props) => {
                                 // </View>
                                 // : null
                             }
-                            <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                                onScreeCamera={() => onScreeCamera()}
-                                onScreeVoice={() => onScreeVoice()}
-                                onCameraOnly={() => onCameraOnly()} />
+
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}
                                 mode="date"

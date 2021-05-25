@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -29,8 +29,11 @@ import { User } from "../../../../utils/Model";
 import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import { launchCamera } from "react-native-image-picker";
 
 const TLDetailAdd = (props) => {
+    const t2 = useRef(null);
+    const item = useRef(null);
     const [materialArr, setMaterialArr] = useState([])
     const [recordingArr, setRecordingArr] = useState([])
     const [isAddRecording, setAddRecording] = useState(false)
@@ -175,11 +178,24 @@ const TLDetailAdd = (props) => {
             return
         }
 
+        let flag = false;
+        itemCheckList.forEach(element => {
+            if (element.ItemName.toLowerCase() == newItem.trim().toLowerCase()) {
+                flag = true
+                return
+            }
+        });
+
+        if (flag) {
+            showMessage(MESSAGE.duplicateItem)
+            return
+        }
+
         let temp = {
             ItemName: newItem
         }
         setItemCheckList([...itemCheckList, temp])
-        this.item.clear()
+        item.current.clear()
         setNewItem('')
     }
 
@@ -232,6 +248,19 @@ const TLDetailAdd = (props) => {
 
     }
     const onCameraOnly = () => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+            }
+
+        })
         setAddRecording(false)
 
     }
@@ -257,7 +286,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: hp(2.08) }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: hp(1.85) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -272,7 +301,7 @@ const TLDetailAdd = (props) => {
                 />
                 <View style={{ ...PAGESTYLE.subjectDateTime, ...PAGESTYLE.textBox1, justifyContent: 'center' }}>
                     <TextInput
-                        ref={input => { this.item = input }}
+                        ref={item}
                         returnKeyType={"done"}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
@@ -500,10 +529,12 @@ const TLDetailAdd = (props) => {
         });
 
         recordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             data.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 
@@ -567,7 +598,7 @@ const TLDetailAdd = (props) => {
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                             <TextInput
                                                 returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.t2.focus(); }}
+                                                onSubmitEditing={() => { t2.current.focus(); }}
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                 placeholder="e.g. Grammar, Fractions, etc"
                                                 autoCapitalize={'sentences'}
@@ -602,9 +633,9 @@ const TLDetailAdd = (props) => {
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
-                                        ref={(input) => { this.t2 = input; }}
+                                        ref={t2}
                                         returnKeyType={"next"}
-                                        onSubmitEditing={() => { this.item.focus(); }}
+                                        onSubmitEditing={() => { item.current.focus(); }}
                                         multiline={true}
                                         autoCapitalize={'sentences'}
                                         numberOfLines={4}
@@ -612,7 +643,10 @@ const TLDetailAdd = (props) => {
                                         style={PAGESTYLE.commonInputTextareaBoldGrey}
                                         onChangeText={text => setDescription(text)} />
                                 </View>
-                                <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
+                                <Popupaddrecording
+                                    recordingArr={recordingArr}
+                                    isVisible={isAddRecording}
+                                    onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
                                     onCameraOnly={() => onCameraOnly()} />

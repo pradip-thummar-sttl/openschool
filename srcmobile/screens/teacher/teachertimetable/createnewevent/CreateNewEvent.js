@@ -193,7 +193,7 @@ const CreateNewEvent = (props) => {
                 <TouchableOpacity
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
-                    onPress={() => { setFromDropOpen(true) }}>
+                    onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                     <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
@@ -224,7 +224,7 @@ const CreateNewEvent = (props) => {
                 <TouchableOpacity
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
-                    onPress={() => { setToDropOpen(true) }}>
+                    onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
                     <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
@@ -362,7 +362,7 @@ const CreateNewEvent = (props) => {
                                                 onChangeText={notes => setnote(notes)} />
                                         </View>
                                         <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                            <TouchableOpacity onPress={() => setColorDropOpen(true)} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
+                                            <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>

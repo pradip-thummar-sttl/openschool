@@ -48,6 +48,7 @@ const PupilLessonDetail = (props) => {
     const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
+        console.log('keyword', keyword);
         if (!isSearchActive) {
             setKeyword('')
             if (isLesson) {
@@ -139,6 +140,7 @@ const PupilLessonDetail = (props) => {
                     last.push(item)
                 }
             })
+            console.log('current', current, "last", last);
             setCurrentWeekLesson(current)
             setLastWeekLesson(last)
         }, (err) => {
@@ -153,7 +155,7 @@ const PupilLessonDetail = (props) => {
                     <TextInput
                         ref={textInput}
                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                        placeholder="Search subject, topic nmae etc"
+                        placeholder="Search subject, topic name etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }}
@@ -231,10 +233,10 @@ const PupilLessonDetail = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
-                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => setLesson(true)}>
+                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => { setSearchActive(false); setLesson(true); getLessonData('', ''); }}>
                                 <Text style={[PAGESTYLE.tabsText, { color: isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts, fontFamily: isLesson ? FONTS.fontSemiBold : FONTS.fontRegular }]}>Lesson</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setLesson(false)}>
+                            <TouchableOpacity onPress={() => { setSearchActive(false); setLesson(false); getHomeworkData('', '') }}>
                                 <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts, fontFamily: !isLesson ? FONTS.fontSemiBold : FONTS.fontRegular }]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
@@ -243,18 +245,28 @@ const PupilLessonDetail = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {
                         isLesson ?
-                            <PupilLesson
-                                currentWeekLesson={currentWeekLesson}
-                                lastWeekLesson={lastWeekLesson}
-                                navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
+                            currentWeekLesson.length > 0 && lastWeekLesson.length > 0 ?
+                                <PupilLesson
+                                    currentWeekLesson={currentWeekLesson}
+                                    lastWeekLesson={lastWeekLesson}
+                                    navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
+                                :
+                                <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                    <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                </View>
                             :
-                            <PupilLessonDue
-                                DueHomeWork={DueHomeWork}
-                                SubmitHomeWork={SubmitHomeWork}
-                                MarkedHomeWork={MarkedHomeWork}
-                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
-                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
-                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
+                            DueHomeWork.length > 0 && SubmitHomeWork.length > 0 && MarkedHomeWork.length > 0 ?
+                                <PupilLessonDue
+                                    DueHomeWork={DueHomeWork}
+                                    SubmitHomeWork={SubmitHomeWork}
+                                    MarkedHomeWork={MarkedHomeWork}
+                                    navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
+                                    navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
+                                    navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
+                                :
+                                <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                    <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                </View>
                     }
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
