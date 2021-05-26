@@ -20,7 +20,7 @@ import { User } from '../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
 
-const { LoginModule } = NativeModules;
+const { LoginModuleIos } = NativeModules;
 
 class Login extends Component {
     constructor(props) {
@@ -85,16 +85,25 @@ class Login extends Component {
     }
 
     onSubmit = async () => {
-        try {
-            const eventId = await LoginModule.qbLogin(
-                'patel.dhruv3@silvertouch.com',
-                'Admin@123456',
-                ['Xyz1', 'Xyz2']
-            );
-            console.log(`Successfully logged with ID: ${eventId}`);
-        } catch (e) {
-            console.error(e);
+        if (Platform.OS == 'ios') {
+            LoginModuleIos.signUpWithFullName("pradip12", "pradip12",(eventId)=>{
+                console.log('log for event', eventId);
+            },(error)=>{
+                console.log('log for error', error);
+            })
+        } else {
+            try {
+                const eventId = await LoginModule.qbLogin(
+                    'patel.dhruv3@silvertouch.com',
+                    'Admin@123456',
+                    ['Xyz1', 'Xyz2']
+                );
+                console.log(`Successfully logged with ID: ${eventId}`);
+            } catch (e) {
+                console.error(e);
+            }
         }
+
     };
 
 
