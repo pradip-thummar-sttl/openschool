@@ -21,7 +21,6 @@ export default StyleSheet.create({
         borderRadius: hp(1),
         justifyContent: 'space-between',
         height: hp(8.5),
-        zIndex: 9,
     },
     yellowHrTag: {
         width: '100%',
@@ -58,20 +57,16 @@ export default StyleSheet.create({
         position: 'absolute',
         top: hp(-4.5),
         right: hp(1.90),
-        textAlign: 'center',
-        paddingBottom: hp(2.04),
-        paddingLeft: hp(1.04),
-        paddingRight: hp(1.04),
-        paddingTop: hp(2.1),
+        justifyContent: 'center',
+        alignItems: 'center',
         width: hp(12.95),
         height: hp(10.22),
     },
     date: {
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
-        marginBottom: hp(0.3),
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
@@ -100,17 +95,18 @@ export default StyleSheet.create({
     },
 
     date: {
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
+        fontFamily: FONTS.fontBold,
+        color: COLORS.darkGray,
+        textAlign: 'center',
+    },
+    month: {
+        fontSize: Platform.OS == 'android' ? hp(1.56) : hp(1.56),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         textAlign: 'center',
-        marginBottom: hp(0.3),
-    },
-    month: {
-        fontSize: hp(1.82),
-        fontFamily: FONTS.fontSemiBold,
-        color: COLORS.darkGray,
-        textAlign: 'center',
+        //bottom: Platform.OS == 'android' ? hp(0.75) : hp(0),
+        //textAlignVertical: 'center',
     },
     moreDashboard: {
         width: hp(0.7),
@@ -224,17 +220,18 @@ export default StyleSheet.create({
         width: '100%',
     },
     subjectName: {
-        fontSize: hp(1.82),
+        fontSize: hp(1.6),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
     },
     subject: {
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.82),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
     },
     timingMain: {
-        marginRight: hp(2)
+        position: 'absolute',
+        right: hp(2),
     },
     subjecRow: {
         marginLeft: hp(0),
@@ -249,9 +246,10 @@ export default StyleSheet.create({
         fontSize: hp(1.4),
         fontFamily: FONTS.fontSemiBold,
         textAlign: 'center',
+        textAlignVertical: 'center',
         paddingTop: hp(0.05),
-        paddingBottom: hp(0.04),
-        width: hp(7.5),
+        paddingBottom: hp(0.0),
+        width: Platform.OS == 'android' ? hp(8.8) : hp(7.5),
         marginBottom: hp(0.5),
     },
     timing: {
@@ -484,7 +482,6 @@ export default StyleSheet.create({
         borderRadius: hp(1),
         justifyContent: 'space-between',
         height: hp(8.5),
-        zIndex: 9,
     },
     pupilHomeWorkGridTopBg:{
         position: 'absolute',

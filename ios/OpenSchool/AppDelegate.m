@@ -1,5 +1,10 @@
 #import "AppDelegate.h"
 
+#import <Quickblox/Quickblox.h>
+#import <QuickbloxWebRTC/QuickbloxWebRTC.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <MobileCoreServices/MobileCoreServices.h>```````````
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -23,6 +28,14 @@ static void InitializeFlipper(UIApplication *application) {
 }
 #endif
 
+const NSTimeInterval kQBAnswerTimeInterval = 60.0f;
+const NSTimeInterval kQBDialingTimeInterval = 5.0f;
+
+const NSUInteger kApplicationID = 90905;
+NSString *const kAuthKey        = @"h-ykAkyXnJkRNWD";
+NSString *const kAuthSecret     = @"n-BAzvbxcR5ggrj";
+NSString *const kAccountKey     = @"2xYap5od8h1GCfgxCJ6B";
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -38,6 +51,25 @@ static void InitializeFlipper(UIApplication *application) {
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
+  [QBSettings setApplicationID:kApplicationID];
+  [QBSettings setAuthKey:kAuthKey];
+  [QBSettings setAuthSecret:kAuthSecret];
+  [QBSettings setAccountKey:kAccountKey];
+      
+  [QBSettings setLogLevel:QBLogLevelNothing];
+  [QBSettings disableXMPPLogging];
+      
+  [QBRTCConfig setAnswerTimeInterval:kQBAnswerTimeInterval];
+  [QBRTCConfig setDialingTimeInterval:kQBDialingTimeInterval];
+  [QBRTCConfig setLogLevel:QBRTCLogLevelVerbose];
+      
+  [QBRTCConfig setConferenceEndpoint:@"wss://janus.quickblox.com:8989/"];
+  NSAssert([QBRTCConfig conferenceEndpoint].length > 0, @"Multi-conference server is available only for Enterprise plans. Please refer to https://quickblox.com/developers/EnterpriseFeatures for more information and contacts.");
+      
+  #if ENABLE_STATS_REPORTS
+      [QBRTCConfig setStatsReportTimeInterval:1.0f];
+  #endif
+  
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;

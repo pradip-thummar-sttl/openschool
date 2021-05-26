@@ -62,7 +62,7 @@ const HeaderTT = (props) => {
                 <View style={styles.field}>
                     <TextInput
                         ref={textInput}
-                        style={[STYLE.commonInput, styles.searchHeader]}
+                        style={[styles.searchHeader]}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -293,8 +293,15 @@ const styles = StyleSheet.create({
     searchHeader: {
         height: hp(5.20),
         paddingLeft: hp(4.43),
+        ...Platform.select({
+            android: {padding:0}
+        }),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
+        color:COLORS.themeBlue,
+        borderWidth: 1,
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
         fontFamily: FONTS.fontSemiBold,
     },
     userIcon: {
@@ -308,7 +315,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: hp(1.66),
         resizeMode: 'contain',
-        // height: 25,
         left: hp(0),
     },
     filterIcon: {
@@ -326,8 +332,9 @@ const styles = StyleSheet.create({
     userIcon1Parent: {
         position: 'absolute',
         width: hp(1.66),
-        top: hp(0.8),
         left: hp(1.5),
+        top: Platform.OS == 'android' ? hp(0.4) : hp(1),
+        alignItems: 'center',
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -351,7 +358,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        //marginRight: hp(1.69),
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -374,7 +380,6 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
         left: hp(1.8),
         zIndex: 9,
     },
