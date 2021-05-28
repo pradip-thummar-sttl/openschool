@@ -85,6 +85,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -97,6 +98,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -109,6 +111,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -122,6 +125,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     value={false}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
                                     tintColor={COLORS.dashboardPupilBlue}

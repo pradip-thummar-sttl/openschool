@@ -240,6 +240,7 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                         style={STYLE.checkBoxcommon1}
                                         value={this.state.isRemember}
                                         onCheckColor={COLORS.themeBlue}

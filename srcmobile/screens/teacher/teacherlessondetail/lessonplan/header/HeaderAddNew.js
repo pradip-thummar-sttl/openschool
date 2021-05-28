@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        paddingTop: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
+        marginBottom: Platform.OS == 'android' ? hp(-1) : hp(0),
     },
     massagesIcon: {
         width: wp(5.20),
@@ -172,8 +173,8 @@ const styles = StyleSheet.create({
         width: hp(1.80),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.5),
-        left: hp(1.8),
+        top: hp(1.35),
+        left: hp(1.7),
         zIndex: 9,
     },
     iconTop: {
@@ -246,7 +247,8 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
+        marginRight: hp(2),
+        top: Platform.OS == 'android' ? hp(1.2) : hp(0)
     },
     titleRow: {
         flexDirection: 'row',

@@ -35,8 +35,8 @@ export default StyleSheet.create({
         paddingTop: hp(1.48),
     },
     labledataTitle: {
-        fontSize: hp(1.6),
-        marginBottom: hp(0.3),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8),
+        marginBottom: Platform.OS == 'android' ? hp(-0.5) : hp(0.5),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontSemiBold,
     },
@@ -55,8 +55,9 @@ export default StyleSheet.create({
     },
     labelTime: {
         fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.6),
+        fontSize:Platform.OS == 'android' ? hp(1.4) : hp(1.6),
         color:COLORS.darkGray,
+        marginTop: Platform.OS == 'android' ? hp(0.4) : hp(0),
     },
     whiteBoard: {
         backgroundColor: COLORS.white,

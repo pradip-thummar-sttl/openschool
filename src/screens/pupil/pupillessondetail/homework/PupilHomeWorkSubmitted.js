@@ -68,6 +68,7 @@ const PupilHomeWorkSubmitted = (props) => {
                                         <View style={PAGESTYLE.checkBoxLabelLine}>
                                             <View style={PAGESTYLE.alignRow}>
                                                 <CheckBox
+                                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                                     style={PAGESTYLE.checkMark}
                                                     value={item.IsCheck}
                                                     boxType={'square'}

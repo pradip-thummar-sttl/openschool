@@ -185,7 +185,7 @@ const Popupdata = (props) => {
                         </View>
                     </ScrollView>
                     <View style={styles.lessonstartButton}>
-                        {!props.isPupil && props.data.Type == Lesson?
+                        {/* {!props.isPupil && props.data.Type == Lesson?
                             <TouchableOpacity
                                 style={styles.buttonGrp}
                                 activeOpacity={opacity}
@@ -194,7 +194,8 @@ const Popupdata = (props) => {
                             </TouchableOpacity>
                             :
                             <View style={{ width: hp(20) }}></View>
-                        }
+                        } */}
+                        <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreenbordered]}>mark as absent</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
         marginRight: hp(2.8),
     },
     datetimeText: {
-        fontSize: hp(1.72),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.72),
         lineHeight: hp(2.46),
         marginLeft: hp(0.9),
         fontFamily: FONTS.fontRegular,
@@ -362,27 +363,25 @@ const styles = StyleSheet.create({
         width: '100%',
         left: hp(1.95),
     },
-    bottomDrwerButton: {
-        width: hp(20),
-        height: hp(5.41),
+    bottomDrwerButtonGreenbordered: {
         backgroundColor: COLORS.transparent,
-        color: COLORS.darkGray,
+        borderColor: COLORS.dashboardGreenButton,
+        borderWidth: 1,
+        color: COLORS.dashboardGreenButton,
         fontSize: hp(1.56),
         fontWeight: '800',
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingTop: hp(1.45),
-        paddingBottom: hp(1.45),
+        paddingTop:  Platform.OS == 'android' ? hp(1.3) : hp(1.21),
+        paddingLeft: Platform.OS == 'android' ? hp(2.5) : hp(3),
+        paddingRight: Platform.OS == 'android' ? hp(2.5) : hp(3),
+        paddingBottom: Platform.OS == 'android' ? hp(0.7) : hp(1.21),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        borderWidth: 1,
-        borderColor: COLORS.borderGrp,
     },
     bottomDrwerButtonGreen: {
-        width: hp(20),
-        height: hp(5.41),
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
@@ -390,14 +389,11 @@ const styles = StyleSheet.create({
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingTop: hp(1.45),
-        paddingBottom: hp(1.45),
+        paddingTop:  Platform.OS == 'android' ? hp(1.3) : hp(1.21),
+        paddingLeft: Platform.OS == 'android' ? hp(4.5) : hp(4.94),
+        paddingRight: Platform.OS == 'android' ? hp(4.5) : hp(4.94),
+        paddingBottom: Platform.OS == 'android' ? hp(1) : hp(1.21),
         alignSelf: 'center',
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 50, },
-        shadowOpacity: 0.16,
-        shadowRadius: 13,
-        elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },

@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     },
     field: {
         position: 'relative',
-        width: hp(35.94),
+        width: Platform.OS == 'android' ? hp(38.3) : hp(34.8),
         justifyContent: 'center',
         marginRight: hp(1.2),
     },
@@ -314,8 +314,10 @@ const styles = StyleSheet.create({
     userIcon1: {
         position: 'absolute',
         width: hp(1.66),
+        height: hp(1.66),
         resizeMode: 'contain',
         left: hp(0),
+        top: hp(1)
     },
     filterIcon: {
         width: hp(1.74),
@@ -333,7 +335,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: hp(1.66),
         left: hp(1.5),
-        top: Platform.OS == 'android' ? hp(0.4) : hp(1),
+        top: Platform.OS == 'android' ? hp(0.6) : hp(1),
         alignItems: 'center',
     },
     commonButtonBorderedheader: {

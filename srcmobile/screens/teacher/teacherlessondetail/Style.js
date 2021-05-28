@@ -78,7 +78,13 @@ export default StyleSheet.create({
         width:hp(20.68),
     },
     subjectDateTime: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        width:'100%',
+    },
+    subjectDateTimePicker: {
         alignItems: 'flex-start',
+        alignSelf: 'center',
         width:'100%',
     },
     subjectDateTimeHomework: {
@@ -103,7 +109,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        bottom: hp(0.55),
+        alignSelf: 'center',
+        left: hp(-0.5),
     },
     calIconHomeWork: {
         resizeMode: 'contain',
@@ -137,7 +144,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginBottom: wp(1.5),
+        marginBottom: Platform.OS == 'android' ? wp(0) : wp(1.5),
     },
     lessonTitleWithoutTextArea: {
         flexDirection: 'row',
@@ -239,6 +246,8 @@ export default StyleSheet.create({
     },
     videoLinkBlockSpaceBottom: {
         marginBottom: hp(4.81),
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
     videoLinkIcon: {
         width: hp(2.38),
@@ -332,11 +341,11 @@ export default StyleSheet.create({
     },
     toggleText: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.85),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.85),
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width:hp(46.12),
+        width: '100%',
         justifyContent: 'flex-start',
         paddingLeft: hp(2.46),
         paddingRight: hp(2.46),
@@ -422,13 +431,14 @@ export default StyleSheet.create({
     },
     commonInput: {
         color: COLORS.darkGray,
-        fontSize: hp('1.9%'),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.9),
         borderWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
         height: hp('6%'),
+        textAlignVertical: 'center',
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontRegular,
@@ -470,7 +480,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         color: COLORS.darkGray,
-        fontSize: 18,
+        fontSize: hp(1.8),
         borderWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
@@ -479,8 +489,6 @@ export default StyleSheet.create({
         height: hp(6),
         paddingLeft: hp(1.5),
         paddingRight: hp(2.0),
-        paddingTop: hp(2.0),
-        paddingBottom: hp(2.0),
         fontFamily: FONTS.fontRegular,
     },
     dropDownSmall: {
@@ -502,6 +510,7 @@ export default StyleSheet.create({
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
+        alignItems: 'center',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
@@ -512,8 +521,6 @@ export default StyleSheet.create({
         height: hp('6%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
-        paddingTop: hp('2.0%'),
-        paddingBottom: hp('2.0%'),
     },
     textBox: {
         flexDirection: 'row',
@@ -556,10 +563,11 @@ export default StyleSheet.create({
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
-        fontSize: hp(1.82),
-        color: COLORS.menuLightFonts,
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.82),
+        color: COLORS.darkGray,
         lineHeight: hp(2.60),
-        fontFamily: FONTS.fontSemiBold,
+        textAlignVertical: 'top',
+        fontFamily: Platform.OS == 'android' ? FONTS.fontRegular : FONTS.fontSemiBold,
     },
     commonInputTextareaNormal: {
         width: '100%',
@@ -590,18 +598,14 @@ export default StyleSheet.create({
         backgroundColor: COLORS.transparent,
     },
     dateTimetextdummy: {
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        bottom: hp(-0.1),
-        height:hp(2.5),
     },
     dateTimetextdummy2: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        bottom: hp(0.3),
-        height:hp(2.5),
     },
     timeField: {
         width: '47.2%',
@@ -1102,8 +1106,9 @@ export default StyleSheet.create({
         width:hp(1.51),
         resizeMode:'contain',
         position:'absolute',
-        right:hp(1.6),
+        right:hp(1.75),
         alignSelf: 'center',
+        top: Platform.OS == 'android' ? hp(0.65) : hp(0)
     },
     dropDownArrowdatetime2:{
         width:hp(1.51),

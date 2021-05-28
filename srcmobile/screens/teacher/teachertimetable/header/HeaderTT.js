@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     },
     field: {
         position: 'relative',
-        width: hp(35.94),
+        width: Platform.OS == 'android' ? hp(38.3) : hp(34.8),
         justifyContent: 'center',
         marginRight: hp(1.2),
     },
@@ -272,6 +272,9 @@ const styles = StyleSheet.create({
         color:COLORS.themeBlue,
         fontSize: hp('1.9%'),
         borderWidth: 1,
+        ...Platform.select({
+            android: {padding:0}
+        }),
         borderColor: COLORS.InoutBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
@@ -310,8 +313,9 @@ const styles = StyleSheet.create({
     userIcon1Parent: {
         position: 'absolute',
         width: hp(1.66),
-        top: hp(0.8),
         left: hp(1.5),
+        top: Platform.OS == 'android' ? hp(0.6) : hp(1),
+        alignItems: 'center',
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -358,7 +362,6 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
         left: hp(1.8),
         zIndex: 9,
     },
