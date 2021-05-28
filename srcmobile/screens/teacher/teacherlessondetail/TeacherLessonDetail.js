@@ -114,24 +114,43 @@ const TeacherLessonDetail = (props) => {
         let data = new FormData();
 
         Addhomework.MaterialArr.forEach(element => {
-            data.append('materiallist', {
-                uri: element.uri,
-                name: element.name,
-                type: element.type
-            });
+            if (element.uri) {
+                data.append('materiallist', {
+                    uri: element.uri,
+                    name: element.name,
+                    type: element.type
+                });
+            }
         });
 
         Addhomework.RecordingArr.forEach(element => {
-            let ext = element.fileName.split('.');
+            if (element.uri) {
+                let ext = element.fileName.split('.');
 
-            data.append('recording', {
-                uri: element.uri,
-                name: element.fileName,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            });
+                data.append('recording', {
+                    uri: element.uri,
+                    name: element.fileName,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                });
+            }
         })
 
         if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
+            let msg
+            if (Addhomework.IsUpdate) {
+                msg = MESSAGE.homeworkUpdated
+            } else {
+                msg = MESSAGE.homeworkAdded
+            }
+            showMessageWithCallBack(msg, () => {
+                props.route.params.onGoBack()
+                props.navigation.goBack()
+            })
+            setHomeworkLoading(false)
+            return
+        }
+
+        if (data._parts.length == 0) {
             let msg
             if (Addhomework.IsUpdate) {
                 msg = MESSAGE.homeworkUpdated

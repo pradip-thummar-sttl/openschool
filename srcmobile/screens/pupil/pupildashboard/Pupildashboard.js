@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -16,6 +16,9 @@ import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
+
+const { CallModule } = NativeModules
+
 const PupuilDashboard = (props) => {
     const refRBSheet = useRef();
     const refRBSheetTwo = useRef();
@@ -58,6 +61,33 @@ const PupuilDashboard = (props) => {
         }, (err) => {
         })
     }, [])
+
+    const startLiveClassAndroid = () => {
+        try {
+            let qBUserIDs = [], userNames = [], names = []
+            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
+            dataOfSubView.PupilList.forEach(pupil => {
+                qBUserIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+            let dialogID = dataOfSubView.QBDilogID
+            // let dialogID = '123456789'
+            let QBUserId = User.user.QBUserId
+            let currentName = User.user.FirstName + " " + User.user.LastName
+
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+
+            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, (error, ID) => {
+                console.log('Class Started');
+            }
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
@@ -262,7 +292,10 @@ const PupuilDashboard = (props) => {
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text></TouchableOpacity>
+                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}
+                                                                            onPress={() => { startLiveClassAndroid() }}>
+                                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
+                                                                        </TouchableOpacity>
                                                                     </View>
                                                                 </View>
                                                             </View>
