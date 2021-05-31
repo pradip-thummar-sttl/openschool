@@ -3,7 +3,7 @@
 #import <Quickblox/Quickblox.h>
 #import <QuickbloxWebRTC/QuickbloxWebRTC.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-#import <MobileCoreServices/MobileCoreServices.h>```````````
+#import <MobileCoreServices/MobileCoreServices.h>
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>

@@ -292,11 +292,6 @@ PODS:
     - React-Core
   - RNSketchCanvas (0.8.0):
     - React
-  - SDWebImage (4.4.8):
-    - SDWebImage/Core (= 4.4.8)
-  - SDWebImage/Core (4.4.8)
-  - SVProgressHUD (2.2.5)
-  - TTTAttributedLabel (2.0.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -305,8 +300,8 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - QuickBlox (~> 2.17.10)
-  - Quickblox-WebRTC (~> 2.7.6)
+  - QuickBlox
+  - Quickblox-WebRTC
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -348,9 +343,6 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSketchCanvas (from `../node_modules/@terrylinla/react-native-sketch-canvas`)"
-  - SDWebImage (~> 4.4.7)
-  - SVProgressHUD
-  - TTTAttributedLabel (~> 2.0.0)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -358,9 +350,6 @@ SPEC REPOS:
     - boost-for-react-native
     - QuickBlox
     - Quickblox-WebRTC
-    - SDWebImage
-    - SVProgressHUD
-    - TTTAttributedLabel
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -502,11 +491,8 @@ SPEC CHECKSUMS:
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
   RNSketchCanvas: 6939b18677cd1794151cc3d8eb5a0a2158a4a05b
-  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: b2ef8f02b2b9eb220e60d94c147d5a8d83b24435
+PODFILE CHECKSUM: ea82a7234f37594119dc559e98e92c74b5d138d4
 
 COCOAPODS: 1.10.1

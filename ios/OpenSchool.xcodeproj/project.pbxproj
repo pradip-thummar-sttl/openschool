@@ -262,6 +262,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				6F0908437E0F294DE7A75524 /* [CP] Copy Pods Resources */,
 				12A74E48120E78F28B37EADF /* [CP] Embed Pods Frameworks */,
+				88E7F54A2660B53400371DA0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -454,17 +455,32 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OpenSchool/Pods-OpenSchool-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenSchool/Pods-OpenSchool-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		88E7F54A2660B53400371DA0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n";
 		};
 		ED71B51A513CD5E33AC549C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -638,8 +654,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-ObjC",
 					"-lc++",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvertouch.openschool;
 				PRODUCT_NAME = "MYED Open School";
@@ -665,11 +681,11 @@
 				INFOPLIST_FILE = OpenSchool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-ObjC",
 					"-lc++",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvertouch.openschool;
 				PRODUCT_NAME = "MYED Open School";
