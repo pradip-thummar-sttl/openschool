@@ -28,7 +28,7 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
     private String TAG = VideoConversationFragment.class.getSimpleName();
 
     private ToggleButton cameraToggle;
-    private CameraState cameraState = CameraState.DISABLED_FROM_USER;
+    public static CameraState cameraState = CameraState.DISABLED_FROM_USER;
 
     private QBRTCVideoTrack localVideoTrack;
     protected boolean isCurrentCameraFront;
@@ -207,7 +207,7 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
         }
     }
 
-    private enum CameraState {
+    public static enum CameraState {
         NONE,
         DISABLED_FROM_USER,
         ENABLED_FROM_USER

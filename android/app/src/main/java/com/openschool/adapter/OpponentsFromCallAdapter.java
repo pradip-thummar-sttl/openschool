@@ -38,13 +38,15 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
     private List<QBUser> opponents;
     private LayoutInflater inflater;
     private OnAdapterEventListener adapterListener;
+    private boolean isTeacher;
 
 
-    public OpponentsFromCallAdapter(Context context, ConferenceSession session, List<QBUser> users, int width, int height) {
+    public OpponentsFromCallAdapter(Context context, ConferenceSession session, List<QBUser> users, int width, int height, boolean isTeacher) {
         this.context = context;
         this.session = session;
         this.opponents = users;
         this.inflater = LayoutInflater.from(context);
+        this.isTeacher = isTeacher;
         itemWidth = width;
         itemHeight = height;
         Log.d(TAG, "item width=" + itemWidth + ", item height=" + itemHeight);
@@ -89,6 +91,13 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         v.findViewById(R.id.innerLayout).setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, itemHeight));
 
         final ViewHolder vh = new ViewHolder(v);
+
+        if (!isTeacher){
+            vh.toggleButton.setVisibility(View.GONE);
+            vh.connectionStatus.setVisibility(View.GONE);
+            vh.opponentsName.setVisibility(View.GONE);
+        }
+
         vh.toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {

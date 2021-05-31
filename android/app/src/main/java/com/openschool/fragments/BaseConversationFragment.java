@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.DimenRes;
@@ -38,13 +39,13 @@ import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.model.QBDialogType;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.view.QBConferenceSurfaceView;
-import com.quickblox.core.helper.StringifyArrayList;
 import com.quickblox.users.model.QBUser;
 import com.quickblox.videochat.webrtc.BaseSession;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCClientVideoTracksCallbacks;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
 
+import org.webrtc.CameraVideoCapturer;
 import org.webrtc.RendererCommon;
 import org.webrtc.SurfaceViewRenderer;
 
@@ -90,6 +91,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected boolean isNeedCleanUp;
 
+    private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
     private ImageButton handUpCall;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
@@ -102,6 +104,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected boolean isTeacher;
     protected String currentUserID;
     protected String currentName;
+    protected String teacherQBUserID;
 
     private SparseArray<OpponentsFromCallAdapter.ViewHolder> opponentViewHolders;
 
@@ -133,46 +136,29 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         conversationFragmentCallbackListener.addCurrentCallStateCallback(this);
     }
 
-    private ArrayList<QBUser> setTempUser() {
-        ArrayList<QBUser> qbUsers = new ArrayList<>();
-
-        StringifyArrayList<String> tags = new StringifyArrayList<>();
-        tags.add("test98765");
-        QBUser qbUser = new QBUser();
-        qbUser.setId(128036346);
-        qbUser.setFullName("test8");
-        qbUser.setTags(tags);
-        qbUsers.add(qbUser);
-
-        tags = new StringifyArrayList<>();
-        tags.add("test98765");
-        qbUser = new QBUser();
-        qbUser.setId(128036423);
-        qbUser.setFullName("test9");
-        qbUser.setTags(tags);
-        qbUsers.add(qbUser);
-
-        return qbUsers;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         opponentsIds = this.getArguments().getIntegerArrayList(Consts.EXTRA_DIALOG_OCCUPANTS);
         opponents = (ArrayList<QBUser>) this.getArguments().getSerializable(Consts.EXTRA_SELECTED_DIALOG_OCCUPANTS);
-        System.out.println("KDKD: opponents " + opponents);
-//        opponents = setTempUser();
         asListenerRole = this.getArguments().getBoolean(Consts.EXTRA_AS_LISTENER);
         currentUserID = this.getArguments().getString(Consts.EXTRA_CURRENTUSERID);
         currentName = this.getArguments().getString(Consts.EXTRA_CURRENTUSERNAME);
         isTeacher = this.getArguments().getBoolean(Consts.EXTRA_DIALOG_IS_TEACHER);
+        teacherQBUserID = this.getArguments().getString(Consts.EXTRA_TEACHER_USER_ID);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
+        System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
         if (currentSession == null) {
             Log.d(TAG, "currentSession = null onCreateView");
             return view;
         }
+
+        if (!isTeacher) {
+            opponents.addAll(selectTeacherForPupil());
+        }
+
         initFields();
         initViews(view);
         initActionBar();
@@ -189,16 +175,24 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     @Override
     int getFragmentLayout() {
-        if (isTeacher)
-            return R.layout.fragment_conversation_teacher;
-        else
-            return R.layout.fragment_conversation_pupil;
+        return R.layout.fragment_conversation;
     }
 
     protected void configureOutgoingScreen() {
         outgoingOpponentsRelativeLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.grey_transparent_50));
         allOpponentsTextView.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
         ringingTextView.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
+    }
+
+    private ArrayList<QBUser> selectTeacherForPupil() {
+        ArrayList<QBUser> qbUsers = new ArrayList<>();
+        for (QBUser user : opponents) {
+            if (user.getId() == Integer.parseInt(teacherQBUserID)) {
+                qbUsers.add(user);
+            }
+        }
+
+        return qbUsers;
     }
 
     private void initActionBar() {
@@ -212,7 +206,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void configureToolbar() {
-        toolbar.setVisibility(View.VISIBLE);
+        toolbar.setVisibility(View.GONE);
         toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.black_transparent_50));
         toolbar.setTitleTextColor(ContextCompat.getColor(getActivity(), R.color.white));
         toolbar.setSubtitleTextColor(ContextCompat.getColor(getActivity(), R.color.white));
@@ -390,6 +384,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected void initViews(View view) {
         Log.i(TAG, "initViews");
+        toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (ImageButton) view.findViewById(R.id.button_hangup_call);
         outgoingOpponentsRelativeLayout = view.findViewById(R.id.layout_background_outgoing_screen);
@@ -444,10 +439,16 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     private void setGrid(int recycleViewHeight) {
         ArrayList<QBUser> qbUsers = new ArrayList<>();
-        int itemHeight = recycleViewHeight / DISPLAY_ROW_AMOUNT;
+        int itemHeight = 0;
+        if (!isTeacher){
+            itemHeight = recycleViewHeight;
+        } else {
+            itemHeight = recycleViewHeight / DISPLAY_ROW_AMOUNT;
+        }
         opponentsAdapter = new OpponentsFromCallAdapter(getActivity(), currentSession, qbUsers,
                 (int) getResources().getDimension(R.dimen.item_width),
-                itemHeight);
+                itemHeight,
+                isTeacher);
         opponentsAdapter.setAdapterListener(this);
         recyclerView.setAdapter(opponentsAdapter);
     }
@@ -480,6 +481,12 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void initButtonsListener() {
+        toggle_camera_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switchCamera(isChecked);
+            }
+        });
 
         micToggleCall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -871,5 +878,31 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         public void onClick(View v) {
             Log.d(TAG, "localView onClick");
         }
+    }
+
+    private void switchCamera(boolean flag) {
+        if (VideoConversationFragment.cameraState == VideoConversationFragment.CameraState.DISABLED_FROM_USER) {
+            return;
+        }
+        conversationFragmentCallbackListener.onSwitchCamera(new CameraVideoCapturer.CameraSwitchHandler() {
+            @Override
+            public void onCameraSwitchDone(boolean b) {
+                Log.d(TAG, "camera switched, bool = " + b);
+//                updateSwitchCameraIcon(item);
+                toggleCameraInternal(flag);
+            }
+
+            @Override
+            public void onCameraSwitchError(String s) {
+                Log.d(TAG, "camera switch error " + s);
+                Toast.makeText(getContext(), getString(R.string.camera_swicth_failed) + s, Toast.LENGTH_SHORT).show();
+                toggle_camera_view.setEnabled(true);
+            }
+        });
+    }
+
+    private void toggleCameraInternal(boolean flag) {
+        Log.d(TAG, "Camera was switched!");
+        updateVideoView(localVideoView, flag);
     }
 }

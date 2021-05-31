@@ -10,12 +10,13 @@
         android:layout_width="@dimen/item_height"
         android:layout_height="@dimen/item_height"
         android:layout_above="@+id/element_set_call_buttons"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center">
 
         <com.quickblox.conference.view.QBConferenceSurfaceView
             android:id="@+id/local_video_view"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/item_height"
             android:layout_height="@dimen/item_height"
             android:layout_margin="@dimen/margin_very_small" />
 
@@ -51,9 +52,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/grid_opponents"
         style="@style/MatchParent"
-        android:layout_above="@+id/element_set_call_buttons"
-        android:layout_marginTop="@dimen/toggle_button_params"
-        android:layout_marginBottom="@dimen/margin_very_small"
         android:horizontalSpacing="@dimen/margin_small"
         android:verticalSpacing="@dimen/margin_small"
         android:visibility="invisible"

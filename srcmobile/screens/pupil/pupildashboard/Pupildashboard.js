@@ -73,13 +73,13 @@ const PupuilDashboard = (props) => {
             });
 
             let dialogID = dataOfSubView.QBDilogID
-            // let dialogID = '123456789'
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
+            let teacherQBUserID = dataOfSubView.TeacherQBUserID
 
             console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, (error, ID) => {
+            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
                 console.log('Class Started');
             }
             );

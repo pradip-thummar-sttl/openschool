@@ -80,9 +80,10 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private boolean isTeacher;
     private String currentUserID;
     private String currentName;
+    private String teacherQBUserID;
 
 
-    public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher) {
+    public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID) {
 
         Intent intent = new Intent(context, CallActivity.class);
         intent.putExtra(Consts.EXTRA_DIALOG_ID, dialogID);
@@ -92,6 +93,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         intent.putExtra(Consts.EXTRA_CURRENTUSERID, currentUserID);
         intent.putExtra(Consts.EXTRA_CURRENTUSERNAME, currentName);
         intent.putExtra(Consts.EXTRA_DIALOG_IS_TEACHER, isTeacher);
+        intent.putExtra(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
 
         context.startActivity(intent);
     }
@@ -147,6 +149,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         currentUserID = getIntent().getStringExtra(Consts.EXTRA_CURRENTUSERID);
         currentName = getIntent().getStringExtra(Consts.EXTRA_CURRENTUSERNAME);
         isTeacher = getIntent().getBooleanExtra(Consts.EXTRA_DIALOG_IS_TEACHER, false);
+        teacherQBUserID = getIntent().getStringExtra(Consts.EXTRA_TEACHER_USER_ID);
     }
 
     private void initAudioManager() {
@@ -407,6 +410,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         bundle.putString(Consts.EXTRA_CURRENTUSERID, currentUserID);
         bundle.putString(Consts.EXTRA_CURRENTUSERNAME, currentName);
         bundle.putBoolean(Consts.EXTRA_DIALOG_IS_TEACHER, isTeacher);
+        bundle.putString(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
         BaseConversationFragment conversationFragment = BaseConversationFragment.newInstance(
                 isVideoCall
                         ? new VideoConversationFragment()

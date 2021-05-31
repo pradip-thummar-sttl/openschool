@@ -1,8 +1,5 @@
 package com.openschool.module;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,13 +8,10 @@ import com.facebook.react.bridge.ReadableArray;
 import com.openschool.activity.CallActivity;
 import com.openschool.util.QBResRequestExecutor;
 import com.openschool.util.WebRtcSessionManager;
-import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.conference.ConferenceClient;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.WsException;
 import com.quickblox.conference.callbacks.ConferenceEntityCallback;
-import com.quickblox.core.QBEntityCallback;
-import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.core.helper.StringifyArrayList;
 import com.quickblox.users.model.QBUser;
 import com.quickblox.videochat.webrtc.QBRTCTypes;
@@ -47,7 +41,16 @@ public class CallModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void qbLaunchLiveClass(final String dialogID, String currentUserID, String currentName, ReadableArray occupants, ReadableArray userNames, ReadableArray names, boolean isTeacher, Callback callBack) {
+    public void qbLaunchLiveClass(String dialogID,
+                                  String currentUserID,
+                                  String currentName,
+                                  ReadableArray occupants,
+                                  ReadableArray userNames,
+                                  ReadableArray names,
+                                  boolean isTeacher,
+                                  String teacherQBUserID,
+                                  Callback callBack) {
+
         ArrayList<QBUser> selectedUsers = new ArrayList<>();
         List<Integer> selectedOccupants = new ArrayList<>();
         for (int i = 0; i < occupants.size(); i++) {
@@ -65,11 +68,11 @@ public class CallModule extends ReactContextBaseJavaModule {
             selectedOccupants.add(Integer.parseInt(occupants.getString(i)));
         }
 
-        System.out.println("KDKD: Welcome to the CallModule! " + dialogID + " " + currentUserID + " " + currentName + " " + occupants + " " + userNames + " " + names + " " + " " + isTeacher + selectedUsers.size());
-        startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, callBack);
+        System.out.println("KDKD: Welcome to the CallModule! " + dialogID + " " + currentUserID + " " + currentName + " " + occupants + " " + userNames + " " + names + " " + teacherQBUserID + " " + isTeacher + selectedUsers.size());
+        startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, teacherQBUserID, callBack);
     }
 
-    private void startConference(final String dialogID, String currentUserID, String currentName, ArrayList<QBUser> selectedUsers, boolean isVideoCall, final List<Integer> occupants, final boolean asListener, boolean isTeacher, Callback callBack) {
+    private void startConference(final String dialogID, String currentUserID, String currentName, ArrayList<QBUser> selectedUsers, boolean isVideoCall, final List<Integer> occupants, final boolean asListener, boolean isTeacher, String teacherQBUserID, Callback callBack) {
         ConferenceClient client = ConferenceClient.getInstance(getCurrentActivity());
 
         QBRTCTypes.QBConferenceType conferenceType = isVideoCall
@@ -81,7 +84,7 @@ public class CallModule extends ReactContextBaseJavaModule {
             public void onSuccess(ConferenceSession session) {
                 webRtcSessionManager.setCurrentSession(session);
 
-                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher);
+                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID);
             }
 
             @Override

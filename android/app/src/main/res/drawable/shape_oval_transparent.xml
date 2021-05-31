@@ -12,10 +12,10 @@
                 android:width="1dp"
                 android:color="@color/grey_transparent_50"/>
             <padding
-                android:bottom="17dp"
-                android:left="18dp"
-                android:right="18dp"
-                android:top="17dp"
+                android:bottom="10dp"
+                android:left="10dp"
+                android:right="10dp"
+                android:top="10dp"
                 />
         </shape>
     </item>
