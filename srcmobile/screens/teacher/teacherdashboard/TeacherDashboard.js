@@ -76,10 +76,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
 
     useEffect(() => {
-        // if(isDesignBuild)
+       refresh()
+    }, [])
+
+    const refresh = () => {
+         // if(isDesignBuild)
         //     return true
         refresh()
-    }, [])
+    }, []
 
     const refresh = () => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {

@@ -20,6 +20,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
 import { Download } from "../../../../utils/Download";
+import { launchCamera } from "react-native-image-picker";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
@@ -30,6 +31,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
     const [recordingArr, setRecordingArr] = useState([])
+    const [isAddRecording, setAddRecording] = useState(false)
     const [isLoading, setLoading] = useState(false);
 
     const [isBronze, setBronze] = useState(false);
@@ -74,6 +76,29 @@ const TLHomeWorkSubmittedDetail = (props) => {
         })
     }
 
+    const onScreeCamera = () => {
+        setAddRecording(false)
+    }
+    const onScreeVoice = () => {
+        setAddRecording(false)
+    }
+    const onCameraOnly = () => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+            }
+
+        })
+        setAddRecording(false)
+
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -198,7 +223,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             style={PAGESTYLE.commonInputTextareaBoldGrey}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
-                                    <Popupaddrecording />
+                                    <Popupaddrecording
+                                        recordingArr={recordingArr}
+                                        isVisible={isAddRecording}
+                                        onClose={() => setAddRecording(false)}
+                                        onScreeCamera={() => onScreeCamera()}
+                                        onScreeVoice={() => onScreeVoice()}
+                                        onCameraOnly={() => onCameraOnly()}
+                                        onRemoveRecording={() => null} />
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

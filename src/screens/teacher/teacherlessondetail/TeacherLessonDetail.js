@@ -120,22 +120,40 @@ const TeacherLessonDetail = (props) => {
         let data = new FormData();
 
         Addhomework.MaterialArr.forEach(element => {
+            if (element.uri) {
             data.append('materiallist', {
                 uri: element.uri,
                 name: element.name,
                 type: element.type
             });
+        }
         });
 
         Addhomework.RecordingArr.forEach(element => {
+            if (element.uri) {
             data.append('recording', {
                 uri: element.uri,
                 name: element.name,
                 type: element.type
             });
+        }
         })
 
         if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
+            let msg
+            if (Addhomework.IsUpdate) {
+                msg = MESSAGE.homeworkUpdated
+            } else {
+                msg = MESSAGE.homeworkAdded
+            }
+            showMessageWithCallBack(msg, () => {
+                props.goBack()
+            })
+            setHomeworkLoading(false)
+            return
+        }
+
+        if (data._parts.length == 0) {
             let msg
             if (Addhomework.IsUpdate) {
                 msg = MESSAGE.homeworkUpdated

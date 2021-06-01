@@ -19,6 +19,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Download } from "../../../../utils/Download";
+import { launchCamera } from "react-native-image-picker";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
@@ -71,6 +72,30 @@ const TLHomeWorkSubmittedDetail = (props) => {
             setLoading(false)
             console.log('response of get all lesson error', err)
         })
+    }
+
+    const onScreeCamera = () => {
+        setAddRecording(false)
+    }
+    const onScreeVoice = () => {
+        setAddRecording(false)
+    }
+    const onCameraOnly = () => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+            }
+
+        })
+        setAddRecording(false)
+
     }
 
     return (
@@ -184,14 +209,22 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             autoCapitalize={'sentences'}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
-                                    <View style={PAGESTYLE.videoRecording}>
+                                    {/* <View style={PAGESTYLE.videoRecording}>
                                         <View style={PAGESTYLE.recordLinkBlock}>
                                             <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                                 <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                                 <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                                             </TouchableOpacity>
                                         </View>
-                                    </View>
+                                    </View> */}
+                                    <Popupaddrecording
+                                        recordingArr={recordingArr}
+                                        isVisible={isAddRecording}
+                                        onClose={() => setAddRecording(false)}
+                                        onScreeCamera={() => onScreeCamera()}
+                                        onScreeVoice={() => onScreeVoice()}
+                                        onCameraOnly={() => onCameraOnly()}
+                                        onRemoveRecording={() => null} />
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

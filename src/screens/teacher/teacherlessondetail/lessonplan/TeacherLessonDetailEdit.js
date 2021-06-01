@@ -60,6 +60,7 @@ const TLDetailEdit = (props) => {
         setSelectedFromTime(lessonData.StartTime)
         setSelectedToTime(lessonData.EndTime)
         setMaterialArr(lessonData.MaterialList)
+        setRecordingArr(lessonData.RecordingList)
         tempPupil = lessonData.PupilList
     }, [lessonData])
 
@@ -504,24 +505,37 @@ const TLDetailEdit = (props) => {
         let data = new FormData();
 
         materialArr.forEach(element => {
-            data.append('materiallist', {
-                uri: element.uri,
-                name: element.name,
-                type: element.type
-            });
+            if (element.uri) {
+                data.append('materiallist', {
+                    uri: element.uri,
+                    name: element.name,
+                    type: element.type
+                });
+            }
         });
 
         recordingArr.forEach(element => {
-            let ext = element.fileName.split('.');
+            if (element.uri) {
+                let ext = element.fileName.split('.');
 
-            data.append('recording', {
-                uri: element.uri,
-                name: element.fileName,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            });
+                data.append('recording', {
+                    uri: element.uri,
+                    name: element.fileName,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                });
+            }
         })
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
+            showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
+                // props.route.params.onGoBack();
+                props.goBack()
+            })
+            setLoading(null)
+            return
+        }
+
+        if (data._parts.length == 0) {
             showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
                 // props.route.params.onGoBack();
                 props.goBack()

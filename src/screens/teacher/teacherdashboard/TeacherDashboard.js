@@ -122,6 +122,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isAddEvent, setAddEvent] = useState(false)
 
     useEffect(() => {
+        refresh()
+    }, [])
+
+    const refresh = () => {
         // if(isDesignBuild)
         //     return true
 
@@ -151,7 +155,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         })
         return () => {
         }
-    }, [])
+    }
+
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
     const [dataOfSubView, setDataOfSubView] = useState([])
@@ -190,7 +195,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     <TLDetailEdit
                         goBack={() => setTeacherLessonDetail(false)}
                         onAlertPress={() => props.navigation.openDrawer()}
-                        onRefresh={() => null}
+                        onRefresh={() => refresh()}
                         data={dataOfSubView} />
                     :
                     isAddSubject ?
