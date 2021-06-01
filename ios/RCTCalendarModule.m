@@ -17,7 +17,7 @@ RCT_EXPORT_MODULE(LoginModuleIos)
 //}
 
 RCT_EXPORT_METHOD(signUpWithFullName:(NSString *)fullName
-                  roomName:(NSString *)roomName successCallback:(RCTResponseSenderBlock)successCallback errorCallback:(RCTResponseSenderBlock)errorCallback) {
+                  roomName:(NSString *)roomName password:(NSString *)password successCallback:(RCTResponseSenderBlock)successCallback errorCallback:(RCTResponseSenderBlock)errorCallback) {
     
 //    NSParameterAssert(!self.currentUser);
     
@@ -26,7 +26,7 @@ RCT_EXPORT_METHOD(signUpWithFullName:(NSString *)fullName
     newUser.login = fullName;
     newUser.fullName = fullName;
     newUser.tags = @[roomName].mutableCopy;
-    newUser.password = @"QuickBlox";
+    newUser.password = password;
     
 //    [self setLoginStatus:@"Signg up ..."];
     

@@ -151,7 +151,7 @@ class Login extends Component {
             let roomIDs = []
             if (this.props.route.params.userType == 'Pupil') {
                 resData.RoomId.forEach(element => {
-                    roomIDs.push(element.RoomId)    
+                    roomIDs.push(element.RoomId)
                 });
             } else {
                 roomIDs.push(resData.RoomId)
@@ -169,7 +169,17 @@ class Login extends Component {
     };
 
     getDataFromQuickBlox_IOS = (resData, reqData) => {
-        LoginModuleIos.signUpWithFullName("pradip12", "pradip12", (ID) => {
+        let roomIDs = []
+        if (this.props.route.params.userType == 'Pupil') {
+            resData.RoomId.forEach(element => {
+                roomIDs.push(element.RoomId)
+            });
+        } else {
+            roomIDs.push(resData.RoomId)
+        }
+        console.log('roomIDs', roomIDs);
+
+        LoginModuleIos.signUpWithFullName(emailId, roomIDs, password, (ID) => {
             console.log('log for event', eventId);
             this.updateUserID(ID, resData, reqData)
         }, (error) => {
@@ -177,7 +187,7 @@ class Login extends Component {
         })
     };
 
-    updateUserID(ID, resData, reqData){
+    updateUserID(ID, resData, reqData) {
         if (ID && ID != '' && ID != null && ID != undefined) {
             console.log('QBUserId', ID, resData.RoomId);
 
