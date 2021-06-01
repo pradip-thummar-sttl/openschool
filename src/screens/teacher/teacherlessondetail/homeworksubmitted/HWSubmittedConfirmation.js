@@ -51,6 +51,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
@@ -62,6 +63,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     value={false}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
@@ -75,6 +77,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
@@ -87,6 +90,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}

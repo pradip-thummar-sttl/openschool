@@ -284,10 +284,10 @@ const TLDetailAdd = (props) => {
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%' }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: hp(1.85) }}>{item.ItemName}</Text>
+                        <View style={{ margin: hp(0.8), }}>
+                            <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -311,10 +311,10 @@ const TLDetailAdd = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'flex-end', position: 'absolute', right: hp(1) }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{fontSize: hp(1.6), right: hp(0.5)}}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -343,10 +343,12 @@ const TLDetailAdd = (props) => {
                                 style={PAGESTYLE.checkMark}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
+                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
+                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                 onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
@@ -368,13 +370,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.2) }} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -390,13 +392,13 @@ const TLDetailAdd = (props) => {
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -413,13 +415,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ fpadding: hp(1) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -436,13 +438,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ fpadding: hp(1) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -640,7 +642,7 @@ const TLDetailAdd = (props) => {
                                         <TouchableOpacity onPress={() => showDatePicker()}>
                                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                <View style={PAGESTYLE.subjectDateTime}>
+                                                <View style={PAGESTYLE.subjectDateTimePicker}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                     <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>

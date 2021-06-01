@@ -172,6 +172,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             style={PAGESTYLE.checkMark}
                                                             value={item.IsCheck}
                                                             disabled
+                                                            tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                                             boxType={'square'}
                                                             onCheckColor={COLORS.white}
                                                             onFillColor={COLORS.dashboardPupilBlue}

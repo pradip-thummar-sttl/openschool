@@ -84,6 +84,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                 <CheckBox
                                     style={PAGESTYLE.checkMark}
                                     value={false}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
@@ -97,6 +98,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -109,6 +111,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -121,6 +124,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}

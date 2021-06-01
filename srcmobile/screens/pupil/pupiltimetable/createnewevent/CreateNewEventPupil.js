@@ -194,18 +194,18 @@ const CreateNewEventPupil = (props) => {
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
                     onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
-                    <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
+                    <Text style={{ alignSelf: 'center', paddingStart: hp(2.28), fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8) }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                     <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
                 </TouchableOpacity>
                 {isFromDropOpen ?
-                    <View style={styles.colorDropView}>
+                    <View style={styles.colorDropView2}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFromDropOpen(false); setSelectedFromTime(item) }}>
-                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                    <Text style={{ padding: hp(1),fontSize:hp(1.8), }}>{item}</Text>
                                 </TouchableOpacity>
                             )}
                             style={{ height: 200 }} />
@@ -225,18 +225,18 @@ const CreateNewEventPupil = (props) => {
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
-                    <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
+                    <Text style={{ alignSelf: 'center', paddingStart: hp(2.28), fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8) }}>{selectedToTime ? selectedToTime : 'To'}</Text>
                     <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
                 </TouchableOpacity>
                 {isToDropOpen ?
-                    <View style={styles.colorDropView}>
+                    <View style={styles.colorDropView2}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setToDropOpen(false); setSelectedToTime(item) }}>
-                                    <Text style={{ padding: 10 }}>{item}</Text>
+                                    <Text style={{ padding: hp(1),fontSize:hp(1.8), }}>{item}</Text>
                                 </TouchableOpacity>
                             )}
                             style={{ height: 200 }} />
@@ -292,7 +292,7 @@ const CreateNewEventPupil = (props) => {
                                     <Text label style={STYLE.labelCommon}>What event is it?</Text>
                                     <View style={styles.copyInputParent}>
                                         <TextInput
-                                            multiline={false}
+                                            //multiline={false}
                                             placeholder='Name of event'
                                             value={event}
                                             placeholderStyle={styles.somePlaceholderStyle}
@@ -332,7 +332,7 @@ const CreateNewEventPupil = (props) => {
                                         <Text label style={STYLE.labelCommon}>What time is it?</Text>
                                         {fromTimeDropDown()}
                                     </View>
-                                    <View style={styles.fieldWidthtwo}>
+                                    <View style={styles.fieldWidthtwo2}>
                                         <Text label style={STYLE.labelCommon}></Text>
                                         {toTimeDropDown()}
                                     </View>
@@ -341,7 +341,7 @@ const CreateNewEventPupil = (props) => {
                                     <Text label style={STYLE.labelCommon}>Where?</Text>
                                     <View style={styles.copyInputParent}>
                                         <TextInput
-                                            multiline={false}
+                                            //multiline={false}
                                             placeholder='Enter Location'
                                             value={location}
                                             placeholderStyle={styles.somePlaceholderStyle}
@@ -354,7 +354,7 @@ const CreateNewEventPupil = (props) => {
                                     <View style={styles.notes}>
                                         <View style={[styles.copyInputParent, styles.noteInput]}>
                                             <TextInput
-                                                multiline={false}
+                                                //multiline={false}
                                                 value={note}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
@@ -388,8 +388,8 @@ const CreateNewEventPupil = (props) => {
                                 renderItem={({ item, index }) => {
                                     return (
                                         <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
-                                            <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                            <Text style={{ marginLeft: 5 }}>{item.EventType}</Text>
+                                            <Image style={{ width: hp(3), height: hp(3), borderRadius: hp(0.5), backgroundColor: item.EventColor }} />
+                                            <Text style={{ marginLeft: hp(0.5), fontSize: hp(1.6) }}>{item.EventType}</Text>
                                         </TouchableOpacity>
                                     )
                                 }}
@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
     },
     popupContent: {
         width: '100%',
-        marginTop: hp(3.88),
+        marginTop: Platform.OS == 'android' ? hp(0) : hp(3.88),
     },
     beforeBorder: {
         padding: hp(1.95),
@@ -497,14 +497,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
+        ...Platform.select({
+            android: {padding:0},
+        }),
         fontFamily: FONTS.fontSemiBold,
     },
     field: {
@@ -525,6 +526,12 @@ const styles = StyleSheet.create({
         width: '50%',
         paddingLeft: hp(0.9),
         paddingRight: hp(0.9),
+    },
+    fieldWidthtwo2: {
+        width: '50%',
+        paddingLeft: hp(0.9),
+        paddingRight: hp(0.9),
+        top: Platform.OS == 'android' ? hp(0.3) : hp(0.56),
     },
     fieldWidthtwo1: {
         width: '100%',
@@ -574,7 +581,7 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        top: hp(1.1),
+        top: Platform.OS == 'android' ? hp(0.75) : hp(1.1),
         left: hp(1.4),
     },
     subjectDateTime: {
@@ -599,7 +606,7 @@ const styles = StyleSheet.create({
         fontSize: hp(1.7),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        top: hp(-0.65),
+        top: Platform.OS == 'android' ? hp(-1) : hp(-0.65),
         left: hp(2.5),
         position: 'absolute'
     },
@@ -645,10 +652,11 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
-        top: hp(0.65),
+        marginRight: hp(1.5),
+        top: Platform.OS == 'android' ? hp(1.2) :  hp(0.65),
     },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS=='android'? hp(18) : hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: hp(1.71), bottom: hp(11.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView2: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS=='android'? hp(18) : hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: hp(1.71), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1) },
     dateTimetextdummy1: {
         fontSize: hp(1.82),

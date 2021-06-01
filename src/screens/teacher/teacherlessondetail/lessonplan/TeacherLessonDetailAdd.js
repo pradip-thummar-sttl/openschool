@@ -344,6 +344,7 @@ const TLDetailAdd = (props) => {
                             <CheckBox
                                 style={PAGESTYLE.checkMark}
                                 boxType={'square'}
+                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}

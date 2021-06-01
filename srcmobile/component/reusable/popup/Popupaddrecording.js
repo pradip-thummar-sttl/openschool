@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: hp(23.5),
+        width: Platform.OS == 'android' ? hp(25.5) : hp(23.5),
         padding: hp(1.43),
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
@@ -189,8 +189,9 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     recordLinkText: {
-        fontSize: hp(1.85),
+        fontSize: Platform.OS == 'android' ? hp(1.7) :hp(1.85),
         fontFamily: FONTS.fontSemiBold,
+        top: Platform.OS == 'android' ? hp(0.2) : hp(0),
         color: COLORS.darkGray,
         marginLeft: hp(1.56),
         textTransform: 'uppercase',

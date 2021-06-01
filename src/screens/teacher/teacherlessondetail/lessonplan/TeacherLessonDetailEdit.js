@@ -323,6 +323,7 @@ const TLDetailEdit = (props) => {
                             <CheckBox
                                 style={{ ...PAGESTYLE.checkMarkTool }}
                                 boxType={'square'}
+                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}

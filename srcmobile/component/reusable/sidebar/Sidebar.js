@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
     },
     menuText: {
-        fontSize: hp(1.8),
+        fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),

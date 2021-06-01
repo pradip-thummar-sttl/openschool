@@ -284,6 +284,7 @@ class Login extends Component {
                                         onCheckColor={COLORS.themeBlue}
                                         onTintColor={COLORS.themeBlue}
                                         tintColor={COLORS.lightplaceholder}
+                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
