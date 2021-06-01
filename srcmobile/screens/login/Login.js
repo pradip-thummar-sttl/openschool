@@ -20,7 +20,7 @@ import { User } from '../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
 
-const { LoginModuleIos } = NativeModules;
+const { LoginModuleIos, LoginModule } = NativeModules;
 
 class Login extends Component {
     constructor(props) {
@@ -84,29 +84,6 @@ class Login extends Component {
 
     }
 
-    onSubmit = async () => {
-        if (Platform.OS == 'ios') {
-            LoginModuleIos.signUpWithFullName("pradip12", "pradip12",(eventId)=>{
-                console.log('log for event', eventId);
-            },(error)=>{
-                console.log('log for error', error);
-            })
-        } else {
-            try {
-                const eventId = await LoginModule.qbLogin(
-                    'patel.dhruv3@silvertouch.com',
-                    'Admin@123456',
-                    ['Xyz1', 'Xyz2']
-                );
-                console.log(`Successfully logged with ID: ${eventId}`);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-    };
-
-
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
@@ -119,12 +96,9 @@ class Login extends Component {
         }
 
         this.setLoading(true)
-        // console.log('Base64.encode(password)', Base64.encode(password))
         Service.get(EndPoints.GetAllUserType, (res) => {
 
             if (res.flag) {
-                console.log('user type of', res)
-
                 var userData = res.data
                 var userType = ""
                 userData.map((item) => {
@@ -133,7 +107,6 @@ class Login extends Component {
                     }
                 })
 
-                console.log('user type of', userType)
                 var data = {
                     Email: userName,
                     Password: password,
@@ -145,27 +118,15 @@ class Login extends Component {
                 }
 
                 Service.post(data, EndPoints.Login, (res) => {
-                    console.log('response Login', res)
                     if (res.code == 200) {
-                        this.setLoading(false)
-                        // showMessage(res.message)
                         data.isRemember = isRemember
-                        console.log('data of login', data)
-                        if (this.props.route.params.userType == 'Pupil') {
-                            AsyncStorage.setItem('pupil', JSON.stringify(data))
-                        } else {
-                            AsyncStorage.setItem('user', JSON.stringify(data))
-                        }
-                        this.props.setUserAuthData(res.data)
-                        if (res.data.UserType === "Teacher") {
-                            this.props.navigation.replace('TeacherDashboard')
-                        } else if (res.data.UserType === "Pupil") {
-                            this.props.navigation.replace('PupuilDashboard')
-                        } else {
-                            this.props.navigation.replace('PupuilDashboard')
-                        }
                         User.user = res.data
-                        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+
+                        if (Platform.OS == 'android') {
+                            this.getDataFromQuickBlox_Android(userName, password, res.data, data)
+                        } else if (Platform.OS == 'ios') {
+                            this.getDataFromQuickBlox_IOS(res.data, data)
+                        }
                     } else {
                         this.setLoading(false)
                         showMessage(res.message)
@@ -183,8 +144,96 @@ class Login extends Component {
             this.setLoading(false)
 
         })
+    }
 
-        // return true;
+    getDataFromQuickBlox_Android = (emailId, password, resData, reqData) => {
+        try {
+            let roomIDs = []
+            if (this.props.route.params.userType == 'Pupil') {
+                resData.RoomId.forEach(element => {
+                    roomIDs.push(element.RoomId)
+                });
+            } else {
+                roomIDs.push(resData.RoomId)
+            }
+            console.log('roomIDs', roomIDs);
+
+            LoginModule.qbLogin(emailId, password, roomIDs, (error, ID) => {
+                console.log('error:eventId', error, ID);
+                this.updateUserID(ID, resData, reqData)
+            }
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    getDataFromQuickBlox_IOS = (resData, reqData) => {
+        let roomIDs = []
+        if (this.props.route.params.userType == 'Pupil') {
+            resData.RoomId.forEach(element => {
+                roomIDs.push(element.RoomId)
+            });
+        } else {
+            roomIDs.push(resData.RoomId)
+        }
+        console.log('roomIDs', roomIDs);
+
+        LoginModuleIos.signUpWithFullName(emailId, roomIDs, password, (ID) => {
+            console.log('log for event', eventId);
+            this.updateUserID(ID, resData, reqData)
+        }, (error) => {
+            console.log('log for error', error);
+        })
+    };
+
+    updateUserID(ID, resData, reqData) {
+        if (ID && ID != '' && ID != null && ID != undefined) {
+            console.log('QBUserId', ID, resData.RoomId);
+
+            if (ID == resData.QBUserId) {
+                this.setLoading(false)
+                this.launchNextScrren(resData, reqData)
+                return
+            }
+
+            var data = {
+                UserId: resData._id,
+                QBUserId: ID
+            }
+
+            console.log('data', data);
+            Service.post(data, EndPoints.SetQBUserId, (res) => {
+                this.setLoading(false)
+                console.log('res', res);
+                if (res.code == 200) {
+                    this.launchNextScrren(resData, reqData)
+                }
+            }, (err) => {
+                this.setLoading(false)
+                console.log('response Login error', err)
+            })
+        } else {
+            this.setLoading(false)
+            showMessage('Sorry, we are unable to login! Please try again.')
+        }
+    }
+
+    launchNextScrren(res, data) {
+        if (this.props.route.params.userType == 'Pupil') {
+            AsyncStorage.setItem('pupil', JSON.stringify(data))
+        } else {
+            AsyncStorage.setItem('user', JSON.stringify(data))
+        }
+        this.props.setUserAuthData(res)
+        if (res.UserType === "Teacher") {
+            this.props.navigation.replace('TeacherDashboard')
+        } else if (res.UserType === "Pupil") {
+            this.props.navigation.replace('PupuilDashboard')
+        } else {
+            this.props.navigation.replace('PupuilDashboard')
+        }
+        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
     }
 
     setLoading(flag) {
@@ -215,7 +264,7 @@ class Login extends Component {
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={STYLE.commonInput}
                                     placeholder="Enter email or phone"
-                                    autoCapitalize={false}
+                                    autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}
                                     placeholderTextColor={COLORS.lightplaceholder}
@@ -231,6 +280,7 @@ class Login extends Component {
                                         style={STYLE.commonInputPassword}
                                         placeholder="Password"
                                         value={this.state.password}
+                                        autoCapitalize={'none'}
                                         maxLength={30}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                         secureTextEntry={this.state.isPasswordHide}
@@ -269,7 +319,6 @@ class Login extends Component {
                                         isDesignBuild ?
                                             this.props.navigation.replace('TeacherDashboard')
                                             :
-                                            // this.onSubmit()
                                             this.isFieldsValidated()
 
                                     }}>

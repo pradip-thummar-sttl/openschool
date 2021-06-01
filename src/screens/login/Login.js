@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
 import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -21,6 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Base64 } from 'js-base64';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
 
+const { LoginModuleIos, LoginModule } = NativeModules;
 
 class Login extends Component {
     constructor(props) {
@@ -40,7 +41,6 @@ class Login extends Component {
 
     componentDidMount() {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
-
         if (this.props.route.params.userType == 'Pupil') {
             AsyncStorage.getItem('pupil').then((value) => {
                 var user = JSON.parse(value)
@@ -97,13 +97,9 @@ class Login extends Component {
         }
 
         this.setLoading(true)
-        // console.log('Base64.encode(password)', Base64.encode(password))
-
         Service.get(EndPoints.GetAllUserType, (res) => {
 
             if (res.flag) {
-                console.log('user type of', res)
-
                 var userData = res.data
                 var userType = ""
                 userData.map((item) => {
@@ -112,7 +108,6 @@ class Login extends Component {
                     }
                 })
 
-                console.log('user type of', userType)
                 var data = {
                     Email: userName,
                     Password: password,
@@ -124,27 +119,15 @@ class Login extends Component {
                 }
 
                 Service.post(data, EndPoints.Login, (res) => {
-                    console.log('response Login', res)
                     if (res.code == 200) {
-                        this.setLoading(false)
-                        // showMessage(res.message)
                         data.isRemember = isRemember
-                        console.log('data of login', data)
-                        if (this.props.route.params.userType == 'Pupil') {
-                            AsyncStorage.setItem('pupil', JSON.stringify(data))
-                        } else {
-                            AsyncStorage.setItem('user', JSON.stringify(data))
-                        }
-                        this.props.setUserAuthData(res.data)
-                        if (res.data.UserType === "Teacher") {
-                            this.props.navigation.replace('TeacherDashboard')
-                        } else if (res.data.UserType === "Pupil") {
-                            this.props.navigation.replace('PupuilDashboard')
-                        } else {
-                            this.props.navigation.replace('PupuilDashboard')
-                        }
                         User.user = res.data
-                        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
+
+                        if (Platform.OS == 'android') {
+                            this.getDataFromQuickBlox_Android(userName, password, res.data, data)
+                        } else if (Platform.OS == 'ios') {
+                            this.getDataFromQuickBlox_IOS(res.data, data)
+                        }
                     } else {
                         this.setLoading(false)
                         showMessage(res.message)
@@ -162,9 +145,76 @@ class Login extends Component {
             this.setLoading(false)
 
         })
+    }
 
+    getDataFromQuickBlox_Android = (emailId, password, resData, reqData) => {
+        try {
+            LoginModule.qbLogin(emailId, password, [resData.RoomId], (error, ID) => {
+                console.log('error:eventId', error, ID);
+                this.updateUserID(ID, resData, reqData)
+            }
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
-        // return true;
+    getDataFromQuickBlox_IOS = (resData, reqData) => {
+        LoginModuleIos.signUpWithFullName("pradip12", "pradip12", (ID) => {
+            console.log('log for event', eventId);
+            this.updateUserID(ID, resData, reqData)
+        }, (error) => {
+            console.log('log for error', error);
+        })
+    };
+
+    updateUserID(ID, resData, reqData){
+        if (ID && ID != '' && ID != null && ID != undefined) {
+            console.log('QBUserId', ID, resData.RoomId);
+
+            if (ID == resData.QBUserId) {
+                this.setLoading(false)
+                this.launchNextScrren(resData, reqData)
+                return
+            }
+
+            var data = {
+                UserId: resData._id,
+                QBUserId: ID
+            }
+
+            console.log('data', data);
+            Service.post(data, EndPoints.SetQBUserId, (res) => {
+                this.setLoading(false)
+                console.log('res', res);
+                if (res.code == 200) {
+                    this.launchNextScrren(resData, reqData)
+                }
+            }, (err) => {
+                this.setLoading(false)
+                console.log('response Login error', err)
+            })
+        } else {
+            this.setLoading(false)
+            showMessage('Sorry, we are unable to login! Please try again.')
+        }
+    }
+
+    launchNextScrren(res, data) {
+        if (this.props.route.params.userType == 'Pupil') {
+            AsyncStorage.setItem('pupil', JSON.stringify(data))
+        } else {
+            AsyncStorage.setItem('user', JSON.stringify(data))
+        }
+        this.props.setUserAuthData(res)
+        if (res.UserType === "Teacher") {
+            this.props.navigation.replace('TeacherDashboard')
+        } else if (res.UserType === "Pupil") {
+            this.props.navigation.replace('PupuilDashboard')
+        } else {
+            this.props.navigation.replace('PupuilDashboard')
+        }
+        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
     }
 
     setLoading(flag) {

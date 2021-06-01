@@ -185,6 +185,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation "com.quickblox:quickblox-android-sdk-conference:3.9.2"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

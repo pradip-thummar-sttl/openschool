@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -30,6 +30,7 @@ import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
+const { DialogModule } = NativeModules;
 
 const TLDetailAdd = (props) => {
     const t2 = useRef(null);
@@ -448,7 +449,7 @@ const TLDetailAdd = (props) => {
         );
     };
 
-    const saveLesson = () => {
+    const getDataFromQuickBloxAndroid = () => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
             return false;
@@ -480,8 +481,32 @@ const TLDetailAdd = (props) => {
             showMessage(MESSAGE.selectPupil);
             return false;
         }
-
+        
         setLoading(true)
+
+        let userIDs = [], userNames = [], names = [];
+        selectedPupils.forEach(pupil => {
+            userIDs.push(pupil.QBUserID)
+            userNames.push(pupil.Email)
+            names.push(pupil.FirstName + " " + pupil.LastName)
+        });
+
+        try {
+            DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                console.log('error:eventId', error, ID);
+                if (ID && ID != '' && ID != null && ID != undefined) {
+                    saveLesson(ID)
+                } else {
+                    setLoading(false)
+                    showMessage('Sorry, we are unable to add lesson!')
+                }
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const saveLesson = (ID) => {
 
         let data = {
             SubjectId: selectedSubject._id,
@@ -499,7 +524,8 @@ const TLDetailAdd = (props) => {
             IsVotingEnabled: IsVotingEnabled,
             CreatedBy: User.user._id,
             PupilList: selectedPupils,
-            CheckList: itemCheckList
+            CheckList: itemCheckList,
+            QBDilogID: ID
         }
 
         console.log('postData', data);
@@ -583,7 +609,7 @@ const TLDetailAdd = (props) => {
                         props.route.params.onGoBack();
                         props.navigation.goBack()
                     }}
-                    saveLesson={() => { saveLesson() }} />
+                    saveLesson={() => { getDataFromQuickBloxAndroid() }} />
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
