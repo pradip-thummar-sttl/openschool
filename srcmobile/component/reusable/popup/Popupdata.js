@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, ImageBackground } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -7,10 +7,13 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { baseUrl, cellWidth, Lesson, opacity } from "../../../utils/Constant";
+import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import RBSheet from "react-native-raw-bottom-sheet";
 import moment from 'moment';
+import { User } from "../../../../src/utils/Model";
+
+const { CallModule } = NativeModules;
 
 const Popupdata = (props) => {
     const refRBSheet = useRef();
@@ -19,6 +22,46 @@ const Popupdata = (props) => {
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
+
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
+        }
+    }
+
+    const startLiveClassAndroid = () => {
+        try {
+            let qBUserIDs = [], userNames = [], names = []
+            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
+            props.data.PupilList.forEach(pupil => {
+                qBUserIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+            let dialogID = props.data.QBDilogID
+            let QBUserId = User.user.QBUserId
+            let currentName = User.user.FirstName + " " + User.user.LastName
+
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+
+            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                console.log('Class Started');
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const startLiveClassIOS = () => {
+
+    }
 
     return (
         <View>
@@ -196,7 +239,12 @@ const Popupdata = (props) => {
                             <View style={{ width: hp(20) }}></View>
                         } */}
                         <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreenbordered]}>mark as absent</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text></TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttonGrp}
+                            activeOpacity={opacity}
+                            onPress={() => { launchLiveClass() }}>
+                            <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </RBSheet>
@@ -373,7 +421,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingTop:  Platform.OS == 'android' ? hp(1.3) : hp(1.21),
+        paddingTop: Platform.OS == 'android' ? hp(1.3) : hp(1.21),
         paddingLeft: Platform.OS == 'android' ? hp(2.5) : hp(3),
         paddingRight: Platform.OS == 'android' ? hp(2.5) : hp(3),
         paddingBottom: Platform.OS == 'android' ? hp(0.7) : hp(1.21),
@@ -389,7 +437,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingTop:  Platform.OS == 'android' ? hp(1.3) : hp(1.21),
+        paddingTop: Platform.OS == 'android' ? hp(1.3) : hp(1.21),
         paddingLeft: Platform.OS == 'android' ? hp(4.5) : hp(4.94),
         paddingRight: Platform.OS == 'android' ? hp(4.5) : hp(4.94),
         paddingBottom: Platform.OS == 'android' ? hp(1) : hp(1.21),

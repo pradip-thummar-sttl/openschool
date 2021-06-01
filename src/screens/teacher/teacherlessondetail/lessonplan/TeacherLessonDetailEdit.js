@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
@@ -33,6 +33,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
+
+const { DialogModule } = NativeModules;
 
 const TLDetailEdit = (props) => {
     const item = useRef(null)
@@ -431,8 +433,7 @@ const TLDetailEdit = (props) => {
         );
     };
 
-    const saveLesson = () => {
-
+    const getDataFromQuickBloxAndroid = () => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
             return false;
@@ -467,6 +468,39 @@ const TLDetailEdit = (props) => {
 
         setLoading(true)
 
+        createQBDialog()
+    };
+
+    const createQBDialog = () => {
+        if (isRunningFromVirtualDevice) {
+            saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
+        } else {
+            let userIDs = [], userNames = [], names = [];
+            selectedPupils.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+
+            if (Platform.OS == 'android') {
+                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                    console.log('error:eventId', error, ID);
+                    if (ID && ID != '' && ID != null && ID != undefined) {
+                        saveLesson(ID)
+                    } else {
+                        setLoading(false)
+                        showMessage('Sorry, we are unable to add lesson!')
+                    }
+                });
+            } else {
+                // Call IOS native module here
+            }
+        }
+    }
+
+    const saveLesson = (ID) => {
+
         let data = {
             SubjectId: selectedSubject._id,
             LessonTopic: lessonTopic,
@@ -483,12 +517,11 @@ const TLDetailEdit = (props) => {
             IsVotingEnabled: IsVotingEnabled,
             CreatedBy: User.user._id,
             PupilList: selectedPupils,
-            CheckList: itemCheckList
+            CheckList: itemCheckList,
+            QBDilogID: ID
         }
 
-        console.log('postData', data.LessonDate, lessonData._id);
-        // return
-
+        console.log('postData', data);
         Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
             if (res.code == 200) {
                 uploadMatirial(res.data._id)
@@ -501,7 +534,6 @@ const TLDetailEdit = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
-
     const uploadMatirial = (lessionId) => {
         let data = new FormData();
 

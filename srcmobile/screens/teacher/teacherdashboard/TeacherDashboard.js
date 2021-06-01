@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -76,7 +76,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
 
     useEffect(() => {
-       refresh()
+        refresh()
     }, [])
 
     const refresh = () => {
@@ -108,6 +108,18 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         }
     }
 
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
+        }
+    }
+
     const startLiveClassAndroid = () => {
         try {
             let qBUserIDs = [], userNames = [], names = []
@@ -131,6 +143,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.error(e);
         }
     };
+
+    const startLiveClassIOS = () => {
+
+    }
 
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
@@ -359,7 +375,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             <Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
                                                         <TouchableOpacity
                                                             style={PAGESTYLE.buttonGrp}
-                                                            onPress={() => { startLiveClassAndroid() }}>
+                                                            onPress={() => { launchLiveClass() }}>
                                                             <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
                                                         </TouchableOpacity>
                                                     </View>

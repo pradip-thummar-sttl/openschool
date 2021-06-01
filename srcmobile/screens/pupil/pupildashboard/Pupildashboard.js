@@ -62,6 +62,18 @@ const PupuilDashboard = (props) => {
         })
     }, [])
 
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
+        }
+    }
+
     const startLiveClassAndroid = () => {
         try {
             let qBUserIDs = [], userNames = [], names = []
@@ -87,6 +99,9 @@ const PupuilDashboard = (props) => {
             console.error(e);
         }
     };
+
+    const startLiveClassIOS = () => {
+    }
 
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
@@ -293,7 +308,7 @@ const PupuilDashboard = (props) => {
                                                                     <View style={PAGESTYLE.lessonstartButton}>
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}
-                                                                            onPress={() => { startLiveClassAndroid() }}>
+                                                                            onPress={() => { launchLiveClass() }}>
                                                                             <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
                                                                         </TouchableOpacity>
                                                                     </View>

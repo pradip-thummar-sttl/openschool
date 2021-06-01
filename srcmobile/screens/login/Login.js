@@ -9,7 +9,7 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-import { opacity, showMessage, isDesignBuild } from '../../utils/Constant';
+import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
 import { connect } from 'react-redux';
@@ -122,10 +122,14 @@ class Login extends Component {
                         data.isRemember = isRemember
                         User.user = res.data
 
-                        if (Platform.OS == 'android') {
-                            this.getDataFromQuickBlox_Android(userName, password, res.data, data)
-                        } else if (Platform.OS == 'ios') {
-                            this.getDataFromQuickBlox_IOS(res.data, data)
+                        if (isRunningFromVirtualDevice) {
+                            this.updateUserID('RUNNIN_FROM_VIRTUAL_DEVICE', res.data, data)
+                        } else {
+                            if (Platform.OS == 'android') {
+                                this.getDataFromQuickBlox_Android(userName, password, res.data, data)
+                            } else if (Platform.OS == 'ios') {
+                                this.getDataFromQuickBlox_IOS(res.data, data)
+                            }
                         }
                     } else {
                         this.setLoading(false)
@@ -299,7 +303,7 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                         style={STYLE.checkBoxcommon1}
                                         value={this.state.isRemember}
                                         onCheckColor={COLORS.themeBlue}

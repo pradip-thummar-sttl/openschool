@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -9,7 +9,7 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack } from "../../../../utils/Constant";
+import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack, isRunningFromVirtualDevice } from "../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
@@ -314,7 +314,7 @@ const TLDetailAdd = (props) => {
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: hp(1) }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text style={{fontSize: hp(1.6), right: hp(0.5)}}>ADD ITEM</Text>
+                        <Text style={{ fontSize: hp(1.6), right: hp(0.5) }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -343,12 +343,12 @@ const TLDetailAdd = (props) => {
                                 style={PAGESTYLE.checkMark}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
@@ -483,30 +483,38 @@ const TLDetailAdd = (props) => {
             showMessage(MESSAGE.selectPupil);
             return false;
         }
-        
+
         setLoading(true)
 
-        let userIDs = [], userNames = [], names = [];
-        selectedPupils.forEach(pupil => {
-            userIDs.push(pupil.QBUserID)
-            userNames.push(pupil.Email)
-            names.push(pupil.FirstName + " " + pupil.LastName)
-        });
-
-        try {
-            DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                console.log('error:eventId', error, ID);
-                if (ID && ID != '' && ID != null && ID != undefined) {
-                    saveLesson(ID)
-                } else {
-                    setLoading(false)
-                    showMessage('Sorry, we are unable to add lesson!')
-                }
-            });
-        } catch (e) {
-            console.error(e);
-        }
+        createQBDialog()
     };
+
+    const createQBDialog = () => {
+        if (isRunningFromVirtualDevice) {
+            saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
+        } else {
+            let userIDs = [], userNames = [], names = [];
+            selectedPupils.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+            if (Platform.OS == 'android') {
+                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                    console.log('error:eventId', error, ID);
+                    if (ID && ID != '' && ID != null && ID != undefined) {
+                        saveLesson(ID)
+                    } else {
+                        setLoading(false)
+                        showMessage('Sorry, we are unable to add lesson!')
+                    }
+                });
+            } else {
+                // Call IOS native module here
+            }
+        }
+    }
 
     const saveLesson = (ID) => {
 

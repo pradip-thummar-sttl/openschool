@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { User } from "../../../utils/Model";
@@ -20,6 +20,8 @@ import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailE
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+const { CallModule } = NativeModules;
 
 const Item = ({ onPress, style, item }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
@@ -155,6 +157,46 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         })
         return () => {
         }
+    }
+
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
+        }
+    }
+
+    const startLiveClassAndroid = () => {
+        try {
+            let qBUserIDs = [], userNames = [], names = []
+            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
+            dataOfSubView.PupilList.forEach(pupil => {
+                qBUserIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+            let dialogID = dataOfSubView.QBDilogID
+            let QBUserId = User.user.QBUserId
+            let currentName = User.user.FirstName + " " + User.user.LastName
+
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+
+            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                console.log('Class Started');
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const startLiveClassIOS = () => {
+
     }
 
     const [isHide, action] = useState(true);
@@ -343,7 +385,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         onPress={() => setTeacherLessonDetail(true)}>
                                                                         <Text style={STYLE.commonButtonBordered}>Edit Lesson</Text>
                                                                     </TouchableOpacity>
-                                                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                                                    <TouchableOpacity
+                                                                        style={PAGESTYLE.buttonGrp}
+                                                                        onPress={() => { launchLiveClass() }}>
+                                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                                    </TouchableOpacity>
                                                                 </View>
                                                             </View>
                                                             {/* <View style={PAGESTYLE.tabcontent}>
