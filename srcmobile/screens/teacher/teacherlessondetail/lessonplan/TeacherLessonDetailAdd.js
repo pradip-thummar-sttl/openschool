@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -30,7 +30,7 @@ import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
-const { DialogModule } = NativeModules;
+const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
     const t2 = useRef(null);
@@ -481,7 +481,7 @@ const TLDetailAdd = (props) => {
             showMessage(MESSAGE.selectPupil);
             return false;
         }
-        
+
         setLoading(true)
 
         let userIDs = [], userNames = [], names = [];
@@ -490,20 +490,38 @@ const TLDetailAdd = (props) => {
             userNames.push(pupil.Email)
             names.push(pupil.FirstName + " " + pupil.LastName)
         });
-
-        try {
-            DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                console.log('error:eventId', error, ID);
-                if (ID && ID != '' && ID != null && ID != undefined) {
-                    saveLesson(ID)
-                } else {
-                    setLoading(false)
-                    showMessage('Sorry, we are unable to add lesson!')
-                }
-            });
-        } catch (e) {
-            console.error(e);
+        if (Platform.OS === 'android') {
+            try {
+                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                    console.log('error:eventId', error, ID);
+                    if (ID && ID != '' && ID != null && ID != undefined) {
+                        saveLesson(ID)
+                    } else {
+                        setLoading(false)
+                        showMessage('Sorry, we are unable to add lesson!')
+                    }
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            try {
+                Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
+                    console.log('eventId--------------------', ID);
+                    if (ID && ID != '' && ID != null && ID != undefined) {
+                        saveLesson(ID)
+                    } else {
+                        setLoading(false)
+                        showMessage('Sorry, we are unable to add lesson!')
+                    }
+                },(error)=>{
+                    console.log('event error--------------------', error);
+                });
+            } catch (e) {
+                console.error(e);
+            }
         }
+
     };
 
     const saveLesson = (ID) => {

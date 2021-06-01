@@ -17,7 +17,7 @@ RCT_EXPORT_MODULE(LoginModuleIos)
 //}
 
 RCT_EXPORT_METHOD(signUpWithFullName:(NSString *)fullName
-                  roomName:(NSString *)roomName password:(NSString *)password successCallback:(RCTResponseSenderBlock)successCallback errorCallback:(RCTResponseSenderBlock)errorCallback) {
+                  roomName:(NSArray *)roomName password:(NSString *)password successCallback:(RCTResponseSenderBlock)successCallback errorCallback:(RCTResponseSenderBlock)errorCallback) {
     
 //    NSParameterAssert(!self.currentUser);
     

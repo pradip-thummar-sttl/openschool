@@ -19,6 +19,10 @@
 		540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C803CDC5ED40679094DFEC /* Poppins-Italic.ttf */; };
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8833B50F26661A2D000938B6 /* CreateDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8833B50E26661A2D000938B6 /* CreateDialog.m */; };
+		8833B51726663EB0000938B6 /* calls.m in Sources */ = {isa = PBXBuildFile; fileRef = 8833B51626663EB0000938B6 /* calls.m */; };
+		8833B51A266643B1000938B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8833B519266643B1000938B6 /* Main.storyboard */; };
+		8833B533266649F9000938B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8833B519266643B1000938B6 /* Main.storyboard */; };
 		887374E6265E35190035B788 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374E5265E35190035B788 /* MobileCoreServices.framework */; };
 		887374E8265E35270035B788 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374E7265E35270035B788 /* CFNetwork.framework */; };
 		887374EA265E353A0035B788 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374E9265E353A0035B788 /* VideoToolbox.framework */; };
@@ -66,6 +70,31 @@
 		4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8833B50D26661A2D000938B6 /* CreateDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateDialog.h; sourceTree = "<group>"; };
+		8833B50E26661A2D000938B6 /* CreateDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateDialog.m; sourceTree = "<group>"; };
+		8833B51526663EB0000938B6 /* calls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calls.h; sourceTree = "<group>"; };
+		8833B51626663EB0000938B6 /* calls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calls.m; sourceTree = "<group>"; };
+		8833B519266643B1000938B6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8833B51C266643B6000938B6 /* ZoomedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZoomedView.h; sourceTree = "<group>"; };
+		8833B51D266643B6000938B6 /* OpponentsFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpponentsFlowLayout.h; sourceTree = "<group>"; };
+		8833B51E266643B6000938B6 /* StatsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
+		8833B51F266643B6000938B6 /* LocalVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalVideoView.m; sourceTree = "<group>"; };
+		8833B520266643B6000938B6 /* CallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallViewController.h; sourceTree = "<group>"; };
+		8833B521266643B6000938B6 /* OpponentsFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpponentsFlowLayout.m; sourceTree = "<group>"; };
+		8833B522266643B6000938B6 /* ZoomedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomedView.m; sourceTree = "<group>"; };
+		8833B523266643B6000938B6 /* StatsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
+		8833B524266643B6000938B6 /* LocalVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalVideoView.h; sourceTree = "<group>"; };
+		8833B525266643B6000938B6 /* CallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallViewController.m; sourceTree = "<group>"; };
+		8833B527266643C1000938B6 /* CornerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CornerView.h; sourceTree = "<group>"; };
+		8833B528266643C1000938B6 /* CornerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CornerView.m; sourceTree = "<group>"; };
+		8833B52A266643C7000938B6 /* OpponentCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpponentCollectionViewCell.m; sourceTree = "<group>"; };
+		8833B52B266643C7000938B6 /* OpponentCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpponentCollectionViewCell.h; sourceTree = "<group>"; };
+		8833B52D266643CC000938B6 /* QBButtonsFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBButtonsFactory.m; sourceTree = "<group>"; };
+		8833B52E266643CC000938B6 /* QBButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBButton.h; sourceTree = "<group>"; };
+		8833B52F266643CC000938B6 /* QBToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBToolBar.m; sourceTree = "<group>"; };
+		8833B530266643CC000938B6 /* QBToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBToolBar.h; sourceTree = "<group>"; };
+		8833B531266643CC000938B6 /* QBButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBButton.m; sourceTree = "<group>"; };
+		8833B532266643CC000938B6 /* QBButtonsFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBButtonsFactory.h; sourceTree = "<group>"; };
 		887374E5265E35190035B788 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		887374E7265E35270035B788 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		887374E9265E353A0035B788 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -156,15 +185,21 @@
 		13B07FAE1A68108700A75B9A /* OpenSchool */ = {
 			isa = PBXGroup;
 			children = (
+				8833B518266643A6000938B6 /* call */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				88D20503265E253200D97116 /* RCTCalendarModule.h */,
 				88D20504265E253200D97116 /* RCTCalendarModule.m */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				8833B519266643B1000938B6 /* Main.storyboard */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				8833B50D26661A2D000938B6 /* CreateDialog.h */,
+				8833B50E26661A2D000938B6 /* CreateDialog.m */,
+				8833B51526663EB0000938B6 /* calls.h */,
+				8833B51626663EB0000938B6 /* calls.m */,
 			);
 			name = OpenSchool;
 			sourceTree = "<group>";
@@ -227,6 +262,65 @@
 				2D02E4901E0B4A5D006451C7 /* OpenSchool-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8833B518266643A6000938B6 /* call */ = {
+			isa = PBXGroup;
+			children = (
+				8833B52C266643CC000938B6 /* QBToolBar */,
+				8833B529266643C7000938B6 /* OpponentCollectionViewCell */,
+				8833B526266643C1000938B6 /* CornerView */,
+				8833B51B266643B6000938B6 /* CallViewController */,
+			);
+			name = call;
+			sourceTree = "<group>";
+		};
+		8833B51B266643B6000938B6 /* CallViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8833B51C266643B6000938B6 /* ZoomedView.h */,
+				8833B51D266643B6000938B6 /* OpponentsFlowLayout.h */,
+				8833B51E266643B6000938B6 /* StatsView.m */,
+				8833B51F266643B6000938B6 /* LocalVideoView.m */,
+				8833B520266643B6000938B6 /* CallViewController.h */,
+				8833B521266643B6000938B6 /* OpponentsFlowLayout.m */,
+				8833B522266643B6000938B6 /* ZoomedView.m */,
+				8833B523266643B6000938B6 /* StatsView.h */,
+				8833B524266643B6000938B6 /* LocalVideoView.h */,
+				8833B525266643B6000938B6 /* CallViewController.m */,
+			);
+			path = CallViewController;
+			sourceTree = "<group>";
+		};
+		8833B526266643C1000938B6 /* CornerView */ = {
+			isa = PBXGroup;
+			children = (
+				8833B527266643C1000938B6 /* CornerView.h */,
+				8833B528266643C1000938B6 /* CornerView.m */,
+			);
+			path = CornerView;
+			sourceTree = "<group>";
+		};
+		8833B529266643C7000938B6 /* OpponentCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8833B52A266643C7000938B6 /* OpponentCollectionViewCell.m */,
+				8833B52B266643C7000938B6 /* OpponentCollectionViewCell.h */,
+			);
+			path = OpponentCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		8833B52C266643CC000938B6 /* QBToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				8833B52D266643CC000938B6 /* QBButtonsFactory.m */,
+				8833B52E266643CC000938B6 /* QBButton.h */,
+				8833B52F266643CC000938B6 /* QBToolBar.m */,
+				8833B530266643CC000938B6 /* QBToolBar.h */,
+				8833B531266643CC000938B6 /* QBButton.m */,
+				8833B532266643CC000938B6 /* QBButtonsFactory.h */,
+			);
+			path = QBToolBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8833B533266649F9000938B6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +470,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */,
 				540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */,
+				8833B51A266643B1000938B6 /* Main.storyboard in Resources */,
 				6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */,
 				C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */,
 				11BAC19FCA954DAEB65A7D86 /* Poppins-SemiBold.ttf in Resources */,
@@ -558,7 +654,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */,
+				8833B50F26661A2D000938B6 /* CreateDialog.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				8833B51726663EB0000938B6 /* calls.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
