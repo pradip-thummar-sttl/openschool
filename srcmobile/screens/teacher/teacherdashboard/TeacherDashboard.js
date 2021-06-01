@@ -80,12 +80,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }, [])
 
     const refresh = () => {
-         // if(isDesignBuild)
-        //     return true
-        refresh()
-    }, []
-
-    const refresh = () => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
