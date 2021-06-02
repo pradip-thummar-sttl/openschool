@@ -160,7 +160,7 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
-        width: hp(46.18),
+        width: '100%',
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
          paddingRight: hp(2.46),
