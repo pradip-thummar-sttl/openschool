@@ -10,15 +10,20 @@
 
 
 @implementation Calls
-RCT_EXPORT_MODULE(CallModule);
-RCT_EXPORT_METHOD(createCall){
-//  CallViewController *VC = [[CallViewController alloc]initWithNibName:@"Main" bundle:nil];
-//  [[[UINavigationController alloc] initWithRootViewController:VC] pushViewController:VC animated:NO];
-
-}
+RCT_EXPORT_MODULE(CallModule)
+//RCT_EXPORT_METHOD(createCall){
+//  
+//  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Mains" bundle:nil];
+//  CallViewController *VC = [storyboard instantiateViewControllerWithIdentifier:@"CallViewController"];
+//  [self presentViewController:VC animated:YES completion:NULL];
+//
+//
+//
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+ 
 }
 
 /*

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -16,7 +16,7 @@ import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { User } from "../../../utils/Model";
 
-const { CallModule } = NativeModules;
+const { CallModule, CallModuleIos } = NativeModules;
 
 // const Pupillist = ({ item }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
@@ -124,16 +124,23 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
-                console.log('Class Started');
-            });
+            
+            if (Platform.OS === 'android') {
+                console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                    console.log('Class Started');
+                });
+            }else{
+                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModuleIos.createCall((id)=>{
+                    console.log('hi id:---------', id)
+                })
+            }
+            
         } catch (e) {
             console.error(e);
         }
     };
-
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
     const [dataOfSubView, setDataOfSubView] = useState([])
