@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
     },
     popupContent: {
         width: '100%',
-        marginTop: hp(3.88),
+        marginTop: Platform.OS == 'android' ? hp(0) : hp(5),
     },
     beforeBorder: {
         padding: hp(1.95),
