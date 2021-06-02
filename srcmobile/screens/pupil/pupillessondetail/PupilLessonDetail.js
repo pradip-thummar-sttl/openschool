@@ -41,6 +41,7 @@ const PupilLessonDetail = (props) => {
     const [currentWeekLesson, setCurrentWeekLesson] = useState([]);
     const [lastWeekLesson, setLastWeekLesson] = useState([]);
 
+    const initialRender = useRef(true);
 
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -49,28 +50,36 @@ const PupilLessonDetail = (props) => {
 
     useEffect(() => {
         console.log('keyword', keyword);
-        if (!isSearchActive) {
-            setKeyword('')
-            if (isLesson) {
-                getLessonData('', '')
-            } else {
-                getHomeworkData('', '')
-            }
-            textInput.current.clear()
+        if (initialRender.current) {
+            initialRender.current = false
         } else {
-            if (isLesson) {
-                getLessonData(keyword, '')
+            if (!isSearchActive) {
+                setKeyword('')
+                if (isLesson) {
+                    getLessonData('', '')
+                } else {
+                    getHomeworkData('', '')
+                }
+                textInput.current.clear()
             } else {
-                getHomeworkData(keyword, '')
+                if (isLesson) {
+                    getLessonData(keyword, '')
+                } else {
+                    getHomeworkData(keyword, '')
+                }
             }
         }
     }, [isSearchActive])
 
     useEffect(() => {
-        if (isLesson) {
-            getLessonData(keyword, filterBy)
+        if (initialRender.current) {
+            initialRender.current = false
         } else {
-            getHomeworkData(keyword, filterBy)
+            if (isLesson) {
+                getLessonData(keyword, filterBy)
+            } else {
+                getHomeworkData(keyword, filterBy)
+            }
         }
     }, [filterBy])
 
@@ -93,7 +102,6 @@ const PupilLessonDetail = (props) => {
 
         console.log('data', data);
         Service.post(data, `${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of all pupil homework list', res)
             if (res.flag) {
                 var due = []
                 var submit = []
@@ -107,7 +115,7 @@ const PupilLessonDetail = (props) => {
                         submit.push(item)
                     }
                 })
-                console.log('tripple array', marked, due, submit)
+                console.log('due', due.length, "submit", submit.length, "marked", marked.length);
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
                 setMarkedHomeWork(marked)
@@ -127,7 +135,6 @@ const PupilLessonDetail = (props) => {
 
         console.log('data', data, User.user.UserDetialId);
         Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
-            console.log('Get All Pupil LessonList response', res)
             var startDate = moment().startOf('week');
             var endDate = moment().endOf('week');
             var current = []
@@ -140,7 +147,7 @@ const PupilLessonDetail = (props) => {
                     last.push(item)
                 }
             })
-            console.log('current', current, "last", last);
+            console.log('current', current.length, "last", last.length);
             setCurrentWeekLesson(current)
             setLastWeekLesson(last)
         }, (err) => {
@@ -245,7 +252,7 @@ const PupilLessonDetail = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     {
                         isLesson ?
-                            currentWeekLesson.length > 0 && lastWeekLesson.length > 0 ?
+                            currentWeekLesson.length > 0 || lastWeekLesson.length > 0 ?
                                 <PupilLesson
                                     currentWeekLesson={currentWeekLesson}
                                     lastWeekLesson={lastWeekLesson}
@@ -255,7 +262,7 @@ const PupilLessonDetail = (props) => {
                                     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                 </View>
                             :
-                            DueHomeWork.length > 0 && SubmitHomeWork.length > 0 && MarkedHomeWork.length > 0 ?
+                            DueHomeWork.length > 0 || SubmitHomeWork.length > 0 || MarkedHomeWork.length > 0 ?
                                 <PupilLessonDue
                                     DueHomeWork={DueHomeWork}
                                     SubmitHomeWork={SubmitHomeWork}

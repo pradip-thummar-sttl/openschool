@@ -30,6 +30,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [feedBack, setFeedback] = useState('')
     const [recordingArr, setRecordingArr] = useState([])
     const [isLoading, setLoading] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
     const [isAddRecording, setAddRecording] = useState(false)
 
     const [isBronze, setBronze] = useState(false);
@@ -45,19 +46,24 @@ const TLHomeWorkSubmittedDetail = (props) => {
         let formData = new FormData();
 
         recordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             formData.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 
         formData.append("Feedback", feedBack);
         formData.append("Rewards", '1');
 
+        setLoading(true)
+
         Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
+                setModalVisible(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
@@ -67,9 +73,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
             } else {
                 showMessage(res.message)
                 setLoading(false)
+                setModalVisible(false)
             }
         }, (err) => {
             setLoading(false)
+            setModalVisible(false)
             console.log('response of get all lesson error', err)
         })
     }
@@ -108,6 +116,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <HeaderSave
+                    isLoading={isLoading}
+                    isModalVisible={isModalVisible}
                     isMarked={data.Marked ? true : false}
                     isSubmitted={data.Submited ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
@@ -119,7 +129,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         <View style={PAGESTYLE.whiteBg}>
                             <View style={PAGESTYLE.containerWrapTop}>
                                 <View style={PAGESTYLE.userLeft}>
-                                <Image source={{ uri: baseUrl + data.ProfilePicture }} style={PAGESTYLE.userThumb} />
+                                    <Image source={{ uri: baseUrl + data.ProfilePicture }} style={PAGESTYLE.userThumb} />
                                     <View>
                                         <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
                                         <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
@@ -162,7 +172,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             style={PAGESTYLE.checkMark}
                                                             value={item.IsCheck}
                                                             disabled
-                                                            tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                             boxType={'square'}
                                                             onCheckColor={COLORS.white}
                                                             onFillColor={COLORS.dashboardPupilBlue}

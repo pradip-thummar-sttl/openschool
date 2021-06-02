@@ -47,7 +47,7 @@ const PupilLessonDetail = (props) => {
     const [lastWeekLesson, setLastWeekLesson] = useState([]);
 
     const [item, setItem] = useState([]);
-
+    const initialRender = useRef(true);
 
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -55,28 +55,37 @@ const PupilLessonDetail = (props) => {
     const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
-        if (!isSearchActive) {
-            setKeyword('')
-            if (isLesson) {
-                getLessonData('', '')
-            } else {
-                getHomeworkData('', '')
-            }
-            textInput.current.clear()
+        console.log('keyword', keyword);
+        if (initialRender.current) {
+            initialRender.current = false
         } else {
-            if (isLesson) {
-                getLessonData(keyword, '')
+            if (!isSearchActive) {
+                setKeyword('')
+                if (isLesson) {
+                    getLessonData('', '')
+                } else {
+                    getHomeworkData('', '')
+                }
+                textInput.current.clear()
             } else {
-                getHomeworkData(keyword, '')
+                if (isLesson) {
+                    getLessonData(keyword, '')
+                } else {
+                    getHomeworkData(keyword, '')
+                }
             }
         }
     }, [isSearchActive])
 
     useEffect(() => {
-        if (isLesson) {
-            getLessonData(keyword, filterBy)
+        if (initialRender.current) {
+            initialRender.current = false
         } else {
-            getHomeworkData(keyword, filterBy)
+            if (isLesson) {
+                getLessonData(keyword, filterBy)
+            } else {
+                getHomeworkData(keyword, filterBy)
+            }
         }
     }, [filterBy])
 
@@ -113,7 +122,7 @@ const PupilLessonDetail = (props) => {
                     }
                 });
 
-                console.log('tripple array', marked, due, submit)
+                console.log('tripple array1', marked, due, submit)
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
                 setMarkedHomeWork(marked)

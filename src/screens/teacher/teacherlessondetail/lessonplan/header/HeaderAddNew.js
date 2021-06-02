@@ -30,16 +30,13 @@ const HeaderAddNew = (props) => {
                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                             color={COLORS.white} />
                         :
-                        props.isLoading == null ?
-                            null
-                            :
-                            <TouchableOpacity
-                                style={styles.buttonGroup}
-                                activeOpacity={opacity}
-                                onPress={() => props.saveLesson()}>
-                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                                <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttonGroup}
+                            activeOpacity={opacity}
+                            onPress={() => props.saveLesson()}>
+                            <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                            <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
+                        </TouchableOpacity>
                     }
                     <TouchableOpacity
                         style={styles.notificationBar}

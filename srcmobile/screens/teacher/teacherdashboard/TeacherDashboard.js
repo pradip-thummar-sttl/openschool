@@ -134,7 +134,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+            console.log('KDKD: Teacher', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
                 console.log('Class Started');

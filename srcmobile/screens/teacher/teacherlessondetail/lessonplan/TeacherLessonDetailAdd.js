@@ -479,6 +479,9 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
+        } else if (recordingArr.length == 0) {
+            showMessage(MESSAGE.recording);
+            return false;
         } else if (selectedPupils.length == 0) {
             showMessage(MESSAGE.selectPupil);
             return false;
@@ -579,7 +582,7 @@ const TLDetailAdd = (props) => {
                 props.route.params.onGoBack();
                 props.navigation.goBack()
             })
-            setLoading(null)
+            setLoading(false)
             return
         }
 
@@ -587,7 +590,7 @@ const TLDetailAdd = (props) => {
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
-                setLoading(null)
+                setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonAdded, () => {

@@ -467,6 +467,9 @@ const TLDetailEdit = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
+        } else if (recordingArr.length == 0) {
+            showMessage(MESSAGE.recording);
+            return false;
         } else if (selectedPupils.length == 0) {
             showMessage(MESSAGE.selectPupil);
             return false;
@@ -487,7 +490,6 @@ const TLDetailEdit = (props) => {
                 userNames.push(pupil.Email)
                 names.push(pupil.FirstName + " " + pupil.LastName)
             });
-
 
             if (Platform.OS == 'android') {
                 DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
@@ -571,7 +573,7 @@ const TLDetailEdit = (props) => {
                 props.route.params.onGoBack();
                 props.navigation.goBack()
             })
-            setLoading(null)
+            setLoading(false)
             return
         }
 
@@ -580,7 +582,7 @@ const TLDetailEdit = (props) => {
                 props.route.params.onGoBack();
                 props.navigation.goBack()
             })
-            setLoading(null)
+            setLoading(false)
             return
         }
 
@@ -590,7 +592,7 @@ const TLDetailEdit = (props) => {
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
-                setLoading(null)
+                setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonUpdated, () => {

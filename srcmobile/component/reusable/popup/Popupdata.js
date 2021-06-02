@@ -201,7 +201,7 @@ const Popupdata = (props) => {
                             <View style={styles.attchmentSectionwithLink}>
                                 <TouchableOpacity style={styles.attachment}>
                                     <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                    <Text style={styles.attachmentText}>1 Attachment</Text>
+                                    <Text style={styles.attachmentText}>{props.data.MaterialList ? props.data.MaterialList.length : 0} Attachment(s)</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity>
                                     <Text style={styles.linkText}>see more</Text>

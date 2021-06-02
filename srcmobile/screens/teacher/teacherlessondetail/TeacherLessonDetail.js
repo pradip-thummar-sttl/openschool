@@ -80,7 +80,7 @@ const TeacherLessonDetail = (props) => {
                 console.log('res', res);
                 if (res.flag) {
                     // setHomeworkLoading(false)
-                    setVisiblePopup(false)
+                    // setVisiblePopup(false)
                     // showMessage('Homework updated successfully')
 
                     uploadMatirial(res.data._id)
@@ -97,7 +97,7 @@ const TeacherLessonDetail = (props) => {
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
                 // setHomeworkLoading(false)
-                setVisiblePopup(false)
+                // setVisiblePopup(false)
                 // showMessage('Homework added successfully')
                 console.log('res First', res);
                 uploadMatirial(res.data._id)
@@ -147,6 +147,7 @@ const TeacherLessonDetail = (props) => {
                 props.navigation.goBack()
             })
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             return
         }
 
@@ -162,6 +163,7 @@ const TeacherLessonDetail = (props) => {
                 props.navigation.goBack()
             })
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             return
         }
 
@@ -171,6 +173,7 @@ const TeacherLessonDetail = (props) => {
             console.log('res11', res);
             if (res.code == 200) {
                 setHomeworkLoading(false)
+                setVisiblePopup(false)
                 // setDefaults()
                 let msg
                 if (Addhomework.IsUpdate) {
@@ -185,9 +188,11 @@ const TeacherLessonDetail = (props) => {
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
+                setVisiblePopup(false)
             }
         }, (err) => {
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             console.log('response of get all lesson error', err)
         })
 

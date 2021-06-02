@@ -1046,9 +1046,17 @@ export default StyleSheet.create({
         height: hp(25.86),
         resizeMode: 'contain',
     },
+    largeVideo1: {
+        backgroundColor: COLORS.black,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    },
     largeVideoBlock: {
         width: '100%',
-        height: hp(25.86),
+        height: 200,
     },
     moreIcon: {
         width: hp(2.41),

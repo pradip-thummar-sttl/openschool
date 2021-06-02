@@ -10,7 +10,7 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { baseUrl, opacity, showMessage, Var } from "../../../utils/Constant";
+import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
@@ -88,13 +88,18 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
+            let teacherUserName = dataOfSubView.TeacherUserName
+            let teacherUser = dataOfSubView.TeacherFirstName + " " + dataOfSubView.TeacherLastName
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+            qBUserIDs.push(teacherQBUserID)
+            userNames.push(teacherUserName)
+            names.push(teacherUser)
+
+            console.log('KDKD: Pupil', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
                 console.log('Class Started');
-            }
-            );
+            });
         } catch (e) {
             console.error(e);
         }
