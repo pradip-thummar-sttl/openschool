@@ -117,7 +117,7 @@ const Header = (props) => {
                     </Menu>
                 </View>
                 <TouchableOpacity
-                    style={styles.buttonGroup}
+                    style={{marginLeft: 10}}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />

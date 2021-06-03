@@ -25,7 +25,7 @@ import {
 import COLORS from "../../../utils/Colors";
 import MESSAGE from "../../../utils/Messages";
 import ScreenAndCameraRecording from "../../../../src/screens/teacher/screenandcamera/ScreenandCamera";
-import TLVideoGallery from "../../../../src/screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
+import TLVideoGallery from "../teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
 import moment from "moment";
 
 const TeacherLessonDetail = (props) => {

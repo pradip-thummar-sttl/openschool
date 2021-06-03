@@ -166,7 +166,7 @@ const TeacherTimeTable = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+            <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
                     onCalenderPress={() => { props.navigation.navigate('Calendars') }}
@@ -176,7 +176,7 @@ const TeacherTimeTable = (props) => {
                     onClearSearch={() => fetchRecord('', '')}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
+                <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
