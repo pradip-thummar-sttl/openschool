@@ -74,7 +74,7 @@ const Header = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10 }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
