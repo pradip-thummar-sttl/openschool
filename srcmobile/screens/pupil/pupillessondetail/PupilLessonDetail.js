@@ -157,18 +157,10 @@ const PupilLessonDetail = (props) => {
 
     const searchHeader = () => {
         return (
-            <View style={PAGESTYLE.filterbarMain}>
-                <View style={PAGESTYLE.field}>
-                    <TextInput
-                        ref={textInput}
-                        style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                        placeholder="Search subject, topic name etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => { setKeyword(keyword) }}
-                    />
+
+            <View style={PAGESTYLE.searchParent}>
+                <View style={PAGESTYLE.searchInner}>
                     <TouchableOpacity
-                        style={PAGESTYLE.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
@@ -179,51 +171,121 @@ const PupilLessonDetail = (props) => {
                                 :
                                 null
                         }}>
-                        <Image
-                            style={PAGESTYLE.userIcon}
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
+                    <TextInput
+                        ref={textInput}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10 }}
+                        placeholder="Search subject, topic name etc"
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => { setKeyword(keyword) }} />
+                    <TouchableOpacity
+                        activeOpacity={opacity}>
+                        <Menu style={PAGESTYLE.filterGroup}>
+                            <MenuTrigger><Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                            <MenuOptions style={PAGESTYLE.filterListWrap}>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Subject</Text>
+                                            {selectedIndex == 0 ?
+                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Date</Text>
+                                            {selectedIndex == 1 ?
+                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                            </MenuOptions>
+                        </Menu>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={PAGESTYLE.buttonGroup}>
-                    <Menu style={PAGESTYLE.filterGroup}>
-                        <MenuTrigger><Image style={PAGESTYLE.filterIcon} source={Images.mobileFilter} /></MenuTrigger>
-                        <MenuOptions style={PAGESTYLE.filterListWrap}>
-                            <MenuOption style={PAGESTYLE.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={PAGESTYLE.filterList}>
-                                        <Text style={PAGESTYLE.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={PAGESTYLE.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={PAGESTYLE.filterList}>
-                                        <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                </TouchableOpacity>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
             </View>
+
+            // <View style={PAGESTYLE.filterbarMain}>
+            //     <View style={PAGESTYLE.field}>
+            // <TouchableOpacity
+            //     style={PAGESTYLE.userIcon1Parent}
+            //     activeOpacity={opacity}
+            //     onPress={() => {
+            //         keyword ?
+            //             isSearchActive ?
+            //                 setSearchActive(false)
+            //                 :
+            //                 setSearchActive(true)
+            //             :
+            //             null
+            //     }}>
+            //     <Image
+            //         style={PAGESTYLE.userIcon}
+            //         source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+            // </TouchableOpacity>
+            //         <TextInput
+            //             ref={textInput}
+            //             style={[PAGESTYLE.searchHeader]}
+            //             placeholder="Search subject, topic name etc"
+            //             maxLength={50}
+            //             placeholderTextColor={COLORS.menuLightFonts}
+            //             onChangeText={keyword => { setKeyword(keyword) }}
+            //         />
+            //     </View>
+            //     <TouchableOpacity style={PAGESTYLE.buttonGroup}>
+            // <Menu style={PAGESTYLE.filterGroup}>
+            //     <MenuTrigger><Image style={PAGESTYLE.filterIcon} source={Images.mobileFilter} /></MenuTrigger>
+            //     <MenuOptions style={PAGESTYLE.filterListWrap}>
+            //         <MenuOption style={PAGESTYLE.borderList}>
+            //             <TouchableOpacity
+            //                 activeOpacity={opacity}
+            //                 onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+            //                 <View style={PAGESTYLE.filterList}>
+            //                     <Text style={PAGESTYLE.filterListText}>Subject</Text>
+            //                     {selectedIndex == 0 ?
+            //                         <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+            //                         :
+            //                         null
+            //                     }
+            //                 </View>
+            //             </TouchableOpacity>
+            //         </MenuOption>
+            //         <MenuOption style={PAGESTYLE.borderList}>
+            //             <TouchableOpacity
+            //                 activeOpacity={opacity}
+            //                 onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+            //                 <View style={PAGESTYLE.filterList}>
+            //                     <Text style={PAGESTYLE.filterListText}>Date</Text>
+            //                     {selectedIndex == 1 ?
+            //                         <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+            //                         :
+            //                         null
+            //                     }
+            //                 </View>
+            //             </TouchableOpacity>
+            //         </MenuOption>
+            //     </MenuOptions>
+            // </Menu>
+            //     </TouchableOpacity>
+            //     {/* <TouchableOpacity style={styles.buttonGroup}>
+            //         <Image style={styles.addIcon} source={Images.AddIconWhite} />
+            //         <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+            //     </TouchableOpacity> */}
+            // </View>
         )
     }
 
@@ -234,7 +296,7 @@ const PupilLessonDetail = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View>
+            <View style={{backgroundColor: COLORS.white}}>
                 <Header4_LH onAlertPress={() => props.navigation.openDrawer()} />
                 {searchHeader()}
                 <View style={PAGESTYLE.whiteBg}>

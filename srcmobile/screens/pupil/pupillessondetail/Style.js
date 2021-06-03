@@ -1056,7 +1056,7 @@ export default StyleSheet.create({
     },
     largeVideoBlock: {
         width: '100%',
-        height: 200,
+        height: hp(25.86),
     },
     moreIcon: {
         width: hp(2.41),
@@ -1188,13 +1188,14 @@ export default StyleSheet.create({
         paddingTop: hp(1),
     },
     feedbackVideoBlock: {
-        flexDirection: 'row',
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         padding: hp(1),
         borderRadius: hp(0.8),
         marginTop: hp(2.5),
         marginBottom: hp(2.5),
+        width: '100%',
+        flexDirection: 'column'
     },
     lessonDesc: {
         fontFamily: FONTS.fontRegular,
@@ -1446,8 +1447,9 @@ export default StyleSheet.create({
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
         paddingTop: hp(1.5),
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.black,
         width: '100%',
+        height:100
     },
     field: {
         position: 'relative',
@@ -1476,7 +1478,7 @@ export default StyleSheet.create({
         left: hp(0),
     },
     filterIcon: {
-        width: hp(1.74),
+        width: hp(5.74),
         resizeMode: 'contain',
         position: 'absolute',
         right: 20,
@@ -1505,20 +1507,37 @@ export default StyleSheet.create({
         paddingBottom: hp(1),
         flex: 1,
     },
+    // filterListWrap: {
+    //     paddingTop: hp(1),
+    //     paddingLeft: hp(1.2),
+    //     paddingRight: hp(1.2),
+    //     paddingBottom: hp(1),
+    //     position: 'absolute',
+    //     backgroundColor: COLORS.white,
+    //     top: hp(5.5),
+    //     right: hp(0),
+    //     width: hp(30.78),
+    //     borderRadius: hp(1),
+    //     shadowColor: COLORS.black,
+    //     shadowOffset: { width: 0, height: hp(1), },
+    //     shadowOpacity: 0.05,
+    //     shadowRadius: hp(1),
+    // },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        right: hp(0),
-        width: hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
     },
+    searchParent: {
+        flexDirection: 'row', alignItems: 'center', marginTop: 10, height: hp(5.20), marginLeft: hp(1.95), marginRight: hp(1.95), backgroundColor: COLORS.white
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
+    searchMenu: {
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+    }
 });
