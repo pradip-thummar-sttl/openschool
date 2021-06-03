@@ -258,7 +258,7 @@ const TLHomeWork = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'center', position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text>ADD ITEM</Text>

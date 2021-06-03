@@ -79,6 +79,7 @@ export default StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'center',
+        flexDirection: 'row',
         alignSelf: 'center',
         width:'100%',
     },
@@ -246,7 +247,7 @@ export default StyleSheet.create({
     },
     videoLinkBlockSpaceBottom: {
         marginBottom: hp(4.81),
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'flex-end',
     },
     videoLinkIcon: {
@@ -293,6 +294,7 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
+        alignItems: 'center',
         paddingBottom: hp(2.2),
         marginBottom: hp(2.2),
         borderBottomWidth: 1,
@@ -321,7 +323,7 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         resizeMode: 'contain',
-        backgroundColor: COLORS.greyplaceholder,
+        // backgroundColor: COLORS.greyplaceholder,
         borderRadius: 20,
     },
     toggleGrp: {
@@ -525,6 +527,7 @@ export default StyleSheet.create({
     textBox: {
         flexDirection: 'row',
         width: '100%',
+        paddingRight: hp(10),
     },
     placeholderStyle: {
         fontSize: hp(1.82),
@@ -573,6 +576,7 @@ export default StyleSheet.create({
         width: '100%',
         height: hp(14.84),
         borderWidth: 1,
+        textAlignVertical: 'top',
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
         paddingTop: hp(1.5),
@@ -1076,6 +1080,7 @@ export default StyleSheet.create({
         padding:0,
         width: 20,
         height: 20,
+        left: 2,
         top:hp(0.52),
     },
     borderRight:{
@@ -1108,7 +1113,6 @@ export default StyleSheet.create({
         position:'absolute',
         right:hp(1.75),
         alignSelf: 'center',
-        top: Platform.OS == 'android' ? hp(0.65) : hp(0)
     },
     dropDownArrowdatetime2:{
         width:hp(1.51),
@@ -1134,6 +1138,10 @@ export default StyleSheet.create({
     },
     commonInputFull:{
         width:'100%',
+    },
+    commonInputFullpadNo: {
+        width:'100%',
+        padding: 0,
     },
     lessonDesc:{
         fontSize: hp(1.82),
@@ -1248,13 +1256,13 @@ export default StyleSheet.create({
     },
     userIcon1Parent: {
         position: 'absolute',
-        width: 25,
-        height: 25,
-        right: 10,
+        width: hp(2.5),
+        height: hp(2.5),
+        right: hp(1),
     },
     userIcon1: {
         position: 'absolute',
-        width: 25,
-        height: 25,
+        width: hp(2.5),
+        height: hp(2.5),
     },
 });

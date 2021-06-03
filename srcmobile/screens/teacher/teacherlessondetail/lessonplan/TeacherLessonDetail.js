@@ -174,7 +174,7 @@ const TLDetail = (props) => {
                                 <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
                             </View>
                             :
-                            <Text style={{ textAlign: 'center' }}>No lesson recording found!</Text>
+                            <Text style={{ textAlign: 'center', width: '100%' }}>No lesson recording found!</Text>
                         }
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
