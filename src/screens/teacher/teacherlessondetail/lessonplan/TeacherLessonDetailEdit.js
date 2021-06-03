@@ -662,7 +662,7 @@ const TLDetailEdit = (props) => {
                                 props.goBack()
                             }}
                             onAlertPress={() => { props.onAlertPress() }}
-                            saveLesson={() => { saveLesson() }} />
+                            saveLesson={() => { getDataFromQuickBloxAndroid() }} />
                         <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.containerWrap}>

@@ -86,7 +86,7 @@ const TeacherLessonDetail = (props) => {
                 console.log('res', res);
                 if (res.flag) {
                     // setHomeworkLoading(false)
-                    setVisiblePopup(false)
+                    // setVisiblePopup(false)
                     // showMessage('Homework updated successfully')
 
                     uploadMatirial(res.data._id)
@@ -104,7 +104,7 @@ const TeacherLessonDetail = (props) => {
             Service.post(data, EndPoints.Homework, (res) => {
                 Addhomework.IsUpdate = true
                 // setHomeworkLoading(false)
-                setVisiblePopup(false)
+                // setVisiblePopup(false)
                 // showMessage('Homework added successfully')
                 uploadMatirial(res.data._id)
             }, (err) => {
@@ -121,22 +121,22 @@ const TeacherLessonDetail = (props) => {
 
         Addhomework.MaterialArr.forEach(element => {
             if (element.uri) {
-            data.append('materiallist', {
-                uri: element.uri,
-                name: element.name,
-                type: element.type
-            });
-        }
+                data.append('materiallist', {
+                    uri: element.uri,
+                    name: element.name,
+                    type: element.type
+                });
+            }
         });
 
         Addhomework.RecordingArr.forEach(element => {
             if (element.uri) {
-            data.append('recording', {
-                uri: element.uri,
-                name: element.name,
-                type: element.type
-            });
-        }
+                data.append('recording', {
+                    uri: element.uri,
+                    name: element.name,
+                    type: element.type
+                });
+            }
         })
 
         if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
@@ -150,6 +150,7 @@ const TeacherLessonDetail = (props) => {
                 props.goBack()
             })
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             return
         }
 
@@ -164,6 +165,7 @@ const TeacherLessonDetail = (props) => {
                 props.goBack()
             })
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             return
         }
 
@@ -173,6 +175,7 @@ const TeacherLessonDetail = (props) => {
             console.log('res.code', res.code);
             if (res.code == 200) {
                 setHomeworkLoading(false)
+                setVisiblePopup(false)
                 // setDefaults()
                 let msg
                 if (Addhomework.IsUpdate) {
@@ -186,9 +189,11 @@ const TeacherLessonDetail = (props) => {
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
+                setVisiblePopup(false)
             }
         }, (err) => {
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             console.log('response of get all lesson error', err)
         })
 
