@@ -272,10 +272,10 @@ const TLDetailEdit = (props) => {
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%', bottom: hp(2) }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: hp(1.85), paddingRight: 50 }}>{item.ItemName}</Text>
+                        <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                            <Text style={{ fontSize: hp(1.85), paddingRight: hp(5) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -300,7 +300,7 @@ const TLDetailEdit = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'center', position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text>ADD ITEM</Text>
@@ -358,13 +358,13 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.5) }} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -379,14 +379,15 @@ const TLDetailEdit = (props) => {
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.5) }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -403,13 +404,13 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -426,13 +427,13 @@ const TLDetailEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -678,9 +679,9 @@ const TLDetailEdit = (props) => {
 
                                     {subjectsDropDown()}
 
-                                    <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
+                                    <View style={[PAGESTYLE.dropDownFormInput]}>
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
+                                        <View style={[PAGESTYLE.subjectDateTime]}>
                                             <TextInput
                                                 returnKeyType={"next"}
                                                 onSubmitEditing={() => { t2.current.focus(); }}

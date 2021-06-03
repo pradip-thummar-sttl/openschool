@@ -79,6 +79,7 @@ export default StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'center',
+        flexDirection: 'row',
         alignSelf: 'center',
         width:'100%',
     },
@@ -137,7 +138,6 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginBottom: hp(0.8),
     },
     lessonTitle: {
         flexDirection: 'row',
@@ -151,13 +151,13 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginBottom: hp(1.56),
+        marginBottom: hp(1.4),
     },
     lessonText: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        fontSize: hp(1.8),
+        fontSize: hp(1.6),
     },
     teacherDetailLeft: {
         width: '100%',
@@ -246,7 +246,7 @@ export default StyleSheet.create({
     },
     videoLinkBlockSpaceBottom: {
         marginBottom: hp(4.81),
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'flex-end',
     },
     videoLinkIcon: {
@@ -285,7 +285,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
-        marginRight: hp(1.04),
+        marginRight: hp(1.2),
         marginBottom: hp(1.04),
         position: 'relative',
         alignItems: 'center',
@@ -293,6 +293,7 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
+        alignItems: 'center',
         paddingBottom: hp(2.2),
         marginBottom: hp(2.2),
         borderBottomWidth: 1,
@@ -303,7 +304,7 @@ export default StyleSheet.create({
         fontSize: hp(1.85),
         top: hp(0.5),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: 10,
+        paddingLeft: hp(1.4),
         paddingRight: hp(2),
     },
     checkBoxLabelTextNone: {
@@ -321,7 +322,7 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         resizeMode: 'contain',
-        backgroundColor: COLORS.greyplaceholder,
+        // backgroundColor: COLORS.greyplaceholder,
         borderRadius: 20,
     },
     toggleGrp: {
@@ -379,13 +380,14 @@ export default StyleSheet.create({
         paddingBottom: hp(1),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
-        borderRadius: hp(1.5),
+        borderRadius: hp(0.8),
         marginBottom: hp(1.04),
     },
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
         top: hp(0.2),
+        right: hp(1),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -525,6 +527,7 @@ export default StyleSheet.create({
     textBox: {
         flexDirection: 'row',
         width: '100%',
+        paddingRight: hp(10),
     },
     placeholderStyle: {
         fontSize: hp(1.82),
@@ -573,6 +576,7 @@ export default StyleSheet.create({
         width: '100%',
         height: hp(14.84),
         borderWidth: 1,
+        textAlignVertical: 'top',
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
         paddingTop: hp(1.5),
@@ -1052,7 +1056,7 @@ export default StyleSheet.create({
         flexWrap:'wrap',
     },
     spaceTop:{
-        marginTop:wp(1),
+        marginTop:hp(3),
     },
     rightSpaceNone:{
         marginRight:hp(0),
@@ -1076,6 +1080,7 @@ export default StyleSheet.create({
         padding:0,
         width: 20,
         height: 20,
+        left: 2,
         top:hp(0.52),
     },
     borderRight:{
@@ -1108,7 +1113,6 @@ export default StyleSheet.create({
         position:'absolute',
         right:hp(1.75),
         alignSelf: 'center',
-        top: Platform.OS == 'android' ? hp(0.65) : hp(0)
     },
     dropDownArrowdatetime2:{
         width:hp(1.51),
@@ -1134,6 +1138,10 @@ export default StyleSheet.create({
     },
     commonInputFull:{
         width:'100%',
+    },
+    commonInputFullpadNo: {
+        width:'100%',
+        padding: 0,
     },
     lessonDesc:{
         fontSize: hp(1.82),
@@ -1248,13 +1256,16 @@ export default StyleSheet.create({
     },
     userIcon1Parent: {
         position: 'absolute',
-        width: 25,
-        height: 25,
-        right: 10,
+        width: hp(2.5),
+        height: hp(2.5),
+        right: hp(1),
     },
     userIcon1: {
         position: 'absolute',
-        width: 25,
-        height: 25,
+        width: hp(2.5),
+        height: hp(2.5),
+    },
+    fileBoxGrpWrap: {
+        marginBottom: hp(-1.5)
     },
 });

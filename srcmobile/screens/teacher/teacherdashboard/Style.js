@@ -21,14 +21,14 @@ export default StyleSheet.create({
         width: '100%',
         height: hp(0.61),
         backgroundColor: COLORS.yellowBorder,
-        marginBottom: hp(2.34),
+        marginBottom: hp(1.5),
     },
     subTitleTab: {
-        fontSize: hp(1.82),
+        fontSize: hp(1.7),
         fontFamily: FONTS.fontRegular,
-        lineHeight: hp(2.60),
+        lineHeight: hp(3.3),
         color: COLORS.darkGray,
-        marginBottom: hp(2.34),
+        marginBottom: hp(1.5),
     },
     myDay: {
         backgroundColor: COLORS.orage,
@@ -85,7 +85,7 @@ export default StyleSheet.create({
         bottom: hp(0.6),
     },
     date: {
-        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.82),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
@@ -94,7 +94,7 @@ export default StyleSheet.create({
         height: hp(60.28),
     },
     month: {
-        fontSize: Platform.OS == 'android' ? hp(1.3) : hp(1.56),
+        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.56),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         textAlign: 'center',

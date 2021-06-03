@@ -284,9 +284,9 @@ const TLDetailAdd = (props) => {
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%' }}
+                    style={{ alignSelf: 'center', width: '100%' , bottom: hp(1), }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(0.8), }}>
+                        <View style={{margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
                             <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
@@ -311,7 +311,7 @@ const TLDetailAdd = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: hp(1) }}
+                        style={{ alignSelf: 'center', position: 'absolute', right: hp(1) }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text style={{ fontSize: hp(1.6), right: hp(0.5) }}>ADD ITEM</Text>
@@ -391,6 +391,7 @@ const TLDetailAdd = (props) => {
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -632,13 +633,13 @@ const TLDetailAdd = (props) => {
 
                                     {subjectsDropDown()}
 
-                                    <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
+                                    <View style={[PAGESTYLE.dropDownFormInput]}>
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
+                                        <View style={[PAGESTYLE.subjectDateTime]}>
                                             <TextInput
                                                 returnKeyType={"next"}
                                                 onSubmitEditing={() => { t2.current.focus(); }}
-                                                style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                                                style={{...PAGESTYLE.commonInput, width: '100%',}}
                                                 placeholder="e.g. Grammar, Fractions, etc"
                                                 autoCapitalize={'sentences'}
                                                 maxLength={40}

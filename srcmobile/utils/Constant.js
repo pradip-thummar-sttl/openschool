@@ -5,7 +5,7 @@ import { Alert, Platform } from "react-native";
 export const opacity = 0.5;
 export const isDesignBuild = false;
 export const isRunningFromVirtualDevice = false;
-export const cellWidth = 167;
+export const cellWidth = 250;
 
 export const Lesson = 'Lesson';
 export const Event = 'Event';

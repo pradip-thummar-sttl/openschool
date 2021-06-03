@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         paddingLeft: wp(5.33),
         paddingRight: wp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1.5),
         borderBottomWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
     },
     titleRow: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
     tickLayout: {
         backgroundColor: COLORS.buttonGreen,

@@ -85,6 +85,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         textAlign: 'center',
         width: hp(9),
+        height: Platform.OS == 'android' ? hp(2.4) : hp(2.8),
+        textAlignVertical: 'center',
         paddingTop: hp(0.1),
         paddingBottom: hp(0.1),
         marginBottom: hp(0.5),
