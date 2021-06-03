@@ -99,5 +99,7 @@ export default StyleSheet.create({
     },
     backgroundTable:{
         backgroundColor:COLORS.backgroundColorCommon,
+        flex: 1,
+        marginTop:hp(3.25),
     },
 });
