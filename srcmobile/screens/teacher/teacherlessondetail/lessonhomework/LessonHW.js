@@ -305,7 +305,7 @@ const TLHomeWork = (props) => {
                             </View>
                         </View>
                         <View style={PAGESTYLE.lessonDesc}>
-                            <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
+                            <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                             <TextInput
                                 multiline={true}
                                 numberOfLines={4}

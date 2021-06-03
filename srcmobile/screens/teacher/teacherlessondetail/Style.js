@@ -138,7 +138,6 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginBottom: hp(0.8),
     },
     lessonTitle: {
         flexDirection: 'row',
@@ -152,13 +151,13 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
-        marginBottom: hp(1.56),
+        marginBottom: hp(1.4),
     },
     lessonText: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        fontSize: hp(1.8),
+        fontSize: hp(1.6),
     },
     teacherDetailLeft: {
         width: '100%',
@@ -286,7 +285,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
-        marginRight: hp(1.04),
+        marginRight: hp(1.2),
         marginBottom: hp(1.04),
         position: 'relative',
         alignItems: 'center',
@@ -305,7 +304,7 @@ export default StyleSheet.create({
         fontSize: hp(1.85),
         top: hp(0.5),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: 10,
+        paddingLeft: hp(1.4),
         paddingRight: hp(2),
     },
     checkBoxLabelTextNone: {
@@ -381,13 +380,14 @@ export default StyleSheet.create({
         paddingBottom: hp(1),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
-        borderRadius: hp(1.5),
+        borderRadius: hp(0.8),
         marginBottom: hp(1.04),
     },
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
         top: hp(0.2),
+        right: hp(1),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -1056,7 +1056,7 @@ export default StyleSheet.create({
         flexWrap:'wrap',
     },
     spaceTop:{
-        marginTop:wp(1),
+        marginTop:hp(3),
     },
     rightSpaceNone:{
         marginRight:hp(0),
@@ -1264,5 +1264,8 @@ export default StyleSheet.create({
         position: 'absolute',
         width: hp(2.5),
         height: hp(2.5),
+    },
+    fileBoxGrpWrap: {
+        marginBottom: hp(-1.5)
     },
 });

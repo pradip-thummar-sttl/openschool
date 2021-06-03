@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     },
     entryData: {
         paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        paddingBottom: hp(3),
     },
     entryIcon: {
         width: hp(11.19),

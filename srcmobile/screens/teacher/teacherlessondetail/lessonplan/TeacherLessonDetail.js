@@ -148,7 +148,7 @@ const TLDetail = (props) => {
                                 keyExtractor={(item, index) => index.toString()}
                             />
                             :
-                            <Text style={{ textAlign: 'center' }}>No material uploaded!</Text>
+                            <Text style={{ textAlign: 'left' }}>No material uploaded!</Text>
                         }
                     </View>
 
@@ -174,7 +174,7 @@ const TLDetail = (props) => {
                                 <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
                             </View>
                             :
-                            <Text style={{ textAlign: 'center', width: '100%' }}>No lesson recording found!</Text>
+                            <Text style={{ textAlign: 'left', width: '100%' }}>No lesson recording found!</Text>
                         }
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
@@ -185,7 +185,7 @@ const TLDetail = (props) => {
                                 <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                             </View>
                             :
-                            <Text style={{ textAlign: 'center' }}>No chat transcript found!</Text>
+                            <Text style={{ textAlign: 'left' }}>No chat transcript found!</Text>
                         }
                     </View>
 

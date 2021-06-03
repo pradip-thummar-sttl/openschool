@@ -49,7 +49,7 @@ const Pupillist = ({ item }) => (
                 <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
-                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
+                <Text style={PAGESTYLE.groupName}>Group {item.GroupName ? item.GroupName : '1A'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
@@ -270,6 +270,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                    <Text style={PAGESTYLE.subTitleTab}>Sub Subject</Text>
+                                                    <View style={PAGESTYLE.yellowHrTag}></View>
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
