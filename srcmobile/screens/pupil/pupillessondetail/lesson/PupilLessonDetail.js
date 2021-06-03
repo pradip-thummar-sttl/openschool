@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, PAGESTYLEheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Video from 'react-native-video';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from '../Style';
@@ -64,7 +65,7 @@ const PupilLessonDetailInternal = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
-    
+
     const NEW = [
         {
             title: 'Description',
@@ -158,7 +159,14 @@ const PupilLessonDetailInternal = (props) => {
                 <View>
                     <View style={{ height: '93%', bottom: 20 }}>
                         <View style={PAGESTYLE.largeVideoBlock}>
-                            <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                            {item.RecordingList.length == 0 ?
+                                <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                                :
+                                <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                    resizeMode={'contain'}
+                                    style={PAGESTYLE.largeVideo1}
+                                    controls={true} />
+                            }
                         </View>
                         <ScrollView style={{ top: 0, height: '100%' }} showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.videoTitleLine}>
@@ -177,7 +185,7 @@ const PupilLessonDetailInternal = (props) => {
                                     <Image source={Images.bookmarkOff} style={PAGESTYLE.bookMarkOn} />
                                 </View>
                             </View>
-                            <View style={{paddingBottom: 80}}>
+                            <View style={{ paddingBottom: 80 }}>
                                 <Accordion
                                     activeSections={activeSections}
                                     sections={NEW}

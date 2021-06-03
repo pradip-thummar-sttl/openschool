@@ -47,7 +47,7 @@ const TLHomeWork = (props) => {
     const [isAddRecording, setAddRecording] = useState(false)
     const [description, setDescription] = useState("")
     const [isSwitch, setSwitch] = useState(true)
-    const [recordingArr, setRecordingArr] = useState({})
+    const [recordingArr, setRecordingArr] = useState([])
     const [itemCheckList, setItemCheckList] = useState([]);
     const [newItem, setNewItem] = useState('');
 
@@ -73,6 +73,7 @@ const TLHomeWork = (props) => {
                 Addhomework.HwId = res.data._id
                 setSelectedDate(moment(res.data.DueDate).format('DD/MM/yyyy'))
                 setMaterialArr(res.data.MaterialList)
+                setRecordingArr(res.data.RecordingList)
                 setDescription(res.data.HomeworkDescription)
                 setSwitch(res.data.IsIncluded)
                 setItemCheckList(res.data.CheckList)
@@ -357,7 +358,8 @@ const TLHomeWork = (props) => {
                             onClose={() => setAddRecording(false)}
                             onScreeCamera={() => onScreeCamera()}
                             onScreeVoice={() => onScreeVoice()}
-                            onCameraOnly={() => onCameraOnly()} />
+                            onCameraOnly={() => onCameraOnly()}
+                            onRemoveRecording={() => { setRecordingArr([]); Addhomework.RecordingArr = [] }} />
 
                         <View style={PAGESTYLE.requirementofClass}>
                             <Text style={PAGESTYLE.requireText}>Create Checklist</Text>

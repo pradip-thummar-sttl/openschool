@@ -1387,16 +1387,29 @@ export default StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
     },
+    // filterListWrap: {
+    //     paddingTop: hp(1),
+    //     paddingLeft: hp(1.2),
+    //     paddingRight: hp(1.2),
+    //     paddingBottom: hp(1),
+    //     position: 'absolute',
+    //     backgroundColor: COLORS.white,
+    //     top: hp(5.5),
+    //     right: 0,
+    //     width: hp(30.98),
+    //     borderRadius: hp(1),
+    //     shadowColor: COLORS.black,
+    //     shadowOffset: { width: 0, height: hp(1), },
+    //     shadowOpacity: 0.05,
+    //     shadowRadius: hp(1),
+    // },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
-        backgroundColor: COLORS.white,
-        top: hp(5.5),
-        right: 0,
         width: hp(30.98),
+        right: 10,
+        top: hp(5.5),
+        position: 'absolute',
+        paddingHorizontal: 5,
+        backgroundColor: COLORS.white,
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -1445,5 +1458,14 @@ export default StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    searchParent: {
+        flexDirection: 'row', width:hp(55.61), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
+    searchMenu: {
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
     }
 });

@@ -19,6 +19,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Download } from "../../../../utils/Download";
+import { launchCamera } from "react-native-image-picker";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
@@ -29,6 +30,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [feedBack, setFeedback] = useState('')
     const [recordingArr, setRecordingArr] = useState([])
     const [isLoading, setLoading] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
     const [isAddRecording, setAddRecording] = useState(false)
 
     const [isBronze, setBronze] = useState(false);
@@ -44,19 +46,24 @@ const TLHomeWorkSubmittedDetail = (props) => {
         let formData = new FormData();
 
         recordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             formData.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 
         formData.append("Feedback", feedBack);
         formData.append("Rewards", '1');
 
+        setLoading(true)
+
         Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
+                setModalVisible(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
@@ -66,11 +73,37 @@ const TLHomeWorkSubmittedDetail = (props) => {
             } else {
                 showMessage(res.message)
                 setLoading(false)
+                setModalVisible(false)
             }
         }, (err) => {
             setLoading(false)
+            setModalVisible(false)
             console.log('response of get all lesson error', err)
         })
+    }
+
+    const onScreeCamera = () => {
+        setAddRecording(false)
+    }
+    const onScreeVoice = () => {
+        setAddRecording(false)
+    }
+    const onCameraOnly = () => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+            }
+
+        })
+        setAddRecording(false)
+
     }
 
     return (
@@ -83,6 +116,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <HeaderSave
+                    isLoading={isLoading}
+                    isModalVisible={isModalVisible}
                     isMarked={data.Marked ? true : false}
                     isSubmitted={data.Submited ? true : false}
                     label={`${data.SubjectName} ${data.LessonTopic}`}
@@ -94,7 +129,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         <View style={PAGESTYLE.whiteBg}>
                             <View style={PAGESTYLE.containerWrapTop}>
                                 <View style={PAGESTYLE.userLeft}>
-                                <Image source={{ uri: baseUrl + data.ProfilePicture }} style={PAGESTYLE.userThumb} />
+                                    <Image source={{ uri: baseUrl + data.ProfilePicture }} style={PAGESTYLE.userThumb} />
                                     <View>
                                         <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
                                         <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
@@ -137,7 +172,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             style={PAGESTYLE.checkMark}
                                                             value={item.IsCheck}
                                                             disabled
-                                                            tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                             boxType={'square'}
                                                             onCheckColor={COLORS.white}
                                                             onFillColor={COLORS.dashboardPupilBlue}
@@ -185,14 +220,22 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             autoCapitalize={'sentences'}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
-                                    <View style={PAGESTYLE.videoRecording}>
+                                    {/* <View style={PAGESTYLE.videoRecording}>
                                         <View style={PAGESTYLE.recordLinkBlock}>
                                             <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
                                                 <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
                                                 <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
                                             </TouchableOpacity>
                                         </View>
-                                    </View>
+                                    </View> */}
+                                    <Popupaddrecording
+                                        recordingArr={recordingArr}
+                                        isVisible={isAddRecording}
+                                        onClose={() => setAddRecording(false)}
+                                        onScreeCamera={() => onScreeCamera()}
+                                        onScreeVoice={() => onScreeVoice()}
+                                        onCameraOnly={() => onCameraOnly()}
+                                        onRemoveRecording={() => null} />
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

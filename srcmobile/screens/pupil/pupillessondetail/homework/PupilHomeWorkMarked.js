@@ -4,6 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from '../Style';
+import Video from 'react-native-video';
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
@@ -14,10 +15,14 @@ import Header8 from '../../../../component/reusable/header/bulck/Header8'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../utils/Images";
 import { Download } from "../../../../utils/Download";
+import { baseUrl } from "../../../../utils/Constant";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
     const { item } = props.route.params;
+
+    console.log('item', item.RecordingList[0].filename);
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={PAGESTYLE.wrapper}>
@@ -68,7 +73,7 @@ const PupilHomeWorkMarked = (props) => {
                                                                 value={item.IsCheck}
                                                                 boxType={'square'}
                                                                 onCheckColor={COLORS.white}
-                                                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                                 onFillColor={COLORS.dashboardPupilBlue}
                                                                 onTintColor={COLORS.dashboardPupilBlue}
                                                                 tintColor={COLORS.dashboardPupilBlue}
@@ -108,10 +113,19 @@ const PupilHomeWorkMarked = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.feedbackVideoBlock}>
-                                    <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
                                     <View>
                                         <Text style={[PAGESTYLE.lessonFeedDesc]}>Feedback for {item.SubjectName} </Text>
                                         <Text style={PAGESTYLE.techerName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.largeVideoBlock}>
+                                    {item.RecordingList.length == 0 ?
+                                        <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
+                                        :
+                                        <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                            resizeMode={'contain'}
+                                            style={PAGESTYLE.largeVideo1}
+                                            controls={true} />
+                                    }
                                     </View>
                                 </View>
                             </View>

@@ -1,6 +1,7 @@
 export const EndPoints = {
     GetAllUserType: "usertype",
     Login: 'login',
+    SetQBUserId: 'setqbuserid',
     // Teacher
     GetLessionById: 'getalllesson',
     GetMyDayByTeacherId: 'getmydayteacher',

@@ -21,7 +21,6 @@ const WorkSpace = (props) => {
     console.log('====', workspaceList)
 
     const onSubmitWorkspace = () => {
-        console.log(pathCount, hasStroke);
         if (!workSpacePath) {
             showMessage(MESSAGE.saveWorkSpace)
             return
@@ -29,8 +28,6 @@ const WorkSpace = (props) => {
             showMessage(MESSAGE.blankWorkspace)
             return
         }
-
-        return
 
         const pathArr = workSpacePath.split('/')
         const ext = getFileExtention(workSpacePath)

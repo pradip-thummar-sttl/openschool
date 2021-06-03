@@ -25,7 +25,7 @@ import {
 import COLORS from "../../../utils/Colors";
 import MESSAGE from "../../../utils/Messages";
 import ScreenAndCameraRecording from "../../../../src/screens/teacher/screenandcamera/ScreenandCamera";
-import TLVideoGallery from "../../../../src/screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
+import TLVideoGallery from "../teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
 import moment from "moment";
 
 const TeacherLessonDetail = (props) => {
@@ -80,7 +80,7 @@ const TeacherLessonDetail = (props) => {
                 console.log('res', res);
                 if (res.flag) {
                     // setHomeworkLoading(false)
-                    setVisiblePopup(false)
+                    // setVisiblePopup(false)
                     // showMessage('Homework updated successfully')
 
                     uploadMatirial(res.data._id)
@@ -97,7 +97,7 @@ const TeacherLessonDetail = (props) => {
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
                 // setHomeworkLoading(false)
-                setVisiblePopup(false)
+                // setVisiblePopup(false)
                 // showMessage('Homework added successfully')
                 console.log('res First', res);
                 uploadMatirial(res.data._id)
@@ -114,21 +114,25 @@ const TeacherLessonDetail = (props) => {
         let data = new FormData();
 
         Addhomework.MaterialArr.forEach(element => {
-            data.append('materiallist', {
-                uri: element.uri,
-                name: element.name,
-                type: element.type
-            });
+            if (element.uri) {
+                data.append('materiallist', {
+                    uri: element.uri,
+                    name: element.name,
+                    type: element.type
+                });
+            }
         });
 
         Addhomework.RecordingArr.forEach(element => {
-            let ext = element.fileName.split('.');
+            if (element.uri) {
+                let ext = element.fileName.split('.');
 
-            data.append('recording', {
-                uri: element.uri,
-                name: element.fileName,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            });
+                data.append('recording', {
+                    uri: element.uri,
+                    name: element.fileName,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                });
+            }
         })
 
         if (Addhomework.MaterialArr.length == 0 && Addhomework.RecordingArr.length == 0) {
@@ -143,6 +147,23 @@ const TeacherLessonDetail = (props) => {
                 props.navigation.goBack()
             })
             setHomeworkLoading(false)
+            setVisiblePopup(false)
+            return
+        }
+
+        if (data._parts.length == 0) {
+            let msg
+            if (Addhomework.IsUpdate) {
+                msg = MESSAGE.homeworkUpdated
+            } else {
+                msg = MESSAGE.homeworkAdded
+            }
+            showMessageWithCallBack(msg, () => {
+                props.route.params.onGoBack()
+                props.navigation.goBack()
+            })
+            setHomeworkLoading(false)
+            setVisiblePopup(false)
             return
         }
 
@@ -152,6 +173,7 @@ const TeacherLessonDetail = (props) => {
             console.log('res11', res);
             if (res.code == 200) {
                 setHomeworkLoading(false)
+                setVisiblePopup(false)
                 // setDefaults()
                 let msg
                 if (Addhomework.IsUpdate) {
@@ -166,9 +188,11 @@ const TeacherLessonDetail = (props) => {
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
+                setVisiblePopup(false)
             }
         }, (err) => {
             setHomeworkLoading(false)
+            setVisiblePopup(false)
             console.log('response of get all lesson error', err)
         })
 

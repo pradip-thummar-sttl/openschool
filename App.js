@@ -15,6 +15,17 @@ import { LogBox, View, StatusBar } from 'react-native';
 
 LogBox.ignoreAllLogs();
 import { isTablet } from 'react-native-device-info';
+import { PERMISSIONS, requestMultiple } from 'react-native-permissions';
+
+requestMultiple(
+  [PERMISSIONS.ANDROID.CAMERA,
+  PERMISSIONS.IOS.CAMERA,
+  PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+  PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+  PERMISSIONS.ANDROID.RECORD_AUDIO,]
+).then((statuses) => {
+  console.log('statuses', statuses);
+});
 
 export default function App() {
   return (

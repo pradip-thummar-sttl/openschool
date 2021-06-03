@@ -38,7 +38,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={styles.headerBarMainWhite}>
+        <View style={{backgroundColor: COLORS.white}}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
@@ -56,7 +56,83 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
+
+
+            <View style={styles.searchParent}>
+                <View style={styles.searchInner}>
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => {
+                            isSearchActive ?
+                                setSearchActive(false)
+                                :
+                                setSearchActive(true)
+                        }}>
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                    </TouchableOpacity>
+                    <TextInput
+                        ref={textInput}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        placeholder="Search subject, topic name etc"
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => {
+                            props.onSearchKeyword(keyword);
+                        }} />
+                </View>
+
+                <TouchableOpacity
+                    style={styles.buttonGroup}
+                    onPress={() => props.navigateToCreateNewEvent()}>
+                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    <Text style={styles.commonButtonGreenheader}></Text>
+                </TouchableOpacity>
+                <RBSheet
+                    ref={refRBSheet}
+                    closeOnDragDown={true}
+                    height={[hp(55.88)]}
+                    style={{ position: 'relative', }}
+                    closeOnPressMask={true}
+                    customStyles={{
+                        wrapper: {
+                            backgroundColor: COLORS.bottomSlideUpBack
+                        },
+                        draggableIcon: {
+                            backgroundColor: COLORS.darkGray
+                        }
+                    }}
+                >
+                    <View style={styles.popupLarge}>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
+                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                        </TouchableOpacity>
+                        <View style={styles.popupContent}>
+                            <View style={styles.tabcontent}>
+                                <View style={styles.beforeBorder}>
+                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
+                                    <View style={styles.entryContentMain}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
+                                            <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                            <Text style={styles.entryTitle}>New Lesson</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
+                                            <Text style={styles.entryTitle}>New Event</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </RBSheet>
+            </View>
+
+            {/* <View style={styles.filterbarMain}>
                 <View style={styles.field}>
                     <TextInput
                         ref={textInput}
@@ -81,40 +157,6 @@ const HeaderTT = (props) => {
                             style={styles.userIcon1}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
-
-                    {/* <Menu style={{ ...styles.filterIcon }}>
-                        <MenuTrigger><Image style={styles.filterIcon1} source={Images.mobileFilter} /></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date {selectedIndex}</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu> */}
                 </View>
                 <TouchableOpacity style={[styles.buttonGroup]}>
                     <Menu style={styles.filterGroup}>
@@ -148,20 +190,6 @@ const HeaderTT = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
                         </MenuOptions>
                     </Menu>
 
@@ -215,7 +243,7 @@ const HeaderTT = (props) => {
                         </View>
                     </View>
                 </RBSheet>
-            </View>
+            </View> */}
         </View>
     );
 }
@@ -269,16 +297,16 @@ const styles = StyleSheet.create({
         marginRight: hp(1.2),
     },
     searchHeader: {
-        color:COLORS.themeBlue,
+        color: COLORS.themeBlue,
         fontSize: hp('1.9%'),
         borderWidth: 1,
         ...Platform.select({
-            android: {padding:0}
+            android: { padding: 0 }
         }),
         borderColor: COLORS.InoutBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
-        lineHeight:hp(2.6),
+        lineHeight: hp(2.6),
         height: hp('5%'),
         paddingLeft: hp('4.43%'),
         paddingRight: hp('2.0%'),
@@ -339,7 +367,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        //marginRight: hp(1.69),
+        marginLeft: 10
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -470,4 +498,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textTransform: 'uppercase',
     },
+    searchParent: {
+        flexDirection: 'row', marginHorizontal: 10, alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
+    searchMenu: {
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+    }
 });

@@ -47,7 +47,7 @@ const PupilLessonDetail = (props) => {
     const [lastWeekLesson, setLastWeekLesson] = useState([]);
 
     const [item, setItem] = useState([]);
-
+    const initialRender = useRef(true);
 
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -55,28 +55,37 @@ const PupilLessonDetail = (props) => {
     const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
-        if (!isSearchActive) {
-            setKeyword('')
-            if (isLesson) {
-                getLessonData('', '')
-            } else {
-                getHomeworkData('', '')
-            }
-            textInput.current.clear()
+        console.log('keyword', keyword);
+        if (initialRender.current) {
+            initialRender.current = false
         } else {
-            if (isLesson) {
-                getLessonData(keyword, '')
+            if (!isSearchActive) {
+                setKeyword('')
+                if (isLesson) {
+                    getLessonData('', '')
+                } else {
+                    getHomeworkData('', '')
+                }
+                textInput.current.clear()
             } else {
-                getHomeworkData(keyword, '')
+                if (isLesson) {
+                    getLessonData(keyword, '')
+                } else {
+                    getHomeworkData(keyword, '')
+                }
             }
         }
     }, [isSearchActive])
 
     useEffect(() => {
-        if (isLesson) {
-            getLessonData(keyword, filterBy)
+        if (initialRender.current) {
+            initialRender.current = false
         } else {
-            getHomeworkData(keyword, filterBy)
+            if (isLesson) {
+                getLessonData(keyword, filterBy)
+            } else {
+                getHomeworkData(keyword, filterBy)
+            }
         }
     }, [filterBy])
 
@@ -113,7 +122,7 @@ const PupilLessonDetail = (props) => {
                     }
                 });
 
-                console.log('tripple array', marked, due, submit)
+                console.log('tripple array1', marked, due, submit)
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
                 setMarkedHomeWork(marked)
@@ -156,18 +165,10 @@ const PupilLessonDetail = (props) => {
 
     const searchHeader = () => {
         return (
-            <View style={PAGESTYLE.filterbarMain}>
-                <View style={PAGESTYLE.field}>
-                    <TextInput
-                        ref={textInput}
-                        style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                        placeholder="Search subject, topic name, teacher name, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => { setKeyword(keyword) }}
-                    />
+
+            <View style={PAGESTYLE.searchParent}>
+                <View style={PAGESTYLE.searchInner}>
                     <TouchableOpacity
-                        style={PAGESTYLE.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
@@ -178,12 +179,18 @@ const PupilLessonDetail = (props) => {
                                 :
                                 null
                         }}>
-                        <Image
-                            style={PAGESTYLE.userIcon}
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
+                    <TextInput
+                        ref={textInput}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        placeholder="Search subject, topic name, teacher name, etc"
+                        maxLength={50}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => { setKeyword(keyword) }} />
                 </View>
-                <TouchableOpacity style={PAGESTYLE.buttonGroup}>
+                <View style={{ flexDirection: 'row', marginLeft: 10 }}>
                     <Menu style={PAGESTYLE.filterGroup}>
                         <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
@@ -218,11 +225,7 @@ const PupilLessonDetail = (props) => {
                         </MenuOptions>
                     </Menu>
                     <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
+                </View>
             </View>
         )
     }

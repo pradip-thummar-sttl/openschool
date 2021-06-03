@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -10,11 +10,13 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { User } from "../../../utils/Model";
+
+const { CallModule } = NativeModules;
 
 // const Pupillist = ({ item }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
@@ -74,8 +76,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
 
     useEffect(() => {
-        // if(isDesignBuild)
-        //     return true
+        refresh()
+    }, [])
+
+    const refresh = () => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
@@ -102,7 +106,47 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         })
         return () => {
         }
-    }, [])
+    }
+
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
+        }
+    }
+
+    const startLiveClassAndroid = () => {
+        try {
+            let qBUserIDs = [], userNames = [], names = []
+            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
+            dataOfSubView.PupilList.forEach(pupil => {
+                qBUserIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+            let dialogID = dataOfSubView.QBDilogID
+            let QBUserId = User.user.QBUserId
+            let currentName = User.user.FirstName + " " + User.user.LastName
+
+            console.log('KDKD: Teacher', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+
+            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                console.log('Class Started');
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const startLiveClassIOS = () => {
+
+    }
 
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
@@ -331,7 +375,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             style={PAGESTYLE.buttonGrp}
                                                             onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
                                                             <Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
-                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                                        <TouchableOpacity
+                                                            style={PAGESTYLE.buttonGrp}
+                                                            onPress={() => { launchLiveClass() }}>
+                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                        </TouchableOpacity>
                                                     </View>
                                                 </View>
                                             </RBSheet>

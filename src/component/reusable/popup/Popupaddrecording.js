@@ -5,14 +5,16 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../utils/Constant";
 const Popupaddrecording = (props) => {
-    const [isModalVisible, setModalVisible] = useState(true);
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
         setModalVisible(!isModalVisible);
     };
     const [date, setDate] = useState(new Date());
@@ -37,6 +39,9 @@ const Popupaddrecording = (props) => {
     const showTimepicker = () => {
         showMode('time');
     };
+
+    console.log('props.recordingArr', props.recordingArr);
+
     return (
         <View>
             {props.recordingArr.length == 0 ?
@@ -51,13 +56,13 @@ const Popupaddrecording = (props) => {
                 <TouchableOpacity
                     // activeOpacity={opacity}
                     // onPress={() => props.onRemoveRecording()}
-                    style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
+                    style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
                     <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
                 </TouchableOpacity>
             }
-            <Modal isVisible={props.isVisible}>
+            <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={() => props.onClose()}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => toggleModal()}>
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
@@ -66,15 +71,15 @@ const Popupaddrecording = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
-                                    <TouchableOpacity onPress={() => props.onScreeCamera()} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => { toggleModal(); props.onScreeCamera() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-camera2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => props.onScreeVoice()} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => { toggleModal(); props.onScreeVoice() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => props.onCameraOnly()} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => { toggleModal(); props.onCameraOnly() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
@@ -138,5 +143,24 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    recordLinkBlock: {
+        width: hp(23.5),
+        padding: hp(1.43),
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    topSpaceRecording: {
+        marginTop: hp(1.401),
+    },
+    recordingLinkIcon: {
+        width: hp(2.34),
+        resizeMode: 'contain',
+        marginRight: 10,
     },
 });

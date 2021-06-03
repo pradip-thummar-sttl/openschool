@@ -20,6 +20,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
 import { Download } from "../../../../utils/Download";
+import { launchCamera } from "react-native-image-picker";
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
@@ -30,7 +31,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
     const [recordingArr, setRecordingArr] = useState([])
+    const [isAddRecording, setAddRecording] = useState(false)
     const [isLoading, setLoading] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const [isBronze, setBronze] = useState(false);
     const [isSilver, setSilver] = useState(false);
@@ -45,19 +48,24 @@ const TLHomeWorkSubmittedDetail = (props) => {
         let formData = new FormData();
 
         recordingArr.forEach(element => {
+            let ext = element.fileName.split('.');
+
             formData.append('recording', {
                 uri: element.uri,
-                name: element.name,
-                type: element.type
+                name: element.fileName,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
 
         formData.append("Feedback", feedBack);
         formData.append("Rewards", '1');
 
+        setLoading(true)
+
         Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
+                setModalVisible(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
@@ -67,13 +75,38 @@ const TLHomeWorkSubmittedDetail = (props) => {
             } else {
                 showMessage(res.message)
                 setLoading(false)
+                setModalVisible(false)
             }
         }, (err) => {
             setLoading(false)
+            setModalVisible(false)
             console.log('response of get all lesson error', err)
         })
     }
 
+    const onScreeCamera = () => {
+        setAddRecording(false)
+    }
+    const onScreeVoice = () => {
+        setAddRecording(false)
+    }
+    const onCameraOnly = () => {
+        var arr = [...recordingArr]
+        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+            // setResponse(response);
+            if (response.errorCode) {
+                showMessage(response.errorCode)
+            } else {
+                console.log('response', response);
+                arr.push(response)
+
+                setRecordingArr(arr)
+            }
+
+        })
+        setAddRecording(false)
+
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -147,7 +180,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             style={PAGESTYLE.checkMark}
                                                             value={item.IsCheck}
                                                             disabled
-                                                            tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                             boxType={'square'}
                                                             onCheckColor={COLORS.white}
                                                             onFillColor={COLORS.dashboardPupilBlue}
@@ -199,7 +232,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             style={PAGESTYLE.commonInputTextareaBoldGrey}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
-                                    <Popupaddrecording />
+                                    <Popupaddrecording
+                                        recordingArr={recordingArr}
+                                        isVisible={isAddRecording}
+                                        onClose={() => setAddRecording(false)}
+                                        onScreeCamera={() => onScreeCamera()}
+                                        onScreeVoice={() => onScreeVoice()}
+                                        onCameraOnly={() => onCameraOnly()}
+                                        onRemoveRecording={() => null} />
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
@@ -227,6 +267,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.submitBtnWrap}>
                                         <PopupHomeWorkSave
+                                            isLoading={isLoading}
+                                            isModalVisible={isModalVisible}
                                             onSetHomework={() => isFieldsValidated()}
                                             isMarked={data.Marked ? true : false}
                                             isSubmitted={data.Submited ? true : false} />

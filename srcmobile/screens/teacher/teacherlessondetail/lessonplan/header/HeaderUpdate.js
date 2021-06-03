@@ -32,23 +32,20 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    {props.isLoading ?
-                        <ActivityIndicator
-                            style={styles.commonButtonGreenheaderwithouticon}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.white} />
-                        :
-                        props.isLoading == null ?
-                            null
+                    <View style={styles.tickLayout}>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
                             :
                             <TouchableOpacity
                                 style={styles.buttonGroup}
                                 activeOpacity={opacity}
                                 onPress={() => props.saveLesson()}>
                                 <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                                <Text style={styles.commonButtonGreenheaderwithicon}></Text>
                             </TouchableOpacity>
-                    }
+                        }
+                    </View>
                     {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
@@ -136,10 +133,7 @@ const styles = StyleSheet.create({
         fontSize: hp(1.5),
     },
     buttonGroup: {
-        position: 'relative',
-        flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
     },
     filterIcon: {
         width: hp(1.74),
@@ -182,12 +176,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     addIcon: {
-        width: hp(1.55),
+        width: 12,
         resizeMode: 'contain',
-        position: 'absolute',
-        top: hp(1.5),
-        left: hp(1.8),
-        zIndex: 9,
     },
     iconTop: {
         top: hp(4.2),
@@ -265,4 +255,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    tickLayout: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 40,
+        width: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });

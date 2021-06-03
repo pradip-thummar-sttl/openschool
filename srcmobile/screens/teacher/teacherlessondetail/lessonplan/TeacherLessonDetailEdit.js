@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -10,7 +10,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
@@ -31,7 +31,7 @@ import DocumentPicker from 'react-native-document-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
-
+const { DialogModule } = NativeModules;
 
 const TLDetailEdit = (props) => {
     const t2 = useRef(null);
@@ -332,7 +332,7 @@ const TLDetailEdit = (props) => {
                                 style={PAGESTYLE.checkMark}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
@@ -440,8 +440,7 @@ const TLDetailEdit = (props) => {
         );
     };
 
-    const saveLesson = () => {
-
+    const getDataFromQuickBloxAndroid = () => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
             return false;
@@ -469,12 +468,47 @@ const TLDetailEdit = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
+        } else if (recordingArr.length == 0) {
+            showMessage(MESSAGE.recording);
+            return false;
         } else if (selectedPupils.length == 0) {
             showMessage(MESSAGE.selectPupil);
             return false;
         }
 
         setLoading(true)
+
+        createQBDialog()
+    };
+
+    const createQBDialog = () => {
+        if (isRunningFromVirtualDevice) {
+            saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
+        } else {
+            let userIDs = [], userNames = [], names = [];
+            selectedPupils.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
+
+            if (Platform.OS == 'android') {
+                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                    console.log('error:eventId', error, ID);
+                    if (ID && ID != '' && ID != null && ID != undefined) {
+                        saveLesson(ID)
+                    } else {
+                        setLoading(false)
+                        showMessage('Sorry, we are unable to add lesson!')
+                    }
+                });
+            } else {
+                // Call IOS native module here
+            }
+        }
+    }
+
+    const saveLesson = (ID) => {
 
         let data = {
             SubjectId: selectedSubject._id,
@@ -492,7 +526,8 @@ const TLDetailEdit = (props) => {
             IsVotingEnabled: IsVotingEnabled,
             CreatedBy: User.user._id,
             PupilList: selectedPupils,
-            CheckList: itemCheckList
+            CheckList: itemCheckList,
+            QBDilogID: ID
         }
 
         console.log('postData', data);
@@ -513,21 +548,25 @@ const TLDetailEdit = (props) => {
         let data = new FormData();
 
         materialArr.forEach(element => {
-            data.append('materiallist', {
-                uri: element.uri,
-                name: element.name,
-                type: element.type
-            });
+            if (element.uri) {
+                data.append('materiallist', {
+                    uri: element.uri,
+                    name: element.name,
+                    type: element.type
+                });
+            }
         });
 
         recordingArr.forEach(element => {
-            let ext = element.fileName.split('.');
+            if (element.uri) {
+                let ext = element.fileName.split('.');
 
-            data.append('recording', {
-                uri: element.uri,
-                name: element.fileName,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            });
+                data.append('recording', {
+                    uri: element.uri,
+                    name: element.fileName,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                });
+            }
         })
 
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
@@ -535,15 +574,26 @@ const TLDetailEdit = (props) => {
                 props.route.params.onGoBack();
                 props.navigation.goBack()
             })
-            setLoading(null)
+            setLoading(false)
             return
         }
 
-        console.log('KD', data, lessionId)
+        if (data._parts.length == 0) {
+            showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
+                props.route.params.onGoBack();
+                props.navigation.goBack()
+            })
+            setLoading(false)
+            return
+        }
+
+        console.log('KD', data._parts, lessionId, `${EndPoints.LessonMaterialUpload}${lessionId}`)
+        // setLoading(false)
+        // return;
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
-                setLoading(null)
+                setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
@@ -619,7 +669,7 @@ const TLDetailEdit = (props) => {
                         props.route.params.onGoBack();
                         props.navigation.goBack()
                     }}
-                    saveLesson={() => { saveLesson() }} />
+                    saveLesson={() => { getDataFromQuickBloxAndroid() }} />
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
