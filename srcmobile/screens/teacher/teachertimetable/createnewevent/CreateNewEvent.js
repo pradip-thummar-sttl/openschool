@@ -223,7 +223,7 @@ const CreateNewEvent = (props) => {
             <View>
                 <TouchableOpacity
                     activeOpacity={opacity}
-                    style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
+                    style={[styles.subjectDateTime, styles.dropDownSmallWrap2]}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <Image style={styles.calIcon} source={Images.Clock} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
     },
     popupContent: {
         width: '100%',
-        marginTop: Platform.OS == 'android' ? hp(0) : hp(5),
+        marginTop: Platform.OS == 'android' ? hp(-1) : hp(3),
     },
     beforeBorder: {
         padding: hp(1.95),
@@ -498,8 +498,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        paddingTop: hp(0.5),
+        paddingBottom: hp(0.5),
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
@@ -507,6 +507,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
+        textAlignVertical: 'center',
     },
     field: {
         marginBottom: hp(2.5),
@@ -575,7 +576,8 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        top: hp(1.1),
+        // top: hp(1.1),
+        alignSelf: 'center',
         left: hp(1.4),
     },
     subjectDateTime: {
@@ -588,6 +590,21 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp('1.0%'),
+        lineHeight: hp(2.3),
+        height: hp(5.20),
+        marginTop: hp(1.3),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
+    },
+    dropDownSmallWrap2: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        fontSize: hp('1.9%'),
+        borderWidth: 1,
+        top: hp(0.5),
         borderColor: COLORS.borderGrp,
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
@@ -646,8 +663,8 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
-        top: hp(0.65),
+        marginRight: hp(1.5),
+        top: Platform.OS == 'android' ? hp(1.5) : hp(0.65),
     },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1) },

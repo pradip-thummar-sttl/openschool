@@ -138,6 +138,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         fontSize: hp(1.8),
+        marginBottom: 8,
     },
     lessonTitle: {
         flexDirection: 'row',
