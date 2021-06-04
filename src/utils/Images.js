@@ -3,7 +3,7 @@ const Images = {
     Logo: require('../assets/images/logo2.png'),
     GradientBack: require('../assets/images/teacher_intro_screen_bg2.png'),
     UserIcon: require('../assets/images/userIcon.png'),
-    LoginBack: require('../assets/images/sign_in_screen_bg2.png'),
+    LoginBack: require('../assets/images/ILLUS-login.png'),
     UserIconLogin: require('../assets/images/icouser2.png'),
     Password: require('../assets/images/icopassword2.png'),
     ShowPassword: require('../assets/images/icoview2.png'),
@@ -99,5 +99,9 @@ const Images = {
     Play3Icon:require('../assets/images/play3.png'),
     userVideo: require('../assets/images/teacher-user2.png'),
     pdfIcon: require('../assets/images/file2.png'),
+    schoolLoginIcon: require('../assets/images/school-icon.png'),
+    teacherLoginIcon: require('../assets/images/teacher-icon.png'),
+    pupilLoginIcon: require('../assets/images/pupil-icon.png'),
+    illuTopBg: require('../assets/images/illus-top.png'),
 }
 export default Images;

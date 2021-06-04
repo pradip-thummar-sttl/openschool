@@ -237,13 +237,14 @@ class Login extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
+                            <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.UserIconLogin} />
+                                    source={Images.UserIconLogin} /> */}
                                 <TextInput
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
@@ -255,10 +256,11 @@ class Login extends Component {
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
+                            <Text style={styles.fieldInputLabel}>Password</Text>
                             <View style={styles.field}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.Password} />
+                                    source={Images.Password} /> */}
                                 <View style={styles.eyeParent}>
                                     <TextInput
                                         ref={(input) => { this.t2 = input; }}
@@ -298,7 +300,7 @@ class Login extends Component {
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>
-                                <TouchableOpacity
+                                <TouchableOpacity 
                                     activeOpacity={opacity}
                                     onPress={() => {
                                         isDesignBuild ?
@@ -314,14 +316,17 @@ class Login extends Component {
                                             color={COLORS.white} />
                                         :
                                         <Text
-                                            style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
+                                            style={styles.commonButtonGreen}>Login to Continue</Text>
                                     }
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        <View>
+                            <Text style={styles.getStartText}>New to MyEd Open School? <TouchableOpacity><Text style={styles.greenText}>Get Started</Text></TouchableOpacity></Text>
+                        </View>
                         <View style={styles.bottomLoginIntro}>
-                            <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
-                            <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
+                            <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
+                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
@@ -362,10 +367,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     titleLogin: {
-        textAlign: 'center',
+        textAlign: 'left',
         color: COLORS.themeBlue,
         fontSize: hp('4.8%'),
-        marginBottom: hp('8.0%'),
+        marginTop: hp('18.22%'),
+        marginBottom: hp('4%'),
+        marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
     },
     loginForm: {
@@ -420,12 +427,15 @@ const styles = StyleSheet.create({
     },
     forgotPass: {
         fontSize: hp('1.8%'),
-        color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontBold,
+        color:COLORS.buttonGreen,
+        textTransform:'uppercase',
+        fontWeight:'700',
     },
     loginButtonView: {
         marginTop: hp('3.0%'),
+        width:'80%',
     },
     bottomLoginIntro: {
         top: hp('15%'),
@@ -439,5 +449,57 @@ const styles = StyleSheet.create({
     },
     eyeParent: {
         justifyContent: 'center'
+    },
+    fieldInputLabel:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.lightGray,
+        paddingBottom:hp(1),
+    },
+    commonButtonGreen:{
+        backgroundColor: COLORS.buttonGreen,
+        color: COLORS.white,
+        fontSize: hp('2.4%'),
+        fontWeight: '800',
+        borderRadius: hp('1.3%'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        alignSelf: 'center',
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: 50,},
+        shadowOpacity: 0.16,
+        shadowRadius: 13,
+        elevation: 4,
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    getStartText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+        marginTop:hp(5),
+        marginLeft: hp('8.4%'),
+    },
+    commonFontsPupleUnderline:{
+        paddingTop:hp(0.5),
+        color: COLORS.thmePurple,
+        //fontSize: hp(3.81),
+        fontWeight: '500',
+        lineHeight: hp('2.6%'),
+        fontFamily: FONTS.fontRegular,
+        textDecorationLine: "underline",
+        textDecorationStyle: "solid",
+        textDecorationColor: "#000",
+
+    },
+    greenText:{
+        color:COLORS.buttonGreen,
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        paddingTop:hp(0.5),
     }
 });
