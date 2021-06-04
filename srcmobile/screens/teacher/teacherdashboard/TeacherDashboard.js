@@ -132,7 +132,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 });
             }else{
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCall((id)=>{
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,(id)=>{
                     console.log('hi id:---------', id)
                 })
             }

@@ -89,10 +89,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     [super viewDidLoad];
     
     // creating session
-    self.session = [[QBRTCConferenceClient instance] createSessionWithChatDialogID:_chatDialog.ID conferenceType:_conferenceType > 0 ? _conferenceType : QBRTCConferenceTypeVideo];
+    self.session = [[QBRTCConferenceClient instance] createSessionWithChatDialogID:_dialogID conferenceType:_conferenceType > 0 ? _conferenceType : QBRTCConferenceTypeVideo];
     
     if (_conferenceType > 0) {
-        self.users = [@[Core.currentUser] mutableCopy];
+        self.users = [@[_selectedUsers] mutableCopy];
     }
     else {
         self.users = [[NSMutableArray alloc] init];

@@ -5,7 +5,6 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-#import "CallViewController.h"
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -79,13 +78,13 @@ NSString *const kAccountKey     = @"2xYap5od8h1GCfgxCJ6B";
   [self.window makeKeyAndVisible];
   return YES;
 }
-- (void)showLoginView
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Mains" bundle:nil];
-    CallViewController *callViewController = [storyboard instantiateViewControllerWithIdentifier:@"CallViewController"];
-    [self.window makeKeyAndVisible];
-    [self.window.rootViewController presentViewController:callViewController animated:YES completion:NULL];
-}
+//- (void)showLoginView
+//{
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Mains" bundle:nil];
+//    CallViewController *callViewController = [storyboard instantiateViewControllerWithIdentifier:@"CallViewController"];
+//    [self.window makeKeyAndVisible];
+//    [self.window.rootViewController presentViewController:callViewController animated:YES completion:NULL];
+//}
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
