@@ -10,12 +10,14 @@ const HeaderGallery = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
+                <View style={styles.arrowTouch}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> Recommended Content</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.mainTitle}>Recommended Content</Text>
+                </View>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity
                         style={styles.notificationBar}
@@ -43,7 +45,7 @@ const HeaderGallery = (props) => {
                             style={styles.userIcon}
                             source={Images.SearchIcon} />
                         <TextInput
-                            style={[STYLE.commonInput, styles.searchHeader]}
+                            style={[styles.searchHeader]}
                             placeholder="Search subject, class, etc"
                             maxLength={50}
                             placeholderTextColor={COLORS.menuLightFonts}
@@ -61,18 +63,16 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: hp(4),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
     },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
         marginBottom:hp(2),
     },
     mainTitle: {
-        fontSize: wp(4.26),
         fontFamily: FONTS.fontSemiBold,
-        alignItems: 'center',
+        fontSize: Platform.OS == 'android' ? hp(1.8) : hp(2),
     },
     massagesIcon: {
         width: wp(5.20),
@@ -90,21 +90,29 @@ const styles = StyleSheet.create({
     },
     field: {
         position: 'relative',
-        width: hp(41),
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     searchHeader: {
-        height: hp(5.20),
+        height: Platform.OS == 'android'? 'auto' : hp(5.20),
+        width: '100%',
         paddingLeft: hp(4.6),
-        borderColor: COLORS.borderGrp,
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.82),
         fontFamily: FONTS.fontSemiBold,
+        color:COLORS.themeBlue,
+        borderWidth: 1,
+        borderRadius: hp('1.0%'),
+        borderColor: COLORS.InoutBorder,
+        lineHeight:hp(2.3),
+        paddingRight: hp('2.0%'),
     },
     userIcon: {
         position: 'absolute',
-        top: hp(1.1),
         width: hp(1.9),
         resizeMode: 'contain',
         left: hp(1.43),
+        alignSelf: 'center',
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -249,7 +257,10 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top:hp(1.2),
+    },
+    arrowTouch: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     commonText: {
         fontSize: hp(1.82),
@@ -258,6 +269,5 @@ const styles = StyleSheet.create({
     infoIcon:{
         width: wp(6.18),
         resizeMode: 'contain',
-        top:hp(1.2),
     },
 });

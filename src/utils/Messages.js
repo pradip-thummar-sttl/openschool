@@ -14,6 +14,7 @@ const MESSAGE = {
     invalidTo: '"To Time" must be greater than "From Time"',
     invalidFrom: 'Time duration cannot be more than 2 hours long',
     description: "Please enter description",
+    recording: "Please add recording",
     eventAdded: "Event added successfully",
     lessonAdded: "Lesson added successfully",
     lessonUpdated: "Lesson updated successfully",

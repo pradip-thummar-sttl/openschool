@@ -50,20 +50,10 @@ const Header = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
-                <View style={styles.field}>
-                    <TextInput
-                        ref={textInput}
-                        style={[STYLE.commonInput, styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            setKeyword(keyword);
-                            props.onSearchKeyword(keyword);
-                        }} />
+
+            <View style={styles.searchParent}>
+                <View style={styles.searchInner}>
                     <TouchableOpacity
-                        style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
@@ -74,44 +64,53 @@ const Header = (props) => {
                                 :
                                 null
                         }}>
-                        <Image
-                            style={styles.userIcon1}
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
+                    <TextInput
+                        ref={textInput}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        placeholder="Search subject, class, etc"
+                        maxLength={50}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => {
+                            setKeyword(keyword);
+                            props.onSearchKeyword(keyword);
+                        }} />
                 </View>
-                <TouchableOpacity style={styles.buttonGroup}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
+                <View style={{flexDirection: 'row'}}>
+                <Menu style={{marginLeft: 10}}>
+                    <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                    <MenuOptions style={styles.filterListWrap}>
+                        <MenuOption style={styles.borderList}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Subject</Text>
+                                    {selectedIndex == 0 ?
+                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                        :
+                                        null
+                                    }
+                                </View>
+                            </TouchableOpacity>
+                        </MenuOption>
+                        <MenuOption style={styles.borderList}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Date</Text>
+                                    {selectedIndex == 1 ?
+                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                        :
+                                        null
+                                    }
+                                </View>
+                            </TouchableOpacity>
+                        </MenuOption>
+                        {/* <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => setSelectedIndex(2)}>
@@ -125,10 +124,10 @@ const Header = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption> */}
-                        </MenuOptions>
-                    </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity>
+                    </MenuOptions>
+                </Menu>
+                <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
@@ -225,6 +224,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: hp(1.69),
+        marginLeft: 10,
     },
     filterIcon: {
         width: hp(1.74),
@@ -271,15 +271,25 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         flex: 1,
     },
+    // filterListWrap: {
+    //     paddingTop: hp(1),
+    //     paddingLeft: hp(1.2),
+    //     paddingRight: hp(1.2),
+    //     paddingBottom: hp(1),
+    //     position: 'absolute',
+    //     backgroundColor: COLORS.white,
+    //     top: hp(5.5),
+    //     width: hp(30.98),
+    //     borderRadius: hp(1),
+    //     shadowColor: COLORS.black,
+    //     shadowOffset: { width: 0, height: hp(1), },
+    //     shadowOpacity: 0.05,
+    //     shadowRadius: hp(1),
+    // },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
+        width: hp(25.98),
+        paddingHorizontal: 5,
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -304,4 +314,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         height: hp(5.20),
     },
+    searchParent: {
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
+    searchMenu: {
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+    }
 });

@@ -414,12 +414,12 @@ export default StyleSheet.create({
         paddingRight: hp(1),
     },
     pupilSecondButton: {
-        paddingLeft: hp(3.77),
-        paddingRight: hp(3.77),
+        paddingLeft: Platform.OS == 'android' ? hp(3.2) : hp(3.77),
+        paddingRight: Platform.OS == 'android' ? hp(3.2) : hp(3.77),
     },
     pupilSecondBottomButton: {
-        paddingLeft: hp(3.4),
-        paddingRight: hp(3.4),
+        paddingLeft: Platform.OS == 'android' ? hp(2.8) : hp(3.4),
+        paddingRight: Platform.OS == 'android' ? hp(2.8) : hp(3.4),
     },
     pupilTable: {
         flexDirection: 'row',
@@ -548,8 +548,8 @@ export default StyleSheet.create({
         paddingTop: hp(1.8),
     },
     rewardStar:{
-        width :hp(43.48),
-        height:hp(9.98),
+        width : Platform.OS == 'android' ? hp(55.5) : hp(43.48),
+        height:Platform.OS == 'android' ? hp(12.5): hp(9.98),
         resizeMode: 'contain',
     },
     rewardStarMark:{
@@ -575,8 +575,8 @@ export default StyleSheet.create({
     starSelectedText:{
         fontFamily: FONTS.fontBold,
         color:COLORS.white,
-        fontSize: hp(1.82),
-        lineHeight: hp(5.1),
+        fontSize: Platform.OS == 'android' ? hp(1.3) : hp(1.82),
+        lineHeight: Platform.OS == 'android' ? hp(4.5) : hp(5.1),
     },
     centerStar:{
         borderLeftWidth:1,
@@ -593,7 +593,7 @@ export default StyleSheet.create({
     },
     starText:{
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
+        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
         color: COLORS.darkGray,
     },
     centerText:{

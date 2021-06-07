@@ -47,7 +47,7 @@ const TLHomeWork = (props) => {
     const [isAddRecording, setAddRecording] = useState(false)
     const [description, setDescription] = useState("")
     const [isSwitch, setSwitch] = useState(true)
-    const [recordingArr, setRecordingArr] = useState({})
+    const [recordingArr, setRecordingArr] = useState([])
     const [itemCheckList, setItemCheckList] = useState([]);
     const [newItem, setNewItem] = useState('');
 
@@ -73,6 +73,7 @@ const TLHomeWork = (props) => {
                 Addhomework.HwId = res.data._id
                 setSelectedDate(moment(res.data.DueDate).format('DD/MM/yyyy'))
                 setMaterialArr(res.data.MaterialList)
+                setRecordingArr(res.data.RecordingList)
                 setDescription(res.data.HomeworkDescription)
                 setSwitch(res.data.IsIncluded)
                 setItemCheckList(res.data.CheckList)
@@ -242,6 +243,7 @@ const TLHomeWork = (props) => {
                             <CheckBox
                                 style={PAGESTYLE.checkMark}
                                 value={item.IsCheck}
+                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
@@ -356,7 +358,8 @@ const TLHomeWork = (props) => {
                             onClose={() => setAddRecording(false)}
                             onScreeCamera={() => onScreeCamera()}
                             onScreeVoice={() => onScreeVoice()}
-                            onCameraOnly={() => onCameraOnly()} />
+                            onCameraOnly={() => onCameraOnly()}
+                            onRemoveRecording={() => { setRecordingArr([]); Addhomework.RecordingArr = [] }} />
 
                         <View style={PAGESTYLE.requirementofClass}>
                             <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
@@ -369,6 +372,7 @@ const TLHomeWork = (props) => {
                                     //         style={PAGESTYLE.checkMark}
                                     //         value={item.IsCheck}
                                     //         boxType={'square'}
+                                                // tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     //         onCheckColor={COLORS.white}
                                     //         onFillColor={COLORS.dashboardPupilBlue}
                                     //         onTintColor={COLORS.dashboardPupilBlue}
@@ -389,6 +393,7 @@ const TLHomeWork = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -401,6 +406,7 @@ const TLHomeWork = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}
@@ -413,6 +419,7 @@ const TLHomeWork = (props) => {
                                     style={PAGESTYLE.checkMark}
                                     value={false}
                                     boxType={'square'}
+                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     onCheckColor={COLORS.white}
                                     onFillColor={COLORS.dashboardPupilBlue}
                                     onTintColor={COLORS.dashboardPupilBlue}

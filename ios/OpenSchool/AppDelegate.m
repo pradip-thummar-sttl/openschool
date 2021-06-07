@@ -1,7 +1,5 @@
 #import "AppDelegate.h"
 
-#import <Quickblox/Quickblox.h>
-#import <QuickbloxWebRTC/QuickbloxWebRTC.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -52,21 +50,6 @@ NSString *const kAccountKey     = @"2xYap5od8h1GCfgxCJ6B";
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
-  [QBSettings setApplicationID:kApplicationID];
-  [QBSettings setAuthKey:kAuthKey];
-  [QBSettings setAuthSecret:kAuthSecret];
-  [QBSettings setAccountKey:kAccountKey];
-      
-  [QBSettings setLogLevel:QBLogLevelNothing];
-  [QBSettings disableXMPPLogging];
-      
-  [QBRTCConfig setAnswerTimeInterval:kQBAnswerTimeInterval];
-  [QBRTCConfig setDialingTimeInterval:kQBDialingTimeInterval];
-  [QBRTCConfig setLogLevel:QBRTCLogLevelVerbose];
-      
-  [QBRTCConfig setConferenceEndpoint:@"wss://janus.quickblox.com:8989/"];
-  NSAssert([QBRTCConfig conferenceEndpoint].length > 0, @"Multi-conference server is available only for Enterprise plans. Please refer to https://quickblox.com/developers/EnterpriseFeatures for more information and contacts.");
-      
   #if ENABLE_STATS_REPORTS
       [QBRTCConfig setStatsReportTimeInterval:1.0f];
   #endif

@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { baseUrl, isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -51,7 +51,7 @@ const Pupillist = ({ item }) => (
                 <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
-                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
+                <Text style={PAGESTYLE.groupName}>Group {item.GroupName ? item.GroupName : '1A'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
@@ -76,8 +76,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
 
     useEffect(() => {
-        // if(isDesignBuild)
-        //     return true
         refresh()
     }, [])
 
@@ -107,6 +105,18 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.log('response of get all pupil error', err)
         })
         return () => {
+        }
+    }
+
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
         }
     }
 
@@ -141,6 +151,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.error(e);
         }
     };
+
+    const startLiveClassIOS = () => {
+
+    }
+
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
     const [dataOfSubView, setDataOfSubView] = useState([])
@@ -307,6 +322,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                    <Text style={PAGESTYLE.subTitleTab}>Sub Subject</Text>
+                                                    <View style={PAGESTYLE.yellowHrTag}></View>
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -368,7 +385,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             <Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
                                                         <TouchableOpacity
                                                             style={PAGESTYLE.buttonGrp}
-                                                            onPress={() => { startLiveClassAndroid() }}>
+                                                            onPress={() => { launchLiveClass() }}>
                                                             <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
                                                         </TouchableOpacity>
                                                     </View>

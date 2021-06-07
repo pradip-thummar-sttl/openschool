@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import React, { useState, useRef } from "react";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -10,10 +10,20 @@ import { opacity } from "../../../utils/Constant";
 
 const PopupHomeWorkSave = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
+    const initialRender = useRef(true);
 
     const toggleModal = (props) => {
         setModalVisible(!isModalVisible);
     };
+
+    React.useEffect(() => {
+        if (initialRender.current) {
+            initialRender.current = false
+        } else {
+            setModalVisible(false);
+        }
+    }, [props.isModalVisible]);
+
     return (
         <View>
             {!props.isMarked && props.isSubmitted ?
@@ -34,10 +44,18 @@ const PopupHomeWorkSave = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing save pupil will be notified. You can edit your feedback at any time. </Text>
-                        <TouchableOpacity activeOpacity={opacity}
-                            onPress={() => {toggleModal(); props.onSetHomework()}}>
-                            <Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text>
-                        </TouchableOpacity>
+
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                style={STYLE.commonButtonGreenDashboardSide}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <TouchableOpacity activeOpacity={opacity}
+                                onPress={() => { props.onSetHomework() }}>
+                                <Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text>
+                            </TouchableOpacity>
+                        }
                     </View>
                 </View>
             </Modal>

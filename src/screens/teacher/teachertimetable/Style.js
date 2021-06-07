@@ -19,7 +19,6 @@ export default StyleSheet.create({
         position: 'absolute',
         top: 0,
         left:0,
-        width: hp(16),
         height: hp(8.59),
     },
     lable: {
@@ -29,7 +28,6 @@ export default StyleSheet.create({
         color:COLORS.lightGray,
     },
     dayRightmain: {
-        width: hp(16),
         height: hp(8.59),
         paddingLeft: hp(1.56),
         paddingTop: hp(1.7),

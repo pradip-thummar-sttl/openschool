@@ -158,6 +158,7 @@ const PupilHomeWorkDetail = (props) => {
                                         <View style={PAGESTYLE.checkBoxLabelBox}>
                                             <View style={PAGESTYLE.alignRow}>
                                                 <CheckBox
+                                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                                     style={PAGESTYLE.checkMark}
                                                     value={item.IsCheck}
                                                     boxType={'square'}
@@ -176,6 +177,7 @@ const PupilHomeWorkDetail = (props) => {
                                         <CheckBox
                                             style={PAGESTYLE.checkMark}
                                             value={true}
+                                            tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                             boxType={'square'}
                                             onCheckColor={COLORS.white}
                                             onFillColor={COLORS.dashboardPupilBlue}

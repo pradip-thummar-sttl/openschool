@@ -31,16 +31,13 @@ const HeaderUpdate = (props) => {
                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                             color={COLORS.white} />
                         :
-                        props.isLoading == null ?
-                            null
-                            :
-                            <TouchableOpacity
-                                style={styles.buttonGroup}
-                                activeOpacity={opacity}
-                                onPress={() => props.saveLesson()}>
-                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                                <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
-                            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttonGroup}
+                            activeOpacity={opacity}
+                            onPress={() => props.saveLesson()}>
+                            <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                            <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
+                        </TouchableOpacity>
                     }
                     <TouchableOpacity
                         style={styles.notificationBar}
@@ -250,5 +247,15 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+    },
+    commonButtonGreenheaderwithouticon: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        padding: hp(1.4),
+        height: hp(5.20),
+        width: hp(20.20),
+        alignSelf: 'center',
     },
 });

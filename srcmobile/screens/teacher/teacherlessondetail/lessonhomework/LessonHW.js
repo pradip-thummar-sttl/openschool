@@ -224,6 +224,7 @@ const TLHomeWork = (props) => {
                                 style={PAGESTYLE.checkMark}
                                 value={item.IsCheck}
                                 boxType={'square'}
+                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
@@ -257,7 +258,7 @@ const TLHomeWork = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'center', position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text>ADD ITEM</Text>
@@ -304,7 +305,7 @@ const TLHomeWork = (props) => {
                             </View>
                         </View>
                         <View style={PAGESTYLE.lessonDesc}>
-                            <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
+                            <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                             <TextInput
                                 multiline={true}
                                 numberOfLines={4}

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.44),
         paddingRight: hp(0.5),
         backgroundColor: COLORS.white,
-        paddingTop: hp(5.6),
+        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.6),
         paddingBottom: hp(2),
     },
     headerMain: {

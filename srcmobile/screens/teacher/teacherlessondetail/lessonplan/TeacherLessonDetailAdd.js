@@ -9,7 +9,7 @@ import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack } from "../../../../utils/Constant";
+import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack, isRunningFromVirtualDevice } from "../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
@@ -284,10 +284,10 @@ const TLDetailAdd = (props) => {
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%', bottom: hp(1), }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: hp(1.85) }}>{item.ItemName}</Text>
+                        <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                            <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -311,10 +311,10 @@ const TLDetailAdd = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'center', position: 'absolute', right: hp(1) }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{ fontSize: hp(1.6), right: hp(0.5) }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -343,10 +343,12 @@ const TLDetailAdd = (props) => {
                                 style={PAGESTYLE.checkMark}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
                             />
                             <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
@@ -368,13 +370,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.2) }} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -389,14 +391,15 @@ const TLDetailAdd = (props) => {
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -413,13 +416,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ fpadding: hp(1) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -436,13 +439,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ fpadding: hp(1) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: hp(20) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -477,6 +480,9 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
+        } else if (recordingArr.length == 0) {
+            showMessage(MESSAGE.recording);
+            return false;
         } else if (selectedPupils.length == 0) {
             showMessage(MESSAGE.selectPupil);
             return false;
@@ -484,39 +490,43 @@ const TLDetailAdd = (props) => {
 
         setLoading(true)
 
-        let userIDs = [], userNames = [], names = [];
-        selectedPupils.forEach(pupil => {
-            userIDs.push(pupil.QBUserID)
-            userNames.push(pupil.Email)
-            names.push(pupil.FirstName + " " + pupil.LastName)
-        });
-        if (Platform.OS === 'android') {
-            try {
-                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                    console.log('error:eventId', error, ID);
-                    if (ID && ID != '' && ID != null && ID != undefined) {
-                        saveLesson(ID)
-                    } else {
-                        setLoading(false)
-                        showMessage('Sorry, we are unable to add lesson!')
-                    }
-                });
-            } catch (e) {
-                console.error(e);
-            }
+        createQBDialog()
+    };
+
+    const createQBDialog = () => {
+        if (isRunningFromVirtualDevice) {
+            saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
+            let userIDs = [], userNames = [], names = [];
+            selectedPupils.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.FirstName + " " + pupil.LastName)
+            });
             try {
-                Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
-                    console.log('eventId--------------------', ID);
-                    if (ID && ID != '' && ID != null && ID != undefined) {
-                        saveLesson(ID)
-                    } else {
-                        setLoading(false)
-                        showMessage('Sorry, we are unable to add lesson!')
-                    }
-                },(error)=>{
-                    console.log('event error--------------------', error);
-                });
+                if (Platform.OS == 'android') {
+                    DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                        console.log('error:eventId', error, ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    });
+                } else {
+                    Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
+                        console.log('eventId--------------------', ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    }, (error) => {
+                        console.log('event error--------------------', error);
+                    });
+                }
             } catch (e) {
                 console.error(e);
             }
@@ -587,7 +597,7 @@ const TLDetailAdd = (props) => {
                 props.route.params.onGoBack();
                 props.navigation.goBack()
             })
-            setLoading(null)
+            setLoading(false)
             return
         }
 
@@ -595,7 +605,7 @@ const TLDetailAdd = (props) => {
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
-                setLoading(null)
+                setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonAdded, () => {
@@ -637,13 +647,13 @@ const TLDetailAdd = (props) => {
 
                                     {subjectsDropDown()}
 
-                                    <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
+                                    <View style={[PAGESTYLE.dropDownFormInput]}>
                                         <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
+                                        <View style={[PAGESTYLE.subjectDateTime]}>
                                             <TextInput
                                                 returnKeyType={"next"}
                                                 onSubmitEditing={() => { t2.current.focus(); }}
-                                                style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
+                                                style={{ ...PAGESTYLE.commonInput, width: '100%', }}
                                                 placeholder="e.g. Grammar, Fractions, etc"
                                                 autoCapitalize={'sentences'}
                                                 maxLength={40}
@@ -658,7 +668,7 @@ const TLDetailAdd = (props) => {
                                         <TouchableOpacity onPress={() => showDatePicker()}>
                                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                <View style={PAGESTYLE.subjectDateTime}>
+                                                <View style={PAGESTYLE.subjectDateTimePicker}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                     <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                                                 </View>

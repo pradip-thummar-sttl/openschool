@@ -54,21 +54,11 @@ const Header = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
-                <View style={styles.field}>
-                    <TextInput
-                        ref={textInput}
-                        style={[STYLE.commonInput, styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            setKeyword(keyword);
-                            props.onSearchKeyword(keyword);
-                        }}/>
 
+
+            <View style={styles.searchParent}>
+                <View style={styles.searchInner}>
                     <TouchableOpacity
-                        style={styles.userIcon1Parent}
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
@@ -79,13 +69,21 @@ const Header = (props) => {
                                 :
                                 null
                         }}>
-                        <Image
-                            style={styles.userIcon1}
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
-
-                    <Menu style={{ ...styles.filterIcon }}>
-                        <MenuTrigger><Image style={styles.filterIcon1} source={Images.mobileFilter} /></MenuTrigger>
+                    <TextInput
+                        ref={textInput}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        placeholder="Search subject, class, etc"
+                        maxLength={50}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => {
+                            setKeyword(keyword);
+                            props.onSearchKeyword(keyword);
+                        }} />
+                    <Menu>
+                        <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -115,25 +113,11 @@ const Header = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
                         </MenuOptions>
                     </Menu>
                 </View>
                 <TouchableOpacity
-                    style={styles.buttonGroup}
+                    style={{marginLeft: 10}}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
@@ -150,7 +134,8 @@ const styles = StyleSheet.create({
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
         backgroundColor: COLORS.white,
-        paddingTop: hp(3),
+        paddingTop: Platform.OS == 'android' ? hp(0) : hp(3),
+        marginTop: Platform.OS == 'android' ? hp(-1) : hp(0),
         // marginBottom: hp(5.85),
     },
     headerMain: {
@@ -174,15 +159,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: hp(2.60),
         marginTop: hp(-1.5),
+        width: '100%',
+        alignItems: 'center',
     },
     field: {
         position: 'relative',
-        width: hp(35.94),
+        width: '84%',
         justifyContent: 'center',
         marginRight: hp(1.2),
     },
     searchHeader: {
         height: hp(5.20),
+        width: '100%',
+        paddingTop: hp(0),
+        paddingBottom: hp(0),
+        paddingRight: hp(4),
         paddingLeft: hp(4.43),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
@@ -197,9 +188,10 @@ const styles = StyleSheet.create({
     },
     userIcon1: {
         position: 'absolute',
-        width: 18,
+        width: 15,
         resizeMode: 'contain',
         height: 30,
+        top: 0,
     },
     userIcon1Parent: {
         position: 'absolute',
@@ -226,17 +218,16 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
     },
     buttonGroup: {
-        position: 'relative',
+        position: 'absolute',
+        right: 0,
         flexDirection: 'row',
         alignItems: 'center',
-        //marginRight: hp(1.69),
+        marginLeft: 10
     },
     filterIcon: {
         width: hp(1.74),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.30),
-        top: hp(1.19),
     },
     filterIcon1: {
         width: hp(1.74),
@@ -264,7 +255,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
+        top: Platform.OS == 'android' ? hp(1) : hp(1.29),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -282,21 +273,29 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         flex: 1,
     },
+    // filterListWrap: {
+    //     paddingTop: hp(1),
+    //     paddingLeft: hp(1.2),
+    //     paddingRight: hp(1.2),
+    //     paddingBottom: hp(1),
+    //     position: 'absolute',
+    //     backgroundColor: COLORS.white,
+    //     top: hp(5.5),
+    //     width: hp(30.78),
+    //     borderRadius: hp(1),
+    //     shadowColor: COLORS.black,
+    //     shadowOffset: { width: 0, height: hp(1), },
+    //     shadowOpacity: 0.05,
+    //     shadowRadius: hp(1),
+    //     right: hp(-1),
+    // },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        width: hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        right: hp(-1),
     },
     checkMark: {
         width: hp(1.48),
@@ -318,7 +317,7 @@ const styles = StyleSheet.create({
         height: hp(5.20),
     },
     filterGroup: {
-    marginTop:wp(-11.5),
+        marginTop: wp(-11.5),
     },
     menuIconWithTitle: {
         flexDirection: 'row',
@@ -329,4 +328,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         marginRight: hp(1.56),
     },
+    searchParent: {
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
+    searchMenu: {
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+    }
 });

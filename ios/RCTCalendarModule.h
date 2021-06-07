@@ -1,13 +1,16 @@
 //
-//  RCTCalendarModule.h
-//  
+//  RCT.h
+//  OpenSchool
 //
-//  Created by iMac on 20/05/21.
+//  Created by iMac on 07/06/21.
 //
 
-#import <React/RCTBridgeModule.h>
-@interface RCTCalendarModule : NSObject <RCTBridgeModule>
-+ (void)signUpWithFullName:(NSString *)fullName
-                  roomName:(NSString *)roomName successCallback:(RCTResponseSenderBlock)successCallback errorCallback:(RCTResponseSenderBlock)errorCallback;
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface RCT : NSObject
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -167,7 +167,7 @@ const PupilTimetable = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={{ width: isHide ? '100%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <Header3
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
@@ -177,7 +177,7 @@ const PupilTimetable = (props) => {
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
 
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1,}}>
+                <View style={{ ...PAGESTYLE.backgroundTable,}}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
@@ -194,7 +194,7 @@ const PupilTimetable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingTop: hp(1.5),}}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, }}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (

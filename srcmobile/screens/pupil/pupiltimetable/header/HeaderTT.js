@@ -40,7 +40,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={styles.headerBarMainWhite}>
+        <View style={{backgroundColor: COLORS.white}}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
@@ -58,7 +58,89 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
+
+
+            <View style={styles.searchParent}>
+                <View style={styles.searchInner}>
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => {
+                            keyword ?
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
+                                :
+                                null
+                        }}>
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                    </TouchableOpacity>
+                    <TextInput
+                        ref={textInput}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        placeholder="Search subject, topic name etc"
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => {
+                            setKeyword(keyword);
+                            props.onSearchKeyword(keyword);
+                        }} />
+                </View>
+
+                <TouchableOpacity
+                    style={styles.buttonGroup}
+                    onPress={() => props.navigateToCreateNewEvent()}>
+                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    <Text style={styles.commonButtonGreenheader}></Text>
+                </TouchableOpacity>
+                <RBSheet
+                    ref={refRBSheet}
+                    closeOnDragDown={true}
+                    height={[hp(55.88)]}
+                    style={{ position: 'relative', }}
+                    closeOnPressMask={true}
+                    customStyles={{
+                        wrapper: {
+                            backgroundColor: COLORS.bottomSlideUpBack
+                        },
+                        draggableIcon: {
+                            backgroundColor: COLORS.darkGray
+                        }
+                    }}
+                >
+                    <View style={styles.popupLarge}>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
+                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                        </TouchableOpacity>
+                        <View style={styles.popupContent}>
+                            <View style={styles.tabcontent}>
+                                <View style={styles.beforeBorder}>
+                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
+                                    <View style={styles.entryContentMain}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
+                                            <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                            <Text style={styles.entryTitle}>New Lesson</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
+                                            <Text style={styles.entryTitle}>New Event</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </RBSheet>
+            </View>
+
+
+
+            {/* <View style={styles.filterbarMain}>
                 <View style={styles.field}>
                     <TextInput
                         ref={textInput}
@@ -90,8 +172,7 @@ const HeaderTT = (props) => {
 
                     <Menu style={{ ...styles.filterIcon }}>
                         <MenuTrigger>
-                            {/* <Image style={styles.filterIcon1} source={Images.mobileFilter} /> */}
-                            </MenuTrigger>
+                        </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -121,20 +202,6 @@ const HeaderTT = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
                         </MenuOptions>
                     </Menu>
                 </View>
@@ -170,20 +237,6 @@ const HeaderTT = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
                         </MenuOptions>
                     </Menu>
 
@@ -237,7 +290,7 @@ const HeaderTT = (props) => {
                         </View>
                     </View>
                 </RBSheet>
-            </View>
+            </View> */}
         </View>
     );
 }
@@ -254,7 +307,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
@@ -286,7 +339,7 @@ const styles = StyleSheet.create({
     },
     field: {
         position: 'relative',
-        width: hp(35.94),
+        width: Platform.OS == 'android' ? hp(38.3) : hp(34.8),
         justifyContent: 'center',
         marginRight: hp(1.2),
     },
@@ -294,11 +347,11 @@ const styles = StyleSheet.create({
         height: hp(5.20),
         paddingLeft: hp(4.43),
         ...Platform.select({
-            android: {padding:0}
+            android: { padding: 0 }
         }),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
-        color:COLORS.themeBlue,
+        color: COLORS.themeBlue,
         borderWidth: 1,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
@@ -314,8 +367,10 @@ const styles = StyleSheet.create({
     userIcon1: {
         position: 'absolute',
         width: hp(1.66),
+        height: hp(1.66),
         resizeMode: 'contain',
         left: hp(0),
+        top: hp(1)
     },
     filterIcon: {
         width: hp(1.74),
@@ -333,7 +388,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: hp(1.66),
         left: hp(1.5),
-        top: Platform.OS == 'android' ? hp(0.4) : hp(1),
+        top: Platform.OS == 'android' ? hp(0.6) : hp(1),
         alignItems: 'center',
     },
     commonButtonBorderedheader: {
@@ -488,4 +543,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textTransform: 'uppercase',
     },
+    searchParent: {
+        flexDirection: 'row', alignItems: 'center', height: hp(5.20), marginLeft: hp(1.95), marginRight: hp(1.95), backgroundColor: COLORS.white
+    },
+    searchInner: {
+        height: '100%', flex: 1, marginRight: 10, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
+    searchMenu: {
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+    }
 });

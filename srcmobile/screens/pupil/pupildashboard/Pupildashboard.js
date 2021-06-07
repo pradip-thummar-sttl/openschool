@@ -10,7 +10,7 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { baseUrl, opacity, showMessage, Var } from "../../../utils/Constant";
+import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
@@ -62,6 +62,18 @@ const PupuilDashboard = (props) => {
         })
     }, [])
 
+    const launchLiveClass = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            if (Platform.OS == 'android') {
+                startLiveClassAndroid()
+            } else {
+                startLiveClassIOS()
+            }
+        }
+    }
+
     const startLiveClassAndroid = () => {
         try {
             let qBUserIDs = [], userNames = [], names = []
@@ -76,17 +88,25 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
+            let teacherUserName = dataOfSubView.TeacherUserName
+            let teacherUser = dataOfSubView.TeacherFirstName + " " + dataOfSubView.TeacherLastName
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+            qBUserIDs.push(teacherQBUserID)
+            userNames.push(teacherUserName)
+            names.push(teacherUser)
+
+            console.log('KDKD: Pupil', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
                 console.log('Class Started');
-            }
-            );
+            });
         } catch (e) {
             console.error(e);
         }
     };
+
+    const startLiveClassIOS = () => {
+    }
 
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
@@ -293,7 +313,7 @@ const PupuilDashboard = (props) => {
                                                                     <View style={PAGESTYLE.lessonstartButton}>
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}
-                                                                            onPress={() => { startLiveClassAndroid() }}>
+                                                                            onPress={() => { launchLiveClass() }}>
                                                                             <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
                                                                         </TouchableOpacity>
                                                                     </View>

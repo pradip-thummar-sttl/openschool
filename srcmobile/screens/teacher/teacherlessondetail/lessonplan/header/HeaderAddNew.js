@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import Images from '../../../../../utils/Images';
@@ -33,12 +33,19 @@ const HeaderAddNew = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    <TouchableOpacity style={styles.buttonGroup}
-                        activeOpacity={opacity}
-                        onPress={() => props.saveLesson()}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}></Text>
-                    </TouchableOpacity>
+                    <View style={styles.tickLayout}>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <TouchableOpacity style={styles.buttonGroup}
+                                activeOpacity={opacity}
+                                onPress={() => props.saveLesson()}>
+                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                            </TouchableOpacity>
+                        }
+                    </View>
                     {/* <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        paddingTop: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -68,6 +75,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
+        marginBottom: Platform.OS == 'android' ? hp(-1) : hp(0),
     },
     massagesIcon: {
         width: wp(5.20),
@@ -123,10 +131,7 @@ const styles = StyleSheet.create({
         fontSize: hp(1.5),
     },
     buttonGroup: {
-        position: 'relative',
-        flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
     },
     filterIcon: {
         width: hp(1.74),
@@ -169,12 +174,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     addIcon: {
-        width: hp(1.80),
+        width: 12,
         resizeMode: 'contain',
-        position: 'absolute',
-        top: hp(1.5),
-        left: hp(1.8),
-        zIndex: 9,
     },
     iconTop: {
         top: hp(4.2),
@@ -246,9 +247,18 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
+        marginRight: hp(2),
+        top: Platform.OS == 'android' ? hp(1.2) : hp(0)
     },
     titleRow: {
         flexDirection: 'row',
     },
+    tickLayout: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 40,
+        width: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });

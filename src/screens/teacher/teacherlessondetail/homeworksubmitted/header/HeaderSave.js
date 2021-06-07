@@ -18,6 +18,8 @@ const HeaderSave = (props) => {
                     </TouchableOpacity> {props.label} Homework</Text>
                 <View style={styles.headerRight}>
                     <PopupHomeWorkSave
+                        isLoading={props.isLoading}
+                        isModalVisible={props.isModalVisible}
                         isMarked={props.isMarked}
                         isSubmitted={props.isSubmitted}
                         onSetHomework={() => props.onSetHomework()} />
