@@ -238,119 +238,12 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
-                       <View style={styles.rightRegisterSmlText}>
-                        <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
-                        </View>
-                        <Text h3 style={styles.titleAccountLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Account'}</Text>
-                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
-                        <View style={styles.loginAccountForm}>                           
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
-                            <TouchableOpacity style={[styles.dropWrap]}>
-                                                    <Text style={styles.dateTimetextdummy}>Day</Text>
-                                               
-                                            </TouchableOpacity>
-                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
-                            </View> 
-                                                       
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
-                            <TouchableOpacity style={[styles.dropWrap]}>
-                                                    <Text style={styles.dateTimetextdummy}>Month</Text>
-                                               
-                                            </TouchableOpacity>
-                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
-                            </View> 
-
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
-                            <TouchableOpacity style={[styles.dropWrap]}>
-                                                    <Text style={styles.dateTimetextdummy}>Year</Text>
-                                               
-                                            </TouchableOpacity>
-                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
-                            </View> 
-                        </View>
-                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
-                        <View style={styles.loginAccountForm}>                           
-                            <View style={[styles.field, styles.filedSpace]}>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
-                                    placeholder="First Name"
-                                    autoCapitalize={false}
-                                    maxLength={40}
-                                    value={this.state.userName}
-                                    placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
-                            </View>                            
-                            <View style={[styles.field, styles.filedSpace]}>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
-                                    placeholder="Last Name"
-                                    autoCapitalize={false}
-                                    maxLength={40}
-                                    value={this.state.userName}
-                                    placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
-                            </View>
-                        </View>
-                        
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                       
+                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Confirm your email address'}</Text>
                         <View style={styles.loginForm}>
-                            <Text style={styles.fieldInputLabel}>Email</Text>
-                            <View style={styles.field}>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
-                                    placeholder="Enter email or phone"
-                                    autoCapitalize={false}
-                                    maxLength={40}
-                                    value={this.state.userName}
-                                    placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
-                            </View>
-                            <Text style={styles.fieldInputLabel}>Password</Text>
-                            <View style={styles.field}>
-                                <View style={styles.eyeParent}>
-                                    <TextInput
-                                        ref={(input) => { this.t2 = input; }}
-                                        style={STYLE.commonInputPassword}
-                                        placeholder="Password"
-                                        value={this.state.password}
-                                        maxLength={30}
-                                        placeholderTextColor={COLORS.lightplaceholder}
-                                        secureTextEntry={this.state.isPasswordHide}
-                                        onChangeText={password => this.setState({ password })} />
-
-                                    <View style={styles.eye}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => this.setPasswordVisibility()}>
-                                            <Image
-                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={styles.bottomLoginFeild}>
-                                <View style={styles.rememberFeild}>
-                                    <CheckBox
-                                        style={STYLE.checkBoxcommon1}
-                                        value={this.state.isRemember}
-                                        onCheckColor={COLORS.themeBlue}
-                                        onTintColor={COLORS.themeBlue}
-                                        tintColor={COLORS.lightplaceholder}
-                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
-                                    />
-                                    <Text style={styles.label}>Remember Me</Text>
-                                </View>
-                                <View style={styles.forgotLink}>
-                                    <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
-                                </View>
-                            </View>
+                            <Text style={[styles.fieldInputLabel, styles.lineSpaceVerify]}>An email has been sent to the following email address:</Text>
+                            <Text style={[styles.fieldInputLabel, styles.lineSpaceVerify]}>email@emailaddress.com</Text>
+                            <Text style={[styles.fieldInputLabel, styles.lineSpaceVerify]}>Please check your email and click verify to get started with MyEd Open School.</Text>
                             <View style={styles.loginButtonView}>
                                 <TouchableOpacity 
                                     activeOpacity={opacity}
@@ -368,14 +261,12 @@ class Login extends Component {
                                             color={COLORS.white} />
                                         :
                                         <Text
-                                            style={styles.commonButtonGreen}>Create My Account</Text>
+                                            style={styles.commonButtonGreen}>Resend Verification email</Text>
                                     }
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View>
-                            <Text style={styles.getStartText}>New to MyEd Open School? <TouchableOpacity><Text style={styles.greenText}>Get Started</Text></TouchableOpacity></Text>
-                        </View>
+                       
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
                             <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>

@@ -239,6 +239,7 @@ class Login extends Component {
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                        
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
@@ -535,42 +536,59 @@ const styles = StyleSheet.create({
     firstNameSpace:{
         marginLeft:hp(9),
     },
-    subjectDateTime: {
-        alignItems: 'flex-start',
-        width: '100%',
-        position: 'relative',
-    },
-    dropDownSmallWrap1: {
-        flexDirection: 'row',
-        fontFamily: FONTS.fontRegular,
-        color: COLORS.darkGray,
-        fontSize: hp('1.9%'),
-        borderWidth: 1,
-        borderColor: COLORS.borderGrp,
-        borderRadius: hp('1.0%'),
-        lineHeight: hp(2.3),
-        height: hp(5.20),
-        marginTop: hp(1.3),
-        paddingLeft: hp('2.0%'),
-        paddingRight: hp('2.0%'),
-    },
-    timeIcon: {
-        resizeMode: 'contain',
-        width: hp(1.76),
-        marginRight: hp(1.04),
-        alignSelf: 'center'
-    },
-    dateTimetextdummy1: {
-        fontSize: hp(1.82),
-        color: COLORS.darkGray,
-        fontFamily: FONTS.fontRegular,
-        alignSelf: 'center',
-    },
-    dropDownArrowdatetime1: {
+    dropDownArrowdatetime: {
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.6),
-        alignSelf: 'center'
+        marginTop:hp(2.5),
     },
+    dropWrap:{
+        width:hp(10.2),
+        marginTop:hp(2.5),
+    },
+    alignVert:{
+        alignItems:'center',
+        marginRight:hp(2.5),
+    },
+    dateTimetextdummy:{
+        fontFamily: FONTS.fontBold,
+        fontSize:hp(1.82),        
+        color:COLORS.lightGray,
+    },
+    lineSpaceVerify:{
+        marginBottom:hp(3),
+    },
+    resetBtn:{
+        backgroundColor: COLORS.white,
+        color: COLORS.darkGray,
+        fontSize: hp('2.4%'),
+        fontWeight: '800',
+        borderRadius: hp('1.3%'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        alignSelf: 'center',
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: 50,},
+        shadowOpacity: 0.16,
+        shadowRadius: 13,
+        elevation: 4,
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        borderWidth:1,
+        borderColor:COLORS.borderGrp,
+        marginLeft:hp(3),
+    },
+    alignBtn:{
+        flexDirection:'row',
+        justifyContent:'space-around',
+    },
+    spaceBottom:{
+        marginTop:hp(5),
+        marginBottom:hp(10),
+    }
 });
