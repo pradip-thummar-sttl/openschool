@@ -238,6 +238,71 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
+                       <View style={styles.rightRegisterSmlText}>
+                        <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
+                        </View>
+                        <Text h3 style={styles.titleAccountLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Account'}</Text>
+                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
+                        <View style={styles.loginAccountForm}>                           
+                            <View style={[styles.field, styles.filedSpace]}>
+                            <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
+                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                <View style={styles.subjectDateTime}>
+                                                    <Text style={styles.dateTimetextdummy}>Test</Text>
+                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                </View>
+                                            </TouchableOpacity>
+                            </View>                            
+                            <View style={[styles.field, styles.filedSpace]}>
+                                {/* <Image
+                                    style={styles.userIcon}
+                                    source={Images.UserIconLogin} /> */}
+                                <TextInput
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { this.t2.focus(); }}
+                                    style={STYLE.commonInput}
+                                    placeholder="Last Name"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    value={this.state.userName}
+                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    onChangeText={userName => this.setState({ userName })} />
+                            </View>
+                        </View>
+                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
+                        <View style={styles.loginAccountForm}>                           
+                            <View style={[styles.field, styles.filedSpace]}>
+                                {/* <Image
+                                    style={styles.userIcon}
+                                    source={Images.UserIconLogin} /> */}
+                                <TextInput
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { this.t2.focus(); }}
+                                    style={STYLE.commonInput}
+                                    placeholder="First Name"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    value={this.state.userName}
+                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    onChangeText={userName => this.setState({ userName })} />
+                            </View>                            
+                            <View style={[styles.field, styles.filedSpace]}>
+                                {/* <Image
+                                    style={styles.userIcon}
+                                    source={Images.UserIconLogin} /> */}
+                                <TextInput
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { this.t2.focus(); }}
+                                    style={STYLE.commonInput}
+                                    placeholder="Last Name"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    value={this.state.userName}
+                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    onChangeText={userName => this.setState({ userName })} />
+                            </View>
+                        </View>
+                        
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
