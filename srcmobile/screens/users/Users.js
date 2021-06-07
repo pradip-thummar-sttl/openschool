@@ -15,43 +15,42 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={Images.GradientBack} style={styles.image}>
-                    <View>
-                        <Text style={styles.titleText}>Select the type of user you are</Text>
-                        <View style={styles.userMain}>
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => null}>
-                                <View style={styles.user}>
-                                    <Image
-                                        style={styles.userIcon}
-                                        source={Images.UserIcon} />
-                                    <Text style={styles.text}>School</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login', { userType: "Teacher" })}>
-                                <View style={styles.user}>
-                                    <Image
-                                        style={styles.userIcon}
-                                        source={Images.UserIcon} />
-                                    <Text style={styles.text}>Teacher</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login', { userType: "Pupil" })}>
-                                <View style={styles.user}>
-                                    <Image
-                                        style={styles.userIcon}
-                                        source={Images.UserIcon} />
-                                    <Text style={styles.text}>Pupil</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
+                <Image source={Images.loginTop} style={styles.image}></Image>
+                <View>
+                    <Text style={styles.titleText}>Select the type of user you are</Text>
+                    <View style={styles.userMain}>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => null}>
+                            <View style={styles.user}>
+                                <Image
+                                    style={styles.userIcon}
+                                    source={Images.school} />
+                                <Text style={styles.text}>School</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => this.props.navigation.navigate('Login', { userType: "Teacher" })}>
+                            <View style={styles.user}>
+                                <Image
+                                    style={styles.userIcon}
+                                    source={Images.teacher} />
+                                <Text style={styles.text}>Teacher</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => this.props.navigation.navigate('Login', { userType: "Pupil" })}>
+                            <View style={styles.user}>
+                                <Image
+                                    style={styles.userIcon}
+                                    source={Images.pupil} />
+                                <Text style={styles.text}>Pupil</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
-                </ImageBackground>
+                </View>
             </View>
         );
     }
@@ -60,43 +59,43 @@ export default class Users extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: COLORS.white,
     },
     text: {
-        color: COLORS.white,
-        fontSize: hp(2.2),
+        color: COLORS.darkGray,
+        fontSize: hp(1.8),
         alignSelf: 'center',
-        fontFamily: FONTS.fontSemiBold,
+        fontFamily: FONTS.fontRegular,
     },
     titleText: {
-        color: COLORS.white,
-        fontSize: hp(2.3),
-        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGray,
+        fontSize: hp(2.46),
+        fontFamily: FONTS.fontBold,
         alignSelf: 'center',
-        marginBottom: hp(0),
-        marginTop: hp(6),
+        marginTop: hp(7.3),
     },
     image: {
-        flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
+        width: '100%',
+        height: hp(15),
     },
     userMain: {
         justifyContent: "center",
         flexDirection: 'column',
         alignSelf: 'center',
-        marginTop: hp(3.5),
+        marginTop: hp(4.5),
     },
     user: {
-        width: hp(22.13),
         justifyContent: "center",
         textAlign: 'center',
-        marginBottom: hp(3),
+        marginBottom: hp(4),
     },
     userIcon: {
-        width: hp(20),
-        height: hp(20),
+        width: hp(13.5),
+        height: hp(13.5),
         resizeMode: "contain",
         alignSelf: 'center',
-        marginBottom: hp(2),
+        marginBottom: hp(1.5),
+        borderRadius: hp(50),
     },
 });
