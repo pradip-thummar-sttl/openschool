@@ -248,7 +248,7 @@ class Login extends Component {
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={STYLE.commonInput}
-                                    placeholder="Enter email or phone"
+                                    placeholder="Enter Code"
                                     autoCapitalize={false}
                                     maxLength={40}
                                     value={this.state.userName}
