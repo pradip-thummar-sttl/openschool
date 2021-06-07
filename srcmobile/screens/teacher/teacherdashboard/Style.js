@@ -91,7 +91,7 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     ScrollViewFlatlist:{
-        height: hp(60.28),
+        flex: 1
     },
     month: {
         fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.56),

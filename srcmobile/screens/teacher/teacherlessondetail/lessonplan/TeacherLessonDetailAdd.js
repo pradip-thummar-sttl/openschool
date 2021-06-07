@@ -751,7 +751,7 @@ const TLDetailAdd = (props) => {
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}
                                         activeOpacity={opacity}
-                                        onPress={() => props.navigation.navigate('TLVideoGallery')}>
+                                        onPress={() => props.navigation.navigate('TLVideoGallery', { goBack: () => props.navigation.goBack() })}>
                                         <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                                     </TouchableOpacity>
                                 </View>

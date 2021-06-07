@@ -16,7 +16,10 @@ const WorkSpaceHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
+                <TouchableOpacity onPress={() => props.goBack()}>
+                    <Image style={styles.arrow} source={Images.backArrow} />
+                </TouchableOpacity>
+                <Text style={styles.mainTitle}> Leave Workspace</Text>
                 <View style={styles.headerRight}>
                     {
                         props.isWorkspace ?
@@ -39,21 +42,18 @@ export default WorkSpaceHeader;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(4.5),
+        paddingHorizontal: hp(2.5),
         backgroundColor: COLORS.white,
-        paddingVertical: wp(1)
-        // marginBottom: hp(5.85),
+        paddingVertical: 10
     },
     headerMain: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.5),
         fontFamily: FONTS.fontSemiBold,
-        alignItems: 'center',
+        marginLeft: 15,
     },
     massagesIcon: {
         width: hp(5.20),
@@ -206,8 +206,9 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     headerRight: {
-        flexDirection: 'row',
         alignItems: 'center',
+        right: 0,
+        position: 'absolute',
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -235,10 +236,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     arrow: {
-        width: hp(2.57),
-        height: hp(2.23),
+        width: 20,
         resizeMode: 'contain',
-        marginRight: hp(1),
-        top: hp(-0.3),
     },
 });

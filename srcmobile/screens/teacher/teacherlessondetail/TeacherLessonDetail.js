@@ -46,8 +46,8 @@ const TeacherLessonDetail = (props) => {
     const [isHSDataChanged, setHSDataChanged] = useState(false)
 
     useEffect(() => {
-        if (!isSearchActive && tabIndex == 2 && !this.textInput) {
-            this.textInput.clear()
+        if (!isSearchActive && tabIndex == 2) {
+            // this.textInput.clear()
         }
     }, [isSearchActive])
 
@@ -222,7 +222,7 @@ const TeacherLessonDetail = (props) => {
                                     navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
                                 : tabIndex == 1 ?
                                     <HeaderHW
-                                        hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
+                                        hwBtnName={updateFlag ? 'Update' : 'Set'}
                                         SubjectName={lessonData.SubjectName}
                                         date={lessonData.Date}
                                         setHomework={() => onAddHomework()}
@@ -274,7 +274,7 @@ const TeacherLessonDetail = (props) => {
                                             id={props.route.params.data._id}
                                             updateBtnName={(flag) => setUpdate(flag)}
                                             navigateScreeCamera={() => setScreenAndCameraRecording(true)}
-                                            navigateToVideoGallery={() => setTLVideoGallery(true)} />
+                                            navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery', { goBack: () => props.navigation.goBack() })} />
                                         :
                                         <TLHomeWorkSubmitted
                                             lessonId={lessonData._id}

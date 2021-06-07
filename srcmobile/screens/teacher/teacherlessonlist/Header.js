@@ -69,7 +69,7 @@ const Header = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                        <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput
@@ -335,6 +335,6 @@ const styles = StyleSheet.create({
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
-        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+        height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
     }
 });

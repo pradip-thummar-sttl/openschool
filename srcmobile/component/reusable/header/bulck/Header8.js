@@ -58,14 +58,12 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
         backgroundColor: COLORS.white,
-        marginTop: hp(3),
     },
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: hp(3),
-        marginBottom: hp(2.46),
+        paddingVertical: 15
     },
     titles: {
         marginLeft: hp(2),

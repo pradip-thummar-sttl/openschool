@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.46),
         paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(6.6),
-        paddingBottom: hp(1.5),
+        paddingVertical: 15,
     },
     headerMain: {
         flexDirection: 'row',
@@ -247,5 +246,6 @@ const styles = StyleSheet.create({
     },
     titleRow: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
 });

@@ -300,10 +300,10 @@ const TLDetailEdit = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'center', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'center', position: 'absolute', right: 10, }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -744,6 +744,7 @@ const TLDetailEdit = (props) => {
                                         style={PAGESTYLE.commonInputTextareaNormal}
                                         onChangeText={text => setDescription(text)} />
                                 </View>
+
                                 <Popupaddrecording
                                     recordingArr={recordingArr}
                                     isVisible={isAddRecording}
@@ -832,7 +833,7 @@ const TLDetailEdit = (props) => {
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}
                                         activeOpacity={opacity}
-                                        onPress={() => props.navigation.navigate('TLVideoGallery')}>
+                                        onPress={() => props.navigation.navigate('TLVideoGallery', { goBack: () => props.navigation.goBack() })}>
                                         <Text style={[STYLE.commonButtonBorderedGreen, PAGESTYLE.fullWidthButton]}>find me learning material</Text>
                                     </TouchableOpacity>
                                 </View>

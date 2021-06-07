@@ -155,8 +155,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: COLORS.commonBorderColor,
         paddingLeft: hp(2.6),
-        paddingTop: hp(4.55),
-        paddingBottom: hp(1.6),
+        paddingVertical: 15,
         paddingRight: hp(1.6),
     },
     drawerTitleMain: {

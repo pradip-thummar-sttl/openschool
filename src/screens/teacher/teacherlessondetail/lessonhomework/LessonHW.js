@@ -289,7 +289,7 @@ const TLHomeWork = (props) => {
                         style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftWidth: 1, borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>

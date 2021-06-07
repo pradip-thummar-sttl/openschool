@@ -25,6 +25,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+        alignSelf: 'center'
     },
     item: {
         flexDirection: 'column',
@@ -119,6 +120,5 @@ export default StyleSheet.create({
         color:COLORS.lightGray,
     },
     topListingArrow:{
-        top:hp(3.2),
     }
 });

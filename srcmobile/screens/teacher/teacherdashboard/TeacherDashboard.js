@@ -282,6 +282,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={PAGESTYLE.whiteBoard}>
                             {isDashDataLoading ?
                                 <ActivityIndicator
+                                    style={{ margin: 20 }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.yellowDark} />
                                 :
@@ -322,7 +323,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                    <Text style={PAGESTYLE.subTitleTab}>Sub Subject</Text>
+                                                    <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
                                                     <View style={PAGESTYLE.yellowHrTag}></View>
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
@@ -379,15 +380,17 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                     </ScrollView>
                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                        <TouchableOpacity
-                                                            style={PAGESTYLE.buttonGrp}
-                                                            onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                            <Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
-                                                        <TouchableOpacity
-                                                            style={PAGESTYLE.buttonGrp}
-                                                            onPress={() => { launchLiveClass() }}>
-                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
-                                                        </TouchableOpacity>
+                                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                            <TouchableOpacity
+                                                                onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
+                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
+                                                        </View>
+                                                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
+                                                            <TouchableOpacity
+                                                                onPress={() => { launchLiveClass() }}>
+                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
                                                     </View>
                                                 </View>
                                             </RBSheet>
@@ -473,6 +476,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>
                             {isPupilDataLoading ?
                                 <ActivityIndicator
+                                    style={{ margin: 20 }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.blueButton} />
                                 :

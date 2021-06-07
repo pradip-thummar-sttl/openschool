@@ -67,41 +67,41 @@ const TeacherLessonList = (props) => {
     };
 
     const Item = ({ navigateToDetail, style, item }) => (
-        <View style={[PAGESTYLE.item, style]}>
-            <View style={PAGESTYLE.classSubject}>
-                <View style={PAGESTYLE.subjecRow}>
-                    <View style={PAGESTYLE.border}></View>
-                    <View style={PAGESTYLE.subjectMain}>
-                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+        <TouchableOpacity
+            style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
+            activeOpacity={opacity}
+            onPress={() => navigateToDetail()}>
+            <View style={[PAGESTYLE.item, style]}>
+                <View style={PAGESTYLE.classSubject}>
+                    <View style={PAGESTYLE.subjecRow}>
+                        <View style={PAGESTYLE.border}></View>
+                        <View style={PAGESTYLE.subjectMain}>
+                            <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
+                            <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                        </View>
+                    </View>
+                    <View style={PAGESTYLE.timingMain}>
+                        <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                        <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
+                    </View>
+                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                </View>
+                <View style={PAGESTYLE.row}>
+                    <View style={PAGESTYLE.checkMarkedText}>
+                        <Image style={PAGESTYLE.tickIcon} source={item.LiveSession ? Images.CheckIcon : Images.CheckIconGrey} />
+                        <Text style={PAGESTYLE.tickText}>Live Lesson</Text>
+                    </View>
+                    <View style={PAGESTYLE.checkMarkedText}>
+                        <Image style={PAGESTYLE.tickIcon} source={item.Publish ? Images.CheckIcon : Images.CheckIconGrey} />
+                        <Text style={PAGESTYLE.tickText}>Published</Text>
+                    </View>
+                    <View style={PAGESTYLE.checkMarkedText}>
+                        <Image style={PAGESTYLE.tickIcon} source={item.HomeWork == 'Yes' ? Images.CheckIcon : Images.CheckIconGrey} />
+                        <Text style={PAGESTYLE.tickText}>Homework</Text>
                     </View>
                 </View>
-                <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
-                    <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
-                </View>
-                <TouchableOpacity
-                    style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
-                    activeOpacity={opacity}
-                    onPress={() => navigateToDetail()}>
-                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                </TouchableOpacity>
             </View>
-            <View style={PAGESTYLE.row}>
-                <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={item.LiveSession ? Images.CheckIcon : Images.CheckIconGrey} />
-                    <Text style={PAGESTYLE.tickText}>Live Lesson</Text>
-                </View>
-                <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={item.Publish ? Images.CheckIcon : Images.CheckIconGrey} />
-                    <Text style={PAGESTYLE.tickText}>Published</Text>
-                </View>
-                <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={item.HomeWork == 'Yes' ? Images.CheckIcon : Images.CheckIconGrey} />
-                    <Text style={PAGESTYLE.tickText}>Homework</Text>
-                </View>
-            </View>
-        </View>
+        </TouchableOpacity>
     );
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -119,32 +119,28 @@ const TeacherLessonList = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)} />
-                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
-                    <View>
-                        {isLessonLoading ?
-                            <ActivityIndicator
-                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.yellowDark} />
+                <View>
+                    {isLessonLoading ?
+                        <ActivityIndicator
+                            style={{ margin: 20 }}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.yellowDark} />
+                        :
+                        lessonData.length > 0 ?
+                            <FlatList
+                                style={{ paddingHorizontal: 12 }}
+                                data={lessonData}
+                                renderItem={renderItem}
+                                keyExtractor={(item) => item.id}
+                                extraData={selectedId}
+                                showsVerticalScrollIndicator={false}
+                            />
                             :
-                            lessonData.length > 0 ?
-                                <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                                    <FlatList
-                                        style={PAGESTYLE.ScrollViewFlatlist}
-                                        data={lessonData}
-                                        renderItem={renderItem}
-                                        keyExtractor={(item) => item.id}
-                                        extraData={selectedId}
-                                        showsVerticalScrollIndicator={false}
-                                    />
-                                </SafeAreaView>
-                                :
-                                <View style={{ height: 100, justifyContent: 'center' }}>
-                                    <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                </View>
-                        }
-                    </View>
-
-                </ScrollView>
+                            <View style={{ height: 100, justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            </View>
+                    }
+                </View>
             </View>
         </View>
     );

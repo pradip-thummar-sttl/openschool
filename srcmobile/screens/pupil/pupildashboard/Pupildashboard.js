@@ -217,6 +217,7 @@ const PupuilDashboard = (props) => {
                                 <View style={PAGESTYLE.whiteBoard}>
                                     {isMyDayLoading ?
                                         <ActivityIndicator
+                                            style={{ margin: 20 }}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.yellowDark} />
                                         :
@@ -311,11 +312,17 @@ const PupuilDashboard = (props) => {
                                                                         </View>
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}
-                                                                            onPress={() => { launchLiveClass() }}>
-                                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
-                                                                        </TouchableOpacity>
+                                                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                            <TouchableOpacity>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Mark As Absent</Text>
+                                                                            </TouchableOpacity>
+                                                                        </View>
+                                                                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton }}>
+                                                                            <TouchableOpacity
+                                                                                onPress={() => { launchLiveClass() }}>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Join Class</Text>
+                                                                            </TouchableOpacity>
+                                                                        </View>
                                                                     </View>
                                                                 </View>
                                                             </View>
@@ -355,6 +362,7 @@ const PupuilDashboard = (props) => {
                                 <View style={PAGESTYLE.whiteBoard}>
                                     {isHomeworkLoading ?
                                         <ActivityIndicator
+                                            style={{ margin: 20 }}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.yellowDark} />
                                         :
@@ -421,7 +429,7 @@ const PupuilDashboard = (props) => {
                                                                         </View>
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity>
+                                                                        {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity> */}
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondButton]}>See Homework</Text></TouchableOpacity>
                                                                     </View>
                                                                 </View>
@@ -463,7 +471,6 @@ const PupuilDashboard = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.lessonstartButtonBottom}>
-                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondBottomButton]}>tertiary cta</Text></TouchableOpacity>
                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondBottomButton]}>View avatar</Text></TouchableOpacity>
                                 </View>
                             </View>

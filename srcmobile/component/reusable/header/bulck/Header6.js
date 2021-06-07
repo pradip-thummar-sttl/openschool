@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: hp(3),
-        marginBottom: hp(2.46),
+        paddingVertical: 8,
     },
     titles: {
         marginLeft: hp(2),

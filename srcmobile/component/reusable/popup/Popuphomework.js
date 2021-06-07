@@ -6,6 +6,8 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Modal from 'react-native-modal';
+import { baseUrl } from "../../../utils/Constant";
+import { User } from "../../../utils/Model";
 
 const Popuphomework = (props) => {
     const [isModalVisible, setModalVisible] = useState(true);
@@ -25,14 +27,14 @@ const Popuphomework = (props) => {
                         <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <ImageBackground source={require('../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
-                    <View style={styles.userProfile}><Image style={styles.userProfileimage} source={require('../../../assets/images/userProfilePopup.png')} /></View>
+                    <View style={styles.userProfile}><Image style={styles.userProfileimage} source={{ uri: baseUrl + User.user.ProfilePicture }} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are setting homework for this class</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing set homework the pupils in this class will be notified. You can edit this class homework at any time. </Text>
                         <TouchableOpacity onPress={() => props.setHomework()}>
                             {props.isHomeworkLoading ?
                                 <ActivityIndicator
-                                    style={{ alignSelf:'center' }}
+                                    style={{ alignSelf: 'center' }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.dashboardGreenButton} />
                                 :
@@ -59,11 +61,20 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     userProfile: {
+        top: hp(7.5),
+        width: 45,
+        height: 45,
+        borderWidth: 2,
+        borderColor: COLORS.white,
+        backgroundColor: COLORS.white,
+        borderRadius: 20,
         position: 'absolute',
-        top: hp(2.5),
+        justifyContent: 'center'
     },
     userProfileimage: {
-        width: hp(7),
+        width: 40,
+        height: 40,
+        alignSelf: 'center',
         resizeMode: 'contain',
     },
     commonInputTextarea: {

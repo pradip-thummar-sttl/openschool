@@ -15,6 +15,7 @@ import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 
 const TLVideoGallery = (props) => {
     const [isHide, action] = useState(true);
+    console.log('props', props);
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -25,7 +26,7 @@ const TLVideoGallery = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderGallery
-                    navigateToBack={() => props.goBack()}
+                    navigateToBack={() => props.route.params.goBack()}
                     onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg, PAGESTYLE.mobileGalleryHolder}>

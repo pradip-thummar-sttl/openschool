@@ -238,13 +238,19 @@ const Popupdata = (props) => {
                             :
                             <View style={{ width: hp(20) }}></View>
                         } */}
-                        <TouchableOpacity style={styles.buttonGrp}><Text style={[styles.bottomDrwerButtonGreenbordered]}>mark as absent</Text></TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.buttonGrp}
-                            activeOpacity={opacity}
-                            onPress={() => { launchLiveClass() }}>
-                            <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
-                        </TouchableOpacity>
+                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                            <TouchableOpacity style={styles.buttonGrp}>
+                                <Text style={{textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>mark as absent</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
+                            <TouchableOpacity
+                                style={styles.buttonGrp}
+                                activeOpacity={opacity}
+                                onPress={() => { launchLiveClass() }}>
+                                <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </RBSheet>

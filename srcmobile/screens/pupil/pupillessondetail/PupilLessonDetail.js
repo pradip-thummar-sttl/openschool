@@ -171,7 +171,7 @@ const PupilLessonDetail = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                        <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput

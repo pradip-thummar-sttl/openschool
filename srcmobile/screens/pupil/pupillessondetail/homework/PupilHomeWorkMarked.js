@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from '../Style';
-import Video from 'react-native-video';
+import Video from "react-native-video";
 import FONTS from '../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
@@ -15,11 +15,12 @@ import Header8 from '../../../../component/reusable/header/bulck/Header8'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../utils/Images";
 import { Download } from "../../../../utils/Download";
-import { baseUrl } from "../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../utils/Constant";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
     const { item } = props.route.params;
+    const [isPaused, setPause] = useState(true)
 
     console.log('item', item.RecordingList[0].filename);
 
@@ -118,14 +119,26 @@ const PupilHomeWorkMarked = (props) => {
                                         <Text style={PAGESTYLE.techerName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                     </View>
                                     <View style={PAGESTYLE.largeVideoBlock}>
-                                    {item.RecordingList.length == 0 ?
-                                        <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
-                                        :
-                                        <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
-                                            resizeMode={'contain'}
-                                            style={PAGESTYLE.largeVideo1}
-                                            controls={true} />
-                                    }
+                                        {item.RecordingList.length == 0 ?
+                                            <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
+                                            :
+                                            <View style={{ height: '100%', justifyContent: 'center' }}>
+                                                <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                                    resizeMode={'contain'}
+                                                    style={PAGESTYLE.largeVideo1}
+                                                    controls={true}
+                                                    paused={isPaused} />
+                                                {isPaused ?
+                                                    <TouchableOpacity
+                                                        activeOpacity={opacity}
+                                                        onPress={() => setPause(!isPaused)}>
+                                                        <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        }
                                     </View>
                                 </View>
                             </View>

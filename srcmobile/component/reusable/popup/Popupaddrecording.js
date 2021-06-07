@@ -56,6 +56,7 @@ const Popupaddrecording = (props) => {
                     activeOpacity={opacity}
                     onPress={() => Download(props.recordingArr[0])}
                     style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
+                    <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
                     <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
                 </TouchableOpacity>
             }
@@ -160,8 +161,8 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: Platform.OS == 'android' ? 175 : hp(23.5),
-        padding: hp(1.43),
+        width: Platform.OS == 'android' ? 185 : hp(23.5),
+        paddingHorizontal: 10,
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
         borderWidth: 1,
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     recordLinkBlock1: {
-        width: hp(30.5),
+        width: '100%',
         padding: hp(1.43),
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     recordLinkText: {
-        fontSize: Platform.OS == 'android' ? 14 :hp(1.85),
+        fontSize: Platform.OS == 'android' ? 14 : hp(1.85),
         fontFamily: FONTS.fontSemiBold,
         top: Platform.OS == 'android' ? hp(0.2) : hp(0),
         color: COLORS.darkGray,

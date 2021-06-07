@@ -318,7 +318,7 @@ const TLDetailAdd = (props) => {
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>

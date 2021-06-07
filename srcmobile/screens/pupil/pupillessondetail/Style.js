@@ -30,10 +30,9 @@ export default StyleSheet.create({
     },
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
-        paddingBottom: hp(2),
-        paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
+        height: '100%',
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -105,8 +104,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.7),
         flex: 0.9,
-        lineHeight: hp(2.46),
-        paddingBottom: hp(1.95),
+        paddingVertical: 10,
     },
     teacherDetailLeft: {
         width: '100%',
@@ -1350,7 +1348,7 @@ export default StyleSheet.create({
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
         backgroundColor: COLORS.white,
-        marginTop: hp(0.98),
+        marginBottom: hp(0.98),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
@@ -1400,16 +1398,14 @@ export default StyleSheet.create({
     lessonstartButtonPupil: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         backgroundColor: COLORS.white,
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
         paddingBottom: hp(2),
         position: 'absolute',
-        bottom: hp(6.5),
+        bottom: 0,
         width: '100%',
-        left: hp(0),
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
     },
@@ -1435,12 +1431,21 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
     },
     fixedButton: {
-        width: hp(19.70),
+        width: '100%',
+        height: 45,
+        textAlign: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
-        height: hp(5.41),
-        paddingTop: hp(1.6),
-        paddingBottom: hp(1.6),
+        backgroundColor: COLORS.transparent,
+        color: COLORS.dashboardGreenButton,
+        textTransform: 'uppercase',
+        textAlignVertical: 'center',
+        fontFamily: FONTS.fontBold,
+        borderWidth: 1,
+        alignSelf: 'center',
+        borderColor: COLORS.dashboardGreenButton,
+        borderRadius: hp(1),
+
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -1449,7 +1454,7 @@ export default StyleSheet.create({
         paddingTop: hp(1.5),
         backgroundColor: COLORS.black,
         width: '100%',
-        height:100
+        height: 100
     },
     field: {
         position: 'relative',
@@ -1538,6 +1543,6 @@ export default StyleSheet.create({
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
-        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+        height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
     }
 });

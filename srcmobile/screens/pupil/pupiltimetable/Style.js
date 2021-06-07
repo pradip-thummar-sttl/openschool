@@ -86,7 +86,7 @@ export default StyleSheet.create({
         // top:hp(5.5),
     },
     spaceTop:{
-        marginTop:hp(3.25),
+        // marginTop:hp(3.25),
     },
     backgroundTable:{
         backgroundColor:COLORS.backgroundColorCommon,

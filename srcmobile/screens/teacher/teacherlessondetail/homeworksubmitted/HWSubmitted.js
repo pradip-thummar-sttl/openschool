@@ -16,39 +16,38 @@ import { Service } from "../../../../service/Service";
 var moment = require('moment');
 
 const Pupillist = (props, item) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.mobilePupilProfile}>
-            <View style={PAGESTYLE.thumbAlign}>
-                <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
+    <TouchableOpacity
+        activeOpacity={opacity}
+        onPress={() => props.navigateToDetail()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.mobilePupilProfile}>
+                <View style={PAGESTYLE.thumbAlign}>
+                    <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
+                    <View>
+                        <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
+                        <Text style={PAGESTYLE.groupName}>{props.item.GroupName}</Text>
+                    </View>
+                </View>
                 <View>
-                    <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
-                    <Text style={PAGESTYLE.groupName}>{props.item.GroupName}</Text>
+                    <Text style={PAGESTYLE.dateLesson}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
                 </View>
             </View>
-            <View>
-                <Text style={PAGESTYLE.dateLesson}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
-            </View>
-        </View>
-        <View style={STYLE.hrCommon}></View>
-        <View style={PAGESTYLE.rowLine}>
-            <View style={PAGESTYLE.checkMarkedText}>
-                <Image style={PAGESTYLE.tickIcon} source={props.item.Submited ? Images.CheckIcon : Images.CheckIcon} />
-                <Text style={PAGESTYLE.tickText}>Submitted</Text>
-            </View>
-            <View style={PAGESTYLE.checkMarkedText}>
-                <Image style={PAGESTYLE.tickIcon} source={props.item.Marked ? Images.CheckIcon : Images.CheckIconGrey} />
-                <Text style={PAGESTYLE.tickText}>Marked</Text>
-            </View>
-            <View>
-                <TouchableOpacity
-                    style={PAGESTYLE.pupilDetailLink}
-                    activeOpacity={opacity}
-                    onPress={() => props.navigateToDetail()}>
+            <View style={STYLE.hrCommon}></View>
+            <View style={PAGESTYLE.rowLine}>
+                <View style={PAGESTYLE.checkMarkedText}>
+                    <Image style={PAGESTYLE.tickIcon} source={props.item.Submited ? Images.CheckIcon : Images.CheckIcon} />
+                    <Text style={PAGESTYLE.tickText}>Submitted</Text>
+                </View>
+                <View style={PAGESTYLE.checkMarkedText}>
+                    <Image style={PAGESTYLE.tickIcon} source={props.item.Marked ? Images.CheckIcon : Images.CheckIconGrey} />
+                    <Text style={PAGESTYLE.tickText}>Marked</Text>
+                </View>
+                <View>
                     <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                </TouchableOpacity>
+                </View>
             </View>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const TLHomeWorkSubmitted = (props) => {
@@ -154,28 +153,26 @@ const TLHomeWorkSubmitted = (props) => {
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
                 </View>
             </View> */}
-            <View style={PAGESTYLE.pupilTabledata}>
-                <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                    {isLoading ?
-                        <ActivityIndicator
-                            style={{ flex: 1 }}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.yellowDark} />
+            <View >
+                {isLoading ?
+                    <ActivityIndicator
+                        style={{ flex: 1, margin: 20 }}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.yellowDark} />
+                    :
+                    homeworkData.length > 0 ?
+                        <FlatList
+                            data={homeworkData}
+                            renderItem={pupilRender}
+                            keyExtractor={(item) => item.id}
+                            extraData={selectedId}
+                            showsVerticalScrollIndicator={false}
+                        />
                         :
-                        homeworkData.length > 0 ?
-                            <FlatList
-                                data={homeworkData}
-                                renderItem={pupilRender}
-                                keyExtractor={(item) => item.id}
-                                extraData={selectedId}
-                                showsVerticalScrollIndicator={false}
-                            />
-                            :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
-                    }
-                </SafeAreaView>
+                        <View style={{ height: 100, justifyContent: 'center' }}>
+                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        </View>
+                }
             </View>
         </View>
 

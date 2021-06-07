@@ -111,7 +111,7 @@ const PupilTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(9), }} />
             );
         }
     }
@@ -174,7 +174,7 @@ const PupilTimeTable = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+            <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <HeaderTT
                     navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEventPupil', { onGoBack: () => refresh() })}
                     onAlertPress={() => { props.navigation.openDrawer() }}
@@ -184,7 +184,7 @@ const PupilTimeTable = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1 }}>
+                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, marginTop:hp(3.25), }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}

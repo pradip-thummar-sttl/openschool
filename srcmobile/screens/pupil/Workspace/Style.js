@@ -8,7 +8,7 @@ export default StyleSheet.create({
         //  marginHorizontal:hp(2),
         marginVertical: wp(2),
         backgroundColor: 'white',
-        height: hp(84),
+        height: hp(88),
         width: wp(95),
         alignSelf: 'center',
         borderRadius: 5
@@ -113,7 +113,7 @@ export default StyleSheet.create({
     },
     functionText: {
         color: 'white', 
-        fontSize: 18,
+        fontSize: 15,
         fontWeight: 'bold'
     },
 

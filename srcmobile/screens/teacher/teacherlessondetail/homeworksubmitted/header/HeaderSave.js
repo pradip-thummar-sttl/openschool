@@ -33,11 +33,9 @@ export default HeaderSave;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
+        paddingVertical: 10,
         paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingBottom: hp(1),
-        paddingTop: hp(3.85),
     },
     headerMain: {
         flexDirection: 'row',
