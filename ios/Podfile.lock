@@ -1,4 +1,4 @@
-PODS:
+gPODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.63.4)
@@ -505,6 +505,6 @@ SPEC CHECKSUMS:
   RNSketchCanvas: 9c28adb5381543ed55cc98ce6de46479cb3cb12c
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: f8d4e076af062f94636d04ab9fce23673e50bf38
+PODFILE CHECKSUM: 014c6c9ec80d438aea2126d421685e8e4791d2f9
 
 COCOAPODS: 1.10.1

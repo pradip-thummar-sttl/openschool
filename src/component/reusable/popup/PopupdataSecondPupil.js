@@ -560,11 +560,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: hp(1.69),
     },
-    subjectDateTime: {
-        alignItems: 'flex-start',
-        width: '100%',
-        position: 'relative',
-    },
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),

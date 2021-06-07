@@ -238,14 +238,68 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                       <View style={styles.rightRegisterSmlText}>
+                        <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
+                        </View>
+                        <Text h3 style={styles.titleAccountLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Account'}</Text>
+                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
+                        <View style={styles.loginAccountForm}>                           
+                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                            <TouchableOpacity style={[styles.dropWrap]}>
+                                                    <Text style={styles.dateTimetextdummy}>Day</Text>
+                                               
+                                            </TouchableOpacity>
+                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
+                            </View> 
+                                                       
+                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                            <TouchableOpacity style={[styles.dropWrap]}>
+                                                    <Text style={styles.dateTimetextdummy}>Month</Text>
+                                               
+                                            </TouchableOpacity>
+                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
+                            </View> 
+
+                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                            <TouchableOpacity style={[styles.dropWrap]}>
+                                                    <Text style={styles.dateTimetextdummy}>Year</Text>
+                                               
+                                            </TouchableOpacity>
+                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
+                            </View> 
+                        </View>
+                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
+                        <View style={styles.loginAccountForm}>                           
+                            <View style={[styles.field, styles.filedSpace]}>
+                                <TextInput
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { this.t2.focus(); }}
+                                    style={STYLE.commonInput}
+                                    placeholder="First Name"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    value={this.state.userName}
+                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    onChangeText={userName => this.setState({ userName })} />
+                            </View>                            
+                            <View style={[styles.field, styles.filedSpace]}>
+                                <TextInput
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { this.t2.focus(); }}
+                                    style={STYLE.commonInput}
+                                    placeholder="Last Name"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    value={this.state.userName}
+                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    onChangeText={userName => this.setState({ userName })} />
+                            </View>
+                        </View>
                         
+                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIconLogin} /> */}
                                 <TextInput
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
@@ -259,9 +313,6 @@ class Login extends Component {
                             </View>
                             <Text style={styles.fieldInputLabel}>Password</Text>
                             <View style={styles.field}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.Password} /> */}
                                 <View style={styles.eyeParent}>
                                     <TextInput
                                         ref={(input) => { this.t2 = input; }}
@@ -317,7 +368,7 @@ class Login extends Component {
                                             color={COLORS.white} />
                                         :
                                         <Text
-                                            style={styles.commonButtonGreen}>Login to Continue</Text>
+                                            style={styles.commonButtonGreen}>Create My Account</Text>
                                     }
                                 </TouchableOpacity>
                             </View>
@@ -555,40 +606,5 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         fontSize:hp(1.82),        
         color:COLORS.lightGray,
-    },
-    lineSpaceVerify:{
-        marginBottom:hp(3),
-    },
-    resetBtn:{
-        backgroundColor: COLORS.white,
-        color: COLORS.darkGray,
-        fontSize: hp('2.4%'),
-        fontWeight: '800',
-        borderRadius: hp('1.3%'),
-        overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(2),
-        paddingRight: hp(2),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
-        alignSelf: 'center',
-        shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
-        shadowOpacity: 0.16,
-        shadowRadius: 13,
-        elevation: 4,
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
-        marginLeft:hp(3),
-    },
-    alignBtn:{
-        flexDirection:'row',
-        justifyContent:'space-around',
-    },
-    spaceBottom:{
-        marginTop:hp(5),
-        marginBottom:hp(10),
     }
 });
