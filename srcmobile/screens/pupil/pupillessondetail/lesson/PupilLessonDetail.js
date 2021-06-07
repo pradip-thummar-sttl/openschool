@@ -212,7 +212,7 @@ const PupilLessonDetailInternal = (props) => {
                 </View>
                 <View style={PAGESTYLE.lessonstartButtonPupil}>
                     <TouchableOpacity
-                        style={{ width: '50%' }}
+                        style={{ width: '50%', }}
                         activeOpacity={opacity}
                         onPress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}>
                         <Text style={{ ...PAGESTYLE.fixedButton, marginRight: 10 }}>open workspace</Text>

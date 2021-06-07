@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
         backgroundColor: COLORS.white,
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',

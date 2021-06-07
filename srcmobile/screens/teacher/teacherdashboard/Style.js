@@ -120,6 +120,15 @@ export default StyleSheet.create({
         marginTop: hp(5),
         backgroundColor: COLORS.dashboardPupilBlue,
     },
+    whiteBg: {
+        backgroundColor: COLORS.white,
+        // paddingLeft: hp(3.5),
+        // paddingRight: hp(3.5),
+        paddingBottom: hp(2),
+        paddingTop: hp(0),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
+    },
     dashBoardBoxes: {
         flexDirection: 'row',
         marginBottom: hp(3.90),

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
@@ -1445,7 +1445,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
         borderColor: COLORS.dashboardGreenButton,
         borderRadius: hp(1),
-
+        paddingVertical: Platform.OS == 'android' ? 0 : 10,
     },
     filterbarMain: {
         flexDirection: 'row',

@@ -505,6 +505,7 @@ const styles = StyleSheet.create({
     //     fontFamily: FONTS.fontSemiBold,
     // },
     commonInputTextarea: {
+        height: 50,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),

@@ -14,7 +14,8 @@ import Header15 from '../../../../component/reusable/header/bulck/Header15'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../utils/Images";
 import { Download } from "../../../../utils/Download";
-import { opacity } from "../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../utils/Constant";
+import Video from "react-native-video";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {

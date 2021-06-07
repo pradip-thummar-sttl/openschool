@@ -38,7 +38,7 @@ const PupilLessonDetailInternal = (props) => {
     // const { item } = props
     // const [item, setItem] = useState(props.route.params.item)
     const [item, setItem] = useState(props.item)
-    console.log('props.route.params', props);
+    console.log('props.route.params', baseUrl + item.RecordingList[0].filename);
 
     const refresh = () => {
         console.log(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`);
