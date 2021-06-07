@@ -253,8 +253,11 @@ class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <Image source={Images.loginMainBack} style={styles.image}>
-                    </Image>
+                    {this.props.route.params.userType == 'Pupil' ?
+                        <Image source={Images.loginMainBack} style={styles.image}></Image>
+                        :
+                        <Image source={Images.loginMainBackteacher} style={styles.image}></Image>
+                    }
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
@@ -347,7 +350,20 @@ class Login extends Component {
                                     }
                                 </TouchableOpacity>
                                 <View style={styles.getStarted}>
-                                    <Text style={styles.getStartedText}>{this.props.route.params.userType == 'Pupil' ? 'New to MyEd Open School? Get Started' : ''}</Text>
+                                    {this.props.route.params.userType == 'Pupil' ?
+                                        <>
+                                            <Text style={styles.getStartedText}> New to MyEd Open School?</Text>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => {
+                                                    this.props.navigation.replace('PupilRegister')
+                                                }}>
+                                                <Text style={styles.getStartedLink}> Get Started</Text>
+                                            </TouchableOpacity>
+                                        </>
+                                        :
+                                        null
+                                    }
                                 </View>
                             </View>
                         </View>
@@ -378,7 +394,7 @@ const styles = StyleSheet.create({
     getStarted: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: hp(3),
+        marginTop: hp(2),
     },
     getStartedText: {
         fontSize: hp(1.8),
@@ -389,7 +405,6 @@ const styles = StyleSheet.create({
         color: COLORS.dashboardGreenButton,
         fontSize: hp(1.8),
         fontFamily: FONTS.fontRegular,
-        top: 2,
     },
     container: {
         flex: 1,
@@ -475,10 +490,10 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     loginButtonView: {
-        marginTop: hp('3.0%'),
+        marginTop: hp(5.7),
     },
     bottomLoginIntro: {
-        top: Platform.OS == 'android' ? hp(5) : hp(9),
+        top: Platform.OS == 'android' ? hp(0) : hp(6.5),
         paddingLeft: hp('2%'),
         paddingRight: hp('2%'),
     },

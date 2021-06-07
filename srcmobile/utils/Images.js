@@ -108,6 +108,7 @@ const Images = {
     teacher: require('../assets/images/teacher2.png'),
     pupil: require('../assets/images/pupil2.png'),
     loginMainBack: require('../assets/images/loginMaintop2.png'),
+    loginMainBackteacher: require('../assets/images/loginMaintopteacher2.png'),
     introSlideOne: require('../assets/images/intro-illus-1-2.png'),
     introSlideTwo: require('../assets/images/intro-illus-2-2.png'),
     introSlideThree: require('../assets/images/intro-illus-3-2.png'),

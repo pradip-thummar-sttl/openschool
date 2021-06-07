@@ -1,4 +1,4 @@
-gPODS:
+PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.63.4)
