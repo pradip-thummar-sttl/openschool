@@ -100,5 +100,10 @@ const Images = {
     videoBanner: require('../assets/images/videoLarge2.png'),
     submittedLogo: require('../assets/images/submitted2.png'),
     pdfIcon: require('../assets/images/file2.png'),
+    loginTop: require('../assets/images/illus-login-top2.png'),
+    school: require('../assets/images/school2.png'),
+    teacher: require('../assets/images/teacher2.png'),
+    pupil: require('../assets/images/pupil2.png'),
+    loginMainBack: require('../assets/images/loginMaintop2.png'),
 }
 export default Images;
