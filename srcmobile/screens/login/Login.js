@@ -347,7 +347,7 @@ class Login extends Component {
                                     }
                                 </TouchableOpacity>
                                 <View style={styles.getStarted}>
-                                    <Text style={styles.getStartedText}>New to MyEd Open School? <TouchableOpacity><Text style={styles.getStartedLink}>Get Started</Text></TouchableOpacity></Text>
+                                    <Text style={styles.getStartedText}>{this.props.route.params.userType == 'Pupil' ? 'New to MyEd Open School? Get Started' : ''}</Text>
                                 </View>
                             </View>
                         </View>

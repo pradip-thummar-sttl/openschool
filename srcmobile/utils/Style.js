@@ -11,6 +11,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: height,
         fontFamily: FONTS.fontRegular,
+        backgroundColor: COLORS.white,
     },
     viewRow: {
         flexDirection: 'row',

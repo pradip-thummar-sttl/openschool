@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../utils/Colors';
 import Images from '../../utils/Images';
 import STYLE from '../../utils/Style';
-import Introduction1 from '../../component/reusable/introduction/Inroduction1';
-import Introduction2 from '../../component/reusable/introduction/Inroduction2';
-import Introduction3 from '../../component/reusable/introduction/Inroduction3';
+import Introduction1 from '../../component/reusable/introductionteacher/Inroduction1';
+import Introduction2 from '../../component/reusable/introductionteacher/Inroduction2';
+import Introduction3 from '../../component/reusable/introductionteacher/Inroduction3';
 
 export default class Introduction extends Component {
     constructor(props) {
@@ -17,24 +17,19 @@ export default class Introduction extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={Images.GradientBack} style={styles.image}>
-                    <Image
-                        style={styles.logo}
-                        source={Images.Logo} />
-                </ImageBackground>
                 <ViewSlider
                     renderSlides={
                         <>
                             <Introduction1 />
                             <Introduction2 />
-                            <Introduction3 />
+                            <Introduction3 navigateToLogin={() => this.props.navigation.replace('Login', { userType: "Teacher" })} />
                         </>
                     }
                     style={styles.slider}
                     slideCount={3}
                     dots={true}
                     dotActiveColor={COLORS.dotActive}
-                    dotInactiveColor={COLORS.white}
+                    dotInactiveColor={COLORS.transparent}
                     dotsContainerStyle={styles.dotContainer}
                 />
             </View>
@@ -56,10 +51,9 @@ const styles = StyleSheet.create({
     },
     dotContainer: {
         backgroundColor: COLORS.transparent,
-        bottom: hp('12.0%'),
-        left: hp('7.0%'),
+        bottom: hp(6.15),
         position: 'absolute',
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
     },
     image: {
         flex: 1,
