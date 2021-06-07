@@ -6,11 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface RCT : NSObject
+#import <React/RCTBridgeModule.h>
+@interface RCTCalendarModule : NSObject <RCTBridgeModule>
++ (void)signUpWithFullName:(NSString *)fullName
+                  roomName:(NSString *)roomName successCallback:(RCTResponseSenderBlock)successCallback errorCallback:(RCTResponseSenderBlock)errorCallback;
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -237,9 +237,9 @@
 		887374ED265E35530035B788 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		887374EF265E35670035B788 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		887374F1265E35A20035B788 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		8884886F266E1A9800B9D17C /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
 		889633C42667879E00E6DE4F /* CallModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallModule.h; sourceTree = "<group>"; };
 		889633C52667879E00E6DE4F /* CallModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallModule.m; sourceTree = "<group>"; };
-		88D20503265E253200D97116 /* RCTCalendarModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
 		88D20504265E253200D97116 /* RCTCalendarModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenSchool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5987D201010499FA5C00400 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 				882EA016266A1D55000B9813 /* conference */,
 				882EA008266A1CAA000B9813 /* CallTestPrefixHeader.pch */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				88D20503265E253200D97116 /* RCTCalendarModule.h */,
+				8884886F266E1A9800B9D17C /* RCTCalendarModule.h */,
 				88D20504265E253200D97116 /* RCTCalendarModule.m */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
