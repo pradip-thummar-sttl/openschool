@@ -54,21 +54,24 @@ const styles = StyleSheet.create({
     },
     introContent: {
         fontSize: hp(1.8),
-        color: COLORS.darkGray,
+        color: COLORS.introGreyColor,
         lineHeight:hp(2.5),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
+        paddingLeft:hp(31.77),
+        paddingRight:hp(31.77),
     },
     SlideImage: {
-        width: hp(41.74),
         resizeMode: 'contain',
-        height: hp(50.98),
+        height: hp(44.79),
     },
     buttonGreenStartMain: {
         alignSelf: 'center',
-        width: '100%',
+        width: '20%',
         paddingHorizontal: hp(2),
         bottom: hp(-0.5),
+        paddingLeft:hp(3),
+        paddingRight:hp(3),
     },
     buttonGreenStart: {
         alignSelf: 'center',

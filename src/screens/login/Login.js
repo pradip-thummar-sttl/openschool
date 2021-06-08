@@ -286,13 +286,15 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                        style={STYLE.checkBoxcommon1}
-                                        value={this.state.isRemember}
-                                        onCheckColor={COLORS.themeBlue}
-                                        onTintColor={COLORS.themeBlue}
-                                        tintColor={COLORS.lightplaceholder}
-                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
+                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                         style={STYLE.checkBoxcommon1}
+                                         value={this.state.isRemember}
+                                         boxType={'square'}
+                                         onCheckColor={COLORS.white}
+                                         onTintColor={COLORS.checkBlue}
+                                         tintColor={COLORS.checkBlue}
+                                         onFillColor={COLORS.checkBlue}
+                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
@@ -489,7 +491,7 @@ const styles = StyleSheet.create({
     commonButtonGreen:{
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
-        fontSize: hp('2.4%'),
+        fontSize: hp('1.56%'),
         fontWeight: '800',
         borderRadius: hp('1.3%'),
         overflow: 'hidden',
@@ -516,8 +518,8 @@ const styles = StyleSheet.create({
     },
     commonFontsPupleUnderline:{
         paddingTop:hp(0.5),
-        color: COLORS.thmePurple,
-        //fontSize: hp(3.81),
+        color: COLORS.lightGray,
+        fontSize: hp(1.82),
         fontWeight: '500',
         lineHeight: hp('2.6%'),
         fontFamily: FONTS.fontRegular,

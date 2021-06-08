@@ -48,15 +48,17 @@ const styles = StyleSheet.create({
     },
     introContent: {
         fontSize: hp(1.8),
-        color: COLORS.darkGray,
+        color: COLORS.introGreyColor,
         lineHeight:hp(2.5),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
+        paddingLeft:hp(31.77),
+        paddingRight:hp(31.77),
     },
     SlideImage: {
-        width: hp(48.5),
+        width: hp(92.05),
         resizeMode: 'contain',
-        height: hp(50.58),
+        height: hp(44.79),
     },
 });
 export default Introduction2;

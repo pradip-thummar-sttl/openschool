@@ -50,6 +50,7 @@ const COLORS = {
     hwmatColor:'rgba(248,249,251,1)',
     blueBorder: '#57ABF0',
     greyBack: '#F9FAFC',
+    introGreyColor:'#454545',
 }
 
 export default COLORS;
