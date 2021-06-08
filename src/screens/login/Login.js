@@ -322,8 +322,21 @@ class Login extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View>
-                            <Text style={styles.getStartText}>New to MyEd Open School? <TouchableOpacity><Text style={styles.greenText}>Get Started</Text></TouchableOpacity></Text>
+                        <View style={styles.getStarted}>
+                            {this.props.route.params.userType == 'Pupil' ?
+                                <>
+                                    <Text style={styles.getStartedText}> New to MyEd Open School?</Text>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => {
+                                            this.props.navigation.replace('PupilRegister')
+                                        }}>
+                                        <Text style={styles.getStartedLink}> Get Started</Text>
+                                    </TouchableOpacity>
+                                </>
+                                :
+                                null
+                            }
                         </View>
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
@@ -350,6 +363,22 @@ function mapDispatchToProps(dispatch) {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
+    getStarted: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: hp(2),
+        marginLeft: hp('8.4%'),
+    },
+    getStartedText: {
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    getStartedLink: {
+        color: COLORS.dashboardGreenButton,
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontRegular,
+    },
     container: {
         flex: 1,
         flexDirection: 'row',

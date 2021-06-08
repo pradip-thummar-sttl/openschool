@@ -1,7 +1,7 @@
 const COLORS = {
     black: '#000000',
     white: '#FFFFFF',
-    dotActive: '#12aefb',
+    dotActive: '#262626',
     transparent: 'transparent',
     lightplaceholder: '#676693',
     blueButton: '#5381F8',

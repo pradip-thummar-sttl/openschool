@@ -39,192 +39,6 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
-        const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
-        if (this.props.route.params.userType == 'Pupil') {
-            AsyncStorage.getItem('pupil').then((value) => {
-                var user = JSON.parse(value)
-                if (user.isRemember) {
-                    console.log('user of async', user)
-
-                    this.setState({
-                        userName: user.Email,
-                        password: user.Password,
-                        PushToken: user.PushToken,
-                        Device: user.Device,
-                        OS: user.OS,
-                        AccessedVia: user.AccessedVia,
-                        isRemember: user.isRemember
-                    })
-                } else {
-                }
-            })
-        } else {
-            AsyncStorage.getItem('user').then((value) => {
-                var user = JSON.parse(value)
-                if (user.isRemember) {
-                    console.log('user of async', user)
-
-                    this.setState({
-                        userName: user.Email,
-                        password: user.Password,
-                        PushToken: user.PushToken,
-                        Device: user.Device,
-                        OS: user.OS,
-                        AccessedVia: user.AccessedVia,
-                        isRemember: user.isRemember
-                    })
-                } else {
-                }
-            })
-        }
-        if (isRemember) {
-
-
-        }
-
-    }
-
-    isFieldsValidated = () => {
-        const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
-
-        if (!userName) {
-            showMessage(MESSAGE.email)
-            return false;
-        } else if (!password) {
-            showMessage(MESSAGE.password);
-            return false;
-        }
-
-        this.setLoading(true)
-        Service.get(EndPoints.GetAllUserType, (res) => {
-
-            if (res.flag) {
-                var userData = res.data
-                var userType = ""
-                userData.map((item) => {
-                    if (item.Name === this.props.route.params.userType) {
-                        userType = item._id
-                    }
-                })
-
-                var data = {
-                    Email: userName,
-                    Password: password,
-                    PushToken: PushToken,
-                    Device: Device,
-                    OS: OS,
-                    AccessedVia: AccessedVia,
-                    UserType: userType
-                }
-
-                Service.post(data, EndPoints.Login, (res) => {
-                    if (res.code == 200) {
-                        data.isRemember = isRemember
-                        User.user = res.data
-
-                        if (isRunningFromVirtualDevice) {
-                            this.updateUserID('RUNNIN_FROM_VIRTUAL_DEVICE', res.data, data)
-                        } else {
-                            if (Platform.OS == 'android') {
-                                this.getDataFromQuickBlox_Android(userName, password, res.data, data)
-                            } else if (Platform.OS == 'ios') {
-                                this.getDataFromQuickBlox_IOS(res.data, data)
-                            }
-                        }
-                    } else {
-                        this.setLoading(false)
-                        showMessage(res.message)
-                    }
-                }, (err) => {
-                    this.setLoading(false)
-                    console.log('response Login error', err)
-                })
-            } else {
-                this.setLoading(false)
-                showMessage(res.message)
-            }
-
-        }, (err) => {
-            this.setLoading(false)
-
-        })
-    }
-
-    getDataFromQuickBlox_Android = (emailId, password, resData, reqData) => {
-        try {
-            LoginModule.qbLogin(emailId, password, [resData.RoomId], (error, ID) => {
-                console.log('error:eventId', error, ID);
-                this.updateUserID(ID, resData, reqData)
-            }
-            );
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    getDataFromQuickBlox_IOS = (resData, reqData) => {
-        LoginModuleIos.signUpWithFullName("pradip12", "pradip12", (ID) => {
-            console.log('log for event', eventId);
-            this.updateUserID(ID, resData, reqData)
-        }, (error) => {
-            console.log('log for error', error);
-        })
-    };
-
-    updateUserID(ID, resData, reqData){
-        if (ID && ID != '' && ID != null && ID != undefined) {
-            console.log('QBUserId', ID, resData.RoomId);
-
-            if (ID == resData.QBUserId) {
-                this.setLoading(false)
-                this.launchNextScrren(resData, reqData)
-                return
-            }
-
-            var data = {
-                UserId: resData._id,
-                QBUserId: ID
-            }
-
-            console.log('data', data);
-            Service.post(data, EndPoints.SetQBUserId, (res) => {
-                this.setLoading(false)
-                console.log('res', res);
-                if (res.code == 200) {
-                    this.launchNextScrren(resData, reqData)
-                }
-            }, (err) => {
-                this.setLoading(false)
-                console.log('response Login error', err)
-            })
-        } else {
-            this.setLoading(false)
-            showMessage('Sorry, we are unable to login! Please try again.')
-        }
-    }
-
-    launchNextScrren(res, data) {
-        if (this.props.route.params.userType == 'Pupil') {
-            AsyncStorage.setItem('pupil', JSON.stringify(data))
-        } else {
-            AsyncStorage.setItem('user', JSON.stringify(data))
-        }
-        this.props.setUserAuthData(res)
-        if (res.UserType === "Teacher") {
-            this.props.navigation.replace('TeacherDashboard')
-        } else if (res.UserType === "Pupil") {
-            this.props.navigation.replace('PupuilDashboard')
-        } else {
-            this.props.navigation.replace('PupuilDashboard')
-        }
-        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
-    }
-
-    setLoading(flag) {
-        this.setState({ isLoading: flag });
-    }
-
     setPasswordVisibility = () => {
         this.setState({ isPasswordHide: !this.state.isPasswordHide });
     }
@@ -241,7 +55,7 @@ class Login extends Component {
                        <View style={styles.rightRegisterSmlText}>
                         <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
                         </View>
-                        <Text h3 style={styles.titleAccountLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Account'}</Text>
+                        <Text h3 style={styles.titleAccountLogin}>Pupil Register</Text>
                         <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
                         <View style={styles.loginAccountForm}>                           
                             <View style={[STYLE.commonInput, styles.alignVert]}>
@@ -295,8 +109,6 @@ class Login extends Component {
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
                         </View>
-                        
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
