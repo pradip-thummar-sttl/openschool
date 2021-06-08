@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     lefContent:{
         width: '100%',
-        paddingHorizontal: hp(4),
+        paddingHorizontal: hp(2),
         paddingBottom: hp(1.5),
         textAlign: 'center',
     },
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '100%',
         paddingHorizontal: hp(2),
-        bottom: hp(-0.5),
+        bottom: Platform.OS == 'android' ? hp(0) :  hp(-0.5),
     },
     buttonGreenStart: {
         alignSelf: 'center',

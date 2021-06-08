@@ -128,7 +128,7 @@ class Login extends Component {
                             if (Platform.OS == 'android') {
                                 this.getDataFromQuickBlox_Android(userName, password, res.data, data)
                             } else if (Platform.OS == 'ios') {
-                                this.getDataFromQuickBlox_IOS(res.data, data)
+                                this.getDataFromQuickBlox_IOS(userName, password,res.data, data)
                             }
                         }
                     } else {
@@ -172,7 +172,7 @@ class Login extends Component {
         }
     };
 
-    getDataFromQuickBlox_IOS = (resData, reqData) => {
+    getDataFromQuickBlox_IOS = (emailId, password,resData, reqData) => {
         let roomIDs = []
         if (this.props.route.params.userType == 'Pupil') {
             resData.RoomId.forEach(element => {
@@ -264,9 +264,6 @@ class Login extends Component {
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIconLogin} /> */}
                                 <Text style={styles.labelInput}>Email</Text>
                                 <TextInput
                                     onFocus={() => this.setState({ isEmailFocused: true })}
@@ -282,9 +279,6 @@ class Login extends Component {
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
                             <View style={styles.field}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.Password} /> */}
                                 <Text style={styles.labelInput}>Password</Text>
                                 <View style={styles.eyeParent}>
                                     <TextInput
@@ -352,7 +346,7 @@ class Login extends Component {
                                 <View style={styles.getStarted}>
                                     {this.props.route.params.userType == 'Pupil' ?
                                         <>
-                                            <Text style={styles.getStartedText}> New to MyEd Open School?</Text>
+                                            <Text style={styles.getStartedText}>New to MyEd Open School?</Text>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => {
@@ -493,9 +487,8 @@ const styles = StyleSheet.create({
         marginTop: hp(5.7),
     },
     bottomLoginIntro: {
-        top: Platform.OS == 'android' ? hp(0) : hp(6.5),
-        paddingLeft: hp('2%'),
-        paddingRight: hp('2%'),
+        top: Platform.OS == 'android' ? hp(2) : hp(6.5),
+        paddingHorizontal: hp(2),
     },
     eye: {
         position: 'absolute',

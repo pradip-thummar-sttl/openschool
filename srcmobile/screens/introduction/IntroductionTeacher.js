@@ -40,14 +40,10 @@ export default class Introduction extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: COLORS.white,
     },
     slider: {
-        alignSelf: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        top: 0,
-        left: 0,
+        flex: 1,
     },
     dotContainer: {
         backgroundColor: COLORS.transparent,

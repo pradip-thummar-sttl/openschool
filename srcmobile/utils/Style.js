@@ -30,6 +30,7 @@ export default StyleSheet.create({
         borderRadius: hp('1.0%'),
         lineHeight:hp(2.3),
         height: hp(6),
+        textAlignVertical: 'center',
         paddingLeft: hp(2),
         paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontRegular,
