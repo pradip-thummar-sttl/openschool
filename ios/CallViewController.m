@@ -136,24 +136,25 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }
     
     if (_conferenceType > 0) {
-//      [self.toolbar addButton:[QBButtonsFactory answer] action: ^(UIButton *sender) {
-//
-//          weakSelf.muteAudio ^= 1;
-//      }];
       [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
-        [self.session leave];
-        [self dismissViewControllerAnimated:YES completion:nil];
+
           weakSelf.muteAudio ^= 1;
+        [weakSelf.session leave];
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
       }];
         [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
             
             weakSelf.muteAudio ^= 1;
         }];
-      
-      [self.toolbar addButton:[QBButtonsFactory screenShare] action: ^(UIButton *sender) {
-          
-          weakSelf.muteAudio ^= 1;
-      }];
+//      self.dynamicEnable = [QBButtonsFactory dynamicEnable];
+//      self.dynamicEnable.pressed = YES;
+//      [self.toolbar addButton:self.dynamicEnable action:^(UIButton *sender) {
+//          
+//          QBRTCAudioDevice device = [QBRTCAudioSession instance].currentAudioDevice;
+//          
+//          [QBRTCAudioSession instance].currentAudioDevice =
+//          device == QBRTCAudioDeviceSpeaker ? QBRTCAudioDeviceReceiver : QBRTCAudioDeviceSpeaker;
+//      }];
      
     }
     
@@ -672,7 +673,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
     
     id result = self.videoViews[opponentID];
     
-   if (_currentUserID == opponentID.integerValue
+    if (Core.currentUser.ID == opponentID.integerValue
         && self.session.conferenceType != QBRTCConferenceTypeAudio) {//Local preview
         
         if (!result) {

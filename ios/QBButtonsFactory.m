@@ -94,7 +94,7 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
                                selectedColor:kDefSelectedColor];
     
     button.iconView = [self iconViewWithNormalImage:@"screensharing_ic"
-                                      selectedImage:@"screenshare_selected"];
+                                      selectedImage:@"screensharing_ic"];
     return button;
 }
 

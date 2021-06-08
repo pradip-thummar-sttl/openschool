@@ -112,11 +112,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            if (Platform.OS == 'android') {
+            // if (Platform.OS == 'android') {
                 startLiveClassAndroid()
-            } else {
-                startLiveClassIOS()
-            }
+            // } else {
+            //     startLiveClassIOS()
+            // }
         }
     }
 
