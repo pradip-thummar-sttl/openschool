@@ -7,6 +7,8 @@ import IntroductionPupil from '../screens/introduction/IntroductionPupil';
 import IntroductionTeacher from '../screens/introduction/IntroductionTeacher';
 import Login from '../screens/login/Login';
 import PupilRegister from '../screens/login/PupilRegister';
+import PupilVerify from '../screens/login/PupilVerify';
+import PupilConnect from '../screens/login/PupilConnect';
 import Popup from '../component/reusable/popup/Popup';
 import Popupuser from '../component/reusable/popup/Popupuser';
 import Sidebar from '../component/reusable/sidebar/Sidebar';
@@ -67,6 +69,8 @@ function ScreenStack() {
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="PupilRegister" component={PupilRegister} />
+            <Stack.Screen name="PupilVerify" component={PupilVerify} />
+            <Stack.Screen name="PupilConnect" component={PupilConnect} />
             <Stack.Screen name="Popup" component={Popup} />
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />

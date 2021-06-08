@@ -411,9 +411,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     image: {
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         width: '100%',
-        height: hp(41.3),
+        height: '100%',
     },
     lefImage: {
         width: '100%',

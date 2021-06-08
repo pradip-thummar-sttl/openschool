@@ -179,27 +179,15 @@ class PupilRegister extends Component {
                                 <View style={styles.loginButtonView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => {
-                                            isDesignBuild ?
-                                                this.props.navigation.replace('TeacherDashboard')
-                                                :
-                                                this.isFieldsValidated()
-
-                                        }}>
-                                        {this.state.isLoading ?
-                                            <ActivityIndicator
-                                                style={STYLE.fullWidthPrimaryButton}
-                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                color={COLORS.white} />
-                                            :
-                                            <Text
-                                                style={STYLE.fullWidthPrimaryButton}>Create my account</Text>
-                                        }
+                                        onPress={() => {this.props.navigation.replace('PupilVerify')}}>
+                                        <Text
+                                            style={STYLE.fullWidthPrimaryButton}>Create my account</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.getStarted}>
                                     <Text style={styles.getStartedText}> Already Registered?</Text>
-                                    <TouchableOpacity activeOpacity={opacity}>
+                                    <TouchableOpacity activeOpacity={opacity}
+                                        onPress={() => this.props.navigation.replace('Login', { userType: 'Pupil' })}>
                                         <Text style={styles.getStartedLink}> Login</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -248,9 +236,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     image: {
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         width: '100%',
-        height: hp(41.3),
+        height: '100%',
     },
     lefImage: {
         width: '100%',
