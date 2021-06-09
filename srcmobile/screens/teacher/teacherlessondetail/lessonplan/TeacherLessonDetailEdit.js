@@ -31,6 +31,7 @@ import DocumentPicker from 'react-native-document-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
+import RecordScreen from 'react-native-record-screen';
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailEdit = (props) => {
@@ -42,6 +43,8 @@ const TLDetailEdit = (props) => {
     const [isLoading, setLoading] = useState(false);
     const [lessonData, setLessonData] = useState(props.route.params.data);
     const [isAddRecording, setAddRecording] = useState(false)
+    const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
+    const [isRecordingStarted, setRecordingStarted] = useState(false)
     var tempPupil = [];
     useEffect(() => {
         if (itemCheckList.length == 0) {
@@ -245,10 +248,40 @@ const TLDetailEdit = (props) => {
     }
     const onScreeVoice = () => {
         setAddRecording(false)
-
+        setScreenVoiceSelected(true)
     }
+
+    const startRecording = () => {
+        setRecordingStarted(true)
+        RecordScreen.startRecording().catch((error) => console.error(error));
+    }
+
+    const stopRecording = async () => {
+        var arr = []
+        const res = await RecordScreen.stopRecording().catch((error) => {
+            setRecordingStarted(false)
+            console.warn(error)
+        });
+        if (res) {
+            setRecordingStarted(false)
+            const url = res.result.outputURL;
+            let ext = url.split('.');
+            let obj = {
+                uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                originalname: 'MY_RECORDING.mp4',
+                fileName: 'MY_RECORDING.mp4',
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setScreenVoiceSelected(false)
+
+            console.log('url', url);
+        }
+    }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+        var arr = []
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
             // setResponse(response);
             if (response.errorCode) {
@@ -748,9 +781,13 @@ const TLDetailEdit = (props) => {
                                 <Popupaddrecording
                                     recordingArr={recordingArr}
                                     isVisible={isAddRecording}
+                                    isRecordingStarted={isRecordingStarted}
+                                    isScreenVoiceSelected={isScreenVoiceSelected}
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
+                                    onStartScrrenRecording={() => startRecording()}
+                                    onStopScrrenRecording={() => stopRecording()}
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}

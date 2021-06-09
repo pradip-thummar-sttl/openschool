@@ -43,27 +43,46 @@ const Popupaddrecording = (props) => {
     };
     return (
         <View>
-            {props.recordingArr.length == 0 ?
-                <TouchableOpacity
-                    activeOpacity={opacity}
-                    onPress={() => refRBSheet.current.open()}
-                    style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
-                    <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
-                    <Text style={styles.recordLinkText}>Add Recording</Text>
-                </TouchableOpacity>
+            {props.isScreenVoiceSelected ?
+                <View>
+                    {!props.isRecordingStarted ?
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => props.onStartScrrenRecording()}
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginRight: 5 }}>
+                            <Text style={styles.recordLinkText}>Start Screen + Voice Recording</Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => props.onStopScrrenRecording()}
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginLeft: 5 }}>
+                            <Text style={styles.recordLinkText}>Stop Recording</Text>
+                        </TouchableOpacity>
+                    }
+                </View>
                 :
-                <TouchableOpacity
-                    activeOpacity={opacity}
-                    onPress={() => Download(props.recordingArr[0])}
-                    style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
-                    <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
-                    <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
-                </TouchableOpacity>
+                props.recordingArr.length == 0 ?
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => refRBSheet.current.open()}
+                        style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                        <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                        <Text style={styles.recordLinkText}>Add Recording</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={() => Download(props.recordingArr[0])}
+                        style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
+                        <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
+                        <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                    </TouchableOpacity>
             }
             <RBSheet
                 ref={refRBSheet}
                 closeOnDragDown={true}
-                height={[wp(175.5)]}
+                height={[wp(130.5)]}
                 style={{ position: 'relative', }}
                 closeOnPressMask={true}
                 customStyles={{
@@ -85,11 +104,11 @@ const Popupaddrecording = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
-                                    <TouchableOpacity style={styles.entryData}
+                                    {/* <TouchableOpacity style={styles.entryData}
                                         onPress={() => { refRBSheet.current.close(); props.onScreeCamera() }}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-camera2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                     <TouchableOpacity style={styles.entryData}
                                         onPress={() => { refRBSheet.current.close(); props.onScreeVoice() }}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
@@ -170,6 +189,16 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
+    },
+    recordLinkBlock2: {
+        width: '100%',
+        paddingHorizontal: 5,
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        alignItems: 'center',
     },
     recordLinkBlock1: {
         width: '100%',

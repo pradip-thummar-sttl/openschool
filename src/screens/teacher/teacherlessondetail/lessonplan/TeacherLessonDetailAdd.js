@@ -70,6 +70,8 @@ const TLDetailAdd = (props) => {
     const [IsDeliveredLive, setDeliveredLive] = useState(false);
     const [IsPublishBeforeSesson, setPublishBeforeSesson] = useState(false);
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
+    const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
+    const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
@@ -248,10 +250,41 @@ const TLDetailAdd = (props) => {
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
+
     const onScreeVoice = () => {
         setAddRecording(false)
-
+        setScreenVoiceSelected(true)
     }
+
+    const startRecording = () => {
+        setRecordingStarted(true)
+        RecordScreen.startRecording().catch((error) => console.error(error));
+    }
+
+    const stopRecording = async () => {
+        var arr = []
+        const res = await RecordScreen.stopRecording().catch((error) => {
+            setRecordingStarted(false)
+            console.warn(error)
+        });
+        if (res) {
+            setRecordingStarted(false)
+            const url = res.result.outputURL;
+            let ext = url.split('.');
+            let obj = {
+                uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                originalname: 'MY_RECORDING.mp4',
+                fileName: 'MY_RECORDING.mp4',
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setScreenVoiceSelected(false)
+
+            console.log('url', url);
+        }
+    }
+
     const onCameraOnly = () => {
         var arr = [...recordingArr]
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
@@ -346,7 +379,7 @@ const TLDetailAdd = (props) => {
                             <CheckBox
                                 style={PAGESTYLE.checkMark}
                                 boxType={'square'}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
@@ -706,9 +739,13 @@ const TLDetailAdd = (props) => {
                                         <Popupaddrecording
                                             recordingArr={recordingArr}
                                             isVisible={isAddRecording}
+                                            isRecordingStarted={isRecordingStarted}
+                                            isScreenVoiceSelected={isScreenVoiceSelected}
                                             onClose={() => setAddRecording(false)}
                                             onScreeCamera={() => onScreeCamera()}
                                             onScreeVoice={() => onScreeVoice()}
+                                            onStartScrrenRecording={() => startRecording()}
+                                            onStopScrrenRecording={() => stopRecording()}
                                             onCameraOnly={() => onCameraOnly()} />
 
                                         {itemCheckListView()}

@@ -35,7 +35,7 @@ const Pupillist = (props, item) => (
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.rowLine}>
                 <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={props.item.Submited ? Images.CheckIcon : Images.CheckIcon} />
+                    <Image style={PAGESTYLE.tickIcon} source={props.item.Submited ? Images.CheckIcon : Images.CheckIconGrey} />
                     <Text style={PAGESTYLE.tickText}>Submitted</Text>
                 </View>
                 <View style={PAGESTYLE.checkMarkedText}>

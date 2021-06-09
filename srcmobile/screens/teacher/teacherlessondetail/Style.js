@@ -201,7 +201,7 @@ export default StyleSheet.create({
         marginTop: hp(3.68),
     },
     videoLinkBlock: {
-        width: hp(38),
+        width: '100%',
         paddingTop: hp(1),
         paddingBottom: hp(1),
         paddingRight: hp(2),
@@ -255,7 +255,7 @@ export default StyleSheet.create({
     },
     videoLinkText: {
         fontSize: hp(1.85),
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         lineHeight: hp(3.60),
         marginLeft: hp(1.56),
