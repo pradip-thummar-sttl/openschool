@@ -17,7 +17,7 @@ import { User } from "../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-const { CallModule } = NativeModules
+const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
     const refRBSheet = useRef();
@@ -66,11 +66,11 @@ const PupuilDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            if (Platform.OS == 'android') {
-                startLiveClassAndroid()
-            } else {
-                startLiveClassIOS()
-            }
+            // if (Platform.OS == 'android') {
+            startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
         }
     }
 
@@ -88,18 +88,19 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
-            let teacherUserName = dataOfSubView.TeacherUserName
-            let teacherUser = dataOfSubView.TeacherFirstName + " " + dataOfSubView.TeacherLastName
 
-            qBUserIDs.push(teacherQBUserID)
-            userNames.push(teacherUserName)
-            names.push(teacherUser)
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
-            console.log('KDKD: Pupil', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
-                console.log('Class Started');
-            });
+            if (Platform.OS == 'android') {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
+                    console.log('Class Started');
+                });
+            } else {
+                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (id) => {
+                    console.log('hi id:---------', id)
+                })
+            }
         } catch (e) {
             console.error(e);
         }

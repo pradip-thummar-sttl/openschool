@@ -31,7 +31,7 @@ import DocumentPicker from 'react-native-document-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
-const { DialogModule } = NativeModules;
+const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailEdit = (props) => {
     const t2 = useRef(null);

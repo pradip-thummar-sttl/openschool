@@ -12,7 +12,7 @@ import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import moment from 'moment';
 import { User } from "../../../utils/Model";
 
-const { CallModule } = NativeModules;
+const { CallModule, CallModuleIos } = NativeModules;
 
 const Popupdata = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -25,11 +25,11 @@ const Popupdata = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            if (Platform.OS == 'android') {
-                startLiveClassAndroid()
-            } else {
-                startLiveClassIOS()
-            }
+            // if (Platform.OS == 'android') {
+            startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
         }
     }
 
@@ -47,11 +47,19 @@ const Popupdata = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
-                console.log('Class Started');
-            });
+            if (Platform.OS === 'android') {
+                console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                    console.log('Class Started');
+                });
+            } else {
+                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (id) => {
+                    console.log('hi id:---------', id)
+                })
+            }
+
         } catch (e) {
             console.error(e);
         }

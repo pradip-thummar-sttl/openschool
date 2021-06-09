@@ -21,7 +21,7 @@ import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAd
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const { CallModule } = NativeModules;
+const { CallModule, CallModuleIos } = NativeModules;
 
 const Item = ({ onPress, style, item }) => (
     <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
@@ -163,11 +163,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            if (Platform.OS == 'android') {
-                startLiveClassAndroid()
-            } else {
-                startLiveClassIOS()
-            }
+            // if (Platform.OS == 'android') {
+            startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
         }
     }
 
@@ -185,11 +185,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
-                console.log('Class Started');
-            });
+            if (Platform.OS == 'android') {
+                console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                    console.log('Class Started');
+                });
+            } else {
+                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (id) => {
+                    console.log('hi id:---------', id)
+                })
+            }
+
         } catch (e) {
             console.error(e);
         }

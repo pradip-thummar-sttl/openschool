@@ -129,7 +129,7 @@ class Login extends Component {
                             if (Platform.OS == 'android') {
                                 this.getDataFromQuickBlox_Android(userName, password, res.data, data)
                             } else if (Platform.OS == 'ios') {
-                                this.getDataFromQuickBlox_IOS(res.data, data)
+                                this.getDataFromQuickBlox_IOS(userName, password, res.data, data)
                             }
                         }
                     } else {
@@ -153,7 +153,17 @@ class Login extends Component {
 
     getDataFromQuickBlox_Android = (emailId, password, resData, reqData) => {
         try {
-            LoginModule.qbLogin(emailId, password, [resData.RoomId], (error, ID) => {
+            let roomIDs = []
+            if (this.props.route.params.userType == 'Pupil') {
+                resData.RoomId.forEach(element => {
+                    roomIDs.push(element.RoomId)
+                });
+            } else {
+                roomIDs.push(resData.RoomId)
+            }
+            console.log('roomIDs', roomIDs);
+
+            LoginModule.qbLogin(emailId, password, roomIDs, (error, ID) => {
                 console.log('error:eventId', error, ID);
                 this.updateUserID(ID, resData, reqData)
             }
@@ -163,9 +173,19 @@ class Login extends Component {
         }
     };
 
-    getDataFromQuickBlox_IOS = (resData, reqData) => {
-        LoginModuleIos.signUpWithFullName("pradip12", "pradip12", (ID) => {
-            console.log('log for event', eventId);
+    getDataFromQuickBlox_IOS = (emailId, password, resData, reqData) => {
+        var roomIDs = []
+        if (this.props.route.params.userType == 'Pupil') {
+            resData.RoomId.forEach(element => {
+                roomIDs.push(element.RoomId)
+            });
+        } else {
+            roomIDs.push(resData.RoomId)
+        }
+        console.log('roomIDs', roomIDs);
+
+        LoginModuleIos.signUpWithFullName(emailId, roomIDs, password, (ID) => {
+            console.log('log for event', ID);
             this.updateUserID(ID, resData, reqData)
         }, (error) => {
             console.log('log for error', error);

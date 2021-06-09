@@ -113,7 +113,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-                startLiveClassAndroid()
+            startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
@@ -134,19 +134,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
 
-            
+
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
                     console.log('Class Started');
                 });
-            }else{
+            } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,(id)=>{
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (id) => {
                     console.log('hi id:---------', id)
                 })
             }
-            
+
         } catch (e) {
             console.error(e);
         }

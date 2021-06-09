@@ -34,7 +34,7 @@ import { launchCamera } from "react-native-image-picker";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 
-const { DialogModule } = NativeModules;
+const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailEdit = (props) => {
     const item = useRef(null)
@@ -325,7 +325,7 @@ const TLDetailEdit = (props) => {
                             <CheckBox
                                 style={{ ...PAGESTYLE.checkMarkTool }}
                                 boxType={'square'}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
@@ -485,22 +485,36 @@ const TLDetailEdit = (props) => {
                 names.push(pupil.FirstName + " " + pupil.LastName)
             });
 
-
-            if (Platform.OS == 'android') {
-                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                    console.log('error:eventId', error, ID);
-                    if (ID && ID != '' && ID != null && ID != undefined) {
-                        saveLesson(ID)
-                    } else {
-                        setLoading(false)
-                        showMessage('Sorry, we are unable to add lesson!')
-                    }
-                });
-            } else {
-                // Call IOS native module here
+            try {
+                if (Platform.OS == 'android') {
+                    DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                        console.log('error:eventId', error, ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    });
+                } else {
+                    Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
+                        console.log('eventId--------------------', ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    }, (error) => {
+                        console.log('event error--------------------', error);
+                    });
+                }
+            }
+            catch (e) {
+                console.error(e);
             }
         }
-    }
+    };
 
     const saveLesson = (ID) => {
 

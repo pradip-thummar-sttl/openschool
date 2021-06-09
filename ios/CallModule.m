@@ -53,8 +53,8 @@ RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSStrin
   VC.conferenceType = QBRTCConferenceTypeVideo;
   VC.modalPresentationStyle = UIModalPresentationFullScreen;
   dispatch_async(dispatch_get_main_queue(), ^{
-   [[[[[UIApplication sharedApplication]keyWindow]rootViewController] presentedViewController] presentViewController:VC animated:NO completion:nil];
-    });
+    [[[[UIApplication sharedApplication]keyWindow]rootViewController]  presentViewController:VC animated:NO completion:nil];
+        });
 //  [[[[UIApplication sharedApplication]keyWindow]rootViewController] presentViewController:VC animated:NO completion:nil];
 //  [((AppDelegate *)[[UIApplication sharedApplication] delegate]) showLoginView];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
