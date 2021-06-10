@@ -57,6 +57,7 @@ const Images = {
     NewEvents: require('../assets/images/new-event2.png'),
     UploadCalender: require('../assets/images/upload-calendar2.png'),
     CheckIconWhite: require('../assets/images/white-check-icon2.png'),
+    Edit: require('../assets/images/edit2.png'),
     Download: require('../assets/images/download2.png'),
     VideoUpload: require('../assets/images/video-uploads2.png'),
     RecordIcon: require('../assets/images/recording-icon2.png'),

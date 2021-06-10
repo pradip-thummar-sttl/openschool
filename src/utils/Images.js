@@ -56,6 +56,7 @@ const Images = {
     FilterIcon: require('../assets/images/filter2.png'),
     AddIconWhite: require('../assets/images/addIcon2.png'),
     PopupCloseIcon: require('../assets/images/cancel2.png'),
+    Edit: require('../assets/images/edit3.png'),
     NewLessons: require('../assets/images/new-lesson2.png'),
     NewEvents: require('../assets/images/new-event2.png'),
     UploadCalender: require('../assets/images/upload-calendar2.png'),
