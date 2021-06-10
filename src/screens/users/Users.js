@@ -6,6 +6,7 @@ import Images from '../../utils/Images';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../utils/Constant';
+import { color } from 'react-native-reanimated';
 
 export default class Users extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={Images.GradientBack} style={styles.image}>
+                <ImageBackground  style={styles.image}>
+                <Image style={styles.topBg} source={Images.illuTopBg} />
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
@@ -25,27 +27,27 @@ export default class Users extends Component {
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
-                                        source={Images.UserIcon} />
+                                        source={Images.schoolLoginIcon} />
                                     <Text style={styles.text}>School</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login', { userType: "Teacher" })}>
+                                onPress={() => this.props.navigation.navigate('IntroductionTeacher')}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
-                                        source={Images.UserIcon} />
+                                        source={Images.teacherLoginIcon} />
                                     <Text style={styles.text}>Teacher</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('Login', { userType: "Pupil" })}>
+                                onPress={() => this.props.navigation.navigate('IntroductionPupil')}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
-                                        source={Images.UserIcon} />
+                                        source={Images.pupilLoginIcon} />
                                     <Text style={styles.text}>Pupil</Text>
                                 </View>
                             </TouchableOpacity>
@@ -60,15 +62,16 @@ export default class Users extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:COLORS.white,
     },
     text: {
-        color: COLORS.white,
-        fontSize: hp(2.86),
+        color: COLORS.darkGray,
+        fontSize: hp(2),
         alignSelf: 'center',
         fontFamily: FONTS.fontSemiBold,
     },
     titleText: {
-        color: COLORS.white,
+        color: COLORS.darkGray,
         fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
         alignSelf: 'center',
@@ -77,7 +80,9 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
+        justifyContent: "center",
+        position:'relative',
+        height:'100%',
     },
     userMain: {
         justifyContent: "center",
@@ -91,10 +96,17 @@ const styles = StyleSheet.create({
         marginRight: hp(5.5),
     },
     userIcon: {
-        width: hp(25),
-        height: hp(35),
+        width: hp(20.10),
+        height: hp(20.10),
         resizeMode: "contain",
         alignSelf: 'center',
         marginBottom: hp(2),
     },
+    topBg:{
+        width:'100%',
+        height:hp(16.77),
+        resizeMode: 'contain',
+        position:'absolute',
+        top:hp(-0.3),
+    }
 });
