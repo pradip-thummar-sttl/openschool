@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image,FlatList, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
 import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -20,8 +20,18 @@ import { User } from '../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Base64 } from 'js-base64';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
-
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
 const { LoginModuleIos, LoginModule } = NativeModules;
+
+var days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+var months=[1,2,3,4,5,6,7,8,9,10,11,12]
+var years=[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021]
 
 class Login extends Component {
     constructor(props) {
@@ -35,9 +45,161 @@ class Login extends Component {
             AccessedVia: "Mobile",
             isLoading: false,
             isPasswordHide: true,
-            isRemember: false
+            isRemember: false,
+            firstName:"",
+            lastName:"",
+            day:"",
+            month:"",
+            year:""
         }
     }
+
+    setLoading(flag) {
+        this.setState({ isLoading: flag });
+    }
+
+    isFieldsValidated = () => {
+        const { userName, password,firstName, lastName, day,month, year, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
+        console.log('user type data', this.props);
+        if (!userName) {
+            showMessage(MESSAGE.email)
+            return false;
+        } else if (!password) {
+            showMessage(MESSAGE.password);
+            return false;
+        } else if (!firstName) {
+             showMessage(MESSAGE.firstName);
+            return false;
+        } else if (!lastName ) {
+            showMessage(MESSAGE.lastName);
+            return false;
+        } else if (!day) {
+            showMessage(MESSAGE.day);
+            return false;
+        } else if (!month) {
+            showMessage(MESSAGE.month);
+            return false;
+        } else if (!year) {
+            showMessage(MESSAGE.year);
+            return false;
+        }
+
+        this.setLoading(true)
+        Service.get(EndPoints.GetAllUserType, (res) => {
+
+            // console.log('user type data', this.props.route);
+            if (res.flag) {
+                var userData = res.data
+                var userType = ""
+                userData.map((item) => {
+                    if (item.Name === this.props.route.params.userType) {
+                        userType = item._id
+                    }
+                })
+
+
+                var data = {
+                    FirstName:firstName,
+                    LastName:lastName,
+                    Email: userName,
+                    Dob:`${year}-${month}-${day}`,
+                    Password: password,
+                    UserTypeId: userType
+                }
+
+                Service.post(data, EndPoints.PupilRegister, (res) => {
+                    console.log('response of register', res);
+                    if (res.code == 200) {
+                        data.isRemember = isRemember
+                        User.user = res.data
+                        this.props.navigation.replace('Login', { userType: "Pupil" })
+                    } else {
+                        this.setLoading(false)
+                        showMessage(res.message)
+                    }
+                }, (err) => {
+                    this.setLoading(false)
+                    console.log('response Login error', err)
+                })
+            } else {
+                this.setLoading(false)
+                showMessage(res.message)
+            }
+
+        }, (err) => {
+            console.log('response usertype error', err)
+            this.setLoading(false)
+        })
+    }
+    
+
+    
+
+    
+
+    daysDropDown = () => {
+        return (
+            <View style={styles.dropDownFormInput}>
+                {/* <Text style={styles.subjectText}>Days</Text> */}
+                <Menu onSelect={(item) => this.setState({day:item})}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day  : 'Day'}</Text>
+                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={days}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 500 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+    monthsDropDown = () => {
+        return (
+            <View style={styles.dropDownFormInput}>
+                {/* <Text style={styles.subjectText}>Month</Text> */}
+                <Menu onSelect={(item) => this.setState({month:item})}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown,{width: hp(12)}]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month  : 'Month'}</Text>
+                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={months}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 500 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+    yearsDropDown = () => {
+        return (
+            <View style={styles.dropDownFormInput}>
+                {/* <Text style={styles.subjectText}>Year</Text> */}
+                <Menu onSelect={(item) => this.setState({year:item})}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year  : 'Year'}</Text>
+                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={years}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 500 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
 
     setPasswordVisibility = () => {
         this.setState({ isPasswordHide: !this.state.isPasswordHide });
@@ -57,29 +219,28 @@ class Login extends Component {
                         </View>
                         <Text h3 style={styles.titleAccountLogin}>Pupil Register</Text>
                         <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the learners date of birth?</Text>
-                        <View style={styles.loginAccountForm}>                           
+                        <View style={styles.loginAccountForm}>       
+                        {/* {
+                            this.daysDropDown(),
+                            this.monthsDropDown(),
+                            this.yearsDropDown()
+                        }                     */}
                             <View style={[STYLE.commonInput, styles.alignVert]}>
-                            <TouchableOpacity style={[styles.dropWrap]}>
-                                                    <Text style={styles.dateTimetextdummy}>Day</Text>
-                                               
-                                            </TouchableOpacity>
-                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
+                            {
+                                this.daysDropDown()
+                            }
                             </View> 
                                                        
                             <View style={[STYLE.commonInput, styles.alignVert]}>
-                            <TouchableOpacity style={[styles.dropWrap]}>
-                                                    <Text style={styles.dateTimetextdummy}>Month</Text>
-                                               
-                                            </TouchableOpacity>
-                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
+                            {
+                                this.monthsDropDown()
+                            }
                             </View> 
 
                             <View style={[STYLE.commonInput, styles.alignVert]}>
-                            <TouchableOpacity style={[styles.dropWrap]}>
-                                                    <Text style={styles.dateTimetextdummy}>Year</Text>
-                                               
-                                            </TouchableOpacity>
-                                            <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />     
+                             {
+                                 this.yearsDropDown()
+                             }
                             </View> 
                         </View>
                         <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
@@ -92,9 +253,9 @@ class Login extends Component {
                                     placeholder="First Name"
                                     autoCapitalize={false}
                                     maxLength={40}
-                                    value={this.state.userName}
+                                    value={this.state.firstName}
                                     placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
+                                    onChangeText={firstName => this.setState({ firstName })} />
                             </View>                            
                             <View style={[styles.field, styles.filedSpace]}>
                                 <TextInput
@@ -104,9 +265,9 @@ class Login extends Component {
                                     placeholder="Last Name"
                                     autoCapitalize={false}
                                     maxLength={40}
-                                    value={this.state.userName}
+                                    value={this.state.lastName}
                                     placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
+                                    onChangeText={lastName => this.setState({ lastName })} />
                             </View>
                         </View>
                         <View style={styles.loginForm}>
@@ -192,6 +353,7 @@ class Login extends Component {
                             <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
+                   
                 </View>
             </View>
         );
@@ -418,5 +580,51 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         fontSize:hp(1.82),        
         color:COLORS.lightGray,
-    }
+    },
+    //
+    dropDownFormInput: {
+        width: '100%',
+    },
+    subjectText: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.lightGray,
+        fontSize: hp(1.8),
+        marginBottom: hp(0.8),
+    },
+    subjectDateTime: {
+        alignItems: 'flex-start',
+        justifyContent:'space-between',
+        width:'100%',
+    },
+    dropDown: {
+        flexDirection: 'row',
+        width: hp(10),
+        color: COLORS.darkGray,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        overflow: 'hidden',
+        borderRadius: hp(1.0),
+        lineHeight: hp(2.3),
+        height: "100%",
+        // paddingLeft: hp(2.0),
+        // paddingRight: hp(2.0),
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
+        fontFamily: FONTS.fontRegular,
+    },
+    dateTimetextdummy: {
+        fontSize: 18,
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+    },
+    dropDownArrow:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.4),
+        top:hp(2.1),
+    },
 });

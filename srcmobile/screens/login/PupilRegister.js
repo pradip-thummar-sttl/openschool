@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform, FlatList } from 'react-native';
 import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -19,8 +19,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { User } from '../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
-
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
 const { LoginModuleIos, LoginModule } = NativeModules;
+var days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+var months=[1,2,3,4,5,6,7,8,9,10,11,12]
+var years=[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021]
 
 class PupilRegister extends Component {
     constructor(props) {
@@ -34,7 +42,12 @@ class PupilRegister extends Component {
             AccessedVia: "Mobile",
             isLoading: false,
             isPasswordHide: true,
-            isRemember: false
+            isRemember: false,
+            firstName:"",
+            lastName:"",
+            day:"",
+            month:"",
+            year:""
         }
     }
     state = {
@@ -44,6 +57,70 @@ class PupilRegister extends Component {
         isFirstNameFocused: false,
         isLastNameFocused: false,
         isPasswordFocus: false,
+    };
+
+    daysDropDown = () => {
+        return (
+            <View style={styles.dropDownFormInput}>
+                {/* <Text style={styles.subjectText}>Days</Text> */}
+                <Menu onSelect={(item) => this.setState({day:item})}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day  : 'Day'}</Text>
+                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={days}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 500 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+    monthsDropDown = () => {
+        return (
+            <View style={styles.dropDownFormInput}>
+                {/* <Text style={styles.subjectText}>Month</Text> */}
+                <Menu onSelect={(item) => this.setState({month:item})}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown,{width: hp(12)}]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month  : 'Month'}</Text>
+                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={months}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 500 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+    yearsDropDown = () => {
+        return (
+            <View style={styles.dropDownFormInput}>
+                {/* <Text style={styles.subjectText}>Year</Text> */}
+                <Menu onSelect={(item) => this.setState({year:item})}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year  : 'Year'}</Text>
+                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                        <FlatList
+                            data={years}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                            )}
+                            style={{ height: 500 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
     };
 
     render() {
@@ -60,8 +137,8 @@ class PupilRegister extends Component {
                                 <View style={styles.field}>
                                     <Text style={styles.labelInput}>What is the learners date of birth?</Text>
                                     <View style={styles.birthRow}>
-                                        <View style={[styles.day, styles.commonInputRegister]}>
-                                            <TextInput
+                                        <View style={[styles.day, styles.commonInputRegister]}> 
+                                             <TextInput
                                                 onFocus={() => this.setState({ isDayFocused: true })}
                                                 onBlur={() => this.setState({ isDayFocused: false })}
                                                 returnKeyType={"next"}
@@ -72,7 +149,11 @@ class PupilRegister extends Component {
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.darkGray}
                                             />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>
+                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image> 
+                                             {/* <View style={[STYLE.commonInput, styles.alignVert]}>
+                                            {
+                                                this.daysDropDown()
+                                            } */}
                                         </View>
                                         <View style={[styles.month, styles.commonInputRegister]}>
                                             <TextInput
@@ -87,6 +168,10 @@ class PupilRegister extends Component {
                                                 placeholderTextColor={COLORS.darkGray}
                                             />
                                             <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>
+                                             {/* <View style={[STYLE.commonInput, styles.alignVert]}>
+                                            {
+                                                this.monthsDropDown()
+                                            } */}
                                         </View>
                                         <View style={[styles.year, styles.commonInputRegister]}>
                                             <TextInput
@@ -101,6 +186,10 @@ class PupilRegister extends Component {
                                                 placeholderTextColor={COLORS.darkGray}
                                             />
                                             <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>
+                                             {/* <View style={[STYLE.commonInput, styles.alignVert]}>
+                                            {
+                                                this.yearsDropDown()
+                                            } */}
                                         </View>
                                     </View>
                                 </View>
@@ -361,5 +450,57 @@ const styles = StyleSheet.create({
         paddingHorizontal: hp(0.6),
         position: 'relative',
         justifyContent: 'center',
+    },
+    //
+    dropDownFormInput: {
+        width: '100%',
+    },
+    subjectText: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.lightGray,
+        fontSize: hp(1.8),
+        marginBottom: hp(0.8),
+    },
+    subjectDateTime: {
+        alignItems: 'flex-start',
+        justifyContent:'space-between',
+        width:'100%',
+    },
+    dropDown: {
+        flexDirection: 'row',
+        width: hp(5),
+        color: COLORS.darkGray,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        overflow: 'hidden',
+        borderRadius: hp(1.0),
+        lineHeight: hp(2.3),
+        height: "100%",
+        justifyContent:'space-between',
+        // paddingLeft: hp(2.0),
+        // paddingRight: hp(2.0),
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
+        fontFamily: FONTS.fontRegular,
+    },
+    dateTimetextdummy: {
+        fontSize: 12,
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+    },
+    dropDownArrow:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        alignSelf:'center'
+        // right:hp(1.4),
+        // top:hp(2.1),
+    },
+    alignVert:{
+        alignItems:'center',
+        marginRight:hp(2.5),
     },
 });

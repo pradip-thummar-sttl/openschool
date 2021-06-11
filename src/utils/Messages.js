@@ -1,6 +1,11 @@
 const MESSAGE = {
     email: "Please enter email or phone",
     password: "Please enter password",
+    firstName:"Please enter First name",
+    lastName:"Please enter Last name",
+    day:"Please Select Day",
+    month:"Please enter Month",
+    year:"Please enter Year",
     event: "Please enter event name",
     location: "Please enter location",
     date: "Please select date",

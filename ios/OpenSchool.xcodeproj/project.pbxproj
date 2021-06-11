@@ -839,8 +839,8 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				6F0908437E0F294DE7A75524 /* [CP] Copy Pods Resources */,
-				12A74E48120E78F28B37EADF /* [CP] Embed Pods Frameworks */,
 				88E7F54A2660B53400371DA0 /* ShellScript */,
+				AC25665BD4C033B4D5ECBFFB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1050,6 +1050,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n";
+		};
+		AC25665BD4C033B4D5ECBFFB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenSchool/Pods-OpenSchool-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Quickblox/Quickblox.framework/Quickblox",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/QuickbloxWebRTC/QuickbloxWebRTC.framework/QuickbloxWebRTC",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quickblox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickbloxWebRTC.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenSchool/Pods-OpenSchool-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		ED71B51A513CD5E33AC549C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

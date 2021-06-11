@@ -350,7 +350,7 @@ class Login extends Component {
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => {
-                                                    this.props.navigation.replace('PupilRegister')
+                                                    this.props.navigation.replace('PupilRegister',{userType:"Pupil"})
                                                 }}>
                                                 <Text style={styles.getStartedLink}> Get Started</Text>
                                             </TouchableOpacity>
