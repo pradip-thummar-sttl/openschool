@@ -136,7 +136,7 @@ class PupilRegister extends Component {
     setLoading(flag) {
         this.setState({ isLoading: flag });
     }
-    
+
     daysDropDown = () => {
         return (
             <View style={styles.dropDownFormInput}>
