@@ -59,6 +59,84 @@ class PupilRegister extends Component {
         isPasswordFocus: false,
     };
 
+    isFieldsValidated = () => {
+        const { userName, password,firstName, lastName, day,month, year, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
+        console.log('user type data', this.props);
+        if (!userName) {
+            showMessage(MESSAGE.email)
+            return false;
+        } else if (!password) {
+            showMessage(MESSAGE.password);
+            return false;
+        } else if (!firstName) {
+             showMessage(MESSAGE.firstName);
+            return false;
+        } else if (!lastName ) {
+            showMessage(MESSAGE.lastName);
+            return false;
+        } else if (!day) {
+            showMessage(MESSAGE.day);
+            return false;
+        } else if (!month) {
+            showMessage(MESSAGE.month);
+            return false;
+        } else if (!year) {
+            showMessage(MESSAGE.year);
+            return false;
+        }
+
+        this.setLoading(true)
+        Service.get(EndPoints.GetAllUserType, (res) => {
+
+            console.log('user type data', res);
+            if (res.flag) {
+                var userData = res.data
+                var userType = ""
+                userData.map((item) => {
+                    if (item.Name === this.props.route.params.userType) {
+                        userType = item._id
+                    }
+                })
+
+
+                var data = {
+                    FirstName:firstName,
+                    LastName:lastName,
+                    Email: userName,
+                    Dob:`${year}-${month}-${day}`,
+                    Password: password,
+                    UserTypeId: userType
+                }
+
+                Service.post(data, EndPoints.PupilRegister, (res) => {
+                    console.log('response of register', res);
+                    if (res.code == 200) {
+                        data.isRemember = isRemember
+                        User.user = res.data
+                        this.props.navigation.replace('Login', { userType: "Pupil" })
+                    } else {
+                        this.setLoading(false)
+                        showMessage(res.message)
+                    }
+                }, (err) => {
+                    this.setLoading(false)
+                    console.log('response Login error', err)
+                })
+            } else {
+                this.setLoading(false)
+                showMessage(res.message)
+            }
+
+        }, (err) => {
+            console.log('response usertype error', err)
+            this.setLoading(false)
+        })
+    }
+
+    setLoading(flag) {
+        this.setState({ isLoading: flag });
+    }
+    
     daysDropDown = () => {
         return (
             <View style={styles.dropDownFormInput}>
@@ -85,7 +163,7 @@ class PupilRegister extends Component {
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Month</Text> */}
                 <Menu onSelect={(item) => this.setState({month:item})}>
-                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown,{width: hp(12)}]}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month  : 'Month'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
@@ -137,7 +215,7 @@ class PupilRegister extends Component {
                                 <View style={styles.field}>
                                     <Text style={styles.labelInput}>What is the learners date of birth?</Text>
                                     <View style={styles.birthRow}>
-                                        <View style={[styles.day, styles.commonInputRegister]}> 
+                                        {/* <View style={[styles.day, styles.commonInputRegister]}> 
                                              <TextInput
                                                 onFocus={() => this.setState({ isDayFocused: true })}
                                                 onBlur={() => this.setState({ isDayFocused: false })}
@@ -149,13 +227,13 @@ class PupilRegister extends Component {
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.darkGray}
                                             />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image> 
-                                             {/* <View style={[STYLE.commonInput, styles.alignVert]}>
+                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>  */}
+                                             <View style={[STYLE.commonInput, styles.alignVert]}>
                                             {
                                                 this.daysDropDown()
-                                            } */}
+                                            }
                                         </View>
-                                        <View style={[styles.month, styles.commonInputRegister]}>
+                                        {/* <View style={[styles.month, styles.commonInputRegister]}>
                                             <TextInput
                                                 onFocus={() => this.setState({ isMonthFocused: true })}
                                                 onBlur={() => this.setState({ isMonthFocused: false })}
@@ -167,13 +245,13 @@ class PupilRegister extends Component {
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.darkGray}
                                             />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>
-                                             {/* <View style={[STYLE.commonInput, styles.alignVert]}>
+                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image> */}
+                                             <View style={[STYLE.commonInput, styles.alignVert]}>
                                             {
                                                 this.monthsDropDown()
-                                            } */}
+                                            }
                                         </View>
-                                        <View style={[styles.year, styles.commonInputRegister]}>
+                                        {/* <View style={[styles.year, styles.commonInputRegister]}>
                                             <TextInput
                                                 onFocus={() => this.setState({ isYearFocused: true })}
                                                 onBlur={() => this.setState({ isYearFocused: false })}
@@ -185,11 +263,11 @@ class PupilRegister extends Component {
                                                 maxLength={40}
                                                 placeholderTextColor={COLORS.darkGray}
                                             />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>
-                                             {/* <View style={[STYLE.commonInput, styles.alignVert]}>
+                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image> */}
+                                             <View style={[STYLE.commonInput, styles.alignVert]}>
                                             {
                                                 this.yearsDropDown()
-                                            } */}
+                                            }
                                         </View>
                                     </View>
                                 </View>
@@ -206,6 +284,7 @@ class PupilRegister extends Component {
                                                 placeholder="First Name"
                                                 autoCapitalize={'none'}
                                                 maxLength={40}
+                                                onChangeText={(firstName)=>this.setState({firstName})}
                                                 placeholderTextColor={COLORS.lightGray}
                                             />
                                         </View>
@@ -219,6 +298,7 @@ class PupilRegister extends Component {
                                                 placeholder="Last Name"
                                                 autoCapitalize={'none'}
                                                 maxLength={40}
+                                                onChangeText={(lastName)=>this.setState({lastName})}
                                                 placeholderTextColor={COLORS.lightGray}
                                             />
                                         </View>
@@ -268,7 +348,7 @@ class PupilRegister extends Component {
                                 <View style={styles.loginButtonView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => {this.props.navigation.replace('PupilVerify')}}>
+                                        onPress={() => {this.isFieldsValidated()}}>
                                         <Text
                                             style={STYLE.fullWidthPrimaryButton}>Create my account</Text>
                                     </TouchableOpacity>
@@ -463,13 +543,13 @@ const styles = StyleSheet.create({
         marginBottom: hp(0.8),
     },
     subjectDateTime: {
-        alignItems: 'flex-start',
+        // alignItems: '',
         justifyContent:'space-between',
         width:'100%',
     },
     dropDown: {
         flexDirection: 'row',
-        width: hp(5),
+        width: hp(8),
         color: COLORS.darkGray,
         fontSize: 18,
         borderWidth: 1,
@@ -494,7 +574,7 @@ const styles = StyleSheet.create({
     dropDownArrow:{
         width:hp(1.51),
         resizeMode:'contain',
-        position:'absolute',
+        // position:'absolute',
         alignSelf:'center'
         // right:hp(1.4),
         // top:hp(2.1),
