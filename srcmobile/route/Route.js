@@ -16,6 +16,7 @@ import SidebarPupil from '../component/reusable/sidebar/Sidebarpupil';
 import Header from '../component/reusable/header/Header';
 import NotificationDrawer from '../component/reusable/notificationdrawer/NotificationDrawer';
 import TeacherDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
+import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupilLessonEmpty from '../screens/pupil/pupillessonempty/PupilLessonEmpty';
 import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
@@ -76,6 +77,7 @@ function ScreenStack() {
             <Stack.Screen name="Sidebar" component={Sidebar} />
             <Stack.Screen name="SidebarPupil" component={SidebarPupil} />
             <Stack.Screen name="Header" component={Header} />
+            <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />

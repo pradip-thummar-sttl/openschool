@@ -61,7 +61,7 @@ const Sidebar = (props) => {
                         <TouchableOpacity
                             style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { setSelectedModule(3); }}>
+                            onPress={() => { props.navigation.replace('PupilManagement'); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Messaging}
