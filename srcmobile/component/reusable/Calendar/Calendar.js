@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, } from 'react-native';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.commonBorderColor,
         paddingLeft: hp(2.6),
         paddingVertical: 15,
+        marginTop: Platform.OS == 'android' ? 0 : 30,
         paddingRight: hp(1.6),
     },
     drawerTitleMain: {

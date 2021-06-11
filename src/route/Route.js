@@ -36,6 +36,7 @@ import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDet
 import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkSubmitted';
 import ScreenAndCameraRecording from '../screens/teacher/screenandcamera/ScreenandCamera';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
+import GroupSetUp from '../screens/teacher/pupilmanagement/GroupSetUp';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -83,6 +84,7 @@ function ScreenStack() {
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
             <Stack.Screen name="ScreenAndCameraRecording" component={ScreenAndCameraRecording} />
             <Stack.Screen name="WorkSpace" component={WorkSpace} />
+            <Stack.Screen name="GroupSetUp" component={GroupSetUp} />
 
         </Stack.Navigator>
     );
