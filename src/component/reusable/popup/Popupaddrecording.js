@@ -44,21 +44,40 @@ const Popupaddrecording = (props) => {
 
     return (
         <View>
-            {props.recordingArr.length == 0 ?
-                <TouchableOpacity
-                    activeOpacity={opacity}
-                    onPress={toggleModal}
-                    style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
-                    <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
-                    <Text style={styles.recordLinkText}>Add Recording</Text>
-                </TouchableOpacity>
+            {props.isScreenVoiceSelected ?
+                <View>
+                    {!props.isRecordingStarted ?
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => props.onStartScrrenRecording()}
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginRight: 5 }}>
+                            <Text style={styles.recordLinkText}>Start Screen + Voice Recording</Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => props.onStopScrrenRecording()}
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginLeft: 5 }}>
+                            <Text style={styles.recordLinkText}>Stop Recording</Text>
+                        </TouchableOpacity>
+                    }
+                </View>
                 :
-                <TouchableOpacity
-                    // activeOpacity={opacity}
-                    // onPress={() => props.onRemoveRecording()}
-                    style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
-                    <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
-                </TouchableOpacity>
+                props.recordingArr.length == 0 ?
+                    <TouchableOpacity
+                        activeOpacity={opacity}
+                        onPress={toggleModal}
+                        style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                        <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                        <Text style={styles.recordLinkText}>Add Recording</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity
+                        // activeOpacity={opacity}
+                        // onPress={() => props.onRemoveRecording()}
+                        style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
+                        <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                    </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
@@ -154,6 +173,16 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
+    },
+    recordLinkBlock2: {
+        width: '100%',
+        paddingHorizontal: 5,
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        alignItems: 'center',
     },
     topSpaceRecording: {
         marginTop: hp(1.401),

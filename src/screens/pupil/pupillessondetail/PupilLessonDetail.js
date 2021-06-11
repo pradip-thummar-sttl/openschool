@@ -66,7 +66,7 @@ const PupilLessonDetail = (props) => {
                 } else {
                     getHomeworkData('', '')
                 }
-                textInput.current.clear()
+                // textInput.current.clear()
             } else {
                 if (isLesson) {
                     getLessonData(keyword, '')

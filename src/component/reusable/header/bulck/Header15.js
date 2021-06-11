@@ -26,7 +26,7 @@ const HeaderWhite = (props) => {
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
                     </TouchableOpacity> */}
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={()=>props.onAlertPress()}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
@@ -39,7 +39,7 @@ export default HeaderWhite;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingRight: 50,
         backgroundColor: COLORS.white,
        // marginBottom: hp(5.85),
     },

@@ -39,23 +39,25 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     introTitle: {
-        color:COLORS.darkGrayIntro,
-        fontSize: hp(2.28),
+        color:COLORS.darkGray,
+        fontSize: hp(3.125),
         marginBottom:hp(2.8),
         textAlign: 'center',
         fontFamily: FONTS.fontBold,
     },
     introContent: {
         fontSize: hp(1.8),
-        color: COLORS.darkGray,
+        color: COLORS.introGreyColor,
         lineHeight:hp(2.5),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
+        paddingLeft:hp(31.77),
+        paddingRight:hp(31.77),
     },
     SlideImage: {
-        width: hp(41.99),
+        width: hp(92.05),
         resizeMode: 'contain',
-        height: hp(42.36),
+        height: hp(44.79),
     },
 });
 

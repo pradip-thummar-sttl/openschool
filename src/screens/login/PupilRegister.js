@@ -56,7 +56,7 @@ class Login extends Component {
                         <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
                         </View>
                         <Text h3 style={styles.titleAccountLogin}>Pupil Register</Text>
-                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
+                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the learners date of birth?</Text>
                         <View style={styles.loginAccountForm}>                           
                             <View style={[STYLE.commonInput, styles.alignVert]}>
                             <TouchableOpacity style={[styles.dropWrap]}>
@@ -151,9 +151,11 @@ class Login extends Component {
                                     <CheckBox
                                         style={STYLE.checkBoxcommon1}
                                         value={this.state.isRemember}
-                                        onCheckColor={COLORS.themeBlue}
-                                        onTintColor={COLORS.themeBlue}
+                                        onCheckColor={COLORS.white}
+                                        onTintColor={COLORS.blueButton}
                                         tintColor={COLORS.lightplaceholder}
+                                        onFillColor={COLORS.blueButton}
+                                        boxType={'square'}
                                         tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
@@ -184,9 +186,6 @@ class Login extends Component {
                                     }
                                 </TouchableOpacity>
                             </View>
-                        </View>
-                        <View>
-                            <Text style={styles.getStartText}>New to MyEd Open School? <TouchableOpacity><Text style={styles.greenText}>Get Started</Text></TouchableOpacity></Text>
                         </View>
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
@@ -292,9 +291,8 @@ const styles = StyleSheet.create({
     forgotPass: {
         fontSize: hp('1.8%'),
         lineHeight: hp('3.0%'),
-        fontFamily: FONTS.fontBold,
+        fontFamily: FONTS.fontRegular,
         color:COLORS.buttonGreen,
-        textTransform:'uppercase',
         fontWeight:'700',
     },
     loginButtonView: {
@@ -302,8 +300,8 @@ const styles = StyleSheet.create({
         width:'80%',
     },
     bottomLoginIntro: {
-        top: hp('15%'),
-        paddingLeft: hp('7%'),
+        top: hp('8%'),
+        paddingLeft: hp('8.5%'),
         paddingRight: hp('7%'),
     },
     eye: {
@@ -323,9 +321,9 @@ const styles = StyleSheet.create({
     commonButtonGreen:{
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
-        fontSize: hp('2.4%'),
+        fontSize: hp('1.56'),
         fontWeight: '800',
-        borderRadius: hp('1.3%'),
+        borderRadius: hp('1.3'),
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(2),
@@ -350,7 +348,7 @@ const styles = StyleSheet.create({
     },
     commonFontsPupleUnderline:{
         paddingTop:hp(0.5),
-        color: COLORS.thmePurple,
+        color: COLORS.lightGray,
         //fontSize: hp(3.81),
         fontWeight: '500',
         lineHeight: hp('2.6%'),
@@ -358,12 +356,13 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline",
         textDecorationStyle: "solid",
         textDecorationColor: "#000",
+        fontSize:hp(1.56),
     },
     greenText:{
         color:COLORS.buttonGreen,
         fontFamily:FONTS.fontRegular,
         fontSize:hp(1.82),
-        paddingTop:hp(0.5),
+        lineHeight:hp(1.5),
     },
     registerSmtText:{
         fontFamily:FONTS.fontRegular,
@@ -380,7 +379,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         color: COLORS.themeBlue,
         fontSize: hp('4.8%'),
-        marginTop: hp('3.5%'),
+        marginTop: hp(0.5),
         marginBottom: hp('4%'),
         marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
@@ -391,6 +390,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         width:hp(54.42),
+        marginBottom: hp('2.0%'),
     },
     filedSpace:{
         width:hp(22.65),

@@ -129,7 +129,7 @@ class Login extends Component {
                             if (Platform.OS == 'android') {
                                 this.getDataFromQuickBlox_Android(userName, password, res.data, data)
                             } else if (Platform.OS == 'ios') {
-                                this.getDataFromQuickBlox_IOS(res.data, data)
+                                this.getDataFromQuickBlox_IOS(userName, password, res.data, data)
                             }
                         }
                     } else {
@@ -153,7 +153,17 @@ class Login extends Component {
 
     getDataFromQuickBlox_Android = (emailId, password, resData, reqData) => {
         try {
-            LoginModule.qbLogin(emailId, password, [resData.RoomId], (error, ID) => {
+            let roomIDs = []
+            if (this.props.route.params.userType == 'Pupil') {
+                resData.RoomId.forEach(element => {
+                    roomIDs.push(element.RoomId)
+                });
+            } else {
+                roomIDs.push(resData.RoomId)
+            }
+            console.log('roomIDs', roomIDs);
+
+            LoginModule.qbLogin(emailId, password, roomIDs, (error, ID) => {
                 console.log('error:eventId', error, ID);
                 this.updateUserID(ID, resData, reqData)
             }
@@ -163,9 +173,19 @@ class Login extends Component {
         }
     };
 
-    getDataFromQuickBlox_IOS = (resData, reqData) => {
-        LoginModuleIos.signUpWithFullName("pradip12", "pradip12", (ID) => {
-            console.log('log for event', eventId);
+    getDataFromQuickBlox_IOS = (emailId, password, resData, reqData) => {
+        var roomIDs = []
+        if (this.props.route.params.userType == 'Pupil') {
+            resData.RoomId.forEach(element => {
+                roomIDs.push(element.RoomId)
+            });
+        } else {
+            roomIDs.push(resData.RoomId)
+        }
+        console.log('roomIDs', roomIDs);
+
+        LoginModuleIos.signUpWithFullName(emailId, roomIDs, password, (ID) => {
+            console.log('log for event', ID);
             this.updateUserID(ID, resData, reqData)
         }, (error) => {
             console.log('log for error', error);
@@ -286,13 +306,15 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                        style={STYLE.checkBoxcommon1}
-                                        value={this.state.isRemember}
-                                        onCheckColor={COLORS.themeBlue}
-                                        onTintColor={COLORS.themeBlue}
-                                        tintColor={COLORS.lightplaceholder}
-                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
+                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                         style={STYLE.checkBoxcommon1}
+                                         value={this.state.isRemember}
+                                         boxType={'square'}
+                                         onCheckColor={COLORS.white}
+                                         onTintColor={COLORS.checkBlue}
+                                         tintColor={COLORS.checkBlue}
+                                         onFillColor={COLORS.checkBlue}
+                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
@@ -489,7 +511,7 @@ const styles = StyleSheet.create({
     commonButtonGreen:{
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
-        fontSize: hp('2.4%'),
+        fontSize: hp('1.56%'),
         fontWeight: '800',
         borderRadius: hp('1.3%'),
         overflow: 'hidden',
@@ -516,8 +538,8 @@ const styles = StyleSheet.create({
     },
     commonFontsPupleUnderline:{
         paddingTop:hp(0.5),
-        color: COLORS.thmePurple,
-        //fontSize: hp(3.81),
+        color: COLORS.lightGray,
+        fontSize: hp(1.82),
         fontWeight: '500',
         lineHeight: hp('2.6%'),
         fontFamily: FONTS.fontRegular,

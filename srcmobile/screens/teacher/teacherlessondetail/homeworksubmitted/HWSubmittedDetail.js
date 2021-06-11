@@ -21,16 +21,17 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import PopupHomeWorkSave from "../../../../component/reusable/popup/PopupHomeWorkSave";
 import { Download } from "../../../../utils/Download";
 import { launchCamera } from "react-native-image-picker";
+import RecordScreen from 'react-native-record-screen';
 var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
 
     var data = props.route.params.item
-    console.log('data', data, data.Marked);
+    console.log('data', data);
 
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
-    const [recordingArr, setRecordingArr] = useState([])
+    const [recordingArr, setRecordingArr] = useState(data.RecordingList)
     const [isAddRecording, setAddRecording] = useState(false)
     const [isLoading, setLoading] = useState(false);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -38,6 +39,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isBronze, setBronze] = useState(false);
     const [isSilver, setSilver] = useState(false);
     const [isGold, setGold] = useState(false);
+    const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
+    const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     const isFieldsValidated = () => {
         if (!feedBack.trim()) {
@@ -87,9 +90,41 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const onScreeCamera = () => {
         setAddRecording(false)
     }
+
     const onScreeVoice = () => {
         setAddRecording(false)
+        setScreenVoiceSelected(true)
     }
+
+    const startRecording = () => {
+        setRecordingStarted(true)
+        RecordScreen.startRecording().catch((error) => console.error(error));
+    }
+
+    const stopRecording = async () => {
+        var arr = []
+        const res = await RecordScreen.stopRecording().catch((error) => {
+            setRecordingStarted(false)
+            console.warn(error)
+        });
+        if (res) {
+            setRecordingStarted(false)
+            const url = res.result.outputURL;
+            let ext = url.split('.');
+            let obj = {
+                uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                originalname: 'MY_RECORDING.mp4',
+                fileName: 'MY_RECORDING.mp4',
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setScreenVoiceSelected(false)
+
+            console.log('url', url);
+        }
+    }
+
     const onCameraOnly = () => {
         var arr = [...recordingArr]
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
@@ -235,11 +270,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     <Popupaddrecording
                                         recordingArr={recordingArr}
                                         isVisible={isAddRecording}
+                                        isRecordingStarted={isRecordingStarted}
+                                        isScreenVoiceSelected={isScreenVoiceSelected}
                                         onClose={() => setAddRecording(false)}
                                         onScreeCamera={() => onScreeCamera()}
                                         onScreeVoice={() => onScreeVoice()}
-                                        onCameraOnly={() => onCameraOnly()}
-                                        onRemoveRecording={() => null} />
+                                        onStartScrrenRecording={() => startRecording()}
+                                        onStopScrrenRecording={() => stopRecording()}
+                                        onCameraOnly={() => onCameraOnly()} />
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

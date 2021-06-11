@@ -103,5 +103,12 @@ const Images = {
     teacherLoginIcon: require('../assets/images/teacher-icon.png'),
     pupilLoginIcon: require('../assets/images/pupil-icon.png'),
     illuTopBg: require('../assets/images/illus-top.png'),
+    loginMainBackteacher: require('../assets/images/loginMaintopteacher2.png'),
+    introSlideOne: require('../assets/images/pupil-intro-screen-1_2.png'),
+    introSlideTwo: require('../assets/images/pupil-intro-screen-2_2.png'),
+    introSlideThree: require('../assets/images/pupil-intro-screen-3_2.png'),
+    teacherintroSlideOne: require('../assets/images/teacher-intro-illus-1-2.png'),
+    teacherintroSlideTwo: require('../assets/images/teacher-intro-illus-2-2.png'),
+    teacherintroSlideThree: require('../assets/images/teacher-intro-illus-3-2.png'),
 }
 export default Images;

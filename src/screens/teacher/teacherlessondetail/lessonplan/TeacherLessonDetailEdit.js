@@ -33,8 +33,9 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
+import RecordScreen from 'react-native-record-screen';
 
-const { DialogModule } = NativeModules;
+const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailEdit = (props) => {
     const item = useRef(null)
@@ -47,6 +48,8 @@ const TLDetailEdit = (props) => {
     const [lessonData, setLessonData] = useState(props.data);
     const [isAddRecording, setAddRecording] = useState(false)
     const [cameraResponse, setCameraResponse] = useState({})
+    const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
+    const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     var tempPupil = [];
     useEffect(() => {
@@ -236,12 +239,43 @@ const TLDetailEdit = (props) => {
         setAddRecording(false)
         props.navigateScreeCamera()
     }
+
     const onScreeVoice = () => {
         setAddRecording(false)
-
+        setScreenVoiceSelected(true)
     }
+
+    const startRecording = () => {
+        setRecordingStarted(true)
+        RecordScreen.startRecording().catch((error) => console.error(error));
+    }
+
+    const stopRecording = async () => {
+        var arr = []
+        const res = await RecordScreen.stopRecording().catch((error) => {
+            setRecordingStarted(false)
+            console.warn(error)
+        });
+        if (res) {
+            setRecordingStarted(false)
+            const url = res.result.outputURL;
+            let ext = url.split('.');
+            let obj = {
+                uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                originalname: 'MY_RECORDING.mp4',
+                fileName: 'MY_RECORDING.mp4',
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setScreenVoiceSelected(false)
+
+            console.log('url', url);
+        }
+    }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+        var arr = []
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
             // setResponse(response);
             if (response.errorCode) {
@@ -297,7 +331,7 @@ const TLDetailEdit = (props) => {
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -325,7 +359,7 @@ const TLDetailEdit = (props) => {
                             <CheckBox
                                 style={{ ...PAGESTYLE.checkMarkTool }}
                                 boxType={'square'}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
@@ -485,22 +519,36 @@ const TLDetailEdit = (props) => {
                 names.push(pupil.FirstName + " " + pupil.LastName)
             });
 
-
-            if (Platform.OS == 'android') {
-                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                    console.log('error:eventId', error, ID);
-                    if (ID && ID != '' && ID != null && ID != undefined) {
-                        saveLesson(ID)
-                    } else {
-                        setLoading(false)
-                        showMessage('Sorry, we are unable to add lesson!')
-                    }
-                });
-            } else {
-                // Call IOS native module here
+            try {
+                if (Platform.OS == 'android') {
+                    DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                        console.log('error:eventId', error, ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    });
+                } else {
+                    Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
+                        console.log('eventId--------------------', ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    }, (error) => {
+                        console.log('event error--------------------', error);
+                    });
+                }
+            }
+            catch (e) {
+                console.error(e);
             }
         }
-    }
+    };
 
     const saveLesson = (ID) => {
 
@@ -728,9 +776,13 @@ const TLDetailEdit = (props) => {
                                         <Popupaddrecording
                                             recordingArr={recordingArr}
                                             isVisible={isAddRecording}
+                                            isRecordingStarted={isRecordingStarted}
+                                            isScreenVoiceSelected={isScreenVoiceSelected}
                                             onClose={() => setAddRecording(false)}
                                             onScreeCamera={() => onScreeCamera()}
                                             onScreeVoice={() => onScreeVoice()}
+                                            onStartScrrenRecording={() => startRecording()}
+                                            onStopScrrenRecording={() => stopRecording()}
                                             onCameraOnly={() => onCameraOnly()} />
 
                                         {itemCheckListView()}

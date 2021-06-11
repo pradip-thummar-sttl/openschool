@@ -30,7 +30,7 @@ import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
-const { DialogModule } = NativeModules;
+const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
     const t2 = useRef(null);
@@ -66,6 +66,8 @@ const TLDetailAdd = (props) => {
     const [IsDeliveredLive, setDeliveredLive] = useState(false);
     const [IsPublishBeforeSesson, setPublishBeforeSesson] = useState(false);
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
+    const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
+    const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
@@ -244,10 +246,41 @@ const TLDetailAdd = (props) => {
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
+
     const onScreeVoice = () => {
         setAddRecording(false)
-
+        setScreenVoiceSelected(true)
     }
+
+    const startRecording = () => {
+        setRecordingStarted(true)
+        RecordScreen.startRecording().catch((error) => console.error(error));
+    }
+
+    const stopRecording = async () => {
+        var arr = []
+        const res = await RecordScreen.stopRecording().catch((error) => {
+            setRecordingStarted(false)
+            console.warn(error)
+        });
+        if (res) {
+            setRecordingStarted(false)
+            const url = res.result.outputURL;
+            let ext = url.split('.');
+            let obj = {
+                uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                originalname: 'MY_RECORDING.mp4',
+                fileName: 'MY_RECORDING.mp4',
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setScreenVoiceSelected(false)
+
+            console.log('url', url);
+        }
+    }
+
     const onCameraOnly = () => {
         var arr = [...recordingArr]
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
@@ -284,9 +317,9 @@ const TLDetailAdd = (props) => {
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%' , bottom: hp(1), }}
+                    style={{ alignSelf: 'center', width: '100%', bottom: hp(1), }}
                     renderItem={({ item, index }) => (
-                        <View style={{margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                        <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
                             <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
@@ -503,22 +536,36 @@ const TLDetailAdd = (props) => {
                 userNames.push(pupil.Email)
                 names.push(pupil.FirstName + " " + pupil.LastName)
             });
-
-            if (Platform.OS == 'android') {
-                DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                    console.log('error:eventId', error, ID);
-                    if (ID && ID != '' && ID != null && ID != undefined) {
-                        saveLesson(ID)
-                    } else {
-                        setLoading(false)
-                        showMessage('Sorry, we are unable to add lesson!')
-                    }
-                });
-            } else {
-                // Call IOS native module here
+            try {
+                if (Platform.OS == 'android') {
+                    DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
+                        console.log('error:eventId', error, ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    });
+                } else {
+                    Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
+                        console.log('eventId--------------------', ID);
+                        if (ID && ID != '' && ID != null && ID != undefined) {
+                            saveLesson(ID)
+                        } else {
+                            setLoading(false)
+                            showMessage('Sorry, we are unable to add lesson!')
+                        }
+                    }, (error) => {
+                        console.log('event error--------------------', error);
+                    });
+                }
+            } catch (e) {
+                console.error(e);
             }
         }
-    }
+
+    };
 
     const saveLesson = (ID) => {
 
@@ -639,7 +686,7 @@ const TLDetailAdd = (props) => {
                                             <TextInput
                                                 returnKeyType={"next"}
                                                 onSubmitEditing={() => { t2.current.focus(); }}
-                                                style={{...PAGESTYLE.commonInput, width: '100%',}}
+                                                style={{ ...PAGESTYLE.commonInput, width: '100%', }}
                                                 placeholder="e.g. Grammar, Fractions, etc"
                                                 autoCapitalize={'sentences'}
                                                 maxLength={40}
@@ -686,9 +733,13 @@ const TLDetailAdd = (props) => {
                                 <Popupaddrecording
                                     recordingArr={recordingArr}
                                     isVisible={isAddRecording}
+                                    isRecordingStarted={isRecordingStarted}
+                                    isScreenVoiceSelected={isScreenVoiceSelected}
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
+                                    onStartScrrenRecording={() => startRecording()}
+                                    onStopScrrenRecording={() => stopRecording()}
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
@@ -737,7 +788,7 @@ const TLDetailAdd = (props) => {
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}
                                         activeOpacity={opacity}
-                                        onPress={() => props.navigation.navigate('TLVideoGallery')}>
+                                        onPress={() => props.navigation.navigate('TLVideoGallery', { goBack: () => props.navigation.goBack() })}>
                                         <Text style={STYLE.commonButtonBorderedGreen}>find me learning material</Text>
                                     </TouchableOpacity>
                                 </View>

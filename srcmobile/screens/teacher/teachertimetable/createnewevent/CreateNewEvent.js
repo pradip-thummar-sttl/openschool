@@ -258,13 +258,12 @@ const CreateNewEvent = (props) => {
                         <KeyboardAwareScrollView>
                             <View style={styles.beforeBorder}>
                                 <View style={styles.titleSave}>
-                                    <Text h2 style={styles.titleTab}><TouchableOpacity
+                                    <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { props.route.params.onGoBack(); props.navigation.goBack(); }}>
                                         <Image style={styles.arrow} source={Images.backArrow} />
                                     </TouchableOpacity>
-                                    Add a calendar entry
-                                </Text>
+                                    <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
                                     <View style={styles.uploadCalendar}>
                                         <View style={styles.lessonstartButton}>
                                             {isLoading ?
@@ -291,16 +290,13 @@ const CreateNewEvent = (props) => {
                                 </View>
                                 <View style={styles.field}>
                                     <Text label style={STYLE.labelCommon}>What event is it?</Text>
-                                    <View style={styles.copyInputParent}>
-                                        <TextInput
-                                            multiline={false}
-                                            placeholder='Name of event'
-                                            value={event}
-                                            placeholderStyle={styles.somePlaceholderStyle}
-                                            placeholderTextColor={COLORS.lightGray}
-                                            style={styles.commonInputTextarea}
-                                            onChangeText={eventName => setEvent(eventName)} />
-                                    </View>
+                                    <TextInput
+                                        multiline={false}
+                                        placeholder='Name of event'
+                                        value={event}
+                                        placeholderTextColor={COLORS.lightGray}
+                                        style={styles.commonInputTextarea}
+                                        onChangeText={eventName => setEvent(eventName)} />
                                 </View>
                                 <View style={styles.fieldWidthtwoMain}>
                                     <View style={styles.fieldWidthtwo1}>
@@ -450,8 +446,6 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        marginBottom: hp(3),
-        top: hp(0.7),
     },
     uploadCalIcon: {
         width: hp(5.20),
@@ -465,6 +459,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        position: 'absolute',
+        right: 0
     },
     buttonGrp: {
         position: 'relative',
@@ -493,19 +489,30 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.5),
         paddingBottom: hp(1.5),
     },
+    // commonInputTextarea: {
+    //     height: hp(5.20),
+    //     borderWidth: 1,
+    //     borderColor: COLORS.borderGrp,
+    //     borderRadius: hp(1),
+    //     paddingTop: hp(1.5),
+    //     paddingBottom: hp(1.5),
+    //     paddingRight: hp(1.5),
+    //     paddingLeft: hp(1.5),
+    //     marginTop: hp(1.3),
+    //     fontSize: hp(1.82),
+    //     color: COLORS.darkGray,
+    //     lineHeight: hp(2.60),
+    //     fontFamily: FONTS.fontSemiBold,
+    // },
     commonInputTextarea: {
-        height: hp(5.20),
+        height: 50,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
-        paddingTop: hp(0.5),
-        paddingBottom: hp(0.5),
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
-        fontSize: hp(1.82),
         color: COLORS.darkGray,
-        lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
         textAlignVertical: 'center',
     },
@@ -556,6 +563,7 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     dropDownSmallWrap: {
+        height: 50,
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
@@ -657,8 +665,9 @@ const styles = StyleSheet.create({
     },
     titleSave: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
+        paddingVertical: 12,
+        marginBottom: 10,
     },
     arrow: {
         width: hp(2.34),
@@ -666,7 +675,7 @@ const styles = StyleSheet.create({
         marginRight: hp(1.5),
         top: Platform.OS == 'android' ? hp(1.5) : hp(0.65),
     },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: 150, borderRadius: hp(1.23), backgroundColor: COLORS.white, left: 15, bottom: hp(11), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1) },
     dateTimetextdummy1: {
         fontSize: hp(1.82),

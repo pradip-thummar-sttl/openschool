@@ -91,7 +91,7 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     ScrollViewFlatlist:{
-        height: hp(60.28),
+        flex: 1
     },
     month: {
         fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.56),
@@ -119,6 +119,15 @@ export default StyleSheet.create({
     pupilBoard: {
         marginTop: hp(5),
         backgroundColor: COLORS.dashboardPupilBlue,
+    },
+    whiteBg: {
+        backgroundColor: COLORS.white,
+        // paddingLeft: hp(3.5),
+        // paddingRight: hp(3.5),
+        paddingBottom: hp(2),
+        paddingTop: hp(0),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
     },
     dashBoardBoxes: {
         flexDirection: 'row',

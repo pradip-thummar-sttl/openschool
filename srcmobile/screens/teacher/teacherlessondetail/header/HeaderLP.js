@@ -243,5 +243,6 @@ const styles = StyleSheet.create({
     },
     titleRow: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
 });

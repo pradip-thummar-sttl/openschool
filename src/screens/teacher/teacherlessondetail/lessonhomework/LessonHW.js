@@ -22,6 +22,8 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import MESSAGE from "../../../../utils/Messages";
 import { Download } from "../../../../utils/Download";
+import RecordScreen from 'react-native-record-screen';
+
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -57,6 +59,8 @@ const TLHomeWork = (props) => {
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
+    const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
+    const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
@@ -164,10 +168,42 @@ const TLHomeWork = (props) => {
         setAddRecording(false)
         props.navigateScreeCamera()
     }
+
     const onScreeVoice = () => {
         setAddRecording(false)
-
+        setScreenVoiceSelected(true)
     }
+
+    const startRecording = () => {
+        setRecordingStarted(true)
+        RecordScreen.startRecording().catch((error) => console.error(error));
+    }
+
+    const stopRecording = async () => {
+        var arr = []
+        const res = await RecordScreen.stopRecording().catch((error) => {
+            setRecordingStarted(false)
+            console.warn(error)
+        });
+        if (res) {
+            setRecordingStarted(false)
+            const url = res.result.outputURL;
+            let ext = url.split('.');
+            let obj = {
+                uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                originalname: 'MY_RECORDING.mp4',
+                fileName: 'MY_RECORDING.mp4',
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setScreenVoiceSelected(false)
+            Addhomework.RecordingArr = arr
+
+            console.log('url', url);
+        }
+    }
+
     const onCameraOnly = () => {
         var arr = [...recordingArr]
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
@@ -179,6 +215,7 @@ const TLHomeWork = (props) => {
                 arr.push(response)
 
                 setRecordingArr(arr)
+                Addhomework.RecordingArr = arr
             }
 
         })
@@ -243,7 +280,7 @@ const TLHomeWork = (props) => {
                             <CheckBox
                                 style={PAGESTYLE.checkMark}
                                 value={item.IsCheck}
-                                tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 onFillColor={COLORS.dashboardPupilBlue}
@@ -289,7 +326,7 @@ const TLHomeWork = (props) => {
                         style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftWidth: 1, borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -355,11 +392,14 @@ const TLHomeWork = (props) => {
                         <Popupaddrecording
                             recordingArr={recordingArr}
                             isVisible={isAddRecording}
+                            isRecordingStarted={isRecordingStarted}
+                            isScreenVoiceSelected={isScreenVoiceSelected}
                             onClose={() => setAddRecording(false)}
                             onScreeCamera={() => onScreeCamera()}
                             onScreeVoice={() => onScreeVoice()}
-                            onCameraOnly={() => onCameraOnly()}
-                            onRemoveRecording={() => { setRecordingArr([]); Addhomework.RecordingArr = [] }} />
+                            onStartScrrenRecording={() => startRecording()}
+                            onStopScrrenRecording={() => stopRecording()}
+                            onCameraOnly={() => onCameraOnly()} />
 
                         <View style={PAGESTYLE.requirementofClass}>
                             <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
@@ -372,7 +412,7 @@ const TLHomeWork = (props) => {
                                     //         style={PAGESTYLE.checkMark}
                                     //         value={item.IsCheck}
                                     //         boxType={'square'}
-                                                // tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                    // tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
                                     //         onCheckColor={COLORS.white}
                                     //         onFillColor={COLORS.dashboardPupilBlue}
                                     //         onTintColor={COLORS.dashboardPupilBlue}

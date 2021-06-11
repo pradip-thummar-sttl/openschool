@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -16,7 +16,7 @@ import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { User } from "../../../utils/Model";
 
-const { CallModule } = NativeModules;
+const { CallModule, CallModuleIos } = NativeModules;
 
 // const Pupillist = ({ item }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
@@ -112,11 +112,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            if (Platform.OS == 'android') {
-                startLiveClassAndroid()
-            } else {
-                startLiveClassIOS()
-            }
+            // if (Platform.OS == 'android') {
+            startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
         }
     }
 
@@ -134,11 +134,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
 
-            console.log('KDKD: Teacher', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
-                console.log('Class Started');
-            });
+            if (Platform.OS === 'android') {
+                console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                    console.log('Class Started');
+                });
+            } else {
+                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,true, (id) => {
+                    console.log('hi id:---------', id)
+                })
+            }
+
         } catch (e) {
             console.error(e);
         }
@@ -216,7 +224,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+            <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <Header onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
@@ -274,6 +282,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={PAGESTYLE.whiteBoard}>
                             {isDashDataLoading ?
                                 <ActivityIndicator
+                                    style={{ margin: 20 }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.yellowDark} />
                                 :
@@ -314,7 +323,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                    <Text style={PAGESTYLE.subTitleTab}>Sub Subject</Text>
+                                                    <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
                                                     <View style={PAGESTYLE.yellowHrTag}></View>
                                                     <View style={PAGESTYLE.timedateGrp}>
                                                         <View style={PAGESTYLE.dateWhiteBoard}>
@@ -371,15 +380,17 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                     </ScrollView>
                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                        <TouchableOpacity
-                                                            style={PAGESTYLE.buttonGrp}
-                                                            onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                            <Text style={STYLE.commonButtonBordered}>Edit Class</Text></TouchableOpacity>
-                                                        <TouchableOpacity
-                                                            style={PAGESTYLE.buttonGrp}
-                                                            onPress={() => { launchLiveClass() }}>
-                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
-                                                        </TouchableOpacity>
+                                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                            <TouchableOpacity
+                                                                onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
+                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
+                                                        </View>
+                                                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
+                                                            <TouchableOpacity
+                                                                onPress={() => { launchLiveClass() }}>
+                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
                                                     </View>
                                                 </View>
                                             </RBSheet>
@@ -465,6 +476,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>
                             {isPupilDataLoading ?
                                 <ActivityIndicator
+                                    style={{ margin: 20 }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.blueButton} />
                                 :

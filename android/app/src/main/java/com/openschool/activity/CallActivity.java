@@ -217,17 +217,17 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
             @Override
             public void onCameraError(final String s) {
 
-                showToast("Camera error: " + s);
+//                showToast("Camera error: " + s);
             }
 
             @Override
             public void onCameraDisconnected() {
-                showToast("Camera onCameraDisconnected: ");
+//                showToast("Camera onCameraDisconnected: ");
             }
 
             @Override
             public void onCameraFreezed(String s) {
-                showToast("Camera freezed: " + s);
+//                showToast("Camera freezed: " + s);
                 if (currentSession != null) {
                     leaveCurrentSession();
                 }
@@ -235,12 +235,12 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
             @Override
             public void onCameraOpening(String s) {
-                showToast("Camera aOpening: " + s);
+//                showToast("Camera aOpening: " + s);
             }
 
             @Override
             public void onFirstFrameAvailable() {
-                showToast("onFirstFrameAvailable: ");
+//                showToast("onFirstFrameAvailable: ");
             }
 
             @Override

@@ -113,7 +113,7 @@ const TeacherTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(9) }} />
             );
         }
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import Images from '../../../../utils/Images';
@@ -51,10 +51,11 @@ export default HeaderHWS;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(2.46),
-        paddingRight: hp(2),
+        paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(6.6),
-        paddingBottom: hp(1.5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingBottom: Platform.OS == 'android' ? 0 : 15,
+        
     },
     headerMain: {
         flexDirection: 'row',
@@ -247,5 +248,6 @@ const styles = StyleSheet.create({
     },
     titleRow: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
 });

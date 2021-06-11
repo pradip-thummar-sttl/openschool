@@ -12,12 +12,11 @@ target 'OpenSchool' do
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
-  # pod 'QuickBlox', '~> 2.17.10'
-  # pod 'Quickblox-WebRTC', '~> 2.7.6'
-  # pod 'SVProgressHUD'
-  # pod 'SDWebImage', '~> 4.4.7'
-  # pod 'TTTAttributedLabel', '~> 2.0.0'
-
+  pod 'QuickBlox' #'~> 2.17.10'
+  pod 'Quickblox-WebRTC' #'~> 2.7.6'
+#  pod 'SVProgressHUD'
+#  pod 'SDWebImage', '~> 4.4.7'
+#  pod 'TTTAttributedLabel', '~> 2.0.0'
   # pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
   # target 'OpenSchoolTests' do
@@ -33,6 +32,14 @@ target 'OpenSchool' do
   # post_install do |installer|
   #   flipper_post_install(installer)
   # end
+  
+  post_install do |installer|
+       installer.pods_project.targets.each do |target|
+           target.build_configurations.each do |config|
+               config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+           end
+       end
+   end
 end
 
 # target 'OpenSchool-tvOS' do

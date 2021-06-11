@@ -17,7 +17,7 @@ import { User } from "../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-const { CallModule } = NativeModules
+const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
     const refRBSheet = useRef();
@@ -66,11 +66,11 @@ const PupuilDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            if (Platform.OS == 'android') {
-                startLiveClassAndroid()
-            } else {
-                startLiveClassIOS()
-            }
+            // if (Platform.OS == 'android') {
+            startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
         }
     }
 
@@ -88,18 +88,19 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
-            let teacherUserName = dataOfSubView.TeacherUserName
-            let teacherUser = dataOfSubView.TeacherFirstName + " " + dataOfSubView.TeacherLastName
 
-            qBUserIDs.push(teacherQBUserID)
-            userNames.push(teacherUserName)
-            names.push(teacherUser)
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
-            console.log('KDKD: Pupil', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-
-            CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
-                console.log('Class Started');
-            });
+            if (Platform.OS == 'android') {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
+                    console.log('Class Started');
+                });
+            } else {
+                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,true, (id) => {
+                    console.log('hi id:---------', id)
+                })
+            }
         } catch (e) {
             console.error(e);
         }
@@ -217,6 +218,7 @@ const PupuilDashboard = (props) => {
                                 <View style={PAGESTYLE.whiteBoard}>
                                     {isMyDayLoading ?
                                         <ActivityIndicator
+                                            style={{ margin: 20 }}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.yellowDark} />
                                         :
@@ -311,11 +313,17 @@ const PupuilDashboard = (props) => {
                                                                         </View>
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}
-                                                                            onPress={() => { launchLiveClass() }}>
-                                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
-                                                                        </TouchableOpacity>
+                                                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                            <TouchableOpacity>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Mark As Absent</Text>
+                                                                            </TouchableOpacity>
+                                                                        </View>
+                                                                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton }}>
+                                                                            <TouchableOpacity
+                                                                                onPress={() => { launchLiveClass() }}>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Join Class</Text>
+                                                                            </TouchableOpacity>
+                                                                        </View>
                                                                     </View>
                                                                 </View>
                                                             </View>
@@ -355,6 +363,7 @@ const PupuilDashboard = (props) => {
                                 <View style={PAGESTYLE.whiteBoard}>
                                     {isHomeworkLoading ?
                                         <ActivityIndicator
+                                            style={{ margin: 20 }}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.yellowDark} />
                                         :
@@ -421,7 +430,7 @@ const PupuilDashboard = (props) => {
                                                                         </View>
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity>
+                                                                        {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity> */}
                                                                         <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondButton]}>See Homework</Text></TouchableOpacity>
                                                                     </View>
                                                                 </View>
@@ -463,7 +472,6 @@ const PupuilDashboard = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.lessonstartButtonBottom}>
-                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondBottomButton]}>tertiary cta</Text></TouchableOpacity>
                                     <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondBottomButton]}>View avatar</Text></TouchableOpacity>
                                 </View>
                             </View>

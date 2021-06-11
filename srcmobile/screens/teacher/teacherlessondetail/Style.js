@@ -12,7 +12,7 @@ export default StyleSheet.create({
         flex: 1,
     },
     fullWidthButton: {
-        width:'100%',
+        width: '100%',
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
         overflow: 'hidden',
         height: hp(65),
     },
-    toggleBoxGrpWrap:{
+    toggleBoxGrpWrap: {
         // marginTop: hp(3),        
     },
     commonWidth: {
@@ -45,8 +45,6 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:wp(5.33),
-        paddingRight:wp(5.33),
         borderTopColor: COLORS.borderGrp,
         borderTopWidth: 1,
     },
@@ -54,6 +52,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: hp(1.90),
+        paddingLeft: wp(5.33),
     },
     tabs: {
         paddingRight: hp(3.90),
@@ -75,18 +74,18 @@ export default StyleSheet.create({
         marginBottom: hp(3.90),
     },
     dateWhiteBoard: {
-        width:hp(20.68),
+        width: hp(20.68),
     },
     subjectDateTime: {
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'center',
-        width:'100%',
+        width: '100%',
     },
     subjectDateTimePicker: {
         alignItems: 'flex-start',
         alignSelf: 'center',
-        width:'100%',
+        width: '100%',
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -109,14 +108,14 @@ export default StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         alignSelf: 'center',
         left: hp(-0.5),
     },
     calIconHomeWork: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         top: hp(1.5),
     },
     calIconNoInput: {
@@ -126,7 +125,7 @@ export default StyleSheet.create({
     timeIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         alignSelf: 'center',
     },
     timeIconNoInput: {
@@ -164,9 +163,9 @@ export default StyleSheet.create({
         width: '100%',
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
-         paddingRight: hp(2.46),
-         paddingTop: hp(2.5),
-         paddingLeft:hp(2.46),
+        paddingRight: hp(2.46),
+        paddingTop: hp(2.5),
+        paddingLeft: hp(2.46),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -202,7 +201,7 @@ export default StyleSheet.create({
         marginTop: hp(3.68),
     },
     videoLinkBlock: {
-        width: hp(38),
+        width: '100%',
         paddingTop: hp(1),
         paddingBottom: hp(1),
         paddingRight: hp(2),
@@ -256,7 +255,7 @@ export default StyleSheet.create({
     },
     videoLinkText: {
         fontSize: hp(1.85),
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         lineHeight: hp(3.60),
         marginLeft: hp(1.56),
@@ -356,19 +355,19 @@ export default StyleSheet.create({
         paddingTop: hp(2.5),
     },
     borderNone: {
-        borderLeftWidth:0,
+        borderLeftWidth: 0,
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
-        width:'100%',
-        height:hp(30.05),
+        width: '100%',
+        height: hp(30.05),
         borderRadius: 10,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
     },
     uploaded: {
-        alignSelf: 'center', 
-        marginVertical: 8, 
+        alignSelf: 'center',
+        marginVertical: 8,
         color: COLORS.greyplaceholder
     },
     fileGrp: {
@@ -405,9 +404,9 @@ export default StyleSheet.create({
         marginRight: hp(1),
     },
     subLineTitle: {
-       // marginTop: hp(-3.5),
+        // marginTop: hp(-3.5),
         zIndex: 9,
-        paddingRight:hp(1.5),
+        paddingRight: hp(1.5),
     },
     closeIconSmall: {
         width: hp(2.8),
@@ -417,7 +416,7 @@ export default StyleSheet.create({
     addIcon: {
         width: hp(1.56),
         resizeMode: 'contain',
-        marginLeft:hp(1.56),
+        marginLeft: hp(1.56),
     },
     addItem: {
         flexDirection: 'row',
@@ -473,7 +472,7 @@ export default StyleSheet.create({
     },
     dropDownFormInput: {
         width: '100%',
-        marginBottom:hp(3.5),
+        marginBottom: hp(3.5),
     },
     duedateBox: {
         width: '47.8%',
@@ -656,7 +655,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: hp(3.60),
         lineHeight: hp(3.60),
-        marginTop:hp(3.5),
+        marginTop: hp(3.5),
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -710,17 +709,18 @@ export default StyleSheet.create({
         marginBottom: hp(1.30),
     },
     pupilData: {
-       // flexDirection: 'row',
+        // flexDirection: 'row',
+        borderColor: COLORS.commonBorderColor,
+        borderWidth: 1,
         alignItems: 'center',
         backgroundColor: COLORS.white,
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: 1, },
-        elevation: 3,
         shadowOpacity: 0.1,
-        borderRadius: hp(1.95),       
+        borderRadius: hp(1.95),
         borderRadius: hp(0.6),
-        marginTop:hp(2.5),
-        padding:wp(2.5),
+        marginTop: hp(2.5),
+        padding: wp(2.5),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -845,118 +845,117 @@ export default StyleSheet.create({
         // left: hp(0),
     },
     userStampName: {
-       // paddingLeft:hp(4.0),
-       fontSize:wp(3.73),
-       fontFamily:FONTS.fontSemiBold,
+        // paddingLeft:hp(4.0),
+        fontSize: wp(3.73),
+        fontFamily: FONTS.fontSemiBold,
     },
-    uploadBoard:{
-        width:hp(33.07),
-        height:hp(45.05),
-        resizeMode:'contain',
+    uploadBoard: {
+        width: hp(33.07),
+        height: hp(45.05),
+        resizeMode: 'contain',
     },
     containerWrapTop: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderBottomWidth:1,
+        borderBottomWidth: 1,
         alignItems: 'center',
-        borderBottomColor:COLORS.lightGrayPupil,
-        marginBottom:hp(2),
-        padding:hp(1),
+        borderBottomColor: COLORS.lightGrayPupil,
+        marginBottom: hp(2),
+        padding: hp(1),
         top: hp(2),
     },
-    userThumb:{
-        width:hp(6.25), 
-        height:hp(6.25), 
-        backgroundColor: COLORS.lightGrayPupil,  
-        borderRadius: hp(5), 
-        marginRight:hp(1.30),
+    userThumb: {
+        width: hp(6.25),
+        height: hp(6.25),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
+        marginRight: hp(1.30),
     },
-    userLeft:{
-    //    width:hp(64.19),
-    //    flexDirection: 'row',
+    userLeft: {
+        //    width:hp(64.19),
+        //    flexDirection: 'row',
     },
-    userRight:{
+    userRight: {
         // width:hp(53.12),
         // flexDirection: 'row',
     },
-    userTopName:{
+    userTopName: {
         flexDirection: 'row',
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
     },
-    userTopGroup:{
+    userTopGroup: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    dateTitle:{
+    dateTitle: {
         flexDirection: 'row',
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(1.56),
-        color:COLORS.menuLightFonts,
-        textTransform:'uppercase',
+        fontSize: hp(1.56),
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
     },
-    dateText:{
+    dateText: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    markedIcon:{
-        width:hp(2.13),
-        resizeMode:'contain',
-        marginRight:hp(1),
+    markedIcon: {
+        width: hp(2.13),
+        resizeMode: 'contain',
+        marginRight: hp(1),
     },
-    markedIcon1:{
+    markedIcon1: {
         width: 60,
         height: 60,
-        resizeMode:'contain',
+        resizeMode: 'contain',
     },
     uploaded: {
-        alignSelf: 'center', 
-        marginVertical: 8, 
+        alignSelf: 'center',
+        marginVertical: 8,
         color: COLORS.greyplaceholder
     },
-    markedLabel:{
+    markedLabel: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginRight:hp(9.63),
+        marginRight: hp(9.63),
         alignItems: 'center',
     },
-    markedText:{
+    markedText: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        lineHeight:hp(3.2),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(3.2),
     },
-    dateNameBlock:{
-        marginRight:hp(2.21),
+    dateNameBlock: {
+        marginRight: hp(2.21),
     },
-    feedbackBlock:{
-        width:hp(70.31),
+    feedbackBlock: {
         marginTop: hp(2),
-        paddingLeft:wp(5.33),
+        paddingLeft: wp(5.33),
     },
-    ratingBlock:{
-        width:'100%',
-        paddingLeft:wp(5.33),
+    ratingBlock: {
+        width: '100%',
+        paddingLeft: wp(5.33),
         marginTop: hp(2.5),
-        paddingRight:wp(5.33),
+        paddingRight: wp(5.33),
     },
-    lessonTitleBold:{
+    lessonTitleBold: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
     },
-    achivementBox:{
+    achivementBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        width:'100%',
-        alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
+        width: '100%',
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.8),
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
@@ -965,110 +964,110 @@ export default StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 1,
     },
-    starSelectedText:{
+    starSelectedText: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.white,
+        color: COLORS.white,
         fontSize: hp(1.82),
         lineHeight: hp(5.1),
     },
-    starSelected:{
-        width:hp(4.94),
-        height:hp(4.68),
+    starSelected: {
+        width: hp(4.94),
+        height: hp(4.68),
         resizeMode: 'contain',
-        alignItems:'center',
+        alignItems: 'center',
         alignSelf: 'center',
-        marginBottom:hp(1.5),
+        marginBottom: hp(1.5),
     },
-    rewardStarMark:{
+    rewardStarMark: {
         justifyContent: 'space-around',
-        width:'100%',
+        width: '100%',
         flexDirection: 'row',
-        paddingTop:hp(3.05),
-        paddingBottom:hp(3.05),
+        paddingTop: hp(3.05),
+        paddingBottom: hp(3.05),
     },
-    centerText:{
-        alignItems:'center',
+    centerText: {
+        alignItems: 'center',
     },
-    starText:{
+    starText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    ratingTitle:{
+    ratingTitle: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
-        color:COLORS.menuLightFonts,
-        paddingBottom:hp(1.5),
+        color: COLORS.menuLightFonts,
+        paddingBottom: hp(1.5),
     },
-    separater:{
-        borderLeftWidth:1,
-        borderLeftColor:COLORS.dashboardBorder,
-        borderRightWidth:1,
-        borderRightColor:COLORS.dashboardBorder,
-        width:hp(14.32),
+    separater: {
+        borderLeftWidth: 1,
+        borderLeftColor: COLORS.dashboardBorder,
+        borderRightWidth: 1,
+        borderRightColor: COLORS.dashboardBorder,
+        width: hp(14.32),
     },
-    centerStar:{
-        alignItems:'center',
+    centerStar: {
+        alignItems: 'center',
     },
-    videoTitle:{
-        fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(2.08),
+    videoTitle: {
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(2.08),
         color: COLORS.darkGray,
         marginTop: hp(3.5),
         marginBottom: hp(1),
     },
-    videoWrap:{
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        flexWrap:'wrap',
-    },  
-    videoThumb:{
-        position:'relative',
-        flexDirection:'row',
+    videoWrap: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
     },
-    videoThumbnail:{        
-       width:'100%',
-       resizeMode:'contain',
-       height:wp(62.08),
-       marginBottom:wp(1.5),
+    videoThumb: {
+        position: 'relative',
+        flexDirection: 'row',
     },
-    videoPlay:{
-        width:wp(12.8),
-        resizeMode:'contain',
-        position:'absolute',
-        top:hp(11.13),
-        left:hp(18.88),
+    videoThumbnail: {
+        width: '100%',
+        resizeMode: 'contain',
+        height: wp(62.08),
+        marginBottom: wp(1.5),
     },
-    videoSelected:{
-        width:hp(2.9),
-        resizeMode:'contain',
-        position:'absolute',
-        bottom:hp(3.2),
-        right:hp(2),
+    videoPlay: {
+        width: wp(12.8),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(11.13),
+        left: hp(18.88),
     },
-    videoSubTitle:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.9),
+    videoSelected: {
+        width: hp(2.9),
+        resizeMode: 'contain',
+        position: 'absolute',
+        bottom: hp(3.2),
+        right: hp(2),
+    },
+    videoSubTitle: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.9),
         color: COLORS.darkGray,
-        flexDirection:'row',
-        lineHeight:hp(2.6),
-        paddingBottom:wp(6.5),
-        width:wp(89.33),
-        flexWrap:'wrap',
+        flexDirection: 'row',
+        lineHeight: hp(2.6),
+        paddingBottom: wp(6.5),
+        width: wp(89.33),
+        flexWrap: 'wrap',
     },
-    spaceTop:{
-        marginTop:hp(3),
+    spaceTop: {
+        marginTop: hp(3),
     },
-    rightSpaceNone:{
-        marginRight:hp(0),
+    rightSpaceNone: {
+        marginRight: hp(0),
     },
-    alignRow:{
-        flexDirection:'row',
-        alignItems:'center',
+    alignRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: hp(0.5),
-        marginTop:hp(1),
+        marginTop: hp(1),
     },
-    closeNotificationbar:{
+    closeNotificationbar: {
         width: hp(1),
         height: hp(1),
         resizeMode: 'contain',
@@ -1076,101 +1075,99 @@ export default StyleSheet.create({
         right: hp(2),
         top: hp(0),
     },
-    checkMark:{
-        margin:0,
-        padding:0,
+    checkMark: {
+        margin: 0,
+        padding: 0,
         width: 20,
         height: 20,
         left: 2,
-        top:hp(0.52),
+        top: hp(0.52),
     },
-    borderRight:{
-        borderRightWidth:1,
-        borderRightColor:COLORS.bottomProfileLightBorder,
+    borderRight: {
+        borderRightWidth: 1,
+        borderRightColor: COLORS.bottomProfileLightBorder,
     },
-    dropHolderImg:{
+    dropHolderImg: {
         width: wp(26.68),
         resizeMode: 'contain',
         alignItems: 'center',
     },
-    thumbVideo:{
+    thumbVideo: {
         width: '100%',
-        flexDirection:'column',
-        marginRight:hp(1),
+        flexDirection: 'column',
+        marginRight: hp(1),
     },
-    topSpaceRecording:{
-        marginTop:hp(1.401),
+    topSpaceRecording: {
+        marginTop: hp(1.401),
     },
-    dropDownArrow:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.4),
-        top:hp(2.1),
+    dropDownArrow: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.4),
+        top: hp(2.1),
     },
-    dropDownArrowdatetime:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.75),
+    dropDownArrowdatetime: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.75),
         alignSelf: 'center',
     },
-    dropDownArrowdatetime2:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.6),
+    dropDownArrowdatetime2: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
         top: hp(0.3),
         alignSelf: 'center',
     },
-    dropDownArrowdatetimehomeWork:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.6),
-        top:hp(2),
+    dropDownArrowdatetimehomeWork: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
+        top: hp(2),
     },
-    plainBg:{
-        paddingLeft: hp(2.5),
-        paddingRight: hp(2.5),
-        paddingBottom: hp(2),
-        paddingTop: hp(0),
-        backgroundColor: COLORS.backgroundColorCommon,
+    plainBg: {
+        height: '100%',
+        padding: 10,
+        backgroundColor: COLORS.commonBorderColor,
     },
-    commonInputFull:{
-        width:'100%',
+    commonInputFull: {
+        width: '100%',
     },
     commonInputFullpadNo: {
-        width:'100%',
+        width: '100%',
         padding: 0,
     },
-    lessonDesc:{
+    lessonDesc: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
-    timeSpace:{
-        marginLeft:hp(12.83),
+    timeSpace: {
+        marginLeft: hp(12.83),
     },
-    leftSpace:{
-        paddingLeft:hp(3.5),
+    leftSpace: {
+        paddingLeft: hp(3.5),
     },
-    mobileUpload:{
-        width:hp(41.31),
-        resizeMode:'contain',
+    mobileUpload: {
+        width: hp(41.31),
+        resizeMode: 'contain',
     },
-    mobileUploadLink:{
-        width:wp(89.46),
-        resizeMode:'contain',
+    mobileUploadLink: {
+        width: wp(89.46),
+        resizeMode: 'contain',
     },
-    smlThumbVideo:{
-        width:wp(39.2),
-        height:wp(25.33),
-        resizeMode:'contain',
-        marginBottom:wp(1.5),
+    smlThumbVideo: {
+        width: wp(39.2),
+        height: wp(25.33),
+        resizeMode: 'contain',
+        marginBottom: wp(1.5),
     },
-    smlThumbVideoText:{
+    smlThumbVideoText: {
         fontSize: wp(3.46),
         width: hp(19),
         color: COLORS.lightGray,
@@ -1178,82 +1175,82 @@ export default StyleSheet.create({
         marginTop: hp(1),
         fontFamily: FONTS.fontRegular,
     },
-    videoScroll:{
-       marginBottom:wp(6.5), 
-       marginTop:wp(3.5), 
+    videoScroll: {
+        marginBottom: wp(6.5),
+        marginTop: wp(3.5),
     },
-    mobileGalleryHolder:{
-        paddingLeft:wp(5.33),
-        paddingRight:wp(5.33),
+    mobileGalleryHolder: {
+        paddingLeft: wp(5.33),
+        paddingRight: wp(5.33),
     },
-    mobilePupilProfile:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        width:'100%',
+    mobilePupilProfile: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
     },
-    thumbAlign:{
-        flexDirection:'row',
-       // width:'100%',
-        justifyContent:'space-between',
+    thumbAlign: {
+        flexDirection: 'row',
+        // width:'100%',
+        justifyContent: 'space-between',
     },
-    rowLine:{
-        flexDirection:'row',
-        width:'100%',
-        justifyContent:'space-between',
-        paddingLeft:wp(12.5),
+    rowLine: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        paddingLeft: wp(12.5),
     },
-    tickIcon:{
+    tickIcon: {
         width: hp(1.40),
         resizeMode: 'contain',
-        marginRight:hp(1),
+        marginRight: hp(1),
     },
-    checkMarkedText:{
-        flexDirection:'row',
-        justifyContent:'space-between',
+    checkMarkedText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
-    tickText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:wp(3.46),
-        color:COLORS.lightGray,
+    tickText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: wp(3.46),
+        color: COLORS.lightGray,
     },
-    topListingArrow:{
-        top:hp(3.2),
+    topListingArrow: {
+        top: hp(3.2),
     },
-    userInfoTop:{
-        paddingLeft:wp(5.33),
-        paddingRight:wp(5.33),
+    userInfoTop: {
+        paddingLeft: wp(5.33),
+        paddingRight: wp(5.33),
     },
-    dateLesson:{
-        fontFamily:FONTS.fontSemiBold,
-        fontSize:wp(3.2),
-        color:COLORS.lightGray,
+    dateLesson: {
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: wp(3.2),
+        color: COLORS.lightGray,
     },
-    groupName:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:wp(3.46),
-        color:COLORS.darkGray,
+    groupName: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: wp(3.46),
+        color: COLORS.darkGray,
     },
-    userInfoDate:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        paddingLeft:wp(5.33),
-        paddingRight:wp(5.33),
+    userInfoDate: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: wp(5.33),
+        paddingRight: wp(5.33),
     },
-    descNormalText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:wp(3.73),
-        color:COLORS.darkGray,
-        lineHeight:wp(4.5),
+    descNormalText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: wp(3.73),
+        color: COLORS.darkGray,
+        lineHeight: wp(4.5),
     },
-    uploadBoardMobile:{
-        width:wp(89.13),
-        height:wp(47.17),
-        resizeMode:'contain',
-        marginBottom:wp(5.5),
+    uploadBoardMobile: {
+        width: wp(89.13),
+        height: wp(47.17),
+        resizeMode: 'contain',
+        marginBottom: wp(5.5),
     },
-    submitBtnWrap:{
-        paddingTop:wp(5.33),
-        paddingBottom:wp(10),
+    submitBtnWrap: {
+        paddingTop: wp(5.33),
+        paddingBottom: wp(10),
     },
     userIcon1Parent: {
         position: 'absolute',

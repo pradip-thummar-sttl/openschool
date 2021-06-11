@@ -73,13 +73,13 @@ const HeaderTT = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                        <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, topic name etc"
+                        placeholder="Search subject etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
                             setKeyword(keyword);

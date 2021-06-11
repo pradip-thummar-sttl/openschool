@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -10,6 +10,7 @@ import { User } from "../../../utils/Model";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
+    const [selectedModule, setSelectedModule] = useState(0);
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
         setSelectedIndex(1);
@@ -28,64 +29,64 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
                         <TouchableOpacity
-                            style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
+                            style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { props.navigation.replace('TeacherDashboard'); props.navigation.closeDrawer() }}>
+                            onPress={() => { props.navigation.replace('TeacherDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
+                            <Text style={[styles.menuText, selectedModule == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
+                            style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { props.navigation.replace('TeacherTimeTable'); props.navigation.closeDrawer() }}>
+                            onPress={() => { props.navigation.replace('TeacherTimeTable'); setSelectedModule(1); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Teacher}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
+                            <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
+                            style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { props.navigation.replace('TeacherLessonList'); props.navigation.closeDrawer() }}>
+                            onPress={() => { props.navigation.replace('TeacherLessonList'); setSelectedModule(2); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Pupil}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>Lesson Planner</Text>
+                            <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>Lesson Planner</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
+                            style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
                             onPress={() => { props.navigation.replace('PupilManagement'); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Messaging}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>Pupil Management</Text>
+                            <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>Pupil Management</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
+                            style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { }}>
+                            onPress={() => { setSelectedModule(4); }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Parents}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>Parents</Text>
+                            <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>Parents</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
+                            style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { }}>
+                            onPress={() => { setSelectedModule(5); }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Faqs}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
+                            <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.userInfo, styles.userInfobottom]}>
@@ -111,48 +112,48 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
 
-                        <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); props.navigation.closeDrawer() }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
+                            <Text style={[styles.menuText, selectedModule == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); props.navigation.closeDrawer() }} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); setSelectedModule(1); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}>
                             
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Teacher}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
+                            <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {props.navigation.replace('PupilLessonDetail'); props.navigation.closeDrawer()}} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => {props.navigation.replace('PupilLessonDetail'); setSelectedModule(2); props.navigation.closeDrawer()}} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
+                            <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAchievements}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
+                            <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
+                            <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.OpenSchool}
                             />
-                            <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
+                            <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         </TouchableOpacity>
                     </View>
                     {/* <View style={styles.cartoon}>

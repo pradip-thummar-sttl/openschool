@@ -19,8 +19,9 @@ import { User } from "../../../../utils/Model";
 import PupilHomeWorkSubmitted from "../homework/PupilHomeWorkSubmitted";
 import PupilHomeWorkMarked from "../homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../homework/PupilHomeWorkDetail";
-import { baseUrl, showMessage } from "../../../../utils/Constant";
+import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
+import Video from "react-native-video";
 
 
 const PupilLessonDetailInternal = (props) => {
@@ -33,10 +34,11 @@ const PupilLessonDetailInternal = (props) => {
     const [isHWMarked, setHWMArked] = useState(false)
     const [hwData, setHWData] = useState({})
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
+    const [isPaused, setPause] = useState(true)
     // const { item } = props
     // const [item, setItem] = useState(props.route.params.item)
     const [item, setItem] = useState(props.item)
-    console.log('props.route.params', props);
+    console.log('props.route.params', baseUrl + item.RecordingList[0].filename);
 
     const refresh = () => {
         console.log(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`);
@@ -128,9 +130,27 @@ const PupilLessonDetailInternal = (props) => {
 
                                     <View style={PAGESTYLE.containerWrap}>
                                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-
                                             <View style={PAGESTYLE.largeVideoBlock}>
-                                                <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
+                                                {item.RecordingList.length == 0 ?
+                                                    <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
+                                                    :
+                                                    <View style={{ height: '100%', justifyContent: 'center' }}>
+                                                        <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                                            resizeMode={'contain'}
+                                                            style={PAGESTYLE.largeVideo1}
+                                                            controls={true}
+                                                            paused={isPaused} />
+                                                        {isPaused ?
+                                                            <TouchableOpacity
+                                                                activeOpacity={opacity}
+                                                                onPress={() => setPause(!isPaused)}>
+                                                                <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                                            </TouchableOpacity>
+                                                            :
+                                                            null
+                                                        }
+                                                    </View>
+                                                }
                                             </View>
                                             <View style={PAGESTYLE.videoTitleLine}>
                                                 <View>

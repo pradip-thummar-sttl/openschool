@@ -184,7 +184,7 @@ class Login extends Component {
         console.log('roomIDs', roomIDs);
 
         LoginModuleIos.signUpWithFullName(emailId, roomIDs, password, (ID) => {
-            console.log('log for event', eventId);
+            console.log('log for event', ID);
             this.updateUserID(ID, resData, reqData)
         }, (error) => {
             console.log('log for error', error);

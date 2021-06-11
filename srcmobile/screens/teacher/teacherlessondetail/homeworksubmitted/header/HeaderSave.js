@@ -34,10 +34,10 @@ export default HeaderSave;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        paddingBottom: hp(1),
-        paddingTop: hp(3.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingBottom: Platform.OS == 'android' ? 0 : 15,
     },
     headerMain: {
         flexDirection: 'row',

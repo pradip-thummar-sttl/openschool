@@ -258,11 +258,20 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width: hp(40.10),
+        width: 200,
+        right: 0,
         justifyContent: 'flex-start',
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
         paddingTop: hp(2.5),
+    },
+    largeVideo1: {
+        backgroundColor: COLORS.black,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
@@ -301,7 +310,6 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
     },
     containerWrap: {
-        justifyContent: 'space-between',
         flexDirection: 'row',
     },
     grpThumbVideo: {
@@ -817,7 +825,7 @@ export default StyleSheet.create({
         marginTop: hp(0.6),
     },
     feedbackBlock: {
-        width: hp(67.57),
+        width: '40%',
         paddingLeft: hp(4.29),
         paddingRight: hp(7.29),
     },
@@ -1002,9 +1010,9 @@ export default StyleSheet.create({
         top: hp(0),
     },
     largeVideoBlock: {
-        width: '100%',
+        width: '60%',
         position: 'relative',
-        height: hp(46.87),
+        height: 200,
     },
     moreIcon: {
         width: hp(2.41),
@@ -1155,7 +1163,7 @@ export default StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         padding: hp(1.2),
-        width: hp(52.08),
+        width: '60%',
         borderRadius: hp(0.8),
         marginRight: hp(3.90),
         marginTop: hp(2.5),

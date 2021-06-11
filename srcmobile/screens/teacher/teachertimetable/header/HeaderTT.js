@@ -38,7 +38,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{backgroundColor: COLORS.white}}>
+        <View style={{ backgroundColor: COLORS.white }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
@@ -68,7 +68,7 @@ const HeaderTT = (props) => {
                                 :
                                 setSearchActive(true)
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                        <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput
@@ -83,7 +83,7 @@ const HeaderTT = (props) => {
 
                 <TouchableOpacity
                     style={styles.buttonGroup}
-                    onPress={() => props.navigateToCreateNewEvent()}>
+                    onPress={() => refRBSheet.current.open()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>

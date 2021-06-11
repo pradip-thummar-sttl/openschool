@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Platform, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import WorkSpaceHeader from "../../../component/reusable/header/WorkSpaceHeader";
 import PAGESTYLE from './Style';
 import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
@@ -24,7 +24,7 @@ const WorkSpace = (props) => {
         if (!workSpacePath) {
             showMessage(MESSAGE.saveWorkSpace)
             return
-        } else if(pathCount == 0){
+        } else if (pathCount == 0) {
             showMessage(MESSAGE.blankWorkspace)
             return
         }
@@ -34,10 +34,17 @@ const WorkSpace = (props) => {
         const data = new FormData()
 
         data.append('workspace', {
-            uri: workSpacePath,
+            uri: Platform.OS == 'android' ?
+                workSpacePath.includes('file://') ?
+                    workSpacePath :
+                    'file://' + workSpacePath
+                :
+                workSpacePath,
             name: pathArr[pathArr.length - 1],
             type: `image/${ext[0]}`
         })
+
+        console.log('data', data._parts, `${EndPoints.UploadWorkspace}/${props.route.params.id}/${User.user.UserDetialId}`);
 
         Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.route.params.id}/${User.user.UserDetialId}`, (res) => {
             console.log('response of upload workspace', res)
@@ -165,7 +172,7 @@ const WorkSpace = (props) => {
                         <View style={PAGESTYLE.bottomView}>
                             <View style={PAGESTYLE.wsView}>
                                 <ScrollView
-                                    style={{ }}
+                                    style={{}}
                                     showsVerticalScrollIndicator={false}
                                     horizontal={true}>
                                     {

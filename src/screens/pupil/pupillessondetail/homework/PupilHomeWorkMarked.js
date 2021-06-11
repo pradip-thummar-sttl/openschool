@@ -14,10 +14,14 @@ import Header15 from '../../../../component/reusable/header/bulck/Header15'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../utils/Images";
 import { Download } from "../../../../utils/Download";
+import { baseUrl, opacity } from "../../../../utils/Constant";
+import Video from "react-native-video";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
     const { item } = props;
+    const [isPaused, setPause] = useState(true)
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -68,7 +72,7 @@ const PupilHomeWorkMarked = (props) => {
                                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                                 <View style={PAGESTYLE.alignRow}>
                                                     <CheckBox
-                                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                         style={PAGESTYLE.checkMark}
                                                         value={item.IsCheck}
                                                         boxType={'square'}
@@ -114,10 +118,31 @@ const PupilHomeWorkMarked = (props) => {
                             </View>
                         </View>
                         <View style={PAGESTYLE.feedbackVideoBlock}>
-                            <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
                             <View>
                                 <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Feedback for {item.SubjectName} </Text>
                                 <Text style={PAGESTYLE.techerName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                            </View>
+                            <View style={PAGESTYLE.largeVideoBlock}>
+                                {item.RecordingList.length == 0 ?
+                                    <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
+                                    :
+                                    <View style={{ height: '100%', justifyContent: 'center' }}>
+                                        <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                            resizeMode={'contain'}
+                                            style={PAGESTYLE.largeVideo1}
+                                            controls={true}
+                                            paused={isPaused} />
+                                        {isPaused ?
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => setPause(!isPaused)}>
+                                                <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                            </TouchableOpacity>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                }
                             </View>
                         </View>
                     </View>

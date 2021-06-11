@@ -40,10 +40,16 @@ const WorkSpace = (props) => {
         const data = new FormData()
 
         data.append('workspace', {
-            uri: workSpacePath,
+            uri: Platform.OS == 'android' ?
+                workSpacePath.includes('file://') ?
+                    workSpacePath :
+                    'file://' + workSpacePath
+                :
+                workSpacePath,
             name: pathArr[pathArr.length - 1],
             type: `image/${ext[0]}`
         })
+
         Service.postFormData(data, `${EndPoints.UploadWorkspace}/${props.id}/${User.user.UserDetialId}`, (res) => {
             console.log('response of upload workspace', res)
             if (res.flag) {
