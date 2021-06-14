@@ -44,6 +44,7 @@ import CreateNewEvent from '../screens/teacher/teachertimetable/createnewevent/C
 import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/CreateNewEventPupil';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import Calendars from '../component/reusable/Calendar/Calendar';
+import Setting from '../screens/Setting/Setting';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -63,7 +64,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="Splash">
+        <Stack.Navigator headerMode='none' initialRouteName="Setting">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
@@ -101,6 +102,7 @@ function ScreenStack() {
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
             <Stack.Screen name="WorkSpace" component={WorkSpace} />
             <Stack.Screen name="Calendars" component={Calendars} />
+            <Stack.Screen name="Setting" component={Setting} />
         </Stack.Navigator>
     );
 }

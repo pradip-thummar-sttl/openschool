@@ -71,7 +71,8 @@ const Sidebar = (props) => {
                         <TouchableOpacity
                             style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { setSelectedModule(4); }}>
+                            onPress={() => { props.navigation.replace('Setting');setSelectedModule(4); props.navigation.closeDrawer() }}>
+
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Parents}

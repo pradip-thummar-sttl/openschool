@@ -17,6 +17,7 @@ import { User } from "../../../utils/Model";
 import moment from "moment";
 import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
+import Setting from "../../Setting/Setting";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -168,7 +169,9 @@ const PupuilDashboard = (props) => {
                 moduleIndex={selectedIndex}
                 navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0) }}
                 navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
-                onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }} />
+                onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }} 
+                onSetting={()=> {setPupilLessonDetail(false); setSelectedIndex(3)}}
+                />
             {
                 isPupilLessonDetail ?
                     <PupilLessonDetail
@@ -432,7 +435,9 @@ const PupuilDashboard = (props) => {
 
                         : selectedIndex == 1 ?
                             <PupilTimetable navigation={props.navigation} />
-                            : <PupilLessonDetail navigation={props.navigation} />
+                            : selectedIndex == 2 ?
+                            <PupilLessonDetail navigation={props.navigation} />
+                            :<Setting navigation={props.navigation} />
             }
 
         </View>

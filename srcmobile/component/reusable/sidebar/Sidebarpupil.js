@@ -71,7 +71,7 @@ const Sidebar = (props) => {
                         />
                         <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.onSetting()} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}

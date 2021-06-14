@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import COLORS from '../../../utils/Colors';
+import COLORS from '../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import FONTS from '../../../utils/Fonts';
+import FONTS from '../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const { width, height } = Dimensions.get('window');
@@ -609,6 +609,8 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(2.0),
+        marginBottom:wp(1),
+        marginHorizontal:hp(2)
     },
     pupilProfile: {
         width: hp(15.80),
@@ -664,7 +666,7 @@ export default StyleSheet.create({
     },
     pupilDetailLink: {
         width: hp(10),
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
     },
     pupilDetaillinkIcon: {
         width: hp(1),
@@ -678,7 +680,7 @@ export default StyleSheet.create({
         marginRight: hp(1.69),
     },
     pupilName: {
-        fontSize: hp(1.82),
+        fontSize: hp(2.22),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
     },
@@ -700,13 +702,13 @@ export default StyleSheet.create({
     },
     firstColumn: {
         paddingLeft: hp(4.5),
-        width: hp(34.55),
+        width: hp(75.55),
     },
     secoundColumn: {
-        width: hp(22.55),
+        width: hp(15.80),
     },
     lastColumn: {
-        width: hp(20.55),
+        width: hp(10.55),
         justifyContent: 'space-between',
     },
     yesText: {
@@ -735,7 +737,7 @@ export default StyleSheet.create({
         left: hp(3.5),
     },
     userStampName: {
-        paddingLeft: hp(4.0),
+        paddingLeft: hp(0.0),
     },
     uploadBoard: {
         width: hp(33.07),
@@ -1477,3 +1479,4 @@ export default StyleSheet.create({
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
     }
 });
+

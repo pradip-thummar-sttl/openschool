@@ -106,6 +106,7 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                     <TouchableOpacity
+                        onPress={() => {props.onSetting(); toggleAnimation(true) }}
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { toggleAnimation(true) }}>
