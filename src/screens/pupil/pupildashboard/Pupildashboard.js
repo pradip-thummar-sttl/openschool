@@ -99,7 +99,7 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,false, (id) => {
                     console.log('hi id:---------', id)
                 })
             }

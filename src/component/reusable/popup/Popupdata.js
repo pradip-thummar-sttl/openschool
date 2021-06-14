@@ -55,7 +55,7 @@ const Popupdata = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,true, (id) => {
                     console.log('hi id:---------', id)
                 })
             }

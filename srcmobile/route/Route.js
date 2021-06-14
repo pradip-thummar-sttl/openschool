@@ -3,8 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Users from '../screens/users/Users';
-import Introduction from '../screens/introduction/Introduction';
+import IntroductionPupil from '../screens/introduction/IntroductionPupil';
+import IntroductionTeacher from '../screens/introduction/IntroductionTeacher';
 import Login from '../screens/login/Login';
+import PupilRegister from '../screens/login/PupilRegister';
+import PupilVerify from '../screens/login/PupilVerify';
+import PupilConnect from '../screens/login/PupilConnect';
 import Popup from '../component/reusable/popup/Popup';
 import Popupuser from '../component/reusable/popup/Popupuser';
 import Sidebar from '../component/reusable/sidebar/Sidebar';
@@ -12,6 +16,7 @@ import SidebarPupil from '../component/reusable/sidebar/Sidebarpupil';
 import Header from '../component/reusable/header/Header';
 import NotificationDrawer from '../component/reusable/notificationdrawer/NotificationDrawer';
 import TeacherDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
+import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupilLessonEmpty from '../screens/pupil/pupillessonempty/PupilLessonEmpty';
 import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
@@ -60,14 +65,19 @@ function ScreenStack() {
     return (
         <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
+            <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
+            <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
             <Stack.Screen name="Users" component={Users} />
-            <Stack.Screen name="Introduction" component={Introduction} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="PupilRegister" component={PupilRegister} />
+            <Stack.Screen name="PupilVerify" component={PupilVerify} />
+            <Stack.Screen name="PupilConnect" component={PupilConnect} />
             <Stack.Screen name="Popup" component={Popup} />
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
             <Stack.Screen name="SidebarPupil" component={SidebarPupil} />
             <Stack.Screen name="Header" component={Header} />
+            <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />

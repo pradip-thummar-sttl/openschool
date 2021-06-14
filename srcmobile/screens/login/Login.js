@@ -172,8 +172,8 @@ class Login extends Component {
         }
     };
 
-    getDataFromQuickBlox_IOS = (emailId, password, resData, reqData) => {
-        var roomIDs = []
+    getDataFromQuickBlox_IOS = (emailId, password,resData, reqData) => {
+        let roomIDs = []
         if (this.props.route.params.userType == 'Pupil') {
             resData.RoomId.forEach(element => {
                 roomIDs.push(element.RoomId)
@@ -247,46 +247,50 @@ class Login extends Component {
     setPasswordVisibility = () => {
         this.setState({ isPasswordHide: !this.state.isPasswordHide });
     }
+    state = { isEmailFocused: false, isPasswordFocus: false };
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <ImageBackground source={Images.LoginBack} style={styles.image}>
-                    </ImageBackground>
+                    {this.props.route.params.userType == 'Pupil' ?
+                        <Image source={Images.loginMainBack} style={styles.image}></Image>
+                        :
+                        <Image source={Images.loginMainBackteacher} style={styles.image}></Image>
+                    }
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIconLogin} />
+                                <Text style={styles.labelInput}>Email</Text>
                                 <TextInput
+                                    onFocus={() => this.setState({ isEmailFocused: true })}
+                                    onBlur={() => this.setState({ isEmailFocused: false })}
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
+                                    style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                     placeholder="Enter email or phone"
                                     autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}
-                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    placeholderTextColor={COLORS.menuLightFonts}
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
                             <View style={styles.field}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.Password} />
+                                <Text style={styles.labelInput}>Password</Text>
                                 <View style={styles.eyeParent}>
                                     <TextInput
+                                        onFocus={() => this.setState({ isPasswordFocus: true })}
+                                        onBlur={() => this.setState({ isPasswordFocus: false })}
                                         ref={(input) => { this.t2 = input; }}
-                                        style={STYLE.commonInputPassword}
                                         placeholder="Password"
                                         value={this.state.password}
                                         autoCapitalize={'none'}
                                         maxLength={30}
-                                        placeholderTextColor={COLORS.lightplaceholder}
+                                        style={{ ...STYLE.commonInputPassword, borderColor: (this.state.isPasswordFocus) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
+                                        placeholderTextColor={COLORS.menuLightFonts}
                                         secureTextEntry={this.state.isPasswordHide}
                                         onChangeText={password => this.setState({ password })} />
 
@@ -306,9 +310,11 @@ class Login extends Component {
                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                         style={STYLE.checkBoxcommon1}
                                         value={this.state.isRemember}
-                                        onCheckColor={COLORS.themeBlue}
-                                        onTintColor={COLORS.themeBlue}
-                                        tintColor={COLORS.lightplaceholder}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        onTintColor={COLORS.checkBlue}
+                                        tintColor={COLORS.checkBlue}
+                                        onFillColor={COLORS.checkBlue}
                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
@@ -337,6 +343,22 @@ class Login extends Component {
                                             style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
                                     }
                                 </TouchableOpacity>
+                                <View style={styles.getStarted}>
+                                    {this.props.route.params.userType == 'Pupil' ?
+                                        <>
+                                            <Text style={styles.getStartedText}>New to MyEd Open School?</Text>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => {
+                                                    this.props.navigation.replace('PupilRegister',{userType:"Pupil"})
+                                                }}>
+                                                <Text style={styles.getStartedLink}> Get Started</Text>
+                                            </TouchableOpacity>
+                                        </>
+                                        :
+                                        null
+                                    }
+                                </View>
                             </View>
                         </View>
                         <View style={styles.bottomLoginIntro}>
@@ -363,29 +385,46 @@ function mapDispatchToProps(dispatch) {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
+    getStarted: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: hp(2),
+    },
+    getStartedText: {
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    getStartedLink: {
+        color: COLORS.dashboardGreenButton,
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontRegular,
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
     },
     image: {
+        resizeMode: 'cover',
         width: '100%',
-        height: hp(28),
-        resizeMode: "contain",
-        justifyContent: "center"
+        height: '100%',
     },
     lefImage: {
         width: '100%',
+        height: hp(28),
+        position: 'relative',
+        overflow: 'hidden',
     },
     rightContent: {
         width: '100%',
         flex: 1,
     },
     titleLogin: {
-        textAlign: 'center',
-        color: COLORS.themeBlue,
-        fontSize: hp(3),
+        color: COLORS.darkGray,
+        fontSize: hp(2.46),
         marginBottom: hp(2),
-        marginTop: hp(5),
+        marginTop: hp(4.3),
+        paddingLeft: hp(2),
         fontFamily: FONTS.fontBold,
     },
     loginForm: {
@@ -398,7 +437,7 @@ const styles = StyleSheet.create({
     },
     userIcon: {
         position: 'absolute',
-        top: Platform.OS == 'android' ? hp(2.5) : hp('2.3%'),
+        top: Platform.OS == 'android' ? hp(2.5) : hp(2),
         left: Platform.OS == 'android' ? hp(2.75) : hp('3%'),
         resizeMode: 'contain',
         width: Platform.OS == 'android' ? hp(2) : hp(1.7),
@@ -419,6 +458,7 @@ const styles = StyleSheet.create({
     },
     bottomLoginFeild: {
         flexDirection: 'row',
+        marginLeft: hp(0.5),
     },
     rememberFeild: {
         flexDirection: 'row',
@@ -431,25 +471,24 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: hp('1.8%'),
-        color: COLORS.linkLightPurple,
+        color: COLORS.darkGray,
         lineHeight: hp('3.0%'),
         marginLeft: Platform.OS == 'android' ? hp(2.0) : hp('1.0%'),
-        fontFamily: FONTS.fontBold,
+        fontFamily: FONTS.fontRegular,
         top: Platform.OS == 'android' ? hp(0.35) : hp(0),
     },
     forgotPass: {
         fontSize: hp('1.8%'),
-        color: COLORS.linkLightPurple,
+        color: COLORS.dashboardGreenButton,
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontBold,
     },
     loginButtonView: {
-        marginTop: hp('3.0%'),
+        marginTop: hp(5.7),
     },
     bottomLoginIntro: {
-        top: Platform.OS == 'android' ? hp(11) : hp(15),
-        paddingLeft: hp('2%'),
-        paddingRight: hp('2%'),
+        top: Platform.OS == 'android' ? hp(2) : hp(6.5),
+        paddingHorizontal: hp(2),
     },
     eye: {
         position: 'absolute',
@@ -458,5 +497,10 @@ const styles = StyleSheet.create({
     },
     eyeParent: {
         justifyContent: 'center'
-    }
+    },
+    labelInput: {
+        color: COLORS.lightGray,
+        fontSize: hp(1.8),
+        marginBottom: hp(0.8),
+    },
 });

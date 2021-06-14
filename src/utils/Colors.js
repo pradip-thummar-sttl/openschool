@@ -1,7 +1,7 @@
 const COLORS = {
     black: '#000000',
     white: '#FFFFFF',
-    dotActive: '#12aefb',
+    dotActive: '#262626',
     transparent: 'transparent',
     lightplaceholder: '#676693',
     blueButton: '#5381F8',
@@ -51,6 +51,7 @@ const COLORS = {
     hwmatColor:'rgba(248,249,251,1)',
     blueBorder: '#57ABF0',
     greyBack: '#F9FAFC',
+    introGreyColor:'#454545',
 }
 
 export default COLORS;

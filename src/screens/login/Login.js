@@ -257,13 +257,15 @@ class Login extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                        
                         <View style={styles.loginForm}>
+                            <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.UserIconLogin} />
+                                    source={Images.UserIconLogin} /> */}
                                 <TextInput
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
@@ -275,10 +277,11 @@ class Login extends Component {
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     onChangeText={userName => this.setState({ userName })} />
                             </View>
+                            <Text style={styles.fieldInputLabel}>Password</Text>
                             <View style={styles.field}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.Password} />
+                                    source={Images.Password} /> */}
                                 <View style={styles.eyeParent}>
                                     <TextInput
                                         ref={(input) => { this.t2 = input; }}
@@ -303,13 +306,15 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                        style={STYLE.checkBoxcommon1}
-                                        value={this.state.isRemember}
-                                        onCheckColor={COLORS.themeBlue}
-                                        onTintColor={COLORS.themeBlue}
-                                        tintColor={COLORS.lightplaceholder}
-                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
+                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                         style={STYLE.checkBoxcommon1}
+                                         value={this.state.isRemember}
+                                         boxType={'square'}
+                                         onCheckColor={COLORS.white}
+                                         onTintColor={COLORS.checkBlue}
+                                         tintColor={COLORS.checkBlue}
+                                         onFillColor={COLORS.checkBlue}
+                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
@@ -318,7 +323,7 @@ class Login extends Component {
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>
-                                <TouchableOpacity
+                                <TouchableOpacity 
                                     activeOpacity={opacity}
                                     onPress={() => {
                                         isDesignBuild ?
@@ -334,14 +339,30 @@ class Login extends Component {
                                             color={COLORS.white} />
                                         :
                                         <Text
-                                            style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
+                                            style={styles.commonButtonGreen}>Login to Continue</Text>
                                     }
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        <View style={styles.getStarted}>
+                            {this.props.route.params.userType == 'Pupil' ?
+                                <>
+                                    <Text style={styles.getStartedText}> New to MyEd Open School?</Text>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => {
+                                            this.props.navigation.replace('PupilRegister',{userType:"Pupil"})
+                                        }}>
+                                        <Text style={styles.getStartedLink}> Get Started</Text>
+                                    </TouchableOpacity>
+                                </>
+                                :
+                                null
+                            }
+                        </View>
                         <View style={styles.bottomLoginIntro}>
-                            <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
-                            <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
+                            <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
+                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
@@ -364,6 +385,22 @@ function mapDispatchToProps(dispatch) {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
+    getStarted: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: hp(2),
+        marginLeft: hp('8.4%'),
+    },
+    getStartedText: {
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    getStartedLink: {
+        color: COLORS.dashboardGreenButton,
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontRegular,
+    },
     container: {
         flex: 1,
         flexDirection: 'row',
@@ -382,10 +419,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     titleLogin: {
-        textAlign: 'center',
+        textAlign: 'left',
         color: COLORS.themeBlue,
         fontSize: hp('4.8%'),
-        marginBottom: hp('8.0%'),
+        marginTop: hp('18.22%'),
+        marginBottom: hp('4%'),
+        marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
     },
     loginForm: {
@@ -440,12 +479,15 @@ const styles = StyleSheet.create({
     },
     forgotPass: {
         fontSize: hp('1.8%'),
-        color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontBold,
+        color:COLORS.buttonGreen,
+        textTransform:'uppercase',
+        fontWeight:'700',
     },
     loginButtonView: {
         marginTop: hp('3.0%'),
+        width:'80%',
     },
     bottomLoginIntro: {
         top: hp('15%'),
@@ -459,5 +501,145 @@ const styles = StyleSheet.create({
     },
     eyeParent: {
         justifyContent: 'center'
+    },
+    fieldInputLabel:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.lightGray,
+        paddingBottom:hp(1),
+    },
+    commonButtonGreen:{
+        backgroundColor: COLORS.buttonGreen,
+        color: COLORS.white,
+        fontSize: hp('1.56%'),
+        fontWeight: '800',
+        borderRadius: hp('1.3%'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        alignSelf: 'center',
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: 50,},
+        shadowOpacity: 0.16,
+        shadowRadius: 13,
+        elevation: 4,
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    getStartText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+        marginTop:hp(5),
+        marginLeft: hp('8.4%'),
+    },
+    commonFontsPupleUnderline:{
+        paddingTop:hp(0.5),
+        color: COLORS.lightGray,
+        fontSize: hp(1.82),
+        fontWeight: '500',
+        lineHeight: hp('2.6%'),
+        fontFamily: FONTS.fontRegular,
+        textDecorationLine: "underline",
+        textDecorationStyle: "solid",
+        textDecorationColor: "#000",
+    },
+    greenText:{
+        color:COLORS.buttonGreen,
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        paddingTop:hp(0.5),
+    },
+    registerSmtText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),        
+        color:COLORS.lightGray,
+    },
+    rightRegisterSmlText:{
+        justifyContent:'flex-end',
+        alignSelf:'flex-end',
+        paddingTop:hp(3.5),
+        paddingRight:hp(3.5),
+    },
+    titleAccountLogin: {
+        textAlign: 'left',
+        color: COLORS.themeBlue,
+        fontSize: hp('4.8%'),
+        marginTop: hp('3.5%'),
+        marginBottom: hp('4%'),
+        marginLeft: hp('8.4%'),
+        fontFamily: FONTS.fontBold,
+    },
+    loginAccountForm:{
+        paddingLeft: hp('9%'),
+        paddingRight: hp('9%'),
+        flexDirection:'row',
+        justifyContent:'space-between',
+        width:hp(54.42),
+    },
+    filedSpace:{
+        width:hp(22.65),
+        marginRight:hp(3),
+    },
+    firstNameSpace:{
+        marginLeft:hp(9),
+    },
+    dropDownArrowdatetime: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
+        marginTop:hp(2.5),
+    },
+    dropWrap:{
+        width:hp(10.2),
+        marginTop:hp(2.5),
+    },
+    alignVert:{
+        alignItems:'center',
+        marginRight:hp(2.5),
+    },
+    dateTimetextdummy:{
+        fontFamily: FONTS.fontBold,
+        fontSize:hp(1.82),        
+        color:COLORS.lightGray,
+    },
+    lineSpaceVerify:{
+        marginBottom:hp(3),
+    },
+    resetBtn:{
+        backgroundColor: COLORS.white,
+        color: COLORS.darkGray,
+        fontSize: hp('2.4%'),
+        fontWeight: '800',
+        borderRadius: hp('1.3%'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        alignSelf: 'center',
+        shadowColor: COLORS.black,
+        shadowOffset: {width: 0,height: 50,},
+        shadowOpacity: 0.16,
+        shadowRadius: 13,
+        elevation: 4,
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        borderWidth:1,
+        borderColor:COLORS.borderGrp,
+        marginLeft:hp(3),
+    },
+    alignBtn:{
+        flexDirection:'row',
+        justifyContent:'space-around',
+    },
+    spaceBottom:{
+        marginTop:hp(5),
+        marginBottom:hp(10),
     }
 });

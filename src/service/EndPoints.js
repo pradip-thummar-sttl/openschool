@@ -24,6 +24,7 @@ export const EndPoints = {
     HomeworkSubmited: 'homeworksubmited/',
 
     //Pupil
+    PupilRegister:"pupilregister",
     GetListOfPupilMyDay: "getmydaypupil",
     GetHomeworkListByPupil:"pupilhomeworklist",
     GetAllHomeworkListByPupil:"allpupilhomeworklist",
