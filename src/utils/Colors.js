@@ -20,6 +20,7 @@ const COLORS = {
     orage: '#FFB100',
     dashboardBorder: '#ECEDF2',
     dashboardPupilBlue: '#50A7F0',
+    dashBoard: '#F0F1F5',
     lightGreen: '#C4F7D2',
     lightYellow: '#FFE882',
     lightPurple: '#FED9FF',

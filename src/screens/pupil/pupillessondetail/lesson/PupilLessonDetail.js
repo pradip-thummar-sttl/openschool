@@ -38,7 +38,6 @@ const PupilLessonDetailInternal = (props) => {
     // const { item } = props
     // const [item, setItem] = useState(props.route.params.item)
     const [item, setItem] = useState(props.item)
-    console.log('props.route.params', baseUrl + item.RecordingList[0].filename);
 
     const refresh = () => {
         console.log(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`);
@@ -134,7 +133,7 @@ const PupilLessonDetailInternal = (props) => {
                                                 {item.RecordingList.length == 0 ?
                                                     <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
                                                     :
-                                                    <View style={{ height: '100%', justifyContent: 'center' }}>
+                                                    <View style={{ height: '100%', width: '100%', justifyContent: 'center', backgroundColor: COLORS.blueBorder }}>
                                                         <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                                             resizeMode={'contain'}
                                                             style={PAGESTYLE.largeVideo1}

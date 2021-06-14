@@ -114,7 +114,7 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
-        width: hp(83.72),
+        width: '68%',
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
         paddingRight: hp(3.90),
@@ -258,7 +258,7 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width: 200,
+        width: '32%',
         right: 0,
         justifyContent: 'flex-start',
         paddingLeft: hp(3.125),
@@ -1010,9 +1010,8 @@ export default StyleSheet.create({
         top: hp(0),
     },
     largeVideoBlock: {
-        width: '60%',
         position: 'relative',
-        height: 200,
+        height: hp(46.87),
     },
     moreIcon: {
         width: hp(2.41),

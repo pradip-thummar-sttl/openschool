@@ -111,7 +111,7 @@ const TeacherLessonList = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+            <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column' }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
@@ -119,28 +119,27 @@ const TeacherLessonList = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)} />
-                <View>
-                    {isLessonLoading ?
-                        <ActivityIndicator
-                            style={{ margin: 20 }}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.yellowDark} />
+
+                {isLessonLoading ?
+                    <ActivityIndicator
+                        style={{ margin: 20 }}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.yellowDark} />
+                    :
+                    lessonData.length > 0 ?
+                        <FlatList
+                            style={{ paddingHorizontal: 12, }}
+                            data={lessonData}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item.id}
+                            extraData={selectedId}
+                            showsVerticalScrollIndicator={false}
+                        />
                         :
-                        lessonData.length > 0 ?
-                            <FlatList
-                                style={{ paddingHorizontal: 12 }}
-                                data={lessonData}
-                                renderItem={renderItem}
-                                keyExtractor={(item) => item.id}
-                                extraData={selectedId}
-                                showsVerticalScrollIndicator={false}
-                            />
-                            :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
-                    }
-                </View>
+                        <View style={{ height: 100, justifyContent: 'center' }}>
+                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        </View>
+                }
             </View>
         </View>
     );

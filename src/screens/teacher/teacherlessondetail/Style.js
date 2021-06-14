@@ -387,7 +387,7 @@ flex: 1,
         resizeMode: 'stretch',
     },
     subLineTitle: {
-        marginTop: hp(-4.5),
+        marginTop: hp(-4.8),
         zIndex: 9,
         paddingRight:hp(1.5),
     },
@@ -776,6 +776,7 @@ flex: 1,
     pupilDetailLink: {
         width: hp(10),
         alignItems: 'flex-end',
+        right: 10
     },
     pupilDetaillinkIcon: {
         width: hp(1),
@@ -1148,13 +1149,16 @@ flex: 1,
     userIcon1Parent: {
         position: 'absolute',
         right: hp(1.60),
-        top: hp(0.5)
+        top: hp(0.5),
     },
     userIcon1: {
         position: 'absolute',
         width: hp(2),
         height: hp(2),
         resizeMode: 'contain',
+        alignSelf: 'center',
+        top: 10,
+        right: 5
     },
     autocompleteContainer: {
         flex: 1,
@@ -1207,7 +1211,7 @@ flex: 1,
         marginRight: hp(1.69),
     },
     searchHeader: {
-        height: hp(5.20),
+        height: 50,
         paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
