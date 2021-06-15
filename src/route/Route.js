@@ -42,6 +42,7 @@ import GroupSetUp from '../screens/teacher/pupilmanagement/GroupSetUp';
 import Setting from '../screens/Setting/Setting';
 import Message from '../screens/GlobalMessage/Message';
 import NewMessage from '../screens/GlobalMessage/NewMessage';
+import Passcode from '../screens/Passcode/Passcode';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -59,7 +60,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="NewMessage">
+        <Stack.Navigator headerMode='none' initialRouteName="Passcode">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
@@ -95,6 +96,7 @@ function ScreenStack() {
             <Stack.Screen name="Setting" component={Setting} />
             <Stack.Screen name="Message" component={Message} />
             <Stack.Screen name="NewMessage" component={NewMessage} />
+            <Stack.Screen name="Passcode" component={Passcode} />
 
         </Stack.Navigator>
     );
