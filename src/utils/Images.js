@@ -111,5 +111,11 @@ const Images = {
     teacherintroSlideOne: require('../assets/images/teacher-intro-illus-1-2.png'),
     teacherintroSlideTwo: require('../assets/images/teacher-intro-illus-2-2.png'),
     teacherintroSlideThree: require('../assets/images/teacher-intro-illus-3-2.png'),
+    managementBlankImg: require('../assets/images/pupil-management-image2.png'),
+    managementBlockTopImg: require('../assets/images/management-detail-banner2.png'),
+    chartImg:require('../assets/images/management-chart2.png'),
+    purpleMarkImg:require('../assets/images/purple-dot2.png'),
+    orangeMarkImg:require('../assets/images/orange-dot2.png'),
+    graphImg:require('../assets/images/management-graph2.png'),
 }
 export default Images;
