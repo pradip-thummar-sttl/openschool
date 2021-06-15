@@ -464,6 +464,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
     },
+    
     commonInputTextareaNormal: {
         width: '100%',
         height: hp(10.67),
@@ -1477,6 +1478,82 @@ export default StyleSheet.create({
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+
+    // new message
+    field1: {
+        marginBottom: hp(2.5),
+        marginLeft:hp(2.5),
+        marginTop:wp(2),
+    },
+    somePlaceholderStyle: {
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        paddingLeft:10
+    },
+    commonInputTextarea1: {
+        height: hp(5.20),
+        width:hp(70),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp(1),
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
+        // paddingRight: hp(1.5),
+        paddingLeft: hp(1.5),
+        marginTop: hp(1.3),
+        marginLeft:hp(1.3),
+        marginRight:wp(2),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(2.60),
+        fontFamily: FONTS.fontSemiBold,
+    },
+    copyInputParent:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    inputWidth:{
+        width:hp(50)
+    },
+    inputHeight:{
+        height:wp(15)
+    },
+    buttonGroup1: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
+        borderRadius:10,
+        borderWidth:1,
+        borderColor:COLORS.borderGrp,
+        width:hp(25),
+        marginLeft:hp(3.8)
+        
+    },
+    addIcon: {
+        width: hp(1.55),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(1.5),
+        left: hp(1.8),
+        zIndex: 9,
+    },
+    commonButtonGreenheaderwithicon: {
+        // backgroundColor: COLORS.black,
+        color: COLORS.black,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
 });
 
