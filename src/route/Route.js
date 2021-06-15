@@ -41,6 +41,8 @@ import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import GroupSetUp from '../screens/teacher/pupilmanagement/GroupSetUp';
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupilManagementdetail from '../screens/teacher/pupilmanagement/PupilManagementdetail';
+import PupilParentZoneProfileEdit from '../screens/pupil/parentzone/PupilParentZoneProfileEdit';
+import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -93,6 +95,8 @@ function ScreenStack() {
             <Stack.Screen name="GroupSetUp" component={GroupSetUp} />
             <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="PupilManagementdetail" component={PupilManagementdetail} />
+            <Stack.Screen name="PupilParentZoneProfileEdit" component={PupilParentZoneProfileEdit} />
+            <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
         </Stack.Navigator>
     );
 }
