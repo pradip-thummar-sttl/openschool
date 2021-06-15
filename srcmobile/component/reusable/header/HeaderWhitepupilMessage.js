@@ -1,84 +1,43 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import Images from '../../../utils/Images';
 import FONTS from '../../../utils/Fonts';
-import Popuphomework from '../popup/Popuphomework';
-import Popupsubmithomework from '../popup/Popupsubmithomework';
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import { opacity } from "../../../utils/Constant";
+import { useLinkProps } from "@react-navigation/native";
+import { useState } from "react";
+import RBSheet from "react-native-raw-bottom-sheet";
+import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 const HeaderWhitepupilMessage = (props) => {
+    const refRBSheet = useRef();
+    const [isSearchActive, setSearchActive] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+    const [isModalVisible, setModalVisible] = useState(false)
+
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+                <View style={styles.menuIconWithTitle}>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                    <Text style={styles.mainTitle}>Lessons and Homework</Text>
+                </View>
+
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar}
+                        onPress={() => null}
+                        activeOpacity={opacity}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
-            </View>
-            <View style={styles.filterbarMain}>
-                {/* <View style={styles.lessonPlanTop}>
-                    <View style={styles.lessonPlanTab}>
-                        <TouchableOpacity style={styles.tabs}>
-                            <Text style={[styles.tabsText, styles.tabsTextSelected]}>Lesson</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={styles.tabsText}>Homework</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View> */}
-                <View style={styles.flexEnd}>
-                    <View style={styles.field}>
-                        <Image
-                            style={styles.userIcon}
-                            source={Images.SearchIcon} />
-                        <TextInput
-                            style={[STYLE.commonInput, styles.searchHeader]}
-                            placeholder="Search subject, class, etc"
-                            maxLength={50}
-                            placeholderTextColor={COLORS.menuLightFonts}
-                        />
-                    </View>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Menu style={styles.filterGroup}>
-                            <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
-                            <MenuOptions style={styles.filterListWrap}>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                    </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                    </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                    </View>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                        <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                    </TouchableOpacity>
-                </View>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
             </View>
         </View>
     );
@@ -87,45 +46,58 @@ export default HeaderWhitepupilMessage;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: hp(1), },
+        shadowOpacity: 0.05,
+        shadowRadius: hp(1),
+        paddingVertical: 15,
+        backgroundColor: COLORS.white,
+        width: '100%',
+        zIndex: 1,
+    },
+    notificationBar: {
+        marginLeft: hp(4.5),
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
-        alignItems: 'center',
+    },
+    date: {
+        fontSize: hp(2.86),
+        fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(5.85),
+        height: hp(5.85),
         resizeMode: 'contain',
-    },
-    calnderDashHeaderIcon: {
-        width: wp(5.20),
-        resizeMode: 'contain',
-        height: hp(5.20),
     },
     filterbarMain: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderBottomWidth: 1,
-        borderColor: COLORS.borderGrp,
-        paddingBottom: hp(1.5),
+        paddingLeft: hp(1.95),
+        paddingRight: hp(1.95),
+        paddingTop: hp(1.5),
+        backgroundColor: COLORS.white,
+        width: '100%',
     },
     field: {
         position: 'relative',
-        width: hp(53.25),
-        marginRight: hp(1.69),
+        width: hp(35.94),
+        justifyContent: 'center',
+        marginRight: hp(1.2),
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: hp(4.6),
+        paddingLeft: hp(4.43),
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
@@ -137,6 +109,31 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         left: hp(1.43),
     },
+    userIcon1: {
+        position: 'absolute',
+        width: hp(1.66),
+        resizeMode: 'contain',
+        // height: 25,
+        left: hp(0),
+    },
+    filterIcon: {
+        width: hp(1.74),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.30),
+        top: hp(1.19),
+    },
+    filterIcon1: {
+        width: hp(1.74),
+        resizeMode: 'contain',
+        position: 'absolute',
+    },
+    userIcon1Parent: {
+        position: 'absolute',
+        width: hp(1.66),
+        top: hp(0.8),
+        left: hp(1.5),
+    },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
@@ -145,28 +142,21 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingLeft: hp(2.2),
         paddingRight: hp(4),
-        paddingTop: hp(1.4),
+        paddingTop: hp(1.2),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
+        fontFamily: FONTS.fontSemiBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
-        fontSize: hp(1.5),
+        fontSize: hp(1.82),
     },
     buttonGroup: {
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
-    },
-    filterIcon: {
-        width: hp(1.74),
-        resizeMode: 'contain',
-        position: 'absolute',
-        right: hp(1.30),
-        top: hp(1.19),
+        //marginRight: hp(1.69),
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -176,13 +166,14 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
+        paddingRight: hp(1),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+
     },
     addIcon: {
         width: hp(1.55),
@@ -204,6 +195,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: hp(1),
         paddingBottom: hp(1),
+        flex: 1,
     },
     filterListWrap: {
         paddingTop: hp(1),
@@ -213,8 +205,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: COLORS.white,
         top: hp(5.5),
-        right: 0,
-        width: hp(30.98),
+        right: hp(0),
+        width: hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -234,33 +226,66 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    lessonPlanTop: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    lessonPlanTab: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: hp(1.90),
-    },
-    tabs: {
-        paddingRight: hp(3.90),
-    },
-    tabsText: {
-        color: COLORS.menuLightFonts,
-        fontFamily: FONTS.fontSemiBold,
-        fontSize: hp(1.56),
-        textTransform: 'uppercase',
-    },
-    tabsTextSelected: {
-        color: COLORS.buttonGreen,
-    },
-    flexEnd: {
-        alignSelf: 'flex-end',
-        flexDirection:'row',
-    },
-    arrow: {
-        width: hp(2.34),
+    calnderDashHeaderIcon: {
+        width: hp(4.57),
         resizeMode: 'contain',
+        height: hp(4.57),
+    },
+    filterGroup: {
+        display: 'none',
+    },
+    menuIconWithTitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    menuIcon: {
+        width: hp(2.60),
+        resizeMode: 'contain',
+        marginRight: hp(1.56),
+        height: hp(2.60),
+    },
+    cancelButton: {
+        position: 'absolute',
+        right: hp(1.5),
+        zIndex: 9,
+        top: hp(1),
+    },
+    popupLarge: {
+        backgroundColor: COLORS.white,
+        borderRadius: hp(2),
+        width: hp(80.59),
+        alignItems: 'center',
+        alignSelf: 'center',
+        overflow: 'hidden',
+        fontFamily: FONTS.fontRegular,
+        position: 'relative',
+        paddingBottom: hp(6.5),
+    },
+    titleTab: {
+        fontSize: hp(2.05),
+        fontFamily: FONTS.fontSemiBold,
+        lineHeight: hp(3.38),
+        color: COLORS.darkGray,
+        marginBottom: hp(5),
+        marginTop: hp(3),
+    },
+    entryContentMain: {
+        alignItems: 'center',
+    },
+    entryData: {
+        marginBottom: hp(5.14)
+    },
+    entryIcon: {
+        width: hp(10),
+        height: hp(10),
+        resizeMode: 'contain',
+        marginBottom: hp(2.28),
+    },
+    entryTitle: {
+        fontSize: hp(1.37),
+        fontFamily: FONTS.fontBold,
+        color: COLORS.darkGray,
+        textAlign: 'center',
+        textTransform: 'uppercase',
     },
 });
