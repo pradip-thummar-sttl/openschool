@@ -13,14 +13,116 @@ const { CallModule } = NativeModules;
 const PupiloverView = (props) => {
     const [isHide, action] = useState(true);
     return (
-        <View style={PAGESTYLE.mainPage}>
+        <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderPM onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
                     <View style={PAGESTYLE.mainContainer}>
-                        <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
-                        <Text H2 style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                        <Text P style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
+                        <TouchableOpacity onPress={() => props.navigation.replace('PupilProfileView')}>
+                            <View style={[PAGESTYLE.pupilData]}>
+                                <View style={PAGESTYLE.pupilProfile}>
+                                    <View style={PAGESTYLE.rowProfile}>
+                                        <Image style={PAGESTYLE.pupilImage}></Image>
+                                        <Text style={PAGESTYLE.pupilName}>Pratik</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.groupPupil}>
+                                        <Text style={PAGESTYLE.groupName}>Group 1A</Text>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.rewardColumn}>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                </View>
+                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <View style={[PAGESTYLE.pupilData]}>
+                                <View style={PAGESTYLE.pupilProfile}>
+                                    <View style={PAGESTYLE.rowProfile}>
+                                        <Image style={PAGESTYLE.pupilImage}></Image>
+                                        <Text style={PAGESTYLE.pupilName}>Pratik</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.groupPupil}>
+                                        <Text style={PAGESTYLE.groupName}>Group 1A</Text>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.rewardColumn}>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                </View>
+                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <View style={[PAGESTYLE.pupilData]}>
+                                <View style={PAGESTYLE.pupilProfile}>
+                                    <View style={PAGESTYLE.rowProfile}>
+                                        <Image style={PAGESTYLE.pupilImage}></Image>
+                                        <Text style={PAGESTYLE.pupilName}>Pratik</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.groupPupil}>
+                                        <Text style={PAGESTYLE.groupName}>Group 1A</Text>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.rewardColumn}>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                </View>
+                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <View style={[PAGESTYLE.pupilData]}>
+                                <View style={PAGESTYLE.pupilProfile}>
+                                    <View style={PAGESTYLE.rowProfile}>
+                                        <Image style={PAGESTYLE.pupilImage}></Image>
+                                        <Text style={PAGESTYLE.pupilName}>Pratik</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.groupPupil}>
+                                        <Text style={PAGESTYLE.groupName}>Group 1A</Text>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.rewardColumn}>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                </View>
+                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <View style={[PAGESTYLE.pupilData]}>
+                                <View style={PAGESTYLE.pupilProfile}>
+                                    <View style={PAGESTYLE.rowProfile}>
+                                        <Image style={PAGESTYLE.pupilImage}></Image>
+                                        <Text style={PAGESTYLE.pupilName}>Pratik</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.groupPupil}>
+                                        <Text style={PAGESTYLE.groupName}>Group 1A</Text>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.rewardColumn}>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                </View>
+                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </View>
