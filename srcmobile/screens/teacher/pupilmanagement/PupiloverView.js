@@ -10,7 +10,7 @@ import HeaderPM from "./HeaderPM";
 
 const { CallModule } = NativeModules;
 
-const PupilManagement = (props) => {
+const PupiloverView = (props) => {
     const [isHide, action] = useState(true);
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -28,4 +28,4 @@ const PupilManagement = (props) => {
     );
 }
 
-export default PupilManagement;
+export default PupiloverView;
