@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import moment from 'moment'
+import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, } from 'react-native'
-import { baseUrl } from '../../utils/Constant'
+import { EndPoints } from '../../service/EndPoints'
+import { Service } from '../../service/Service'
+import { baseUrl, showMessage } from '../../utils/Constant'
 import Images from '../../utils/Images'
 import STYLE from '../../utils/Style'
 import PAGESTYLE from '../PupilManagement/Style'
@@ -28,24 +31,24 @@ const Item = ({ onPress, style, item }) => (
 )
 const Pupillist = ({ item }) => (
     <View style={[PAGESTYLE.pupilData]}>
+        <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+
         <View style={PAGESTYLE.pupilProfile}>
-            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+            <Text style={PAGESTYLE.pupilName}>{item.FirstName}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
-            {/* <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image> */}
-            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+            <Text style={PAGESTYLE.pupilName}>{item.LastName}</Text>
         </View>
-        <View style={PAGESTYLE.groupColumnmain}>
+        {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
+                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : 'Grop A'}</Text>
             </View>
-        </View>
-        <View style={PAGESTYLE.groupColumnmain}>
-            <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
+        {/* </View> */}
+        {/* <View style={PAGESTYLE.groupColumnmain}> */}
+            <View style={PAGESTYLE.groupColumn11}>
+                <Text style={PAGESTYLE.pupilgroupName}>{moment(item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
-        </View>
+        {/* </View> */}
         <View style={PAGESTYLE.perfomanceColumn}>
             <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
             <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
@@ -63,6 +66,20 @@ const Pupillist = ({ item }) => (
 
 const PupilManagement = () => {
     const [selectedId, setSelectedId] = useState(0);
+    const [pupilData, setPupilData] = useState([])
+    useEffect(() => {
+        Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                setPupilData(res.data)
+            }else{
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
+    }, [])
+
     const pupilRender = ({ item }) => {
         return (
             <Pupillist
@@ -83,10 +100,10 @@ const PupilManagement = () => {
                         {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                     </View>
                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
-                        <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
+                        <Text style={PAGESTYLE.pupilTableHeadingMainTitle}> Class Group</Text>
                     </View>
 
-                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
                     </View>
                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
@@ -105,18 +122,19 @@ const PupilManagement = () => {
                         </View>
                     </View>
                 </View>
-                <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
+                {/* <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View> */}
                 <View style={PAGESTYLE.pupilTabledata}>
-                    <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
+                    {/* <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}> */}
                         <FlatList
-                            data={[1, 2, 3]}
+                        // style={{backgroundColor:'gray'}}
+                            data={pupilData}
                             renderItem={pupilRender}
                             keyExtractor={(item) => item.id}
                             extraData={selectedId}
                             showsVerticalScrollIndicator={false}
                             nestedScrollEnabled
                         />
-                    </SafeAreaView>
+                    {/* </SafeAreaView> */}
                 </View>
             </View>
         </View>

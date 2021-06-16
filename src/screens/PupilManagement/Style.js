@@ -93,7 +93,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     whiteBoard: {
-        backgroundColor: COLORS.white,
+        // backgroundColor: COLORS.white,
         borderRadius: hp(1),
         marginTop: hp(1.30),
         borderColor: COLORS.commonBorderColor,
@@ -353,6 +353,8 @@ export default StyleSheet.create({
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
+        marginLeft:hp(4.5),
+        // backgroundColor: COLORS.white
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -361,10 +363,13 @@ export default StyleSheet.create({
         paddingBottom: hp(3.51),
     },
     pupilTableHeadingMain: {
-        width: hp(17.90),
+        width: hp(15.90),
     },
     tabpupil2: {
-        width: hp(17.97),
+        width: hp(15.97),
+    },
+    tabpupil22: {
+        width: hp(13.97),
     },
     tabpupil3: {
         width: hp(20.18),
@@ -403,9 +408,14 @@ export default StyleSheet.create({
         marginBottom: hp(1.30),
     },
     pupilData: {
+        // height:wp(10),
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 10
+        borderRadius:10,
+        backgroundColor:'white',
+        marginBottom:wp(1),
+        paddingHorizontal:hp(2)
+        //  marginLeft:hp(4.5)
     },
     pupilProfile: {
         width: hp(17.90),
@@ -414,10 +424,22 @@ export default StyleSheet.create({
     },
     groupColumnmain: {
         width: hp(17.97),
+        backgroundColor:'blue'
+        
     },
     groupColumn: {
-        width: hp(5.59),
+        width: hp(6.59),
         alignItems: 'center',
+        marginLeft:hp(-2)
+    },
+    groupColumn1: {
+        width: hp(10.59),
+        alignItems: 'center',
+    },
+    groupColumn11: {
+        width: hp(10.59),
+        alignItems: 'flex-start',
+        marginLeft:hp(5)
     },
     pupilgroupName: {
         textAlign: 'center',
@@ -425,6 +447,7 @@ export default StyleSheet.create({
     perfomanceColumn: {
         flexDirection: 'row',
         width: hp(20.18),
+        marginLeft:hp(4),
         marginRight: hp(9.50),
     },
     perfomanceDotmain: {
@@ -473,7 +496,7 @@ export default StyleSheet.create({
         height: hp(3.7),
         borderRadius: hp(100),
         backgroundColor: COLORS.lightGrayPupil,
-        marginRight: hp(1.69),
+        marginRight: hp(1),
     },
     pupilName: {
         fontSize: hp(1.82),
