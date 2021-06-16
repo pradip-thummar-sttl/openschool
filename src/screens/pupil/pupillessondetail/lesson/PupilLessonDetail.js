@@ -151,25 +151,27 @@ const PupilLessonDetailInternal = (props) => {
                                                     </View>
                                                 }
                                             </View>
-                                            <View style={PAGESTYLE.videoTitleLine}>
-                                                <View>
-                                                    <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
-                                                    <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
+                                            <View style={{ marginStart: 10 }}>
+                                                <View style={PAGESTYLE.videoTitleLine}>
+                                                    <View>
+                                                        <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
+                                                        <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
+                                                    </View>
+                                                    <View style={PAGESTYLE.bookMark}>
+                                                        <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
+                                                        <Text style={PAGESTYLE.saveBookMarkText}>Saved!</Text>
+                                                    </View>
                                                 </View>
-                                                <View style={PAGESTYLE.bookMark}>
-                                                    <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
-                                                    <Text style={PAGESTYLE.saveBookMarkText}>Saved!</Text>
+                                                <View style={PAGESTYLE.userNameMain}>
+                                                    <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
+                                                    <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                                 </View>
-                                            </View>
-                                            <View style={PAGESTYLE.userNameMain}>
-                                                <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
-                                                <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.lessonDesc}>
-                                                <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
+                                                <View style={PAGESTYLE.lessonDesc}>
+                                                    <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
+                                                </View>
                                             </View>
                                         </View>
-                                        <View style={PAGESTYLE.rightSideBar}>
+                                        <View style={PAGESTYLE.rightSideBarLesson}>
                                             <View style={PAGESTYLE.fileBoxGrpWrap}>
                                                 <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                                 {

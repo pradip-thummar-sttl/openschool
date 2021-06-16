@@ -35,6 +35,7 @@ const PupilHomeWorkMarked = (props) => {
                         onAlertPress={() => props.onAlertPress()}
                         goBack={() => props.goBack()}
                         title={item.SubjectName + ' ' + item.LessonTopic} />
+
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.containerWrapTopPurple}>
                             <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
@@ -57,38 +58,67 @@ const PupilHomeWorkMarked = (props) => {
                             </View>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={PAGESTYLE.teacherDetailLeft}>
+                    <View style={{ flexDirection: 'row', height: '80%', paddingHorizontal: 30 }}>
+                        <ScrollView style={{ width: '70%', paddingTop: 30, }}>
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription} Homework Description</Text>
                             </View>
-                            <View style={PAGESTYLE.requirementofClass}>
-
-                                <View style={PAGESTYLE.checkBoxGroup}>
-                                    <FlatList
-                                        data={item.CheckList}
-                                        renderItem={({ item }) => (
-                                            <View style={PAGESTYLE.checkBoxLabelLine}>
-                                                <View style={PAGESTYLE.alignRow}>
-                                                    <CheckBox
-                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                                        style={PAGESTYLE.checkMark}
-                                                        value={item.IsCheck}
-                                                        boxType={'square'}
-                                                        onCheckColor={COLORS.white}
-                                                        onFillColor={COLORS.dashboardPupilBlue}
-                                                        onTintColor={COLORS.dashboardPupilBlue}
-                                                        tintColor={COLORS.dashboardPupilBlue}
-                                                    />
-                                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                            <FlatList
+                                style={{ marginTop: 30 }}
+                                data={item.CheckList}
+                                renderItem={({ item }) => (
+                                    <View style={PAGESTYLE.checkBoxLabelLine}>
+                                        <View style={PAGESTYLE.alignRow}>
+                                            <CheckBox
+                                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                                style={PAGESTYLE.checkMark}
+                                                value={item.IsCheck}
+                                                boxType={'square'}
+                                                onCheckColor={COLORS.white}
+                                                onFillColor={COLORS.dashboardPupilBlue}
+                                                onTintColor={COLORS.dashboardPupilBlue}
+                                                tintColor={COLORS.dashboardPupilBlue}
+                                            />
+                                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                        </View>
+                                    </View>
+                                )} />
+                            <View style={PAGESTYLE.commonBg}>
+                                <View style={PAGESTYLE.containerWrap1}>
+                                    <View style={PAGESTYLE.feedbackBlock}>
+                                        <View style={PAGESTYLE.lessonDesc}>
+                                            <Text style={PAGESTYLE.lessonTitleBold}>{item.TeacherFirstName} {item.TeacherLastName}'s Feedback</Text>
+                                            <Text style={PAGESTYLE.descriptionText}>{item.Feedback}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={PAGESTYLE.feedbackVideoBlock}>
+                                        <View style={PAGESTYLE.largeVideoBlock}>
+                                            {item.RecordingList.length == 0 ?
+                                                <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
+                                                :
+                                                <View style={{ height: '100%', justifyContent: 'center' }}>
+                                                    <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                                        resizeMode={'contain'}
+                                                        style={PAGESTYLE.largeVideo1}
+                                                        controls={true}
+                                                        paused={isPaused} />
+                                                    {isPaused ?
+                                                        <TouchableOpacity
+                                                            activeOpacity={opacity}
+                                                            onPress={() => setPause(!isPaused)}>
+                                                            <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                                        </TouchableOpacity>
+                                                        :
+                                                        null
+                                                    }
                                                 </View>
-                                            </View>
-                                        )}
-                                        style={{ height: 200 }} />
+                                            }
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
+                        </ScrollView>
                         <View style={PAGESTYLE.rightSideBar}>
                             <View style={PAGESTYLE.uploadBoardBlock}>
                                 <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
@@ -98,51 +128,13 @@ const PupilHomeWorkMarked = (props) => {
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
-                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                <Image source={Images.pdfIcon} style={PAGESTYLE.pdfIcon} />
                                             </View>
                                         </TouchableOpacity>
                                     )}
                                     numColumns={4}
                                     keyExtractor={(item, index) => index.toString()}
                                 />
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <View style={PAGESTYLE.commonBg}>
-                    <View style={PAGESTYLE.containerWrap}>
-                        <View style={PAGESTYLE.feedbackBlock}>
-                            <View style={PAGESTYLE.lessonDesc}>
-                                <Text style={PAGESTYLE.lessonTitleBold}>Teacher’s Feedback</Text>
-                                <Text style={PAGESTYLE.descriptionText}>{item.Feedback}</Text>
-                            </View>
-                        </View>
-                        <View style={PAGESTYLE.feedbackVideoBlock}>
-                            <View>
-                                <Text style={[PAGESTYLE.lessonFeedDesc, PAGESTYLE.lineLength]}>Feedback for {item.SubjectName} </Text>
-                                <Text style={PAGESTYLE.techerName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
-                            </View>
-                            <View style={PAGESTYLE.largeVideoBlock}>
-                                {item.RecordingList.length == 0 ?
-                                    <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
-                                    :
-                                    <View style={{ height: '100%', justifyContent: 'center' }}>
-                                        <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
-                                            resizeMode={'contain'}
-                                            style={PAGESTYLE.largeVideo1}
-                                            controls={true}
-                                            paused={isPaused} />
-                                        {isPaused ?
-                                            <TouchableOpacity
-                                                activeOpacity={opacity}
-                                                onPress={() => setPause(!isPaused)}>
-                                                <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
-                                            </TouchableOpacity>
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                }
                             </View>
                         </View>
                     </View>

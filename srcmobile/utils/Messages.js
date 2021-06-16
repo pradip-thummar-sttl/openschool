@@ -39,6 +39,7 @@ const MESSAGE = {
     workspaceAdded: 'Workspace saved successfully',
     blankWorkspace: 'Workspace cannot be blank',
     noHomework: 'Homework has not assigned yet',
+    hwSubmitted: 'Homework submitted successfully'
 }
 
 export default MESSAGE;
