@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image,FlatList, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, FlatList, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
 import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -29,9 +29,9 @@ import {
 } from 'react-native-popup-menu';
 const { LoginModuleIos, LoginModule } = NativeModules;
 
-var days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-var months=[1,2,3,4,5,6,7,8,9,10,11,12]
-var years=[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021]
+var days = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+var years = [1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
 
 class Login extends Component {
     constructor(props) {
@@ -45,12 +45,14 @@ class Login extends Component {
             AccessedVia: "Mobile",
             isLoading: false,
             isPasswordHide: true,
+            iscPasswordHide: true,
             isRemember: false,
-            firstName:"",
-            lastName:"",
-            day:"",
-            month:"",
-            year:""
+            firstName: "",
+            lastName: "",
+            mobile: "",
+            day: "",
+            month: "",
+            year: ""
         }
     }
 
@@ -58,22 +60,19 @@ class Login extends Component {
         this.setState({ isLoading: flag });
     }
 
+    state = {
+        isDayFocused: false,
+        isMonthFocused: false,
+        isYearFocused: false,
+        isFirstNameFocused: false,
+        isLastNameFocused: false,
+        isPasswordFocus: false,
+    };
+
     isFieldsValidated = () => {
-        const { userName, password,firstName, lastName, day,month, year, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
+        const { userName, password, cpassword, firstName, lastName, day, month, year, PushToken, mobile, Device, OS, AccessedVia, isRemember } = this.state;
         console.log('user type data', this.props);
-        if (!userName) {
-            showMessage(MESSAGE.email)
-            return false;
-        } else if (!password) {
-            showMessage(MESSAGE.password);
-            return false;
-        } else if (!firstName) {
-             showMessage(MESSAGE.firstName);
-            return false;
-        } else if (!lastName ) {
-            showMessage(MESSAGE.lastName);
-            return false;
-        } else if (!day) {
+        if (!day) {
             showMessage(MESSAGE.day);
             return false;
         } else if (!month) {
@@ -81,6 +80,27 @@ class Login extends Component {
             return false;
         } else if (!year) {
             showMessage(MESSAGE.year);
+            return false;
+        } else if (!firstName.trim()) {
+            showMessage(MESSAGE.firstName);
+            return false;
+        } else if (!lastName.trim()) {
+            showMessage(MESSAGE.lastName);
+            return false;
+        } else if (mobile.trim().length < 5) {
+            showMessage(MESSAGE.phone)
+            return false;
+        } else if (!userName.trim()) {
+            showMessage(MESSAGE.email)
+            return false;
+        } else if (password.trim().length < 5) {
+            showMessage(MESSAGE.password);
+            return false;
+        } else if (!cpassword.trim()) {
+            showMessage(MESSAGE.cpassword);
+            return false;
+        } else if (password != cpassword) {
+            showMessage(MESSAGE.notMatched);
             return false;
         }
 
@@ -99,10 +119,11 @@ class Login extends Component {
 
 
                 var data = {
-                    FirstName:firstName,
-                    LastName:lastName,
+                    FirstName: firstName,
+                    LastName: lastName,
                     Email: userName,
-                    Dob:`${year}-${month}-${day}`,
+                    phone: mobile,
+                    Dob: `${year}-${month}-${day}`,
                     Password: password,
                     UserTypeId: userType
                 }
@@ -131,19 +152,19 @@ class Login extends Component {
             this.setLoading(false)
         })
     }
-    
 
-    
 
-    
+
+
+
 
     daysDropDown = () => {
         return (
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Days</Text> */}
-                <Menu onSelect={(item) => this.setState({day:item})}>
+                <Menu onSelect={(item) => this.setState({ day: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
-                        <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day  : 'Day'}</Text>
+                        <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day : 'Day'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
@@ -162,9 +183,9 @@ class Login extends Component {
         return (
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Month</Text> */}
-                <Menu onSelect={(item) => this.setState({month:item})}>
-                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown,{width: hp(12)}]}>
-                        <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month  : 'Month'}</Text>
+                <Menu onSelect={(item) => this.setState({ month: item })}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, { width: hp(12) }]}>
+                        <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month : 'Month'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
@@ -183,9 +204,9 @@ class Login extends Component {
         return (
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Year</Text> */}
-                <Menu onSelect={(item) => this.setState({year:item})}>
+                <Menu onSelect={(item) => this.setState({ year: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
-                        <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year  : 'Year'}</Text>
+                        <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year : 'Year'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
@@ -205,6 +226,10 @@ class Login extends Component {
         this.setState({ isPasswordHide: !this.state.isPasswordHide });
     }
 
+    setCPasswordVisibility = () => {
+        this.setState({ iscPasswordHide: !this.state.iscPasswordHide });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -213,57 +238,58 @@ class Login extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
-                       <View style={styles.rightRegisterSmlText}>
-                        <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
+                    <KeyboardAwareScrollView style={{ flex: 1 }}>
+                        <View style={styles.rightRegisterSmlText}>
+                            <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity onPress={() => this.props.navigation.replace('Login', { userType: 'Pupil' })}><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
                         </View>
-                        <Text h3 style={styles.titleAccountLogin}>Pupil Register</Text>
-                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the learners date of birth?</Text>
-                        <View style={styles.loginAccountForm}>       
-                        {/* {
-                            this.daysDropDown(),
-                            this.monthsDropDown(),
-                            this.yearsDropDown()
-                        }                     */}
+                        <Text h3 style={styles.titleAccountLogin}>Pupil Account</Text>
+                        <Text style={[styles.fieldInputLabel]}>What is the learners date of birth?</Text>
+                        <View style={styles.loginAccountForm}>
                             <View style={[STYLE.commonInput, styles.alignVert]}>
-                            {
-                                this.daysDropDown()
-                            }
-                            </View> 
-                                                       
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
-                            {
-                                this.monthsDropDown()
-                            }
-                            </View> 
+                                {
+                                    this.daysDropDown()
+                                }
+                            </View>
 
                             <View style={[STYLE.commonInput, styles.alignVert]}>
-                             {
-                                 this.yearsDropDown()
-                             }
-                            </View> 
+                                {
+                                    this.monthsDropDown()
+                                }
+                            </View>
+
+                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                                {
+                                    this.yearsDropDown()
+                                }
+                            </View>
                         </View>
-                        <Text style={[styles.fieldInputLabel, styles.firstNameSpace]}>What is the Learners Name</Text>
-                        <View style={styles.loginAccountForm}>                           
-                            <View style={[styles.field, styles.filedSpace]}>
+                        <Text style={[styles.fieldInputLabel]}>What is the Learners Name</Text>
+                        <View style={styles.loginAccountForm}>
+                            <View style={{ ...styles.field, ...styles.filedSpace, marginRight: 10 }}>
                                 <TextInput
+                                    onFocus={() => this.setState({ isFirstNameFocused: true })}
+                                    onBlur={() => this.setState({ isFirstNameFocused: false })}
                                     returnKeyType={"next"}
+                                    ref={(input) => { this.t1 = input; }}
                                     onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
+                                    style={{ ...STYLE.commonInput, borderColor: (this.state.isFirstNameFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                     placeholder="First Name"
-                                    autoCapitalize={false}
+                                    autoCapitalize={'words'}
                                     maxLength={40}
                                     value={this.state.firstName}
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     onChangeText={firstName => this.setState({ firstName })} />
-                            </View>                            
-                            <View style={[styles.field, styles.filedSpace]}>
+                            </View>
+                            <View style={{ ...styles.field, ...styles.filedSpace, marginLeft: 10 }}>
                                 <TextInput
+                                    onFocus={() => this.setState({ isLastNameFocused: true })}
+                                    onBlur={() => this.setState({ isLastNameFocused: false })}
                                     returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
+                                    ref={(input) => { this.t2 = input; }}
+                                    onSubmitEditing={() => { this.t3.focus(); }}
+                                    style={{ ...STYLE.commonInput, borderColor: (this.state.isLastNameFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                     placeholder="Last Name"
-                                    autoCapitalize={false}
+                                    autoCapitalize={'words'}
                                     maxLength={40}
                                     value={this.state.lastName}
                                     placeholderTextColor={COLORS.lightplaceholder}
@@ -271,13 +297,34 @@ class Login extends Component {
                             </View>
                         </View>
                         <View style={styles.loginForm}>
+                            <Text style={styles.fieldInputLabel}>Parent's phone number</Text>
+                            <View style={styles.field}>
+                                <TextInput
+                                    onFocus={() => this.setState({ isMobileFocused: true })}
+                                    onBlur={() => this.setState({ isMobileFocused: false })}
+                                    returnKeyType={"next"}
+                                    keyboardType={'phone-pad'}
+                                    ref={(input) => { this.t3 = input; }}
+                                    onSubmitEditing={() => { this.t4.focus(); }}
+                                    style={{ ...STYLE.commonInput, borderColor: (this.state.isMobileFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
+                                    placeholder="Phone Number"
+                                    autoCapitalize={false}
+                                    maxLength={40}
+                                    value={this.state.mobile}
+                                    placeholderTextColor={COLORS.lightplaceholder}
+                                    onChangeText={mobile => this.setState({ mobile })} />
+                            </View>
                             <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
                                 <TextInput
+                                    onFocus={() => this.setState({ isEmailFocused: true })}
+                                    onBlur={() => this.setState({ isEmailFocused: false })}
                                     returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
-                                    placeholder="Enter email or phone"
+                                    keyboardType={'email-address'}
+                                    ref={(input) => { this.t4 = input; }}
+                                    onSubmitEditing={() => { this.t5.focus(); }}
+                                    style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
+                                    placeholder="Email"
                                     autoCapitalize={false}
                                     maxLength={40}
                                     value={this.state.userName}
@@ -288,8 +335,11 @@ class Login extends Component {
                             <View style={styles.field}>
                                 <View style={styles.eyeParent}>
                                     <TextInput
-                                        ref={(input) => { this.t2 = input; }}
-                                        style={STYLE.commonInputPassword}
+                                        onFocus={() => this.setState({ isPasswordFocus: true })}
+                                        onBlur={() => this.setState({ isPasswordFocus: false })}
+                                        ref={(input) => { this.t5 = input; }}
+                                        onSubmitEditing={() => { this.t6.focus(); }}
+                                        style={{ ...STYLE.commonInputPassword, borderColor: (this.state.isPasswordFocus) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                         placeholder="Password"
                                         value={this.state.password}
                                         maxLength={30}
@@ -307,27 +357,33 @@ class Login extends Component {
                                     </View>
                                 </View>
                             </View>
-                            <View style={styles.bottomLoginFeild}>
-                                <View style={styles.rememberFeild}>
-                                    <CheckBox
-                                        style={STYLE.checkBoxcommon1}
-                                        value={this.state.isRemember}
-                                        onCheckColor={COLORS.white}
-                                        onTintColor={COLORS.blueButton}
-                                        tintColor={COLORS.lightplaceholder}
-                                        onFillColor={COLORS.blueButton}
-                                        boxType={'square'}
-                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
-                                    />
-                                    <Text style={styles.label}>Remember Me</Text>
-                                </View>
-                                <View style={styles.forgotLink}>
-                                    <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
+                            <Text style={styles.fieldInputLabel}>Confirm Password</Text>
+                            <View style={styles.field}>
+                                <View style={styles.eyeParent}>
+                                    <TextInput
+                                        onFocus={() => this.setState({ iscPasswordFocus: true })}
+                                        onBlur={() => this.setState({ iscPasswordFocus: false })}
+                                        ref={(input) => { this.t6 = input; }}
+                                        style={{ ...STYLE.commonInputPassword, borderColor: (this.state.iscPasswordFocus) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
+                                        placeholder="Confirm Password"
+                                        value={this.state.cpassword}
+                                        maxLength={30}
+                                        placeholderTextColor={COLORS.lightplaceholder}
+                                        secureTextEntry={this.state.iscPasswordHide}
+                                        onChangeText={cpassword => this.setState({ cpassword })} />
+
+                                    <View style={styles.eye}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => this.setCPasswordVisibility()}>
+                                            <Image
+                                                source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => {
                                         isDesignBuild ?
@@ -338,7 +394,7 @@ class Login extends Component {
                                     }}>
                                     {this.state.isLoading ?
                                         <ActivityIndicator
-                                            style={STYLE.fullWidthPrimaryButton}
+                                            style={styles.commonButtonGreen}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.white} />
                                         :
@@ -353,7 +409,7 @@ class Login extends Component {
                             <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
-                   
+
                 </View>
             </View>
         );
@@ -384,12 +440,13 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     lefImage: {
-        width: '50%',
+        width: '50%'
     },
     rightContent: {
         width: '50%',
         justifyContent: 'center',
         alignSelf: 'center',
+        paddingHorizontal: 50
     },
     titleLogin: {
         textAlign: 'left',
@@ -401,8 +458,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     loginForm: {
-        paddingLeft: hp('9%'),
-        paddingRight: hp('9%'),
+        width: '100%'
     },
     field: {
         position: 'relative',
@@ -454,17 +510,15 @@ const styles = StyleSheet.create({
         fontSize: hp('1.8%'),
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontRegular,
-        color:COLORS.buttonGreen,
-        fontWeight:'700',
+        color: COLORS.buttonGreen,
+        fontWeight: '700',
     },
     loginButtonView: {
         marginTop: hp('3.0%'),
-        width:'80%',
+        width: '100%',
     },
     bottomLoginIntro: {
-        top: hp('8%'),
-        paddingLeft: hp('8.5%'),
-        paddingRight: hp('7%'),
+        marginTop: 50
     },
     eye: {
         position: 'absolute',
@@ -474,13 +528,13 @@ const styles = StyleSheet.create({
     eyeParent: {
         justifyContent: 'center'
     },
-    fieldInputLabel:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.lightGray,
-        paddingBottom:hp(1),
+    fieldInputLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
     },
-    commonButtonGreen:{
+    commonButtonGreen: {
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
         fontSize: hp('1.56'),
@@ -488,28 +542,22 @@ const styles = StyleSheet.create({
         borderRadius: hp('1.3'),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(2),
-        paddingRight: hp(2),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
         alignSelf: 'center',
-        shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
-        shadowOpacity: 0.16,
-        shadowRadius: 13,
-        elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+        width: 250,
+        height: 55,
+        paddingVertical: 15
     },
-    getStartText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        marginTop:hp(5),
+    getStartText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        marginTop: hp(5),
         marginLeft: hp('8.4%'),
     },
-    commonFontsPupleUnderline:{
-        paddingTop:hp(0.5),
+    commonFontsPupleUnderline: {
+        paddingTop: hp(0.5),
         color: COLORS.lightGray,
         //fontSize: hp(3.81),
         fontWeight: '500',
@@ -518,24 +566,23 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline",
         textDecorationStyle: "solid",
         textDecorationColor: "#000",
-        fontSize:hp(1.56),
+        fontSize: hp(1.56),
     },
-    greenText:{
-        color:COLORS.buttonGreen,
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        lineHeight:hp(1.5),
+    greenText: {
+        color: COLORS.buttonGreen,
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        lineHeight: hp(2.5),
     },
-    registerSmtText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+    registerSmtText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    rightRegisterSmlText:{
-        justifyContent:'flex-end',
-        alignSelf:'flex-end',
-        paddingTop:hp(3.5),
-        paddingRight:hp(3.5),
+    rightRegisterSmlText: {
+        justifyContent: 'flex-end',
+        alignSelf: 'flex-end',
+        marginTop: hp(3.5),
     },
     titleAccountLogin: {
         textAlign: 'left',
@@ -543,43 +590,38 @@ const styles = StyleSheet.create({
         fontSize: hp('4.8%'),
         marginTop: hp(0.5),
         marginBottom: hp('4%'),
-        marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
     },
-    loginAccountForm:{
-        paddingLeft: hp('9%'),
-        paddingRight: hp('9%'),
-        flexDirection:'row',
-        justifyContent:'space-between',
-        width:hp(54.42),
+    loginAccountForm: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         marginBottom: hp('2.0%'),
     },
-    filedSpace:{
-        width:hp(22.65),
-        marginRight:hp(3),
+    filedSpace: {
+        flex: 0.5
     },
-    firstNameSpace:{
-        marginLeft:hp(9),
+    firstNameSpace: {
+        marginLeft: hp(9),
     },
     dropDownArrowdatetime: {
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.6),
-        marginTop:hp(2.5),
+        marginTop: hp(2.5),
     },
-    dropWrap:{
-        width:hp(10.2),
-        marginTop:hp(2.5),
+    dropWrap: {
+        width: hp(10.2),
+        marginTop: hp(2.5),
     },
-    alignVert:{
-        alignItems:'center',
-        marginRight:hp(2.5),
+    alignVert: {
+        alignItems: 'center',
     },
-    dateTimetextdummy:{
+    dateTimetextdummy: {
         fontFamily: FONTS.fontBold,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
     //
     dropDownFormInput: {
@@ -594,8 +636,8 @@ const styles = StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        justifyContent:'space-between',
-        width:'100%',
+        justifyContent: 'space-between',
+        width: '100%',
     },
     dropDown: {
         flexDirection: 'row',
@@ -616,15 +658,15 @@ const styles = StyleSheet.create({
     },
     dateTimetextdummy: {
         fontSize: 18,
-        color: COLORS.darkGray,
+        color: COLORS.themeBlue,
         fontFamily: FONTS.fontRegular,
         alignSelf: 'center',
     },
-    dropDownArrow:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.4),
-        top:hp(2.1),
+    dropDownArrow: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.4),
+        top: hp(2.1),
     },
 });

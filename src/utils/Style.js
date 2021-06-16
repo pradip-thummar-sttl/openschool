@@ -248,4 +248,5 @@ export default StyleSheet.create({
         textTransform: 'uppercase',
     },
    
+    
 });

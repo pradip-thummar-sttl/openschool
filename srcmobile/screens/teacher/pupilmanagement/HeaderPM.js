@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -19,6 +19,7 @@ import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
+    const [tabIndex, setSelectedTab] = useState(0);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
@@ -33,7 +34,7 @@ const HeaderPM = (props) => {
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
-                    <Text style={styles.mainTitle}>Timetable</Text>
+                    <Text style={styles.mainTitle}>Pupil Management</Text>
                 </View>
 
                 <View style={styles.headerRight}>
@@ -73,6 +74,26 @@ const HeaderPM = (props) => {
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
+            </View>
+            <View style={styles.whiteBg}>
+                <View style={styles.lessonPlanTop}>
+                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+                        <View style={styles.lessonPlanTab}>
+                            <TouchableOpacity
+                                style={styles.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(0)}>
+                                <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>pupil overview</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(1)}>
+                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </View>
             </View>
         </View>
     );
@@ -337,12 +358,39 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', paddingLeft: hp(2), paddingRight: hp(2), alignItems: 'center', marginBottom: hp(1), backgroundColor: COLORS.white,marginTop: 12,
+        flexDirection: 'row', paddingLeft: hp(2), paddingRight: hp(2), alignItems: 'center', marginBottom: hp(1), backgroundColor: COLORS.white, marginTop: 12,
     },
     searchInner: {
-        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center',paddingHorizontal: 10,
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+    whiteBg: {
+        paddingBottom: hp(1),
+        paddingTop: hp(1),
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingRight: hp(2),
+        paddingLeft: hp(2),
+    },
+    lessonPlanTop: {
+        flexDirection: 'row',
+    },
+    lessonPlanTab: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    tabs: {
+        paddingRight: hp(2.5),
+    },
+    tabsText: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.56),
+        textTransform: 'uppercase',
+    },
+    tabsTextSelected: {
+        color: COLORS.buttonGreen,
+    },
 });

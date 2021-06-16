@@ -258,7 +258,7 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher Login' : 'Pupil Login'}</Text>
                         
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
@@ -361,8 +361,8 @@ class Login extends Component {
                             }
                         </View>
                         <View style={styles.bottomLoginIntro}>
-                            <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
-                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
+                            <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
+                            <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
