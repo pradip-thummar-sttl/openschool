@@ -43,7 +43,7 @@ import Setting from '../screens/Setting/Setting';
 import Message from '../screens/GlobalMessage/Message';
 import NewMessage from '../screens/GlobalMessage/NewMessage';
 import Passcode from '../screens/Passcode/Passcode';
-import PupilManagement from '../screens/PupilManagement/PupilManagement';
+// import PupilManagement from '../screens/PupilManagement/PupilManagement';
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupilManagementdetail from '../screens/teacher/pupilmanagement/PupilManagementdetail';
 import PupilParentZoneProfileEdit from '../screens/pupil/parentzone/PupilParentZoneProfileEdit';
@@ -102,7 +102,7 @@ function ScreenStack() {
             <Stack.Screen name="Message" component={Message} />
             <Stack.Screen name="NewMessage" component={NewMessage} />
             <Stack.Screen name="Passcode" component={Passcode} />
-            <Stack.Screen name="PupilManagement" component={PupilManagement} />
+            {/* <Stack.Screen name="PupilManagement" component={PupilManagement} /> */}
 
             <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="PupilManagementdetail" component={PupilManagementdetail} />

@@ -67,7 +67,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="NewMessage">
+        <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
