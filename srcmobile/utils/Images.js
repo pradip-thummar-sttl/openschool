@@ -117,5 +117,7 @@ const Images = {
     teacherintroSlideTwo: require('../assets/images/teacher-intro-illus-2-2.png'),
     teacherintroSlideThree: require('../assets/images/teacher-intro-illus-3-2.png'),
     noData: require('../assets/images/no-data2.png'),
+    Coverback: require('../assets/images/profile-cover2.png'),
+    profileImage: require('../assets/images/profile2.png'),
 }
 export default Images;
