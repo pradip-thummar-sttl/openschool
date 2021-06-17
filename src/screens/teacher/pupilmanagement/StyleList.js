@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import COLORS from '../../utils/Colors';
+import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import FONTS from '../../utils/Fonts';
+import FONTS from '../../../utils/Fonts';
 
 const { width, height } = Dimensions.get('window');
 
@@ -98,10 +98,6 @@ export default StyleSheet.create({
         marginTop: hp(1.30),
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(0.2), },
-        shadowOpacity: 0.16,
-        shadowRadius: hp(1.95),
         overflow: 'hidden',
     },
     pupilBoard: {
@@ -354,6 +350,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         marginLeft:hp(4.5),
+        marginBottom: 10,
         // backgroundColor: COLORS.white
     },
     pupilDashboard: {
@@ -484,12 +481,13 @@ export default StyleSheet.create({
         alignSelf: 'center',
     },
     pupilDetailLink: {
-        width: hp(8),
-        alignItems: 'flex-end',
+        width: '100%',
     },
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+        right: 20,
+        position: 'absolute',
     },
     pupilImage: {
         width: hp(3.7),

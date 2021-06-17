@@ -8,16 +8,19 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import HeaderPMInner from "./HeaderPMInner";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
+import moment from 'moment';
+import { baseUrl } from "../../../utils/Constant";
 
 const { CallModule } = NativeModules;
 
 const PupilProfileView = (props) => {
+    const item = props.route.params.item;
     const [isHide, action] = useState(true);
     return (
         <View>
             <HeaderPMInner
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit')}
+                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
             />
             <View style={PAGESTYLE.MainProfile}>
@@ -25,25 +28,27 @@ const PupilProfileView = (props) => {
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image>
-                            <View style={PAGESTYLE.profileOuter}><Image style={PAGESTYLE.profileImage} source={Images.profileImage}></Image></View>
+                            <View style={PAGESTYLE.profileOuter}>
+                                <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
+                            </View>
                         </View>
                     </View>
                     <View style={PAGESTYLE.mainDetails}>
                         <View style={PAGESTYLE.fieldDetails}>
                             <Text LABLE style={PAGESTYLE.label}>Pupil name</Text>
-                            <Text P style={PAGESTYLE.data}>Reuel Pardesi</Text>
+                            <Text P style={PAGESTYLE.data}>{item.FirstName} {item.LastName}</Text>
                         </View>
                         <View style={PAGESTYLE.fieldDetails}>
                             <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
-                            <Text P style={PAGESTYLE.data}>17/07/2012</Text>
+                            <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
                         </View>
                         <View style={PAGESTYLE.fieldDetails}>
                             <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
-                            <Text P style={PAGESTYLE.data}>RP170712</Text>
+                            <Text P style={PAGESTYLE.data}>{item.FirstName}</Text>
                         </View>
                         <View style={PAGESTYLE.fieldDetails}>
                             <Text LABLE style={PAGESTYLE.label}>Notes</Text>
-                            <Text P style={PAGESTYLE.data}>Reuel is a bright boy that is always helpful to all those around him. He is eager to learn and is particularly interesting Mathematics and Science.{"\n"}{"\n"}Reminder: Mention to parent that he is nominated to participate in Science Wiz quiz. Need parent signature and confirmation.</Text>
+                            <Text P style={PAGESTYLE.data}>{item.FirstName}</Text>
                         </View>
                     </View>
                     <View HR style={STYLE.hrCommon}></View>

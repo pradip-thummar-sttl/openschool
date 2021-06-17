@@ -56,6 +56,26 @@ const GroupSetUp = () => {
         })
     }, [])
 
+    const saveGroup = () =>{
+        let data = {
+            
+        }
+
+        // Service.get(`${EndPoints.Groupsetup}`, (res) => {
+            Service.post(`groupsetup`, (res) => {
+                setPupilLoading(false)
+                if (res.code == 200) {
+                    setPupils(res.data)
+                    setPupilsClone(res.data)
+                } else {
+                    showMessage(res.message)
+                }
+            }, (err) => {
+                setPupilLoading(false)
+                console.log('error of GetPupilByTeacherId', err)
+            })
+    }
+
     const Pupillist = (props) => (
         <TouchableOpacity
             activeOpacity={opacity}

@@ -10,21 +10,27 @@ import { User } from "../../../utils/Model";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import HeaderPMInner from './HeaderPMInner';
+import moment from 'moment';
 
-const PupilManagementdetail = () => {
+const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
 
+    console.log('props', props.selectedPupil);
     return (
-        <View style={PAGESTYLE.mainPage}>
-            <Sidebar hide={() => action(!isHide)} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+        <View style={PAGESTYLE.mainPage1}>
+            <HeaderPMInner navigateToBack={() => props.navigateToBack()} />
+            <View style={{ width: isHide ? '100%' : '100%', }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={PAGESTYLE.managementBlockTop}>
                                 <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
-                                    <View style={PAGESTYLE.thumbTopUser}></View>
+                                    <View style={PAGESTYLE.thumbTopUser}>
+                                        <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                            source={{uri: baseUrl + props.selectedPupil.ProfilePicture}} />
+                                    </View>
                                     <TouchableOpacity>
                                         <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>EDit Profile</Text>
                                     </TouchableOpacity>
@@ -33,21 +39,20 @@ const PupilManagementdetail = () => {
                             <View style={PAGESTYLE.managementNameSec}>
                                 <View style={PAGESTYLE.nameSmlBlock}>
                                     <Text style={PAGESTYLE.userLabel}>Pupil name</Text>
-                                    <Text style={PAGESTYLE.userName}>Reuel Pardesi</Text>
+                                    <Text style={PAGESTYLE.userName}>{props.selectedPupil.FirstName} {props.selectedPupil.LastName}</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateSmlBlock}>
                                     <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
-                                    <Text style={PAGESTYLE.userName}>17/07/2012</Text>
+                                    <Text style={PAGESTYLE.userName}>{moment(props.selectedPupil.Dob).format('DD/MM/yyyy')}</Text>
                                 </View>
                                 <View>
                                     <Text style={PAGESTYLE.userLabel}>Unique I.D (auto-generated)</Text>
-                                    <Text style={PAGESTYLE.userName}>RP170712</Text>
+                                    <Text style={PAGESTYLE.userName}>{props.selectedPupil.FirstName}</Text>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.managementParaSec}>
                                 <Text style={PAGESTYLE.userLabel}>Notes</Text>
-                                <Text style={PAGESTYLE.paragraphText}>Reuel is a bright boy that is always helpful to all those around him. He is eager to learn and is particularly interesting Mathematics and Science.</Text>
-                                <Text style={PAGESTYLE.paragraphText}>Reminder: Mention to parent that he is nominated to participate in Science Wiz quiz. Need parent signature and confirmation.</Text>
+                                <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.FirstName}</Text>
                             </View>
                         </View>
                         <View style={PAGESTYLE.rateAnnotationBlock}>
@@ -72,7 +77,7 @@ const PupilManagementdetail = () => {
                             </View>
                             <View style={PAGESTYLE.annotationText}>
                                 <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>Annotation</Text>
-                                <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>Rainforests are one of the oldest ecosystems on Earth and are fundamental to all life on the planet. You will learn all about different forms of physical geography, including different world ecosystems. You will also learn about everyday items that come from the Amazon Rainforest.</Text>
+                                <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.FirstName}</Text>
                             </View>
                         </View>
                         <View style={PAGESTYLE.generalRow}>
@@ -89,9 +94,9 @@ const PupilManagementdetail = () => {
                                         <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
                                         <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
                                             <Image source={Images.purpleMarkImg} style={PAGESTYLE.purpleMark} />
-                                            <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>                                            
+                                            <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
                                         </View>
-                                        <View style={PAGESTYLE.generalRow}>                                           
+                                        <View style={PAGESTYLE.generalRow}>
                                             <Image source={Images.orangeMarkImg} style={PAGESTYLE.orangeMark} />
                                             <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
                                         </View>
@@ -100,7 +105,7 @@ const PupilManagementdetail = () => {
                                 <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} />
                             </View>
                             <View>
-                           
+
                             </View>
                         </View>
                     </View>
@@ -109,4 +114,4 @@ const PupilManagementdetail = () => {
         </View>
     );
 }
-export default  PupilManagementdetail;
+export default PupilProfileView;

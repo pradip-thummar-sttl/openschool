@@ -7,9 +7,15 @@ const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
     mainPage: {
-        flexDirection: 'row',
         flex: 1,
         backgroundColor: COLORS.white,
+        width: '100%',
+        flexDirection: 'row'
+    },
+    mainPage1: {
+        flex: 1,
+        backgroundColor: COLORS.white,
+        width: '100%',
     },
     left: {
         flex: 0.26,
