@@ -19,6 +19,7 @@ const COLORS = {
     bottomProfileLightBorder:'#F1F2F7',
     backgroundColorCommon: '#F9FAFC',
     red: '#FF200D',
+    editBorder: '#CBCCD8',
     checkBlue: '#17A9EA',
     orage: '#FFB100',
     dashBoard: '#F0F1F5',
