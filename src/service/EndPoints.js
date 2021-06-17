@@ -22,6 +22,7 @@ export const EndPoints = {
     TeacherMarkedHomework: 'teacherMarkedHomework',
     EventType: 'eventtype',
     HomeworkSubmited: 'homeworksubmited/',
+    Groupsetup: 'groupsetup',
 
     //Pupil
     PupilRegister:"pupilregister",

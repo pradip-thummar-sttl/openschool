@@ -49,6 +49,8 @@ import Calendars from '../component/reusable/Calendar/Calendar';
 import Setting from '../screens/Setting/Setting';
 import Message from '../screens/GlobalMessage/Message';
 import NewMessage from '../screens/GlobalMessage/NewMessage';
+import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -112,6 +114,7 @@ function ScreenStack() {
             <Stack.Screen name="Setting" component={Setting} />
             <Stack.Screen name="Message" component={Message} />
             <Stack.Screen name="NewMessage" component={NewMessage} />
+            <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
         </Stack.Navigator>
     );
 }

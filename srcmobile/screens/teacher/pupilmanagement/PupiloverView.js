@@ -9,12 +9,15 @@ import FONTS from '../../../utils/Fonts';
 import HeaderPM from "./HeaderPM";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import GroupSetUp from "./GroupSetUp";
 
 const { CallModule } = NativeModules;
 
 const PupiloverView = (props) => {
     const [isHide, action] = useState(true);
     const [pupilData, setPupilData] = useState([])
+    const [selectedTabIndex, setSelectedTabIndex] = useState(0)
+
     useEffect(() => {
         Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
             console.log('res of all pupil by teacher', res)
@@ -31,38 +34,46 @@ const PupiloverView = (props) => {
     return (
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
-                    <View style={PAGESTYLE.mainContainer}>
-                        {
-                            pupilData.map((item, index) => {
-                                return (
-                                    <TouchableOpacity onPress={() => props.navigation.replace('PupilProfileView')}>
-                                        <View style={[PAGESTYLE.pupilData]}>
-                                            <View style={PAGESTYLE.pupilProfile}>
-                                                <View style={PAGESTYLE.rowProfile}>
-                                                    <Image style={PAGESTYLE.pupilImage}></Image>
-                                                    <Text style={PAGESTYLE.pupilName}>{item.FirstName}</Text>
+                <HeaderPM
+                    onAlertPress={() => props.navigation.openDrawer()}
+                    setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
+                />
+                {selectedTabIndex == 0 ?
+                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
+                        <View style={PAGESTYLE.mainContainer}>
+                            {
+                                pupilData.map((item, index) => {
+                                    return (
+                                        <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
+                                            <View style={[PAGESTYLE.pupilData]}>
+                                                <View style={PAGESTYLE.pupilProfile}>
+                                                    <View style={PAGESTYLE.rowProfile}>
+                                                        <Image style={PAGESTYLE.pupilImage}></Image>
+                                                        <Text style={PAGESTYLE.pupilName}>{item.FirstName}</Text>
+                                                    </View>
+                                                    <View style={PAGESTYLE.groupPupil}>
+                                                        <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : 'Group 1A'}</Text>
+                                                    </View>
                                                 </View>
-                                                <View style={PAGESTYLE.groupPupil}>
-                                                    <Text style={PAGESTYLE.groupName}>{item.GroupName?item.GroupName:'Group 1A'}</Text>
+                                                <View style={PAGESTYLE.rewardColumn}>
+                                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                 </View>
+                                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                                </TouchableOpacity>
                                             </View>
-                                            <View style={PAGESTYLE.rewardColumn}>
-                                                <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                            </View>
-                                            <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
-                                                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </TouchableOpacity>
-                                )
-                            })
-                        }
-                    </View>
-                </ScrollView>
+                                        </TouchableOpacity>
+                                    )
+                                })
+                            }
+                        </View>
+                    </ScrollView>
+                    :
+                    <GroupSetUp
+                        navigateToPupilSelection={() => props.navigation.navigate('GroupSetUpPupilSelection', { goBack: () => props.navigation.goBack() })} />
+                }
             </View>
         </View>
     );

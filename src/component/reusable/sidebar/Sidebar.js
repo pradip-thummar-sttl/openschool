@@ -18,6 +18,8 @@ const Sidebar = (props) => {
     //     props.hide();
     // }
 
+    console.log('props', props);
+
     toggleAnimation = (flag) => {
 
         if (flag && isSmall) {
@@ -106,10 +108,9 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => {props.onSetting(); toggleAnimation(true) }}
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { toggleAnimation(true) }}>
+                        onPress={() => { props.navigateToPupilManagement(); toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}

@@ -2,8 +2,6 @@ import { useSelector } from "react-redux"
 import { baseUrl } from "../utils/Constant"
 import { User } from "../utils/Model"
 
-
-
 export const Service = {
 
     get: (endPoint, success, error) => {
@@ -13,8 +11,7 @@ export const Service = {
             method: 'GET',
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
-                // "Authorization": `JWT ${User.user.Token}`
-                "Authorization": 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcmVzaC5sYWt1bUBzaWx2ZXJ0b3VjaC5jb20iLCJmdWxsTmFtZSI6IlNpbHZlciIsIl9pZCI6IjYwM2Y3YWY0ZjVkYzVkNGJiNDg5MmRmMCIsImlhdCI6MTYxNTg5NTgyN30.gCsd2gRA3qtHX7EQbi-b4Xm6nETAg0MjjojD_q8fO6Q'
+                "Authorization": `JWT ${User.user.Token}`
             },
         }).then((res) => res.json()).then((res) => {
 
