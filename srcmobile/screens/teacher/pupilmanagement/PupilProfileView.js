@@ -7,7 +7,7 @@ import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import HeaderPMInner from "./HeaderPMInner";
-import { PanGestureHandler } from "react-native-gesture-handler";
+import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 
 const { CallModule } = NativeModules;
 
@@ -17,10 +17,11 @@ const PupilProfileView = (props) => {
         <View>
             <HeaderPMInner
                 navigateToBack={() => props.navigation.goBack()}
+                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit')}
                 onAlertPress={() => props.navigation.openDrawer()}
             />
             <View style={PAGESTYLE.MainProfile}>
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image>
@@ -49,8 +50,36 @@ const PupilProfileView = (props) => {
                     <View style={PAGESTYLE.rewardSection}>
                         <View style={PAGESTYLE.fieldDetails}>
                             <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
-                            
+                            <View style={PAGESTYLE.rewardStarMark}>
+                                <View style={PAGESTYLE.centerText}>
+                                    <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                    <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                </View>
+                                <View style={PAGESTYLE.centerStar}>
+                                    <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                    <Text style={PAGESTYLE.starText}>Silver stars</Text>
+                                </View>
+                                <View style={PAGESTYLE.centerText}>
+                                    <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                    <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                </View>
+                            </View>
                         </View>
+                        <View style={PAGESTYLE.fieldDetails}>
+                            <Text LABLE style={PAGESTYLE.label}>What is the reward for?</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                multiline={true}
+                                autoCapitalize={'sentences'}
+                                numberOfLines={4}
+                                placeholder='Leave feedback here'
+                                style={PAGESTYLE.commonInputTextareaBoldGrey} />
+                        </View>
+                    </View>
+                    <View HR style={STYLE.hrCommon}></View>
+                    <View style={PAGESTYLE.pupilPerfomance}>
+                        <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
+                        <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image>
                     </View>
                 </ScrollView>
             </View>

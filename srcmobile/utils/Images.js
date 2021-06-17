@@ -119,5 +119,7 @@ const Images = {
     noData: require('../assets/images/no-data2.png'),
     Coverback: require('../assets/images/profile-cover2.png'),
     profileImage: require('../assets/images/profile2.png'),
+    graphImagePupilPerfomance: require('../assets/images/graphImagePupilPerfomance2.png'),
+    pupilEditGrpahImage: require('../assets/images/pupilEditgraph2.png'),
 }
 export default Images;
