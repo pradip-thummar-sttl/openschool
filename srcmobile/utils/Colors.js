@@ -53,6 +53,10 @@ const COLORS = {
     daySelect:'#EDF0F6',
     blueBorder: '#57ABF0',
     greyBack: '#F9FAFC',
+    sentBackColor:'rgba(213,241,254,1)',
+    sentColor:'rgba(48,156,233,1)',
+    draftBackColor:'rgba(255,236,200,1)',
+    draftColor:'rgba(255,164,57,1)',
 }
 
 export default COLORS;

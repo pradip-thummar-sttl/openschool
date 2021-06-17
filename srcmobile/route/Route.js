@@ -46,6 +46,9 @@ import CreateNewEvent from '../screens/teacher/teachertimetable/createnewevent/C
 import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/CreateNewEventPupil';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import Calendars from '../component/reusable/Calendar/Calendar';
+import Setting from '../screens/Setting/Setting';
+import Message from '../screens/GlobalMessage/Message';
+import NewMessage from '../screens/GlobalMessage/NewMessage';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -106,6 +109,9 @@ function ScreenStack() {
             <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
             <Stack.Screen name="WorkSpace" component={WorkSpace} />
             <Stack.Screen name="Calendars" component={Calendars} />
+            <Stack.Screen name="Setting" component={Setting} />
+            <Stack.Screen name="Message" component={Message} />
+            <Stack.Screen name="NewMessage" component={NewMessage} />
         </Stack.Navigator>
     );
 }

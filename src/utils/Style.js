@@ -247,5 +247,6 @@ export default StyleSheet.create({
         marginLeft: hp(1.56),
         textTransform: 'uppercase',
     },
+   
     
 });

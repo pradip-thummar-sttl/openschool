@@ -39,6 +39,11 @@ import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/
 import ScreenAndCameraRecording from '../screens/teacher/screenandcamera/ScreenandCamera';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import GroupSetUp from '../screens/teacher/pupilmanagement/GroupSetUp';
+import Setting from '../screens/Setting/Setting';
+import Message from '../screens/GlobalMessage/Message';
+import NewMessage from '../screens/GlobalMessage/NewMessage';
+import Passcode from '../screens/Passcode/Passcode';
+// import PupilManagement from '../screens/PupilManagement/PupilManagement';
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupilManagementdetail from '../screens/teacher/pupilmanagement/PupilManagementdetail';
 import PupilParentZoneProfileEdit from '../screens/pupil/parentzone/PupilParentZoneProfileEdit';
@@ -60,7 +65,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="Splash">
+        <Stack.Navigator headerMode='none' initialRouteName="PupilManagement">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
@@ -93,6 +98,12 @@ function ScreenStack() {
             <Stack.Screen name="ScreenAndCameraRecording" component={ScreenAndCameraRecording} />
             <Stack.Screen name="WorkSpace" component={WorkSpace} />
             <Stack.Screen name="GroupSetUp" component={GroupSetUp} />
+            <Stack.Screen name="Setting" component={Setting} />
+            <Stack.Screen name="Message" component={Message} />
+            <Stack.Screen name="NewMessage" component={NewMessage} />
+            <Stack.Screen name="Passcode" component={Passcode} />
+            {/* <Stack.Screen name="PupilManagement" component={PupilManagement} /> */}
+
             <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="PupilManagementdetail" component={PupilManagementdetail} />
             <Stack.Screen name="PupilParentZoneProfileEdit" component={PupilParentZoneProfileEdit} />

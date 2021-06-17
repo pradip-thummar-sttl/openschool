@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import COLORS from '../../../utils/Colors';
+import COLORS from '../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import FONTS from '../../../utils/Fonts';
+import FONTS from '../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const { width, height } = Dimensions.get('window');
@@ -114,11 +114,12 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
+        width: '68%',
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
         paddingRight: hp(3.90),
         paddingTop: hp(2.5),
-        width: '65%'
+        paddingLeft: hp(3.25),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -257,20 +258,12 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width: '30%',
+        width: '32%',
         right: 0,
         justifyContent: 'flex-start',
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
         paddingTop: hp(2.5),
-    },
-    rightSideBarLesson: {
-        right: 0,
-        justifyContent: 'flex-start',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(5.33),
-        paddingTop: hp(2.5),
-        width: '35%'
     },
     largeVideo1: {
         backgroundColor: COLORS.black,
@@ -318,9 +311,6 @@ export default StyleSheet.create({
     },
     containerWrap: {
         flexDirection: 'row',
-    },
-    containerWrap1: {
-        flexDirection: 'column',
     },
     grpThumbVideo: {
         width: hp(31.90),
@@ -474,6 +464,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
     },
+    
     commonInputTextareaNormal: {
         width: '100%',
         height: hp(10.67),
@@ -619,6 +610,8 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(2.0),
+        marginBottom:wp(1),
+        marginHorizontal:hp(2)
     },
     pupilProfile: {
         width: hp(15.80),
@@ -674,7 +667,7 @@ export default StyleSheet.create({
     },
     pupilDetailLink: {
         width: hp(10),
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
     },
     pupilDetaillinkIcon: {
         width: hp(1),
@@ -688,7 +681,7 @@ export default StyleSheet.create({
         marginRight: hp(1.69),
     },
     pupilName: {
-        fontSize: hp(1.82),
+        fontSize: hp(2.22),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
     },
@@ -710,13 +703,13 @@ export default StyleSheet.create({
     },
     firstColumn: {
         paddingLeft: hp(4.5),
-        width: hp(34.55),
+        width: hp(75.55),
     },
     secoundColumn: {
-        width: hp(22.55),
+        width: hp(15.80),
     },
     lastColumn: {
-        width: hp(20.55),
+        width: hp(10.55),
         justifyContent: 'space-between',
     },
     yesText: {
@@ -745,7 +738,7 @@ export default StyleSheet.create({
         left: hp(3.5),
     },
     userStampName: {
-        paddingLeft: hp(4.0),
+        paddingLeft: hp(0.0),
     },
     uploadBoard: {
         width: hp(33.07),
@@ -773,6 +766,7 @@ export default StyleSheet.create({
     },
     userLeft: {
         width: hp(56.77),
+        flexDirection: 'row',
     },
     userRight: {
         width: hp(60.41),
@@ -804,15 +798,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
-        width: 40,
-        height: 40,
-        marginRight: 10,
-        resizeMode: 'contain',
-    },
-    pdfIcon: {
         width: 60,
         height: 60,
-        marginRight: 10,
         resizeMode: 'contain',
     },
     removeIcon: {
@@ -842,6 +829,9 @@ export default StyleSheet.create({
         marginTop: hp(0.6),
     },
     feedbackBlock: {
+        width: '40%',
+        paddingLeft: hp(4.29),
+        paddingRight: hp(7.29),
     },
     ratingBlock: {
         width: '40%',
@@ -1107,11 +1097,11 @@ export default StyleSheet.create({
         top: hp(-5.5),
     },
     bookPurpleStip: {
+        width: hp(13.76),
         resizeMode: 'contain',
         position: 'absolute',
-        right: -20,
-        top: -20,
-        height: hp(9.46),
+        right: hp(1.5),
+        top: hp(-5.5),
     },
     blueStripText: {
         fontFamily: FONTS.fontSemiBold,
@@ -1128,6 +1118,7 @@ export default StyleSheet.create({
         // marginLeft:hp(0),
         // 
         // marginBottom:hp(-1),
+        position: 'relative',
         height: hp(8.46),
     },
     containerWrapTopPurple: {
@@ -1171,9 +1162,11 @@ export default StyleSheet.create({
         paddingTop: hp(1),
     },
     feedbackVideoBlock: {
+        flexDirection: 'row',
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         padding: hp(1.2),
+        width: '60%',
         borderRadius: hp(0.8),
         marginRight: hp(3.90),
         marginTop: hp(2.5),
@@ -1485,5 +1478,82 @@ export default StyleSheet.create({
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+
+    // new message
+    field1: {
+        marginBottom: hp(2.5),
+        // marginLeft:hp(2.5),
+        marginTop:wp(2),
+    },
+    somePlaceholderStyle: {
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        paddingLeft:10
+    },
+    commonInputTextarea1: {
+        height: hp(5.20),
+        width:hp(70),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp(1),
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
+        // paddingRight: hp(1.5),
+        paddingLeft: hp(1.5),
+        marginTop: hp(1.3),
+        marginLeft:hp(1.3),
+        marginRight:wp(2),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(2.60),
+        fontFamily: FONTS.fontSemiBold,
+    },
+    copyInputParent:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    inputWidth:{
+        width:hp(50)
+    },
+    inputHeight:{
+        height:wp(15)
+    },
+    buttonGroup1: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
+        borderRadius:10,
+        borderWidth:1,
+        borderColor:COLORS.borderGrp,
+        width:hp(25),
+        marginLeft:hp(3.8)
+        
+    },
+    addIcon: {
+        width: hp(1.55),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(1.5),
+        left: hp(1.8),
+        zIndex: 9,
+    },
+    commonButtonGreenheaderwithicon: {
+        // backgroundColor: COLORS.black,
+        color: COLORS.black,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
 });
+
