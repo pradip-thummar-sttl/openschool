@@ -241,7 +241,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         // label for user
         NSString *title = user.fullName ?: kUnknownUserLabel;
         reusableCell.name = title;
-        reusableCell.nameColor = [PlaceholderGenerator colorForString:title];
+      reusableCell.nameColor = [UIColor colorNamed: @"white"];//[PlaceholderGenerator colorForString:title];
         // mute button
         reusableCell.isMuted = NO;
         // state

@@ -110,6 +110,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     const launchLiveClass = () => {
         if (isRunningFromVirtualDevice) {
+
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
