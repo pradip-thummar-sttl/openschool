@@ -36,5 +36,6 @@ export const EndPoints = {
     GetPupilHomework: 'getpupilhomework',
 
     // pupil management.
-    PupilByTeacherId:"pupilbyteacherid"
+    PupilByTeacherId:"pupilbyteacherid",
+    UserSetting:"usersetting",
 }
