@@ -11,6 +11,7 @@ import { User } from "../../../utils/Model";
 import PAGESTYLE from './Style';
 
 const GroupSetUp = (props) => {
+    console.log('props', props);
 
     const [groups, setGroups] = useState([])
     const [pupils, setPupils] = useState([])
@@ -23,7 +24,10 @@ const GroupSetUp = (props) => {
     const [isGroupLoading, setGroupLoading] = useState([])
 
     useEffect(() => {
+        refresh()
+    }, [])
 
+    const refresh = () => {
         setGroupLoading(true)
 
         // Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
@@ -40,45 +44,26 @@ const GroupSetUp = (props) => {
             console.log('error of GetParticipants', err)
         })
 
-        setPupilLoading(true)
+    }
 
-        // Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
-        Service.get(`pupilbyteacherid/604b09139dc64117024690c3`, (res) => {
-            setPupilLoading(false)
-            if (res.code == 200) {
-                setPupils(res.data)
-                setPupilsClone(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            setPupilLoading(false)
-            console.log('error of GetPupilByTeacherId', err)
-        })
-    }, [])
-
-    const Grouplist = (props) => (
+    const Grouplist = (item) => (
         <View style={PAGESTYLE.groupParent}>
             <View style={PAGESTYLE.groupTitle1}>
-                <Text style={PAGESTYLE.groupName} numberOfLines={1}>{props.item.GroupName}</Text>
+                <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.GroupName}</Text>
                 <TouchableOpacity
-                    style={{ justifyContent: 'center', flex: 1, }}
+                    style={{ height: 30, width: 30 }}
                     activeOpacity={opacity}
-                    onPress={() => pushGroup(props.index)}>
-                    {selectedGroup.length == 0 ?
-                        <Image
-                            style={PAGESTYLE.groupEdit1}
-                            source={Images.Edit} />
-                        :
-                        null
-                    }
+                    onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList }) }}>
+                    <Image
+                        style={PAGESTYLE.groupEdit1}
+                        source={Images.Edit} />
                 </TouchableOpacity>
             </View>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false} >
                 <View style={{ flexDirection: 'row' }}>
-                    {props.item.PupilList.map((data, index) => (
+                    {item.item.PupilList.map((data, index) => (
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <Image style={PAGESTYLE.mediabarRight} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
@@ -128,7 +113,7 @@ const GroupSetUp = (props) => {
         <SafeAreaView style={PAGESTYLE.mainPage1}>
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={() => { props.navigateToPupilSelection() }}>
+                onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), }) }}>
                 <View style={PAGESTYLE.newGroup}>
                     <Text style={PAGESTYLE.newGroupLbl}>create new group</Text>
                 </View>

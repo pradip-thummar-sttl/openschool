@@ -42,37 +42,44 @@ const PupiloverView = (props) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
                         <View style={PAGESTYLE.mainContainer}>
                             {
-                                pupilData.map((item, index) => {
-                                    return (
-                                        <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
-                                            <View style={[PAGESTYLE.pupilData]}>
-                                                <View style={PAGESTYLE.pupilProfile}>
-                                                    <View style={PAGESTYLE.rowProfile}>
-                                                        <Image style={PAGESTYLE.pupilImage}></Image>
-                                                        <Text style={PAGESTYLE.pupilName}>{item.FirstName}</Text>
+                                pupilData.length > 0 ?
+                                    pupilData.map((item, index) => {
+                                        return (
+                                            <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
+                                                <View style={[PAGESTYLE.pupilData]}>
+                                                    <View style={PAGESTYLE.pupilProfile}>
+                                                        <View style={PAGESTYLE.rowProfile}>
+                                                            <Image style={PAGESTYLE.pupilImage}></Image>
+                                                            <Text style={PAGESTYLE.pupilName}>{item.FirstName}</Text>
+                                                        </View>
+                                                        <View style={PAGESTYLE.groupPupil}>
+                                                            <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : 'Group 1A'}</Text>
+                                                        </View>
                                                     </View>
-                                                    <View style={PAGESTYLE.groupPupil}>
-                                                        <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : 'Group 1A'}</Text>
+                                                    <View style={PAGESTYLE.rewardColumn}>
+                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                     </View>
+                                                    <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                                        <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                                    </TouchableOpacity>
                                                 </View>
-                                                <View style={PAGESTYLE.rewardColumn}>
-                                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                    <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                </View>
-                                                <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
-                                                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        </TouchableOpacity>
-                                    )
-                                })
+                                            </TouchableOpacity>
+                                        )
+                                    })
+                                    :
+                                    <View style={PAGESTYLE.mainContainer}>
+                                        <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
+                                        <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                                        <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
+                                    </View>
+
                             }
                         </View>
                     </ScrollView>
                     :
-                    <GroupSetUp
-                        navigateToPupilSelection={() => props.navigation.navigate('GroupSetUpPupilSelection', { goBack: () => props.navigation.goBack() })} />
+                    <GroupSetUp props={props} />
                 }
             </View>
         </View>

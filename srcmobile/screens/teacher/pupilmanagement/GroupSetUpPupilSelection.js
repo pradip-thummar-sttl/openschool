@@ -5,12 +5,14 @@ import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
-import { baseUrl, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import Images from "../../../utils/Images";
+import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
 import PAGESTYLE from './Style';
 
 const GroupSetUpPupilSelection = (props) => {
+    console.log('props', props);
 
     const [groups, setGroups] = useState([])
     const [pupils, setPupils] = useState([])
@@ -23,23 +25,6 @@ const GroupSetUpPupilSelection = (props) => {
     const [isGroupLoading, setGroupLoading] = useState([])
 
     useEffect(() => {
-
-        setGroupLoading(true)
-
-        // Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
-        Service.get(`getparticipants/604b09139dc64117024690c3`, (res) => {
-            setGroupLoading(false)
-            if (res.code == 200) {
-                setGroups(res.data)
-                setGroupsClone(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            setGroupLoading(false)
-            console.log('error of GetParticipants', err)
-        })
-
         setPupilLoading(true)
 
         // Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
@@ -48,6 +33,15 @@ const GroupSetUpPupilSelection = (props) => {
             if (res.code == 200) {
                 setPupils(res.data)
                 setPupilsClone(res.data)
+
+                if (props.route.params.data) {
+                    let list = []
+                    props.route.params.data.forEach(element => {
+                        list.push({_id: element.PupilId})
+                    });
+                    setSelectedPupils(list)
+                } else {
+                }
             } else {
                 showMessage(res.message)
             }
@@ -58,23 +52,63 @@ const GroupSetUpPupilSelection = (props) => {
     }, [])
 
     const saveGroup = () => {
-        let data = {
-
+        if (groupName.trim().length == 0) {
+            showMessage(MESSAGE.groupName)
+            return
+        } else if (selectedPupils.length == 0) {
+            showMessage(MESSAGE.selectPupil)
+            return
         }
 
+        let list = []
+        selectedPupils.forEach(element => {
+            list.push({ PupilId: element._id })
+        });
+
+        let data = {
+            GroupName: groupName,
+            TeacherId: User.user._id,
+            CreatedBy: User.user._id,
+            PupilList: list
+        }
+
+        console.log('data', data);
+
         // Service.get(`${EndPoints.Groupsetup}`, (res) => {
-        Service.post(`groupsetup`, (res) => {
-            setPupilLoading(false)
+        Service.post(data, `groupsetup`, (res) => {
             if (res.code == 200) {
-                setPupils(res.data)
-                setPupilsClone(res.data)
+                showMessageWithCallBack(MESSAGE.groupCreate, () => {
+                    props.route.params.onRefresh();
+                    props.navigation.goBack()
+                })
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
-            setPupilLoading(false)
             console.log('error of GetPupilByTeacherId', err)
         })
+    }
+
+    const pushPupilItem = (isSelected, _index) => {
+        console.log('isSelected', isSelected, _index);
+        if (!isSelected) {
+            const newList = selectedPupils.filter((item, index) => item._id !== pupils[_index]._id);
+            setSelectedPupils(newList)
+        } else {
+            setSelectedPupils([...selectedPupils, pupils[_index]])
+        }
+    }
+
+    const isPupilChecked = (_index) => {
+        if (selectedPupils.length > 0) {
+            if (selectedPupils.some(ele => ele._id == pupils[_index]._id)) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
     }
 
     const Pupillist = (props) => (
@@ -95,8 +129,9 @@ const GroupSetUpPupilSelection = (props) => {
                             onFillColor={COLORS.dashboardPupilBlue}
                             onTintColor={COLORS.dashboardPupilBlue}
                             tintColor={COLORS.dashboardPupilBlue}
+                            value={isPupilChecked(props.index)}
                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                            onValueChange={(newValue) => { console.log('newValue', newValue); }}
+                            onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, props.index) }}
                         />
                     </View>
                 </View>
@@ -119,11 +154,16 @@ const GroupSetUpPupilSelection = (props) => {
         setPupilsClone(newList)
     }
 
+    const reset = () => {
+        setGroupName('')
+        setSelectedPupils([])
+    }
+
     return (
         <SafeAreaView style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.white }}>
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={() => props.route.params.goBack()}>
+                onPress={() => props.navigation.goBack()}>
                 <Image style={PAGESTYLE.arrow} source={Images.backArrow} />
             </TouchableOpacity>
             <TextInput
@@ -152,6 +192,18 @@ const GroupSetUpPupilSelection = (props) => {
                             <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         </View>
                 }
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor }}>
+                <TouchableOpacity
+                    style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}
+                    onPress={() => { saveGroup() }}>
+                    <Text style={PAGESTYLE.button1}>Assign Group</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={PAGESTYLE.buttonParent1}
+                    onPress={() => { reset() }}>
+                    <Text style={{ ...PAGESTYLE.button1, color: COLORS.dashboardGreenButton }}>Reset</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
