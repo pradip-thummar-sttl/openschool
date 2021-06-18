@@ -230,7 +230,7 @@ export default StyleSheet.create({
     },
     managementParaSec:{
         marginRight:hp(20.05),
-        marginTop:hp(5),
+        marginTop:hp(1.5),
         paddingLeft:hp(26.04),
     },
     ratingBlock:{
@@ -671,6 +671,60 @@ export default StyleSheet.create({
         height:hp(15),
         width:hp(79.5),
         paddingTop:hp(1.5), 
+    },
+    tabLinks:{
+        flexDirection:'row',
+        paddingTop:hp(3),
+        paddingBottom:hp(3),
+        paddingLeft:hp(13.67),
+    },
+    tabLinkGrey:{
+        fontFamily:FONTS.fontBold,
+        fontSize:hp(1.56),
+        color:COLORS.lightGray,
+        marginRight:hp(4.16),
+        textTransform:'uppercase',
+    },
+    tabLinkSelected:{
+        fontFamily:FONTS.fontBold,
+        fontSize:hp(1.56),
+        color:COLORS.buttonGreen,
+        textTransform:'uppercase',
+    },
+    profileFormTopSpace:{
+        marginTop:hp(2),
+    },
+    titleInner:{
+        fontFamily:FONTS.fontSemiBold,
+        fontSize:hp(2.08),
+    },
+    titleInnerRow:{
+        flexDirection:'row',
+        marginTop:hp(5),
+        paddingLeft:hp(20),
+    },
+    managementProfileSec:{
+        flexDirection:'row',
+        paddingLeft:hp(26.04),
+        marginBottom:hp(4),
+    },
+    profileTitleRow:{
+        flexDirection:'row',
+        width:hp(75),
+        marginTop:hp(5),
+        paddingBottom:hp(1),
+        marginBottom:hp(1),
+        borderBottomWidth:1,
+        borderBottomColor:COLORS.bottomProfileLightBorder,
+        marginLeft:hp(26.04),
+    },
+    userNameNormal:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+    },
+    addressText:{
+        width:hp(20),
+        flexWrap:'wrap',
     }
-
 });

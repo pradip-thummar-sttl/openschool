@@ -22,14 +22,14 @@ const PupilProfileView = (props) => {
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInner navigateToBack={() => props.navigateToBack()} />
             <View style={{ width: isHide ? '100%' : '100%', }}>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={PAGESTYLE.whiteBg}>
+                <View style={PAGESTYLE.whiteBg}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={PAGESTYLE.managementBlockTop}>
                                 <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
                                     <View style={PAGESTYLE.thumbTopUser}>
                                         <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
-                                            source={{uri: baseUrl + props.selectedPupil.ProfilePicture}} />
+                                            source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
                                     </View>
                                     <TouchableOpacity>
                                         <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>EDit Profile</Text>
@@ -108,8 +108,8 @@ const PupilProfileView = (props) => {
 
                             </View>
                         </View>
-                    </View>
-                </ScrollView>
+                    </ScrollView>
+                </View>
             </View>
         </View>
     );

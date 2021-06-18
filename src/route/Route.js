@@ -49,6 +49,9 @@ import PupilProfileView from '../screens/teacher/pupilmanagement/PupilProfileVie
 import PupilParentZoneProfileEdit from '../screens/pupil/parentzone/PupilParentZoneProfileEdit';
 import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
+import PupilParentZoneProfileConnecttoMySchool from '../screens/pupil/parentzone/PupilParentZoneProfileConnecttoMySchool';
+import PupilParentZoneProfile from '../screens/pupil/parentzone/PupilParentZoneProfile';
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -68,7 +71,7 @@ function ScreenStack() {
     return (
         <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
-            <Stack.Screen name="Users" component={Users} />
+            <Stack.Screen name="Users" component={PupilParentZoneProfile} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
             <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
             <Stack.Screen name="Login" component={Login} />
@@ -110,6 +113,8 @@ function ScreenStack() {
             <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
             <Stack.Screen name="PupilParentZoneProfileEdit" component={PupilParentZoneProfileEdit} />
             <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
+            <Stack.Screen name="PupilParentZoneProfileConnecttoMySchool" component={PupilParentZoneProfileConnecttoMySchool} />
+            <Stack.Screen name="PupilParentZoneProfile" component={PupilParentZoneProfile} />
         </Stack.Navigator>
     );
 }
