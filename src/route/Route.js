@@ -45,10 +45,11 @@ import NewMessage from '../screens/GlobalMessage/NewMessage';
 import Passcode from '../screens/Passcode/Passcode';
 // import PupilManagement from '../screens/PupilManagement/PupilManagement';
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
-import PupilManagementdetail from '../screens/teacher/pupilmanagement/PupilManagementdetail';
+import PupilProfileView from '../screens/teacher/pupilmanagement/PupilProfileView';
 import PupilParentZoneProfileEdit from '../screens/pupil/parentzone/PupilParentZoneProfileEdit';
 import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 import Chat from '../screens/Chat/Chat';
+import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -105,8 +106,9 @@ function ScreenStack() {
             <Stack.Screen name="Passcode" component={Passcode} />
             {/* <Stack.Screen name="PupilManagement" component={PupilManagement} /> */}
 
+            <Stack.Screen name="PupiloverView" component={PupiloverView} />
             <Stack.Screen name="PupilManagement" component={PupilManagement} />
-            <Stack.Screen name="PupilManagementdetail" component={PupilManagementdetail} />
+            <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
             <Stack.Screen name="PupilParentZoneProfileEdit" component={PupilParentZoneProfileEdit} />
             <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
 

@@ -122,5 +122,6 @@ const Images = {
     parentZoneAdd:require('../assets/images/parent-zone-3-2.png'),
     parentZoneIcon: require('../assets/images/parent-zone-icon2.png'),
     editIcon: require('../assets/images/edit-icon2.png'),
+    noData: require('../assets/images/no-data2.png'),
 }
 export default Images;

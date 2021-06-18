@@ -99,14 +99,9 @@ const styles = StyleSheet.create({
         paddingRight: hp(2),
     },
     headerMain: {
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.5),
         backgroundColor: COLORS.white,
         width: '100%',
-        zIndex: 1,
     },
     mainTitle: {
         fontSize: hp(2.21),

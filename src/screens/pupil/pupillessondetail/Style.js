@@ -114,12 +114,11 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
     },
     teacherDetailLeft: {
-        width: '68%',
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
         paddingRight: hp(3.90),
         paddingTop: hp(2.5),
-        paddingLeft: hp(3.25),
+        width: '65%'
     },
     requireText: {
         fontSize: hp(2.08),
@@ -258,12 +257,20 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width: '32%',
+        width: '30%',
         right: 0,
         justifyContent: 'flex-start',
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
         paddingTop: hp(2.5),
+    },
+    rightSideBarLesson: {
+        right: 0,
+        justifyContent: 'flex-start',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(5.33),
+        paddingTop: hp(2.5),
+        width: '35%'
     },
     largeVideo1: {
         backgroundColor: COLORS.black,
@@ -311,6 +318,9 @@ export default StyleSheet.create({
     },
     containerWrap: {
         flexDirection: 'row',
+    },
+    containerWrap1: {
+        flexDirection: 'column',
     },
     grpThumbVideo: {
         width: hp(31.90),
@@ -763,7 +773,6 @@ export default StyleSheet.create({
     },
     userLeft: {
         width: hp(56.77),
-        flexDirection: 'row',
     },
     userRight: {
         width: hp(60.41),
@@ -795,8 +804,15 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
+        resizeMode: 'contain',
+    },
+    pdfIcon: {
         width: 60,
         height: 60,
+        marginRight: 10,
         resizeMode: 'contain',
     },
     removeIcon: {
@@ -826,9 +842,6 @@ export default StyleSheet.create({
         marginTop: hp(0.6),
     },
     feedbackBlock: {
-        width: '40%',
-        paddingLeft: hp(4.29),
-        paddingRight: hp(7.29),
     },
     ratingBlock: {
         width: '40%',
@@ -1094,11 +1107,11 @@ export default StyleSheet.create({
         top: hp(-5.5),
     },
     bookPurpleStip: {
-        width: hp(13.76),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.5),
-        top: hp(-5.5),
+        right: -20,
+        top: -20,
+        height: hp(9.46),
     },
     blueStripText: {
         fontFamily: FONTS.fontSemiBold,
@@ -1115,7 +1128,6 @@ export default StyleSheet.create({
         // marginLeft:hp(0),
         // 
         // marginBottom:hp(-1),
-        position: 'relative',
         height: hp(8.46),
     },
     containerWrapTopPurple: {
@@ -1159,11 +1171,9 @@ export default StyleSheet.create({
         paddingTop: hp(1),
     },
     feedbackVideoBlock: {
-        flexDirection: 'row',
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         padding: hp(1.2),
-        width: '60%',
         borderRadius: hp(0.8),
         marginRight: hp(3.90),
         marginTop: hp(2.5),

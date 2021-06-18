@@ -6,49 +6,85 @@ import STYLE from '../../../utils/Style';
 import Images from '../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
-import HeaderPMInner from "./HeaderPMInner";
+import HeaderPMInnerEdit from "./HeaderPMInnerEdit";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
-import moment from 'moment';
-import { baseUrl } from "../../../utils/Constant";
 
 const { CallModule } = NativeModules;
 
-const PupilProfileView = (props) => {
-    const item = props.route.params.item;
+const PupilProfileEdit = (props) => {
     const [isHide, action] = useState(true);
     return (
         <View>
-            <HeaderPMInner
+            <HeaderPMInnerEdit
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
             />
             <View style={PAGESTYLE.MainProfile}>
-                <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
+                <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image>
                             <View style={PAGESTYLE.profileOuter}>
-                                <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
+                                <Image style={PAGESTYLE.profileImage}></Image>
+                                <TouchableOpacity style={PAGESTYLE.editProfileMain}><Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} ></Image></TouchableOpacity>
                             </View>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.mainDetails}>
-                        <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>Pupil name</Text>
-                            <Text P style={PAGESTYLE.data}>{item.FirstName} {item.LastName}</Text>
+                    <View style={PAGESTYLE.mainDetailsForm}>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={STYLE.commonInputGrayBack}
+                                placeholder="First Name"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={"Reuel"}
+                                placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
-                        <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
-                            <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={STYLE.commonInputGrayBack}
+                                placeholder="Last Name"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={"Pardesi"}
+                                placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
-                        <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
-                            <Text P style={PAGESTYLE.data}>{item.FirstName}</Text>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={STYLE.commonInputGrayBack}
+                                placeholder="Date of Birth"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={"17/07/2012"}
+                                placeholderTextColor={COLORS.menuLightFonts} />
+                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                        </View>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={STYLE.commonInputGrayBack}
+                                placeholder="Unique I.D (auto-generated)"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={"RP170712"}
+                                placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetails}>
                             <Text LABLE style={PAGESTYLE.label}>Notes</Text>
-                            <Text P style={PAGESTYLE.data}>{item.FirstName}</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                multiline={true}
+                                autoCapitalize={'sentences'}
+                                numberOfLines={4}
+                                placeholder='Write something about your pupil here…'
+                                style={PAGESTYLE.commonInputTextareaBoldGrey} />
                         </View>
                     </View>
                     <View HR style={STYLE.hrCommon}></View>
@@ -82,9 +118,9 @@ const PupilProfileView = (props) => {
                         </View>
                     </View>
                     <View HR style={STYLE.hrCommon}></View>
-                    <View style={PAGESTYLE.pupilPerfomance}>
+                    <View style={PAGESTYLE.pupilPerfomanceEdit}>
                         <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                        <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image>
+                        <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image>
                     </View>
                 </ScrollView>
             </View>
@@ -92,4 +128,4 @@ const PupilProfileView = (props) => {
     );
 }
 
-export default PupilProfileView;
+export default PupilProfileEdit;

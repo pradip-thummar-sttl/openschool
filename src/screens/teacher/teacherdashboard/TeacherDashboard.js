@@ -21,6 +21,7 @@ import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAd
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import PupilManagement from "../pupilmanagement/PupilManagement";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -123,6 +124,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isTeacherLessonDetail, setTeacherLessonDetail] = useState(false)
     const [isAddSubject, setAddSubject] = useState(false)
     const [isAddEvent, setAddEvent] = useState(false)
+    const [isPupilManagement, setPupilManagement] = useState(false)
 
     useEffect(() => {
         refresh()
@@ -194,7 +196,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,false, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, false, (id) => {
                     console.log('hi id:---------', id)
                 })
             }
@@ -240,7 +242,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0) }}
                 navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
-                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }} />
+                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
+                navigateToPupilManagement={() => { console.log('CLICKED'); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }} />
             {
                 isTeacherLessonDetail ?
                     <TLDetailEdit
@@ -540,7 +543,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                             selectedIndex == 1 ?
                                 <TeacherTimeTable navigation={props.navigation} />
                                 :
-                                <TeacherLessonList navigation={props.navigation} />
+                                selectedIndex == 2 ?
+                                    <TeacherLessonList navigation={props.navigation} />
+                                    :
+                                    <PupilManagement navigation={props.navigation} />
 
             }
             {isAddEvent ?

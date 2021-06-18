@@ -56,7 +56,7 @@ const PupilHomeWorkDetail = (props) => {
                 setLoading(false)
                 console.log('response of save Homework', res)
                 // setDefaults()
-                showMessageWithCallBack(res.message, () => {
+                showMessageWithCallBack(MESSAGE.hwSubmitted, () => {
                     props.goBack()
                 })
                 setSubmitPopup(false)

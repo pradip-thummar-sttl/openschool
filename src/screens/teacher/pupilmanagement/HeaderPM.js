@@ -16,7 +16,6 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
-
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -34,7 +33,6 @@ const HeaderPM = (props) => {
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Pupil Management</Text>
                 </View>
 
@@ -47,90 +45,106 @@ const HeaderPM = (props) => {
                 </View>
             </View>
 
-            {tabIndex == 0 ?
-                <View style={styles.searchParent}>
-                    <View style={styles.searchInner}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => {
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                            }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                        </TouchableOpacity>
-                        <TextInput
-                            ref={textInput}
-                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                            placeholder="Search subject, topic name etc"
-                            placeholderTextColor={COLORS.menuLightFonts}
-                            onChangeText={keyword => {
-                                props.onSearchKeyword(keyword);
-                            }} />
-                        <Menu>
-                            <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
-                            <MenuOptions style={styles.filterListWrap}>
-                                <MenuOption style={styles.borderList}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                        <View style={styles.filterList}>
-                                            <Text style={styles.filterListText}>Subject</Text>
-                                            {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                :
-                                                null
-                                            }
-                                        </View>
-                                    </TouchableOpacity>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                        <View style={styles.filterList}>
-                                            <Text style={styles.filterListText}>Date</Text>
-                                            {selectedIndex == 1 ?
-                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                :
-                                                null
-                                            }
-                                        </View>
-                                    </TouchableOpacity>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                    </View>
-
-                    {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity> */}
-                </View>
-                :
-                <View style={{ height: 20 }}></View>
-            }
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
-                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                        <View style={styles.lessonPlanTab}>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { props.setSelectedTabIndex(0); setSelectedTab(0) }}>
-                                <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>pupil overview</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { props.setSelectedTabIndex(1); setSelectedTab(1) }}>
-                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
+                    <View style={styles.lessonPlanTab}>
+                        <TouchableOpacity
+                            style={styles.tabs}
+                            activeOpacity={opacity}
+                            onPress={() => { props.onTabSelected(0); setSelectedTab(0) }}>
+                            <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>pupil overview</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.tabs}
+                            activeOpacity={opacity}
+                            onPress={() => { props.onTabSelected(1); setSelectedTab(1) }}>
+                            <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+
+                {tabIndex == 0 ?
+                    <View style={styles.searchParent}>
+                        <View style={styles.searchInner}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => {
+                                    isSearchActive ?
+                                        setSearchActive(false)
+                                        :
+                                        setSearchActive(true)
+                                }}>
+                                <Image style={{ height: 20, resizeMode: 'contain' }}
+                                    source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            </TouchableOpacity>
+                            <TextInput
+                                ref={textInput}
+                                style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                placeholder="Search pupil name etc"
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={keyword => {
+                                    props.onSearchKeyword(keyword);
+                                }} />
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Menu style={{ marginLeft: 10 }}>
+                                <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                                <MenuOptions style={styles.filterListWrap}>
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Subject</Text>
+                                                {selectedIndex == 0 ?
+                                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Date</Text>
+                                                {selectedIndex == 1 ?
+                                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                    {/* <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => setSelectedIndex(2)}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Name</Text>
+                                        {selectedIndex == 2 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption> */}
+                                </MenuOptions>
+                            </Menu>
+                            <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                        </View>
+
+                        {/* <TouchableOpacity style={styles.buttonGroup}>
+                        <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                        <Text style={styles.commonButtonGreenheader}></Text>
+                    </TouchableOpacity> */}
+                    </View>
+                    :
+                    null
+                }
             </View>
         </View>
     );
@@ -142,8 +156,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
-        justifyContent: 'space-between',
-        borderBottomWidth: 1, borderColor: COLORS.dashBoard,
         paddingBottom: 5,
         paddingLeft: hp(2),
         paddingRight: hp(2),
@@ -161,9 +173,10 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
+        paddingLeft: 20
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
     },
     date: {
@@ -330,7 +343,8 @@ const styles = StyleSheet.create({
     },
     headerRight: {
         alignSelf: 'flex-end',
-        right: -5,
+        position: 'absolute',
+        right: 10,
     },
     calnderDashHeaderIcon: {
         width: hp(4.57),
@@ -395,13 +409,25 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', paddingLeft: hp(2), paddingRight: hp(2), alignItems: 'center', marginBottom: hp(1), backgroundColor: COLORS.white, marginTop: 12, height: 50
+        flexDirection: 'row',
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        width: '50%',
+        right: 0,
+        position: 'absolute',
+        height: 50,
     },
     searchInner: {
-        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
+        height: '100%', flex: 1,
+        borderColor: COLORS.borderGrp,
+        borderWidth: 1,
+        borderRadius: 10,
+        flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {
-        height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
+        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
     },
     whiteBg: {
         paddingBottom: hp(1),
@@ -410,6 +436,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingRight: hp(2),
         paddingLeft: hp(2),
+        width: '100%',
+        marginVertical: 20,
+        height: 50,
     },
     lessonPlanTop: {
         flexDirection: 'row',

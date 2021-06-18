@@ -19,6 +19,7 @@ import TeacherDashboard from '../screens/teacher/teacherdashboard/TeacherDashboa
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
 import PupilProfileView from '../screens/teacher/pupilmanagement/PupilProfileView';
+import PupilProfileEdit from '../screens/teacher/pupilmanagement/PupilProfileEdit';
 import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
 import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLessonList';
@@ -48,6 +49,8 @@ import Calendars from '../component/reusable/Calendar/Calendar';
 import Setting from '../screens/Setting/Setting';
 import Message from '../screens/GlobalMessage/Message';
 import NewMessage from '../screens/GlobalMessage/NewMessage';
+import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -84,6 +87,7 @@ function ScreenStack() {
             <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="PupiloverView" component={PupiloverView} />
             <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
+            <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
             <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
             <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
             <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
@@ -110,6 +114,7 @@ function ScreenStack() {
             <Stack.Screen name="Setting" component={Setting} />
             <Stack.Screen name="Message" component={Message} />
             <Stack.Screen name="NewMessage" component={NewMessage} />
+            <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
         </Stack.Navigator>
     );
 }

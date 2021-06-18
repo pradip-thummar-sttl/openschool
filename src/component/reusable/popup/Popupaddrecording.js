@@ -90,10 +90,10 @@ const Popupaddrecording = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
-                                    <TouchableOpacity onPress={() => { toggleModal(); props.onScreeCamera() }} style={styles.entryData}>
+                                    {/* <TouchableOpacity onPress={() => { toggleModal(); props.onScreeCamera() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-camera2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                     <TouchableOpacity onPress={() => { toggleModal(); props.onScreeVoice() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
@@ -123,7 +123,8 @@ const styles = StyleSheet.create({
     popupLarge: {
         backgroundColor: COLORS.white,
         borderRadius: hp(2),
-        width: hp(94.40),
+        // width: hp(94.40),
+        paddingHorizontal: 150,
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -142,8 +143,8 @@ const styles = StyleSheet.create({
     entryContentMain: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft: hp(-4.23),
-        marginRight: hp(-4.23),
+        // marginLeft: hp(-4.23),
+        // marginRight: hp(-4.23),
     },
     entryData: {
         paddingLeft: hp(4.23),

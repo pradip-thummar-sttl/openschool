@@ -29,7 +29,7 @@ const PopupHomeWorkSave = (props) => {
             {!props.isMarked && props.isSubmitted ?
                 <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
                     <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                    <Text style={styles.commonButtonGreenheader}>set homework</Text>
+                    <Text style={styles.commonButtonGreenheader}>mark homework</Text>
                 </TouchableOpacity>
                 :
                 null

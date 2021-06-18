@@ -12,7 +12,8 @@ import moment from 'moment';
 import { Download } from "../../../../utils/Download";
 import { baseUrl } from "../../../../utils/Constant";
 const TLDetail = (props) => {
-console.log('props', props);
+    console.log('props', props.lessonData.RecordingList);
+    console.log('props', props.lessonData.MaterialList);
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
@@ -124,7 +125,7 @@ console.log('props', props);
                         {props.lessonData.MaterialList.length > 0 ?
                             props.lessonData.MaterialList.map((item, index) => {
                                 return (
-                                    <View style={{...PAGESTYLE.fileGrp, height: 60}}>
+                                    <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
                                         <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
@@ -153,11 +154,17 @@ console.log('props', props);
                     }
                     <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                        {props.lessonData.RecordedLessonName ?
-                            <View style={PAGESTYLE.videoLinkBlockRight}>
-                                <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                                <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
-                            </View>
+                        {props.lessonData.RecordingList ?
+                            props.lessonData.RecordingList.map((item, index) => {
+                                return (
+                                    <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
+                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            })
                             :
                             <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No lesson recording found!</Text>
                         }
