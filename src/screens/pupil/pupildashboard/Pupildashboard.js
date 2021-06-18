@@ -18,6 +18,7 @@ import moment from "moment";
 import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
 import Setting from "../../Setting/Setting";
+import Chat from "../../Chat/Chat";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -437,7 +438,8 @@ const PupuilDashboard = (props) => {
                             <PupilTimetable navigation={props.navigation} />
                             : selectedIndex == 2 ?
                             <PupilLessonDetail navigation={props.navigation} />
-                            :<Setting navigation={props.navigation} />
+                            : <Chat />
+                            // <Setting navigation={props.navigation} />
             }
 
         </View>
