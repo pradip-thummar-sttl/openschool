@@ -506,5 +506,31 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
     },
+    mainContainer: {
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: hp(1.5),
+        paddingTop: hp(2),
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1),
+    },
+    noDataImage: {
+        height: 300,
+        resizeMode: 'contain',
+        alignSelf: 'center',
+        marginBottom: 50
+    },
+    nodataTitle: {
+        alignSelf: 'center',
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: 18,
+        textAlign : 'center',
+        marginBottom: 10,
+    },
+    nodataContent: {
+        alignSelf: 'center',
+        fontSize: 18,
+        textAlign : 'center'
+    },
   
 })

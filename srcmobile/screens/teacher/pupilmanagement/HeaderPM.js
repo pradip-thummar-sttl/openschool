@@ -16,6 +16,7 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
+
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -68,6 +69,39 @@ const HeaderPM = (props) => {
                             onChangeText={keyword => {
                                 props.onSearchKeyword(keyword);
                             }} />
+                        <Menu>
+                            <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                            <MenuOptions style={styles.filterListWrap}>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Subject</Text>
+                                            {selectedIndex == 0 ?
+                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Date</Text>
+                                            {selectedIndex == 1 ?
+                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                            </MenuOptions>
+                        </Menu>
                     </View>
 
                     {/* <TouchableOpacity style={styles.buttonGroup}>
@@ -367,7 +401,7 @@ const styles = StyleSheet.create({
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {
-        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+        height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
     },
     whiteBg: {
         paddingBottom: hp(1),

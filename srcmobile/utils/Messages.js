@@ -39,7 +39,10 @@ const MESSAGE = {
     workspaceAdded: 'Workspace saved successfully',
     blankWorkspace: 'Workspace cannot be blank',
     noHomework: 'Homework has not assigned yet',
-    hwSubmitted: 'Homework submitted successfully'
+    hwSubmitted: 'Homework submitted successfully',
+    groupName: 'Please enter valid group name',
+    groupCreate: 'Group created successfully',
+
 }
 
 export default MESSAGE;

@@ -47,50 +47,104 @@ const HeaderPM = (props) => {
 
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
-                        <View style={styles.lessonPlanTab}>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => {props.onTabSelected(0); setSelectedTab(0)}}>
-                                <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>pupil overview</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => {props.onTabSelected(1); setSelectedTab(1)}}>
-                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
-                            </TouchableOpacity>
-                        </View>
+                    <View style={styles.lessonPlanTab}>
+                        <TouchableOpacity
+                            style={styles.tabs}
+                            activeOpacity={opacity}
+                            onPress={() => { props.onTabSelected(0); setSelectedTab(0) }}>
+                            <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>pupil overview</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.tabs}
+                            activeOpacity={opacity}
+                            onPress={() => { props.onTabSelected(1); setSelectedTab(1) }}>
+                            <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
-                <View style={styles.searchParent}>
-                    <View style={styles.searchInner}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => {
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                            }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                        </TouchableOpacity>
-                        <TextInput
-                            ref={textInput}
-                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                            placeholder="Search pupil name etc"
-                            placeholderTextColor={COLORS.menuLightFonts}
-                            onChangeText={keyword => {
-                                props.onSearchKeyword(keyword);
-                            }} />
-                    </View>
+                {tabIndex == 0 ?
+                    <View style={styles.searchParent}>
+                        <View style={styles.searchInner}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => {
+                                    isSearchActive ?
+                                        setSearchActive(false)
+                                        :
+                                        setSearchActive(true)
+                                }}>
+                                <Image style={{ height: 20, resizeMode: 'contain' }}
+                                    source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            </TouchableOpacity>
+                            <TextInput
+                                ref={textInput}
+                                style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                placeholder="Search pupil name etc"
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={keyword => {
+                                    props.onSearchKeyword(keyword);
+                                }} />
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Menu style={{ marginLeft: 10 }}>
+                                <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                                <MenuOptions style={styles.filterListWrap}>
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Subject</Text>
+                                                {selectedIndex == 0 ?
+                                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Date</Text>
+                                                {selectedIndex == 1 ?
+                                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                    {/* <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => setSelectedIndex(2)}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Name</Text>
+                                        {selectedIndex == 2 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption> */}
+                                </MenuOptions>
+                            </Menu>
+                            <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                        </View>
 
-                    {/* <TouchableOpacity style={styles.buttonGroup}>
+                        {/* <TouchableOpacity style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.AddIconWhite} />
                         <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity> */}
-                </View>
+                    </View>
+                    :
+                    null
+                }
             </View>
         </View>
     );

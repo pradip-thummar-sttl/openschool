@@ -78,39 +78,39 @@ const Header = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <View style={{flexDirection: 'row'}}>
-                <Menu style={{marginLeft: 10}}>
-                    <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
-                    <MenuOptions style={styles.filterListWrap}>
-                        <MenuOption style={styles.borderList}>
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Subject</Text>
-                                    {selectedIndex == 0 ?
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                        :
-                                        null
-                                    }
-                                </View>
-                            </TouchableOpacity>
-                        </MenuOption>
-                        <MenuOption style={styles.borderList}>
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Date</Text>
-                                    {selectedIndex == 1 ?
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                        :
-                                        null
-                                    }
-                                </View>
-                            </TouchableOpacity>
-                        </MenuOption>
-                        {/* <MenuOption style={styles.borderList}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Menu style={{ marginLeft: 10 }}>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                        <MenuOptions style={styles.filterListWrap}>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Subject</Text>
+                                        {selectedIndex == 0 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Date</Text>
+                                        {selectedIndex == 1 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            {/* <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => setSelectedIndex(2)}>
@@ -124,9 +124,9 @@ const Header = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption> */}
-                    </MenuOptions>
-                </Menu>
-                <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                        </MenuOptions>
+                    </Menu>
+                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
