@@ -33,14 +33,17 @@ const Setting = (props) => {
     }, [])
     const setData = (data) => {
         var type = []
+        var type1 = []
         var subType = []
         var typeDic = []
         data.forEach(item => {
             if (!type.includes(item.Type)) {
+                let o = {name:item.Type, isSelected:false}
                 type.push(item.Type)
+                type1.push(o)
             }
         });
-        setTypeObject(type)
+        setTypeObject(type1)
         var mainArray = []
         type.forEach(obj => {
             var x = []
@@ -84,7 +87,7 @@ const Setting = (props) => {
                     typeObject.map((item, index) => {
                         return (
                             <TouchableOpacity style={styles.tabs}>
-                                <Text style={[styles.tabsText, styles.tabsTextSelected]}>{item}</Text>
+                                <Text style={[styles.tabsText, styles.tabsTextSelected]}>{item.name}</Text>
                             </TouchableOpacity>
                         )
                     })

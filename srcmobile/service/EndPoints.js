@@ -33,5 +33,7 @@ export const EndPoints = {
     PupilUploadHomework:"uploadhomework",
     UploadWorkspace:'uploadWorkspace',
     GetPupilLesson: 'getpupillesson',
-    GetPupilHomework: 'getpupilhomework'
+    GetPupilHomework: 'getpupilhomework',
+
+    UserSetting:"usersetting",
 }
