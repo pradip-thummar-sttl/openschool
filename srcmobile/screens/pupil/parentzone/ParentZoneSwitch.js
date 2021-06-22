@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
-import COLORS from '../../utils/Colors';
-import FONTS from '../../utils/Fonts';
-import Images from '../../utils/Images';
+import COLORS from '../../../utils/Colors';
+import FONTS from '../../../utils/Fonts';
+import Images from '../../../utils/Images';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { opacity } from '../../utils/Constant';
+import { opacity } from '../../../utils/Constant';
 
 export default class Users extends Component {
     constructor(props) {
