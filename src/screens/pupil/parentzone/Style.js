@@ -726,5 +726,9 @@ export default StyleSheet.create({
     addressText:{
         width:hp(20),
         flexWrap:'wrap',
-    }
+    },
+    fullInput:{
+        width:hp(79.5),
+        paddingTop:hp(1.5), 
+    },
 });

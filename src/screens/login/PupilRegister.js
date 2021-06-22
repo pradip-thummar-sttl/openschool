@@ -265,7 +265,7 @@ class Login extends Component {
                         </View>
                         <Text style={[styles.fieldInputLabel]}>What is the Learners Name</Text>
                         <View style={styles.loginAccountForm}>
-                            <View style={{ ...styles.field, ...styles.filedSpace, marginRight: 10 }}>
+                            <View style={{ ...styles.field, ...styles.filedSpace, marginRight: 10, marginBottom: 0 }}>
                                 <TextInput
                                     onFocus={() => this.setState({ isFirstNameFocused: true })}
                                     onBlur={() => this.setState({ isFirstNameFocused: false })}
@@ -280,7 +280,7 @@ class Login extends Component {
                                     placeholderTextColor={COLORS.lightplaceholder}
                                     onChangeText={firstName => this.setState({ firstName })} />
                             </View>
-                            <View style={{ ...styles.field, ...styles.filedSpace, marginLeft: 10 }}>
+                            <View style={{ ...styles.field, ...styles.filedSpace, marginLeft: 10, marginBottom: 0 }}>
                                 <TextInput
                                     onFocus={() => this.setState({ isLastNameFocused: true })}
                                     onBlur={() => this.setState({ isLastNameFocused: false })}
@@ -516,6 +516,7 @@ const styles = StyleSheet.create({
     loginButtonView: {
         marginTop: hp('3.0%'),
         width: '100%',
+        alignContent:'flex-start',
     },
     bottomLoginIntro: {
         marginTop: 50
@@ -542,7 +543,7 @@ const styles = StyleSheet.create({
         borderRadius: hp('1.3'),
         overflow: 'hidden',
         textAlign: 'center',
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         width: 250,
@@ -571,13 +572,14 @@ const styles = StyleSheet.create({
     greenText: {
         color: COLORS.buttonGreen,
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        lineHeight: hp(2.5),
+        fontSize: hp(1.75),
+        textAlignVertical:'top',
     },
     registerSmtText: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
+        fontSize: hp(1.95),
         color: COLORS.lightGray,
+        textAlignVertical:'top',
     },
     rightRegisterSmlText: {
         justifyContent: 'flex-end',

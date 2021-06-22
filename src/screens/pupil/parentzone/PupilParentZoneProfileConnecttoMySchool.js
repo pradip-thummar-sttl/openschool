@@ -50,7 +50,7 @@ const PupilParentZoneProfileConnecttoMySchool = () => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={[STYLE.commonInput, PAGESTYLE.fullInput]}
                                         placeholder="Moseley Church of England School"
                                         autoCapitalize={false}
                                         maxLength={40}
@@ -67,7 +67,7 @@ const PupilParentZoneProfileConnecttoMySchool = () => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={[STYLE.commonInput, PAGESTYLE.fullInput]}
                                         placeholder="Enter Unique Code"
                                         autoCapitalize={false}
                                         maxLength={40}
