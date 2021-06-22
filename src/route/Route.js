@@ -71,7 +71,7 @@ function ScreenStack() {
     return (
         <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
-            <Stack.Screen name="Users" component={PupilParentZoneProfileConnecttoMySchool} />
+            <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
             <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
             <Stack.Screen name="Login" component={Login} />
