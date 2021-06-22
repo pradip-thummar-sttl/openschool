@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         lineHeight:hp(2.5),
         textAlign: 'center',
+        paddingHorizontal: hp(2),
         fontFamily: FONTS.fontRegular,
     },
     SlideImage: {
