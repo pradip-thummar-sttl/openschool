@@ -24,7 +24,56 @@ const ParentZonemain = (props) => {
                     <View style={PAGESTYLE.feedsMain}>
                         <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
                             <View style={PAGESTYLE.leftContent}>
-                                <View style={PAGESTYLE.test}></View>
+                                <View style={PAGESTYLE.dateGrp}>
+                                    <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>14/09/2020</Text></View>
+                                    <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View>
+                                </View>
+                                <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>Back to school newsletter from the he…</Text></View>
+                                <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View>
+                            </View>
+                            <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
+                            <View style={PAGESTYLE.leftContent}>
+                                <View style={PAGESTYLE.dateGrp}>
+                                    <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>14/09/2020</Text></View>
+                                    <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View>
+                                </View>
+                                <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>School reopen in 3 weeks according to…</Text></View>
+                                <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusDraft}>Draft</Text></View>
+                            </View>
+                            <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
+                            <View style={PAGESTYLE.leftContent}>
+                                <View style={PAGESTYLE.dateGrp}>
+                                    <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>14/09/2020</Text></View>
+                                    <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View>
+                                </View>
+                                <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>Class cancelled for 2 days</Text></View>
+                                <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View>
+                            </View>
+                            <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
+                            <View style={PAGESTYLE.leftContent}>
+                                <View style={PAGESTYLE.dateGrp}>
+                                    <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>14/09/2020</Text></View>
+                                    <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View>
+                                </View>
+                                <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>Christmas Arts & Craft at Home</Text></View>
+                                <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View>
+                            </View>
+                            <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
+                            <View style={PAGESTYLE.leftContent}>
+                                <View style={PAGESTYLE.dateGrp}>
+                                    <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>14/09/2020</Text></View>
+                                    <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View>
+                                </View>
+                                <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>School term break Sept-Oct 2020</Text></View>
+                                <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View>
                             </View>
                             <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
                         </TouchableOpacity>
