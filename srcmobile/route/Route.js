@@ -26,7 +26,7 @@ import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLesso
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
 import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
-import ParentZone from '../screens/users/ParentZone';
+import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 import ParentZonemain from '../screens/pupil/parentzone/ParentZonemain';
 import STYLE from '../utils/Style';
 
@@ -116,7 +116,7 @@ function ScreenStack() {
             <Stack.Screen name="Setting" component={Setting} />
             <Stack.Screen name="Message" component={Message} />
             <Stack.Screen name="NewMessage" component={NewMessage} />
-            <Stack.Screen name="ParentZone" component={ParentZone} />
+            <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
             <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
             <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
         </Stack.Navigator>

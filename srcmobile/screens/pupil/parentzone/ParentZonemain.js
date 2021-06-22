@@ -21,7 +21,14 @@ const ParentZonemain = (props) => {
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                 />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
-                    
+                    <View style={PAGESTYLE.feedsMain}>
+                        <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
+                            <View style={PAGESTYLE.leftContent}>
+                                <View style={PAGESTYLE.test}></View>
+                            </View>
+                            <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+                        </TouchableOpacity>
+                    </View>
                 </ScrollView>
             </View>
         </View>
