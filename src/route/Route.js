@@ -51,6 +51,7 @@ import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
 import PupilParentZoneProfileConnecttoMySchool from '../screens/pupil/parentzone/PupilParentZoneProfileConnecttoMySchool';
 import PupilParentZoneProfile from '../screens/pupil/parentzone/PupilParentZoneProfile';
+import PupilParentZoneNewsFeed from '../screens/pupil/parentzone/PupilParentZoneNewsFeed';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
@@ -115,6 +116,7 @@ function ScreenStack() {
             <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
             <Stack.Screen name="PupilParentZoneProfileConnecttoMySchool" component={PupilParentZoneProfileConnecttoMySchool} />
             <Stack.Screen name="PupilParentZoneProfile" component={PupilParentZoneProfile} />
+            <Stack.Screen name="PupilParentZoneNewsFeed" component={PupilParentZoneNewsFeed} />
         </Stack.Navigator>
     );
 }
