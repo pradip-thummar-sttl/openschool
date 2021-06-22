@@ -135,7 +135,7 @@ const Sidebar = (props) => {
                             />
                             <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer()}} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => {props.navigation.replace('Chat'); setSelectedModule(3); props.navigation.closeDrawer()}} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAchievements}
