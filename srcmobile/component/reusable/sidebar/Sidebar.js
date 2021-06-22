@@ -149,7 +149,7 @@ const Sidebar = (props) => {
                             />
                             <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => {props.navigation.replace('ParentZone'); setSelectedModule(3); props.navigation.closeDrawer()}} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.OpenSchool}

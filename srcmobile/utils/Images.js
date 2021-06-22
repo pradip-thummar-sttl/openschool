@@ -121,5 +121,11 @@ const Images = {
     profileImage: require('../assets/images/profile2.png'),
     graphImagePupilPerfomance: require('../assets/images/graphImagePupilPerfomance2.png'),
     pupilEditGrpahImage: require('../assets/images/pupilEditgraph2.png'),
+    parentZone: require('../assets/images/parent-zone-top2.png'),
+    userOne: require('../assets/images/parent-user-12.png'),
+    userTwo: require('../assets/images/parent-user-22.png'),
+    addUser: require('../assets/images/parent-user-add2.png'),
+    parentZoneIcon: require('../assets/images/parent-zone-icon2.png'),
+    userparent: require('../assets/images/userParent2.png'),
 }
 export default Images;
