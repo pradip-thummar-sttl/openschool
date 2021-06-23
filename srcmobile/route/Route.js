@@ -28,6 +28,9 @@ import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimet
 import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
 import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 import ParentZonemain from '../screens/pupil/parentzone/ParentZonemain';
+import ParentZoneProfile from '../screens/pupil/parentzone/ParentZoneProfile';
+import ParentZoneProfileEdit from '../screens/pupil/parentzone/ParentZoneProfileEdit';
+import ParentZoneSchoolDetails from '../screens/pupil/parentzone/ParentZoneSchoolDetails';
 import STYLE from '../utils/Style';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -118,6 +121,9 @@ function ScreenStack() {
             <Stack.Screen name="NewMessage" component={NewMessage} />
             <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
             <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
+            <Stack.Screen name="ParentZoneProfile" component={ParentZoneProfile} />
+            <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
+            <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
             <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
         </Stack.Navigator>
     );

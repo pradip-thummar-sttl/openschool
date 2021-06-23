@@ -226,8 +226,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(5.85),
-        height: hp(5.85),
+        width: hp(5.17),
+        height: hp(5.17),
         resizeMode: 'contain',
     },
     userparent: {

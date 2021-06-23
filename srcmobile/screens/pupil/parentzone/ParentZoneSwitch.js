@@ -30,7 +30,8 @@ export default class Users extends Component {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            activeOpacity={opacity}>
+                            activeOpacity={opacity}
+                            onPress={() => this.props.navigation.navigate('ParentZoneProfile')}>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
@@ -39,7 +40,8 @@ export default class Users extends Component {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            activeOpacity={opacity}>
+                            activeOpacity={opacity}
+                            onPress={() => this.props.navigation.navigate('ParentZoneSchoolDetails')}>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
