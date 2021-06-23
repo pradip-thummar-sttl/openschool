@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     introTitle: {
         color:COLORS.darkGrayIntro,
-        fontSize: hp(2.28),
+        fontSize: hp(3.12),
         marginBottom:hp(2.8),
         textAlign: 'center',
         fontFamily: FONTS.fontBold,
@@ -52,9 +52,11 @@ const styles = StyleSheet.create({
         lineHeight:hp(2.5),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
+        paddingLeft:hp(31.77),
+        paddingRight:hp(31.77),
     },
     SlideImage: {
-        width: hp(46),
+       // width: hp(46),
         resizeMode: 'contain',
         height: hp(49),
     },

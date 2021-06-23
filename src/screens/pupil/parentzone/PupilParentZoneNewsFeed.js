@@ -58,7 +58,7 @@ const PupilParentZoneNewsFeed = () => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(true);
-
+console.log( renderItem={pupilRender});
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar hide={() => action(!isHide)} />
