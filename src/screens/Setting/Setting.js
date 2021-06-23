@@ -16,7 +16,20 @@ const Setting = (props) => {
 
 
     const switchOnOff = (isOn) => {
-        setSwitch(isOn)
+        var arr = [...settings]
+       
+        arr[index].data[index1][index2].Value = isOn
+        setSettings(arr)
+        // console.log('hello index', arr, arr[index].data[index1][index2])
+        let data = {"SettingList":[arr[index].data[index1][index2]]}
+        Service.post(data, `${EndPoints.SaveSetting}/${User.user.UserDetialId}`, (res) => {
+            console.log('save setyting response', res);
+            showMessage(res.message)
+        }, (err) => {
+            console.log('save setyting error', err);
+
+        })
+        // setSwitch(isOn)
     }
     useEffect(() => {
         Service.get(`${EndPoints.UserSetting}/${User.user.UserDetialId}`, (res) => {
@@ -115,7 +128,7 @@ const Setting = (props) => {
                                                     <View style={styles.listView}>
                                                         <Text style={styles.text}>{item2.Name}</Text>
                                                         <ToggleSwitch
-                                                            isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
+                                                            isOn={item2.Value} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn, index, index1, index2)}
                                                         />
                                                     </View>
                                                 )

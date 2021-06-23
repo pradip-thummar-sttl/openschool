@@ -63,14 +63,35 @@ const PupuilDashboard = (props) => {
     }, [])
 
     const launchLiveClass = () => {
+        console.log('data of sub view', dataOfSubView)
         if (isRunningFromVirtualDevice) {
+            
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+
+                })
+            } else {
+                showMessage('please time time to start')
+
+            }
         }
     }
 

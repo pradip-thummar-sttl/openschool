@@ -37,4 +37,7 @@ export const EndPoints = {
     GetPupilHomework: 'getpupilhomework',
 
     UserSetting:"usersetting",
+    SaveSetting:"saveSetting",
+
+    LessionStartEnd:"lessionstartend"
 }

@@ -10,14 +10,13 @@ import { Service } from "../../service/Service";
 import { EndPoints } from "../../service/EndPoints";
 import { User } from "../../utils/Model";
 import { showMessage } from "../../utils/Constant";
+import { log } from "react-native-reanimated";
 const Setting = (props) => {
     const [isSwitch, setSwitch] = useState(true)
     const [typeObject, setTypeObject] = useState([])
     const [settings, setSettings] = useState([])
 
-    const switchOnOff = (isOn) => {
-        setSwitch(isOn)
-    }
+
     useEffect(() => {
         Service.get(`${EndPoints.UserSetting}/${User.user.UserDetialId}`, (res) => {
             console.log('user setting response', res);
@@ -38,7 +37,7 @@ const Setting = (props) => {
         var typeDic = []
         data.forEach(item => {
             if (!type.includes(item.Type)) {
-                let o = {name:item.Type, isSelected:false}
+                let o = { name: item.Type, isSelected: false }
                 type.push(item.Type)
                 type1.push(o)
             }
@@ -77,6 +76,22 @@ const Setting = (props) => {
         setSettings(mainArray)
         console.log('type  of mainArray ', mainArray)
     }
+    const switchOnOff = (isOn, index, index1, index2) => {
+        var arr = [...settings]
+       
+        arr[index].data[index1][index2].Value = isOn
+        setSettings(arr)
+        // console.log('hello index', arr, arr[index].data[index1][index2])
+        let data = {"SettingList":[arr[index].data[index1][index2]]}
+        Service.post(data, `${EndPoints.SaveSetting}/${User.user.UserDetialId}`, (res) => {
+            console.log('save setyting response', res);
+            showMessage(res.message)
+        }, (err) => {
+            console.log('save setyting error', err);
+
+        })
+        // setSwitch(isOn)
+    }
     return (
         <View style={styles.mainPage}>
             <SettingHeader onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLES.pupilHeader} />
@@ -95,41 +110,41 @@ const Setting = (props) => {
 
 
             <View >
-            {
-                settings.map((item, index) => {
-                    return (
-                        item.data.map((item1, index1) => {
-                            return (
-                                <>
-                                    <View style={[styles.headingTextView,{height: wp(7),marginTop:hp(2)}]}>
-                                        <Text style={styles.mainTitle}>{item1[0].SubType}</Text>
-                                        {/* <View style={styles.headLineView} /> */}
-                                    </View>
-                                    <View style={[styles.headingTextView, { flexDirection: 'column', alignItems: 'flex-start' }]}>
-                                        {
-                                            item1.map((item2, index2) => {
-                                                return (
-                                                    <View style={styles.listView}>
-                                                        <Text style={styles.text}>{item2.Name}</Text>
-                                                        <ToggleSwitch
-                                                            isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                                                        />
-                                                    </View>
-                                                )
-                                            })
-                                        }
-                                    </View>
-                                </>
-                            )
-                        })
+                {
+                    settings.map((item, index) => {
+                        return (
+                            item.data.map((item1, index1) => {
+                                return (
+                                    <>
+                                        <View style={[styles.headingTextView, { height: wp(7), marginTop: hp(2) }]}>
+                                            <Text style={styles.mainTitle}>{item1[0].SubType}</Text>
+                                            {/* <View style={styles.headLineView} /> */}
+                                        </View>
+                                        <View style={[styles.headingTextView, { flexDirection: 'column', alignItems: 'flex-start' }]}>
+                                            {
+                                                item1.map((item2, index2) => {
+                                                    return (
+                                                        <View style={styles.listView}>
+                                                            <Text style={styles.text}>{item2.Name}</Text>
+                                                            <ToggleSwitch
+                                                                isOn={item2.Value} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn, index, index1, index2)}
+                                                            />
+                                                        </View>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                    </>
+                                )
+                            })
 
-                    )
-                })
+                        )
+                    })
 
-            }
+                }
             </View>
 
-          
+
         </View>
     );
 }
@@ -172,8 +187,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         // justifyContent: 'space-between',
         // paddingTop: hp(1.90),
-        alignItems:'center',
-        backgroundColor:'white',
+        alignItems: 'center',
+        backgroundColor: 'white',
         borderBottomWidth: 1,
         borderColor: COLORS.borderGrp
     },

@@ -109,15 +109,36 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const launchLiveClass = () => {
+        console.log('data of sub view', dataOfSubView)
         if (isRunningFromVirtualDevice) {
-
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+
+                })
+            } else {
+                showMessage('please time time to start')
+
+            }
+
+            console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
 
@@ -143,7 +164,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,true, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, true, (id) => {
                     console.log('hi id:---------', id)
                 })
             }

@@ -39,4 +39,7 @@ export const EndPoints = {
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",
     UserSetting:"usersetting",
+    SaveSetting:"saveSetting",
+
+    LessionStartEnd:"lessionstartend"
 }

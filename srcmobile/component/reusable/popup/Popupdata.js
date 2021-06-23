@@ -7,11 +7,13 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity } from "../../../utils/Constant";
+import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity, showMessage } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import RBSheet from "react-native-raw-bottom-sheet";
 import moment from 'moment';
 import { User } from "../../../../src/utils/Model";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -28,10 +30,29 @@ const Popupdata = (props) => {
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+
+                })
+            } else {
+                showMessage('please time time to start')
+
+            }
         }
     }
 

@@ -167,10 +167,28 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+
+                })
+            } else {
+                showMessage('please time time to start')
+
+            }
         }
     }
 
