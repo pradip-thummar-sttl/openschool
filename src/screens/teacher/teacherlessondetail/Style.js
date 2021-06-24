@@ -1272,7 +1272,8 @@ flex: 1,
         shadowRadius: hp(1),
     },
     checkMark: {
-        width: hp(1.48),
+        width: 20,
+        height: 20,
         resizeMode: 'contain',
         left: hp(0.4),
         top: hp(0.28)
