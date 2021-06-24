@@ -106,7 +106,7 @@ export default StyleSheet.create({
     moreDashboard: {
         width: hp(0.7),
         resizeMode: 'contain',
-        marginTop: hp(-3),
+        marginTop: hp(1),
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
