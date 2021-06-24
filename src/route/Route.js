@@ -56,9 +56,6 @@ import ParentZoneProfile from '../screens/pupil/parentzone/ParentZoneProfile';
 import ParentZonemain from '../screens/pupil/parentzone/ParentZonemain';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
-import PupilParentZoneProfileConnecttoMySchool from '../screens/pupil/parentzone/PupilParentZoneProfileConnecttoMySchool';
-import PupilParentZoneProfile from '../screens/pupil/parentzone/PupilParentZoneProfile';
-import PupilParentZoneNewsFeed from '../screens/pupil/parentzone/PupilParentZoneNewsFeed';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();

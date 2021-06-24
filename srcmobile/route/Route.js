@@ -85,59 +85,61 @@ export default function Route() {
 
 function ScreenStack() {
     return (
-        <Stack.Navigator headerMode='none' initialRouteName="Splash">
-            <Stack.Screen name="Splash" component={Splash} />
-            <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
-            <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
-            <Stack.Screen name="Users" component={Users} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="PupilRegister" component={PupilRegister} />
-            <Stack.Screen name="PupilVerify" component={PupilVerify} />
-            <Stack.Screen name="PupilConnect" component={PupilConnect} />
-            <Stack.Screen name="Popup" component={Popup} />
-            <Stack.Screen name="Popupuser" component={Popupuser} />
-            <Stack.Screen name="Sidebar" component={Sidebar} />
-            <Stack.Screen name="SidebarPupil" component={SidebarPupil} />
-            <Stack.Screen name="Header" component={Header} />
-            <Stack.Screen name="PupilManagement" component={PupilManagement} />
-            <Stack.Screen name="PupiloverView" component={PupiloverView} />
-            <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
-            <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
-            <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
-            <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
-            <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
-            <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
-            <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
-            <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
-            <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
-            <Stack.Screen name="CreateNewEvent" component={CreateNewEvent} />
-            <Stack.Screen name="CreateNewEventPupil" component={CreateNewEventPupil} />
-            {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
-            <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
-            <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
-            <Stack.Screen name="TLDetail" component={TLDetail} />
-            <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
-            <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
-            <Stack.Screen name="PupilHomeWorkSubmitted" component={PupilHomeWorkSubmitted} />
-            <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
-            {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
-            <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
-            <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
-            <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
-            <Stack.Screen name="WorkSpace" component={WorkSpace} />
-            <Stack.Screen name="Calendars" component={Calendars} />
-            <Stack.Screen name="Setting" component={Setting} />
-            <Stack.Screen name="Message" component={Message} />
-            <Stack.Screen name="NewMessage" component={NewMessage} />
-            <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
-            <Stack.Screen name="Passcode" component={Passcode} />
-            <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
-            <Stack.Screen name="ParentZoneProfile" component={ParentZoneProfile} />
-            <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
-            <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
-            <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
-            <Stack.Screen name="Chat" component={Chat} />
-        </Stack.Navigator>
+        <PubNubProvider client={pubnubDetail}>
+            <Stack.Navigator headerMode='none' initialRouteName="Splash">
+                <Stack.Screen name="Splash" component={Splash} />
+                <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
+                <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
+                <Stack.Screen name="Users" component={Users} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="PupilRegister" component={PupilRegister} />
+                <Stack.Screen name="PupilVerify" component={PupilVerify} />
+                <Stack.Screen name="PupilConnect" component={PupilConnect} />
+                <Stack.Screen name="Popup" component={Popup} />
+                <Stack.Screen name="Popupuser" component={Popupuser} />
+                <Stack.Screen name="Sidebar" component={Sidebar} />
+                <Stack.Screen name="SidebarPupil" component={SidebarPupil} />
+                <Stack.Screen name="Header" component={Header} />
+                <Stack.Screen name="PupilManagement" component={PupilManagement} />
+                <Stack.Screen name="PupiloverView" component={PupiloverView} />
+                <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
+                <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
+                <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
+                <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
+                <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
+                <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
+                <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
+                <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
+                <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
+                <Stack.Screen name="CreateNewEvent" component={CreateNewEvent} />
+                <Stack.Screen name="CreateNewEventPupil" component={CreateNewEventPupil} />
+                {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
+                <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
+                <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
+                <Stack.Screen name="TLDetail" component={TLDetail} />
+                <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
+                <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
+                <Stack.Screen name="PupilHomeWorkSubmitted" component={PupilHomeWorkSubmitted} />
+                <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
+                {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
+                <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
+                <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
+                <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
+                <Stack.Screen name="WorkSpace" component={WorkSpace} />
+                <Stack.Screen name="Calendars" component={Calendars} />
+                <Stack.Screen name="Setting" component={Setting} />
+                <Stack.Screen name="Message" component={Message} />
+                <Stack.Screen name="NewMessage" component={NewMessage} />
+                <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
+                <Stack.Screen name="Passcode" component={Passcode} />
+                <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
+                <Stack.Screen name="ParentZoneProfile" component={ParentZoneProfile} />
+                <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
+                <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
+                <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
+                <Stack.Screen name="Chat" component={Chat} />
+            </Stack.Navigator>
+        </PubNubProvider>
     );
 }
 
