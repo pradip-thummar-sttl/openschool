@@ -49,14 +49,26 @@ import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement'
 import PupilProfileView from '../screens/teacher/pupilmanagement/PupilProfileView';
 import ParentZoneProfileEdit from '../screens/pupil/parentzone/ParentZoneProfileEdit';
 import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
+import Chat from '../screens/Chat/Chat';
 import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
 import ParentZoneSchoolDetails from '../screens/pupil/parentzone/ParentZoneSchoolDetails';
 import ParentZoneProfile from '../screens/pupil/parentzone/ParentZoneProfile';
 import ParentZonemain from '../screens/pupil/parentzone/ParentZonemain';
+import PubNub from 'pubnub';
+import { PubNubProvider, usePubNub } from 'pubnub-react';
+import PupilParentZoneProfileConnecttoMySchool from '../screens/pupil/parentzone/PupilParentZoneProfileConnecttoMySchool';
+import PupilParentZoneProfile from '../screens/pupil/parentzone/PupilParentZoneProfile';
+import PupilParentZoneNewsFeed from '../screens/pupil/parentzone/PupilParentZoneNewsFeed';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
+
+const pubnubDetail = new PubNub({
+    publishKey: 'pub-c-bd967178-53ea-4b05-954a-2666bb3b6337',
+    subscribeKey: 'sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267',
+    uuid: 'myUniqueUUID'
+});
 export default function Route() {
     return (
 
@@ -71,6 +83,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
+        <PubNubProvider client={pubnubDetail}>
         <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
@@ -119,7 +132,10 @@ function ScreenStack() {
             <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
             <Stack.Screen name="ParentZoneProfile" component={ParentZoneProfile} />
             <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
+
+            <Stack.Screen name="Chat" component={Chat} />
         </Stack.Navigator>
+        </PubNubProvider>
     );
 }
 
@@ -131,7 +147,8 @@ function MyDrawer() {
             drawerPosition='right'
             headerMode='none'
             drawerStyle={STYLE.drawerWidth} >
-            <Drawer.Screen name="ScreenStack" component={ScreenStack} />
+            
+                <Drawer.Screen name="ScreenStack" component={ScreenStack} />
         </Drawer.Navigator>
     );
 }

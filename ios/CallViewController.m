@@ -140,6 +140,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
           weakSelf.muteAudio ^= 1;
         [weakSelf.session leave];
+        if( weakSelf.completeCall ){
+          weakSelf.completeCall(true);
+           }
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
       }];
         [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
@@ -241,7 +244,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         // label for user
         NSString *title = user.fullName ?: kUnknownUserLabel;
         reusableCell.name = title;
-        reusableCell.nameColor = [PlaceholderGenerator colorForString:title];
+      reusableCell.nameColor = [UIColor colorNamed: @"white"];//[PlaceholderGenerator colorForString:title];
         // mute button
         reusableCell.isMuted = NO;
         // state

@@ -1,58 +1,150 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from "../../utils/Fonts";
 import COLORS from "../../utils/Colors";
 import ToggleSwitch from 'toggle-switch-react-native';
 import SettingHeader from "../../component/reusable/header/SettingHeader";
 import STYLES from "../../utils/Style";
+import { Service } from "../../service/Service";
+import { EndPoints } from "../../service/EndPoints";
+import { User } from "../../utils/Model";
+import { showMessage } from "../../utils/Constant";
+import { log } from "react-native-reanimated";
 const Setting = (props) => {
     const [isSwitch, setSwitch] = useState(true)
-    const switchOnOff = (isOn) => {
-        setSwitch(isOn)
+    const [typeObject, setTypeObject] = useState([])
+    const [settings, setSettings] = useState([])
+
+
+    useEffect(() => {
+        Service.get(`${EndPoints.UserSetting}/${User.user.UserDetialId}`, (res) => {
+            console.log('user setting response', res);
+            if (res.flag) {
+                setData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('user setting error', err);
+
+        })
+    }, [])
+    const setData = (data) => {
+        var type = []
+        var type1 = []
+        var subType = []
+        var typeDic = []
+        data.forEach(item => {
+            if (!type.includes(item.Type)) {
+                let o = { name: item.Type, isSelected: false }
+                type.push(item.Type)
+                type1.push(o)
+            }
+        });
+        setTypeObject(type1)
+        var mainArray = []
+        type.forEach(obj => {
+            var x = []
+            data.forEach(element => {
+                if (element.Type === obj) {
+                    x.push(element)
+                }
+            });
+            console.log('type  of ', x)
+            x.forEach(a => {
+                if (!subType.includes(a.SubType)) {
+                    subType.push(a.SubType)
+                }
+            });
+            var z = []
+            subType.forEach(obj => {
+                var y = []
+                x.forEach(element => {
+                    if (element.SubType === obj) {
+                        y.push(element)
+                    }
+                });
+                z.push(y)
+
+            });
+
+            // console.log('type  of subType ', z)
+            let dict = { data: z, isSelected: false }
+            mainArray.push(dict)
+        });
+        setSettings(mainArray)
+        console.log('type  of mainArray ', mainArray)
+    }
+    const switchOnOff = (isOn, index, index1, index2) => {
+        var arr = [...settings]
+       
+        arr[index].data[index1][index2].Value = isOn
+        setSettings(arr)
+        // console.log('hello index', arr, arr[index].data[index1][index2])
+        let data = {"SettingList":[arr[index].data[index1][index2]]}
+        Service.post(data, `${EndPoints.SaveSetting}/${User.user.UserDetialId}`, (res) => {
+            console.log('save setyting response', res);
+            showMessage(res.message)
+        }, (err) => {
+            console.log('save setyting error', err);
+
+        })
+        // setSwitch(isOn)
     }
     return (
         <View style={styles.mainPage}>
             <SettingHeader onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLES.pupilHeader} />
 
-            {/* First part */}
-            <View style={styles.headingTextView}>
-                <Text style={styles.mainTitle}>Notifications</Text>
-                {/* <View style={styles.headLineView} /> */}
-            </View>
-            <View style={[styles.headingTextView,{flexDirection:'column', alignItems:'flex-start'}]}>
+            <View style={[styles.lessonPlanTab, { height: 50 }]}>
                 {
-                    [1, 2, 3].map((item, index) => {
+                    typeObject.map((item, index) => {
                         return (
-                            <View style={styles.listView}>
-                                <Text style={styles.text}>Upcoming Live Lessons</Text>
-                                <ToggleSwitch
-                                    isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                                />
-                            </View>
+                            <TouchableOpacity style={styles.tabs}>
+                                <Text style={[styles.tabsText, styles.tabsTextSelected]}>{item.name}</Text>
+                            </TouchableOpacity>
                         )
                     })
                 }
             </View>
-            {/* second part */}
-            <View style={[styles.headingTextView, { marginTop: hp(15) }]}>
-                <Text style={styles.mainTitle}>Accessibility</Text>
-                {/* <View style={styles.headLineView} /> */}
-            </View>
-            <View style={[styles.headingTextView,{flexDirection:'column', alignItems:'flex-start'}]}>
+
+
+            <View >
                 {
-                    [1, 2, 3].map((item, index) => {
+                    settings.map((item, index) => {
                         return (
-                            <View style={styles.listView}>
-                                <Text style={styles.text}>Upcoming Live Lessons</Text>
-                                <ToggleSwitch
-                                    isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                                />
-                            </View>
+                            item.data.map((item1, index1) => {
+                                return (
+                                    <>
+                                        <View style={[styles.headingTextView, { height: wp(7), marginTop: hp(2) }]}>
+                                            <Text style={styles.mainTitle}>{item1[0].SubType}</Text>
+                                            {/* <View style={styles.headLineView} /> */}
+                                        </View>
+                                        <View style={[styles.headingTextView, { flexDirection: 'column', alignItems: 'flex-start' }]}>
+                                            {
+                                                item1.map((item2, index2) => {
+                                                    return (
+                                                        <View style={styles.listView}>
+                                                            <Text style={styles.text}>{item2.Name}</Text>
+                                                            <ToggleSwitch
+                                                                isOn={item2.Value} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn, index, index1, index2)}
+                                                            />
+                                                        </View>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                    </>
+                                )
+                            })
+
                         )
                     })
+
                 }
             </View>
+
+
         </View>
     );
 }
@@ -66,10 +158,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: hp(1.95),
         alignItems: 'center',
-        height: hp(7),
+        // height: hp(7),
     },
     mainTitle: {
-        fontSize: hp(2.50),
+        fontSize: hp(2.00),
         fontFamily: FONTS.fontSemiBold,
     },
     headLineView: {
@@ -90,5 +182,27 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.89)
-    }
+    },
+    lessonPlanTab: {
+        flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // paddingTop: hp(1.90),
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderBottomWidth: 1,
+        borderColor: COLORS.borderGrp
+    },
+    tabs: {
+        // paddingRight: hp(3.90),
+        paddingLeft: wp(3.90)
+    },
+    tabsText: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.56),
+        textTransform: 'uppercase',
+    },
+    tabsTextSelected: {
+        color: COLORS.buttonGreen,
+    },
 })

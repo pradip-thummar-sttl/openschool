@@ -42,4 +42,8 @@ export const EndPoints = {
 
     //Parent Zone
     SetPin: 'setpin',
+    UserSetting:"usersetting",
+    SaveSetting:"saveSetting",
+
+    LessionStartEnd:"lessionstartend"
 }

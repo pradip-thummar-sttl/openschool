@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -7,15 +7,18 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import Modal from 'react-native-modal';
-import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity } from "../../../utils/Constant";
+import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity, showMessage } from "../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import moment from 'moment';
 import { User } from "../../../utils/Model";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
 const Popupdata = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -23,13 +26,37 @@ const Popupdata = (props) => {
 
     const launchLiveClass = () => {
         if (isRunningFromVirtualDevice) {
+            
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+            setLoading(true)
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    setLoading(false)
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                   
+                }, (err) => {
+                    setLoading(false)
+
+                })
+            } else {
+                showMessage('please start selected time')
+                setLoading(false)
+
+            }
         }
     }
 
@@ -55,8 +82,16 @@ const Popupdata = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,true, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, true, (id) => {
                     console.log('hi id:---------', id)
+
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    }, (err) => {
+                    })
                 })
             }
 
@@ -235,7 +270,15 @@ const Popupdata = (props) => {
                                             style={styles.buttonGrp}
                                             activeOpacity={opacity}
                                             onPress={() => { launchLiveClass() }}>
-                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                            {
+                                                isLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...styles.buttonGrp, right: 30 }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.buttonGreen} /> :
+                                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+
+                                            }
                                         </TouchableOpacity>
                                     </View>
                                 </View>

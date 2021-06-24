@@ -34,6 +34,7 @@ const PupuilDashboard = (props) => {
     const [isMyDayLoading, setMyDayLoading] = useState(true)
     const [isHomeworkLoading, setHomeworkLoading] = useState(true)
 
+    const [isLoading, setLoading] = useState(false);
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -63,14 +64,38 @@ const PupuilDashboard = (props) => {
     }, [])
 
     const launchLiveClass = () => {
+        console.log('data of sub view', dataOfSubView)
         if (isRunningFromVirtualDevice) {
+
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+            setLoading(true)
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                    setLoading(false)
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+                    setLoading(false)
+
+                })
+            } else {
+                showMessage('please time time to start')
+                setLoading(false)
+
+            }
         }
     }
 
@@ -97,8 +122,11 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,true, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, true, (id) => {
                     console.log('hi id:---------', id)
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                    }, (err) => {
+                    })
                 })
             }
         } catch (e) {
@@ -321,7 +349,15 @@ const PupuilDashboard = (props) => {
                                                                         <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton }}>
                                                                             <TouchableOpacity
                                                                                 onPress={() => { launchLiveClass() }}>
-                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Join Class</Text>
+                                                                                {
+                                                                                    isLoading ?
+                                                                                        <ActivityIndicator
+                                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                            color={COLORS.buttonGreen} /> :
+                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Join Class</Text>
+                                                                                }
+
                                                                             </TouchableOpacity>
                                                                         </View>
                                                                     </View>

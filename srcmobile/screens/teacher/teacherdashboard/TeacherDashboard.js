@@ -74,6 +74,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [pupilData, setPupilData] = useState([])
     const [isDashDataLoading, setDashDataLoading] = useState(true)
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
+    const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         refresh()
@@ -109,14 +110,42 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const launchLiveClass = () => {
+        console.log('data of sub view', dataOfSubView)
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
-            startLiveClassAndroid()
+            // startLiveClassAndroid()
             // } else {
             //     startLiveClassIOS()
             // }
+            setLoading(true)
+            let currentTime = moment(Date()).format('hh:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    setLoading(false)
+
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+                    setLoading(false)
+
+                })
+            } else {
+                setLoading(false)
+                showMessage('please time time to start')
+                
+
+
+            }
+
+            console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
 
@@ -142,8 +171,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId,true, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, true, (id) => {
                     console.log('hi id:---------', id)
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    }, (err) => {
+                    })
                 })
             }
 
@@ -388,7 +420,16 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                                             <TouchableOpacity
                                                                 onPress={() => { launchLiveClass() }}>
-                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+
+                                                                {
+                                                                    isLoading ?
+                                                                        <ActivityIndicator
+                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                            color={COLORS.buttonGreen} /> :
+                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+                                                                }
+
                                                             </TouchableOpacity>
                                                         </View>
                                                     </View>
