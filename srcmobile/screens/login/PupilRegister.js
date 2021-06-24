@@ -25,6 +25,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import moment from "moment";
 const { LoginModuleIos, LoginModule } = NativeModules;
 
 var days = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
@@ -49,7 +50,10 @@ class PupilRegister extends Component {
             lastName: "",
             day: "",
             month: "",
-            year: ""
+            year: "",
+            mobile: "",
+            password: "",
+            cpassword: "",
         }
     }
     state = {
@@ -63,7 +67,6 @@ class PupilRegister extends Component {
 
     isFieldsValidated = () => {
         const { userName, password, cpassword, firstName, lastName, day, month, year, PushToken, mobile, Device, OS, AccessedVia, isRemember } = this.state;
-        console.log('user type data', this.props);
         if (!day) {
             showMessage(MESSAGE.day);
             return false;
@@ -109,24 +112,24 @@ class PupilRegister extends Component {
                     }
                 })
 
-
                 var data = {
                     FirstName: firstName,
                     LastName: lastName,
                     Email: userName,
-                    Dob: `${year}-${month}-${day}`,
+                    MobileNumber: mobile,
+                    Dob: moment(`${year}-${month}-${day}`, 'yyyy-MMM-DD').format('yyyy-MM-DD'),
                     Password: password,
                     UserTypeId: userType
                 }
 
+                console.log('data', data);
+
                 Service.post(data, EndPoints.PupilRegister, (res) => {
                     console.log('response of register', res);
+                    this.setLoading(false)
                     if (res.code == 200) {
-                        data.isRemember = isRemember
-                        User.user = res.data
-                        this.props.navigation.replace('Login', { userType: "Pupil" })
+                        this.props.navigation.replace('PupilConnect', { userType: "Pupil", data: res.data })
                     } else {
-                        this.setLoading(false)
                         showMessage(res.message)
                     }
                 }, (err) => {
@@ -302,7 +305,7 @@ class PupilRegister extends Component {
                                                 onSubmitEditing={() => { this.t2.focus(); }}
                                                 style={{ ...STYLE.commonInput, borderColor: (this.state.isFirstNameFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                                 placeholder="First Name"
-                                                autoCapitalize={'none'}
+                                                autoCapitalize={'words'}
                                                 maxLength={40}
                                                 onChangeText={(firstName) => this.setState({ firstName })}
                                                 placeholderTextColor={COLORS.lightGray}
@@ -317,7 +320,7 @@ class PupilRegister extends Component {
                                                 onSubmitEditing={() => { this.t3.focus(); }}
                                                 style={{ ...STYLE.commonInput, borderColor: (this.state.isLastNameFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                                 placeholder="Last Name"
-                                                autoCapitalize={'none'}
+                                                autoCapitalize={'words'}
                                                 maxLength={40}
                                                 onChangeText={(lastName) => this.setState({ lastName })}
                                                 placeholderTextColor={COLORS.lightGray}

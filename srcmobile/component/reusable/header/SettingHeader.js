@@ -35,10 +35,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-        marginBottom: hp(1.95),
+        // marginBottom: hp(1.95),
         paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        borderBottomWidth: 1,
+        borderColor: COLORS.borderGrp
     },
     mainTitle: {
         fontSize: hp(2),

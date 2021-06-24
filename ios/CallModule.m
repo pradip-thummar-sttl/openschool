@@ -51,7 +51,15 @@ RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSStrin
   VC.isTeacher=isTeacher;
   VC.teacherQBUserID=teacherQBUserID;
   VC.conferenceType = QBRTCConferenceTypeVideo;
+ 
   VC.modalPresentationStyle = UIModalPresentationFullScreen;
+  VC.completeCall = ^(BOOL isFinished) {
+         if (isFinished){
+           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+             successCallback(@[@"hello"]);
+           });
+         }
+     };
   dispatch_async(dispatch_get_main_queue(), ^{
     
     if (isPopup) {
@@ -63,9 +71,9 @@ RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSStrin
         });
 //  [[[[UIApplication sharedApplication]keyWindow]rootViewController] presentViewController:VC animated:NO completion:nil];
 //  [((AppDelegate *)[[UIApplication sharedApplication] delegate]) showLoginView];
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    successCallback(@[@"hello"]);
-  });
+//  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    successCallback(@[@"hello"]);
+//  });
  
 
 

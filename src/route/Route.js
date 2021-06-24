@@ -7,6 +7,7 @@ import IntroductionTeacher from '../screens/introduction/IntroductionTeacher';
 import IntroductionPupil from '../screens/introduction/IntroductionPupil';
 import Login from '../screens/login/Login';
 import PupilRegister from '../screens/login/PupilRegister';
+import PupilConnect from '../screens/login/PupilConnect';
 import Popup from '../component/reusable/popup/Popup';
 import Popupuser from '../component/reusable/popup/Popupuser';
 import Sidebar from '../component/reusable/sidebar/Sidebar';
@@ -42,20 +43,29 @@ import GroupSetUp from '../screens/teacher/pupilmanagement/GroupSetUp';
 import Setting from '../screens/Setting/Setting';
 import Message from '../screens/GlobalMessage/Message';
 import NewMessage from '../screens/GlobalMessage/NewMessage';
-import Passcode from '../screens/Passcode/Passcode';
+import Passcode from '../screens/pupil/parentzone/Passcode';
 // import PupilManagement from '../screens/PupilManagement/PupilManagement';
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';
 import PupilProfileView from '../screens/teacher/pupilmanagement/PupilProfileView';
-import PupilParentZoneProfileEdit from '../screens/pupil/parentzone/PupilParentZoneProfileEdit';
+import ParentZoneProfileEdit from '../screens/pupil/parentzone/ParentZoneProfileEdit';
 import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
+import Chat from '../screens/Chat/Chat';
 import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
-import PupilParentZoneProfileConnecttoMySchool from '../screens/pupil/parentzone/PupilParentZoneProfileConnecttoMySchool';
-import PupilParentZoneProfile from '../screens/pupil/parentzone/PupilParentZoneProfile';
-import PupilParentZoneNewsFeed from '../screens/pupil/parentzone/PupilParentZoneNewsFeed';
+import ParentZoneSchoolDetails from '../screens/pupil/parentzone/ParentZoneSchoolDetails';
+import ParentZoneProfile from '../screens/pupil/parentzone/ParentZoneProfile';
+import ParentZonemain from '../screens/pupil/parentzone/ParentZonemain';
+import PubNub from 'pubnub';
+import { PubNubProvider, usePubNub } from 'pubnub-react';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
+
+const pubnubDetail = new PubNub({
+    publishKey: 'pub-c-bd967178-53ea-4b05-954a-2666bb3b6337',
+    subscribeKey: 'sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267',
+    uuid: 'myUniqueUUID'
+});
 export default function Route() {
     return (
 
@@ -70,6 +80,7 @@ export default function Route() {
 
 function ScreenStack() {
     return (
+        <PubNubProvider client={pubnubDetail}>
         <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
@@ -77,6 +88,7 @@ function ScreenStack() {
             <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="PupilRegister" component={PupilRegister} />
+            <Stack.Screen name="PupilConnect" component={PupilConnect} />
             <Stack.Screen name="Popup" component={Popup} />
             <Stack.Screen name="Popupuser" component={Popupuser} />
             <Stack.Screen name="Sidebar" component={Sidebar} />
@@ -112,12 +124,15 @@ function ScreenStack() {
             <Stack.Screen name="PupiloverView" component={PupiloverView} />
             <Stack.Screen name="PupilManagement" component={PupilManagement} />
             <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
-            <Stack.Screen name="PupilParentZoneProfileEdit" component={PupilParentZoneProfileEdit} />
+            <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
             <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
-            <Stack.Screen name="PupilParentZoneProfileConnecttoMySchool" component={PupilParentZoneProfileConnecttoMySchool} />
-            <Stack.Screen name="PupilParentZoneProfile" component={PupilParentZoneProfile} />
-            <Stack.Screen name="PupilParentZoneNewsFeed" component={PupilParentZoneNewsFeed} />
+            <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
+            <Stack.Screen name="ParentZoneProfile" component={ParentZoneProfile} />
+            <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
+
+            <Stack.Screen name="Chat" component={Chat} />
         </Stack.Navigator>
+        </PubNubProvider>
     );
 }
 
@@ -129,7 +144,8 @@ function MyDrawer() {
             drawerPosition='right'
             headerMode='none'
             drawerStyle={STYLE.drawerWidth} >
-            <Drawer.Screen name="ScreenStack" component={ScreenStack} />
+            
+                <Drawer.Screen name="ScreenStack" component={ScreenStack} />
         </Drawer.Navigator>
     );
 }

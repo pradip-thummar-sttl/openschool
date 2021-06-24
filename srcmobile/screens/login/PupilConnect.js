@@ -26,25 +26,39 @@ class PupilConnect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            password: '',
-            PushToken: "Test",
-            Device: getBrand() + ', ' + getModel() + ', ' + getSystemVersion(),
-            OS: Platform.OS,
-            AccessedVia: "Mobile",
-            isLoading: false,
-            isPasswordHide: true,
-            isRemember: false
+            schoolCode: '',
         }
     }
-    state = {
-        isDayFocused: false,
-        isMonthFocused: false,
-        isYearFocused: false,
-        isFirstNameFocused: false,
-        isLastNameFocused: false,
-        isPasswordFocus: false,
-    };
+
+    setLoading(flag) {
+        this.setState({ isLoading: flag });
+    }
+
+    verifySchool() {
+        const { schoolCode, } = this.state;
+
+        if (!schoolCode.trim()) {
+            showMessage(MESSAGE.schoolCode)
+            return false
+        }
+
+        let data = {
+            pupilId: this.props.route.params.UserDetialId,
+            SchoolCode: schoolCode
+        }
+
+        Service.post(data, EndPoints.PupilSchoolCode, (res) => {
+            if (res.code == 200) {
+                this.props.navigation.replace('PupuilDashboard')
+            } else {
+                this.setLoading(false)
+                showMessage(res.message)
+            }
+        }, (err) => {
+            this.setLoading(false)
+            console.log('response Login error', err)
+        })
+    }
 
     render() {
         return (
@@ -62,17 +76,19 @@ class PupilConnect extends Component {
                                     onFocus={() => this.setState({ isEmailFocused: true })}
                                     onBlur={() => this.setState({ isEmailFocused: false })}
                                     returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                     placeholder="Enter code"
                                     autoCapitalize={'none'}
                                     maxLength={40}
-                                    value={this.state.userName}
+                                    value={this.state.schoolCode}
                                     placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={userName => this.setState({ userName })} />
+                                    onChangeText={schoolCode => this.setState({ schoolCode })} />
                             </View>
                             <View style={styles.sendButton}>
-                                <TouchableOpacity style={styles.sendButtonCommon} activeOpacity={opacity}>
+                                <TouchableOpacity
+                                    style={styles.sendButtonCommon}
+                                    activeOpacity={opacity}
+                                    onPress={() => this.verifySchool()}>
                                     <Text style={styles.fullWidthPrimaryButton}>Submit my code</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.sendButtonCommon} activeOpacity={opacity}>

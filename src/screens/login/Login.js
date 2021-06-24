@@ -192,7 +192,7 @@ class Login extends Component {
         })
     };
 
-    updateUserID(ID, resData, reqData){
+    updateUserID(ID, resData, reqData) {
         if (ID && ID != '' && ID != null && ID != undefined) {
             console.log('QBUserId', ID, resData.RoomId);
 
@@ -234,7 +234,11 @@ class Login extends Component {
         if (res.UserType === "Teacher") {
             this.props.navigation.replace('TeacherDashboard')
         } else if (res.UserType === "Pupil") {
-            this.props.navigation.replace('PupuilDashboard')
+            if (res.SchoolId == undefined || res.SchoolId == null || res.SchoolId == '') {
+                this.props.navigation.replace('PupilConnect', { UserDetialId: res.UserDetialId })
+            } else {
+                this.props.navigation.replace('ParentZoneSwitch')
+            }
         } else {
             this.props.navigation.replace('PupuilDashboard')
         }
@@ -257,9 +261,9 @@ class Login extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start' }}>
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher Login' : 'Pupil Login'}</Text>
-                        
+
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
                             <View style={styles.field}>
@@ -306,15 +310,15 @@ class Login extends Component {
                             <View style={styles.bottomLoginFeild}>
                                 <View style={styles.rememberFeild}>
                                     <CheckBox
-                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                         style={STYLE.checkBoxcommon1}
-                                         value={this.state.isRemember}
-                                         boxType={'square'}
-                                         onCheckColor={COLORS.white}
-                                         onTintColor={COLORS.checkBlue}
-                                         tintColor={COLORS.checkBlue}
-                                         onFillColor={COLORS.checkBlue}
-                                         onChange={() => this.setState({ isRemember: !this.state.isRemember })}
+                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                        style={STYLE.checkBoxcommon1}
+                                        value={this.state.isRemember}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        onTintColor={COLORS.checkBlue}
+                                        tintColor={COLORS.checkBlue}
+                                        onFillColor={COLORS.checkBlue}
+                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
                                     />
                                     <Text style={styles.label}>Remember Me</Text>
                                 </View>
@@ -323,7 +327,7 @@ class Login extends Component {
                                 </View>
                             </View>
                             <View style={styles.loginButtonView}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => {
                                         isDesignBuild ?
@@ -334,8 +338,8 @@ class Login extends Component {
                                     }}>
                                     {this.state.isLoading ?
                                         <ActivityIndicator
-                                            style={STYLE.fullWidthPrimaryButton}
-                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            style={STYLE.commonButtonGreen}
+                                            size={Platform.OS == 'ios' ? 'small' : 'small'}
                                             color={COLORS.white} />
                                         :
                                         <Text
@@ -351,7 +355,7 @@ class Login extends Component {
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => {
-                                            this.props.navigation.replace('PupilRegister',{userType:"Pupil"})
+                                            this.props.navigation.replace('PupilRegister', { userType: "Pupil" })
                                         }}>
                                         <Text style={styles.getStartedLink}> Get Started</Text>
                                     </TouchableOpacity>
@@ -481,13 +485,13 @@ const styles = StyleSheet.create({
         fontSize: hp('1.8%'),
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontBold,
-        color:COLORS.buttonGreen,
-        textTransform:'uppercase',
-        fontWeight:'700',
+        color: COLORS.buttonGreen,
+        textTransform: 'uppercase',
+        fontWeight: '700',
     },
     loginButtonView: {
         marginTop: hp('3.0%'),
-        width:'80%',
+        width: '80%',
     },
     bottomLoginIntro: {
         top: hp('15%'),
@@ -502,13 +506,13 @@ const styles = StyleSheet.create({
     eyeParent: {
         justifyContent: 'center'
     },
-    fieldInputLabel:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.lightGray,
-        paddingBottom:hp(1),
+    fieldInputLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
     },
-    commonButtonGreen:{
+    commonButtonGreen: {
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
         fontSize: hp('1.56%'),
@@ -522,22 +526,22 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.5),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
-    getStartText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        marginTop:hp(5),
+    getStartText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        marginTop: hp(5),
         marginLeft: hp('8.4%'),
     },
-    commonFontsPupleUnderline:{
-        paddingTop:hp(0.5),
+    commonFontsPupleUnderline: {
+        paddingTop: hp(0.5),
         color: COLORS.lightGray,
         fontSize: hp(1.82),
         fontWeight: '500',
@@ -547,22 +551,22 @@ const styles = StyleSheet.create({
         textDecorationStyle: "solid",
         textDecorationColor: "#000",
     },
-    greenText:{
-        color:COLORS.buttonGreen,
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        paddingTop:hp(0.5),
+    greenText: {
+        color: COLORS.buttonGreen,
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        paddingTop: hp(0.5),
     },
-    registerSmtText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+    registerSmtText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    rightRegisterSmlText:{
-        justifyContent:'flex-end',
-        alignSelf:'flex-end',
-        paddingTop:hp(3.5),
-        paddingRight:hp(3.5),
+    rightRegisterSmlText: {
+        justifyContent: 'flex-end',
+        alignSelf: 'flex-end',
+        paddingTop: hp(3.5),
+        paddingRight: hp(3.5),
     },
     titleAccountLogin: {
         textAlign: 'left',
@@ -573,44 +577,44 @@ const styles = StyleSheet.create({
         marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
     },
-    loginAccountForm:{
+    loginAccountForm: {
         paddingLeft: hp('9%'),
         paddingRight: hp('9%'),
-        flexDirection:'row',
-        justifyContent:'space-between',
-        width:hp(54.42),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: hp(54.42),
     },
-    filedSpace:{
-        width:hp(22.65),
-        marginRight:hp(3),
+    filedSpace: {
+        width: hp(22.65),
+        marginRight: hp(3),
     },
-    firstNameSpace:{
-        marginLeft:hp(9),
+    firstNameSpace: {
+        marginLeft: hp(9),
     },
     dropDownArrowdatetime: {
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.6),
-        marginTop:hp(2.5),
+        marginTop: hp(2.5),
     },
-    dropWrap:{
-        width:hp(10.2),
-        marginTop:hp(2.5),
+    dropWrap: {
+        width: hp(10.2),
+        marginTop: hp(2.5),
     },
-    alignVert:{
-        alignItems:'center',
-        marginRight:hp(2.5),
+    alignVert: {
+        alignItems: 'center',
+        marginRight: hp(2.5),
     },
-    dateTimetextdummy:{
+    dateTimetextdummy: {
         fontFamily: FONTS.fontBold,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    lineSpaceVerify:{
-        marginBottom:hp(3),
+    lineSpaceVerify: {
+        marginBottom: hp(3),
     },
-    resetBtn:{
+    resetBtn: {
         backgroundColor: COLORS.white,
         color: COLORS.darkGray,
         fontSize: hp('2.4%'),
@@ -624,22 +628,22 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.5),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
-        marginLeft:hp(3),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        marginLeft: hp(3),
     },
-    alignBtn:{
-        flexDirection:'row',
-        justifyContent:'space-around',
+    alignBtn: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
-    spaceBottom:{
-        marginTop:hp(5),
-        marginBottom:hp(10),
+    spaceBottom: {
+        marginTop: hp(5),
+        marginBottom: hp(10),
     }
 });

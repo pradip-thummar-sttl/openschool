@@ -42,6 +42,11 @@ const MESSAGE = {
     hwSubmitted: 'Homework submitted successfully',
     groupName: 'Please enter valid group name',
     groupCreate: 'Group created successfully',
+    schoolCode: 'Please enter unique code provided by your school',
+    loggedInPupil: 'Please select a pupil logged in with',
+    validCode: 'Please enter valid code',
+    codeMismatched: 'Code does not matched',
+    setCode: 'You have set code successfully',
 
 }
 

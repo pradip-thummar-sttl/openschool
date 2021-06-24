@@ -137,115 +137,129 @@ export default StyleSheet.create({
         borderColor: COLORS.dashboardGreenButton,
     },
     label: {
-        height: 50, 
-        fontSize: 25, 
-        padding: 10, 
+        height: 50,
+        fontSize: 25,
+        padding: 10,
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
     },
     // Mamagement UI starts
-    managementBlankImgWrap:{
-        textAlign:'center',
-        alignItems:'center',
-        marginTop:hp(22.13),
-        marginBottom:hp(18),
-        flex:1,
+    managementBlankImgWrap: {
+        textAlign: 'center',
+        alignItems: 'center',
+        marginTop: hp(22.13),
+        marginBottom: hp(18),
+        flex: 1,
     },
-    blankPageImage:{
-        width:hp(35.03),
-        height:hp(30.77),
+    blankPageImage: {
+        width: hp(35.03),
+        height: hp(30.77),
         resizeMode: 'contain',
     },
-    blankManageTextBold:{
-        fontSize:hp(2.86),
-        fontFamily:FONTS.fontBold,
-        textAlign:'center',
+    blankManageTextBold: {
+        fontSize: hp(2.86),
+        fontFamily: FONTS.fontBold,
+        textAlign: 'center',
     },
-    blankManageTextNormal:{
-        fontSize:hp(1.82),
-        fontFamily:FONTS.fontRegular,
-        textAlign:'center',
+    blankManageTextNormal: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        textAlign: 'center',
     },
-    managementDetail:{
-       // flex:1,
+    managementDetail: {
+        // flex:1,
     },
-    managementBlockTop:{
-        flexDirection:'row',
-        height:hp(14.06),
+    managementBlockTop: {
+        height: hp(14.06),
+        width: '100%',
     },
-    managementopImage:{
-        width:'100%',
-        height:hp(14.06),
+    managementopImage: {
+        width: '100%',
+        height: hp(14.06),
         resizeMode: 'contain',
-        position:'relative',
     },
-    thumbTopUser:{
+    thumbTopUser: {
         width: hp(12.5),
-        height:hp(12.5),
+        height: hp(12.5),
         borderRadius: 96,
-        borderColor:COLORS.white,
+        borderColor: COLORS.white,
         borderWidth: 3,
-        backgroundColor:'#ECEDF0',
-        position:'absolute',
-        left:hp(5),
-        bottom:hp(-4),
+        backgroundColor: '#ECEDF0',
+        position: 'absolute',
+        left: hp(5),
+        bottom: hp(-4),
     },
-    topBannerBtn:{
-        position:'absolute',
-        right:hp(5),
-        top:hp(2),
-        paddingLeft:hp(3),
-        paddingRight:hp(3),
-        fontFamily:FONTS.fontBold,
-        color:COLORS.white,
-        fontSize:hp(1.56),
+    topBannerBtn: {
+        position: 'absolute',
+        paddingHorizontal: hp(3),
+        paddingVertical: hp(3),
+        fontFamily: FONTS.fontBold,
+        color: COLORS.white,
+        fontSize: hp(1.56),
     },
-    managementNameSec:{
-        flexDirection:'row',
-        paddingLeft:hp(26.04),
-        paddingTop:hp(8.64),
+    topBannerBtn1: {
+        padding: 15,
+        fontFamily: FONTS.fontBold,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        textTransform: 'uppercase'
     },
-    userLabel:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.lightGray,
+    topBannerParent: {
+        paddingHorizontal: 10,
+        position: 'absolute',
+        right: 20,
+        top: 20,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLORS.buttonGreen,
+        backgroundColor: COLORS.buttonGreen,
     },
-    userName:{
-        fontFamily:FONTS.fontBold,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+    managementNameSec: {
+        flexDirection: 'row',
+        paddingLeft: hp(26.04),
+        paddingTop: hp(8.64),
     },
-    nameSmlBlock:{
-        marginRight:hp(13),
+    userLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    dateSmlBlock:{
-        marginRight:hp(13),
+    userName: {
+        fontFamily: FONTS.fontBold,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    paragraphText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.introGreyColor,
-        flexWrap:'wrap',
-        paddingBottom:hp(2),
+    nameSmlBlock: {
+        marginRight: hp(13),
     },
-    managementParaSec:{
-        marginRight:hp(20.05),
-        marginTop:hp(1.5),
-        paddingLeft:hp(26.04),
+    dateSmlBlock: {
+        marginRight: hp(13),
     },
-    ratingBlock:{
-        width:hp(43.35),
-        marginLeft:hp(1.95),
+    paragraphText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.introGreyColor,
+        flexWrap: 'wrap',
+        paddingBottom: hp(2),
+    },
+    managementParaSec: {
+        marginRight: hp(20.05),
+        marginTop: hp(1.5),
+        paddingLeft: hp(26.04),
+    },
+    ratingBlock: {
+        width: hp(43.35),
+        marginLeft: hp(1.95),
         marginTop: hp(2.5),
-        marginRight:hp(3.9),
+        marginRight: hp(3.9),
     },
-    achivementBox:{
+    achivementBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        width :hp(43.48),
-        alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
+        width: hp(43.48),
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.8),
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
@@ -254,160 +268,160 @@ export default StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 1,
     },
-    starSelectedText:{
+    starSelectedText: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.white,
+        color: COLORS.white,
         fontSize: hp(1.82),
         lineHeight: hp(5.1),
     },
-    starSelected:{
-        width:hp(4.94),
-        height:hp(4.68),
+    starSelected: {
+        width: hp(4.94),
+        height: hp(4.68),
         resizeMode: 'contain',
-        alignItems:'center',
+        alignItems: 'center',
         alignSelf: 'center',
-        marginBottom:hp(1.5),
+        marginBottom: hp(1.5),
     },
-    rewardStarMark:{
+    rewardStarMark: {
         justifyContent: 'space-around',
-        width:'100%',
+        width: '100%',
         flexDirection: 'row',
-        paddingTop:hp(3.05),
-        paddingBottom:hp(3.05),
+        paddingTop: hp(3.05),
+        paddingBottom: hp(3.05),
     },
-    centerText:{
-        alignItems:'center',
+    centerText: {
+        alignItems: 'center',
     },
-    starText:{
+    starText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    ratingTitle:{
+    ratingTitle: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
-        color:COLORS.menuLightFonts,
-        paddingBottom:hp(1.5),
+        color: COLORS.menuLightFonts,
+        paddingBottom: hp(1.5),
     },
-    separater:{
-        borderLeftWidth:1,
-        borderLeftColor:COLORS.dashboardBorder,
-        borderRightWidth:1,
-        borderRightColor:COLORS.dashboardBorder,
-        width:hp(14.32),
+    separater: {
+        borderLeftWidth: 1,
+        borderLeftColor: COLORS.dashboardBorder,
+        borderRightWidth: 1,
+        borderRightColor: COLORS.dashboardBorder,
+        width: hp(14.32),
     },
-    centerStar:{
-        alignItems:'center',
+    centerStar: {
+        alignItems: 'center',
     },
     whiteBg: {
         backgroundColor: COLORS.white,
         paddingBottom: hp(2),
         paddingTop: hp(0),
     },
-    annotationText:{
-        width:hp(72.91),
+    annotationText: {
+        width: hp(72.91),
         marginTop: hp(2.5),
     },
-    rateAnnotationBlock:{
-        flexDirection:'row',
+    rateAnnotationBlock: {
+        flexDirection: 'row',
     },
-    annotationBox:{
-        borderWidth:1,
-        borderColor:COLORS.dashboardBorder,
-        borderRadius:hp(1.8),
-        padding:hp(1.95),
+    annotationBox: {
+        borderWidth: 1,
+        borderColor: COLORS.dashboardBorder,
+        borderRadius: hp(1.8),
+        padding: hp(1.95),
     },
-    anoteTitle:{
-        paddingLeft:hp(1.95),
-        paddingBottom:hp(1.80),
+    anoteTitle: {
+        paddingLeft: hp(1.95),
+        paddingBottom: hp(1.80),
     },
-    graphBlock:{
-        flexDirection:'row',
-        margin:hp(3),
+    graphBlock: {
+        flexDirection: 'row',
+        margin: hp(3),
     },
-    graphTitle:{
+    graphTitle: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.darkGray,
+        color: COLORS.darkGray,
         fontSize: hp(2.08),
-        marginTop:hp(5),
-        marginLeft:hp(2.3),
+        marginTop: hp(5),
+        marginLeft: hp(2.3),
     },
-    chartBlock:{
-        width:hp(28.20),
-        alignItems:'flex-start',
+    chartBlock: {
+        width: hp(28.20),
+        alignItems: 'flex-start',
     },
-    mngmntchartImg:{
-        width:hp(25.20),
-        height:hp(25.20),
+    mngmntchartImg: {
+        width: hp(25.20),
+        height: hp(25.20),
         resizeMode: 'contain',
     },
-    generalRow:{
-        flexDirection:'row',
+    generalRow: {
+        flexDirection: 'row',
     },
-    purpleMark:{
-        width:10,
-        height:10,
-        borderRadius:hp(1.8),
+    purpleMark: {
+        width: 10,
+        height: 10,
+        borderRadius: hp(1.8),
     },
-    labelMark:{
+    labelMark: {
         fontFamily: FONTS.fontRegular,
-        color:COLORS.lightGray,
-        fontSize: hp(1.82), 
+        color: COLORS.lightGray,
+        fontSize: hp(1.82),
     },
-    normalText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.introGreyColor,
+    normalText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.introGreyColor,
     },
-    graphChartText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.introGreyColor,
-        marginTop:hp(7),
-        marginBottom:hp(4),
+    graphChartText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.introGreyColor,
+        marginTop: hp(7),
+        marginBottom: hp(4),
     },
-    graphBox:{
+    graphBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
-        elevation: 1,        
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.8),
+        elevation: 1,
         shadowColor: COLORS.lightGrayPupil,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
         shadowRadius: 1,
-        width:'100%',
-        padding:hp(3),
+        width: '100%',
+        padding: hp(3),
     },
-    purpleMark:{
-        width:hp(1.82),
-        height:hp(1.82),
+    purpleMark: {
+        width: hp(1.82),
+        height: hp(1.82),
         resizeMode: 'contain',
-        marginTop:hp(0.3),
-        marginRight:hp(1.5),
+        marginTop: hp(0.3),
+        marginRight: hp(1.5),
     },
-    orangeMark:{
-        width:hp(1.82),
-        height:hp(1.82),
+    orangeMark: {
+        width: hp(1.82),
+        height: hp(1.82),
         resizeMode: 'contain',
-        marginTop:hp(0.3),
-        marginRight:hp(1.5),
+        marginTop: hp(0.3),
+        marginRight: hp(1.5),
     },
-    mngmntgraphImg:{
-        width:hp(118.16),
-        height:hp(37.36),
+    mngmntgraphImg: {
+        width: hp(118.16),
+        height: hp(37.36),
         resizeMode: 'contain',
     },
-    listBottomSpace:{
-        marginBottom:hp(1.5),
+    listBottomSpace: {
+        marginBottom: hp(1.5),
     },
-    pzEditIcon:{
-        width:hp(3.38),
-        height:hp(3.38),
+    pzEditIcon: {
+        width: hp(3.38),
+        height: hp(3.38),
         resizeMode: 'contain',
-        position:'absolute',
-        top:hp(10),
-        left:hp(4.5),
+        position: 'absolute',
+        top: hp(10),
+        left: hp(4.5),
     },
     titleLogin: {
         textAlign: 'left',
@@ -472,12 +486,12 @@ export default StyleSheet.create({
         fontSize: hp('1.8%'),
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontRegular,
-        color:COLORS.buttonGreen,
-        fontWeight:'700',
+        color: COLORS.buttonGreen,
+        fontWeight: '700',
     },
     loginButtonView: {
         marginTop: hp('3.0%'),
-        width:'80%',
+        width: '80%',
     },
     bottomLoginIntro: {
         top: hp('8%'),
@@ -492,13 +506,13 @@ export default StyleSheet.create({
     eyeParent: {
         justifyContent: 'center'
     },
-    fieldInputLabel:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.lightGray,
-        paddingBottom:hp(1),
+    fieldInputLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
     },
-    commonButtonGreen:{
+    commonButtonGreen: {
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
         fontSize: hp('1.56'),
@@ -512,22 +526,22 @@ export default StyleSheet.create({
         paddingBottom: hp(1.5),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
-    getStartText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        marginTop:hp(5),
+    getStartText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        marginTop: hp(5),
         marginLeft: hp('8.4%'),
     },
-    commonFontsPupleUnderline:{
-        paddingTop:hp(0.5),
+    commonFontsPupleUnderline: {
+        paddingTop: hp(0.5),
         color: COLORS.lightGray,
         //fontSize: hp(3.81),
         fontWeight: '500',
@@ -536,24 +550,24 @@ export default StyleSheet.create({
         textDecorationLine: "underline",
         textDecorationStyle: "solid",
         textDecorationColor: "#000",
-        fontSize:hp(1.56),
+        fontSize: hp(1.56),
     },
-    greenText:{
-        color:COLORS.buttonGreen,
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        lineHeight:hp(1.5),
+    greenText: {
+        color: COLORS.buttonGreen,
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        lineHeight: hp(1.5),
     },
-    registerSmtText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+    registerSmtText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    rightRegisterSmlText:{
-        justifyContent:'flex-end',
-        alignSelf:'flex-end',
-        paddingTop:hp(3.5),
-        paddingRight:hp(3.5),
+    rightRegisterSmlText: {
+        justifyContent: 'flex-end',
+        alignSelf: 'flex-end',
+        paddingTop: hp(3.5),
+        paddingRight: hp(3.5),
     },
     titleAccountLogin: {
         textAlign: 'left',
@@ -564,41 +578,41 @@ export default StyleSheet.create({
         marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
     },
-    loginAccountForm:{
-        
-        flexDirection:'row',
-        justifyContent:'space-between',
-        
+    loginAccountForm: {
+
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
         marginBottom: hp('2.0%'),
     },
-    filedSpace:{
-        width:hp(38.4),
-        marginRight:hp(2.5),
+    filedSpace: {
+        width: hp(38.4),
+        marginRight: hp(2.5),
     },
-    firstNameSpace:{
-        marginLeft:hp(9),
+    firstNameSpace: {
+        marginLeft: hp(9),
     },
     dropDownArrowdatetime: {
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.6),
-        marginTop:hp(2.5),
+        marginTop: hp(2.5),
     },
-    dropWrap:{
-        width:hp(10.2),
-        marginTop:hp(2.5),
+    dropWrap: {
+        width: hp(10.2),
+        marginTop: hp(2.5),
     },
-    alignVert:{
-        alignItems:'center',
-        marginRight:hp(2.5),
+    alignVert: {
+        alignItems: 'center',
+        marginRight: hp(2.5),
     },
-    dateTimetextdummy:{
+    dateTimetextdummy: {
         fontFamily: FONTS.fontBold,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    
+
     dropDownFormInput: {
         width: '100%',
     },
@@ -611,8 +625,8 @@ export default StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        justifyContent:'space-between',
-        width:'100%',
+        justifyContent: 'space-between',
+        width: '100%',
     },
     dropDown: {
         flexDirection: 'row',
@@ -633,104 +647,104 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         alignSelf: 'center',
     },
-    dropDownArrow:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.4),
-        top:hp(2.1),
+    dropDownArrow: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.4),
+        top: hp(2.1),
     },
-    formSpace:{
-        marginLeft:hp(20),
-        marginRight:hp(25),
+    formSpace: {
+        marginLeft: hp(20),
+        marginRight: hp(25),
     },
-    formTopSpace:{
-        marginTop:hp(15),
+    formTopSpace: {
+        marginTop: hp(15),
     },
-    dateField:{
-        paddingRight:hp(5),
-        paddingLeft:hp(5),
+    dateField: {
+        paddingRight: hp(5),
+        paddingLeft: hp(5),
     },
-    dateIconSml:{
-        position:'absolute',
-        width:hp(1.76),
-        height:hp(1.76),
-        resizeMode:'contain',
-        left:hp(1.5),
-        top:hp(2.3),
+    dateIconSml: {
+        position: 'absolute',
+        width: hp(1.76),
+        height: hp(1.76),
+        resizeMode: 'contain',
+        left: hp(1.5),
+        top: hp(2.3),
     },
-    dropArrow:{
-       // position:'absolute',
-        width:hp(1.51),
-        height:hp(0.95),
-        resizeMode:'contain',
+    dropArrow: {
+        // position:'absolute',
+        width: hp(1.51),
+        height: hp(0.95),
+        resizeMode: 'contain',
         // right:hp(1.5),
-         top:hp(1.5),
-         marginLeft:hp(1.5),
+        top: hp(1.5),
+        marginLeft: hp(1.5),
     },
-    textArea:{
-        height:hp(15),
-        width:hp(79.5),
-        paddingTop:hp(1.5), 
+    textArea: {
+        height: hp(15),
+        width: hp(79.5),
+        paddingTop: hp(1.5),
     },
-    tabLinks:{
-        flexDirection:'row',
-        paddingTop:hp(3),
-        paddingBottom:hp(3),
+    tabLinks: {
+        flexDirection: 'row',
+        paddingTop: hp(3),
+        paddingBottom: hp(3),
         //paddingLeft:hp(13.67),
     },
-    tabLinkGrey:{
-        fontFamily:FONTS.fontBold,
-        fontSize:hp(1.56),
-        color:COLORS.lightGray,
-        marginRight:hp(4.16),
-        textTransform:'uppercase',
+    tabLinkGrey: {
+        fontFamily: FONTS.fontBold,
+        fontSize: hp(1.56),
+        color: COLORS.lightGray,
+        marginRight: hp(4.16),
+        textTransform: 'uppercase',
     },
-    tabLinkSelected:{
-        fontFamily:FONTS.fontBold,
-        fontSize:hp(1.56),
-        color:COLORS.buttonGreen,
-        textTransform:'uppercase',
+    tabLinkSelected: {
+        fontFamily: FONTS.fontBold,
+        fontSize: hp(1.56),
+        color: COLORS.buttonGreen,
+        textTransform: 'uppercase',
     },
-    profileFormTopSpace:{
-        marginTop:hp(2),
+    profileFormTopSpace: {
+        marginTop: hp(2),
     },
-    titleInner:{
-        fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(2.08),
+    titleInner: {
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(2.08),
     },
-    titleInnerRow:{
-        flexDirection:'row',
-        marginTop:hp(5),
-        paddingLeft:hp(20),
+    titleInnerRow: {
+        flexDirection: 'row',
+        marginTop: hp(5),
+        paddingLeft: hp(20),
     },
-    managementProfileSec:{
-        flexDirection:'row',
-        paddingLeft:hp(26.04),
-        marginBottom:hp(4),
+    managementProfileSec: {
+        flexDirection: 'row',
+        paddingLeft: hp(26.04),
+        marginBottom: hp(4),
     },
-    profileTitleRow:{
-        flexDirection:'row',
-        width:hp(75),
-        marginTop:hp(5),
-        paddingBottom:hp(1),
-        marginBottom:hp(1),
-        borderBottomWidth:1,
-        borderBottomColor:COLORS.bottomProfileLightBorder,
-        marginLeft:hp(26.04),
+    profileTitleRow: {
+        flexDirection: 'row',
+        width: hp(75),
+        marginTop: hp(5),
+        paddingBottom: hp(1),
+        marginBottom: hp(1),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        marginLeft: hp(26.04),
     },
-    userNameNormal:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+    userNameNormal: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    addressText:{
-        width:hp(20),
-        flexWrap:'wrap',
+    addressText: {
+        width: hp(20),
+        flexWrap: 'wrap',
     },
-    fullInput:{
-        width:hp(79.5),
-        paddingTop:hp(1.5), 
+    fullInput: {
+        width: hp(79.5),
+        paddingTop: hp(1.5),
     },
     headerMain: {
         flexDirection: 'row',
@@ -751,12 +765,12 @@ export default StyleSheet.create({
     filterbarMain: {
         //flexDirection: 'row',
         marginBottom: hp(2.60),
-        width:hp(35),
-        marginRight:hp(0.8),
+        width: hp(35),
+        marginRight: hp(0.8),
     },
     field: {
         position: 'relative',
-       // marginRight: hp(1.69),
+        // marginRight: hp(1.69),
     },
     searchHeader: {
         height: hp(5.20),
@@ -769,7 +783,7 @@ export default StyleSheet.create({
         position: 'absolute',
         top: hp(1.8),
         width: hp(1.62),
-        height:hp(1.62),
+        height: hp(1.62),
         resizeMode: 'contain',
         left: hp(1.43),
     },
@@ -824,7 +838,7 @@ export default StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         zIndex: 9,
-        marginRight:hp(1.5),
+        marginRight: hp(1.5),
     },
     iconTop: {
         top: hp(4.2),
@@ -837,7 +851,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         paddingTop: hp(1),
         paddingBottom: hp(1),
-        textAlign:'left',
+        textAlign: 'left',
     },
     filterListWrap: {
         paddingTop: hp(1),
@@ -856,17 +870,17 @@ export default StyleSheet.create({
     },
     checkMark: {
         width: hp(1.48),
-        height:hp(1.48),
+        height: hp(1.48),
         resizeMode: 'contain',
-        position:'absolute',
-        right:2,
-        top:hp(1.5),
+        position: 'absolute',
+        right: 2,
+        top: hp(1.5),
     },
     filterListText: {
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
-        top:hp(0.5),
+        top: hp(0.5),
     },
     headerRight: {
         flexDirection: 'row',
@@ -877,49 +891,49 @@ export default StyleSheet.create({
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
     },
-    smlFilterThumb:{
-        width:hp(3.64),
-        height:hp(3.64),
+    smlFilterThumb: {
+        width: hp(3.64),
+        height: hp(3.64),
         resizeMode: 'contain',
-        backgroundColor:COLORS.borderGrp,
-        borderRadius:hp(3.64),
-        marginRight:hp(1.5),
+        backgroundColor: COLORS.borderGrp,
+        borderRadius: hp(3.64),
+        marginRight: hp(1.5),
     },
-    filterGroup:{
-        flexDirection:'row',
+    filterGroup: {
+        flexDirection: 'row',
     },
-    selectDropList:{
-        fontFamily:FONTS.fontBold,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        top:hp(0.5),
+    selectDropList: {
+        fontFamily: FONTS.fontBold,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        top: hp(0.5),
     },
-    filterAlign:{
-        width:'100%',
-        flexDirection:'row',
-        justifyContent:'space-between',
+    filterAlign: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
-    plainBg:{
+    plainBg: {
         paddingLeft: hp(3.5),
         paddingRight: hp(3.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         backgroundColor: COLORS.backgroundColorCommon,
     },
-    commonInputFull:{
-        width:'100%',
+    commonInputFull: {
+        width: '100%',
     },
-    lessonDesc:{
+    lessonDesc: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
-    timeSpace:{
-        marginLeft:hp(12.83),
+    timeSpace: {
+        marginLeft: hp(12.83),
     },
-    leftSpace:{
-        paddingLeft:hp(3.5),
+    leftSpace: {
+        paddingLeft: hp(3.5),
     },
     userIcon1Parent: {
         position: 'absolute',
@@ -941,8 +955,8 @@ export default StyleSheet.create({
         right: 0,
         top: 0,
         zIndex: hp(1.30)
-      },
-      borderList: {
+    },
+    borderList: {
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: hp(0.26),
     },
@@ -957,7 +971,7 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(0.6),
-        marginBottom:hp(0.78),
+        marginBottom: hp(0.78),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -999,7 +1013,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: hp(3.60),
         lineHeight: hp(3.60),
-        marginTop:hp(3.5),
+        marginTop: hp(3.5),
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -1063,7 +1077,7 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(0.6),
-        marginBottom:hp(0.78),
+        marginBottom: hp(0.78),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -1099,20 +1113,20 @@ export default StyleSheet.create({
         height: hp(1.1),
         borderRadius: hp(100),
     },
-    firstColumn:{
-        width:hp(58.59),
+    firstColumn: {
+        width: hp(58.59),
     },
-    sentBlueText:{
-        fontSize:hp(1.82),
-        color:COLORS.dashboardPupilBlue,
-        fontFamily:FONTS.fontRegular,
+    sentBlueText: {
+        fontSize: hp(1.82),
+        color: COLORS.dashboardPupilBlue,
+        fontFamily: FONTS.fontRegular,
     },
-    draftOrangeText:{
-        fontSize:hp(1.82),
-        color:COLORS.yellowDark,
-        fontFamily:FONTS.fontRegular,
+    draftOrangeText: {
+        fontSize: hp(1.82),
+        color: COLORS.yellowDark,
+        fontFamily: FONTS.fontRegular,
     },
-    filterListWrapNew:{
+    filterListWrapNew: {
         paddingTop: hp(1),
         paddingLeft: hp(1.2),
         paddingRight: hp(1.2),
@@ -1123,16 +1137,16 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        flexDirection:'row',
+        flexDirection: 'row',
         justifyContent: 'space-around',
-        position:'relative',
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
+        position: 'relative',
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
     },
-    filterListTextBold:{
-        fontFamily:FONTS.fontBold,
-        color:COLORS.darkGray,
-        fontSize:hp(1.82),
-        textTransform:'uppercase',
+    filterListTextBold: {
+        fontFamily: FONTS.fontBold,
+        color: COLORS.darkGray,
+        fontSize: hp(1.82),
+        textTransform: 'uppercase',
     }
 });

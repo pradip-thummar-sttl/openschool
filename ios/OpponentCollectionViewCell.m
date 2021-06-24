@@ -70,6 +70,8 @@ static UIImage *mutedImage() {
         
         _name = [name copy];
         self.nameLabel.text = _name;
+      self.nameView.backgroundColor =
+      [UIColor colorWithRed:0.9441 green:0.9441 blue:0.9441 alpha:0.350031672297297];
         self.nameView.hidden = _name == nil;
     }
 }

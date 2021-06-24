@@ -4,44 +4,37 @@ import COLORS from '../../../utils/Colors';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { opacity } from '../../../utils/Constant';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { baseUrl, opacity, showMessage } from '../../../utils/Constant';
+import { User } from '../../../utils/Model';
+import MESSAGE from '../../../utils/Messages';
 
-export default class Users extends Component {
+export default class ParentZoneSwitch extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            childrenList: User.user.ChildrenList
+        }
+    }
+
+    launchPupil(item) {
+        if (User.user._id == item._id) {
+            this.props.navigation.replace('PupuilDashboard')
+        } else {
+            showMessage(MESSAGE.loggedInPupil)
+        }
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <Image source={Images.parentZone} style={styles.image}></Image>
-                <View>
+                <View style={{ flex: 1 }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
                         <TouchableOpacity
                             activeOpacity={opacity}
-                            onPress={() => this.props.navigation.navigate('ParentZonemain')}>
-                            <View style={styles.user}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.userOne} />
-                                <Text style={styles.text}>Reuel Pardesi</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => this.props.navigation.navigate('ParentZoneProfile')}>
-                            <View style={styles.user}>
-                                <Image
-                                    style={styles.userIcon}
-                                    source={Images.userTwo} />
-                                <Text style={styles.text}>Elysian Pardesi</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => this.props.navigation.navigate('ParentZoneSchoolDetails')}>
+                            onPress={() => this.props.navigation.replace('PupilRegister')}>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
@@ -49,9 +42,28 @@ export default class Users extends Component {
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
+                        <FlatList
+                            data={this.state.childrenList}
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item, index }) => (
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => this.launchPupil(item)}>
+                                    <View style={styles.user}>
+                                        <Image
+                                            style={styles.userIcon}
+                                            source={{ uri: baseUrl + item.ProfilePicture }} />
+                                        <Text style={styles.text}>{item.FirstName} {item.LastName}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )}
+                            //Setting the number of column
+                            keyExtractor={(item, index) => index.toString()}
+                        />
                     </View>
                     <View style={styles.parentZone}>
-                        <TouchableOpacity style={styles.parentZoneClick}>
+                        <TouchableOpacity style={styles.parentZoneClick}
+                            onPress={() => this.props.navigation.navigate('Passcode')}>
                             <Image source={Images.parentZoneIcon} style={styles.parentIcon}></Image>
                             <Text style={styles.titleParent}>Parent Zone</Text>
                         </TouchableOpacity>
@@ -90,6 +102,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignSelf: 'center',
         marginTop: hp(4.5),
+        flex: 1,
+        marginBottom: 50,
     },
     user: {
         justifyContent: "center",
@@ -108,7 +122,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: hp(3),
         position: 'absolute',
-        bottom: hp(-6),
+        bottom: 10,
     },
     parentZoneClick: {
         flexDirection: 'row',
