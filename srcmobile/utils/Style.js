@@ -31,8 +31,8 @@ export default StyleSheet.create({
         lineHeight:hp(2.3),
         height: hp(6),
         textAlignVertical: 'center',
-        paddingLeft: hp(2),
-        paddingRight: hp('2.0%'),
+        paddingLeft: hp(1.84),
+        paddingRight: hp(1.84),
         fontFamily: FONTS.fontRegular,
     },
     commonInputGrayBack: {
@@ -134,7 +134,7 @@ export default StyleSheet.create({
     commonFonts: {
         color: COLORS.darkGray,
         fontSize: hp(1.81),
-        marginBottom: Platform.OS == 'android' ? hp(0) : hp('0.4%'),
+        marginBottom: Platform.OS == 'android' ? hp(0) : hp('0.8%'),
         fontFamily: FONTS.fontRegular,
     },
     commonFontsPuple: {

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         paddingRight:hp(31.77),
     },
     SlideImage: {
-        width: hp(92.05),
+       // width: hp(92.05),
         resizeMode: 'contain',
         height: hp(44.79),
     },

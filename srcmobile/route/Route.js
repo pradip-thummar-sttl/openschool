@@ -26,6 +26,11 @@ import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLesso
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
 import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
+import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
+import ParentZonemain from '../screens/pupil/parentzone/ParentZonemain';
+import ParentZoneProfile from '../screens/pupil/parentzone/ParentZoneProfile';
+import ParentZoneProfileEdit from '../screens/pupil/parentzone/ParentZoneProfileEdit';
+import ParentZoneSchoolDetails from '../screens/pupil/parentzone/ParentZoneSchoolDetails';
 import STYLE from '../utils/Style';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';

@@ -165,13 +165,13 @@ class PupilRegister extends Component {
                         <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day : 'Day'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.72), } }}>
                         <FlatList
                             data={days}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.84) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 500 }} />
+                            style={{ height: hp(40) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -186,13 +186,13 @@ class PupilRegister extends Component {
                         <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month : 'Month'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.72), } }}>
                         <FlatList
                             data={months}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.84) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 500 }} />
+                            style={{ height: hp(40) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -207,13 +207,13 @@ class PupilRegister extends Component {
                         <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year : 'Year'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.72), } }}>
                         <FlatList
                             data={years}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.84) }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 500 }} />
+                            style={{ height: hp(40) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -416,7 +416,7 @@ class PupilRegister extends Component {
                                         activeOpacity={opacity}
                                         onPress={() => { this.isFieldsValidated() }}>
                                         <Text
-                                            style={STYLE.fullWidthPrimaryButton}>Create my account</Text>
+                                            style={{...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase',}}>Create my account</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.getStarted}>
@@ -632,7 +632,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     dateTimetextdummy: {
-        fontSize: 12,
+        fontSize: hp(1.72),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
         alignSelf: 'center',

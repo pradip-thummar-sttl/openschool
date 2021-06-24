@@ -54,6 +54,7 @@ import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import PupilParentZoneProfileConnecttoMySchool from '../screens/pupil/parentzone/PupilParentZoneProfileConnecttoMySchool';
 import PupilParentZoneProfile from '../screens/pupil/parentzone/PupilParentZoneProfile';
+import PupilParentZoneNewsFeed from '../screens/pupil/parentzone/PupilParentZoneNewsFeed';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
@@ -127,6 +128,7 @@ function ScreenStack() {
             <Stack.Screen name="Chat" component={Chat} />
             <Stack.Screen name="PupilParentZoneProfileConnecttoMySchool" component={PupilParentZoneProfileConnecttoMySchool} />
             <Stack.Screen name="PupilParentZoneProfile" component={PupilParentZoneProfile} />
+            <Stack.Screen name="PupilParentZoneNewsFeed" component={PupilParentZoneNewsFeed} />
         </Stack.Navigator>
         </PubNubProvider>
     );

@@ -57,6 +57,9 @@ const COLORS = {
     sentColor:'rgba(48,156,233,1)',
     draftBackColor:'rgba(255,236,200,1)',
     draftColor:'rgba(255,164,57,1)',
+    sentStatus: '#DDF3FF',
+    draftStatus: '#FFEECC',
+    draftStatusText: '#FEAD29',
 }
 
 export default COLORS;

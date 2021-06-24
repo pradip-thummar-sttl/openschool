@@ -60,6 +60,7 @@ const Images = {
     UploadCalender: require('../assets/images/upload-calendar2.png'),
     CheckIconWhite: require('../assets/images/white-check-icon2.png'),
     Edit: require('../assets/images/edit2.png'),
+    EditGreen: require('../assets/images/edit-green2.png'),
     Download: require('../assets/images/download2.png'),
     VideoUpload: require('../assets/images/video-uploads2.png'),
     RecordIcon: require('../assets/images/recording-icon2.png'),
@@ -121,5 +122,12 @@ const Images = {
     profileImage: require('../assets/images/profile2.png'),
     graphImagePupilPerfomance: require('../assets/images/graphImagePupilPerfomance2.png'),
     pupilEditGrpahImage: require('../assets/images/pupilEditgraph2.png'),
+    parentZone: require('../assets/images/parent-zone-top2.png'),
+    userOne: require('../assets/images/parent-user-12.png'),
+    userTwo: require('../assets/images/parent-user-22.png'),
+    addUser: require('../assets/images/parent-user-add2.png'),
+    parentZoneIcon: require('../assets/images/parent-zone-icon2.png'),
+    userparent: require('../assets/images/userParent2.png'),
+    parentProfilecoverImage: require('../assets/images/parentProfileViewCover2.png'),
 }
 export default Images;

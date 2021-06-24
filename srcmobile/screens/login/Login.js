@@ -128,7 +128,7 @@ class Login extends Component {
                             if (Platform.OS == 'android') {
                                 this.getDataFromQuickBlox_Android(userName, password, res.data, data)
                             } else if (Platform.OS == 'ios') {
-                                this.getDataFromQuickBlox_IOS(userName, password,res.data, data)
+                                this.getDataFromQuickBlox_IOS(userName, password, res.data, data)
                             }
                         }
                     } else {
@@ -172,7 +172,7 @@ class Login extends Component {
         }
     };
 
-    getDataFromQuickBlox_IOS = (emailId, password,resData, reqData) => {
+    getDataFromQuickBlox_IOS = (emailId, password, resData, reqData) => {
         let roomIDs = []
         if (this.props.route.params.userType == 'Pupil') {
             resData.RoomId.forEach(element => {
@@ -340,7 +340,7 @@ class Login extends Component {
                                             color={COLORS.white} />
                                         :
                                         <Text
-                                            style={STYLE.fullWidthPrimaryButton}>Login to Continue</Text>
+                                            style={{ ...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase', }}>Login to Continue</Text>
                                     }
                                 </TouchableOpacity>
                                 <View style={styles.getStarted}>
@@ -350,7 +350,7 @@ class Login extends Component {
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => {
-                                                    this.props.navigation.replace('PupilRegister',{userType:"Pupil"})
+                                                    this.props.navigation.replace('PupilRegister', { userType: "Pupil" })
                                                 }}>
                                                 <Text style={styles.getStartedLink}> Get Started</Text>
                                             </TouchableOpacity>
@@ -362,8 +362,17 @@ class Login extends Component {
                             </View>
                         </View>
                         <View style={styles.bottomLoginIntro}>
-                            <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
-                            <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
+                            {this.props.route.params.userType == 'Pupil' ?
+                                <>
+                                    <Text style={STYLE.commonFonts}>Our Terms & Conditions and Privacy Policy</Text>
+                                    <Text style={STYLE.commonFontsPuple}>By clicking ‘Create My Account’, I agree to MyEd’s Terms, and Privacy Policy</Text>
+                                </>
+                                :
+                                <>
+                                    <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
+                                    <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
+                                </>
+                            }
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
@@ -478,16 +487,17 @@ const styles = StyleSheet.create({
         top: Platform.OS == 'android' ? hp(0.35) : hp(0),
     },
     forgotPass: {
-        fontSize: hp('1.8%'),
+        fontSize: hp(1.62),
         color: COLORS.dashboardGreenButton,
         lineHeight: hp('3.0%'),
+        textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
     loginButtonView: {
         marginTop: hp(5.7),
     },
     bottomLoginIntro: {
-        top: Platform.OS == 'android' ? hp(2) : hp(6.5),
+        top: Platform.OS == 'android' ? hp(2) : hp(6.15),
         paddingHorizontal: hp(2),
     },
     eye: {
