@@ -20,6 +20,7 @@ const { CallModule, CallModuleIos } = NativeModules;
 const Popupdata = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -34,7 +35,7 @@ const Popupdata = (props) => {
             // } else {
             //     startLiveClassIOS()
             // }
-
+            setLoading(true)
             let currentTime = moment(Date()).format('hh:mm')
             if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
                 // showMessage('time to start')
@@ -43,14 +44,17 @@ const Popupdata = (props) => {
                     LessonEnd: false
                 }
                 Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
                     }
                 }, (err) => {
+                    setLoading(false)
 
                 })
             } else {
                 showMessage('please time time to start')
+                setLoading(false)
 
             }
         }
@@ -79,8 +83,12 @@ const Popupdata = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,true, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, true, (id) => {
                     console.log('hi id:---------', id)
+
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    }, (err) => {
+                    })
                 })
             }
         } catch (e) {
@@ -269,7 +277,7 @@ const Popupdata = (props) => {
                         } */}
                         <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
                             <TouchableOpacity style={styles.buttonGrp}>
-                                <Text style={{textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>mark as absent</Text>
+                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>mark as absent</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
@@ -277,7 +285,15 @@ const Popupdata = (props) => {
                                 style={styles.buttonGrp}
                                 activeOpacity={opacity}
                                 onPress={() => { launchLiveClass() }}>
-                                <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                                {
+                                    isLoading ?
+                                        <ActivityIndicator
+                                            style={{ ...styles.buttonGrp, right: 30 }}
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.buttonGreen} /> :
+                                        <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                                }
+
                             </TouchableOpacity>
                         </View>
                     </View>

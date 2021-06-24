@@ -38,6 +38,9 @@ const PupuilDashboard = (props) => {
     const [isHomeworkLoading, setHomeworkLoading] = useState(true)
     const [isPupilLessonDetail, setPupilLessonDetail] = useState(false)
 
+    const [isLoading, setLoading] = useState(false);
+
+
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -75,7 +78,7 @@ const PupuilDashboard = (props) => {
             // } else {
             //     startLiveClassIOS()
             // }
-
+            setLoading(true)
             let currentTime = moment(Date()).format('hh:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
@@ -84,15 +87,16 @@ const PupuilDashboard = (props) => {
                     LessonEnd: false
                 }
                 Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                    setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
                     }
                 }, (err) => {
-
+                    setLoading(false)
                 })
             } else {
                 showMessage('please time time to start')
-
+                setLoading(false)
             }
         }
     }
@@ -120,8 +124,15 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,false, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, (id) => {
                     console.log('hi id:---------', id)
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                    }, (err) => {
+                    })
                 })
             }
         } catch (e) {
@@ -189,9 +200,9 @@ const PupuilDashboard = (props) => {
                 moduleIndex={selectedIndex}
                 navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0) }}
                 navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
-                onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }} 
-                onSetting={()=> {setPupilLessonDetail(false); setSelectedIndex(3)}}
-                />
+                onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
+                onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
+            />
             {
                 isPupilLessonDetail ?
                     <PupilLessonDetail
@@ -306,7 +317,15 @@ const PupuilDashboard = (props) => {
                                                                                 <TouchableOpacity
                                                                                     style={PAGESTYLE.buttonGrp}
                                                                                     onPress={() => { launchLiveClass() }}>
-                                                                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
+                                                                                    {
+                                                                                        isLoading ?
+                                                                                            <ActivityIndicator
+                                                                                                style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                                color={COLORS.buttonGreen} /> :
+                                                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
+                                                                                    }
+
                                                                                 </TouchableOpacity>
                                                                             </View>
                                                                         </View>
@@ -456,9 +475,9 @@ const PupuilDashboard = (props) => {
                         : selectedIndex == 1 ?
                             <PupilTimetable navigation={props.navigation} />
                             : selectedIndex == 2 ?
-                            <PupilLessonDetail navigation={props.navigation} />
-                            : <Chat />
-                            // <Setting navigation={props.navigation} />
+                                <PupilLessonDetail navigation={props.navigation} />
+                                : <Chat />
+                // <Setting navigation={props.navigation} />
             }
 
         </View>

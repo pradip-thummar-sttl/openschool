@@ -126,6 +126,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isAddEvent, setAddEvent] = useState(false)
     const [isPupilManagement, setPupilManagement] = useState(false)
 
+
+    const [isLoading, setLoading] = useState(false);
     useEffect(() => {
         refresh()
     }, [])
@@ -171,6 +173,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // } else {
             //     startLiveClassIOS()
             // }
+            setLoading(true)
             let currentTime = moment(Date()).format('hh:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
@@ -179,15 +182,16 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     LessonEnd: false
                 }
                 Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
                     }
                 }, (err) => {
-
+                    setLoading(false)
                 })
             } else {
                 showMessage('please time time to start')
-
+                setLoading(false)
             }
         }
     }
@@ -216,6 +220,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, false, (id) => {
                     console.log('hi id:---------', id)
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    }, (err) => {
+                    })
                 })
             }
 
@@ -418,7 +425,15 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <TouchableOpacity
                                                                         style={PAGESTYLE.buttonGrp}
                                                                         onPress={() => { launchLiveClass() }}>
-                                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                                        {
+                                                                            isLoading ?
+                                                                                <ActivityIndicator
+                                                                                    style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                    color={COLORS.buttonGreen} /> :
+                                                                                <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                                        }
+
                                                                     </TouchableOpacity>
                                                                 </View>
                                                             </View>

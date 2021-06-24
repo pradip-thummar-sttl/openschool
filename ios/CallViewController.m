@@ -140,6 +140,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
           weakSelf.muteAudio ^= 1;
         [weakSelf.session leave];
+        if( weakSelf.completeCall ){
+          weakSelf.completeCall(true);
+           }
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
       }];
         [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
