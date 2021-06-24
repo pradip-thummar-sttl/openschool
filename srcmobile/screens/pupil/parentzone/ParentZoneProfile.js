@@ -15,7 +15,6 @@ const PupilProfileView = (props) => {
     
     return (
         <View>
-            <HeaderPM onAlertPress={() => props.navigation.openDrawer()} />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
@@ -28,7 +27,7 @@ const PupilProfileView = (props) => {
                     </View>
                     <View style={PAGESTYLE.mainDetails}>
                         <View style={PAGESTYLE.editProfileButtonMain}>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('ParentZoneProfileEdit')} style={PAGESTYLE.profileEdit}>
+                            <TouchableOpacity onPress={() => props.navigateToDetail()} style={PAGESTYLE.profileEdit}>
                                 <Image source={Images.EditGreen} style={PAGESTYLE.profileeditButton} />
                             </TouchableOpacity>
                         </View>

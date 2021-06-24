@@ -11,35 +11,27 @@ import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
-const PupilParentZoneProfile = () => {
+const ParentZoneProfile = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            <Sidebar hide={() => action(!isHide)} />
-            <View style={{ width: isHide ? '93%' : '78%' }}>
+            {/* <Sidebar hide={() => action(!isHide)} /> */}
+            <View style={{ width: isHide ? '100%' : '78%' }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
-                        <View style={PAGESTYLE.tabLinks}>
-                            <TouchableOpacity><Text style={PAGESTYLE.tabLinkGrey}>Newsfeed</Text></TouchableOpacity>
-                            <TouchableOpacity><Text style={PAGESTYLE.tabLinkGrey}>Performance</Text></TouchableOpacity>
-                            <TouchableOpacity><Text style={PAGESTYLE.tabLinkGrey}>Chat</Text></TouchableOpacity>
-                            <TouchableOpacity><Text style={PAGESTYLE.tabLinkGrey}>Faq</Text></TouchableOpacity>
-                            <TouchableOpacity><Text style={[PAGESTYLE.tabLinkGrey, PAGESTYLE.tabLinkSelected]}>Profile</Text></TouchableOpacity>
-                            <TouchableOpacity><Text style={PAGESTYLE.tabLinkGrey}>My School</Text></TouchableOpacity>
-                        </View>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.managementDetail}>
                                 <View style={PAGESTYLE.managementBlockTop}>
-                                    <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
-                                        <View style={PAGESTYLE.thumbTopUser}>
-
-                                        </View>
-                                        <TouchableOpacity>
-                                            <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>EDit Profile</Text>
+                                    <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} />
+                                    <View style={PAGESTYLE.topBannerParent}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { props.navigateToDetail() }}>
+                                            <Text style={PAGESTYLE.topBannerBtn1}>EDit Profile</Text>
                                         </TouchableOpacity>
-                                    </ImageBackground>
+                                    </View>
                                 </View>
                                 <View style={[PAGESTYLE.profileTitleRow]}>
                                     <Text style={PAGESTYLE.titleInner}>School details</Text>
@@ -105,4 +97,4 @@ const PupilParentZoneProfile = () => {
         </View>
     );
 }
-export default PupilParentZoneProfile;
+export default ParentZoneProfile;

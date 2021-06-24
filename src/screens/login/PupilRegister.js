@@ -27,6 +27,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import moment from "moment";
 const { LoginModuleIos, LoginModule } = NativeModules;
 
 var days = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
@@ -49,10 +50,12 @@ class Login extends Component {
             isRemember: false,
             firstName: "",
             lastName: "",
-            mobile: "",
             day: "",
             month: "",
-            year: ""
+            year: "",
+            mobile: "",
+            password: "",
+            cpassword: "",
         }
     }
 
@@ -117,25 +120,25 @@ class Login extends Component {
                     }
                 })
 
-
+                
                 var data = {
                     FirstName: firstName,
                     LastName: lastName,
                     Email: userName,
-                    phone: mobile,
-                    Dob: `${year}-${month}-${day}`,
+                    MobileNumber: mobile,
+                    Dob: moment(`${year}-${month}-${day}`, 'yyyy-MMM-DD').format('yyyy-MM-DD'),
                     Password: password,
                     UserTypeId: userType
                 }
 
+                console.log('data', data);
+
                 Service.post(data, EndPoints.PupilRegister, (res) => {
                     console.log('response of register', res);
+                    this.setLoading(false)
                     if (res.code == 200) {
-                        data.isRemember = isRemember
-                        User.user = res.data
-                        this.props.navigation.replace('Login', { userType: "Pupil" })
+                        this.props.navigation.replace('PupilConnect', { userType: "Pupil", data: res.data })
                     } else {
-                        this.setLoading(false)
                         showMessage(res.message)
                     }
                 }, (err) => {

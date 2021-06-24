@@ -21,212 +21,45 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Base64 } from 'js-base64';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
 
-const { LoginModuleIos, LoginModule } = NativeModules;
-
-class Login extends Component {
+class PupilConnect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            password: '',
-            PushToken: "Test",
-            Device: getBrand() + ', ' + getModel() + ', ' + getSystemVersion(),
-            OS: Platform.OS,
-            AccessedVia: "Mobile",
-            isLoading: false,
-            isPasswordHide: true,
-            isRemember: false
+            schoolCode: '',
         }
     }
 
     componentDidMount() {
-        const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
-        if (this.props.route.params.userType == 'Pupil') {
-            AsyncStorage.getItem('pupil').then((value) => {
-                var user = JSON.parse(value)
-                if (user.isRemember) {
-                    console.log('user of async', user)
-
-                    this.setState({
-                        userName: user.Email,
-                        password: user.Password,
-                        PushToken: user.PushToken,
-                        Device: user.Device,
-                        OS: user.OS,
-                        AccessedVia: user.AccessedVia,
-                        isRemember: user.isRemember
-                    })
-                } else {
-                }
-            })
-        } else {
-            AsyncStorage.getItem('user').then((value) => {
-                var user = JSON.parse(value)
-                if (user.isRemember) {
-                    console.log('user of async', user)
-
-                    this.setState({
-                        userName: user.Email,
-                        password: user.Password,
-                        PushToken: user.PushToken,
-                        Device: user.Device,
-                        OS: user.OS,
-                        AccessedVia: user.AccessedVia,
-                        isRemember: user.isRemember
-                    })
-                } else {
-                }
-            })
-        }
-        if (isRemember) {
-
-
-        }
-
-    }
-
-    isFieldsValidated = () => {
-        const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
-
-        if (!userName) {
-            showMessage(MESSAGE.email)
-            return false;
-        } else if (!password) {
-            showMessage(MESSAGE.password);
-            return false;
-        }
-
-        this.setLoading(true)
-        Service.get(EndPoints.GetAllUserType, (res) => {
-
-            if (res.flag) {
-                var userData = res.data
-                var userType = ""
-                userData.map((item) => {
-                    if (item.Name === this.props.route.params.userType) {
-                        userType = item._id
-                    }
-                })
-
-                var data = {
-                    Email: userName,
-                    Password: password,
-                    PushToken: PushToken,
-                    Device: Device,
-                    OS: OS,
-                    AccessedVia: AccessedVia,
-                    UserType: userType
-                }
-
-                Service.post(data, EndPoints.Login, (res) => {
-                    if (res.code == 200) {
-                        data.isRemember = isRemember
-                        User.user = res.data
-
-                        if (isRunningFromVirtualDevice) {
-                            this.updateUserID('RUNNIN_FROM_VIRTUAL_DEVICE', res.data, data)
-                        } else {
-                            if (Platform.OS == 'android') {
-                                this.getDataFromQuickBlox_Android(userName, password, res.data, data)
-                            } else if (Platform.OS == 'ios') {
-                                this.getDataFromQuickBlox_IOS(res.data, data)
-                            }
-                        }
-                    } else {
-                        this.setLoading(false)
-                        showMessage(res.message)
-                    }
-                }, (err) => {
-                    this.setLoading(false)
-                    console.log('response Login error', err)
-                })
-            } else {
-                this.setLoading(false)
-                showMessage(res.message)
-            }
-
-        }, (err) => {
-            this.setLoading(false)
-
-        })
-    }
-
-    getDataFromQuickBlox_Android = (emailId, password, resData, reqData) => {
-        try {
-            LoginModule.qbLogin(emailId, password, [resData.RoomId], (error, ID) => {
-                console.log('error:eventId', error, ID);
-                this.updateUserID(ID, resData, reqData)
-            }
-            );
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    getDataFromQuickBlox_IOS = (resData, reqData) => {
-        LoginModuleIos.signUpWithFullName("pradip12", "pradip12", (ID) => {
-            console.log('log for event', eventId);
-            this.updateUserID(ID, resData, reqData)
-        }, (error) => {
-            console.log('log for error', error);
-        })
-    };
-
-    updateUserID(ID, resData, reqData){
-        if (ID && ID != '' && ID != null && ID != undefined) {
-            console.log('QBUserId', ID, resData.RoomId);
-
-            if (ID == resData.QBUserId) {
-                this.setLoading(false)
-                this.launchNextScrren(resData, reqData)
-                return
-            }
-
-            var data = {
-                UserId: resData._id,
-                QBUserId: ID
-            }
-
-            console.log('data', data);
-            Service.post(data, EndPoints.SetQBUserId, (res) => {
-                this.setLoading(false)
-                console.log('res', res);
-                if (res.code == 200) {
-                    this.launchNextScrren(resData, reqData)
-                }
-            }, (err) => {
-                this.setLoading(false)
-                console.log('response Login error', err)
-            })
-        } else {
-            this.setLoading(false)
-            showMessage('Sorry, we are unable to login! Please try again.')
-        }
-    }
-
-    launchNextScrren(res, data) {
-        if (this.props.route.params.userType == 'Pupil') {
-            AsyncStorage.setItem('pupil', JSON.stringify(data))
-        } else {
-            AsyncStorage.setItem('user', JSON.stringify(data))
-        }
-        this.props.setUserAuthData(res)
-        if (res.UserType === "Teacher") {
-            this.props.navigation.replace('TeacherDashboard')
-        } else if (res.UserType === "Pupil") {
-            this.props.navigation.replace('PupuilDashboard')
-        } else {
-            this.props.navigation.replace('PupuilDashboard')
-        }
-        // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
     }
 
     setLoading(flag) {
         this.setState({ isLoading: flag });
     }
 
-    setPasswordVisibility = () => {
-        this.setState({ isPasswordHide: !this.state.isPasswordHide });
+    verifySchool() {
+        const { schoolCode, } = this.state;
+
+        if (!schoolCode.trim()) {
+            showMessage(MESSAGE.schoolCode)
+            return false
+        }
+
+        let data = {
+            pupilId: this.props.route.params.UserDetialId,
+            SchoolCode: schoolCode
+        }
+
+        Service.post(data, EndPoints.PupilSchoolCode, (res) => {
+            if (res.code == 200) {
+                this.props.navigation.replace('PupuilDashboard')
+            } else {
+                this.setLoading(false)
+                showMessage(res.message)
+            }
+        }, (err) => {
+            this.setLoading(false)
+            console.log('response Login error', err)
+        })
     }
 
     render() {
@@ -237,33 +70,32 @@ class Login extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start'}}>
-                       
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Connect to your school'}</Text>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start' }}>
+
+                        <Text h3 style={styles.titleLogin}>Connect to your school</Text>
                         <View style={styles.loginForm}>
                             <Text style={[styles.fieldInputLabel, styles.lineSpaceVerify]}>To access classes at your school enter the unique code provided by your school</Text>
-                            
+
                             <View style={styles.field, styles.spaceBottom}>
                                 <TextInput
                                     returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
                                     style={STYLE.commonInput}
                                     placeholder="Enter Code"
                                     autoCapitalize={false}
                                     maxLength={40}
-                                    value={this.state.userName}
+                                    value={this.state.schoolCode}
                                     placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
-                           
-                            </View> 
+                                    onChangeText={schoolCode => this.setState({ schoolCode })} />
+
+                            </View>
                             <View style={styles.loginButtonView, styles.alignBtn}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => {
                                         isDesignBuild ?
-                                            this.props.navigation.replace('TeacherDashboard')
+                                            null
                                             :
-                                            this.isFieldsValidated()
+                                            this.verifySchool()
 
                                     }}>
                                     {this.state.isLoading ?
@@ -276,13 +108,13 @@ class Login extends Component {
                                             style={styles.commonButtonGreen}>Submit my code</Text>
                                     }
                                 </TouchableOpacity>
-                                
+
                                 <TouchableOpacity>
                                     <Text style={styles.resetBtn}>Skip this step</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
-                       
+
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
                             <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
@@ -306,7 +138,7 @@ function mapDispatchToProps(dispatch) {
         setPupilAuthData: (data) => dispatch(setPupilAuthData(data)),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(PupilConnect)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -388,13 +220,13 @@ const styles = StyleSheet.create({
         fontSize: hp('1.8%'),
         lineHeight: hp('3.0%'),
         fontFamily: FONTS.fontBold,
-        color:COLORS.buttonGreen,
-        textTransform:'uppercase',
-        fontWeight:'700',
+        color: COLORS.buttonGreen,
+        textTransform: 'uppercase',
+        fontWeight: '700',
     },
     loginButtonView: {
         marginTop: hp('3.0%'),
-        width:'80%',
+        width: '80%',
     },
     bottomLoginIntro: {
         top: hp('15%'),
@@ -409,13 +241,13 @@ const styles = StyleSheet.create({
     eyeParent: {
         justifyContent: 'center'
     },
-    fieldInputLabel:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.lightGray,
-        paddingBottom:hp(1),
+    fieldInputLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
     },
-    commonButtonGreen:{
+    commonButtonGreen: {
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
         fontSize: hp('2.4%'),
@@ -429,14 +261,14 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.5),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
-    resetBtn:{
+    resetBtn: {
         backgroundColor: COLORS.white,
         color: COLORS.darkGray,
         fontSize: hp('2.4%'),
@@ -450,24 +282,24 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.5),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
     },
-    getStartText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        marginTop:hp(5),
+    getStartText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        marginTop: hp(5),
         marginLeft: hp('8.4%'),
     },
-    commonFontsPupleUnderline:{
-        paddingTop:hp(0.5),
+    commonFontsPupleUnderline: {
+        paddingTop: hp(0.5),
         color: COLORS.thmePurple,
         //fontSize: hp(3.81),
         fontWeight: '500',
@@ -477,22 +309,22 @@ const styles = StyleSheet.create({
         textDecorationStyle: "solid",
         textDecorationColor: "#000",
     },
-    greenText:{
-        color:COLORS.buttonGreen,
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),
-        paddingTop:hp(0.5),
+    greenText: {
+        color: COLORS.buttonGreen,
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        paddingTop: hp(0.5),
     },
-    registerSmtText:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+    registerSmtText: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    rightRegisterSmlText:{
-        justifyContent:'flex-end',
-        alignSelf:'flex-end',
-        paddingTop:hp(3.5),
-        paddingRight:hp(3.5),
+    rightRegisterSmlText: {
+        justifyContent: 'flex-end',
+        alignSelf: 'flex-end',
+        paddingTop: hp(3.5),
+        paddingRight: hp(3.5),
     },
     titleAccountLogin: {
         textAlign: 'left',
@@ -503,44 +335,44 @@ const styles = StyleSheet.create({
         marginLeft: hp('8.4%'),
         fontFamily: FONTS.fontBold,
     },
-    loginAccountForm:{
+    loginAccountForm: {
         paddingLeft: hp('9%'),
         paddingRight: hp('9%'),
-        flexDirection:'row',
-        justifyContent:'space-between',
-        width:hp(54.42),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: hp(54.42),
     },
-    filedSpace:{
-        width:hp(22.65),
-        marginRight:hp(3),
+    filedSpace: {
+        width: hp(22.65),
+        marginRight: hp(3),
     },
-    firstNameSpace:{
-        marginLeft:hp(9),
+    firstNameSpace: {
+        marginLeft: hp(9),
     },
     dropDownArrowdatetime: {
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.6),
-        marginTop:hp(2.5),
+        marginTop: hp(2.5),
     },
-    dropWrap:{
-        width:hp(10.2),
-        marginTop:hp(2.5),
+    dropWrap: {
+        width: hp(10.2),
+        marginTop: hp(2.5),
     },
-    alignVert:{
-        alignItems:'center',
-        marginRight:hp(2.5),
+    alignVert: {
+        alignItems: 'center',
+        marginRight: hp(2.5),
     },
-    dateTimetextdummy:{
+    dateTimetextdummy: {
         fontFamily: FONTS.fontBold,
-        fontSize:hp(1.82),        
-        color:COLORS.lightGray,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
     },
-    lineSpaceVerify:{
-        marginBottom:hp(3),
+    lineSpaceVerify: {
+        marginBottom: hp(3),
     },
-    resetBtn:{
+    resetBtn: {
         backgroundColor: COLORS.white,
         color: COLORS.darkGray,
         fontSize: hp('2.4%'),
@@ -554,22 +386,22 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.5),
         alignSelf: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 50,},
+        shadowOffset: { width: 0, height: 50, },
         shadowOpacity: 0.16,
         shadowRadius: 13,
         elevation: 4,
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
-        marginLeft:hp(3),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        marginLeft: hp(3),
     },
-    alignBtn:{
-        flexDirection:'row',
-        justifyContent:'space-around',
+    alignBtn: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
-    spaceBottom:{
-        marginTop:hp(5),
-        marginBottom:hp(10),
+    spaceBottom: {
+        marginTop: hp(5),
+        marginBottom: hp(10),
     }
 });
