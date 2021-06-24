@@ -232,7 +232,7 @@ const PupuilDashboard = (props) => {
                                         <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} />
                                         <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
                                             <Text style={PAGESTYLE.date}>Today</Text>
-                                            <Text style={PAGESTYLE.month}>25 Sept</Text>
+                                            <Text style={PAGESTYLE.month}>{moment().format('D')} {moment().format('MMM')}</Text>
                                         </ImageBackground>
                                         <View>
                                             <TouchableOpacity>

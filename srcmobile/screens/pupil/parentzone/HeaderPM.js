@@ -11,11 +11,12 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { opacity } from "../../../utils/Constant";
+import { baseUrl, opacity } from "../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
+import { User } from "../../../utils/Model";
 
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
@@ -23,12 +24,14 @@ const HeaderPM = (props) => {
     const [tabIndex, setSelectedTab] = useState(0);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
+    const [selectedPupilIndex, setSelectedPupilIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
+    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
 
     useEffect(() => {
-        // props.onFilter(filterBy)
-    }, [filterBy])
+
+    }, [])
 
     return (
         <View style={styles.headerMain}>
@@ -40,34 +43,31 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <Menu>
-                        <MenuTrigger><Image style={styles.userparent} source={Images.userparent} /></MenuTrigger>
+                        <MenuTrigger><Image style={styles.userparent} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}>
-                                    <View style={styles.filterList}>
-                                        <View style={styles.filterListSub}>
-                                            <Image style={styles.userparentInMenu} source={Images.userparent} />
-                                            <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>Reuel Pardesi</Text>
+                            {childrenList.map((item, index) => (
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => setSelectedPupilIndex(index)}>
+                                        <View style={styles.filterList}>
+                                            <View style={styles.filterListSub}>
+                                                <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
+                                                <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>{item.FirstName} {item.LastName}</Text>
+                                            </View>
+                                            {index == selectedPupilIndex ?
+                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                :
+                                                null
+                                            }
                                         </View>
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                            ))}
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
-                                    activeOpacity={opacity}>
-                                    <View style={styles.filterList}>
-                                        <View style={styles.filterListSub}>
-                                            <Image style={styles.userparentInMenu} source={Images.userparent} />
-                                            <Text style={styles.filterListText}>Elysian Pardesi</Text>
-                                        </View>
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}>
+                                    activeOpacity={opacity}
+                                    onPress={() => props.navigateToAddNewUser()}>
                                     <View style={styles.filterList}>
                                         <View style={styles.filterListSub}>
                                             <View style={styles.userparentInMenuAddmain}><Image style={styles.userparentInMenuAdd} source={Images.AddIcon} /></View>

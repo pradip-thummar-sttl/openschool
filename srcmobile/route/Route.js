@@ -55,6 +55,7 @@ import Setting from '../screens/Setting/Setting';
 import Message from '../screens/GlobalMessage/Message';
 import NewMessage from '../screens/GlobalMessage/NewMessage';
 import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
+import Passcode from '../screens/pupil/parentzone/Passcode';
 import Chat from '../screens/Chat/Chat';
 
 import PubNub from 'pubnub';
@@ -129,9 +130,14 @@ function ScreenStack() {
                 <Stack.Screen name="Setting" component={Setting} />
                 <Stack.Screen name="Message" component={Message} />
                 <Stack.Screen name="NewMessage" component={NewMessage} />
+                <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
+                <Stack.Screen name="Passcode" component={Passcode} />
+                <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
+                <Stack.Screen name="ParentZoneProfile" component={ParentZoneProfile} />
+                <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
+                <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
                 <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
                 <Stack.Screen name="Chat" component={Chat} />
-
             </Stack.Navigator>
         </PubNubProvider>
     );

@@ -13,10 +13,6 @@ const ParentZoneSchoolDetails = (props) => {
     const [isHide, action] = useState(true);
     return (
         <View>
-            <HeaderPM
-                onAlertPress={() => props.navigation.openDrawer()}
-                setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
-            />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>

@@ -23,6 +23,7 @@ export const EndPoints = {
     EventType: 'eventtype',
     HomeworkSubmited: 'homeworksubmited/',
     Groupsetup: 'groupsetup',
+    PupilSchoolCode: 'pupilschoolcode',
 
     //Pupil
     PupilRegister:"pupilregister",
@@ -36,6 +37,8 @@ export const EndPoints = {
     GetPupilLesson: 'getpupillesson',
     GetPupilHomework: 'getpupilhomework',
 
+    //Parent Zone
+    SetPin: 'setpin',
     UserSetting:"usersetting",
     SaveSetting:"saveSetting",
 

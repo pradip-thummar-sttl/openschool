@@ -1,14 +1,15 @@
 import { Dimensions, StyleSheet } from 'react-native'
 const { width, height } = Dimensions.get('window');
-import FONTS from '../../utils/Fonts';
-import COLORS from '../../utils/Colors';
+import FONTS from '../../../utils/Fonts';
+import COLORS from '../../../utils/Colors';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 export default StyleSheet.create({
     mainView:{
         width:'100%',
         height:'100%',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor: COLORS.white
     },
     EnterCodeText:{
         fontFamily:FONTS.fontBold,
@@ -23,16 +24,17 @@ export default StyleSheet.create({
         height:hp(12),
         width:hp(12),
         borderRadius:hp(12/2),
-        backgroundColor:COLORS.borderGrp,
+        backgroundColor:COLORS.greyBack,
          margin:hp(2),
         borderWidth:1,
-        borderColor:COLORS.lightGray,
+        borderColor:COLORS.videoLinkBorder,
          alignItems:'center',
          justifyContent:'center'
     },
     numberText:{
         fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(4)
+        fontSize:hp(4),
+        color: COLORS.darkGrayIntro,
     },
     codeView:{
         flexDirection:'row'
@@ -42,8 +44,6 @@ export default StyleSheet.create({
         width:hp(10),
         borderBottomWidth:1,
         margin:wp(2),
-       
-        
     },
     text:{
         textAlign:'center',
