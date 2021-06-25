@@ -110,7 +110,7 @@ const HeaderPM = (props) => {
                 </TouchableOpacity> */}
                 </View>
                 :
-                <View style={{ height: 20 }}></View>
+                null
             }
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
@@ -144,7 +144,8 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
-        paddingBottom: 5,
+        paddingBottom: hp(2),
+        paddingTop: hp(1),
         paddingLeft: hp(2),
         paddingRight: hp(2),
     },
@@ -163,16 +164,18 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGrayIntro,
     },
     date: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGrayIntro,
     },
     massagesIcon: {
-        width: hp(5.85),
-        height: hp(5.85),
+        width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -405,7 +408,7 @@ const styles = StyleSheet.create({
     },
     whiteBg: {
         paddingBottom: hp(1),
-        paddingTop: hp(1),
+        paddingTop: hp(2),
         flexDirection: 'row',
         alignItems: 'center',
         paddingRight: hp(2),

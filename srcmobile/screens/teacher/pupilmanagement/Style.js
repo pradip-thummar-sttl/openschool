@@ -10,21 +10,22 @@ export default StyleSheet.create({
         flex: 0.26,
         borderRightColor: COLORS.dashBoard,
         borderRightWidth: 1,
-        paddingTop: 20
+        paddingTop: hp(2.46)
     },
     left1: {
         flex: 1,
         borderRightColor: COLORS.dashBoard,
         borderRightWidth: 1,
-        paddingTop: 20
+        paddingTop: hp(2.46)
     },
     middle: {
         flex: 0.48,
         flexDirection: 'column',
-        paddingTop: 20,
+        paddingTop: hp(2.46),
     },
     right: {
-        paddingTop: 20,
+        paddingTop: 10,
+        paddingHorizontal: hp(1.5),
         flex: 1
     },
     pupilParent: {
@@ -50,7 +51,7 @@ export default StyleSheet.create({
         marginHorizontal: 15,
     },
     bar: {
-        marginHorizontal: 20,
+        marginHorizontal: hp(2.46),
         marginVertical: 10,
         height: 1,
         backgroundColor: COLORS.dashBoard
@@ -77,19 +78,17 @@ export default StyleSheet.create({
         borderRadius: hp(50),
     },
     groupEdit: {
-        width: 20,
-        borderRadius: hp(50),
+        width: hp(2.46),
         resizeMode: 'contain',
     },
     groupEdit1: {
-        width: 20,
-        borderRadius: hp(50),
+        width: hp(2),
         resizeMode: 'contain',
-        position: 'absolute',
-        right: 0
+        right: 0,
+        top: 5,
     },
     selectedPupilName: {
-        fontSize: 20,
+        fontSize: hp(2.46),
         marginLeft: 10,
         flex: 1,
         paddingVertical: 2,
@@ -110,43 +109,51 @@ export default StyleSheet.create({
     },
     groupTitle1: {
         flexDirection: 'row',
-        margin: 10,
+        paddingHorizontal: hp(2),
+        marginBottom: hp(1),
         alignItems: 'center',
-        height: 40,
     },
     groupParent: {
         flexDirection: 'column',
-        padding: 10,
+        padding: hp(0.5),
+        paddingVertical: hp(1.25),
+        paddingBottom: hp(1.8),
         borderWidth: 1,
-        borderColor: COLORS.dashBoard,
-        borderRadius: 8,
-        margin: 5,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(0.615),
+        marginTop: hp(0.615),
         justifyContent: 'center',
-        backgroundColor: COLORS.white
+        backgroundColor: COLORS.white,
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: hp(1), },
+        shadowOpacity: 0.04,
+        shadowRadius: hp(1),
     },
     groupName: {
-        fontSize: 20,
-        flex: 1,
+        fontSize: hp(2.46),
     },
     input: {
-        borderBottomColor: COLORS.dashBoard,
+        borderBottomColor: COLORS.videoLinkBorder,
         borderBottomWidth: 1,
-        fontSize: 30,
-        paddingBottom: 10,
+        fontSize: hp(1.97),
+        paddingBottom: hp(1.5),
+        marginHorizontal: hp(2),
         marginBottom: 50,
-        marginHorizontal: 30
     },
     input1: {
-        borderBottomColor: COLORS.dashBoard,
+        borderBottomColor: COLORS.videoLinkBorder,
         borderBottomWidth: 1,
-        fontSize: 30,
-        paddingBottom: 10,
-        marginBottom: 30,
-        marginHorizontal: 30
+        color: COLORS.darkGrayIntro,
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.97),
+        paddingBottom: hp(1),
+        marginHorizontal: hp(2),
+        marginBottom: hp(1.5),
     },
     button: {
         color: COLORS.white,
-        fontSize: 20,
+        fontSize: hp(2.46),
         fontWeight: '800',
         borderRadius: hp(1),
         alignSelf: 'center',
@@ -156,8 +163,7 @@ export default StyleSheet.create({
     },
     button1: {
         color: COLORS.white,
-        fontSize: 18,
-        fontWeight: '800',
+        fontSize: hp(1.75),
         borderRadius: hp(1),
         alignSelf: 'center',
         textTransform: 'uppercase',
@@ -167,7 +173,7 @@ export default StyleSheet.create({
     buttonParent: {
         height: 60,
         width: 200,
-        marginVertical: 20,
+        marginVertical: hp(2.46),
         borderRadius: 10,
         margin: 5,
         borderWidth: 1,
@@ -176,18 +182,19 @@ export default StyleSheet.create({
         borderColor: COLORS.dashboardGreenButton,
     },
     buttonParent1: {
-        height: 50,
-        width: 170,
-        marginTop: 20,
+        height: hp(5.5),
+        marginTop: hp(2.46),
         borderRadius: 10,
-        margin: 5,
+        marginHorizontal: hp(0.5),
+        paddingHorizontal: hp(3),
         borderWidth: 1,
         justifyContent: 'center',
         alignSelf: 'center',
+        width: '95%',
         borderColor: COLORS.dashboardGreenButton,
     },
     label: {
-        height: 50,
+        height: hp(5.5),
         fontSize: 25,
         padding: 10,
         textAlign: 'center',
@@ -272,7 +279,7 @@ export default StyleSheet.create({
     },
     groupName: {
         color: COLORS.darkGray,
-        fontSize: hp(1.6),
+        fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
         textAlignVertical: 'center',
         flex: 1
@@ -474,7 +481,7 @@ export default StyleSheet.create({
     calIcon: {
         position: 'absolute',
         alignSelf: 'flex-end',
-        right: 20,
+        right: hp(2.46),
         bottom: 15,
         width: hp(2),
         resizeMode: 'contain',
@@ -484,29 +491,39 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     newGroup: {
-        flexDirection: 'row', borderRadius: 10,
+        flexDirection: 'row', borderRadius: hp(0.73),
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
-        height: 50,
+        height: hp(5.91),
         backgroundColor: COLORS.white,
-        marginHorizontal: 10,
-        marginTop: 20
+        marginHorizontal: hp(2),
+        marginTop: hp(2),
+        paddingLeft: hp(2)
     },
     newGroupLbl: {
-        marginHorizontal: 20,
+        marginHorizontal: hp(2),
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontSize: hp(1.6),
+        color: COLORS.darkGrayIntro,
     },
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginLeft: 20,
-        marginBottom: 20,
+        marginLeft: hp(2.46),
+        marginBottom: hp(2.46),
     },
     checkMark: {
         position :'absolute',
         alignContent: 'flex-end',
         right: 10,
+    },
+    createIcon: {
+        width: hp(2.30),
+        height: hp(2.30),
+        resizeMode: 'contain',
+        alignSelf: 'center',
+        left: hp(0.5)
     },
 });

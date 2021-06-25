@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Image, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
@@ -51,7 +52,6 @@ const GroupSetUp = (props) => {
             <View style={PAGESTYLE.groupTitle1}>
                 <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.GroupName}</Text>
                 <TouchableOpacity
-                    style={{ height: 30, width: 30 }}
                     activeOpacity={opacity}
                     onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList }) }}>
                     <Image
@@ -115,6 +115,7 @@ const GroupSetUp = (props) => {
                 activeOpacity={opacity}
                 onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), }) }}>
                 <View style={PAGESTYLE.newGroup}>
+                    <Image style={PAGESTYLE.createIcon} source={Images.uploadIcon} />
                     <Text style={PAGESTYLE.newGroupLbl}>create new group</Text>
                 </View>
             </TouchableOpacity>
@@ -132,7 +133,7 @@ const GroupSetUp = (props) => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
                         :
-                        <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
                 }
             </View>
         </SafeAreaView>

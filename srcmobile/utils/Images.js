@@ -129,5 +129,6 @@ const Images = {
     parentZoneIcon: require('../assets/images/parent-zone-icon2.png'),
     userparent: require('../assets/images/userParent2.png'),
     parentProfilecoverImage: require('../assets/images/parentProfileViewCover2.png'),
+    uploadIcon: require('../assets/images/upload-icon2.png'),
 }
 export default Images;
