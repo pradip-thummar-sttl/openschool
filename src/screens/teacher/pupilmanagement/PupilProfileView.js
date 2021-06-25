@@ -37,7 +37,7 @@ const PupilProfileView = (props) => {
                                             source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
                                     </View>
                                     <TouchableOpacity>
-                                        <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>EDit Profile</Text>
+                                        <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
                                     </TouchableOpacity>
                                 </ImageBackground>
                             </View>
