@@ -108,7 +108,7 @@ export default StyleSheet.create({
     },
     mesagesView: {
         width: '105%',
-        height: hp(70),
+        height: hp(62),
         marginBottom: wp(3),
     },
     textView: {

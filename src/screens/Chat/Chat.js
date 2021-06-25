@@ -8,6 +8,7 @@ import Images from '../../utils/Images'
 import STYLE from '../../utils/Style'
 import ChatHeader from './ChatHeader'
 import Styles from './Style'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 
@@ -18,7 +19,7 @@ import Styles from './Style'
 //     { name: 'SCHOOL CHAT', isSelected: false }]
 
 
-const Chat = () => {
+const Chat = (props) => {
     const pubnub = usePubNub();
     const [channels] = useState(['awesome-channel']);
     const [messages, addMessage] = useState([]);
@@ -66,9 +67,9 @@ const Chat = () => {
     return (
 
         <View style={{ flex: 1 }}>
-            <ChatHeader />
+            {/* <ChatHeader /> */}
             {/* tabs */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
                 <View style={[Styles.lessonPlanTab, { height: 50 }]}>
                     {
                         tabs.map((item, index) => {
@@ -91,41 +92,46 @@ const Chat = () => {
                         placeholderTextColor={COLORS.menuLightFonts}
                     />
                 </View>
-            </View>
+            </View> */}
 
             <View style={Styles.views}>
-                <View style={Styles.leftView}>
-                    <View style={Styles.firstView}>
-                        <Image style={Styles.iconParent} source={Images.LessonIcon} />
-                        <Text style={Styles.availabeText}>{'This person is curently offline.\nAvailable from 09:00 - 17:00'}</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Parent/Guardian</Text>
-                        <Text style={Styles.subText}>Ann Le-Pardesi</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Relationship to pupil:</Text>
-                        <Text style={Styles.subText}>Mother</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Email:</Text>
-                        <Text style={Styles.subText}>ann@gmail.com</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Address:</Text>
-                        <Text style={Styles.subText}>{'23 York Road, Mosely,\nBirmingham, B13 1LT'}</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Telephone no:</Text>
-                        <Text style={Styles.subText}>07777 777 777</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Notes:</Text>
-                        <Text style={Styles.subText}>{'Speak to her about Reuels'}</Text>
-                    </View>
+                {
+                    props.tabs === 1 ?
+                        <View style={Styles.leftView}>
+                            <View style={Styles.firstView}>
+                                <Image style={Styles.iconParent} source={Images.LessonIcon} />
+                                <Text style={Styles.availabeText}>{'This person is curently offline.\nAvailable from 09:00 - 17:00'}</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Parent/Guardian</Text>
+                                <Text style={Styles.subText}>Ann Le-Pardesi</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Relationship to pupil:</Text>
+                                <Text style={Styles.subText}>Mother</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Email:</Text>
+                                <Text style={Styles.subText}>ann@gmail.com</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Address:</Text>
+                                <Text style={Styles.subText}>{'23 York Road, Mosely,\nBirmingham, B13 1LT'}</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Telephone no:</Text>
+                                <Text style={Styles.subText}>07777 777 777</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Notes:</Text>
+                                <Text style={Styles.subText}>{'Speak to her about Reuels'}</Text>
+                            </View>
 
-                </View>
-                <View style={Styles.rightView}>
+                        </View>
+                        : null
+                }
+
+                <View style={[Styles.rightView,{width:props.tabs === 1?hp(76):wp(85)}]}>
                     <View style={Styles.mesagesView}>
                         <FlatList
                             data={messages}
@@ -157,14 +163,14 @@ const Chat = () => {
                             }
                         </ScrollView> */}
                     </View>
-                    <View style={Styles.textView}>
+                    <View style={[Styles.textView,{width:props.tabs === 1?hp(76):wp(85)}]}>
                         <TextInput
                             style={Styles.input}
                             multiline={true}
                             placeholder="Message Ann le"
                             placeholderTextColor={COLORS.menuLightFonts}
                             value={message}
-                            onChangeText={(text)=>setMessage(text)}
+                            onChangeText={(text) => setMessage(text)}
                         />
                         <View style={Styles.buttonView}>
                             <TouchableOpacity>
@@ -173,7 +179,7 @@ const Chat = () => {
                             <TouchableOpacity style={{ marginHorizontal: 20 }}>
                                 <Image style={Styles.btn} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={()=>sendMessage(message)}>
+                            <TouchableOpacity onPress={() => sendMessage(message)}>
                                 <Image style={Styles.btn} />
                             </TouchableOpacity>
                         </View>

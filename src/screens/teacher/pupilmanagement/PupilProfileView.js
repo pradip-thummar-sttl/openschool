@@ -12,16 +12,21 @@ import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderPMInner from './HeaderPMInner';
 import moment from 'moment';
+import Chat from "../../Chat/Chat";
 
 const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
+    const [tabSelected, setTabSelected] = useState(0);
+
 
     console.log('props', props.selectedPupil);
     return (
         <View style={PAGESTYLE.mainPage1}>
-            <HeaderPMInner navigateToBack={() => props.navigateToBack()} />
-            <View style={{ width: isHide ? '100%' : '100%', }}>
+            <HeaderPMInner navigateToBack={() => props.navigateToBack()} tabIndex={(index)=>{setTabSelected(index)}} />
+            {
+                tabSelected === 0?
+                <View style={{ width: isHide ? '100%' : '100%', }}>
                 <View style={PAGESTYLE.whiteBg}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.managementDetail}>
@@ -111,6 +116,13 @@ const PupilProfileView = (props) => {
                     </ScrollView>
                 </View>
             </View>
+            :
+            <View style={{ width: isHide ? '100%' : '100%', }}>
+
+            <Chat tabs={tabSelected}/>
+            </View>
+            }
+            
         </View>
     );
 }

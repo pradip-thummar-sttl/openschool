@@ -32,7 +32,7 @@ import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 
-import { PERMISSIONS, requestMultiple } from 'react-native-permissions';
+import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
 
 const { DialogModule, Dialog } = NativeModules;
 
