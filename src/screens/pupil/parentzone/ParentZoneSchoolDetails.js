@@ -26,10 +26,11 @@ const ParentZoneSchoolDetails = (props) => {
     const [zip, setZip] = useState('');
 
     useEffect(() => {
+        console.log('schoolData', schoolData);
         setSchoolFirstName(schoolData.SchoolFirstName)
         setSchoolLastName(schoolData.SchoolLastName)
         setUniqueCode(schoolData.UniqueNumber)
-        setSchoolMobile(schoolData.SchoolMobileNumber)
+        setSchoolMobile(schoolData.SchoolMobileNumber + '')
         setAdd1(schoolData.SchoolAddressLine1)
         setAdd2(schoolData.SchoolAddressLine2)
         setCity(schoolData.SchoolCity)
@@ -45,13 +46,13 @@ const ParentZoneSchoolDetails = (props) => {
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={PAGESTYLE.managementBlockTop}>
                                 <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
-                                    <View style={PAGESTYLE.topBannerParent}>
+                                    {/* <View style={PAGESTYLE.topBannerParent}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => { }}>
                                             <Text style={PAGESTYLE.topBannerBtn1}>Save Changes</Text>
                                         </TouchableOpacity>
-                                    </View>
+                                    </View> */}
                                 </ImageBackground>
                             </View>
                         </View>
@@ -66,9 +67,9 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={[STYLE.commonInput, PAGESTYLE.fullInput]}
+                                        style={[STYLE.commonInput1, PAGESTYLE.fullInput]}
                                         placeholder="Moseley Church of England School"
-                                        enabled={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={schoolFirstName + ' ' + schoolLastName}
                                         placeholderTextColor={COLORS.lightplaceholder}
@@ -83,9 +84,10 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={[STYLE.commonInput, PAGESTYLE.fullInput]}
+                                        style={[STYLE.commonInput1, PAGESTYLE.fullInput]}
                                         placeholder="Enter Unique Code"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         numberOfLines={4}
                                         value={uniqueCode}
@@ -101,12 +103,13 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={STYLE.commonInput1}
                                         placeholder="Miss Rachel Barker"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={teacherName}
-                                        placeholderTextColor={COLORS.lightplaceholder}
+                                        placeholderTextColor={COLORS.darkGray}
                                     />
                                 </View>
                             </View>
@@ -117,9 +120,10 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={STYLE.commonInput1}
                                         placeholder="01632 960600"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={schoolMobile}
                                         placeholderTextColor={COLORS.lightplaceholder}
@@ -138,9 +142,10 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={STYLE.commonInput1}
                                         placeholder="23 York Road"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={add1}
                                         placeholderTextColor={COLORS.lightplaceholder}
@@ -153,9 +158,10 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={STYLE.commonInput1}
                                         placeholder="Moseley"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={add2}
                                         placeholderTextColor={COLORS.lightplaceholder}
@@ -170,9 +176,10 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={STYLE.commonInput1}
                                         placeholder="Birmingham"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={city}
                                         placeholderTextColor={COLORS.lightplaceholder}
@@ -185,9 +192,10 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput}
+                                        style={STYLE.commonInput1}
                                         placeholder="B13 1LT"
                                         autoCapitalize={false}
+                                        editable={false}
                                         maxLength={40}
                                         value={zip}
                                         placeholderTextColor={COLORS.lightplaceholder}

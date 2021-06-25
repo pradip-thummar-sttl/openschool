@@ -26,7 +26,7 @@ const ParentZoneSchoolDetails = (props) => {
         setSchoolFirstName(schoolData.SchoolFirstName)
         setSchoolLastName(schoolData.SchoolLastName)
         setUniqueCode(schoolData.UniqueNumber)
-        setSchoolMobile(schoolData.SchoolMobileNumber)
+        setSchoolMobile(schoolData.SchoolMobileNumber + '')
         setAdd1(schoolData.SchoolAddressLine1)
         setAdd2(schoolData.SchoolAddressLine2)
         setCity(schoolData.SchoolCity)
@@ -54,6 +54,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="School name"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={schoolFirstName + ' ' + schoolLastName}
@@ -66,6 +67,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Unique Link Code"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={uniqueCode}
@@ -78,6 +80,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Teacher name"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={teacherName}
@@ -90,6 +93,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="School contact tel."
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={schoolMobile}
@@ -102,6 +106,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Address Line 1"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={add1}
@@ -114,6 +119,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Address Line 2"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={add2}
@@ -126,6 +132,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="City"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={city}
@@ -138,6 +145,7 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Postcode"
                                 autoCapitalize={'none'}
+                                editable={false}
                                 enabled={false}
                                 maxLength={40}
                                 value={zip}
