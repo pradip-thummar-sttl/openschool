@@ -311,7 +311,8 @@ const PupilLessonDetail = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
+                <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.teacherLessonGrid]}>
+                    <View >
                     {
                         isLesson ?
                             currentWeekLesson.length > 0 || lastWeekLesson.length > 0 ?
@@ -337,6 +338,7 @@ const PupilLessonDetail = (props) => {
                                     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                 </View>
                     }
+                    </View>
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}

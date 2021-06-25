@@ -59,6 +59,10 @@ export default StyleSheet.create({
         fontSize: hp(1.56),
         textTransform: 'uppercase',
     },
+    teacherLessonGrid: {
+        width: '100%',
+        height: hp(72)
+    },
     tabsTextSelected: {
         color: COLORS.buttonGreen,
     },

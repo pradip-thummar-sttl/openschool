@@ -145,6 +145,7 @@ class Login extends Component {
             }
 
         }, (err) => {
+            console.log('error ', err)
             this.setLoading(false)
 
         })
@@ -233,12 +234,12 @@ class Login extends Component {
         if (res.UserType === "Teacher") {
             this.props.navigation.replace('TeacherDashboard')
         } else if (res.UserType === "Pupil") {
-            if (res.SchoolId == undefined || res.SchoolId == null || res.SchoolId == '') {
-                this.props.navigation.replace('PupilConnect', { UserDetialId: res.UserDetialId })
-            } else {
-                this.props.navigation.replace('ParentZoneSwitch')
-            }
-        } else {
+        //     if (res.SchoolId == undefined || res.SchoolId == null || res.SchoolId == '') {
+        //         this.props.navigation.replace('PupilConnect', { UserDetialId: res.UserDetialId })
+        //     } else {
+        //         this.props.navigation.replace('ParentZoneSwitch')
+        //     }
+        // } else {
             this.props.navigation.replace('PupuilDashboard')
         }
         // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')

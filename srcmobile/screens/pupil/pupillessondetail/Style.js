@@ -54,6 +54,10 @@ export default StyleSheet.create({
         fontSize: hp(1.47),
         textTransform: 'uppercase',
     },
+    teacherLessonGrid: {
+        width: '100%',
+        height: hp(72)
+    },
     timedateGrp: {
         flexDirection: 'row',
         marginBottom: hp(4.94),
