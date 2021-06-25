@@ -10,6 +10,7 @@ import HeaderPM from "./HeaderPM";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import GroupSetUp from "./GroupSetUp";
+import { User } from "../../../utils/Model";
 
 const { CallModule } = NativeModules;
 
@@ -19,7 +20,7 @@ const PupiloverView = (props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
 
     useEffect(() => {
-        Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
@@ -50,7 +51,7 @@ const PupiloverView = (props) => {
                                                     <View style={PAGESTYLE.pupilProfile}>
                                                         <View style={PAGESTYLE.rowProfile}>
                                                             <Image style={PAGESTYLE.pupilImage}></Image>
-                                                            <Text style={PAGESTYLE.pupilName}>{item.FirstName}</Text>
+                                                            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
                                                         </View>
                                                         <View style={PAGESTYLE.groupPupil}>
                                                             <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : 'Group 1A'}</Text>

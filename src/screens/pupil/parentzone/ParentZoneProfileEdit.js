@@ -12,13 +12,16 @@ import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { add, not } from "react-native-reanimated";
+import moment from 'moment';
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
 
+    const [profileData, setProfileData] = useState(props.data);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [profile, setProfile] = useState('')
     const [dob, setDob] = useState('');
     const [uniqueCode, setUniqueCode] = useState('');
     const [note, setNote] = useState('');
@@ -33,6 +36,26 @@ const ParentZoneProfileEdit = (props) => {
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
 
+    useEffect(() => {
+        setFirstName(profileData.FirstName)
+        setLastName(profileData.LastName)
+        setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
+        setProfile(profileData.ProfilePicture)
+        setUniqueCode(profileData.UniqueNumber)
+        setNote(profileData.Note)
+        setRelation(profileData.Relationship)
+        setCode(profileData.PinPassword)
+        setParentName(profileData.ParentFirstName + ' ' + profileData.ParentLastName)
+        setMobile(profileData.MobileNumber + '')
+        setChildEmail(profileData.Email)
+        setAdd1(profileData.AddressLine1)
+        setAdd2(profileData.AddressLine2)
+        setCity(profileData.City)
+        setZip(profileData.PostCode)
+
+        console.log('baseUrl + profile', baseUrl + profile);
+    }, [profileData])
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar hide={() => action(!isHide)} /> */}
@@ -44,6 +67,7 @@ const ParentZoneProfileEdit = (props) => {
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
                                         <View style={PAGESTYLE.thumbTopUser}>
+                                            <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: baseUrl + profile }} />
                                             <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} />
                                         </View>
                                         <View style={PAGESTYLE.topBannerParent}>
@@ -79,7 +103,7 @@ const ParentZoneProfileEdit = (props) => {
                                         <TextInput
                                             returnKeyType={"next"}
                                             ref={(input) => { this.t2 = input; }}
-                                            onSubmitEditing={() => { this.t3.focus(); }}
+                                            onSubmitEditing={() => { this.t4.focus(); }}
                                             style={STYLE.commonInput}
                                             value={lastName}
                                             autoCapitalize={'words'}
@@ -98,11 +122,12 @@ const ParentZoneProfileEdit = (props) => {
                                         <TextInput
                                             style={[STYLE.commonInput, PAGESTYLE.dateField]}
                                             placeholder="Select"
+                                            editable={false}
                                             autoCapitalize={false}
                                             maxLength={40}
                                             placeholderTextColor={COLORS.lightplaceholder}
                                         />
-                                        <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow} />
+                                        <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow1} />
                                     </View>
                                 </View>
                                 <View>
@@ -114,6 +139,7 @@ const ParentZoneProfileEdit = (props) => {
                                             onSubmitEditing={() => { this.t4.focus(); }}
                                             style={STYLE.commonInput}
                                             value={uniqueCode}
+                                            editable={false}
                                             autoCapitalize={'words'}
                                             maxLength={40}
                                             placeholderTextColor={COLORS.lightplaceholder}
@@ -193,7 +219,7 @@ const ParentZoneProfileEdit = (props) => {
                                         <TextInput
                                             returnKeyType={"next"}
                                             ref={(input) => { this.t7 = input; }}
-                                            onSubmitEditing={() => { this.t8.focus(); }}
+                                            onSubmitEditing={() => { this.t10.focus(); }}
                                             style={STYLE.commonInput}
                                             value={parentName}
                                             autoCapitalize={'words'}
@@ -212,6 +238,7 @@ const ParentZoneProfileEdit = (props) => {
                                             ref={(input) => { this.t8 = input; }}
                                             onSubmitEditing={() => { this.t9.focus(); }}
                                             style={STYLE.commonInput}
+                                            editable={false}
                                             value={mobile}
                                             keyboardType={'phone-pad'}
                                             maxLength={40}
@@ -230,6 +257,7 @@ const ParentZoneProfileEdit = (props) => {
                                             ref={(input) => { this.t9 = input; }}
                                             onSubmitEditing={() => { this.t10.focus(); }}
                                             style={STYLE.commonInput}
+                                            editable={false}
                                             value={childEmail}
                                             autoCapitalize={false}
                                             maxLength={40}

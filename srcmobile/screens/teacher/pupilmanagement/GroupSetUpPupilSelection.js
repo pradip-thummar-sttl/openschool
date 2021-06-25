@@ -22,15 +22,14 @@ const GroupSetUpPupilSelection = (props) => {
     const [groupsClone, setGroupsClone] = useState([])
     const [selectedPupils, setSelectedPupils] = useState([])
     const [selectedGroup, setSelectedGroup] = useState([])
-    const [groupName, setGroupName] = useState('')
+    const [groupName, setGroupName] = useState(props.route.params.isForUpdate ? props.route.params.groupName : '')
     const [isPupilLoading, setPupilLoading] = useState([])
     const [isGroupLoading, setGroupLoading] = useState([])
 
     useEffect(() => {
         setPupilLoading(true)
 
-        // Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
-        Service.get(`pupilbyteacherid/604b09139dc64117024690c3`, (res) => {
+        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
@@ -39,7 +38,7 @@ const GroupSetUpPupilSelection = (props) => {
                 if (props.route.params.data) {
                     let list = []
                     props.route.params.data.forEach(element => {
-                        list.push({_id: element.PupilId})
+                        list.push({ PupilId: element.PupilId })
                     });
                     setSelectedPupils(list)
                 } else {
@@ -64,37 +63,55 @@ const GroupSetUpPupilSelection = (props) => {
 
         let list = []
         selectedPupils.forEach(element => {
-            list.push({ PupilId: element._id })
+            list.push({ PupilId: element.PupilId })
         });
 
-        let data = {
-            GroupName: groupName,
-            TeacherId: User.user._id,
-            CreatedBy: User.user._id,
-            PupilList: list
+        let data, url
+        if (!props.route.params.isForUpdate) {
+            url = `${EndPoints.Groupsetup}`
+            data = {
+                GroupName: groupName,
+                TeacherId: User.user._id,
+                CreatedBy: User.user._id,
+                PupilList: list
+            }
+        } else {
+            url = `${EndPoints.UpdateGroupSetup}/${props.route.params.groupId}`
+            data = {
+                GroupName: groupName,
+                UpdatedBy: User.user._id,
+                PupilList: list
+            }
         }
 
-        console.log('data', data);
-
-        // Service.get(`${EndPoints.Groupsetup}`, (res) => {
-        Service.post(data, `groupsetup`, (res) => {
+        Service.post(data, url, (res) => {
+            setPupilLoading(false)
             if (res.code == 200) {
-                showMessageWithCallBack(MESSAGE.groupCreate, () => {
-                    props.route.params.onRefresh();
-                    props.navigation.goBack()
-                })
+                reset()
+                if (!props.route.params.isForUpdate) {
+                    showMessageWithCallBack(MESSAGE.groupCreate, () => {
+                        props.route.params.onRefresh();
+                        props.navigation.goBack()
+                    })
+                } else {
+                    showMessageWithCallBack(MESSAGE.groupUpdated, () => {
+                        props.route.params.onRefresh();
+                        props.navigation.goBack()
+                    })
+                }
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
+            setPupilLoading(false)
             console.log('error of GetPupilByTeacherId', err)
         })
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', isSelected, _index);
+        console.log('isSelected', selectedPupils, pupils);
         if (!isSelected) {
-            const newList = selectedPupils.filter((item, index) => item._id !== pupils[_index]._id);
+            const newList = selectedPupils.filter((item, index) => item.PupilId !== pupils[_index].PupilId);
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
@@ -103,7 +120,7 @@ const GroupSetUpPupilSelection = (props) => {
 
     const isPupilChecked = (_index) => {
         if (selectedPupils.length > 0) {
-            if (selectedPupils.some(ele => ele._id == pupils[_index]._id)) {
+            if (selectedPupils.some(ele => ele.PupilId == pupils[_index].PupilId)) {
                 return true
             } else {
                 return false

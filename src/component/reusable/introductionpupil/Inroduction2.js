@@ -8,7 +8,7 @@ import Images from '../../../utils/Images';
 
 const Introduction2 = (props) => {
     return (
-        <View style={STYLE.viewBox}>
+        <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
                 <Image source={Images.introSlideTwo} style={styles.SlideImage}></Image>
             </View>

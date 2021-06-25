@@ -23,6 +23,7 @@ export const EndPoints = {
     EventType: 'eventtype',
     HomeworkSubmited: 'homeworksubmited/',
     Groupsetup: 'groupsetup',
+    UpdateGroupSetup: 'updategroupsetup',
     PupilSchoolCode: 'pupilschoolcode',
 
     //Pupil

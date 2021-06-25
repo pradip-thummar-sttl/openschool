@@ -6,6 +6,7 @@ import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../utils/Constant";
 import Images from "../../../utils/Images";
+import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
 import PAGESTYLE from './Style';
 
@@ -23,26 +24,11 @@ const GroupSetUp = () => {
 
     useEffect(() => {
 
-        setGroupLoading(true)
-
-        // Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
-        Service.get(`getparticipants/604b09139dc64117024690c3`, (res) => {
-            setGroupLoading(false)
-            if (res.code == 200) {
-                setGroups(res.data)
-                setGroupsClone(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            setGroupLoading(false)
-            console.log('error of GetParticipants', err)
-        })
+        loadGroup()        
 
         setPupilLoading(true)
 
-        // Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
-        Service.get(`pupilbyteacherid/604b09139dc64117024690c3`, (res) => {
+        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
@@ -56,24 +42,72 @@ const GroupSetUp = () => {
         })
     }, [])
 
-    const saveGroup = () =>{
-        let data = {
-            
+    const loadGroup = () => {
+        setGroupLoading(true)
+
+        Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
+            setGroupLoading(false)
+            if (res.code == 200) {
+                setGroups(res.data)
+                setGroupsClone(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setGroupLoading(false)
+            console.log('error of GetParticipants', err)
+        })
+    }
+
+    const saveGroup = () => {
+        if (groupName.trim().length == 0) {
+            showMessage(MESSAGE.groupName)
+            return
+        } else if (selectedPupils.length == 0) {
+            showMessage(MESSAGE.selectPupil)
+            return
         }
 
-        // Service.get(`${EndPoints.Groupsetup}`, (res) => {
-            Service.post(`groupsetup`, (res) => {
-                setPupilLoading(false)
-                if (res.code == 200) {
-                    setPupils(res.data)
-                    setPupilsClone(res.data)
-                } else {
-                    showMessage(res.message)
+        let list = []
+        selectedPupils.forEach(element => {
+            list.push({ PupilId: element.PupilId })
+        });
+
+        let data, url
+        if (selectedGroup.length == 0) {
+            url = `${EndPoints.Groupsetup}`
+            data = {
+                GroupName: groupName,
+                TeacherId: User.user._id,
+                CreatedBy: User.user._id,
+                PupilList: list
+            }
+        } else {
+            url = `${EndPoints.UpdateGroupSetup}/${selectedGroup[0]._id}`
+            data = {
+                GroupName: groupName,
+                UpdatedBy: User.user._id,
+                PupilList: list
+            }
+        }
+
+        Service.post(data, url, (res) => {
+            setPupilLoading(false)
+            if (res.code == 200) {
+                reset()
+                loadGroup()
+                if (selectedGroup.length == 0) {
+                showMessage(MESSAGE.groupCreated)
+                } else{
+                    showMessage(MESSAGE.groupUpdated)
                 }
-            }, (err) => {
-                setPupilLoading(false)
-                console.log('error of GetPupilByTeacherId', err)
-            })
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setPupilLoading(false)
+            console.log('error of GetPupilByTeacherId', err)
+        })
     }
 
     const Pupillist = (props) => (
@@ -256,7 +290,7 @@ const GroupSetUp = () => {
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <TouchableOpacity
                                 style={{ ...PAGESTYLE.buttonParent, backgroundColor: COLORS.dashboardGreenButton, }}
-                                onPress={() => { launchLiveClass() }}>
+                                onPress={() => { saveGroup() }}>
                                 <Text style={PAGESTYLE.button}>Assign Group</Text>
                             </TouchableOpacity>
                             <TouchableOpacity

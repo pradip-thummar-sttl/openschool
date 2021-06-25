@@ -11,6 +11,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: height,
         fontFamily: FONTS.fontRegular,
+        backgroundColor: COLORS.white
     },
     viewRow: {
         flexDirection: 'row',
@@ -22,6 +23,19 @@ export default StyleSheet.create({
     },
     commonInput: {
         color:COLORS.themeBlue,
+        fontSize: hp('1.9%'),
+        borderWidth: 2,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        lineHeight:hp(2.3),
+        height: hp('6.8%'),
+        paddingLeft: hp('2.0%'),
+        paddingRight: hp('2.0%'),
+        fontFamily: FONTS.fontSemiBold,
+    },
+    commonInput1: {
+        color:COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 2,
         borderColor: COLORS.videoLinkBorder,

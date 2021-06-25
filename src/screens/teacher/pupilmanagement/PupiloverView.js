@@ -10,6 +10,7 @@ import HeaderPM from './HeaderPM'
 import PAGESTYLE from './StyleList'
 import GroupSetUp from './GroupSetUp'
 import COLORS from '../../../utils/Colors'
+import { User } from '../../../utils/Model'
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
@@ -54,7 +55,7 @@ const PupiloverView = (props) => {
     const [selectedTab, setSelectedTab] = useState(0)
 
     useEffect(() => {
-        Service.get(`${EndPoints.PupilByTeacherId}/6041cf525ff1ce52e5d4d398`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
