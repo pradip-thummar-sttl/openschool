@@ -3,7 +3,7 @@ import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { back } from 'react-native/Libraries/Animated/src/Easing';
+// import { back } from 'react-native/Libraries/Animated/src/Easing';
 
 const { width, height } = Dimensions.get('window');
 
