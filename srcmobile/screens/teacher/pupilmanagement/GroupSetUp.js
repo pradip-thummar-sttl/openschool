@@ -12,8 +12,6 @@ import { User } from "../../../utils/Model";
 import PAGESTYLE from './Style';
 
 const GroupSetUp = (props) => {
-    console.log('props', props);
-
     const [groups, setGroups] = useState([])
     const [pupils, setPupils] = useState([])
     const [pupilsClone, setPupilsClone] = useState([])
@@ -31,8 +29,7 @@ const GroupSetUp = (props) => {
     const refresh = () => {
         setGroupLoading(true)
 
-        // Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
-        Service.get(`getparticipants/604b09139dc64117024690c3`, (res) => {
+        Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
             setGroupLoading(false)
             if (res.code == 200) {
                 setGroups(res.data)
@@ -53,7 +50,7 @@ const GroupSetUp = (props) => {
                 <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.GroupName}</Text>
                 <TouchableOpacity
                     activeOpacity={opacity}
-                    onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList }) }}>
+                    onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList, groupName: item.item.GroupName, isForUpdate: true, groupId: item.item._id }) }}>
                     <Image
                         style={PAGESTYLE.groupEdit1}
                         source={Images.Edit} />
@@ -81,39 +78,11 @@ const GroupSetUp = (props) => {
         );
     };
 
-    const pushGroup = (_index) => {
-        if (selectedPupils.length != 0) {
-            showMessage('Please reset your list first')
-            return
-        }
-
-        setSelectedGroup([...selectedGroup, groupsClone[_index]])
-
-        const newList = [], newSelectedList = []
-        pupilsClone.map((item1) => {
-            let flag = false
-            groupsClone[_index].PupilList.map((item2) => {
-                if (item1._id == item2.PupilId) {
-                    flag = true
-                }
-            })
-            if (!flag) {
-                newList.push(item1)
-            } else {
-                newSelectedList.push(item1)
-            }
-        });
-        setPupilsClone(newList)
-        setSelectedPupils(newSelectedList)
-        setGroupName(groupsClone[_index].GroupName)
-    }
-
-
     return (
         <SafeAreaView style={PAGESTYLE.mainPage1}>
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), }) }}>
+                onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), isForUpdate: false }) }}>
                 <View style={PAGESTYLE.newGroup}>
                     <Image style={PAGESTYLE.createIcon} source={Images.uploadIcon} />
                     <Text style={PAGESTYLE.newGroupLbl}>create new group</Text>

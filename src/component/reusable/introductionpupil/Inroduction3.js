@@ -10,7 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const Introduction3 = (props) => {
     console.log(props);
     return (
-        <View style={STYLE.viewBox}>
+        <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
                 <Image source={Images.introSlideThree} style={styles.SlideImage}></Image>
             </View>

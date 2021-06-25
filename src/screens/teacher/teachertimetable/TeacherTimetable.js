@@ -115,7 +115,8 @@ const TeacherTimeTable = (props) => {
         if (flag) {
             return (
                 <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
-                    navigateToDetail={() => { setTeacherLessonDetail(true); setTeacherDetailData(data) }} />
+                    navigateToDetail={() => { setTeacherLessonDetail(true); setTeacherDetailData(data) }}
+                    isLesson={data.Type == Lesson} />
             );
         } else {
             return (

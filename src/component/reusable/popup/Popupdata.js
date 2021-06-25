@@ -26,7 +26,7 @@ const Popupdata = (props) => {
 
     const launchLiveClass = () => {
         if (isRunningFromVirtualDevice) {
-            
+
             // Do Nothing
         } else {
             // if (Platform.OS == 'android') {
@@ -47,7 +47,7 @@ const Popupdata = (props) => {
                     if (res.flag) {
                         startLiveClassAndroid()
                     }
-                   
+
                 }, (err) => {
                     setLoading(false)
 
@@ -126,164 +126,124 @@ const Popupdata = (props) => {
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
-                        {/* <View style={styles.tabcontent}>
-                            <View style={styles.beforeBorder}>
-                                <Text h2 style={styles.titleTab}>Cartoon Drawings</Text>
-                                <Text h3 style={styles.subTitleTab}>Art Subject</Text>
-                                <View style={styles.yellowHrTag}></View>
-                                <View style={styles.timedateGrp}>
-                                    <View style={styles.dateWhiteBoard}>
-                                        <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                        <Text style={styles.datetimeText}>14/09/2020</Text>
-                                    </View>
-                                    <View style={[styles.dateWhiteBoard, styles.time]}>
-                                        <Image style={styles.timeIcon} source={Images.Clock} />
-                                        <Text style={styles.datetimeText}>09:00 - 09:30</Text>
-                                    </View>
-                                    <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                        <Image style={styles.calIcon} source={Images.Group} />
-                                        <Text style={styles.datetimeText}>Group 2A</Text>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={STYLE.hrCommon}></View>
-                            <View style={styles.afterBorder}>
-                                <View style={styles.mediaMain}>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.mediabar}></View></TouchableOpacity>
-                                    <TouchableOpacity style={styles.mediabarTouch}><View style={styles.moreMedia}><Text style={styles.moreMediaText}>2+</Text></View></TouchableOpacity>
-                                </View>
-                                <Text style={styles.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with…</Text>
-                                <View style={styles.attchmentSectionwithLink}>
-                                    <TouchableOpacity style={styles.attachment}>
-                                        <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                        <Text style={styles.attachmentText}>1 Attachment</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity>
-                                        <Text style={styles.linkText}>see more</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.requirementofClass}>
-                                    <Text style={styles.requireText}>Items that your class will need</Text>
-                                    <View style={styles.lessonPoints}>
-                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
-                                        <Text style={styles.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
-                                    </View>
-                                    <View style={styles.lessonPoints}>
-                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
-                                        <Text style={styles.lessonPointText}>Drawing work sheet.</Text>
+                        {props.isLesson ?
+                            <View style={styles.tabcontent}>
+                                <View style={styles.beforeBorder}>
+                                    <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
+                                    <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
+                                    <View style={styles.yellowHrTag}></View>
+                                    <View style={styles.timedateGrp}>
+                                        <View style={styles.dateWhiteBoard}>
+                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                            <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                                        </View>
+                                        <View style={[styles.dateWhiteBoard, styles.time]}>
+                                            <Image style={styles.timeIcon} source={Images.Clock} />
+                                            <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                        </View>
+                                        <View style={[styles.dateWhiteBoard, styles.grp]}>
+                                            <Image style={styles.calIcon} source={Images.Group} />
+                                            <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
+                                        </View>
                                     </View>
                                 </View>
-                                <View style={styles.uploadCalendar}>
-                                    <TouchableOpacity>
-                                        <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
-                                    </TouchableOpacity>
-                                    <View style={styles.lessonstartButton}>
-                                        <TouchableOpacity style={styles.buttonGrp}><Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text></TouchableOpacity>
-                                        <TouchableOpacity style={styles.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
+                                <View style={STYLE.hrCommon}></View>
+                                <View style={styles.afterBorder}>
+                                    <View style={styles.mediaMain}>
+                                        {props.data.Allpupillist ?
+                                            props.data.Allpupillist.map((data, index) => (
+                                                <TouchableOpacity
+                                                    style={styles.mediabarTouch}
+                                                    activeOpacity={opacity}>
+                                                    <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
+                                                </TouchableOpacity>
+                                            ))
+                                            :
+                                            null
+                                        }
                                     </View>
-                                </View>
-                            </View>
-                        </View> */}
-                        <View style={styles.tabcontent}>
-                            <View style={styles.beforeBorder}>
-                                <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
-                                <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
-                                <View style={styles.yellowHrTag}></View>
-                                <View style={styles.timedateGrp}>
-                                    <View style={styles.dateWhiteBoard}>
-                                        <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                        <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                                    <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
+                                    <View style={styles.attchmentSectionwithLink}>
+                                        <TouchableOpacity style={styles.attachment}>
+                                            <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
+                                            <Text style={styles.attachmentText}>1 Attachment</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity>
+                                            <Text style={styles.linkText}>see more</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                    <View style={[styles.dateWhiteBoard, styles.time]}>
-                                        <Image style={styles.timeIcon} source={Images.Clock} />
-                                        <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                    <View style={styles.requirementofClass}>
+                                        <Text style={styles.requireText}>Items that your class will need</Text>
+                                        {props.data.CheckList ?
+                                            props.data.CheckList.map((data, index) => (
+                                                <View style={styles.lessonPoints}>
+                                                    <Image source={Images.CheckIcon} style={styles.checkIcon} />
+                                                    <Text style={styles.lessonPointText}>{data.ItemName}</Text>
+                                                </View>
+                                            ))
+                                            :
+                                            null
+                                        }
                                     </View>
-                                    <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                        <Image style={styles.calIcon} source={Images.Group} />
-                                        <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={STYLE.hrCommon}></View>
-                            <View style={styles.afterBorder}>
-                                <View style={styles.mediaMain}>
-                                    {props.data.Allpupillist ?
-                                        props.data.Allpupillist.map((data, index) => (
-                                            <TouchableOpacity
-                                                style={styles.mediabarTouch}
-                                                activeOpacity={opacity}>
-                                                <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
-                                            </TouchableOpacity>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </View>
-                                <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
-                                <View style={styles.attchmentSectionwithLink}>
-                                    <TouchableOpacity style={styles.attachment}>
-                                        <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                        <Text style={styles.attachmentText}>1 Attachment</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity>
-                                        <Text style={styles.linkText}>see more</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.requirementofClass}>
-                                    <Text style={styles.requireText}>Items that your class will need</Text>
-                                    {props.data.CheckList ?
-                                        props.data.CheckList.map((data, index) => (
-                                            <View style={styles.lessonPoints}>
-                                                <Image source={Images.CheckIcon} style={styles.checkIcon} />
-                                                <Text style={styles.lessonPointText}>{data.ItemName}</Text>
-                                            </View>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </View>
-                                <View style={styles.uploadCalendar}>
-                                    <TouchableOpacity>
-                                        <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
-                                    </TouchableOpacity>
-                                    <View style={styles.lessonstartButton}>
-                                        {!props.isPupil && props.data.Type == Lesson ?
+                                    <View style={styles.uploadCalendar}>
+                                        <TouchableOpacity>
+                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                        </TouchableOpacity>
+                                        <View style={styles.lessonstartButton}>
+                                            {!props.isPupil && props.data.Type == Lesson ?
+                                                <TouchableOpacity
+                                                    style={styles.buttonGrp}
+                                                    activeOpacity={opacity}
+                                                    onPress={() => { toggleModal(); props.navigateToDetail() }}>
+                                                    <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
+                                                </TouchableOpacity>
+                                                :
+                                                <View style={{ width: hp(20) }}></View>
+                                            }
                                             <TouchableOpacity
                                                 style={styles.buttonGrp}
                                                 activeOpacity={opacity}
-                                                onPress={() => { toggleModal(); props.navigateToDetail() }}>
-                                                <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
-                                            </TouchableOpacity>
-                                            :
-                                            <View style={{ width: hp(20) }}></View>
-                                        }
-                                        <TouchableOpacity
-                                            style={styles.buttonGrp}
-                                            activeOpacity={opacity}
-                                            onPress={() => { launchLiveClass() }}>
-                                            {
-                                                isLoading ?
-                                                    <ActivityIndicator
-                                                        style={{ ...styles.buttonGrp, right: 30 }}
-                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                        color={COLORS.buttonGreen} /> :
-                                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                onPress={() => { launchLiveClass() }}>
+                                                {
+                                                    isLoading ?
+                                                        <ActivityIndicator
+                                                            style={{ ...styles.buttonGrp, right: 30 }}
+                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                            color={COLORS.buttonGreen} /> :
+                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
 
-                                            }
-                                        </TouchableOpacity>
+                                                }
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
+                            :
+                            <View style={styles.tabcontent}>
+                                <View style={styles.beforeBorder}>
+                                    <Text h2 style={styles.titleTab}>{props.data.EventName}</Text>
+                                    <Text h3 style={styles.subTitleTab}>{props.data.EventType}</Text>
+                                    <View style={styles.yellowHrTag}></View>
+                                    <View style={styles.timedateGrp}>
+                                        <View style={styles.dateWhiteBoard}>
+                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                            <Text style={styles.datetimeText}>{moment(props.data.EventDate).format('DD/MM/yyyy')}</Text>
+                                        </View>
+                                        <View style={[styles.dateWhiteBoard, styles.time]}>
+                                            <Image style={styles.timeIcon} source={Images.Clock} />
+                                            <Text style={styles.datetimeText}>{props.data.EventStartTime} - {props.data.EventEndTime}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={STYLE.hrCommon}></View>
+                                <View style={styles.afterBorder}>
+                                    <Text style={styles.lessondesciption}>Location: {props.data.EventLocation}</Text>
+                                    <View style={styles.requirementofClass}>
+                                        <Text style={styles.requireText1}>Notes: {props.data.EventDescription}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        }
                     </View>
                 </View>
             </Modal>
@@ -438,12 +398,19 @@ const styles = StyleSheet.create({
         borderLeftColor: 'transparent',
     },
     requirementofClass: {
-        marginTop: hp(4.81),
+        marginTop: hp(2.81),
         marginBottom: hp(1.81),
     },
     requireText: {
         fontSize: hp(2.08),
         fontFamily: FONTS.fontSemiBold,
+        lineHeight: hp(2.86),
+        color: COLORS.darkGray,
+        marginBottom: hp(1.95),
+    },
+    requireText1: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
         lineHeight: hp(2.86),
         color: COLORS.darkGray,
         marginBottom: hp(1.95),
