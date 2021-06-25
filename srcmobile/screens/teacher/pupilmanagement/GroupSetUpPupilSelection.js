@@ -7,8 +7,10 @@ import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import Images from "../../../utils/Images";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
+import STYLE from "../../../utils/Style";
 import PAGESTYLE from './Style';
 
 const GroupSetUpPupilSelection = (props) => {
@@ -125,6 +127,7 @@ const GroupSetUpPupilSelection = (props) => {
                         <CheckBox
                             boxType={'square'}
                             onCheckColor={COLORS.white}
+                            style={STYLE.checkBoxcommon}
                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                             onFillColor={COLORS.dashboardPupilBlue}
                             onTintColor={COLORS.dashboardPupilBlue}
@@ -172,9 +175,10 @@ const GroupSetUpPupilSelection = (props) => {
                 placeholder="Enter group name"
                 autoCapitalize={'sentences'}
                 maxLength={40}
-                placeholderTextColor={COLORS.lightplaceholder}
+                placeholderTextColor={COLORS.darkGrayIntro}
                 value={groupName}
                 onChangeText={groupName => { setGroupName(groupName) }} />
+            <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.left1}>
                 {isPupilLoading ?
                     <ActivityIndicator
@@ -193,14 +197,14 @@ const GroupSetUpPupilSelection = (props) => {
                         </View>
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', }}>
                 <TouchableOpacity
                     style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}
                     onPress={() => { saveGroup() }}>
                     <Text style={PAGESTYLE.button1}>Assign Group</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={PAGESTYLE.buttonParent1}
+                    style={{...PAGESTYLE.buttonParent1, paddingHorizontal: hp(7),}}
                     onPress={() => { reset() }}>
                     <Text style={{ ...PAGESTYLE.button1, color: COLORS.dashboardGreenButton }}>Reset</Text>
                 </TouchableOpacity>

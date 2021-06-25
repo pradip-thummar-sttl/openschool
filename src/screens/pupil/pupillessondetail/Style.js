@@ -121,8 +121,9 @@ export default StyleSheet.create({
         // borderRightWidth: 1,
         // borderColor: COLORS.borderGrp,
         paddingRight: hp(3.90),
+        paddingLeft: hp(3.90),
         paddingTop: hp(2.5),
-        width: '65%'
+        width: '68.5%'
     },
     requireText: {
         fontSize: hp(2.08),
@@ -1020,16 +1021,16 @@ export default StyleSheet.create({
         marginRight: hp(14.32),
     },
     largeVideo: {
-        width: hp(83.72),
-        height: hp(46.87),
+        width: '100%',
+        height: '100%',
         resizeMode: 'contain',
         position: 'absolute',
-        left: hp(-3),
+        left: hp(0),
         top: hp(0),
     },
     largeVideoBlock: {
         position: 'relative',
-        height: hp(46.87),
+        height: hp(43.15),
     },
     moreIcon: {
         width: hp(2.41),
@@ -1052,7 +1053,7 @@ export default StyleSheet.create({
     },
     bookMark: {
         alignItems: 'center',
-        width: hp(6.2),
+        width: hp(6.5),
         marginRight: hp(-1.2),
     },
     videoMainTitle: {
