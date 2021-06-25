@@ -8,9 +8,31 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../utils/Fonts';
 import HeaderPM from "./HeaderPM";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
+import { User } from "../../../utils/Model";
 
 const ParentZoneSchoolDetails = (props) => {
-    const [isHide, action] = useState(true);
+    const [schoolData, setSchoolData] = useState(props.data);
+    const [schoolFirstName, setSchoolFirstName] = useState('');
+    const [schoolLastName, setSchoolLastName] = useState('');
+    const [uniqueCode, setUniqueCode] = useState('');
+    const [teacherName, setTeacherName] = useState('');
+    const [schoolMobile, setSchoolMobile] = useState('');
+    const [add1, setAdd1] = useState('');
+    const [add2, setAdd2] = useState('');
+    const [city, setCity] = useState('');
+    const [zip, setZip] = useState('');
+
+    useEffect(() => {
+        setSchoolFirstName(schoolData.SchoolFirstName)
+        setSchoolLastName(schoolData.SchoolLastName)
+        setUniqueCode(schoolData.UniqueNumber)
+        setSchoolMobile(schoolData.SchoolMobileNumber)
+        setAdd1(schoolData.SchoolAddressLine1)
+        setAdd2(schoolData.SchoolAddressLine2)
+        setCity(schoolData.SchoolCity)
+        setZip(schoolData.SchoolPostalCode)
+    }, [schoolData])
+
     return (
         <View>
             <View style={PAGESTYLE.MainProfile}>
@@ -32,8 +54,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="School name"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"Moseley Church of England School"}
+                                value={schoolFirstName + ' ' + schoolLastName}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -43,8 +66,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Unique Link Code"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"Enter Unique Code"}
+                                value={uniqueCode}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -54,8 +78,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Teacher name"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"Mrs Rachel Barker"}
+                                value={teacherName}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -65,8 +90,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="School contact tel."
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"01632 960600"}
+                                value={schoolMobile}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -76,8 +102,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Address Line 1"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"23 York Road"}
+                                value={add1}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -87,8 +114,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Address Line 2"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"Moseley"}
+                                value={add2}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -98,8 +126,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="City"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"Birmingham"}
+                                value={city}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -109,8 +138,9 @@ const ParentZoneSchoolDetails = (props) => {
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Postcode"
                                 autoCapitalize={'none'}
+                                enabled={false}
                                 maxLength={40}
-                                value={"B13 1LT"}
+                                value={zip}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                     </View>

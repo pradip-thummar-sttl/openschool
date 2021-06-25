@@ -12,11 +12,13 @@ import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { add, not } from "react-native-reanimated";
+import moment from 'moment';
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
 
+    const [profileData, setProfileData] = useState(props.data);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
@@ -32,6 +34,23 @@ const ParentZoneProfileEdit = (props) => {
     const [add2, setAdd2] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
+
+    useEffect(() => {
+        setFirstName(profileData.FirstName)
+        setLastName(profileData.LastName)
+        setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
+        setUniqueCode(profileData.UniqueNumber)
+        setNote(profileData.Note)
+        setRelation(profileData.Relationship)
+        setCode(profileData.PinPassword)
+        setParentName(profileData.ParentFirstName + ' ' + profileData.ParentLastName)
+        setMobile(profileData.MobileNumber)
+        setChildEmail(profileData.Email)
+        setAdd1(profileData.AddressLine1)
+        setAdd2(profileData.AddressLine2)
+        setCity(profileData.City)
+        setZip(profileData.PostCode)
+    }, [profileData])
 
     return (
         <View style={PAGESTYLE.mainPage}>

@@ -13,7 +13,28 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
 const ParentZoneSchoolDetails = (props) => {
     const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(null);
+
+    const [schoolData, setSchoolData] = useState(props.data);
+    const [schoolFirstName, setSchoolFirstName] = useState('');
+    const [schoolLastName, setSchoolLastName] = useState('');
+    const [uniqueCode, setUniqueCode] = useState('');
+    const [teacherName, setTeacherName] = useState('');
+    const [schoolMobile, setSchoolMobile] = useState('');
+    const [add1, setAdd1] = useState('');
+    const [add2, setAdd2] = useState('');
+    const [city, setCity] = useState('');
+    const [zip, setZip] = useState('');
+
+    useEffect(() => {
+        setSchoolFirstName(schoolData.SchoolFirstName)
+        setSchoolLastName(schoolData.SchoolLastName)
+        setUniqueCode(schoolData.UniqueNumber)
+        setSchoolMobile(schoolData.SchoolMobileNumber)
+        setAdd1(schoolData.SchoolAddressLine1)
+        setAdd2(schoolData.SchoolAddressLine2)
+        setCity(schoolData.SchoolCity)
+        setZip(schoolData.SchoolPostalCode)
+    }, [schoolData])
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -47,9 +68,9 @@ const ParentZoneSchoolDetails = (props) => {
                                         onSubmitEditing={() => { this.t2.focus(); }}
                                         style={[STYLE.commonInput, PAGESTYLE.fullInput]}
                                         placeholder="Moseley Church of England School"
-                                        autoCapitalize={false}
+                                        enabled={false}
                                         maxLength={40}
-                                        numberOfLines={4}
+                                        value={schoolFirstName + ' ' + schoolLastName}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>
@@ -67,6 +88,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         autoCapitalize={false}
                                         maxLength={40}
                                         numberOfLines={4}
+                                        value={uniqueCode}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>
@@ -83,6 +105,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         placeholder="Miss Rachel Barker"
                                         autoCapitalize={false}
                                         maxLength={40}
+                                        value={teacherName}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>
@@ -98,6 +121,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         placeholder="01632 960600"
                                         autoCapitalize={false}
                                         maxLength={40}
+                                        value={schoolMobile}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
 
@@ -118,6 +142,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         placeholder="23 York Road"
                                         autoCapitalize={false}
                                         maxLength={40}
+                                        value={add1}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>
@@ -132,6 +157,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         placeholder="Moseley"
                                         autoCapitalize={false}
                                         maxLength={40}
+                                        value={add2}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>
@@ -148,6 +174,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         placeholder="Birmingham"
                                         autoCapitalize={false}
                                         maxLength={40}
+                                        value={city}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>
@@ -162,6 +189,7 @@ const ParentZoneSchoolDetails = (props) => {
                                         placeholder="B13 1LT"
                                         autoCapitalize={false}
                                         maxLength={40}
+                                        value={zip}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                     />
                                 </View>

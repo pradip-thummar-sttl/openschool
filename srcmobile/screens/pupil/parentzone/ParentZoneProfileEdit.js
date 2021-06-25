@@ -9,10 +9,12 @@ import FONTS from '../../../utils/Fonts';
 import HeaderPMInnerEdit from "./HeaderPMInnerEdit";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import moment from 'moment';
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
 
+    const [profileData, setProfileData] = useState(props.data);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
@@ -28,6 +30,23 @@ const ParentZoneProfileEdit = (props) => {
     const [add2, setAdd2] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
+
+    useEffect(() => {
+        setFirstName(profileData.FirstName)
+        setLastName(profileData.LastName)
+        setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
+        setUniqueCode(profileData.UniqueNumber)
+        setNote(profileData.Note)
+        setRelation(profileData.Relationship)
+        setCode(profileData.PinPassword)
+        setParentName(profileData.ParentFirstName + ' ' + profileData.ParentLastName)
+        setMobile(profileData.MobileNumber)
+        setChildEmail(profileData.Email)
+        setAdd1(profileData.AddressLine1)
+        setAdd2(profileData.AddressLine2)
+        setCity(profileData.City)
+        setZip(profileData.PostCode)
+    }, [profileData])
 
     return (
         <View>
