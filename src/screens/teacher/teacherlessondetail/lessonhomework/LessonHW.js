@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -24,6 +24,7 @@ import MESSAGE from "../../../../utils/Messages";
 import { Download } from "../../../../utils/Download";
 import RecordScreen from 'react-native-record-screen';
 
+import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -174,9 +175,45 @@ const TLHomeWork = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = () => {
-        setRecordingStarted(true)
-        RecordScreen.startRecording().catch((error) => console.error(error));
+    const startRecording = async() => {
+        // setRecordingStarted(true)
+        // RecordScreen.startRecording().catch((error) => console.error(error));
+
+        if (Platform.OS === 'android') {
+            const res = await check(PERMISSIONS.ANDROID.CAMERA);
+            if (res === "granted") {
+                setRecordingStarted(true)
+                RecordScreen.startRecording().catch((error) => console.error(error));
+            } else {
+                const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
+                console.log('hello', res2);
+    
+                if (res2 === "granted") {
+                    setRecordingStarted(true)
+                    RecordScreen.startRecording().catch((error) => console.error(error));
+                } else {
+                    showMessage("Please give permission for camera")
+                }
+    
+            }
+        }else{
+            const res = await check(PERMISSIONS.IOS.CAMERA);
+            if (res === "granted") {
+                setRecordingStarted(true)
+                RecordScreen.startRecording().catch((error) => console.error(error));
+            } else {
+                const res2 = await request(PERMISSIONS.IOS.CAMERA);
+                console.log('hello', res2);
+    
+                if (res2 === "granted") {
+                    setRecordingStarted(true)
+                    RecordScreen.startRecording().catch((error) => console.error(error));
+                } else {
+                    showMessage("Please give permission for camera")
+                }
+    
+            }
+        }
     }
 
     const stopRecording = async () => {

@@ -32,6 +32,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
 import RecordScreen from 'react-native-record-screen';
+import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailEdit = (props) => {
@@ -251,9 +253,46 @@ const TLDetailEdit = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = () => {
-        setRecordingStarted(true)
-        RecordScreen.startRecording().catch((error) => console.error(error));
+    const startRecording = async() => {
+        // setRecordingStarted(true)
+        // RecordScreen.startRecording().catch((error) => console.error(error));
+        if (Platform.OS === 'android') {
+            const res = await check(PERMISSIONS.ANDROID.CAMERA);
+            if (res === "granted") {
+                setRecordingStarted(true)
+                RecordScreen.startRecording().catch((error) => console.error(error));
+            } else {
+                const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
+                console.log('hello', res2);
+    
+                if (res2 === "granted") {
+                    setRecordingStarted(true)
+                    RecordScreen.startRecording().catch((error) => console.error(error));
+                } else {
+                    showMessage("Please give permission for camera")
+                }
+    
+            }
+        }else{
+            const res = await check(PERMISSIONS.IOS.CAMERA);
+            if (res === "granted") {
+                setRecordingStarted(true)
+                RecordScreen.startRecording().catch((error) => console.error(error));
+            } else {
+                const res2 = await request(PERMISSIONS.IOS.CAMERA);
+                console.log('hello', res2);
+    
+                if (res2 === "granted") {
+                    setRecordingStarted(true)
+                    RecordScreen.startRecording().catch((error) => console.error(error));
+                } else {
+                    showMessage("Please give permission for camera")
+                }
+    
+            }
+        }
+
+       
     }
 
     const stopRecording = async () => {

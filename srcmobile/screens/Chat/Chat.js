@@ -68,9 +68,9 @@ const Chat = () => {
     return (
 
         <View style={{ flex: 1 }}>
-            <ChatHeader />
+            {/* <ChatHeader /> */}
             {/* tabs */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
                 <View style={[Styles.lessonPlanTab, { height: 50 }]}>
                     {
                         tabs.map((item, index) => {
@@ -82,51 +82,11 @@ const Chat = () => {
                         })
                     }
                 </View>
-                {/* <View style={Styles.field}>
-                    <Image
-                        style={Styles.userIcon}
-                        source={Images.SearchIcon} />
-                    <TextInput
-                        style={[STYLE.commonInput, Styles.searchHeader]}
-                        placeholder="Search Messages"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                    />
-                </View> */}
-            </View>
+                
+            </View> */}
 
             <View style={Styles.views}>
-                {/* <View style={Styles.leftView}>
-                    <View style={Styles.firstView}>
-                        <Image style={Styles.iconParent} source={Images.LessonIcon} />
-                        <Text style={Styles.availabeText}>{'This person is curently offline.\nAvailable from 09:00 - 17:00'}</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Parent/Guardian</Text>
-                        <Text style={Styles.subText}>Ann Le-Pardesi</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Relationship to pupil:</Text>
-                        <Text style={Styles.subText}>Mother</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Email:</Text>
-                        <Text style={Styles.subText}>ann@gmail.com</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Address:</Text>
-                        <Text style={Styles.subText}>{'23 York Road, Mosely,\nBirmingham, B13 1LT'}</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Telephone no:</Text>
-                        <Text style={Styles.subText}>07777 777 777</Text>
-                    </View>
-                    <View style={Styles.secondView}>
-                        <Text style={Styles.headText}>Notes:</Text>
-                        <Text style={Styles.subText}>{'Speak to her about Reuels'}</Text>
-                    </View>
-
-                </View> */}
+               
                 <View style={Styles.rightView}>
                     <View style={Styles.mesagesView}>
                         <FlatList

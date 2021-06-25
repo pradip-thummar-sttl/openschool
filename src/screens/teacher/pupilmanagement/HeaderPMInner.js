@@ -58,25 +58,25 @@ const HeaderPMInner = (props) => {
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => setSelectedTab(0)}>
+                                onPress={() => {setSelectedTab(0), props.tabIndex(0)}}>
                                 <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>Pupil profile</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => setSelectedTab(1)}>
+                                onPress={() => {setSelectedTab(1),props.tabIndex(1)}}>
                                 <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>parent chat</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => setSelectedTab(2)}>
+                                onPress={() => {setSelectedTab(2),props.tabIndex(2)}}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Pupil chat</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => setSelectedTab(3)}>
+                                onPress={() => {setSelectedTab(3),props.tabIndex(3)}}>
                                 <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>School chat</Text>
                             </TouchableOpacity>
                         </View>

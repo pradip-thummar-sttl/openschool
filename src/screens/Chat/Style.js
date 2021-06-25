@@ -53,13 +53,15 @@ export default StyleSheet.create({
     //
     views: {
         flexDirection: 'row',
+        borderTopWidth:1,
+        borderColor:COLORS.borderGrp
 
     },
     leftView: {
         marginLeft: hp(2),
         marginTop: hp(2),
         width: hp(40),
-        height: wp(55),
+        height: wp(60),
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -105,11 +107,11 @@ export default StyleSheet.create({
         marginLeft: hp(2),
         marginTop: hp(2),
         width: hp(76),
-        height: wp(55),
+        height: wp(60),
     },
     mesagesView: {
         width: '105%',
-        height: wp(40),
+        height: wp(45),
         marginBottom: wp(3),
 
     },

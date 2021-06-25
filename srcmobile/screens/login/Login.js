@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
-import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
+// import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
 import COLORS from '../../utils/Colors';
@@ -145,6 +145,7 @@ class Login extends Component {
             }
 
         }, (err) => {
+            console.log('error ', err)
             this.setLoading(false)
 
         })

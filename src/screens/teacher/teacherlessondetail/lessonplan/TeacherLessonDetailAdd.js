@@ -32,6 +32,8 @@ import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 
+import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -256,16 +258,53 @@ const TLDetailAdd = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = () => {
-        setRecordingStarted(true)
-        RecordScreen.startRecording().catch((error) => console.error(error));
+    const startRecording = async() => {
+        if (Platform.OS === 'android') {
+            const res = await check(PERMISSIONS.ANDROID.CAMERA);
+            if (res === "granted") {
+                setRecordingStarted(true)
+                RecordScreen.startRecording().catch((error) => console.error(error));
+            } else {
+                const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
+                console.log('hello', res2);
+    
+                if (res2 === "granted") {
+                    setRecordingStarted(true)
+                    RecordScreen.startRecording().catch((error) => console.error(error));
+                } else {
+                    showMessage("Please give permission for camera")
+                }
+    
+            }
+        }else{
+            const res = await check(PERMISSIONS.IOS.CAMERA);
+            if (res === "granted") {
+                setRecordingStarted(true)
+                RecordScreen.startRecording().catch((error) => console.error(error));
+            } else {
+                const res2 = await request(PERMISSIONS.IOS.CAMERA);
+                console.log('hello', res2);
+    
+                if (res2 === "granted") {
+                    setRecordingStarted(true)
+                    RecordScreen.startRecording().catch((error) => console.error(error));
+                } else {
+                    showMessage("Please give permission for camera")
+                }
+    
+            }
+        }
+
+
     }
 
     const stopRecording = async () => {
         var arr = []
+
         const res = await RecordScreen.stopRecording().catch((error) => {
             setRecordingStarted(false)
             console.warn(error)
+            console.log(error);
         });
         if (res) {
             setRecordingStarted(false)
