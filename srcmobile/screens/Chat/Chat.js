@@ -11,6 +11,7 @@ import moment from 'moment';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Images from '../../../src/utils/Images';
+import { User } from '../../utils/Model';
 
 
 // var data = [
@@ -23,7 +24,12 @@ import Images from '../../../src/utils/Images';
 const Chat = (props) => {
     console.log('data of parent chat', props.data);
     const pubnub = usePubNub();
-    const [channels] = useState(['awesome-channel']);
+    let channel1=`${props.data.MobileNumber}_${User.user._id}`
+    let channel2=`${props.data.PupilId}_${User.user._id}`
+    let channel3=`${props.data.SchoolId}_${User.user._id}`
+
+    const [channels] = useState([channel1, channel2, channel3]);
+    // const [channels] = useState(['awesome-channel']);
     const [messages, addMessage] = useState([]);
     const [message, setMessage] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -49,9 +55,17 @@ const Chat = (props) => {
     };
 
     const sendMessage = message => {
+        var channel = ""
+        if (props.tabs === 1) {
+            channel = channels[0]
+        }else if (props.tabs === 2) {
+            channel = channels[1]
+        }else{
+            channel = channels[2]
+        }
         if (message) {
             pubnub
-                .publish({ channel: channels[0], message })
+                .publish({ channel: channel, message })
                 .then(() => setMessage(''));
         }
     };

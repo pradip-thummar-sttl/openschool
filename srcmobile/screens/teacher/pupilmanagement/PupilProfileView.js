@@ -96,7 +96,7 @@ const PupilProfileView = (props) => {
                     </View>
                     :
                     <View style={PAGESTYLE.MainProfile}>
-                        <Chat data={item} />
+                        <Chat tabs = {tabSelected} data={item} />
                     </View>
             }
 

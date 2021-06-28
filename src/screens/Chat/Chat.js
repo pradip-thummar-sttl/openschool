@@ -12,6 +12,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import moment from 'moment';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { User } from '../../utils/Model';
 
 
 // var data = [
@@ -23,7 +24,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 const Chat = (props) => {
     const pubnub = usePubNub();
-    const [channels] = useState(['awesome-channel']);
+    let channel1=`${props.data.MobileNumber}_${User.user._id}`
+    let channel2=`${props.data.PupilId}_${User.user._id}`
+    let channel3=`${props.data.SchoolId}_${User.user._id}`
+
+    const [channels] = useState([channel1, channel2, channel3]);
     const [messages, addMessage] = useState([]);
     const [message, setMessage] = useState('');
     const [tabs, settabs] = useState([
@@ -46,9 +51,17 @@ const Chat = (props) => {
     };
 
     const sendMessage = message => {
+        var channel = ""
+        if (props.tabs === 1) {
+            channel = channels[0]
+        }else if (props.tabs === 2) {
+            channel = channels[1]
+        }else{
+            channel = channels[2]
+        }
         if (message) {
             pubnub
-                .publish({ channel: channels[0], message })
+                .publish({ channel: channel, message })
                 .then(() => setMessage(''));
         }
     };
@@ -111,7 +124,7 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Relationship to pupil:</Text>
-                                <Text style={Styles.subText}>Mother</Text>
+                                <Text style={Styles.subText}>{props.data.Relationship}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Email:</Text>
@@ -119,7 +132,7 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Address:</Text>
-                                <Text style={Styles.subText}>{'23 York Road, Mosely,\nBirmingham, B13 1LT'}</Text>
+                                <Text style={Styles.subText}>{`${props.data.AddressLine1}\n${props.data.AddressLine2}`}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Telephone no:</Text>
