@@ -4,11 +4,13 @@ import { PubNubProvider, usePubNub } from 'pubnub-react';
 import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import COLORS from '../../utils/Colors'
-import Images from '../../utils/Images'
 import STYLE from '../../utils/Style'
 import ChatHeader from './ChatHeader'
 import Styles from './Style'
+import moment from 'moment';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Images from '../../../src/utils/Images';
 
 
 // var data = [
@@ -18,7 +20,8 @@ import Styles from './Style'
 //     { name: 'SCHOOL CHAT', isSelected: false }]
 
 
-const Chat = () => {
+const Chat = (props) => {
+    console.log('data of parent chat', props.data);
     const pubnub = usePubNub();
     const [channels] = useState(['awesome-channel']);
     const [messages, addMessage] = useState([]);
@@ -33,11 +36,14 @@ const Chat = () => {
 
     const handleMessage = event => {
         console.log('log of event message', event);
+        var mesage = messages
         const message = event.message;
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             const text = message.text || message;
-            var mesage = [...messages]
-            mesage.push(text)
+            // addMessage(messages => [...messages, event]);
+            
+            console.log('messages array', mesage, event)
+            mesage.push(event)
             addMessage(mesage);
         }
     };
@@ -56,15 +62,15 @@ const Chat = () => {
     }, [pubnub, channels]);
 
 
-    const onPressTab = (index) => {
-        var data = [...tabs]
-        data.forEach(element => {
-            element.isSelected = false
-        });
-        data[index].isSelected = true
-        settabs(data)
-        setSelectedIndex(index)
-    }
+    // const onPressTab = (index) => {
+    //     var data = [...tabs]
+    //     data.forEach(element => {
+    //         element.isSelected = false
+    //     });
+    //     data[index].isSelected = true
+    //     settabs(data)
+    //     setSelectedIndex(index)
+    // }
     return (
 
         <View style={{ flex: 1 }}>
@@ -84,7 +90,8 @@ const Chat = () => {
                 </View>
                 
             </View> */}
-
+            
+            <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
             <View style={Styles.views}>
                
                 <View style={Styles.rightView}>
@@ -96,8 +103,8 @@ const Chat = () => {
                                     <View style={Styles.messageCell}>
                                         <Image style={Styles.roundImage} />
                                         <View style={Styles.messageSubCell}>
-                                            <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   08:20</Text></Text>
-                                            <Text style={Styles.messageText}>{item}</Text>
+                                            <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000)*1000))).format('hh:mm')}</Text></Text>
+                                            <Text style={Styles.messageText}>{item.message}</Text>
                                         </View>
                                     </View>
                                 )
@@ -130,13 +137,13 @@ const Chat = () => {
                         />
                         <View style={Styles.buttonView}>
                             <TouchableOpacity>
-                                <Image style={Styles.btn} />
+                                <Image style={Styles.btn} source={Images.paperClip}/>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ marginHorizontal: 20 }}>
-                                <Image style={Styles.btn} />
+                            <TouchableOpacity >
+                                <Image style={Styles.btn} source={Images.imageUpload} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={()=>sendMessage(message)}>
-                                <Image style={Styles.btn} />
+                                <Image style={Styles.btn} source={Images.send} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -144,7 +151,10 @@ const Chat = () => {
                 </View>
 
             </View>
+            </KeyboardAwareScrollView>
+
         </View>
+
 
     )
 }

@@ -8,10 +8,15 @@ import STYLE from '../../utils/Style';
 import Introduction1 from '../../component/reusable/introductionteacher/Inroduction1';
 import Introduction2 from '../../component/reusable/introductionteacher/Inroduction2';
 import Introduction3 from '../../component/reusable/introductionteacher/Inroduction3';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Introduction extends Component {
     constructor(props) {
         super(props);
+    }
+    navigateToLogin(){
+        AsyncStorage.setItem('introduceTeacher', "true")
+        this.props.navigation.replace('Login', { userType: "Teacher" })
     }
 
     render() {
@@ -22,7 +27,7 @@ export default class Introduction extends Component {
                         <>
                             <Introduction1 />
                             <Introduction2 />
-                            <Introduction3 navigateToLogin={() => this.props.navigation.replace('Login', { userType: "Teacher" })} />
+                            <Introduction3 navigateToLogin={() => this.navigateToLogin()} />
                         </>
                     }
                     style={styles.slider}

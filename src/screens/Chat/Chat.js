@@ -9,7 +9,9 @@ import STYLE from '../../utils/Style'
 import ChatHeader from './ChatHeader'
 import Styles from './Style'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import moment from 'moment';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 // var data = [
@@ -33,11 +35,12 @@ const Chat = (props) => {
 
     const handleMessage = event => {
         console.log('log of event message', event);
+        var mesage = messages
         const message = event.message;
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             const text = message.text || message;
-            var mesage = [...messages]
-            mesage.push(text)
+            // var mesage = [...messages]
+            mesage.push(event)
             addMessage(mesage);
         }
     };
@@ -104,7 +107,7 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Parent/Guardian</Text>
-                                <Text style={Styles.subText}>Ann Le-Pardesi</Text>
+                                <Text style={Styles.subText}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Relationship to pupil:</Text>
@@ -112,7 +115,7 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Email:</Text>
-                                <Text style={Styles.subText}>ann@gmail.com</Text>
+                                <Text style={Styles.subText}>{props.data.Email}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Address:</Text>
@@ -120,11 +123,11 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Telephone no:</Text>
-                                <Text style={Styles.subText}>07777 777 777</Text>
+                                <Text style={Styles.subText}>{props.data.MobileNumber}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Notes:</Text>
-                                <Text style={Styles.subText}>{'Speak to her about Reuels'}</Text>
+                                <Text style={Styles.subText}>{props.data.Note}</Text>
                             </View>
 
                         </View>
@@ -132,6 +135,8 @@ const Chat = (props) => {
                 }
 
                 <View style={[Styles.rightView,{width:props.tabs === 1?hp(76):wp(85)}]}>
+            <KeyboardAwareScrollView >
+
                     <View style={Styles.mesagesView}>
                         <FlatList
                             data={messages}
@@ -140,8 +145,8 @@ const Chat = (props) => {
                                     <View style={Styles.messageCell}>
                                         <Image style={Styles.roundImage} />
                                         <View style={Styles.messageSubCell}>
-                                            <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   08:20</Text></Text>
-                                            <Text style={Styles.messageText}>{item}</Text>
+                                            <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000)*1000))).format('hh:mm')}</Text></Text>
+                                            <Text style={Styles.messageText}>{item.message}</Text>
                                         </View>
                                     </View>
                                 )
@@ -174,16 +179,17 @@ const Chat = (props) => {
                         />
                         <View style={Styles.buttonView}>
                             <TouchableOpacity>
-                                <Image style={Styles.btn} />
+                                <Image style={Styles.btn} source={Images.paperClip}  />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ marginHorizontal: 20 }}>
-                                <Image style={Styles.btn} />
+                            <TouchableOpacity >
+                                <Image style={Styles.btn} source={Images.imageUpload} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => sendMessage(message)}>
-                                <Image style={Styles.btn} />
+                                <Image style={Styles.btn} source={Images.send} />
                             </TouchableOpacity>
                         </View>
                     </View>
+                    </KeyboardAwareScrollView>
 
                 </View>
 

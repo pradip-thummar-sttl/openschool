@@ -119,7 +119,7 @@ const PupilProfileView = (props) => {
             :
             <View style={{ width: isHide ? '100%' : '100%', }}>
 
-            <Chat tabs={tabSelected}/>
+            <Chat tabs={tabSelected} data={props.selectedPupil}/>
             </View>
             }
             
