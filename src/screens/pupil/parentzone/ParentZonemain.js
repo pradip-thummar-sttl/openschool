@@ -63,17 +63,20 @@ const ParentZonemain = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [isProfileEdit, setProfileEdit] = useState(false)
+    const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
 
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar hide={() => action(!isHide)} /> */}
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <HeaderPM
+                    onSwitchPupil={(pupilData) => setPupilData(pupilData)}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')} />
 
                 {isProfileEdit ?
                     <ParentZoneProfileEdit
+                        data={pupilData}
                         navigateToProfile={() => setProfileEdit(false)} />
                     :
                     selectedTabIndex == 0 ?
@@ -137,9 +140,11 @@ const ParentZonemain = (props) => {
                                     :
                                     selectedTabIndex == 4 ?
                                         <ParentZoneProfile
+                                            data={pupilData}
                                             navigateToDetail={() => setProfileEdit(true)} />
                                         :
-                                        <ParentZoneSchoolDetails />
+                                        <ParentZoneSchoolDetails
+                                            data={pupilData} />
                 }
             </View>
         </View>

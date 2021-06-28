@@ -48,7 +48,7 @@ const HeaderPM = (props) => {
                                     <MenuOption style={PAGESTYLE.borderList}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
-                                            onPress={() => setSelectedPupilIndex(index)}>
+                                            onPress={() => {props.onSwitchPupil(childrenList[index]); setSelectedPupilIndex(index)}}>
                                             <View style={PAGESTYLE.filterList}>
                                                 <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), resizeMode: 'contain', marginRight: hp(1), }} />
                                                 <Text style={PAGESTYLE.filterListText}>{item.FirstName} {item.LastName}</Text>

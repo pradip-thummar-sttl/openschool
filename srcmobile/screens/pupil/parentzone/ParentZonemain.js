@@ -9,16 +9,18 @@ import FONTS from '../../../utils/Fonts';
 import HeaderPM from "./HeaderPM";
 import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
+import { User } from "../../../utils/Model";
 
 const ParentZonemain = (props) => {
     const [isHide, action] = useState(true);
-    const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
+    const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
 
     return (
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderPM
+                    onSwitchPupil={(pupilData) => setPupilData(pupilData)}
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
@@ -51,9 +53,11 @@ const ParentZonemain = (props) => {
                                 :
                                 selectedTabIndex == 4 ?
                                     <ParentZoneProfile
-                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit')} />
+                                        data={pupilData}
+                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { data: pupilData })} />
                                     :
-                                    <ParentZoneSchoolDetails />
+                                    <ParentZoneSchoolDetails
+                                        data={pupilData} />
                 }
             </View>
         </View>

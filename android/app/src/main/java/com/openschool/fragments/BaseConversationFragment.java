@@ -72,7 +72,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected WebRtcSessionManager sessionManager;
     protected ConferenceSession currentSession;
-    protected ArrayList<QBUser> opponents;
+    protected ArrayList<QBUser> opponents = new ArrayList<>();
+    protected ArrayList<QBUser> opponentsTemp;
     protected ArrayList<Integer> opponentsIds;
     private LocalViewOnClickListener localViewOnClickListener;
     private Set<Integer> usersToDestroy;
@@ -141,7 +142,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         opponentsIds = this.getArguments().getIntegerArrayList(Consts.EXTRA_DIALOG_OCCUPANTS);
-        opponents = (ArrayList<QBUser>) this.getArguments().getSerializable(Consts.EXTRA_SELECTED_DIALOG_OCCUPANTS);
+        opponentsTemp = (ArrayList<QBUser>) this.getArguments().getSerializable(Consts.EXTRA_SELECTED_DIALOG_OCCUPANTS);
         asListenerRole = this.getArguments().getBoolean(Consts.EXTRA_AS_LISTENER);
         currentUserID = this.getArguments().getString(Consts.EXTRA_CURRENTUSERID);
         currentName = this.getArguments().getString(Consts.EXTRA_CURRENTUSERNAME);
@@ -157,6 +158,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         if (!isTeacher) {
             opponents.addAll(selectTeacherForPupil());
+        } else {
+            opponents.addAll(opponentsTemp);
         }
 
         initFields();
@@ -186,7 +189,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     private ArrayList<QBUser> selectTeacherForPupil() {
         ArrayList<QBUser> qbUsers = new ArrayList<>();
-        for (QBUser user : opponents) {
+        for (QBUser user : opponentsTemp) {
             if (user.getId() == Integer.parseInt(teacherQBUserID)) {
                 qbUsers.add(user);
             }
@@ -451,6 +454,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 isTeacher);
         opponentsAdapter.setAdapterListener(this);
         recyclerView.setAdapter(opponentsAdapter);
+
+        localVideoView.setZOrderOnTop(true);
     }
 
     private void releaseViewHolders() {

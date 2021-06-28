@@ -47,6 +47,8 @@ const MESSAGE = {
     validCode: 'Please enter valid code',
     codeMismatched: 'Code does not matched',
     setCode: 'You have set code successfully',
+    groupCreated: 'Group created successfully',
+    groupUpdated: 'Group updated successfully',
 
 }
 
