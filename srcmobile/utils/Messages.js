@@ -49,7 +49,12 @@ const MESSAGE = {
     setCode: 'You have set code successfully',
     groupCreated: 'Group created successfully',
     groupUpdated: 'Group updated successfully',
-
+    selectDOB: 'Please sselect date of birth',
+    relation: 'Please enter relation with pupil',
+    passCode: 'Please enter four digit pass code',
+    parentNAme: 'Please enter parent name',
+    childPassword: "Please enter child's password",
+    profileUpdated: 'Profile updated successfully',
 }
 
 export default MESSAGE;

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ActivityIndicator, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -24,15 +24,11 @@ const HeaderPMInner = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const showAlert = () =>{
-        Alert.alert(
-           'Record successfully Saved...'
-        )
-     }
+   
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-    
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -48,10 +44,16 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
-                        <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
-                        <Text style={styles.commonButtonGreenheader}></Text>
-                    </TouchableOpacity>
+                    {props.isLoading ?
+                        <ActivityIndicator
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.white} />
+                        :
+                        <TouchableOpacity onPress={props.saveProfile()} style={styles.buttonGroup}>
+                            <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
+                        </TouchableOpacity>
+                    }
+                    <Text style={styles.commonButtonGreenheader}></Text>
                 </View>
             </View>
         </View>

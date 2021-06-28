@@ -37,6 +37,8 @@ export const EndPoints = {
     UploadWorkspace:'uploadWorkspace',
     GetPupilLesson: 'getpupillesson',
     GetPupilHomework: 'getpupilhomework',
+    PupilUpdate: 'pupilupdate',
+    UpdateParent: 'updateparent',
 
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",
