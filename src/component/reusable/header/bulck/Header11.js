@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {

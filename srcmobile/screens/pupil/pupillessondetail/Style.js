@@ -1541,7 +1541,16 @@ export default StyleSheet.create({
         shadowRadius: hp(1),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginTop: 10, height: hp(5.20), marginLeft: hp(1.95), marginRight: hp(1.95), backgroundColor: COLORS.white
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: hp(5.20),
+        marginLeft: hp(2),
+        marginRight: hp(2),
+        backgroundColor: COLORS.white,
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: hp(1), },
+        shadowOpacity: 0.05,
+        shadowRadius: hp(1),
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

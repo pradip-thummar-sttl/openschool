@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
         fontSize: Platform.OS == 'android' ? hp(1.8) : hp(2),
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {

@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
         marginLeft: hp(1.25),
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
 });

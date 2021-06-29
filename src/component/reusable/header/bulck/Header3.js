@@ -52,9 +52,6 @@ const HeaderWhite = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-
-
-
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
                     <TouchableOpacity
@@ -82,42 +79,6 @@ const HeaderWhite = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                {/* <View style={{ flexDirection: 'row' }}>
-                    <Menu style={{ marginLeft: 10 }}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </View> */}
                 <PopupdataSecondPupil
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
@@ -130,9 +91,13 @@ export default HeaderWhite;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        shadowColor: COLORS.black,
+        shadowOffset: { width: 0, height: hp(1), },
+        shadowOpacity: 0.05,
+        shadowRadius: hp(1),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
     },
     headerMain: {
         flexDirection: 'row',
@@ -146,10 +111,6 @@ const styles = StyleSheet.create({
     date: {
         fontSize: hp(2.86),
         fontFamily: FONTS.fontRegular,
-    },
-    massagesIcon: {
-        width: wp(5.20),
-        resizeMode: 'contain',
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -272,9 +233,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: wp(5.20),
-        resizeMode: 'contain',
+        width: hp(5.20),
         height: hp(5.20),
+        resizeMode: 'contain',
+        marginRight: hp(1),
+    },
+    massagesIcon: {
+        width: hp(5.20),
+        height: hp(5.20),
+        resizeMode: 'contain',
     },
     userIcon1: {
         position: 'absolute',
@@ -289,7 +256,7 @@ const styles = StyleSheet.create({
         right: hp(1.43),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', alignItems: 'center', marginBottom: hp(1.5), height: hp(5.20), backgroundColor: COLORS.white, marginTop: hp(1.5),
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, marginRight: 10, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

@@ -1,5 +1,6 @@
 const COLORS = {
     black: '#000000',
+    redNotification: '#FF200D',
     bottomSlideUpBack: 'rgba(0, 0, 0, 0.5)',
     white: '#FFFFFF',
     darkGrayIntro: '#262626',

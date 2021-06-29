@@ -38,9 +38,9 @@ export default HeaderWhite;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
-        paddingRight: hp(4.5),
+        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
     },
     headerMain: {
         flexDirection: 'row',
