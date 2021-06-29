@@ -22,6 +22,7 @@ import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PupilManagement from "../pupilmanagement/PupilManagement";
+import Message from "../GlobalMessage/Message";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -268,7 +269,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0) }}
                 navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
                 navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
-                navigateToPupilManagement={() => { console.log('CLICKED'); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }} />
+                navigateToPupilManagement={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
+                navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }} />
             {
                 isTeacherLessonDetail ?
                     <TLDetailEdit
@@ -579,7 +581,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 selectedIndex == 2 ?
                                     <TeacherLessonList navigation={props.navigation} />
                                     :
-                                    <PupilManagement navigation={props.navigation} />
+                                    selectedIndex == 2 ?
+                                        <PupilManagement navigation={props.navigation} />
+                                        :
+                                        <Message navigation={props.navigation} />
 
             }
             {isAddEvent ?

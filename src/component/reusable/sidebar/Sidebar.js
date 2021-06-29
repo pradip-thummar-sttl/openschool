@@ -123,7 +123,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { toggleAnimation(true) }}>
+                        onPress={() => { props.navigateToParents(); toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Parents}

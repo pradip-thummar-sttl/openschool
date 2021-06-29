@@ -41,8 +41,8 @@ import ScreenAndCameraRecording from '../screens/teacher/screenandcamera/Screena
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import GroupSetUp from '../screens/teacher/pupilmanagement/GroupSetUp';
 import Setting from '../screens/Setting/Setting';
-import Message from '../screens/GlobalMessage/Message';
-import NewMessage from '../screens/GlobalMessage/NewMessage';
+import Message from '../screens/teacher/GlobalMessage/Message';
+import NewMessage from '../screens/teacher/GlobalMessage/NewMessage';
 import Passcode from '../screens/pupil/parentzone/Passcode';
 // import PupilManagement from '../screens/PupilManagement/PupilManagement';
 import PupilManagement from '../screens/teacher/pupilmanagement/PupilManagement';

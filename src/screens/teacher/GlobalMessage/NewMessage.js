@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
-import NewMessageHeader from '../../component/reusable/header/NewMessageHeader'
-import COLORS from '../../utils/Colors';
-import STYLE from '../../utils/Style';
+import NewMessageHeader from '../../../component/reusable/header/NewMessageHeader'
+import COLORS from '../../../utils/Colors';
+import STYLE from '../../../utils/Style';
 import styles from './Styles';
 import ToggleSwitch from 'toggle-switch-react-native';
-import Images from '../../utils/Images';
+import Images from '../../../utils/Images';
 
 const NewMessage = () => {
     const [event, setEvent] = useState('');

@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 import { View, Text, TextInput } from 'react-native'
 import Styles from './Style'
-import COLORS from '../../utils/Colors'
-import Style from '../../utils/Style'
-import NewMessageHeader from '../../component/reusable/header/NewMessageHeader'
+import COLORS from '../../../utils/Colors'
+import Style from '../../../utils/Style'
+import NewMessageHeader from '../../../component/reusable/header/NewMessageHeader'
 
 const NewMessage = () => {
     const [event, setEvent] = useState('');

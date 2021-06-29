@@ -52,8 +52,8 @@ import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import Calendars from '../component/reusable/Calendar/Calendar';
 import Setting from '../screens/Setting/Setting';
-import Message from '../screens/GlobalMessage/Message';
-import NewMessage from '../screens/GlobalMessage/NewMessage';
+import Message from '../screens/teacher/GlobalMessage/Message';
+import NewMessage from '../screens/teacher/GlobalMessage/NewMessage';
 import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
 import Passcode from '../screens/pupil/parentzone/Passcode';
 import Chat from '../screens/Chat/Chat';

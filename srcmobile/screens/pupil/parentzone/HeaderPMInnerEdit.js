@@ -24,10 +24,12 @@ const HeaderPMInner = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-   
+
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
+
+    console.log('props.isLoading', props.isLoading);
 
     return (
         <View style={styles.headerMain}>
@@ -45,15 +47,19 @@ const HeaderPMInner = (props) => {
 
                 <View style={styles.headerRight}>
                     {props.isLoading ?
-                        <ActivityIndicator
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.white} />
+                        <TouchableOpacity style={styles.buttonGroup}>
+                            <ActivityIndicator
+                                style={[styles.addIcon1, styles.iconTop]}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            <Text style={styles.commonButtonGreenheader}></Text>
+                        </TouchableOpacity>
                         :
-                        <TouchableOpacity onPress={props.saveProfile()} style={styles.buttonGroup}>
+                        <TouchableOpacity onPress={() => props.saveProfile()} style={styles.buttonGroup}>
                             <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} />
+                            <Text style={styles.commonButtonGreenheader}></Text>
                         </TouchableOpacity>
                     }
-                    <Text style={styles.commonButtonGreenheader}></Text>
                 </View>
             </View>
         </View>
@@ -136,6 +142,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         top: hp(1.52),
+        left: hp(1.8),
+        zIndex: 9,
+    },
+    addIcon1: {
+        width: hp(1.55),
+        resizeMode: 'contain',
+        position: 'absolute',
         left: hp(1.8),
         zIndex: 9,
     },

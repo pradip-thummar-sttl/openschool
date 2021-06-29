@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, opacity, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, opacity, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -14,10 +14,15 @@ import { baseUrl, showMessage, showMessageWithCallBack } from "../../../utils/Co
 import MESSAGE from "../../../utils/Messages";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src';
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(false);
+    const [isPindHide, setPinHide] = useState(false);
+    const [isPasswordHide, setPasswordide] = useState(false);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const [profileData, setProfileData] = useState(props.route.params.data);
     const [pupilId, setPupilId] = useState('');
@@ -25,6 +30,7 @@ const ParentZoneProfileEdit = (props) => {
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
     const [profile, setProfile] = useState('')
+    const [profileUri, setProfileUri] = useState('')
     const [uniqueCode, setUniqueCode] = useState('');
     const [note, setNote] = useState('');
     const [relation, setRelation] = useState('');
@@ -47,7 +53,7 @@ const ParentZoneProfileEdit = (props) => {
         setUniqueCode(profileData.UniqueNumber)
         setNote(profileData.Note)
         setRelation(profileData.Relationship)
-        setCode(profileData.PinPassword)
+        setCode(profileData.PinPassword + '')
         setParentName(profileData.ParentFirstName + ' ' + profileData.ParentLastName)
         setMobile(profileData.MobileNumber + '')
         setChildEmail(profileData.Email)
@@ -57,7 +63,7 @@ const ParentZoneProfileEdit = (props) => {
         setZip(profileData.PostCode)
     }, [profileData])
 
-    const saveProfile = () => {
+    const validateFields = () => {
         if (!firstName.trim()) {
             showMessage(MESSAGE.firstName)
             return false
@@ -81,17 +87,18 @@ const ParentZoneProfileEdit = (props) => {
             return false
         }
 
-        // saveProfile()
+        saveProfile()
     }
 
     const saveProfile = () => {
+        setLoading(true)
 
         let data = {
             FirstName: firstName,
             LastName: lastName,
             ParentFirstName: parentName,
             ParentLastName: '',
-            Dob: moment(dob, 'DD/MM/yyyy').format('yyyy-MM-DD'),
+            Dob: moment(dob, 'yyyy-MM-DD').format('yyyy-MM-DD'),
             Note: note,
             Relationship: relation,
             AddressLine1: add1,
@@ -101,16 +108,15 @@ const ParentZoneProfileEdit = (props) => {
             MobileNumber: mobile,
             PinPassword: code,
             Password: childPass,
-            UpdatedBy: ''
+            UpdatedBy: pupilId
         }
 
         console.log('postData', data);
+
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
-                showMessageWithCallBack(MESSAGE.profileUpdated, () => {
-                    props.route.navigation.goBack()
-                })
+                uploadProfile()
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -121,11 +127,118 @@ const ParentZoneProfileEdit = (props) => {
         })
     }
 
+    const uploadProfile = () => {
+        if (!profileUri) {
+            showMessageWithCallBack(MESSAGE.profileUpdated, () => {
+                props.navigation.goBack()
+            })
+            setLoading(false)
+            return
+        }
+
+        let data = new FormData();
+        let ext = profileUri.uri.split('.');
+
+            data.append('materiallist', {
+                uri: profileUri.uri,
+                name: profileUri.uri.split('/'),
+                type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+            });
+
+        console.log('data', data._parts, lessionId);
+
+        Service.postFormData(data, `${EndPoints.PupilUploadProfile}${pupilId}`, (res) => {
+            if (res.code == 200) {
+                setLoading(false)
+                console.log('response of save lesson', res)
+                // setDefaults()
+                showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                    props.navigation.goBack()
+                })
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
+    }
+
+    const setPinVisibility = () => {
+        setPinHide(!isPindHide)
+    }
+
+    const setPasswordVisibility = () => {
+        setPasswordide(!isPasswordHide)
+    }
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setDob(moment(date).format('yyyy-MM-DD'))
+        hideDatePicker();
+    };
+
+    showActionChooser = () => {
+        Alert.alert(
+            '',
+            'Browse a profile picture',
+            [{
+                text: 'TAKE PHOTO',
+                onPress: () => captureImage(),
+            },
+            {
+                text: 'CHOOSE PHOTO',
+                onPress: () => chooseImage(),
+            },
+            ],
+            { cancelable: true }
+        )
+    }
+
+    const captureImage = () => {
+        launchCamera(
+            {
+                mediaType: 'photo',
+                includeBase64: false,
+                maxHeight: 200,
+                maxWidth: 200,
+            },
+            (response) => {
+                setProfileUri(response.uri)
+            },
+        )
+    }
+
+    const chooseImage = () => {
+        launchImageLibrary(
+            {
+                mediaType: 'photo',
+                includeBase64: false,
+                maxHeight: 200,
+                maxWidth: 200,
+            },
+            (response) => {
+                console.log('response', response);
+                setProfileUri(response.uri)
+            }
+        );
+    }
+
     return (
         <View>
             <HeaderPMInnerEdit
                 isLoading={isLoading}
-                saveProfile={() => saveProfile()}
+                saveProfile={() => validateFields()}
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
             />
@@ -135,8 +248,13 @@ const ParentZoneProfileEdit = (props) => {
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
                             <View style={PAGESTYLE.profileOuter}>
-                                <Image source={{ uri: baseUrl + profile }} style={PAGESTYLE.profileImage}></Image>
-                                <TouchableOpacity style={PAGESTYLE.editProfileMain}><Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} ></Image></TouchableOpacity>
+                                <Image source={{ uri: !profileUri ? baseUrl + profile : profileUri }} style={PAGESTYLE.profileImage}></Image>
+                                <TouchableOpacity
+                                    style={PAGESTYLE.editProfileMain}
+                                    activeOpacity={opacity}
+                                    onPress={() => showActionChooser()}>
+                                    <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} ></Image>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -175,15 +293,19 @@ const ParentZoneProfileEdit = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
-                                placeholder="Date of Birth"
-                                autoCapitalize={'none'}
-                                maxLength={40}
-                                value={"17/07/2012"}
-                                placeholderTextColor={COLORS.menuLightFonts} />
-                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                            <TouchableOpacity activeOpacity={opacity}
+                                onPress={() => showDatePicker()}>
+                                <TextInput
+                                    returnKeyType={"next"}
+                                    style={STYLE.commonInputGrayBack}
+                                    placeholder="Date of Birth"
+                                    autoCapitalize={'none'}
+                                    editable={false}
+                                    maxLength={40}
+                                    value={dob}
+                                    placeholderTextColor={COLORS.menuLightFonts} />
+                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                            </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
@@ -242,15 +364,16 @@ const ParentZoneProfileEdit = (props) => {
                                     ref={(input) => { this.t6 = input; }}
                                     onSubmitEditing={() => { this.t7.focus(); }}
                                     style={STYLE.commonInputPassword}
-                                    value={childPass}
-                                    maxLength={30}
+                                    value={code}
+                                    maxLength={4}
+                                    secureTextEntry={isPindHide}
                                     placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={pass => setChildPass(pass)}
+                                    onChangeText={pass => setCode(pass)}
                                 />
                                 <View style={PAGESTYLE.eye}>
-                                    <TouchableOpacity activeOpacity={opacity}>
+                                    <TouchableOpacity activeOpacity={opacity} onPress={() => setPinVisibility()}>
                                         <Image
-                                            style={PAGESTYLE.viewIcon} source={Images.ShowPassword} />
+                                            style={PAGESTYLE.viewIcon} source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -311,13 +434,14 @@ const ParentZoneProfileEdit = (props) => {
                                     style={STYLE.commonInputPassword}
                                     value={childPass}
                                     maxLength={30}
+                                    secureTextEntry={isPasswordHide}
                                     placeholderTextColor={COLORS.menuLightFonts}
                                     onChangeText={pass => setChildPass(pass)}
                                 />
                                 <View style={PAGESTYLE.eye}>
-                                    <TouchableOpacity activeOpacity={opacity}>
+                                    <TouchableOpacity activeOpacity={opacity} onPress={() => setPasswordVisibility()}>
                                         <Image
-                                            style={PAGESTYLE.viewIcon} source={Images.ShowPassword} />
+                                            style={PAGESTYLE.viewIcon} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -379,6 +503,12 @@ const ParentZoneProfileEdit = (props) => {
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                />
             </View>
         </View>
     );
