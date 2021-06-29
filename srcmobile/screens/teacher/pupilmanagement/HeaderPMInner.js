@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     },
     massagesIcon: {
         width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     whiteBg: {

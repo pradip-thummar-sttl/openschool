@@ -149,10 +149,10 @@ export default StyleSheet.create({
         color: COLORS.darkGrayIntro,
     },
     scrollViewCommon: {
-        marginBottom: hp(38),
+        marginBottom: hp(62),
     },
     scrollViewCommonPupilEdit: {
-        marginBottom: hp(15),
+        marginBottom: hp(37),
     },
     rewardSection: {
         paddingHorizontal: hp(2),

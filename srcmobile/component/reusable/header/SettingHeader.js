@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
         right: 10
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
-        resizeMode: 'cover',
+        width: hp(4.92),
+        height: hp(4.92),
+        resizeMode: 'contain',
     },
     menuIconWithTitle:{
         flexDirection: 'row',

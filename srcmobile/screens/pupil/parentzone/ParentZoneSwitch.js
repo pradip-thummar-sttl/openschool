@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
     },
     parentZone: {
         alignSelf: 'flex-start',
-        marginLeft: hp(3),
+        marginLeft: hp(3.5),
         position: 'absolute',
-        bottom: 10,
+        bottom: hp(3.5),
     },
     parentZoneClick: {
         flexDirection: 'row',

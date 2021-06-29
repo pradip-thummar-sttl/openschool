@@ -20,7 +20,8 @@ const Header = (props) => {
                     style={styles.notificationBar}
                     onPress={() => props.onAlertPress()}
                     activeOpacity={opacity}>
-                    <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
+                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    <View style={STYLE.redDot}></View>
                 </TouchableOpacity>
             </View>
         </View>
@@ -33,10 +34,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
-        marginBottom: hp(1.95),
-        paddingRight: hp(2.46),
+        padding: hp(2),
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
@@ -44,15 +42,11 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        width: '85%',
-    },
-    notificationBar: {
-        right: 10
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
-        resizeMode: 'cover',
+        width: hp(4.92),
+        height: hp(4.92),
+        resizeMode: 'contain',
     },
     menuIconWithTitle:{
         flexDirection: 'row',

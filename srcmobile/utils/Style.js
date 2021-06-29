@@ -249,4 +249,13 @@ export default StyleSheet.create({
         marginLeft: hp(1.56),
         textTransform: 'uppercase',
     },
+    redDot: {
+        width: hp(1.35),
+        height: hp(1.35),
+        backgroundColor: COLORS.redNotification,
+        borderRadius: hp(100),
+        position: 'absolute',
+        right: -3,
+        top: -3,
+    },
 });
