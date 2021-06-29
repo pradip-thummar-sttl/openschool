@@ -25,6 +25,7 @@ export const EndPoints = {
     Groupsetup: 'groupsetup',
     UpdateGroupSetup: 'updategroupsetup',
     PupilSchoolCode: 'pupilschoolcode',
+    GlobalMessaging: 'globalmessaging',
 
     //Pupil
     PupilRegister:"pupilregister",

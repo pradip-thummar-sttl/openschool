@@ -214,6 +214,7 @@ const ParentZoneProfileEdit = (props) => {
                 maxWidth: 200,
             },
             (response) => {
+                console.log('response', response);
                 setProfileUri(response.uri)
             },
         )

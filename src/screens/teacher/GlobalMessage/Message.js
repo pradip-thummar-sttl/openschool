@@ -1,55 +1,83 @@
 import moment from 'moment';
-import React,{useState} from 'react'
-import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
-import HeaderWhitepupilMessage from '../../../src/component/reusable/header/HeaderWhitepupilMessage';
-import { baseUrl } from '../../../srcmobile/utils/Constant';
-import { opacity } from '../../utils/Constant';
-import Images from '../../utils/Images';
+import React, { useState, useEffect } from 'react'
+import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator, } from 'react-native'
+import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
+import { EndPoints } from '../../../service/EndPoints';
+import { Service } from '../../../service/Service';
+import { opacity, showMessage } from '../../../utils/Constant';
+import Images from '../../../utils/Images';
+import { User } from '../../../utils/Model';
 import PAGESTYLE from './Styles';
 
+const MessageList = (props, { style }) => (
+    <TouchableOpacity
+        style={PAGESTYLE.pupilDetailLink}
+        activeOpacity={opacity}
+        onPress={() => props.navigateToDetail()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
+            </View>
 
-
-const Pupillist = (props, { style }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            {/* <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} /> */}
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{'message of title'}</Text>
-        </View>
-
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(Date()).format('DD/MM/yyyy') : '-'}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
+                <Text style={PAGESTYLE.pupilName}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+            </View>
+            {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
             <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
-        </View>
-        
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={[PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText,]}>{props.item.Submited ? 'Yes' : 'No'}</Text>
-        </View>
-       
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            {/* <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text> */}
-            <TouchableOpacity
-                style={PAGESTYLE.pupilDetailLink}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToDetail()}>
+        </View> */}
+
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text style={[PAGESTYLE.pupilName, props.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText]}>{props.item.Status}</Text>
+            </View>
+
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
                 <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-            </TouchableOpacity>
+            </View>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 const Message = (props) => {
     const [selectedId, setSelectedId] = useState(null);
+    const [isLoading, setLoading] = useState(false)
+    const [messageData, setMessageData] = useState([])
 
     const pupilRender = ({ item, index }) => {
         return (
-            <Pupillist
+            <MessageList
                 item={item}
-                navigateToDetail={() => props.navigateToDetail(item)}
-                onAlertPress={() => { props.onAlertPress() }}
-            />
+                navigateToDetail={() => { }} />
         );
     };
+
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setMessageData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
+
     return (
         <View style={PAGESTYLE.plainBg}>
             <HeaderWhitepupilMessage />
@@ -72,33 +100,26 @@ const Message = (props) => {
             </View>
             <View style={PAGESTYLE.pupilTabledata}>
                 <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                    <FlatList
-                        data={[1, 2, 3]}
-                        renderItem={pupilRender}
-                        keyExtractor={(item) => item.id}
-                        extraData={selectedId}
-                        showsVerticalScrollIndicator={false}
-                    />
 
-                    {/* {isLoading ?
+                    {isLoading ?
                         <ActivityIndicator
-                            style={{ flex: 1 }}
+                            style={{ flex: 1, marginTop: 20 }}
                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                             color={COLORS.yellowDark} />
                         :
-                        // homeworkData.length > 0 ?
+                        messageData.length > 0 ?
                             <FlatList
-                                data={[1,2,3]}
+                                data={messageData}
                                 renderItem={pupilRender}
                                 keyExtractor={(item) => item.id}
                                 extraData={selectedId}
                                 showsVerticalScrollIndicator={false}
                             />
-                            // :
-                            // <View style={{ height: 100, justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            // </View>
-                    } */}
+                            :
+                            <View style={{ height: 100, justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            </View>
+                    }
                 </SafeAreaView>
             </View>
         </View>
