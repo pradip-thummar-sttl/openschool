@@ -20,42 +20,27 @@ import HeaderPM from "./HeaderPM";
 import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
 import ParentZoneProfileEdit from "./ParentZoneProfileEdit";
+var moment = require('moment');
 
-const Pupillist = (props, { style }) => (
+const MessageList = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>Back to school newsletter from the headteacher</Text>
+        <View style={PAGESTYLE.firstColumn}>
+            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>14/09/2020</Text>
+            <Text style={PAGESTYLE.pupilName}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
         </View>
-        <View style={PAGESTYLE.pupilProfile}>
+        {/* <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>Group 1A</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
             <Text style={[PAGESTYLE.pupilName, PAGESTYLE.sentBlueText]}>Sent</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            <TouchableOpacity
-                style={PAGESTYLE.pupilDetailLink}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToDetail()}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-            </TouchableOpacity>
+        </View> */}
+        <View style={{ right: 10, position: 'absolute' }}>
+            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </View>
     </View>
 );
-
-const pupilRender = ({ item, index }) => {
-    return (
-        <Pupillist
-            item={item}
-            navigateToDetail={() => props.navigateToDetail(item)}
-            onAlertPress={() => { props.onAlertPress() }}
-        />
-    );
-};
 
 const ParentZonemain = (props) => {
     const [isHide, action] = useState(true);
@@ -64,6 +49,45 @@ const ParentZonemain = (props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [isProfileEdit, setProfileEdit] = useState(false)
     const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+
+    const [messageData, setMessageData] = useState([])
+
+    const messageRender = ({ item, index }) => {
+        return (
+            <MessageList
+                item={item}
+                navigateToDetail={() => { }} />
+        );
+    };
+
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        Service.get(`${EndPoints.PupilGlobalMessaging}/${User.user.MobileNumber}`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setMessageData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -88,15 +112,15 @@ const ParentZonemain = (props) => {
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
                                             </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
+                                            <View>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>
                                             </View>
-                                            <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                            {/* <View style={PAGESTYLE.pupilTableHeadingMain}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class</Text>
                                             </View>
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Status</Text>
-                                            </View>
+                                            </View> */}
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
                                             </View>
@@ -109,14 +133,14 @@ const ParentZonemain = (props) => {
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.yellowDark} />
                                                     :
-                                                    homeworkData.length > 0 ?
+                                                    messageData.length > 0 ?
                                                         <FlatList
-                                                            data={homeworkData}
-                                                            renderItem={pupilRender}
+                                                            style={{ marginTop: 10 }}
+                                                            data={messageData}
+                                                            renderItem={messageRender}
                                                             keyExtractor={(item) => item.id}
                                                             extraData={selectedId}
-                                                            showsVerticalScrollIndicator={false}
-                                                        />
+                                                            showsVerticalScrollIndicator={false} />
                                                         :
                                                         <View style={{ height: 100, justifyContent: 'center' }}>
                                                             <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>

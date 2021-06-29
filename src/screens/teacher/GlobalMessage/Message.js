@@ -4,6 +4,7 @@ import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIn
 import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
 import { EndPoints } from '../../../service/EndPoints';
 import { Service } from '../../../service/Service';
+import COLORS from '../../../utils/Colors';
 import { opacity, showMessage } from '../../../utils/Constant';
 import Images from '../../../utils/Images';
 import { User } from '../../../utils/Model';
@@ -60,7 +61,7 @@ const Message = (props) => {
             Filterby: filterBy,
         }
 
-        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+        Service.get(`${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -88,9 +89,9 @@ const Message = (props) => {
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>DATE</Text>
                 </View>
-                <View style={PAGESTYLE.pupilTableHeadingMain}>
+                {/* <View style={PAGESTYLE.pupilTableHeadingMain}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>CLASS</Text>
-                </View>
+                </View> */}
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>STATUS</Text>
                 </View>

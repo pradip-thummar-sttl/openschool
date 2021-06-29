@@ -39,7 +39,6 @@ export default StyleSheet.create({
     },
     pupilName: {
         fontSize: 20,
-        alignSelf: 'center',
         marginHorizontal: 15,
     },
     bar: {
@@ -991,8 +990,6 @@ export default StyleSheet.create({
     },
     pupilProfile: {
         width: hp(15.80),
-        flexDirection: 'row',
-        alignItems: 'center',
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -1081,24 +1078,6 @@ export default StyleSheet.create({
     pupilhrCustomMargin: {
         marginTop: hp(1.95),
         marginBottom: hp(1.30),
-    },
-    pupilData: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: COLORS.white,
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 1, },
-        elevation: 3,
-        shadowOpacity: 0.1,
-        borderRadius: hp(1.95),
-        height: hp(8.85),
-        borderRadius: hp(0.6),
-        marginBottom: hp(0.78),
-    },
-    pupilProfile: {
-        width: hp(15.80),
-        flexDirection: 'row',
-        alignItems: 'center',
     },
     groupColumnmain: {
         width: hp(17.97),

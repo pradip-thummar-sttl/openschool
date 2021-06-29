@@ -1631,7 +1631,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
-        marginTop: 5
+        marginTop: Platform.OS == 'android' ? 5 : 10
     },
     thirdRowDraft: {
         marginLeft: wp(3),
@@ -1640,7 +1640,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
-        marginTop: 5
+        marginTop: Platform.OS == 'android' ? 5 : 10
     },
     sentText: {
         color: COLORS.sentColor,

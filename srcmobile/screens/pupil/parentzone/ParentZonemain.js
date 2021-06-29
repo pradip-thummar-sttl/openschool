@@ -10,11 +10,74 @@ import HeaderPM from "./HeaderPM";
 import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
 import { User } from "../../../utils/Model";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
+var moment = require('moment');
+
+const MessageList = (props) => {
+    return (
+        <View style={{...PAGESTYLE.feedsMain, marginHorizontal: 10}}>
+            <View style={PAGESTYLE.feeds} onPress={(null)}>
+                <View style={PAGESTYLE.leftContent}>
+                    <View style={PAGESTYLE.dateGrp}>
+                        <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text></View>
+                        {/* <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View> */}
+                    </View>
+                    <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>{props.item.Title}</Text></View>
+                    {/* <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View> */}
+                </View>
+                <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+            </View>
+        </View>
+    )
+}
+
 
 const ParentZonemain = (props) => {
     const [isHide, action] = useState(true);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+
+    const [selectedId, setSelectedId] = useState(null);
+    const [isLoading, setLoading] = useState(false)
+    const [messageData, setMessageData] = useState([])
+
+    const messageRender = ({ item, index }) => {
+        return (
+            <MessageList
+                item={item}
+                navigateToDetail={() => { }} />
+        );
+    };
+
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+        setLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
+        Service.get(`${EndPoints.PupilGlobalMessaging}/${User.user.MobileNumber}`, (res) => {
+            setLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all lesson', res)
+                setMessageData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
 
     return (
         <View>
@@ -26,21 +89,25 @@ const ParentZonemain = (props) => {
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                 />
                 {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
-                        <View style={PAGESTYLE.feedsMain}>
-                            <TouchableOpacity style={PAGESTYLE.feeds} onPress={(null)}>
-                                <View style={PAGESTYLE.leftContent}>
-                                    <View style={PAGESTYLE.dateGrp}>
-                                        <View style={PAGESTYLE.date}><Text style={PAGESTYLE.dateText}>14/09/2020</Text></View>
-                                        <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View>
-                                    </View>
-                                    <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>Back to school newsletter from the he…</Text></View>
-                                    <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View>
-                                </View>
-                                <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
+                    isLoading ?
+                        <ActivityIndicator
+                            style={{ flex: 1, marginTop: 20 }}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.yellowDark} />
+                        :
+                        messageData.length > 0 ?
+                            <FlatList
+                                style={{ marginTop: 10 }}
+                                data={messageData}
+                                renderItem={messageRender}
+                                keyExtractor={(item) => item.id}
+                                extraData={selectedId}
+                                showsVerticalScrollIndicator={false} />
+                            :
+                            <View style={{ height: 100, justifyContent: 'center' }}>
+                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            </View>
+
                     :
                     selectedTabIndex == 1 ?
                         null
