@@ -36,7 +36,7 @@ const ParentZoneSchoolDetails = (props) => {
     return (
         <View>
             <View style={PAGESTYLE.MainProfile}>
-                <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
+                <ScrollView style={PAGESTYLE.scrollViewCommonPupilEditSchool} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
