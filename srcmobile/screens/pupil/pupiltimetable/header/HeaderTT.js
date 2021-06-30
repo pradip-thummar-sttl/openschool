@@ -40,7 +40,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{backgroundColor: COLORS.white}}>
+        <View style={{backgroundColor: COLORS.white, shadowColor: COLORS.black,shadowOffset: { width: 0, height: hp(1), }, shadowOpacity: 0.05, shadowRadius: hp(1),paddingBottom: hp(1.5)}}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
@@ -303,10 +303,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
@@ -322,8 +318,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(5.85),
-        height: hp(5.85),
+        width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -482,9 +478,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: hp(4.57),
+        width: hp(4.92),
         resizeMode: 'contain',
-        height: hp(4.57),
+        height: hp(4.92),
+        marginRight: hp(1)
     },
     filterGroup: {
         display: 'none',

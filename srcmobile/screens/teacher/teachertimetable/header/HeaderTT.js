@@ -44,7 +44,6 @@ const HeaderTT = (props) => {
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Timetable</Text>
                 </View>
-
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}>
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
@@ -56,8 +55,6 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-
-
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
                     <TouchableOpacity
@@ -68,19 +65,18 @@ const HeaderTT = (props) => {
                                 :
                                 setSearchActive(true)
                         }}>
-                        <Image style={{ height: 15, resizeMode: 'contain' }}
+                        <Image style={{ height: 18, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     onPress={() => refRBSheet.current.open()}>
@@ -131,119 +127,6 @@ const HeaderTT = (props) => {
                     </View>
                 </RBSheet>
             </View>
-
-            {/* <View style={styles.filterbarMain}>
-                <View style={styles.field}>
-                    <TextInput
-                        ref={textInput}
-                        style={[styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            props.onSearchKeyword(keyword);
-                        }} />
-
-                    <TouchableOpacity
-                        style={styles.userIcon1Parent}
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
-                        <Image
-                            style={styles.userIcon1}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity style={[styles.buttonGroup]}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.buttonGroup}
-                    onPress={() => refRBSheet.current.open()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity>
-                <RBSheet
-                    ref={refRBSheet}
-                    closeOnDragDown={true}
-                    height={[hp(55.88)]}
-                    style={{ position: 'relative', }}
-                    closeOnPressMask={true}
-                    customStyles={{
-                        wrapper: {
-                            backgroundColor: COLORS.bottomSlideUpBack
-                        },
-                        draggableIcon: {
-                            backgroundColor: COLORS.darkGray
-                        }
-                    }}
-                >
-                    <View style={styles.popupLarge}>
-                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
-                        </TouchableOpacity>
-                        <View style={styles.popupContent}>
-                            <View style={styles.tabcontent}>
-                                <View style={styles.beforeBorder}>
-                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
-                                    <View style={styles.entryContentMain}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
-                                            <Image style={styles.entryIcon} source={Images.NewLessons} />
-                                            <Text style={styles.entryTitle}>New Lesson</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
-                                            <Text style={styles.entryTitle}>New Event</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                </RBSheet>
-            </View> */}
         </View>
     );
 }
@@ -254,13 +137,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: wp(5.33),
-        paddingRight: wp(4),
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
@@ -275,8 +154,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(5.85),
-        height: hp(5.85),
+        width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -367,7 +246,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft: 10
+        marginLeft: hp(1)
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -437,9 +316,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: hp(4.57),
+        width: hp(4.92),
         resizeMode: 'contain',
-        height: hp(4.57),
+        height: hp(4.92),
+        marginRight: hp(1),
     },
     filterGroup: {
         display: 'none',
@@ -499,7 +379,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', marginHorizontal: 10, alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', marginHorizontal: hp(2), alignItems: 'center', marginBottom: 20,marginTop: 5, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

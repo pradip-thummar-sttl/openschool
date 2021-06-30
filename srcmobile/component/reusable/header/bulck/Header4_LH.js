@@ -46,9 +46,8 @@ export default Header4_LH;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
     },
     headerMain: {
         flexDirection: 'row',
@@ -56,18 +55,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
         paddingVertical: 15,
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
-    },
-    notificationBar: {
-        marginLeft: hp(4.5),
-    },
+    },    
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
@@ -77,8 +69,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(5.85),
-        height: hp(5.85),
+        width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     filterbarMain: {

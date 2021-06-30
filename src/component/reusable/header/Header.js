@@ -6,6 +6,7 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import { opacity } from "../../../utils/Constant";
 import { User } from "../../../utils/Model";
+import Images from "../../../utils/Images";
 
 const Header = (props) => {
     return (
@@ -16,7 +17,8 @@ const Header = (props) => {
                     style={styles.notificationBar}
                     onPress={() => props.onAlertPress()}
                     activeOpacity={opacity}>
-                    <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
+                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    <View style={STYLE.redDot}></View>
                 </TouchableOpacity>
             </View>
         </View>
@@ -40,10 +42,11 @@ const styles = StyleSheet.create({
     },
     notificationBar: {
         marginLeft: hp(1.25),
+        position: 'relative',
     },
     massagesIcon: {
-        width: wp(6),
-        height: hp(6),
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
 });

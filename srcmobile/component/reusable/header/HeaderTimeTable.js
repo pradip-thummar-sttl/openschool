@@ -128,9 +128,9 @@ const styles = StyleSheet.create({
         marginLeft: hp(1.25),
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
-        resizeMode: 'cover',
+        width: hp(4.92),
+        height: hp(4.92),
+        resizeMode: 'contain',
     },
     menuIconWithTitle: {
         flexDirection: 'row',

@@ -87,11 +87,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
-        // backgroundColor:COLORS.dashboardGreenButton
-        // resizeMode: 'contain',
-
+        width: hp(4.92),
+        height: hp(4.92),
+        resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
         width: wp(5.20),

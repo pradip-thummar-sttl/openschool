@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
         marginBottom: Platform.OS == 'android' ? hp(-1) : hp(0),
     },
     massagesIcon: {
-        width: wp(5.20),
+        width: hp(4.92),
+        height: hp(4.92),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
