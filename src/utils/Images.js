@@ -123,5 +123,11 @@ const Images = {
     parentZoneIcon: require('../assets/images/parent-zone-icon2.png'),
     editIcon: require('../assets/images/edit-icon2.png'),
     noData: require('../assets/images/no-data2.png'),
+
+    // Chat Icon
+    attachmentIpad:require('../assets/images/Chatimage/attachment-ipad.png'),
+    paperClip:require('../assets/images/Chatimage/paperclip.png'),
+    send:require('../assets/images/Chatimage/send.png'),
+    imageUpload:require('../assets/images/Chatimage/image-upload.png'),
 }
 export default Images;

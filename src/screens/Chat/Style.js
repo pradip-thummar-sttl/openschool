@@ -163,9 +163,10 @@ export default StyleSheet.create({
         flexDirection:'row'
     },
     btn:{
-        backgroundColor:'yellow',
-        width:hp(4),
-        height:hp(4)
+        // backgroundColor:'yellow',
+        width:hp(3),
+        height:hp(3),
+        marginHorizontal:wp(1.5)
     },
     timeText:{
         color:COLORS.menuLightFonts,
