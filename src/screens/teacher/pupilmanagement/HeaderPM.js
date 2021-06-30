@@ -79,68 +79,21 @@ const HeaderPM = (props) => {
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                                placeholder="Search pupil name etc"
+                                style={{ width: '100%',  height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                placeholder="Search subject, class, etc"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
                                     props.onSearchKeyword(keyword);
                                 }} />
                         </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Menu style={{ marginLeft: 10 }}>
-                                <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
-                                <MenuOptions style={styles.filterListWrap}>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>Subject</Text>
-                                                {selectedIndex == 0 ?
-                                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    :
-                                                    null
-                                                }
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>Date</Text>
-                                                {selectedIndex == 1 ?
-                                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    :
-                                                    null
-                                                }
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                    {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
-                                </MenuOptions>
-                            </Menu>
-                            <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                        <View style={{ flexDirection: 'row', alignItems: 'center',marginLeft: 10, }}>
+                            <TouchableOpacity
+                                style={styles.buttonGroup}
+                                activeOpacity={opacity}>
+                                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                                <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
+                            </TouchableOpacity>
                         </View>
-
-                        {/* <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                        <Text style={styles.commonButtonGreenheader}></Text>
-                    </TouchableOpacity> */}
                     </View>
                     :
                     null
@@ -154,11 +107,12 @@ export default HeaderPM;
 const styles = StyleSheet.create({
     headerMaintop: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        paddingBottom: 5,
-        paddingLeft: hp(2),
-        paddingRight: hp(2),
+        paddingLeft: hp(3.25),
+        paddingRight: hp(2.0),
+        backgroundColor: COLORS.white,
     },
     headerMain: {
         flexDirection: 'column',
@@ -168,15 +122,14 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
-        paddingLeft: 20
     },
     mainTitle: {
-        fontSize: hp(2.21),
+        fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
     },
     date: {
@@ -286,7 +239,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(4.175),
-        paddingRight: hp(1),
+        paddingRight: hp(1.8),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
@@ -342,9 +295,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     headerRight: {
-        alignSelf: 'flex-end',
-        position: 'absolute',
-        right: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     calnderDashHeaderIcon: {
         width: hp(4.57),
@@ -414,34 +366,29 @@ const styles = StyleSheet.create({
         paddingRight: hp(2),
         alignItems: 'center',
         backgroundColor: COLORS.white,
-        width: '50%',
         right: 0,
         position: 'absolute',
         height: 50,
     },
     searchInner: {
-        height: '100%', flex: 1,
+        height: '100%',
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         borderRadius: 10,
+        width: hp(58.85),
         flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
     },
     whiteBg: {
-        paddingBottom: hp(1),
-        paddingTop: hp(1),
         flexDirection: 'row',
         alignItems: 'center',
-        paddingRight: hp(2),
-        paddingLeft: hp(2),
+        justifyContent: 'space-between',
+        paddingLeft: hp(3.25),
         width: '100%',
-        marginVertical: 20,
-        height: 50,
-    },
-    lessonPlanTop: {
-        flexDirection: 'row',
+        marginTop: hp(3),
+        marginBottom: hp(2.5),
     },
     lessonPlanTab: {
         flexDirection: 'row',

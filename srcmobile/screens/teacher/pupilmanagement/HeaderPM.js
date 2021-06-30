@@ -104,10 +104,10 @@ const HeaderPM = (props) => {
                         </Menu>
                     </View>
 
-                    {/* <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
                 </View>
                 :
                 null
