@@ -37,11 +37,16 @@ export default StyleSheet.create({
         marginBottom: hp(0.9),
     },
     titleMain: {
-        marginBottom: hp(2),
+        marginBottom: hp(1),
     },
     title: {
         fontSize: hp(1.72),
         fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGrayIntro,
+    },
+    message: {
+        fontSize: hp(1.72),
+        fontFamily: FONTS.fontRegular,
         color: COLORS.darkGrayIntro,
     },
     statusSent: {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -13,11 +13,18 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import { opacity } from "../../../utils/Constant";
 const NewMessageHeader = (props) => {
+    const menu = useRef(null)
+
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> New Message</Text>
+                <Text style={styles.mainTitle}>
+                    <TouchableOpacity activeOpacity={opacity}
+                        onPress={() => props.onGoback()}>
+                        <Image style={styles.arrow} source={Images.backArrow} />
+                    </TouchableOpacity> New Message</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
@@ -28,34 +35,44 @@ const NewMessageHeader = (props) => {
                     {/* <TouchableOpacity style={styles.moreMenu}>
                         <Image style={styles.moreIcon} source={Images.SidebarMore} />
                     </TouchableOpacity>  */}
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Menu style={styles.filterGroup}>
-                            <MenuTrigger>
-                                {/* <TouchableOpacity style={styles.moreMenu}> */}
+                    {props.status == 'Sent' ?
+                        null
+                        :
+                        <View style={styles.buttonGroup}>
+                            <Menu ref={menu}>
+                                <MenuTrigger>
+                                    {/* <TouchableOpacity style={styles.moreMenu}> */}
                                     <Image style={styles.moreIcon} source={Images.SidebarMore} />
-                                {/* </TouchableOpacity> */}
-                            </MenuTrigger>
-                            <MenuOptions style={styles.filterListWrap}>
-                                {/* <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                    </View>
-                                </MenuOption> */}
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>SAVE AS DRAFT</Text>
-                                    </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>SCHEDULE SEND</Text>
-                                    </View>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                        {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
-                    </TouchableOpacity>
+                                    {/* </TouchableOpacity> */}
+                                </MenuTrigger>
+                                <MenuOptions>
+                                    {props.status == 'Draft' ?
+                                        null
+                                        :
+                                        <MenuOption style={styles.borderList}>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => { menu.current.close(); props.onDraft() }}>
+                                                <View style={styles.filterList}>
+                                                    <Text style={styles.filterListText}>SAVE AS DRAFT</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </MenuOption>
+                                    }
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { menu.current.close(); props.onSent() }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>SEND MESSAGE</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                </MenuOptions>
+                            </Menu>
+                            {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
+                        </View>
+                    }
                     <TouchableOpacity style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>

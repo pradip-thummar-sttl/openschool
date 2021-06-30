@@ -16,7 +16,7 @@ var moment = require('moment');
 
 const MessageList = (props) => {
     return (
-        <View style={{...PAGESTYLE.feedsMain, marginHorizontal: 10}}>
+        <View style={{ marginHorizontal: 10 }}>
             <View style={PAGESTYLE.feeds} onPress={(null)}>
                 <View style={PAGESTYLE.leftContent}>
                     <View style={PAGESTYLE.dateGrp}>
@@ -24,9 +24,10 @@ const MessageList = (props) => {
                         {/* <View style={PAGESTYLE.group}><Text style={PAGESTYLE.groupText}>Group 2A</Text></View> */}
                     </View>
                     <View style={PAGESTYLE.titleMain}><Text style={PAGESTYLE.title}>{props.item.Title}</Text></View>
+                    <View><Text style={PAGESTYLE.message}>{props.item.Message}</Text></View>
                     {/* <View style={PAGESTYLE.statusMain}><Text style={PAGESTYLE.statusSent}>Sent</Text></View> */}
                 </View>
-                <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View>
+                {/* <View style={PAGESTYLE.arrowMain}><Image source={Images.DashboardRightArrow} style={PAGESTYLE.arrowIcon} /></View> */}
             </View>
         </View>
     )
@@ -42,6 +43,12 @@ const ParentZonemain = (props) => {
     const [isLoading, setLoading] = useState(false)
     const [messageData, setMessageData] = useState([])
 
+    const [isSearchActive, setSearchActive] = useState(false)
+    const textInput = useRef(null);
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+    const [keyword, setKeyword] = useState('')
+
     const messageRender = ({ item, index }) => {
         return (
             <MessageList
@@ -51,17 +58,17 @@ const ParentZonemain = (props) => {
     };
 
     useEffect(() => {
-        fetchRecord('', '')
-    }, [])
+        fetchRecord('', filterBy)
+    }, [filterBy])
 
-    const fetchRecord = (searchBy, filterBy) => {
+    const fetchRecord = (searchby, filterBy) => {
         setLoading(true)
         let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
+            Searchby: searchby,
+            Filterby: filterBy
         }
 
-        Service.get(`${EndPoints.PupilGlobalMessaging}/${User.user.MobileNumber}`, (res) => {
+        Service.post(data, `${EndPoints.PupilGlobalMessaging}/${User.user.MobileNumber}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -75,8 +82,14 @@ const ParentZonemain = (props) => {
     }
 
     const refresh = () => {
-        console.log('refreshed');
-        fetchRecord('', '')
+        if (isSearchActive) {
+            textInput.current.clear()
+            setSearchActive(false)
+            fetchRecord('', filterBy)
+        } else {
+            setSearchActive(true)
+            fetchRecord(keyword, filterBy)
+        }
     }
 
     return (
@@ -87,7 +100,10 @@ const ParentZonemain = (props) => {
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
-                />
+                    onSearchKeyword={(keyword) => setKeyword(keyword)}
+                    onSearch={() => fetchRecord(keyword, filterBy)}
+                    onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
+                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
                 {selectedTabIndex == 0 ?
                     isLoading ?
                         <ActivityIndicator
@@ -97,7 +113,7 @@ const ParentZonemain = (props) => {
                         :
                         messageData.length > 0 ?
                             <FlatList
-                                style={{ marginTop: 10 }}
+                                style={{ marginTop: 10, height: '77%' }}
                                 data={messageData}
                                 renderItem={messageRender}
                                 keyExtractor={(item) => item.id}

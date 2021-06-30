@@ -27,6 +27,8 @@ export const EndPoints = {
     PupilSchoolCode: 'pupilschoolcode',
     GlobalMessaging: 'globalmessaging',
     PupilGlobalMessaging: 'pupilglobalmessaging',
+    ParentList: 'parentlist',
+    UpdateGlobalMessaging: 'updateglobalmessaging',
 
     //Pupil
     PupilRegister:"pupilregister",

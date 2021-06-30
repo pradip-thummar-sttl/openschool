@@ -16,17 +16,17 @@ const NewMessageHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> {'New Message'}</Text>
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.onGoback()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> {'New Message'}</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.onSubmitHomework()} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onDraft()} style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => { }} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
-            </View>           
+            </View>
         </View>
     );
 }
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.34),

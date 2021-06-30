@@ -27,6 +27,9 @@ const MessageList = (props, { style }) => (
         <View style={PAGESTYLE.firstColumn}>
             <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
         </View>
+        <View style={PAGESTYLE.firstColumn}>
+            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Message}</Text>
+        </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
             <Text style={PAGESTYLE.pupilName}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
         </View>
@@ -111,6 +114,9 @@ const ParentZonemain = (props) => {
                                         <View style={PAGESTYLE.pupilTable}>
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
+                                            </View>
+                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message</Text>
                                             </View>
                                             <View>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>

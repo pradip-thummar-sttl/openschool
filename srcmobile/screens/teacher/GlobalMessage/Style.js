@@ -240,12 +240,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     checkBoxLabelText: {
-        lineHeight: hp(2.82),
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.5),
-        minHeight: hp(6),
-        paddingRight: hp(1),
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
     },
     checkBoxLabelTextSubmit: {
         lineHeight: hp(2.4),

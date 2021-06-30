@@ -55,6 +55,11 @@ const MESSAGE = {
     parentNAme: 'Please enter parent name',
     childPassword: "Please enter child's password",
     profileUpdated: 'Profile updated successfully',
+    gmTitle: 'Please enter valid title',
+    gmMessage: 'Please enter valid message',
+    gmPArent: 'Please select at least one parent',
+    gmMessageDraft: 'Message drafted successfully',
+    gmMessageSent: 'Message sent successfully',
 }
 
 export default MESSAGE;

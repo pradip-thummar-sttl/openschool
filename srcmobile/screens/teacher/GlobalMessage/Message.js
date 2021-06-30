@@ -18,30 +18,7 @@ import { EndPoints } from '../../../service/EndPoints';
 import { User } from '../../../utils/Model';
 var moment = require('moment');
 
-const MessageList = (props) => {
-    return (
-        <TouchableOpacity
-            activeOpacity={opacity}
-            onPress={() => props.navigateToDetail()}>
-            <View style={PAGESTYLE.flateMainView}>
-                <View style={PAGESTYLE.firstRow}>
-                    <Text style={PAGESTYLE.dateText}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
-                    {/* <Text style={PAGESTYLE.groupText}>Group A</Text> */}
-                </View>
-                <View style={PAGESTYLE.secondRow}>
-                    <Text style={PAGESTYLE.titleText}>{props.item.Title}</Text>
-                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                </View>
-                <View style={props.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>
-                    <Text style={props.item.Status == 'Draft' ? PAGESTYLE.draftText : PAGESTYLE.sentText}>{props.item.Status}</Text>
-                </View>
-            </View>
-        </TouchableOpacity>
-    )
-}
-
-const Message = () => {
-
+const Message = (props) => {
     const searchHeader = () => {
         return (
             <View style={PAGESTYLE.searchParent}>
@@ -50,10 +27,7 @@ const Message = () => {
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
+                                refresh()
                                 :
                                 null
                         }}>
@@ -74,9 +48,9 @@ const Message = () => {
                                 <MenuOption style={PAGESTYLE.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                        onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                         <View style={PAGESTYLE.filterList}>
-                                            <Text style={PAGESTYLE.filterListText}>Subject</Text>
+                                            <Text style={PAGESTYLE.filterListText}>Title</Text>
                                             {selectedIndex == 0 ?
                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
                                                 :
@@ -104,7 +78,9 @@ const Message = () => {
                     </TouchableOpacity>
 
                 </View>
-                <TouchableOpacity style={PAGESTYLE.buttonGroup}>
+                <TouchableOpacity
+                    style={PAGESTYLE.buttonGroup}
+                    onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refresh() })}>
                     <Image style={PAGESTYLE.addIcon} source={Images.AddIconWhite} />
                 </TouchableOpacity>
             </View>
@@ -116,10 +92,34 @@ const Message = () => {
     const [isSearchActive, setSearchActive] = useState(false)
     const textInput = useRef(null);
     const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+    const [keyword, setKeyword] = useState('')
 
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
     const [messageData, setMessageData] = useState([])
+
+    const MessageList = (item) => {
+        return (
+            <TouchableOpacity
+                activeOpacity={opacity}
+                onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => fetchRecord('', ''), data: item.item })}>
+                <View style={PAGESTYLE.flateMainView}>
+                    <View style={PAGESTYLE.firstRow}>
+                        <Text style={PAGESTYLE.dateText}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                        {/* <Text style={PAGESTYLE.groupText}>Group A</Text> */}
+                    </View>
+                    <View style={PAGESTYLE.secondRow}>
+                        <Text style={PAGESTYLE.titleText}>{item.item.Title}</Text>
+                        <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                    </View>
+                    <View style={item.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>
+                        <Text style={item.item.Status == 'Draft' ? PAGESTYLE.draftText : PAGESTYLE.sentText}>{item.item.Status}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        )
+    }
 
     const messageRender = ({ item, index }) => {
         return (
@@ -129,18 +129,22 @@ const Message = () => {
         );
     };
 
-    useEffect(() => {
-        fetchRecord('', '')
-    }, [])
+    // useEffect(() => {
+    //     fetchRecord('', )
+    // }, [])
 
-    const fetchRecord = (searchBy, filterBy) => {
+    useEffect(() => {
+        fetchRecord('', filterBy)
+    }, [filterBy])
+
+    const fetchRecord = (searchby, filterBy) => {
         setLoading(true)
         let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
+            Searchby: searchby,
+            Filterby: filterBy
         }
 
-        Service.get(`${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -154,8 +158,14 @@ const Message = () => {
     }
 
     const refresh = () => {
-        console.log('refreshed');
-        fetchRecord('', '')
+        if (isSearchActive) {
+            textInput.current.clear()
+            setSearchActive(false)
+            fetchRecord('', filterBy)
+        } else {
+            setSearchActive(true)
+            fetchRecord(keyword, filterBy)
+        }
     }
 
     return (
@@ -170,7 +180,7 @@ const Message = () => {
                 :
                 messageData.length > 0 ?
                     <FlatList
-                        style={{ marginTop: 10 }}
+                        style={{ marginTop: 10, height: '80%' }}
                         data={messageData}
                         renderItem={messageRender}
                         keyExtractor={(item) => item.id}

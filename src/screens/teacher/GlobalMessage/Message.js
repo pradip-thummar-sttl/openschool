@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator, } from 'react-native'
 import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
 import { EndPoints } from '../../../service/EndPoints';
@@ -10,37 +10,16 @@ import Images from '../../../utils/Images';
 import { User } from '../../../utils/Model';
 import PAGESTYLE from './Styles';
 
-const MessageList = (props, { style }) => (
-    <TouchableOpacity
-        style={PAGESTYLE.pupilDetailLink}
-        activeOpacity={opacity}
-        onPress={() => props.navigateToDetail()}>
-        <View style={[PAGESTYLE.pupilData]}>
-            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
-            </View>
-
-            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-                <Text style={PAGESTYLE.pupilName}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
-            </View>
-            {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
-        </View> */}
-
-            <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, props.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText]}>{props.item.Status}</Text>
-            </View>
-
-            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-            </View>
-        </View>
-    </TouchableOpacity>
-);
 const Message = (props) => {
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
     const [messageData, setMessageData] = useState([])
+
+    const [isSearchActive, setSearchActive] = useState(false)
+    const textInput = useRef(null);
+    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [filterBy, setFilterBy] = useState('Date')
+    const [keyword, setKeyword] = useState('')
 
     const pupilRender = ({ item, index }) => {
         return (
@@ -51,17 +30,18 @@ const Message = (props) => {
     };
 
     useEffect(() => {
-        fetchRecord('', '')
-    }, [])
+        fetchRecord('', filterBy)
+    }, [filterBy])
 
-    const fetchRecord = (searchBy, filterBy) => {
+    const fetchRecord = (searchby, filterBy) => {
         setLoading(true)
         let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
+            Searchby: searchby,
+            Filterby: filterBy
         }
 
-        Service.get(`${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+        Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {
+        // Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -75,13 +55,51 @@ const Message = (props) => {
     }
 
     const refresh = () => {
-        console.log('refreshed');
-        fetchRecord('', '')
+        if (isSearchActive) {
+            textInput.current.clear()
+            setSearchActive(false)
+            fetchRecord('', filterBy)
+        } else {
+            setSearchActive(true)
+            fetchRecord(keyword, filterBy)
+        }
     }
+
+    const MessageList = (item, { style }) => (
+        <TouchableOpacity
+            style={PAGESTYLE.pupilDetailLink}
+            activeOpacity={opacity}
+            onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => fetchRecord('', ''), data: item.item })}>
+            <View style={[PAGESTYLE.pupilData]}>
+                <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+                    <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{item.item.Title}</Text>
+                </View>
+
+                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
+                    <Text style={PAGESTYLE.pupilName}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                </View>
+                {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
+                <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
+            </View> */}
+
+                <View style={PAGESTYLE.pupilProfile}>
+                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText]}>{item.item.Status}</Text>
+                </View>
+
+                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
+                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                </View>
+            </View>
+        </TouchableOpacity>
+    );
 
     return (
         <View style={PAGESTYLE.plainBg}>
-            <HeaderWhitepupilMessage />
+            <HeaderWhitepupilMessage
+                onSearchKeyword={(keyword) => setKeyword(keyword)}
+                onSearch={() => fetchRecord(keyword, filterBy)}
+                onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
+                onFilter={(filterBy) => fetchRecord('', filterBy)} />
             <View style={PAGESTYLE.pupilTable}>
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>MESSAGE TITLE</Text>

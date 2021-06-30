@@ -54,6 +54,11 @@ const MESSAGE = {
     passCode: 'Please enter four digit pass code',
     parentNAme: 'Please enter parent name',
     childPassword: "Please enter child's password",
+    gmTitle: 'Please enter valid title',
+    gmMessage: 'Please enter valid message',
+    gmPArent: 'Please select at least one parent',
+    gmMessageDraft: 'Message drafted successfully',
+    gmMessageSent: 'Message sent successfully',
 }
 
 export default MESSAGE;
