@@ -81,7 +81,7 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-        <Stack.Navigator headerMode='none' initialRouteName="Message">
+        <Stack.Navigator headerMode='none' initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Users" component={Users} />
             <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />

@@ -18,10 +18,14 @@ const NewMessageHeader = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.onGoback()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> {'New Message'}</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={() => props.onDraft()} style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
-                    </TouchableOpacity>
+                    {props.status == 'Sent' ?
+                        null
+                        :
+                        <TouchableOpacity onPress={() => props.onSent()} style={styles.buttonGroup}>
+                            <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                            <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
+                        </TouchableOpacity>
+                    }
                     <TouchableOpacity onPress={() => { }} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>

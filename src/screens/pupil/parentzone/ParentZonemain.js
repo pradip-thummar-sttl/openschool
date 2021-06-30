@@ -39,9 +39,9 @@ const MessageList = (props, { style }) => (
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
             <Text style={[PAGESTYLE.pupilName, PAGESTYLE.sentBlueText]}>Sent</Text>
         </View> */}
-        <View style={{ right: 10, position: 'absolute' }}>
+        {/* <View style={{ right: 10, position: 'absolute' }}>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </View>
+        </View> */}
     </View>
 );
 
@@ -52,6 +52,7 @@ const ParentZonemain = (props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [isProfileEdit, setProfileEdit] = useState(false)
     const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+    const [keyword, setKeyword] = useState('')
 
     const [messageData, setMessageData] = useState([])
 
@@ -74,7 +75,7 @@ const ParentZonemain = (props) => {
             Filterby: filterBy,
         }
 
-        Service.get(`${EndPoints.PupilGlobalMessaging}/${User.user.MobileNumber}`, (res) => {
+        Service.post(data, `${EndPoints.PupilGlobalMessaging}/${User.user.MobileNumber}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -99,7 +100,11 @@ const ParentZonemain = (props) => {
                 <HeaderPM
                     onSwitchPupil={(pupilData) => setPupilData(pupilData)}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
-                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')} />
+                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    onSearchKeyword={(keyword) => setKeyword(keyword)}
+                    onSearch={() => fetchRecord(keyword, '')}
+                    onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
+                    onFilter={(filterBy) => fetchRecord('', '')} />
 
                 {isProfileEdit ?
                     <ParentZoneProfileEdit
@@ -131,8 +136,8 @@ const ParentZonemain = (props) => {
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
                                             </View>
                                         </View>
-                                        <View style={PAGESTYLE.pupilTabledata}>
-                                            <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
+                                        <View>
+                                            <SafeAreaView>
                                                 {isLoading ?
                                                     <ActivityIndicator
                                                         style={{ flex: 1 }}

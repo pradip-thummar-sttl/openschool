@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
@@ -39,7 +39,7 @@ const HeaderWhitepupilMessage = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>Lesson and homework planner</Text>
+                <Text style={styles.mainTitle}>Global Messaging to Parents</Text>
                 <View style={styles.headerRight}>
                     {/* <Popuphomework />
                     <Popupsubmithomework /> */}
@@ -48,8 +48,8 @@ const HeaderWhitepupilMessage = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.filterbarMain}>
-                <View style={styles.field}>
+            <View style={styles.searchParent}>
+                <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => {
@@ -61,8 +61,7 @@ const HeaderWhitepupilMessage = (props) => {
                                 :
                                 null
                         }}>
-                        <Image
-                            style={styles.userIcon}
+                        <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput
@@ -86,7 +85,11 @@ const HeaderWhitepupilMessage = (props) => {
                                     onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Title</Text>
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                        {selectedIndex == 0 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -96,6 +99,11 @@ const HeaderWhitepupilMessage = (props) => {
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
+                                        {selectedIndex == 1 ?
+                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            :
+                                            null
+                                        }
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -103,7 +111,10 @@ const HeaderWhitepupilMessage = (props) => {
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonGroup}>
+                <TouchableOpacity
+                    style={styles.buttonGroup}
+                    activeOpacity={opacity}
+                    onPress={() => props.onNewMessage()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
                 </TouchableOpacity>
@@ -124,6 +135,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginTop: 10
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -158,6 +170,12 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         left: hp(1.43),
     },
+    userIcon1: {
+        position: 'absolute',
+        width: 25,
+        height: 25,
+        left: hp(1.43),
+    },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
@@ -180,7 +198,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+        marginHorizontal: hp(1.69),
     },
     filterIcon: {
         width: hp(1.74),
@@ -253,5 +271,11 @@ const styles = StyleSheet.create({
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    searchParent: {
+        flexDirection: 'row', alignItems: 'center', marginTop: 20, height: hp(5.20), backgroundColor: COLORS.white,
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
 });

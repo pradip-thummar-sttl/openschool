@@ -545,9 +545,11 @@ export default StyleSheet.create({
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        height: hp(3.60),
-        lineHeight: hp(3.60),
-        marginTop:wp(2)
+        height: hp(4.60),
+        lineHeight: hp(4.60),
+        marginTop:wp(2),
+        paddingVertical: 10,
+        backgroundColor: COLORS.greyBack
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -611,7 +613,7 @@ export default StyleSheet.create({
         height: hp(8.85),
         borderRadius: hp(2.0),
         marginBottom:wp(1),
-        marginHorizontal:hp(2)
+        marginHorizontal:hp(2),
     },
     pupilProfile: {
         width: hp(15.80),
@@ -709,8 +711,8 @@ export default StyleSheet.create({
         width: hp(15.80),
     },
     lastColumn: {
-        width: hp(10.55),
-        justifyContent: 'space-between',
+        right: 20,
+        position: 'absolute',
     },
     yesText: {
         fontFamily: FONTS.fontSemiBold,
@@ -996,7 +998,6 @@ export default StyleSheet.create({
     },
     alignRow: {
         flexDirection: 'row',
-        width: '68.5%',
     },
     alignRow1: {
         flexDirection: 'row',
@@ -1485,6 +1486,7 @@ export default StyleSheet.create({
         marginBottom: hp(2.5),
         // marginLeft:hp(2.5),
         marginTop:wp(2),
+        backgroundColor: COLORS.white
     },
     somePlaceholderStyle: {
         fontFamily: FONTS.fontSemiBold,
@@ -1493,7 +1495,7 @@ export default StyleSheet.create({
     },
     commonInputTextarea1: {
         height: hp(5.20),
-        width:hp(70),
+        width:'65%',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
@@ -1509,12 +1511,27 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
     },
+    labelCommon: {
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: hp(1.3),
+        width: '100%',
+    },
+    checkMark: {
+        margin: 0,
+        padding: 0,
+        width: 20,
+        height: 20,
+        left: 2,
+        top: hp(0.52),
+    },
     copyInputParent:{
         flexDirection:'row',
         alignItems:'center'
     },
     inputWidth:{
-        width:hp(50)
+        width:'50%'
     },
     inputHeight:{
         height:wp(15)

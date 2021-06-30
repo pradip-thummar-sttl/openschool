@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, FlatList, SafeAreaView } from 'react-native'
 import NewMessageHeader from '../../../component/reusable/header/NewMessageHeader'
 import COLORS from '../../../utils/Colors';
 import STYLE from '../../../utils/Style';
@@ -16,7 +16,7 @@ import MESSAGE from '../../../utils/Messages'
 
 const NewMessage = (props) => {
     const t2 = useRef(null);
-    const [data, setData] = useState(props.route.params.data);
+    const [data, setData] = useState(props.selectedItem);
     const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
@@ -24,14 +24,17 @@ const NewMessage = (props) => {
 
     const [isLoading, setLoading] = useState(true)
     const [parentsData, setPatrentsData] = useState([])
-    const [selectedParents, setSelectedParents] = useState('')
+    const [selectedParents, setSelectedParents] = useState([])
 
+    console.log('props.selectedItem', props.selectedItem);
     useEffect(() => {
-        setId(data._id)
-        setTitle(data.Title)
-        setMessage(data.Message)
-        setSelectedParents(data.PupilList)
-        setStatus(data.Status)
+        if (data) {
+            setId(data._id)
+            setTitle(data.Title)
+            setMessage(data.Message)
+            setSelectedParents(data.PupilList)
+            setStatus(data.Status)
+        }
     }, [data])
 
     const [isSwitch, setSwitch] = useState(true)
@@ -40,8 +43,8 @@ const NewMessage = (props) => {
     }
 
     useEffect(() => {
-        Service.get('parentlist/60b0b79a0e74b0373679d1b6/T', (res) => {
-        // Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
+        // Service.get('parentlist/60b0b79a0e74b0373679d1b6/T', (res) => {
+            Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -96,8 +99,8 @@ const NewMessage = (props) => {
                 SendToAll: parentsData.length == selectedParents.length,
                 Status: selectedStatus,
                 Type: 'T',
-                UpdatedBy: '60b0b79a0e74b0373679d1b6',
-                // UpdatedBy: User.user._id,
+                // UpdatedBy: '60b0b79a0e74b0373679d1b6',
+                UpdatedBy: User.user._id,
                 PupilList: selectedParents
             }
         } else {
@@ -107,8 +110,8 @@ const NewMessage = (props) => {
                 SendToAll: parentsData.length == selectedParents.length,
                 Status: selectedStatus,
                 Type: 'T',
-                CreatedBy: '60b0b79a0e74b0373679d1b6',
-                // CreatedBy: User.user._id,
+                // CreatedBy: '60b0b79a0e74b0373679d1b6',
+                CreatedBy: User.user._id,
                 PupilList: selectedParents
             }
         }
@@ -119,8 +122,7 @@ const NewMessage = (props) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
                 showMessageWithCallBack(selectedStatus == 'Draft' ? MESSAGE.gmMessageDraft : MESSAGE.gmMessageSent, () => {
-                    props.route.params.onGoBack()
-                    props.navigation.goBack()
+                    props.onGoBack()
                 })
             } else {
                 showMessage(res.message)
@@ -134,15 +136,15 @@ const NewMessage = (props) => {
 
     const parentListView = () => {
         return (
-            <View style={{ marginBottom: 10, flexDirection: 'column', }}>
-                <Text label style={Style.labelCommon}>Recipient</Text>
+            <View style={{ marginBottom: 10, width: '65%', flexDirection: 'column', }}>
+                <Text label style={styles.labelCommon}>Recipient</Text>
                 <FlatList
                     data={parentsData}
-                    style={{ width: '100%', paddingStart: 5, }}
+                    style={{ width: '100%', paddingHorizontal: 10, }}
                     renderItem={({ item, index }) => (
-                        <View style={{ ...Styles.alignRow, marginTop: 10 }}>
+                        <View style={{ ...styles.alignRow, marginTop: 10, marginRight: 20 }}>
                             <CheckBox
-                                style={Styles.checkMark}
+                                style={styles.checkMark}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -153,10 +155,10 @@ const NewMessage = (props) => {
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
-                            <Text style={Styles.checkBoxLabelText}>{item.ParentFirstName} {item.ParentLastName}</Text>
+                            <Text style={styles.checkBoxLabelText}>{item.ParentFirstName} {item.ParentLastName}</Text>
                         </View>
                     )}
-                    numColumns={2}
+                    numColumns={3}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>
@@ -164,32 +166,32 @@ const NewMessage = (props) => {
     };
 
     return (
-        <View>
-            <NewMessageHeader
-                onDraft={() => saveMessage('Sent')}
-                onGoback={() => props.navigation.goBack()}
-                status={status} />
-            <View style={styles.field1}>
-                <Text label style={STYLE.labelCommon}>Message Title</Text>
-                <View style={styles.copyInputParent}>
-                    <TextInput
-                        multiline={false}
-                        placeholder='Enter title of the message'
-                        returnKeyType={"next"}
-                        onSubmitEditing={() => { t2.current.focus(); }}
-                        value={title}
-                        autoCapitalize={'sentences'}
-                        placeholderStyle={styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.borderGrp}
-                        style={[styles.commonInputTextarea1, , styles.inputWidth]}
-                        onChangeText={title => setTitle(title)} />
+        <View style={{ height: '100%', backgroundColor: COLORS.white, paddingHorizontal: 20 }}>
+            <SafeAreaView>
+                <NewMessageHeader
+                    onSent={() => saveMessage('Sent')}
+                    onGoback={() => props.goBack()}
+                    status={status} />
+                <View style={styles.field1}>
+                    <Text label style={STYLE.labelCommon}>Message Title</Text>
+                    <View style={styles.copyInputParent}>
+                        <TextInput
+                            multiline={false}
+                            placeholder='Enter title of the message'
+                            returnKeyType={"next"}
+                            onSubmitEditing={() => { t2.current.focus(); }}
+                            value={title}
+                            autoCapitalize={'sentences'}
+                            placeholderStyle={styles.somePlaceholderStyle}
+                            placeholderTextColor={COLORS.borderGrp}
+                            style={[styles.commonInputTextarea1, , styles.inputWidth]}
+                            onChangeText={title => setTitle(title)} />
+                    </View>
                 </View>
-            </View>
 
-            <View style={styles.field1}>
-                <Text label style={STYLE.labelCommon}>Recipient</Text>
-                <View style={styles.copyInputParent}>
-                    {/* <TextInput
+                <View style={styles.field1}>
+                    <View style={styles.copyInputParent}>
+                        {/* <TextInput
                         multiline={false}
                         placeholder='Enter title of the message'
                         value={event}
@@ -197,37 +199,42 @@ const NewMessage = (props) => {
                         placeholderTextColor={COLORS.borderGrp}
                         style={styles.commonInputTextarea1}
                         onChangeText={eventName => setEvent(eventName)} /> */}
-                    {parentListView()}
+                        {parentListView()}
 
-                    <ToggleSwitch
-                        isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                    />
-                    <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
+                        <ToggleSwitch
+                            isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
+                        />
+                        <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
 
+                    </View>
                 </View>
-            </View>
 
-            <View style={styles.field1}>
-                <Text label style={STYLE.labelCommon}>Message</Text>
-                <View style={styles.copyInputParent}>
-                    <TextInput
-                        ref={t2}
-                        multiline={true}
-                        placeholder='Write a message here'
-                        value={message}
-                        autoCapitalize={'sentences'}
-                        placeholderStyle={styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.borderGrp}
-                        style={[styles.commonInputTextarea1, styles.inputHeight]}
-                        onChangeText={message => setMessage(message)} />
+                <View style={styles.field1}>
+                    <Text label style={STYLE.labelCommon}>Message</Text>
+                    <View style={styles.copyInputParent}>
+                        <TextInput
+                            ref={t2}
+                            multiline={true}
+                            placeholder='Write a message here'
+                            value={message}
+                            autoCapitalize={'sentences'}
+                            placeholderStyle={styles.somePlaceholderStyle}
+                            placeholderTextColor={COLORS.borderGrp}
+                            style={[styles.commonInputTextarea1, styles.inputHeight]}
+                            onChangeText={message => setMessage(message)} />
+                    </View>
                 </View>
-            </View>
-            <TouchableOpacity style={styles.buttonGroup1}
-                activeOpacity={opacity}
-                onPress={() => saveMessage('Draft')}>
-                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
-            </TouchableOpacity>
+                {status == 'Draft' || status == 'Sent' ?
+                    null
+                    :
+                    <TouchableOpacity style={styles.buttonGroup1}
+                        activeOpacity={opacity}
+                        onPress={() => saveMessage('Draft')}>
+                        <Image style={styles.addIcon} source={Images.CheckIcon} />
+                        <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
+                    </TouchableOpacity>
+                }
+            </SafeAreaView>
         </View>
     )
 }

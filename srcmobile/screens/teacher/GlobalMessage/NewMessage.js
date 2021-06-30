@@ -21,14 +21,16 @@ const NewMessage = (props) => {
 
     const [isLoading, setLoading] = useState(true)
     const [parentsData, setPatrentsData] = useState([])
-    const [selectedParents, setSelectedParents] = useState('')
+    const [selectedParents, setSelectedParents] = useState([])
 
     useEffect(() => {
-        setId(data._id)
-        setTitle(data.Title)
-        setMessage(data.Message)
-        setSelectedParents(data.PupilList)
-        setStatus(data.Status)
+        if (data) {
+            setId(data._id)
+            setTitle(data.Title)
+            setMessage(data.Message)
+            setSelectedParents(data.PupilList)
+            setStatus(data.Status)
+        }
     }, [data])
 
     useEffect(() => {
