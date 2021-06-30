@@ -82,42 +82,6 @@ const HeaderTT = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                {/* <View style={{ flexDirection: 'row' }}>
-                    <Menu style={{ marginLeft: 10 }}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </View> */}
                 <PopupAddNewData
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
@@ -133,6 +97,8 @@ const styles = StyleSheet.create({
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
         // marginBottom: hp(5.85),
+        paddingBottom: hp(1.5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
     },
     headerMain: {
         flexDirection: 'row',
@@ -285,12 +251,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: wp(5.20),
+        width: hp(5.20),
         resizeMode: 'contain',
         height: hp(5.20),
+        marginRight: hp(1)
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, marginRight: 10, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

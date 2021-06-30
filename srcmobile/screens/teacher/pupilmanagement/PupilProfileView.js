@@ -18,14 +18,22 @@ const PupilProfileView = (props) => {
     const item = props.route.params.item;
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
+    const myref=useRef(null);
 
+    const handleOnClick = (index) => {
+        setTabSelected(index)
+        console.log('reference', myref);
+        if(myref.current) {
+           myref.current.refresh();
+        }
+     }
     return (
         <View>
             <HeaderPMInner
                 navigateToBack={() => props.navigation.goBack()}
                 navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
-                tabIndex={(index) => { setTabSelected(index) }}
+                tabIndex={(index) => { handleOnClick(index) }}
             />
             {
                 tabSelected === 0 ?
@@ -96,7 +104,7 @@ const PupilProfileView = (props) => {
                     </View>
                     :
                     <View style={PAGESTYLE.MainProfile}>
-                        <Chat />
+                        <Chat ref={myref} tabs={tabSelected} data={item} />
                     </View>
             }
 

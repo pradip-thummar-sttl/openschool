@@ -6,6 +6,8 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Introduction3 = (props) => {
     console.log(props);

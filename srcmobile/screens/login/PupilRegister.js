@@ -486,6 +486,7 @@ const styles = StyleSheet.create({
     },
     rightContent: {
         width: '100%',
+        backgroundColor: COLORS.white,
         flex: 1,
     },
     titleLogin: {

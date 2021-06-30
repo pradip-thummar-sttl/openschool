@@ -7,17 +7,40 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../utils/Constant';
 import { color } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Users extends Component {
     constructor(props) {
         super(props);
     }
 
+    navigateIntroductionScreen(type) {
+        if (type === 'Teacher') {
+            AsyncStorage.getItem('introduceTeacher').then((value) => {
+                if (value) {
+                    this.props.navigation.replace('Login', { userType: "Teacher" })
+                } else {
+                    this.props.navigation.navigate('IntroductionTeacher')
+                }
+            })
+
+        } else {
+            AsyncStorage.getItem('introducePupil').then((value) => {
+                if (value) {
+                    this.props.navigation.replace('Login', { userType: "Pupil" })
+                } else {
+                    this.props.navigation.navigate('IntroductionPupil')
+                }
+            })
+
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground  style={styles.image}>
-                <Image style={styles.topBg} source={Images.illuTopBg} />
+                <ImageBackground style={styles.image}>
+                    <Image style={styles.topBg} source={Images.illuTopBg} />
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
@@ -33,7 +56,7 @@ export default class Users extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('IntroductionTeacher')}>
+                                onPress={() => this.navigateIntroductionScreen('Teacher')}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
@@ -43,7 +66,7 @@ export default class Users extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => this.props.navigation.navigate('IntroductionPupil')}>
+                                onPress={() => this.navigateIntroductionScreen('Pupil')}>
                                 <View style={styles.user}>
                                     <Image
                                         style={styles.userIcon}
@@ -62,7 +85,7 @@ export default class Users extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:COLORS.white,
+        backgroundColor: COLORS.white,
     },
     text: {
         color: COLORS.darkGray,
@@ -81,8 +104,8 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center",
-        position:'relative',
-        height:'100%',
+        position: 'relative',
+        height: '100%',
     },
     userMain: {
         justifyContent: "center",
@@ -102,11 +125,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: hp(2),
     },
-    topBg:{
-        width:'100%',
-        height:hp(16.77),
+    topBg: {
+        width: '100%',
+        height: hp(16.77),
         resizeMode: 'contain',
-        position:'absolute',
-        top:hp(-0.3),
+        position: 'absolute',
+        top: hp(-0.3),
     }
 });

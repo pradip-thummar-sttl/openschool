@@ -110,20 +110,6 @@ const Header = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
-                            {/* <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => setSelectedIndex(2)}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 2 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption> */}
                         </MenuOptions>
                     </Menu>
                     <Image style={styles.filterIcon} source={Images.FilterIcon} />
@@ -147,11 +133,13 @@ const styles = StyleSheet.create({
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
         // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
+        paddingBottom: hp(1.5),
     },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'center',        
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -316,7 +304,7 @@ const styles = StyleSheet.create({
         height: hp(5.20),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

@@ -117,7 +117,7 @@ export default StyleSheet.create({
     mainDetailsForm: {
         marginTop: hp(10),
         paddingHorizontal: hp(2),
-        marginBottom: hp(12)
+        marginBottom: hp(6)
     },
     mainDetailsFormSchool: {
         paddingHorizontal: hp(2),
@@ -152,7 +152,10 @@ export default StyleSheet.create({
         marginBottom: hp(62),
     },
     scrollViewCommonPupilEdit: {
-        marginBottom: hp(37),
+        marginBottom: hp(24),
+    },
+    scrollViewCommonPupilEditSchool: {
+        marginBottom: hp(33),
     },
     rewardSection: {
         paddingHorizontal: hp(2),

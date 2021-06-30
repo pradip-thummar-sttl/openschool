@@ -107,7 +107,7 @@ export default StyleSheet.create({
         height: hp(55),
     },
     mesagesView: {
-        width: '105%',
+        width: '125%',
         height: hp(62),
         marginBottom: wp(3),
     },
@@ -156,9 +156,10 @@ export default StyleSheet.create({
         flexDirection:'row'
     },
     btn:{
-        backgroundColor:'yellow',
-        width:hp(4),
-        height:hp(4)
+        // backgroundColor:'yellow',
+        width:hp(2.5),
+        height:hp(2.5),
+        marginHorizontal:wp(2.5)
     },
     timeText:{
         color:COLORS.menuLightFonts,
