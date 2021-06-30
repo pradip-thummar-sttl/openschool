@@ -104,10 +104,10 @@ const HeaderPM = (props) => {
                         </Menu>
                     </View>
 
-                    {/* <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity style={styles.buttonGroup}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
                     <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
                 </View>
                 :
                 null
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
+        shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),

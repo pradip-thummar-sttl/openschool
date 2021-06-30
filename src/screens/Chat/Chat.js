@@ -9,7 +9,10 @@ import STYLE from '../../utils/Style'
 import ChatHeader from './ChatHeader'
 import Styles from './Style'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import moment from 'moment';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { User } from '../../utils/Model';
 
 
 // var data = [
@@ -21,7 +24,11 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const Chat = (props) => {
     const pubnub = usePubNub();
-    const [channels] = useState(['awesome-channel']);
+    let channel1 = `${props.data.MobileNumber}_${User.user._id}`
+    let channel2 = `${props.data.PupilId}_${User.user._id}`
+    let channel3 = `${props.data.SchoolId}_${User.user._id}`
+
+    const [channels] = useState([channel1, channel2, channel3]);
     const [messages, addMessage] = useState([]);
     const [message, setMessage] = useState('');
     const [tabs, settabs] = useState([
@@ -29,23 +36,36 @@ const Chat = (props) => {
         { name: 'PARENT CHAT', isSelected: false },
         { name: 'PUPIL CHAT', isSelected: false },
         { name: 'SCHOOL CHAT', isSelected: false }])
+        
+    useEffect(() => {
+        addMessage([])
+    }, [props.tabs])
 
 
     const handleMessage = event => {
         console.log('log of event message', event);
+        var mesage = messages
         const message = event.message;
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             const text = message.text || message;
-            var mesage = [...messages]
-            mesage.push(text)
+            // var mesage = [...messages]
+            mesage.push(event)
             addMessage(mesage);
         }
     };
 
     const sendMessage = message => {
+        var channel = ""
+        if (props.tabs === 1) {
+            channel = channels[0]
+        } else if (props.tabs === 2) {
+            channel = channels[1]
+        } else {
+            channel = channels[2]
+        }
         if (message) {
             pubnub
-                .publish({ channel: channels[0], message })
+                .publish({ channel: channel, message })
                 .then(() => setMessage(''));
         }
     };
@@ -104,50 +124,52 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Parent/Guardian</Text>
-                                <Text style={Styles.subText}>Ann Le-Pardesi</Text>
+                                <Text style={Styles.subText}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Relationship to pupil:</Text>
-                                <Text style={Styles.subText}>Mother</Text>
+                                <Text style={Styles.subText}>{props.data.Relationship}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Email:</Text>
-                                <Text style={Styles.subText}>ann@gmail.com</Text>
+                                <Text style={Styles.subText}>{props.data.Email}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Address:</Text>
-                                <Text style={Styles.subText}>{'23 York Road, Mosely,\nBirmingham, B13 1LT'}</Text>
+                                <Text style={Styles.subText}>{`${props.data.AddressLine1}\n${props.data.AddressLine2}`}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Telephone no:</Text>
-                                <Text style={Styles.subText}>07777 777 777</Text>
+                                <Text style={Styles.subText}>{props.data.MobileNumber}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Notes:</Text>
-                                <Text style={Styles.subText}>{'Speak to her about Reuels'}</Text>
+                                <Text style={Styles.subText}>{props.data.Note}</Text>
                             </View>
 
                         </View>
                         : null
                 }
 
-                <View style={[Styles.rightView,{width:props.tabs === 1?hp(76):wp(85)}]}>
-                    <View style={Styles.mesagesView}>
-                        <FlatList
-                            data={messages}
-                            renderItem={({ item, index }) => {
-                                return (
-                                    <View style={Styles.messageCell}>
-                                        <Image style={Styles.roundImage} />
-                                        <View style={Styles.messageSubCell}>
-                                            <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   08:20</Text></Text>
-                                            <Text style={Styles.messageText}>{item}</Text>
+                <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
+                    <KeyboardAwareScrollView >
+
+                        <View style={Styles.mesagesView}>
+                            <FlatList
+                                data={messages}
+                                renderItem={({ item, index }) => {
+                                    return (
+                                        <View style={Styles.messageCell}>
+                                            <Image style={Styles.roundImage} />
+                                            <View style={Styles.messageSubCell}>
+                                                <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
+                                                <Text style={Styles.messageText}>{item.message}</Text>
+                                            </View>
                                         </View>
-                                    </View>
-                                )
-                            }}
-                        />
-                        {/* <ScrollView>
+                                    )
+                                }}
+                            />
+                            {/* <ScrollView>
                             {
                                 [1, 2, 3, 4, 5, 6,].map((item, index) => {
                                     return (
@@ -162,28 +184,29 @@ const Chat = (props) => {
                                 })
                             }
                         </ScrollView> */}
-                    </View>
-                    <View style={[Styles.textView,{width:props.tabs === 1?hp(76):wp(85)}]}>
-                        <TextInput
-                            style={Styles.input}
-                            multiline={true}
-                            placeholder="Message Ann le"
-                            placeholderTextColor={COLORS.menuLightFonts}
-                            value={message}
-                            onChangeText={(text) => setMessage(text)}
-                        />
-                        <View style={Styles.buttonView}>
-                            <TouchableOpacity>
-                                <Image style={Styles.btn} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{ marginHorizontal: 20 }}>
-                                <Image style={Styles.btn} />
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => sendMessage(message)}>
-                                <Image style={Styles.btn} />
-                            </TouchableOpacity>
                         </View>
-                    </View>
+                        <View style={[Styles.textView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
+                            <TextInput
+                                style={Styles.input}
+                                multiline={true}
+                                placeholder="Message Ann le"
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                value={message}
+                                onChangeText={(text) => setMessage(text)}
+                            />
+                            <View style={Styles.buttonView}>
+                                <TouchableOpacity>
+                                    <Image style={Styles.btn} source={Images.paperClip} />
+                                </TouchableOpacity>
+                                <TouchableOpacity >
+                                    <Image style={Styles.btn} source={Images.imageUpload} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => sendMessage(message)}>
+                                    <Image style={Styles.btn} source={Images.send} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </KeyboardAwareScrollView>
 
                 </View>
 

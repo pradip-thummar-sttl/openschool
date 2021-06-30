@@ -552,7 +552,7 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } else if (recordingArr.length == 0) {
+        } else if (recordingArr.length == 0 ) { //&& isRunningFromVirtualDevice.  remove validation for simulator.
             showMessage(MESSAGE.recording);
             return false;
         } else if (selectedPupils.length == 0) {

@@ -356,8 +356,8 @@ const TLDetailAdd = (props) => {
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                <View style={STYLE.hrCommon}></View>
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                <View style={STYLE.hrCommon}></View>
                 <FlatList
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
@@ -404,15 +404,15 @@ const TLDetailAdd = (props) => {
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <View style={STYLE.hrCommon}></View>
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                <View style={STYLE.hrCommon}></View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                 </TouchableOpacity> */}
                 <FlatList
                     data={pupils}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%',}}
                     renderItem={({ item, index }) => (
                         <View style={PAGESTYLE.alignRow}>
                             <CheckBox

@@ -6,10 +6,33 @@ import Images from '../../utils/Images';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../utils/Constant';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Users extends Component {
     constructor(props) {
         super(props);
+    }
+
+    navigateIntroductionScreen(type) {
+        if (type === 'Teacher') {
+            AsyncStorage.getItem('introduceTeacher').then((value) => {
+                if (value) {
+                    this.props.navigation.replace('Login', { userType: "Teacher" })
+                } else {
+                    this.props.navigation.navigate('IntroductionTeacher')
+                }
+            })
+
+        } else {
+            AsyncStorage.getItem('introducePupil').then((value) => {
+                if (value) {
+                    this.props.navigation.replace('Login', { userType: "Pupil" })
+                } else {
+                    this.props.navigation.navigate('IntroductionPupil')
+                }
+            })
+
+        }
     }
 
     render() {
@@ -31,7 +54,7 @@ export default class Users extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={opacity}
-                            onPress={() => this.props.navigation.navigate('IntroductionTeacher')}>
+                            onPress={() => this.navigateIntroductionScreen('Teacher')}>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
@@ -41,7 +64,7 @@ export default class Users extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={opacity}
-                            onPress={() => this.props.navigation.navigate('IntroductionPupil')}>
+                            onPress={() => this.navigateIntroductionScreen('Pupil')}>
                             <View style={styles.user}>
                                 <Image
                                     style={styles.userIcon}
