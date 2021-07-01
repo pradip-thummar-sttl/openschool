@@ -7,10 +7,9 @@ const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
     mainView: {
-        // flex:1,
-        height: wp(67),
-        padding: hp(2),
-        flexDirection: 'row',
+        flex:1,
+        // height: hp(67),
+        // padding: hp(2),
     },
     leftView: {
         paddingHorizontal: hp(1.5)
@@ -28,16 +27,14 @@ export default StyleSheet.create({
     },
     yellowView: {
         width: '100%',
-        height: '50%',
+        height: hp(20),
+        paddingLeft:wp(2),
         backgroundColor: 'orange',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
     subText: {
         fontSize: hp(2.2),
-        fontFamily: FONTS.fontRegular
+        fontFamily: FONTS.fontRegular,
+        marginTop:hp(3)
     },
     headText: {
         fontSize: hp(3.5),
@@ -45,15 +42,16 @@ export default StyleSheet.create({
     },
     rewardStarMark: {
         justifyContent: 'space-around',
-        width: '100%',
+        width: '90%',
+        height:hp(12),
         marginBottom: hp(3),
         flexDirection: 'row',
         paddingTop: hp(1.8),
         paddingBottom: hp(1.8),
-        // borderBottomWidth:1,
-        // borderBottomColor:COLORS.bottomProfileLightBorder,
-        // borderTopWidth:1,
-        // borderTopColor:COLORS.bottomProfileLightBorder,
+        backgroundColor:'white',
+        alignSelf:'center',
+        marginTop:hp(-6),
+         borderRadius:10
     },
     starSelected: {
         width: hp(4.94),
@@ -84,31 +82,31 @@ export default StyleSheet.create({
 
     // Right View
     borderView: {
-        width: hp(73),
-        height: wp(60),
+        width: "100%",
+        height: hp(60),
         borderWidth: 1,
-        borderRadius: 10,
         borderColor: COLORS.borderGrp,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent:'center'
     },
     tabView: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     tabBtn: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: hp(1),
-        marginVertical: hp(2)
+        // marginRight: wp(2),
+        marginHorizontal:wp(3),
+        marginVertical: hp(1.5),
     },
     tabText: {
-        padding: hp(2.5),
-        fontSize: hp(2),
+        fontSize: hp(1.5),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.lightGray
     },
     itemBtn:{
-        width:wp(15),
-        height:wp(15),
+        width:hp(12),
+        height:hp(12),
         margin:10,
         borderRadius:10,
         backgroundColor:'orange'  

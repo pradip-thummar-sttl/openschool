@@ -60,6 +60,7 @@ import Chat from '../screens/Chat/Chat';
 
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
+import Avatar from '../screens/pupil/Avatar/Avatar';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -86,7 +87,7 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-            <Stack.Navigator headerMode='none' initialRouteName="Splash">
+            <Stack.Navigator headerMode='none' initialRouteName="Avatar">
                 <Stack.Screen name="Splash" component={Splash} options={{swipeEnabled: false,}} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} options={{swipeEnabled: false,}} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} options={{swipeEnabled: false,}} />
@@ -138,6 +139,7 @@ function ScreenStack() {
                 <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
                 <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
                 <Stack.Screen name="Chat" component={Chat} />
+                <Stack.Screen name="Avatar" component={Avatar} />
             </Stack.Navigator>
         </PubNubProvider>
     );
