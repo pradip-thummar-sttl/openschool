@@ -93,11 +93,11 @@ export default StyleSheet.create({
     coverImage: {
         width: '100%',
         height: hp(13.8),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
     profileOuter: {
         borderRadius: hp(100),
-        borderWidth: hp(1.3),
+        borderWidth: hp(0.1),
         borderColor: COLORS.white,
         position: 'absolute',
         top: hp(7.38),
@@ -105,9 +105,9 @@ export default StyleSheet.create({
     profileImage: {
         width: hp(12.31),
         height: hp(12.31),
+        backgroundColor: COLORS.white,
         borderRadius: hp(100),
-        resizeMode: 'contain',
-        backgroundColor: COLORS.lightGrayPupil,
+        resizeMode: 'cover',
     },
     mainDetails: {
         marginTop: hp(2),
@@ -117,7 +117,7 @@ export default StyleSheet.create({
     mainDetailsForm: {
         marginTop: hp(10),
         paddingHorizontal: hp(2),
-        marginBottom: hp(12)
+        marginBottom: hp(6)
     },
     mainDetailsFormSchool: {
         paddingHorizontal: hp(2),
@@ -152,7 +152,10 @@ export default StyleSheet.create({
         marginBottom: hp(62),
     },
     scrollViewCommonPupilEdit: {
-        marginBottom: hp(37),
+        marginBottom: hp(24),
+    },
+    scrollViewCommonPupilEditSchool: {
+        marginBottom: hp(33),
     },
     rewardSection: {
         paddingHorizontal: hp(2),
