@@ -28,7 +28,9 @@ const HeaderPM = (props) => {
 
     useEffect(() => {
         // props.onFilter(filterBy)
-    }, [filterBy])
+        console.log('log of props in header pm mobile', props.tabs);
+        setSelectedTab(props.tabs)
+    }, [filterBy, props.tabs])
 
     return (
         <View style={styles.headerMain}>

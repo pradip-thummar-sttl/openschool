@@ -78,11 +78,8 @@ const PupuilDashboard = (props) => {
             let currentTime = moment(Date()).format('hh:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
-                let data = {
-                    LessonStart: true,
-                    LessonEnd: false
-                }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                let data = { "Absent": true }
+                Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
@@ -135,6 +132,15 @@ const PupuilDashboard = (props) => {
     };
 
     const startLiveClassIOS = () => {
+    }
+
+    const markAsAbsent = () => {
+        let data = { "Absent": true }
+        Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of absent check', res);
+        }, (err) => {
+            console.log('error of absent check', err);
+        })
     }
 
     const renderItem = ({ item, index }) => {
@@ -342,7 +348,7 @@ const PupuilDashboard = (props) => {
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
                                                                         <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
-                                                                            <TouchableOpacity>
+                                                                            <TouchableOpacity onPress={() => { markAsAbsent() }}>
                                                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Mark As Absent</Text>
                                                                             </TouchableOpacity>
                                                                         </View>

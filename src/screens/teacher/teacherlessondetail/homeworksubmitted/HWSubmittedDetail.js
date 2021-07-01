@@ -97,7 +97,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = async() => {
+    const startRecording = async () => {
         // setRecordingStarted(true)
         // RecordScreen.startRecording().catch((error) => console.error(error));
 
@@ -109,16 +109,16 @@ const TLHomeWorkSubmittedDetail = (props) => {
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => console.error(error));
                 } else {
                     showMessage("Please give permission for camera")
                 }
-    
+
             }
-        }else{
+        } else {
             const res = await check(PERMISSIONS.IOS.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
@@ -126,14 +126,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => console.error(error));
                 } else {
                     showMessage("Please give permission for camera")
                 }
-    
+
             }
         }
     }
@@ -178,6 +178,19 @@ const TLHomeWorkSubmittedDetail = (props) => {
         })
         setAddRecording(false)
 
+    }
+    const onStarSelection = (index) => {
+        setBronze(false)
+        setSilver(false)
+        setGold(false)
+        if (index === 0) {
+            setBronze(true)
+        } else if (index === 1) {
+            setSilver(true)
+        } else {
+            setGold(true)
+
+        }
     }
 
     return (
@@ -318,19 +331,19 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
                                     <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
-                                            <TouchableOpacity onPress={() => setBronze(!isBronze)} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => { onStarSelection(0) }} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => setSilver(!isSilver)} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => { onStarSelection(1) }} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
                                                     <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => setGold(!isGold)} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => { onStarSelection(2) }} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Gold stars</Text>

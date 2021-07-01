@@ -43,7 +43,7 @@ const { CallModule, CallModuleIos } = NativeModules;
 //         </TouchableOpacity>
 //     </View>
 // );
-const Pupillist = ({ item }) => (
+const Pupillist = ({ item, onPress }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <View style={PAGESTYLE.rowProfile}>
@@ -59,7 +59,7 @@ const Pupillist = ({ item }) => (
             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
             <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
         </View>
-        <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+        <TouchableOpacity onPress={()=>onPress()} style={PAGESTYLE.pupilDetailLink}>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </TouchableOpacity>
     </View>
@@ -195,6 +195,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         return (
             <Pupillist
                 item={item}
+                onPress={()=>{props.navigation.navigate('PupilProfileView', { item: item })}}
             />
         );
     };
@@ -285,7 +286,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('PupiloverView',{item:1})}
+                            style={PAGESTYLE.boxDash}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground>

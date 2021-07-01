@@ -15,11 +15,13 @@ import { User } from "../../../utils/Model";
 const { CallModule } = NativeModules;
 
 const PupiloverView = (props) => {
+    const item = props.route.params.item;
     const [isHide, action] = useState(true);
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
 
     useEffect(() => {
+        setSelectedTabIndex(item)
         Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -38,6 +40,7 @@ const PupiloverView = (props) => {
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
+                    tabs={selectedTabIndex}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>

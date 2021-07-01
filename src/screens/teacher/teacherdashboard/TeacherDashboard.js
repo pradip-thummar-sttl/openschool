@@ -22,6 +22,7 @@ import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PupilManagement from "../pupilmanagement/PupilManagement";
+import PupilProfileView from "../pupilmanagement/PupilProfileView";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -61,7 +62,7 @@ const Item = ({ onPress, style, item }) => (
     // </TouchableOpacity>
 );
 
-const Pupillist = ({ item }) => (
+const Pupillist = ({ item, onPress }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
@@ -81,7 +82,7 @@ const Pupillist = ({ item }) => (
             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
             <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
         </View>
-        <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+        <TouchableOpacity onPress={()=>{onPress()}} style={PAGESTYLE.pupilDetailLink}>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </TouchableOpacity>
     </View>
@@ -125,6 +126,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isAddSubject, setAddSubject] = useState(false)
     const [isAddEvent, setAddEvent] = useState(false)
     const [isPupilManagement, setPupilManagement] = useState(false)
+    const [pupilManagementselectedTab, setPupilManagementselectedTab] = useState(0)
+    const [isPupilDetail, setPupilDetail] = useState(false)
+    const [selectedPupil, setSelectedPupil] = useState({})
 
 
     const [isLoading, setLoading] = useState(false);
@@ -242,12 +246,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         return (
             <Pupillist
                 item={item}
+                onPress={()=>{ setSelectedPupil(item); setPupilDetail(true) }}
             />
         );
     };
     const setData = (index) => {
         setSelectedId(index)
         setDataOfSubView(dashData[index])
+    }
+    const navigatePupilGroup = () =>{
+        setPupilManagementselectedTab(1)
+        setTeacherLessonDetail(false); 
+        setAddSubject(false); 
+        setSelectedIndex(3)
     }
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
@@ -268,8 +279,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0) }}
                 navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
                 navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
-                navigateToPupilManagement={() => { console.log('CLICKED'); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }} />
+                navigateToPupilManagement={() => { console.log('CLICKED');setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }} />
             {
+                isPupilDetail?
+                <PupilProfileView
+                        selectedPupil={selectedPupil}
+                        navigateToBack={() => { setPupilDetail(false) }} />
+                    
+                :
                 isTeacherLessonDetail ?
                     <TLDetailEdit
                         goBack={() => setTeacherLessonDetail(false)}
@@ -312,7 +329,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity style={PAGESTYLE.boxDash}>
+                                            <TouchableOpacity onPress={()=>{navigatePupilGroup()}} style={PAGESTYLE.boxDash}>
                                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                                     <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
                                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground>
@@ -579,7 +596,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 selectedIndex == 2 ?
                                     <TeacherLessonList navigation={props.navigation} />
                                     :
-                                    <PupilManagement navigation={props.navigation} />
+                                    <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
 
             }
             {isAddEvent ?

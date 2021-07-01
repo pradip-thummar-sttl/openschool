@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import PupiloverView from "./PupiloverView";
 import PupilProfileView from "./PupilProfileView";
@@ -10,11 +10,13 @@ const PupilManagement = (props) => {
     const [isDetailSelected, setDetailSelected] = useState(true);
     const [selectedPupil, setSelectedPupil] = useState({})
 
+  
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {isOverViewSelected ?
                 <PupiloverView
-                    onPupilClick={(item) => { setSelectedPupil(item); setOverViewSelected(false); setDetailSelected(true) }} />
+                    onPupilClick={(item) => { setSelectedPupil(item); setOverViewSelected(false); setDetailSelected(true) }} tabs={props.tabs} />
                 :
                 isDetailSelected ?
                     <PupilProfileView

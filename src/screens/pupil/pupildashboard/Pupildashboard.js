@@ -82,11 +82,8 @@ const PupuilDashboard = (props) => {
             let currentTime = moment(Date()).format('hh:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
-                let data = {
-                    LessonStart: true,
-                    LessonEnd: false
-                }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                let data = { "Absent": true }
+                Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
@@ -126,13 +123,13 @@ const PupuilDashboard = (props) => {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, (id) => {
                     console.log('hi id:---------', id)
-                    let data = {
-                        LessonStart: false,
-                        LessonEnd: true
-                    }
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
-                    }, (err) => {
-                    })
+                    // let data = {
+                    //     LessonStart: false,
+                    //     LessonEnd: true
+                    // }
+                    // Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
+                    // }, (err) => {
+                    // })
                 })
             }
         } catch (e) {
@@ -143,6 +140,14 @@ const PupuilDashboard = (props) => {
     const startLiveClassIOS = () => {
     }
 
+    const markAsAbsent = () => {
+        let data = { "Absent": true }
+        Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of absent check', res);
+        }, (err) => {
+            console.log('error of absent check', err);
+        })
+    }
     const renderItem = ({ item, index }) => {
         const backgroundColor = index === selectedId ? COLORS.selectedDashboard : COLORS.white;
 
@@ -313,7 +318,7 @@ const PupuilDashboard = (props) => {
                                                                                 />
                                                                             </View>
                                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                                <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
+                                                                                <TouchableOpacity onPress={() => markAsAbsent()} style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
                                                                                 <TouchableOpacity
                                                                                     style={PAGESTYLE.buttonGrp}
                                                                                     onPress={() => { launchLiveClass() }}>
