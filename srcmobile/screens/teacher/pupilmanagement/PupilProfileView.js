@@ -18,14 +18,10 @@ const PupilProfileView = (props) => {
     const item = props.route.params.item;
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
-    const myref=useRef(null);
 
     const handleOnClick = (index) => {
         setTabSelected(index)
-        console.log('reference', myref);
-        if(myref.current) {
-           myref.current.refresh();
-        }
+       
      }
     return (
         <View>
@@ -104,7 +100,7 @@ const PupilProfileView = (props) => {
                     </View>
                     :
                     <View style={PAGESTYLE.MainProfile}>
-                        <Chat ref={myref} tabs={tabSelected} data={item} />
+                        <Chat tabs={tabSelected} data={item} />
                     </View>
             }
 
