@@ -22,14 +22,18 @@ import { User } from '../../utils/Model';
 
 
 const Chat = (props) => {
-    console.log('data of parent chat', props.data);
+    // console.log('data of parent chat', props.data);
 
     const pubnub = usePubNub();
-    let channel1 = `${props.data.MobileNumber}_${User.user._id}`
-    let channel2 = `${props.data.PupilId}_${User.user._id}`
-    let channel3 = `${props.data.SchoolId}_${User.user._id}`
+    let channel1 = [`${props.data.MobileNumber}_${User.user._id}`]
+    let channel2 = [`${props.data.PupilId}_${User.user._id}`]
+    let channel3 = [`${props.data.SchoolId}_${User.user._id}`]
 
-    const [channels] = useState([channel1, channel2, channel3]);
+    const [channels, setChannels] = useState(channel1);
+
+    // const [parentChannels] = useState([channel1]);
+    // const [pupilChannels] = useState([channel2]);
+    // const [schoolChannels] = useState([channel3]);
     // const [channels] = useState(['awesome-channel']);
     const [messages, addMessage] = useState([]);
     const [message, setMessage] = useState('');
@@ -42,6 +46,7 @@ const Chat = (props) => {
 
     useEffect(() => {
         addMessage([])
+        props.tabs === 1 ? setChannels(channel1) : props.tabs === 2 ? setChannels(channel2) : setChannels(channel3);
     }, [props.tabs])
 
     const handleMessage = event => {
@@ -50,26 +55,18 @@ const Chat = (props) => {
         const message = event.message;
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             const text = message.text || message;
-            // addMessage(messages => [...messages, event]);
-
             console.log('messages array', mesage, event)
             mesage.push(event)
             addMessage(mesage);
         }
+        console.log('log of event message', messages);
+
     };
 
     const sendMessage = message => {
-        var channel = ""
-        if (props.tabs === 1) {
-            channel = channels[0]
-        } else if (props.tabs === 2) {
-            channel = channels[1]
-        } else {
-            channel = channels[2]
-        }
         if (message) {
             pubnub
-                .publish({ channel: channel, message })
+                .publish({ channel: channels[0], message })
                 .then(() => setMessage(''));
         }
     };
@@ -81,39 +78,16 @@ const Chat = (props) => {
 
 
     useEffect(() => {
-        pubnub.addListener({ message: handleMessage });
+        pubnub.addListener({ message: handleMessage });   
         pubnub.subscribe({ channels });
-    }, [pubnub, channels]);
+    }, [pubnub, channels,]);
 
 
-    // const onPressTab = (index) => {
-    //     var data = [...tabs]
-    //     data.forEach(element => {
-    //         element.isSelected = false
-    //     });
-    //     data[index].isSelected = true
-    //     settabs(data)
-    //     setSelectedIndex(index)
-    // }
+   
     return (
 
         <View style={{ flex: 1 }}>
-            {/* <ChatHeader /> */}
-            {/* tabs */}
-            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
-                <View style={[Styles.lessonPlanTab, { height: 50 }]}>
-                    {
-                        tabs.map((item, index) => {
-                            return (
-                                <TouchableOpacity onPress={() => onPressTab(index)} style={Styles.tabs}>
-                                    <Text style={[Styles.tabsText, item.isSelected ? Styles.tabsTextSelected : null]}>{item.name}</Text>
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
-                </View>
-                
-            </View> */}
+           
 
             <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
                 <View style={Styles.views}>
@@ -134,21 +108,7 @@ const Chat = (props) => {
                                     )
                                 }}
                             />
-                            {/* <ScrollView>
-                            {
-                                [1, 2, 3, 4, 5, 6,].map((item, index) => {
-                                    return (
-                                        <View style={Styles.messageCell}>
-                                            <Image style={Styles.roundImage} />
-                                            <View style={Styles.messageSubCell}>
-                                                <Text style={Styles.userNameText}>Miss Barker</Text>
-                                                <Text style={Styles.messageText}>ok Thank you</Text>
-                                            </View>
-                                        </View>
-                                    )
-                                })
-                            }
-                        </ScrollView> */}
+                           
                         </View>
                         <View style={Styles.textView}>
                             <TextInput

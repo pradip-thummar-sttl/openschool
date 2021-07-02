@@ -27,6 +27,7 @@ const HeaderPM = (props) => {
 
     useEffect(() => {
         // props.onFilter(filterBy)
+        setSelectedTab(props.tabs)
     }, [filterBy])
 
     return (

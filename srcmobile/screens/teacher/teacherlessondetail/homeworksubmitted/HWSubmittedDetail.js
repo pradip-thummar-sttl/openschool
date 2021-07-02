@@ -182,6 +182,20 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     }
 
+    const onStarSelection = (index) => {
+        setBronze(false)
+        setSilver(false)
+        setGold(false)
+        if (index === 0) {
+            setBronze(true)
+        } else if (index === 1) {
+            setSilver(true)
+        } else {
+            setGold(true)
+
+        }
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -322,19 +336,19 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
                                     <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
-                                            <TouchableOpacity onPress={() => setBronze(!isBronze)} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => onStarSelection(0)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => setSilver(!isSilver)} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => onStarSelection(1)} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
                                                     <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => setGold(!isGold)} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => onStarSelection(2)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Gold stars</Text>

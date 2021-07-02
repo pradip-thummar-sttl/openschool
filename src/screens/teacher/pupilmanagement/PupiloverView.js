@@ -55,6 +55,7 @@ const PupiloverView = (props) => {
     const [selectedTab, setSelectedTab] = useState(0)
 
     useEffect(() => {
+        setSelectedTab(props.tabs)
         Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -79,7 +80,8 @@ const PupiloverView = (props) => {
         <View style={{ width: '100%', backgroundColor: COLORS.backgroundColorCommon }}>
             <HeaderPM
                 onAlertPress={() => props.navigation.openDrawer()}
-                onTabSelected={(tab) => setSelectedTab(tab)} />
+                onTabSelected={(tab) => setSelectedTab(tab)} 
+                tabs={props.tabs}/>
 
             {selectedTab == 0 ?
                 <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>

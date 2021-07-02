@@ -24,11 +24,13 @@ import { User } from '../../utils/Model';
 
 const Chat = (props) => {
     const pubnub = usePubNub();
-    let channel1 = `${props.data.MobileNumber}_${User.user._id}`
-    let channel2 = `${props.data.PupilId}_${User.user._id}`
-    let channel3 = `${props.data.SchoolId}_${User.user._id}`
+    
 
-    const [channels] = useState([channel1, channel2, channel3]);
+    let channel1 = [`${props.data.MobileNumber}_${User.user._id}`]
+    let channel2 = [`${props.data.PupilId}_${User.user._id}`]
+    let channel3 = [`${props.data.SchoolId}_${User.user._id}`]
+
+    const [channels, setChannels] = useState(channel1);
     const [messages, addMessage] = useState([]);
     const [message, setMessage] = useState('');
     const [tabs, settabs] = useState([
@@ -39,6 +41,7 @@ const Chat = (props) => {
         
     useEffect(() => {
         addMessage([])
+        props.tabs === 1 ? setChannels(channel1) : props.tabs === 2 ? setChannels(channel2) : setChannels(channel3);
     }, [props.tabs])
 
 
@@ -55,17 +58,17 @@ const Chat = (props) => {
     };
 
     const sendMessage = message => {
-        var channel = ""
-        if (props.tabs === 1) {
-            channel = channels[0]
-        } else if (props.tabs === 2) {
-            channel = channels[1]
-        } else {
-            channel = channels[2]
-        }
+        // var channel = ""
+        // if (props.tabs === 1) {
+        //     channel = channels[0]
+        // } else if (props.tabs === 2) {
+        //     channel = channels[1]
+        // } else {
+        //     channel = channels[2]
+        // }
         if (message) {
             pubnub
-                .publish({ channel: channel, message })
+                .publish({ channel: channels[0], message })
                 .then(() => setMessage(''));
         }
     };

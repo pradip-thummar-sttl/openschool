@@ -50,5 +50,6 @@ export const EndPoints = {
     UserSetting:"usersetting",
     SaveSetting:"saveSetting",
 
-    LessionStartEnd:"lessionstartend"
+    LessionStartEnd:"lessionstartend",
+    LessonCheck:"lessoncheck",
 }
