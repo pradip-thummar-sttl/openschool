@@ -170,7 +170,9 @@ const Message = (props) => {
 
     return (
         <View>
-            <HeaderWhitepupilMessage />
+            <HeaderWhitepupilMessage
+                onAlertPress={() => props.navigation.openDrawer()} />
+                
             {searchHeader()}
             {isLoading ?
                 <ActivityIndicator

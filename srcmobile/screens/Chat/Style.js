@@ -108,7 +108,7 @@ export default StyleSheet.create({
     },
     mesagesView: {
         width: '125%',
-        height: hp(62),
+        height: hp(70),
         marginBottom: wp(3),
     },
     textView: {
@@ -117,6 +117,7 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
+        backgroundColor: COLORS.greyBack
         // bottom:0,
     },
     messageCell: {
@@ -143,16 +144,18 @@ export default StyleSheet.create({
     },
     input: {
         // width: '100%',
-        height: '85%',
+        height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
         marginHorizontal:wp(1.5),
-        marginVertical:hp(1),  
+        // marginVertical:hp(1),  
     },
     buttonView:{
         position:'absolute',
         right:hp(2),
-        bottom:wp(2),
+        // bottom:wp(2),
+        alignItems: 'center',
+        height: '100%',
         flexDirection:'row'
     },
     btn:{

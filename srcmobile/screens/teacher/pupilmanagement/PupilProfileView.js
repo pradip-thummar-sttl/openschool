@@ -11,6 +11,10 @@ import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import moment from 'moment';
 import { baseUrl } from "../../../utils/Constant";
 import Chat from "../../Chat/Chat";
+import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../service/EndPoints";
+import { User } from "../../../utils/Model";
+import ActivityRings from "react-native-activity-rings";
 
 const { CallModule } = NativeModules;
 
@@ -21,11 +25,76 @@ const PupilProfileView = (props) => {
 
     const handleOnClick = (index) => {
         setTabSelected(index)
-       
-     }
+    }
+    
+    const [chartData, setChartData] = useState([])
+
+    const myref = useRef(null);
+
+    const activityConfig = {
+        width: 200,
+        height: 200
+    };
+
+    const handleOnClick = (index) => {
+        setTabSelected(index)
+        console.log('reference', myref);
+        if (myref.current) {
+            myref.current.refresh();
+        }
+    }
+
+    useEffect(() => {
+        getLessonData()
+    }, [])
+
+    useEffect(() => {
+        console.log('chartData', chartData);
+    }, [chartData])
+
+    const getLessonData = () => {
+        Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                let per = res.data.percentage
+                let data = [{
+                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    color: COLORS.purpleDark,
+                    backgroundColor: COLORS.lightPurple
+                }]
+                getHomeworkData(data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
+    }
+
+    const getHomeworkData = (lessonData) => {
+        Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                let per = res.data.percentage
+                let data = {
+                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    color: COLORS.yellowDark,
+                    backgroundColor: COLORS.lightYellow
+                }
+                lessonData.push(data)
+                setChartData(lessonData)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
+    }
+
     return (
         <View>
             <HeaderPMInner
+                name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
                 navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
@@ -94,7 +163,26 @@ const PupilProfileView = (props) => {
                             <View HR style={STYLE.hrCommon}></View>
                             <View style={PAGESTYLE.pupilPerfomance}>
                                 <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                                <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image>
+                                {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
+
+                                <View style={PAGESTYLE.performancePArent}>
+                                    <ActivityRings
+                                        data={chartData}
+                                        config={activityConfig} />
+
+                                    <View style={{ flexDirection: 'row', height: 50 }}>
+                                        <View style={PAGESTYLE.colorLeftParent}>
+                                            <View style={PAGESTYLE.colorSquare} />
+                                            <Text style={PAGESTYLE.introText}>{`Engagement over${'\n'}last month`}</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.colorRightParent}>
+                                            <View style={PAGESTYLE.colorSquareRight} />
+                                            <Text style={PAGESTYLE.introText}>{`Effort over last${'\n'}month`}</Text>
+                                        </View>
+                                    </View>
+                                    <View HR style={STYLE.hrCommon}></View>
+                                    <Text style={PAGESTYLE.bottomText}>Based on {item.FirstName + ' ' + item.LastName}'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
+                                </View>
                             </View>
                         </ScrollView>
                     </View>

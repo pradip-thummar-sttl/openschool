@@ -55,7 +55,7 @@ const HeaderPM = (props) => {
                 <View style={styles.headerRight}>
                     <Menu>
                         <MenuTrigger><Image style={styles.userparent} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
+                        <MenuOptions>
                             {childrenList.map((item, index) => (
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity

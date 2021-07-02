@@ -161,6 +161,7 @@ export default StyleSheet.create({
     },
     scrollViewCommonPupilEditSchool: {
         marginBottom: hp(33),
+        padding: 10
     },
     rewardSection: {
         paddingHorizontal: hp(2),
@@ -230,7 +231,7 @@ export default StyleSheet.create({
         fontFamily: Platform.OS == 'android' ? FONTS.fontRegular : FONTS.fontSemiBold,
     },
     pupilPerfomance: {
-        marginTop: hp(4.5),
+        marginTop: hp(2),
         marginBottom: hp(1),
     },
     pupilPerfomanceEdit: {
@@ -313,4 +314,25 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(8)
     },
+    performancePArent: {
+        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%'
+    },
+    colorLeftParent: {
+        flexDirection: 'row', alignItems: 'center', marginHorizontal: 15
+    },
+    colorRightParent: {
+        flexDirection: 'row', alignItems: 'center', right: 0, position: 'absolute', marginHorizontal: 15
+    },
+    colorSquare: {
+        height: 15, width: 15, backgroundColor: COLORS.purpleDark, borderRadius: 5, marginRight: 10
+    },
+    colorSquareRight: {
+        height: 15, width: 15, backgroundColor: COLORS.yellowDark, borderRadius: 5, marginRight: 10
+    },
+    introText: {
+        color: COLORS.lightGray, fontFamily: FONTS.fontRegular
+    },
+    bottomText: {
+        color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10
+    }
 });

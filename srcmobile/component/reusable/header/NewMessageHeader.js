@@ -20,11 +20,11 @@ const NewMessageHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
-                    <TouchableOpacity activeOpacity={opacity}
-                        onPress={() => props.onGoback()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
-                    </TouchableOpacity> New Message</Text>
+                <TouchableOpacity activeOpacity={opacity}
+                    onPress={() => props.onGoback()}>
+                    <Image style={styles.arrow} source={Images.backArrow} />
+                </TouchableOpacity>
+                <Text style={styles.mainTitle}>New Message</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
@@ -94,14 +94,14 @@ const styles = StyleSheet.create({
     },
     headerMain: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: hp(3)
+        marginVertical: hp(1.5)
     },
     mainTitle: {
         fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
+        marginLeft: 15
     },
     massagesIcon: {
         width: hp(4.92),
@@ -249,10 +249,6 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontBold,
     },
-    headerRight: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -377,5 +373,7 @@ const styles = StyleSheet.create({
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
+        right: 10,
+        position: 'absolute',
     },
 });

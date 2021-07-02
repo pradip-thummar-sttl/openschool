@@ -29,6 +29,8 @@ export const EndPoints = {
     PupilGlobalMessaging: 'pupilglobalmessaging',
     ParentList: 'parentlist',
     UpdateGlobalMessaging: 'updateglobalmessaging',
+    GetCountLession: 'getcountlession',
+    GetCountHomework: 'getcounthomework',
 
     //Pupil
     PupilRegister:"pupilregister",

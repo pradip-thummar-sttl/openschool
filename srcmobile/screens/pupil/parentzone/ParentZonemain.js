@@ -9,6 +9,7 @@ import FONTS from '../../../utils/Fonts';
 import HeaderPM from "./HeaderPM";
 import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
+import ParentZonePerformance from "./ParentZonePerformance";
 import { User } from "../../../utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
@@ -126,7 +127,8 @@ const ParentZonemain = (props) => {
 
                     :
                     selectedTabIndex == 1 ?
-                        null
+                        <ParentZonePerformance
+                            data={pupilData} />
                         :
                         selectedTabIndex == 2 ?
                             null

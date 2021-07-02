@@ -66,20 +66,20 @@ const HeaderPM = (props) => {
                         <TextInput
                             ref={textInput}
                             style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                            placeholder="Search subject, topic name etc"
+                            placeholder="Search pupil"
                             placeholderTextColor={COLORS.menuLightFonts}
                             onChangeText={keyword => {
                                 props.onSearchKeyword(keyword);
                             }} />
                         <Menu>
                             <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
-                            <MenuOptions style={styles.filterListWrap}>
+                            <MenuOptions>
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                         <View style={styles.filterList}>
-                                            <Text style={styles.filterListText}>Subject</Text>
+                                            <Text style={styles.filterListText}>Name</Text>
                                             {selectedIndex == 0 ?
                                                 <Image source={Images.CheckIcon} style={styles.checkMark} />
                                                 :
@@ -93,7 +93,7 @@ const HeaderPM = (props) => {
                                         activeOpacity={opacity}
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={styles.filterList}>
-                                            <Text style={styles.filterListText}>Date</Text>
+                                            <Text style={styles.filterListText}>DOB</Text>
                                             {selectedIndex == 1 ?
                                                 <Image source={Images.CheckIcon} style={styles.checkMark} />
                                                 :

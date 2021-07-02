@@ -71,7 +71,7 @@ const Pupillist = ({ item, onPress }) => (
         </View>
         <View style={PAGESTYLE.groupColumnmain}>
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
+                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.perfomanceColumn}>
