@@ -24,6 +24,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
         marginTop: hp(10),
     },
+    roundButtonMain: {
+        width: '28%',
+        alignItems: 'center',
+    },
     roundButton: {
         height: hp(8.86),
         width: hp(8.86),
@@ -63,12 +67,14 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
+        textAlignVertical: 'center',
     },
     withoutnumberText: {
         fontFamily: FONTS.fontBold,
         fontSize: hp(1.47),
         color: COLORS.dashboardGreenButton,
-        textAlign: 'center'
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
     backSpaceArrow: {
         width: hp(3.38),

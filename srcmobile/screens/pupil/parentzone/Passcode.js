@@ -141,7 +141,7 @@ const Passcode = (props) => {
                     <Text style={Styles.text}>{t4}</Text>
                 </View>
 
-                
+
             </View>
             <View style={Styles.numberView}>
                 {
@@ -156,9 +156,11 @@ const Passcode = (props) => {
                                         <Text style={Styles.withoutnumberText}><Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image></Text>
                                     </TouchableOpacity>
                                     :
-                                    <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.roundButton}>
-                                        <Text style={Styles.numberText}>{item}</Text>
-                                    </TouchableOpacity>
+                                    <View style={Styles.roundButtonMain}>
+                                        <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.roundButton}>
+                                            <Text style={Styles.numberText}>{item}</Text>
+                                        </TouchableOpacity>
+                                    </View>
                         )
                     })
                 }
