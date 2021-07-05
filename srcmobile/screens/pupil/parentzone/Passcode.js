@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
 import { EndPoints } from '../../../service/EndPoints';
 import { Service } from '../../../service/Service';
 import { showMessage, showMessageWithCallBack } from '../../../utils/Constant';
 import MESSAGE from '../../../utils/Messages';
 import { User } from '../../../utils/Model';
+import Images from '../../../utils/Images';
 import Styles from './StylePassCode';
 
 
@@ -152,7 +153,7 @@ const Passcode = (props) => {
                                 </TouchableOpacity>
                                 : index == 11 ?
                                     <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.withoutRoundButton}>
-                                        <Text style={Styles.withoutnumberText}>{item} </Text>
+                                        <Text style={Styles.withoutnumberText}><Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image></Text>
                                     </TouchableOpacity>
                                     :
                                     <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.roundButton}>

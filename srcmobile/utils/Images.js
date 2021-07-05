@@ -130,5 +130,6 @@ const Images = {
     userparent: require('../assets/images/userParent2.png'),
     parentProfilecoverImage: require('../assets/images/parentProfileViewCover2.png'),
     uploadIcon: require('../assets/images/upload-icon2.png'),
+    backSpaceArrow: require('../assets/images/backSpace-mobile-2.png'),
 }
 export default Images;
