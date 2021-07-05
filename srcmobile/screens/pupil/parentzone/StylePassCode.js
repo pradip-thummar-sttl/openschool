@@ -24,6 +24,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
         marginTop: hp(10),
     },
+    roundButtonMain: {
+        width: '28%',
+        alignItems: 'center',
+    },
     roundButton: {
         height: hp(8.86),
         width: hp(8.86),
