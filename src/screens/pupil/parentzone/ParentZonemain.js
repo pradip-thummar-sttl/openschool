@@ -20,6 +20,7 @@ import HeaderPM from "./HeaderPM";
 import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
 import ParentZoneProfileEdit from "./ParentZoneProfileEdit";
+import ParentZonePerformance from "./ParentZonePerformance";
 var moment = require('moment');
 
 const MessageList = (props, { style }) => (
@@ -165,7 +166,8 @@ const ParentZonemain = (props) => {
                         </View>
                         :
                         selectedTabIndex == 1 ?
-                            null
+                            <ParentZonePerformance
+                                data={pupilData} />
                             :
                             selectedTabIndex == 2 ?
                                 null

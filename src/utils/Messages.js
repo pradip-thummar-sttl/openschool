@@ -59,6 +59,8 @@ const MESSAGE = {
     gmPArent: 'Please select at least one parent',
     gmMessageDraft: 'Message drafted successfully',
     gmMessageSent: 'Message sent successfully',
+    scheduledTime: 'You cannot join class before or after scheduled time',
+    markAbsent: 'You marked as a absent'
 }
 
 export default MESSAGE;

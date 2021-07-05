@@ -13,6 +13,7 @@ import moment from 'moment';
 import { User } from "../../../utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -53,7 +54,7 @@ const Popupdata = (props) => {
 
                 })
             } else {
-                showMessage('please start selected time')
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
 
             }

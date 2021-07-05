@@ -64,7 +64,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
         })
 
         formData.append("Feedback", feedBack);
-        formData.append("Rewards", '1');
+        formData.append("Rewards", isBronze ? '3' : isSilver ? '6' : '9');
 
         setLoading(true)
 
@@ -99,43 +99,43 @@ const TLHomeWorkSubmittedDetail = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = async() => {
+    const startRecording = async () => {
         // setRecordingStarted(true)
-        // RecordScreen.startRecording().catch((error) => console.error(error));
+        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
 
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
-                RecordScreen.startRecording().catch((error) => console.error(error));
+                RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
-                    RecordScreen.startRecording().catch((error) => console.error(error));
+                    RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
-                    showMessage("Please give permission for camera")
+                    showMessage("We need permission to access  camera")
                 }
-    
+
             }
-        }else{
+        } else {
             const res = await check(PERMISSIONS.IOS.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
-                RecordScreen.startRecording().catch((error) => console.error(error));
+                RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
-                    RecordScreen.startRecording().catch((error) => console.error(error));
+                    RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
-                    showMessage("Please give permission for camera")
+                    showMessage("We need permission to access  camera")
                 }
-    
+
             }
         }
     }
@@ -170,6 +170,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
             // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
+            } else if (response.didCancel) {
             } else {
                 console.log('response', response);
                 arr.push(response)
@@ -339,19 +340,19 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             <TouchableOpacity onPress={() => onStarSelection(0)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
-                                                    <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                                    <Text style={PAGESTYLE.starText}>Bronze star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(1)} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
                                                     <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
-                                                    <Text style={PAGESTYLE.starText}>Silver stars</Text>
+                                                    <Text style={PAGESTYLE.starText}>Silver star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(2)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
-                                                    <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                                    <Text style={PAGESTYLE.starText}>Gold star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                         </View>

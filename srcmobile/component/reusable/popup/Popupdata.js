@@ -14,6 +14,7 @@ import moment from 'moment';
 import { User } from "../../../../src/utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -53,7 +54,7 @@ const Popupdata = (props) => {
 
                 })
             } else {
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
 
             }
@@ -210,9 +211,16 @@ const Popupdata = (props) => {
                             <View style={{ width: hp(20) }}></View>
                         } */}
                             <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
-                                <TouchableOpacity style={styles.buttonGrp}>
-                                    <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>mark as absent</Text>
-                                </TouchableOpacity>
+                                {!props.isPupil && props.data.Type == Lesson ?
+                                    <TouchableOpacity
+                                        style={styles.buttonGrp}
+                                        activeOpacity={opacity}
+                                        onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
+                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Lesson</Text>
+                                    </TouchableOpacity>
+                                    :
+                                    <View style={{ width: hp(20) }}></View>
+                                }
                             </View>
                             <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                 <TouchableOpacity

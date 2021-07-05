@@ -23,9 +23,9 @@ const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
-    const handleOnClick = (index) => {
-        setTabSelected(index)
-    }
+    // const handleOnClick = (index) => {
+    //     setTabSelected(index)
+    // }
     
     const [chartData, setChartData] = useState([])
 

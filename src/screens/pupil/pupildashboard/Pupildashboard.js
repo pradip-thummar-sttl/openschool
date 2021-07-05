@@ -19,6 +19,7 @@ import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
 import Setting from "../../Setting/Setting";
 import Chat from "../../Chat/Chat";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -92,7 +93,7 @@ const PupuilDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }
@@ -143,7 +144,7 @@ const PupuilDashboard = (props) => {
     const markAsAbsent = () => {
         let data = { "Absent": true }
         Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of absent check', res);
+            showMessage(MESSAGE.markAbsent)
         }, (err) => {
             console.log('error of absent check', err);
         })

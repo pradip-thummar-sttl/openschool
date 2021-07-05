@@ -161,7 +161,7 @@ class Login extends Component {
             } else {
                 roomIDs.push(resData.RoomId)
             }
-            console.log('roomIDs', roomIDs);
+            console.log('roomIDs', roomIDs, emailId, password);
 
             LoginModule.qbLogin(emailId, password, roomIDs, (error, ID) => {
                 console.log('error:eventId', error, ID);

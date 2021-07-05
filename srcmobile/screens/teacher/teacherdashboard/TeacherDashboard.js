@@ -15,6 +15,7 @@ import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { User } from "../../../utils/Model";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -139,7 +140,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 })
             } else {
                 setLoading(false)
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 
 
 

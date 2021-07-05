@@ -49,7 +49,7 @@ class PupilConnect extends Component {
 
         Service.post(data, EndPoints.PupilSchoolCode, (res) => {
             if (res.code == 200) {
-                this.props.navigation.replace('PupuilDashboard')
+                this.props.navigation.replace('Login', { userType: "Pupil" })
             } else {
                 this.setLoading(false)
                 showMessage(res.message)
@@ -91,7 +91,10 @@ class PupilConnect extends Component {
                                     onPress={() => this.verifySchool()}>
                                     <Text style={styles.fullWidthPrimaryButton}>Submit my code</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.sendButtonCommon} activeOpacity={opacity}>
+                                <TouchableOpacity
+                                    style={styles.sendButtonCommon}
+                                    activeOpacity={opacity}
+                                    onPress={() => this.props.navigation.replace('Login', { userType: "Pupil" })}>
                                     <Text style={styles.fullWidthPrimaryButtonbordered}>Skip this step</Text>
                                 </TouchableOpacity>
                             </View>
