@@ -49,7 +49,18 @@ const MESSAGE = {
     setCode: 'You have set code successfully',
     groupCreated: 'Group created successfully',
     groupUpdated: 'Group updated successfully',
-
+    selectDOB: 'Please sselect date of birth',
+    relation: 'Please enter relation with pupil',
+    passCode: 'Please enter four digit pass code',
+    parentNAme: 'Please enter parent name',
+    childPassword: "Please enter child's password",
+    gmTitle: 'Please enter valid title',
+    gmMessage: 'Please enter valid message',
+    gmPArent: 'Please select at least one parent',
+    gmMessageDraft: 'Message drafted successfully',
+    gmMessageSent: 'Message sent successfully',
+    scheduledTime: 'You cannot join class before or after scheduled time',
+    markAbsent: 'You marked as a absent'
 }
 
 export default MESSAGE;

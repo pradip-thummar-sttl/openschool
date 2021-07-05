@@ -1,7 +1,7 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native'
-import COLORS from '../../utils/Colors';
+import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import FONTS from '../../utils/Fonts';
+import FONTS from '../../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { color } from 'react-native-reanimated';
 
@@ -240,12 +240,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     checkBoxLabelText: {
-        lineHeight: hp(2.82),
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.5),
-        minHeight: hp(6),
-        paddingRight: hp(1),
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
     },
     checkBoxLabelTextSubmit: {
         lineHeight: hp(2.4),
@@ -1538,10 +1536,10 @@ export default StyleSheet.create({
         shadowRadius: hp(1),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center',  width:'100%',backgroundColor:'red', height: hp(8.20),  backgroundColor: COLORS.white
+        flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor: 'red', height: hp(8.20), backgroundColor: COLORS.white
     },
     searchInner: {
-         flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10,marginLeft: hp(1.95), marginRight: hp(1.95),height: hp(5.20), flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+        flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, marginLeft: hp(1.95), marginRight: hp(1.95), height: hp(5.20), flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
         height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
@@ -1554,10 +1552,10 @@ export default StyleSheet.create({
         backgroundColor: COLORS.dashboardGreenButton,
         borderRadius: hp(1),
         overflow: 'hidden',
-        alignItems:'center',
-        justifyContent:'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: hp(5.20),
-        width:hp(5.20)
+        width: hp(5.20)
         // paddingTop: hp(1.4),
         // paddingBottom: hp(1.4),
         // paddingLeft: hp(4.175),
@@ -1569,7 +1567,7 @@ export default StyleSheet.create({
         // top: hp(1.29),
         // left: hp(1.8),
         // zIndex: 9,
-        
+
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -1589,71 +1587,87 @@ export default StyleSheet.create({
     },
 
     // flatelist style.
-    flateMainView:{
-        borderRadius:10,
-        height:hp(12),
-        backgroundColor:COLORS.white,
-        marginHorizontal:wp(3.2),
-        marginBottom:hp(1.2)
+    flateMainView: {
+        borderRadius: 10,
+        height: hp(12),
+        backgroundColor: COLORS.white,
+        marginHorizontal: wp(3.2),
+        marginBottom: hp(1.2)
     },
-    firstRow:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        marginTop:hp(1.5),
-        marginHorizontal:wp(3)
+    firstRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: hp(1.5),
+        marginHorizontal: wp(3)
     },
-    dateText:{
+    dateText: {
         fontSize: hp(1.37),
         fontFamily: FONTS.fontRegular,
     },
-    groupText:{
+    groupText: {
         fontSize: hp(1.50),
         fontFamily: FONTS.fontRegular,
-        color:COLORS.lightGray,
-        paddingRight:wp(7)
+        color: COLORS.lightGray,
+        paddingRight: wp(7)
     },
-    secondRow:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        marginTop:hp(0.5),
-        marginHorizontal:wp(3)
+    secondRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: hp(0.5),
+        marginHorizontal: wp(3)
     },
-    titleText:{
+    titleText: {
         fontSize: hp(1.62),
         fontFamily: FONTS.fontSemiBold,
     },
-    thirdRow:{
-        marginLeft:wp(3),
-        backgroundColor:COLORS.sentBackColor,
-        width:wp(12),
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:5,
-        marginTop:hp(2)
+    thirdRow: {
+        marginLeft: wp(3),
+        backgroundColor: COLORS.sentBackColor,
+        width: wp(12),
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        marginTop: Platform.OS == 'android' ? 5 : 10
     },
-    sentText:{
-        color:COLORS.sentColor,
-        fontSize:hp(1.2),
-        fontFamily:FONTS.fontSemiBold,
-        paddingVertical:hp(.2)
+    thirdRowDraft: {
+        marginLeft: wp(3),
+        backgroundColor: COLORS.draftStatus,
+        width: wp(12),
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        marginTop: Platform.OS == 'android' ? 5 : 10
+    },
+    sentText: {
+        color: COLORS.sentColor,
+        fontSize: hp(1.2),
+        fontFamily: FONTS.fontSemiBold,
+        paddingVertical: hp(.2)
+    },
+
+    draftText: {
+        color: COLORS.draftStatusText,
+        fontSize: hp(1.2),
+        fontFamily: FONTS.fontSemiBold,
+        paddingVertical: hp(.2)
     },
 
     // new message
     field1: {
         marginBottom: hp(2.5),
-        marginLeft:hp(2.5),
-        marginTop:wp(2),
+        marginLeft: hp(2.5),
+        marginTop: wp(2),
     },
     somePlaceholderStyle: {
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        paddingLeft:10
+        paddingLeft: 10
     },
     commonInputTextarea1: {
         height: hp(5.20),
-        width:wp(90),
+        width: wp(90),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
@@ -1669,27 +1683,27 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
-    copyInputParent:{
-        flexDirection:'row',
-        alignItems:'center'
+    copyInputParent: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
-    inputWidth:{
-        width:wp(90)
+    inputWidth: {
+        width: wp(90)
     },
-    inputHeight:{
-        height:wp(15)
+    inputHeight: {
+        height: wp(15)
     },
     buttonGroup1: {
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: hp(1.69),
-        borderRadius:10,
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
-        width:hp(25),
-        marginLeft:hp(3.8)
-        
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        width: hp(25),
+        marginLeft: hp(3.8)
+
     },
     addIcon: {
         width: hp(1.55),

@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(0) : hp(3),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3),
         marginTop: Platform.OS == 'android' ? hp(-1) : hp(0),
         // marginBottom: hp(5.85),
     },
@@ -142,6 +142,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingBottom: hp(2),
+        paddingTop: hp(1),
     },
     mainTitle: {
         fontSize: hp(2.21),

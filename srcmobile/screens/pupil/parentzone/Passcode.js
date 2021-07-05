@@ -145,7 +145,7 @@ const Passcode = (props) => {
             </View>
             <View style={Styles.numberView}>
                 {
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, "FORGOT?", 0, "REMOVE"].map((item, index) => {
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, "REMOVE"].map((item, index) => {
                         return (
                             index == 9 ?
                                 <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.withoutRoundButton}>
@@ -153,7 +153,7 @@ const Passcode = (props) => {
                                 </TouchableOpacity>
                                 : index == 11 ?
                                     <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.withoutRoundButton}>
-                                        <Text style={Styles.withoutnumberText}><Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image></Text>
+                                        <Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image>
                                     </TouchableOpacity>
                                     :
                                     <View style={Styles.roundButtonMain}>

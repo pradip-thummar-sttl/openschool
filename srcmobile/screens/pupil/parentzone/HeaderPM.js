@@ -28,10 +28,21 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
+    const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
+        if (!isSearchActive) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
 
-    }, [])
+    useEffect(() => {
+        props.onFilter(filterBy)
+    }, [filterBy])
 
     return (
         <View style={styles.headerMain}>
@@ -44,7 +55,7 @@ const HeaderPM = (props) => {
                 <View style={styles.headerRight}>
                     <Menu>
                         <MenuTrigger><Image style={styles.userparent} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
+                        <MenuOptions>
                             {childrenList.map((item, index) => (
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
@@ -102,16 +113,20 @@ const HeaderPM = (props) => {
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search subject, topic name etc"
-                        placeholderTextColor={COLORS.menuLightFonts} />
+                        placeholderTextColor={COLORS.menuLightFonts}
+                        onChangeText={keyword => {
+                            setKeyword(keyword);
+                            props.onSearchKeyword(keyword);
+                        }} />
                     <Menu>
                         <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
+                        <MenuOptions>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                    onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
+                                        <Text style={styles.filterListText}>Title</Text>
                                         {selectedIndex == 0 ?
                                             <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             :

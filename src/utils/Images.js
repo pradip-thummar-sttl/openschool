@@ -123,6 +123,7 @@ const Images = {
     parentZoneIcon: require('../assets/images/parent-zone-icon2.png'),
     editIcon: require('../assets/images/edit-icon2.png'),
     noData: require('../assets/images/no-data2.png'),
+    backSpaceArrow: require('../assets/images/backSpace-mobile-2.png'),
 
     // Chat Icon
     attachmentIpad:require('../assets/images/Chatimage/attachment-ipad.png'),

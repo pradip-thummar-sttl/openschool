@@ -17,8 +17,10 @@ import { User } from "../../../utils/Model";
 import moment from "moment";
 import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
+import ParentZoneSwitch from "../parentzone/ParentZoneSwitch";
 import Setting from "../../Setting/Setting";
 import Chat from "../../Chat/Chat";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -92,7 +94,7 @@ const PupuilDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }
@@ -143,7 +145,7 @@ const PupuilDashboard = (props) => {
     const markAsAbsent = () => {
         let data = { "Absent": true }
         Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of absent check', res);
+            showMessage(MESSAGE.markAbsent)
         }, (err) => {
             console.log('error of absent check', err);
         })
@@ -201,13 +203,17 @@ const PupuilDashboard = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage} >
-            <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={selectedIndex}
-                navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0) }}
-                navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
-                onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
-                onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
-            />
+            {selectedIndex != 5 ?
+                <Sidebarpupil hide={() => action(!isHide)}
+                    moduleIndex={selectedIndex}
+                    navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0) }}
+                    navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
+                    onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
+                    onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
+                    onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
+                />
+                : null
+            }
             {
                 isPupilLessonDetail ?
                     <PupilLessonDetail
@@ -481,7 +487,13 @@ const PupuilDashboard = (props) => {
                             <PupilTimetable navigation={props.navigation} />
                             : selectedIndex == 2 ?
                                 <PupilLessonDetail navigation={props.navigation} />
-                                : <Chat />
+                                : selectedIndex == 3 ?
+                                    <Setting navigation={props.navigation} />
+                                    : selectedIndex == 4 ?
+                                        null
+                                        :
+                                        <ParentZoneSwitch navigation={props.navigation} />
+
                 // <Setting navigation={props.navigation} />
             }
 

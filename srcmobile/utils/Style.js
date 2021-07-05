@@ -241,6 +241,14 @@ export default StyleSheet.create({
         paddingLeft: hp(1.3),
         width: '100%',
     },
+    checkMark: {
+        margin: 0,
+        padding: 0,
+        width: 20,
+        height: 20,
+        left: 2,
+        top: hp(0.52),
+    },
     recordLinkText: {
         fontSize: hp(1.85),
         fontFamily: FONTS.fontSemiBold,

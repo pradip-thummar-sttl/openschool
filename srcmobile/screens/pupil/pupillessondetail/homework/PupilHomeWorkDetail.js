@@ -18,7 +18,7 @@ import DocumentPicker from 'react-native-document-picker';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Images from "../../../../utils/Images";
 
@@ -140,7 +140,8 @@ const PupilHomeWorkDetail = (props) => {
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                     <View style={PAGESTYLE.daterow}>
-                                        <View style={PAGESTYLE.thumbSmall}></View>
+                                        {/* <View style={PAGESTYLE.thumbSmall}></View> */}
+                                        <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                         <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                     </View>
                                 </View>

@@ -177,22 +177,22 @@ const TLHomeWork = (props) => {
 
     const startRecording = async() => {
         // setRecordingStarted(true)
-        // RecordScreen.startRecording().catch((error) => console.error(error));
+        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
 
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
-                RecordScreen.startRecording().catch((error) => console.error(error));
+                RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
                 console.log('hello', res2);
     
                 if (res2 === "granted") {
                     setRecordingStarted(true)
-                    RecordScreen.startRecording().catch((error) => console.error(error));
+                    RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
-                    showMessage("Please give permission for camera")
+                    showMessage("We need permission to access  camera")
                 }
     
             }
@@ -200,16 +200,16 @@ const TLHomeWork = (props) => {
             const res = await check(PERMISSIONS.IOS.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
-                RecordScreen.startRecording().catch((error) => console.error(error));
+                RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
                 console.log('hello', res2);
     
                 if (res2 === "granted") {
                     setRecordingStarted(true)
-                    RecordScreen.startRecording().catch((error) => console.error(error));
+                    RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
-                    showMessage("Please give permission for camera")
+                    showMessage("We need permission to access  camera")
                 }
     
             }
@@ -247,6 +247,7 @@ const TLHomeWork = (props) => {
             // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
+            } else if (response.didCancel) {
             } else {
                 console.log('response', response);
                 arr.push(response)
