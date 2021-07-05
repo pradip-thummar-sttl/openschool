@@ -13,20 +13,27 @@ export default StyleSheet.create({
     },
     EnterCodeText: {
         fontFamily: FONTS.fontBold,
-        fontSize: hp(3),
-        marginBottom: 10
+        fontSize: hp(2.46),
+        marginBottom: hp(6),
+        color: COLORS.darkGray,
     },
     numberView: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        width: '100%'
+        width: '100%',
+        justifyContent: 'center',
+        marginTop: hp(10),
+    },
+    roundButtonMain: {
+        width: '28%',
+        alignItems: 'center',
     },
     roundButton: {
-        height: hp(7),
-        width: hp(7),
-        borderRadius: hp(12 / 2),
+        height: hp(8.86),
+        width: hp(8.86),
+        borderRadius: hp(100),
         backgroundColor: COLORS.greyBack,
-        margin: hp(4),
+        margin: hp(1.72),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         alignItems: 'center',
@@ -34,38 +41,44 @@ export default StyleSheet.create({
     },
     numberText: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize: hp(2.5),
-        // backgroundColor: COLORS.blueBorder,
-        
-        
+        fontSize: hp(2.21),
+        color: COLORS.darkGray,
     },
     codeView: {
         flexDirection: 'row',
     },
     input: {
-        height: wp(10),
-        width: hp(8),
+        height: hp(4.56),
+        width: hp(5.97),
         borderBottomWidth: 1,
-        margin: wp(2),
-
-
+        borderColor: COLORS.darkGray,
+        marginHorizontal: hp(2.15),
     },
     text: {
         textAlign: 'center',
-        fontFamily: FONTS.fontSemiBold,
-        fontSize: hp(3),
+        fontFamily: FONTS.fontBold,
+        fontSize: hp(2.46),
+        color: COLORS.darkGray,
     },
     withoutRoundButton: {
-        height: hp(11),
-        width: hp(11),
-        margin: hp(2),
+        height: hp(8.86),
+        width: hp(8.86),
+        marginHorizontal: hp(1.72),
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignSelf: 'center',
+        textAlignVertical: 'center',
     },
     withoutnumberText: {
         fontFamily: FONTS.fontBold,
-        fontSize: hp(2),
+        fontSize: hp(1.47),
         color: COLORS.dashboardGreenButton,
-        textAlign: 'center'
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
+    backSpaceArrow: {
+        width: hp(3.38),
+        height: hp(2.58),
+        resizeMode: 'contain',
     },
 })
