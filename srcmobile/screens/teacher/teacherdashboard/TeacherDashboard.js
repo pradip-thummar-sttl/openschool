@@ -15,6 +15,7 @@ import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { User } from "../../../utils/Model";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -51,7 +52,7 @@ const Pupillist = ({ item, onPress }) => (
                 <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupPupil}>
-                <Text style={PAGESTYLE.groupName}>Group {item.GroupName ? item.GroupName : '1A'}</Text>
+                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
@@ -139,7 +140,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 })
             } else {
                 setLoading(false)
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 
 
 

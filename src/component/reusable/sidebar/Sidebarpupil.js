@@ -105,7 +105,7 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={()=>props.onParentZone()} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.OpenSchool}

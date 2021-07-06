@@ -22,7 +22,9 @@ import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PupilManagement from "../pupilmanagement/PupilManagement";
+import Message from "../GlobalMessage/Message";
 import PupilProfileView from "../pupilmanagement/PupilProfileView";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -70,7 +72,7 @@ const Pupillist = ({ item, onPress }) => (
         </View>
         <View style={PAGESTYLE.groupColumnmain}>
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '1A'}</Text>
+                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
             </View>
         </View>
         <View style={PAGESTYLE.perfomanceColumn}>
@@ -194,7 +196,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }
@@ -279,7 +281,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0) }}
                 navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
                 navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
-                navigateToPupilManagement={() => { console.log('CLICKED'); setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }} />
+                navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
+                navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }} />
             {
                 isPupilDetail ?
                     <PupilProfileView
@@ -596,7 +599,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     selectedIndex == 2 ?
                                         <TeacherLessonList navigation={props.navigation} />
                                         :
-                                        <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
+                                        selectedIndex == 2 ?
+                                            <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
+                                            :
+                                            <Message navigation={props.navigation} />
 
             }
             {isAddEvent ?

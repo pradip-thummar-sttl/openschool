@@ -28,7 +28,7 @@ const HeaderWhitepupilMessage = (props) => {
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
-                    <Text style={styles.mainTitle}>Lessons and Homework</Text>
+                    <Text style={styles.mainTitle}>Global Messaging</Text>
                 </View>
 
                 <View style={styles.headerRight}>

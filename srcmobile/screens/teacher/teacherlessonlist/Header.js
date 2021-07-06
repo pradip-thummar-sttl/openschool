@@ -142,6 +142,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingBottom: hp(2),
+        paddingTop: hp(1),
     },
     mainTitle: {
         fontSize: hp(2.21),

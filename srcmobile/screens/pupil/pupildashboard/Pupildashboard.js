@@ -10,12 +10,13 @@ import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../utils/Constant";
+import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack, Var } from "../../../utils/Constant";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -49,6 +50,7 @@ const PupuilDashboard = (props) => {
         }, (err) => {
         })
 
+        console.log(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`);
         Service.get(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of pupil homework list', res)
             if (res.flag === true) {
@@ -89,7 +91,7 @@ const PupuilDashboard = (props) => {
 
                 })
             } else {
-                showMessage('please time time to start')
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
 
             }
@@ -137,9 +139,36 @@ const PupuilDashboard = (props) => {
     const markAsAbsent = () => {
         let data = { "Absent": true }
         Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of absent check', res);
+            showMessage(MESSAGE.markAbsent)
         }, (err) => {
             console.log('error of absent check', err);
+        })
+    }
+
+    const getHomeWork = () => {
+        setHomeworkLoading(true)
+        console.log(`${EndPoints.GetPupilHomework}/${dataOfHWSubView._id}/${User.user.UserDetialId}`);
+        Service.get(`${EndPoints.GetPupilHomework}/${dataOfHWSubView._id}/${User.user.UserDetialId}`, (res) => {
+            setHomeworkLoading(false)
+            if (res.code == 200) {
+                console.log('response of get all homework', res)
+                if (res.data._id) {
+                    if (res.data.Submited) {
+                        props.navigation.navigate('PupilHomeWorkSubmitted', { item: res.data })
+                    } else if (res.data.Marked) {
+                        props.navigation.navigate('PupilHomeWorkMarked', { item: res.data })
+                    } else {
+                        props.navigation.navigate('PupilHomeWorkDetail', { item: res.data, })
+                    }
+                } else {
+                    showMessage(MESSAGE.noHomework)
+                }
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setHomeworkLoading(false)
+            console.log('response of get all lesson error', err)
         })
     }
 
@@ -473,7 +502,11 @@ const PupuilDashboard = (props) => {
                                                                     </ScrollView>
                                                                     <View style={PAGESTYLE.lessonstartButton}>
                                                                         {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonBordered, PAGESTYLE.pupilSecondButton]}>tertiary cta</Text></TouchableOpacity> */}
-                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondButton]}>See Homework</Text></TouchableOpacity>
+                                                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}
+                                                                            activeOpacity={opacity}
+                                                                            onPress={() => getHomeWork()}>
+                                                                            <Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondButton]}>See Homework</Text>
+                                                                        </TouchableOpacity>
                                                                     </View>
                                                                 </View>
                                                             </View>

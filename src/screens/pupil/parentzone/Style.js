@@ -39,7 +39,6 @@ export default StyleSheet.create({
     },
     pupilName: {
         fontSize: 20,
-        alignSelf: 'center',
         marginHorizontal: 15,
     },
     bar: {
@@ -788,6 +787,12 @@ export default StyleSheet.create({
         position: 'relative',
         // marginRight: hp(1.69),
     },
+    searchParent: {
+        width: hp(35), flexDirection: 'row', alignItems: 'center', marginTop: 20, height: hp(5.20), backgroundColor: COLORS.white,
+    },
+    searchInner: {
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+    },
     searchHeader: {
         height: hp(5.20),
         paddingLeft: hp(4.6),
@@ -930,8 +935,8 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
     },
     plainBg: {
-        paddingLeft: hp(3.5),
-        paddingRight: hp(3.5),
+        paddingLeft: hp(2.5),
+        paddingRight: hp(2.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         backgroundColor: COLORS.backgroundColorCommon,
@@ -991,8 +996,6 @@ export default StyleSheet.create({
     },
     pupilProfile: {
         width: hp(15.80),
-        flexDirection: 'row',
-        alignItems: 'center',
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -1082,24 +1085,6 @@ export default StyleSheet.create({
         marginTop: hp(1.95),
         marginBottom: hp(1.30),
     },
-    pupilData: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: COLORS.white,
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 1, },
-        elevation: 3,
-        shadowOpacity: 0.1,
-        borderRadius: hp(1.95),
-        height: hp(8.85),
-        borderRadius: hp(0.6),
-        marginBottom: hp(0.78),
-    },
-    pupilProfile: {
-        width: hp(15.80),
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     groupColumnmain: {
         width: hp(17.97),
     },
@@ -1130,7 +1115,7 @@ export default StyleSheet.create({
         borderRadius: hp(100),
     },
     firstColumn: {
-        width: hp(58.59),
+        width: hp(57),
     },
     sentBlueText: {
         fontSize: hp(1.82),
@@ -1149,15 +1134,12 @@ export default StyleSheet.create({
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
         flexDirection: 'row',
         justifyContent: 'space-around',
         position: 'relative',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
+        marginRight: 10,
     },
     filterListTextBold: {
         fontFamily: FONTS.fontBold,

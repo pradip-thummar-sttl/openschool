@@ -23,7 +23,7 @@ const HeaderAddNew = (props) => {
                         <Text style={styles.mainTitle}>
                             Add New Lesson
                     </Text>
-                        <Text style={styles.date}>{moment().format('MM/DD/yyyy')}</Text>
+                        <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>

@@ -13,28 +13,35 @@ const Setting = (props) => {
     const [isSwitch, setSwitch] = useState(true)
     const [typeObject, setTypeObject] = useState([])
     const [settings, setSettings] = useState([])
+    const [apiData, setApiData] = useState([])
 
-
-    const switchOnOff = (isOn) => {
+    const switchOnOff = (isOn, index, index1, index2) => {
         var arr = [...settings]
-       
+        let settingId = arr[index].data[index1][index2].SettingId
+
+        let itemIndex = apiData.findIndex(el => el.SettingId == settingId);
+        apiData[itemIndex] = { ...apiData[itemIndex], Value: isOn };
+
+        let data = { "SettingList": apiData }
+
         arr[index].data[index1][index2].Value = isOn
+
         setSettings(arr)
-        // console.log('hello index', arr, arr[index].data[index1][index2])
-        let data = {"SettingList":[arr[index].data[index1][index2]]}
+        // // console.log('hello index', arr, arr[index].data[index1][index2])
+        // let data = {"SettingList":[arr[index].data[index1][index2]]}
         Service.post(data, `${EndPoints.SaveSetting}/${User.user.UserDetialId}`, (res) => {
             console.log('save setyting response', res);
-            showMessage(res.message)
         }, (err) => {
             console.log('save setyting error', err);
-
         })
         // setSwitch(isOn)
     }
+
     useEffect(() => {
         Service.get(`${EndPoints.UserSetting}/${User.user.UserDetialId}`, (res) => {
             console.log('user setting response', res);
             if (res.flag) {
+                setApiData(res.data)
                 setData(res.data)
             } else {
                 showMessage(res.message)
@@ -153,7 +160,8 @@ export default Setting;
 const styles = StyleSheet.create({
     mainPage: {
         height:'100%',
-        width:'100%'
+        width:'100%',
+        backgroundColor: COLORS.white,
     },
     headingTextView: {
         flexDirection: 'row',

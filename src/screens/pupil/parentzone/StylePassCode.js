@@ -63,4 +63,9 @@ export default StyleSheet.create({
          color:COLORS.dashboardGreenButton,
           textAlign:'center'
     },
+    backSpaceArrow: {
+        width: hp(3.38),
+        height: hp(2.58),
+        resizeMode: 'contain',
+    },
 })

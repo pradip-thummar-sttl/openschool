@@ -25,6 +25,12 @@ export const EndPoints = {
     Groupsetup: 'groupsetup',
     UpdateGroupSetup: 'updategroupsetup',
     PupilSchoolCode: 'pupilschoolcode',
+    GlobalMessaging: 'globalmessaging',
+    ParentList: 'parentlist',
+    PupilGlobalMessaging: 'pupilglobalmessaging',
+    UpdateGlobalMessaging: 'updateglobalmessaging',
+    GetCountLession: 'getcountlession',
+    GetCountHomework: 'getcounthomework',
 
     //Pupil
     PupilRegister:"pupilregister",
@@ -37,6 +43,8 @@ export const EndPoints = {
     UploadWorkspace:'uploadWorkspace',
     GetPupilLesson: 'getpupillesson',
     GetPupilHomework: 'getpupilhomework',
+    PupilUpdate: 'pupilupdate',
+    UpdateParent: 'updateparent',
 
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",

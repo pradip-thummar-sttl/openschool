@@ -14,7 +14,6 @@ import STYLE from "../../../utils/Style";
 import PAGESTYLE from './Style';
 
 const GroupSetUpPupilSelection = (props) => {
-    console.log('props', props);
 
     const [groups, setGroups] = useState([])
     const [pupils, setPupils] = useState([])
@@ -119,6 +118,7 @@ const GroupSetUpPupilSelection = (props) => {
     }
 
     const isPupilChecked = (_index) => {
+        console.log('selectedPupils', selectedPupils, _index);
         if (selectedPupils.length > 0) {
             if (selectedPupils.some(ele => ele.PupilId == pupils[_index].PupilId)) {
                 return true
@@ -131,33 +131,33 @@ const GroupSetUpPupilSelection = (props) => {
     }
 
     const Pupillist = (props) => (
-        <TouchableOpacity
-            activeOpacity={opacity}
-            onPress={() => pushPupil(props.index)}>
-            <View style={{ flexDirection: 'column' }}>
-                <View style={PAGESTYLE.pupilParent1}>
-                    <Image
-                        style={PAGESTYLE.mediabar}
-                        source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
-                    <Text style={PAGESTYLE.pupilName1} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
-                    <View style={PAGESTYLE.checkMark}>
-                        <CheckBox
-                            boxType={'square'}
-                            onCheckColor={COLORS.white}
-                            style={STYLE.checkBoxcommon}
-                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                            onFillColor={COLORS.dashboardPupilBlue}
-                            onTintColor={COLORS.dashboardPupilBlue}
-                            tintColor={COLORS.dashboardPupilBlue}
-                            value={isPupilChecked(props.index)}
-                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                            onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, props.index) }}
-                        />
-                    </View>
+        // <TouchableOpacity
+        //     activeOpacity={opacity}
+        //     onPress={() => pushPupil(props.index)}>
+        <View style={{ flexDirection: 'column' }}>
+            <View style={PAGESTYLE.pupilParent1}>
+                <Image
+                    style={PAGESTYLE.mediabar}
+                    source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
+                <Text style={PAGESTYLE.pupilName1} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
+                <View style={PAGESTYLE.checkMark}>
+                    <CheckBox
+                        boxType={'square'}
+                        onCheckColor={COLORS.white}
+                        style={STYLE.checkBoxcommon}
+                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                        onFillColor={COLORS.dashboardPupilBlue}
+                        onTintColor={COLORS.dashboardPupilBlue}
+                        tintColor={COLORS.dashboardPupilBlue}
+                        value={isPupilChecked(props.index)}
+                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                        onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, props.index) }}
+                    />
                 </View>
-                <View style={PAGESTYLE.bar}></View>
             </View>
-        </TouchableOpacity>
+            <View style={PAGESTYLE.bar}></View>
+        </View>
+        // </TouchableOpacity>
     );
 
     const pupilRender = ({ item, index }) => {
@@ -170,8 +170,8 @@ const GroupSetUpPupilSelection = (props) => {
     const pushPupil = (_index) => {
         setSelectedPupils([...selectedPupils, pupilsClone[_index]])
 
-        const newList = pupilsClone.filter((item, index) => index !== _index);
-        setPupilsClone(newList)
+        // const newList = pupilsClone.filter((item, index) => index !== _index);
+        // setPupilsClone(newList)
     }
 
     const reset = () => {
@@ -202,9 +202,9 @@ const GroupSetUpPupilSelection = (props) => {
                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                         color={COLORS.blueButton} />
                     :
-                    pupilsClone.length > 0 ?
+                    pupils.length > 0 ?
                         <FlatList
-                            data={pupilsClone}
+                            data={pupils}
                             renderItem={pupilRender}
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
@@ -215,16 +215,18 @@ const GroupSetUpPupilSelection = (props) => {
                 }
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', }}>
-                <TouchableOpacity
-                    style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}
-                    onPress={() => { saveGroup() }}>
-                    <Text style={PAGESTYLE.button1}>Assign Group</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{...PAGESTYLE.buttonParent1, paddingHorizontal: hp(7),}}
-                    onPress={() => { reset() }}>
-                    <Text style={{ ...PAGESTYLE.button1, color: COLORS.dashboardGreenButton }}>Reset</Text>
-                </TouchableOpacity>
+                <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
+                    <TouchableOpacity
+                        onPress={() => { saveGroup() }}>
+                        <Text style={PAGESTYLE.button1}>Assign Group</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ ...PAGESTYLE.buttonParent1, }}>
+                    <TouchableOpacity
+                        onPress={() => { reset() }}>
+                        <Text style={{ ...PAGESTYLE.button1, color: COLORS.dashboardGreenButton }}>Reset</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </SafeAreaView>
     );

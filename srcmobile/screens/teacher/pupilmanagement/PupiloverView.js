@@ -11,6 +11,7 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import GroupSetUp from "./GroupSetUp";
 import { User } from "../../../utils/Model";
+import { baseUrl } from "../../../utils/Constant";
 
 const { CallModule } = NativeModules;
 
@@ -41,6 +42,7 @@ const PupiloverView = (props) => {
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     tabs={selectedTabIndex}
+                    onSearchKeyword={() => { }}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
@@ -53,11 +55,11 @@ const PupiloverView = (props) => {
                                                 <View style={[PAGESTYLE.pupilData]}>
                                                     <View style={PAGESTYLE.pupilProfile}>
                                                         <View style={PAGESTYLE.rowProfile}>
-                                                            <Image style={PAGESTYLE.pupilImage}></Image>
+                                                            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
                                                             <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
                                                         </View>
                                                         <View style={PAGESTYLE.groupPupil}>
-                                                            <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : 'Group 1A'}</Text>
+                                                            <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
                                                         </View>
                                                     </View>
                                                     <View style={PAGESTYLE.rewardColumn}>

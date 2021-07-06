@@ -38,12 +38,21 @@ const Chat = (props) => {
         { name: 'PARENT CHAT', isSelected: false },
         { name: 'PUPIL CHAT', isSelected: false },
         { name: 'SCHOOL CHAT', isSelected: false }])
-        
+    const [placeholder, setPlaceHolder] = useState('');
+
     useEffect(() => {
+        if (props.tabs === 1) {
+            setPlaceHolder("Message " + props.data.ParentFirstName + ' ' + props.data.ParentLastName)
+        } else if (props.tabs === 2) {
+            setPlaceHolder("Message " + props.data.FirstName + ' ' + props.data.LastName)
+        } else {
+            setPlaceHolder("Message School")
+        }
+
+        setMessage('')
         addMessage([])
         props.tabs === 1 ? setChannels(channel1) : props.tabs === 2 ? setChannels(channel2) : setChannels(channel3);
     }, [props.tabs])
-
 
     const handleMessage = event => {
         console.log('log of event message', event);
@@ -66,10 +75,13 @@ const Chat = (props) => {
         // } else {
         //     channel = channels[2]
         // }
+        message = message + '#@#' + User.user.FirstName + ' ' + User.user.LastName + '#@#' + User.user.ProfilePicture
+
         if (message) {
             pubnub
-                .publish({ channel: channels[0], message })
-                .then(() => setMessage(''));
+            .publish({ channel: channels[0], message })
+                .then(() => setMessage(''))
+                .catch((msg) => console.log(msg));
         }
     };
 
@@ -163,10 +175,10 @@ const Chat = (props) => {
                                 renderItem={({ item, index }) => {
                                     return (
                                         <View style={Styles.messageCell}>
-                                            <Image style={Styles.roundImage} />
+                                            <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
                                             <View style={Styles.messageSubCell}>
-                                                <Text style={Styles.userNameText}>Miss Barker<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
-                                                <Text style={Styles.messageText}>{item.message}</Text>
+                                                <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
+                                                <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
                                             </View>
                                         </View>
                                     )
@@ -192,18 +204,18 @@ const Chat = (props) => {
                             <TextInput
                                 style={Styles.input}
                                 multiline={true}
-                                placeholder="Message Ann le"
+                                placeholder={placeholder}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 value={message}
                                 onChangeText={(text) => setMessage(text)}
                             />
                             <View style={Styles.buttonView}>
-                                <TouchableOpacity>
+                                {/* <TouchableOpacity>
                                     <Image style={Styles.btn} source={Images.paperClip} />
                                 </TouchableOpacity>
                                 <TouchableOpacity >
                                     <Image style={Styles.btn} source={Images.imageUpload} />
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                                 <TouchableOpacity onPress={() => sendMessage(message)}>
                                     <Image style={Styles.btn} source={Images.send} />
                                 </TouchableOpacity>

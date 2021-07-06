@@ -14,8 +14,6 @@ export default StyleSheet.create({
     },
     left1: {
         flex: 1,
-        borderRightColor: COLORS.dashBoard,
-        borderRightWidth: 1,
         paddingTop: hp(2.46)
     },
     middle: {
@@ -184,13 +182,12 @@ export default StyleSheet.create({
     buttonParent1: {
         height: hp(5.5),
         marginTop: hp(2.46),
-        borderRadius: 10,
         marginHorizontal: hp(0.5),
-        paddingHorizontal: hp(3),
+        borderRadius: 10,
+        width: '48%',
         borderWidth: 1,
         justifyContent: 'center',
         alignSelf: 'center',
-        width: '95%',
         borderColor: COLORS.dashboardGreenButton,
     },
     label: {
@@ -249,7 +246,7 @@ export default StyleSheet.create({
         marginBottom: hp(1),
     },
     pupilProfile: {
-        width: Platform.OS == 'android' ? hp(39.5) : hp(26),
+        width: Platform.OS == 'android' ? hp(30.5) : hp(26),
     },
     rowProfile: {
         flexDirection: 'row',
@@ -321,17 +318,17 @@ export default StyleSheet.create({
     },
     profileOuter: {
         borderRadius: hp(100),
-        borderWidth: hp(1.3),
+        borderWidth: 1,
         borderColor: COLORS.white,
         position: 'absolute',
         top: hp(7.38),
+        backgroundColor: COLORS.white
     },
     profileImage: {
         width: hp(13),
         height: hp(13),
         borderRadius: hp(100),
         resizeMode: 'contain',
-        backgroundColor: COLORS.lightGrayPupil,
     },
     mainDetails: {
         marginTop: hp(8.75),
@@ -367,7 +364,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     scrollViewCommon: {
-        marginBottom: hp(38),
+        marginBottom: hp(30),
     },
     scrollViewCommonPupilEdit: {
         marginBottom: hp(15),
@@ -526,4 +523,25 @@ export default StyleSheet.create({
         alignSelf: 'center',
         left: hp(0.5)
     },
+    performancePArent: {
+        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%'
+    },
+    colorLeftParent: {
+        flexDirection: 'row', alignItems: 'center', marginHorizontal: 15
+    },
+    colorRightParent: {
+        flexDirection: 'row', alignItems: 'center', right: 0, position: 'absolute', marginHorizontal: 15
+    },
+    colorSquare: {
+        height: 15, width: 15, backgroundColor: COLORS.purpleDark, borderRadius: 5, marginRight: 10
+    },
+    colorSquareRight: {
+        height: 15, width: 15, backgroundColor: COLORS.yellowDark, borderRadius: 5, marginRight: 10
+    },
+    introText: {
+        color: COLORS.lightGray, fontFamily: FONTS.fontRegular
+    },
+    bottomText: {
+        color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10 
+    }
 });
