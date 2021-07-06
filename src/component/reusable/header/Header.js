@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
-        paddingTop: hp(4),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         paddingBottom: hp(5)
     },
     mainTitle: {

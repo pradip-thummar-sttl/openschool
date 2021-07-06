@@ -130,13 +130,11 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
         left: hp(1.8),
         zIndex: 9,
     },

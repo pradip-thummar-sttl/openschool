@@ -43,12 +43,11 @@ export default HeaderHWS;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
         paddingBottom: hp(2),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
     },
     headerMain: {
         flexDirection: 'row',

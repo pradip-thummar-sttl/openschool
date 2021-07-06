@@ -68,7 +68,7 @@ const HeaderTT = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
+                        <Image style={{ height: 20, resizeMode: 'contain', }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                     </TouchableOpacity>
                     <TextInput
@@ -93,12 +93,15 @@ export default HeaderTT;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(3.25),
+        paddingLeft: hp(4.16),
+        paddingRight: hp(2.99),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
         paddingBottom: hp(1.5),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 1, },
+        shadowOpacity: 0.08,
+        shadowRadius: 2,
     },
     headerMain: {
         flexDirection: 'row',

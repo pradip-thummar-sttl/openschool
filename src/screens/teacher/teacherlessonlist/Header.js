@@ -129,12 +129,16 @@ export default Header;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         paddingBottom: hp(1.5),
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 1, },
+        shadowOpacity: 0.08,
+        shadowRadius: 2,
+        zIndex: 9,
     },
     headerMain: {
         flexDirection: 'row',
@@ -200,19 +204,18 @@ const styles = StyleSheet.create({
         paddingRight: hp(4),
         paddingTop: hp(1.2),
         paddingBottom: hp(1.4),
+        height: hp(5.20),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontSemiBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        height: hp(5.20),
         fontSize: hp(1.82),
     },
     buttonGroup: {
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
         marginLeft: 10,
     },
     filterIcon: {
@@ -284,6 +287,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
+        position: 'absolute',
+        top: hp(6),
     },
     checkMark: {
         width: hp(1.48),
