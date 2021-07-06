@@ -400,12 +400,12 @@ export default StyleSheet.create({
     },
     pupilhrCustomMargin: {
         marginTop: hp(1.95),
-        marginBottom: hp(1.30),
+        marginBottom: hp(0),
     },
     pupilData: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical:10
+        marginBottom: hp(0),
     },
     pupilProfile: {
         width: hp(35.80),
@@ -461,7 +461,7 @@ export default StyleSheet.create({
         alignSelf:'center',
     },
     pupilDetailLink: {
-        width: hp(8),
+        width: hp(7.5),
         alignItems: 'flex-end',
     },
     pupilDetaillinkIcon: {

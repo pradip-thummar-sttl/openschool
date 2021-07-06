@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     whiteBg: {

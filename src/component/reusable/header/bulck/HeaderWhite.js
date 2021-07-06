@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -214,8 +214,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: wp(5.20),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(5.20),
+        height: 40,
     },
 });

@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(0) : hp(3),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         marginTop: Platform.OS == 'android' ? hp(-1) : hp(0),
         // marginBottom: hp(5.85),
     },
@@ -152,8 +152,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(4.92),
-        height: hp(4.92),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -313,9 +313,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: wp(5.20),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(5.20),
+        height: 40,
     },
     filterGroup: {
         marginTop: wp(-11.5),
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
         marginRight: hp(1.56),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

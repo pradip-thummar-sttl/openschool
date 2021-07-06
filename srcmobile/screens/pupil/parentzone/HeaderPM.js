@@ -226,8 +226,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(4.92),
-        height: hp(4.92),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     userparent: {
@@ -420,9 +420,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     calnderDashHeaderIcon: {
-        width: hp(4.57),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(4.57),
+        height: 40,
     },
     filterGroup: {
         display: 'none',

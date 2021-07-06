@@ -31,22 +31,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
-        paddingTop: hp(3.38),
-        paddingBottom: hp(2)
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: hp(4),
+        paddingBottom: hp(5)
     },
     mainTitle: {
         fontSize: hp(2.86),
         fontFamily: FONTS.fontSemiBold,
     },
     notificationBar: {
-        marginLeft: hp(1.25),
+        // marginLeft: hp(1.25),
         position: 'relative',
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
 });

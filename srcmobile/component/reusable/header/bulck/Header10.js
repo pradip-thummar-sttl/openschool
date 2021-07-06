@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: hp(4.92),
-        height: hp(4.92),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
-        width: wp(5.20),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(5.20),
+        height: 40,
     },
     filterbarMain: {
         flexDirection: 'row',

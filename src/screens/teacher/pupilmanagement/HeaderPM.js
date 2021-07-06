@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -300,9 +300,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: hp(4.57),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(4.57),
+        height: 40,
     },
     filterGroup: {
         display: 'none',

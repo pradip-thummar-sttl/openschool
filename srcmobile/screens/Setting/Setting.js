@@ -96,7 +96,7 @@ const Setting = (props) => {
         <View style={styles.mainPage}>
             <SettingHeader onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLES.pupilHeader} />
 
-            <View style={[styles.lessonPlanTab, { height: 50 }]}>
+            <View style={[styles.lessonPlanTab, { height: 50, }]}>
                 {
                     typeObject.map((item, index) => {
                         return (

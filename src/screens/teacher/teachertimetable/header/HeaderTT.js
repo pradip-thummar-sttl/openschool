@@ -94,11 +94,11 @@ export default HeaderTT;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingRight: hp(3.25),
         backgroundColor: COLORS.white,
         // marginBottom: hp(5.85),
         paddingBottom: hp(1.5),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
     },
     headerMain: {
         flexDirection: 'row',
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -251,9 +251,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: hp(5.20),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(5.20),
+        height: 40,
         marginRight: hp(1)
     },
     searchParent: {

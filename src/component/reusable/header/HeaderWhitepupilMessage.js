@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     filterbarMain: {

@@ -1454,9 +1454,9 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: wp(5.20),
+        width: 40,
         resizeMode: 'contain',
-        height: hp(5.20),
+        height: 40,
     },
     homeworkView: {
         width: hp(32.5),

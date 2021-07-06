@@ -33,10 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
-        // marginBottom: hp(1.95),
-        paddingRight: hp(2.46),
+        padding: hp(2),
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         borderBottomWidth: 1,
@@ -46,14 +43,10 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        width: '85%',
-    },
-    notificationBar: {
-        right: 10
     },
     massagesIcon: {
-        width: hp(4.92),
-        height: hp(4.92),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     menuIconWithTitle:{
