@@ -20,7 +20,7 @@ import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailE
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 
 const TeacherTimeTable = (props) => {
-    const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
     const dispatch = useDispatch()
 
@@ -120,7 +120,7 @@ const TeacherTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
+                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: 66 }} />
             );
         }
     }
@@ -198,7 +198,7 @@ const TeacherTimeTable = (props) => {
                                 navigateToAddLesson={() => setTeacherLessonAdd(true)}
                                 refreshList={() => refresh()} />
 
-                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top: 20, left: 10 }}>
+                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top: 20, left: 15,}}>
                                 {isTimeTableLoading ?
                                     <ActivityIndicator
                                         style={{ flex: 1 }}
@@ -215,14 +215,14 @@ const TeacherTimeTable = (props) => {
                                                 ))}
                                             </View>
 
-                                            <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingTop: hp(1.5), }}
+                                            <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingTop: hp(1.5),paddingLeft: 0, }}
                                                 horizontal={true}>
 
                                                 {time.map((data, timneKey) => (
                                                     <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
                                                         <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
 
-                                                        <View style={PAGESTYLE.timeLabel}>
+                                                        <View style={{...PAGESTYLE.timeLabel}}>
                                                             {days.map((data, dayKey) => (
                                                                 dayKey != 0 ?
                                                                     setData(dayKey, timneKey)

@@ -216,7 +216,12 @@ export default StyleSheet.create({
         color: COLORS.buttonGreen,
         textTransform: 'uppercase',
         fontSize: hp(1.56),
+        marginBottom: 15,
         fontFamily: FONTS.fontBold,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: {width: 0,height: 1,},
+        shadowOpacity: 0.08,
+        shadowRadius: 5,
     },
     commonButtonBorderedGreen: {
         backgroundColor: COLORS.transparent,
