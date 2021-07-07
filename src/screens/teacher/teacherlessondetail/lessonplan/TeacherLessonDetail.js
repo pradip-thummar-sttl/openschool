@@ -12,7 +12,6 @@ import moment from 'moment';
 import { Download } from "../../../../utils/Download";
 import { baseUrl } from "../../../../utils/Constant";
 const TLDetail = (props) => {
-    console.log('props', props.lessonData.RecordingList);
     console.log('props', props.lessonData.MaterialList);
     return (
         <View style={PAGESTYLE.whiteBg}>

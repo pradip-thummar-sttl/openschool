@@ -46,6 +46,8 @@ export const EndPoints = {
     PupilUpdate: 'pupilupdate',
     UpdateParent: 'updateparent',
     PupilUploadProfile: 'pupiluploadProfile',
+    SaveLessonByPupil: 'savelessionbypupil',
+    GetPupilRewards: 'getpupilrewards',
 
     //Parent Zone
     SetPin: 'setpin',

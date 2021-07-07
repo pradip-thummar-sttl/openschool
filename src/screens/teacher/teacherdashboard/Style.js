@@ -454,6 +454,7 @@ export default StyleSheet.create({
     rewardStar: {
         width: hp(5.5),
         marginRight: hp(0.91),
+        justifyContent: 'flex-end',
     },
     rewardStartIcon: {
         width: hp(2.15),

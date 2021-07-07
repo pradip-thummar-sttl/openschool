@@ -66,17 +66,6 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.lessonTitleWithoutTextArea}>Lesson Description</Text>
                         <Text style={PAGESTYLE.lessonText}>{props.lessonData.LessonDescription}</Text>
                     </View>
-                    {props.lessonData.RecordingList.length > 0 ?
-                        <TouchableOpacity
-                            style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}
-                            activeOpacity={opacity}
-                            onPress={() => Download(props.lessonData.RecordingList[0])}>
-                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                            <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingList[0].originalname}</Text>
-                        </TouchableOpacity>
-                        :
-                            null
-                    }
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
@@ -168,11 +157,14 @@ const TLDetail = (props) => {
                     }
                     <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                        {props.lessonData.RecordedLessonName ?
-                            <View style={PAGESTYLE.videoLinkBlockRight}>
+                        {props.lessonData.RecordingList.length > 0 ?
+                            <TouchableOpacity
+                                style={[PAGESTYLE.videoLinkBlock]}
+                                activeOpacity={opacity}
+                                onPress={() => Download(props.lessonData.RecordingList[0])}>
                                 <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                                <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
-                            </View>
+                                <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingList[0].originalname}</Text>
+                            </TouchableOpacity>
                             :
                             <Text style={{ textAlign: 'left', width: '100%' }}>No lesson recording found!</Text>
                         }

@@ -37,7 +37,7 @@ import RecordScreen from 'react-native-record-screen';
 
 
 
-import { PERMISSIONS, requestMultiple , check, request} from 'react-native-permissions';
+import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
 
 
 const { DialogModule, Dialog } = NativeModules;
@@ -87,6 +87,7 @@ const TLDetailEdit = (props) => {
     const [subjects, setSubjects] = useState([])
     const [participants, setParticipants] = useState([])
     const [pupils, setPupils] = useState([]);
+    const [filteredPupils, setFilteredPupils] = useState([]);
 
     const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
 
@@ -250,7 +251,7 @@ const TLDetailEdit = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = async() => {
+    const startRecording = async () => {
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
             if (res === "granted") {
@@ -259,16 +260,16 @@ const TLDetailEdit = (props) => {
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
                     showMessage("We need permission to access  camera")
                 }
-    
+
             }
-        }else{
+        } else {
             const res = await check(PERMISSIONS.IOS.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
@@ -276,14 +277,14 @@ const TLDetailEdit = (props) => {
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
                     showMessage("We need permission to access  camera")
                 }
-    
+
             }
         }
 
@@ -385,6 +386,24 @@ const TLDetailEdit = (props) => {
         );
     };
 
+    const showRemainingPupils = (item) => {
+        setSelectedPupils([])
+        let newArr = []
+        pupils.forEach(ele1 => {
+            let flag = false
+            item.PupilList.forEach(ele2 => {
+                console.log(ele1.PupilId + '==' + ele2.PupilId);
+                if (ele1.PupilId == ele2.PupilId) {
+                    flag = true
+                }
+            })
+            if (!flag) {
+                newArr.push(ele1)
+            }
+        });
+        setFilteredPupils(newArr)
+    }
+
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
@@ -394,28 +413,32 @@ const TLDetailEdit = (props) => {
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                 </TouchableOpacity> */}
-                <FlatList
-                    data={pupils}
-                    style={{ alignSelf: 'center', width: '100%', }}
-                    renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.alignRow}>
-                            <CheckBox
-                                style={{ ...PAGESTYLE.checkMarkTool }}
-                                boxType={'square'}
-                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                onCheckColor={COLORS.white}
-                                onFillColor={COLORS.dashboardPupilBlue}
-                                onTintColor={COLORS.dashboardPupilBlue}
-                                tintColor={COLORS.dashboardPupilBlue}
-                                value={isPupilChecked(index)}
-                                onValueChange={(newValue) => pushPupilItem(newValue, index)}
-                            />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
-                        </View>
-                    )}
-                    numColumns={3}
-                    keyExtractor={(item, index) => index.toString()}
-                />
+                {filteredPupils.length > 0 ?
+                    <FlatList
+                        data={filteredPupils}
+                        style={{ alignSelf: 'center', width: '100%', }}
+                        renderItem={({ item, index }) => (
+                            <View style={PAGESTYLE.alignRow}>
+                                <CheckBox
+                                    style={{ ...PAGESTYLE.checkMarkTool }}
+                                    boxType={'square'}
+                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                    onCheckColor={COLORS.white}
+                                    onFillColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
+                                    value={isPupilChecked(index)}
+                                    onValueChange={(newValue) => pushPupilItem(newValue, index)}
+                                />
+                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
+                            </View>
+                        )}
+                        numColumns={3}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                    :
+                    <Text style={{ alignSelf: 'center' }}>Pupils not available!</Text>
+                }
             </View>
         );
     };
@@ -446,7 +469,7 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                <Menu onSelect={(item) => setSelectedParticipants(item)}>
+                <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
@@ -540,9 +563,6 @@ const TLDetailEdit = (props) => {
             return false;
         } else if (recordingArr.length == 0) {
             showMessage(MESSAGE.recording);
-            return false;
-        } else if (selectedPupils.length == 0) {
-            showMessage(MESSAGE.selectPupil);
             return false;
         }
 

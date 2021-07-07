@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -22,6 +22,7 @@ import PupilHomeWorkDetail from "../homework/PupilHomeWorkDetail";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import Video from "react-native-video";
+import { set } from "react-native-reanimated";
 
 
 const PupilLessonDetailInternal = (props) => {
@@ -40,12 +41,29 @@ const PupilLessonDetailInternal = (props) => {
     const [item, setItem] = useState(props.item)
 
     const refresh = () => {
-        console.log(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`);
 
         Service.get(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setItem(res.data[0])
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
+    const saveLesson = (flag) => {
+        let data = {
+            SaveLesson: flag
+        }
+        Service.post(data, `${EndPoints.SaveLessonByPupil}/${item._id}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                let temp = {...item, SaveLesson: flag}
+
+                console.log('temp', temp);
+                setItem(temp)
             } else {
                 showMessage(res.message)
             }
@@ -89,7 +107,6 @@ const PupilLessonDetailInternal = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             {
-                console.log('isworkspace on or off', isWorkspace),
                 isWorkspace ?
                     <WorkSpace
                         goBack={() => setWorkSpace(false)}
@@ -114,7 +131,7 @@ const PupilLessonDetailInternal = (props) => {
                             :
                             isHWDetail ?
                                 <PupilHomeWorkDetail
-                                    goBack={() => setHWMArked(false)}
+                                    goBack={() => setHWDetail(false)}
                                     item={hwData}
                                     onAlertPress={() => props.onAlertPress()} />
                                 :
@@ -157,10 +174,13 @@ const PupilLessonDetailInternal = (props) => {
                                                         <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
                                                         <Text style={PAGESTYLE.videoPublishDate}>Published on {moment(item.LessonDate).format('ll')}</Text>
                                                     </View>
-                                                    <View style={PAGESTYLE.bookMark}>
-                                                        <Image source={require('../../../../assets/images/bookmarkOn2.png')} style={PAGESTYLE.bookMarkOn} />
-                                                        <Text style={PAGESTYLE.saveBookMarkText}>Saved!</Text>
-                                                    </View>
+                                                    <TouchableOpacity activeOpacity={opacity}
+                                                        onPress={() => saveLesson(item.SaveLesson ? false : true)}>
+                                                        <View style={PAGESTYLE.bookMark}>
+                                                            <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} />
+                                                            <Text style={PAGESTYLE.saveBookMarkText}>{item.SaveLesson ? 'Saved!' : 'Save'}</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
                                                 </View>
                                                 <View style={PAGESTYLE.userNameMain}>
                                                     <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>

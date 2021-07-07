@@ -67,6 +67,24 @@ const PupilLessonDetailInternal = (props) => {
         })
     }
 
+    const saveLesson = (flag) => {
+        let data = {
+            SaveLesson: flag
+        }
+        Service.post(data, `${EndPoints.SaveLessonByPupil}/${item._id}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                let temp = {...item, SaveLesson: flag}
+
+                console.log('temp', temp);
+                setItem(temp)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }
+
     const NEW = [
         {
             title: 'Description',
@@ -192,10 +210,13 @@ const PupilLessonDetailInternal = (props) => {
                                 <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                 <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                             </View>
-                            <View style={PAGESTYLE.bookMark}>
-                                <Text style={PAGESTYLE.saveBookMarkText}>Save</Text>
-                                <Image source={Images.bookmarkOff} style={PAGESTYLE.bookMarkOn} />
-                            </View>
+                            <TouchableOpacity activeOpacity={opacity}
+                                onPress={() => saveLesson(item.SaveLesson ? false : true)}>
+                                <View style={PAGESTYLE.bookMark}>
+                                    <Text style={PAGESTYLE.saveBookMarkText}>{item.SaveLesson ? 'Saved!' : 'Save'}</Text>
+                                    <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} />
+                                </View>
+                            </TouchableOpacity>
                         </View>
                         <View style={{ paddingBottom: 80 }}>
                             <Accordion

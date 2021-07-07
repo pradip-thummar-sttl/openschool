@@ -82,6 +82,7 @@ const Images = {
     VideoBack: require('../assets/images/video-back2.png'),
     VideoShadow: require('../assets/images/video-shadow2.png'),
     BookmarkIcon: require('../assets/images/bookmark-on2.png'),
+    BookmarkIconOff: require('../assets/images/bookmarkOff2.png'),
     UserProfilePopup: require('../assets/images/userProfilePopup.png'),
     MyLessons: require('../assets/images/my-lessons2.png'),
     MyAchievements: require('../assets/images/my-achievements2.png'),

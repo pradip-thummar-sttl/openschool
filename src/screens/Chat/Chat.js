@@ -13,6 +13,7 @@ import moment from 'moment';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { User } from '../../utils/Model';
+import { baseUrl } from '../../utils/Constant';
 
 
 // var data = [
@@ -24,7 +25,7 @@ import { User } from '../../utils/Model';
 
 const Chat = (props) => {
     const pubnub = usePubNub();
-    
+
 
     let channel1 = [`${props.data.MobileNumber}_${User.user._id}`]
     let channel2 = [`${props.data.PupilId}_${User.user._id}`]
@@ -79,7 +80,7 @@ const Chat = (props) => {
 
         if (message) {
             pubnub
-            .publish({ channel: channels[0], message })
+                .publish({ channel: channels[0], message })
                 .then(() => setMessage(''))
                 .catch((msg) => console.log(msg));
         }
@@ -99,6 +100,9 @@ const Chat = (props) => {
         data[index].isSelected = true
         settabs(data)
     }
+
+    console.log('props.data', props.data);
+
     return (
 
         <View style={{ flex: 1 }}>
@@ -133,17 +137,17 @@ const Chat = (props) => {
                 {
                     props.tabs === 1 ?
                         <View style={Styles.leftView}>
-                            <View style={Styles.firstView}>
+                            {/* <View style={Styles.firstView}>
                                 <Image style={Styles.iconParent} source={Images.LessonIcon} />
                                 <Text style={Styles.availabeText}>{'This person is curently offline.\nAvailable from 09:00 - 17:00'}</Text>
-                            </View>
+                            </View> */}
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Parent/Guardian</Text>
                                 <Text style={Styles.subText}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Relationship to pupil:</Text>
-                                <Text style={Styles.subText}>{props.data.Relationship}</Text>
+                                <Text style={Styles.subText}>{props.data.Relationship ? props.data.Relationship : '-'}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Email:</Text>
@@ -151,15 +155,15 @@ const Chat = (props) => {
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Address:</Text>
-                                <Text style={Styles.subText}>{`${props.data.AddressLine1}\n${props.data.AddressLine2}`}</Text>
+                                <Text style={Styles.subText}>{props.data.AddressLine1 || props.data.AddressLine2 ? `${props.data.AddressLine1}\n${props.data.AddressLine2}` : '-'}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Telephone no:</Text>
-                                <Text style={Styles.subText}>{props.data.MobileNumber}</Text>
+                                <Text style={Styles.subText}>{props.data.MobileNumber ? props.data.MobileNumber : '-'}</Text>
                             </View>
                             <View style={Styles.secondView}>
                                 <Text style={Styles.headText}>Notes:</Text>
-                                <Text style={Styles.subText}>{props.data.Note}</Text>
+                                <Text style={Styles.subText}>{props.data.Note ? props.data.Note : '-'}</Text>
                             </View>
 
                         </View>

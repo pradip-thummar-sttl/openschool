@@ -27,7 +27,7 @@ const PupilHomeWorkDetail = (props) => {
     const { item } = props.route.params
     const [materialArr, setMaterialArr] = useState([])
     const [isLoading, setLoading] = useState(false);
-    console.log('props of homewor', props.route.params);
+    console.log('props of homewor', baseUrl + item.TeacherProfile);
 
     const isFieldsValidated = () => {
         if (materialArr.length <= 0) {

@@ -35,6 +35,10 @@ const PupuilDashboard = (props) => {
     const [isMyDayLoading, setMyDayLoading] = useState(true)
     const [isHomeworkLoading, setHomeworkLoading] = useState(true)
 
+    const [bronze, setBronze] = useState(0)
+    const [silver, setSilver] = useState(0)
+    const [gold, setGold] = useState(0)
+
     const [isLoading, setLoading] = useState(false);
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
@@ -50,7 +54,6 @@ const PupuilDashboard = (props) => {
         }, (err) => {
         })
 
-        console.log(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`);
         Service.get(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of pupil homework list', res)
             if (res.flag === true) {
@@ -60,6 +63,31 @@ const PupuilDashboard = (props) => {
             } else {
                 showMessage(res.message)
                 setHomeworkLoading(false)
+            }
+        }, (err) => {
+        })
+
+        Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of my day', res)
+            if (res.flag) {
+                res.data.forEach(element => {
+                    switch (element._id) {
+                        case '3':
+                            setBronze(element.count)
+                            break;
+                        case '6':
+                            setSilver(element.count)
+                            break;
+                        case '9':
+                            setGold(element.count)
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            } else {
+                showMessage(res.message)
+                setMyDayLoading(false)
             }
         }, (err) => {
         })
@@ -147,8 +175,7 @@ const PupuilDashboard = (props) => {
 
     const getHomeWork = () => {
         setHomeworkLoading(true)
-        console.log(`${EndPoints.GetPupilHomework}/${dataOfHWSubView._id}/${User.user.UserDetialId}`);
-        Service.get(`${EndPoints.GetPupilHomework}/${dataOfHWSubView._id}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.GetPupilHomework}/${dataOfHWSubView.LessonId}/${User.user.UserDetialId}`, (res) => {
             setHomeworkLoading(false)
             if (res.code == 200) {
                 console.log('response of get all homework', res)
@@ -525,23 +552,23 @@ const PupuilDashboard = (props) => {
                             <View style={PAGESTYLE.achivementBox}>
                                 <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} />
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
-                                <Text style={PAGESTYLE.starCovertPoints}>60 points</Text>
+                                <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                 <View style={PAGESTYLE.rewardStarMark}>
                                     <View style={PAGESTYLE.centerText}>
                                         <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>18</Text>
+                                            <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
                                         </ImageBackground>
                                         <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                     </View>
                                     <View style={PAGESTYLE.centerStar}>
                                         <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>15</Text>
+                                            <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
                                         </ImageBackground>
                                         <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                     </View>
                                     <View style={PAGESTYLE.centerText}>
                                         <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>5</Text>
+                                            <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
                                         </ImageBackground>
                                         <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                     </View>

@@ -1289,7 +1289,7 @@ export default StyleSheet.create({
     },
     lessonThumb: {
         width: hp(3.64),
-        width: hp(3.64),
+        height: hp(3.64),
         backgroundColor: COLORS.lightGrayPupil,
         borderRadius: hp(5),
     },
