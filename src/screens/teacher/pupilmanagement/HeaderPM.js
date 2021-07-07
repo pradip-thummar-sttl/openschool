@@ -24,10 +24,21 @@ const HeaderPM = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
+    const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
-        // props.onFilter(filterBy)
+        if (!isSearchActive) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
+
+    useEffect(() => {
         setSelectedTab(props.tabs)
+        props.onFilter(filterBy)
     }, [filterBy])
 
     return (
@@ -70,24 +81,28 @@ const HeaderPM = (props) => {
                             <TouchableOpacity
                                 activeOpacity={opacity}
                                 onPress={() => {
-                                    isSearchActive ?
-                                        setSearchActive(false)
+                                    keyword ?
+                                        isSearchActive ?
+                                            setSearchActive(false)
+                                            :
+                                            setSearchActive(true)
                                         :
-                                        setSearchActive(true)
+                                        null
                                 }}>
                                 <Image style={{ height: 20, resizeMode: 'contain' }}
                                     source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%',  height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ width: '100%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search subject, class, etc"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
+                                    setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
                                 }} />
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center',marginLeft: 10, }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, }}>
                             <TouchableOpacity
                                 style={styles.buttonGroup}
                                 activeOpacity={opacity}>

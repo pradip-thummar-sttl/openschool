@@ -56,6 +56,7 @@ const TLDetailAdd = (props) => {
     const [participants, setParticipants] = useState([])
     const [itemCheckList, setItemCheckList] = useState([]);
     const [pupils, setPupils] = useState([]);
+    const [filteredPupils, setFilteredPupils] = useState([]);
 
     const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
 
@@ -212,16 +213,16 @@ const TLDetailAdd = (props) => {
     const pushPupilItem = (isSelected, _index) => {
         console.log('isSelected', isSelected, _index);
         if (!isSelected) {
-            const newList = selectedPupils.filter((item, index) => item._id !== pupils[_index]._id);
+            const newList = selectedPupils.filter((item, index) => item._id !== filteredPupils[_index]._id);
             setSelectedPupils(newList)
         } else {
-            setSelectedPupils([...selectedPupils, pupils[_index]])
+            setSelectedPupils([...selectedPupils, filteredPupils[_index]])
         }
     }
 
     const isPupilChecked = (_index) => {
         if (selectedPupils.length > 0) {
-            if (selectedPupils.some(ele => ele._id == pupils[_index]._id)) {
+            if (selectedPupils.some(ele => ele._id == filteredPupils[_index]._id)) {
                 return true
             } else {
                 return false
@@ -398,6 +399,24 @@ const TLDetailAdd = (props) => {
         );
     };
 
+    const showRemainingPupils = (item) => {
+        setSelectedPupils([])
+        let newArr = []
+        pupils.forEach(ele1 => {
+            let flag = false
+            item.PupilList.forEach(ele2 => {
+                console.log(ele1.PupilId + '==' + ele2.PupilId);
+                if (ele1.PupilId == ele2.PupilId) {
+                    flag = true
+                }
+            })
+            if (!flag) {
+                newArr.push(ele1)
+            }
+        });
+        setFilteredPupils(newArr)
+    }
+
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
@@ -407,29 +426,33 @@ const TLDetailAdd = (props) => {
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                 </TouchableOpacity> */}
-                <FlatList
-                    data={pupils}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20, paddingStart: 5 }}
-                    renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.alignRow}>
-                            <CheckBox
-                                style={PAGESTYLE.checkMark}
-                                boxType={'square'}
-                                onCheckColor={COLORS.white}
-                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                onFillColor={COLORS.dashboardPupilBlue}
-                                onTintColor={COLORS.dashboardPupilBlue}
-                                tintColor={COLORS.dashboardPupilBlue}
-                                value={isPupilChecked(index)}
-                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
-                            />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
-                        </View>
-                    )}
-                    numColumns={2}
-                    keyExtractor={(item, index) => index.toString()}
-                />
+                {filteredPupils.length > 0 ?
+                    <FlatList
+                        data={filteredPupils}
+                        style={{ alignSelf: 'center', width: '100%', bottom: 20, paddingStart: 5 }}
+                        renderItem={({ item, index }) => (
+                            <View style={PAGESTYLE.alignRow}>
+                                <CheckBox
+                                    style={PAGESTYLE.checkMark}
+                                    boxType={'square'}
+                                    onCheckColor={COLORS.white}
+                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                    onFillColor={COLORS.dashboardPupilBlue}
+                                    onTintColor={COLORS.dashboardPupilBlue}
+                                    tintColor={COLORS.dashboardPupilBlue}
+                                    value={isPupilChecked(index)}
+                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                    onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
+                                />
+                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
+                            </View>
+                        )}
+                        numColumns={2}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                    :
+                    <Text style={{ alignSelf: 'center' }}>Pupils not available!</Text>
+                }
             </View>
         );
     };
@@ -460,7 +483,7 @@ const TLDetailAdd = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                <Menu onSelect={(item) => setSelectedParticipants(item)}>
+                <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
@@ -553,11 +576,8 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } else if (recordingArr.length == 0) { //&& isRunningFromVirtualDevice.  remove validation for simulator.
+        } else if (recordingArr.length == 0) {
             showMessage(MESSAGE.recording);
-            return false;
-        } else if (selectedPupils.length == 0) {
-            showMessage(MESSAGE.selectPupil);
             return false;
         }
 

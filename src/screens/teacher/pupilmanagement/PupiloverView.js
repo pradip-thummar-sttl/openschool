@@ -53,9 +53,20 @@ const PupiloverView = (props) => {
     const [selectedId, setSelectedId] = useState(0);
     const [pupilData, setPupilData] = useState([])
     const [selectedTab, setSelectedTab] = useState(0)
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterBy, setFilterBy] = useState('')
 
     useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
         setSelectedTab(props.tabs)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+        }
+
         Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -66,7 +77,12 @@ const PupiloverView = (props) => {
         }, (err) => {
             console.log('Err of all pupil by teacher', err)
         })
-    }, [])
+    }
+
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
+    }
 
     const pupilRender = ({ item }) => {
         return (
@@ -80,8 +96,12 @@ const PupiloverView = (props) => {
         <View style={{ width: '100%', backgroundColor: COLORS.backgroundColorCommon }}>
             <HeaderPM
                 onAlertPress={() => props.navigation.openDrawer()}
-                onTabSelected={(tab) => setSelectedTab(tab)} 
-                tabs={props.tabs}/>
+                onTabSelected={(tab) => setSelectedTab(tab)}
+                tabs={props.tabs}
+                onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                onSearch={() => fetchRecord(searchKeyword, '')}
+                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                onFilter={(filterBy) => fetchRecord('', filterBy)} />
 
             {selectedTab == 0 ?
                 <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>

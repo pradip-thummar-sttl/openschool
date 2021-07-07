@@ -28,7 +28,7 @@ const PupilLesson = (props) => {
                                             <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
                                             <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                                             <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
-                                            <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
+                                            <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} />
                                         </View>
                                         <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                         <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
@@ -53,7 +53,7 @@ const PupilLesson = (props) => {
                                         <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
                                         <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
                                         <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
-                                        <Image source={Images.BookmarkIcon} style={PAGESTYLE.bookMarkLabel} />
+                                        <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} />
                                     </View>
                                     <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                     <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>

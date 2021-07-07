@@ -109,7 +109,7 @@ const ParentZonePerformance = (props) => {
                                     </View>
                                 </View>
                             </View>
-                            <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} />
+                            {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                         </View>
                         <View>
 

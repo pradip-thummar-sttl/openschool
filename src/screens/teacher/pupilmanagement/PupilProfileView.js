@@ -79,7 +79,9 @@ const PupilProfileView = (props) => {
     console.log('props', props.selectedPupil);
     return (
         <View style={PAGESTYLE.mainPage1}>
-            <HeaderPMInner navigateToBack={() => props.navigateToBack()} tabIndex={(index) => { setTabSelected(index) }} />
+            <HeaderPMInner
+                navigateToBack={() => props.navigateToBack()} tabIndex={(index) => { setTabSelected(index) }}
+                pupilName={props.selectedPupil.FirstName + ' ' + props.selectedPupil.LastName} />
             {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>

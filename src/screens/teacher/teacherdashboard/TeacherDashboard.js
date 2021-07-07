@@ -80,9 +80,9 @@ const Pupillist = ({ item, onPress }) => (
             <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
         </View>
         <TouchableOpacity onPress={() => { onPress() }} style={PAGESTYLE.pupilDetailLink}>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
@@ -599,7 +599,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     selectedIndex == 2 ?
                                         <TeacherLessonList navigation={props.navigation} />
                                         :
-                                        selectedIndex == 2 ?
+                                        selectedIndex == 3 ?
                                             <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
                                             :
                                             <Message navigation={props.navigation} />
