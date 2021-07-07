@@ -93,11 +93,11 @@ export default HeaderTT;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(4.16),
-        paddingRight: hp(2.99),
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
         paddingBottom: hp(1.5),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         shadowColor: COLORS.SidebarHeaderShadow,
         shadowOffset: { width: 0, height: 1, },
         shadowOpacity: 0.08,
@@ -138,25 +138,6 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
     },
-    userIcon: {
-        position: 'absolute',
-        top: hp(1.1),
-        width: hp(1.9),
-        resizeMode: 'contain',
-        left: hp(1.43),
-    },
-    userIcon1: {
-        position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
-    },
-    userIcon1Parent: {
-        position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
-    },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
@@ -174,19 +155,6 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
         fontSize: hp(1.82),
-    },
-    buttonGroup: {
-        position: 'relative',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: hp(1.69),
-    },
-    filterIcon: {
-        width: hp(1.74),
-        resizeMode: 'contain',
-        position: 'absolute',
-        right: hp(1.30),
-        top: hp(1.19),
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
