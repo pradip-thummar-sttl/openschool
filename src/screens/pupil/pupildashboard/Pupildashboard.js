@@ -259,7 +259,7 @@ const PupuilDashboard = (props) => {
                     <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
             </View>
-            <View style={PAGESTYLE.arrowSelectedTab}></View>
+            {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
 
         </TouchableOpacity>
     );
@@ -316,8 +316,8 @@ const PupuilDashboard = (props) => {
                                                             </View>
                                                             <View style={[PAGESTYLE.rightContent]}>
                                                                 <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
-                                                                    <Text style={PAGESTYLE.date}>{moment().format('D')}</Text>
-                                                                    <Text style={PAGESTYLE.month}>{moment().format('MMM')}</Text>
+                                                                    <Text style={PAGESTYLE.today}>Today</Text>
+                                                                    <Text style={PAGESTYLE.datemonth}>{moment().format('D')} {moment().format('MMM')}</Text>
                                                                 </ImageBackground>
                                                                 <View>
                                                                     <TouchableOpacity>
@@ -434,9 +434,7 @@ const PupuilDashboard = (props) => {
                                                 </View>
 
                                                 <View style={PAGESTYLE.dashboardPurpleBox}>
-                                                    <View STYLE={PAGESTYLE.pupilHomeWorkGridTopBgHold}>
-                                                        <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} />
-                                                    </View>
+                                                    <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} />
                                                     <View style={PAGESTYLE.purpleBoxTop}>
                                                         <View style={PAGESTYLE.myDayPurple}>
                                                             <View>
@@ -474,44 +472,46 @@ const PupuilDashboard = (props) => {
                                                                                     />
                                                                                 </SafeAreaView>
                                                                                 <View style={PAGESTYLE.rightTabContent}>
-                                                                                    <View style={PAGESTYLE.arrowSelectedTab}></View>
-                                                                                    <View style={PAGESTYLE.tabcontent}>
-                                                                                        <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
-                                                                                        <View style={PAGESTYLE.timedateGrp}>
-                                                                                            <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                                <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
-                                                                                                <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
+                                                                                    {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
+                                                                                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.tabcontent}>
+                                                                                        <View>
+                                                                                            <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
+                                                                                            <View style={PAGESTYLE.timedateGrp}>
+                                                                                                <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
+                                                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
+                                                                                                </View>
+                                                                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
+                                                                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
+                                                                                                </View>
                                                                                             </View>
-                                                                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                                <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
-                                                                                                <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
+                                                                                            <View style={STYLE.hrCommon}></View>
+                                                                                            <Text style={PAGESTYLE.lessondesciption}>{dataOfHWSubView.HomeworkDescription}</Text>
+                                                                                            <View style={PAGESTYLE.requirementofClass}>
+                                                                                                <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
+                                                                                                <FlatList
+                                                                                                    data={dataOfHWSubView.CheckList}
+                                                                                                    style={{ width: '100%' }}
+                                                                                                    renderItem={({ item, index }) => (
+                                                                                                        <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
+                                                                                                            <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                                                            <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                                                        </View>
+                                                                                                    )}
+                                                                                                    keyExtractor={(item, index) => index.toString()}
+                                                                                                />
+                                                                                            </View>
+                                                                                            <View style={PAGESTYLE.lessonstartButton}>
+                                                                                                {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity> */}
+                                                                                                <TouchableOpacity style={PAGESTYLE.buttonGrp}
+                                                                                                    activeOpacity={opacity}
+                                                                                                    onPress={() => { setSelectedIndex(2); getHomeWork() }}>
+                                                                                                    <Text style={STYLE.commonButtonGreenDashboardSide}>See Homework</Text>
+                                                                                                </TouchableOpacity>
                                                                                             </View>
                                                                                         </View>
-                                                                                        <View style={STYLE.hrCommon}></View>
-                                                                                        <Text style={PAGESTYLE.lessondesciption}>{dataOfHWSubView.HomeworkDescription}</Text>
-                                                                                        <View style={PAGESTYLE.requirementofClass}>
-                                                                                            <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
-                                                                                            <FlatList
-                                                                                                data={dataOfHWSubView.CheckList}
-                                                                                                style={{ width: '100%' }}
-                                                                                                renderItem={({ item, index }) => (
-                                                                                                    <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                                                        <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
-                                                                                                        <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
-                                                                                                    </View>
-                                                                                                )}
-                                                                                                keyExtractor={(item, index) => index.toString()}
-                                                                                            />
-                                                                                        </View>
-                                                                                        <View style={PAGESTYLE.lessonstartButton}>
-                                                                                            {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity> */}
-                                                                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}
-                                                                                                activeOpacity={opacity}
-                                                                                                onPress={() => { setSelectedIndex(2); getHomeWork() }}>
-                                                                                                <Text style={STYLE.commonButtonGreenDashboardSide}>See Homework</Text>
-                                                                                            </TouchableOpacity>
-                                                                                        </View>
-                                                                                    </View>
+                                                                                    </ScrollView>
                                                                                 </View>
                                                                             </> :
                                                                             <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
@@ -550,7 +550,7 @@ const PupuilDashboard = (props) => {
                                                                 <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                                             </View>
                                                         </View>
-                                                        <View style={PAGESTYLE.lessonstartButton}>
+                                                        <View style={PAGESTYLE.lessonstartButtonTroffy}>
                                                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity>
                                                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>edit avatar</Text></TouchableOpacity>
                                                         </View>

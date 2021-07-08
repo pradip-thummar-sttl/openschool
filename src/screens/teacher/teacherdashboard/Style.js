@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import COLORS from '../../../utils/Colors';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
 
 const { width, height } = Dimensions.get('window');
@@ -50,7 +50,7 @@ export default StyleSheet.create({
         width: hp(6.9),
         height: hp(7.3),
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: hp(1.03),},
+        shadowOffset: { width: 0, height: hp(1.03), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
     },
@@ -61,7 +61,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginBottom: hp(0.3),
     },
-    ScrollViewFlatlist:{
+    ScrollViewFlatlist: {
         height: hp(60),
     },
     arrowSelectedTab: {
@@ -99,7 +99,7 @@ export default StyleSheet.create({
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: hp(0.2),},
+        shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
         overflow: 'hidden',
@@ -140,11 +140,11 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightBlue,
     },
     timeIcon: {
-        resizeMode:'contain',
+        resizeMode: 'contain',
         width: hp(1.76),
     },
     calIcon: {
-        resizeMode:'contain',
+        resizeMode: 'contain',
         width: hp(1.76),
     },
     titleBox: {
@@ -165,7 +165,7 @@ export default StyleSheet.create({
     },
     leftTabbing: {
         width: '38%',
-        borderRightWidth:1,
+        borderRightWidth: 1,
         borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
@@ -187,7 +187,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.borderLesoon,
         padding: hp(0.39),
         borderRadius: hp(5),
-        marginRight: hp(2.1),        
+        marginRight: hp(2.1),
     },
     classSubject: {
         flexDirection: 'row',
@@ -459,7 +459,7 @@ export default StyleSheet.create({
     rewardStartIcon: {
         width: hp(2.15),
         resizeMode: 'contain',
-        alignSelf:'center',
+        alignSelf: 'center',
     },
     pupilDetailLink: {
         width: hp(7.5),
