@@ -42,15 +42,16 @@ export default StyleSheet.create({
     },
     datePositionBg: {
         position: 'absolute',
-        top: hp(-4.5),
-        right: hp(5.20),
+        top: -38,
+        right: 42,
         textAlign: 'center',
         paddingBottom: hp(2.04),
         paddingLeft: hp(1.04),
         paddingRight: hp(1.04),
         paddingTop: hp(2.1),
-        width: hp(13.15),
-        height: hp(10.14),
+        width: 101,
+        height: 80,
+        resizeMode: 'contain',
     },
     date: {
         fontSize: hp(1.82),
@@ -86,7 +87,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(40.49),
         height:hp(10.67),
-        top: hp(-11.97),
+        top: -75,
         right: hp(9.24),
     },
 
@@ -104,9 +105,10 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     moreDashboard: {
-        width: hp(0.7),
+        width: 5,
+        height: 28,
         resizeMode: 'contain',
-        marginTop: hp(1),
+        marginTop: 7,
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
@@ -422,18 +424,22 @@ export default StyleSheet.create({
         padding:hp(1),
         borderRadius: hp(1),
         position: 'relative',
+        zIndex: 9,
     },
     orangeBoxTop:{
-        justifyContent:'flex-end'
+        justifyContent:'flex-end',
+        zIndex: 9,
     },
     orangeBoxBottom:{
         flexDirection: 'row',
         flex: 1,
         marginTop: hp(-3),
+        zIndex: 9,
     },
     pupilHeader:{
         paddingLeft: 0,
         paddingRight: 0,
+        zIndex: 9,
     },
     dashboardPurpleBox:{
         backgroundColor: COLORS.dashboardHomeWorkPurple,
