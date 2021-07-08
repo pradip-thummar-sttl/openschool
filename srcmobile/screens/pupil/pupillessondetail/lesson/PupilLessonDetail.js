@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, PAGESTYLEheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, PAGESTYLEheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform, BackHandler } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -27,6 +27,20 @@ const PupilLessonDetailInternal = (props) => {
     const [item, setItem] = useState(props.route.params.item)
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
     const [isPaused, setPause] = useState(true)
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.navigation.goBack()
+        return true;
+      }
 
     const refresh = () => {
         Service.get(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`, (res) => {

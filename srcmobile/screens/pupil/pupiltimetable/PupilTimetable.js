@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -69,6 +69,33 @@ const PupilTimeTable = (props) => {
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    let currentCount = 0
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
+
+      const handleBackButtonClick=()=> {
+
+        if (currentCount === 1) {
+            BackHandler.exitApp()
+            return true;
+          }
+
+        if (currentCount < 1) {
+            currentCount += 1;
+            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
+          }
+          setTimeout(() => {
+            currentCount = 0;
+          }, 2000);
+        
+        return true;
+      }
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;

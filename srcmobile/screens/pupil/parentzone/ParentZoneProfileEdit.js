@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, opacity, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Alert } from "react-native";
+import { NativeModules, View, StyleSheet, Text, opacity, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Alert, BackHandler, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -43,6 +43,20 @@ const ParentZoneProfileEdit = (props) => {
     const [add2, setAdd2] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.navigation.goBack()
+        return true;
+      }
 
     useEffect(() => {
         setPupilId(profileData.UserId)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, BackHandler, Platform, ToastAndroid } from "react-native";
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -158,6 +158,33 @@ const TeacherTimeTable = (props) => {
         console.log('Refreshed');
         fetchRecord('', '')
     }
+    let currentCount = 0
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
+
+      const handleBackButtonClick=()=> {
+
+        if (currentCount === 1) {
+            BackHandler.exitApp()
+            return true;
+          }
+
+        if (currentCount < 1) {
+            currentCount += 1;
+            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
+          }
+          setTimeout(() => {
+            currentCount = 0;
+          }, 2000);
+        
+        return true;
+      }
 
     return (
         <View style={PAGESTYLE.mainPage}>

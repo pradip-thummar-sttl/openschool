@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -77,9 +77,38 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isPupilDataLoading, setPupilDataLoading] = useState(true)
     const [isLoading, setLoading] = useState(false);
 
+    let currentCount = 0
+
     useEffect(() => {
         refresh()
     }, [])
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
+
+      const handleBackButtonClick=()=> {
+
+        if (currentCount === 1) {
+            BackHandler.exitApp()
+            return true;
+          }
+
+        if (currentCount < 1) {
+            currentCount += 1;
+            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
+          }
+          setTimeout(() => {
+            currentCount = 0;
+          }, 2000);
+        
+        return true;
+      }
 
     const refresh = () => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {

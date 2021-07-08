@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, BackHandler, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -19,6 +19,19 @@ var moment = require('moment');
 const PupilHomeWorkSubmitted = (props) => {
     const { item } = props.route.params
     const [materialArr, setMaterialArr] = useState(item.HomeworkList)
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.navigation.goBack()
+        return true;
+      }
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={PAGESTYLE.whiteBg}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Image, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, Platform, BackHandler } from "react-native";
 import STYLE from '../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -49,6 +49,21 @@ const TeacherLessonDetail = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isHSDataChanged, setHSDataChanged] = useState(false)
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.goBack() 
+        return true;
+      }
+
 
     useEffect(() => {
         if (!isSearchActive && tabIndex == 2) {

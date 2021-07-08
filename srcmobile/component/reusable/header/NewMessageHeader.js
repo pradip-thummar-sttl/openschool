@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground, Platform, BackHandler } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -16,6 +16,21 @@ import {
 import { opacity } from "../../../utils/Constant";
 const NewMessageHeader = (props) => {
     const menu = useRef(null)
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.onGoback() 
+        return true;
+      }
+
 
     return (
         <View style={styles.headerBarMainWhite}>
