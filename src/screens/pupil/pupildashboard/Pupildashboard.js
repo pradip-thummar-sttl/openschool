@@ -304,10 +304,10 @@ const PupuilDashboard = (props) => {
                                 :
                                 selectedIndex == 0 ?
                                     <View style={{ width: isHide ? '94%' : '78%' }}>
-
                                         <ScrollView showsVerticalScrollIndicator={false}>
-                                            <Header onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
+                                            <Header onAlertPress={() => { props.navigation.openDrawer() }} />
                                             <View style={STYLE.padLeftRight}>
+                                                <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} />
                                                 <View style={PAGESTYLE.dashboardOrangeBox}>
                                                     <View style={PAGESTYLE.orangeBoxTop}>
                                                         <View style={PAGESTYLE.myDay}>
@@ -315,7 +315,6 @@ const PupuilDashboard = (props) => {
                                                                 <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                                             </View>
                                                             <View style={[PAGESTYLE.rightContent]}>
-                                                                <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} />
                                                                 <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
                                                                     <Text style={PAGESTYLE.date}>{moment().format('D')}</Text>
                                                                     <Text style={PAGESTYLE.month}>{moment().format('MMM')}</Text>
