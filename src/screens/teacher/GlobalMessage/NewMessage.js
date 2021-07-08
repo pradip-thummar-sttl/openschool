@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, FlatList, SafeAreaView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, FlatList, SafeAreaView, BackHandler, Platform } from 'react-native'
 import NewMessageHeader from '../../../component/reusable/header/NewMessageHeader'
 import COLORS from '../../../utils/Colors';
 import STYLE from '../../../utils/Style';
@@ -27,6 +27,21 @@ const NewMessage = (props) => {
     const [selectedParents, setSelectedParents] = useState([])
 
     console.log('props.selectedItem', props.selectedItem);
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.goBack() 
+        return true;
+      }
+
     useEffect(() => {
         if (data) {
             setId(data._id)

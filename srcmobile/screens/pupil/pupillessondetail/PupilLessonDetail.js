@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler, ToastAndroid } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -48,6 +48,33 @@ const PupilLessonDetail = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
+    let currentCount = 0
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
+
+      const handleBackButtonClick=()=> {
+
+        if (currentCount === 1) {
+            BackHandler.exitApp()
+            return true;
+          }
+
+        if (currentCount < 1) {
+            currentCount += 1;
+            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
+          }
+          setTimeout(() => {
+            currentCount = 0;
+          }, 2000);
+        
+        return true;
+      }
     useEffect(() => {
         console.log('keyword', keyword);
         if (initialRender.current) {

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View, Platform, BackHandler } from "react-native";
 import WorkSpaceHeader from "../../../component/reusable/header/WorkSpaceHeader";
 import PAGESTYLE from './Style';
 import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
@@ -24,6 +24,20 @@ const WorkSpace = (props) => {
     const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.tappedItem)
 
     console.log('====', workspaceList)
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.goBack() 
+        return true;
+      }
 
     const onSubmitWorkspace = () => {
         console.log(pathCount);

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, } from 'react-native';
+import React,{useEffect} from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Platform,BackHandler } from 'react-native';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
@@ -18,6 +18,20 @@ const Calendars = (props) => {
     })
     // console.log('cal  event data', calEventData)
 
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        // props.route.params.goBack()
+        props.navigation.goBack() 
+        return true;
+      }
 
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');

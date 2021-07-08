@@ -1,6 +1,6 @@
 import CheckBox from "@react-native-community/checkbox";
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, Image, SafeAreaView, Text, View } from "react-native";
+import { ActivityIndicator, Image, SafeAreaView, Text, View, BackHandler, Platform } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
@@ -25,6 +25,19 @@ const GroupSetUpPupilSelection = (props) => {
     const [isPupilLoading, setPupilLoading] = useState([])
     const [isGroupLoading, setGroupLoading] = useState([])
 
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.navigation.goBack() 
+        return true;
+      }
     useEffect(() => {
         setPupilLoading(true)
 

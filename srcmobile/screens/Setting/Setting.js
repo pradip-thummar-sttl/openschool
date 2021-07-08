@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, } from "react-native";
+import { StyleSheet, View, Text, FlatList, TouchableOpacity,ToastAndroid, BackHandler, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from "../../utils/Fonts";
 import COLORS from "../../utils/Colors";
@@ -17,6 +17,33 @@ const Setting = (props) => {
     const [settings, setSettings] = useState([])
     const [apiData, setApiData] = useState([])
 
+    let currentCount = 0
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+
+        if (currentCount === 1) {
+            BackHandler.exitApp()
+            return true;
+          }
+
+        if (currentCount < 1) {
+            currentCount += 1;
+            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
+          }
+          setTimeout(() => {
+            currentCount = 0;
+          }, 2000);
+        
+        return true;
+      }
 
     useEffect(() => {
         Service.get(`${EndPoints.UserSetting}/${User.user.UserDetialId}`, (res) => {

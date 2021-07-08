@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, TextInput, FlatList } from 'react-native'
+import { View, Text, TextInput, FlatList, Platform, BackHandler } from 'react-native'
 import Styles from './Style'
 import COLORS from '../../../utils/Colors'
 import Style from '../../../utils/Style'
@@ -22,6 +22,20 @@ const NewMessage = (props) => {
     const [isLoading, setLoading] = useState(true)
     const [parentsData, setPatrentsData] = useState([])
     const [selectedParents, setSelectedParents] = useState([])
+
+    useEffect(() => {
+        if (Platform.OS==="android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }   
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, [props.navigation]);
+
+      const handleBackButtonClick=()=> {
+        props.navigation.goBack() 
+        return true;
+      }
 
     useEffect(() => {
         if (data) {
