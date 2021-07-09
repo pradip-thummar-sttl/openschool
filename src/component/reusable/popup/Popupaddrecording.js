@@ -10,6 +10,8 @@ import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../utils/Constant";
+import { Download } from "../../../utils/Download";
+
 const Popupaddrecording = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -73,8 +75,8 @@ const Popupaddrecording = (props) => {
                     </TouchableOpacity>
                     :
                     <TouchableOpacity
-                        // activeOpacity={opacity}
-                        // onPress={() => props.onRemoveRecording()}
+                        activeOpacity={opacity}
+                        onPress={() => Download(props.recordingArr[0])}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
                         <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
                     </TouchableOpacity>

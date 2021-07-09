@@ -176,7 +176,7 @@ const PupilHomeWorkDetail = (props) => {
                                                         style={PAGESTYLE.checkMark}
                                                         value={item.IsCheck}
                                                         boxType={'square'}
-                                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                         onCheckColor={COLORS.white}
                                                         onFillColor={COLORS.dashboardPupilBlue}
                                                         onTintColor={COLORS.dashboardPupilBlue}
@@ -198,21 +198,23 @@ const PupilHomeWorkDetail = (props) => {
                                             onPress={() => addMaterial()}>
                                             <Text style={PAGESTYLE.HomeText}>Upload Homework</Text>
                                         </TouchableOpacity>
-                                        <View style={PAGESTYLE.docView}>
-                                            {materialArr.map((item, index) => {
-                                                return (
-                                                    <TouchableOpacity
-                                                        style={PAGESTYLE.homeworkView}
-                                                        activeOpacity={opacity}
-                                                        onPress={() => removeDocument(index)}>
-                                                        <View style={PAGESTYLE.alignRow1}>
-                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                                            <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
-                                                        </View>
-                                                    </TouchableOpacity>
-                                                )
-                                            })}
-                                        </View>
+                                        <ScrollView>
+                                            <View style={PAGESTYLE.docView}>
+                                                {materialArr.map((item, index) => {
+                                                    return (
+                                                        <TouchableOpacity
+                                                            style={PAGESTYLE.homeworkView}
+                                                            activeOpacity={opacity}
+                                                            onPress={() => removeDocument(index)}>
+                                                            <View style={PAGESTYLE.alignRow1}>
+                                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
+                                                            </View>
+                                                        </TouchableOpacity>
+                                                    )
+                                                })}
+                                            </View>
+                                        </ScrollView>
                                     </View>
                                 </View>
                             </View>

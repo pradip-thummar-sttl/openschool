@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -34,6 +35,7 @@ import com.openschool.activity.CallActivity;
 import com.openschool.adapter.OpponentsFromCallAdapter;
 import com.openschool.util.CollectionsUtils;
 import com.openschool.util.Consts;
+import com.openschool.util.FragmentExecuotr;
 import com.openschool.util.WebRtcSessionManager;
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.model.QBDialogType;
@@ -41,6 +43,7 @@ import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.view.QBConferenceSurfaceView;
 import com.quickblox.users.model.QBUser;
 import com.quickblox.videochat.webrtc.BaseSession;
+import com.quickblox.videochat.webrtc.QBRTCScreenCapturer;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCClientVideoTracksCallbacks;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
@@ -95,6 +98,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
     private ImageButton handUpCall;
+    private ImageButton button_screen_sharing;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
     protected View outgoingOpponentsRelativeLayout;
     protected TextView allOpponentsTextView;
@@ -297,6 +301,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         }
     }
 
+    private void startScreenSharing() {
+        conversationFragmentCallbackListener.onStartScreenSharing();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -390,6 +398,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (ImageButton) view.findViewById(R.id.button_hangup_call);
+        button_screen_sharing = (ImageButton) view.findViewById(R.id.button_screen_sharing);
         outgoingOpponentsRelativeLayout = view.findViewById(R.id.layout_background_outgoing_screen);
         allOpponentsTextView = (TextView) view.findViewById(R.id.text_outgoing_opponents_names);
         ringingTextView = (TextView) view.findViewById(R.id.text_ringing);
@@ -509,6 +518,13 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
                 conversationFragmentCallbackListener.onLeaveCurrentSession();
                 Log.d(TAG, "Call is stopped");
+            }
+        });
+
+        button_screen_sharing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startScreenSharing();
             }
         });
     }

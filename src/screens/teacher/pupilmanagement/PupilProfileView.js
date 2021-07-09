@@ -23,12 +23,32 @@ const PupilProfileView = (props) => {
     const item = props.selectedPupil;
     const [chartData, setChartData] = useState([])
 
+    const [bronze, setBronze] = useState(0)
+    const [silver, setSilver] = useState(0)
+    const [gold, setGold] = useState(0)
+
     const activityConfig = {
         width: 200,
         height: 200
     };
 
     useEffect(() => {
+        item.RewardsList.forEach(element => {
+            switch (element._id) {
+                case '3':
+                    setBronze(element.count)
+                    break;
+                case '6':
+                    setSilver(element.count)
+                    break;
+                case '9':
+                    setGold(element.count)
+                    break;
+                default:
+                    break;
+            }
+        });
+
         getLessonData()
     }, [])
 
@@ -124,15 +144,21 @@ const PupilProfileView = (props) => {
                                         <View style={PAGESTYLE.achivementBox}>
                                             <View style={PAGESTYLE.rewardStarMark}>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                    <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
+                                                        <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
+                                                    </ImageBackground>
                                                     <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
+                                                        <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
+                                                    </ImageBackground>
                                                     <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                                 </View>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]} />
+                                                    <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
+                                                        <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
+                                                    </ImageBackground>
                                                     <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                                 </View>
                                             </View>

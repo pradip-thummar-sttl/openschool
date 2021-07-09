@@ -53,7 +53,7 @@ console.log('props of homework',props)
                                     <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeworkesubmited(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>
                                             <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                                            <Text style={PAGESTYLE.videoDateBlack}>Submitted: {moment(item.SubmitedDate).format('dd/mm/yyyy')}</Text>
+                                            <Text style={PAGESTYLE.videoDateBlack}>Submitted: {moment(item.SubmitedDate).format('DD/MM/yyyy')}</Text>
                                         </View>
                                         <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
                                             <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
