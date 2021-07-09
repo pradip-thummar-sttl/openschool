@@ -44,7 +44,8 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={()=>toggleAnimation()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                    <Image style={styles.headerProfile} source={Images.proffileLogo} />
+                    {/* { uri: baseUrl + User.user.ProfilePicture } */}
                     {
                         isSmall? null:
                         <View style={styles.profileTextMain}>
@@ -146,9 +147,14 @@ const styles = StyleSheet.create({
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.2,
+        shadowOffset: { 
+            width: 2,
+            height: 0,
+        },
+        shadowOpacity: 0.06,
         shadowRadius: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        borderRightWidth: 1,
     },
     sideBarAside: {
         backgroundColor: COLORS.white,
@@ -206,9 +212,10 @@ const styles = StyleSheet.create({
         width: hp(22),
     },
     headerProfile: {
-        width: hp(5.40),
-        height: hp(5.40),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
+        borderRadius: hp(100),
     },
     userInfobottom: {
         position: 'absolute',

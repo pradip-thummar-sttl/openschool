@@ -31,7 +31,7 @@ const Images = {
     CheckIcon: require('../assets/images/check-icon2.png'),
     PupilDashTopBg: require('../assets/images/pupilDashboardTopGridBg3.png'),
     CalenderBg: require('../assets/images/calendarBg2.png'),
-    PupilHomeworkTableTopBg: require('../assets/images/PupilHomeworkTableTopBg3.png'),
+    PupilHomeworkTableTopBg: require('../assets/images/pupilHomeworkTableTopBg3.png'),
     HomeworkBook: require('../assets/images/homeworkbook2.png'),
     DueToday: require('../assets/images/dueToday2.png'),
     DueCalendar: require('../assets/images/dueCalendar2.png'),
@@ -125,7 +125,7 @@ const Images = {
     editIcon: require('../assets/images/edit-icon2.png'),
     noData: require('../assets/images/no-data2.png'),
     backSpaceArrow: require('../assets/images/backSpace-mobile-2.png'),
-
+    proffileLogo: require('../assets/images/profileLogo.png'),
     // Chat Icon
     attachmentIpad:require('../assets/images/Chatimage/attachment-ipad.png'),
     paperClip:require('../assets/images/Chatimage/paperclip.png'),
