@@ -174,7 +174,7 @@ const NotificationDrawer = (props) => {
                         </View>
                         <ScrollView style={styles.notificationmain} showsVerticalScrollIndicator={false}>
                             <View>
-                                <Text style={styles.notificationsText}>Live Classes</Text>
+                                <Text style={{...styles.notificationsText, paddingTop: hp(1),}}>Live Classes</Text>
                                 <View style={styles.classDetail}>
                                     <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
                                     <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
@@ -184,7 +184,7 @@ const NotificationDrawer = (props) => {
                                             <Text style={styles.timingText}>09:00 - 09:30</Text>
                                         </View>
                                         <TouchableOpacity>
-                                            <Text style={STYLE.openClassLink}>{[<PopupUser />]}</Text>
+                                            <Text style={{...STYLE.openClassLink, marginBottom: 0,}}>{[<PopupUser />]}</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -218,9 +218,7 @@ const NotificationDrawer = (props) => {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            </View>
-                            <View>
-                                <View style={styles.classDetail}>
+                                <View style={styles.classDetailLast}>
                                     <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
                                     <Text style={styles.classsummary}>You have a new message from</Text>
                                     <View style={styles.timingJoinClass}>
@@ -253,14 +251,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     drawerTitleMain: {
-        borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
         paddingLeft: hp(1.95),
-        paddingTop: hp(3.25),
-        paddingBottom: hp(3.25),
+        paddingTop: 25,
+        paddingBottom: 25,
         paddingRight: hp(1.95),
         position: 'relative',
         zIndex: 9,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
     },
     drawerTitle: {
         fontSize: hp(2.08),
@@ -281,22 +281,28 @@ const styles = StyleSheet.create({
         zIndex: 9,
     },
     closeIcon: {
-        width: hp(3),
+        width: 23,
+        height: 23,
         resizeMode: 'contain',
     },
     classDetail: {
         padding: hp(1.95),
-        marginBottom: -1,
         borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderColor: COLORS.bottomProfileLightBorder,
+        position: 'relative',
+    },
+    classDetailLast: {
+        padding: hp(1.95),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.bottomProfileLightBorder,
         position: 'relative',
     },
     notificationsText: {
         padding: hp(1.95),
         paddingBottom: hp(1),
-        paddingTop: hp(1),
-        borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        paddingTop: hp(4.55),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.bottomProfileLightBorder,
         color: COLORS.menuLightFonts,
         fontSize: hp(1.56),
         fontFamily: FONTS.fontSemiBold,
@@ -314,15 +320,16 @@ const styles = StyleSheet.create({
     },
     classsummary: {
         paddingRight: hp(5.1),
-        fontSize: hp(1.82),
+        fontSize: 14,
         fontFamily: FONTS.fontRegular,
-        lineHeight: hp(2.6),
+        lineHeight: 20,
         color: COLORS.darkGray,
         marginBottom: hp(1.95),
     },
     timingJoinClass: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
     },
     timing: {
         flexDirection: 'row',
@@ -366,11 +373,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: hp(1.82),
         paddingBottom: hp(1.82),
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: -1 },
-        shadowOpacity: 0.2,
-        shadowRadius: hp(3.125),
-        elevation: 10,
+        shadowColor: '#13171F',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.1,
+        shadowRadius: 20,
         backgroundColor: COLORS.white,
     },
     trashIcon: {
