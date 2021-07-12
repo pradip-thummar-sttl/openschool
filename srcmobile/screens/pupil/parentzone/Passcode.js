@@ -123,7 +123,7 @@ const Passcode = (props) => {
 
     return (
         <View style={Styles.mainView}>
-            <Text style={Styles.EnterCodeText}>Enter your code</Text>
+            <Text style={Styles.EnterCodeText}>{isConfirmation ? 'Re-enter your code' : !pin ? 'Create your code' : 'Enter your code'}</Text>
             <View style={Styles.codeView}>
                 <View style={Styles.input}>
                     <Text style={Styles.text}>{t1}</Text>
