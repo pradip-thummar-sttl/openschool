@@ -80,9 +80,29 @@ const Pupillist = ({ item, onPress }) => (
             <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
+            {item.RewardsList.map((item, index) => {
+                return (
+                    item._id == '3' ?
+                        <View style={PAGESTYLE.rewardStar}>
+                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                        </View>
+                        :
+                        item._id == '6' ?
+                            <View style={PAGESTYLE.rewardStar}>
+                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                            </View>
+                            :
+                            item._id == '9' ?
+                                <View style={PAGESTYLE.rewardStar}>
+                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                </View>
+                                :
+                                null
+                )
+            })}
         </View>
         <TouchableOpacity onPress={() => { onPress() }} style={PAGESTYLE.pupilDetailLink}>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />

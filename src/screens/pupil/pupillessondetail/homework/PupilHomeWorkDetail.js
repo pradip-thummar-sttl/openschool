@@ -173,7 +173,7 @@ const PupilHomeWorkDetail = (props) => {
                                         <View style={PAGESTYLE.checkBoxLabelBox}>
                                             <View style={PAGESTYLE.alignRow}>
                                                 <CheckBox
-                                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                     style={PAGESTYLE.checkMark}
                                                     value={item.IsCheck}
                                                     boxType={'square'}
@@ -211,18 +211,18 @@ const PupilHomeWorkDetail = (props) => {
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
                         {/* <View style={PAGESTYLE.uploadBoardBlock}> */}
-                            {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
+                        {/* <Image source={require('../../../../assets/images/upload-hw2.png')} style={PAGESTYLE.uploadBoard} /> */}
 
-                            <TouchableOpacity
-                                style={PAGESTYLE.homeworkView}
-                                onPress={() => addMaterial()}>
-                                <Text style={PAGESTYLE.HomeText}>Upload Homework</Text>
-                            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={PAGESTYLE.homeworkView}
+                            onPress={() => addMaterial()}>
+                            <Text style={PAGESTYLE.HomeText}>Upload Homework</Text>
+                        </TouchableOpacity>
+                        <ScrollView>
                             <View style={PAGESTYLE.docView}>
                                 {materialArr.map((item, index) => {
                                     return (
                                         <TouchableOpacity
-                                            
                                             activeOpacity={opacity}
                                             onPress={() => removeDocument(index)}>
                                             <View style={PAGESTYLE.alignRow1}>
@@ -233,13 +233,14 @@ const PupilHomeWorkDetail = (props) => {
                                     )
                                 })}
                             </View>
-                        </View>
+                        </ScrollView>
                     </View>
                 </View>
-                {
-                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
-                }
             </View>
+            {
+                isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
+            }
+        </View>
     );
 }
 export default PupilHomeWorkDetail;

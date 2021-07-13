@@ -105,7 +105,8 @@ const HeaderPM = (props) => {
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, }}>
                             <TouchableOpacity
                                 style={styles.buttonGroup}
-                                activeOpacity={opacity}>
+                                activeOpacity={opacity}
+                                onPress={()=> props.navigateToAddNewUser()}>
                                 <Image style={styles.addIcon} source={Images.AddIconWhite} />
                                 <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
                             </TouchableOpacity>

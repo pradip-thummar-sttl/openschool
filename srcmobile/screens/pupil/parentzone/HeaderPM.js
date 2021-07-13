@@ -112,7 +112,7 @@ const HeaderPM = (props) => {
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, topic name etc"
+                        placeholder="Search news"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
                             setKeyword(keyword);
@@ -179,12 +179,12 @@ const HeaderPM = (props) => {
                                 onPress={() => { props.setSelectedTabIndex(2); setSelectedTab(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>MESSAGE</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
                                 onPress={() => { props.setSelectedTabIndex(3); setSelectedTab(3) }}>
                                 <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>FAQ</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}

@@ -507,7 +507,7 @@ const PupuilDashboard = (props) => {
                                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
-                                                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
+                                                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.HomeWorkDate).format('DD/MM/yyyy')}</Text>
                                                                                                 </View>
                                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />

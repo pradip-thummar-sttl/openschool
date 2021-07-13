@@ -125,7 +125,7 @@ const WorkSpace = (props) => {
                                 )
                             }}
                             strokeWidthComponent={(w) => {
-                                return (<View style={PAGESTYLE.strokeWidthButton}>
+                                return (<View style={{...PAGESTYLE.strokeWidthButton, borderRadius: 100,width: 41,}}>
                                     <View style={{
                                         backgroundColor: 'white', marginHorizontal: 2.5,
                                         width: Math.sqrt(w / 3) * 10, height: Math.sqrt(w / 3) * 10, borderRadius: Math.sqrt(w / 3) * 10 / 2

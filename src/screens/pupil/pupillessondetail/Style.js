@@ -40,13 +40,14 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: hp(4.42),
+        paddingLeft: hp(3.25),
         paddingRight: hp(2.99),
+        alignItems: 'center',
     },
     lessonPlanTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: hp(1.90),
+        paddingTop: 0,
     },
     tabs: {
         paddingRight: hp(3.90),

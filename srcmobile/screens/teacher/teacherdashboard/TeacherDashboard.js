@@ -56,11 +56,34 @@ const Pupillist = ({ item, onPress }) => (
             </View>
         </View>
         <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            {item.RewardsList.map((item, index) => {
+                return (
+                    item._id == '3' ?
+                        <View style={PAGESTYLE.rewardStar}>
+                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                        </View>
+                        :
+                        item._id == '6' ?
+                            <View style={PAGESTYLE.rewardStar}>
+                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                            </View>
+                            :
+                            item._id == '9' ?
+                                <View style={PAGESTYLE.rewardStar}>
+                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                </View>
+                                :
+                                null
+                )
+            })}
+            {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
         </View>
-        <TouchableOpacity onPress={()=>onPress()} style={PAGESTYLE.pupilDetailLink}>
+        <TouchableOpacity onPress={() => onPress()} style={PAGESTYLE.pupilDetailLink}>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </TouchableOpacity>
     </View>
@@ -140,7 +163,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const launchLiveClass = () => {
-        console.log('data of sub view', dataOfSubView)
+        console.log('data of sub view', dataOfSubView, isRunningFromVirtualDevice)
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
@@ -149,9 +172,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // } else {
             //     startLiveClassIOS()
             // }
-            setLoading(true)
+            // setLoading(true)
             let currentTime = moment(Date()).format('hh:mm')
-            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+            let startTime = moment(dataOfSubView.StartTime, 'HH:mm').format('HH:mm')
+            let endTime = moment(dataOfSubView.EndTime, ["h:mm A"]).format("HH:mm");
+            console.log(currentTime + ' - ' + startTime + ' - ' + endTime);
+            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
@@ -167,15 +193,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     setLoading(false)
 
                 })
-            } else {
-                setLoading(false)
-                showMessage(MESSAGE.scheduledTime)
-                
-
-
-            }
-
-            console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
+            // } else {
+            //     setLoading(false)
+            //     showMessage(MESSAGE.scheduledTime)
+            // }
+// 
+            // console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
 
@@ -225,7 +248,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         return (
             <Pupillist
                 item={item}
-                onPress={()=>{props.navigation.navigate('PupilProfileView', { item: item })}}
+                onPress={() => { props.navigation.navigate('PupilProfileView', { item: item }) }}
             />
         );
     };
@@ -316,8 +339,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('PupiloverView',{item:1})}
-                            style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('PupiloverView', { item: 1 })}
+                                style={PAGESTYLE.boxDash}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground>
@@ -458,7 +481,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         <ActivityIndicator
                                                                             style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                            color={COLORS.buttonGreen} /> :
+                                                                            color={COLORS.white} />
+                                                                        :
                                                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
                                                                 }
 

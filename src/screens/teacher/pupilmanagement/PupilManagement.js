@@ -16,6 +16,7 @@ const PupilManagement = (props) => {
         <View style={PAGESTYLE.mainPage}>
             {isOverViewSelected ?
                 <PupiloverView
+                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     onPupilClick={(item) => { setSelectedPupil(item); setOverViewSelected(false); setDetailSelected(true) }} tabs={props.tabs} />
                 :
                 isDetailSelected ?

@@ -49,7 +49,7 @@ const ParentZonePerformance = (props) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != null ? per == 0 ? 0.0001 : (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -68,7 +68,7 @@ const ParentZonePerformance = (props) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != null ? per == 0 ? 0.0001 : (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
