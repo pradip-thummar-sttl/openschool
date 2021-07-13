@@ -39,10 +39,9 @@ export default WorkSpaceHeader;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.25),
-        paddingRight: hp(4.5),
+        paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        paddingVertical: wp(1)
-        // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
     },
     headerMain: {
         flexDirection: 'row',
