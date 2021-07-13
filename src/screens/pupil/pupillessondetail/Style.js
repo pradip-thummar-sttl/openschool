@@ -33,7 +33,7 @@ export default StyleSheet.create({
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
         paddingBottom: hp(2),
-        paddingTop: hp(2),
+        // paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
@@ -274,7 +274,7 @@ export default StyleSheet.create({
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
         paddingTop: hp(2.5),
-        width: '35%'
+        width: '31.5%'
     },
     largeVideo1: {
         backgroundColor: COLORS.black,
@@ -781,6 +781,7 @@ export default StyleSheet.create({
     userRight: {
         width: hp(60.41),
         flexDirection: 'row',
+        alignItems: 'center',
     },
     userTopName: {
         flexDirection: 'row',
@@ -808,8 +809,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
-        width: 40,
-        height: 40,
+        width: 18,
         marginRight: 10,
         resizeMode: 'contain',
     },
@@ -831,9 +831,9 @@ export default StyleSheet.create({
     markedLabel: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         marginLeft: hp(6.19),
         marginRight: hp(9.63),
-        marginTop: hp(1.0),
     },
     markedText: {
         fontFamily: FONTS.fontRegular,
@@ -843,7 +843,7 @@ export default StyleSheet.create({
     },
     dateNameBlock: {
         marginRight: hp(2.21),
-        marginTop: hp(0.6),
+        // marginTop: hp(0.6),
     },
     feedbackBlock: {
     },
@@ -1099,7 +1099,7 @@ export default StyleSheet.create({
         height: hp(8.46),
     },
     submittedIcon: {
-        width: hp(1.89),
+        width: 18,
         resizeMode: 'contain',
         marginRight: hp(1),
     },
@@ -1128,22 +1128,18 @@ export default StyleSheet.create({
         backgroundColor: COLORS.dashboardHomeWorkPurple,
         borderTopLeftRadius: hp(1.5),
         borderBottomLeftRadius: hp(1.5),
-        marginTop: hp(-1),
-        // marginLeft:hp(0),
-        // 
-        // marginBottom:hp(-1),
         height: hp(8.46),
     },
     containerWrapTopPurple: {
         justifyContent: 'space-between',
         flexDirection: 'row',
+        alignItems: 'center',
         borderWidth: 1,
         borderColor: COLORS.dashboardHomeWorkPurple,
         borderRadius: hp(1.5),
         marginLeft: hp(3.25),
         marginRight: hp(2.99),
         marginBottom: hp(1),
-        paddingTop: hp(1),
         height: hp(8.46),
     },
     markSubmittedSpaceLeft: {
