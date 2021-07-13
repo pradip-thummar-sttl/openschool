@@ -16,36 +16,37 @@ import FONTS from '../../../utils/Fonts'
 import { Service } from '../../../service/Service';
 import { EndPoints } from '../../../service/EndPoints';
 import { User } from '../../../utils/Model';
+import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 var moment = require('moment');
 
 const Message = (props) => {
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
     const searchHeader = () => {
         return (
             <View style={PAGESTYLE.searchParent}>
@@ -199,7 +200,7 @@ const Message = (props) => {
         <View>
             <HeaderWhitepupilMessage
                 onAlertPress={() => props.navigation.openDrawer()} />
-                
+
             {searchHeader()}
             {isLoading ?
                 <ActivityIndicator
@@ -216,9 +217,10 @@ const Message = (props) => {
                         extraData={selectedId}
                         showsVerticalScrollIndicator={false} />
                     :
-                    <View style={{ height: 100, justifyContent: 'center' }}>
-                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                    </View>
+                    // <View style={{ height: 100, justifyContent: 'center' }}>
+                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                    // </View>
+                    <EmptyStatePlaceHohder />
             }
         </View>
     )

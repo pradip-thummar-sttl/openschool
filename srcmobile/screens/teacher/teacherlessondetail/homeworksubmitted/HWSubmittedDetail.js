@@ -268,7 +268,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             numberOfLines={4}
                                             defaultValue={data.HomeworkDescription}
                                             style={PAGESTYLE.commonInputTextareaNormal}
-                                        />
+                                            editable={false} />
                                         {/* <TextInput
                                         multiline={true}
                                         numberOfLines={4}

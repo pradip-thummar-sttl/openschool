@@ -15,6 +15,7 @@ import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
@@ -165,9 +166,10 @@ const TeacherLessonList = (props) => {
                                             showsVerticalScrollIndicator={false}
                                         />
                                         :
-                                        <View style={{ height: 100, justifyContent: 'center' }}>
-                                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        </View>
+                                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                        // </View>
+                                        <EmptyStatePlaceHohder />
                                 }
                             </SafeAreaView>
                         </View>

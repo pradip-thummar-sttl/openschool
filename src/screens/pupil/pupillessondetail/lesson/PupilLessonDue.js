@@ -7,6 +7,7 @@ import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import moment from "moment";
 import { baseUrl } from "../../../../utils/Constant";
+import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 
 const PupilLessonDue = (props) => {
@@ -14,7 +15,7 @@ console.log('props of homework',props)
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
-            {props.DueHomeWork.length > 0 ?
+            {props.DueHomeWork.length > 0 || props.SubmitHomeWork.length > 0 || props.MarkedHomeWork.length > 0 ?
                 <>
                     <Text style={PAGESTYLE.videoTitle}>Homework due</Text>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
@@ -41,10 +42,6 @@ console.log('props of homework',props)
                             })
                         }
                     </ScrollView>
-                </> : null
-            }
-            {props.SubmitHomeWork.length > 0 ?
-                <>
                     <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Submitted homework</Text>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                         {
@@ -68,10 +65,6 @@ console.log('props of homework',props)
                             })
                         }
                     </ScrollView>
-                </> : null
-            }
-            {props.MarkedHomeWork.length > 0 ?
-                <>
                     <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Homework marked</Text>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
 
@@ -96,7 +89,9 @@ console.log('props of homework',props)
                             })
                         }
                     </ScrollView>
-                </> : null
+                </> 
+                : 
+                <EmptyStatePlaceHohder />
             }
         </View >
 

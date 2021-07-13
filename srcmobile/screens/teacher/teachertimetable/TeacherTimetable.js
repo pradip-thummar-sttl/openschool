@@ -15,6 +15,7 @@ import { setCalendarEventData } from "../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { User } from "../../../utils/Model";
 import { Lesson } from "../../../utils/Constant";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -242,9 +243,10 @@ const TeacherTimeTable = (props) => {
                                 </ScrollView>
                             </View>
                             :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
+                            // <View style={{ height: 100, justifyContent: 'center' }}>
+                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            // </View>
+                            <EmptyStatePlaceHohder />
                     }
                 </View>
             </View>

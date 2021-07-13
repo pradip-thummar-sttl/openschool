@@ -25,6 +25,7 @@ import PupilManagement from "../pupilmanagement/PupilManagement";
 import Message from "../GlobalMessage/Message";
 import PupilProfileView from "../pupilmanagement/PupilProfileView";
 import MESSAGE from "../../../utils/Messages";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -156,31 +157,31 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isLoading, setLoading] = useState(false);
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
 
     useEffect(() => {
         refresh()
@@ -566,9 +567,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             </View>
                                                         </View>
                                                         :
-                                                        <View style={{ height: 100, justifyContent: 'center' }}>
-                                                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        </View>
+                                                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                        // </View>
+                                                        <EmptyStatePlaceHohder />
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -632,9 +634,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                         :
 
-                                                        <View>
-                                                            <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        </View>
+                                                        // <View>
+                                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                        // </View>
+                                                        <EmptyStatePlaceHohder />
                                                 }
                                             </View>
                                         </ScrollView>

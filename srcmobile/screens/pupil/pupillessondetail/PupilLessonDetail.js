@@ -28,6 +28,7 @@ import { User } from "../../../utils/Model";
 import moment from "moment";
 import { opacity } from "../../../utils/Constant";
 import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 
 const PupilLessonDetail = (props) => {
@@ -348,9 +349,10 @@ const PupilLessonDetail = (props) => {
                                     lastWeekLesson={lastWeekLesson}
                                     navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
                                 :
-                                <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                    <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                </View>
+                                // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                // </View>
+                                <EmptyStatePlaceHohder />
                             :
                             DueHomeWork.length > 0 || SubmitHomeWork.length > 0 || MarkedHomeWork.length > 0 ?
                                 <PupilLessonDue
@@ -361,9 +363,10 @@ const PupilLessonDetail = (props) => {
                                     navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
                                     navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                                 :
-                                <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                    <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                </View>
+                                // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                // </View>
+                                <EmptyStatePlaceHohder />
                     }
                     </View>
                     {/* <HeaderBulk /> */}

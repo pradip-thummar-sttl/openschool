@@ -16,6 +16,7 @@ import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { User } from "../../../utils/Model";
 import MESSAGE from "../../../utils/Messages";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -107,31 +108,31 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }, [])
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
 
     const refresh = () => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
@@ -178,26 +179,26 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let endTime = moment(dataOfSubView.EndTime, ["h:mm A"]).format("HH:mm");
             console.log(currentTime + ' - ' + startTime + ' - ' + endTime);
             // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
-                // showMessage('time to start')
-                let data = {
-                    LessonStart: true,
-                    LessonEnd: false
+            // showMessage('time to start')
+            let data = {
+                LessonStart: true,
+                LessonEnd: false
+            }
+            Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                setLoading(false)
+
+                if (res.flag) {
+                    startLiveClassAndroid()
                 }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
-                    setLoading(false)
+            }, (err) => {
+                setLoading(false)
 
-                    if (res.flag) {
-                        startLiveClassAndroid()
-                    }
-                }, (err) => {
-                    setLoading(false)
-
-                })
+            })
             // } else {
             //     setLoading(false)
             //     showMessage(MESSAGE.scheduledTime)
             // }
-// 
+            // 
             // console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
@@ -552,9 +553,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         </View>
                                     </View>
                                     :
-                                    <View style={{ height: 100, justifyContent: 'center' }}>
-                                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    </View>
+                                    // <View style={{ height: 100, justifyContent: 'center' }}>
+                                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder />
                             }
                         </View>
                         <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -594,9 +596,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     </View>
                                     :
 
-                                    <View>
-                                        <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    </View>
+                                    // <View>
+                                    //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder />
                             }
                         </View>
                     </View>
