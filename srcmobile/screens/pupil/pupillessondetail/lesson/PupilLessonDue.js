@@ -24,7 +24,7 @@ const PupilLessonDue = (props) => {
                                     <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeWorkDetail(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>
                                             <Image source={require('../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
-                                            <Text style={PAGESTYLE.videoDateBlack}>Due: {moment(item.DueDate).format('dd/mm/yyyy')}</Text>
+                                            <Text style={PAGESTYLE.videoDateBlack}>Due: {moment(item.DueDate).format('DD/MM/yyyy')}</Text>
                                             <Image source={require('../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} />
                                         </View>
                                         <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
@@ -52,7 +52,7 @@ const PupilLessonDue = (props) => {
                                     <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeworkesubmited(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>
                                             <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
-                                            <Text style={PAGESTYLE.videoDateBlack}>Submitted: {moment(item.SubmitedDate).format('dd/mm/yyyy')}</Text>
+                                            <Text style={PAGESTYLE.videoDateBlack}>Submitted: {moment(item.SubmitedDate).format('DD/MM/yyyy')}</Text>
                                         </View>
                                         <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
                                             <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>

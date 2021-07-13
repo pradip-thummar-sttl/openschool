@@ -1,8 +1,11 @@
 package com.openschool.activity;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -18,6 +21,7 @@ import com.openschool.fragments.AudioConversationFragment;
 import com.openschool.fragments.BaseConversationFragment;
 import com.openschool.fragments.ConversationFragmentCallbackListener;
 import com.openschool.fragments.OnCallEventsController;
+import com.openschool.fragments.ScreenShareFragment;
 import com.openschool.fragments.VideoConversationFragment;
 import com.openschool.util.Consts;
 import com.openschool.util.FragmentExecuotr;
@@ -35,6 +39,7 @@ import com.quickblox.videochat.webrtc.AppRTCAudioManager;
 import com.quickblox.videochat.webrtc.BaseSession;
 import com.quickblox.videochat.webrtc.QBRTCCameraVideoCapturer;
 import com.quickblox.videochat.webrtc.QBRTCConfig;
+import com.quickblox.videochat.webrtc.QBRTCScreenCapturer;
 import com.quickblox.videochat.webrtc.QBRTCTypes;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 
@@ -291,6 +296,34 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private void setVideoEnabled(boolean isVideoEnabled) {
         if (currentSession != null && currentSession.getMediaStreamManager() != null) {
             currentSession.getMediaStreamManager().getLocalVideoTrack().setEnabled(isVideoEnabled);
+        }
+    }
+
+    @TargetApi(21)
+    @Override
+    public void onStartScreenSharing() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+        QBRTCScreenCapturer.requestPermissions(CallActivity.this);
+    }
+
+    private void startScreenSharing(final Intent data) {
+        ScreenShareFragment screenShareFragment = ScreenShareFragment.newIntstance();
+        FragmentExecuotr.addFragmentWithBackStack(getSupportFragmentManager(), R.id.fragment_container, screenShareFragment, ScreenShareFragment.TAG);
+        currentSession.getMediaStreamManager().setVideoCapturer(new QBRTCScreenCapturer(data, null));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        Log.i(TAG, "onActivityResult requestCode=" + requestCode + ", resultCode= " + resultCode);
+        if (requestCode == QBRTCScreenCapturer.REQUEST_MEDIA_PROJECTION) {
+            if (resultCode == Activity.RESULT_OK) {
+                startScreenSharing(data);
+                Log.i(TAG, "Starting screen capture");
+            } else {
+
+            }
         }
     }
 

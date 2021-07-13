@@ -13,6 +13,7 @@ import ParentZonePerformance from "./ParentZonePerformance";
 import { User } from "../../../utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import ParentChat from "./Chat/ParentChat";
 var moment = require('moment');
 
 const MessageList = (props) => {
@@ -131,7 +132,9 @@ const ParentZonemain = (props) => {
                             data={pupilData} />
                         :
                         selectedTabIndex == 2 ?
-                            null
+                            <ParentChat
+                                data={pupilData}
+                                tabs={1} />
                             :
                             selectedTabIndex == 3 ?
                                 null

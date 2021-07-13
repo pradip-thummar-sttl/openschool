@@ -23,12 +23,32 @@ const PupilProfileView = (props) => {
     const item = props.selectedPupil;
     const [chartData, setChartData] = useState([])
 
+    const [bronze, setBronze] = useState(0)
+    const [silver, setSilver] = useState(0)
+    const [gold, setGold] = useState(0)
+
     const activityConfig = {
-        width: 200,
-        height: 200
+        width: 300,
+        height: 300
     };
 
     useEffect(() => {
+        item.RewardsList.forEach(element => {
+            switch (element._id) {
+                case '3':
+                    setBronze(element.count)
+                    break;
+                case '6':
+                    setSilver(element.count)
+                    break;
+                case '9':
+                    setGold(element.count)
+                    break;
+                default:
+                    break;
+            }
+        });
+
         getLessonData()
     }, [])
 
@@ -37,12 +57,13 @@ const PupilProfileView = (props) => {
     }, [chartData])
 
     const getLessonData = () => {
+        console.log('`${EndPoints.GetCountLession}/${item.PupilId}`', `${EndPoints.GetCountLession}/${item.PupilId}`);
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -61,7 +82,7 @@ const PupilProfileView = (props) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -110,12 +131,12 @@ const PupilProfileView = (props) => {
                                         </View>
                                         <View>
                                             <Text style={PAGESTYLE.userLabel}>Unique I.D (auto-generated)</Text>
-                                            <Text style={PAGESTYLE.userName}>{props.selectedPupil.FirstName}</Text>
+                                            <Text style={PAGESTYLE.userName}>{props.selectedPupil.UniqueNumber}</Text>
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.managementParaSec}>
                                         <Text style={PAGESTYLE.userLabel}>Notes</Text>
-                                        <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.FirstName}</Text>
+                                        <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.Note ? props.selectedPupil.Note : '-'}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.rateAnnotationBlock}>
@@ -124,15 +145,21 @@ const PupilProfileView = (props) => {
                                         <View style={PAGESTYLE.achivementBox}>
                                             <View style={PAGESTYLE.rewardStarMark}>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                    <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
+                                                        <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
+                                                    </ImageBackground>
                                                     <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
+                                                        <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
+                                                    </ImageBackground>
                                                     <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                                 </View>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]} />
+                                                    <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
+                                                        <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
+                                                    </ImageBackground>
                                                     <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                                 </View>
                                             </View>
@@ -140,7 +167,7 @@ const PupilProfileView = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.annotationText}>
                                         <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>Annotation</Text>
-                                        <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.FirstName}</Text>
+                                        <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.generalRow}>

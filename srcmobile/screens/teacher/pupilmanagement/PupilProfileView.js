@@ -23,6 +23,11 @@ const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
+    const [bronze, setBronze] = useState(0)
+    const [silver, setSilver] = useState(0)
+    const [gold, setGold] = useState(0)
+
+    console.log('item', item);
     // const handleOnClick = (index) => {
     //     setTabSelected(index)
     // }
@@ -58,6 +63,23 @@ const PupilProfileView = (props) => {
     }
 
     useEffect(() => {
+
+        item.RewardsList.forEach(element => {
+            switch (element._id) {
+                case '3':
+                    setBronze(element.count)
+                    break;
+                case '6':
+                    setSilver(element.count)
+                    break;
+                case '9':
+                    setGold(element.count)
+                    break;
+                default:
+                    break;
+            }
+        });
+
         getLessonData()
     }, [])
 
@@ -71,7 +93,7 @@ const PupilProfileView = (props) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -90,7 +112,7 @@ const PupilProfileView = (props) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -136,11 +158,11 @@ const PupilProfileView = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.FirstName}</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
                                 </View>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>Notes</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.FirstName}</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.Note ? item.Note : '-'}</Text>
                                 </View>
                             </View>
                             <View HR style={STYLE.hrCommon}></View>
@@ -149,15 +171,21 @@ const PupilProfileView = (props) => {
                                     <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
                                     <View style={PAGESTYLE.rewardStarMark}>
                                         <View style={PAGESTYLE.centerText}>
-                                            <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                            <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
+                                            </ImageBackground>
                                             <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                         </View>
                                         <View style={PAGESTYLE.centerStar}>
-                                            <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                            <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
+                                            </ImageBackground>
                                             <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                         </View>
                                         <View style={PAGESTYLE.centerText}>
-                                            <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                            <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
+                                            </ImageBackground>
                                             <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                         </View>
                                     </View>

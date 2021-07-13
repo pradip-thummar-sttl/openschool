@@ -40,9 +40,32 @@ const Pupillist = (props, { item }) => (
                 <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
-                <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                {props.item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
+                            <View style={PAGESTYLE.rewardStar}>
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                            </View>
+                            :
+                            item._id == '6' ?
+                                <View style={PAGESTYLE.rewardStar}>
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                </View>
+                                :
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+                {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
             </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </View>
@@ -57,7 +80,8 @@ const PupiloverView = (props) => {
     const [filterBy, setFilterBy] = useState('')
 
     useEffect(() => {
-        fetchRecord('', '')
+        console.log('`${EndPoints.PupilByTeacherId}/${User.user._id}`', `${EndPoints.PupilByTeacherId}/${User.user._id}`);
+        // fetchRecord('', '')
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
@@ -67,7 +91,7 @@ const PupiloverView = (props) => {
             Filterby: filterBy,
         }
 
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
@@ -101,7 +125,8 @@ const PupiloverView = (props) => {
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                 onSearch={() => fetchRecord(searchKeyword, '')}
                 onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                onFilter={(filterBy) => fetchRecord('', filterBy)}
+                navigateToAddNewUser={() => props.navigateToAddNewUser()} />
 
             {selectedTab == 0 ?
                 <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>

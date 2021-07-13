@@ -102,7 +102,7 @@ const PupilHomeWorkMarked = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.rightSideBar}>
                                     <View style={PAGESTYLE.uploadBoardBlock}>
-                                        <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
+                                        <Text style={PAGESTYLE.uploaded}>Uploaded Homework</Text>
                                         <FlatList
                                             data={item.HomeworkList}
                                             style={{ width: '100%', height: '100%' }}

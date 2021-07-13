@@ -50,6 +50,7 @@ import PupilProfileView from '../screens/teacher/pupilmanagement/PupilProfileVie
 import ParentZoneProfileEdit from '../screens/pupil/parentzone/ParentZoneProfileEdit';
 import ParentZoneSwitch from '../screens/pupil/parentzone/ParentZoneSwitch';
 import Chat from '../screens/Chat/Chat';
+import ParentChat from '../screens/pupil/parentzone/Chat/ParentChat';
 import PupiloverView from '../screens/teacher/pupilmanagement/PupiloverView';
 import ParentZoneSchoolDetails from '../screens/pupil/parentzone/ParentZoneSchoolDetails';
 import ParentZoneProfile from '../screens/pupil/parentzone/ParentZoneProfile';
@@ -133,9 +134,10 @@ function ScreenStack() {
                 <Stack.Screen name="ParentZonemain" component={ParentZonemain} />
                 <Stack.Screen name="ParentZonePerformance" component={ParentZonePerformance} />
 
-            <Stack.Screen name="Chat" component={Chat} />
-            <Stack.Screen name="Avatar" component={Avatar} />
-        </Stack.Navigator>
+                <Stack.Screen name="Chat" component={Chat} />
+                <Stack.Screen name="ParentChat" component={ParentChat} />
+                <Stack.Screen name="Avatar" component={Avatar} />
+            </Stack.Navigator>
         </PubNubProvider>
     );
 }

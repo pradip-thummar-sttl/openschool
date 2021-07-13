@@ -29,6 +29,8 @@ public interface ConversationFragmentCallbackListener {
 
     void onLeaveCurrentSession();
 
+    void onStartScreenSharing();
+
     void onSwitchCamera(CameraVideoCapturer.CameraSwitchHandler cameraSwitchHandler);
 
     void onStartJoinConference();
