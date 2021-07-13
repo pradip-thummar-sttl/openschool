@@ -28,8 +28,8 @@ const PupilProfileView = (props) => {
     const [gold, setGold] = useState(0)
 
     const activityConfig = {
-        width: 200,
-        height: 200
+        width: 300,
+        height: 300
     };
 
     useEffect(() => {
@@ -57,12 +57,13 @@ const PupilProfileView = (props) => {
     }, [chartData])
 
     const getLessonData = () => {
+        console.log('`${EndPoints.GetCountLession}/${item.PupilId}`', `${EndPoints.GetCountLession}/${item.PupilId}`);
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -81,7 +82,7 @@ const PupilProfileView = (props) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? per == 0 ? 0.0001 : (per / 100) : 0,       // To make value between 0 to 1
+                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -130,12 +131,12 @@ const PupilProfileView = (props) => {
                                         </View>
                                         <View>
                                             <Text style={PAGESTYLE.userLabel}>Unique I.D (auto-generated)</Text>
-                                            <Text style={PAGESTYLE.userName}>{props.selectedPupil.FirstName}</Text>
+                                            <Text style={PAGESTYLE.userName}>{props.selectedPupil.UniqueNumber}</Text>
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.managementParaSec}>
                                         <Text style={PAGESTYLE.userLabel}>Notes</Text>
-                                        <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.FirstName}</Text>
+                                        <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.Note ? props.selectedPupil.Note : '-'}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.rateAnnotationBlock}>
@@ -166,7 +167,7 @@ const PupilProfileView = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.annotationText}>
                                         <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>Annotation</Text>
-                                        <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.FirstName}</Text>
+                                        <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.generalRow}>

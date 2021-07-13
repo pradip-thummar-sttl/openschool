@@ -339,7 +339,7 @@ export default StyleSheet.create({
         marginLeft:hp(2.3),
     },
     chartBlock:{
-        width:hp(28.20),
+        // width:hp(28.20),
         alignItems:'flex-start',
     },
     mngmntchartImg:{

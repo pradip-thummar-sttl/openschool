@@ -108,99 +108,58 @@ const ParentChat = (props) => {
 
 
     return (
+        <View style={{ height: '100%', backgroundColor: COLORS.white, width: '100%' }}>
 
-        <View style={{ height: '100%', width: '100%', padding: 10, bottom: 0, flexDirection: 'column' }}>
-            <FlatList
-                style={{ height: '100%', top: 0, bottom: 110, backgroundColor: COLORS.blueButton }}
-                data={messages}
-                renderItem={({ item, index }) => {
-                    return (
-                        <View style={Styles.messageCell}>
-                            <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
-                            <View style={Styles.messageSubCell}>
-                                <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
-                                <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
+
+            <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
+                <View style={Styles.views}>
+
+                    <View style={Styles.rightView}>
+                        <View style={Styles.mesagesView}>
+                            <FlatList
+                                data={messages}
+                                renderItem={({ item, index }) => {
+                                    return (
+                                        <View style={Styles.messageCell}>
+                                            <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
+                                            <View style={Styles.messageSubCell}>
+                                                <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
+                                                <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
+                                            </View>
+                                        </View>
+                                    )
+                                }}
+                            />
+
+                        </View>
+                        <View style={Styles.textView}>
+                            <TextInput
+                                style={Styles.input}
+                                multiline={true}
+                                placeholder={placeholder}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                value={message}
+                                onChangeText={(text) => setMessage(text)}
+                            />
+                            <View style={Styles.buttonView}>
+                                {/* <TouchableOpacity>
+                    <Image style={Styles.btn} source={Images.paperClip} />
+                </TouchableOpacity>
+                <TouchableOpacity >
+                    <Image style={Styles.btn} source={Images.imageUpload} />
+                </TouchableOpacity> */}
+                                <TouchableOpacity onPress={() => sendMessage(message)}>
+                                    <Image style={Styles.btn} source={Images.send} />
+                                </TouchableOpacity>
                             </View>
                         </View>
-                    )
-                }}
-            />
 
-            <View style={Styles.textView}>
-                <TextInput
-                    style={Styles.input}
-                    multiline={true}
-                    placeholder={placeholder}
-                    placeholderTextColor={COLORS.menuLightFonts}
-                    value={message}
-                    onChangeText={(text) => setMessage(text)}
-                />
-                <View style={Styles.buttonView}>
-                    {/* <TouchableOpacity>
-                                    <Image style={Styles.btn} source={Images.paperClip} />
-                                </TouchableOpacity>
-                                <TouchableOpacity >
-                                    <Image style={Styles.btn} source={Images.imageUpload} />
-                                </TouchableOpacity> */}
-                    <TouchableOpacity onPress={() => sendMessage(message)}>
-                        <Image style={Styles.btn} source={Images.send} />
-                    </TouchableOpacity>
+                    </View>
+
                 </View>
-            </View>
+            </KeyboardAwareScrollView>
+
         </View>
-
-        // <View style={{ height: '100%', backgroundColor: COLORS.white, width: '100%' }}>
-
-
-        //     <c contentContainerStyle={{ flex: 1, }}>
-        //         <View style={Styles.views}>
-
-        //             <View style={Styles.rightView}>
-        //                 <View style={Styles.mesagesView}>
-        // <FlatList
-        //     data={messages}
-        //     renderItem={({ item, index }) => {
-        //         return (
-        //             <View style={Styles.messageCell}>
-        //                 <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
-        //                 <View style={Styles.messageSubCell}>
-        //                     <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
-        //                     <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
-        //                 </View>
-        //             </View>
-        //         )
-        //     }}
-        // />
-
-        //                 </View>
-        // <View style={Styles.textView}>
-        //     <TextInput
-        //         style={Styles.input}
-        //         multiline={true}
-        //         placeholder={placeholder}
-        //         placeholderTextColor={COLORS.menuLightFonts}
-        //         value={message}
-        //         onChangeText={(text) => setMessage(text)}
-        //     />
-        //     <View style={Styles.buttonView}>
-        //         {/* <TouchableOpacity>
-        //             <Image style={Styles.btn} source={Images.paperClip} />
-        //         </TouchableOpacity>
-        //         <TouchableOpacity >
-        //             <Image style={Styles.btn} source={Images.imageUpload} />
-        //         </TouchableOpacity> */}
-        //         <TouchableOpacity onPress={() => sendMessage(message)}>
-        //             <Image style={Styles.btn} source={Images.send} />
-        //         </TouchableOpacity>
-        //     </View>
-        // </View>
-
-        //             </View>
-
-        //         </View>
-        //     </KeyboardAwareScrollView>
-
-        // </View>
 
     )
 }

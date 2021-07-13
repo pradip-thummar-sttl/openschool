@@ -40,7 +40,7 @@ const Pupillist = (props, { item }) => (
                 <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
-                {item.RewardsList.map((item, index) => {
+                {props.item.RewardsList.map((item, index) => {
                     return (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
@@ -80,7 +80,8 @@ const PupiloverView = (props) => {
     const [filterBy, setFilterBy] = useState('')
 
     useEffect(() => {
-        fetchRecord('', '')
+        console.log('`${EndPoints.PupilByTeacherId}/${User.user._id}`', `${EndPoints.PupilByTeacherId}/${User.user._id}`);
+        // fetchRecord('', '')
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
@@ -90,7 +91,7 @@ const PupiloverView = (props) => {
             Filterby: filterBy,
         }
 
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
@@ -124,7 +125,8 @@ const PupiloverView = (props) => {
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                 onSearch={() => fetchRecord(searchKeyword, '')}
                 onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                onFilter={(filterBy) => fetchRecord('', filterBy)}
+                navigateToAddNewUser={() => props.navigateToAddNewUser()} />
 
             {selectedTab == 0 ?
                 <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>

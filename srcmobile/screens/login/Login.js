@@ -276,7 +276,7 @@ class Login extends Component {
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                    placeholder="Enter email or phone"
+                                    placeholder="Enter email"
                                     autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}

@@ -20,36 +20,43 @@ const PupiloverView = (props) => {
     const [isHide, action] = useState(true);
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
+    const [searchKeyword, setSearchKeyword] = useState('')
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
+
     useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+
         setSelectedTabIndex(item)
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
@@ -59,7 +66,7 @@ const PupiloverView = (props) => {
         }, (err) => {
             console.log('Err of all pupil by teacher', err)
         })
-    }, [])
+    }
 
     return (
         <View>
@@ -68,7 +75,11 @@ const PupiloverView = (props) => {
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     tabs={selectedTabIndex}
-                    onSearchKeyword={() => { }}
+                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                    onSearch={() => fetchRecord(searchKeyword, '')}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                    onFilter={(filterBy) => fetchRecord('', filterBy)}
+                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
@@ -116,9 +127,9 @@ const PupiloverView = (props) => {
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
                                                     </View>
-                                                    <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
+                                                    <View style={PAGESTYLE.pupilDetailLink}>
                                                         <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                                                    </TouchableOpacity>
+                                                    </View>
                                                 </View>
                                             </TouchableOpacity>
                                         )

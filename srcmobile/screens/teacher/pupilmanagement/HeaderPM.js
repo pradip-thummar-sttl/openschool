@@ -25,6 +25,17 @@ const HeaderPM = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
+    const [keyword, setKeyword] = useState('')
+
+    useEffect(() => {
+        if (!isSearchActive) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
 
     useEffect(() => {
         // props.onFilter(filterBy)
@@ -69,6 +80,7 @@ const HeaderPM = (props) => {
                             placeholder="Search pupil"
                             placeholderTextColor={COLORS.menuLightFonts}
                             onChangeText={keyword => {
+                                setKeyword(keyword);
                                 props.onSearchKeyword(keyword);
                             }} />
                         <Menu>
@@ -106,10 +118,11 @@ const HeaderPM = (props) => {
                         </Menu>
                     </View>
 
-                    <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonGroup}
+                        onPress={() => props.navigateToAddNewUser()}>
+                        <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                        <Text style={styles.commonButtonGreenheader}></Text>
+                    </TouchableOpacity>
                 </View>
                 :
                 null

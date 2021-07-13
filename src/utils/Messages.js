@@ -3,7 +3,7 @@ const MESSAGE = {
     phone: "Please enter valid mobile number",
     password: "Password must contains at least five characters",
     cpassword: "Please enter confirm password",
-    notMatched: "Password does not matched",
+    notMatched: "Confirm password does not match",
     firstName: "Please enter first name",
     lastName: "Please enter last name",
     day: "Please select day",
