@@ -21,14 +21,15 @@ export default StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         padding: 20,
-        marginVertical: 30
+        marginVertical: 30,
+        width: '100%'
     },
     blankPageImage: {
         height: 150,
         resizeMode: 'contain',
     },
     blankManageTextBold: {
-        fontSize: 14,
+        fontSize: 18,
         fontFamily: FONTS.fontBold,
         textAlign: 'center',
         marginTop: 50

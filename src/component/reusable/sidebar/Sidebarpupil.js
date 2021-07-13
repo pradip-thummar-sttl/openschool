@@ -121,7 +121,7 @@ const Sidebar = (props) => {
                     <Image source={Images.cartoon} style={styles.cartoonIcon} />
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
-                    <Image style={styles.bottomUser} source={Images.proffileLogo} />
+                    <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                     {
                         isSmall? null:
                         <>
