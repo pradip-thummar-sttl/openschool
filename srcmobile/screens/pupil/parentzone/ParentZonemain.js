@@ -14,6 +14,7 @@ import { User } from "../../../utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import ParentChat from "./Chat/ParentChat";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 var moment = require('moment');
 
 const MessageList = (props) => {
@@ -122,9 +123,10 @@ const ParentZonemain = (props) => {
                                 extraData={selectedId}
                                 showsVerticalScrollIndicator={false} />
                             :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
+                            // <View style={{ height: 100, justifyContent: 'center' }}>
+                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            // </View>
+                            <EmptyStatePlaceHohder />
 
                     :
                     selectedTabIndex == 1 ?

@@ -12,6 +12,7 @@ import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
 import STYLE from "../../../utils/Style";
 import PAGESTYLE from './Style';
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const GroupSetUpPupilSelection = (props) => {
 
@@ -222,9 +223,10 @@ const GroupSetUpPupilSelection = (props) => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
                         :
-                        <View>
-                            <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        </View>
+                        // <View>
+                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // </View>
+                        <EmptyStatePlaceHohder />
                 }
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', }}>

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../actions/action";
 import { User } from "../../../utils/Model";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const PupilTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -249,9 +250,10 @@ const PupilTimeTable = (props) => {
                                 </ScrollView>
                             </View>
                             :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
+                            // <View style={{ height: 100, justifyContent: 'center' }}>
+                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            // </View>
+                            <EmptyStatePlaceHohder />
                     }
                 </View>
             </View>

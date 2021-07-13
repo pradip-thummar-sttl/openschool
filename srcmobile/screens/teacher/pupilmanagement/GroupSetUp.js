@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Image, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
@@ -102,7 +103,8 @@ const GroupSetUp = (props) => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
                         :
-                        <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
+                        // <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
+                        <EmptyStatePlaceHohder />
                 }
             </View>
         </SafeAreaView>

@@ -17,6 +17,7 @@ import { User } from "../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 import MESSAGE from "../../../utils/Messages";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -456,9 +457,10 @@ const PupuilDashboard = (props) => {
                                                         </RBSheet>
                                                     </>
                                                     :
-                                                    <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                        <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                    </View>
+                                                    // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                    //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                    // </View>
+                                                    <EmptyStatePlaceHohder />
                                             }
                                         </View>
                                     }
@@ -567,9 +569,10 @@ const PupuilDashboard = (props) => {
                                                             </View>
                                                         </RBSheet>
                                                     </> :
-                                                    <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                        <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                    </View>
+                                                    // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                    //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                    // </View>
+                                                    <EmptyStatePlaceHohder />
                                             }
                                         </View>
                                     }

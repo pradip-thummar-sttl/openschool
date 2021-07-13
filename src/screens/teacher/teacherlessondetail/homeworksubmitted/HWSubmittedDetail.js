@@ -43,18 +43,18 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
 
     useEffect(() => {
@@ -265,7 +265,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             numberOfLines={4}
                                             defaultValue={data.HomeworkDescription}
                                             style={PAGESTYLE.commonInputTextareaNormal}
-                                        />
+                                            editable={false} />
                                     </View>
                                     <View style={PAGESTYLE.requirementofClass}>
                                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>

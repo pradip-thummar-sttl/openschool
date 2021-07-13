@@ -19,7 +19,7 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
                 <TouchableOpacity style={styles.widthBackArrow} onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
                 <View style={styles.titles}>
-                    <Text style={styles.mainTitle}>English Grammar Homework{"\n"}Homework</Text>
+                    <Text style={styles.mainTitle}>{props.title}</Text>
                 </View>
             </View>            
         </View>

@@ -24,6 +24,7 @@ import MESSAGE from "../../../utils/Messages";
 import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/PupilHomeWorkSubmitted";
 import PupilHomeWorkMarked from "../../pupil/pupillessondetail/homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../../pupil/pupillessondetail/homework/PupilHomeWorkDetail";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -451,9 +452,10 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </>
                                                                             :
-                                                                            <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                                                <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                                            </View>
+                                                                            // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                                            //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                                            // </View>
+                                                                            <EmptyStatePlaceHohder />
                                                                     }
                                                                 </View>
                                                             }
@@ -542,9 +544,10 @@ const PupuilDashboard = (props) => {
                                                                                     </ScrollView>
                                                                                 </View>
                                                                             </> :
-                                                                            <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                                                <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                                            </View>
+                                                                            // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                                            //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                                            // </View>
+                                                                            <EmptyStatePlaceHohder />
                                                                     }
 
                                                                 </View>

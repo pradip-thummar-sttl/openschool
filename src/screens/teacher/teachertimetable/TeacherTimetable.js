@@ -18,6 +18,7 @@ import { Lesson } from "../../../utils/Constant";
 import TLDetail from "../teacherlessondetail/lessonplan/TeacherLessonDetail";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const TeacherTimeTable = (props) => {
     const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -236,9 +237,10 @@ const TeacherTimeTable = (props) => {
                                             </ScrollView>
                                         </View>
                                         :
-                                        <View style={{ height: hp(13), justifyContent: 'center' }}>
-                                            <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
-                                        </View>
+                                        // <View style={{ height: hp(13), justifyContent: 'center' }}>
+                                        //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
+                                        // </View>
+                                        <EmptyStatePlaceHohder />
                                 }
                             </View>
                         </View>
