@@ -117,8 +117,8 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        backgroundColor: COLORS.greyBack
-        // bottom:0,
+        backgroundColor: COLORS.greyBack,
+        // marginTop:100,
     },
     messageCell: {
         flexDirection: 'row',

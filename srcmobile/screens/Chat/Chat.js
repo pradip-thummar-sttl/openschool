@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Platform } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import COLORS from '../../utils/Colors'
 import STYLE from '../../utils/Style'
@@ -106,10 +106,16 @@ const Chat = (props) => {
    
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{flex:1}}>
            
 
-            <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
+            <KeyboardAwareScrollView 
+            enableOnAndroid={true}
+            extraScrollHeight={90}
+            scrollEnabled
+            enableAutomaticScroll={(Platform.OS === 'ios')}
+            contentContainerStyle={{ flex:1}}
+            >
                 <View style={Styles.views}>
 
                     <View style={Styles.rightView}>
