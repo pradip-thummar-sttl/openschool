@@ -57,7 +57,8 @@ export default class Splash extends Component {
                     onError={this.videoError}  
                     onEnd={()=>{this.launchNextScreen()}} 
                     // resizeMode={'stretch'}
-                    style={styles.backgroundVideo} />
+                    style={styles.backgroundVideo}
+                    resizeMode={'contain'} />
             </View>
         );
     }
@@ -69,8 +70,8 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         bottom: 0,
-        right: 0,
-        
+        right: 0, 
+               
         // resizeMode:'stretch'
       },
     container: {
