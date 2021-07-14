@@ -346,8 +346,7 @@ const TLDetailAdd = (props) => {
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
-                console.log('did cnacel');
-                showMessage('did cnacel')
+              
             } else {
                 console.log('response', response);
                 arr.push(response)
