@@ -18,7 +18,7 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 
 const PupilTimetable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
+    const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
 
     const timeTableData__ = [
         {
@@ -107,7 +107,7 @@ const PupilTimetable = (props) => {
                     et = (et >= 100 && et < 900) ? (et + 1200) : et
 
                     let timeSpan = (et - st);
-                    span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100) ? 3 : 4;
+                    span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100 && timeSpan < 200) ? 3 : 4;
 
                     lblTitle = `${subName} - ${lessonTopic}`;
                     lblTime = `${startTime} - ${endTime}`;

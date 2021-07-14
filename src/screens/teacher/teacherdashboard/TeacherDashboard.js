@@ -66,49 +66,49 @@ const Item = ({ onPress, style, item }) => (
 );
 
 const Pupillist = ({ item, onPress }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
-        </View>
-        <View style={PAGESTYLE.groupColumnmain}>
-            <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+    <TouchableOpacity onPress={() => { onPress() }}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
             </View>
-        </View>
-        <View style={PAGESTYLE.perfomanceColumn}>
-            <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
-            <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
-        </View>
-        <View style={PAGESTYLE.rewardColumn}>
-            {item.RewardsList.map((item, index) => {
-                return (
-                    item._id == '3' ?
-                        <View style={PAGESTYLE.rewardStar}>
-                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
-                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                        </View>
-                        :
-                        item._id == '6' ?
+            <View style={PAGESTYLE.groupColumnmain}>
+                <View style={PAGESTYLE.groupColumn}>
+                    <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                </View>
+            </View>
+            <View style={PAGESTYLE.perfomanceColumn}>
+                <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
+            </View>
+            <View style={PAGESTYLE.rewardColumn}>
+                {item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
-                            item._id == '9' ?
+                            item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
-                                null
-                )
-            })}
-        </View>
-        <TouchableOpacity onPress={() => { onPress() }} style={PAGESTYLE.pupilDetailLink}>
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+            </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </TouchableOpacity>
-    </View>
+        </View>
+    </TouchableOpacity>
 );
 // const Pupillist = ({ style }) => (
 //     <View style={[PAGESTYLE.pupilData]}>

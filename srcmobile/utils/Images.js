@@ -134,5 +134,6 @@ const Images = {
     backSpaceArrow: require('../assets/images/backSpace-mobile-2.png'),
     send: require('../assets/images/Chatimage/send2.png'),
     managementBlankImg: require('../assets/images/pupil-management-image2.png'),
+    proffileLogo: require('../assets/images/profileLogo.png'),
 }
 export default Images;

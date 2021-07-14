@@ -46,7 +46,7 @@ const CreateNewEvent = (props) => {
     const [selectedFromTime, setSelectedFromTime] = useState('')
     const [selectedToTime, setSelectedToTime] = useState('')
 
-    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'])
     const [colorArr, setColorArr] = useState([])
     // this.state = {
     //     userName: '',
@@ -102,9 +102,6 @@ const CreateNewEvent = (props) => {
             return false
         } else if (!location.trim()) {
             showMessage(MESSAGE.location);
-            return false;
-        } else if (!note.trim()) {
-            showMessage(MESSAGE.note);
             return false;
         }
         saveEvent()

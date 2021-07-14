@@ -12,13 +12,13 @@ const Header = (props) => {
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
-                <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
                 <Text style={styles.mainTitle} numberOfLines={1} >Welcome, {User.user.FirstName} {User.user.LastName}!</Text>
             </View>
             <View>
                 <TouchableOpacity
                     style={styles.notificationBar}
-                    onPress={() => props.onAlertPress()}
+                    onPress={() => null}
                     activeOpacity={opacity}>
                     <Image style={styles.massagesIcon} source={Images.Notification} />
                     <View style={STYLE.redDot}></View>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         height: 40,
         resizeMode: 'contain',
     },
-    menuIconWithTitle:{
+    menuIconWithTitle: {
         flexDirection: 'row',
         alignItems: 'center',
     },
