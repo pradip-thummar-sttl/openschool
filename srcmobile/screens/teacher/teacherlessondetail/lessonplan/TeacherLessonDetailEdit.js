@@ -872,15 +872,15 @@ const TLDetailEdit = (props) => {
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                        <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                        <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                     </View>
                                 </View>
                             </View>

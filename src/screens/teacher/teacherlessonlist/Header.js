@@ -78,9 +78,9 @@ const Header = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                     <Menu style={{ marginLeft: 10 }}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.4),
         height: hp(5.20),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontSemiBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -222,8 +222,7 @@ const styles = StyleSheet.create({
         width: hp(1.74),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.30),
-        top: hp(1.19),
+        right: hp(1.30),        
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,

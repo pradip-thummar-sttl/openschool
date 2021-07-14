@@ -35,7 +35,7 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                             <View style={PAGESTYLE.toggleBox}>
                                 <View style={PAGESTYLE.toggleGrpBox}>
                                     <Text style={PAGESTYLE.toggleText}>Include homework</Text>
-                                    <ToggleSwitch
+                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton}
                                         isOn={true} color={COLORS.dashboardGreenButton} onToggle={isOn => true}
                                     />
                                 </View>

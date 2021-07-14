@@ -66,7 +66,7 @@ const Images = {
     RecordIcon: require('../assets/images/recording-icon2.png'),
     AddIcon: require('../assets/images/add2.png'),
     PlayIcon: require('../assets/images/playIcon2.png'),
-    DropHolder: require('../assets/images/dropHolder2.png'),
+    DropHolder: require('../assets/images/dropHolder3.png'),
     bbcImage: require('../assets/images/bbc-video2.png'),
     PlayTransperent: require('../assets/images/play-transparent-icon2.png'),
     TickSelected: require('../assets/images/tick-selected2.png'),

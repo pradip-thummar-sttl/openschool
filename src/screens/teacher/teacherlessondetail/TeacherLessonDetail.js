@@ -349,7 +349,7 @@ const TeacherLessonDetail = (props) => {
                                                     </View>
                                                     <TouchableOpacity style={PAGESTYLE.buttonGroup}>
                                                         <Menu style={PAGESTYLE.filterGroup}>
-                                                            <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                                                            <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                                                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                                                 <MenuOption style={PAGESTYLE.borderList}>
                                                                     <TouchableOpacity
