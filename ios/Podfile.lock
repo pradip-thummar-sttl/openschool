@@ -22,6 +22,10 @@ PODS:
   - Permission-Camera (3.0.4):
     - RNPermissions
   - QuickBlox (2.17.10)
+  - quickblox-react-native-sdk (0.5.12-beta):
+    - QuickBlox (~> 2.17.9)
+    - Quickblox-WebRTC (~> 2.7.5)
+    - React (>= 0.60.0)
   - Quickblox-WebRTC (2.7.6):
     - QuickBlox (>= 2.7)
   - RCTRequired (0.63.4)
@@ -313,6 +317,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
   - QuickBlox
+  - quickblox-react-native-sdk (from `../node_modules/quickblox-react-native-sdk`)
   - Quickblox-WebRTC
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -379,6 +384,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   Permission-Camera:
     :path: "../node_modules/react-native-permissions/ios/Camera"
+  quickblox-react-native-sdk:
+    :path: "../node_modules/quickblox-react-native-sdk"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -475,6 +482,7 @@ SPEC CHECKSUMS:
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   Permission-Camera: 74dc395c37a06ebe915069c5dca954c7a2a5a2e3
   QuickBlox: 49d85c6e1782993fb2383001301b788a8d7dcad3
+  quickblox-react-native-sdk: 8b571f113d46bc78e523d0a617eb8fefc6de515e
   Quickblox-WebRTC: 162d2421d91cfb3d4f7e01f87e095633ca52bb1d
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
