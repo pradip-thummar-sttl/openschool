@@ -171,7 +171,10 @@ const Chat = (props) => {
                 }
 
                 <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
-                    <KeyboardAwareScrollView >
+                    <KeyboardAwareScrollView enableOnAndroid={true}
+                        extraScrollHeight={90}
+                        scrollEnabled
+                        enableAutomaticScroll={(Platform.OS === 'ios')} >
 
                         <View style={Styles.mesagesView}>
                             <FlatList
