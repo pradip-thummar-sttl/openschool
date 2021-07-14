@@ -13,7 +13,7 @@ import { EndPoints } from "../../../service/EndPoints";
 import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { User } from "../../../utils/Model";
+import { appSettings, User } from "../../../utils/Model";
 import TeacherTimeTable from "../teachertimetable/TeacherTimetable";
 import TeacherLessonList from "../teacherlessonlist/TeacherLessonList";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -25,6 +25,7 @@ import PupilManagement from "../pupilmanagement/PupilManagement";
 import Message from "../GlobalMessage/Message";
 import PupilProfileView from "../pupilmanagement/PupilProfileView";
 import MESSAGE from "../../../utils/Messages";
+import QB from "quickblox-react-native-sdk";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const { CallModule, CallModuleIos } = NativeModules;
@@ -157,6 +158,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isLoading, setLoading] = useState(false);
     let currentCount = 0
     useEffect(() => {
+        QB.settings
+            .init(appSettings)
+            .then(function () {
+                // SDK initialized successfully
+            })
+            .catch(function (e) {
+                // Some error occurred, look at the exception message for more details
+            });
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -357,7 +366,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>
-                                                <TouchableOpacity style={PAGESTYLE.boxDash}>
+                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={()=>{}}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
                                                         <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
