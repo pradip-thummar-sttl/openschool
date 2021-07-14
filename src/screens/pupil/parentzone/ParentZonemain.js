@@ -22,6 +22,7 @@ import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
 import ParentZoneProfileEdit from "./ParentZoneProfileEdit";
 import ParentZonePerformance from "./ParentZonePerformance";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
 var moment = require('moment');
 
 const MessageList = (props, { style }) => (
@@ -158,7 +159,7 @@ const ParentZonemain = (props) => {
                                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder />
+                                                        <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
                                                 }
                                             </SafeAreaView>
                                         </View>

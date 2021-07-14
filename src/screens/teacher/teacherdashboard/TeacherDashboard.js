@@ -158,7 +158,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isLoading, setLoading] = useState(false);
     let currentCount = 0
     useEffect(() => {
-        QB.settings
+        QB.webrtc
             .init(appSettings)
             .then(function () {
                 // SDK initialized successfully
@@ -239,7 +239,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // }
             setLoading(true)
             let currentTime = moment(Date()).format('hh:mm')
-            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
@@ -253,10 +253,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 }, (err) => {
                     setLoading(false)
                 })
-            } else {
-                showMessage(MESSAGE.scheduledTime)
-                setLoading(false)
-            }
+            // } else {
+            //     showMessage(MESSAGE.scheduledTime)
+            //     setLoading(false)
+            // }
         }
     }
 
@@ -331,6 +331,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             />
         );
     };
+
+    const initOneToOneCall = () => {
+        const params = {
+            opponentsIds: [12345, 12346],
+            type: QB.webrtc.RTC_SESSION_TYPE.AUDIO
+        }
+
+        QB.webrtc
+            .call(params)
+            .then(function (session) { console.log('Call Session Started', session); })
+            .catch(function (e) { console.log('Call Session Error', e); })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -366,7 +379,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>
-                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={()=>{}}>
+                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall()}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
                                                         <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
@@ -579,7 +592,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder />
+                                                        <EmptyStatePlaceHohder image={Images.noLesson} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -646,7 +659,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         // <View>
                                                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder />
+                                                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                                                 }
                                             </View>
                                         </ScrollView>

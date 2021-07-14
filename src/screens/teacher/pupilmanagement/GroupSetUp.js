@@ -25,7 +25,7 @@ const GroupSetUp = () => {
 
     useEffect(() => {
 
-        loadGroup()        
+        loadGroup()
 
         setPupilLoading(true)
 
@@ -98,8 +98,8 @@ const GroupSetUp = () => {
                 reset()
                 loadGroup()
                 if (selectedGroup.length == 0) {
-                showMessage(MESSAGE.groupCreated)
-                } else{
+                    showMessage(MESSAGE.groupCreated)
+                } else {
                     showMessage(MESSAGE.groupUpdated)
                 }
             } else {
@@ -266,7 +266,7 @@ const GroupSetUp = () => {
                         // <View>
                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder />
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
             <View style={PAGESTYLE.middle}>
@@ -322,7 +322,7 @@ const GroupSetUp = () => {
                             showsVerticalScrollIndicator={false} />
                         :
                         // <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        <EmptyStatePlaceHohder />
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
         </SafeAreaView>

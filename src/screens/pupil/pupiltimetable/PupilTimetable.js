@@ -15,6 +15,8 @@ import COLORS from "../../../utils/Colors";
 import { setCalendarEventData } from "../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import Images from "../../../utils/Images";
+import MESSAGE from "../../../utils/Messages";
 
 const PupilTimetable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -178,7 +180,7 @@ const PupilTimetable = (props) => {
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
 
-                <View style={{ ...PAGESTYLE.backgroundTable,}}>
+                <View style={{ ...PAGESTYLE.backgroundTable, }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
@@ -195,7 +197,7 @@ const PupilTimetable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, }}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, }}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
@@ -219,7 +221,7 @@ const PupilTimetable = (props) => {
                             // <View style={{ height: hp(13), justifyContent: 'center' }}>
                             //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
                             // </View>
-                            <EmptyStatePlaceHohder />
+                            <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                     }
                 </View>
             </View>

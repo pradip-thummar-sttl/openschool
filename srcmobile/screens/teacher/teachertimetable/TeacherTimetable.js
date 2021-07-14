@@ -16,6 +16,8 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { User } from "../../../utils/Model";
 import { Lesson } from "../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import Images from "../../../utils/Images";
+import MESSAGE from "../../../utils/Messages";
 
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -246,7 +248,7 @@ const TeacherTimeTable = (props) => {
                             // <View style={{ height: 100, justifyContent: 'center' }}>
                             //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                             // </View>
-                            <EmptyStatePlaceHohder />
+                            <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                     }
                 </View>
             </View>

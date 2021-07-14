@@ -34,4 +34,9 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginTop: 50
     },
+    nodataContent: {
+        alignSelf: 'center',
+        textAlign : 'center',
+        fontSize: 14,
+    },
 });

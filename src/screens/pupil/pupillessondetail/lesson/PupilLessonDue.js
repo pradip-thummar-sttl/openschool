@@ -8,6 +8,8 @@ import FONTS from '../../../../utils/Fonts';
 import moment from "moment";
 import { baseUrl } from "../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import Images from "../../../../utils/Images";
+import MESSAGE from "../../../../utils/Messages";
 
 
 const PupilLessonDue = (props) => {
@@ -91,7 +93,7 @@ console.log('props of homework',props)
                     </ScrollView>
                 </> 
                 : 
-                <EmptyStatePlaceHohder />
+                <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
         </View >
 

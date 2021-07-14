@@ -9,6 +9,7 @@ import FONTS from '../../../../utils/Fonts';
 import moment from "moment";
 import { baseUrl } from "../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../../utils/Messages";
 //import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
@@ -65,7 +66,7 @@ const PupilLesson = (props) => {
                     </ScrollView>
                 </>
                 :
-                <EmptyStatePlaceHohder />
+                <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
         </View>
 

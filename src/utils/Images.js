@@ -131,5 +131,11 @@ const Images = {
     paperClip: require('../assets/images/Chatimage/paperclip.png'),
     send: require('../assets/images/Chatimage/send.png'),
     imageUpload: require('../assets/images/Chatimage/image-upload.png'),
+
+    noLesson: require('../assets/images/ILLUS2.png'),
+    noPupil: require('../assets/images/ILLUS-22.png'),
+    noLessonHW: require('../assets/images/ILLUS-92.png'),
+    noMessage: require('../assets/images/illus-72.png'),
+    noCalender: require('../assets/images/ILLUS-52.png'),
 }
 export default Images;

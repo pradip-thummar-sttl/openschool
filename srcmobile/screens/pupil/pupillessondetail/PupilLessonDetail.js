@@ -51,31 +51,31 @@ const PupilLessonDetail = (props) => {
 
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
     useEffect(() => {
         console.log('keyword', keyword);
         if (initialRender.current) {
@@ -324,7 +324,7 @@ const PupilLessonDetail = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={{backgroundColor: COLORS.white}}>
+            <View style={{ backgroundColor: COLORS.white }}>
                 <Header4_LH onAlertPress={() => props.navigation.openDrawer()} />
                 {searchHeader()}
                 <View style={PAGESTYLE.whiteBg}>
@@ -341,33 +341,32 @@ const PupilLessonDetail = (props) => {
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.teacherLessonGrid]}>
                     <View >
-                    {
-                        isLesson ?
-                            currentWeekLesson.length > 0 || lastWeekLesson.length > 0 ?
+                        {
+                            isLesson ?
+
                                 <PupilLesson
                                     currentWeekLesson={currentWeekLesson}
                                     lastWeekLesson={lastWeekLesson}
                                     navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
-                                :
+
                                 // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                 //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                 // </View>
-                                <EmptyStatePlaceHohder />
-                            :
-                            DueHomeWork.length > 0 || SubmitHomeWork.length > 0 || MarkedHomeWork.length > 0 ?
-                                <PupilLessonDue
-                                    DueHomeWork={DueHomeWork}
-                                    SubmitHomeWork={SubmitHomeWork}
-                                    MarkedHomeWork={MarkedHomeWork}
-                                    navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
-                                    navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
-                                    navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                                 :
-                                // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                // </View>
-                                <EmptyStatePlaceHohder />
-                    }
+                                DueHomeWork.length > 0 || SubmitHomeWork.length > 0 || MarkedHomeWork.length > 0 ?
+                                    <PupilLessonDue
+                                        DueHomeWork={DueHomeWork}
+                                        SubmitHomeWork={SubmitHomeWork}
+                                        MarkedHomeWork={MarkedHomeWork}
+                                        navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
+                                        navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
+                                        navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
+                                    :
+                                    // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                    //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder />
+                        }
                     </View>
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}

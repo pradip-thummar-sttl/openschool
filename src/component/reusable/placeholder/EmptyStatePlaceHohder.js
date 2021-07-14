@@ -4,11 +4,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import PAGESTYLE from './Style';
 import Images from "../../../utils/Images";
 
-const EmptyStatePlaceHohder = () => {
+const EmptyStatePlaceHohder = (props) => {
     return (
         <View style={PAGESTYLE.managementBlankImgWrap}>
-            <Image style={PAGESTYLE.blankPageImage} source={Images.managementBlankImg} />
-            <Text style={PAGESTYLE.blankManageTextBold}>There doesn’t seem to be any record here</Text>
+            <Image style={PAGESTYLE.blankPageImage} source={props.image} />
+            <Text style={PAGESTYLE.blankManageTextBold}>{props.title1}</Text>
+            <Text P style={PAGESTYLE.nodataContent}>{props.title2}</Text>
         </View>
     );
 }
