@@ -16,12 +16,15 @@ const PupilLesson = (props) => {
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
+           
             {currentWeekLesson.length > 0 ?
+            
                 <>
                     <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning</Text>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                         {
                             currentWeekLesson.map((item) => {
+                                
                                 return (
                                     <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilLessonDetailInternal(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>
@@ -41,7 +44,8 @@ const PupilLesson = (props) => {
                             })
                         }
                     </ScrollView>
-                </> : null}
+                </> 
+                 : null} 
             {lastWeekLesson.length > 0 ?
                 <>
                     <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons from last week</Text>
