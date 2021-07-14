@@ -162,7 +162,7 @@ const PupilHomeWorkDetail = (props) => {
                             </View>
                             <View style={[PAGESTYLE.lessonDesc]}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
                             </View>
                             <View style={PAGESTYLE.requirementofClass}>
                                 <Text style={PAGESTYLE.requireText}>Make sure you:</Text>

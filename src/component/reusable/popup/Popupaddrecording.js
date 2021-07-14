@@ -23,6 +23,14 @@ const Popupaddrecording = (props) => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
+    const onCameraOnly =()=>{
+        toggleModal(); 
+        setTimeout(() => {
+            props.onCameraOnly()
+        }, 1000);
+       
+    }
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
@@ -100,7 +108,7 @@ const Popupaddrecording = (props) => {
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => { toggleModal(); props.onCameraOnly() }} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => { onCameraOnly() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>

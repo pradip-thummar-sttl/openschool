@@ -327,7 +327,7 @@ const PupilLessonDetail = (props) => {
             <View style={{ backgroundColor: COLORS.white }}>
                 <Header4_LH onAlertPress={() => props.navigation.openDrawer()} />
                 {searchHeader()}
-                <View style={PAGESTYLE.whiteBg}>
+                <View style={PAGESTYLE.whiteBg1}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
                             <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => { setSearchActive(false); setLesson(true); getLessonData('', ''); }}>
