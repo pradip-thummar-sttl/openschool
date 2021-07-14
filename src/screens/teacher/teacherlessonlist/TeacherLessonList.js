@@ -27,7 +27,7 @@ const Pupillist = (props, { style }) => (
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
             <Text style={PAGESTYLE.pupilName}>{props.item.LessonTopic}</Text>
         </View>
-        <View style={PAGESTYLE.pupilProfile}>
+        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
             <Text style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
@@ -39,7 +39,7 @@ const Pupillist = (props, { style }) => (
         <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.Publish).toString()}</Text>
         </View>
-        <View style={PAGESTYLE.pupilProfile}>
+        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
             <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>{props.item.HomeWork}</Text>
             <TouchableOpacity
                 style={PAGESTYLE.pupilDetailLink}

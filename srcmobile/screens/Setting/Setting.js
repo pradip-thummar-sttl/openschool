@@ -160,7 +160,7 @@ const Setting = (props) => {
                                                     return (
                                                         <View style={styles.listView}>
                                                             <Text style={styles.text}>{item2.Name}</Text>
-                                                            <ToggleSwitch
+                                                            <ToggleSwitch onColor={COLORS.dashboardGreenButton}
                                                                 isOn={item2.Value} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn, index, index1, index2)}
                                                             />
                                                         </View>
