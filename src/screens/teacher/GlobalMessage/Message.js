@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator, } from 'react-native'
 import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
+import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import { EndPoints } from '../../../service/EndPoints';
 import { Service } from '../../../service/Service';
 import COLORS from '../../../utils/Colors';
@@ -141,9 +142,10 @@ const Message = (props) => {
                                         showsVerticalScrollIndicator={false}
                                     />
                                     :
-                                    <View style={{ height: 100, justifyContent: 'center' }}>
-                                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    </View>
+                                    // <View style={{ height: 100, justifyContent: 'center' }}>
+                                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder />
                             }
                         </View>
                     </>

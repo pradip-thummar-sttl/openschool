@@ -56,6 +56,7 @@ const COLORS = {
     blueBorder: '#57ABF0',
     greyBack: '#F9FAFC',
     introGreyColor:'#454545',
+    dateShadow: '#EBAC39',
 }
 
 export default COLORS;

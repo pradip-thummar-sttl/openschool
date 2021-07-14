@@ -27,6 +27,7 @@ export default StyleSheet.create({
         paddingBottom: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
+        height: '100%',
     },
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
@@ -112,6 +113,7 @@ export default StyleSheet.create({
     },
     teacherDetailLeft: {
         width: '100%',
+        height: '85%',
     },
     requireText: {
         fontSize: hp(2.08),
@@ -760,6 +762,7 @@ export default StyleSheet.create({
     containerWrap: {
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        height: '93%',
     },
     containerWrapMarked: {
         paddingLeft: hp(1.95),
@@ -1417,13 +1420,13 @@ export default StyleSheet.create({
         width: '100%',
     },
     fullButtonMain: {
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.whiteBg,
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
         paddingBottom: hp(2),
         position: 'absolute',
-        bottom: hp(13.5),
+        bottom: 10,
         width: '100%',
         left: hp(0),
         paddingLeft: hp(1.95),

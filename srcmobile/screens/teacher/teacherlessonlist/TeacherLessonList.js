@@ -14,6 +14,7 @@ import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { User } from "../../../utils/Model";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const TeacherLessonList = (props) => {
     const userAuthData = useSelector(state => {
@@ -138,7 +139,7 @@ const TeacherLessonList = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column' }}>
+            <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column', }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
@@ -163,9 +164,10 @@ const TeacherLessonList = (props) => {
                             showsVerticalScrollIndicator={false}
                         />
                         :
-                        <View style={{ height: 100, justifyContent: 'center' }}>
-                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        </View>
+                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // </View>
+                        <EmptyStatePlaceHohder />
                 }
             </View>
         </View>

@@ -14,6 +14,7 @@ import { User } from "../../../utils/Model";
 import COLORS from "../../../utils/Colors";
 import { setCalendarEventData } from "../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const PupilTimetable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -215,9 +216,10 @@ const PupilTimetable = (props) => {
                                 </ScrollView>
                             </View>
                             :
-                            <View style={{ height: hp(13), justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
-                            </View>
+                            // <View style={{ height: hp(13), justifyContent: 'center' }}>
+                            //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
+                            // </View>
+                            <EmptyStatePlaceHohder />
                     }
                 </View>
             </View>

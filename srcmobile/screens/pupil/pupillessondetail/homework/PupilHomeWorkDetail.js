@@ -29,19 +29,19 @@ const PupilHomeWorkDetail = (props) => {
     const [isLoading, setLoading] = useState(false);
     console.log('props of homewor', baseUrl + item.TeacherProfile);
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
-  
+    }
+
 
     const isFieldsValidated = () => {
         if (materialArr.length <= 0) {
@@ -140,9 +140,10 @@ const PupilHomeWorkDetail = (props) => {
                     goBack={() => props.navigation.goBack()}
                     onSubmitHomework={() => isFieldsValidated()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
-                <View style={{ ...PAGESTYLE.containerWrap, paddingBottom: hp(24) }}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={{ ...PAGESTYLE.containerWrap, }}>
+
+                    <View style={PAGESTYLE.teacherDetailLeft}>
+                        <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.dateBlockRow}>
                                 <View style={[PAGESTYLE.dateNameBlock, PAGESTYLE.spaceSmallUserName]}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
@@ -154,7 +155,6 @@ const PupilHomeWorkDetail = (props) => {
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                     <View style={PAGESTYLE.daterow}>
-                                        {/* <View style={PAGESTYLE.thumbSmall}></View> */}
                                         <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                         <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                     </View>
@@ -162,7 +162,7 @@ const PupilHomeWorkDetail = (props) => {
                             </View>
                             <View style={[PAGESTYLE.lessonDesc]}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</Text>
                             </View>
                             <View style={PAGESTYLE.requirementofClass}>
                                 <Text style={PAGESTYLE.requireText}>Make sure you:</Text>
@@ -191,8 +191,6 @@ const PupilHomeWorkDetail = (props) => {
 
                                 <View style={PAGESTYLE.rightSideBar}>
                                     <View style={PAGESTYLE.uploadBoardBlock}>
-                                        {/* <Image source={require('../../../../assets/images/upload-hw-mobile2.png')} style={PAGESTYLE.uploadBoard} /> */}
-
                                         <TouchableOpacity
                                             style={PAGESTYLE.homeworkView}
                                             onPress={() => addMaterial()}>
@@ -218,8 +216,8 @@ const PupilHomeWorkDetail = (props) => {
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    </ScrollView>
+                        </ScrollView>
+                    </View>
                     <View style={[PAGESTYLE.fullButtonMain]}>
                         <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.buttonGrp}><Text style={[PAGESTYLE.commonButtonGreenheaderFullWidth, PAGESTYLE.fullButton]}>submit homework</Text></TouchableOpacity>
                     </View>

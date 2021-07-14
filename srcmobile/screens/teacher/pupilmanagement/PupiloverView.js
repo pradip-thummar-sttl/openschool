@@ -18,9 +18,12 @@ const { CallModule } = NativeModules;
 const PupiloverView = (props) => {
     const item = props.route.params.item;
     const [isHide, action] = useState(true);
+    const [isLoading, setLoading] = useState(true);
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [searchKeyword, setSearchKeyword] = useState('')
+
+
     let currentCount = 0
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -59,6 +62,7 @@ const PupiloverView = (props) => {
         Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
+                setLoading(false)
                 setPupilData(res.data)
             } else {
                 showMessage(res.message)
@@ -85,61 +89,67 @@ const PupiloverView = (props) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
                         <View style={PAGESTYLE.mainContainer}>
                             {
-                                pupilData.length > 0 ?
-                                    pupilData.map((item, index) => {
-                                        return (
-                                            <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
-                                                <View style={[PAGESTYLE.pupilData]}>
-                                                    <View style={PAGESTYLE.pupilProfile}>
-                                                        <View style={PAGESTYLE.rowProfile}>
-                                                            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                                                            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+                                isLoading ?
+                                    <ActivityIndicator
+                                        style={{ margin: 20 }}
+                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                        color={COLORS.yellowDark} />
+                                    :
+                                    pupilData.length > 0 ?
+                                        pupilData.map((item, index) => {
+                                            return (
+                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
+                                                    <View style={[PAGESTYLE.pupilData]}>
+                                                        <View style={PAGESTYLE.pupilProfile}>
+                                                            <View style={PAGESTYLE.rowProfile}>
+                                                                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                                                                <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+                                                            </View>
+                                                            <View style={PAGESTYLE.groupPupil}>
+                                                                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                            </View>
                                                         </View>
-                                                        <View style={PAGESTYLE.groupPupil}>
-                                                            <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
-                                                        </View>
-                                                    </View>
-                                                    <View style={PAGESTYLE.rewardColumn}>
-                                                        {item.RewardsList.map((item, index) => {
-                                                            return (
-                                                                item._id == '3' ?
-                                                                    <View style={PAGESTYLE.rewardStar}>
-                                                                        <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
-                                                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                                                    </View>
-                                                                    :
-                                                                    item._id == '6' ?
+                                                        <View style={PAGESTYLE.rewardColumn}>
+                                                            {item.RewardsList.map((item, index) => {
+                                                                return (
+                                                                    item._id == '3' ?
                                                                         <View style={PAGESTYLE.rewardStar}>
-                                                                            <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                                                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
                                                                             <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                         </View>
                                                                         :
-                                                                        item._id == '9' ?
+                                                                        item._id == '6' ?
                                                                             <View style={PAGESTYLE.rewardStar}>
-                                                                                <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                                                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
                                                                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                             </View>
                                                                             :
-                                                                            null
-                                                            )
-                                                        })}
-                                                        {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                                            item._id == '9' ?
+                                                                                <View style={PAGESTYLE.rewardStar}>
+                                                                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                                                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                                                                </View>
+                                                                                :
+                                                                                null
+                                                                )
+                                                            })}
+                                                            {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
+                                                        </View>
+                                                        <View style={PAGESTYLE.pupilDetailLink}>
+                                                            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                                        </View>
                                                     </View>
-                                                    <View style={PAGESTYLE.pupilDetailLink}>
-                                                        <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-                                                    </View>
-                                                </View>
-                                            </TouchableOpacity>
-                                        )
-                                    })
-                                    :
-                                    <View style={PAGESTYLE.mainContainer}>
-                                        <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
-                                        <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                                        <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
-                                    </View>
+                                                </TouchableOpacity>
+                                            )
+                                        })
+                                        :
+                                        <View style={PAGESTYLE.mainContainer}>
+                                            <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
+                                            <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                                            <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
+                                        </View>
 
                             }
                         </View>

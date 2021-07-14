@@ -107,11 +107,11 @@ const HeaderPM = (props) => {
                         onPress={() => { props.setSelectedTabIndex(2); setSelectedTab(2) }}>
                         <Text style={[PAGESTYLE.tabLinkGrey, tabIndex == 2 ? PAGESTYLE.tabLinkSelected : null]}>Chat</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => { props.setSelectedTabIndex(3); setSelectedTab(3) }}>
                         <Text style={[PAGESTYLE.tabLinkGrey, tabIndex == 3 ? PAGESTYLE.tabLinkSelected : null]}>Faq</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => { props.setSelectedTabIndex(4); setSelectedTab(4) }}>
