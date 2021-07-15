@@ -15,6 +15,7 @@ import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { User } from "../../../utils/Model";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
 
 const TeacherLessonList = (props) => {
     const userAuthData = useSelector(state => {
@@ -167,7 +168,7 @@ const TeacherLessonList = (props) => {
                         // <View style={{ height: 100, justifyContent: 'center' }}>
                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder />
+                        <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                 }
             </View>
         </View>

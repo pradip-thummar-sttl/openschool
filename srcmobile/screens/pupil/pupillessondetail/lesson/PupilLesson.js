@@ -8,6 +8,8 @@ import PAGESTYLE from '../Style';
 import FONTS from '../../../../utils/Fonts';
 import moment from "moment";
 import { baseUrl } from "../../../../utils/Constant";
+import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../../utils/Messages";
 //import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
@@ -16,9 +18,7 @@ const PupilLesson = (props) => {
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
-           
-            {currentWeekLesson.length > 0 ?
-            
+            {currentWeekLesson.length > 0 || lastWeekLesson.length > 0 ?
                 <>
                     <Text style={PAGESTYLE.videoTitle}>Lessons for Week beginning</Text>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
@@ -44,10 +44,6 @@ const PupilLesson = (props) => {
                             })
                         }
                     </ScrollView>
-                </> 
-                 : null} 
-            {lastWeekLesson.length > 0 ?
-                <>
                     <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons from last week</Text>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                         {lastWeekLesson.map((item) => {
@@ -69,7 +65,10 @@ const PupilLesson = (props) => {
                             )
                         })}
                     </ScrollView>
-                </> : null}
+                </>
+                :
+                <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+            }
         </View>
 
 

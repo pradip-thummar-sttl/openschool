@@ -14,6 +14,8 @@ import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../../utils/Messages";
+
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
@@ -166,7 +168,7 @@ const TLHomeWorkSubmitted = (props) => {
                             // <View style={{ height: 100, justifyContent: 'center' }}>
                             //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                             // </View>
-                            <EmptyStatePlaceHohder />
+                            <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noHomework1} title2={MESSAGE.noHomework2} />
                     }
                 </SafeAreaView>
             </View>

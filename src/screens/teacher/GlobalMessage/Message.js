@@ -8,6 +8,7 @@ import { Service } from '../../../service/Service';
 import COLORS from '../../../utils/Colors';
 import { opacity, showMessage } from '../../../utils/Constant';
 import Images from '../../../utils/Images';
+import MESSAGE from '../../../utils/Messages';
 import { User } from '../../../utils/Model';
 import NewMessage from './NewMessage';
 import PAGESTYLE from './Styles';
@@ -45,7 +46,7 @@ const Message = (props) => {
         }
 
         // Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {
-            Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -97,8 +98,8 @@ const Message = (props) => {
     );
 
     return (
-        <View style={{width: '93%', }}>
-            <SafeAreaView style={{backgroundColor: COLORS.white}}>
+        <View style={{ width: '93%', }}>
+            <SafeAreaView style={{ backgroundColor: COLORS.white }}>
                 {!isAddMessage ?
                     <>
                         <HeaderWhitepupilMessage
@@ -125,7 +126,7 @@ const Message = (props) => {
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
                 </View> */}
                         </View>
-                        <View style={{backgroundColor:COLORS.greyBack}}>
+                        <View style={{ backgroundColor: COLORS.greyBack }}>
                             {isLoading ?
                                 <ActivityIndicator
                                     style={{ flex: 1, marginTop: 20 }}
@@ -145,7 +146,7 @@ const Message = (props) => {
                                     // <View style={{ height: 100, justifyContent: 'center' }}>
                                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                     // </View>
-                                    <EmptyStatePlaceHohder />
+                                    <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
                             }
                         </View>
                     </>

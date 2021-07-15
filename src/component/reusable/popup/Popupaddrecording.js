@@ -23,6 +23,14 @@ const Popupaddrecording = (props) => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
+    const onCameraOnly =()=>{
+        toggleModal(); 
+        setTimeout(() => {
+            props.onCameraOnly()
+        }, 1000);
+       
+    }
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');

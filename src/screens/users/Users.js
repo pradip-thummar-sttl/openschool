@@ -18,7 +18,7 @@ export default class Users extends Component {
         if (type === 'Teacher') {
             AsyncStorage.getItem('introduceTeacher').then((value) => {
                 if (value) {
-                    this.props.navigation.replace('Login', { userType: "Teacher" })
+                    this.props.navigation.navigate('Login', { userType: "Teacher" })
                 } else {
                     this.props.navigation.navigate('IntroductionTeacher')
                 }
@@ -27,7 +27,7 @@ export default class Users extends Component {
         } else {
             AsyncStorage.getItem('introducePupil').then((value) => {
                 if (value) {
-                    this.props.navigation.replace('Login', { userType: "Pupil" })
+                    this.props.navigation.navigate('Login', { userType: "Pupil" })
                 } else {
                     this.props.navigation.navigate('IntroductionPupil')
                 }
