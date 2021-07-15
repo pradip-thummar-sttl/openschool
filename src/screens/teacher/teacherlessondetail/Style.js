@@ -198,6 +198,10 @@ flex: 1,
     },
     requirementofClass: {
         marginTop: hp(4.68),
+        
+    },
+    widthHw:{
+        width:'100%',
     },
     videoLinkBlock: {
         width: hp(38),
@@ -624,6 +628,7 @@ flex: 1,
     blockSpaceBottom: {
         marginBottom: hp(2.6),
         marginTop: hp(2),
+        width:'100%'
     },
     dueDateWrap: {
         borderRightWidth: 2,
@@ -1283,6 +1288,7 @@ flex: 1,
         height: 15,
         left: 3,
         resizeMode: 'contain',
+        
     },
     checkMarkTool: {
         marginLeft:hp(0.2),

@@ -312,11 +312,11 @@ const TLHomeWork = (props) => {
                 }
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop:10 }}
                     renderItem={({ item, index }) => (
                         <View style={PAGESTYLE.checkBoxLabelLine}>
                             <CheckBox
-                                style={PAGESTYLE.checkMark}
+                                style={[PAGESTYLE.checkMark,{top:5}]}
                                 value={item.IsCheck}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}
@@ -361,7 +361,7 @@ const TLHomeWork = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftWidth: 1, borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1),  borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }} //borderLeftWidth: 1
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
                         <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
@@ -377,7 +377,7 @@ const TLHomeWork = (props) => {
 
     return (
 
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView >
             <View style={PAGESTYLE.whiteBg}>
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
@@ -439,7 +439,7 @@ const TLHomeWork = (props) => {
                             onStopScrrenRecording={() => stopRecording()}
                             onCameraOnly={() => onCameraOnly()} />
 
-                        <View style={PAGESTYLE.requirementofClass}>
+                        <View style={[PAGESTYLE.requirementofClass,]}>
                             <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                             <View style={PAGESTYLE.checkBoxGroup}>
                                 {

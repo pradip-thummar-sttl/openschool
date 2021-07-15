@@ -62,8 +62,8 @@ const Sidebar = (props) => {
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                                <Text style={styles.profileDesi}>{User.user.UserType}</Text>
+                                <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
                             </View>
                     }
                 </TouchableOpacity>
@@ -154,7 +154,7 @@ const Sidebar = (props) => {
                             isSmall ? null :
                                 <>
                                     <View style={styles.profileTextMain}>
-                                        <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                                        <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                                     </View>
                                     <TouchableOpacity style={styles.moreMenu}>
                                         <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.5),
         paddingBottom: hp(2.0),
         paddingLeft: hp(1.1),
+        // alignSelf:'center'
     },
     profileTextMain: {
         paddingLeft: hp(1.5),
@@ -247,6 +248,7 @@ const styles = StyleSheet.create({
     },
     userInfobottomMain: {
         position: 'absolute',
+        alignSelf:'center',
         bottom: 0,
         paddingHorizontal: hp(1.35),
         borderColor: COLORS.bottomProfileLightBorder,
@@ -279,7 +281,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     moreMenu: {
-        position: 'absolute',
+        // position: 'absolute',
+        marginLeft:hp(4),
         right: 0,
     },
 });

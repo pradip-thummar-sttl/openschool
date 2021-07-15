@@ -49,8 +49,8 @@ const Sidebar = (props) => {
                     {
                         isSmall? null:
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
+                            <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
                         </View>
                     }
                 </TouchableOpacity>
@@ -126,7 +126,7 @@ const Sidebar = (props) => {
                         isSmall? null:
                         <>
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                             </View>
                             <TouchableOpacity style={styles.moreMenu}>
                                 <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -255,7 +255,8 @@ const styles = StyleSheet.create({
         right: hp(-10.5),
     },
     moreMenu: {
-        position: 'absolute',
+        // position: 'absolute',
+        marginLeft:hp(4),
         right: 0,
     },
 });

@@ -419,9 +419,9 @@ export default StyleSheet.create({
         width: hp(5.59),
         alignItems: 'center',
     },
-    pupilgroupName: {
-        textAlign: 'center',
-    },
+    // pupilgroupName: {
+    //     textAlign: 'center',
+    // },
     perfomanceColumn: {
         flexDirection: 'row',
         width: hp(20.18),
@@ -487,5 +487,7 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+        width:hp(8),
+        textAlign:'center'
     },
 });

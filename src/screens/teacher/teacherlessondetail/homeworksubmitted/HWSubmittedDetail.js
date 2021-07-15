@@ -275,7 +275,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                 renderItem={({ item }) => (
                                                     <View style={PAGESTYLE.checkBoxLabelLine}>
                                                         <CheckBox
-                                                            style={PAGESTYLE.checkMark}
+                                                            style={[PAGESTYLE.checkMark,{top:5}]}
                                                             value={item.IsCheck}
                                                             disabled
                                                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -297,7 +297,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         <Text style={PAGESTYLE.uploaded}>Uploaded Homework</Text>
                                         <FlatList
                                             data={data.HomeworkList}
-                                            style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                            style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal:10 }}
                                             renderItem={({ item, index }) => (
                                                 <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
