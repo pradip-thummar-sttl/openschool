@@ -30,6 +30,7 @@ import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
+// import ImagePicker from 'react-native-image-picker';
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
 
 const { DialogModule, Dialog } = NativeModules;
@@ -336,19 +337,38 @@ const TLDetailAdd = (props) => {
 
     const onCameraOnly = () => {
         var arr = [...recordingArr]
-        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
+        const options = {
+            mediaType:"video",
+            cameraType:"back"
+          };
+        launchCamera(options, (response) => {
+            // Same code as in above section!
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
+              
             } else {
                 console.log('response', response);
                 arr.push(response)
 
                 setRecordingArr(arr)
             }
+          });
+        // launchCamera({ mediaType: 'video',  }, (response) => {
+        //     // setResponse(response);
+        //     if (response.errorCode) {
+        //         showMessage(response.errorCode)
+        //     } else if (response.didCancel) {
+        //         console.log('did cnacel');
+        //         showMessage('did cnacel')
+        //     } else {
+        //         console.log('response', response);
+        //         arr.push(response)
 
-        })
+        //         setRecordingArr(arr)
+        //     }
+
+        // })
         setAddRecording(false)
 
     }

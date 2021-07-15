@@ -41,6 +41,14 @@ const Popupaddrecording = (props) => {
     const showTimepicker = () => {
         showMode('time');
     };
+
+    const onCameraOnly =()=>{
+        refRBSheet.current.close(); 
+        setTimeout(() => {
+            props.onCameraOnly()
+        }, 1000);
+       
+    }
     return (
         <View>
             {props.isScreenVoiceSelected ?
@@ -115,7 +123,7 @@ const Popupaddrecording = (props) => {
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.entryData}
-                                        onPress={() => { refRBSheet.current.close(); props.onCameraOnly() }}>
+                                        onPress={() => { onCameraOnly() }}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
