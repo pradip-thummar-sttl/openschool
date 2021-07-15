@@ -45,8 +45,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderBottomLeftRadius: hp(1),
         borderBottomRightRadius: hp(1),
-        width: 50,
-        height: 55,
+        width: hp(6.51),
+        height: hp(7.16),
         shadowColor: COLORS.dateShadow,
         shadowOffset: { width: 0, height: 5, },
         shadowOpacity: 0.4,
@@ -87,8 +87,8 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     moreDashboard: {
-        width: 5,
-        height: 20,
+        width: hp(0.65),
+        height: hp(2.60),
         resizeMode: 'contain',
     },
     whiteBoard: {
@@ -404,8 +404,7 @@ export default StyleSheet.create({
     pupilData: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: hp(0),
-        justifyContent: 'space-between',
+        marginVertical: 6,
     },
     pupilProfile: {
         width: hp(35.80),
@@ -416,8 +415,8 @@ export default StyleSheet.create({
         width: hp(17.97),
     },
     groupColumn: {
-        width: hp(5.59),
-        alignItems: 'center',
+        // width: hp(5.59),
+        alignItems: 'flex-start',
     },
     pupilgroupName: {
         textAlign: 'center',
@@ -469,10 +468,12 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+        position: 'absolute',
+        right: 2,
     },
     pupilImage: {
-        width: 28,
-        height: 28,
+        width: hp(3.64),
+        height: hp(3.64),
         borderRadius: hp(100),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1.69),
