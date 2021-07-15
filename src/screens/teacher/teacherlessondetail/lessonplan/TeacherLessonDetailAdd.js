@@ -379,10 +379,10 @@ const TLDetailAdd = (props) => {
                 </View>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%', bottom: 0 }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: 8,flexDirection: 'row',alignItems: 'center', }}>
-                            <Text style={{ fontSize: 16 }}>{item.ItemName}</Text>
+                        <View style={{ flexDirection: 'row',alignItems: 'center',padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
+                            <Text style={{ fontSize: 14 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
