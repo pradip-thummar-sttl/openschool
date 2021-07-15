@@ -49,6 +49,14 @@ const Popupaddrecording = (props) => {
     const showTimepicker = () => {
         showMode('time');
     };
+
+    const onCameraOnly =()=>{
+        refRBSheet.current.close(); 
+        setTimeout(() => {
+            props.onCameraOnly()
+        }, 1000);
+       
+    }
     return (
         <View>
             {props.isScreenVoiceSelected ?

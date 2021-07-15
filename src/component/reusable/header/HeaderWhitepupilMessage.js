@@ -77,7 +77,7 @@ const HeaderWhitepupilMessage = (props) => {
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by Date</Text></MenuTrigger>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By Date</Text></MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,

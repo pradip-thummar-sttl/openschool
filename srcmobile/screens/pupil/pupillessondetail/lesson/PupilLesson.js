@@ -24,6 +24,7 @@ const PupilLesson = (props) => {
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                         {
                             currentWeekLesson.map((item) => {
+                                
                                 return (
                                     <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilLessonDetailInternal(item)}>
                                         <View style={PAGESTYLE.videoCardThumb}>

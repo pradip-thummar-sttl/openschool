@@ -216,7 +216,7 @@ const NewMessage = (props) => {
                         onChangeText={eventName => setEvent(eventName)} /> */}
                         {parentListView()}
 
-                        <ToggleSwitch
+                        <ToggleSwitch onColor={COLORS.dashboardGreenButton}
                             isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
                         />
                         <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>

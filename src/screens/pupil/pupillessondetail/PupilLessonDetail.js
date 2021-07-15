@@ -192,7 +192,7 @@ const PupilLessonDetail = (props) => {
                 </View>
                 <View style={{ flexDirection: 'row', marginLeft: hp(0.5), right: -7, }}>
                     <Menu style={PAGESTYLE.filterGroup}>
-                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
