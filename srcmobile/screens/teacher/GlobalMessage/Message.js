@@ -64,9 +64,10 @@ const Message = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
+                        multiline={false}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                     <TouchableOpacity
                         activeOpacity={opacity}>
@@ -109,7 +110,7 @@ const Message = (props) => {
                 <TouchableOpacity
                     style={PAGESTYLE.buttonGroup}
                     onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refresh() })}>
-                    <Image style={PAGESTYLE.addIcon} source={Images.AddIconWhite} />
+                    <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} />
                 </TouchableOpacity>
             </View>
 
@@ -138,7 +139,7 @@ const Message = (props) => {
                         {/* <Text style={PAGESTYLE.groupText}>Group A</Text> */}
                     </View>
                     <View style={PAGESTYLE.secondRow}>
-                        <Text style={PAGESTYLE.titleText}>{item.item.Title}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.titleText,{width:'85%'}]}>{item.item.Title}</Text>
                         <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
                     </View>
                     <View style={item.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>

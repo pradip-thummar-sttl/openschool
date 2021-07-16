@@ -81,7 +81,7 @@ const TLDetail = (props) => {
                             keyExtractor={(item, index) => index.toString()}
                         />
                     </View>
-                    <View style={STYLE.hrCommon}></View>
+                    {/* <View style={STYLE.hrCommon}></View> */}
                     <View style={PAGESTYLE.checkBoxGrpWrap}>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
 

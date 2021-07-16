@@ -74,10 +74,12 @@ const Header = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, class, etc"
+                        style={{ flex: 1, height: '95%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical:0 }}
+                        placeholder="Search subject,class,etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
+                        numberOfLines={1}
+                        multiline={false}
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);

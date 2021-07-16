@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, TextInput, FlatList, Platform, BackHandler } from 'react-native'
+import { View, Text, TextInput, FlatList, Platform, BackHandler, SafeAreaView } from 'react-native'
 import Styles from './Style'
 import COLORS from '../../../utils/Colors'
 import Style from '../../../utils/Style'
@@ -169,13 +169,16 @@ const NewMessage = (props) => {
     }
 
     return (
-        <View>
+        
+
+        <View >
+            <SafeAreaView style={{backgroundColor:'white'}} />
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
                 onDraft={() => saveMessage('Draft')}
                 onGoback={() => props.navigation.goBack()}
                 status={status} />
-            <View style={Styles.field1}>
+            <View style={[Styles.field1,]}>
                 <Text label style={Style.labelCommon}>Title</Text>
                 <View style={Styles.copyInputParent}>
                     <TextInput
@@ -222,8 +225,8 @@ const NewMessage = (props) => {
                         onChangeText={message => setMessage(message)} />
                 </View>
             </View>
-
         </View>
+
     )
 }
 

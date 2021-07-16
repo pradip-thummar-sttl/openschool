@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
     right: {
         paddingTop: 10,
-        paddingHorizontal: hp(1.5),
+        paddingHorizontal:Platform.OS==='ios'? hp(1.5):hp(0),
         flex: 1
     },
     pupilParent: {
@@ -204,7 +204,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.backgroundColorCommon,
     },
     mainPage1: {
-        height: '80%',
+        height: '85%',
         paddingHorizontal: hp(2),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,
@@ -493,7 +493,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         height: hp(5.91),
         backgroundColor: COLORS.white,
-        marginHorizontal: hp(2),
+        marginHorizontal: Platform.OS === 'ios'? hp(2):hp(0),
         marginTop: hp(2),
         paddingLeft: hp(2)
     },

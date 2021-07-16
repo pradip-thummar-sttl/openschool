@@ -297,7 +297,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                         <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
                                                     </View>
                                                 )}
-                                                style={{ height: 200 }} />
+                                                // style={{ height: 200 }} 
+                                                />
                                         </View>
                                     </View>
                                 </View>

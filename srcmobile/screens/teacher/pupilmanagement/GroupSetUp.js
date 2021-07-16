@@ -101,7 +101,8 @@ const GroupSetUp = (props) => {
                             data={groups}
                             renderItem={groupRender}
                             keyExtractor={(item) => item.id}
-                            showsVerticalScrollIndicator={false} />
+                            showsVerticalScrollIndicator={false} 
+                            />
                         :
                         // <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
                         <EmptyStatePlaceHohder />

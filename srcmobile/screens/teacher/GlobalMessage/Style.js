@@ -242,7 +242,7 @@ export default StyleSheet.create({
     checkBoxLabelText: {
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(2),
+        paddingLeft: Platform.OS === 'ios'? hp(1):hp(2),
         paddingRight: hp(2),
     },
     checkBoxLabelTextSubmit: {
@@ -321,6 +321,10 @@ export default StyleSheet.create({
         opacity: 0.4,
     },
     addIcon: {
+        width: hp(1.56),
+        resizeMode: 'contain',
+    },
+    addIcon4: {
         width: hp(1.56),
         resizeMode: 'contain',
     },
@@ -1545,13 +1549,10 @@ export default StyleSheet.create({
         height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
     },
     buttonGroup: {
-        position: 'relative',
         flexDirection: 'row',
-        alignItems: 'center',
         marginRight: hp(1.69),
         backgroundColor: COLORS.dashboardGreenButton,
         borderRadius: hp(1),
-        overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
         height: hp(5.20),

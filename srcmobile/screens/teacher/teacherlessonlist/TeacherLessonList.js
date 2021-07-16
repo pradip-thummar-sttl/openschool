@@ -104,8 +104,8 @@ const TeacherLessonList = (props) => {
                     <View style={PAGESTYLE.subjecRow}>
                         <View style={PAGESTYLE.border}></View>
                         <View style={PAGESTYLE.subjectMain}>
-                            <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                            <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:150}]}>{item.SubjectName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:150}]}>{item.LessonTopic}</Text>
                         </View>
                     </View>
                     <View style={PAGESTYLE.timingMain}>
@@ -156,7 +156,7 @@ const TeacherLessonList = (props) => {
                     :
                     lessonData.length > 0 ?
                         <FlatList
-                            style={{ paddingHorizontal: 12, }}
+                            style={{ paddingHorizontal: 12,marginBottom:10 }}
                             data={lessonData}
                             renderItem={renderItem}
                             keyExtractor={(item) => item.id}
