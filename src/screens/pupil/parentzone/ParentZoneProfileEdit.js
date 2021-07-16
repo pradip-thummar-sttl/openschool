@@ -15,6 +15,7 @@ import { add, not } from "react-native-reanimated";
 import moment from 'moment';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src';
+import MESSAGE from "../../../utils/Messages";
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
@@ -39,9 +40,11 @@ const ParentZoneProfileEdit = (props) => {
     const t14 = useRef(null);
 
     const [profileData, setProfileData] = useState(props.data);
+    const [pupilId, setPupilId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [profile, setProfile] = useState('')
+    const [profileUri, setProfileUri] = useState('')
     const [dob, setDob] = useState('');
     const [uniqueCode, setUniqueCode] = useState('');
     const [note, setNote] = useState('');
@@ -57,6 +60,7 @@ const ParentZoneProfileEdit = (props) => {
     const [zip, setZip] = useState('');
 
     useEffect(() => {
+        setPupilId(profileData.Pupilid)
         setFirstName(profileData.FirstName)
         setLastName(profileData.LastName)
         setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
@@ -111,7 +115,7 @@ const ParentZoneProfileEdit = (props) => {
             LastName: lastName,
             ParentFirstName: parentName,
             ParentLastName: '',
-            Dob: moment(dob, 'yyyy-MM-DD').format('yyyy-MM-DD'),
+            Dob: moment(dob, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             Note: note,
             Relationship: relation,
             AddressLine1: add1,
@@ -160,12 +164,12 @@ const ParentZoneProfileEdit = (props) => {
 
         console.log('data', data._parts, lessionId);
 
-        Service.postFormData(data, `${EndPoints.PupilUploadProfile}${pupilId}`, (res) => {
+        Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                showMessageWithCallBack(MESSAGE.profileUpdated, () => {
                     props.navigateToProfile()
                 })
             } else {
@@ -197,7 +201,7 @@ const ParentZoneProfileEdit = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setDob(moment(date).format('yyyy-MM-DD'))
+        setDob(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -259,7 +263,7 @@ const ParentZoneProfileEdit = (props) => {
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
                                         <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: baseUrl + profile }} />
+                                            <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
                                             <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} />
                                         </View>
                                         <View style={PAGESTYLE.topBannerParent}>

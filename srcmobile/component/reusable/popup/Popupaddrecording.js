@@ -85,7 +85,8 @@ const Popupaddrecording = (props) => {
                         onPress={() => Download(props.recordingArr[0])}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
                         <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
-                        <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                        {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
+                        <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
                     </TouchableOpacity>
             }
             <RBSheet

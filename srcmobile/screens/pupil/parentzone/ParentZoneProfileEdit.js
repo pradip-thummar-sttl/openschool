@@ -74,7 +74,7 @@ const ParentZoneProfileEdit = (props) => {
     }
 
     useEffect(() => {
-        setPupilId(profileData.UserId)
+        setPupilId(profileData.Pupilid)
         setFirstName(profileData.FirstName)
         setLastName(profileData.LastName)
         setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
@@ -127,7 +127,7 @@ const ParentZoneProfileEdit = (props) => {
             LastName: lastName,
             ParentFirstName: parentName,
             ParentLastName: '',
-            Dob: moment(dob, 'yyyy-MM-DD').format('yyyy-MM-DD'),
+            Dob: moment(dob, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             Note: note,
             Relationship: relation,
             AddressLine1: add1,
@@ -140,7 +140,7 @@ const ParentZoneProfileEdit = (props) => {
             UpdatedBy: pupilId
         }
 
-        console.log('postData', data);
+        console.log('postData', dob, data);
 
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
             if (res.code == 200) {
@@ -168,20 +168,20 @@ const ParentZoneProfileEdit = (props) => {
         let data = new FormData();
         let ext = profileUri.uri.split('.');
 
-        data.append('materiallist', {
+        data.append('file', {
             uri: profileUri.uri,
-            name: profileUri.uri.split('/'),
-            type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+            name: 'pupilprofile.' + (ext.length > 0 ? ext[ext.length-1] : 'jpeg'),
+            type: 'image/' + (ext.length > 0 ? ext[ext.length-1] : 'jpeg')
         });
 
-        console.log('data', data._parts, lessionId);
+        console.log('data', data._parts, ext, profileUri.uri);
 
-        Service.postFormData(data, `${EndPoints.PupilUploadProfile}${pupilId}`, (res) => {
+        Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                showMessageWithCallBack(MESSAGE.profileUpdated, () => {
                     props.navigation.goBack()
                 })
             } else {
@@ -213,7 +213,7 @@ const ParentZoneProfileEdit = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setDob(moment(date).format('yyyy-MM-DD'))
+        setDob(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -244,7 +244,7 @@ const ParentZoneProfileEdit = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             },
         )
     }
@@ -259,7 +259,7 @@ const ParentZoneProfileEdit = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             }
         );
     }
@@ -278,7 +278,7 @@ const ParentZoneProfileEdit = (props) => {
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
                             <View style={PAGESTYLE.profileOuter}>
-                                <Image source={{ uri: !profileUri ? baseUrl + profile : profileUri }} style={PAGESTYLE.profileImage}></Image>
+                                <Image source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} style={PAGESTYLE.profileImage}></Image>
                                 <TouchableOpacity
                                     style={PAGESTYLE.editProfileMain}
                                     activeOpacity={opacity}
