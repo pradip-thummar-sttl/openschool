@@ -305,7 +305,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                     </View>
                                                 </TouchableOpacity>
                                             )}
-                                            numColumns={4}
+                                            numColumns={5}
                                             keyExtractor={(item, index) => index.toString()}
                                         />
                                     </View>

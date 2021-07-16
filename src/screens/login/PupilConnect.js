@@ -109,7 +109,9 @@ class PupilConnect extends Component {
                                     }
                                 </TouchableOpacity>
 
-                                <TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => this.props.navigation.replace('Login', { userType: "Pupil" })}>
                                     <Text style={styles.resetBtn}>Skip this step</Text>
                                 </TouchableOpacity>
                             </View>

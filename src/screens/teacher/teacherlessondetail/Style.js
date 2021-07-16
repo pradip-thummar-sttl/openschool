@@ -1314,7 +1314,6 @@ flex: 1,
         alignItems:'center',
         justifyContent: 'center',
         width:hp(5),
-        height:'100%',
     },
     checkBoxGroup: {
         flexDirection: 'row',

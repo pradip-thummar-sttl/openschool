@@ -306,7 +306,7 @@ class Login extends Component {
                                     onFocus={() => this.setState({ isMobileFocused: true })}
                                     onBlur={() => this.setState({ isMobileFocused: false })}
                                     returnKeyType={"next"}
-                                    keyboardType={'phone-pad'}
+                                    keyboardType={'numeric'}
                                     ref={(input) => { this.t3 = input; }}
                                     onSubmitEditing={() => { this.t4.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isMobileFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}

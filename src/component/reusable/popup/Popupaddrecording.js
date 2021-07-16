@@ -52,13 +52,6 @@ const Popupaddrecording = (props) => {
 
     console.log('props.recordingArr', props.recordingArr);
 
-    const onCameraOnly =()=>{
-        toggleModal(); 
-        setTimeout(() => {
-            props.onCameraOnly()
-        }, 1000);
-       
-    }
     return (
         <View>
             {props.isScreenVoiceSelected ?

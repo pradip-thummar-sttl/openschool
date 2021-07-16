@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -19,11 +19,17 @@ const WorkSpaceHeader = (props) => {
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
                 <View style={styles.headerRight}>
                     {
-                        props.isWorkspace ?
-                            <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
-                                <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
-                            </TouchableOpacity>
-                            : null
+                        props.isLoading ?
+                            <ActivityIndicator
+                                style={{ ...styles.buttonGroup }}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            props.isWorkspace ?
+                                <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
+                                    <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
+                                </TouchableOpacity>
+                                : null
                     }
 
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
