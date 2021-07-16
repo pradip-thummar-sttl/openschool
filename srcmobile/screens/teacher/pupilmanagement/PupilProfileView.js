@@ -15,6 +15,7 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import ActivityRings from "react-native-activity-rings";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule } = NativeModules;
 
@@ -128,6 +129,11 @@ const PupilProfileView = (props) => {
     }
 
     const setInstantRewards = () => {
+        if (!isBronze && !isSilver && !isGold) {
+            showMessage(MESSAGE.selectReward)
+            return
+        }
+
         let data = {
             TeacherID: User.user._id,
             PupilID: item.PupilId,
@@ -143,7 +149,7 @@ const PupilProfileView = (props) => {
                 setSilver(false)
                 setGold(false)
                 setFeedback('')
-                showMessage('Pupil has been rewarded')
+                showMessage(MESSAGE.rewarded)
             } else {
                 showMessage(res.message)
             }

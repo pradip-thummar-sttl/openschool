@@ -14,6 +14,8 @@ import HeaderPMInner from './HeaderPMInner';
 import moment from 'moment';
 import Chat from "../../Chat/Chat";
 import ActivityRings from "react-native-activity-rings";
+import MESSAGE from "../../../utils/Messages";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
@@ -78,6 +80,11 @@ const PupilProfileView = (props) => {
     }
 
     const setInstantRewards = () => {
+        if (!isBronze && !isSilver && !isGold) {
+            showMessage(MESSAGE.selectReward)
+            return
+        }
+
         let data = {
             TeacherID: User.user._id,
             PupilID: item.PupilId,
@@ -93,7 +100,7 @@ const PupilProfileView = (props) => {
                 setSilver(false)
                 setGold(false)
                 setFeedback('')
-                showMessage('Pupil has been rewarded')
+                showMessage(MESSAGE.rewarded)
             } else {
                 showMessage(res.message)
             }
@@ -126,7 +133,7 @@ const PupilProfileView = (props) => {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
                         <View style={PAGESTYLE.whiteBg}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
+                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
@@ -134,9 +141,9 @@ const PupilProfileView = (props) => {
                                                 <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                     source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
                                             </View>
-                                            <TouchableOpacity>
+                                            {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </ImageBackground>
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
@@ -186,6 +193,15 @@ const PupilProfileView = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.annotationText}>
                                         <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
+                                        <View style={PAGESTYLE.tickLayoutPArent}>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => setInstantRewards()}>
+                                                <View>
+                                                    <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
                                         {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
                                         <TextInput
                                             returnKeyType={"next"}
@@ -193,7 +209,7 @@ const PupilProfileView = (props) => {
                                             autoCapitalize={'sentences'}
                                             numberOfLines={4}
                                             placeholder='Leave feedback here'
-                                            style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}
+                                            style={[PAGESTYLE.paragraphText1, PAGESTYLE.annotationBox]}
                                             value={feedBack}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
@@ -229,7 +245,7 @@ const PupilProfileView = (props) => {
 
                                     </View>
                                 </View>
-                            </ScrollView>
+                            </KeyboardAwareScrollView>
                         </View>
                     </View>
                     :
