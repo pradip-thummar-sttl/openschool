@@ -334,7 +334,7 @@ class PupilRegister extends Component {
                                         onFocus={() => this.setState({ isPhoneFocused: true })}
                                         onBlur={() => this.setState({ isPhoneFocused: false })}
                                         returnKeyType={"next"}
-                                        keyboardType={'phone-pad'}
+                                        keyboardType={'numeric'}
                                         ref={(input) => { this.t3 = input; }}
                                         onSubmitEditing={() => { this.t4.focus(); }}
                                         style={{ ...STYLE.commonInput, borderColor: (this.state.isPhoneFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}

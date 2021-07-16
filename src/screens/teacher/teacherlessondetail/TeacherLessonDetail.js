@@ -51,18 +51,18 @@ const TeacherLessonDetail = (props) => {
     const [isHSDataChanged, setHSDataChanged] = useState(false)
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
 
     useEffect(() => {
@@ -148,7 +148,8 @@ const TeacherLessonDetail = (props) => {
             if (element.uri) {
                 data.append('recording', {
                     uri: element.uri,
-                    name: element.name,
+                    // name: element.fileName,
+                    name: 'MY_RECORDING.mp4',
                     type: element.type
                 });
             }

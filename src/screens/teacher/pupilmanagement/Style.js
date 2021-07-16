@@ -232,7 +232,34 @@ export default StyleSheet.create({
         fontSize:hp(1.82),
         color:COLORS.introGreyColor,
         flexWrap:'wrap',
-        paddingBottom:hp(2),
+        paddingBottom:hp(2), 
+    },
+    paragraphText1:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.introGreyColor,
+        flexWrap:'wrap',
+        paddingBottom:hp(2), 
+        height: hp(15)
+    },
+    tickLayout: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 15,
+        width: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'contain'
+    },
+    tickLayoutPArent: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 35,
+        width: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        alignSelf: 'flex-end',
     },
     managementParaSec:{
         marginRight:hp(20.05),
@@ -316,6 +343,7 @@ export default StyleSheet.create({
     },
     rateAnnotationBlock:{
         flexDirection:'row',
+        height: 200
     },
     annotationBox:{
         borderWidth:1,

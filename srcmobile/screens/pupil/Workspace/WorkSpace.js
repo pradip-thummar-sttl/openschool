@@ -15,6 +15,7 @@ const WorkSpace = (props) => {
     const workspaceList = props.route.params.item
     const [pathCount, setPathCount] = useState(0)
     const [workSpace, setWorkSpace] = useState([])
+    const [isLoading, setLoading] = useState(false)
     const [workSpacePath, setWorkSpacePath] = useState("")
     const [selectedWorkSpace, setSelectedWorkSpace] = useState(props.route.params.tappedItem)
 
@@ -41,6 +42,7 @@ const WorkSpace = (props) => {
             return
         }
 
+        setLoading(true)
         const pathArr = workSpacePath.split('/')
         const ext = getFileExtention(workSpacePath)
         const data = new FormData()
@@ -68,6 +70,7 @@ const WorkSpace = (props) => {
             } else {
                 showMessage(res.message)
             }
+            setLoading(false)
         }, (err) => {
             console.log('Error of upload workspace', err)
         })
@@ -83,6 +86,7 @@ const WorkSpace = (props) => {
         <View style={{ flex: 1 }}>
             <SafeAreaView />
             <WorkSpaceHeader
+                isLoading={isLoading}
                 isWorkspace={props.route.params.isWorkspace}
                 goBack={() => {
                     props.navigation.goBack()

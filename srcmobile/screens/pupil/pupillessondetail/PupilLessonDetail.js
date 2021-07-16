@@ -348,24 +348,14 @@ const PupilLessonDetail = (props) => {
                                     currentWeekLesson={currentWeekLesson}
                                     lastWeekLesson={lastWeekLesson}
                                     navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
-
-                                // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                // </View>
                                 :
-                                DueHomeWork.length > 0 || SubmitHomeWork.length > 0 || MarkedHomeWork.length > 0 ?
-                                    <PupilLessonDue
-                                        DueHomeWork={DueHomeWork}
-                                        SubmitHomeWork={SubmitHomeWork}
-                                        MarkedHomeWork={MarkedHomeWork}
-                                        navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
-                                        navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
-                                        navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
-                                    :
-                                    // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                    //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    // </View>
-                                    <EmptyStatePlaceHohder />
+                                <PupilLessonDue
+                                    DueHomeWork={DueHomeWork}
+                                    SubmitHomeWork={SubmitHomeWork}
+                                    MarkedHomeWork={MarkedHomeWork}
+                                    navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
+                                    navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
+                                    navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
                         }
                     </View>
                     {/* <HeaderBulk /> */}

@@ -25,18 +25,18 @@ const PupilHomeWorkMarked = (props) => {
     console.log('item', item.RecordingList[0].filename);
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={PAGESTYLE.wrapper}>
@@ -131,10 +131,10 @@ const PupilHomeWorkMarked = (props) => {
                                         <Text style={[PAGESTYLE.lessonFeedDesc]}>Feedback for {item.SubjectName} </Text>
                                         <Text style={PAGESTYLE.techerName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                     </View>
-                                    <View style={PAGESTYLE.largeVideoBlock}>
-                                        {item.RecordingList.length == 0 ?
-                                            <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
-                                            :
+                                    {item.RecordingList.length == 0 ?
+                                        null
+                                        :
+                                        <View style={PAGESTYLE.largeVideoBlock}>
                                             <View style={{ height: '100%', justifyContent: 'center' }}>
                                                 <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                                     resizeMode={'contain'}
@@ -151,8 +151,8 @@ const PupilHomeWorkMarked = (props) => {
                                                     null
                                                 }
                                             </View>
-                                        }
-                                    </View>
+                                        </View>
+                                    }
                                 </View>
                             </View>
                         </ScrollView>

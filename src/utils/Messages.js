@@ -54,6 +54,7 @@ const MESSAGE = {
     passCode: 'Please enter four digit pass code',
     parentNAme: 'Please enter parent name',
     childPassword: "Please enter child's password",
+    profileUpdated: 'Profile updated successfully',
     gmTitle: 'Please enter valid title',
     gmMessage: 'Please enter valid message',
     gmPArent: 'Please select at least one parent',
@@ -81,6 +82,8 @@ const MESSAGE = {
 
     noLessonHWPupil1: 'You have no homework yet',
     noLessonHWPupil2: 'Take it easy and enjoy a break',
+    selectReward: 'Please select any reward for pupil',
+    rewarded: 'Pupil has been rewarded',
 }
 
 export default MESSAGE;

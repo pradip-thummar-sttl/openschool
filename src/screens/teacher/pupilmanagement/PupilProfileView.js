@@ -14,6 +14,8 @@ import HeaderPMInner from './HeaderPMInner';
 import moment from 'moment';
 import Chat from "../../Chat/Chat";
 import ActivityRings from "react-native-activity-rings";
+import MESSAGE from "../../../utils/Messages";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
@@ -23,34 +25,15 @@ const PupilProfileView = (props) => {
     const item = props.selectedPupil;
     const [chartData, setChartData] = useState([])
 
-    const [bronze, setBronze] = useState(0)
-    const [silver, setSilver] = useState(0)
-    const [gold, setGold] = useState(0)
+    const [isBronze, setBronze] = useState(false);
+    const [isSilver, setSilver] = useState(false);
+    const [isGold, setGold] = useState(false);
+    const [feedBack, setFeedback] = useState('')
 
     const activityConfig = {
         width: 300,
         height: 300
     };
-
-    useEffect(() => {
-        item.RewardsList.forEach(element => {
-            switch (element._id) {
-                case '3':
-                    setBronze(element.count)
-                    break;
-                case '6':
-                    setSilver(element.count)
-                    break;
-                case '9':
-                    setGold(element.count)
-                    break;
-                default:
-                    break;
-            }
-        });
-
-        getLessonData()
-    }, [])
 
     useEffect(() => {
         console.log('chartData', chartData);
@@ -96,6 +79,49 @@ const PupilProfileView = (props) => {
         })
     }
 
+    const setInstantRewards = () => {
+        if (!isBronze && !isSilver && !isGold) {
+            showMessage(MESSAGE.selectReward)
+            return
+        }
+
+        let data = {
+            TeacherID: User.user._id,
+            PupilID: item.PupilId,
+            Reward: isBronze ? '3' : isSilver ? '6' : '9',
+            Feedback: feedBack,
+            CreatedBy: User.user._id
+        }
+
+        Service.post(data, `${EndPoints.AddInstantReward}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                setBronze(false)
+                setSilver(false)
+                setGold(false)
+                setFeedback('')
+                showMessage(MESSAGE.rewarded)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
+    }
+
+    const onStarSelection = (index) => {
+        setBronze(false)
+        setSilver(false)
+        setGold(false)
+        if (index == 3) {
+            setBronze(true)
+        } else if (index == 6) {
+            setSilver(true)
+        } else {
+            setGold(true)
+
+        }
+    }
 
     console.log('props', props.selectedPupil);
     return (
@@ -107,7 +133,7 @@ const PupilProfileView = (props) => {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
                         <View style={PAGESTYLE.whiteBg}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
+                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
@@ -115,9 +141,9 @@ const PupilProfileView = (props) => {
                                                 <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                     source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
                                             </View>
-                                            <TouchableOpacity>
+                                            {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </ImageBackground>
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
@@ -144,30 +170,48 @@ const PupilProfileView = (props) => {
                                         <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
                                         <View style={PAGESTYLE.achivementBox}>
                                             <View style={PAGESTYLE.rewardStarMark}>
-                                                <View style={PAGESTYLE.centerText}>
-                                                    <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
-                                                        <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
-                                                    </ImageBackground>
-                                                    <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                                                </View>
-                                                <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
-                                                        <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
-                                                    </ImageBackground>
-                                                    <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                                </View>
-                                                <View style={PAGESTYLE.centerText}>
-                                                    <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
-                                                        <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
-                                                    </ImageBackground>
-                                                    <Text style={PAGESTYLE.starText}>Gold stars</Text>
-                                                </View>
+                                                <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
+                                                    <View style={PAGESTYLE.centerText}>
+                                                        <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                        <Text style={PAGESTYLE.starText}>Bronze star</Text>
+                                                    </View>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
+                                                    <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
+                                                        <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                        <Text style={PAGESTYLE.starText}>Silver star</Text>
+                                                    </View>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
+                                                    <View style={PAGESTYLE.centerText}>
+                                                        <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                        <Text style={PAGESTYLE.starText}>Gold star</Text>
+                                                    </View>
+                                                </TouchableOpacity>
                                             </View>
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.annotationText}>
-                                        <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>Annotation</Text>
-                                        <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text>
+                                        <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
+                                        <View style={PAGESTYLE.tickLayoutPArent}>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => setInstantRewards()}>
+                                                <View>
+                                                    <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
+                                        {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
+                                        <TextInput
+                                            returnKeyType={"next"}
+                                            multiline={true}
+                                            autoCapitalize={'sentences'}
+                                            numberOfLines={4}
+                                            placeholder='Leave feedback here'
+                                            style={[PAGESTYLE.paragraphText1, PAGESTYLE.annotationBox]}
+                                            value={feedBack}
+                                            onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.generalRow}>
@@ -201,7 +245,7 @@ const PupilProfileView = (props) => {
 
                                     </View>
                                 </View>
-                            </ScrollView>
+                            </KeyboardAwareScrollView>
                         </View>
                     </View>
                     :

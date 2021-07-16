@@ -123,34 +123,38 @@ const HeaderPM = (props) => {
                         <Text style={[PAGESTYLE.tabLinkGrey, tabIndex == 5 ? PAGESTYLE.tabLinkSelected : null]}>My School</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={PAGESTYLE.searchParent}>
-                    <View style={PAGESTYLE.searchInner}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => {
-                                keyword ?
-                                    isSearchActive ?
-                                        setSearchActive(false)
+                {tabIndex == 0 ?
+                    <View style={PAGESTYLE.searchParent}>
+                        <View style={PAGESTYLE.searchInner}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => {
+                                    keyword ?
+                                        isSearchActive ?
+                                            setSearchActive(false)
+                                            :
+                                            setSearchActive(true)
                                         :
-                                        setSearchActive(true)
-                                    :
-                                    null
-                            }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={Images.SearchIcon} />
-                        </TouchableOpacity>
-                        <TextInput
-                            ref={textInput}
-                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                            placeholder="Search message"
-                            maxLength={50}
-                            placeholderTextColor={COLORS.menuLightFonts}
-                            onChangeText={keyword => {
-                                setKeyword(keyword);
-                                props.onSearchKeyword(keyword);
-                            }} />
+                                        null
+                                }}>
+                                <Image style={{ height: 20, resizeMode: 'contain' }}
+                                    source={Images.SearchIcon} />
+                            </TouchableOpacity>
+                            <TextInput
+                                ref={textInput}
+                                style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                placeholder="Search message"
+                                maxLength={50}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={keyword => {
+                                    setKeyword(keyword);
+                                    props.onSearchKeyword(keyword);
+                                }} />
+                        </View>
                     </View>
-                </View>
+                    :
+                    null
+                }
             </View>
         </View>
     )

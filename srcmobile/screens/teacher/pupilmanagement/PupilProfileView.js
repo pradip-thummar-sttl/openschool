@@ -9,12 +9,13 @@ import FONTS from '../../../utils/Fonts';
 import HeaderPMInner from "./HeaderPMInner";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import moment from 'moment';
-import { baseUrl } from "../../../utils/Constant";
+import { baseUrl, opacity, showMessage } from "../../../utils/Constant";
 import Chat from "../../Chat/Chat";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import ActivityRings from "react-native-activity-rings";
+import MESSAGE from "../../../utils/Messages";
 
 const { CallModule } = NativeModules;
 
@@ -23,28 +24,29 @@ const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
-    const [bronze, setBronze] = useState(0)
-    const [silver, setSilver] = useState(0)
-    const [gold, setGold] = useState(0)
+    const [isBronze, setBronze] = useState(false);
+    const [isSilver, setSilver] = useState(false);
+    const [isGold, setGold] = useState(false);
+    const [feedBack, setFeedback] = useState('')
 
     console.log('item', item);
     // const handleOnClick = (index) => {
     //     setTabSelected(index)
     // }
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
-    
+    }
+
     const [chartData, setChartData] = useState([])
 
     const myref = useRef(null);
@@ -126,6 +128,50 @@ const PupilProfileView = (props) => {
         })
     }
 
+    const setInstantRewards = () => {
+        if (!isBronze && !isSilver && !isGold) {
+            showMessage(MESSAGE.selectReward)
+            return
+        }
+
+        let data = {
+            TeacherID: User.user._id,
+            PupilID: item.PupilId,
+            Reward: isBronze ? '3' : isSilver ? '6' : '9',
+            Feedback: feedBack,
+            CreatedBy: User.user._id
+        }
+
+        Service.post(data, `${EndPoints.AddInstantReward}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                setBronze(false)
+                setSilver(false)
+                setGold(false)
+                setFeedback('')
+                showMessage(MESSAGE.rewarded)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
+    }
+
+    const onStarSelection = (index) => {
+        setBronze(false)
+        setSilver(false)
+        setGold(false)
+        if (index == 3) {
+            setBronze(true)
+        } else if (index == 6) {
+            setSilver(true)
+        } else {
+            setGold(true)
+
+        }
+    }
+
     return (
         <View>
             <HeaderPMInner
@@ -169,24 +215,34 @@ const PupilProfileView = (props) => {
                             <View style={PAGESTYLE.rewardSection}>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
-                                    <View style={PAGESTYLE.rewardStarMark}>
-                                        <View style={PAGESTYLE.centerText}>
-                                            <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
-                                                <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
-                                            </ImageBackground>
-                                            <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                    <TouchableOpacity
+                                        style={PAGESTYLE.tickLayoutPArent}
+                                        activeOpacity={opacity}
+                                        onPress={() => setInstantRewards()}>
+                                        <View>
+                                            <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
                                         </View>
-                                        <View style={PAGESTYLE.centerStar}>
-                                            <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
-                                                <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
-                                            </ImageBackground>
-                                            <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.centerText}>
-                                            <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
-                                                <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
-                                            </ImageBackground>
-                                            <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                    </TouchableOpacity>
+                                    <View style={PAGESTYLE.achivementBox}>
+                                        <View style={PAGESTYLE.rewardStarMark}>
+                                            <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
+                                                <View style={PAGESTYLE.centerText}>
+                                                    <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                    <Text style={PAGESTYLE.starText}>Bronze star</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
+                                                <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
+                                                    <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    <Text style={PAGESTYLE.starText}>Silver star</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
+                                                <View style={PAGESTYLE.centerText}>
+                                                    <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                    <Text style={PAGESTYLE.starText}>Gold star</Text>
+                                                </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
@@ -198,7 +254,9 @@ const PupilProfileView = (props) => {
                                         autoCapitalize={'sentences'}
                                         numberOfLines={4}
                                         placeholder='Leave feedback here'
-                                        style={PAGESTYLE.commonInputTextareaBoldGrey} />
+                                        style={PAGESTYLE.commonInputTextareaBoldGrey}
+                                        value={feedBack}
+                                        onChangeText={feedback => setFeedback(feedback)} />
                                 </View>
                             </View>
                             <View HR style={STYLE.hrCommon}></View>

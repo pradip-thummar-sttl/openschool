@@ -23,12 +23,12 @@ const Popupaddrecording = (props) => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    const onCameraOnly =()=>{
-        toggleModal(); 
+    const onCameraOnly = () => {
+        toggleModal();
         setTimeout(() => {
             props.onCameraOnly()
         }, 1000);
-       
+
     }
 
     const onChange = (event, selectedDate) => {
@@ -86,7 +86,8 @@ const Popupaddrecording = (props) => {
                         activeOpacity={opacity}
                         onPress={() => Download(props.recordingArr[0])}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
-                        <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                        {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
+                        <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
                     </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>
