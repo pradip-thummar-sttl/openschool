@@ -1,10 +1,10 @@
-export const baseUrl = "http://14.143.90.233:3000/"; //public
-// export const baseUrl = "http://192.168.0.218:3000/"; //internal
+// export const baseUrl = "http://14.143.90.233:3000/"; //public
+export const baseUrl = "http://192.168.0.218:3000/"; //internal
 import { Alert, Platform } from "react-native";
 
 export const opacity = 0.5;
 export const isDesignBuild = false;
-export const isRunningFromVirtualDevice = true;
+export const isRunningFromVirtualDevice = false;
 export const cellWidth = 250;
 
 export const Lesson = 'Lesson';

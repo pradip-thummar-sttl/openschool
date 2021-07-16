@@ -28,7 +28,7 @@ const Sidebar = (props) => {
 
         if (isSmall) {
             Animated.timing(animationValue, {
-                toValue: 225,
+                toValue: hp(29.29),
                 duration: 500
             }).start(() => {
                 action(false)
@@ -36,7 +36,7 @@ const Sidebar = (props) => {
         }
         else {
             Animated.timing(animationValue, {
-                toValue: 72,
+                toValue: hp(9.375),
                 duration: 500
             }).start(() => {
                 action(true)

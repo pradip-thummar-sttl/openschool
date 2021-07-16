@@ -24,7 +24,7 @@ export default StyleSheet.create({
     commonInput: {
         color:COLORS.themeBlue,
         fontSize: hp('1.9%'),
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),

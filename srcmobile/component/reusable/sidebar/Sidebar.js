@@ -21,7 +21,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                        <Image style={styles.headerProfile} source={Images.proffileLogo} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text style={styles.profileDesi}>{User.user.UserType}</Text>
@@ -105,7 +105,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                        <Image style={styles.headerProfile} source={Images.proffileLogo} />
                         <View style={styles.profileTextMain}>
                             <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text style={styles.profileDesi}>{User.user.UserType}</Text>
@@ -249,6 +249,7 @@ const styles = StyleSheet.create({
         width: hp(5.40),
         height: hp(5.40),
         resizeMode: 'contain',
+        borderRadius: hp(100),
     },
     userInfobottom: {
         position: 'absolute',

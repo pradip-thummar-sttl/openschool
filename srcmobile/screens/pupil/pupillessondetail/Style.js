@@ -29,6 +29,12 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         height: '100%',
     },
+    whiteBg1: {
+        backgroundColor: COLORS.white,
+        paddingBottom: hp(2),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
+    },
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
         borderBottomColor: COLORS.borderGrp,

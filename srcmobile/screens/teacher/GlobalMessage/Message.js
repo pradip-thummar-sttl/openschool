@@ -17,6 +17,7 @@ import { Service } from '../../../service/Service';
 import { EndPoints } from '../../../service/EndPoints';
 import { User } from '../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
+import MESSAGE from '../../../utils/Messages';
 var moment = require('moment');
 
 const Message = (props) => {
@@ -221,7 +222,7 @@ const Message = (props) => {
                     // <View style={{ height: 100, justifyContent: 'center' }}>
                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                     // </View>
-                    <EmptyStatePlaceHohder />
+                    <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
             }
         </View>
     )

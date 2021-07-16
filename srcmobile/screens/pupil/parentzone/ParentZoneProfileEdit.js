@@ -20,9 +20,24 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src'
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(false);
-    const [isPindHide, setPinHide] = useState(false);
-    const [isPasswordHide, setPasswordide] = useState(false);
+    const [isPindHide, setPinHide] = useState(true);
+    const [isPasswordHide, setPasswordide] = useState(true);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const t1 = useRef(null);
+    const t2 = useRef(null);
+    const t3 = useRef(null);
+    const t4 = useRef(null);
+    const t5 = useRef(null);
+    const t6 = useRef(null);
+    const t7 = useRef(null);
+    const t8 = useRef(null);
+    const t9 = useRef(null);
+    const t10 = useRef(null);
+    const t11 = useRef(null);
+    const t12 = useRef(null);
+    const t13 = useRef(null);
+    const t14 = useRef(null);
 
     const [profileData, setProfileData] = useState(props.route.params.data);
     const [pupilId, setPupilId] = useState('');
@@ -45,21 +60,21 @@ const ParentZoneProfileEdit = (props) => {
     const [zip, setZip] = useState('');
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
+    }
 
     useEffect(() => {
-        setPupilId(profileData.UserId)
+        setPupilId(profileData.Pupilid)
         setFirstName(profileData.FirstName)
         setLastName(profileData.LastName)
         setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
@@ -112,7 +127,7 @@ const ParentZoneProfileEdit = (props) => {
             LastName: lastName,
             ParentFirstName: parentName,
             ParentLastName: '',
-            Dob: moment(dob, 'yyyy-MM-DD').format('yyyy-MM-DD'),
+            Dob: moment(dob, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             Note: note,
             Relationship: relation,
             AddressLine1: add1,
@@ -125,7 +140,7 @@ const ParentZoneProfileEdit = (props) => {
             UpdatedBy: pupilId
         }
 
-        console.log('postData', data);
+        console.log('postData', dob, data);
 
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
             if (res.code == 200) {
@@ -153,20 +168,20 @@ const ParentZoneProfileEdit = (props) => {
         let data = new FormData();
         let ext = profileUri.uri.split('.');
 
-            data.append('materiallist', {
-                uri: profileUri.uri,
-                name: profileUri.uri.split('/'),
-                type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
-            });
+        data.append('file', {
+            uri: profileUri.uri,
+            name: 'pupilprofile.' + (ext.length > 0 ? ext[ext.length-1] : 'jpeg'),
+            type: 'image/' + (ext.length > 0 ? ext[ext.length-1] : 'jpeg')
+        });
 
-        console.log('data', data._parts, lessionId);
+        console.log('data', data._parts, ext, profileUri.uri);
 
-        Service.postFormData(data, `${EndPoints.PupilUploadProfile}${pupilId}`, (res) => {
+        Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
-                showMessageWithCallBack(MESSAGE.lessonAdded, () => {
+                showMessageWithCallBack(MESSAGE.profileUpdated, () => {
                     props.navigation.goBack()
                 })
             } else {
@@ -198,7 +213,7 @@ const ParentZoneProfileEdit = (props) => {
 
     const handleConfirm = (date) => {
         // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        setDob(moment(date).format('yyyy-MM-DD'))
+        setDob(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
@@ -229,7 +244,7 @@ const ParentZoneProfileEdit = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             },
         )
     }
@@ -244,7 +259,7 @@ const ParentZoneProfileEdit = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             }
         );
     }
@@ -263,7 +278,7 @@ const ParentZoneProfileEdit = (props) => {
                         <View style={PAGESTYLE.profileImageArea}>
                             <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
                             <View style={PAGESTYLE.profileOuter}>
-                                <Image source={{ uri: !profileUri ? baseUrl + profile : profileUri }} style={PAGESTYLE.profileImage}></Image>
+                                <Image source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} style={PAGESTYLE.profileImage}></Image>
                                 <TouchableOpacity
                                     style={PAGESTYLE.editProfileMain}
                                     activeOpacity={opacity}
@@ -282,8 +297,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t1 = input; }}
-                                onSubmitEditing={() => { this.t2.focus(); }}
+                                ref={t1}
+                                onSubmitEditing={() => { t2.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={firstName}
                                 autoCapitalize={'words'}
@@ -296,8 +311,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t2 = input; }}
-                                onSubmitEditing={() => { this.t4.focus(); }}
+                                ref={t2}
+                                onSubmitEditing={() => { t4.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={lastName}
                                 autoCapitalize={'words'}
@@ -326,8 +341,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t3 = input; }}
-                                onSubmitEditing={() => { this.t4.focus(); }}
+                                ref={t3}
+                                onSubmitEditing={() => { t4.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 editable={false}
                                 value={uniqueCode}
@@ -341,8 +356,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.label}>Notes</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t4 = input; }}
-                                onSubmitEditing={() => { this.t5.focus(); }}
+                                ref={t4}
+                                onSubmitEditing={() => { t5.current.focus(); }}
                                 multiline={true}
                                 autoCapitalize={'sentences'}
                                 numberOfLines={4}
@@ -358,8 +373,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Relationship to pupil</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t5 = input; }}
-                                onSubmitEditing={() => { this.t6.focus(); }}
+                                ref={t5}
+                                onSubmitEditing={() => { t6.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={relation}
                                 autoCapitalize={'words'}
@@ -376,8 +391,8 @@ const ParentZoneProfileEdit = (props) => {
                                 <TextInput
                                     placeholder="Password"
                                     autoCapitalize={'none'}
-                                    ref={(input) => { this.t6 = input; }}
-                                    onSubmitEditing={() => { this.t7.focus(); }}
+                                    ref={t6}
+                                    onSubmitEditing={() => { t7.current.focus(); }}
                                     style={STYLE.commonInputPassword}
                                     value={code}
                                     maxLength={4}
@@ -397,8 +412,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent/Guardian Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t7 = input; }}
-                                onSubmitEditing={() => { this.t10.focus(); }}
+                                ref={t7}
+                                onSubmitEditing={() => { t10.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={parentName}
                                 autoCapitalize={'words'}
@@ -411,8 +426,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Contact tel.</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t8 = input; }}
-                                onSubmitEditing={() => { this.t9.focus(); }}
+                                ref={t8}
+                                onSubmitEditing={() => { t9.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 editable={false}
                                 value={mobile}
@@ -426,8 +441,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Associated email for child’s acc.</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t9 = input; }}
-                                onSubmitEditing={() => { this.t10.focus(); }}
+                                ref={t9}
+                                onSubmitEditing={() => { t10.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 editable={false}
                                 value={childEmail}
@@ -444,8 +459,8 @@ const ParentZoneProfileEdit = (props) => {
                                 <TextInput
                                     placeholder="Password"
                                     autoCapitalize={'none'}
-                                    ref={(input) => { this.t10 = input; }}
-                                    onSubmitEditing={() => { this.t11.focus(); }}
+                                    ref={t10}
+                                    onSubmitEditing={() => { t11.current.focus(); }}
                                     style={STYLE.commonInputPassword}
                                     value={childPass}
                                     maxLength={30}
@@ -465,8 +480,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Address Line 1</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t11 = input; }}
-                                onSubmitEditing={() => { this.t12.focus(); }}
+                                ref={t11}
+                                onSubmitEditing={() => { t12.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={add1}
                                 autoCapitalize={'words'}
@@ -479,8 +494,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Address Line 2</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t12 = input; }}
-                                onSubmitEditing={() => { this.t13.focus(); }}
+                                ref={t12}
+                                onSubmitEditing={() => { t13.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={add2}
                                 autoCapitalize={'words'}
@@ -493,8 +508,8 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>City</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t13 = input; }}
-                                onSubmitEditing={() => { this.t14.focus(); }}
+                                ref={t13}
+                                onSubmitEditing={() => { t14.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 value={city}
                                 autoCapitalize={'words'}
@@ -507,7 +522,7 @@ const ParentZoneProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Postcode</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                ref={(input) => { this.t14 = input; }}
+                                ref={t14}
                                 style={STYLE.commonInputGrayBack}
                                 value={zip}
                                 keyboardType={'phone-pad'}
@@ -521,6 +536,7 @@ const ParentZoneProfileEdit = (props) => {
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}
                     mode="date"
+                    minimumDate={new Date()}
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
                 />

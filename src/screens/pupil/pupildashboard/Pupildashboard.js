@@ -57,31 +57,31 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -455,7 +455,7 @@ const PupuilDashboard = (props) => {
                                                                             // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                                                             //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                                             // </View>
-                                                                            <EmptyStatePlaceHohder />
+                                                                            <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                                     }
                                                                 </View>
                                                             }
@@ -547,7 +547,7 @@ const PupuilDashboard = (props) => {
                                                                             // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                                                             //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                                             // </View>
-                                                                            <EmptyStatePlaceHohder />
+                                                                            <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                                                     }
 
                                                                 </View>

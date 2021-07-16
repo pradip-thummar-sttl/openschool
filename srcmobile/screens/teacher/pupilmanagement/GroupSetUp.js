@@ -9,6 +9,7 @@ import COLORS from "../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../utils/Constant";
 import FONTS from "../../../utils/Fonts";
 import Images from "../../../utils/Images";
+import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
 import PAGESTYLE from './Style';
 
@@ -105,7 +106,7 @@ const GroupSetUp = (props) => {
                             />
                         :
                         // <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
-                        <EmptyStatePlaceHohder />
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
         </SafeAreaView>

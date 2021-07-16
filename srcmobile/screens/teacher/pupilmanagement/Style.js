@@ -378,7 +378,7 @@ export default StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         paddingVertical: hp(2.5),
-        marginTop: hp(1),
+        marginTop: hp(2),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
@@ -444,6 +444,25 @@ export default StyleSheet.create({
     pupilPerfomanceEdit: {
         marginTop: hp(2.5),
         paddingHorizontal: hp(2),
+    },
+    tickLayout: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 15,
+        width: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'contain'
+    },
+    tickLayoutPArent: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 35,
+        width: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        alignSelf: 'flex-end',
     },
     titlePerfomance: {
         fontSize: hp(2),

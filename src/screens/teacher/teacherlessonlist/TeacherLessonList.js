@@ -16,6 +16,7 @@ import { User } from "../../../utils/Model";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
@@ -170,7 +171,7 @@ const TeacherLessonList = (props) => {
                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                         // </View>
-                                        <EmptyStatePlaceHohder />
+                                        <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                                 }
                             </SafeAreaView>
                         </View>

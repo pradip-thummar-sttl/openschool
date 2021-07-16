@@ -39,14 +39,16 @@ export default StyleSheet.create({
         alignSelf: 'flex-end',
         width: '83%'
     },
+    commonWidthClassSetting: {
+        alignSelf: 'flex-end',
+        width: '78%'
+    },
     commonWidthMidium: {
         alignSelf: 'flex-end',
         width: '75%'
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        // paddingLeft: hp(3.5),
-        // paddingRight: hp(3.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         borderBottomColor: COLORS.borderGrp,
@@ -56,16 +58,18 @@ export default StyleSheet.create({
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft:hp(4.42),
-        paddingRight:hp(2.99),
+        paddingLeft: hp(3.90),
+        paddingRight:hp(2),
     },
     lessonPlanTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: hp(1.90),
+        height: hp(5.20),
+        alignItems: 'flex-start',
     },
     tabs: {
         paddingRight: hp(3.90),
+        paddingTop: hp(2.3),
     },
     tabsText: {
         color: COLORS.menuLightFonts,
@@ -1215,7 +1219,6 @@ flex: 1,
     },
     filterbarMain: {
         flexDirection: 'row',
-        marginBottom: hp(2.60),
     },
     field: {
         position: 'relative',
@@ -1224,7 +1227,7 @@ flex: 1,
         marginRight: hp(1.69),
     },
     searchHeader: {
-        height: 50,
+        height: hp(5.20),
         paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
@@ -1278,6 +1281,7 @@ flex: 1,
         backgroundColor: COLORS.white,
         top: hp(5.5),
         width: hp(20.98),
+        right: 0,
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -1321,7 +1325,6 @@ flex: 1,
         alignItems:'center',
         justifyContent: 'center',
         width:hp(5),
-        height:'100%',
     },
     checkBoxGroup: {
         flexDirection: 'row',

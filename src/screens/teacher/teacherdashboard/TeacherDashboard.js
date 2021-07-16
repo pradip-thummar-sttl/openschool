@@ -67,7 +67,10 @@ const Item = ({ onPress, style, item }) => (
 );
 
 const Pupillist = ({ item, onPress }) => (
-    <View style={[PAGESTYLE.pupilData]}>
+
+
+    <TouchableOpacity onPress={() => { onPress() }}>
+        <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
             <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
@@ -75,41 +78,40 @@ const Pupillist = ({ item, onPress }) => (
         <View style={PAGESTYLE.groupColumnmain}>
             <View style={PAGESTYLE.groupColumn}>
                 <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                </View>
             </View>
-        </View>
-        <View style={PAGESTYLE.perfomanceColumn}>
-            <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
-            <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
-        </View>
-        <View style={PAGESTYLE.rewardColumn}>
-            {item.RewardsList.map((item, index) => {
-                return (
-                    item._id == '3' ?
-                        <View style={PAGESTYLE.rewardStar}>
-                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
-                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                        </View>
-                        :
-                        item._id == '6' ?
+            <View style={PAGESTYLE.perfomanceColumn}>
+                <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
+            </View>
+            <View style={PAGESTYLE.rewardColumn}>
+                {item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
-                            item._id == '9' ?
+                            item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
-                                null
-                )
-            })}
-        </View>
-        <TouchableOpacity onPress={() => { onPress() }} style={PAGESTYLE.pupilDetailLink}>
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+            </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </TouchableOpacity>
-    </View>
+        </View>
+    </TouchableOpacity>
 );
 // const Pupillist = ({ style }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
@@ -158,7 +160,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isLoading, setLoading] = useState(false);
     let currentCount = 0
     useEffect(() => {
-        QB.settings
+        QB.webrtc
             .init(appSettings)
             .then(function () {
                 // SDK initialized successfully
@@ -239,7 +241,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // }
             setLoading(true)
             let currentTime = moment(Date()).format('hh:mm')
-            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
@@ -253,10 +255,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 }, (err) => {
                     setLoading(false)
                 })
-            } else {
-                showMessage(MESSAGE.scheduledTime)
-                setLoading(false)
-            }
+            // } else {
+            //     showMessage(MESSAGE.scheduledTime)
+            //     setLoading(false)
+            // }
         }
     }
 
@@ -331,6 +333,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             />
         );
     };
+
+    const initOneToOneCall = () => {
+        const params = {
+            opponentsIds: [12345, 12346],
+            type: QB.webrtc.RTC_SESSION_TYPE.AUDIO
+        }
+
+        QB.webrtc
+            .call(params)
+            .then(function (session) { console.log('Call Session Started', session); })
+            .catch(function (e) { console.log('Call Session Error', e); })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -361,12 +376,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 onAlertPress={() => props.navigation.openDrawer()} />
                             :
                             selectedIndex == 0 ?
-                                <View style={{ width: isHide ? '93%' : '78%' }}>
+                                <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
                                     <Header onAlertPress={() => props.navigation.openDrawer()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>
-                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={()=>{}}>
+                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall()}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
                                                         <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
@@ -579,7 +594,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder />
+                                                        <EmptyStatePlaceHohder image={Images.noLesson} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -646,7 +661,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         // <View>
                                                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder />
+                                                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                                                 }
                                             </View>
                                         </ScrollView>

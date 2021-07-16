@@ -14,9 +14,10 @@ import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessag
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
-import { User } from "../../../utils/Model";
+import { appSettings, User } from "../../../utils/Model";
 import MESSAGE from "../../../utils/Messages";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import QB from "quickblox-react-native-sdk";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -46,48 +47,48 @@ const { CallModule, CallModuleIos } = NativeModules;
 //     </View>
 // );
 const Pupillist = ({ item, onPress }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile}>
-            <View style={PAGESTYLE.rowProfile}>
-                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+    <TouchableOpacity onPress={() => onPress()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile}>
+                <View style={PAGESTYLE.rowProfile}>
+                    <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                    <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+                </View>
+                <View style={PAGESTYLE.groupPupil}>
+                    <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                </View>
             </View>
-            <View style={PAGESTYLE.groupPupil}>
-                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
-            </View>
-        </View>
-        <View style={PAGESTYLE.rewardColumn}>
-            {item.RewardsList.map((item, index) => {
-                return (
-                    item._id == '3' ?
-                        <View style={PAGESTYLE.rewardStar}>
-                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
-                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                        </View>
-                        :
-                        item._id == '6' ?
+            <View style={PAGESTYLE.rewardColumn}>
+                {item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
-                            item._id == '9' ?
+                            item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
-                                null
-                )
-            })}
-            {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+                {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
             <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
-        </View>
-        <TouchableOpacity onPress={() => onPress()} style={PAGESTYLE.pupilDetailLink}>
+            </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </TouchableOpacity>
-    </View>
+        </View>
+    </TouchableOpacity>
 );
 const LessonandHomeworkPlannerDashboard = (props) => {
     const refRBSheet = useRef();
@@ -104,10 +105,62 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     let currentCount = 0
 
     useEffect(() => {
-        refresh()
-    }, [])
 
-    useEffect(() => {
+        // QB.settings
+        //     .init(appSettings)
+        //     .then(function () {
+        //         QB.auth
+        //             .getSession()
+        //             .then(function (session) {
+        //                 console.log('handle session', session);
+        //                 QB.auth
+        //                     .login({
+        //                         login: User.user.Email,
+        //                         password: 'Admin@123'
+        //                     })
+        //                     .then(function (info) {
+        //                         console.log('signed in successfully, handle info as necessary', info);
+
+        //                         QB.chat
+        //                             .isConnected()
+        //                             .then(function (connected) { // boolean
+        //                                 // handle as necessary, i.e.
+        //                                 if (connected === false) {
+        //                                     QB.chat
+        //                                         .connect({
+        //                                             userId: User.user.QBUserId,
+        //                                             password: 'Admin@123'
+        //                                         })
+        //                                         .then(function () {
+        //                                             console.log('connected successfully');
+        //                                             QB.webrtc
+        //                                                 .init()
+        //                                                 .then(function () { console.log('module is ready for calls processing'); })
+        //                                                 .catch(function (e) { console.log('handle error', e); })
+        //                                         })
+        //                                         .catch(function (e) {
+        //                                             console.log('some error occurred', e);
+        //                                         });
+        //                                 }
+        //                             })
+        //                             .catch(function (e) {
+        //                                 // handle error
+        //                             });
+        //                     })
+        //                     .catch(function (e) {
+        //                         console.log('handle error', e);
+        //                     });
+        //             })
+        //             .catch(function (e) {
+        //                 console.log('something went wrong', e);
+        //             });
+        //     })
+        //     .catch(function (e) {
+        //         console.log('Some error occurred, look at the exception message for more details', e);
+        //     });
+
+        refresh()
+
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -138,7 +191,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
                 setdashData(res.data)
                 setDataOfSubView(res.data[0])
             } else {
@@ -151,7 +203,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all pupil data', res)
                 setPupilData(res.data)
             } else {
                 showMessage(res.message)
@@ -164,7 +215,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const launchLiveClass = () => {
-        console.log('data of sub view', dataOfSubView, isRunningFromVirtualDevice)
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
@@ -177,7 +227,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let currentTime = moment(Date()).format('hh:mm')
             let startTime = moment(dataOfSubView.StartTime, 'HH:mm').format('HH:mm')
             let endTime = moment(dataOfSubView.EndTime, ["h:mm A"]).format("HH:mm");
-            console.log(currentTime + ' - ' + startTime + ' - ' + endTime);
             // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
             // showMessage('time to start')
             let data = {
@@ -303,6 +352,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         //     </View>
         // </TouchableOpacity>
     );
+
+    const initOneToOneCall = () => {
+        // const params = {
+        //     opponentsIds: [12345, 12346],
+        //     type: QB.webrtc.RTC_SESSION_TYPE.AUDIO
+        // }
+
+        // QB.webrtc
+        //     .call(params)
+        //     .then(function (session) { console.log('Call Session Started', session); })
+        //     .catch(function (e) { console.log('Call Session Error', e); })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -316,7 +378,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity style={PAGESTYLE.boxDash}
+                                onPress={() => initOneToOneCall()}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Start a new call</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
@@ -556,7 +619,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     // <View style={{ height: 100, justifyContent: 'center' }}>
                                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                     // </View>
-                                    <EmptyStatePlaceHohder />
+                                    <EmptyStatePlaceHohder image={Images.noLesson} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                             }
                         </View>
                         <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -599,7 +662,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     // <View>
                                     //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                     // </View>
-                                    <EmptyStatePlaceHohder />
+                                    <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                             }
                         </View>
                     </View>
