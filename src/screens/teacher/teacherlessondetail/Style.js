@@ -51,6 +51,7 @@ export default StyleSheet.create({
         paddingTop: hp(0),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
+        
     },
     lessonPlanTop: {
         flexDirection: 'row',

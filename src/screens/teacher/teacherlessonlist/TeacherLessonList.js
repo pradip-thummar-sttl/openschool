@@ -164,6 +164,7 @@ const TeacherLessonList = (props) => {
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
+                                            style={{ height:wp(53.5)}}
                                         />
                                         :
                                         // <View style={{ height: 100, justifyContent: 'center' }}>

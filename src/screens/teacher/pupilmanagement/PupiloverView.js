@@ -19,7 +19,7 @@ const Pupillist = (props, { item }) => (
         <View style={[PAGESTYLE.pupilData]}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
-            <View style={PAGESTYLE.pupilProfile}>
+            <View style={[PAGESTYLE.pupilProfile, ]}>
                 <Text style={PAGESTYLE.pupilName}>{props.item.FirstName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
@@ -27,12 +27,12 @@ const Pupillist = (props, { item }) => (
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
+                <Text style={PAGESTYLE.pupilgroupName1}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn11}>
-                <Text style={PAGESTYLE.pupilgroupName}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
+                <Text style={PAGESTYLE.pupilgroupName10}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
             {/* </View> */}
             <View style={PAGESTYLE.perfomanceColumn}>

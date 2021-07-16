@@ -37,8 +37,8 @@ const Item = ({ onPress, style, item }) => (
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
                 <View>
-                    <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                    <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:120}]}>{item.SubjectName}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:100}]}>{item.LessonTopic}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.timingMain}>

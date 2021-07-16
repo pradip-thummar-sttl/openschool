@@ -159,7 +159,7 @@ const NewMessage = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={{ ...styles.alignRow, marginTop: 10, marginRight: 20 }}>
                             <CheckBox
-                                style={styles.checkMark}
+                                style={styles.checkMark1}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

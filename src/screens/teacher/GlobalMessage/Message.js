@@ -74,19 +74,19 @@ const Message = (props) => {
             activeOpacity={opacity}
             onPress={() => { setAddMessage(true); setSelectedItem(item.item) }}>
             <View style={[PAGESTYLE.pupilData]}>
-                <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-                    <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{item.item.Title}</Text>
+                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn]}>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,]}>{item.item.Title}</Text>
                 </View>
 
                 <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-                    <Text style={PAGESTYLE.pupilName}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                    <Text style={[PAGESTYLE.pupilName,{marginLeft:-12}]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
                 </View>
                 {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
                 <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
             </View> */}
 
                 <View style={PAGESTYLE.pupilProfile}>
-                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText]}>{item.item.Status}</Text>
+                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText,{marginLeft:-12}]}>{item.item.Status}</Text>
                 </View>
 
                 <View style={[PAGESTYLE.lastColumn]}>

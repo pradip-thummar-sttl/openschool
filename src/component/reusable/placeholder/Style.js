@@ -22,7 +22,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         padding: 20,
         marginVertical: 30,
-        width: '100%'
+        width: '100%',
+        height:'100%'
     },
     blankPageImage: {
         height: 150,

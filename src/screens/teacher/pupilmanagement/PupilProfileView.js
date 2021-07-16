@@ -107,7 +107,7 @@ const PupilProfileView = (props) => {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
                         <View style={PAGESTYLE.whiteBg}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
+                            <ScrollView showsVerticalScrollIndicator={false} style={{height:'94%'}}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>

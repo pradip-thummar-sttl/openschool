@@ -235,6 +235,12 @@ export default StyleSheet.create({
         top: hp(0.55),
         fontFamily: FONTS.fontBold,
     },
+    checkMark1: {
+        width: hp(2.2),
+        height: hp(2.2),
+        // top: hp(0.55),
+        fontFamily: FONTS.fontBold,
+    },
     toggleGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -740,7 +746,7 @@ export default StyleSheet.create({
         left: hp(3.5),
     },
     userStampName: {
-        paddingLeft: hp(0.0),
+        width:'70%', marginLeft:-12
     },
     uploadBoard: {
         width: hp(33.07),
@@ -1545,7 +1551,7 @@ export default StyleSheet.create({
         borderWidth:1,
         borderColor:COLORS.borderGrp,
         width:hp(25),
-        marginLeft:hp(3.8)
+        marginLeft:hp(1.8)
         
     },
     addIcon: {
