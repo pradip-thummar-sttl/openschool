@@ -45,9 +45,9 @@ const HeaderPMInner = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => props.navigateToPupilProfileEdit()}>
-                        <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
+                        style={styles.notificationBar}
+                        activeOpacity={opacity}>
+                        <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -95,22 +95,25 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
-        paddingLeft: hp(2),
-        paddingRight: hp(2),
+        paddingLeft: hp(3.90),
+        paddingRight: hp(2.0),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingBottom: hp(2),
     },
     headerMain: {
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.5),
         backgroundColor: COLORS.white,
         width: '100%',
     },
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
+        top: 2,
     },
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(2),
+        top: 2,
     },
     titleRow: {
         flexDirection: 'row',
@@ -122,7 +125,10 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     whiteBg: {
-        padding: hp(2),
+        paddingLeft: hp(3.90),
+        paddingRight: hp(2.0),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingBottom: hp(2),
         flexDirection: 'row',
         alignItems: 'center',
     },
