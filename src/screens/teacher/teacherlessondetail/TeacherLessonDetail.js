@@ -66,7 +66,7 @@ const TeacherLessonDetail = (props) => {
 
 
     useEffect(() => {
-        if (!isSearchActive && tabIndex == 2) {
+        if (!isSearchActive && tabIndex == 2 && textInput.current) {
             textInput.current.clear()
             setSearchKeyword('');
         }

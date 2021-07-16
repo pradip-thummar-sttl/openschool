@@ -374,7 +374,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 onAlertPress={() => props.navigation.openDrawer()} />
                             :
                             selectedIndex == 0 ?
-                                <View style={{ width: isHide ? '93%' : '78%' }}>
+                                <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
                                     <Header onAlertPress={() => props.navigation.openDrawer()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>

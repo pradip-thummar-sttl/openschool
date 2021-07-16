@@ -353,8 +353,10 @@ const TLDetailEdit = (props) => {
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                <View style={STYLE.hrCommon}></View>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Items your class may need</Text>
+                <View style={PAGESTYLE.hrTagMIddleReverse}>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthSmall]}></View>
+                </View>
                 <View style={PAGESTYLE.hrCommon2}></View>
                 <FlatList
                     data={itemCheckList}
@@ -421,8 +423,10 @@ const TLDetailEdit = (props) => {
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Add Pupils</Text>
-                <View style={PAGESTYLE.hrCommon2}></View>
+                <View style={PAGESTYLE.hrTagMIddleReverse}>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add Pupils</Text>
+                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthlarge]}></View>
+                </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
@@ -793,8 +797,10 @@ const TLDetailEdit = (props) => {
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.containerWrap}>
                                     <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                                        <View style={STYLE.hrCommon}></View>
-                                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                        <View style={PAGESTYLE.hrTagMIddleReverse}>
+                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                                        </View>
                                         <View style={PAGESTYLE.timedateGrp}>
 
                                             {subjectsDropDown()}
@@ -868,8 +874,10 @@ const TLDetailEdit = (props) => {
                                         {pupilListView()}
 
                                         <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
-                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Class Settings</Text>
-                                            <View style={PAGESTYLE.hrCommon2}></View>
+                                            <View style={PAGESTYLE.hrTagMIddleReverse}>
+                                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                                <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthClassSetting]}></View>
+                                            </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
