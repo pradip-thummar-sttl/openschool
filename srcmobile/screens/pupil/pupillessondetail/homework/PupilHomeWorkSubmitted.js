@@ -61,8 +61,8 @@ const PupilHomeWorkSubmitted = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={PAGESTYLE.containerWrap}>
+                <ScrollView showsVerticalScrollIndicator={false}  >
+                    <View style={[PAGESTYLE.containerWrap,]}>
                         <View style={PAGESTYLE.teacherDetailLeft}>
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
@@ -72,11 +72,12 @@ const PupilHomeWorkSubmitted = (props) => {
                                 <View style={PAGESTYLE.checkBoxGroup}>
                                     <FlatList
                                         data={item.CheckList}
+                                        // data={[1,2,]}
                                         renderItem={({ item }) => (
                                             <View style={PAGESTYLE.checkBoxLabelLine}>
                                                 <View style={PAGESTYLE.alignRow}>
                                                     <CheckBox
-                                                        style={PAGESTYLE.checkMark}
+                                                        style={[PAGESTYLE.checkMark]}
                                                         value={item.IsCheck}
                                                         boxType={'square'}
                                                         onCheckColor={COLORS.white}
@@ -89,17 +90,19 @@ const PupilHomeWorkSubmitted = (props) => {
                                                 </View>
                                             </View>
                                         )}
-                                        style={{ height: 200 }} />
+                                        
+                                        />
                                 </View>
                             </View>
-                        </View>
-                        <View style={PAGESTYLE.rightSideBar}>
+                        </View >
+                            {/* style={PAGESTYLE.rightSideBar} */}
+                        <View style={PAGESTYLE.rightSideBar} > 
                             <View style={PAGESTYLE.uploadBoardBlock}>
                                 {/* <Image source={Images.UploadHomeWorkMobile} style={PAGESTYLE.uploadBoardsubmit} /> */}
                                 <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
                                 <FlatList
                                     data={item.HomeworkList}
-                                    style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                    style={{  width: '100%', }}
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>

@@ -34,6 +34,7 @@ export default StyleSheet.create({
         paddingLeft: hp(1.84),
         paddingRight: hp(1.84),
         fontFamily: FONTS.fontRegular,
+        // paddingLeft:10
     },
     commonInputGrayBack: {
         color:COLORS.darkGray,

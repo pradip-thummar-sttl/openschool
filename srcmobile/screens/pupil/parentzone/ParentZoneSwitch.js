@@ -45,6 +45,7 @@ export default class ParentZoneSwitch extends Component {
                         <FlatList
                             data={this.state.childrenList}
                             showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}

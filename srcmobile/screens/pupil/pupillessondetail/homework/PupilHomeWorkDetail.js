@@ -142,7 +142,7 @@ const PupilHomeWorkDetail = (props) => {
                     title={item.SubjectName + ' ' + item.LessonTopic} />
                 <View style={{ ...PAGESTYLE.containerWrap, }}>
 
-                    <View style={PAGESTYLE.teacherDetailLeft}>
+                    <View style={PAGESTYLE.teacherDetailLeft1}>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.dateBlockRow}>
                                 <View style={[PAGESTYLE.dateNameBlock, PAGESTYLE.spaceSmallUserName]}>
@@ -186,7 +186,8 @@ const PupilHomeWorkDetail = (props) => {
                                                 </View>
                                             </View>
                                         )}
-                                        style={{ height: 200 }} />
+                                        // style={{ height: 200 }}
+                                         />
                                 </View>
 
                                 <View style={PAGESTYLE.rightSideBar}>

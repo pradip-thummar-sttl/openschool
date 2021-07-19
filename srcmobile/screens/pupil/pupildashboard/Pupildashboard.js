@@ -266,8 +266,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:wp(37)}]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:wp(40)}]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -287,8 +287,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:wp(37)}]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:wp(40)}]}>{item.LessonTopic}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
