@@ -25,29 +25,28 @@ export default StyleSheet.create({
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        paddingBottom: hp(0.5),
-        paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
+        paddingBottom: hp(1),
     },
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
         paddingBottom: hp(2),
-        // paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.99),
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
         alignItems: 'center',
     },
     lessonPlanTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 0,
+        marginTop: 0,
     },
     tabs: {
         paddingRight: hp(3.90),
@@ -420,11 +419,6 @@ export default StyleSheet.create({
         width: '100%',
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
-        // borderWidth: 1,
-        // borderColor:COLORS.commonBorderColor,
-        // overflow: 'hidden',
-        // borderRadius: hp('1.0%'),
-        // lineHeight:hp(2.3),
         height: hp('6%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
@@ -1303,11 +1297,8 @@ export default StyleSheet.create({
         paddingTop: hp(3.51),
         paddingLeft: hp(3.25),
     },
-
-    //
     filterbarMain: {
         flexDirection: 'row',
-        // marginBottom: hp(0.60),
     },
     field: {
         position: 'relative',
@@ -1407,22 +1398,6 @@ export default StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
     },
-    // filterListWrap: {
-    //     paddingTop: hp(1),
-    //     paddingLeft: hp(1.2),
-    //     paddingRight: hp(1.2),
-    //     paddingBottom: hp(1),
-    //     position: 'absolute',
-    //     backgroundColor: COLORS.white,
-    //     top: hp(5.5),
-    //     right: 0,
-    //     width: hp(30.98),
-    //     borderRadius: hp(1),
-    //     shadowColor: COLORS.black,
-    //     shadowOffset: { width: 0, height: hp(1), },
-    //     shadowOpacity: 0.05,
-    //     shadowRadius: hp(1),
-    // },
     filterListWrap: {
         width: hp(30.98),
         right: 10,
@@ -1436,11 +1411,6 @@ export default StyleSheet.create({
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
     },
-    // checkMark: {
-    //     width: hp(1.48),
-    //     height: hp(1.48),
-    //     resizeMode: 'contain',
-    // },
     filterListText: {
         color: COLORS.darkGray,
         fontSize: hp(1.82),
@@ -1472,15 +1442,13 @@ export default StyleSheet.create({
     },
     docView: {
         flexDirection: 'row',
-        // paddingHorizontal: hp(1),
-        // paddingVertical:wp(0.5),
         flexWrap: 'wrap',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
     },
     searchParent: {
-        flexDirection: 'row', width:hp(55.61), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', width:hp(60), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

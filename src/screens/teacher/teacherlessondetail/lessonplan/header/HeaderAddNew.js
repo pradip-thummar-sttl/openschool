@@ -19,7 +19,7 @@ const HeaderAddNew = (props) => {
                     </TouchableOpacity> Add New Lesson</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
+                      <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>

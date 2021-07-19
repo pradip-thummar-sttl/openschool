@@ -19,55 +19,11 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>Lessons and Homework</Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
-                    </TouchableOpacity> */}
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
             </View>
-            {/* <View style={styles.filterbarMain}>
-                <View style={styles.field}>
-                    <Image
-                        style={styles.userIcon}
-                        source={Images.SearchIcon} />
-                    <TextInput
-                        style={[STYLE.commonInput, styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                    />
-                </View>
-                <TouchableOpacity style={styles.buttonGroup}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Subject</Text>
-                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Date</Text>
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Name</Text>
-                                </View>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity> */}
-            {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
-            {/* </View> */}
         </View>
     );
 }
@@ -75,10 +31,12 @@ export default HeaderWhite;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        backgroundColor: COLORS.white,
+        width: '100%',
         paddingLeft: hp(2.99),
-        paddingRight: hp(2),
+        paddingRight: hp(4.16),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
+        backgroundColor: COLORS.white,
+        paddingBottom: hp(2),
     },
     headerMain: {
         flexDirection: 'row',

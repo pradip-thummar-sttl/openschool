@@ -90,7 +90,7 @@ const HeaderPM = (props) => {
                 </View>
 
             </View>
-            <View style={[PAGESTYLE.generalRow, PAGESTYLE.filterAlign]}>
+            <View style={[PAGESTYLE.filterAlign]}>
                 <View style={PAGESTYLE.tabLinks}>
                     <TouchableOpacity
                         activeOpacity={opacity}
