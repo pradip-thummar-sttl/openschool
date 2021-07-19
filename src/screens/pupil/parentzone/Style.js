@@ -704,8 +704,7 @@ export default StyleSheet.create({
     },
     tabLinks: {
         flexDirection: 'row',
-        paddingTop: hp(3),
-        paddingBottom: hp(3),
+        alignItems: 'center',
         //paddingLeft:hp(13.67),
     },
     tabLinkGrey: {
@@ -765,8 +764,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop: hp(3),
-        paddingBottom: hp(2),
+        paddingTop: hp(1.95),
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -908,9 +906,13 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingLeft: hp(13.67),
+        paddingRight: hp(2.99),
         backgroundColor: COLORS.white,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 1, },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
     },
     smlFilterThumb: {
         width: hp(3.64),
@@ -933,6 +935,8 @@ export default StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: hp(2),
     },
     plainBg: {
         paddingLeft: hp(2.5),
@@ -1128,10 +1132,9 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     filterListWrapNew: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
+        paddingVertical: 4,
+        paddingLeft: 8,
+        paddingRight: 15,
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
         flexDirection: 'row',

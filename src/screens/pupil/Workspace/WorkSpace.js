@@ -90,7 +90,7 @@ const WorkSpace = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <SafeAreaView />
+            {/* <SafeAreaView /> */}
             <WorkSpaceHeader
                 isLoading={isLoading}
                 isWorkspace={props.isWorkspace}

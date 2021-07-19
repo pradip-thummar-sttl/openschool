@@ -90,14 +90,15 @@ export default HeaderWhite;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2),
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingBottom: hp(1.5),
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 1, },
+        shadowOpacity: 0.08,
+        shadowRadius: 2,
     },
     headerMain: {
         flexDirection: 'row',
@@ -112,6 +113,11 @@ const styles = StyleSheet.create({
         fontSize: hp(2.86),
         fontFamily: FONTS.fontRegular,
     },
+    massagesIcon: {
+        width: 40,
+        height: 40,
+        resizeMode: 'contain',
+    },
     filterbarMain: {
         flexDirection: 'row',
         marginBottom: hp(2.60),
@@ -124,17 +130,10 @@ const styles = StyleSheet.create({
     },
     searchHeader: {
         height: hp(5.20),
-        paddingLeft: hp(4.6),
+        paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontSemiBold,
-    },
-    userIcon: {
-        position: 'absolute',
-        top: hp(1.1),
-        width: hp(1.9),
-        resizeMode: 'contain',
-        left: hp(1.43),
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
@@ -153,19 +152,6 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
         fontSize: hp(1.82),
-    },
-    buttonGroup: {
-        position: 'relative',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: hp(1.69),
-    },
-    filterIcon: {
-        width: hp(1.74),
-        resizeMode: 'contain',
-        position: 'absolute',
-        right: hp(1.30),
-        top: hp(1.19),
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -234,32 +220,15 @@ const styles = StyleSheet.create({
     },
     calnderDashHeaderIcon: {
         width: 40,
-        height: 40,
         resizeMode: 'contain',
-        marginRight: hp(1),
-    },
-    massagesIcon: {
-        width: 40,
         height: 40,
-        resizeMode: 'contain',
-    },
-    userIcon1: {
-        position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
-    },
-    userIcon1Parent: {
-        position: 'absolute',
-        width: 25,
-        height: 25,
-        right: hp(1.43),
+        marginRight: hp(1)
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: hp(1.5), height: hp(5.20), backgroundColor: COLORS.white, marginTop: hp(1.5),
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
     },
     searchInner: {
-        height: '100%', flex: 1, borderColor: COLORS.borderGrp, marginRight: 10, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, marginRight: 10, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
