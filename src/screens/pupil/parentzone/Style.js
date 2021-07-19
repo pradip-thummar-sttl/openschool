@@ -909,10 +909,6 @@ export default StyleSheet.create({
         paddingLeft: hp(13.67),
         paddingRight: hp(2.99),
         backgroundColor: COLORS.white,
-        shadowColor: COLORS.SidebarHeaderShadow,
-        shadowOffset: { width: 0, height: 1, },
-        shadowOpacity: 0.8,
-        shadowRadius: 1,
     },
     smlFilterThumb: {
         width: hp(3.64),

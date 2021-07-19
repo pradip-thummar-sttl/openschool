@@ -116,9 +116,10 @@ const styles = StyleSheet.create({
     userIcon: {
         width: hp(20.10),
         height: hp(20.10),
-        resizeMode: "contain",
+        // resizeMode: "auto",
         alignSelf: 'center',
         marginBottom: hp(2),
+        borderRadius: hp(100),
     },
     topBg: {
         width: '100%',
