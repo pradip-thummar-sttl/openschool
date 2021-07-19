@@ -68,7 +68,7 @@ const ParentZoneProfileEdit = (props) => {
         setUniqueCode(profileData.UniqueNumber)
         setNote(profileData.Note)
         setRelation(profileData.Relationship)
-        setCode(profileData.PinPassword)
+        setCode(profileData.PinPassword + '')
         setParentName(profileData.ParentFirstName + ' ' + profileData.ParentLastName)
         setMobile(profileData.MobileNumber + '')
         setChildEmail(profileData.Email)
@@ -99,16 +99,13 @@ const ParentZoneProfileEdit = (props) => {
         } else if (!parentName.trim()) {
             showMessage(MESSAGE.parentNAme)
             return false
-        } else if (!childPass.trim()) {
-            showMessage(MESSAGE.childPassword)
-            return false
         }
 
         saveProfile()
     }
 
     const saveProfile = () => {
-        setLoading(true)
+        // setLoading(true)
 
         let data = {
             FirstName: firstName,
@@ -128,12 +125,10 @@ const ParentZoneProfileEdit = (props) => {
             UpdatedBy: pupilId
         }
 
-        console.log('postData', data);
-
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
-                uploadProfile()
+                uploadProfile(res.data)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -144,10 +139,11 @@ const ParentZoneProfileEdit = (props) => {
         })
     }
 
-    const uploadProfile = () => {
+    const uploadProfile = (updatedData) => {
         if (!profileUri) {
             showMessageWithCallBack(MESSAGE.profileUpdated, () => {
-                props.navigateToProfile()
+                User.user.ChildrenList = updatedData
+                props.navigateToProfile(updatedData)
             })
             setLoading(false)
             return
@@ -162,15 +158,22 @@ const ParentZoneProfileEdit = (props) => {
             type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
         });
 
-        console.log('data', data._parts, lessionId);
-
         Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.profileUpdated, () => {
-                    props.navigateToProfile()
+                    let temp = updatedData
+                    temp.forEach(element => {
+                        if (pupilId == element.Pupilid) {
+                            element.ProfilePicture = res.data.ProfilePicture
+                        }
+                    });
+
+                    console.log('temp', temp);
+                    return
+                    props.navigateToProfile(temp)
                 })
             } else {
                 showMessage(res.message)

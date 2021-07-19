@@ -11,6 +11,7 @@ import { User } from '../../../../utils/Model';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import { baseUrl } from '../../../../utils/Constant'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // var data = [
 //     { name: 'PUPIL PROFILE', isSelected: true },
@@ -83,7 +84,7 @@ const ParentChat = (props) => {
 
         if (message) {
             pubnub
-            .publish({ channel: channels[0], message })
+                .publish({ channel: channels[0], message })
                 .then(() => setMessage(''))
                 .catch((msg) => console.log(msg));
         }
@@ -96,21 +97,73 @@ const ParentChat = (props) => {
 
 
     useEffect(() => {
-        pubnub.addListener({ message: handleMessage });   
+        pubnub.addListener({ message: handleMessage });
         pubnub.subscribe({ channels });
     }, [pubnub, channels,]);
 
 
-   
+
     return (
 
         <View style={{ flex: 1 }}>
-           
+            {/* <ChatHeader /> */}
+            {/* tabs */}
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
+                <View style={[Styles.lessonPlanTab, { height: 50 }]}>
+                    {
+                        tabs.map((item, index) => {
+                            return (
+                                <TouchableOpacity onPress={() => onPressTab(index)} style={Styles.tabs}>
+                                    <Text style={[Styles.tabsText, item.isSelected ? Styles.tabsTextSelected : null]}>{item.name}</Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                </View>
+                <View style={Styles.field}>
+                    <Image
+                        style={Styles.userIcon}
+                        source={Images.SearchIcon} />
+                    <TextInput
+                        style={[STYLE.commonInput, Styles.searchHeader]}
+                        placeholder="Search Messages"
+                        maxLength={50}
+                        placeholderTextColor={COLORS.menuLightFonts}
+                    />
+                </View>
+            </View> */}
 
-            <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
-                <View style={Styles.views}>
+            <View style={Styles.views}>
+                {
+                    props.tabs === 1 ?
+                        <View style={Styles.leftView}>
+                            {/* <View style={Styles.firstView}>
+                                <Image style={Styles.iconParent} source={Images.LessonIcon} />
+                                <Text style={Styles.availabeText}>{'This person is curently offline.\nAvailable from 09:00 - 17:00'}</Text>
+                            </View> */}
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Teacher's name:</Text>
+                                <Text style={Styles.subText}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Address:</Text>
+                                <Text style={Styles.subText}>{props.data.AddressLine1 || props.data.AddressLine2 ? `${props.data.AddressLine1}\n${props.data.AddressLine2}` : '-'}</Text>
+                            </View>
+                            <View style={Styles.secondView}>
+                                <Text style={Styles.headText}>Telephone no:</Text>
+                                <Text style={Styles.subText}>{props.data.MobileNumber ? props.data.MobileNumber : '-'}</Text>
+                            </View>
+                            
+                        </View>
+                        : null
+                }
 
-                    <View style={Styles.rightView}>
+                <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
+                    <KeyboardAwareScrollView enableOnAndroid={true}
+                        extraScrollHeight={90}
+                        scrollEnabled
+                        enableAutomaticScroll={(Platform.OS === 'ios')} >
+
                         <View style={Styles.mesagesView}>
                             <FlatList
                                 data={messages}
@@ -126,9 +179,23 @@ const ParentChat = (props) => {
                                     )
                                 }}
                             />
-                           
+                            {/* <ScrollView>
+                            {
+                                [1, 2, 3, 4, 5, 6,].map((item, index) => {
+                                    return (
+                                        <View style={Styles.messageCell}>
+                                            <Image style={Styles.roundImage} />
+                                            <View style={Styles.messageSubCell}>
+                                                <Text style={Styles.userNameText}>Miss Barker</Text>
+                                                <Text style={Styles.messageText}>ok Thank you</Text>
+                                            </View>
+                                        </View>
+                                    )
+                                })
+                            }
+                        </ScrollView> */}
                         </View>
-                        <View style={Styles.textView}>
+                        <View style={[Styles.textView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
                             <TextInput
                                 style={Styles.input}
                                 multiline={true}
@@ -149,12 +216,11 @@ const ParentChat = (props) => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-
-                    </View>
+                    </KeyboardAwareScrollView>
 
                 </View>
-            </KeyboardAwareScrollView>
 
+            </View>
         </View>
 
     )
