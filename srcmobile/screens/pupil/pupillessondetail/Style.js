@@ -119,6 +119,10 @@ export default StyleSheet.create({
     },
     teacherDetailLeft: {
         width: '100%',
+        // height: '85%',
+    },
+    teacherDetailLeft1: {
+        width: '100%',
         height: '85%',
     },
     requireText: {
@@ -254,7 +258,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.82),
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.5),
+        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(2.5),
         minHeight: hp(6),
         paddingRight: hp(1),
     },
@@ -269,6 +273,7 @@ export default StyleSheet.create({
         height: hp(1.84),
         top: hp(0.35),
         fontFamily: FONTS.fontBold,
+        resizeMode:'contain'
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -768,7 +773,7 @@ export default StyleSheet.create({
     containerWrap: {
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-        height: '93%',
+        // height:hp(63),
     },
     containerWrapMarked: {
         paddingLeft: hp(1.95),

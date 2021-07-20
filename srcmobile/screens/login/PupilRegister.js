@@ -619,11 +619,11 @@ const styles = StyleSheet.create({
     },
     dropDown: {
         flexDirection: 'row',
-        width: hp(8),
+        width: wp(16),
         color: COLORS.darkGray,
         fontSize: 18,
-        borderWidth: 1,
-        borderColor: COLORS.bottomProfileLightBorder,
+        // borderWidth: 1,
+        // borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
         borderRadius: hp(1.0),
         lineHeight: hp(2.3),
@@ -634,6 +634,8 @@ const styles = StyleSheet.create({
         // paddingTop: hp(1.5),
         // paddingBottom: hp(1.5),
         fontFamily: FONTS.fontRegular,
+        // padding:10
+        // margin:hp(1)
     },
     dateTimetextdummy: {
         fontSize: hp(1.72),

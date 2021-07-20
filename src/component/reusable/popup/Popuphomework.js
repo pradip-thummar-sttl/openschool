@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
-        height: 40,
+        // height: 40,
         paddingTop: hp(1.3),
         paddingBottom: hp(1.3),
         alignSelf: 'center',

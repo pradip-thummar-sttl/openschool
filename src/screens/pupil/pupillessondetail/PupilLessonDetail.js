@@ -190,7 +190,7 @@ const PupilLessonDetail = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                 </View>
-                <View style={{ flexDirection: 'row', marginLeft: hp(0.5), right: -7, }}>
+                <View style={{ flexDirection: 'row', marginLeft: hp(1.8), }}>
                     <Menu style={PAGESTYLE.filterGroup}>
                         <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
@@ -246,9 +246,6 @@ const PupilLessonDetail = (props) => {
                         {
                             searchHeader()
                         }
-                        {/* <View style={PAGESTYLE.lessonstartButton}>
-                        <Text>Dynamic Search Goes Here</Text>
-                    </View> */}
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.teacherLessonGrid]}>

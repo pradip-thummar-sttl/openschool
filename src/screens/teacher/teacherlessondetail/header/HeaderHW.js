@@ -19,10 +19,6 @@ const HeaderHW = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity> {props.SubjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity onPress={()=>{}} style={styles.buttonGroup}>
-                        <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
-                        <Text style={styles.commonButtonGreenheader}>set homework</Text>
-                    </TouchableOpacity> */}
                     <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
                     <TouchableOpacity
                         style={styles.notificationBar}

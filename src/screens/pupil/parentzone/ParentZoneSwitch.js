@@ -46,6 +46,7 @@ export default class ParentZoneSwitch extends Component {
                         <FlatList
                             data={this.state.childrenList}
                             showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
@@ -115,9 +116,10 @@ const styles = StyleSheet.create({
     userIcon: {
         width: hp(20.10),
         height: hp(20.10),
-        resizeMode: "contain",
+        // resizeMode: "auto",
         alignSelf: 'center',
         marginBottom: hp(2),
+        borderRadius: hp(100),
     },
     topBg: {
         width: '100%',

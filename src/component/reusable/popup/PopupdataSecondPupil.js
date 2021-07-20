@@ -558,7 +558,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
     },
     calIcon: {
         resizeMode: 'contain',

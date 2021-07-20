@@ -159,8 +159,7 @@ export default Setting;
 
 const styles = StyleSheet.create({
     mainPage: {
-        height:'100%',
-        width:'100%',
+        flex: 1,
         backgroundColor: COLORS.white,
     },
     headingTextView: {

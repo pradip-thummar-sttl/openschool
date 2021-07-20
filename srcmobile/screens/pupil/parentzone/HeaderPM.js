@@ -64,7 +64,7 @@ const HeaderPM = (props) => {
                                         <View style={styles.filterList}>
                                             <View style={styles.filterListSub}>
                                                 <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
-                                                <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>{item.FirstName} {item.LastName}</Text>
+                                                <Text numberOfLines={1} style={{ ...styles.filterListText, fontFamily: FONTS.fontBold, width:wp(25) }}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                             {index == selectedPupilIndex ?
                                                 <Image source={Images.CheckIcon} style={styles.checkMark} />

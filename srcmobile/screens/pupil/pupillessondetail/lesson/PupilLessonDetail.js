@@ -212,7 +212,7 @@ const PupilLessonDetailInternal = (props) => {
                             </View>
                         }
                     </View>
-                    <ScrollView style={{ top: 0, }} showsVerticalScrollIndicator={false}>
+                    <ScrollView style={{ top: 0,marginBottom:5 }} showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.videoTitleLine}>
                             <View>
                                 <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
@@ -232,7 +232,7 @@ const PupilLessonDetailInternal = (props) => {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={{ paddingBottom: 80 }}>
+                        <View style={{ paddingBottom: hp(12)}}>
                             <Accordion
                                 activeSections={activeSections}
                                 sections={NEW}

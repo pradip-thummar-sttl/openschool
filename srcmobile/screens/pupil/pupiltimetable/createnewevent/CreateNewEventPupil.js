@@ -375,7 +375,7 @@ const CreateNewEventPupil = (props) => {
                                                 onChangeText={notes => setnote(notes)} />
                                         </View>
                                         <View style={[styles.copyInputParent, styles.colorPicker]}>
-                                            <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
+                                            <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime1, styles.dropDownSmallWrap, styles.dateandColor]}>
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
@@ -595,12 +595,18 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        top: Platform.OS == 'android' ? hp(0.75) : hp(1.1),
-        left: hp(1.4),
+        alignSelf:'center',
+        marginLeft:hp(1.4)
+        // top: Platform.OS == 'android' ? hp(0.75) : hp(1.1),
+        // left: hp(1.4),
     },
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',
+    },
+    subjectDateTime1: {
+        alignItems: 'flex-start',
+        width: wp(18),
     },
     dropDownSmallWrap1: {
         flexDirection: 'row',
