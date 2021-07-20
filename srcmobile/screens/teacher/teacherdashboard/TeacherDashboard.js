@@ -53,10 +53,10 @@ const Pupillist = ({ item, onPress }) => (
             <View style={PAGESTYLE.pupilProfile}>
                 <View style={PAGESTYLE.rowProfile}>
                     <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                    <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(40)}]}>{item.FirstName} {item.LastName}</Text>
                 </View>
                 <View style={PAGESTYLE.groupPupil}>
-                    <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
@@ -275,7 +275,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                     <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
                 <View style={PAGESTYLE.topListingArrow}>
@@ -399,7 +399,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             <RBSheet
                                                 ref={refRBSheet}
                                                 closeOnDragDown={true}
-                                                height={[hp(85)]}
+                                                height={hp(85)}
                                                 style={{ position: 'relative', }}
                                                 closeOnPressMask={true}
                                                 customStyles={{
@@ -411,8 +411,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     }
                                                 }}
                                             >
+                                                <ScrollView>
                                                 <View style={PAGESTYLE.tabcontent}>
-                                                    <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                    <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                     <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
                                                     <View style={PAGESTYLE.yellowHrTag}></View>
                                                     <View style={PAGESTYLE.timedateGrp}>
@@ -426,7 +427,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                             <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                            <Text numberOfLines={1} style={[PAGESTYLE.datetimeText,{width:wp(25)}]}>{dataOfSubView.GroupName}</Text>
                                                         </View>
                                                     </View>
                                                     <View style={STYLE.hrCommon}></View>
@@ -493,6 +494,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                     </View>
                                                 </View>
+                                                </ScrollView>
                                             </RBSheet>
                                             {/* <View style={PAGESTYLE.tabcontent}>
                                         <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>

@@ -114,7 +114,7 @@ const Popupdata = (props) => {
                 onPress={toggleModal}>
                 <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
                     <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, width: cellWidth * props.span }}></View>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span }}>{props.title}</Text>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span-10 }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>

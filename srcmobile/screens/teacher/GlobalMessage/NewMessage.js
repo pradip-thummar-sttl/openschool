@@ -171,7 +171,7 @@ const NewMessage = (props) => {
     return (
         
 
-        <View >
+        <View style={{backgroundColor:'white', height:'100%'}}>
             <SafeAreaView style={{backgroundColor:'white'}} />
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
@@ -182,7 +182,8 @@ const NewMessage = (props) => {
                 <Text label style={Style.labelCommon}>Title</Text>
                 <View style={Styles.copyInputParent}>
                     <TextInput
-                        multiline={false}
+                        multiline={true}
+                        numberOfLines={2}
                         placeholder='Enter title of the message'
                         returnKeyType={"next"}
                         onSubmitEditing={() => { t2.current.focus(); }}

@@ -519,7 +519,7 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy,{width:wp(22)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>

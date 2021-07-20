@@ -66,6 +66,7 @@ const PupilHomeWorkSubmitted = (props) => {
                         </View>
                     </View>
                 </View>
+                <ScrollView>
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
                         <View style={PAGESTYLE.lessonDesc}>
@@ -94,7 +95,8 @@ const PupilHomeWorkSubmitted = (props) => {
                                             </View>
                                         </View>
                                     )}
-                                    style={{ height: 200 }} />
+                                    // style={{ height: 200 }} 
+                                    />
                             </View>
                         </View>
                     </View>
@@ -103,7 +105,8 @@ const PupilHomeWorkSubmitted = (props) => {
                             <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
                             <FlatList
                                 data={item.HomeworkList}
-                                style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                style={{alignSelf:'center',  width: '95%',  }}
+                                showsVerticalScrollIndicator={false}
                                 renderItem={({ item, index }) => (
                                     <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                         <View style={PAGESTYLE.alignRow1}>
@@ -111,14 +114,14 @@ const PupilHomeWorkSubmitted = (props) => {
                                         </View>
                                     </TouchableOpacity>
                                 )}
-                                numColumns={4}
+                                numColumns={3}
                                 keyExtractor={(item, index) => index.toString()}
                             />
 
                         </View>
                     </View>
                 </View>
-
+                </ScrollView>
             </View>
         </View>
     );

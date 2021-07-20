@@ -1061,6 +1061,7 @@ export default StyleSheet.create({
         color: COLORS.menuLightFonts,
         fontFamily: FONTS.fontSemiBold,
         textTransform: 'uppercase',
+        marginLeft:hp(1.8)
     },
     pupilTableHeadingMainsubTitle: {
         fontSize: hp(1.56),

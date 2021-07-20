@@ -131,7 +131,7 @@ const TLDetail = (props) => {
                             props.lessonData.MaterialList.map((item, index) => {
                                 return (
                                     <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>
@@ -163,7 +163,7 @@ const TLDetail = (props) => {
                             props.lessonData.RecordingList.map((item, index) => {
                                 return (
                                     <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>

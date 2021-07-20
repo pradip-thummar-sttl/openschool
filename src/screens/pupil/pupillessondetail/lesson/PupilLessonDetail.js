@@ -157,7 +157,7 @@ const PupilLessonDetailInternal = (props) => {
                                         onOpenWorkSpacePress={() => { setWorkSpaceEdit(true), setWorkSpace(true) }}
                                         onSeeHomeworkPress={() => getHomeWork()} />
                                     {/* onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })} */}
-
+<ScrollView>
                                     <View style={PAGESTYLE.containerWrap}>
                                         <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                                             <View style={PAGESTYLE.largeVideoBlock}>
@@ -213,7 +213,7 @@ const PupilLessonDetailInternal = (props) => {
                                                         item.MaterialList.map((obj) => {
                                                             return (
                                                                 <View style={PAGESTYLE.fileGrp}>
-                                                                    <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{obj.originalname}</Text>
                                                                     <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
                                                                         <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                                     </TouchableOpacity>
@@ -239,7 +239,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                 return (
                                                                     // props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})
                                                                     <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setTappedItem(index), setWorkSpaceEdit(false), setWorkSpace(true) }}>
-                                                                        <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
+                                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>Workspace {index + 1}</Text>
                                                                         <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                                                                     </TouchableOpacity>
                                                                 )
@@ -266,6 +266,7 @@ const PupilLessonDetailInternal = (props) => {
                                             </View>
                                         </View>
                                     </View>
+                                    </ScrollView>
                                 </View>
             }
         </View >

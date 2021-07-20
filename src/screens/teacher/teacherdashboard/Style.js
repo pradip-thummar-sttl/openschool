@@ -487,7 +487,7 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        width:hp(8),
+        width:hp(10),
         textAlign:'center'
     },
 });

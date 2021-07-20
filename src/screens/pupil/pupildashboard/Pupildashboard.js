@@ -279,8 +279,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View>
-                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:hp(20)}]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:hp(20)}]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -381,7 +381,7 @@ const PupuilDashboard = (props) => {
                                                                                 <View style={PAGESTYLE.rightTabContent}>
                                                                                     {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                                     <View style={PAGESTYLE.tabcontent}>
-                                                                                        <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                                                        <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                                         <View style={PAGESTYLE.timedateGrp}>
                                                                                             <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -428,7 +428,7 @@ const PupuilDashboard = (props) => {
                                                                                                         <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                                     </View>
                                                                                                 )}
-                                                                                                numColumns={4}
+                                                                                                numColumns={1}
                                                                                                 keyExtractor={(item, index) => index.toString()}
                                                                                             />
                                                                                         </View>
@@ -505,7 +505,7 @@ const PupuilDashboard = (props) => {
                                                                                     {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.tabcontent}>
                                                                                         <View>
-                                                                                            <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
+                                                                                            <Text numberOfLines={1} h2 style={[PAGESTYLE.titleTab]}>{dataOfHWSubView.LessonTopic}</Text>
                                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />

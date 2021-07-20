@@ -119,11 +119,11 @@ const Header = (props) => {
                     </Menu>
                 </View>
                 <TouchableOpacity
-                    style={{marginLeft: 10}}
+                    style={styles.commonButtonGreenheader}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
                     <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
+                    {/* <Text style={styles.commonButtonGreenheader}></Text> */}
                 </TouchableOpacity>
             </View>
         </View>
@@ -242,27 +242,22 @@ const styles = StyleSheet.create({
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
         borderRadius: hp(1),
-        overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(4.175),
-        paddingRight: hp(1),
         height: hp(5.20),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
-        alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
+        width: hp(5.20),
+        marginLeft: 10, 
+        alignItems:'center', 
+        justifyContent:'center'
 
     },
     addIcon: {
         width: hp(1.55),
-        resizeMode: 'contain',
-        position: 'absolute',
-        top: Platform.OS == 'android' ? hp(1) : hp(1.29),
-        left: hp(1.8),
-        zIndex: 9,
+        height:hp(1.55)
+        // resizeMode: 'contain',
+        // position: 'absolute',
+        // top: Platform.OS == 'android' ? hp(1) : hp(1.29),
+        // left: hp(1.8),
+        // zIndex: 9,
     },
     iconTop: {
         top: hp(4.2),

@@ -321,9 +321,10 @@ export default StyleSheet.create({
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
         // backgroundColor: COLORS.greyplaceholder,
-        borderRadius: 20,
+        borderRadius: hp(1.25),
+        // backgroundColor:'red'
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -360,7 +361,7 @@ export default StyleSheet.create({
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
         width: '100%',
-        height: hp(30.05),
+        // height: hp(30.05),
         borderRadius: 10,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,

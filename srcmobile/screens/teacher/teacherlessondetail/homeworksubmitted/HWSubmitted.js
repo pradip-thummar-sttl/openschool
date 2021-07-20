@@ -26,8 +26,8 @@ const Pupillist = (props, item) => (
                 <View style={PAGESTYLE.thumbAlign}>
                     <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                     <View>
-                        <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
-                        <Text style={PAGESTYLE.groupName}>{props.item.GroupName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName, {width:wp(45)}]}>{props.item.PupilName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName,{width:wp(45)}]}>{props.item.GroupName}</Text>
                     </View>
                 </View>
                 <View>
