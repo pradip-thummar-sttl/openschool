@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
+import { NativeModules, View, NativeEventEmitter, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -18,6 +18,8 @@ import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 import MESSAGE from "../../../utils/Messages";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
+import QB from "quickblox-react-native-sdk";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -44,6 +46,11 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
+        initApp(callBack => {
+            console.log('Pupil callBack', callBack);
+            handleIncommingCall()
+        });
+
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -69,6 +76,36 @@ const PupuilDashboard = (props) => {
 
         return true;
     }
+
+    const handleIncommingCall = () => {
+        const emitter = new NativeEventEmitter(QB.webrtc)
+        Object.keys(QB.webrtc.EVENT_TYPE).forEach(key => {
+            emitter.addListener(QB.webrtc.EVENT_TYPE[key], eventHandler)
+        })
+    }
+
+    const eventHandler = (event) => {
+        const {
+            type, // type of the event (i.e. `@QB/CALL` or `@QB/REJECT`)
+            payload
+        } = event
+        const {
+            userId, // id of QuickBlox user who initiated this event (if any)
+            session // current or new session
+        } = payload
+        console.log('Event Received', event, payload);
+        switch (type) {
+            case QB.webrtc.EVENT_TYPE.CALL:
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id })
+                break;
+            case QB.webrtc.EVENT_TYPE.HANG_UP:
+                // props.navigation.goBack()
+                break;
+            default:
+                break;
+        }
+    }
+
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -266,8 +303,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:wp(37)}]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:wp(40)}]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: wp(37) }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: wp(40) }]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -287,8 +324,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:wp(37)}]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:wp(40)}]}>{item.LessonTopic}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: wp(37) }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: wp(40) }]}>{item.LessonTopic}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>

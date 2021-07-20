@@ -117,9 +117,8 @@ const PupilProfileView = (props) => {
             setBronze(true)
         } else if (index == 6) {
             setSilver(true)
-        } else {
+        } else if (index == 9) {
             setGold(true)
-
         }
     }
 

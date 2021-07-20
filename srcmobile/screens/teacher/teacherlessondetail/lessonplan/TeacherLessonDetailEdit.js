@@ -592,6 +592,13 @@ const TLDetailEdit = (props) => {
             saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
             let userIDs = [], userNames = [], names = [];
+
+            selectedParticipants.PupilList.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.PupilName)
+            });
+
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)

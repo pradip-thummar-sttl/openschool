@@ -143,6 +143,8 @@ const ParentZoneProfileEdit = (props) => {
         if (!profileUri) {
             showMessageWithCallBack(MESSAGE.profileUpdated, () => {
                 User.user.ChildrenList = updatedData
+                User.user.FirstName = firstName
+                User.user.LastName = lastName
                 props.navigateToProfile(updatedData)
             })
             setLoading(false)
@@ -171,8 +173,10 @@ const ParentZoneProfileEdit = (props) => {
                         }
                     });
 
-                    console.log('temp', temp);
-                    return
+                    User.user.ChildrenList = updatedData
+                    User.user.FirstName = firstName
+                    User.user.LastName = lastName
+                    User.user.ProfilePicture = res.data.ProfilePicture
                     props.navigateToProfile(temp)
                 })
             } else {
@@ -208,7 +212,7 @@ const ParentZoneProfileEdit = (props) => {
         hideDatePicker();
     };
 
-    showActionChooser = () => {
+    const showActionChooser = () => {
         Alert.alert(
             '',
             'Browse a profile picture',
