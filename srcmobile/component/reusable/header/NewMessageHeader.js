@@ -295,7 +295,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     moreIcon: {
-        width: hp(3),
+        width: hp(4),
+        marginVertical:hp(3),
         resizeMode: 'contain',
     },
     moreMenu: {

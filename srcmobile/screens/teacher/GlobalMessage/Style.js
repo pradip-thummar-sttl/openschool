@@ -1667,7 +1667,7 @@ export default StyleSheet.create({
         paddingLeft: 10
     },
     commonInputTextarea1: {
-        height: hp(5.20),
+        height: hp(6.20),
         width: wp(90),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -1683,6 +1683,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
+        paddingVertical:0
     },
     copyInputParent: {
         flexDirection: 'row',

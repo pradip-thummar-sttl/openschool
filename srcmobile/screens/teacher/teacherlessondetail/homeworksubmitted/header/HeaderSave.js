@@ -10,7 +10,7 @@ const HeaderSave = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
+                <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(80)}]}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>

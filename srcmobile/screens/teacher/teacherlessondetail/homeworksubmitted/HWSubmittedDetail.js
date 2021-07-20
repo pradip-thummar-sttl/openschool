@@ -238,8 +238,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         <View style={PAGESTYLE.whiteBg}>
                             <View style={PAGESTYLE.containerWrapTop}>
                                 <View style={PAGESTYLE.userInfoTop}>
-                                    <Text style={PAGESTYLE.userTopName}>{data.PupilName}</Text>
-                                    <Text style={PAGESTYLE.userTopGroup}>{data.GroupName}</Text>
+                                    <Text numberOfLines={1} style={[PAGESTYLE.userTopName,{width:wp(45)}]}>{data.PupilName}</Text>
+                                    <Text numberOfLines={1} style={[PAGESTYLE.userTopGroup,{width:wp(45)}]}>{data.GroupName}</Text>
                                 </View>
                                 <View>
                                     <View style={PAGESTYLE.markedLabel}>
@@ -295,7 +295,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             onTintColor={COLORS.dashboardPupilBlue}
                                                             tintColor={COLORS.dashboardPupilBlue}
                                                         />
-                                                        <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText,{width:wp(90)}]}>{item.ItemName}</Text>
                                                     </View>
                                                 )}
                                                 // style={{ height: 200 }} 
@@ -312,7 +312,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         {console.log('data.HomeworkList', data.HomeworkList)}
                                         <FlatList
                                             data={data.HomeworkList}
-                                            style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                            style={{ alignSelf: 'center', marginBottom:hp(1)  }}
                                             renderItem={({ item, index }) => (
                                                 <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
