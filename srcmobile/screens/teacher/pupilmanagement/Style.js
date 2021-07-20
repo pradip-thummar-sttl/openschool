@@ -255,7 +255,7 @@ export default StyleSheet.create({
     pupilImage: {
         width: hp(3.7),
         height: hp(3.7),
-        borderRadius: hp(100),
+        borderRadius: hp(3.7/2),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1.5),
         top: hp(1.1),
@@ -327,8 +327,8 @@ export default StyleSheet.create({
     profileImage: {
         width: hp(13),
         height: hp(13),
-        borderRadius: hp(100),
-        resizeMode: 'contain',
+        borderRadius: hp(13/2),
+        // resizeMode: 'contain',
     },
     mainDetails: {
         marginTop: hp(8.75),
@@ -452,16 +452,17 @@ export default StyleSheet.create({
         width: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        resizeMode: 'contain'
+        resizeMode: 'contain',
     },
     tickLayoutPArent: {
         backgroundColor: COLORS.buttonGreen,
         borderRadius: 10,
         height: 35,
         width: 35,
+        // marginBottom:50,        // bottom:hp(1),
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
+        // position: 'absolute',
         alignSelf: 'flex-end',
     },
     titlePerfomance: {

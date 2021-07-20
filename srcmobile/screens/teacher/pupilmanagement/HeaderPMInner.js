@@ -39,7 +39,7 @@ const HeaderPMInner = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>{props.name}</Text>
+                        <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(75)}]}>{props.name}</Text>
                     </View>
                 </View>
 
