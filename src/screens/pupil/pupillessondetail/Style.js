@@ -803,7 +803,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
-        width: 18,
+        width: hp(10),
         marginRight: 10,
         resizeMode: 'contain',
     },

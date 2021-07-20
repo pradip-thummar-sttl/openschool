@@ -28,13 +28,13 @@ var moment = require('moment');
 const MessageList = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.firstColumn}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
+            <Text numberOfLines={2} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:'85%'}]}>{props.item.Title}</Text>
         </View>
         <View style={PAGESTYLE.firstColumn}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Message}</Text>
+            <Text numberOfLines={2} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName, {width:'85%'}]}>{props.item.Message}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+            <Text style={[PAGESTYLE.pupilName,{marginLeft:-10}]}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
         </View>
         {/* <View style={PAGESTYLE.pupilProfile}>
             <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>Group 1A</Text>
@@ -127,7 +127,7 @@ const ParentZonemain = (props) => {
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message</Text>
                                             </View>
                                             <View>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,{marginLeft:-10}]}>Date</Text>
                                             </View>
                                             {/* <View style={PAGESTYLE.pupilTableHeadingMain}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class</Text>

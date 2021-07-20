@@ -23,30 +23,30 @@ const Pupillist = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
             <View style={PAGESTYLE.border}></View>
-            <Text style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
+            <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
         </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.LessonTopic}</Text>
+        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,]}>
+            <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:hp(14)}]}>{props.item.LessonTopic}</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
-            <Text style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
+            <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>
+            <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:hp(12)}]}>{props.item.GroupName}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.LiveSession).toString()}</Text>
+            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText,{marginLeft:hp(0.8)}]}>{(props.item.LiveSession).toString()}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.Publish).toString()}</Text>
+            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText,{marginLeft:hp(0.8)}]}>{(props.item.Publish).toString()}</Text>
         </View>
         <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>{props.item.HomeWork}</Text>
+            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText,{marginLeft:hp(0.8)}]}>{props.item.HomeWork}</Text>
             <TouchableOpacity
                 style={PAGESTYLE.pupilDetailLink}
                 activeOpacity={opacity}
                 onPress={() => props.navigateToDetail()}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                <Image style={[PAGESTYLE.pupilDetaillinkIcon,{marginRight:hp(2)}]} source={Images.DashboardRightArrow} />
             </TouchableOpacity>
         </View>
     </View>
