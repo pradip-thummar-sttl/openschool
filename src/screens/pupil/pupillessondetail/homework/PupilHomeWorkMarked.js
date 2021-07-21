@@ -136,7 +136,7 @@ const PupilHomeWorkMarked = (props) => {
                                 <Text style={PAGESTYLE.uploaded}>Uploaded Homework</Text>
                                 <FlatList
                                     data={item.HomeworkList}
-                                    style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                    style={{ alignSelf: 'center', }}
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
@@ -144,7 +144,7 @@ const PupilHomeWorkMarked = (props) => {
                                             </View>
                                         </TouchableOpacity>
                                     )}
-                                    numColumns={4}
+                                    numColumns={3}
                                     keyExtractor={(item, index) => index.toString()}
                                 />
                             </View>

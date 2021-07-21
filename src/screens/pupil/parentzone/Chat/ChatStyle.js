@@ -103,12 +103,12 @@ export default StyleSheet.create({
         // backgroundColor:'red',
         marginLeft: hp(2),
         marginTop: hp(2),
-        width: wp(76),
-        height: hp(55),
+        width: wp(80),
+        height: hp(90),
     },
     mesagesView: {
         width: '125%',
-        height: hp(70),
+        height: hp(50),
         marginBottom: wp(3),
     },
     textView: {
@@ -117,7 +117,9 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        backgroundColor: COLORS.greyBack
+        backgroundColor: COLORS.greyBack,
+        // position:'absolute',
+        // bottom:0
         // bottom:0,
     },
     messageCell: {
@@ -143,7 +145,7 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        // width: '100%',
+        width: '85%',
         height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,

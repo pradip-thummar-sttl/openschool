@@ -37,9 +37,18 @@ export default StyleSheet.create({
         borderRadius: hp(50),
         backgroundColor: COLORS.lightGrayPupil,
     },
+    userStampName: {
+        fontSize: 14,
+        paddingRight: 40,
+        paddingLeft: 20,
+    },
     pupilName: {
-        fontSize: 20,
-        marginHorizontal: 15,
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGrayIntro,
+    },
+    message: {
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
     },
     bar: {
         marginHorizontal: 20,
@@ -165,35 +174,27 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         textAlign: 'center',
     },
-    managementDetail: {
-        // flex:1,
-    },
     managementBlockTop: {
         height: hp(14.06),
         width: '100%',
+        position: 'relative',
     },
     managementopImage: {
         width: '100%',
         height: hp(14.06),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
     thumbTopUser: {
-        width: hp(12.5),
-        height: hp(12.5),
-        borderRadius: 96,
-        borderColor: COLORS.white,
-        borderWidth: 2,
-        backgroundColor: '#ECEDF0',
         position: 'absolute',
-        left: hp(5),
-        bottom: hp(-4),
+        left: 78,
+        top: 32,
     },
     thumbTopUser1: {
-        width: hp(12.5),
-        height: hp(12.5),
-        borderRadius: 96,
-        position: 'absolute',
-        alignSelf: 'center',
+        width: 100,
+        height: 100,
+        borderRadius: 100,
+        borderColor: COLORS.white,
+        borderWidth: 4,
     },
     topBannerBtn: {
         position: 'absolute',
@@ -204,21 +205,25 @@ export default StyleSheet.create({
         fontSize: hp(1.56),
     },
     topBannerBtn1: {
-        padding: 15,
         fontFamily: FONTS.fontBold,
         color: COLORS.white,
-        fontSize: hp(1.56),
-        textTransform: 'uppercase'
+        fontSize: 12,
+        lineHeight: 37.5,
+        textTransform: 'uppercase',
+        borderRadius: 8,
+        borderWidth: 1,
+        width: 128,
+        height: 40,
+        textAlign: 'center',
+        overflow: 'hidden',
+        borderColor: COLORS.buttonGreen,
+        backgroundColor: COLORS.buttonGreen,
     },
     topBannerParent: {
         paddingHorizontal: 10,
         position: 'absolute',
-        right: 20,
-        top: 20,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: COLORS.buttonGreen,
-        backgroundColor: COLORS.buttonGreen,
+        right: 32,
+        top: 17,
     },
     managementNameSec: {
         flexDirection: 'row',
@@ -236,10 +241,28 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     nameSmlBlock: {
-        marginRight: hp(13),
+        marginRight: hp(2),
+        width: 215,
     },
+    mailSmlBlock: {
+        marginRight: hp(2),
+        width: 330,
+    },
+    passSmlBlock: {
+        marginRight: hp(2),
+        width: 200,
+    },    
+    addSmlBlock: {
+        marginRight: hp(2),
+        width: 625,
+    },    
     dateSmlBlock: {
-        marginRight: hp(13),
+        marginRight: hp(2),
+        width: 200,
+    },
+    UniqueNumberClass: {
+        marginRight: hp(2),
+        width: 215,
     },
     paragraphText: {
         fontFamily: FONTS.fontRegular,
@@ -323,6 +346,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.backgroundColorCommon,
         paddingBottom: hp(2),
         paddingTop: hp(0),
+        flex: 1,
     },
     annotationText: {
         width: hp(72.91),
@@ -343,7 +367,6 @@ export default StyleSheet.create({
     },
     graphBlock: {
         flexDirection: 'row',
-        margin: hp(3),
     },
     graphTitle: {
         fontFamily: FONTS.fontBold,
@@ -661,11 +684,14 @@ export default StyleSheet.create({
         top: hp(2.1),
     },
     formSpace: {
-        marginLeft: hp(20),
-        marginRight: hp(25),
+        marginLeft: 172,
+        marginRight: 250,
     },
     formTopSpace: {
-        marginTop: hp(15),
+        marginTop: 75,
+    },
+    bottomSpace: {
+        marginBottom: 90,
     },
     dateField: {
         paddingRight: hp(5),
@@ -676,8 +702,8 @@ export default StyleSheet.create({
         width: hp(1.76),
         height: hp(1.76),
         resizeMode: 'contain',
-        left: hp(1.5),
-        top: hp(2.3),
+        left: 15,
+        top: 12,
     },
     dropArrow: {
         // position:'absolute',
@@ -693,8 +719,8 @@ export default StyleSheet.create({
         width: hp(1.51),
         height: hp(0.95),
         resizeMode: 'contain',
-        right:hp(1.5),
-        top: hp(3),
+        right: 12,
+        top: 16,
         marginLeft: hp(1.5),
     },
     textArea: {
@@ -708,20 +734,23 @@ export default StyleSheet.create({
         //paddingLeft:hp(13.67),
     },
     tabLinkGrey: {
-        fontFamily: FONTS.fontBold,
+        fontFamily: FONTS.fontSemiBold,
         fontSize: hp(1.56),
         color: COLORS.lightGray,
         marginRight: hp(4.16),
         textTransform: 'uppercase',
     },
     tabLinkSelected: {
-        fontFamily: FONTS.fontBold,
+        fontFamily: FONTS.fontSemiBold,
         fontSize: hp(1.56),
         color: COLORS.buttonGreen,
         textTransform: 'uppercase',
     },
     profileFormTopSpace: {
         marginTop: hp(2),
+    },
+    profile: {
+        paddingHorizontal: 35,
     },
     titleInner: {
         fontFamily: FONTS.fontSemiBold,
@@ -742,7 +771,7 @@ export default StyleSheet.create({
         width: hp(75),
         marginTop: hp(5),
         paddingBottom: hp(1),
-        marginBottom: hp(1),
+        marginBottom: 30,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.bottomProfileLightBorder,
         marginLeft: hp(26.04),
@@ -786,7 +815,7 @@ export default StyleSheet.create({
         // marginRight: hp(1.69),
     },
     searchParent: {
-        width: hp(35), flexDirection: 'row', alignItems: 'center', marginTop: 20, height: hp(5.20), backgroundColor: COLORS.white,
+        width: hp(41.92), flexDirection: 'row', alignItems: 'center', height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
@@ -857,7 +886,8 @@ export default StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         zIndex: 9,
-        marginRight: hp(1.5),
+        marginRight: hp(2.2),
+        marginLeft: hp(1.2)
     },
     iconTop: {
         top: hp(4.2),
@@ -871,6 +901,7 @@ export default StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
         textAlign: 'left',
+        alignItems: 'center',
     },
     filterListWrap: {
         paddingTop: hp(1),
@@ -879,13 +910,14 @@ export default StyleSheet.create({
         paddingBottom: hp(1),
         position: 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
+        top: hp(5.20),
         width: hp(30.98),
         borderRadius: hp(1),
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
-        shadowOpacity: 0.05,
-        shadowRadius: hp(1),
+        left: hp(2),
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 5, },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
     },
     checkMark: {
         width: hp(1.48),
@@ -899,7 +931,12 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
-        top: hp(0.5),
+    },
+    filterListTextAddUser: {
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontBold,
+        textTransform: 'uppercase',
     },
     headerRight: {
         flexDirection: 'row',
@@ -909,6 +946,11 @@ export default StyleSheet.create({
         paddingLeft: hp(13.67),
         paddingRight: hp(2.99),
         backgroundColor: COLORS.white,
+        zIndex: 9,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 0, },
+        shadowOpacity: 0.08,
+        shadowRadius: 2,
     },
     smlFilterThumb: {
         width: hp(3.64),
@@ -924,6 +966,7 @@ export default StyleSheet.create({
     selectDropList: {
         fontFamily: FONTS.fontBold,
         fontSize: hp(1.82),
+        width: hp(14),
         color: COLORS.darkGray,
         top: hp(0.5),
     },
@@ -932,17 +975,45 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: hp(2),
+        height: hp(5.20),
+        marginTop: 20,
+        paddingBottom: hp(3),
     },
     plainBg: {
-        paddingLeft: hp(2.5),
-        paddingRight: hp(2.5),
+        paddingLeft: hp(8.46),
+        paddingRight: hp(7.16),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         backgroundColor: COLORS.backgroundColorCommon,
     },
     commonInputFull: {
         width: '100%',
+    },
+    commonInput: {
+        color:COLORS.darkGrayIntro,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: 6,
+        lineHeight: 20,
+        height: 40,
+        paddingHorizontal: 10,
+        textAlignVertical: 'center',
+        fontFamily: FONTS.fontRegular,
+    },
+    commonInputPassword: {
+        color:COLORS.darkGrayIntro,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: 6,
+        lineHeight: 20,
+        height: 40,
+        paddingHorizontal: 10,
+        textAlignVertical: 'center',
+        fontFamily: FONTS.fontRegular,
     },
     lessonDesc: {
         fontSize: hp(1.82),
@@ -983,16 +1054,18 @@ export default StyleSheet.create({
     },
     pupilData: {
         flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: COLORS.white,
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 1, },
-        elevation: 3,
-        shadowOpacity: 0.1,
         borderRadius: hp(1.95),
         height: hp(8.85),
-        borderRadius: hp(0.6),
+        borderRadius: 6,
         marginBottom: hp(0.78),
+        paddingHorizontal: 25,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 1, },
+        shadowOpacity: 0.12,
+        shadowRadius: 2,
     },
     pupilProfile: {
         width: hp(15.80),
@@ -1030,9 +1103,9 @@ export default StyleSheet.create({
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        height: hp(3.60),
-        lineHeight: hp(3.60),
-        marginTop: hp(3.5),
+        justifyContent: 'space-around',
+        marginBottom: 10,
+        paddingHorizontal: 20,
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -1056,12 +1129,12 @@ export default StyleSheet.create({
         width: hp(18.22),
     },
     pupilTableHeadingMainTitle: {
-        fontSize: hp(1.5),
-        lineHeight: hp(2.60),
+        fontSize: hp(1.56),
+        lineHeight: hp(2.08),
         color: COLORS.menuLightFonts,
         fontFamily: FONTS.fontSemiBold,
         textTransform: 'uppercase',
-        marginLeft:hp(1.8)
+        paddingLeft: 15,
     },
     pupilTableHeadingMainsubTitle: {
         fontSize: hp(1.56),
@@ -1116,7 +1189,7 @@ export default StyleSheet.create({
         borderRadius: hp(100),
     },
     firstColumn: {
-        width: hp(57),
+        width: hp(55),
     },
     sentBlueText: {
         fontSize: hp(1.82),
@@ -1129,7 +1202,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     filterListWrapNew: {
-        paddingVertical: 4,
+        paddingVertical: 5,
         paddingLeft: 8,
         paddingRight: 15,
         backgroundColor: COLORS.white,
@@ -1138,6 +1211,7 @@ export default StyleSheet.create({
         justifyContent: 'space-around',
         position: 'relative',
         borderWidth: 1,
+        width: hp(25),
         borderColor: COLORS.borderGrp,
         marginRight: 10,
     },
@@ -1146,5 +1220,29 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.82),
         textTransform: 'uppercase',
-    }
+    },
+    flexDiv: {
+        height: '100%',
+    },
+    managementDetail: {
+        paddingBottom: hp(15),
+        paddingTop: hp(5.20),
+    },
+    MainProfile: {
+        paddingLeft: hp(7.81),
+        paddingRight: hp(9.75),
+        marginTop: 20,
+    },
+    proffileLogo: {
+        width: 100,
+        height: 100,
+        resizeMode: 'cover',
+        borderRadius: hp(100),
+        position: 'absolute',
+        left: 78,
+        borderColor: COLORS.white,
+        borderWidth: 4,
+        backgroundColor: COLORS.greyBack,
+        top: 32,
+    },
 });

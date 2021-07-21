@@ -15,7 +15,7 @@ import moment from 'moment';
 const ParentZoneProfile = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
-
+    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar hide={() => action(!isHide)} /> */}
@@ -23,14 +23,15 @@ const ParentZoneProfile = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            <View style={PAGESTYLE.managementDetail}>
+                            <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} />
+                                    <Image style={PAGESTYLE.proffileLogo} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList.ProfilePicture }} />
                                     <View style={PAGESTYLE.topBannerParent}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => { props.navigateToDetail() }}>
-                                            <Text style={PAGESTYLE.topBannerBtn1}>EDit Profile</Text>
+                                            <Text style={PAGESTYLE.topBannerBtn1}>Edit Profile</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -46,7 +47,7 @@ const ParentZoneProfile = (props) => {
                                         <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
                                         <Text style={PAGESTYLE.userName}>{moment(props.data.Dob).format('DD/MM/yyyy')}</Text>
                                     </View>
-                                    <View>
+                                    <View style={PAGESTYLE.UniqueNumberClass}>
                                         <Text style={PAGESTYLE.userLabel}>Unique I.D (auto-generated)</Text>
                                         <Text style={PAGESTYLE.userName}>{props.data.UniqueNumber}</Text>
                                     </View>
@@ -55,46 +56,45 @@ const ParentZoneProfile = (props) => {
                                     <Text style={PAGESTYLE.userLabel}>Notes</Text>
                                     <Text style={PAGESTYLE.paragraphText}>{props.data.Note ? props.data.Note : '-'}</Text>
                                 </View>
-                            </View>
 
-                            <View style={[PAGESTYLE.profileTitleRow]}>
-                                <Text style={PAGESTYLE.titleInner}>Parent/Guardian</Text>
-                            </View>
-                            <View style={PAGESTYLE.managementProfileSec}>
-                                <View style={PAGESTYLE.nameSmlBlock}>
-                                    <Text style={PAGESTYLE.userLabel}>Relationship to pupil</Text>
-                                    <Text style={PAGESTYLE.userNameNormal}>{props.data.Relationship ? props.data.Relationship : '-'}</Text>
+                                <View style={[PAGESTYLE.profileTitleRow]}>
+                                    <Text style={PAGESTYLE.titleInner}>Parent/Guardian</Text>
                                 </View>
-                                <View style={PAGESTYLE.dateSmlBlock}>
-                                    <Text style={PAGESTYLE.userLabel}>Parent/Guardian Name</Text>
-                                    <Text style={PAGESTYLE.userNameNormal}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
-                                </View>
-                                <View>
-                                    <Text style={PAGESTYLE.userLabel}>Contact tel.</Text>
-                                    <Text style={PAGESTYLE.userNameNormal}>{props.data.MobileNumber}</Text>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.managementProfileSec}>
-                                <View style={PAGESTYLE.nameSmlBlock}>
-                                    <Text style={PAGESTYLE.userLabel}>Associated email for child’s acc.</Text>
-                                    <Text style={PAGESTYLE.userNameNormal}>{props.data.Email}</Text>
-                                </View>
-                                <View style={PAGESTYLE.dateSmlBlock}>
-                                    <Text style={PAGESTYLE.userLabel}>Password</Text>
-                                    <Text style={PAGESTYLE.userNameNormal}>*******</Text>
-                                </View>
-                            </View>
-                            {props.data.AddressLine1.length > 0 || props.data.AddressLine1.length > 0 ?
                                 <View style={PAGESTYLE.managementProfileSec}>
                                     <View style={PAGESTYLE.nameSmlBlock}>
-                                        <Text style={PAGESTYLE.userLabel}>Address</Text>
-                                        <Text style={[PAGESTYLE.userNameNormal, PAGESTYLE.addressText]}>{props.data.AddressLine1} {props.data.AddressLine2} {props.data.City} {props.data.PostCode}</Text>
+                                        <Text style={PAGESTYLE.userLabel}>Relationship to pupil</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.Relationship ? props.data.Relationship : '-'}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.dateSmlBlock}>
+                                        <Text style={PAGESTYLE.userLabel}>Parent/Guardian Name</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
+                                    </View>
+                                    <View>
+                                        <Text style={PAGESTYLE.userLabel}>Contact tel.</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.MobileNumber}</Text>
                                     </View>
                                 </View>
-                                :
-                                null
-                            }
-
+                                <View style={PAGESTYLE.managementProfileSec}>
+                                    <View style={PAGESTYLE.mailSmlBlock}>
+                                        <Text style={PAGESTYLE.userLabel}>Associated email for child’s acc.</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.Email}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.passSmlBlock}>
+                                        <Text style={PAGESTYLE.userLabel}>Password</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>*******</Text>
+                                    </View>
+                                </View>
+                                {props.data.AddressLine1.length > 0 || props.data.AddressLine1.length > 0 ?
+                                    <View style={PAGESTYLE.managementProfileSec}>
+                                        <View style={PAGESTYLE.addSmlBlock}>
+                                            <Text style={PAGESTYLE.userLabel}>Address</Text>
+                                            <Text style={[PAGESTYLE.userNameNormal, PAGESTYLE.addressText]}>{props.data.AddressLine1} {props.data.AddressLine2} {props.data.City} {props.data.PostCode}</Text>
+                                        </View>
+                                    </View>
+                                    :
+                                    null
+                                }
+                            </View>
                         </ScrollView>
                     </View>
                 </ScrollView>

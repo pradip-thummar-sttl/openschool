@@ -265,8 +265,8 @@ const ParentZoneProfileEdit = (props) => {
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={PAGESTYLE.whiteBg}>
-                            <View style={PAGESTYLE.managementDetail}>
+                        <View>
+                            <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
                                         <View style={PAGESTYLE.thumbTopUser}>
@@ -291,11 +291,11 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t1}
                                             onSubmitEditing={() => { t2.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={firstName}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={firstName => setFirstName(firstName)}
                                         />
                                     </View>
@@ -307,11 +307,11 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t2}
                                             onSubmitEditing={() => { t4.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={lastName}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={lastName => setLastName(lastName)}
                                         />
                                     </View>
@@ -325,13 +325,13 @@ const ParentZoneProfileEdit = (props) => {
                                         <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                             <Image source={Images.CalenderIconSmall} style={PAGESTYLE.dateIconSml} />
                                             <TextInput
-                                                style={[STYLE.commonInput, PAGESTYLE.dateField]}
+                                                style={[PAGESTYLE.commonInput, PAGESTYLE.dateField]}
                                                 placeholder="Select"
                                                 editable={false}
                                                 autoCapitalize={false}
                                                 maxLength={40}
                                                 value={dob}
-                                                placeholderTextColor={COLORS.lightplaceholder}
+                                                placeholderTextColor={COLORS.menuLightFonts}
                                             />
                                             <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow1} />
                                         </View>
@@ -344,19 +344,19 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t3}
                                             onSubmitEditing={() => { t4.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={uniqueCode}
                                             editable={false}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={lastName => setUniqueCode(uniqueCode)}
                                         />
                                     </View>
                                 </View>
                             </View>
 
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, PAGESTYLE.bottomSpace]}>
                                 <View>
                                     <Text style={PAGESTYLE.fieldInputLabel}>Notes</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
@@ -364,13 +364,13 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t4}
                                             onSubmitEditing={() => { t5.current.focus(); }}
-                                            style={[STYLE.commonInput, PAGESTYLE.textArea]}
+                                            style={[PAGESTYLE.commonInput, PAGESTYLE.textArea]}
                                             placeholder="You can leave notes here for the teacher such as special needs, behaviour, performance, things to discuss with teachers etc."
                                             value={note}
                                             autoCapitalize={'sentences'}
                                             multiline
                                             numberOfLines={4}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={note => setNote(note)}
                                         />
                                     </View>
@@ -384,11 +384,11 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t5}
                                             onSubmitEditing={() => { t6.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={relation}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={relation => setRelation(relation)}
                                         />
                                         {/* <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow} /> */}
@@ -403,18 +403,18 @@ const ParentZoneProfileEdit = (props) => {
                                                 autoCapitalize={'none'}
                                                 ref={t6}
                                                 onSubmitEditing={() => { t7.current.focus(); }}
-                                                style={STYLE.commonInputPassword}
+                                                style={PAGESTYLE.commonInputPassword}
                                                 value={code}
                                                 maxLength={30}
                                                 secureTextEntry={isPindHide}
-                                                placeholderTextColor={COLORS.lightplaceholder}
+                                                placeholderTextColor={COLORS.menuLightFonts}
                                                 onChangeText={code => setCode(code)}
                                             />
 
                                             <View style={PAGESTYLE.eye}>
                                                 <TouchableOpacity activeOpacity={opacity} onPress={() => setPinVisibility()}>
                                                     <Image
-                                                        source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
+                                                        style={{width: 18.52, height: 14.53, resizeMode: 'contain',}} source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -430,11 +430,11 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t7}
                                             onSubmitEditing={() => { t10.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={parentName}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={pName => setParentName(pName)}
                                         />
 
@@ -447,12 +447,12 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t8}
                                             onSubmitEditing={() => { t9.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             editable={false}
                                             value={mobile}
                                             keyboardType={'phone-pad'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={mobile => setMobile(mobile)}
                                         />
                                     </View>
@@ -466,12 +466,12 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t9}
                                             onSubmitEditing={() => { t10.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             editable={false}
                                             value={childEmail}
                                             autoCapitalize={false}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={email => setChildEmail(email)}
                                         />
                                     </View>
@@ -485,18 +485,18 @@ const ParentZoneProfileEdit = (props) => {
                                                 autoCapitalize={'none'}
                                                 ref={t10}
                                                 onSubmitEditing={() => { t11.current.focus(); }}
-                                                style={STYLE.commonInputPassword}
+                                                style={PAGESTYLE.commonInputPassword}
                                                 value={childPass}
                                                 maxLength={30}
                                                 secureTextEntry={isPasswordHide}
-                                                placeholderTextColor={COLORS.lightplaceholder}
+                                                placeholderTextColor={COLORS.menuLightFonts}
                                                 onChangeText={pass => setChildPass(pass)}
                                             />
 
                                             <View style={PAGESTYLE.eye}>
                                                 <TouchableOpacity activeOpacity={opacity} onPress={() => setPasswordVisibility()}>
                                                     <Image
-                                                        source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                        style={{width: 18.52, height: 14.53, resizeMode: 'contain',}} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -512,11 +512,11 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t11}
                                             onSubmitEditing={() => { t12.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={add1}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={add1 => setAdd1(add1)}
                                         />
                                     </View>
@@ -528,17 +528,17 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t12}
                                             onSubmitEditing={() => { t13.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={add2}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={add2 => setAdd2(add2)}
                                         />
                                     </View>
                                 </View>
                             </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, PAGESTYLE.bottomSpace]}>
                                 <View>
                                     <Text style={PAGESTYLE.fieldInputLabel}>City</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
@@ -546,11 +546,11 @@ const ParentZoneProfileEdit = (props) => {
                                             returnKeyType={"next"}
                                             ref={t13}
                                             onSubmitEditing={() => { t14.current.focus(); }}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={city}
                                             autoCapitalize={'words'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={city => setCity(city)}
                                         />
                                     </View>
@@ -561,11 +561,11 @@ const ParentZoneProfileEdit = (props) => {
                                         <TextInput
                                             returnKeyType={"next"}
                                             ref={t14}
-                                            style={STYLE.commonInput}
+                                            style={PAGESTYLE.commonInput}
                                             value={zip}
                                             keyboardType={'phone-pad'}
                                             maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            placeholderTextColor={COLORS.menuLightFonts}
                                             onChangeText={zip => setZip(zip)}
                                         />
                                     </View>
