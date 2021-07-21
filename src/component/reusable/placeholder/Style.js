@@ -23,7 +23,7 @@ export default StyleSheet.create({
         padding: 20,
         marginVertical: 30,
         width: '100%',
-        height:'100%'
+        // height:'100%'
     },
     blankPageImage: {
         height: 150,
