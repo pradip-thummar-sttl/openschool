@@ -27,8 +27,12 @@ const HeaderPM = (props) => {
     const [selectedPupilIndex, setSelectedPupilIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
+    const [childrenList, setChildrenList] = useState(props.data)
     const [keyword, setKeyword] = useState('')
+
+    useEffect(() => {
+        setChildrenList(props.data);
+    }, [props.data]);
 
     useEffect(() => {
         if (!isSearchActive) {

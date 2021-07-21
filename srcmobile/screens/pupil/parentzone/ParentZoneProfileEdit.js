@@ -16,6 +16,7 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src';
+import { User } from "../../../utils/Model";
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
@@ -58,6 +59,8 @@ const ParentZoneProfileEdit = (props) => {
     const [add2, setAdd2] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
+
+    console.log('ghddgh ', profileData);
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -111,9 +114,6 @@ const ParentZoneProfileEdit = (props) => {
         } else if (!parentName.trim()) {
             showMessage(MESSAGE.parentNAme)
             return false
-        } else if (!childPass.trim()) {
-            showMessage(MESSAGE.childPassword)
-            return false
         }
 
         saveProfile()
@@ -145,7 +145,7 @@ const ParentZoneProfileEdit = (props) => {
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
-                uploadProfile()
+                uploadProfile(res.data)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -156,10 +156,13 @@ const ParentZoneProfileEdit = (props) => {
         })
     }
 
-    const uploadProfile = () => {
+    const uploadProfile = (updatedData) => {
         if (!profileUri) {
             showMessageWithCallBack(MESSAGE.profileUpdated, () => {
-                props.navigation.goBack()
+                User.user.ChildrenList = updatedData
+                User.user.FirstName = firstName
+                User.user.LastName = lastName
+                props.route.params.onGoBack()
             })
             setLoading(false)
             return
@@ -170,8 +173,8 @@ const ParentZoneProfileEdit = (props) => {
 
         data.append('file', {
             uri: profileUri.uri,
-            name: 'pupilprofile.' + (ext.length > 0 ? ext[ext.length-1] : 'jpeg'),
-            type: 'image/' + (ext.length > 0 ? ext[ext.length-1] : 'jpeg')
+            name: 'pupilprofile.' + (ext.length > 0 ? ext[ext.length - 1] : 'jpeg'),
+            type: 'image/' + (ext.length > 0 ? ext[ext.length - 1] : 'jpeg')
         });
 
         console.log('data', data._parts, ext, profileUri.uri);
@@ -182,7 +185,17 @@ const ParentZoneProfileEdit = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.profileUpdated, () => {
-                    props.navigation.goBack()
+                    let temp = updatedData
+                    temp.forEach(element => {
+                        if (pupilId == element.Pupilid) {
+                            element.ProfilePicture = res.data.ProfilePicture
+                        }
+                    });
+                    User.user.ChildrenList = updatedData
+                    User.user.FirstName = firstName
+                    User.user.LastName = lastName
+                    User.user.ProfilePicture = res.data.ProfilePicture
+                    props.route.params.onGoBack()
                 })
             } else {
                 showMessage(res.message)
@@ -217,7 +230,7 @@ const ParentZoneProfileEdit = (props) => {
         hideDatePicker();
     };
 
-    showActionChooser = () => {
+    const showActionChooser = () => {
         Alert.alert(
             '',
             'Browse a profile picture',

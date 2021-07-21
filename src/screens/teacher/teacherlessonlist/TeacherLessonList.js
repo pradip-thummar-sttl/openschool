@@ -20,36 +20,37 @@ import MESSAGE from "../../../utils/Messages";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            <View style={PAGESTYLE.border}></View>
-            <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
+    <TouchableOpacity
+        activeOpacity={opacity}
+        onPress={() => props.navigateToDetail()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+                <View style={PAGESTYLE.border}></View>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,]}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(14) }]}>{props.item.LessonTopic}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8) }]}>{(props.item.LiveSession).toString()}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8) }]}>{(props.item.Publish).toString()}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8) }]}>{props.item.HomeWork}</Text>
+                <View style={PAGESTYLE.pupilDetailLink}>
+                    <Image style={[PAGESTYLE.pupilDetaillinkIcon, { marginRight: hp(2) }]} source={Images.DashboardRightArrow} />
+                </View>
+            </View>
         </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,]}>
-            <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:hp(14)}]}>{props.item.LessonTopic}</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
-            <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:hp(12)}]}>{props.item.GroupName}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText,{marginLeft:hp(0.8)}]}>{(props.item.LiveSession).toString()}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText,{marginLeft:hp(0.8)}]}>{(props.item.Publish).toString()}</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText,{marginLeft:hp(0.8)}]}>{props.item.HomeWork}</Text>
-            <TouchableOpacity
-                style={PAGESTYLE.pupilDetailLink}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToDetail()}>
-                <Image style={[PAGESTYLE.pupilDetaillinkIcon,{marginRight:hp(2)}]} source={Images.DashboardRightArrow} />
-            </TouchableOpacity>
-        </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const TeacherLessonList = (props) => {
@@ -165,7 +166,7 @@ const TeacherLessonList = (props) => {
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
-                                            style={{ height:wp(53.5)}}
+                                            style={{ height: wp(53.5) }}
                                         />
                                         :
                                         // <View style={{ height: 100, justifyContent: 'center' }}>

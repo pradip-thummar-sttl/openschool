@@ -28,10 +28,14 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
-    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
+    const [childrenList, setChildrenList] = useState(props.data)
 
     useEffect(() => {
-        if (!isSearchActive) {
+        setChildrenList(props.data);
+    }, [props.data]);
+
+    useEffect(() => {
+        if (!isSearchActive && textInput.current) {
             props.onClearSearch()
             setKeyword('')
             textInput.current.clear()
@@ -59,7 +63,7 @@ const HeaderPM = (props) => {
                                     <MenuOption style={PAGESTYLE.borderList}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
-                                            onPress={() => { props.onSwitchPupil(childrenList[index]); setSelectedPupilIndex(index) }}>
+                                            onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
                                             <View style={PAGESTYLE.filterList}>
                                                 <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), resizeMode: 'contain', marginRight: hp(1), }} />
                                                 <Text style={PAGESTYLE.filterListText}>{item.FirstName} {item.LastName}</Text>

@@ -65,23 +65,6 @@ const PupilProfileView = (props) => {
     }
 
     useEffect(() => {
-
-        item.RewardsList.forEach(element => {
-            switch (element._id) {
-                case '3':
-                    setBronze(element.count)
-                    break;
-                case '6':
-                    setSilver(element.count)
-                    break;
-                case '9':
-                    setGold(element.count)
-                    break;
-                default:
-                    break;
-            }
-        });
-
         getLessonData()
     }, [])
 
@@ -166,9 +149,8 @@ const PupilProfileView = (props) => {
             setBronze(true)
         } else if (index == 6) {
             setSilver(true)
-        } else {
+        } else if (index == 9) {
             setGold(true)
-
         }
     }
 
