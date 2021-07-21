@@ -334,16 +334,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         );
     };
 
-    const initOneToOneCall = () => {
-        const params = {
-            opponentsIds: [12345, 12346],
-            type: QB.webrtc.RTC_SESSION_TYPE.AUDIO
-        }
-
-        QB.webrtc
-            .call(params)
-            .then(function (session) { console.log('Call Session Started', session); })
-            .catch(function (e) { console.log('Call Session Error', e); })
+    const initOneToOneCall = (pupilData) => {
+        props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
 
     return (
@@ -381,7 +373,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>
-                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall()}>
+                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall(pupilData)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
                                                         <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>

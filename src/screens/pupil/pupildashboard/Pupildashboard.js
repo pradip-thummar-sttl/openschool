@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid, NativeEventEmitter } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -25,6 +25,8 @@ import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/Pupil
 import PupilHomeWorkMarked from "../../pupil/pupillessondetail/homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../../pupil/pupillessondetail/homework/PupilHomeWorkDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import QB from "quickblox-react-native-sdk";
+import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -57,6 +59,11 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
+        initApp(callBack => {
+            console.log('Pupil callBack', callBack);
+            handleIncommingCall()
+        });
+
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -82,6 +89,37 @@ const PupuilDashboard = (props) => {
 
         return true;
     }
+
+    const handleIncommingCall = () => {
+        const emitter = new NativeEventEmitter(QB.webrtc)
+        Object.keys(QB.webrtc.EVENT_TYPE).forEach(key => {
+            emitter.addListener(QB.webrtc.EVENT_TYPE[key], eventHandler)
+        })
+    }
+
+    const eventHandler = (event) => {
+        const {
+            type, // type of the event (i.e. `@QB/CALL` or `@QB/REJECT`)
+            payload
+        } = event
+        const {
+            userId, // id of QuickBlox user who initiated this event (if any)
+            session, // current or new session
+            userInfo
+        } = payload
+        console.log('Event Received', event, payload);
+        switch (type) {
+            case QB.webrtc.EVENT_TYPE.CALL:
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo })
+                break;
+            case QB.webrtc.EVENT_TYPE.HANG_UP:
+                // props.navigation.goBack()
+                break;
+            default:
+                break;
+        }
+    }
+
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)

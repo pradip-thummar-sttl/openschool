@@ -59,17 +59,13 @@ const Chat = (props) => {
     }, [props.tabs])
 
     const handleMessage = event => {
-        console.log('log of event message', event);
-        var mesage = messages
+        // var mesage = messages
         const message = event.message;
+        console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
-            const text = message.text || message;
-            console.log('messages array', mesage, event)
-            mesage.push(event)
-            addMessage(mesage);
+            // mesage.push(event)
+            addMessage(messages => [...messages, event]);
         }
-        console.log('log of event message', messages);
-
     };
 
     const sendMessage = message => {

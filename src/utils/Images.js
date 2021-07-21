@@ -137,5 +137,7 @@ const Images = {
     noLessonHW: require('../assets/images/ILLUS-92.png'),
     noMessage: require('../assets/images/illus-72.png'),
     noCalender: require('../assets/images/ILLUS-52.png'),
+    callPick: require('../assets/images/Green2.png'),
+    callDrop: require('../assets/images/Red2.png'),
 }
 export default Images;
