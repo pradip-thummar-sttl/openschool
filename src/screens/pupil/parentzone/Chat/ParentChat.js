@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, ActivityIndicator } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import COLORS from '../../../../utils/Colors'
 import Styles from './ChatStyle'
@@ -10,7 +10,10 @@ import Images from '../../../../utils/Images';
 import { User } from '../../../../utils/Model';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
-import { baseUrl } from '../../../../utils/Constant'
+import { baseUrl, opacity, showMessage } from '../../../../utils/Constant'
+import { Service } from '../../../../service/Service'
+import { EndPoints } from '../../../../service/EndPoints'
+import FONTS from '../../../../utils/Fonts'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ParentChat = (props) => {
@@ -119,7 +122,7 @@ const ParentChat = (props) => {
                 </View>
             </View> */}
 
-            {!isLoading ?
+            {!isLoading && teacherData.length > 0 && selectedTeacherIndex != -1 ?
                 <>
                     <View style={Styles.views}>
                         <View style={Styles.leftView}>

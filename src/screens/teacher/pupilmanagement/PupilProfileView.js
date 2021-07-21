@@ -214,7 +214,7 @@ const PupilProfileView = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.generalRow}>
-                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance..</Text>
+                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance</Text>
                                 </View>
                                 <View style={PAGESTYLE.graphBlock}>
 
