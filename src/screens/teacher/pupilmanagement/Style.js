@@ -110,13 +110,13 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     groupName: {
-        fontSize: 20,
+        fontSize: wp(1.8),
         flex: 1,
     },
     input: {
         borderBottomColor: COLORS.dashBoard,
         borderBottomWidth: 1,
-        fontSize: 30,
+        fontSize: wp(2.5),
         paddingBottom: 10,
         marginBottom: 50,
         marginHorizontal: 30
@@ -144,7 +144,7 @@ export default StyleSheet.create({
     },
     label: {
         height: 50, 
-        fontSize: 25, 
+        fontSize: wp(2), 
         padding: 10, 
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
@@ -258,8 +258,9 @@ export default StyleSheet.create({
         width: 35,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
+        // position: 'absolute',
         alignSelf: 'flex-end',
+        marginBottom:wp(1)
     },
     managementParaSec:{
         marginRight:hp(20.05),
@@ -321,6 +322,7 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         color:COLORS.menuLightFonts,
         paddingBottom:hp(1.5),
+        marginBottom:wp(1.2)
     },
     separater:{
         borderLeftWidth:1,

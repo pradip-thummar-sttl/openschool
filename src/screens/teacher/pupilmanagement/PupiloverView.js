@@ -1,6 +1,8 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 import { EndPoints } from '../../../service/EndPoints'
 import { Service } from '../../../service/Service'
 import { baseUrl, showMessage } from '../../../utils/Constant'
@@ -20,14 +22,14 @@ const Pupillist = (props, { item }) => (
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
             <View style={[PAGESTYLE.pupilProfile, ]}>
-                <Text style={PAGESTYLE.pupilName}>{props.item.FirstName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(10)}]}>{props.item.FirstName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={PAGESTYLE.pupilName}>{props.item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(10)}]}>{props.item.LastName}</Text>
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName1}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1,{width:wp(8)}]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}

@@ -103,12 +103,12 @@ export default StyleSheet.create({
         // backgroundColor:'red',
         marginLeft: hp(2),
         marginTop: hp(2),
-        width: wp(76),
-        height: hp(55),
+        width: wp(80),
+        height: hp(90),
     },
     mesagesView: {
         width: '125%',
-        height: hp(70),
+        height: hp(50),
         marginBottom: wp(3),
     },
     textView: {
@@ -117,7 +117,9 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        backgroundColor: COLORS.greyBack
+        backgroundColor: COLORS.greyBack,
+        // position:'absolute',
+        // bottom:0
         // bottom:0,
     },
     messageCell: {
@@ -143,7 +145,7 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        // width: '100%',
+        width: '85%',
         height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
@@ -168,5 +170,25 @@ export default StyleSheet.create({
         color:COLORS.menuLightFonts,
         marginTop:wp(1),
         fontSize:hp(1.2)
-    }
+    },
+    userIconPupil: {
+        width: hp(2.5),
+        height: hp(2.5),
+        resizeMode: 'contain',
+        backgroundColor: COLORS.white,
+        borderRadius: 20,
+    },
+    checkBoxLabelNone: {
+        flexDirection: 'row',
+        marginRight: 10,
+        marginBottom: 10,
+        alignItems: 'center',
+
+    },
+    teachers: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.6),
+        marginTop: wp(0.2),
+        padding: 10
+    },
 })

@@ -211,8 +211,9 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        paddingBottom: hp(1.5),
-        marginBottom: hp(1.5),
+        // paddingBottom: hp(1.5),
+        // marginBottom: hp(1.5),
+        marginTop:hp(2.5),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -228,7 +229,8 @@ export default StyleSheet.create({
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
         width: '100%',
-        height: hp(20),
+        // height: hp(20),
+        alignItems:'center',
         borderRadius: 10,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
@@ -828,8 +830,9 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
-        height: 60,
-        width: 60,
+        height: 62,
+        width: 62,
+        // margin:wp(1),
         resizeMode: 'contain',
     },
     removeIcon: {
@@ -1462,7 +1465,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         alignSelf: 'center',
         borderColor: COLORS.dashboardGreenButton,
-        borderRadius: hp(1),
+        borderRadius: 10,
         paddingVertical: Platform.OS == 'android' ? 0 : 10,
     },
     filterbarMain: {

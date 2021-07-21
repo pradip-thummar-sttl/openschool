@@ -103,10 +103,10 @@ const PupiloverView = (props) => {
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>
                                                                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                                                                <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(35)}]}>{item.FirstName} {item.LastName}</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.groupPupil}>
-                                                                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName,{width:wp(35)}]}>{item.GroupName ? item.GroupName : '-'}</Text>
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.rewardColumn}>

@@ -284,7 +284,7 @@ export default StyleSheet.create({
     mediabar: {
         width: hp(4.16),
         height: hp(4.16),
-        borderRadius: hp(200),
+        borderRadius: hp(4.16/2),
         backgroundColor: COLORS.lightGrayPupil,
     },
     moreMedia: {

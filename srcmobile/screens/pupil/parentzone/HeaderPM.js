@@ -27,8 +27,12 @@ const HeaderPM = (props) => {
     const [selectedPupilIndex, setSelectedPupilIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
+    const [childrenList, setChildrenList] = useState(props.data)
     const [keyword, setKeyword] = useState('')
+
+    useEffect(() => {
+        setChildrenList(props.data);
+    }, [props.data]);
 
     useEffect(() => {
         if (!isSearchActive) {
@@ -248,14 +252,16 @@ const styles = StyleSheet.create({
     userparent: {
         width: hp(3.81),
         height: hp(3.81),
-        resizeMode: 'contain',
+        borderRadius:hp(3.81/2),
+        // resizeMode: 'contain',
         marginRight: hp(1.5),
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
         marginRight: hp(1),
+        borderRadius:hp(3.81/2)
     },
     userparentInMenuAdd: {
         width: hp(1.47),

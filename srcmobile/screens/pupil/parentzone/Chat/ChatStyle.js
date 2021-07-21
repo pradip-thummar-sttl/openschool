@@ -103,8 +103,9 @@ export default StyleSheet.create({
         // backgroundColor:'red',
         marginLeft: hp(2),
         marginTop: hp(2),
-        width: wp(76),
+        width: wp(90),
         height: hp(55),
+        
     },
     mesagesView: {
         width: '100%',
@@ -144,6 +145,26 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.4),
         marginTop: wp(0.2)
+    },
+    teachers: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.6),
+        marginTop: wp(0.2),
+        padding: 10
+    },
+    userIconPupil: {
+        width: hp(2.5),
+        height: hp(2.5),
+        resizeMode: 'contain',
+        backgroundColor: COLORS.white,
+        borderRadius: 20,
+    },
+    checkBoxLabelNone: {
+        flexDirection: 'row',
+        marginRight: 10,
+        marginBottom: 10,
+        alignItems: 'center',
+
     },
     input: {
         // width: '100%',

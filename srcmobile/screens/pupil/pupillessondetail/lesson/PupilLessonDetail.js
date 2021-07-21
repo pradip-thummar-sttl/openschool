@@ -137,7 +137,7 @@ const PupilLessonDetailInternal = (props) => {
                                         item.MaterialList.map((obj) => {
                                             return (
                                                 <View style={PAGESTYLE.fileGrp}>
-                                                    <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
+                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{obj.originalname}</Text>
                                                     <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
                                                         <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                     </TouchableOpacity>

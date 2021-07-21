@@ -227,8 +227,8 @@ const styles = StyleSheet.create({
     bottomUser: {
         width: 32,
         height: 32,
-        resizeMode: 'contain',
-        borderRadius: hp(100),
+        // resizeMode: 'contain',
+        borderRadius: 16,
     },
     profileTitleBottom: {
         fontSize: hp(1.82),

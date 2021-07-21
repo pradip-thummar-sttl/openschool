@@ -808,9 +808,9 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     pdfIcon: {
-        width: 60,
-        height: 60,
-        marginRight: 10,
+        width: wp(7),
+        height: wp(7),
+        // marginRight: 10,
         resizeMode: 'contain',
     },
     removeIcon: {
@@ -826,8 +826,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginLeft: hp(6.19),
-        marginRight: hp(9.63),
+        marginLeft: hp(4.19),
+        marginRight: hp(6.63),
     },
     markedText: {
         fontFamily: FONTS.fontRegular,
@@ -836,7 +836,7 @@ export default StyleSheet.create({
         lineHeight: hp(3.2),
     },
     dateNameBlock: {
-        marginRight: hp(2.21),
+        marginRight: hp(2),
         // marginTop: hp(0.6),
     },
     feedbackBlock: {
@@ -1008,7 +1008,9 @@ export default StyleSheet.create({
     },
     alignRow1: {
         flexDirection: 'row',
-        marginVertical: 5
+        marginVertical: 5,
+        marginHorizontal:5
+        
     },
     spaceSmallUserName: {
         marginRight: hp(14.32),

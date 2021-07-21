@@ -65,23 +65,6 @@ const PupilProfileView = (props) => {
     }
 
     useEffect(() => {
-
-        item.RewardsList.forEach(element => {
-            switch (element._id) {
-                case '3':
-                    setBronze(element.count)
-                    break;
-                case '6':
-                    setSilver(element.count)
-                    break;
-                case '9':
-                    setGold(element.count)
-                    break;
-                default:
-                    break;
-            }
-        });
-
         getLessonData()
     }, [])
 
@@ -166,9 +149,8 @@ const PupilProfileView = (props) => {
             setBronze(true)
         } else if (index == 6) {
             setSilver(true)
-        } else {
+        } else if (index == 9) {
             setGold(true)
-
         }
     }
 
@@ -214,6 +196,7 @@ const PupilProfileView = (props) => {
                             <View HR style={STYLE.hrCommon}></View>
                             <View style={PAGESTYLE.rewardSection}>
                                 <View style={PAGESTYLE.fieldDetails}>
+                                    <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between', alignItems:'center'}}>
                                     <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
                                     <TouchableOpacity
                                         style={PAGESTYLE.tickLayoutPArent}
@@ -223,6 +206,7 @@ const PupilProfileView = (props) => {
                                             <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
                                         </View>
                                     </TouchableOpacity>
+                                    </View>
                                     <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
                                             <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>

@@ -41,7 +41,8 @@ const MessageList = (props) => {
 const ParentZonemain = (props) => {
     const [isHide, action] = useState(true);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
-    const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+    const [pupilData, setPupilData] = useState(User.user.ChildrenList)
+    const [pupilIndex, setPupilIndex] = useState(0)
 
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
@@ -100,7 +101,8 @@ const ParentZonemain = (props) => {
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderPM
-                    onSwitchPupil={(pupilData) => setPupilData(pupilData)}
+                    onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
+                    data={pupilData}
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
@@ -132,11 +134,11 @@ const ParentZonemain = (props) => {
                     :
                     selectedTabIndex == 1 ?
                         <ParentZonePerformance
-                            data={pupilData} />
+                            data={pupilData[pupilIndex]} />
                         :
                         selectedTabIndex == 2 ?
                             <ParentChat
-                                data={pupilData}
+                                data={pupilData[pupilIndex]}
                                 tabs={1} />
                             :
                             selectedTabIndex == 3 ?
@@ -144,11 +146,11 @@ const ParentZonemain = (props) => {
                                 :
                                 selectedTabIndex == 4 ?
                                     <ParentZoneProfile
-                                        data={pupilData}
-                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { data: pupilData })} />
+                                        data={pupilData[pupilIndex]}
+                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { onGoBack: () => { setPupilData(User.user.ChildrenList); props.navigation.goBack() }, data: pupilData[pupilIndex] })} />
                                     :
                                     <ParentZoneSchoolDetails
-                                        data={pupilData} />
+                                        data={pupilData[pupilIndex]} />
                 }
             </View>
         </View>

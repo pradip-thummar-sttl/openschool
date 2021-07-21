@@ -153,7 +153,7 @@ const GroupSetUpPupilSelection = (props) => {
                 <Image
                     style={PAGESTYLE.mediabar}
                     source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
-                <Text style={PAGESTYLE.pupilName1} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName1,{width:wp(60)}]} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
                 <View style={PAGESTYLE.checkMark}>
                     <CheckBox
                         boxType={'square'}

@@ -23,6 +23,7 @@ import ParentZoneProfileEdit from "./ParentZoneProfileEdit";
 import ParentZonePerformance from "./ParentZonePerformance";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../utils/Messages";
+import ParentChat from "./Chat/ParentChat";
 var moment = require('moment');
 
 const MessageList = (props, { style }) => (
@@ -45,7 +46,8 @@ const ParentZonemain = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [isProfileEdit, setProfileEdit] = useState(false)
-    const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+    const [pupilData, setPupilData] = useState(User.user.ChildrenList)
+    const [pupilIndex, setPupilIndex] = useState(0)
     const [keyword, setKeyword] = useState('')
 
     const [messageData, setMessageData] = useState([])
@@ -92,7 +94,8 @@ const ParentZonemain = (props) => {
             {/* <Sidebar hide={() => action(!isHide)} /> */}
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <HeaderPM
-                    onSwitchPupil={(pupilData) => setPupilData(pupilData)}
+                    onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
+                    data={pupilData}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     onSearchKeyword={(keyword) => setKeyword(keyword)}
@@ -102,8 +105,8 @@ const ParentZonemain = (props) => {
 
                 {isProfileEdit ?
                     <ParentZoneProfileEdit
-                        data={pupilData}
-                        navigateToProfile={() => setProfileEdit(false)} />
+                        data={pupilData[pupilIndex]}
+                        navigateToProfile={() => { setProfileEdit(false); setPupilData(User.user.ChildrenList) }} />
                     :
                     selectedTabIndex == 0 ?
                         <View style={PAGESTYLE.plainBg}>
@@ -155,21 +158,23 @@ const ParentZonemain = (props) => {
                         :
                         selectedTabIndex == 1 ?
                             <ParentZonePerformance
-                                data={pupilData} />
+                                data={pupilData[pupilIndex]} />
                             :
                             selectedTabIndex == 2 ?
-                                null
+                                <ParentChat
+                                    data={pupilData[pupilIndex]}
+                                    tabs={1} />
                                 :
                                 selectedTabIndex == 3 ?
                                     null
                                     :
                                     selectedTabIndex == 4 ?
                                         <ParentZoneProfile
-                                            data={pupilData}
+                                            data={pupilData[pupilIndex]}
                                             navigateToDetail={() => setProfileEdit(true)} />
                                         :
                                         <ParentZoneSchoolDetails
-                                            data={pupilData} />
+                                            data={pupilData[pupilIndex]} />
                 }
             </View>
         </View>

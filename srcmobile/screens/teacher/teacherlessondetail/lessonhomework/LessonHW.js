@@ -305,7 +305,7 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText,{width:wp(75)}]}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}

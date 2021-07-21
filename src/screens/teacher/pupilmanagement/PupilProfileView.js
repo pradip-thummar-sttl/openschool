@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Image, ImageBackground, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
@@ -117,9 +119,8 @@ const PupilProfileView = (props) => {
             setBronze(true)
         } else if (index == 6) {
             setSilver(true)
-        } else {
+        } else if (index == 9) {
             setGold(true)
-
         }
     }
 
@@ -156,7 +157,7 @@ const PupilProfileView = (props) => {
                                             <Text style={PAGESTYLE.userName}>{moment(props.selectedPupil.Dob).format('DD/MM/yyyy')}</Text>
                                         </View>
                                         <View>
-                                            <Text style={PAGESTYLE.userLabel}>Unique I.D (auto-generated)</Text>
+                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel,{width:wp(15)}]}>Unique I.D (auto-generated)</Text>
                                             <Text style={PAGESTYLE.userName}>{props.selectedPupil.UniqueNumber}</Text>
                                         </View>
                                     </View>
@@ -192,6 +193,7 @@ const PupilProfileView = (props) => {
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.annotationText}>
+                                    <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between', alignItems:'center'}}>
                                         <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
                                         <View style={PAGESTYLE.tickLayoutPArent}>
                                             <TouchableOpacity
@@ -201,6 +203,7 @@ const PupilProfileView = (props) => {
                                                     <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
                                                 </View>
                                             </TouchableOpacity>
+                                        </View>
                                         </View>
                                         {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
                                         <TextInput
@@ -215,7 +218,7 @@ const PupilProfileView = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.generalRow}>
-                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance..</Text>
+                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance</Text>
                                 </View>
                                 <View style={PAGESTYLE.graphBlock}>
 

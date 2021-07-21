@@ -74,18 +74,18 @@ const TLDetailAdd = (props) => {
     const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
+    }
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             console.log('response of GetSubjectBySchoolId response', res)
@@ -338,22 +338,22 @@ const TLDetailAdd = (props) => {
     const onCameraOnly = () => {
         var arr = [...recordingArr]
         const options = {
-            mediaType:"video",
-            cameraType:"back"
-          };
+            mediaType: "video",
+            cameraType: "back"
+        };
         launchCamera(options, (response) => {
             // Same code as in above section!
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
-              
+
             } else {
                 console.log('response', response);
                 arr.push(response)
 
                 setRecordingArr(arr)
             }
-          });
+        });
         // launchCamera({ mediaType: 'video',  }, (response) => {
         //     // setResponse(response);
         //     if (response.errorCode) {
@@ -519,7 +519,7 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy,{width:wp(22)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
@@ -624,6 +624,13 @@ const TLDetailAdd = (props) => {
             saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
             let userIDs = [], userNames = [], names = [];
+
+            selectedParticipants.PupilList.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.PupilName)
+            });
+
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)

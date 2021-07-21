@@ -185,7 +185,7 @@ const Chat = (props) => {
                                             <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
                                             <View style={Styles.messageSubCell}>
                                                 <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
-                                                <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
+                                                <Text style={[Styles.messageText,{width:props.tabs === 1 ?wp(50):wp(80)}]}>{item.message.split('#@#')[0]}</Text>
                                             </View>
                                         </View>
                                     )
