@@ -117,9 +117,8 @@ const PupilProfileView = (props) => {
             setBronze(true)
         } else if (index == 6) {
             setSilver(true)
-        } else {
+        } else if (index == 9) {
             setGold(true)
-
         }
     }
 
@@ -215,7 +214,7 @@ const PupilProfileView = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.generalRow}>
-                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance..</Text>
+                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance</Text>
                                 </View>
                                 <View style={PAGESTYLE.graphBlock}>
 

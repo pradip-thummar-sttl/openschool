@@ -18,6 +18,7 @@ import { appSettings, User } from "../../../utils/Model";
 import MESSAGE from "../../../utils/Messages";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import QB from "quickblox-react-native-sdk";
+import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -105,60 +106,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     let currentCount = 0
 
     useEffect(() => {
-
-        // QB.settings
-        //     .init(appSettings)
-        //     .then(function () {
-        //         QB.auth
-        //             .getSession()
-        //             .then(function (session) {
-        //                 console.log('handle session', session);
-        //                 QB.auth
-        //                     .login({
-        //                         login: User.user.Email,
-        //                         password: 'Admin@123'
-        //                     })
-        //                     .then(function (info) {
-        //                         console.log('signed in successfully, handle info as necessary', info);
-
-        //                         QB.chat
-        //                             .isConnected()
-        //                             .then(function (connected) { // boolean
-        //                                 // handle as necessary, i.e.
-        //                                 if (connected === false) {
-        //                                     QB.chat
-        //                                         .connect({
-        //                                             userId: User.user.QBUserId,
-        //                                             password: 'Admin@123'
-        //                                         })
-        //                                         .then(function () {
-        //                                             console.log('connected successfully');
-        //                                             QB.webrtc
-        //                                                 .init()
-        //                                                 .then(function () { console.log('module is ready for calls processing'); })
-        //                                                 .catch(function (e) { console.log('handle error', e); })
-        //                                         })
-        //                                         .catch(function (e) {
-        //                                             console.log('some error occurred', e);
-        //                                         });
-        //                                 }
-        //                             })
-        //                             .catch(function (e) {
-        //                                 // handle error
-        //                             });
-        //                     })
-        //                     .catch(function (e) {
-        //                         console.log('handle error', e);
-        //                     });
-        //             })
-        //             .catch(function (e) {
-        //                 console.log('something went wrong', e);
-        //             });
-        //     })
-        //     .catch(function (e) {
-        //         console.log('Some error occurred, look at the exception message for more details', e);
-        //     });
-
         refresh()
 
         if (Platform.OS === "android") {
@@ -323,8 +270,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:160}]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:100}]}>{item.LessonTopic}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: 160 }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: 100 }]}>{item.LessonTopic}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -353,16 +300,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // </TouchableOpacity>
     );
 
-    const initOneToOneCall = () => {
-        // const params = {
-        //     opponentsIds: [12345, 12346],
-        //     type: QB.webrtc.RTC_SESSION_TYPE.AUDIO
-        // }
-
-        // QB.webrtc
-        //     .call(params)
-        //     .then(function (session) { console.log('Call Session Started', session); })
-        //     .catch(function (e) { console.log('Call Session Error', e); })
+    const initOneToOneCall = (pupilData) => {
+        props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
 
     return (
@@ -379,7 +318,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>
                             <TouchableOpacity style={PAGESTYLE.boxDash}
-                                onPress={() => initOneToOneCall()}>
+                                onPress={() => initOneToOneCall(pupilData)}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Start a new call</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>

@@ -19,30 +19,31 @@ import MESSAGE from "../../../../utils/Messages";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-        <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
+    <TouchableOpacity
+        activeOpacity={opacity}
+        onPress={() => props.navigateToDetail()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+                <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
+                <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
+                <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
+                <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
+                <View style={PAGESTYLE.pupilDetailLink}>
+                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                </View>
+            </View>
         </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-            <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
-            <TouchableOpacity
-                style={PAGESTYLE.pupilDetailLink}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToDetail()}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-            </TouchableOpacity>
-        </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const TLHomeWorkSubmitted = (props) => {
@@ -55,7 +56,7 @@ const TLHomeWorkSubmitted = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const [dataChanged, setDataChanged] = useState(false)
 
-    React.useEffect(() => { 
+    React.useEffect(() => {
         setFilterBy(props.filterBy)
         setSearchKeyword(props.searchKeyword)
         setSearchActive(props.searchActive)
@@ -72,9 +73,9 @@ const TLHomeWorkSubmitted = (props) => {
 
     useEffect(() => {
         if (isSearchActive) {
-            fetchRecord(searchKeyword, filterBy)   
+            fetchRecord(searchKeyword, filterBy)
         } else {
-            fetchRecord('', '')   
+            fetchRecord('', '')
         }
     }, [isSearchActive])
 
@@ -110,7 +111,7 @@ const TLHomeWorkSubmitted = (props) => {
         }
         console.log('props.lessonId', props.lessonId);
         Service.post(data, `${EndPoints.HomeworkSubmited}${props.lessonId}`, (res) => {
-        // Service.post(data, `${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
+            // Service.post(data, `${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 setHomeworkData(res.data)
