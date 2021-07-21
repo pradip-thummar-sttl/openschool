@@ -28,23 +28,14 @@ var moment = require('moment');
 const MessageList = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.firstColumn}>
-            <Text numberOfLines={2} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:'85%'}]}>{props.item.Title}</Text>
+            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
         </View>
         <View style={PAGESTYLE.firstColumn}>
-            <Text numberOfLines={2} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName, {width:'85%'}]}>{props.item.Message}</Text>
+            <Text numberOfLines={1} style={[PAGESTYLE.message, PAGESTYLE.userStampName]}>{props.item.Message}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={[PAGESTYLE.pupilName,{marginLeft:-10}]}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+            <Text style={[PAGESTYLE.message, PAGESTYLE.userStampName]}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
         </View>
-        {/* <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>Group 1A</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.sentBlueText]}>Sent</Text>
-        </View> */}
-        {/* <View style={{ right: 10, position: 'absolute' }}>
-            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </View> */}
     </View>
 );
 
@@ -115,10 +106,10 @@ const ParentZonemain = (props) => {
                         navigateToProfile={() => setProfileEdit(false)} />
                     :
                     selectedTabIndex == 0 ?
-                        <View style={PAGESTYLE.whiteBg}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={PAGESTYLE.plainBg}>
+                            <ScrollView style={PAGESTYLE.flexDiv} showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.plainBg}>
+                                    <View style={PAGESTYLE.table}>
                                         <View style={PAGESTYLE.pupilTable}>
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
@@ -129,12 +120,6 @@ const ParentZonemain = (props) => {
                                             <View>
                                                 <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,{marginLeft:-10}]}>Date</Text>
                                             </View>
-                                            {/* <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class</Text>
-                                            </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Status</Text>
-                                            </View> */}
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
                                             </View>

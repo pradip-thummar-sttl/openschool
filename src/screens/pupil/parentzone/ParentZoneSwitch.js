@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         alignSelf: 'center',
         fontFamily: FONTS.fontSemiBold,
+        textAlign: 'center'
     },
     titleText: {
         color: COLORS.darkGray,
@@ -110,8 +111,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     user: {
-        marginLeft: hp(5.5),
-        marginRight: hp(5.5),
+        marginLeft: hp(5),
+        marginRight: hp(5),
+        width: hp(21),
     },
     userIcon: {
         width: hp(20.10),
