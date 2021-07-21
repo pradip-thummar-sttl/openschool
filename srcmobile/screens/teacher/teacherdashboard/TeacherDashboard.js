@@ -412,6 +412,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 }}
                                             >
                                                 <ScrollView>
+                                                    <TouchableOpacity activeOpacity={1}>
                                                 <View style={PAGESTYLE.tabcontent}>
                                                     <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                     <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
@@ -494,6 +495,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                     </View>
                                                 </View>
+                                                </TouchableOpacity>
                                                 </ScrollView>
                                             </RBSheet>
                                             {/* <View style={PAGESTYLE.tabcontent}>
