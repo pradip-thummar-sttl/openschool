@@ -103,8 +103,9 @@ export default StyleSheet.create({
         // backgroundColor:'red',
         marginLeft: hp(2),
         marginTop: hp(2),
-        width: wp(76),
+        width: wp(90),
         height: hp(55),
+        
     },
     mesagesView: {
         width: '100%',

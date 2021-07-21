@@ -252,14 +252,16 @@ const styles = StyleSheet.create({
     userparent: {
         width: hp(3.81),
         height: hp(3.81),
-        resizeMode: 'contain',
+        borderRadius:hp(3.81/2),
+        // resizeMode: 'contain',
         marginRight: hp(1.5),
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
         marginRight: hp(1),
+        borderRadius:hp(3.81/2)
     },
     userparentInMenuAdd: {
         width: hp(1.47),

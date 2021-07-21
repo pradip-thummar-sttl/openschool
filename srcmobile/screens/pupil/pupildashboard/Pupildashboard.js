@@ -304,12 +304,12 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: wp(37) }]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: wp(40) }]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:wp(40)}]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:wp(40)}]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                     <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
             </View>
@@ -325,12 +325,12 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: wp(37) }]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: wp(40) }]}>{item.LessonTopic}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:wp(40)}]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:wp(37)}]}>{item.LessonTopic}</Text>
                     </View>
                 </View>
-                <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                <View style={[PAGESTYLE.timingMain,{width:wp(28)}]}>
+                    <Text numberOfLines={1} style={[PAGESTYLE.groupName,]}>{item.GroupName}</Text>
                     <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
             </View>
