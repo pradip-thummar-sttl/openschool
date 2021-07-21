@@ -140,14 +140,17 @@ export default StyleSheet.create({
     messageText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.4),
-        marginTop: wp(0.2)
+        marginTop: wp(0.2),
+         width:wp(80),
+        //  backgroundColor:'red'
     },
     input: {
-        // width: '100%',
-        height: '100%',
+        width: '85%',
+        height: '80%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
         marginHorizontal:wp(1.5),
+        // backgroundColor:'red'
         // marginVertical:hp(1),  
     },
     buttonView:{

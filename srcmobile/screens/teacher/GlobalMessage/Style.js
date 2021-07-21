@@ -1693,7 +1693,7 @@ export default StyleSheet.create({
         width: wp(90)
     },
     inputHeight: {
-        height: wp(15)
+        height: hp(15)
     },
     buttonGroup1: {
         position: 'relative',
