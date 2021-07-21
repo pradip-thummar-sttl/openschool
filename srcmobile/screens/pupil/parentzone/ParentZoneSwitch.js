@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
     userIcon: {
         width: hp(13.5),
         height: hp(13.5),
-        resizeMode: "contain",
+        // resizeMode: "contain",
         alignSelf: 'center',
         marginBottom: hp(1.5),
-        borderRadius: hp(50),
+        borderRadius: hp(13.5/2),
     },
     parentZone: {
         alignSelf: 'flex-start',

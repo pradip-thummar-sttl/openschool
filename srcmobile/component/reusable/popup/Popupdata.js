@@ -149,7 +149,7 @@ const Popupdata = (props) => {
                                 </View>
                                 <View style={[styles.dateWhiteBoard, styles.grp]}>
                                     <Image style={styles.calIcon} source={Images.Group} />
-                                    <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
+                                    <Text numberOfLines={1} style={[styles.datetimeText,{width:wp(18)}]}>{props.data.GroupName}</Text>
                                 </View>
                             </View>
                         </View>

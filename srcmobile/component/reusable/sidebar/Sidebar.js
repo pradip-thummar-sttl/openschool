@@ -264,6 +264,7 @@ const styles = StyleSheet.create({
     bottomUser: {
         width: hp(4.2),
         height: hp(4.2),
+        borderRadius:hp(4.2/2)
     },
     profileTitleBottom: {
         fontSize: hp(2.0),
