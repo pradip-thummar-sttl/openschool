@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         // resizeMode: "auto",
         alignSelf: 'center',
         marginBottom: hp(2),
-        borderRadius: hp(100),
+        borderRadius: hp(20.10/2),
     },
     topBg: {
         width: '100%',
