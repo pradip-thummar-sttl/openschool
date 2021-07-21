@@ -141,8 +141,8 @@ const ParentChat = (props) => {
 
                         </View>
 
-                        <View style={[Styles.rightView, { width: hp(76) }]}>
-                            <View style={{ flexDirection: 'row', width: '100%' }}>
+                        <View style={[Styles.rightView, { width: hp(86) }]}>
+                            <View style={{ flexDirection: 'row', width: '100%',}}>
                                 <Text style={Styles.teachers}>Chat with:</Text>
                                 {teacherData.map((item, index) => (
                                     <TouchableOpacity
@@ -160,9 +160,12 @@ const ParentChat = (props) => {
                                 scrollEnabled
                                 enableAutomaticScroll={(Platform.OS === 'ios')} >
 
-                                <View style={Styles.mesagesView}>
+
+
+                                <View style={[Styles.mesagesView,{ width: hp(76),  }]}>
                                     <FlatList
                                         data={messages}
+                                        showsVerticalScrollIndicator={false}
                                         renderItem={({ item, index }) => {
                                             return (
                                                 <View style={Styles.messageCell}>
@@ -175,7 +178,7 @@ const ParentChat = (props) => {
                                             )
                                         }} />
                                 </View>
-                                <View style={[Styles.textView, { width: hp(76) }]}>
+                                <View style={[Styles.textView, { width: hp(76),  }]}>
                                     <TextInput
                                         style={Styles.input}
                                         multiline={true}

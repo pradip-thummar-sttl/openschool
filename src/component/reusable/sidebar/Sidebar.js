@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     bottomUser: {
         width: 32,
         height: 32,
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
         borderRadius: 16,
     },
     profileTitleBottom: {
