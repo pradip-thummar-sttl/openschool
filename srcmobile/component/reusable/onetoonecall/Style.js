@@ -39,4 +39,42 @@ export default StyleSheet.create({
         borderRadius: hp(200),
         backgroundColor: COLORS.lightGrayPupil,
     },
+    pupilData: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingBottom:hp(2),
+        justifyContent: 'space-between',
+        paddingTop:hp(2),
+        width: '100%',
+        borderBottomWidth: 1,
+        borderColor: COLORS.dashBoard,
+    },
+    pupilProfile: {
+        width: Platform.OS == 'android' ? hp(39.5) : hp(26),
+    },
+    rowProfile: {
+        flexDirection: 'row',
+        alignContent: 'center',
+    },
+    pupilImage: {
+        width: hp(3.64),
+        height: hp(3.64),
+        borderRadius: hp(100),
+        backgroundColor: COLORS.lightGrayPupil,
+        marginRight: hp(1.5),
+    },
+    pupilName: {
+        fontSize: hp(1.9),
+        color: COLORS.darkGray,
+    },
+    pupilDetaillinkIcon: {
+        width: hp(0.9),
+        resizeMode: 'contain',
+    },
+    listHeader: {
+        fontSize: hp(1.95),
+        color: COLORS.darkGray,
+        marginBottom: 20,
+        fontFamily: FONTS.fontSemiBold,
+    },
 });

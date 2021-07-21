@@ -91,12 +91,13 @@ const PupuilDashboard = (props) => {
         } = event
         const {
             userId, // id of QuickBlox user who initiated this event (if any)
-            session // current or new session
+            session, // current or new session
+            userInfo
         } = payload
         console.log('Event Received', event, payload);
         switch (type) {
             case QB.webrtc.EVENT_TYPE.CALL:
-                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id })
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo })
                 break;
             case QB.webrtc.EVENT_TYPE.HANG_UP:
                 // props.navigation.goBack()

@@ -300,8 +300,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // </TouchableOpacity>
     );
 
-    const initOneToOneCall = () => {
-        props.navigation.navigate('Call', { userType: 'Teacher' })
+    const initOneToOneCall = (pupilData) => {
+        props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
 
     return (
@@ -318,7 +318,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>
                             <TouchableOpacity style={PAGESTYLE.boxDash}
-                                onPress={() => initOneToOneCall()}>
+                                onPress={() => initOneToOneCall(pupilData)}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Start a new call</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>

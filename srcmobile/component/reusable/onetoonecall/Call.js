@@ -1,10 +1,14 @@
 import QB from "quickblox-react-native-sdk";
 import React, { useState, useEffect, useRef } from "react";
 import { Image, Text, View } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { baseUrl, opacity, showMessage } from "../../../utils/Constant"
 import { initApp } from "./CallConfiguration";
 import Style from './Style'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Images from "../../../utils/Images";
+import COLORS from "../../../utils/Colors";
+import { User } from "../../../utils/Model";
 
 const Call = (props) => {
     const params = props.route.params
@@ -12,13 +16,18 @@ const Call = (props) => {
     const [isLoading, setLoading] = useState(false)
     const [sessionId, setSessionId] = useState('')
     const [isCallAccepted, setCallAccepted] = useState(false)
+    const [pupilData, setPupilData] = useState(params.pupilData)
+    const [selectedPupilData, setSelectedPupilData] = useState(params.userInfo ? params.userInfo : {})
+    const [isCallStarted, setCallStarted] = useState(false)
+
+    console.log('pupilData', params);
 
     useEffect(() => {
         if (params.userType == 'Teacher') {
             setLoading(true)
             initApp(callBack => {
                 if (callBack.errCode == 200) {
-                    createSession()
+                    setLoading(false)
                 } else {
                     // showMessage(callBack.err)
                 }
@@ -26,16 +35,24 @@ const Call = (props) => {
         }
     }, []);
 
-    const createSession = () => {
+    const createSession = (QBUserID) => {
+        setCallStarted(true)
+
+        const userInfo = {
+            FirstName: User.user.FirstName,
+            LastName: User.user.LastName,
+            ProfilePicture: User.user.ProfilePicture
+        }
+
         const params = {
-            opponentsIds: [129315015],
-            type: QB.webrtc.RTC_SESSION_TYPE.AUDIO
+            opponentsIds: [QBUserID],
+            type: QB.webrtc.RTC_SESSION_TYPE.AUDIO,
+            userInfo: userInfo
         }
 
         QB.webrtc
             .call(params)
             .then(function (session) {
-                setLoading(false)
                 console.log('Session created', session.id);
                 setSessionId(session.id)
             })
@@ -82,12 +99,34 @@ const Call = (props) => {
 
     }
 
+    const pupilRender = ({ item }) => {
+        return (
+            <Pupillist
+                item={item}
+                onPress={() => { props.navigation.navigate('PupilProfileView', { item: item }) }}
+            />
+        );
+    };
+
+    const Pupillist = ({ item }) => (
+        <TouchableOpacity onPress={() => { setSelectedPupilData(item); createSession(Number(item.QBUserID)) }}>
+            <View style={[Style.pupilData]}>
+                <View style={Style.pupilProfile}>
+                    <View style={Style.rowProfile}>
+                        <Image style={Style.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                        <Text numberOfLines={1} style={[Style.pupilName, {}]}>{item.FirstName} {item.LastName}</Text>
+                    </View>
+                </View>
+            </View>
+        </TouchableOpacity>
+    );
+
     return (
         <View style={Style.mainPage}>
             {!isLoading ?
                 <>
-                    <Image style={Style.profile} source={{ uri: baseUrl }} />
-                    <Text style={Style.profileTitle} numberOfLines={1}>Caller Name Here</Text>
+                    <Image style={Style.profile} source={{ uri: baseUrl + selectedPupilData.ProfilePicture }} />
+                    <Text style={Style.profileTitle} numberOfLines={1}>{selectedPupilData.FirstName} {selectedPupilData.LastName}</Text>
 
                     <View style={Style.actionParent}>
                         {params.userType == 'Pupil' && !isCallAccepted ?
@@ -108,6 +147,23 @@ const Call = (props) => {
                 </>
                 :
                 <Text style={Style.profileTitle}>Wait a moment, we're initializing a call...</Text>
+            }
+            {params.userType == 'Teacher' && !isCallStarted ?
+                <FlatList
+                    style={{ position: 'absolute', height: '100%', marginVertical: 40, width: '100%', backgroundColor: COLORS.white }}
+                    data={pupilData}
+                    renderItem={pupilRender}
+                    keyExtractor={(item) => item.id}
+                    extraData={0}
+                    showsVerticalScrollIndicator={false}
+                    ListHeaderComponent={() => {
+                        return (
+                            <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
+                        )
+                    }}
+                />
+                :
+                null
             }
         </View>
     )
