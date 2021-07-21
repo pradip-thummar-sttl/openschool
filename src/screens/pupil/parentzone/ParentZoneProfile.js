@@ -19,7 +19,7 @@ const ParentZoneProfile = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar hide={() => action(!isHide)} /> */}
-            <View style={{ width: isHide ? '100%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <ScrollView showsVerticalScrollIndicator={false}>

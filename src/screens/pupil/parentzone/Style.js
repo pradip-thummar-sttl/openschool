@@ -320,7 +320,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     whiteBg: {
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.backgroundColorCommon,
         paddingBottom: hp(2),
         paddingTop: hp(0),
     },
