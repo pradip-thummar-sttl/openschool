@@ -38,10 +38,14 @@ export default NewMessageHeader;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
+        paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(0),
+        paddingBottom: hp(2),
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
+        marginTop: hp(-0.5),
     },
     headerMain: {
         flexDirection: 'row',
@@ -231,6 +235,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+        top: 5,
     },
     commonText: {
         fontSize: hp(1.82),

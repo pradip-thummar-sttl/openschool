@@ -181,12 +181,12 @@ const NewMessage = (props) => {
     };
 
     return (
-        <View style={{ height: '100%', backgroundColor: COLORS.white, paddingHorizontal: 20 }}>
-            <SafeAreaView>
-                <NewMessageHeader
+        <View style={{ height: '100%', backgroundColor: COLORS.white }}>
+            <NewMessageHeader
                     onSent={() => saveMessage('Sent')}
                     onGoback={() => props.goBack()}
                     status={status} />
+            <SafeAreaView style={{paddingHorizontal: 20}}>
                 <View style={styles.field1}>
                     <Text label style={STYLE.labelCommon}>Message Title</Text>
                     <View style={styles.copyInputParent}>
