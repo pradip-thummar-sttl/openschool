@@ -63,6 +63,8 @@ const PupilHomeWorkDetail = (props) => {
             });
         })
 
+        setLoading(true)
+
         // formData.append("Feedback", feedBack);
         // formData.append("Rewards", '1');
 
@@ -186,8 +188,8 @@ const PupilHomeWorkDetail = (props) => {
                                                 </View>
                                             </View>
                                         )}
-                                        // style={{ height: 200 }}
-                                         />
+                                    // style={{ height: 200 }}
+                                    />
                                 </View>
 
                                 <View style={PAGESTYLE.rightSideBar}>
@@ -224,7 +226,13 @@ const PupilHomeWorkDetail = (props) => {
                     </View>
                 </View>
                 {
-                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
+                    isSubmitPopup ?
+                        <Popuphomework
+                            isLoading={isLoading}
+                            OnSubmitHomeworkPress={() => onSubmitHomework()}
+                            onPopupClosed={(flag) => setSubmitPopup(flag)} />
+                        :
+                        null
                 }
             </View>
         </View>

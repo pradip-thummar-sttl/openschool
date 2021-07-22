@@ -84,6 +84,7 @@ const MESSAGE = {
     noLessonHWPupil2: 'Take it easy and enjoy a break',
     selectReward: 'Please select any reward for pupil',
     rewarded: 'Pupil has been rewarded',
+    teacherNotStarted: 'Teacher has not started class yet!',
 }
 
 export default MESSAGE;

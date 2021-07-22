@@ -84,7 +84,7 @@ public class CallModule extends ReactContextBaseJavaModule {
             public void onSuccess(ConferenceSession session) {
                 webRtcSessionManager.setCurrentSession(session);
 
-                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID);
+                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID, callBack);
             }
 
             @Override

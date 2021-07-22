@@ -37,8 +37,8 @@ const Item = ({ onPress, style, item }) => (
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
                 <View>
-                    <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:120}]}>{item.SubjectName}</Text>
-                    <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:100}]}>{item.LessonTopic}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: 120 }]}>{item.SubjectName}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: 100 }]}>{item.LessonTopic}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.timingMain}>
@@ -71,13 +71,13 @@ const Pupillist = ({ item, onPress }) => (
 
     <TouchableOpacity onPress={() => { onPress() }}>
         <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-            <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:hp(20)}]}>{item.FirstName} {item.LastName}</Text>
-        </View>
-        <View style={PAGESTYLE.groupColumnmain}>
-            <View style={PAGESTYLE.groupColumn}>
-                <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20) }]}>{item.FirstName} {item.LastName}</Text>
+            </View>
+            <View style={PAGESTYLE.groupColumnmain}>
+                <View style={PAGESTYLE.groupColumn}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>
@@ -240,14 +240,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
-            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+            let currentTime = moment(Date()).format('HH:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
                     LessonEnd: false
                 }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
@@ -255,10 +255,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 }, (err) => {
                     setLoading(false)
                 })
-            // } else {
-            //     showMessage(MESSAGE.scheduledTime)
-            //     setLoading(false)
-            // }
+            } else {
+                showMessage(MESSAGE.scheduledTime)
+                setLoading(false)
+            }
         }
     }
 
@@ -281,12 +281,23 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
                     console.log('Class Started');
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
+                    }, (err) => {
+                    })
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, false, (id) => {
                     console.log('hi id:---------', id)
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
                 })

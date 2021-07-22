@@ -183,14 +183,16 @@ const PupuilDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
-                let data = { "Absent": true }
+                let data = { "Absent": false }
                 Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
+                    } else {
+                        showMessage(MESSAGE.teacherNotStarted)
                     }
                 }, (err) => {
                     setLoading(false)
@@ -227,13 +229,6 @@ const PupuilDashboard = (props) => {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, (id) => {
                     console.log('hi id:---------', id)
-                    // let data = {
-                    //     LessonStart: false,
-                    //     LessonEnd: true
-                    // }
-                    // Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
-                    // }, (err) => {
-                    // })
                 })
             }
         } catch (e) {
@@ -317,8 +312,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:hp(20)}]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:hp(20)}]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: hp(20) }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: hp(20) }]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -478,9 +473,9 @@ const PupuilDashboard = (props) => {
                                                                                                 {
                                                                                                     isLoading ?
                                                                                                         <ActivityIndicator
-                                                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                                            style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                                            color={COLORS.buttonGreen} /> :
+                                                                                                            color={COLORS.white} /> :
                                                                                                         <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
                                                                                                 }
 

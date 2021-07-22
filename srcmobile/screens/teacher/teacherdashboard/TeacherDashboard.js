@@ -53,7 +53,7 @@ const Pupillist = ({ item, onPress }) => (
             <View style={PAGESTYLE.pupilProfile}>
                 <View style={PAGESTYLE.rowProfile}>
                     <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(40)}]}>{item.FirstName} {item.LastName}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(40) }]}>{item.FirstName} {item.LastName}</Text>
                 </View>
                 <View style={PAGESTYLE.groupPupil}>
                     <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
@@ -170,32 +170,30 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // } else {
             //     startLiveClassIOS()
             // }
-            // setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
-            let startTime = moment(dataOfSubView.StartTime, 'HH:mm').format('HH:mm')
-            let endTime = moment(dataOfSubView.EndTime, ["h:mm A"]).format("HH:mm");
-            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
-            // showMessage('time to start')
-            let data = {
-                LessonStart: true,
-                LessonEnd: false
-            }
-            Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
-                setLoading(false)
-
-                if (res.flag) {
-                    startLiveClassAndroid()
+            setLoading(true)
+            let currentTime = moment(Date()).format('HH:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
                 }
-            }, (err) => {
-                setLoading(false)
+                Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
+                    setLoading(false)
 
-            })
-            // } else {
-            //     setLoading(false)
-            //     showMessage(MESSAGE.scheduledTime)
-            // }
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+                    setLoading(false)
+
+                })
+            } else {
+                setLoading(false)
+                showMessage(MESSAGE.scheduledTime)
+            }
             // 
-            // console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
+            console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
 
@@ -218,12 +216,24 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
                     console.log('Class Started');
+
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
+                    }, (err) => {
+                    })
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, true, (id) => {
                     console.log('hi id:---------', id)
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
                 })
@@ -413,89 +423,89 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             >
                                                 <ScrollView>
                                                     <TouchableOpacity activeOpacity={1}>
-                                                <View style={PAGESTYLE.tabcontent}>
-                                                    <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                    <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
-                                                    <View style={PAGESTYLE.yellowHrTag}></View>
-                                                    <View style={PAGESTYLE.timedateGrp}>
-                                                        <View style={PAGESTYLE.dateWhiteBoard}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                            <Text numberOfLines={1} style={[PAGESTYLE.datetimeText,{width:wp(25)}]}>{dataOfSubView.GroupName}</Text>
-                                                        </View>
-                                                    </View>
-                                                    <View style={STYLE.hrCommon}></View>
-                                                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
-                                                        <View style={PAGESTYLE.mediaMain}>
-                                                            {dataOfSubView.PupilList ?
-                                                                dataOfSubView.PupilList.map((data, index) => (
-                                                                    <TouchableOpacity
-                                                                        style={PAGESTYLE.mediabarTouch}
-                                                                        activeOpacity={opacity}>
-                                                                        <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
-                                                                    </TouchableOpacity>
-                                                                ))
-                                                                :
-                                                                null
-                                                            }
-                                                        </View>
-                                                        <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
-                                                        <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                            <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                                <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
-                                                            </TouchableOpacity>
-                                                            <TouchableOpacity>
-                                                                <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                        <View style={PAGESTYLE.requirementofClass}>
-                                                            <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
-
-                                                            {dataOfSubView.CheckList ?
-                                                                dataOfSubView.CheckList.map((data, index) => (
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
-                                                                    </View>
-                                                                ))
-                                                                :
-                                                                null
-                                                            }
-                                                        </View>
-                                                    </ScrollView>
-                                                    <View style={PAGESTYLE.lessonstartButton}>
-                                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
-                                                            <TouchableOpacity
-                                                                onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
-                                                        </View>
-                                                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
-                                                            <TouchableOpacity
-                                                                onPress={() => { launchLiveClass() }}>
-
-                                                                {
-                                                                    isLoading ?
-                                                                        <ActivityIndicator
-                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
-                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                            color={COLORS.white} />
+                                                        <View style={PAGESTYLE.tabcontent}>
+                                                            <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                            <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
+                                                            <View style={PAGESTYLE.yellowHrTag}></View>
+                                                            <View style={PAGESTYLE.timedateGrp}>
+                                                                <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                    <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                                </View>
+                                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                                                    <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
+                                                                </View>
+                                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                    <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: wp(25) }]}>{dataOfSubView.GroupName}</Text>
+                                                                </View>
+                                                            </View>
+                                                            <View style={STYLE.hrCommon}></View>
+                                                            <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
+                                                                <View style={PAGESTYLE.mediaMain}>
+                                                                    {dataOfSubView.PupilList ?
+                                                                        dataOfSubView.PupilList.map((data, index) => (
+                                                                            <TouchableOpacity
+                                                                                style={PAGESTYLE.mediabarTouch}
+                                                                                activeOpacity={opacity}>
+                                                                                <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
+                                                                            </TouchableOpacity>
+                                                                        ))
                                                                         :
-                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
-                                                                }
+                                                                        null
+                                                                    }
+                                                                </View>
+                                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
+                                                                <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                                                    <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                                        <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                                                        <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
+                                                                    </TouchableOpacity>
+                                                                    <TouchableOpacity>
+                                                                        <Text style={PAGESTYLE.linkText}>see more</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <View style={PAGESTYLE.requirementofClass}>
+                                                                    <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
 
-                                                            </TouchableOpacity>
+                                                                    {dataOfSubView.CheckList ?
+                                                                        dataOfSubView.CheckList.map((data, index) => (
+                                                                            <View style={PAGESTYLE.lessonPoints}>
+                                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
+                                                                            </View>
+                                                                        ))
+                                                                        :
+                                                                        null
+                                                                    }
+                                                                </View>
+                                                            </ScrollView>
+                                                            <View style={PAGESTYLE.lessonstartButton}>
+                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                    <TouchableOpacity
+                                                                        onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
+                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
+                                                                </View>
+                                                                <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
+                                                                    <TouchableOpacity
+                                                                        onPress={() => { launchLiveClass() }}>
+
+                                                                        {
+                                                                            isLoading ?
+                                                                                <ActivityIndicator
+                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
+                                                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                    color={COLORS.white} />
+                                                                                :
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+                                                                        }
+
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            </View>
                                                         </View>
-                                                    </View>
-                                                </View>
-                                                </TouchableOpacity>
+                                                    </TouchableOpacity>
                                                 </ScrollView>
                                             </RBSheet>
                                             {/* <View style={PAGESTYLE.tabcontent}>
