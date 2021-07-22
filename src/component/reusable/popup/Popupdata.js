@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator, ScrollView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -121,7 +121,10 @@ const Popupdata = (props) => {
                     </View>
                 </View>
             </TouchableOpacity>
-            <Modal isVisible={isModalVisible}>
+
+            <Modal isVisible={isModalVisible} style={{height:wp(55)}}>
+            <ScrollView >
+
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
                         <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
@@ -247,6 +250,8 @@ const Popupdata = (props) => {
                         }
                     </View>
                 </View>
+            </ScrollView>
+
             </Modal>
         </View>
     );
