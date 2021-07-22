@@ -449,8 +449,13 @@ export default StyleSheet.create({
         height: hp(3.38),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(10),
-        left: hp(4.5),
+        left: hp(4.8),
+        bottom: hp(-1.6),
+    },
+    editProfileIcon: {
+        width: hp(3.38),
+        height: hp(3.38),
+        resizeMode: 'contain',
     },
     titleLogin: {
         textAlign: 'left',

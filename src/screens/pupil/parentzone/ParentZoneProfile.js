@@ -26,7 +26,7 @@ const ParentZoneProfile = (props) => {
                             <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} />
-                                    <Image style={PAGESTYLE.proffileLogo} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList.ProfilePicture }} />
+                                    <Image style={PAGESTYLE.proffileLogo} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + props.data.ProfilePicture }} />
                                     <View style={PAGESTYLE.topBannerParent}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
