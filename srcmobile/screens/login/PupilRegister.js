@@ -9,7 +9,7 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice } from '../../utils/Constant';
+import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice, emailValidate } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
 import { connect } from 'react-redux';
@@ -79,13 +79,13 @@ class PupilRegister extends Component {
         } else if (!firstName.trim()) {
             showMessage(MESSAGE.firstName);
             return false;
-        } else if (!lastName.trim()) {
+        } else if (!lastName.trim() ) {
             showMessage(MESSAGE.lastName);
             return false;
         } else if (mobile.trim().length < 5) {
             showMessage(MESSAGE.phone)
             return false;
-        } else if (!userName.trim()) {
+        } else if (!userName.trim() || !emailValidate(userName) ) {
             showMessage(MESSAGE.email)
             return false;
         } else if (password.trim().length < 5) {
