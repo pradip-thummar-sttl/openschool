@@ -133,6 +133,8 @@ const Popupdata = (props) => {
                 }}
             >
                 {props.isLesson ?
+                <ScrollView>
+                    <TouchableOpacity activeOpacity={1}>
                     <View style={styles.tabcontent}>
                         <View style={styles.beforeBorder}>
                             <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
@@ -240,6 +242,9 @@ const Popupdata = (props) => {
                             </View>
                         </View>
                     </View>
+                    </TouchableOpacity>
+                </ScrollView>
+
                     :
                     <View style={styles.tabcontent}>
                         <View style={styles.beforeBorder}>
@@ -265,6 +270,7 @@ const Popupdata = (props) => {
                             </View>
                         </View>
                     </View>
+
                 }
             </RBSheet>
         </View>
