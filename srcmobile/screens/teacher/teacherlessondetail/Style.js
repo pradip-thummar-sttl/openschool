@@ -558,7 +558,7 @@ export default StyleSheet.create({
     },
     commonInputTextareaBoldGrey: {
         width: wp(89.33),
-        height: wp(49.06),
+        // height: wp(49.06),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
@@ -575,7 +575,7 @@ export default StyleSheet.create({
     },
     commonInputTextareaNormal: {
         width: '100%',
-        height: hp(14.84),
+        // height: hp(14.84),
         borderWidth: 1,
         textAlignVertical: 'top',
         borderColor: COLORS.videoLinkBorder,
