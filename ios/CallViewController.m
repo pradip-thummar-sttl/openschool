@@ -21,6 +21,7 @@
 #import "SVProgressHUD.h"
 #import "AddUsersViewController.h"
 #import "ZoomedView.h"
+#import "WhiteboardVC.h"
 
 typedef NS_ENUM(NSUInteger, CallViewControllerState) {
     CallViewControllerStateDisconnected,
@@ -149,6 +150,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
             
             weakSelf.muteAudio ^= 1;
         }];
+      [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
+          
+          weakSelf.muteAudio ^= 1;
+        WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
+        [weakSelf presentViewController:vc animated:false completion:nil];
+        
+        
+      }];
 //      self.dynamicEnable = [QBButtonsFactory dynamicEnable];
 //      self.dynamicEnable.pressed = YES;
 //      [self.toolbar addButton:self.dynamicEnable action:^(UIButton *sender) {

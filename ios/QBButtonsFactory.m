@@ -131,4 +131,17 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
     return button;
 }
 
++ (QBButton *)whiteBoard {
+    
+  QBButton *button = [self buttonWithFrame:kDefRect
+                           backgroundColor:kDefBackgroundColor
+                             selectedColor:kDefSelectedColor];
+  
+  button.pushed = YES;
+  
+  button.iconView = [self iconViewWithNormalImage:@"mute_on_ic"
+                                    selectedImage:@"mute_off_ic"];
+  return button;
+}
+
 @end
