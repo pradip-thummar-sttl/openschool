@@ -183,7 +183,9 @@
                                     <constraint firstAttribute="height" constant="30" id="dYA-a5-Qa6"/>
                                     <constraint firstAttribute="width" constant="50" id="uTB-fl-gMb"/>
                                 </constraints>
-                                <state key="normal" title="Back"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
                                 <connections>
                                     <action selector="onBack:" destination="LFQ-T1-DLE" eventType="touchUpInside" id="gg9-tB-a4j"/>
                                 </connections>
@@ -210,6 +212,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

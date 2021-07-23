@@ -16,12 +16,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-     NSURL *url = [NSURL URLWithString:@"14.143.90.234:10082/web/CoDoodler/CoDoodler.html"];
+     NSURL *url = [NSURL URLWithString:@"http://14.143.90.234:10082/web/CoDoodler/CoDoodler.html"];
      NSURLRequest *request = [NSURLRequest requestWithURL:url];
      [_wkWebView loadRequest:request];
     // Do any additional setup after loading the view.
 }
 - (IBAction)onBack:(id)sender {
+  [self dismissViewControllerAnimated:false completion:nil];
 }
 
 /*
