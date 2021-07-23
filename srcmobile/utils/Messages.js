@@ -1,5 +1,5 @@
 const MESSAGE = {
-    email: "Please enter email",
+    email: "Please enter email proper",
     phone: "Please enter valid mobile number",
     password: "Password must contains at least five characters",
     cpassword: "Please enter confirm password",

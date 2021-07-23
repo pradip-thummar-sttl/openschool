@@ -225,6 +225,7 @@ export default StyleSheet.create({
         paddingLeft: hp(1.30),
         paddingRight: hp(1.30),
         paddingTop: hp(2.60),
+        marginBottom:hp(1)
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
@@ -1438,13 +1439,14 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(2),
+        // paddingBottom: hp(1),
         position: 'absolute',
-        bottom: 10,
+        bottom: 0,
         width: '100%',
-        left: hp(0),
+        left: hp(1.5),
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        // alignSelf:'center'
     },
     lessonstartButtonBottom: {
         flexDirection: 'row',
