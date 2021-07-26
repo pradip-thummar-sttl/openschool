@@ -172,7 +172,6 @@ const NewMessage = (props) => {
         
 
         <View style={{backgroundColor:'white', height:'100%'}}>
-            <SafeAreaView style={{backgroundColor:'white'}} />
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
                 onDraft={() => saveMessage('Draft')}
@@ -182,16 +181,15 @@ const NewMessage = (props) => {
                 <Text label style={Style.labelCommon}>Title</Text>
                 <View style={Styles.copyInputParent}>
                     <TextInput
-                        multiline={true}
-                        numberOfLines={2}
+                        multiline={false}
+                        numberOfLines={1}
                         placeholder='Enter title of the message'
                         returnKeyType={"next"}
                         onSubmitEditing={() => { t2.current.focus(); }}
                         value={title}
                         autoCapitalize={'sentences'}
                         placeholderStyle={Styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.black}
-                        style={[Styles.commonInputTextarea1, , Styles.inputWidth]}
+                        style={Styles.commonInputTextarea1}
                         onChangeText={title => setTitle(title)} />
                 </View>
             </View>
@@ -221,7 +219,6 @@ const NewMessage = (props) => {
                         value={message}
                         autoCapitalize={'sentences'}
                         placeholderStyle={Styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.black}
                         style={[Styles.commonInputTextarea1, Styles.inputHeight]}
                         onChangeText={message => setMessage(message)} />
                 </View>

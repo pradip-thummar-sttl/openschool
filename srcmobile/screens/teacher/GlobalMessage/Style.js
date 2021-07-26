@@ -1658,32 +1658,25 @@ export default StyleSheet.create({
     // new message
     field1: {
         marginBottom: hp(2.5),
-        marginLeft: hp(2.5),
-        marginTop: wp(2),
+        paddingHorizontal: hp(2.46),
     },
     somePlaceholderStyle: {
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        paddingLeft: 10
+        fontSize: hp(1.56),
     },
     commonInputTextarea1: {
-        height: hp(6.20),
-        width: wp(90),
+        height: hp(5.20),
+        width: '100%',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        borderRadius: hp(1),
-        // paddingTop: hp(1.5),
-        // paddingBottom: hp(1.5),
-        // paddingRight: hp(1.5),
-        paddingLeft: hp(1.5),
+        borderRadius: 6,
+        paddingHorizontal: hp(1.5),
+        paddingVertical: hp(1.5),
         marginTop: hp(1.3),
-        // marginLeft:hp(1.3),
-        // marginRight:wp(2),
-        fontSize: hp(1.50),
+        fontSize: hp(1.56),
         color: COLORS.darkGray,
-        lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
-        paddingVertical:0
     },
     copyInputParent: {
         flexDirection: 'row',
@@ -1693,7 +1686,8 @@ export default StyleSheet.create({
         width: wp(90)
     },
     inputHeight: {
-        height: hp(15)
+        height: hp(15),
+        paddingTop: hp(1.5),
     },
     buttonGroup1: {
         position: 'relative',
