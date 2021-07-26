@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid, NativeEventEmitter } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -25,6 +25,8 @@ import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/Pupil
 import PupilHomeWorkMarked from "../../pupil/pupillessondetail/homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../../pupil/pupillessondetail/homework/PupilHomeWorkDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import QB from "quickblox-react-native-sdk";
+import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -57,6 +59,11 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
+        initApp(callBack => {
+            console.log('Pupil callBack', callBack);
+            handleIncommingCall()
+        });
+
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -82,6 +89,37 @@ const PupuilDashboard = (props) => {
 
         return true;
     }
+
+    const handleIncommingCall = () => {
+        const emitter = new NativeEventEmitter(QB.webrtc)
+        Object.keys(QB.webrtc.EVENT_TYPE).forEach(key => {
+            emitter.addListener(QB.webrtc.EVENT_TYPE[key], eventHandler)
+        })
+    }
+
+    const eventHandler = (event) => {
+        const {
+            type, // type of the event (i.e. `@QB/CALL` or `@QB/REJECT`)
+            payload
+        } = event
+        const {
+            userId, // id of QuickBlox user who initiated this event (if any)
+            session, // current or new session
+            userInfo
+        } = payload
+        console.log('Event Received', event, payload);
+        switch (type) {
+            case QB.webrtc.EVENT_TYPE.CALL:
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo })
+                break;
+            case QB.webrtc.EVENT_TYPE.HANG_UP:
+                // props.navigation.goBack()
+                break;
+            default:
+                break;
+        }
+    }
+
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -145,14 +183,16 @@ const PupuilDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
-                let data = { "Absent": true }
+                let data = { "Absent": false }
                 Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
+                    } else {
+                        showMessage(MESSAGE.teacherNotStarted)
                     }
                 }, (err) => {
                     setLoading(false)
@@ -178,24 +218,18 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
+            let title = dataOfSubView.LessonTopic
 
             console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, (error, ID) => {
                     console.log('Class Started');
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, (id) => {
                     console.log('hi id:---------', id)
-                    // let data = {
-                    //     LessonStart: false,
-                    //     LessonEnd: true
-                    // }
-                    // Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
-                    // }, (err) => {
-                    // })
                 })
             }
         } catch (e) {
@@ -279,8 +313,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:hp(20)}]}>{item.SubjectName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:hp(20)}]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: hp(20) }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: hp(20) }]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -440,9 +474,9 @@ const PupuilDashboard = (props) => {
                                                                                                 {
                                                                                                     isLoading ?
                                                                                                         <ActivityIndicator
-                                                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                                            style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                                            color={COLORS.buttonGreen} /> :
+                                                                                                            color={COLORS.white} /> :
                                                                                                         <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
                                                                                                 }
 

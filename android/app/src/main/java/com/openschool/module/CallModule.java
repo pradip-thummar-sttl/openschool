@@ -49,6 +49,7 @@ public class CallModule extends ReactContextBaseJavaModule {
                                   ReadableArray names,
                                   boolean isTeacher,
                                   String teacherQBUserID,
+                                  String title,
                                   Callback callBack) {
 
         ArrayList<QBUser> selectedUsers = new ArrayList<>();
@@ -69,10 +70,10 @@ public class CallModule extends ReactContextBaseJavaModule {
         }
 
         System.out.println("KDKD: Welcome to the CallModule! " + dialogID + " " + currentUserID + " " + currentName + " " + occupants + " " + userNames + " " + names + " " + teacherQBUserID + " " + isTeacher + selectedUsers.size());
-        startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, teacherQBUserID, callBack);
+        startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, teacherQBUserID, title, callBack);
     }
 
-    private void startConference(final String dialogID, String currentUserID, String currentName, ArrayList<QBUser> selectedUsers, boolean isVideoCall, final List<Integer> occupants, final boolean asListener, boolean isTeacher, String teacherQBUserID, Callback callBack) {
+    private void startConference(final String dialogID, String currentUserID, String currentName, ArrayList<QBUser> selectedUsers, boolean isVideoCall, final List<Integer> occupants, final boolean asListener, boolean isTeacher, String teacherQBUserID, String title, Callback callBack) {
         ConferenceClient client = ConferenceClient.getInstance(getCurrentActivity());
 
         QBRTCTypes.QBConferenceType conferenceType = isVideoCall
@@ -84,7 +85,7 @@ public class CallModule extends ReactContextBaseJavaModule {
             public void onSuccess(ConferenceSession session) {
                 webRtcSessionManager.setCurrentSession(session);
 
-                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID);
+                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID, title, callBack);
             }
 
             @Override

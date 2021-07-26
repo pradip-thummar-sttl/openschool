@@ -45,11 +45,12 @@ const ParentChat = (props) => {
     }, [])
 
     const handleMessage = event => {
-        var mesage = messages
+        // var mesage = messages
         const message = event.message;
+        console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
-            mesage.push(event)
-            addMessage(mesage);
+            // mesage.push(event)
+            addMessage(messages => [...messages, event]);
         }
     };
 

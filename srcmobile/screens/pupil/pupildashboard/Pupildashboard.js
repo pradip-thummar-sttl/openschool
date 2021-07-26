@@ -172,24 +172,25 @@ const PupuilDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
-            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
-            // showMessage('time to start')
-            let data = { "Absent": true }
-            Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
-                setLoading(false)
-                if (res.flag) {
-                    startLiveClassAndroid()
-                }
-            }, (err) => {
-                setLoading(false)
+            let currentTime = moment(Date()).format('HH:mm')
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+                // showMessage('time to start')
+                let data = { "Absent": false }
+                Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
+                    setLoading(false)
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    } else {
+                        showMessage(MESSAGE.teacherNotStarted)
+                    }
+                }, (err) => {
+                    setLoading(false)
 
-            })
-            // } else {
-            //     showMessage(MESSAGE.scheduledTime)
-            //     setLoading(false)
-
-            // }
+                })
+            } else {
+                showMessage(MESSAGE.scheduledTime)
+                setLoading(false)
+            }
         }
     }
 
@@ -207,20 +208,18 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
+            let title = dataOfSubView.LessonTopic
 
             console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, (error, ID) => {
                     console.log('Class Started');
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, true, (id) => {
                     console.log('hi id:---------', id)
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
-                    }, (err) => {
-                    })
                 })
             }
         } catch (e) {
@@ -467,7 +466,6 @@ const PupuilDashboard = (props) => {
                                                                                                 <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                             </View>
                                                                                         )}
-                                                                                        numColumns={4}
                                                                                         keyExtractor={(item, index) => index.toString()}
                                                                                     />
                                                                                 </View>
@@ -484,9 +482,9 @@ const PupuilDashboard = (props) => {
                                                                                         {
                                                                                             isLoading ?
                                                                                                 <ActivityIndicator
-                                                                                                    style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
                                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                                    color={COLORS.buttonGreen} /> :
+                                                                                                    color={COLORS.white} /> :
                                                                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Join Class</Text>
                                                                                         }
 

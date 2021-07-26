@@ -10,7 +10,7 @@
     <dimen name="item_height">150dp</dimen>
     <dimen name="action_bar_height">80dp</dimen>
 
-    <dimen name="toggle_button_params">45dp</dimen>
+    <dimen name="toggle_button_params">50dp</dimen>
     <dimen name="toggle_button_params_small">30dp</dimen>
     <dimen name="element_fragment_margin">30dp</dimen>
     <dimen name="element_fragment_margin_small">8dp</dimen>

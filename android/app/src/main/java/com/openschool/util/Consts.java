@@ -42,6 +42,7 @@ public interface Consts {
     String EXTRA_DIALOG_IS_VIDEO = "dialog_is_video";
     String EXTRA_DIALOG_IS_TEACHER = "dialog_is_TEACHER";
     String EXTRA_TEACHER_USER_ID = "TEACHER_user_id";
+    String TITLE = "TITLE";
     String EXTRA_PENDING_INTENT = "pending_Intent";
 
     String EXTRA_LOGIN_RESULT = "login_result";

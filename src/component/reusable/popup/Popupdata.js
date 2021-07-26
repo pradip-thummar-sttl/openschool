@@ -25,7 +25,7 @@ const Popupdata = (props) => {
         setModalVisible(!isModalVisible);
     };
 
-    const launchLiveClass = () => {
+    const launchLiveClassForPupil = () => {
         if (isRunningFromVirtualDevice) {
 
             // Do Nothing
@@ -36,25 +36,57 @@ const Popupdata = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
                 // showMessage('time to start')
-                let data = {
-                    LessonStart: true,
-                    LessonEnd: false
-                }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                let data = { "Absent": false }
+                Service.post(data, `${EndPoints.LessonCheck}/${props.data._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
+                    } else {
+                        showMessage(MESSAGE.teacherNotStarted)
                     }
-
                 }, (err) => {
                     setLoading(false)
 
                 })
             } else {
                 showMessage(MESSAGE.scheduledTime)
+                setLoading(false)
+
+            }
+        }
+    }
+
+    const launchLiveClassForTeacher = () => {
+        if (isRunningFromVirtualDevice) {
+            // Do Nothing
+        } else {
+            // if (Platform.OS == 'android') {
+            // startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
+            setLoading(true)
+            let currentTime = moment(Date()).format('HH:mm')
+            if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
+                // showMessage('time to start')
+                let data = {
+                    LessonStart: true,
+                    LessonEnd: false
+                }
+                Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
+                    setLoading(false)
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    }
+                }, (err) => {
+                    setLoading(false)
+
+                })
+            } else {
+                showMessage(MESSAGE.scheduledTimeStart)
                 setLoading(false)
 
             }
@@ -74,25 +106,38 @@ const Popupdata = (props) => {
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
+            let title = props.data.LessonTopic
 
 
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
                     console.log('Class Started');
+
+                    if (!props.isPupil) {
+                        let data = {
+                            LessonStart: false,
+                            LessonEnd: true
+                        }
+                        Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
+                        }, (err) => {
+                        })
+                    }
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, true, (id) => {
                     console.log('hi id:---------', id)
 
-                    let data = {
-                        LessonStart: false,
-                        LessonEnd: true
+                    if (!props.isPupil) {
+                        let data = {
+                            LessonStart: false,
+                            LessonEnd: true
+                        }
+                        Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
+                        }, (err) => {
+                        })
                     }
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
-                    }, (err) => {
-                    })
                 })
             }
 
@@ -114,7 +159,7 @@ const Popupdata = (props) => {
                 onPress={toggleModal}>
                 <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
                     <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, width: cellWidth * props.span }}></View>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span-10 }}>{props.title}</Text>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 10 }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>
@@ -122,135 +167,135 @@ const Popupdata = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <Modal isVisible={isModalVisible} style={{height:wp(55)}}>
-            <ScrollView >
+            <Modal isVisible={isModalVisible} style={{ height: wp(55) }}>
+                <ScrollView >
 
-                <View style={styles.popupCard}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
-                    </TouchableOpacity>
-                    <View style={styles.popupContent}>
-                        {props.isLesson ?
-                            <View style={styles.tabcontent}>
-                                <View style={styles.beforeBorder}>
-                                    <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
-                                    <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
-                                    <View style={styles.yellowHrTag}></View>
-                                    <View style={styles.timedateGrp}>
-                                        <View style={styles.dateWhiteBoard}>
-                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                            <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                    <View style={styles.popupCard}>
+                        <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
+                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                        </TouchableOpacity>
+                        <View style={styles.popupContent}>
+                            {props.isLesson ?
+                                <View style={styles.tabcontent}>
+                                    <View style={styles.beforeBorder}>
+                                        <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
+                                        <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
+                                        <View style={styles.yellowHrTag}></View>
+                                        <View style={styles.timedateGrp}>
+                                            <View style={styles.dateWhiteBoard}>
+                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                                            </View>
+                                            <View style={[styles.dateWhiteBoard, styles.time]}>
+                                                <Image style={styles.timeIcon} source={Images.Clock} />
+                                                <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                            </View>
+                                            <View style={[styles.dateWhiteBoard, styles.grp]}>
+                                                <Image style={styles.calIcon} source={Images.Group} />
+                                                <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
+                                            </View>
                                         </View>
-                                        <View style={[styles.dateWhiteBoard, styles.time]}>
-                                            <Image style={styles.timeIcon} source={Images.Clock} />
-                                            <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                    </View>
+                                    <View style={STYLE.hrCommon}></View>
+                                    <View style={styles.afterBorder}>
+                                        <View style={styles.mediaMain}>
+                                            {props.data.Allpupillist ?
+                                                props.data.Allpupillist.map((data, index) => (
+                                                    <TouchableOpacity
+                                                        style={styles.mediabarTouch}
+                                                        activeOpacity={opacity}>
+                                                        <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
+                                                    </TouchableOpacity>
+                                                ))
+                                                :
+                                                null
+                                            }
                                         </View>
-                                        <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                            <Image style={styles.calIcon} source={Images.Group} />
-                                            <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
+                                        <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
+                                        <View style={styles.attchmentSectionwithLink}>
+                                            <TouchableOpacity style={styles.attachment}>
+                                                <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
+                                                <Text style={styles.attachmentText}>1 Attachment</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity>
+                                                <Text style={styles.linkText}>see more</Text>
+                                            </TouchableOpacity>
                                         </View>
-                                    </View>
-                                </View>
-                                <View style={STYLE.hrCommon}></View>
-                                <View style={styles.afterBorder}>
-                                    <View style={styles.mediaMain}>
-                                        {props.data.Allpupillist ?
-                                            props.data.Allpupillist.map((data, index) => (
-                                                <TouchableOpacity
-                                                    style={styles.mediabarTouch}
-                                                    activeOpacity={opacity}>
-                                                    <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
-                                                </TouchableOpacity>
-                                            ))
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                    <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
-                                    <View style={styles.attchmentSectionwithLink}>
-                                        <TouchableOpacity style={styles.attachment}>
-                                            <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                            <Text style={styles.attachmentText}>1 Attachment</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <Text style={styles.linkText}>see more</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.requirementofClass}>
-                                        <Text style={styles.requireText}>Items that your class will need</Text>
-                                        {props.data.CheckList ?
-                                            props.data.CheckList.map((data, index) => (
-                                                <View style={styles.lessonPoints}>
-                                                    <Image source={Images.CheckIcon} style={styles.checkIcon} />
-                                                    <Text style={styles.lessonPointText}>{data.ItemName}</Text>
-                                                </View>
-                                            ))
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                    <View style={styles.uploadCalendar}>
-                                        <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
-                                        </TouchableOpacity>
-                                        <View style={styles.lessonstartButton}>
-                                            {!props.isPupil && props.data.Type == Lesson ?
+                                        <View style={styles.requirementofClass}>
+                                            <Text style={styles.requireText}>Items that your class will need</Text>
+                                            {props.data.CheckList ?
+                                                props.data.CheckList.map((data, index) => (
+                                                    <View style={styles.lessonPoints}>
+                                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
+                                                        <Text style={styles.lessonPointText}>{data.ItemName}</Text>
+                                                    </View>
+                                                ))
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                        <View style={styles.uploadCalendar}>
+                                            <TouchableOpacity>
+                                                <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                            </TouchableOpacity>
+                                            <View style={styles.lessonstartButton}>
+                                                {!props.isPupil && props.data.Type == Lesson ?
+                                                    <TouchableOpacity
+                                                        style={styles.buttonGrp}
+                                                        activeOpacity={opacity}
+                                                        onPress={() => { toggleModal(); props.navigateToDetail() }}>
+                                                        <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
+                                                    </TouchableOpacity>
+                                                    :
+                                                    <View style={{ width: hp(20) }}></View>
+                                                }
                                                 <TouchableOpacity
                                                     style={styles.buttonGrp}
                                                     activeOpacity={opacity}
-                                                    onPress={() => { toggleModal(); props.navigateToDetail() }}>
-                                                    <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
-                                                </TouchableOpacity>
-                                                :
-                                                <View style={{ width: hp(20) }}></View>
-                                            }
-                                            <TouchableOpacity
-                                                style={styles.buttonGrp}
-                                                activeOpacity={opacity}
-                                                onPress={() => { launchLiveClass() }}>
-                                                {
-                                                    isLoading ?
-                                                        <ActivityIndicator
-                                                            style={{ ...styles.buttonGrp, right: 30 }}
-                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                            color={COLORS.buttonGreen} /> :
-                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                    onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
+                                                    {
+                                                        isLoading ?
+                                                            <ActivityIndicator
+                                                                style={{ ...styles.buttonGrp, paddingVertical: 13 }}
+                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                color={COLORS.white} /> :
+                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
 
-                                                }
-                                            </TouchableOpacity>
+                                                    }
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
-                            </View>
-                            :
-                            <View style={styles.tabcontent}>
-                                <View style={styles.beforeBorder}>
-                                    <Text h2 style={styles.titleTab}>{props.data.EventName}</Text>
-                                    <Text h3 style={styles.subTitleTab}>{props.data.EventType}</Text>
-                                    <View style={styles.yellowHrTag}></View>
-                                    <View style={styles.timedateGrp}>
-                                        <View style={styles.dateWhiteBoard}>
-                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                            <Text style={styles.datetimeText}>{moment(props.data.EventDate).format('DD/MM/yyyy')}</Text>
+                                :
+                                <View style={styles.tabcontent}>
+                                    <View style={styles.beforeBorder}>
+                                        <Text h2 style={styles.titleTab}>{props.data.EventName}</Text>
+                                        <Text h3 style={styles.subTitleTab}>{props.data.EventType}</Text>
+                                        <View style={styles.yellowHrTag}></View>
+                                        <View style={styles.timedateGrp}>
+                                            <View style={styles.dateWhiteBoard}>
+                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                <Text style={styles.datetimeText}>{moment(props.data.EventDate).format('DD/MM/yyyy')}</Text>
+                                            </View>
+                                            <View style={[styles.dateWhiteBoard, styles.time]}>
+                                                <Image style={styles.timeIcon} source={Images.Clock} />
+                                                <Text style={styles.datetimeText}>{props.data.EventStartTime} - {props.data.EventEndTime}</Text>
+                                            </View>
                                         </View>
-                                        <View style={[styles.dateWhiteBoard, styles.time]}>
-                                            <Image style={styles.timeIcon} source={Images.Clock} />
-                                            <Text style={styles.datetimeText}>{props.data.EventStartTime} - {props.data.EventEndTime}</Text>
+                                    </View>
+                                    <View style={STYLE.hrCommon}></View>
+                                    <View style={styles.afterBorder}>
+                                        <Text style={styles.lessondesciption}>Location: {props.data.EventLocation}</Text>
+                                        <View style={styles.requirementofClass}>
+                                            <Text style={styles.requireText1}>Notes: {props.data.EventDescription}</Text>
                                         </View>
                                     </View>
                                 </View>
-                                <View style={STYLE.hrCommon}></View>
-                                <View style={styles.afterBorder}>
-                                    <Text style={styles.lessondesciption}>Location: {props.data.EventLocation}</Text>
-                                    <View style={styles.requirementofClass}>
-                                        <Text style={styles.requireText1}>Notes: {props.data.EventDescription}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        }
+                            }
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
 
             </Modal>
         </View>
@@ -336,7 +381,7 @@ const styles = StyleSheet.create({
     mediabar: {
         width: hp(4.16),
         height: hp(4.16),
-        borderRadius: hp(4.16/2),
+        borderRadius: hp(4.16 / 2),
         backgroundColor: COLORS.lightGrayPupil,
     },
     moreMedia: {

@@ -27,7 +27,40 @@ const Popupdata = (props) => {
         setModalVisible(!isModalVisible);
     };
 
-    const launchLiveClass = () => {
+    const launchLiveClassForPupil = () => {
+        if (isRunningFromVirtualDevice) {
+
+            // Do Nothing
+        } else {
+            // if (Platform.OS == 'android') {
+            // startLiveClassAndroid()
+            // } else {
+            //     startLiveClassIOS()
+            // }
+            setLoading(true)
+            let currentTime = moment(Date()).format('HH:mm')
+            if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
+                // showMessage('time to start')
+                let data = { "Absent": false }
+                Service.post(data, `${EndPoints.LessonCheck}/${props.data._id}/${User.user.UserDetialId}`, (res) => {
+                    setLoading(false)
+                    if (res.flag) {
+                        startLiveClassAndroid()
+                    } else {
+                        showMessage(MESSAGE.teacherNotStarted)
+                    }
+                }, (err) => {
+                    setLoading(false)
+
+                })
+            } else {
+                showMessage(MESSAGE.scheduledTime)
+                setLoading(false)
+            }
+        }
+    }
+
+    const launchLiveClassForTeacher = () => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
@@ -37,14 +70,14 @@ const Popupdata = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
                     LessonEnd: false
                 }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
@@ -54,7 +87,7 @@ const Popupdata = (props) => {
 
                 })
             } else {
-                showMessage(MESSAGE.scheduledTime)
+                showMessage(MESSAGE.scheduledTimeStart)
                 setLoading(false)
 
             }
@@ -75,21 +108,38 @@ const Popupdata = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = props.data.TeacherQBUserID
+            let title = props.data.LessonTopic
 
             console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, (error, ID) => {
                     console.log('Class Started');
+
+                    if (!props.isPupil) {
+                        let data = {
+                            LessonStart: false,
+                            LessonEnd: true
+                        }
+                        Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
+                        }, (err) => {
+                        })
+                    }
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, true, (id) => {
                     console.log('hi id:---------', id)
 
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
-                    }, (err) => {
-                    })
+                    if (!props.isPupil) {
+                        let data = {
+                            LessonStart: false,
+                            LessonEnd: true
+                        }
+                        Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
+                        }, (err) => {
+                        })
+                    }
                 })
             }
         } catch (e) {
@@ -151,7 +201,7 @@ const Popupdata = (props) => {
                                 </View>
                                 <View style={[styles.dateWhiteBoard, styles.grp]}>
                                     <Image style={styles.calIcon} source={Images.Group} />
-                                    <Text numberOfLines={1} style={[styles.datetimeText,{width:wp(18)}]}>{props.data.GroupName}</Text>
+                                    <Text numberOfLines={1} style={[styles.datetimeText, { width: wp(18) }]}>{props.data.GroupName}</Text>
                                 </View>
                             </View>
                         </View>
@@ -212,29 +262,29 @@ const Popupdata = (props) => {
                             :
                             <View style={{ width: hp(20) }}></View>
                         } */}
-                            <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
-                                {!props.isPupil && props.data.Type == Lesson ?
+                            {!props.isPupil && props.data.Type == Lesson ?
+                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
                                     <TouchableOpacity
                                         style={styles.buttonGrp}
                                         activeOpacity={opacity}
                                         onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Lesson</Text>
                                     </TouchableOpacity>
-                                    :
-                                    <View style={{ width: hp(20) }}></View>
-                                }
-                            </View>
+                                </View>
+                                :
+                                <View style={STYLE.commonButtonBordered1}></View>
+                            }
                             <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                 <TouchableOpacity
                                     style={styles.buttonGrp}
                                     activeOpacity={opacity}
-                                    onPress={() => { launchLiveClass() }}>
+                                    onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
                                     {
                                         isLoading ?
                                             <ActivityIndicator
-                                                style={{ ...styles.buttonGrp, right: 30 }}
+                                                style={{ ...styles.buttonGrp, paddingVertical: 13 }}
                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                color={COLORS.buttonGreen} /> :
+                                                color={COLORS.white} /> :
                                             <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
                                     }
 

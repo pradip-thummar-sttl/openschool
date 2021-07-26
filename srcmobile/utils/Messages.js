@@ -61,6 +61,7 @@ const MESSAGE = {
     gmMessageDraft: 'Message drafted successfully',
     gmMessageSent: 'Message sent successfully',
     scheduledTime: 'You cannot join class before or after scheduled time',
+    scheduledTimeStart: 'You cannot start class before or after scheduled time',
     markAbsent: 'You marked as a absent',
 
     noLesson1: 'No lessons or events today',
@@ -84,6 +85,7 @@ const MESSAGE = {
     noLessonHWPupil2: 'Take it easy and enjoy a break',
     selectReward: 'Please select any reward for pupil',
     rewarded: 'Pupil has been rewarded',
+    teacherNotStarted: 'Teacher has not started class yet!',
 }
 
 export default MESSAGE;

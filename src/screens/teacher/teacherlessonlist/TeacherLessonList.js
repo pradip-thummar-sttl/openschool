@@ -118,7 +118,7 @@ const TeacherLessonList = (props) => {
 
     const renderList = () => {
         return (
-            <View style={{ width: isHide ? '100%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => { setAddSubject(true) }}

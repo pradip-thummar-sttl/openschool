@@ -56,14 +56,12 @@ const Chat = (props) => {
     }, [props.tabs])
 
     const handleMessage = event => {
-        console.log('log of event message', event);
-        var mesage = messages
+        // var mesage = messages
         const message = event.message;
+        console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
-            const text = message.text || message;
-            // var mesage = [...messages]
-            mesage.push(event)
-            addMessage(mesage);
+            // mesage.push(event)
+            addMessage(messages => [...messages, event]);
         }
     };
 
@@ -76,6 +74,10 @@ const Chat = (props) => {
         // } else {
         //     channel = channels[2]
         // }
+        if (message.trim().length == 0) {
+            return
+        }
+        
         message = message + '#@#' + User.user.FirstName + ' ' + User.user.LastName + '#@#' + User.user.ProfilePicture
 
         if (message) {

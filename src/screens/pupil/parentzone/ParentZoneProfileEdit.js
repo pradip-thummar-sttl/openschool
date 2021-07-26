@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ActivityIndicator, Image, ImageBackground, SafeAreaView, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Image, ImageBackground, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
@@ -270,8 +270,12 @@ const ParentZoneProfileEdit = (props) => {
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
                                         <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
-                                            <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} />
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => showActionChooser()}>
+                                                <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
+                                                <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} />
+                                            </TouchableOpacity>
                                         </View>
                                         <View style={PAGESTYLE.topBannerParent}>
                                             <TouchableOpacity
@@ -414,7 +418,7 @@ const ParentZoneProfileEdit = (props) => {
                                             <View style={PAGESTYLE.eye}>
                                                 <TouchableOpacity activeOpacity={opacity} onPress={() => setPinVisibility()}>
                                                     <Image
-                                                        style={{width: 18.52, height: 14.53, resizeMode: 'contain',}} source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
+                                                        style={{ width: 18.52, height: 14.53, resizeMode: 'contain', }} source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -496,7 +500,7 @@ const ParentZoneProfileEdit = (props) => {
                                             <View style={PAGESTYLE.eye}>
                                                 <TouchableOpacity activeOpacity={opacity} onPress={() => setPasswordVisibility()}>
                                                     <Image
-                                                        style={{width: 18.52, height: 14.53, resizeMode: 'contain',}} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                        style={{ width: 18.52, height: 14.53, resizeMode: 'contain', }} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>

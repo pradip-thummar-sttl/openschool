@@ -19,14 +19,14 @@ const ParentZoneProfile = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar hide={() => action(!isHide)} /> */}
-            <View style={{ width: isHide ? '100%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} />
-                                    <Image style={PAGESTYLE.proffileLogo} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList.ProfilePicture }} />
+                                    <Image style={PAGESTYLE.proffileLogo} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + props.data.ProfilePicture }} />
                                     <View style={PAGESTYLE.topBannerParent}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
