@@ -27,6 +27,7 @@ import PupilProfileView from "../pupilmanagement/PupilProfileView";
 import MESSAGE from "../../../utils/Messages";
 import QB from "quickblox-react-native-sdk";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import { Download } from "../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -491,13 +492,33 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     </View>
                                                                     <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                                     <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                                        <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                                        {/* <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                             <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                                                             <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
                                                                         </TouchableOpacity>
                                                                         <TouchableOpacity>
                                                                             <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                                        </TouchableOpacity>
+                                                                        </TouchableOpacity> */}
+                                                                        <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                                            <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
+                                                                            {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                                <FlatList
+                                                                                    data={dataOfSubView.MaterialList}
+                                                                                    style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                                                                    renderItem={({ item, index }) => (
+                                                                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                                                            <View style={PAGESTYLE.fileGrp}>
+                                                                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                            </View>
+                                                                                        </TouchableOpacity>
+                                                                                    )}
+                                                                                    keyExtractor={(item, index) => index.toString()}
+                                                                                />
+                                                                                :
+                                                                                <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
+                                                                            }
+                                                                        </View>
                                                                     </View>
                                                                     <View style={PAGESTYLE.requirementofClass}>
                                                                         <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>

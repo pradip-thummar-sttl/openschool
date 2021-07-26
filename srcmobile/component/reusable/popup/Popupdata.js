@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput, FlatList, Image, ImageBackground, Platform, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -15,6 +15,7 @@ import { User } from "../../../../src/utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import MESSAGE from "../../../utils/Messages";
+import { Download } from "../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -183,76 +184,96 @@ const Popupdata = (props) => {
                 }}
             >
                 {props.isLesson ?
-                <ScrollView>
-                    <TouchableOpacity activeOpacity={1}>
-                    <View style={styles.tabcontent}>
-                        <View style={styles.beforeBorder}>
-                            <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
-                            <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
-                            <View style={styles.yellowHrTag}></View>
-                            <View style={styles.timedateGrp}>
-                                <View style={styles.dateWhiteBoard}>
-                                    <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
-                                    <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                    <ScrollView>
+                        <TouchableOpacity activeOpacity={1} style={{paddingBottom: 80,}}>
+                            <View style={styles.tabcontent}>
+                                <View style={styles.beforeBorder}>
+                                    <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
+                                    <Text h3 style={styles.subTitleTab}>{props.data.LessonTopic}</Text>
+                                    <View style={styles.yellowHrTag}></View>
+                                    <View style={styles.timedateGrp}>
+                                        <View style={styles.dateWhiteBoard}>
+                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                            <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                                        </View>
+                                        <View style={[styles.dateWhiteBoard, styles.time]}>
+                                            <Image style={styles.timeIcon} source={Images.Clock} />
+                                            <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                        </View>
+                                        <View style={[styles.dateWhiteBoard, styles.grp]}>
+                                            <Image style={styles.calIcon} source={Images.Group} />
+                                            <Text numberOfLines={1} style={[styles.datetimeText, { width: wp(18) }]}>{props.data.GroupName}</Text>
+                                        </View>
+                                    </View>
                                 </View>
-                                <View style={[styles.dateWhiteBoard, styles.time]}>
-                                    <Image style={styles.timeIcon} source={Images.Clock} />
-                                    <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
-                                </View>
-                                <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                    <Image style={styles.calIcon} source={Images.Group} />
-                                    <Text numberOfLines={1} style={[styles.datetimeText, { width: wp(18) }]}>{props.data.GroupName}</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={STYLE.hrCommon}></View>
-                        <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
-                            <View style={styles.afterBorder}>
-                                <View style={styles.mediaMain}>
-                                    {props.data.Allpupillist ?
-                                        props.data.Allpupillist.map((data, index) => (
-                                            <TouchableOpacity
-                                                style={styles.mediabarTouch}
-                                                activeOpacity={opacity}>
-                                                <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
-                                            </TouchableOpacity>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </View>
-                                <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
-                                <View style={styles.attchmentSectionwithLink}>
-                                    <TouchableOpacity style={styles.attachment}>
+                                <View style={STYLE.hrCommon}></View>
+                                <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
+                                    <View style={styles.afterBorder}>
+                                        <View style={styles.mediaMain}>
+                                            {props.data.Allpupillist ?
+                                                props.data.Allpupillist.map((data, index) => (
+                                                    <TouchableOpacity
+                                                        style={styles.mediabarTouch}
+                                                        activeOpacity={opacity}>
+                                                        <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
+                                                    </TouchableOpacity>
+                                                ))
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                        <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
+                                        <View style={styles.attchmentSectionwithLink}>
+                                            {/* <TouchableOpacity style={styles.attachment}>
                                         <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
                                         <Text style={styles.attachmentText}>{props.data.MaterialList ? props.data.MaterialList.length : 0} Attachment(s)</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity>
                                         <Text style={styles.linkText}>see more</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.requirementofClass}>
-                                    <Text style={styles.requireText}>Items that your class will need</Text>
-                                    {props.data.CheckList ?
-                                        props.data.CheckList.map((data, index) => (
-                                            <View style={styles.lessonPoints}>
-                                                <Image source={Images.CheckIcon} style={styles.checkIcon} />
-                                                <Text style={styles.lessonPointText}>{data.ItemName}</Text>
+                                    </TouchableOpacity> */}
+                                            <View style={styles.fileBoxGrpWrap}>
+                                                <Text style={styles.requireText}>Attachment(s)</Text>
+                                                {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                                                    <FlatList
+                                                        data={props.data.MaterialList}
+                                                        style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                                        renderItem={({ item, index }) => (
+                                                            <TouchableOpacity onPress={() => Download(item)} style={styles.downloaBtn}>
+                                                                <View style={styles.fileGrp}>
+                                                                    <Text numberOfLines={1} style={[styles.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                    <Image source={Images.Download} style={styles.downloadIcon} />
+                                                                </View>
+                                                            </TouchableOpacity>
+                                                        )}
+                                                        keyExtractor={(item, index) => index.toString()}
+                                                    />
+                                                    :
+                                                    <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
+                                                }
                                             </View>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </View>
-                            </View>
-                            <View style={styles.uploadCalendar}>
-                                <TouchableOpacity>
-                                    <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
-                                </TouchableOpacity>
-                            </View>
-                        </ScrollView>
-                        <View style={styles.lessonstartButton}>
-                            {/* {!props.isPupil && props.data.Type == Lesson?
+                                        </View>
+                                        <View style={styles.requirementofClass}>
+                                            <Text style={styles.requireText}>Items that your class will need</Text>
+                                            {props.data.CheckList ?
+                                                props.data.CheckList.map((data, index) => (
+                                                    <View style={styles.lessonPoints}>
+                                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
+                                                        <Text style={styles.lessonPointText}>{data.ItemName}</Text>
+                                                    </View>
+                                                ))
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </View>
+                                    <View style={styles.uploadCalendar}>
+                                        <TouchableOpacity>
+                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </ScrollView>
+                                <View style={styles.lessonstartButton}>
+                                    {/* {!props.isPupil && props.data.Type == Lesson?
                             <TouchableOpacity
                                 style={styles.buttonGrp}
                                 activeOpacity={opacity}
@@ -262,38 +283,38 @@ const Popupdata = (props) => {
                             :
                             <View style={{ width: hp(20) }}></View>
                         } */}
-                            {!props.isPupil && props.data.Type == Lesson ?
-                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
-                                    <TouchableOpacity
-                                        style={styles.buttonGrp}
-                                        activeOpacity={opacity}
-                                        onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
-                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Lesson</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                :
-                                <View style={STYLE.commonButtonBordered1}></View>
-                            }
-                            <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
-                                <TouchableOpacity
-                                    style={styles.buttonGrp}
-                                    activeOpacity={opacity}
-                                    onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
-                                    {
-                                        isLoading ?
-                                            <ActivityIndicator
-                                                style={{ ...styles.buttonGrp, paddingVertical: 13 }}
-                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                color={COLORS.white} /> :
-                                            <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                                    {!props.isPupil && props.data.Type == Lesson ?
+                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                            <TouchableOpacity
+                                                style={styles.buttonGrp}
+                                                activeOpacity={opacity}
+                                                onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
+                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Lesson</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                        :
+                                        <View style={STYLE.commonButtonBordered1}></View>
                                     }
+                                    <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
+                                        <TouchableOpacity
+                                            style={styles.buttonGrp}
+                                            activeOpacity={opacity}
+                                            onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
+                                            {
+                                                isLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...styles.buttonGrp, paddingVertical: 13 }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.white} /> :
+                                                    <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                                            }
 
-                                </TouchableOpacity>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
                             </View>
-                        </View>
-                    </View>
-                    </TouchableOpacity>
-                </ScrollView>
+                        </TouchableOpacity>
+                    </ScrollView>
 
                     :
                     <View style={styles.tabcontent}>
@@ -420,9 +441,9 @@ const styles = StyleSheet.create({
         marginBottom: hp(1.95),
     },
     attchmentSectionwithLink: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
     },
     attachment: {
         flexDirection: 'row',
@@ -447,7 +468,7 @@ const styles = StyleSheet.create({
     },
     requirementofClass: {
         marginTop: hp(4.81),
-        marginBottom: hp(1.81),
+        marginBottom: hp(1),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -487,9 +508,9 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(6),
+        paddingBottom: hp(3.5),
         position: 'absolute',
-        bottom: hp(1.47),
+        bottom: hp(-8),
         width: '100%',
         left: hp(1.95),
     },
@@ -553,5 +574,27 @@ const styles = StyleSheet.create({
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
+    },
+    downloadIcon: {
+        width: hp(2.01),
+        resizeMode: 'contain',
+        top: hp(0.2),
+        right: hp(1),
+    },
+    fileGrp: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+    },
+    fileBoxGrpWrap: {
+        // marginRight: hp(-1.5)
     },
 });

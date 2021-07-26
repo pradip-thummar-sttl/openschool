@@ -20,6 +20,7 @@ import MESSAGE from "../../../utils/Messages";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 import QB from "quickblox-react-native-sdk";
+import { Download } from "../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -427,7 +428,7 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                                                    <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, PAGESTYLE.grpElipsis]}>{dataOfSubView.GroupName}</Text>
                                                                                 </View>
                                                                             </View>
                                                                             <View style={STYLE.hrCommon}></View>
@@ -447,13 +448,33 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                                 <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                                                 <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                                                    <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                                                    {/* <TouchableOpacity style={PAGESTYLE.attachment}>
                                                                                         <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                                                                         <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
                                                                                     </TouchableOpacity>
                                                                                     <TouchableOpacity>
                                                                                         <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                                                    </TouchableOpacity>
+                                                                                    </TouchableOpacity> */}
+                                                                                    <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                                                        <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
+                                                                                        {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                                            <FlatList
+                                                                                                data={dataOfSubView.MaterialList}
+                                                                                                style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                                                                                renderItem={({ item, index }) => (
+                                                                                                    <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                                                                        <View style={PAGESTYLE.fileGrp}>
+                                                                                                            <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                        </View>
+                                                                                                    </TouchableOpacity>
+                                                                                                )}
+                                                                                                keyExtractor={(item, index) => index.toString()}
+                                                                                            />
+                                                                                            :
+                                                                                            <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
+                                                                                        }
+                                                                                    </View>
                                                                                 </View>
                                                                                 <View style={PAGESTYLE.requirementofClass}>
                                                                                     <Text style={PAGESTYLE.requireText}>What you will need</Text>
@@ -463,7 +484,7 @@ const PupuilDashboard = (props) => {
                                                                                         renderItem={({ item, index }) => (
                                                                                             <View style={PAGESTYLE.lessonPoints}>
                                                                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                                                <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                                                <Text numberOfLines={1} style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                             </View>
                                                                                         )}
                                                                                         keyExtractor={(item, index) => index.toString()}
@@ -471,9 +492,9 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </ScrollView>
                                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10, borderColor: COLORS.dashboardGreenButton, }}>
                                                                                     <TouchableOpacity onPress={() => { markAsAbsent() }}>
-                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Mark As Absent</Text>
+                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton, paddingVertical: 10 }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
                                                                                 <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton }}>
@@ -629,24 +650,26 @@ const PupuilDashboard = (props) => {
                                 <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} />
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                 <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
-                                <View style={PAGESTYLE.rewardStarMark}>
-                                    <View style={PAGESTYLE.centerText}>
-                                        <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
-                                        </ImageBackground>
-                                        <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.centerStar}>
-                                        <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
-                                        </ImageBackground>
-                                        <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.centerText}>
-                                        <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
-                                        </ImageBackground>
-                                        <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                <View style={PAGESTYLE.paddingDiv}>
+                                    <View style={PAGESTYLE.rewardStarMark}>
+                                        <View style={PAGESTYLE.centerText}>
+                                            <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
+                                            </ImageBackground>
+                                            <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.centerStar}>
+                                            <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
+                                            </ImageBackground>
+                                            <Text style={PAGESTYLE.starText}>Silver stars</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.centerText}>
+                                            <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
+                                            </ImageBackground>
+                                            <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.lessonstartButtonBottom}>

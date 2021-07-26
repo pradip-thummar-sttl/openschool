@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, Platform } from 'react-native';
 import COLORS from '../../utils/Colors';
 import FONTS from '../../utils/Fonts';
 import Images from '../../utils/Images';
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     topBg: {
         width: '100%',
         height: hp(16.77),
-        resizeMode: 'contain',
+        resizeMode: Platform.OS == 'android' ? 'cover' : 'contain',
         position: 'absolute',
         top: hp(-0.3),
     }

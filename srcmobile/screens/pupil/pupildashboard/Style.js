@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import COLORS from '../../../utils/Colors';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
 import { color } from 'react-native-reanimated';
 
@@ -39,7 +39,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    ScrollViewFlatlist:{
+    ScrollViewFlatlist: {
         height: hp(60),
     },
     dayIcon: {
@@ -75,7 +75,7 @@ export default StyleSheet.create({
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: hp(0.2),},
+        shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
         height: hp(59.89),
@@ -85,11 +85,11 @@ export default StyleSheet.create({
         marginTop: hp(5),
         backgroundColor: COLORS.dashboardHomeWorkPurple,
     },
-    pupilGridTopBg:{
+    pupilGridTopBg: {
         position: 'absolute',
         resizeMode: 'contain',
         width: hp(40),
-        height:hp(10),
+        height: hp(10),
         top: hp(-11),
         right: hp(-3),
     },
@@ -121,17 +121,17 @@ export default StyleSheet.create({
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: hp(0.2),},
+        shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
         overflow: 'hidden',
     },
     timeIcon: {
-        resizeMode:'contain',
+        resizeMode: 'contain',
         width: hp(1.66),
     },
     calIcon: {
-        resizeMode:'contain',
+        resizeMode: 'contain',
         width: hp(1.66),
     },
     pupilBoard: {
@@ -187,7 +187,7 @@ export default StyleSheet.create({
     },
     leftTabbing: {
         width: '100%',
-        borderRightWidth:1,
+        borderRightWidth: 1,
         borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
@@ -212,7 +212,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.borderLesoon,
         padding: hp(0.3),
         borderRadius: hp(5),
-        marginRight: hp(1.95),        
+        marginRight: hp(1.95),
     },
     classSubject: {
         flexDirection: 'row',
@@ -262,7 +262,7 @@ export default StyleSheet.create({
         paddingRight: hp(1.95),
         paddingBottom: hp(2.60),
         paddingTop: hp(3),
-        position:'relative',
+        position: 'relative',
         height: '100%',
     },
     titleTab: {
@@ -283,11 +283,15 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginRight: hp(1.69),
     },
+    
     datetimeText: {
         fontSize: hp(1.72),
         marginLeft: hp(0.6),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+    },
+    grpElipsis: {
+        width: '50%',
     },
     mediaMain: {
         flexDirection: 'row',
@@ -330,9 +334,31 @@ export default StyleSheet.create({
         marginBottom: hp(2),
     },
     attchmentSectionwithLink: {
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
+    },
+    downloadIcon: {
+        width: hp(2.01),
+        resizeMode: 'contain',
+        top: hp(0.2),
+        right: hp(1),
+    },
+    fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+    },
+    fileBoxGrpWrap: {
+        // marginRight: hp(-1.5)
     },
     attachment: {
         flexDirection: 'row',
@@ -384,11 +410,12 @@ export default StyleSheet.create({
         top: hp(0.2),
     },
     lessonPointText: {
-        fontSize: hp(1.85),
+        fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         marginLeft: hp(1),
+        width: '90%',
     },
     lessonstartButton: {
         flexDirection: 'row',
@@ -398,12 +425,12 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(5),
+        paddingBottom: hp(3),
         position: 'absolute',
-        bottom: hp(1.5),
+        bottom: hp(0),
         width: '100%',
         left: hp(1.95),
-    }, 
+    },
     lessonstartButtonBottom: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -444,34 +471,34 @@ export default StyleSheet.create({
     tabpupil4: {
         width: hp(18.22),
     },
-    dashboardOrangeBox:{
+    dashboardOrangeBox: {
         backgroundColor: COLORS.orage,
-        padding:hp(1),
+        padding: hp(1),
         borderRadius: hp(1),
         position: 'relative',
         top: hp(10),
     },
-    orangeBoxTop:{
-        justifyContent:'flex-end'
+    orangeBoxTop: {
+        justifyContent: 'flex-end'
     },
-    orangeBoxBottom:{
+    orangeBoxBottom: {
         flexDirection: 'column',
         flex: 1,
         marginTop: hp(-3),
     },
-    pupilHeader:{
+    pupilHeader: {
         paddingLeft: 0,
         paddingRight: 0,
     },
-    dashboardPurpleBox:{
+    dashboardPurpleBox: {
         backgroundColor: COLORS.dashboardHomeWorkPurple,
-        padding:hp(1),
+        padding: hp(1),
         borderRadius: hp(1),
         position: 'relative',
-        marginTop: hp(22.30),        
+        marginTop: hp(22.30),
     },
-    purpleBoxTop:{
-        justifyContent:'flex-end'
+    purpleBoxTop: {
+        justifyContent: 'flex-end'
     },
     myDayPurple: {
         backgroundColor: COLORS.dashboardHomeWorkPurple,
@@ -483,11 +510,11 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         height: hp(8.5),
     },
-    pupilHomeWorkGridTopBg:{
+    pupilHomeWorkGridTopBg: {
         position: 'absolute',
         resizeMode: 'contain',
         width: hp(40),
-        height:hp(10),
+        height: hp(10),
         top: hp(-9.8),
         right: hp(-1),
     },
@@ -499,105 +526,106 @@ export default StyleSheet.create({
         width: hp(13.41),
         height: hp(11.84),
     },
-    pupilHomeWorkGridTopBgHold:{
+    pupilHomeWorkGridTopBgHold: {
         position: 'relative',
         flexDirection: 'row',
         width: '100%',
-    },    
+    },
     checkIconSquare: {
         width: hp(1.95),
         resizeMode: 'contain',
-        top:hp(-0.5),
+        top: hp(-0.5),
     },
-    achivementWrap:{
+    achivementWrap: {
         flexDirection: 'column',
-        marginTop:hp(7.5),
-        marginBottom:hp(0),
-        width:'100%',
+        marginTop: hp(7.5),
+        marginBottom: hp(0),
+        width: '100%',
         alignItems: 'center',
     },
-    achivementRobot:{
+    achivementRobot: {
         width: '100%',
         marginTop: hp(6),
+        justifyContent: 'center',
+        flexDirection: 'row',
     },
-    achivementBox:{
+    achivementBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
         width: '100%',
-        alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:hp(0.8),
-        overflow:'hidden',
-        paddingBottom:hp(3.8),
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(0.8),
+        overflow: 'hidden',
+        paddingBottom: hp(3.8),
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 6,},
+        shadowOffset: { width: 0, height: 6, },
         shadowOpacity: 0.8,
         shadowRadius: hp(5),
-        elevation: 1,
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
     },
-    starCovertPoints:{
+    starCovertPoints: {
         fontSize: hp(3.125),
-        fontFamily: FONTS.fontBold, 
-        marginBottom: hp(1.8),   
+        fontFamily: FONTS.fontBold,
+        marginBottom: hp(1.8),
     },
-    starCovert:{
+    starCovert: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.8),
         paddingTop: hp(1.8),
     },
     rewardStar:{
-        width : Platform.OS == 'android' ? hp(55.5) : hp(43.48),
-        height:Platform.OS == 'android' ? hp(12.5): hp(9.98),
-        resizeMode: 'contain',
+        width : Platform.OS == 'android' ? hp(55.5) : '100%',
+        height:Platform.OS == 'android' ? hp(12.5): 85,
     },
-    rewardStarMark:{
+    paddingDiv: {
+        paddingHorizontal: hp(1.84),
+    },
+    rewardStarMark: {
         justifyContent: 'space-around',
-        width:'100%',
-        marginBottom:hp(3),
+        width: '100%',
+        marginBottom: hp(3),
         flexDirection: 'row',
-        paddingTop:hp(1.8),
-        paddingBottom:hp(1.8),
-        borderBottomWidth:1,
-        borderBottomColor:COLORS.bottomProfileLightBorder,
-        borderTopWidth:1,
-        borderTopColor:COLORS.bottomProfileLightBorder,
+        paddingTop: hp(1.8),
+        paddingBottom: hp(1.8),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderTopWidth: 1,
+        borderTopColor: COLORS.bottomProfileLightBorder,
     },
-    starSelected:{
-        width:hp(4.94),
-        height:hp(4.68),
+    starSelected: {
+        width: hp(4.94),
+        height: hp(4.68),
         resizeMode: 'contain',
-        alignItems:'center',
+        alignItems: 'center',
         alignSelf: 'center',
         marginBottom: hp(1.30),
     },
-    starSelectedText:{
+    starSelectedText: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.white,
+        color: COLORS.white,
         fontSize: Platform.OS == 'android' ? hp(1.3) : hp(1.82),
         lineHeight: Platform.OS == 'android' ? hp(4.5) : hp(5.1),
     },
-    centerStar:{
-        borderLeftWidth:1,
+    centerStar: {
+        borderLeftWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
-        borderRightWidth:1,
+        borderRightWidth: 1,
         width: hp(14.32),
         alignItems: 'center',
     },
-    cartoon:{
+    cartoon: {
         resizeMode: 'contain',
-        alignItems:'center',
-        width:hp(41.25),
-        height:hp(35.71),
+        alignItems: 'center',
+        width: hp(41.25),
+        height: hp(35.71),
     },
-    starText:{
+    starText: {
         fontFamily: FONTS.fontRegular,
         fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
         color: COLORS.darkGray,
     },
-    centerText:{
-        alignItems:'center',
+    centerText: {
+        alignItems: 'center',
     },
     pupilDetaillinkIcon: {
         width: hp(0.9),
