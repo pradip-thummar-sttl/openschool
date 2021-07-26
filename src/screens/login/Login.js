@@ -302,6 +302,7 @@ class Login extends Component {
                                             activeOpacity={opacity}
                                             onPress={() => this.setPasswordVisibility()}>
                                             <Image
+                                                style={styles.password}
                                                 source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                         </TouchableOpacity>
                                     </View>
@@ -478,8 +479,9 @@ const styles = StyleSheet.create({
         fontSize: hp('1.8%'),
         color: COLORS.linkLightPurple,
         lineHeight: hp('3.0%'),
-        marginLeft: hp('1.0%'),
+        marginLeft: Platform.OS == 'android' ? hp(1.5) : hp('1.0%'),
         fontFamily: FONTS.fontBold,
+        top: Platform.OS == 'android' ? 2 : 0,
     },
     forgotPass: {
         fontSize: hp('1.8%'),
@@ -645,5 +647,10 @@ const styles = StyleSheet.create({
     spaceBottom: {
         marginTop: hp(5),
         marginBottom: hp(10),
-    }
+    },
+    password: {
+        width: hp(2.47),
+        height: hp(1.69),
+        resizeMode: 'contain',
+    },
 });
