@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../utils/Fonts';
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
     right: {
         paddingTop: 10,
-        paddingHorizontal: hp(1.5),
+        paddingHorizontal:Platform.OS==='ios'? hp(1.5):hp(0),
         flex: 1
     },
     pupilParent: {
@@ -161,8 +161,7 @@ export default StyleSheet.create({
     },
     button1: {
         color: COLORS.white,
-        fontSize: hp(1.75),
-        borderRadius: hp(1),
+        fontSize: hp(1.60),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
@@ -180,11 +179,11 @@ export default StyleSheet.create({
         borderColor: COLORS.dashboardGreenButton,
     },
     buttonParent1: {
-        height: hp(5.5),
+        height: hp(5.20),
         marginTop: hp(2.46),
         marginHorizontal: hp(0.5),
-        borderRadius: 10,
-        width: '48%',
+        borderRadius: 8,
+        width: '50%',
         borderWidth: 1,
         justifyContent: 'center',
         alignSelf: 'center',
@@ -204,7 +203,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.backgroundColorCommon,
     },
     mainPage1: {
-        height: '80%',
+        height: '85%',
         paddingHorizontal: hp(2),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,
@@ -255,7 +254,7 @@ export default StyleSheet.create({
     pupilImage: {
         width: hp(3.7),
         height: hp(3.7),
-        borderRadius: hp(100),
+        borderRadius: hp(3.7/2),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1.5),
         top: hp(1.1),
@@ -327,8 +326,8 @@ export default StyleSheet.create({
     profileImage: {
         width: hp(13),
         height: hp(13),
-        borderRadius: hp(100),
-        resizeMode: 'contain',
+        borderRadius: hp(13/2),
+        // resizeMode: 'contain',
     },
     mainDetails: {
         marginTop: hp(8.75),
@@ -378,7 +377,7 @@ export default StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         paddingVertical: hp(2.5),
-        marginTop: hp(1),
+        marginTop: hp(2),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
@@ -445,6 +444,26 @@ export default StyleSheet.create({
         marginTop: hp(2.5),
         paddingHorizontal: hp(2),
     },
+    tickLayout: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 15,
+        width: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'contain',
+    },
+    tickLayoutPArent: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 35,
+        width: 35,
+        // marginBottom:50,        // bottom:hp(1),
+        justifyContent: 'center',
+        alignItems: 'center',
+        // position: 'absolute',
+        alignSelf: 'flex-end',
+    },
     titlePerfomance: {
         fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
@@ -493,7 +512,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         height: hp(5.91),
         backgroundColor: COLORS.white,
-        marginHorizontal: hp(2),
+        marginHorizontal: Platform.OS === 'ios'? hp(2):hp(0),
         marginTop: hp(2),
         paddingLeft: hp(2)
     },

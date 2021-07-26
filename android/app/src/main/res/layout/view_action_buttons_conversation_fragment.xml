@@ -1,57 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_action_buttons"
-    style="@style/MatchWidth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
-    android:layout_marginBottom="@dimen/element_fragment_margin_small"
-    android:background="@android:color/transparent"
-    android:gravity="center_horizontal"
-    android:orientation="horizontal">
+    android:background="@color/black_trans"
+    android:orientation="horizontal"
+    android:paddingVertical="5dp">
 
-    <ToggleButton
-        android:id="@+id/toggle_camera_view"
-        android:layout_width="@dimen/toggle_button_params"
-        android:layout_height="@dimen/toggle_button_params"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/element_fragment_margin"
-        android:background="@drawable/camera_view_toggle_background"
-        android:checked="true"
-        android:textOff=""
-        android:textOn="" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <ToggleButton
-        android:id="@+id/toggle_mic"
-        android:layout_width="@dimen/toggle_button_params"
-        android:layout_height="@dimen/toggle_button_params"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/call_mic_toggle_background"
-        android:checked="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:textOff=""
-        android:textOn="" />
+        <ToggleButton
+            android:id="@+id/toggle_camera_view"
+            android:layout_width="@dimen/toggle_button_params"
+            android:layout_height="@dimen/toggle_button_params"
+            android:background="@drawable/camera_view_toggle_background"
+            android:checked="true"
+            android:textOff=""
+            android:textOn="" />
 
-    <ImageButton
-        android:id="@+id/button_hangup_call"
-        android:layout_width="@dimen/toggle_button_params"
-        android:layout_height="@dimen/toggle_button_params"
-        style="@style/EndCallImageButton"
-        android:layout_marginStart="@dimen/element_fragment_margin"
-        android:layout_marginLeft="@dimen/element_fragment_margin"
-        android:background="@drawable/shape_oval_red" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SWITCH"
+            android:textColor="@color/white" />
 
-    <ToggleButton
-        android:id="@+id/toggle_camera"
-        android:layout_width="@dimen/toggle_button_params"
-        android:layout_height="@dimen/toggle_button_params"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/element_fragment_margin"
-        android:layout_marginLeft="@dimen/element_fragment_margin"
-        android:background="@drawable/call_cam_toggle_background"
-        android:checked="true"
-        android:textOff=""
-        android:textOn=""
-        android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ToggleButton
+            android:id="@+id/toggle_mic"
+            android:layout_width="@dimen/toggle_button_params"
+            android:layout_height="@dimen/toggle_button_params"
+            android:background="@drawable/call_mic_toggle_background"
+            android:checked="true"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MUTE"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/button_screen_sharing"
+            android:layout_width="@dimen/toggle_button_params"
+            android:layout_height="@dimen/toggle_button_params"
+            android:src="@drawable/share"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHARE"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ToggleButton
+            android:id="@+id/toggle_camera"
+            android:layout_width="@dimen/toggle_button_params"
+            android:layout_height="@dimen/toggle_button_params"
+            android:background="@drawable/call_cam_toggle_background"
+            android:checked="true"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAMERA"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/whiteboard"
+            android:layout_width="@dimen/toggle_button_params"
+            android:layout_height="@dimen/toggle_button_params"
+            android:src="@drawable/ic_whiteboard"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BOARD"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
     <ToggleButton
         android:id="@+id/toggle_speaker"
@@ -65,4 +137,5 @@
         android:textOff=""
         android:textOn=""
         android:visibility="gone"/>
+
 </LinearLayout>

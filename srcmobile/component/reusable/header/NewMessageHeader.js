@@ -88,9 +88,6 @@ const NewMessageHeader = (props) => {
                             {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                         </View>
                     }
-                    <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -100,20 +97,19 @@ export default NewMessageHeader;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: wp(3.25),
-        paddingRight: wp(2.0),
+        paddingLeft: hp(2.46),
+        paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        height: hp(10),
-        justifyContent: 'center'
-        // marginBottom: hp(5.85),
+        justifyContent: 'center',
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingBottom: 15,
     },
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginVertical: hp(1.5)
     },
     mainTitle: {
-        fontSize: hp(2.86),
+        fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
         marginLeft: 15
@@ -295,7 +291,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     moreIcon: {
-        width: hp(3),
+        width: hp(4),
+        marginVertical:hp(3),
         resizeMode: 'contain',
     },
     moreMenu: {

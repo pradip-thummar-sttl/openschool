@@ -25,6 +25,17 @@ const HeaderPM = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
+    const [keyword, setKeyword] = useState('')
+
+    useEffect(() => {
+        if (!isSearchActive) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+        } else {
+            props.onSearch()
+        }
+    }, [isSearchActive])
 
     useEffect(() => {
         // props.onFilter(filterBy)
@@ -69,6 +80,7 @@ const HeaderPM = (props) => {
                             placeholder="Search pupil"
                             placeholderTextColor={COLORS.menuLightFonts}
                             onChangeText={keyword => {
+                                setKeyword(keyword);
                                 props.onSearchKeyword(keyword);
                             }} />
                         <Menu>
@@ -106,10 +118,11 @@ const HeaderPM = (props) => {
                         </Menu>
                     </View>
 
-                    <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonGroup}
+                        onPress={() => props.navigateToAddNewUser()}>
+                        <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                        <Text style={styles.commonButtonGreenheader}></Text>
+                    </TouchableOpacity>
                 </View>
                 :
                 null
@@ -159,7 +172,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',

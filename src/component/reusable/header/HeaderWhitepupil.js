@@ -52,7 +52,7 @@ const HeaderWhite = (props) => {
                     </View>
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Menu style={styles.filterGroup}>
-                            <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
+                            <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
                             <MenuOptions style={styles.filterListWrap}>
                                 <MenuOption style={styles.borderList}>
                                     <View style={styles.filterList}>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,

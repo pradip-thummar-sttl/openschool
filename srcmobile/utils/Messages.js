@@ -1,9 +1,9 @@
 const MESSAGE = {
-    email: "Please enter email",
+    email: "Please enter email proper",
     phone: "Please enter valid mobile number",
     password: "Password must contains at least five characters",
     cpassword: "Please enter confirm password",
-    notMatched: "Password does not matched",
+    notMatched: "Confirm password does not match",
     firstName:"Please enter first name",
     lastName:"Please enter last name",
     day: "Please select day",
@@ -61,7 +61,31 @@ const MESSAGE = {
     gmMessageDraft: 'Message drafted successfully',
     gmMessageSent: 'Message sent successfully',
     scheduledTime: 'You cannot join class before or after scheduled time',
-    markAbsent: 'You marked as a absent'
+    scheduledTimeStart: 'You cannot start class before or after scheduled time',
+    markAbsent: 'You marked as a absent',
+
+    noLesson1: 'No lessons or events today',
+    noLesson2: 'Take it easy and enjoy a break',
+    noPupil1: 'No pupils here yet',
+    noPupil2: 'Go to pupil management section to start adding pupils',
+    noLessonHW1: 'You have no lessons or homework yet',
+    noLessonHW2: 'Start planning to add new lessons or homework here',
+    noHomework1: 'You have not assigned homework yet',
+    noHomework2: 'Assign homework to start',
+    noTimetable1: 'You have no lessons or event yet',
+    noTimetable2: 'Create a lesson or event to start',
+    noMessage1: 'You have not sent any global messages yet',
+    noMessage2: 'Create and send a new message and it will show up here',
+    noMessagePrent1: 'You have not any global messages yet',
+    noMessagePrent2: 'Message sent by teacher will show up here',
+    noGroup1: 'You have not created any groups yet',
+    noGroup2: 'Create a group and it will show up here',
+
+    noLessonHWPupil1: 'You have no homework yet',
+    noLessonHWPupil2: 'Take it easy and enjoy a break',
+    selectReward: 'Please select any reward for pupil',
+    rewarded: 'Pupil has been rewarded',
+    teacherNotStarted: 'Teacher has not started class yet!',
 }
 
 export default MESSAGE;

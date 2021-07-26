@@ -21,28 +21,22 @@ import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
 import ParentZoneProfileEdit from "./ParentZoneProfileEdit";
 import ParentZonePerformance from "./ParentZonePerformance";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
+import ParentChat from "./Chat/ParentChat";
 var moment = require('moment');
 
 const MessageList = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
         <View style={PAGESTYLE.firstColumn}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
+            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
         </View>
         <View style={PAGESTYLE.firstColumn}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Message}</Text>
+            <Text numberOfLines={1} style={[PAGESTYLE.message, PAGESTYLE.userStampName]}>{props.item.Message}</Text>
         </View>
         <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+            <Text style={[PAGESTYLE.message, PAGESTYLE.userStampName]}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
         </View>
-        {/* <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>Group 1A</Text>
-        </View>
-        <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-            <Text style={[PAGESTYLE.pupilName, PAGESTYLE.sentBlueText]}>Sent</Text>
-        </View> */}
-        {/* <View style={{ right: 10, position: 'absolute' }}>
-            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </View> */}
     </View>
 );
 
@@ -52,7 +46,8 @@ const ParentZonemain = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [isProfileEdit, setProfileEdit] = useState(false)
-    const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+    const [pupilData, setPupilData] = useState(User.user.ChildrenList)
+    const [pupilIndex, setPupilIndex] = useState(0)
     const [keyword, setKeyword] = useState('')
 
     const [messageData, setMessageData] = useState([])
@@ -97,9 +92,10 @@ const ParentZonemain = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar hide={() => action(!isHide)} /> */}
-            <View style={{ width: isHide ? '100%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <HeaderPM
-                    onSwitchPupil={(pupilData) => setPupilData(pupilData)}
+                    onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
+                    data={pupilData}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     onSearchKeyword={(keyword) => setKeyword(keyword)}
@@ -109,14 +105,14 @@ const ParentZonemain = (props) => {
 
                 {isProfileEdit ?
                     <ParentZoneProfileEdit
-                        data={pupilData}
-                        navigateToProfile={() => setProfileEdit(false)} />
+                        data={pupilData[pupilIndex]}
+                        navigateToProfile={() => { setProfileEdit(false); setPupilData(User.user.ChildrenList) }} />
                     :
                     selectedTabIndex == 0 ?
-                        <View style={PAGESTYLE.whiteBg}>
-                            <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={PAGESTYLE.plainBg}>
+                            <ScrollView style={PAGESTYLE.flexDiv} showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.plainBg}>
+                                    <View style={PAGESTYLE.table}>
                                         <View style={PAGESTYLE.pupilTable}>
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
@@ -125,14 +121,8 @@ const ParentZonemain = (props) => {
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message</Text>
                                             </View>
                                             <View>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,{marginLeft:-10}]}>Date</Text>
                                             </View>
-                                            {/* <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class</Text>
-                                            </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Status</Text>
-                                            </View> */}
                                             <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
                                             </View>
@@ -154,9 +144,10 @@ const ParentZonemain = (props) => {
                                                             extraData={selectedId}
                                                             showsVerticalScrollIndicator={false} />
                                                         :
-                                                        <View style={{ height: 100, justifyContent: 'center' }}>
-                                                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        </View>
+                                                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                        // </View>
+                                                        <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
                                                 }
                                             </SafeAreaView>
                                         </View>
@@ -167,21 +158,23 @@ const ParentZonemain = (props) => {
                         :
                         selectedTabIndex == 1 ?
                             <ParentZonePerformance
-                                data={pupilData} />
+                                data={pupilData[pupilIndex]} />
                             :
                             selectedTabIndex == 2 ?
-                                null
+                                <ParentChat
+                                    data={pupilData[pupilIndex]}
+                                    tabs={1} />
                                 :
                                 selectedTabIndex == 3 ?
                                     null
                                     :
                                     selectedTabIndex == 4 ?
                                         <ParentZoneProfile
-                                            data={pupilData}
+                                            data={pupilData[pupilIndex]}
                                             navigateToDetail={() => setProfileEdit(true)} />
                                         :
                                         <ParentZoneSchoolDetails
-                                            data={pupilData} />
+                                            data={pupilData[pupilIndex]} />
                 }
             </View>
         </View>

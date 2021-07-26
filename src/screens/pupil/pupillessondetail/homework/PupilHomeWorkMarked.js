@@ -22,18 +22,18 @@ const PupilHomeWorkMarked = (props) => {
     const { item } = props;
     const [isPaused, setPause] = useState(true)
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -105,10 +105,10 @@ const PupilHomeWorkMarked = (props) => {
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.feedbackVideoBlock}>
-                                        <View style={PAGESTYLE.largeVideoBlock}>
-                                            {item.RecordingList.length == 0 ?
-                                                <Image source={require('../../../../assets/images/videoThumb2.png')} style={PAGESTYLE.videoThumbMedium} />
-                                                :
+                                        {item.RecordingList.length == 0 ?
+                                            null
+                                            :
+                                            <View style={PAGESTYLE.largeVideoBlock}>
                                                 <View style={{ height: '100%', justifyContent: 'center' }}>
                                                     <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                                         resizeMode={'contain'}
@@ -125,18 +125,18 @@ const PupilHomeWorkMarked = (props) => {
                                                         null
                                                     }
                                                 </View>
-                                            }
-                                        </View>
+                                            </View>
+                                        }
                                     </View>
                                 </View>
                             </View>
                         </ScrollView>
                         <View style={PAGESTYLE.rightSideBar}>
                             <View style={PAGESTYLE.uploadBoardBlock}>
-                                <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
+                                <Text style={PAGESTYLE.uploaded}>Uploaded Homework</Text>
                                 <FlatList
                                     data={item.HomeworkList}
-                                    style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                    style={{ alignSelf: 'center', }}
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
@@ -144,7 +144,7 @@ const PupilHomeWorkMarked = (props) => {
                                             </View>
                                         </TouchableOpacity>
                                     )}
-                                    numColumns={4}
+                                    numColumns={3}
                                     keyExtractor={(item, index) => index.toString()}
                                 />
                             </View>

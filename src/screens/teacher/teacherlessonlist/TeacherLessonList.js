@@ -15,39 +15,42 @@ import { EndPoints } from "../../../service/EndPoints";
 import { User } from "../../../utils/Model";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-            <View style={PAGESTYLE.border}></View>
-            <Text style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
+    <TouchableOpacity
+        activeOpacity={opacity}
+        onPress={() => props.navigateToDetail()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+                <View style={PAGESTYLE.border}></View>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,]}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(14) }]}>{props.item.LessonTopic}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8) }]}>{(props.item.LiveSession).toString()}</Text>
+            </View>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8) }]}>{(props.item.Publish).toString()}</Text>
+            </View>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8) }]}>{props.item.HomeWork}</Text>
+                <View style={PAGESTYLE.pupilDetailLink}>
+                    <Image style={[PAGESTYLE.pupilDetaillinkIcon, { marginRight: hp(2) }]} source={Images.DashboardRightArrow} />
+                </View>
+            </View>
         </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.LessonTopic}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName}>{props.item.GroupName}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.LiveSession).toString()}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.yesText}>{(props.item.Publish).toString()}</Text>
-        </View>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Text style={PAGESTYLE.pupilName, PAGESTYLE.noText}>{props.item.HomeWork}</Text>
-            <TouchableOpacity
-                style={PAGESTYLE.pupilDetailLink}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToDetail()}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-            </TouchableOpacity>
-        </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const TeacherLessonList = (props) => {
@@ -115,7 +118,7 @@ const TeacherLessonList = (props) => {
 
     const renderList = () => {
         return (
-            <View style={{ width: isHide ? '100%' : '78%' }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => { setAddSubject(true) }}
@@ -163,11 +166,13 @@ const TeacherLessonList = (props) => {
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
+                                            style={{ height: wp(53.5) }}
                                         />
                                         :
-                                        <View style={{ height: 100, justifyContent: 'center' }}>
-                                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        </View>
+                                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                        // </View>
+                                        <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                                 }
                             </SafeAreaView>
                         </View>

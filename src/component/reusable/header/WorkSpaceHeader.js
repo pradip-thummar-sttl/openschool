@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -19,11 +19,17 @@ const WorkSpaceHeader = (props) => {
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
                 <View style={styles.headerRight}>
                     {
-                        props.isWorkspace ?
-                            <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
-                                <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
-                            </TouchableOpacity>
-                            : null
+                        props.isLoading ?
+                            <ActivityIndicator
+                                style={{ ...styles.buttonGroup }}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            props.isWorkspace ?
+                                <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
+                                    <Text style={styles.commonButtonGreenheader}>Save Workspace</Text>
+                                </TouchableOpacity>
+                                : null
                     }
 
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
@@ -38,11 +44,13 @@ export default WorkSpaceHeader;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(4.5),
+        paddingLeft: hp(3.90),
+        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingVertical: wp(1)
-        // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingBottom: hp(2),
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
     },
     headerMain: {
         flexDirection: 'row',
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,

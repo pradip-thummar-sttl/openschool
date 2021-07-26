@@ -137,7 +137,7 @@ const PupilLessonDetailInternal = (props) => {
                                         item.MaterialList.map((obj) => {
                                             return (
                                                 <View style={PAGESTYLE.fileGrp}>
-                                                    <Text style={PAGESTYLE.fileName}>{obj.originalname}</Text>
+                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{obj.originalname}</Text>
                                                     <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
                                                         <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                     </TouchableOpacity>
@@ -212,7 +212,7 @@ const PupilLessonDetailInternal = (props) => {
                             </View>
                         }
                     </View>
-                    <ScrollView style={{ top: 0, }} showsVerticalScrollIndicator={false}>
+                    <ScrollView style={{ top: 0,marginBottom:5 }} showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.videoTitleLine}>
                             <View>
                                 <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
@@ -232,7 +232,7 @@ const PupilLessonDetailInternal = (props) => {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={{ paddingBottom: 80 }}>
+                        <View style={{ paddingBottom: hp(12)}}>
                             <Accordion
                                 activeSections={activeSections}
                                 sections={NEW}

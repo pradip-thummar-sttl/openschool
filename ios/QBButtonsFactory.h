@@ -19,5 +19,6 @@
 + (QBButton *)decline;
 + (QBButton *)circleDecline;
 + (QBButton *)answer;
++ (QBButton *)whiteBoard ;
 
 @end

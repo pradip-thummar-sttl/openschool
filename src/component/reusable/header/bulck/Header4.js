@@ -19,55 +19,11 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>Lessons and Homework</Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
-                    </TouchableOpacity> */}
-                    <TouchableOpacity onPress={()=>props.onAlertPress()}  style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         <Image style={styles.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
                 </View>
             </View>
-            {/* <View style={styles.filterbarMain}>
-                <View style={styles.field}>
-                    <Image
-                        style={styles.userIcon}
-                        source={Images.SearchIcon} />
-                    <TextInput
-                        style={[STYLE.commonInput, styles.searchHeader]}
-                        placeholder="Search subject, class, etc"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                    />
-                </View>
-                <TouchableOpacity style={styles.buttonGroup}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by subject</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Subject</Text>
-                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Date</Text>
-                                </View>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Name</Text>
-                                </View>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
-                </TouchableOpacity> */}
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
-                </TouchableOpacity> */}
-            {/* </View> */}
         </View>
     );
 }
@@ -75,11 +31,12 @@ export default HeaderWhite;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        width: '100%',
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
-       paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingBottom: hp(2),
     },
     headerMain: {
         flexDirection: 'row',
@@ -119,7 +76,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(1.8),
         width: hp(1.62),
-        height:hp(1.62),
+        height: hp(1.62),
         resizeMode: 'contain',
         left: hp(1.43),
     },
@@ -209,7 +166,7 @@ const styles = StyleSheet.create({
     },
     checkMark: {
         width: hp(1.48),
-        height:hp(1.48),
+        height: hp(1.48),
         resizeMode: 'contain',
     },
     filterListText: {

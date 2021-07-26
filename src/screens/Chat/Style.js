@@ -148,7 +148,7 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        // width: '100%',
+        width: '85%',
         height: '85%',
         fontSize:hp(2.2),
         fontFamily:FONTS.fontSemiBold,

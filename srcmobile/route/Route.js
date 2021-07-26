@@ -57,11 +57,13 @@ import NewMessage from '../screens/teacher/GlobalMessage/NewMessage';
 import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
 import Passcode from '../screens/pupil/parentzone/Passcode';
 import Chat from '../screens/Chat/Chat';
+import ParentChat from '../screens/pupil/parentzone/Chat/ParentChat';
 
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import Avatar from '../screens/pupil/Avatar/Avatar';
 import ParentZonePerformance from '../screens/pupil/parentzone/ParentZonePerformance';
+import Call from '../component/reusable/onetoonecall/Call';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -141,7 +143,9 @@ function ScreenStack() {
                 <Stack.Screen name="GroupSetUpPupilSelection" component={GroupSetUpPupilSelection} />
                 <Stack.Screen name="ParentZonePerformance" component={ParentZonePerformance} />
                 <Stack.Screen name="Chat" component={Chat} />
+                <Stack.Screen name="ParentChat" component={ParentChat} />
                 <Stack.Screen name="Avatar" component={Avatar} />
+                <Stack.Screen name="Call" component={Call} />
             </Stack.Navigator>
         </PubNubProvider>
     );

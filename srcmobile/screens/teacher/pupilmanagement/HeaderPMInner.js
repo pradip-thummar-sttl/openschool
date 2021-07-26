@@ -39,7 +39,7 @@ const HeaderPMInner = (props) => {
                         <Image style={styles.arrow} source={Images.backArrow} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>{props.name}</Text>
+                        <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(75)}]}>{props.name}</Text>
                     </View>
                 </View>
 
@@ -99,15 +99,16 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
-        paddingLeft: hp(2),
+        paddingLeft: hp(2.46),
         paddingRight: hp(2),
+        paddingBottom: 10,
     },
     headerMain: {
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
@@ -131,14 +132,14 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     whiteBg: {
-        padding: hp(2),
+        paddingLeft: hp(2.46),
         flexDirection: 'row',
         alignItems: 'center',
     },
     lessonPlanTop: {
         flexDirection: 'row',
-        paddingBottom: 10,
-        borderBottomWidth: 1, borderColor: COLORS.dashBoard
+        paddingBottom: 15,
+        paddingTop: 15,
     },
     lessonPlanTab: {
         flexDirection: 'row',

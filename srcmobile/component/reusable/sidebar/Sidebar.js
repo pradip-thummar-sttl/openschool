@@ -21,10 +21,10 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                        <Image style={styles.headerProfile} source={Images.proffileLogo} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -93,7 +93,7 @@ const Sidebar = (props) => {
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitleBottom,{width:wp(45)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
                         <TouchableOpacity style={styles.moreMenu}>
                             <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -105,10 +105,10 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                        <Image style={styles.headerProfile} source={Images.proffileLogo} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -163,7 +163,7 @@ const Sidebar = (props) => {
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitleBottom,{width:wp(45)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
                         <TouchableOpacity style={styles.moreMenu}>
                             <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -249,6 +249,7 @@ const styles = StyleSheet.create({
         width: hp(5.40),
         height: hp(5.40),
         resizeMode: 'contain',
+        borderRadius: hp(100),
     },
     userInfobottom: {
         position: 'absolute',
@@ -263,6 +264,7 @@ const styles = StyleSheet.create({
     bottomUser: {
         width: hp(4.2),
         height: hp(4.2),
+        borderRadius:hp(4.2/2)
     },
     profileTitleBottom: {
         fontSize: hp(2.0),

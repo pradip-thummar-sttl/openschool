@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, TextInput, FlatList, Platform, BackHandler } from 'react-native'
+import { View, Text, TextInput, FlatList, Platform, BackHandler, SafeAreaView } from 'react-native'
 import Styles from './Style'
 import COLORS from '../../../utils/Colors'
 import Style from '../../../utils/Style'
@@ -169,25 +169,27 @@ const NewMessage = (props) => {
     }
 
     return (
-        <View>
+        
+
+        <View style={{backgroundColor:'white', height:'100%'}}>
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
                 onDraft={() => saveMessage('Draft')}
                 onGoback={() => props.navigation.goBack()}
                 status={status} />
-            <View style={Styles.field1}>
+            <View style={[Styles.field1,]}>
                 <Text label style={Style.labelCommon}>Title</Text>
                 <View style={Styles.copyInputParent}>
                     <TextInput
                         multiline={false}
+                        numberOfLines={1}
                         placeholder='Enter title of the message'
                         returnKeyType={"next"}
                         onSubmitEditing={() => { t2.current.focus(); }}
                         value={title}
                         autoCapitalize={'sentences'}
                         placeholderStyle={Styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.black}
-                        style={[Styles.commonInputTextarea1, , Styles.inputWidth]}
+                        style={Styles.commonInputTextarea1}
                         onChangeText={title => setTitle(title)} />
                 </View>
             </View>
@@ -217,13 +219,12 @@ const NewMessage = (props) => {
                         value={message}
                         autoCapitalize={'sentences'}
                         placeholderStyle={Styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.black}
                         style={[Styles.commonInputTextarea1, Styles.inputHeight]}
                         onChangeText={message => setMessage(message)} />
                 </View>
             </View>
-
         </View>
+
     )
 }
 

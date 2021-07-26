@@ -14,8 +14,11 @@ import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessag
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
-import { User } from "../../../utils/Model";
+import { appSettings, User } from "../../../utils/Model";
 import MESSAGE from "../../../utils/Messages";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import QB from "quickblox-react-native-sdk";
+import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -45,25 +48,48 @@ const { CallModule, CallModuleIos } = NativeModules;
 //     </View>
 // );
 const Pupillist = ({ item, onPress }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile}>
-            <View style={PAGESTYLE.rowProfile}>
-                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
+    <TouchableOpacity onPress={() => onPress()}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile}>
+                <View style={PAGESTYLE.rowProfile}>
+                    <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(40) }]}>{item.FirstName} {item.LastName}</Text>
+                </View>
+                <View style={PAGESTYLE.groupPupil}>
+                    <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                </View>
             </View>
-            <View style={PAGESTYLE.groupPupil}>
-                <Text style={PAGESTYLE.groupName}>{item.GroupName ? item.GroupName : '-'}</Text>
-            </View>
-        </View>
-        <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+            <View style={PAGESTYLE.rewardColumn}>
+                {item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
+                            <View style={PAGESTYLE.rewardStar}>
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                            </View>
+                            :
+                            item._id == '6' ?
+                                <View style={PAGESTYLE.rewardStar}>
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                </View>
+                                :
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+                {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
-        </View>
-        <TouchableOpacity onPress={()=>onPress()} style={PAGESTYLE.pupilDetailLink}>
+            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
+            </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </TouchableOpacity>
-    </View>
+        </View>
+    </TouchableOpacity>
 );
 const LessonandHomeworkPlannerDashboard = (props) => {
     const refRBSheet = useRef();
@@ -81,40 +107,37 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     useEffect(() => {
         refresh()
-    }, [])
 
-    useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
 
     const refresh = () => {
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
                 setdashData(res.data)
                 setDataOfSubView(res.data[0])
             } else {
@@ -127,7 +150,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all pupil data', res)
                 setPupilData(res.data)
             } else {
                 showMessage(res.message)
@@ -140,7 +162,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const launchLiveClass = () => {
-        console.log('data of sub view', dataOfSubView)
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
@@ -150,14 +171,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
                     LessonEnd: false
                 }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     setLoading(false)
 
                     if (res.flag) {
@@ -169,12 +190,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 })
             } else {
                 setLoading(false)
-                showMessage(MESSAGE.scheduledTime)
-                
-
-
+                showMessage(MESSAGE.scheduledTimeStart)
             }
-
+            // 
             console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
@@ -192,18 +210,30 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
-
+            let title = dataOfSubView.LessonTopic
 
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
                     console.log('Class Started');
+
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
+                    }, (err) => {
+                    })
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, true, (id) => {
                     console.log('hi id:---------', id)
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
                 })
@@ -225,7 +255,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         return (
             <Pupillist
                 item={item}
-                onPress={()=>{props.navigation.navigate('PupilProfileView', { item: item })}}
+                onPress={() => { props.navigation.navigate('PupilProfileView', { item: item }) }}
             />
         );
     };
@@ -250,12 +280,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View style={PAGESTYLE.subjectMain}>
-                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: 160 }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: 100 }]}>{item.LessonTopic}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
-                    <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                     <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                 </View>
                 <View style={PAGESTYLE.topListingArrow}>
@@ -279,6 +309,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         //     </View>
         // </TouchableOpacity>
     );
+
+    const initOneToOneCall = (pupilData) => {
+        props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -292,7 +327,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity style={PAGESTYLE.boxDash}
+                                onPress={() => initOneToOneCall(pupilData)}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Start a new call</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
@@ -316,8 +352,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('PupiloverView',{item:1})}
-                            style={PAGESTYLE.boxDash}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('PupiloverView', { item: 1 })}
+                                style={PAGESTYLE.boxDash}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
                                     <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground>
@@ -373,7 +409,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             <RBSheet
                                                 ref={refRBSheet}
                                                 closeOnDragDown={true}
-                                                height={[hp(85)]}
+                                                height={hp(85)}
                                                 style={{ position: 'relative', }}
                                                 closeOnPressMask={true}
                                                 customStyles={{
@@ -385,87 +421,92 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     }
                                                 }}
                                             >
-                                                <View style={PAGESTYLE.tabcontent}>
-                                                    <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                    <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
-                                                    <View style={PAGESTYLE.yellowHrTag}></View>
-                                                    <View style={PAGESTYLE.timedateGrp}>
-                                                        <View style={PAGESTYLE.dateWhiteBoard}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
-                                                        </View>
-                                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                            <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
-                                                        </View>
-                                                    </View>
-                                                    <View style={STYLE.hrCommon}></View>
-                                                    <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
-                                                        <View style={PAGESTYLE.mediaMain}>
-                                                            {dataOfSubView.PupilList ?
-                                                                dataOfSubView.PupilList.map((data, index) => (
-                                                                    <TouchableOpacity
-                                                                        style={PAGESTYLE.mediabarTouch}
-                                                                        activeOpacity={opacity}>
-                                                                        <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
+                                                <ScrollView>
+                                                    <TouchableOpacity activeOpacity={1}>
+                                                        <View style={PAGESTYLE.tabcontent}>
+                                                            <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                            <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
+                                                            <View style={PAGESTYLE.yellowHrTag}></View>
+                                                            <View style={PAGESTYLE.timedateGrp}>
+                                                                <View style={PAGESTYLE.dateWhiteBoard}>
+                                                                    <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                                </View>
+                                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                                                                    <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
+                                                                </View>
+                                                                <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                                                                    <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: wp(25) }]}>{dataOfSubView.GroupName}</Text>
+                                                                </View>
+                                                            </View>
+                                                            <View style={STYLE.hrCommon}></View>
+                                                            <ScrollView showsVerticalScrollIndicator={false} vertical={true}>
+                                                                <View style={PAGESTYLE.mediaMain}>
+                                                                    {dataOfSubView.PupilList ?
+                                                                        dataOfSubView.PupilList.map((data, index) => (
+                                                                            <TouchableOpacity
+                                                                                style={PAGESTYLE.mediabarTouch}
+                                                                                activeOpacity={opacity}>
+                                                                                <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
+                                                                            </TouchableOpacity>
+                                                                        ))
+                                                                        :
+                                                                        null
+                                                                    }
+                                                                </View>
+                                                                <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
+                                                                <View style={PAGESTYLE.attchmentSectionwithLink}>
+                                                                    <TouchableOpacity style={PAGESTYLE.attachment}>
+                                                                        <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
+                                                                        <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
                                                                     </TouchableOpacity>
-                                                                ))
-                                                                :
-                                                                null
-                                                            }
-                                                        </View>
-                                                        <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
-                                                        <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                            <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                                <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
-                                                            </TouchableOpacity>
-                                                            <TouchableOpacity>
-                                                                <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                        <View style={PAGESTYLE.requirementofClass}>
-                                                            <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                                                    <TouchableOpacity>
+                                                                        <Text style={PAGESTYLE.linkText}>see more</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <View style={PAGESTYLE.requirementofClass}>
+                                                                    <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
 
-                                                            {dataOfSubView.CheckList ?
-                                                                dataOfSubView.CheckList.map((data, index) => (
-                                                                    <View style={PAGESTYLE.lessonPoints}>
-                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                        <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
-                                                                    </View>
-                                                                ))
-                                                                :
-                                                                null
-                                                            }
-                                                        </View>
-                                                    </ScrollView>
-                                                    <View style={PAGESTYLE.lessonstartButton}>
-                                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
-                                                            <TouchableOpacity
-                                                                onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
-                                                        </View>
-                                                        <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
-                                                            <TouchableOpacity
-                                                                onPress={() => { launchLiveClass() }}>
+                                                                    {dataOfSubView.CheckList ?
+                                                                        dataOfSubView.CheckList.map((data, index) => (
+                                                                            <View style={PAGESTYLE.lessonPoints}>
+                                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
+                                                                            </View>
+                                                                        ))
+                                                                        :
+                                                                        null
+                                                                    }
+                                                                </View>
+                                                            </ScrollView>
+                                                            <View style={PAGESTYLE.lessonstartButton}>
+                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                    <TouchableOpacity
+                                                                        onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
+                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
+                                                                </View>
+                                                                <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
+                                                                    <TouchableOpacity
+                                                                        onPress={() => { launchLiveClass() }}>
 
-                                                                {
-                                                                    isLoading ?
-                                                                        <ActivityIndicator
-                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
-                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                            color={COLORS.buttonGreen} /> :
-                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
-                                                                }
+                                                                        {
+                                                                            isLoading ?
+                                                                                <ActivityIndicator
+                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
+                                                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                    color={COLORS.white} />
+                                                                                :
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+                                                                        }
 
-                                                            </TouchableOpacity>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            </View>
                                                         </View>
-                                                    </View>
-                                                </View>
+                                                    </TouchableOpacity>
+                                                </ScrollView>
                                             </RBSheet>
                                             {/* <View style={PAGESTYLE.tabcontent}>
                                         <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
@@ -528,9 +569,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         </View>
                                     </View>
                                     :
-                                    <View style={{ height: 100, justifyContent: 'center' }}>
-                                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    </View>
+                                    // <View style={{ height: 100, justifyContent: 'center' }}>
+                                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder image={Images.noLesson} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                             }
                         </View>
                         <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -570,9 +612,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                     </View>
                                     :
 
-                                    <View>
-                                        <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    </View>
+                                    // <View>
+                                    //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                             }
                         </View>
                     </View>

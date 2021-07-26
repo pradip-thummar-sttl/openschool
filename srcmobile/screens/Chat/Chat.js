@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Platform } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import COLORS from '../../utils/Colors'
 import STYLE from '../../utils/Style'
@@ -59,17 +59,13 @@ const Chat = (props) => {
     }, [props.tabs])
 
     const handleMessage = event => {
-        console.log('log of event message', event);
-        var mesage = messages
+        // var mesage = messages
         const message = event.message;
+        console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
-            const text = message.text || message;
-            console.log('messages array', mesage, event)
-            mesage.push(event)
-            addMessage(mesage);
+            // mesage.push(event)
+            addMessage(messages => [...messages, event]);
         }
-        console.log('log of event message', messages);
-
     };
 
     const sendMessage = message => {
@@ -81,6 +77,10 @@ const Chat = (props) => {
         // } else {
         //     channel = channels[2]
         // }
+        if (message.trim().length == 0) {
+            return
+        }
+        
         message = message + '#@#' + User.user.FirstName + ' ' + User.user.LastName + '#@#' + User.user.ProfilePicture
 
         if (message) {
@@ -106,10 +106,16 @@ const Chat = (props) => {
    
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{flex:1}}>
            
 
-            <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
+            <KeyboardAwareScrollView 
+            enableOnAndroid={true}
+            extraScrollHeight={90}
+            scrollEnabled
+            enableAutomaticScroll={(Platform.OS === 'ios')}
+            contentContainerStyle={{ flex:1}}
+            >
                 <View style={Styles.views}>
 
                     <View style={Styles.rightView}>
@@ -146,14 +152,12 @@ const Chat = (props) => {
                                 <TouchableOpacity >
                                     <Image style={Styles.btn} source={Images.imageUpload} />
                                 </TouchableOpacity> */}
-                                <TouchableOpacity onPress={() => sendMessage(message)}>
+                                <TouchableOpacity style={Styles.btnBack} onPress={() => sendMessage(message)}>
                                     <Image style={Styles.btn} source={Images.send} />
                                 </TouchableOpacity>
                             </View>
                         </View>
-
                     </View>
-
                 </View>
             </KeyboardAwareScrollView>
 

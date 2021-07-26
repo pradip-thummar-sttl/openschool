@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: hp(2),
+        paddingHorizontal: hp(2),
+        paddingBottom: 15,
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(6.85),
         borderBottomWidth: 1,
         borderColor: COLORS.borderGrp
     },

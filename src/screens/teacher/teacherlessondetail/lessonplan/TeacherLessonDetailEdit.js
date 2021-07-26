@@ -89,7 +89,7 @@ const TLDetailEdit = (props) => {
     const [pupils, setPupils] = useState([]);
     const [filteredPupils, setFilteredPupils] = useState([]);
 
-    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'])
 
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -102,18 +102,18 @@ const TLDetailEdit = (props) => {
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
@@ -353,8 +353,10 @@ const TLDetailEdit = (props) => {
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                <View style={STYLE.hrCommon}></View>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Items your class may need</Text>
+                <View style={PAGESTYLE.hrTagMIddleReverse}>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthSmall]}></View>
+                </View>
                 <View style={PAGESTYLE.hrCommon2}></View>
                 <FlatList
                     data={itemCheckList}
@@ -421,8 +423,10 @@ const TLDetailEdit = (props) => {
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Add Pupils</Text>
-                <View style={PAGESTYLE.hrCommon2}></View>
+                <View style={PAGESTYLE.hrTagMIddleReverse}>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add Pupils</Text>
+                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthlarge]}></View>
+                </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
@@ -486,7 +490,7 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy,{width:hp(13)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
@@ -575,7 +579,7 @@ const TLDetailEdit = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } else if (recordingArr.length == 0) {
+        } else if (recordingArr.length == 0 && !isRunningFromVirtualDevice) {
             showMessage(MESSAGE.recording);
             return false;
         }
@@ -681,7 +685,8 @@ const TLDetailEdit = (props) => {
 
                 data.append('recording', {
                     uri: element.uri,
-                    name: element.fileName,
+                    // name: element.fileName,
+                    name: 'MY_RECORDING.mp4',
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
             }
@@ -792,8 +797,10 @@ const TLDetailEdit = (props) => {
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.containerWrap}>
                                     <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                                        <View style={STYLE.hrCommon}></View>
-                                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                        <View style={PAGESTYLE.hrTagMIddleReverse}>
+                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                                        </View>
                                         <View style={PAGESTYLE.timedateGrp}>
 
                                             {subjectsDropDown()}
@@ -867,19 +874,21 @@ const TLDetailEdit = (props) => {
                                         {pupilListView()}
 
                                         <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
-                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.TitleClass]}>Class Settings</Text>
-                                            <View style={PAGESTYLE.hrCommon2}></View>
+                                            <View style={PAGESTYLE.hrTagMIddleReverse}>
+                                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                                <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthClassSetting]}></View>
+                                            </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                                <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                             </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                                <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
+                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                             </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                                <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
+                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                             </View>
                                         </View>
                                     </View>
@@ -897,7 +906,7 @@ const TLDetailEdit = (props) => {
                                             materialArr.length != 0 ? materialArr.map((item, index) => {
                                                 return (
                                                     <View style={PAGESTYLE.fileGrp}>
-                                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(25)}]}>{item.originalname}</Text>
                                                         {item.uri ?
                                                             <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                                 <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />

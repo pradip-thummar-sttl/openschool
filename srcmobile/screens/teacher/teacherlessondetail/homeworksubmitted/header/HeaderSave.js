@@ -10,7 +10,7 @@ const HeaderSave = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
+                <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(80)}]}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
@@ -33,10 +33,10 @@ export default HeaderSave;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.46),
+        paddingLeft: hp(3),
+        paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4.85),
         paddingBottom: Platform.OS == 'android' ? 0 : 15,
     },
     headerMain: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: wp(4.26),
+        fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -226,8 +226,8 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
-        top: wp(2.6),
+        top: 8,
+        marginRight: hp(1.2),
     },
     commonText: {
         fontSize: hp(1.82),

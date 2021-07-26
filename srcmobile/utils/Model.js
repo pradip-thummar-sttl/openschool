@@ -14,4 +14,9 @@ export var Addhomework={
     MaterialArr: [],
     RecordingArr: [],
 }
- 
+export const appSettings = {
+    appId: '90905',
+    authKey: 'h-ykAkyXnJkRNWD',
+    authSecret: 'n-BAzvbxcR5ggrj',
+    accountKey: '2xYap5od8h1GCfgxCJ6B'
+  };

@@ -13,7 +13,7 @@ import { EndPoints } from "../../../service/EndPoints";
 import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { User } from "../../../utils/Model";
+import { appSettings, User } from "../../../utils/Model";
 import TeacherTimeTable from "../teachertimetable/TeacherTimetable";
 import TeacherLessonList from "../teacherlessonlist/TeacherLessonList";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -25,6 +25,8 @@ import PupilManagement from "../pupilmanagement/PupilManagement";
 import Message from "../GlobalMessage/Message";
 import PupilProfileView from "../pupilmanagement/PupilProfileView";
 import MESSAGE from "../../../utils/Messages";
+import QB from "quickblox-react-native-sdk";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -35,8 +37,8 @@ const Item = ({ onPress, style, item }) => (
             <View style={PAGESTYLE.subjecRow}>
                 <View style={PAGESTYLE.border}></View>
                 <View>
-                    <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                    <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: 120 }]}>{item.SubjectName}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: 100 }]}>{item.LessonTopic}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.timingMain}>
@@ -65,29 +67,51 @@ const Item = ({ onPress, style, item }) => (
 );
 
 const Pupillist = ({ item, onPress }) => (
-    <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.pupilProfile}>
-            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-            <Text style={PAGESTYLE.pupilName}>{item.FirstName} {item.LastName}</Text>
-        </View>
-        <View style={PAGESTYLE.groupColumnmain}>
-            <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+
+
+    <TouchableOpacity onPress={() => { onPress() }}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20) }]}>{item.FirstName} {item.LastName}</Text>
             </View>
-        </View>
-        <View style={PAGESTYLE.perfomanceColumn}>
-            <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
-            <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
-        </View>
-        <View style={PAGESTYLE.rewardColumn}>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /><Text style={{ alignSelf: 'center' }}>-1</Text></View>
-        </View>
-        <TouchableOpacity onPress={() => { onPress() }} style={PAGESTYLE.pupilDetailLink}>
+            <View style={PAGESTYLE.groupColumnmain}>
+                <View style={PAGESTYLE.groupColumn}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                </View>
+            </View>
+            <View style={PAGESTYLE.perfomanceColumn}>
+                <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
+            </View>
+            <View style={PAGESTYLE.rewardColumn}>
+                {item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
+                            <View style={PAGESTYLE.rewardStar}>
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                            </View>
+                            :
+                            item._id == '6' ?
+                                <View style={PAGESTYLE.rewardStar}>
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                </View>
+                                :
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+            </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-        </TouchableOpacity>
-    </View>
+        </View>
+    </TouchableOpacity>
 );
 // const Pupillist = ({ style }) => (
 //     <View style={[PAGESTYLE.pupilData]}>
@@ -136,31 +160,39 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isLoading, setLoading] = useState(false);
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        QB.webrtc
+            .init(appSettings)
+            .then(function () {
+                // SDK initialized successfully
+            })
+            .catch(function (e) {
+                // Some error occurred, look at the exception message for more details
+            });
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
 
     useEffect(() => {
         refresh()
@@ -208,14 +240,14 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
                     LessonEnd: false
                 }
-                Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
@@ -224,7 +256,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                showMessage(MESSAGE.scheduledTime)
+                showMessage(MESSAGE.scheduledTimeStart)
                 setLoading(false)
             }
         }
@@ -243,18 +275,30 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
+            let title = dataOfSubView.LessonTopic
 
 
             if (Platform.OS == 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
                     console.log('Class Started');
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
+                    }, (err) => {
+                    })
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, false, (id) => {
                     console.log('hi id:---------', id)
-                    Service.post(data, `${EndPoints.LessionStartEnd}/${User.user._id}`, (res) => {
+                    let data = {
+                        LessonStart: false,
+                        LessonEnd: true
+                    }
+                    Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
                 })
@@ -301,6 +345,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             />
         );
     };
+
+    const initOneToOneCall = (pupilData) => {
+        props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -331,12 +380,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 onAlertPress={() => props.navigation.openDrawer()} />
                             :
                             selectedIndex == 0 ?
-                                <View style={{ width: isHide ? '93%' : '78%' }}>
+                                <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
                                     <Header onAlertPress={() => props.navigation.openDrawer()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>
-                                                <TouchableOpacity style={PAGESTYLE.boxDash}>
+                                                <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall(pupilData)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
                                                         <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
@@ -546,9 +595,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             </View>
                                                         </View>
                                                         :
-                                                        <View style={{ height: 100, justifyContent: 'center' }}>
-                                                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        </View>
+                                                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                        // </View>
+                                                        <EmptyStatePlaceHohder image={Images.noLesson} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -612,9 +662,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         </View>
                                                         :
 
-                                                        <View>
-                                                            <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        </View>
+                                                        // <View>
+                                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                        // </View>
+                                                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                                                 }
                                             </View>
                                         </ScrollView>

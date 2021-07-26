@@ -415,7 +415,7 @@ export default StyleSheet.create({
         //  marginLeft:hp(4.5)
     },
     pupilProfile: {
-        width: hp(17.90),
+        width: hp(15),
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -425,8 +425,9 @@ export default StyleSheet.create({
         
     },
     groupColumn: {
-        width: hp(6.59),
+        width: hp(10.59),
         alignItems: 'center',
+        justifyContent:'center',
         marginLeft:hp(-2)
     },
     groupColumn1: {
@@ -505,6 +506,21 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+    },
+    pupilgroupName1: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        marginLeft:22,
+        width:100,
+        textAlign:'center'
+    },
+    pupilgroupName10: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        width:100,
+        textAlign:'center'
     },
     mainContainer: {
         width: '100%',

@@ -20,10 +20,6 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> {props.title}</Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>save workspace</Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity
                         style={styles.notificationBar}
                         activeOpacity={opacity}
@@ -39,10 +35,11 @@ export default HeaderWhite;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
-        paddingRight: hp(2.0),
+        paddingLeft: hp(3.90),
+        paddingRight: hp(2.99),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingBottom: hp(2),
     },
     headerMain: {
         flexDirection: 'row',
@@ -100,7 +97,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -232,6 +229,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
+        top: 5,
     },
     commonText: {
         fontSize: hp(1.82),

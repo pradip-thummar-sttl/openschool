@@ -27,6 +27,13 @@ export default StyleSheet.create({
         paddingBottom: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
+        height: '100%',
+    },
+    whiteBg1: {
+        backgroundColor: COLORS.white,
+        paddingBottom: hp(2),
+        borderBottomColor: COLORS.borderGrp,
+        borderBottomWidth: 1,
     },
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
@@ -112,6 +119,11 @@ export default StyleSheet.create({
     },
     teacherDetailLeft: {
         width: '100%',
+        // height: '85%',
+    },
+    teacherDetailLeft1: {
+        width: '100%',
+        height: '85%',
     },
     requireText: {
         fontSize: hp(2.08),
@@ -145,7 +157,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(4.92),
+        marginTop: hp(1),
         paddingRight: hp(1.5),
     },
     videoLinkBlock: {
@@ -199,8 +211,9 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        paddingBottom: hp(1.5),
-        marginBottom: hp(1.5),
+        // paddingBottom: hp(1.5),
+        // marginBottom: hp(1.5),
+        marginTop:hp(2.5),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -212,19 +225,23 @@ export default StyleSheet.create({
         paddingLeft: hp(1.30),
         paddingRight: hp(1.30),
         paddingTop: hp(2.60),
+        marginBottom:hp(1)
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
         width: '100%',
-        height: hp(20),
+        alignItems:'center',
         borderRadius: 10,
+        padding: 15,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
     },
     uploaded: {
         alignSelf: 'center',
-        marginVertical: 8,
-        color: COLORS.greyplaceholder
+        marginBottom: 10,
+        color: COLORS.greyplaceholder,
+        fontFamily: FONTS.fontRegular,
+        fontSize: 14,
     },
     HomeText: {
         alignSelf: 'center',
@@ -246,7 +263,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.82),
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.5),
+        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(2.5),
         minHeight: hp(6),
         paddingRight: hp(1),
     },
@@ -259,7 +276,8 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
-        top: hp(0.35),
+        top: 5,
+        left: 3,
         fontFamily: FONTS.fontBold,
     },
     toggleGrp: {
@@ -760,6 +778,7 @@ export default StyleSheet.create({
     containerWrap: {
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        // height:hp(63),
     },
     containerWrapMarked: {
         paddingLeft: hp(1.95),
@@ -814,8 +833,9 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
-        height: 60,
-        width: 60,
+        height: 62,
+        width: 62,
+        // margin:wp(1),
         resizeMode: 'contain',
     },
     removeIcon: {
@@ -999,7 +1019,7 @@ export default StyleSheet.create({
         marginRight: hp(-3),
     },
     containerWrapSubmit: {
-        marginBottom: hp(4.31),
+        marginBottom: hp(2),
     },
     dateBlockRowSubmitted: {
         flexDirection: 'row',
@@ -1184,10 +1204,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.47),
         fontFamily: FONTS.fontRegular,
-        zIndex: 10,
         lineHeight: hp(3.7),
         paddingLeft: hp(1),
-        paddingTop: hp(1),
     },
     feedbackVideoBlock: {
         borderColor: COLORS.borderGrp,
@@ -1263,6 +1281,7 @@ export default StyleSheet.create({
     videoCardThumb: {
         position: 'relative',
         flexDirection: 'row',
+        alignItems: 'center',
         width: hp(28.25),
     },
     lessonDue: {
@@ -1273,7 +1292,6 @@ export default StyleSheet.create({
         width: hp(1.79),
         resizeMode: 'contain',
         marginLeft: hp(1.5),
-        marginTop: hp(1),
     },
     lightSkyBlueDue: {
         backgroundColor: COLORS.lightSkyBlueDue,
@@ -1408,7 +1426,7 @@ export default StyleSheet.create({
         paddingTop: hp(2),
         paddingBottom: hp(2),
         position: 'absolute',
-        bottom: 0,
+        bottom: 10,
         width: '100%',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
@@ -1417,17 +1435,18 @@ export default StyleSheet.create({
         width: '100%',
     },
     fullButtonMain: {
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.whiteBg,
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(2),
+        // paddingBottom: hp(1),
         position: 'absolute',
-        bottom: hp(13.5),
+        bottom: 0,
         width: '100%',
-        left: hp(0),
+        left: hp(1.5),
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        // alignSelf:'center'
     },
     lessonstartButtonBottom: {
         flexDirection: 'row',
@@ -1448,7 +1467,8 @@ export default StyleSheet.create({
         borderWidth: 1,
         alignSelf: 'center',
         borderColor: COLORS.dashboardGreenButton,
-        borderRadius: hp(1),
+        borderRadius: 8,
+        overflow: 'hidden',
         paddingVertical: Platform.OS == 'android' ? 0 : 10,
     },
     filterbarMain: {

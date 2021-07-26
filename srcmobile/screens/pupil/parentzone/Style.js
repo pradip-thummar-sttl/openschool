@@ -89,7 +89,7 @@ export default StyleSheet.create({
         height: hp(1.75),
     },
     MainProfile: {
-        height: '100%',
+        height: hp(100),
         backgroundColor: COLORS.white,
     },
     profileImageArea: {
@@ -154,14 +154,13 @@ export default StyleSheet.create({
         color: COLORS.darkGrayIntro,
     },
     scrollViewCommon: {
-        marginBottom: hp(62),
+        marginBottom: hp(5),
     },
     scrollViewCommonPupilEdit: {
-        marginBottom: hp(24),
+        marginBottom: hp(6),
     },
     scrollViewCommonPupilEditSchool: {
-        marginBottom: hp(33),
-        padding: 10
+        marginBottom: hp(0),
     },
     rewardSection: {
         paddingHorizontal: hp(2),

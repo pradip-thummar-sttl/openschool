@@ -29,19 +29,19 @@ const PupilHomeWorkDetail = (props) => {
     const [isLoading, setLoading] = useState(false);
     console.log('props of homewor', baseUrl + item.TeacherProfile);
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
-  
+    }
+
 
     const isFieldsValidated = () => {
         if (materialArr.length <= 0) {
@@ -62,6 +62,8 @@ const PupilHomeWorkDetail = (props) => {
                 type: element.type
             });
         })
+
+        setLoading(true)
 
         // formData.append("Feedback", feedBack);
         // formData.append("Rewards", '1');
@@ -140,9 +142,10 @@ const PupilHomeWorkDetail = (props) => {
                     goBack={() => props.navigation.goBack()}
                     onSubmitHomework={() => isFieldsValidated()}
                     title={item.SubjectName + ' ' + item.LessonTopic} />
-                <View style={{ ...PAGESTYLE.containerWrap, paddingBottom: hp(24) }}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={PAGESTYLE.teacherDetailLeft}>
+                <View style={{ ...PAGESTYLE.containerWrap, }}>
+
+                    <View style={PAGESTYLE.teacherDetailLeft1}>
+                        <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.dateBlockRow}>
                                 <View style={[PAGESTYLE.dateNameBlock, PAGESTYLE.spaceSmallUserName]}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
@@ -154,7 +157,6 @@ const PupilHomeWorkDetail = (props) => {
                                 <View style={PAGESTYLE.dateNameBlock}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Teacher</Text>
                                     <View style={PAGESTYLE.daterow}>
-                                        {/* <View style={PAGESTYLE.thumbSmall}></View> */}
                                         <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                         <Text style={PAGESTYLE.dueDateTextBold}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                     </View>
@@ -176,7 +178,7 @@ const PupilHomeWorkDetail = (props) => {
                                                         style={PAGESTYLE.checkMark}
                                                         value={item.IsCheck}
                                                         boxType={'square'}
-                                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                         onCheckColor={COLORS.white}
                                                         onFillColor={COLORS.dashboardPupilBlue}
                                                         onTintColor={COLORS.dashboardPupilBlue}
@@ -186,44 +188,51 @@ const PupilHomeWorkDetail = (props) => {
                                                 </View>
                                             </View>
                                         )}
-                                        style={{ height: 200 }} />
+                                    // style={{ height: 200 }}
+                                    />
                                 </View>
 
                                 <View style={PAGESTYLE.rightSideBar}>
                                     <View style={PAGESTYLE.uploadBoardBlock}>
-                                        {/* <Image source={require('../../../../assets/images/upload-hw-mobile2.png')} style={PAGESTYLE.uploadBoard} /> */}
-
                                         <TouchableOpacity
                                             style={PAGESTYLE.homeworkView}
                                             onPress={() => addMaterial()}>
                                             <Text style={PAGESTYLE.HomeText}>Upload Homework</Text>
                                         </TouchableOpacity>
-                                        <View style={PAGESTYLE.docView}>
-                                            {materialArr.map((item, index) => {
-                                                return (
-                                                    <TouchableOpacity
-                                                        style={PAGESTYLE.homeworkView}
-                                                        activeOpacity={opacity}
-                                                        onPress={() => removeDocument(index)}>
-                                                        <View style={PAGESTYLE.alignRow1}>
-                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                                            <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
-                                                        </View>
-                                                    </TouchableOpacity>
-                                                )
-                                            })}
-                                        </View>
+                                        <ScrollView>
+                                            <View style={PAGESTYLE.docView}>
+                                                {materialArr.map((item, index) => {
+                                                    return (
+                                                        <TouchableOpacity
+                                                            style={PAGESTYLE.homeworkView}
+                                                            activeOpacity={opacity}
+                                                            onPress={() => removeDocument(index)}>
+                                                            <View style={PAGESTYLE.alignRow1}>
+                                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
+                                                            </View>
+                                                        </TouchableOpacity>
+                                                    )
+                                                })}
+                                            </View>
+                                        </ScrollView>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    </ScrollView>
+                        </ScrollView>
+                    </View>
                     <View style={[PAGESTYLE.fullButtonMain]}>
                         <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.buttonGrp}><Text style={[PAGESTYLE.commonButtonGreenheaderFullWidth, PAGESTYLE.fullButton]}>submit homework</Text></TouchableOpacity>
                     </View>
                 </View>
                 {
-                    isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
+                    isSubmitPopup ?
+                        <Popuphomework
+                            isLoading={isLoading}
+                            OnSubmitHomeworkPress={() => onSubmitHomework()}
+                            onPopupClosed={(flag) => setSubmitPopup(flag)} />
+                        :
+                        null
                 }
             </View>
         </View>

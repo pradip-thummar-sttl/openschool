@@ -159,7 +159,7 @@ const NewMessage = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={{ ...styles.alignRow, marginTop: 10, marginRight: 20 }}>
                             <CheckBox
-                                style={styles.checkMark}
+                                style={styles.checkMark1}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -181,12 +181,12 @@ const NewMessage = (props) => {
     };
 
     return (
-        <View style={{ height: '100%', backgroundColor: COLORS.white, paddingHorizontal: 20 }}>
-            <SafeAreaView>
-                <NewMessageHeader
+        <View style={{ height: '100%', backgroundColor: COLORS.white }}>
+            <NewMessageHeader
                     onSent={() => saveMessage('Sent')}
                     onGoback={() => props.goBack()}
                     status={status} />
+            <SafeAreaView style={{paddingHorizontal: 20}}>
                 <View style={styles.field1}>
                     <Text label style={STYLE.labelCommon}>Message Title</Text>
                     <View style={styles.copyInputParent}>
@@ -216,7 +216,7 @@ const NewMessage = (props) => {
                         onChangeText={eventName => setEvent(eventName)} /> */}
                         {parentListView()}
 
-                        <ToggleSwitch
+                        <ToggleSwitch onColor={COLORS.dashboardGreenButton}
                             isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
                         />
                         <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>

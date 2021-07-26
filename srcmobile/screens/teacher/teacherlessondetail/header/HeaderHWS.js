@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.46),
         paddingRight: hp(2.46),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(1) : hp(5.85),
         paddingBottom: Platform.OS == 'android' ? 0 : 15,
         
     },
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
+        marginRight: hp(2),
     },
     titleRow: {
         flexDirection: 'row',

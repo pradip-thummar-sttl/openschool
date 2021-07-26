@@ -19,7 +19,7 @@ const HeaderAddNew = (props) => {
                     </TouchableOpacity> Add New Lesson</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
+                      <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
@@ -53,12 +53,13 @@ export default HeaderAddNew;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(3.25),
+        paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        // marginBottom: hp(5.85),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.38),
-        paddingBottom: hp(1.5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingBottom: hp(2),
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: 1,
     },
     headerMain: {
         flexDirection: 'row',
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -258,6 +259,7 @@ const styles = StyleSheet.create({
     },
     arrow: {
         width: hp(2.34),
+        top: 5,
         resizeMode: 'contain',
         marginRight: hp(1),
     },

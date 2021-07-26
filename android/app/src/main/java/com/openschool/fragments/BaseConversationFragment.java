@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
+import com.openschool.activity.WhiteBoardActivity;
 import com.openschool.adapter.OpponentsFromCallAdapter;
 import com.openschool.util.CollectionsUtils;
 import com.openschool.util.Consts;
@@ -94,7 +96,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
-    private ImageButton handUpCall;
+    private TextView handUpCall;
+    private TextView tvTitle;
+    private ImageView button_screen_sharing;
+    private ImageView whiteboard;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
     protected View outgoingOpponentsRelativeLayout;
     protected TextView allOpponentsTextView;
@@ -106,6 +111,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected String currentUserID;
     protected String currentName;
     protected String teacherQBUserID;
+    protected String title;
 
     private SparseArray<OpponentsFromCallAdapter.ViewHolder> opponentViewHolders;
 
@@ -148,6 +154,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         currentName = this.getArguments().getString(Consts.EXTRA_CURRENTUSERNAME);
         isTeacher = this.getArguments().getBoolean(Consts.EXTRA_DIALOG_IS_TEACHER);
         teacherQBUserID = this.getArguments().getString(Consts.EXTRA_TEACHER_USER_ID);
+        title = this.getArguments().getString(Consts.TITLE);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
         System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
@@ -297,6 +304,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         }
     }
 
+    private void startScreenSharing() {
+        conversationFragmentCallbackListener.onStartScreenSharing();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -389,7 +400,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         Log.i(TAG, "initViews");
         toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
-        handUpCall = (ImageButton) view.findViewById(R.id.button_hangup_call);
+        handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
+        tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+        button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
+        whiteboard = (ImageView) view.findViewById(R.id.whiteboard);
         outgoingOpponentsRelativeLayout = view.findViewById(R.id.layout_background_outgoing_screen);
         allOpponentsTextView = (TextView) view.findViewById(R.id.text_outgoing_opponents_names);
         ringingTextView = (TextView) view.findViewById(R.id.text_ringing);
@@ -399,6 +413,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         localVideoView = (QBConferenceSurfaceView) view.findViewById(R.id.local_video_view);
         localVideoView.setOnClickListener(localViewOnClickListener);
+
+        tvTitle.setText(title);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.grid_opponents);
 
@@ -443,7 +459,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private void setGrid(int recycleViewHeight) {
         ArrayList<QBUser> qbUsers = new ArrayList<>();
         int itemHeight = 0;
-        if (!isTeacher){
+        if (!isTeacher) {
             itemHeight = recycleViewHeight;
         } else {
             itemHeight = recycleViewHeight / DISPLAY_ROW_AMOUNT;
@@ -509,6 +525,20 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
                 conversationFragmentCallbackListener.onLeaveCurrentSession();
                 Log.d(TAG, "Call is stopped");
+            }
+        });
+
+        button_screen_sharing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startScreenSharing();
+            }
+        });
+
+        whiteboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), WhiteBoardActivity.class));
             }
         });
     }

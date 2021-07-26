@@ -58,7 +58,7 @@ const TLDetail = (props) => {
                         <View style={PAGESTYLE.subjectDateTime}>
                             <View style={PAGESTYLE.alignRow}>
                                 <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} />
-                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.GroupName}</Text>
+                                <Text numberOfLines={1} style={[PAGESTYLE.datetimeText,{width:wp(50)}]}>{props.lessonData.GroupName}</Text>
                             </View>
                         </View>
                     </View>
@@ -75,13 +75,13 @@ const TLDetail = (props) => {
                             renderItem={({ item, index }) => (
                                 <View style={PAGESTYLE.checkBoxLabelLine}>
                                     <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                    <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                    <Text numberOfLines={1} style={[PAGESTYLE.lessonPointText,{width:wp(82)}]}>{item.ItemName}</Text>
                                 </View>
                             )}
                             keyExtractor={(item, index) => index.toString()}
                         />
                     </View>
-                    <View style={STYLE.hrCommon}></View>
+                    {/* <View style={STYLE.hrCommon}></View> */}
                     <View style={PAGESTYLE.checkBoxGrpWrap}>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
 
@@ -107,15 +107,15 @@ const TLDetail = (props) => {
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                            <ToggleSwitch isOn={props.lessonData.LiveSession} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.LiveSession} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                            <ToggleSwitch isOn={props.lessonData.Publish} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.Publish} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                            <ToggleSwitch isOn={props.lessonData.IsVotingEnabled} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.IsVotingEnabled} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                     </View>
                 </View>
@@ -128,7 +128,7 @@ const TLDetail = (props) => {
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.fileGrp}>
-                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(70)}]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>
@@ -163,7 +163,7 @@ const TLDetail = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => Download(props.lessonData.RecordingList[0])}>
                                 <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                                <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingList[0].originalname}</Text>
+                                <Text numberOfLines={1} style={[PAGESTYLE.videoLinkText,{width:wp(70)}]}>{props.lessonData.RecordingList[0].originalname}</Text>
                             </TouchableOpacity>
                             :
                             <Text style={{ textAlign: 'left', width: '100%' }}>No lesson recording found!</Text>

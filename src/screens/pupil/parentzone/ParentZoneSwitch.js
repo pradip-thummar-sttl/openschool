@@ -46,6 +46,7 @@ export default class ParentZoneSwitch extends Component {
                         <FlatList
                             data={this.state.childrenList}
                             showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         alignSelf: 'center',
         fontFamily: FONTS.fontSemiBold,
+        textAlign: 'center'
     },
     titleText: {
         color: COLORS.darkGray,
@@ -109,15 +111,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     user: {
-        marginLeft: hp(5.5),
-        marginRight: hp(5.5),
+        marginLeft: hp(5),
+        marginRight: hp(5),
+        width: hp(21),
     },
     userIcon: {
         width: hp(20.10),
         height: hp(20.10),
-        resizeMode: "contain",
+        // resizeMode: "auto",
         alignSelf: 'center',
         marginBottom: hp(2),
+        borderRadius: hp(20.10/2),
     },
     topBg: {
         width: '100%',

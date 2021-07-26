@@ -49,7 +49,7 @@ const PopupdataSecondPupil = (props) => {
     const [selectedFromTime, setSelectedFromTime] = useState('')
     const [selectedToTime, setSelectedToTime] = useState('')
 
-    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'])
     const [colorArr, setColorArr] = useState([])
 
     const isFieldsValidated = () => {
@@ -186,7 +186,7 @@ const PopupdataSecondPupil = (props) => {
                     </View>
                 </TouchableOpacity>
                 {isFromDropOpen ?
-                    <View style={styles.colorDropView}>
+                    <View style={styles.colorDropView1}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
@@ -218,7 +218,7 @@ const PopupdataSecondPupil = (props) => {
                     </View>
                 </TouchableOpacity>
                 {isToDropOpen ?
-                    <View style={styles.colorDropView}>
+                    <View style={styles.colorDropView1}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
@@ -558,15 +558,15 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
     },
-    calIcon: {
+    calIcon1: {
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        top: hp(1.1),
-        left: hp(1.4),
+        alignSelf:'center'
+        // top: hp(1.1),
+        // left: hp(1.4),
     },
     dropDownSmallWrap: {
         flexDirection: 'row',
@@ -609,7 +609,8 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
-        top: hp(-0.75),
+        top: hp(-0.50),
+        // alignSelf:'center',
         left: hp(2.5),
         position: 'absolute'
     },
@@ -636,6 +637,7 @@ const styles = StyleSheet.create({
     // colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
     // colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView1: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white,  padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
     timeField: {
         flex: 0.20

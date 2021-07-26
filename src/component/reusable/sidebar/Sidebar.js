@@ -28,7 +28,7 @@ const Sidebar = (props) => {
 
         if (isSmall) {
             Animated.timing(animationValue, {
-                toValue: hp(29.42),
+                toValue: hp(29.29),
                 duration: 500
             }).start(() => {
                 action(false)
@@ -36,7 +36,7 @@ const Sidebar = (props) => {
         }
         else {
             Animated.timing(animationValue, {
-                toValue: hp(9.50),
+                toValue: hp(9.375),
                 duration: 500
             }).start(() => {
                 action(true)
@@ -58,12 +58,12 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                    <Image style={styles.headerProfile} source={Images.proffileLogo} />
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                                <Text style={styles.profileDesi}>{User.user.UserType}</Text>
+                                <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
                             </View>
                     }
                 </TouchableOpacity>
@@ -147,19 +147,21 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.userInfo, styles.userInfobottom]}>
-                    <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
-                    {
-                        isSmall ? null :
-                            <>
-                                <View style={styles.profileTextMain}>
-                                    <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
-                                </View>
-                                <TouchableOpacity style={styles.moreMenu}>
-                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
-                                </TouchableOpacity>
-                            </>
-                    }
+                <View style={[styles.userInfobottomMain]}>
+                    <View style={[styles.userInfobottom]}>
+                        <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                        {
+                            isSmall ? null :
+                                <>
+                                    <View style={styles.profileTextMain}>
+                                        <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                                    </View>
+                                    <TouchableOpacity style={styles.moreMenu}>
+                                        <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                    </TouchableOpacity>
+                                </>
+                        }
+                    </View>
                 </View>
             </Animated.View>
         </View>
@@ -174,9 +176,14 @@ const styles = StyleSheet.create({
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.2,
+        shadowOffset: {
+            width: 2,
+            height: 0,
+        },
+        shadowOpacity: 0.06,
         shadowRadius: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        borderRightWidth: 1,
     },
     sideBarAside: {
         backgroundColor: COLORS.white,
@@ -190,11 +197,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp(1.5),
         paddingBottom: hp(2.0),
-        paddingLeft: hp(1.5),
+        paddingLeft: hp(1.1),
+        // alignSelf:'center'
     },
     profileTextMain: {
         paddingLeft: hp(1.5),
-        width: hp(19.53),
     },
     profileTitle: {
         fontSize: hp(2.0),
@@ -234,23 +241,31 @@ const styles = StyleSheet.create({
         width: hp(22),
     },
     headerProfile: {
-        width: hp(5.40),
-        height: hp(5.40),
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
+        borderRadius: hp(100),
+    },
+    userInfobottomMain: {
+        position: 'absolute',
+        alignSelf:'center',
+        bottom: 0,
+        paddingHorizontal: hp(1.35),
+        borderColor: COLORS.bottomProfileLightBorder,
+        borderWidth: 1,
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        width: '100%',
     },
     userInfobottom: {
-        position: 'absolute',
-        bottom: hp(6),
-        borderWidth: 1,
-        left: -1,
-        width: hp(29.6),
-        borderColor: COLORS.bottomProfileLightBorder,
-        paddingTop: hp(1),
-        paddingBottom: hp(1),
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     bottomUser: {
-        width: hp(4.2),
-        height: hp(4.2),
+        width: 32,
+        height: 32,
+        // resizeMode: 'contain',
+        borderRadius: 16,
     },
     profileTitleBottom: {
         fontSize: hp(2.0),
@@ -264,5 +279,10 @@ const styles = StyleSheet.create({
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
+    },
+    moreMenu: {
+        // position: 'absolute',
+        marginLeft:hp(4),
+        right: 0,
     },
 });

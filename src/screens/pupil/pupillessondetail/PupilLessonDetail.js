@@ -66,7 +66,7 @@ const PupilLessonDetail = (props) => {
                 } else {
                     getHomeworkData('', '')
                 }
-                // textInput.current.clear()
+                textInput.current.clear()
             } else {
                 if (isLesson) {
                     getLessonData(keyword, '')
@@ -190,9 +190,9 @@ const PupilLessonDetail = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                 </View>
-                <View style={{ flexDirection: 'row', marginLeft: hp(0.5), right: -7, }}>
+                <View style={{ flexDirection: 'row', marginLeft: hp(1.8), }}>
                     <Menu style={PAGESTYLE.filterGroup}>
-                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
@@ -246,9 +246,6 @@ const PupilLessonDetail = (props) => {
                         {
                             searchHeader()
                         }
-                        {/* <View style={PAGESTYLE.lessonstartButton}>
-                        <Text>Dynamic Search Goes Here</Text>
-                    </View> */}
                     </View>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.teacherLessonGrid]}>

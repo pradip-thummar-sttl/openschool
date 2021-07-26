@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Image, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../utils/Constant";
 import FONTS from "../../../utils/Fonts";
 import Images from "../../../utils/Images";
+import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
 import PAGESTYLE from './Style';
 
@@ -100,9 +102,11 @@ const GroupSetUp = (props) => {
                             data={groups}
                             renderItem={groupRender}
                             keyExtractor={(item) => item.id}
-                            showsVerticalScrollIndicator={false} />
+                            showsVerticalScrollIndicator={false} 
+                            />
                         :
-                        <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
+                        // <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
         </SafeAreaView>

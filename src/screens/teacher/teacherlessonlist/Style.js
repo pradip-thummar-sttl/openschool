@@ -83,12 +83,11 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor:COLORS.white,
-        shadowColor: COLORS.black,
-        shadowOffset: {width: 0, height: 2,},
-        elevation: 3,
-        shadowOpacity: 0.10,
-        borderRadius: hp(1.95),
-        height:hp(8.85),
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: {width: 0, height: 0,},
+        shadowOpacity: 0.12,
+        borderRadius: 8,
+        height: 68,
         marginBottom: hp(1),
         borderRadius:hp(1),
     },
@@ -182,10 +181,10 @@ export default StyleSheet.create({
     },
     firstColumn:{
       paddingLeft: hp(4.5),
-      width:hp(18),
+      width:hp(20),
     },
     secoundColumn:{
-        width:hp(20),
+        width:hp(19),
     },
     lastColumn:{
         width:hp(30.55),
@@ -202,9 +201,7 @@ export default StyleSheet.create({
     },
     whiteBg: {
         backgroundColor: COLORS.backgroundColorCommon,
-        paddingLeft:hp(2.0),
-        paddingRight:hp(2.0),
-        paddingBottom: hp(2.0),
-        paddingTop: hp(2.0),
+        padding: hp(2),
+        paddingTop: 30,
     },
 });

@@ -12,6 +12,7 @@ import MESSAGE from "../../../utils/Messages";
 import { User } from "../../../utils/Model";
 import STYLE from "../../../utils/Style";
 import PAGESTYLE from './Style';
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 
 const GroupSetUpPupilSelection = (props) => {
 
@@ -26,18 +27,18 @@ const GroupSetUpPupilSelection = (props) => {
     const [isGroupLoading, setGroupLoading] = useState([])
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
+    }
     useEffect(() => {
         setPupilLoading(true)
 
@@ -152,7 +153,7 @@ const GroupSetUpPupilSelection = (props) => {
                 <Image
                     style={PAGESTYLE.mediabar}
                     source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
-                <Text style={PAGESTYLE.pupilName1} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName1,{width:wp(60)}]} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
                 <View style={PAGESTYLE.checkMark}>
                     <CheckBox
                         boxType={'square'}
@@ -222,12 +223,13 @@ const GroupSetUpPupilSelection = (props) => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
                         :
-                        <View>
-                            <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        </View>
+                        // <View>
+                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // </View>
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',paddingHorizontal: hp(2.46), }}>
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>

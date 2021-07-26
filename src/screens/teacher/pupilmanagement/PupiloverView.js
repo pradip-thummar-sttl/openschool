@@ -1,6 +1,8 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 import { EndPoints } from '../../../service/EndPoints'
 import { Service } from '../../../service/Service'
 import { baseUrl, showMessage } from '../../../utils/Constant'
@@ -19,20 +21,20 @@ const Pupillist = (props, { item }) => (
         <View style={[PAGESTYLE.pupilData]}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
-            <View style={PAGESTYLE.pupilProfile}>
-                <Text style={PAGESTYLE.pupilName}>{props.item.FirstName}</Text>
+            <View style={[PAGESTYLE.pupilProfile, ]}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(10)}]}>{props.item.FirstName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={PAGESTYLE.pupilName}>{props.item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(10)}]}>{props.item.LastName}</Text>
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text style={PAGESTYLE.pupilgroupName}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1,{width:wp(8)}]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn11}>
-                <Text style={PAGESTYLE.pupilgroupName}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
+                <Text style={PAGESTYLE.pupilgroupName10}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
             {/* </View> */}
             <View style={PAGESTYLE.perfomanceColumn}>
@@ -40,9 +42,32 @@ const Pupillist = (props, { item }) => (
                 <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
-                <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                {props.item.RewardsList.map((item, index) => {
+                    return (
+                        item._id == '3' ?
+                            <View style={PAGESTYLE.rewardStar}>
+                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                            </View>
+                            :
+                            item._id == '6' ?
+                                <View style={PAGESTYLE.rewardStar}>
+                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                </View>
+                                :
+                                item._id == '9' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    null
+                    )
+                })}
+                {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
             </View>
             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
         </View>
@@ -55,9 +80,11 @@ const PupiloverView = (props) => {
     const [selectedTab, setSelectedTab] = useState(0)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchRecord('', '')
+        console.log('`${EndPoints.PupilByTeacherId}/${User.user._id}`', `${EndPoints.PupilByTeacherId}/${User.user._id}`);
+        // fetchRecord('', '')
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
@@ -67,10 +94,11 @@ const PupiloverView = (props) => {
             Filterby: filterBy,
         }
 
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
+                setLoading(false)
             } else {
                 showMessage(res.message)
             }
@@ -101,61 +129,69 @@ const PupiloverView = (props) => {
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                 onSearch={() => fetchRecord(searchKeyword, '')}
                 onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                onFilter={(filterBy) => fetchRecord('', filterBy)}
+                navigateToAddNewUser={() => props.navigateToAddNewUser()} />
 
             {selectedTab == 0 ?
                 <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>
-                    {pupilData.length > 0 ?
-                        <>
-                            <View style={PAGESTYLE.pupilTable}>
-                                <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
-                                    {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
-                                </View>
-                                <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
-                                    {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
-                                </View>
-                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}> Class Group</Text>
-                                </View>
+                    {
+                        isLoading ?
+                            <ActivityIndicator
+                                style={{ margin: 20 }}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.yellowDark} />
+                            :
+                            pupilData.length > 0 ?
+                                <>
+                                    <View style={PAGESTYLE.pupilTable}>
+                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
+                                            {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
+                                        </View>
+                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
+                                            {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}> Class Group</Text>
+                                        </View>
 
-                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
-                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
-                                </View>
-                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
-                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
-                                    <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
-                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
+                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
+                                            </View>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
+                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                            </View>
+                                        </View>
                                     </View>
-                                </View>
-                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
-                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                    <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
-                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
-                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                    <View style={PAGESTYLE.pupilTabledata}>
+                                        <FlatList
+                                            data={pupilData}
+                                            renderItem={pupilRender}
+                                            keyExtractor={(item) => item.id}
+                                            extraData={selectedId}
+                                            showsVerticalScrollIndicator={false}
+                                            nestedScrollEnabled
+                                        />
                                     </View>
+                                </>
+                                :
+                                <View style={PAGESTYLE.mainContainer}>
+                                    <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
+                                    <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                                    <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
                                 </View>
-                            </View>
-                            <View style={PAGESTYLE.pupilTabledata}>
-                                <FlatList
-                                    data={pupilData}
-                                    renderItem={pupilRender}
-                                    keyExtractor={(item) => item.id}
-                                    extraData={selectedId}
-                                    showsVerticalScrollIndicator={false}
-                                    nestedScrollEnabled
-                                />
-                            </View>
-                        </>
-                        :
-                        <View style={PAGESTYLE.mainContainer}>
-                            <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
-                            <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                            <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
-                        </View>
                     }
                 </View>
                 :

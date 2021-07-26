@@ -9,7 +9,7 @@ import FONTS from '../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Images from '../../utils/Images';
-import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice } from '../../utils/Constant';
+import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice, emailValidate } from '../../utils/Constant';
 import { Service } from '../../service/Service';
 import { EndPoints } from '../../service/EndPoints';
 import { connect } from 'react-redux';
@@ -87,7 +87,7 @@ class Login extends Component {
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
-        if (!userName) {
+        if (!userName || !emailValidate(userName)) {
             showMessage(MESSAGE.email)
             return false;
         } else if (!password) {
@@ -234,12 +234,12 @@ class Login extends Component {
         if (res.UserType === "Teacher") {
             this.props.navigation.replace('TeacherDashboard')
         } else if (res.UserType === "Pupil") {
-        //     if (res.SchoolId == undefined || res.SchoolId == null || res.SchoolId == '') {
-        //         this.props.navigation.replace('PupilConnect', { UserDetialId: res.UserDetialId })
-        //     } else {
-        //         this.props.navigation.replace('ParentZoneSwitch')
-        //     }
-        // } else {
+            if (res.SchoolId == undefined || res.SchoolId == null || res.SchoolId == '') {
+                this.props.navigation.replace('PupilConnect', { UserDetialId: res.UserDetialId })
+            } else {
+                this.props.navigation.replace('ParentZoneSwitch')
+            }
+        } else {
             this.props.navigation.replace('PupuilDashboard')
         }
         // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
@@ -276,7 +276,7 @@ class Login extends Component {
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                    placeholder="Enter email or phone"
+                                    placeholder="Enter email"
                                     autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}

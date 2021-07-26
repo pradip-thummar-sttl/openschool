@@ -14,6 +14,8 @@ import { isDesignBuild, opacity, showMessage } from "../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { User } from "../../../utils/Model";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
 
 const TeacherLessonList = (props) => {
     const userAuthData = useSelector(state => {
@@ -103,8 +105,8 @@ const TeacherLessonList = (props) => {
                     <View style={PAGESTYLE.subjecRow}>
                         <View style={PAGESTYLE.border}></View>
                         <View style={PAGESTYLE.subjectMain}>
-                            <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                            <Text style={PAGESTYLE.subject}>{item.LessonTopic}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:150}]}>{item.SubjectName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:150}]}>{item.LessonTopic}</Text>
                         </View>
                     </View>
                     <View style={PAGESTYLE.timingMain}>
@@ -138,7 +140,7 @@ const TeacherLessonList = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column' }}>
+            <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column', }}>
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
@@ -155,7 +157,7 @@ const TeacherLessonList = (props) => {
                     :
                     lessonData.length > 0 ?
                         <FlatList
-                            style={{ paddingHorizontal: 12, }}
+                            style={{ paddingHorizontal: 12,marginBottom:10 }}
                             data={lessonData}
                             renderItem={renderItem}
                             keyExtractor={(item) => item.id}
@@ -163,9 +165,10 @@ const TeacherLessonList = (props) => {
                             showsVerticalScrollIndicator={false}
                         />
                         :
-                        <View style={{ height: 100, justifyContent: 'center' }}>
-                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        </View>
+                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // </View>
+                        <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                 }
             </View>
         </View>

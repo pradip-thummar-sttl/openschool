@@ -25,28 +25,28 @@ export default StyleSheet.create({
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        paddingBottom: hp(0.5),
-        paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
+        paddingBottom: hp(1),
     },
     commonBg: {
         backgroundColor: COLORS.backgroundColorCommon,
         paddingBottom: hp(2),
-        paddingTop: hp(2),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
     },
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: hp(4.42),
-        paddingRight: hp(2.99),
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        alignItems: 'center',
     },
     lessonPlanTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: hp(1.90),
+        paddingTop: 0,
+        marginTop: 0,
     },
     tabs: {
         paddingRight: hp(3.90),
@@ -273,7 +273,7 @@ export default StyleSheet.create({
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
         paddingTop: hp(2.5),
-        width: '35%'
+        width: '31.5%'
     },
     largeVideo1: {
         backgroundColor: COLORS.black,
@@ -419,11 +419,6 @@ export default StyleSheet.create({
         width: '100%',
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
-        // borderWidth: 1,
-        // borderColor:COLORS.commonBorderColor,
-        // overflow: 'hidden',
-        // borderRadius: hp('1.0%'),
-        // lineHeight:hp(2.3),
         height: hp('6%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
@@ -780,6 +775,7 @@ export default StyleSheet.create({
     userRight: {
         width: hp(60.41),
         flexDirection: 'row',
+        alignItems: 'center',
     },
     userTopName: {
         flexDirection: 'row',
@@ -807,15 +803,14 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     markedIcon: {
-        width: 40,
-        height: 40,
+        width: hp(10),
         marginRight: 10,
         resizeMode: 'contain',
     },
     pdfIcon: {
-        width: 60,
-        height: 60,
-        marginRight: 10,
+        width: wp(7),
+        height: wp(7),
+        // marginRight: 10,
         resizeMode: 'contain',
     },
     removeIcon: {
@@ -830,9 +825,9 @@ export default StyleSheet.create({
     markedLabel: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: hp(6.19),
-        marginRight: hp(9.63),
-        marginTop: hp(1.0),
+        alignItems: 'center',
+        marginLeft: hp(4.19),
+        marginRight: hp(6.63),
     },
     markedText: {
         fontFamily: FONTS.fontRegular,
@@ -841,8 +836,8 @@ export default StyleSheet.create({
         lineHeight: hp(3.2),
     },
     dateNameBlock: {
-        marginRight: hp(2.21),
-        marginTop: hp(0.6),
+        marginRight: hp(2),
+        // marginTop: hp(0.6),
     },
     feedbackBlock: {
     },
@@ -1013,7 +1008,9 @@ export default StyleSheet.create({
     },
     alignRow1: {
         flexDirection: 'row',
-        marginVertical: 5
+        marginVertical: 5,
+        marginHorizontal:5
+        
     },
     spaceSmallUserName: {
         marginRight: hp(14.32),
@@ -1098,7 +1095,7 @@ export default StyleSheet.create({
         height: hp(8.46),
     },
     submittedIcon: {
-        width: hp(1.89),
+        width: 18,
         resizeMode: 'contain',
         marginRight: hp(1),
     },
@@ -1127,22 +1124,18 @@ export default StyleSheet.create({
         backgroundColor: COLORS.dashboardHomeWorkPurple,
         borderTopLeftRadius: hp(1.5),
         borderBottomLeftRadius: hp(1.5),
-        marginTop: hp(-1),
-        // marginLeft:hp(0),
-        // 
-        // marginBottom:hp(-1),
         height: hp(8.46),
     },
     containerWrapTopPurple: {
         justifyContent: 'space-between',
         flexDirection: 'row',
+        alignItems: 'center',
         borderWidth: 1,
         borderColor: COLORS.dashboardHomeWorkPurple,
         borderRadius: hp(1.5),
         marginLeft: hp(3.25),
         marginRight: hp(2.99),
         marginBottom: hp(1),
-        paddingTop: hp(1),
         height: hp(8.46),
     },
     markSubmittedSpaceLeft: {
@@ -1306,11 +1299,8 @@ export default StyleSheet.create({
         paddingTop: hp(3.51),
         paddingLeft: hp(3.25),
     },
-
-    //
     filterbarMain: {
         flexDirection: 'row',
-        // marginBottom: hp(0.60),
     },
     field: {
         position: 'relative',
@@ -1410,22 +1400,6 @@ export default StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
     },
-    // filterListWrap: {
-    //     paddingTop: hp(1),
-    //     paddingLeft: hp(1.2),
-    //     paddingRight: hp(1.2),
-    //     paddingBottom: hp(1),
-    //     position: 'absolute',
-    //     backgroundColor: COLORS.white,
-    //     top: hp(5.5),
-    //     right: 0,
-    //     width: hp(30.98),
-    //     borderRadius: hp(1),
-    //     shadowColor: COLORS.black,
-    //     shadowOffset: { width: 0, height: hp(1), },
-    //     shadowOpacity: 0.05,
-    //     shadowRadius: hp(1),
-    // },
     filterListWrap: {
         width: hp(30.98),
         right: 10,
@@ -1439,11 +1413,6 @@ export default StyleSheet.create({
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
     },
-    // checkMark: {
-    //     width: hp(1.48),
-    //     height: hp(1.48),
-    //     resizeMode: 'contain',
-    // },
     filterListText: {
         color: COLORS.darkGray,
         fontSize: hp(1.82),
@@ -1475,15 +1444,13 @@ export default StyleSheet.create({
     },
     docView: {
         flexDirection: 'row',
-        // paddingHorizontal: hp(1),
-        // paddingVertical:wp(0.5),
         flexWrap: 'wrap',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
     },
     searchParent: {
-        flexDirection: 'row', width:hp(55.61), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', width:hp(60), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

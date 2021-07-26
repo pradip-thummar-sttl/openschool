@@ -78,7 +78,7 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
                         placeholder="Search subject etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
@@ -207,7 +207,7 @@ const HeaderTT = (props) => {
                 </View>
                 <TouchableOpacity style={[styles.buttonGroup]}>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>by {filterBy}</Text></MenuTrigger>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',

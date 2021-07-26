@@ -62,7 +62,7 @@ const TLDetailAdd = (props) => {
     const [pupils, setPupils] = useState([]);
     const [filteredPupils, setFilteredPupils] = useState([]);
 
-    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'])
 
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -77,18 +77,18 @@ const TLDetailAdd = (props) => {
     const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
 
     useEffect(() => {
@@ -373,14 +373,16 @@ const TLDetailAdd = (props) => {
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
-                <View style={STYLE.hrCommon}></View>
+                <View style={PAGESTYLE.hrTagMIddleReverse}>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthSmall]}></View>
+                </View>
                 <FlatList
                     data={itemCheckList}
-                    style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
+                    style={{ alignSelf: 'center', width: '100%', bottom: 0 }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: 8, }}>
-                            <Text style={{ fontSize: 18 }}>{item.ItemName}</Text>
+                        <View style={{ flexDirection: 'row',alignItems: 'center',padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
+                            <Text style={{ fontSize: 14 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -439,8 +441,10 @@ const TLDetailAdd = (props) => {
     const pupilListView = () => {
         return (
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
-                <View style={STYLE.hrCommon}></View>
+                <View style={PAGESTYLE.hrTagMIddleReverse}>
+                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthlarge]}></View>
+                </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
@@ -484,13 +488,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: 190 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -504,15 +508,16 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy,{width:hp(13)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: 190 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -529,13 +534,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: 190 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -552,13 +557,13 @@ const TLDetailAdd = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 200 }} />
+                            style={{ height: 190 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -697,7 +702,8 @@ const TLDetailAdd = (props) => {
 
             data.append('recording', {
                 uri: element.uri,
-                name: element.fileName,
+                // name: element.fileName,
+                name: 'MY_RECORDING.mp4',
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
@@ -753,8 +759,10 @@ const TLDetailAdd = (props) => {
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.containerWrap}>
                                     <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                                        <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
-                                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                        <View style={PAGESTYLE.hrTagMIddle}>
+                                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                        </View>
                                         <View style={PAGESTYLE.timedateGrp}>
 
                                             {subjectsDropDown()}
@@ -828,19 +836,21 @@ const TLDetailAdd = (props) => {
                                         {pupilListView()}
 
                                         <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
-                                            <View style={STYLE.hrCommon}></View>
-                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                            <View style={PAGESTYLE.hrTagMIddleReverse}>
+                                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                                                <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                                            </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                                <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                             </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                                <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
+                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                             </View>
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                                <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
+                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                             </View>
                                         </View>
                                     </View>

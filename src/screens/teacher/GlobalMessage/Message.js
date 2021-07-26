@@ -2,11 +2,13 @@ import moment from 'moment';
 import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator, } from 'react-native'
 import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
+import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import { EndPoints } from '../../../service/EndPoints';
 import { Service } from '../../../service/Service';
 import COLORS from '../../../utils/Colors';
 import { opacity, showMessage } from '../../../utils/Constant';
 import Images from '../../../utils/Images';
+import MESSAGE from '../../../utils/Messages';
 import { User } from '../../../utils/Model';
 import NewMessage from './NewMessage';
 import PAGESTYLE from './Styles';
@@ -44,7 +46,7 @@ const Message = (props) => {
         }
 
         // Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {
-            Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -73,19 +75,19 @@ const Message = (props) => {
             activeOpacity={opacity}
             onPress={() => { setAddMessage(true); setSelectedItem(item.item) }}>
             <View style={[PAGESTYLE.pupilData]}>
-                <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
-                    <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{item.item.Title}</Text>
+                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn]}>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,]}>{item.item.Title}</Text>
                 </View>
 
                 <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-                    <Text style={PAGESTYLE.pupilName}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                    <Text style={[PAGESTYLE.pupilName,{marginLeft:-12}]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
                 </View>
                 {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
                 <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
             </View> */}
 
                 <View style={PAGESTYLE.pupilProfile}>
-                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText]}>{item.item.Status}</Text>
+                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText,{marginLeft:-12}]}>{item.item.Status}</Text>
                 </View>
 
                 <View style={[PAGESTYLE.lastColumn]}>
@@ -96,8 +98,8 @@ const Message = (props) => {
     );
 
     return (
-        <View style={{width: '93%', }}>
-            <SafeAreaView style={{backgroundColor: COLORS.white}}>
+        <View style={{ width: '93%', }}>
+            <SafeAreaView style={{ backgroundColor: COLORS.white }}>
                 {!isAddMessage ?
                     <>
                         <HeaderWhitepupilMessage
@@ -124,7 +126,7 @@ const Message = (props) => {
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
                 </View> */}
                         </View>
-                        <View style={{backgroundColor:COLORS.greyBack}}>
+                        <View style={{ backgroundColor: COLORS.greyBack }}>
                             {isLoading ?
                                 <ActivityIndicator
                                     style={{ flex: 1, marginTop: 20 }}
@@ -141,9 +143,10 @@ const Message = (props) => {
                                         showsVerticalScrollIndicator={false}
                                     />
                                     :
-                                    <View style={{ height: 100, justifyContent: 'center' }}>
-                                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    </View>
+                                    // <View style={{ height: 100, justifyContent: 'center' }}>
+                                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
                             }
                         </View>
                     </>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Image, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import { EndPoints } from "../../../service/EndPoints";
 import { Service } from "../../../service/Service";
 import COLORS from "../../../utils/Colors";
@@ -24,7 +25,7 @@ const GroupSetUp = () => {
 
     useEffect(() => {
 
-        loadGroup()        
+        loadGroup()
 
         setPupilLoading(true)
 
@@ -97,8 +98,8 @@ const GroupSetUp = () => {
                 reset()
                 loadGroup()
                 if (selectedGroup.length == 0) {
-                showMessage(MESSAGE.groupCreated)
-                } else{
+                    showMessage(MESSAGE.groupCreated)
+                } else {
                     showMessage(MESSAGE.groupUpdated)
                 }
             } else {
@@ -262,9 +263,10 @@ const GroupSetUp = () => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
                         :
-                        <View>
-                            <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        </View>
+                        // <View>
+                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // </View>
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
             <View style={PAGESTYLE.middle}>
@@ -319,7 +321,8 @@ const GroupSetUp = () => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false} />
                         :
-                        <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
         </SafeAreaView>

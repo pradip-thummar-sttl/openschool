@@ -43,23 +43,15 @@ const ParentZoneSchoolDetails = (props) => {
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
-                        <View style={PAGESTYLE.managementDetail}>
+                        <View style={PAGESTYLE.profile}>
                             <View style={PAGESTYLE.managementBlockTop}>
                                 <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
-                                    {/* <View style={PAGESTYLE.topBannerParent}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => { }}>
-                                            <Text style={PAGESTYLE.topBannerBtn1}>Save Changes</Text>
-                                        </TouchableOpacity>
-                                    </View> */}
                                 </ImageBackground>
                             </View>
                         </View>
                         <View style={[PAGESTYLE.titleInnerRow]}>
                             <Text style={PAGESTYLE.titleInner}>School details</Text>
                         </View>
-
                         <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, PAGESTYLE.profileFormTopSpace]}>
                             <View>
                                 <Text style={PAGESTYLE.fieldInputLabel}>School name</Text>
@@ -67,7 +59,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={[STYLE.commonInput1, PAGESTYLE.fullInput]}
+                                        style={[PAGESTYLE.commonInput, PAGESTYLE.fullInput]}
                                         placeholder="Moseley Church of England School"
                                         editable={false}
                                         maxLength={40}
@@ -84,7 +76,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={[STYLE.commonInput1, PAGESTYLE.fullInput]}
+                                        style={[PAGESTYLE.commonInput, PAGESTYLE.fullInput]}
                                         placeholder="Enter Unique Code"
                                         autoCapitalize={false}
                                         editable={false}
@@ -103,7 +95,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput1}
+                                        style={PAGESTYLE.commonInput}
                                         placeholder="Miss Rachel Barker"
                                         autoCapitalize={false}
                                         editable={false}
@@ -120,7 +112,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput1}
+                                        style={PAGESTYLE.commonInput}
                                         placeholder="01632 960600"
                                         autoCapitalize={false}
                                         editable={false}
@@ -142,7 +134,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput1}
+                                        style={PAGESTYLE.commonInput}
                                         placeholder="23 York Road"
                                         autoCapitalize={false}
                                         editable={false}
@@ -158,7 +150,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput1}
+                                        style={PAGESTYLE.commonInput}
                                         placeholder="Moseley"
                                         autoCapitalize={false}
                                         editable={false}
@@ -176,7 +168,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput1}
+                                        style={PAGESTYLE.commonInput}
                                         placeholder="Birmingham"
                                         autoCapitalize={false}
                                         editable={false}
@@ -192,7 +184,7 @@ const ParentZoneSchoolDetails = (props) => {
                                     <TextInput
                                         returnKeyType={"next"}
                                         onSubmitEditing={() => { this.t2.focus(); }}
-                                        style={STYLE.commonInput1}
+                                        style={PAGESTYLE.commonInput}
                                         placeholder="B13 1LT"
                                         autoCapitalize={false}
                                         editable={false}

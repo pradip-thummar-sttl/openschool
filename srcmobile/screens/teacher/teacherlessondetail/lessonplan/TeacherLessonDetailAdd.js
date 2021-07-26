@@ -30,6 +30,7 @@ import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
+// import ImagePicker from 'react-native-image-picker';
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
 
 const { DialogModule, Dialog } = NativeModules;
@@ -58,7 +59,7 @@ const TLDetailAdd = (props) => {
     const [pupils, setPupils] = useState([]);
     const [filteredPupils, setFilteredPupils] = useState([]);
 
-    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'])
 
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -73,18 +74,18 @@ const TLDetailAdd = (props) => {
     const [isRecordingStarted, setRecordingStarted] = useState(false)
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
+    }
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             console.log('response of GetSubjectBySchoolId response', res)
@@ -336,19 +337,38 @@ const TLDetailAdd = (props) => {
 
     const onCameraOnly = () => {
         var arr = [...recordingArr]
-        launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
+        const options = {
+            mediaType: "video",
+            cameraType: "back"
+        };
+        launchCamera(options, (response) => {
+            // Same code as in above section!
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
+
             } else {
                 console.log('response', response);
                 arr.push(response)
 
                 setRecordingArr(arr)
             }
+        });
+        // launchCamera({ mediaType: 'video',  }, (response) => {
+        //     // setResponse(response);
+        //     if (response.errorCode) {
+        //         showMessage(response.errorCode)
+        //     } else if (response.didCancel) {
+        //         console.log('did cnacel');
+        //         showMessage('did cnacel')
+        //     } else {
+        //         console.log('response', response);
+        //         arr.push(response)
 
-        })
+        //         setRecordingArr(arr)
+        //     }
+
+        // })
         setAddRecording(false)
 
     }
@@ -499,7 +519,7 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy,{width:wp(22)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
@@ -604,6 +624,13 @@ const TLDetailAdd = (props) => {
             saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
             let userIDs = [], userNames = [], names = [];
+
+            selectedParticipants.PupilList.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.PupilName)
+            });
+
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
@@ -693,7 +720,8 @@ const TLDetailAdd = (props) => {
 
             data.append('recording', {
                 uri: element.uri,
-                name: element.fileName,
+                // name: element.fileName,
+                name: 'MY_RECORDING.mp4',
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
@@ -824,15 +852,15 @@ const TLDetailAdd = (props) => {
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                        <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                        <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                     </View>
                                 </View>
                             </View>

@@ -27,14 +27,18 @@ const HeaderPM = (props) => {
     const [selectedPupilIndex, setSelectedPupilIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
+    const [childrenList, setChildrenList] = useState(props.data)
     const [keyword, setKeyword] = useState('')
+
+    useEffect(() => {
+        setChildrenList(props.data);
+    }, [props.data]);
 
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
             setKeyword('')
-            textInput.current.clear()
+            // textInput.current.clear()
         } else {
             props.onSearch()
         }
@@ -55,16 +59,16 @@ const HeaderPM = (props) => {
                 <View style={styles.headerRight}>
                     <Menu>
                         <MenuTrigger><Image style={styles.userparent} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
-                        <MenuOptions>
+                        <MenuOptions style={styles.filterCard}>
                             {childrenList.map((item, index) => (
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => setSelectedPupilIndex(index)}>
+                                        onPress={() => {props.onSwitchPupil(item); setSelectedPupilIndex(index)}}>
                                         <View style={styles.filterList}>
                                             <View style={styles.filterListSub}>
                                                 <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
-                                                <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>{item.FirstName} {item.LastName}</Text>
+                                                <Text numberOfLines={1} style={{ ...styles.filterListText, fontFamily: FONTS.fontSemiBold, width: hp(15) }}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                             {index == selectedPupilIndex ?
                                                 <Image source={Images.CheckIcon} style={styles.checkMark} />
@@ -75,7 +79,7 @@ const HeaderPM = (props) => {
                                     </TouchableOpacity>
                                 </MenuOption>
                             ))}
-                            <MenuOption style={styles.borderList}>
+                            <MenuOption>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => props.navigateToAddNewUser()}>
@@ -96,67 +100,67 @@ const HeaderPM = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.searchParent}>
-                <View style={styles.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                    </TouchableOpacity>
-                    <TextInput
-                        ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, topic name etc"
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            setKeyword(keyword);
-                            props.onSearchKeyword(keyword);
-                        }} />
-                    <Menu>
-                        <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
-                        <MenuOptions>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Title</Text>
-                                        {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
+            {tabIndex == 0 ?
+                <View style={styles.searchParent}>
+                    <View style={styles.searchInner}>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => {
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
+                            }}>
+                            <Image style={{ height: 20, resizeMode: 'contain' }}
+                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        </TouchableOpacity>
+                        <TextInput
+                            ref={textInput}
+                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                            placeholder="Search news"
+                            placeholderTextColor={COLORS.menuLightFonts}
+                            onChangeText={keyword => {
+                                setKeyword(keyword);
+                                props.onSearchKeyword(keyword);
+                            }} />
+                        <Menu>
+                            <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                            <MenuOptions style={[styles.filterCard, styles.dateFilter]}>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Title</Text>
+                                            {selectedIndex == 0 ?
+                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Date</Text>
+                                            {selectedIndex == 1 ?
+                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                            </MenuOptions>
+                        </Menu>
+                    </View>
                 </View>
-                {/* <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity> */}
-            </View>
+                :
+                null
+            }
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
@@ -179,12 +183,12 @@ const HeaderPM = (props) => {
                                 onPress={() => { props.setSelectedTabIndex(2); setSelectedTab(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>MESSAGE</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
                                 onPress={() => { props.setSelectedTabIndex(3); setSelectedTab(3) }}>
                                 <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>FAQ</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
@@ -213,8 +217,8 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
-        paddingBottom: 5,
-        paddingLeft: hp(2),
+        paddingBottom: 15,
+        paddingLeft: hp(2.46),
         paddingRight: hp(2),
     },
     headerMain: {
@@ -225,7 +229,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
@@ -248,14 +252,14 @@ const styles = StyleSheet.create({
     userparent: {
         width: hp(3.81),
         height: hp(3.81),
-        resizeMode: 'contain',
+        borderRadius:hp(3.81/2),
         marginRight: hp(1.5),
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
-        resizeMode: 'contain',
         marginRight: hp(1),
+        borderRadius:hp(3.81/2)
     },
     userparentInMenuAdd: {
         width: hp(1.47),
@@ -393,9 +397,8 @@ const styles = StyleSheet.create({
     filterList: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: hp(0.5),
         alignItems: 'center',
-        paddingBottom: hp(0.5),
+        paddingVertical: 5,
         flex: 1,
     },
     filterListSub: {
@@ -430,7 +433,6 @@ const styles = StyleSheet.create({
     },
     headerRight: {
         alignSelf: 'flex-end',
-        right: -5,
         alignItems: 'center',
         flexDirection: 'row',
     },
@@ -507,11 +509,11 @@ const styles = StyleSheet.create({
     },
     whiteBg: {
         paddingBottom: hp(1),
-        paddingTop: hp(1),
+        paddingTop: hp(1.7),
         flexDirection: 'row',
         alignItems: 'center',
-        paddingRight: hp(2),
-        paddingLeft: hp(2),
+        paddingRight: hp(0),
+        paddingLeft: hp(2.46),
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -531,5 +533,23 @@ const styles = StyleSheet.create({
     },
     tabsTextSelected: {
         color: COLORS.buttonGreen,
+    },
+    filterCard: {
+        backgroundColor: COLORS.white,
+        position: 'absolute',
+        top: 50,
+        right: 0,
+        width: 238,
+        padding: 10,
+        paddingVertical: 0,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 4, },
+        shadowOpacity: 0.16,
+        shadowRadius: 6,
+        borderRadius: 6,
+    },
+    dateFilter: {
+        width: 180,
+        top: 25,
     },
 });

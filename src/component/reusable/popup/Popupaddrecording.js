@@ -10,6 +10,8 @@ import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../utils/Constant";
+import { Download } from "../../../utils/Download";
+
 const Popupaddrecording = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -20,6 +22,14 @@ const Popupaddrecording = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+
+    const onCameraOnly = () => {
+        toggleModal();
+        setTimeout(() => {
+            props.onCameraOnly()
+        }, 1000);
+
+    }
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -73,10 +83,11 @@ const Popupaddrecording = (props) => {
                     </TouchableOpacity>
                     :
                     <TouchableOpacity
-                        // activeOpacity={opacity}
-                        // onPress={() => props.onRemoveRecording()}
+                        activeOpacity={opacity}
+                        onPress={() => Download(props.recordingArr[0])}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
-                        <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text>
+                        {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
+                        <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
                     </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>
@@ -98,7 +109,7 @@ const Popupaddrecording = (props) => {
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => { toggleModal(); props.onCameraOnly() }} style={styles.entryData}>
+                                    <TouchableOpacity onPress={() => { onCameraOnly() }} style={styles.entryData}>
                                         <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
@@ -165,12 +176,13 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: hp(23.5),
+        width: 154,
+        height: 40,
         padding: hp(1.43),
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
         borderWidth: 1,
-        borderColor: COLORS.videoLinkBorder,
+        borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
@@ -181,7 +193,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
         borderWidth: 1,
-        borderColor: COLORS.videoLinkBorder,
+        borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
     },
@@ -192,5 +204,11 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: 10,
+    },
+    recordLinkText: {
+        fontSize: 12,
+        fontFamily: FONTS.fontBold,
+        textTransform: 'uppercase',
+        color: COLORS.darkGrayIntro,
     },
 });

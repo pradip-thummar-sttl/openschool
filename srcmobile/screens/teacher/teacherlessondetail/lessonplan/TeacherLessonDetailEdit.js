@@ -80,7 +80,7 @@ const TLDetailEdit = (props) => {
     const [pupils, setPupils] = useState([]);
     const [filteredPupils, setFilteredPupils] = useState([]);
 
-    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00', '01:30', '02:00', '02:30', '03:00'])
+    const [timeSlot, setTimeSlots] = useState(['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'])
 
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedFromTime, setSelectedFromTime] = useState('')
@@ -93,18 +93,18 @@ const TLDetailEdit = (props) => {
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
+    }
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             if (res.code == 200) {
@@ -487,7 +487,7 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2,{width:wp(22)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
@@ -592,6 +592,13 @@ const TLDetailEdit = (props) => {
             saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
             let userIDs = [], userNames = [], names = [];
+
+            selectedParticipants.PupilList.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.PupilName)
+            });
+
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
@@ -684,7 +691,8 @@ const TLDetailEdit = (props) => {
 
                 data.append('recording', {
                     uri: element.uri,
-                    name: element.fileName,
+                    // name: element.fileName,
+                    name: 'MY_RECORDING.mp4',
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
             }
@@ -872,15 +880,15 @@ const TLDetailEdit = (props) => {
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                                        <ToggleSwitch isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                     </View>
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                                        <ToggleSwitch isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
                                     </View>
                                 </View>
                             </View>
@@ -898,7 +906,7 @@ const TLDetailEdit = (props) => {
                                     materialArr.length != 0 ? materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{item.originalname}</Text>
                                                 {item.uri ?
                                                     <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                         <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />

@@ -58,4 +58,7 @@ export const EndPoints = {
 
     LessionStartEnd:"lessionstartend",
     LessonCheck:"lessoncheck",
+    AddInstantReward: 'addinstantreward',
+    PupilUploadProfile: 'pupiluploadProfile',
+    GetTeachersList: 'getteacherslist',
 }

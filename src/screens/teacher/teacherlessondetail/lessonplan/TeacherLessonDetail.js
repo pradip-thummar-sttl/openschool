@@ -68,8 +68,10 @@ const TLDetail = (props) => {
                         null
                     }
                     <View style={PAGESTYLE.requirementofClass}>
-                        <View style={STYLE.hrCommon}></View>
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                        <View style={PAGESTYLE.hrTagMIddleReverse}>
+                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthSmall]}></View>
+                        </View>
                         <FlatList
                             data={props.lessonData.CheckList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
@@ -83,8 +85,10 @@ const TLDetail = (props) => {
                         />
                     </View>
                     <View style={PAGESTYLE.checkBoxGrpWrap}>
-                        <View style={STYLE.hrCommon}></View>
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
+                        <View style={PAGESTYLE.hrTagMIddleReverse}>
+                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
+                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthMidium]}></View>
+                        </View>
                         <View style={PAGESTYLE.checkBoxGrp}>
                             <FlatList
                                 data={props.lessonData.PupilList}
@@ -101,19 +105,21 @@ const TLDetail = (props) => {
                         </View>
                     </View>
                     <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
-                        <View style={STYLE.hrCommon}></View>
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                        <View style={PAGESTYLE.hrTagMIddleReverse}>
+                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
+                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
+                        </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                            <ToggleSwitch isOn={props.lessonData.LiveSession} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.LiveSession} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
-                            <ToggleSwitch isOn={props.lessonData.Publish} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.Publish} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                         <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
-                            <ToggleSwitch isOn={props.lessonData.IsVotingEnabled} onToggle={isOn => console.log("changed to : ", isOn)} />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.IsVotingEnabled} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
                     </View>
                 </View>
@@ -125,7 +131,7 @@ const TLDetail = (props) => {
                             props.lessonData.MaterialList.map((item, index) => {
                                 return (
                                     <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>
@@ -157,7 +163,7 @@ const TLDetail = (props) => {
                             props.lessonData.RecordingList.map((item, index) => {
                                 return (
                                     <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>

@@ -85,6 +85,7 @@
 		887374F2265E35B70035B788 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374F1265E35A20035B788 /* libresolv.tbd */; };
 		889633C62667879E00E6DE4F /* CallModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 889633C52667879E00E6DE4F /* CallModule.m */; };
 		88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D20504265E253200D97116 /* RCTCalendarModule.m */; };
+		88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */; };
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
 		C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */; };
 		DB01CB6E85DE81B7E47A0B5F /* libPods-OpenSchool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */; };
@@ -241,6 +242,8 @@
 		889633C42667879E00E6DE4F /* CallModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallModule.h; sourceTree = "<group>"; };
 		889633C52667879E00E6DE4F /* CallModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallModule.m; sourceTree = "<group>"; };
 		88D20504265E253200D97116 /* RCTCalendarModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
+		88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardVC.h; sourceTree = "<group>"; };
+		88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardVC.m; sourceTree = "<group>"; };
 		CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenSchool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5987D201010499FA5C00400 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -453,6 +456,8 @@
 				882EA021266A1DF4000B9813 /* StatsView.m */,
 				882EA022266A1DF4000B9813 /* ZoomedView.h */,
 				882EA023266A1DF4000B9813 /* ZoomedView.m */,
+				88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */,
+				88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */,
 			);
 			name = CallViewController;
 			sourceTree = "<group>";
@@ -903,7 +908,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 7NDT2F7TY6;
 						LastSwiftMigration = 1120;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1146,6 +1151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */,
 				882EA02C266A1DF5000B9813 /* ZoomedView.m in Sources */,
 				88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */,
 				882EA06E266A1F58000B9813 /* Settings.m in Sources */,

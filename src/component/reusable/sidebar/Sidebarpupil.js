@@ -20,7 +20,7 @@ const Sidebar = (props) => {
 
         if (isSmall) {
             Animated.timing(animationValue, {
-                toValue: hp(29.42),
+                toValue: 225,
                 duration: 500
             }).start(() => {
                 action(false)
@@ -28,7 +28,7 @@ const Sidebar = (props) => {
         }
         else {
             Animated.timing(animationValue, {
-                toValue: hp(9.50),
+                toValue: 72,
                 duration: 500
             }).start(() => {
                 action(true)
@@ -49,8 +49,8 @@ const Sidebar = (props) => {
                     {
                         isSmall? null:
                         <View style={styles.profileTextMain}>
-                            <Text style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text style={styles.profileDesi}>{User.user.UserType}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
                         </View>
                     }
                 </TouchableOpacity>
@@ -73,7 +73,7 @@ const Sidebar = (props) => {
                         />
                         {
                             isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
+                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
@@ -126,7 +126,7 @@ const Sidebar = (props) => {
                         isSmall? null:
                         <>
                             <View style={styles.profileTextMain}>
-                                <Text style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={[styles.profileTitleBottom,{width:hp(12)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             </View>
                             <TouchableOpacity style={styles.moreMenu}>
                                 <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -166,13 +166,12 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: hp(1.5),
-        paddingBottom: hp(2.0),
-        paddingLeft: hp(1.5),
+        paddingTop: 20,
+        paddingBottom: 0,
+        paddingHorizontal: 10,
     },
     profileTextMain: {
-        paddingLeft: hp(1.5),
-        width: hp(19.53),
+        paddingLeft: 15,
     },
     profileTitle: {
         fontSize: hp(2.0),
@@ -186,15 +185,12 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     mainMenu: {
-        paddingTop: hp(4.5),
+        paddingTop: 40,
     },
     menuItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: hp(2.2),
-        paddingTop: hp(2.2),
-        paddingRight: hp(2.0),
-        paddingBottom: hp(2.2),
+        padding: hp(2),
         borderRadius: hp(1.5),
         marginBottom: hp(0.9),
     },
@@ -219,21 +215,24 @@ const styles = StyleSheet.create({
     },
     userInfobottom: {
         position: 'absolute',
-        bottom: hp(1),
-        borderWidth: 1,
+        bottom: 0,
+        // borderWidth: 1,
         left: -1,
-        width: hp(29.6),
         borderColor: COLORS.bottomProfileLightBorder,
-        paddingTop: hp(1),
-        paddingBottom: hp(1),
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingHorizontal: 20,
+        width: '100%',
     },
     bottomUser: {
-        width: hp(4.2),
-        height: hp(4.2),
+        width: 32,
+        height: 32,
+        // resizeMode: 'contain',
+        borderRadius: 16,
     },
     profileTitleBottom: {
-        fontSize: hp(2.0),
-        color: COLORS.lightGray,
+        fontSize: hp(1.82),
+        color: COLORS.menuLightFonts,
         fontFamily: FONTS.fontSemiBold,
     },
     menuIcon: {
@@ -242,7 +241,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     moreIcon: {
-        width: hp(3),
+        width: 18,
+        height: 5,
         resizeMode: 'contain',
     },
     cartoonIcon: {
@@ -253,5 +253,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: hp(1.5),
         right: hp(-10.5),
+    },
+    moreMenu: {
+        // position: 'absolute',
+        marginLeft:hp(4),
+        right: 0,
     },
 });

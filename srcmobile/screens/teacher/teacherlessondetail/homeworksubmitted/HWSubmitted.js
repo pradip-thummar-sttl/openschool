@@ -13,6 +13,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { baseUrl, opacity } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
+import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../../utils/Messages";
 var moment = require('moment');
 
 const Pupillist = (props, item) => (
@@ -24,8 +26,8 @@ const Pupillist = (props, item) => (
                 <View style={PAGESTYLE.thumbAlign}>
                     <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                     <View>
-                        <Text style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.PupilName}</Text>
-                        <Text style={PAGESTYLE.groupName}>{props.item.GroupName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName, {width:wp(45)}]}>{props.item.PupilName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName,{width:wp(45)}]}>{props.item.GroupName}</Text>
                     </View>
                 </View>
                 <View>
@@ -169,9 +171,10 @@ const TLHomeWorkSubmitted = (props) => {
                             showsVerticalScrollIndicator={false}
                         />
                         :
-                        <View style={{ height: 100, justifyContent: 'center' }}>
-                            <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        </View>
+                        // <View style={{ height: 100, justifyContent: 'center' }}>
+                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                        // </View>
+                        <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noHomework1} title2={MESSAGE.noHomework2} />
                 }
             </View>
         </View>

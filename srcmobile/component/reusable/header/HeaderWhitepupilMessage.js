@@ -46,7 +46,8 @@ export default HeaderWhitepupilMessage;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingRight: hp(2.46),
+        paddingRight: hp(2),
+        paddingLeft: hp(2),
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
@@ -54,15 +55,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingVertical: 15,
         backgroundColor: COLORS.white,
         width: '100%',
+        paddingTop: hp(1),
         zIndex: 1,
     },
     notificationBar: {

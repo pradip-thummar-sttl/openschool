@@ -262,8 +262,8 @@ export default StyleSheet.create({
         paddingRight: hp(1.95),
         paddingBottom: hp(2.60),
         paddingTop: hp(3),
-        position:'relative',
-        height: '100%',
+        // position:'relative',
+        // height: '100%',
     },
     titleTab: {
         fontSize: hp(2.86),

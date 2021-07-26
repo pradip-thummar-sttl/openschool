@@ -34,6 +34,7 @@ export default StyleSheet.create({
         paddingLeft: hp(1.84),
         paddingRight: hp(1.84),
         fontFamily: FONTS.fontRegular,
+        // paddingLeft:10
     },
     commonInputGrayBack: {
         color:COLORS.darkGray,
@@ -130,6 +131,19 @@ export default StyleSheet.create({
         alignSelf: 'center',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
+    },
+    commonButtonBordered1: {
+        flex: 0.5,
+        alignItems: 'center',
+        backgroundColor: COLORS.transparent,
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        borderRadius: hp(0.9),
+        overflow: 'hidden',
+        textAlign: 'center',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.white,
     },
     commonFonts: {
         color: COLORS.darkGray,

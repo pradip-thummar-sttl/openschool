@@ -305,7 +305,7 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText,{width:wp(75)}]}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -364,7 +364,7 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.toggleBox}>
                                     <View style={PAGESTYLE.toggleGrpBox}>
                                         <Text style={PAGESTYLE.toggleText}>Include homework</Text>
-                                        <ToggleSwitch
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton}
                                             isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
                                         />
                                     </View>
@@ -386,7 +386,7 @@ const TLHomeWork = (props) => {
                             </View>
                         </View>
                         <View style={PAGESTYLE.lessonDesc}>
-                            <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
+                            <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
                             <TextInput
                                 multiline={true}
                                 numberOfLines={4}

@@ -2,7 +2,7 @@ import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
-import { baseUrl } from './Constant';
+import { baseUrl, showMessage } from './Constant';
 export const Download = (item) => {
     if (Platform.OS === 'ios') {
         downloadFile(item);
@@ -91,7 +91,7 @@ export const downloadFile = (item) => {
             console.log('hello avy')
         })
         .catch(error => {
-            // error
+            showMessage('Sorry, unable to find compatible App on your device')
         }).catch(error=>{
             console.log('hello error')
 

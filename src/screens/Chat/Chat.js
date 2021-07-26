@@ -56,14 +56,12 @@ const Chat = (props) => {
     }, [props.tabs])
 
     const handleMessage = event => {
-        console.log('log of event message', event);
-        var mesage = messages
+        // var mesage = messages
         const message = event.message;
+        console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
-            const text = message.text || message;
-            // var mesage = [...messages]
-            mesage.push(event)
-            addMessage(mesage);
+            // mesage.push(event)
+            addMessage(messages => [...messages, event]);
         }
     };
 
@@ -76,6 +74,10 @@ const Chat = (props) => {
         // } else {
         //     channel = channels[2]
         // }
+        if (message.trim().length == 0) {
+            return
+        }
+        
         message = message + '#@#' + User.user.FirstName + ' ' + User.user.LastName + '#@#' + User.user.ProfilePicture
 
         if (message) {
@@ -171,7 +173,10 @@ const Chat = (props) => {
                 }
 
                 <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
-                    <KeyboardAwareScrollView >
+                    <KeyboardAwareScrollView enableOnAndroid={true}
+                        extraScrollHeight={90}
+                        scrollEnabled
+                        enableAutomaticScroll={(Platform.OS === 'ios')} >
 
                         <View style={Styles.mesagesView}>
                             <FlatList
@@ -182,7 +187,7 @@ const Chat = (props) => {
                                             <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
                                             <View style={Styles.messageSubCell}>
                                                 <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
-                                                <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
+                                                <Text style={[Styles.messageText,{width:props.tabs === 1 ?wp(50):wp(80)}]}>{item.message.split('#@#')[0]}</Text>
                                             </View>
                                         </View>
                                     )

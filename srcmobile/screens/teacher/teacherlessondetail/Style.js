@@ -321,9 +321,10 @@ export default StyleSheet.create({
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
         // backgroundColor: COLORS.greyplaceholder,
-        borderRadius: 20,
+        borderRadius: hp(1.25),
+        // backgroundColor:'red'
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -360,7 +361,7 @@ export default StyleSheet.create({
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
         width: '100%',
-        height: hp(30.05),
+        // height: hp(30.05),
         borderRadius: 10,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
@@ -574,7 +575,7 @@ export default StyleSheet.create({
     },
     commonInputTextareaNormal: {
         width: '100%',
-        height: hp(14.84),
+        // height: hp(14.84),
         borderWidth: 1,
         textAlignVertical: 'top',
         borderColor: COLORS.videoLinkBorder,
@@ -860,9 +861,10 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         alignItems: 'center',
         borderBottomColor: COLORS.lightGrayPupil,
-        marginBottom: hp(2),
+        marginBottom: hp(1),
         padding: hp(1),
-        top: hp(2),
+        paddingBottom: hp(2),
+        top: hp(1),
     },
     userThumb: {
         width: hp(6.25),

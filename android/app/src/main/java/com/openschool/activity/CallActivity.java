@@ -1,8 +1,11 @@
 package com.openschool.activity;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -12,12 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import com.facebook.react.bridge.Callback;
 
 import com.openschool.R;
 import com.openschool.fragments.AudioConversationFragment;
 import com.openschool.fragments.BaseConversationFragment;
 import com.openschool.fragments.ConversationFragmentCallbackListener;
 import com.openschool.fragments.OnCallEventsController;
+import com.openschool.fragments.ScreenShareFragment;
 import com.openschool.fragments.VideoConversationFragment;
 import com.openschool.util.Consts;
 import com.openschool.util.FragmentExecuotr;
@@ -35,6 +40,7 @@ import com.quickblox.videochat.webrtc.AppRTCAudioManager;
 import com.quickblox.videochat.webrtc.BaseSession;
 import com.quickblox.videochat.webrtc.QBRTCCameraVideoCapturer;
 import com.quickblox.videochat.webrtc.QBRTCConfig;
+import com.quickblox.videochat.webrtc.QBRTCScreenCapturer;
 import com.quickblox.videochat.webrtc.QBRTCTypes;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 
@@ -81,10 +87,13 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private String currentUserID;
     private String currentName;
     private String teacherQBUserID;
+    private String title;
+    private static Callback _callback;
 
 
-    public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID) {
+    public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID, String title, Callback callBack) {
 
+        _callback = callBack;
         Intent intent = new Intent(context, CallActivity.class);
         intent.putExtra(Consts.EXTRA_DIALOG_ID, dialogID);
         intent.putExtra(Consts.EXTRA_DIALOG_OCCUPANTS, (Serializable) occupants);
@@ -94,6 +103,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         intent.putExtra(Consts.EXTRA_CURRENTUSERNAME, currentName);
         intent.putExtra(Consts.EXTRA_DIALOG_IS_TEACHER, isTeacher);
         intent.putExtra(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
+        intent.putExtra(Consts.TITLE, title);
 
         context.startActivity(intent);
     }
@@ -150,6 +160,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         currentName = getIntent().getStringExtra(Consts.EXTRA_CURRENTUSERNAME);
         isTeacher = getIntent().getBooleanExtra(Consts.EXTRA_DIALOG_IS_TEACHER, false);
         teacherQBUserID = getIntent().getStringExtra(Consts.EXTRA_TEACHER_USER_ID);
+        title = getIntent().getStringExtra(Consts.TITLE);
     }
 
     private void initAudioManager() {
@@ -294,6 +305,34 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         }
     }
 
+    @TargetApi(21)
+    @Override
+    public void onStartScreenSharing() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+        QBRTCScreenCapturer.requestPermissions(CallActivity.this);
+    }
+
+    private void startScreenSharing(final Intent data) {
+        ScreenShareFragment screenShareFragment = ScreenShareFragment.newIntstance();
+        FragmentExecuotr.addFragmentWithBackStack(getSupportFragmentManager(), R.id.fragment_container, screenShareFragment, ScreenShareFragment.TAG);
+        currentSession.getMediaStreamManager().setVideoCapturer(new QBRTCScreenCapturer(data, null));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        Log.i(TAG, "onActivityResult requestCode=" + requestCode + ", resultCode= " + resultCode);
+        if (requestCode == QBRTCScreenCapturer.REQUEST_MEDIA_PROJECTION) {
+            if (resultCode == Activity.RESULT_OK) {
+                startScreenSharing(data);
+                Log.i(TAG, "Starting screen capture");
+            } else {
+
+            }
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -411,6 +450,8 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         bundle.putString(Consts.EXTRA_CURRENTUSERNAME, currentName);
         bundle.putBoolean(Consts.EXTRA_DIALOG_IS_TEACHER, isTeacher);
         bundle.putString(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
+        bundle.putString(Consts.TITLE, title);
+
         BaseConversationFragment conversationFragment = BaseConversationFragment.newInstance(
                 isVideoCall
                         ? new VideoConversationFragment()
@@ -444,6 +485,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
     @Override
     public void onLeaveCurrentSession() {
+        _callback.invoke(null, "Live class ends");
         leaveCurrentSession();
     }
 

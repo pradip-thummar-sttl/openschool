@@ -16,36 +16,38 @@ import FONTS from '../../../utils/Fonts'
 import { Service } from '../../../service/Service';
 import { EndPoints } from '../../../service/EndPoints';
 import { User } from '../../../utils/Model';
+import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
+import MESSAGE from '../../../utils/Messages';
 var moment = require('moment');
 
 const Message = (props) => {
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
     const searchHeader = () => {
         return (
             <View style={PAGESTYLE.searchParent}>
@@ -63,9 +65,10 @@ const Message = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
+                        multiline={false}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                     <TouchableOpacity
                         activeOpacity={opacity}>
@@ -108,7 +111,7 @@ const Message = (props) => {
                 <TouchableOpacity
                     style={PAGESTYLE.buttonGroup}
                     onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refresh() })}>
-                    <Image style={PAGESTYLE.addIcon} source={Images.AddIconWhite} />
+                    <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} />
                 </TouchableOpacity>
             </View>
 
@@ -137,7 +140,7 @@ const Message = (props) => {
                         {/* <Text style={PAGESTYLE.groupText}>Group A</Text> */}
                     </View>
                     <View style={PAGESTYLE.secondRow}>
-                        <Text style={PAGESTYLE.titleText}>{item.item.Title}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.titleText,{width:'85%'}]}>{item.item.Title}</Text>
                         <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
                     </View>
                     <View style={item.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>
@@ -199,7 +202,7 @@ const Message = (props) => {
         <View>
             <HeaderWhitepupilMessage
                 onAlertPress={() => props.navigation.openDrawer()} />
-                
+
             {searchHeader()}
             {isLoading ?
                 <ActivityIndicator
@@ -216,9 +219,10 @@ const Message = (props) => {
                         extraData={selectedId}
                         showsVerticalScrollIndicator={false} />
                     :
-                    <View style={{ height: 100, justifyContent: 'center' }}>
-                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                    </View>
+                    // <View style={{ height: 100, justifyContent: 'center' }}>
+                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                    // </View>
+                    <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
             }
         </View>
     )

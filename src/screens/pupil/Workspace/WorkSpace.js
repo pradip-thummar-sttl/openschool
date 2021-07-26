@@ -14,6 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 const WorkSpace = (props) => {
     const [pathCount, setPathCount] = useState(-1)
     const [workSpace, setWorkSpace] = useState([])
+    const [isLoading, setLoading] = useState(false)
     const [workSpacePath, setWorkSpacePath] = useState("")
     console.log('props of workspace', props)
 
@@ -26,18 +27,18 @@ const WorkSpace = (props) => {
     console.log('====', workspaceList)
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
     const onSubmitWorkspace = () => {
         console.log(pathCount);
@@ -49,6 +50,7 @@ const WorkSpace = (props) => {
             return
         }
 
+        setLoading(true)
         const pathArr = workSpacePath.split('/')
         const ext = getFileExtention(workSpacePath)
         const data = new FormData()
@@ -74,6 +76,7 @@ const WorkSpace = (props) => {
             } else {
                 showMessage(res.message)
             }
+            setLoading(false)
         }, (err) => {
             console.log('Error of upload workspace', err)
         })
@@ -87,8 +90,9 @@ const WorkSpace = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <SafeAreaView />
+            {/* <SafeAreaView /> */}
             <WorkSpaceHeader
+                isLoading={isLoading}
                 isWorkspace={props.isWorkspace}
                 goBack={() => props.goBack()}
                 onAlertPress={() => props.onAlertPress()}
@@ -125,7 +129,7 @@ const WorkSpace = (props) => {
                                 )
                             }}
                             strokeWidthComponent={(w) => {
-                                return (<View style={PAGESTYLE.strokeWidthButton}>
+                                return (<View style={{ ...PAGESTYLE.strokeWidthButton, borderRadius: 100, width: 41, }}>
                                     <View style={{
                                         backgroundColor: 'white', marginHorizontal: 2.5,
                                         width: Math.sqrt(w / 3) * 10, height: Math.sqrt(w / 3) * 10, borderRadius: Math.sqrt(w / 3) * 10 / 2

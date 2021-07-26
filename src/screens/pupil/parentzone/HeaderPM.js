@@ -28,10 +28,14 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
-    const [childrenList, setChildrenList] = useState(User.user.ChildrenList)
+    const [childrenList, setChildrenList] = useState(props.data)
 
     useEffect(() => {
-        if (!isSearchActive) {
+        setChildrenList(props.data);
+    }, [props.data]);
+
+    useEffect(() => {
+        if (!isSearchActive && textInput.current) {
             props.onClearSearch()
             setKeyword('')
             textInput.current.clear()
@@ -50,8 +54,8 @@ const HeaderPM = (props) => {
                     <View style={PAGESTYLE.filterListWrapNew}>
                         <Menu>
                             <MenuTrigger style={PAGESTYLE.filterGroup}>
-                                <Image source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), resizeMode: 'contain', marginRight: hp(1), }} />
-                                <Text style={PAGESTYLE.selectDropList}>{childrenList.length == 0 ? '' : childrenList[selectedPupilIndex].FirstName + ' ' + childrenList[selectedPupilIndex].LastName}</Text>
+                                <Image source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
+                                <Text style={PAGESTYLE.selectDropList} numberOfLines={1} ellipsizeMode='tail'>{childrenList.length == 0 ? '' : childrenList[selectedPupilIndex].FirstName + ' ' + childrenList[selectedPupilIndex].LastName}</Text>
                                 <Image style={PAGESTYLE.dropArrow} source={Images.DropArrow} />
                             </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
@@ -59,21 +63,21 @@ const HeaderPM = (props) => {
                                     <MenuOption style={PAGESTYLE.borderList}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
-                                            onPress={() => { props.onSwitchPupil(childrenList[index]); setSelectedPupilIndex(index) }}>
+                                            onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
                                             <View style={PAGESTYLE.filterList}>
-                                                <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), resizeMode: 'contain', marginRight: hp(1), }} />
+                                                <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
                                                 <Text style={PAGESTYLE.filterListText}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                         </TouchableOpacity>
                                     </MenuOption>
                                 ))}
-                                <MenuOption style={PAGESTYLE.borderList}>
+                                <MenuOption>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => props.navigateToAddNewUser()}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Image style={PAGESTYLE.addIcon} source={Images.AddIcon} />
-                                            <Text style={PAGESTYLE.filterListText}>add new user</Text>
+                                            <Text style={PAGESTYLE.filterListTextAddUser}>add new user</Text>
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -83,14 +87,14 @@ const HeaderPM = (props) => {
 
                     </View>
 
-                    <TouchableOpacity onPress={() => props.onAlertPress()} style={PAGESTYLE.notificationBar}>
+                    <TouchableOpacity style={PAGESTYLE.notificationBar}>
                         <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} />
                     </TouchableOpacity>
 
                 </View>
 
             </View>
-            <View style={[PAGESTYLE.generalRow, PAGESTYLE.filterAlign]}>
+            <View style={[PAGESTYLE.filterAlign]}>
                 <View style={PAGESTYLE.tabLinks}>
                     <TouchableOpacity
                         activeOpacity={opacity}
@@ -107,11 +111,11 @@ const HeaderPM = (props) => {
                         onPress={() => { props.setSelectedTabIndex(2); setSelectedTab(2) }}>
                         <Text style={[PAGESTYLE.tabLinkGrey, tabIndex == 2 ? PAGESTYLE.tabLinkSelected : null]}>Chat</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => { props.setSelectedTabIndex(3); setSelectedTab(3) }}>
                         <Text style={[PAGESTYLE.tabLinkGrey, tabIndex == 3 ? PAGESTYLE.tabLinkSelected : null]}>Faq</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => { props.setSelectedTabIndex(4); setSelectedTab(4) }}>
@@ -123,34 +127,38 @@ const HeaderPM = (props) => {
                         <Text style={[PAGESTYLE.tabLinkGrey, tabIndex == 5 ? PAGESTYLE.tabLinkSelected : null]}>My School</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={PAGESTYLE.searchParent}>
-                    <View style={PAGESTYLE.searchInner}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => {
-                                keyword ?
-                                    isSearchActive ?
-                                        setSearchActive(false)
+                {tabIndex == 0 ?
+                    <View style={PAGESTYLE.searchParent}>
+                        <View style={PAGESTYLE.searchInner}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => {
+                                    keyword ?
+                                        isSearchActive ?
+                                            setSearchActive(false)
+                                            :
+                                            setSearchActive(true)
                                         :
-                                        setSearchActive(true)
-                                    :
-                                    null
-                            }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={Images.SearchIcon} />
-                        </TouchableOpacity>
-                        <TextInput
-                            ref={textInput}
-                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                            placeholder="Search message"
-                            maxLength={50}
-                            placeholderTextColor={COLORS.menuLightFonts}
-                            onChangeText={keyword => {
-                                setKeyword(keyword);
-                                props.onSearchKeyword(keyword);
-                            }} />
+                                        null
+                                }}>
+                                <Image style={{ height: 20, resizeMode: 'contain' }}
+                                    source={Images.SearchIcon} />
+                            </TouchableOpacity>
+                            <TextInput
+                                ref={textInput}
+                                style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                placeholder="Search message"
+                                maxLength={50}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={keyword => {
+                                    setKeyword(keyword);
+                                    props.onSearchKeyword(keyword);
+                                }} />
+                        </View>
                     </View>
-                </View>
+                    :
+                    null
+                }
             </View>
         </View>
     )

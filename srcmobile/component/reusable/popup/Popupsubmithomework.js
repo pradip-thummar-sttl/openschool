@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -24,9 +24,17 @@ const Popuphomework = (props) => {
                     <View style={styles.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
-                        <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}>
-                            <Text style={styles.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
-                        </TouchableOpacity>
+
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                style={styles.commonButtonGreenDashboardSide}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}>
+                                <Text style={styles.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
+                            </TouchableOpacity>
+                        }
                     </View>
                 </View>
             </Modal>

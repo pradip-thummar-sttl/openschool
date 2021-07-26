@@ -242,7 +242,7 @@ export default StyleSheet.create({
     checkBoxLabelText: {
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(2),
+        paddingLeft: Platform.OS === 'ios'? hp(1):hp(2),
         paddingRight: hp(2),
     },
     checkBoxLabelTextSubmit: {
@@ -321,6 +321,10 @@ export default StyleSheet.create({
         opacity: 0.4,
     },
     addIcon: {
+        width: hp(1.56),
+        resizeMode: 'contain',
+    },
+    addIcon4: {
         width: hp(1.56),
         resizeMode: 'contain',
     },
@@ -1545,13 +1549,10 @@ export default StyleSheet.create({
         height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
     },
     buttonGroup: {
-        position: 'relative',
         flexDirection: 'row',
-        alignItems: 'center',
         marginRight: hp(1.69),
         backgroundColor: COLORS.dashboardGreenButton,
         borderRadius: hp(1),
-        overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
         height: hp(5.20),
@@ -1657,30 +1658,24 @@ export default StyleSheet.create({
     // new message
     field1: {
         marginBottom: hp(2.5),
-        marginLeft: hp(2.5),
-        marginTop: wp(2),
+        paddingHorizontal: hp(2.46),
     },
     somePlaceholderStyle: {
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        paddingLeft: 10
+        fontSize: hp(1.56),
     },
     commonInputTextarea1: {
         height: hp(5.20),
-        width: wp(90),
+        width: '100%',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        borderRadius: hp(1),
-        // paddingTop: hp(1.5),
-        // paddingBottom: hp(1.5),
-        // paddingRight: hp(1.5),
-        paddingLeft: hp(1.5),
+        borderRadius: 6,
+        paddingHorizontal: hp(1.5),
+        paddingVertical: hp(1.5),
         marginTop: hp(1.3),
-        // marginLeft:hp(1.3),
-        // marginRight:wp(2),
-        fontSize: hp(1.50),
+        fontSize: hp(1.56),
         color: COLORS.darkGray,
-        lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
     copyInputParent: {
@@ -1691,7 +1686,8 @@ export default StyleSheet.create({
         width: wp(90)
     },
     inputHeight: {
-        height: wp(15)
+        height: hp(15),
+        paddingTop: hp(1.5),
     },
     buttonGroup1: {
         position: 'relative',

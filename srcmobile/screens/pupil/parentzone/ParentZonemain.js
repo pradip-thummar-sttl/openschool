@@ -13,6 +13,9 @@ import ParentZonePerformance from "./ParentZonePerformance";
 import { User } from "../../../utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
+import ParentChat from "./Chat/ParentChat";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../utils/Messages";
 var moment = require('moment');
 
 const MessageList = (props) => {
@@ -38,7 +41,8 @@ const MessageList = (props) => {
 const ParentZonemain = (props) => {
     const [isHide, action] = useState(true);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
-    const [pupilData, setPupilData] = useState(User.user.ChildrenList[0])
+    const [pupilData, setPupilData] = useState(User.user.ChildrenList)
+    const [pupilIndex, setPupilIndex] = useState(0)
 
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
@@ -97,7 +101,8 @@ const ParentZonemain = (props) => {
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderPM
-                    onSwitchPupil={(pupilData) => setPupilData(pupilData)}
+                    onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
+                    data={pupilData}
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
@@ -121,28 +126,31 @@ const ParentZonemain = (props) => {
                                 extraData={selectedId}
                                 showsVerticalScrollIndicator={false} />
                             :
-                            <View style={{ height: 100, justifyContent: 'center' }}>
-                                <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            </View>
+                            // <View style={{ height: 100, justifyContent: 'center' }}>
+                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            // </View>
+                            <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
 
                     :
                     selectedTabIndex == 1 ?
                         <ParentZonePerformance
-                            data={pupilData} />
+                            data={pupilData[pupilIndex]} />
                         :
                         selectedTabIndex == 2 ?
-                            null
+                            <ParentChat
+                                data={pupilData[pupilIndex]}
+                                tabs={1} />
                             :
                             selectedTabIndex == 3 ?
                                 null
                                 :
                                 selectedTabIndex == 4 ?
                                     <ParentZoneProfile
-                                        data={pupilData}
-                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { data: pupilData })} />
+                                        data={pupilData[pupilIndex]}
+                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { onGoBack: () => { setPupilData(User.user.ChildrenList); props.navigation.goBack() }, data: pupilData[pupilIndex] })} />
                                     :
                                     <ParentZoneSchoolDetails
-                                        data={pupilData} />
+                                        data={pupilData[pupilIndex]} />
                 }
             </View>
         </View>

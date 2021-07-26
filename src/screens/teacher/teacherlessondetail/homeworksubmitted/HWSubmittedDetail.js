@@ -43,19 +43,23 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
+
+    useEffect(() => {
+        onStarSelection(data.Rewards)
+    }, [])
 
     const isFieldsValidated = () => {
         if (!feedBack.trim()) {
@@ -70,7 +74,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
             formData.append('recording', {
                 uri: element.uri,
-                name: element.fileName,
+                // name: element.fileName,
+                name: 'MY_RECORDING.mp4',
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             });
         })
@@ -198,13 +203,12 @@ const TLHomeWorkSubmittedDetail = (props) => {
         setBronze(false)
         setSilver(false)
         setGold(false)
-        if (index === 0) {
+        if (index == 3) {
             setBronze(true)
-        } else if (index === 1) {
+        } else if (index == 6) {
             setSilver(true)
-        } else {
+        } else if (index == 9) {
             setGold(true)
-
         }
     }
 
@@ -261,7 +265,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             numberOfLines={4}
                                             defaultValue={data.HomeworkDescription}
                                             style={PAGESTYLE.commonInputTextareaNormal}
-                                        />
+                                            editable={false} />
                                     </View>
                                     <View style={PAGESTYLE.requirementofClass}>
                                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
@@ -271,7 +275,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                 renderItem={({ item }) => (
                                                     <View style={PAGESTYLE.checkBoxLabelLine}>
                                                         <CheckBox
-                                                            style={PAGESTYLE.checkMark}
+                                                            style={[PAGESTYLE.checkMark,{top:5}]}
                                                             value={item.IsCheck}
                                                             disabled
                                                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -290,10 +294,10 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 </View>
                                 <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>
                                     <View style={PAGESTYLE.uploadBoardBlock}>
-                                        <Text style={PAGESTYLE.uploaded}>Uploded Homework</Text>
+                                        <Text style={PAGESTYLE.uploaded}>Uploaded Homework</Text>
                                         <FlatList
                                             data={data.HomeworkList}
-                                            style={{ alignSelf: 'center', width: '100%', top: 10 }}
+                                            style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal:10 }}
                                             renderItem={({ item, index }) => (
                                                 <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
@@ -301,7 +305,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                     </View>
                                                 </TouchableOpacity>
                                             )}
-                                            numColumns={4}
+                                            numColumns={5}
                                             keyExtractor={(item, index) => index.toString()}
                                         />
                                     </View>
@@ -346,19 +350,19 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
                                     <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
-                                            <TouchableOpacity onPress={() => { onStarSelection(0) }} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => { !data.Marked ? onStarSelection(3) : null }} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Bronze star</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => { onStarSelection(1) }} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => { !data.Marked ? onStarSelection(6) : null }} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
                                                     <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Silver star</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => { onStarSelection(2) }} activeOpacity={opacity}>
+                                            <TouchableOpacity onPress={() => { !data.Marked ? onStarSelection(9) : null }} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
                                                     <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
                                                     <Text style={PAGESTYLE.starText}>Gold star</Text>

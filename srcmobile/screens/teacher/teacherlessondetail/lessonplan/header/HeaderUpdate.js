@@ -61,8 +61,8 @@ export default HeaderUpdate;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: wp(5.33),
-        paddingRight: wp(2.0),
+        paddingLeft: hp(2.46),
+        paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1.5),
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
+        marginRight: hp(2),
     },
     titleRow: {
         flexDirection: 'row',

@@ -283,11 +283,15 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginRight: hp(1.69),
     },
+    
     datetimeText: {
         fontSize: hp(1.72),
         marginLeft: hp(0.6),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+    },
+    grpElipsis: {
+        width: '50%',
     },
     mediaMain: {
         flexDirection: 'row',
@@ -384,11 +388,12 @@ export default StyleSheet.create({
         top: hp(0.2),
     },
     lessonPointText: {
-        fontSize: hp(1.85),
+        fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         marginLeft: hp(1),
+        width: '90%',
     },
     lessonstartButton: {
         flexDirection: 'row',
@@ -398,9 +403,9 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(5),
+        paddingBottom: hp(3),
         position: 'absolute',
-        bottom: hp(1.5),
+        bottom: hp(0),
         width: '100%',
         left: hp(1.95),
     }, 
@@ -519,6 +524,8 @@ export default StyleSheet.create({
     achivementRobot:{
         width: '100%',
         marginTop: hp(6),
+        justifyContent: 'center',
+        flexDirection: 'row',
     },
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
@@ -533,9 +540,6 @@ export default StyleSheet.create({
         shadowOffset: {width: 0,height: 6,},
         shadowOpacity: 0.8,
         shadowRadius: hp(5),
-        elevation: 1,
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
     },
     starCovertPoints:{
         fontSize: hp(3.125),
@@ -548,9 +552,11 @@ export default StyleSheet.create({
         paddingTop: hp(1.8),
     },
     rewardStar:{
-        width : Platform.OS == 'android' ? hp(55.5) : hp(43.48),
-        height:Platform.OS == 'android' ? hp(12.5): hp(9.98),
-        resizeMode: 'contain',
+        width : Platform.OS == 'android' ? hp(55.5) : '100%',
+        height:Platform.OS == 'android' ? hp(12.5): 85,
+    },
+    paddingDiv: {
+        paddingHorizontal: hp(1.84),
     },
     rewardStarMark:{
         justifyContent: 'space-around',

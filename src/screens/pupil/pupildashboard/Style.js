@@ -247,7 +247,7 @@ export default StyleSheet.create({
     tabcontent: {
         padding: hp(3.90),
         paddingBottom: hp(2.60),
-        height: hp(60),
+        // height: hp(60),
     },
     titleTab: {
         fontSize: hp(3.125),
@@ -284,7 +284,7 @@ export default StyleSheet.create({
     mediabar: {
         width: hp(4.16),
         height: hp(4.16),
-        borderRadius: hp(200),
+        borderRadius: hp(4.16/2),
         backgroundColor: COLORS.lightGrayPupil,
     },
     moreMedia: {

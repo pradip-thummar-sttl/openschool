@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid, NativeEventEmitter } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -24,6 +24,9 @@ import MESSAGE from "../../../utils/Messages";
 import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/PupilHomeWorkSubmitted";
 import PupilHomeWorkMarked from "../../pupil/pupillessondetail/homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../../pupil/pupillessondetail/homework/PupilHomeWorkDetail";
+import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import QB from "quickblox-react-native-sdk";
+import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -56,31 +59,67 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
-            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
-        return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-      }, []);
+        initApp(callBack => {
+            console.log('Pupil callBack', callBack);
+            handleIncommingCall()
+        });
 
-      const handleBackButtonClick=()=> {
+        if (Platform.OS === "android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+    }, []);
+
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
+
+    const handleIncommingCall = () => {
+        const emitter = new NativeEventEmitter(QB.webrtc)
+        Object.keys(QB.webrtc.EVENT_TYPE).forEach(key => {
+            emitter.addListener(QB.webrtc.EVENT_TYPE[key], eventHandler)
+        })
+    }
+
+    const eventHandler = (event) => {
+        const {
+            type, // type of the event (i.e. `@QB/CALL` or `@QB/REJECT`)
+            payload
+        } = event
+        const {
+            userId, // id of QuickBlox user who initiated this event (if any)
+            session, // current or new session
+            userInfo
+        } = payload
+        console.log('Event Received', event, payload);
+        switch (type) {
+            case QB.webrtc.EVENT_TYPE.CALL:
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo })
+                break;
+            case QB.webrtc.EVENT_TYPE.HANG_UP:
+                // props.navigation.goBack()
+                break;
+            default:
+                break;
+        }
+    }
+
     useEffect(() => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -144,14 +183,16 @@ const PupuilDashboard = (props) => {
             //     startLiveClassIOS()
             // }
             setLoading(true)
-            let currentTime = moment(Date()).format('hh:mm')
+            let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
-                let data = { "Absent": true }
+                let data = { "Absent": false }
                 Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
                         startLiveClassAndroid()
+                    } else {
+                        showMessage(MESSAGE.teacherNotStarted)
                     }
                 }, (err) => {
                     setLoading(false)
@@ -177,24 +218,18 @@ const PupuilDashboard = (props) => {
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
+            let title = dataOfSubView.LessonTopic
 
             console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, (error, ID) => {
                     console.log('Class Started');
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, (id) => {
                     console.log('hi id:---------', id)
-                    // let data = {
-                    //     LessonStart: false,
-                    //     LessonEnd: true
-                    // }
-                    // Service.post(data, `${EndPoints.LessionStartEnd}/${User.user.UserDetialId}`, (res) => {
-                    // }, (err) => {
-                    // })
                 })
             }
         } catch (e) {
@@ -278,8 +313,8 @@ const PupuilDashboard = (props) => {
                 <View style={PAGESTYLE.subjecRow}>
                     <View style={PAGESTYLE.border}></View>
                     <View>
-                        <Text style={PAGESTYLE.subjectName}>{item.SubjectName}</Text>
-                        <Text style={PAGESTYLE.subject}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: hp(20) }]}>{item.SubjectName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: hp(20) }]}>{item.LessonTopic ? item.LessonTopic : ""}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.timingMain}>
@@ -380,7 +415,7 @@ const PupuilDashboard = (props) => {
                                                                                 <View style={PAGESTYLE.rightTabContent}>
                                                                                     {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                                     <View style={PAGESTYLE.tabcontent}>
-                                                                                        <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
+                                                                                        <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                                         <View style={PAGESTYLE.timedateGrp}>
                                                                                             <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
@@ -427,7 +462,7 @@ const PupuilDashboard = (props) => {
                                                                                                         <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                                     </View>
                                                                                                 )}
-                                                                                                numColumns={4}
+                                                                                                numColumns={1}
                                                                                                 keyExtractor={(item, index) => index.toString()}
                                                                                             />
                                                                                         </View>
@@ -439,9 +474,9 @@ const PupuilDashboard = (props) => {
                                                                                                 {
                                                                                                     isLoading ?
                                                                                                         <ActivityIndicator
-                                                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                                            style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                                            color={COLORS.buttonGreen} /> :
+                                                                                                            color={COLORS.white} /> :
                                                                                                         <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
                                                                                                 }
 
@@ -451,9 +486,10 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </>
                                                                             :
-                                                                            <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                                                <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                                            </View>
+                                                                            // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                                            //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                                            // </View>
+                                                                            <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                                     }
                                                                 </View>
                                                             }
@@ -503,11 +539,11 @@ const PupuilDashboard = (props) => {
                                                                                     {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.tabcontent}>
                                                                                         <View>
-                                                                                            <Text h2 style={PAGESTYLE.titleTab}>{dataOfHWSubView.LessonTopic}</Text>
+                                                                                            <Text numberOfLines={1} h2 style={[PAGESTYLE.titleTab]}>{dataOfHWSubView.LessonTopic}</Text>
                                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
-                                                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.LessonDate).format('ll')}</Text>
+                                                                                                    <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.HomeWorkDate).format('DD/MM/yyyy')}</Text>
                                                                                                 </View>
                                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
@@ -542,9 +578,10 @@ const PupuilDashboard = (props) => {
                                                                                     </ScrollView>
                                                                                 </View>
                                                                             </> :
-                                                                            <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                                                <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                                            </View>
+                                                                            // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
+                                                                            //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                                            // </View>
+                                                                            <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                                                     }
 
                                                                 </View>
