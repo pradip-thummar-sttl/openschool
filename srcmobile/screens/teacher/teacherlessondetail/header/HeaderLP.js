@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.46),
         paddingRight: hp(2),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(0) : hp(3.85),
-        paddingBottom: Platform.OS == 'android' ? hp(0) : hp(1.85),
+        paddingTop: Platform.OS == 'android' ? hp(0) : hp(5.85),
+        paddingBottom: Platform.OS == 'android' ? hp(0) : 15,
     },
     headerMain: {
         flexDirection: 'row',
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
+        marginRight: hp(2),
     },
     titleRow: {
         flexDirection: 'row',

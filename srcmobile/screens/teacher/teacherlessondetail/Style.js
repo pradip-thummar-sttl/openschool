@@ -558,7 +558,7 @@ export default StyleSheet.create({
     },
     commonInputTextareaBoldGrey: {
         width: wp(89.33),
-        // height: wp(49.06),
+        height: wp(49.06),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1.3),
@@ -861,9 +861,10 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         alignItems: 'center',
         borderBottomColor: COLORS.lightGrayPupil,
-        marginBottom: hp(2),
+        marginBottom: hp(1),
         padding: hp(1),
-        top: hp(2),
+        paddingBottom: hp(2),
+        top: hp(1),
     },
     userThumb: {
         width: hp(6.25),
