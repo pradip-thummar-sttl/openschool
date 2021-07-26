@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginRight: hp(1),
+        marginRight: hp(2),
     },
     titleRow: {
         flexDirection: 'row',

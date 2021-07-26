@@ -101,31 +101,29 @@ export default StyleSheet.create({
     },
     rightView: {
         // backgroundColor:'red',
-        marginLeft: hp(2),
-        marginTop: hp(2),
-        width: wp(76),
-        height: hp(55),
+        width: '100%',
+        height: '71%',
     },
     mesagesView: {
-        width: '125%',
-        height: hp(70),
-        marginBottom: wp(3),
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: hp(2),
+        marginBottom: hp(1),
     },
     textView: {
-        width: '120%',
+        width: '100%',
         height: hp(12),
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: COLORS.borderGrp,
+        borderTopWidth: 1,
+        borderTopColor: COLORS.videoLinkBorder,
         backgroundColor: COLORS.greyBack,
-        // marginTop:100,
     },
     messageCell: {
         flexDirection: 'row',
-        paddingVertical: wp(1)
+        paddingVertical: hp(1),
+        paddingRight: hp(2),
     },
     messageSubCell: {
-        marginLeft: wp(1)
+        marginLeft: hp(1.5)
     },
     roundImage: {
         width: hp(4),
@@ -141,23 +139,21 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.4),
         marginTop: wp(0.2),
-         width:wp(80),
-        //  backgroundColor:'red'
+        paddingRight: 15,
     },
     input: {
-        width: '85%',
-        height: '80%',
-        fontSize:hp(1.8),
-        fontFamily:FONTS.fontSemiBold,
-        marginHorizontal:wp(1.5),
-        // backgroundColor:'red'
-        // marginVertical:hp(1),  
+        width: '100%',
+        height: hp(12),
+        fontSize: hp(1.72),
+        fontFamily:FONTS.fontRegular,
+        padding: hp(1.5),
+        paddingTop: hp(1.5),
     },
     buttonView:{
         position:'absolute',
         right:hp(2),
-        // bottom:wp(2),
-        alignItems: 'center',
+        paddingBottom: hp(2),
+        alignItems: 'flex-end',
         height: '100%',
         flexDirection:'row'
     },
@@ -165,7 +161,11 @@ export default StyleSheet.create({
         // backgroundColor:'yellow',
         width:hp(2.5),
         height:hp(2.5),
-        marginHorizontal:wp(2.5)
+    },
+    btnBack: {
+        backgroundColor: COLORS.greyBack,
+        padding: 5,
+        borderRadius: 6,
     },
     timeText:{
         color:COLORS.menuLightFonts,

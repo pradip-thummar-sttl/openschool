@@ -54,18 +54,18 @@ const CreateNewEventPupil = (props) => {
     // }
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
+    }
 
     const showMode = (currentMode) => {
         setShow(true);
@@ -219,7 +219,7 @@ const CreateNewEventPupil = (props) => {
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFromDropOpen(false); setSelectedFromTime(item) }}>
-                                    <Text style={{ padding: hp(1),fontSize:hp(1.8), }}>{item}</Text>
+                                    <Text style={{ padding: hp(1), fontSize: hp(1.8), }}>{item}</Text>
                                 </TouchableOpacity>
                             )}
                             style={{ height: 200 }} />
@@ -250,7 +250,7 @@ const CreateNewEventPupil = (props) => {
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setToDropOpen(false); setSelectedToTime(item) }}>
-                                    <Text style={{ padding: hp(1),fontSize:hp(1.8), }}>{item}</Text>
+                                    <Text style={{ padding: hp(1), fontSize: hp(1.8), }}>{item}</Text>
                                 </TouchableOpacity>
                             )}
                             style={{ height: 200 }} />
@@ -271,13 +271,14 @@ const CreateNewEventPupil = (props) => {
                         <KeyboardAwareScrollView>
                             <View style={styles.beforeBorder}>
                                 <View style={styles.titleSave}>
-                                    <Text h2 style={styles.titleTab}><TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => { props.route.params.onGoBack(); props.navigation.goBack(); }}>
-                                        <Image style={styles.arrow} source={Images.backArrow} />
-                                    </TouchableOpacity>
-                                    Add a calendar entry
-                                </Text>
+                                    <View style={styles.title}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { props.route.params.onGoBack(); props.navigation.goBack(); }}>
+                                            <Image style={styles.arrow} source={Images.backArrow} />
+                                        </TouchableOpacity>
+                                        <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
+                                    </View>
                                     <View style={styles.uploadCalendar}>
                                         <View style={styles.lessonstartButton}>
                                             {isLoading ?
@@ -449,11 +450,10 @@ const styles = StyleSheet.create({
     },
     popupContent: {
         width: '100%',
-        marginTop: Platform.OS == 'android' ? hp(0) : hp(3.88),
+        marginTop: Platform.OS == 'android' ? hp(0) : hp(5.85),
     },
     beforeBorder: {
-        padding: hp(1.95),
-        paddingBottom: hp(0.5),
+        paddingHorizontal: hp(2.46),
     },
     afterBorder: {
         padding: hp(2.60),
@@ -463,8 +463,6 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        marginBottom: hp(3),
-        top: hp(0.7),
     },
     uploadCalIcon: {
         width: hp(5.20),
@@ -475,9 +473,7 @@ const styles = StyleSheet.create({
         bottom: hp(0.5),
     },
     uploadCalendar: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+
     },
     buttonGrp: {
         position: 'relative',
@@ -488,7 +484,7 @@ const styles = StyleSheet.create({
         width: hp(4.92),
         height: hp(4.92),
         backgroundColor: COLORS.dashboardGreenButton,
-        borderRadius: hp(0.9),
+        borderRadius: 8,
         overflow: 'hidden',
         paddingTop: hp(1.7),
         paddingLeft: hp(1.7),
@@ -518,7 +514,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         ...Platform.select({
-            android: {padding:0},
+            android: { padding: 0 },
         }),
         fontFamily: FONTS.fontSemiBold,
     },
@@ -595,8 +591,8 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        alignSelf:'center',
-        marginLeft:hp(1.4)
+        alignSelf: 'center',
+        marginLeft: hp(1.4)
         // top: Platform.OS == 'android' ? hp(0.75) : hp(1.1),
         // left: hp(1.4),
     },
@@ -668,15 +664,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom: 15,
+    },
+    title: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1.5),
-        top: Platform.OS == 'android' ? hp(1.2) :  hp(0.65),
     },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS=='android'? hp(18) : hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: hp(1.71), bottom: hp(11.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
-    colorDropView2: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS=='android'? hp(18) : hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: hp(1.71), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS == 'android' ? hp(18) : hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: hp(1.71), bottom: hp(11.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView2: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS == 'android' ? hp(18) : hp(16), borderRadius: hp(1.23), backgroundColor: COLORS.white, left: hp(1.71), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1) },
     dateTimetextdummy1: {
         fontSize: hp(1.82),

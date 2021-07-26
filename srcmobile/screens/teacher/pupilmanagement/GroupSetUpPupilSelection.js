@@ -229,7 +229,7 @@ const GroupSetUpPupilSelection = (props) => {
                         <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',marginBottom:10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',paddingHorizontal: hp(2.46), }}>
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>

@@ -20,7 +20,7 @@ const Header6 = (props) => {
             <View style={styles.headerMain}>
                 <TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
                 <View style={styles.titles}>
-                    <Text style={styles.mainTitle}>{props.title}</Text>
+                    <Text numberOfLines={1} style={styles.mainTitle}>{props.title}</Text>
                     <Text style={styles.date}>{props.date}</Text>
                 </View>
             </View>            
@@ -31,18 +31,20 @@ export default Header6;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
+        paddingLeft: hp(2.46),
+        paddingRight: hp(2),
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 8,
+        width: '90%',
+        paddingBottom: 15,
     },
     titles: {
-        marginLeft: hp(2),
+        flexDirection: 'column',
+        alignItems: 'flex-start',
     },
     mainTitle: {
         fontSize: hp(1.97),
@@ -54,10 +56,11 @@ const styles = StyleSheet.create({
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+        marginLeft: 6,
     },
     arrow: {
         width: hp(2.43),
-        height: hp(2.43),
         resizeMode: 'contain',
+        marginRight: hp(1.8)
     },
 });

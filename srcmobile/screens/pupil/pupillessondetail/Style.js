@@ -157,7 +157,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(4.92),
+        marginTop: hp(1),
         paddingRight: hp(1.5),
     },
     videoLinkBlock: {
@@ -230,16 +230,18 @@ export default StyleSheet.create({
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
         width: '100%',
-        // height: hp(20),
         alignItems:'center',
         borderRadius: 10,
+        padding: 15,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
     },
     uploaded: {
         alignSelf: 'center',
-        marginVertical: 8,
-        color: COLORS.greyplaceholder
+        marginBottom: 10,
+        color: COLORS.greyplaceholder,
+        fontFamily: FONTS.fontRegular,
+        fontSize: 14,
     },
     HomeText: {
         alignSelf: 'center',
@@ -274,9 +276,9 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
-        top: hp(0.35),
+        top: 5,
+        left: 3,
         fontFamily: FONTS.fontBold,
-        resizeMode:'contain'
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -1017,7 +1019,7 @@ export default StyleSheet.create({
         marginRight: hp(-3),
     },
     containerWrapSubmit: {
-        marginBottom: hp(4.31),
+        marginBottom: hp(2),
     },
     dateBlockRowSubmitted: {
         flexDirection: 'row',
@@ -1202,10 +1204,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.47),
         fontFamily: FONTS.fontRegular,
-        zIndex: 10,
         lineHeight: hp(3.7),
         paddingLeft: hp(1),
-        paddingTop: hp(1),
     },
     feedbackVideoBlock: {
         borderColor: COLORS.borderGrp,
@@ -1281,6 +1281,7 @@ export default StyleSheet.create({
     videoCardThumb: {
         position: 'relative',
         flexDirection: 'row',
+        alignItems: 'center',
         width: hp(28.25),
     },
     lessonDue: {
@@ -1291,7 +1292,6 @@ export default StyleSheet.create({
         width: hp(1.79),
         resizeMode: 'contain',
         marginLeft: hp(1.5),
-        marginTop: hp(1),
     },
     lightSkyBlueDue: {
         backgroundColor: COLORS.lightSkyBlueDue,
@@ -1426,7 +1426,7 @@ export default StyleSheet.create({
         paddingTop: hp(2),
         paddingBottom: hp(2),
         position: 'absolute',
-        bottom: 0,
+        bottom: 10,
         width: '100%',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
@@ -1467,7 +1467,8 @@ export default StyleSheet.create({
         borderWidth: 1,
         alignSelf: 'center',
         borderColor: COLORS.dashboardGreenButton,
-        borderRadius: 10,
+        borderRadius: 8,
+        overflow: 'hidden',
         paddingVertical: Platform.OS == 'android' ? 0 : 10,
     },
     filterbarMain: {

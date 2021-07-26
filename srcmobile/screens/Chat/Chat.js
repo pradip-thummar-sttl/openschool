@@ -152,14 +152,12 @@ const Chat = (props) => {
                                 <TouchableOpacity >
                                     <Image style={Styles.btn} source={Images.imageUpload} />
                                 </TouchableOpacity> */}
-                                <TouchableOpacity onPress={() => sendMessage(message)}>
+                                <TouchableOpacity style={Styles.btnBack} onPress={() => sendMessage(message)}>
                                     <Image style={Styles.btn} source={Images.send} />
                                 </TouchableOpacity>
                             </View>
                         </View>
-
                     </View>
-
                 </View>
             </KeyboardAwareScrollView>
 
