@@ -1204,10 +1204,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp(1.47),
         fontFamily: FONTS.fontRegular,
-        zIndex: 10,
         lineHeight: hp(3.7),
         paddingLeft: hp(1),
-        paddingTop: hp(1),
     },
     feedbackVideoBlock: {
         borderColor: COLORS.borderGrp,
@@ -1283,6 +1281,7 @@ export default StyleSheet.create({
     videoCardThumb: {
         position: 'relative',
         flexDirection: 'row',
+        alignItems: 'center',
         width: hp(28.25),
     },
     lessonDue: {
@@ -1293,7 +1292,6 @@ export default StyleSheet.create({
         width: hp(1.79),
         resizeMode: 'contain',
         marginLeft: hp(1.5),
-        marginTop: hp(1),
     },
     lightSkyBlueDue: {
         backgroundColor: COLORS.lightSkyBlueDue,
