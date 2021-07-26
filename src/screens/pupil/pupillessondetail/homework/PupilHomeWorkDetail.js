@@ -138,7 +138,7 @@ const PupilHomeWorkDetail = (props) => {
                     onAlertPress={() => props.onAlertPress()}
                     goBack={() => props.goBack()}
                     onSubmitHomework={() => isFieldsValidated()}
-                    title={item.SubjectName + ' ' + item.LessonTopic} />
+                    title={item.LessonTopic} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
 

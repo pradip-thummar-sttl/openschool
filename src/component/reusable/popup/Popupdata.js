@@ -14,6 +14,7 @@ import { User } from "../../../utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import MESSAGE from "../../../utils/Messages";
+import { Download } from "../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -213,13 +214,33 @@ const Popupdata = (props) => {
                                         </View>
                                         <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
                                         <View style={styles.attchmentSectionwithLink}>
-                                            <TouchableOpacity style={styles.attachment}>
+                                            {/* <TouchableOpacity style={styles.attachment}>
                                                 <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
                                                 <Text style={styles.attachmentText}>1 Attachment</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity>
                                                 <Text style={styles.linkText}>see more</Text>
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
+                                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
+                                                {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                                                    <FlatList
+                                                        data={props.data.MaterialList}
+                                                        style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
+                                                        renderItem={({ item, index }) => (
+                                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                                <View style={PAGESTYLE.fileGrp}>
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                </View>
+                                                            </TouchableOpacity>
+                                                        )}
+                                                        keyExtractor={(item, index) => index.toString()}
+                                                    />
+                                                    :
+                                                    <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
+                                                }
+                                            </View>
                                         </View>
                                         <View style={styles.requirementofClass}>
                                             <Text style={styles.requireText}>Items that your class will need</Text>
@@ -406,9 +427,31 @@ const styles = StyleSheet.create({
         marginBottom: hp(1.95),
     },
     attchmentSectionwithLink: {
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
+    },
+    downloadIcon: {
+        width: hp(2.01),
+        resizeMode: 'contain',
+        top: hp(0.2),
+        right: hp(1),
+    },
+    fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+    },
+    fileBoxGrpWrap: {
+        // marginRight: hp(-1.5)
     },
     attachment: {
         flexDirection: 'row',

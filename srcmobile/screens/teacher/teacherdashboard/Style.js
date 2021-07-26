@@ -324,9 +324,9 @@ export default StyleSheet.create({
         marginBottom: hp(1.95),
     },
     attchmentSectionwithLink: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
     },
     attachment: {
         flexDirection: 'row',
@@ -364,6 +364,28 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: hp(1.95),
+    },
+    downloadIcon: {
+        width: hp(2.01),
+        resizeMode: 'contain',
+        top: hp(0.2),
+        right: hp(1),
+    },
+    fileGrp: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+    },
+    fileBoxGrpWrap: {
+        // marginRight: hp(-1.5)
     },
     checkIcon: {
         width: hp(1.7),
