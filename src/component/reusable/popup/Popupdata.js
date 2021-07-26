@@ -86,7 +86,7 @@ const Popupdata = (props) => {
 
                 })
             } else {
-                showMessage(MESSAGE.scheduledTime)
+                showMessage(MESSAGE.scheduledTimeStart)
                 setLoading(false)
 
             }
@@ -106,11 +106,12 @@ const Popupdata = (props) => {
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
+            let title = props.data.LessonTopic
 
 
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
                     console.log('Class Started');
 
                     if (!props.isPupil) {

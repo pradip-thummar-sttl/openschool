@@ -1,7 +1,10 @@
 package com.openschool.activity;
 
+import android.annotation.TargetApi;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -38,6 +41,6 @@ public class WhiteBoardActivity extends AppCompatActivity {
                 onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
             }
         });
-        wvBoard.loadUrl("http://www.google.com");
+        wvBoard.loadUrl("http://14.143.90.234:10082/web/CoDoodler/CoDoodler.html");
     }
 }

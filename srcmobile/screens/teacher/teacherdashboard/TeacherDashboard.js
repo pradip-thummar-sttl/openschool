@@ -190,7 +190,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 })
             } else {
                 setLoading(false)
-                showMessage(MESSAGE.scheduledTime)
+                showMessage(MESSAGE.scheduledTimeStart)
             }
             // 
             console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
@@ -210,11 +210,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
-
+            let title = dataOfSubView.LessonTopic
 
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
                     console.log('Class Started');
 
                     let data = {

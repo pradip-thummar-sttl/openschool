@@ -77,6 +77,10 @@ const Chat = (props) => {
         // } else {
         //     channel = channels[2]
         // }
+        if (message.trim().length == 0) {
+            return
+        }
+        
         message = message + '#@#' + User.user.FirstName + ' ' + User.user.LastName + '#@#' + User.user.ProfilePicture
 
         if (message) {

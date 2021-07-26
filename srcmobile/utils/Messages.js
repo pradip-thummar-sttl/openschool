@@ -61,6 +61,7 @@ const MESSAGE = {
     gmMessageDraft: 'Message drafted successfully',
     gmMessageSent: 'Message sent successfully',
     scheduledTime: 'You cannot join class before or after scheduled time',
+    scheduledTimeStart: 'You cannot start class before or after scheduled time',
     markAbsent: 'You marked as a absent',
 
     noLesson1: 'No lessons or events today',
