@@ -38,7 +38,7 @@ const HeaderPM = (props) => {
         if (!isSearchActive) {
             props.onClearSearch()
             setKeyword('')
-            textInput.current.clear()
+            // textInput.current.clear()
         } else {
             props.onSearch()
         }
@@ -509,7 +509,7 @@ const styles = StyleSheet.create({
     },
     whiteBg: {
         paddingBottom: hp(1),
-        paddingTop: hp(1),
+        paddingTop: hp(1.7),
         flexDirection: 'row',
         alignItems: 'center',
         paddingRight: hp(0),
