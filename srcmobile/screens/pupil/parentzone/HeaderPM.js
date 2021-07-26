@@ -59,7 +59,7 @@ const HeaderPM = (props) => {
                 <View style={styles.headerRight}>
                     <Menu>
                         <MenuTrigger><Image style={styles.userparent} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
-                        <MenuOptions>
+                        <MenuOptions style={styles.filterCard}>
                             {childrenList.map((item, index) => (
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
@@ -68,7 +68,7 @@ const HeaderPM = (props) => {
                                         <View style={styles.filterList}>
                                             <View style={styles.filterListSub}>
                                                 <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
-                                                <Text numberOfLines={1} style={{ ...styles.filterListText, fontFamily: FONTS.fontBold, width:wp(25) }}>{item.FirstName} {item.LastName}</Text>
+                                                <Text numberOfLines={1} style={{ ...styles.filterListText, fontFamily: FONTS.fontSemiBold, width: hp(15) }}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                             {index == selectedPupilIndex ?
                                                 <Image source={Images.CheckIcon} style={styles.checkMark} />
@@ -79,7 +79,7 @@ const HeaderPM = (props) => {
                                     </TouchableOpacity>
                                 </MenuOption>
                             ))}
-                            <MenuOption style={styles.borderList}>
+                            <MenuOption>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => props.navigateToAddNewUser()}>
@@ -125,7 +125,7 @@ const HeaderPM = (props) => {
                             }} />
                         <Menu>
                             <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
-                            <MenuOptions>
+                            <MenuOptions style={[styles.filterCard, styles.dateFilter]}>
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
@@ -217,8 +217,8 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
-        paddingBottom: 5,
-        paddingLeft: hp(2),
+        paddingBottom: 15,
+        paddingLeft: hp(2.46),
         paddingRight: hp(2),
     },
     headerMain: {
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
@@ -253,13 +253,11 @@ const styles = StyleSheet.create({
         width: hp(3.81),
         height: hp(3.81),
         borderRadius:hp(3.81/2),
-        // resizeMode: 'contain',
         marginRight: hp(1.5),
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
-        // resizeMode: 'contain',
         marginRight: hp(1),
         borderRadius:hp(3.81/2)
     },
@@ -399,9 +397,8 @@ const styles = StyleSheet.create({
     filterList: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: hp(0.5),
         alignItems: 'center',
-        paddingBottom: hp(0.5),
+        paddingVertical: 5,
         flex: 1,
     },
     filterListSub: {
@@ -436,7 +433,6 @@ const styles = StyleSheet.create({
     },
     headerRight: {
         alignSelf: 'flex-end',
-        right: -5,
         alignItems: 'center',
         flexDirection: 'row',
     },
@@ -516,8 +512,8 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
         flexDirection: 'row',
         alignItems: 'center',
-        paddingRight: hp(2),
-        paddingLeft: hp(2),
+        paddingRight: hp(0),
+        paddingLeft: hp(2.46),
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -537,5 +533,23 @@ const styles = StyleSheet.create({
     },
     tabsTextSelected: {
         color: COLORS.buttonGreen,
+    },
+    filterCard: {
+        backgroundColor: COLORS.white,
+        position: 'absolute',
+        top: 50,
+        right: 0,
+        width: 238,
+        padding: 10,
+        paddingVertical: 0,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 4, },
+        shadowOpacity: 0.16,
+        shadowRadius: 6,
+        borderRadius: 6,
+    },
+    dateFilter: {
+        width: 180,
+        top: 25,
     },
 });

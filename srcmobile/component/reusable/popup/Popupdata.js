@@ -184,7 +184,7 @@ const Popupdata = (props) => {
             >
                 {props.isLesson ?
                 <ScrollView>
-                    <TouchableOpacity activeOpacity={1}>
+                    <TouchableOpacity activeOpacity={1} style={{paddingBottom: 80,}}>
                     <View style={styles.tabcontent}>
                         <View style={styles.beforeBorder}>
                             <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
@@ -447,7 +447,7 @@ const styles = StyleSheet.create({
     },
     requirementofClass: {
         marginTop: hp(4.81),
-        marginBottom: hp(1.81),
+        marginBottom: hp(1),
     },
     requireText: {
         fontSize: hp(2.08),
@@ -487,9 +487,9 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(6),
+        paddingBottom: hp(3.5),
         position: 'absolute',
-        bottom: hp(1.47),
+        bottom: hp(-8),
         width: '100%',
         left: hp(1.95),
     },

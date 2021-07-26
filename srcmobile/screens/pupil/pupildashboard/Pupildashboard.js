@@ -427,7 +427,7 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                                                     <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                                                                    <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
+                                                                                    <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, PAGESTYLE.grpElipsis]}>{dataOfSubView.GroupName}</Text>
                                                                                 </View>
                                                                             </View>
                                                                             <View style={STYLE.hrCommon}></View>
@@ -463,7 +463,7 @@ const PupuilDashboard = (props) => {
                                                                                         renderItem={({ item, index }) => (
                                                                                             <View style={PAGESTYLE.lessonPoints}>
                                                                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                                                                                <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
+                                                                                                <Text numberOfLines={1} style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                             </View>
                                                                                         )}
                                                                                         keyExtractor={(item, index) => index.toString()}
@@ -471,9 +471,9 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </ScrollView>
                                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10, borderColor: COLORS.dashboardGreenButton, }}>
                                                                                     <TouchableOpacity onPress={() => { markAsAbsent() }}>
-                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Mark As Absent</Text>
+                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton, paddingVertical: 10 }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
                                                                                 <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton }}>
@@ -629,24 +629,26 @@ const PupuilDashboard = (props) => {
                                 <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} />
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                 <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
-                                <View style={PAGESTYLE.rewardStarMark}>
-                                    <View style={PAGESTYLE.centerText}>
-                                        <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
-                                        </ImageBackground>
-                                        <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.centerStar}>
-                                        <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
-                                        </ImageBackground>
-                                        <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.centerText}>
-                                        <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
-                                            <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
-                                        </ImageBackground>
-                                        <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                <View style={PAGESTYLE.paddingDiv}>
+                                    <View style={PAGESTYLE.rewardStarMark}>
+                                        <View style={PAGESTYLE.centerText}>
+                                            <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
+                                            </ImageBackground>
+                                            <Text style={PAGESTYLE.starText}>Bronze stars</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.centerStar}>
+                                            <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
+                                            </ImageBackground>
+                                            <Text style={PAGESTYLE.starText}>Silver stars</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.centerText}>
+                                            <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
+                                                <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
+                                            </ImageBackground>
+                                            <Text style={PAGESTYLE.starText}>Gold stars</Text>
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.lessonstartButtonBottom}>

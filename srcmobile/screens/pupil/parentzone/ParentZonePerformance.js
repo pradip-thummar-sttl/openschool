@@ -88,9 +88,6 @@ const ParentZonePerformance = (props) => {
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEditSchool} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.pupilPerfomance}>
-                        <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                        {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
-
                         <View style={PAGESTYLE.performancePArent}>
                             <ActivityRings
                                 data={chartData}

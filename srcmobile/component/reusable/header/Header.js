@@ -13,7 +13,7 @@ const Header = (props) => {
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
                 <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
-                <Text style={styles.mainTitle} numberOfLines={1} >Welcome, {User.user.FirstName} {User.user.LastName}!</Text>
+                <Text style={styles.mainTitle} numberOfLines={1}>Welcome, {User.user.FirstName} {User.user.LastName}!</Text>
             </View>
             <View>
                 <TouchableOpacity
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
+        width: '75%',
     },
     massagesIcon: {
         width: 40,
