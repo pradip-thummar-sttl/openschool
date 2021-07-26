@@ -20,7 +20,7 @@ const Headerseven = (props) => {
                 <View style={styles.headerMainInner}>
                     <TouchableOpacity style={styles.widthBackArrow} onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
                     <View style={styles.titles}>
-                        <Text style={styles.mainTitle}>{props.subjectName} {"\n"}{props.topicName}</Text>
+                        <Text numberOfLines={2} style={[styles.mainTitle,{width:wp(45)}]}>{props.subjectName} {"\n"}{props.topicName}</Text>
                     </View>
                 </View>
                 <View style={styles.submittedLogo}>

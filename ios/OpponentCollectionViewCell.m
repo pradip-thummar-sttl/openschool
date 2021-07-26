@@ -14,7 +14,7 @@ static UIImage *unmutedImage() {
     static UIImage *image = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        image = [UIImage imageNamed:@"ic-qm-videocall-dynamic-off"];
+        image = [UIImage imageNamed:@"mute_off_ic"];
     });
     return image;
 }
@@ -24,7 +24,7 @@ static UIImage *mutedImage() {
     static UIImage *image = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        image = [UIImage imageNamed:@"ic-qm-videocall-dynamic-on"];
+        image = [UIImage imageNamed:@"mute_off_ic"];
     });
     return image;
 }
@@ -50,7 +50,7 @@ static UIImage *mutedImage() {
     
     [self.muteButton setImage:unmutedImage() forState:UIControlStateNormal];
     [self.muteButton setImage:mutedImage() forState:UIControlStateSelected];
-    self.muteButton.hidden = YES;
+    self.muteButton.hidden = NO;
 }
 
 - (void)setVideoView:(UIView *)videoView {

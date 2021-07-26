@@ -56,6 +56,7 @@ const PupilLessonDetailInternal = (props) => {
     }
 
     const getHomeWork = () => {
+        setPause(true)
         setHomeworkLoading(true)
         Service.get(`${EndPoints.GetPupilHomework}/${item._id}/${User.user.UserDetialId}`, (res) => {
             setHomeworkLoading(false)
@@ -196,6 +197,7 @@ const PupilLessonDetailInternal = (props) => {
                             :
                             <View style={{ height: '100%', justifyContent: 'center' }}>
                                 <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                // hideShutterView={true}
                                     resizeMode={'contain'}
                                     style={PAGESTYLE.largeVideo1}
                                     controls={true}
