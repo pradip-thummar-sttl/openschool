@@ -172,7 +172,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
-            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
@@ -188,10 +188,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     setLoading(false)
 
                 })
-            } else {
-                setLoading(false)
-                showMessage(MESSAGE.scheduledTimeStart)
-            }
+            // } else {
+            //     setLoading(false)
+            //     showMessage(MESSAGE.scheduledTimeStart)
+            // }
             // 
             console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
