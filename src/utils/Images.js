@@ -139,5 +139,6 @@ const Images = {
     noCalender: require('../assets/images/ILLUS-52.png'),
     callPick: require('../assets/images/Green2.png'),
     callDrop: require('../assets/images/Red2.png'),
+    createGrpImageLogo: require('../assets/images/dragdrop-icon-2.png'),
 }
 export default Images;
