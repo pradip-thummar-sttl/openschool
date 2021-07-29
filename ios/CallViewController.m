@@ -22,6 +22,9 @@
 #import "AddUsersViewController.h"
 #import "ZoomedView.h"
 #import "WhiteboardVC.h"
+#import "ReactionTableViewCell.h"
+
+
 
 typedef NS_ENUM(NSUInteger, CallViewControllerState) {
     CallViewControllerStateDisconnected,
@@ -35,7 +38,7 @@ static NSString * const kUnknownUserLabel = @"Unknown user";
 static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @interface CallViewController ()
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QBRTCAudioSessionDelegate, QBRTCConferenceClientDelegate, LocalVideoViewDelegate>
+<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QBRTCAudioSessionDelegate, QBRTCConferenceClientDelegate, LocalVideoViewDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     BOOL _didStartPlayAndRecord;
 }
@@ -67,11 +70,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) UIBarButtonItem *statsItem;
 @property (strong, nonatomic) UIBarButtonItem *addUsersItem;
 
+@property (strong, nonatomic) NSMutableArray *reactionImageArr;
+
 @end
 
 @implementation CallViewController
 
 // MARK: Life cycle
+
 
 - (void)dealloc {
     
@@ -88,7 +94,13 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+  _reactionView.hidden = true;
+  self.reactionView.layer.cornerRadius = 10;
+  self.reactionTableView.layer.cornerRadius = 10;
+  self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
+  [self.reactionTableView setDelegate:self];
+  [self.reactionTableView setDataSource:self];
+  self.endCallButton.layer.cornerRadius = 10;
     // creating session
     self.session = [[QBRTCConferenceClient instance] createSessionWithChatDialogID:_dialogID conferenceType:_conferenceType > 0 ? _conferenceType : QBRTCConferenceTypeVideo];
     
@@ -121,13 +133,21 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     self.state = CallViewControllerStateDisconnecting;
     [self.session leave];
 }
+- (IBAction)onEndCallButton:(id)sender {
+    [self.session leave];
+    if( self.completeCall ){
+      self.completeCall(true);
+       }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)configureGUI {
     
     __weak __typeof(self)weakSelf = self;
   
   [self.toolbar addButton:[QBButtonsFactory switchCamera] action:^(UIButton *sender) {
-      
+    Settings *settings = Settings.instance;
+    self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionFront];
   }];
   
   [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
@@ -151,7 +171,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
       
-      weakSelf.muteAudio ^= 1;
+//      weakSelf.muteAudio ^= 1;
     WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
     [weakSelf presentViewController:vc animated:false completion:nil];
     
@@ -162,11 +182,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 ////      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
 ////
 ////          weakSelf.muteAudio ^= 1;
-////        [weakSelf.session leave];
-////        if( weakSelf.completeCall ){
-////          weakSelf.completeCall(true);
-////           }
-////        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+//        [weakSelf.session leave];
+//        if( weakSelf.completeCall ){
+//          weakSelf.completeCall(true);
+//           }
+//        [weakSelf dismissViewControllerAnimated:YES completion:nil];
 ////      }];
 //        [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
 //
@@ -249,6 +269,12 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }
 }
 
+- (void)addReaction:(UIButton*)sender
+{
+   //Write a code you want to execute on buttons click event
+  _reactionView.hidden = false;
+}
+
 // MARK: UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -270,6 +296,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
+  reusableCell.addReactionBtn.tag = indexPath.row;
+  [reusableCell.addReactionBtn addTarget:self action:@selector(addReaction:) forControlEvents:UIControlEventTouchUpInside];
     
     if (user.ID != [QBSession currentSession].currentUser.ID) {
         // label for user
@@ -316,484 +344,516 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     } completion:nil];
 }
 
+
+
+
+
+
+
+
+
+
+
 // MARK: QBRTCBaseClientDelegate
 
 - (void)session:(__kindof QBRTCBaseSession *)session updatedStatsReport:(QBRTCStatsReport *)report forUserID:(NSNumber *)userID {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
+    [self performUpdateUserID:userID block:^(OpponentCollectionViewCell *cell) {
+      if (cell.connectionState == QBRTCConnectionStateConnected
+          && report.videoReceivedBitrateTracker.bitrate > 0) {
+        [cell setBitrate:report.videoReceivedBitrateTracker.bitrate];
+      }
+    }];
+    
+    if ([_statsUserID isEqualToNumber:userID]) {
+      
+      NSString *result = [report statsString];
+      NSLog(@"%@", result);
+      
+      // send stats to stats view if needed
+      if (_shouldGetStats) {
         
-        [self performUpdateUserID:userID block:^(OpponentCollectionViewCell *cell) {
-            if (cell.connectionState == QBRTCConnectionStateConnected
-                && report.videoReceivedBitrateTracker.bitrate > 0) {
-                [cell setBitrate:report.videoReceivedBitrateTracker.bitrate];
-            }
-        }];
-        
-        if ([_statsUserID isEqualToNumber:userID]) {
-            
-            NSString *result = [report statsString];
-            NSLog(@"%@", result);
-            
-            // send stats to stats view if needed
-            if (_shouldGetStats) {
-                
-                [_statsView setStats:result];
-                [self.view setNeedsLayout];
-            }
-        }
+        [_statsView setStats:result];
+        [self.view setNeedsLayout];
+      }
     }
+  }
 }
 
 - (void)session:(__kindof QBRTCBaseSession *)session startedConnectingToUser:(NSNumber *)userID {
-    
-    if (session == self.session) {
-        // adding user to the collection
-        [self addToCollectionUserWithID:userID];
-    }
+  
+  if (session == self.session) {
+    // adding user to the collection
+    [self addToCollectionUserWithID:userID];
+  }
 }
 
 - (void)session:(__kindof QBRTCBaseSession *)session connectionClosedForUser:(NSNumber *)userID {
-    
-    if (session == self.session) {
-        // remove user from the collection
-        [self removeFromCollectionUserWithID:userID];
-    }
+  
+  if (session == self.session) {
+    // remove user from the collection
+    [self removeFromCollectionUserWithID:userID];
+  }
 }
 
 - (void)session:(__kindof QBRTCBaseSession *)session didChangeConnectionState:(QBRTCConnectionState)state forUser:(NSNumber *)userID {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        [self performUpdateUserID:userID block:^(OpponentCollectionViewCell *cell) {
-            cell.connectionState = state;
-        }];
-    }
+    [self performUpdateUserID:userID block:^(OpponentCollectionViewCell *cell) {
+      cell.connectionState = state;
+    }];
+  }
 }
 
 - (void)session:(__kindof QBRTCBaseSession *)session receivedRemoteVideoTrack:(QBRTCVideoTrack *)videoTrack fromUser:(NSNumber *)userID {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        __weak __typeof(self)weakSelf = self;
-        [self performUpdateUserID:userID block:^(OpponentCollectionViewCell *cell) {
-            QBRTCRemoteVideoView *opponentVideoView = (id)[weakSelf videoViewWithOpponentID:userID];
-            [cell setVideoView:opponentVideoView];
-        }];
-    }
+    __weak __typeof(self)weakSelf = self;
+    [self performUpdateUserID:userID block:^(OpponentCollectionViewCell *cell) {
+      QBRTCRemoteVideoView *opponentVideoView = (id)[weakSelf videoViewWithOpponentID:userID];
+      [cell setVideoView:opponentVideoView];
+    }];
+  }
 }
 
 // MARK: QBRTCConferenceClientDelegate
 
 - (void)didCreateNewSession:(QBRTCConferenceSession *)session {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        QBRTCAudioSession *audioSession = [QBRTCAudioSession instance];
-        [audioSession initializeWithConfigurationBlock:^(QBRTCAudioSessionConfiguration *configuration) {
-            // adding blutetooth support
-            configuration.categoryOptions |= AVAudioSessionCategoryOptionAllowBluetooth;
-            configuration.categoryOptions |= AVAudioSessionCategoryOptionAllowBluetoothA2DP;
-            
-            // adding airplay support
-            configuration.categoryOptions |= AVAudioSessionCategoryOptionAllowAirPlay;
-            
-            if (_session.conferenceType == QBRTCConferenceTypeVideo) {
-                // setting mode to video chat to enable airplay audio and speaker only
-                configuration.mode = AVAudioSessionModeVideoChat;
-            }
-        }];
-        
-        session.localMediaStream.audioTrack.enabled = !self.muteAudio;
-        session.localMediaStream.videoTrack.enabled = !self.muteVideo;
-        
-        if (self.cameraCapture != nil) {
-            session.localMediaStream.videoTrack.videoCapture = self.cameraCapture;
-        }
-        
-        if (_conferenceType > 0) {
-            [session joinAsPublisher];
-        }
-        else {
-            self.state = CallViewControllerStateConnected;
-            __weak __typeof(self)weakSelf = self;
-            [self.session listOnlineParticipantsWithCompletionBlock:^(NSArray<NSNumber *> * _Nonnull publishers, NSArray<NSNumber *> * _Nonnull listeners) {
-                for (NSNumber *userID in publishers) {
-                    [weakSelf.session subscribeToUserWithID:userID];
-                }
-            }];
-        }
+    QBRTCAudioSession *audioSession = [QBRTCAudioSession instance];
+    [audioSession initializeWithConfigurationBlock:^(QBRTCAudioSessionConfiguration *configuration) {
+      // adding blutetooth support
+      configuration.categoryOptions |= AVAudioSessionCategoryOptionAllowBluetooth;
+      configuration.categoryOptions |= AVAudioSessionCategoryOptionAllowBluetoothA2DP;
+      
+      // adding airplay support
+      configuration.categoryOptions |= AVAudioSessionCategoryOptionAllowAirPlay;
+      
+      if (_session.conferenceType == QBRTCConferenceTypeVideo) {
+        // setting mode to video chat to enable airplay audio and speaker only
+        configuration.mode = AVAudioSessionModeVideoChat;
+      }
+    }];
+    
+    session.localMediaStream.audioTrack.enabled = !self.muteAudio;
+    session.localMediaStream.videoTrack.enabled = !self.muteVideo;
+    
+    if (self.cameraCapture != nil) {
+      session.localMediaStream.videoTrack.videoCapture = self.cameraCapture;
     }
+    
+    if (_conferenceType > 0) {
+      [session joinAsPublisher];
+    }
+    else {
+      self.state = CallViewControllerStateConnected;
+      __weak __typeof(self)weakSelf = self;
+      [self.session listOnlineParticipantsWithCompletionBlock:^(NSArray<NSNumber *> * _Nonnull publishers, NSArray<NSNumber *> * _Nonnull listeners) {
+        for (NSNumber *userID in publishers) {
+          [weakSelf.session subscribeToUserWithID:userID];
+        }
+      }];
+    }
+  }
 }
 
 - (void)session:(QBRTCConferenceSession *)session didJoinChatDialogWithID:(NSString *)chatDialogID publishersList:(NSArray *)publishersList {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        self.state = CallViewControllerStateConnected;
-        for (NSNumber *userID in publishersList) {
-            [self.session subscribeToUserWithID:userID];
-            [self addToCollectionUserWithID:userID];
-        }
+    self.state = CallViewControllerStateConnected;
+    for (NSNumber *userID in publishersList) {
+      [self.session subscribeToUserWithID:userID];
+      [self addToCollectionUserWithID:userID];
     }
+  }
 }
 
 - (void)session:(QBRTCConferenceSession *)session didReceiveNewPublisherWithUserID:(NSNumber *)userID {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        // subscribing to user to receive his media
-        [self.session subscribeToUserWithID:userID];
-    }
+    // subscribing to user to receive his media
+    [self.session subscribeToUserWithID:userID];
+  }
 }
 
 - (void)session:(QBRTCConferenceSession *)session publisherDidLeaveWithUserID:(NSNumber *)userID {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        // in case we are zoomed into leaving publisher
-        // cleaning it here
-        if ([_statsUserID isEqualToNumber:userID]) {
-            [self unzoomVideoView];
-        }
+    // in case we are zoomed into leaving publisher
+    // cleaning it here
+    if ([_statsUserID isEqualToNumber:userID]) {
+      [self unzoomVideoView];
     }
+  }
 }
 
 - (void)sessionWillClose:(QBRTCConferenceSession *)session {
+  
+  if (session == self.session) {
     
-    if (session == self.session) {
-        
-        if ([QBRTCAudioSession instance].isInitialized) {
-            // deinitializing audio session if needed
-            [[QBRTCAudioSession instance] deinitialize];
-        }
-        
-        [self closeCallWithTimeout:NO];
+    if ([QBRTCAudioSession instance].isInitialized) {
+      // deinitializing audio session if needed
+      [[QBRTCAudioSession instance] deinitialize];
     }
+    
+    [self closeCallWithTimeout:NO];
+  }
 }
 
 - (void)sessionDidClose:(QBRTCConferenceSession *)session withTimeout:(BOOL)timeout {
+  
+  if (session == self.session
+      && self.state != CallViewControllerStateDisconnected) {
     
-    if (session == self.session
-        && self.state != CallViewControllerStateDisconnected) {
-        
-        [self closeCallWithTimeout:timeout];
-    }
+    [self closeCallWithTimeout:timeout];
+  }
 }
 
 - (void)session:(QBRTCConferenceSession *)session didReceiveError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+  [SVProgressHUD showErrorWithStatus:error.localizedDescription];
 }
 
 // MARK: QBRTCAudioSessionDelegate
 
 - (void)audioSession:(QBRTCAudioSession *)audioSession didChangeCurrentAudioDevice:(QBRTCAudioDevice)updatedAudioDevice {
+  
+  if (!_didStartPlayAndRecord) {
+    return;
+  }
+  
+  BOOL isSpeaker = updatedAudioDevice == QBRTCAudioDeviceSpeaker;
+  if (self.dynamicEnable.pressed != isSpeaker) {
     
-    if (!_didStartPlayAndRecord) {
-        return;
-    }
-    
-    BOOL isSpeaker = updatedAudioDevice == QBRTCAudioDeviceSpeaker;
-    if (self.dynamicEnable.pressed != isSpeaker) {
-        
-        self.dynamicEnable.pressed = isSpeaker;
-    }
+    self.dynamicEnable.pressed = isSpeaker;
+  }
 }
 
 - (void)audioSessionDidStartPlayOrRecord:(QBRTCAudioSession *)audioSession {
-    _didStartPlayAndRecord = YES;
-    audioSession.currentAudioDevice = QBRTCAudioDeviceSpeaker;
+  _didStartPlayAndRecord = YES;
+  audioSession.currentAudioDevice = QBRTCAudioDeviceSpeaker;
 }
 
 - (void)audioSessionDidStopPlayOrRecord:(QBRTCAudioSession *)audioSession {
-    _didStartPlayAndRecord = NO;
+  _didStartPlayAndRecord = NO;
 }
 
 // MARK: Overrides
 
 - (void)setState:(CallViewControllerState)state {
-    
-    if (_state != state) {
-        switch (state) {
-            case CallViewControllerStateDisconnected:
-                self.title = @"Disconnected";
-                break;
-                
-            case CallViewControllerStateConnecting:
-                self.title = @"Connecting...";
-                break;
-                
-            case CallViewControllerStateConnected:
-                self.title = @"Connected";
-                break;
-                
-            case CallViewControllerStateDisconnecting:
-                self.title = @"Disconnecting...";
-                break;
-        }
+  
+  if (_state != state) {
+    switch (state) {
+      case CallViewControllerStateDisconnected:
+        self.title = @"Disconnected";
+        break;
         
-        _state = state;
+      case CallViewControllerStateConnecting:
+        self.title = @"Connecting...";
+        break;
+        
+      case CallViewControllerStateConnected:
+        self.title = @"Connected";
+        break;
+        
+      case CallViewControllerStateDisconnecting:
+        self.title = @"Disconnecting...";
+        break;
     }
+    
+    _state = state;
+  }
 }
 
 - (void)setMuteAudio:(BOOL)muteAudio {
-    
-    if (_muteAudio != muteAudio) {
-        _muteAudio = muteAudio;
-        self.session.localMediaStream.audioTrack.enabled = !muteAudio;
-    }
+  
+  if (_muteAudio != muteAudio) {
+    _muteAudio = muteAudio;
+    self.session.localMediaStream.audioTrack.enabled = !muteAudio;
+  }
 }
 
 - (void)setMuteVideo:(BOOL)muteVideo {
-    
-    if (_muteVideo != muteVideo) {
-        _muteVideo = muteVideo;
-        self.session.localMediaStream.videoTrack.enabled = !muteVideo;
-    }
+  
+  if (_muteVideo != muteVideo) {
+    _muteVideo = muteVideo;
+    self.session.localMediaStream.videoTrack.enabled = !muteVideo;
+  }
 }
 
 // MARK: Actions
 
 - (void)pushAddUsersToRoomScreen {
-    [self performSegueWithIdentifier:kUsersSegue sender:nil];
+  [self performSegueWithIdentifier:kUsersSegue sender:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  
+  [self.cameraCapture stopSession:nil];
+  if ([segue.identifier isEqualToString:kUsersSegue]) {
     
-    [self.cameraCapture stopSession:nil];
-    if ([segue.identifier isEqualToString:kUsersSegue]) {
-        
-        AddUsersViewController *usersVC = (id)segue.destinationViewController;
-        usersVC.usersDataSource = self.usersDataSource;
-        usersVC.chatDialog = self.chatDialog;
-    }
+    AddUsersViewController *usersVC = (id)segue.destinationViewController;
+    usersVC.usersDataSource = self.usersDataSource;
+    usersVC.chatDialog = self.chatDialog;
+  }
 }
 
 - (void)zoomVideoView:(UIView *)videoView {
-    [_zoomedView setVideoView:videoView];
-    _zoomedView.hidden = NO;
-    self.navigationItem.rightBarButtonItem = self.statsItem;
+  [_zoomedView setVideoView:videoView];
+  _zoomedView.hidden = NO;
+  self.navigationItem.rightBarButtonItem = self.statsItem;
 }
 
 - (void)unzoomVideoView {
-    if (self.originCell != nil) {
-        self.originCell.videoView = _zoomedView.videoView;
-        _zoomedView.videoView = nil;
-        self.originCell = nil;
-        _zoomedView.hidden = YES;
-        _statsUserID = nil;
-        self.navigationItem.rightBarButtonItem = self.addUsersItem;
-    }
+  if (self.originCell != nil) {
+    self.originCell.videoView = _zoomedView.videoView;
+    _zoomedView.videoView = nil;
+    self.originCell = nil;
+    _zoomedView.hidden = YES;
+    _statsUserID = nil;
+    self.navigationItem.rightBarButtonItem = self.addUsersItem;
+  }
 }
 
 - (void)addToCollectionUserWithID:(NSNumber *)userID {
+  
+  QBUUser *user = [self userWithID:userID];
+  if ([self.users indexOfObject:user] != NSNotFound) {
+    return;
+  }
+  [self.users insertObject:user atIndex:0];
+  NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+  
+  __weak __typeof(self)weakSelf = self;
+  [self.opponentsCollectionView performBatchUpdates:^{
     
-    QBUUser *user = [self userWithID:userID];
-    if ([self.users indexOfObject:user] != NSNotFound) {
-        return;
-    }
-    [self.users insertObject:user atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    [weakSelf.opponentsCollectionView insertItemsAtIndexPaths:@[indexPath]];
     
-    __weak __typeof(self)weakSelf = self;
-    [self.opponentsCollectionView performBatchUpdates:^{
-        
-        [weakSelf.opponentsCollectionView insertItemsAtIndexPaths:@[indexPath]];
-        
-    } completion:^(BOOL finished) {
-        
-        [weakSelf refreshVideoViews];
-    }];
+  } completion:^(BOOL finished) {
     
+    [weakSelf refreshVideoViews];
+  }];
+  
 }
 
 - (void)removeFromCollectionUserWithID:(NSNumber *)userID {
+  
+  QBUUser *user = [self userWithID:userID];
+  NSInteger index = [self.users indexOfObject:user];
+  if (index == NSNotFound) {
+    return;
+  }
+  NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+  [self.users removeObject:user];
+  [self.videoViews removeObjectForKey:userID];
+  
+  __weak __typeof(self)weakSelf = self;
+  [self.opponentsCollectionView performBatchUpdates:^{
     
-    QBUUser *user = [self userWithID:userID];
-    NSInteger index = [self.users indexOfObject:user];
-    if (index == NSNotFound) {
-        return;
-    }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    [self.users removeObject:user];
-    [self.videoViews removeObjectForKey:userID];
+    [weakSelf.opponentsCollectionView deleteItemsAtIndexPaths:@[indexPath]];
     
-    __weak __typeof(self)weakSelf = self;
-    [self.opponentsCollectionView performBatchUpdates:^{
-        
-        [weakSelf.opponentsCollectionView deleteItemsAtIndexPaths:@[indexPath]];
-        
-    } completion:^(BOOL finished) {
-        
-        [weakSelf refreshVideoViews];
-    }];
+  } completion:^(BOOL finished) {
+    
+    [weakSelf refreshVideoViews];
+  }];
 }
 
 - (void)closeCallWithTimeout:(BOOL)timeout {
-    
-    // removing delegate on close call so we don't get any callbacks
-    // that will force collection view to perform updates
-    // while controller is deallocating
-    [[QBRTCConferenceClient instance] removeDelegate:self];
-    
-    // stopping camera session
-    [self.cameraCapture stopSession:nil];
-    
-    // toolbar
-    self.toolbar.userInteractionEnabled = NO;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.toolbar.alpha = 0.4;
-    }];
-    
-    self.state = CallViewControllerStateDisconnected;
-    
-    if (timeout) {
-        [SVProgressHUD showErrorWithStatus:@"Conference did close due to time out"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    else {
-        // dismissing progress hud if needed
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [SVProgressHUD dismiss];
-    }
+  
+  // removing delegate on close call so we don't get any callbacks
+  // that will force collection view to perform updates
+  // while controller is deallocating
+  [[QBRTCConferenceClient instance] removeDelegate:self];
+  
+  // stopping camera session
+  [self.cameraCapture stopSession:nil];
+  
+  // toolbar
+  self.toolbar.userInteractionEnabled = NO;
+  [UIView animateWithDuration:0.5 animations:^{
+    self.toolbar.alpha = 0.4;
+  }];
+  
+  self.state = CallViewControllerStateDisconnected;
+  
+  if (timeout) {
+    [SVProgressHUD showErrorWithStatus:@"Conference did close due to time out"];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+  }
+  else {
+    // dismissing progress hud if needed
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
+  }
 }
 
 - (void)leaveFromRoom {
-    self.state = CallViewControllerStateDisconnecting;
-    if (self.session.state == QBRTCSessionStatePending) {
-        [self closeCallWithTimeout:NO];
-    }
-    else if (self.session.state != QBRTCSessionStateNew) {
-        [SVProgressHUD showWithStatus:nil];
-    }
-    [self.session leave];
+  self.state = CallViewControllerStateDisconnecting;
+  if (self.session.state == QBRTCSessionStatePending) {
+    [self closeCallWithTimeout:NO];
+  }
+  else if (self.session.state != QBRTCSessionStateNew) {
+    [SVProgressHUD showWithStatus:nil];
+  }
+  [self.session leave];
 }
 
 - (void)refreshVideoViews {
-    
-    // resetting zoomed view
-    UIView *zoomedVideoView = self.zoomedView.videoView;
-    for (OpponentCollectionViewCell *viewToRefresh  in self.opponentsCollectionView.visibleCells) {
-        UIView *view = viewToRefresh.videoView;
-        if (view == zoomedVideoView) {
-            continue;
-        }
-        
-        [viewToRefresh setVideoView:nil];
-        [viewToRefresh setVideoView:view];
+  
+  // resetting zoomed view
+  UIView *zoomedVideoView = self.zoomedView.videoView;
+  for (OpponentCollectionViewCell *viewToRefresh  in self.opponentsCollectionView.visibleCells) {
+    UIView *view = viewToRefresh.videoView;
+    if (view == zoomedVideoView) {
+      continue;
     }
+    
+    [viewToRefresh setVideoView:nil];
+    [viewToRefresh setVideoView:view];
+  }
 }
 
 - (void)updateStatsView {
-    self.shouldGetStats ^= 1;
-    self.statsView.hidden ^= 1;
+  self.shouldGetStats ^= 1;
+  self.statsView.hidden ^= 1;
 }
 
 // MARK: Helpers
 
 static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) {
-    
-    UIView *subview = [[subviewClass alloc] initWithFrame:view.bounds];
-    subview.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    subview.hidden = YES;
-    [view addSubview:subview];
-    return subview;
+  
+  UIView *subview = [[subviewClass alloc] initWithFrame:view.bounds];
+  subview.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+  subview.hidden = YES;
+  [view addSubview:subview];
+  return subview;
 }
 
 - (UIView *)videoViewWithOpponentID:(NSNumber *)opponentID {
+  
+  if (!self.videoViews) {
+    self.videoViews = [NSMutableDictionary dictionary];
+  }
+  
+  id result = self.videoViews[opponentID];
+  
+  if (Core.currentUser.ID == opponentID.integerValue
+      && self.session.conferenceType != QBRTCConferenceTypeAudio) {//Local preview
     
-    if (!self.videoViews) {
-        self.videoViews = [NSMutableDictionary dictionary];
+    if (!result) {
+      
+      LocalVideoView *localVideoView = [[LocalVideoView alloc] initWithPreviewlayer:self.cameraCapture.previewLayer];
+      self.videoViews[opponentID] = localVideoView;
+      localVideoView.delegate = self;
+      self.localVideoView = localVideoView;
+      
+      return localVideoView;
     }
+  }
+  else {//Opponents
     
-    id result = self.videoViews[opponentID];
+    QBRTCRemoteVideoView *remoteVideoView = nil;
+    QBRTCVideoTrack *remoteVideoTraсk = [self.session remoteVideoTrackWithUserID:opponentID];
     
-    if (Core.currentUser.ID == opponentID.integerValue
-        && self.session.conferenceType != QBRTCConferenceTypeAudio) {//Local preview
-        
-        if (!result) {
-            
-            LocalVideoView *localVideoView = [[LocalVideoView alloc] initWithPreviewlayer:self.cameraCapture.previewLayer];
-            self.videoViews[opponentID] = localVideoView;
-            localVideoView.delegate = self;
-            self.localVideoView = localVideoView;
-            
-            return localVideoView;
-        }
-    }
-    else {//Opponents
-        
-        QBRTCRemoteVideoView *remoteVideoView = nil;
-        QBRTCVideoTrack *remoteVideoTraсk = [self.session remoteVideoTrackWithUserID:opponentID];
-        
-        if (!result && remoteVideoTraсk) {
-            
-            remoteVideoView = [[QBRTCRemoteVideoView alloc] initWithFrame:CGRectMake(2, 2, 2, 2)];
-            remoteVideoView.videoGravity = AVLayerVideoGravityResizeAspectFill;
-            self.videoViews[opponentID] = remoteVideoView;
-            [remoteVideoView setVideoTrack:remoteVideoTraсk];
-            result = remoteVideoView;
-        }
-        
-        return result;
+    if (!result && remoteVideoTraсk) {
+      
+      remoteVideoView = [[QBRTCRemoteVideoView alloc] initWithFrame:CGRectMake(2, 2, 2, 2)];
+      remoteVideoView.videoGravity = AVLayerVideoGravityResizeAspectFill;
+      self.videoViews[opponentID] = remoteVideoView;
+      [remoteVideoView setVideoTrack:remoteVideoTraсk];
+      result = remoteVideoView;
     }
     
     return result;
+  }
+  
+  return result;
 }
 
 - (QBUUser *)userWithID:(NSNumber *)userID {
-    
-    QBUUser *user = [self.usersDataSource userWithID:userID.unsignedIntegerValue];
-    
-    if (!user) {
-        user = [QBUUser user];
-        user.ID = userID.unsignedIntegerValue;
-    }
-    
-    return user;
+  
+  QBUUser *user = [self.usersDataSource userWithID:userID.unsignedIntegerValue];
+  
+  if (!user) {
+    user = [QBUUser user];
+    user.ID = userID.unsignedIntegerValue;
+  }
+  
+  return user;
 }
 
 - (NSIndexPath *)indexPathAtUserID:(NSNumber *)userID {
-    
-    QBUUser *user = [self userWithID:userID];
-    NSUInteger idx = [self.users indexOfObject:user];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
-    
-    return indexPath;
+  
+  QBUUser *user = [self userWithID:userID];
+  NSUInteger idx = [self.users indexOfObject:user];
+  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+  
+  return indexPath;
 }
 
 - (void)performUpdateUserID:(NSNumber *)userID block:(void(^)(OpponentCollectionViewCell *cell))block {
-    
-    NSIndexPath *indexPath = [self indexPathAtUserID:userID];
-    OpponentCollectionViewCell *cell = (id)[self.opponentsCollectionView cellForItemAtIndexPath:indexPath];
-    block(cell);
+  
+  NSIndexPath *indexPath = [self indexPathAtUserID:userID];
+  OpponentCollectionViewCell *cell = (id)[self.opponentsCollectionView cellForItemAtIndexPath:indexPath];
+  block(cell);
 }
 
 // MARK: LocalVideoViewDelegate
 
 - (void)localVideoView:(LocalVideoView *)localVideoView pressedSwitchButton:(UIButton *)sender {
+  
+  AVCaptureDevicePosition position = self.cameraCapture.position;
+  AVCaptureDevicePosition newPosition = position == AVCaptureDevicePositionBack ? AVCaptureDevicePositionFront : AVCaptureDevicePositionBack;
+  
+  if ([self.cameraCapture hasCameraForPosition:newPosition]) {
     
-    AVCaptureDevicePosition position = self.cameraCapture.position;
-    AVCaptureDevicePosition newPosition = position == AVCaptureDevicePositionBack ? AVCaptureDevicePositionFront : AVCaptureDevicePositionBack;
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.75f;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.type = @"oglFlip";
     
-    if ([self.cameraCapture hasCameraForPosition:newPosition]) {
-        
-        CATransition *animation = [CATransition animation];
-        animation.duration = 0.75f;
-        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        animation.type = @"oglFlip";
-        
-        if (position == AVCaptureDevicePositionFront) {
-            
-            animation.subtype = kCATransitionFromRight;
-        }
-        else if(position == AVCaptureDevicePositionBack) {
-            
-            animation.subtype = kCATransitionFromLeft;
-        }
-        
-        [localVideoView.superview.layer addAnimation:animation forKey:nil];
-        self.cameraCapture.position = newPosition;
+    if (position == AVCaptureDevicePositionFront) {
+      
+      animation.subtype = kCATransitionFromRight;
     }
+    else if(position == AVCaptureDevicePositionBack) {
+      
+      animation.subtype = kCATransitionFromLeft;
+    }
+    
+    [localVideoView.superview.layer addAnimation:animation forKey:nil];
+    self.cameraCapture.position = newPosition;
+  }
 }
+
+// MARK: table view delegate
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return _reactionImageArr.count;
+}
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+
+  ReactionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reactionCell"];
+  [cell.reactionImage setImage:[UIImage imageNamed:_reactionImageArr[indexPath.row]]];
+  return  cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  return 70;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  _reactionView.hidden = true;
+}
+
+
+
+
 
 @end

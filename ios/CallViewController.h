@@ -28,4 +28,10 @@
 
 typedef void (^CompleteCall)(BOOL isFinished);
 @property (copy, nonatomic) CompleteCall completeCall;
+@property (weak, nonatomic) IBOutlet UIButton *endCallButton;
+@property (weak, nonatomic) IBOutlet UIView *reactionView;
+@property (weak, nonatomic) IBOutlet UITableView *reactionTableView;
+
+
+
 @end
