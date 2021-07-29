@@ -87,19 +87,19 @@ const CGFloat kAnimationLength = 0.15;
 
 - (void)prepareApperance {
     
-    self.selectedView.backgroundColor = self.selectedColor;
+//    self.selectedView.backgroundColor = self.selectedColor;
     self.layer.borderColor = [self.borderColor CGColor];
 }
 
 - (void)performLayout {
     
-    self.selectedView.frame = CGRectMake(0,
-                                         0,
-                                         self.frame.size.width,
-                                         self.frame.size.height);
-    
-    
-    [self addSubview:self.selectedView];
+//    self.selectedView.frame = CGRectMake(0,
+//                                         0,
+//                                         self.frame.size.width,
+//                                         self.frame.size.height);
+//
+//
+//    [self addSubview:self.selectedView];
     
     CGFloat max = MAX(self.frame.size.height, self.frame.size.width) * 0.5;
     self.iconView.frame = CGRectMake(
@@ -107,10 +107,13 @@ const CGFloat kAnimationLength = 0.15;
                                      CGRectGetMidY(self.bounds) - (max / 2.0),
                                      max,
                                      max);
+//  [self.iconView setBackgroundColor:[UIColor redColor]];
+  self.labelName.frame = CGRectMake(0, self.iconView.frame.size.height - 5, self.frame.size.width, 20);
+  [self.labelName setTextColor:[UIColor whiteColor]];
     [self addSubview:self.iconView];
+  [self addSubview:self.labelName];
     
-    
-    self.layer.cornerRadius = self.frame.size.height / 2.0;
+//    self.layer.cornerRadius = self.frame.size.height / 2.0;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -20,5 +20,6 @@
 + (QBButton *)circleDecline;
 + (QBButton *)answer;
 + (QBButton *)whiteBoard ;
++ (QBButton *)switchCamera;
 
 @end

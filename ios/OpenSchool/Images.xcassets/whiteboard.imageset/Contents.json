@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "unmute.png",
+      "filename" : "whiteboard-illus.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "unmute@2x.png",
+      "filename" : "whiteboard-illus@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "unmute@3x.png",
+      "filename" : "whiteboard-illus@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -125,6 +125,19 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)configureGUI {
     
     __weak __typeof(self)weakSelf = self;
+  
+  [self.toolbar addButton:[QBButtonsFactory switchCamera] action:^(UIButton *sender) {
+      
+  }];
+  
+  [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
+      
+      weakSelf.muteAudio ^= 1;
+  }];
+  
+  [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
+      
+  }];
     
     if (self.session.conferenceType == QBRTCConferenceTypeVideo
         && _conferenceType > 0) {
@@ -135,53 +148,62 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
             weakSelf.localVideoView.hidden = weakSelf.muteVideo;
         }];
     }
+  
+  [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
+      
+      weakSelf.muteAudio ^= 1;
+    WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
+    [weakSelf presentViewController:vc animated:false completion:nil];
     
-    if (_conferenceType > 0) {
-      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
-
-          weakSelf.muteAudio ^= 1;
-        [weakSelf.session leave];
-        if( weakSelf.completeCall ){
-          weakSelf.completeCall(true);
-           }
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-      }];
-        [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
-            
-            weakSelf.muteAudio ^= 1;
-        }];
-      [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
-          
-          weakSelf.muteAudio ^= 1;
-        WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
-        [weakSelf presentViewController:vc animated:false completion:nil];
-        
-        
-      }];
-//      self.dynamicEnable = [QBButtonsFactory dynamicEnable];
-//      self.dynamicEnable.pressed = YES;
-//      [self.toolbar addButton:self.dynamicEnable action:^(UIButton *sender) {
-//          
-//          QBRTCAudioDevice device = [QBRTCAudioSession instance].currentAudioDevice;
-//          
-//          [QBRTCAudioSession instance].currentAudioDevice =
-//          device == QBRTCAudioDeviceSpeaker ? QBRTCAudioDeviceReceiver : QBRTCAudioDeviceSpeaker;
+    
+  }];
+    
+//    if (_conferenceType > 0) {
+////      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
+////
+////          weakSelf.muteAudio ^= 1;
+////        [weakSelf.session leave];
+////        if( weakSelf.completeCall ){
+////          weakSelf.completeCall(true);
+////           }
+////        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+////      }];
+//        [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
+//
+//            weakSelf.muteAudio ^= 1;
+//        }];
+//      [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
+//
+//          weakSelf.muteAudio ^= 1;
+//        WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
+//        [weakSelf presentViewController:vc animated:false completion:nil];
+//
+//
 //      }];
-     
-    }
-    
-    if (self.session.conferenceType == QBRTCConferenceTypeAudio) {
-        
-        self.dynamicEnable = [QBButtonsFactory dynamicEnable];
-        self.dynamicEnable.pressed = YES;
-        [self.toolbar addButton:self.dynamicEnable action:^(UIButton *sender) {
-            
-            QBRTCAudioDevice device = [QBRTCAudioSession instance].currentAudioDevice;
-            
-            [QBRTCAudioSession instance].currentAudioDevice =
-            device == QBRTCAudioDeviceSpeaker ? QBRTCAudioDeviceReceiver : QBRTCAudioDeviceSpeaker;
-        }];
-    }
+////      self.dynamicEnable = [QBButtonsFactory dynamicEnable];
+////      self.dynamicEnable.pressed = YES;
+////      [self.toolbar addButton:self.dynamicEnable action:^(UIButton *sender) {
+////
+////          QBRTCAudioDevice device = [QBRTCAudioSession instance].currentAudioDevice;
+////
+////          [QBRTCAudioSession instance].currentAudioDevice =
+////          device == QBRTCAudioDeviceSpeaker ? QBRTCAudioDeviceReceiver : QBRTCAudioDeviceSpeaker;
+////      }];
+//
+//    }
+//
+//    if (self.session.conferenceType == QBRTCConferenceTypeAudio) {
+//
+//        self.dynamicEnable = [QBButtonsFactory dynamicEnable];
+//        self.dynamicEnable.pressed = YES;
+//        [self.toolbar addButton:self.dynamicEnable action:^(UIButton *sender) {
+//
+//            QBRTCAudioDevice device = [QBRTCAudioSession instance].currentAudioDevice;
+//
+//            [QBRTCAudioSession instance].currentAudioDevice =
+//            device == QBRTCAudioDeviceSpeaker ? QBRTCAudioDeviceReceiver : QBRTCAudioDeviceSpeaker;
+//        }];
+//    }
     
     [self.toolbar updateItems];
     
