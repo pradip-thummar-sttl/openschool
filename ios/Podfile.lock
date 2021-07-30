@@ -21,6 +21,9 @@ PODS:
   - glog (0.3.5)
   - Permission-Camera (3.0.4):
     - RNPermissions
+  - PubNub (4.16.2):
+    - PubNub/Core (= 4.16.2)
+  - PubNub/Core (4.16.2)
   - QuickBlox (2.17.10)
   - quickblox-react-native-sdk (0.5.12-beta):
     - QuickBlox (~> 2.17.9)
@@ -316,6 +319,7 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
+  - PubNub
   - QuickBlox
   - quickblox-react-native-sdk (from `../node_modules/quickblox-react-native-sdk`)
   - Quickblox-WebRTC
@@ -368,6 +372,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - PubNub
     - QuickBlox
     - Quickblox-WebRTC
 
@@ -481,6 +486,7 @@ SPEC CHECKSUMS:
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   Permission-Camera: 74dc395c37a06ebe915069c5dca954c7a2a5a2e3
+  PubNub: d2f675a6ec0c03a7ce562c8accc365c1457bf0c6
   QuickBlox: 49d85c6e1782993fb2383001301b788a8d7dcad3
   quickblox-react-native-sdk: 8b571f113d46bc78e523d0a617eb8fefc6de515e
   Quickblox-WebRTC: 162d2421d91cfb3d4f7e01f87e095633ca52bb1d
@@ -528,6 +534,6 @@ SPEC CHECKSUMS:
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 3cdeb15e0ee491fdf7ad71e8b6af803f74d2857c
+PODFILE CHECKSUM: 1a2056423bf0c99a4efda1bcd1128c55bd93fb2c
 
 COCOAPODS: 1.10.1

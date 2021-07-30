@@ -23,6 +23,16 @@
 #import "ZoomedView.h"
 #import "WhiteboardVC.h"
 #import "ReactionTableViewCell.h"
+#import <PubNub/PubNub.h>
+
+#pragma mark Statics
+
+static NSString * const kUpdateCellIdentifier = @"cellIdentifier";
+static NSString * const kUpdateEntryMessage = @"entryMessage";
+static NSString * const kUpdateEntryType = @"entryType";
+static NSString * const kChannelGuide = @"the_guide";
+static NSString * const kEntryEarth = @"Earth";
+
 
 
 
@@ -38,7 +48,7 @@ static NSString * const kUnknownUserLabel = @"Unknown user";
 static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @interface CallViewController ()
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QBRTCAudioSessionDelegate, QBRTCConferenceClientDelegate, LocalVideoViewDelegate, UITableViewDelegate, UITableViewDataSource>
+<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QBRTCAudioSessionDelegate, QBRTCConferenceClientDelegate, LocalVideoViewDelegate, UITableViewDelegate, UITableViewDataSource, PNObjectEventListener>
 {
     BOOL _didStartPlayAndRecord;
 }
@@ -71,6 +81,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) UIBarButtonItem *addUsersItem;
 
 @property (strong, nonatomic) NSMutableArray *reactionImageArr;
+@property (strong, nonatomic) NSMutableArray *reactionUnicodeArr;
+
+@property (nonatomic, strong) PubNub *pubnub;
+@property (nonatomic, strong) NSMutableArray<NSDictionary *> *messages;
 
 @end
 
@@ -90,6 +104,16 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [[QBRTCConferenceClient instance] addDelegate:self];
     [[QBRTCAudioSession instance] addDelegate:self];
+  
+  PNConfiguration *pnconfig = [PNConfiguration configurationWithPublishKey:@"pub-c-bd967178-53ea-4b05-954a-2666bb3b6337"
+                                                              subscribeKey:@"sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267"];
+  pnconfig.uuid = @"myUniqueUUID";
+  self.pubnub = [PubNub clientWithConfiguration:pnconfig];
+  
+  [self.pubnub addListener:self];
+  [self.pubnub subscribeToChannels: @[kChannelGuide] withPresence:YES];
+  
+  self.messages = [NSMutableArray new];
 }
 
 - (void)viewDidLoad {
@@ -98,6 +122,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   self.reactionView.layer.cornerRadius = 10;
   self.reactionTableView.layer.cornerRadius = 10;
   self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
+  self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"0x1F44A", @"0x1F44F", @"0x263A", @"0x1F496", @"0x1F44B", @"0x1F44D", nil];
   [self.reactionTableView setDelegate:self];
   [self.reactionTableView setDataSource:self];
   self.endCallButton.layer.cornerRadius = 10;
@@ -126,6 +151,57 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     self.view.backgroundColor = self.opponentsCollectionView.backgroundColor =
     [UIColor colorWithRed:0.1465 green:0.1465 blue:0.1465 alpha:1.0];
 }
+
+#pragma mark - Updates sending
+
+- (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
+    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:kChannelGuide
+          withCompletion:^(PNPublishStatus *status) {
+
+        NSString *text = update;
+        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    }];
+}
+
+- (void)displayMessage:(NSString *)message asType:(NSString *)type {
+    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
+    [self.messages insertObject:updateEntry atIndex:0];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//
+//    [self.tableView beginUpdates];
+//    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+//                          withRowAnimation:UITableViewRowAnimationBottom];
+//
+//    [self.tableView endUpdates];
+  NSLog(@"print messages data %@", self.messages);
+}
+
+
+#pragma mark - PubNub event listeners
+
+- (void)client:(PubNub *)pubnub didReceiveMessage:(PNMessageResult *)event {
+    NSString *text = [NSString stringWithFormat:@"entry: %@, update: %@",
+                      event.data.message[@"entry"],
+                      event.data.message[@"update"]];
+
+    [self displayMessage:text asType:@"[MESSAGE: received]"];
+}
+
+//- (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
+//    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
+//                      event.data.presence.uuid,
+//                      event.data.channel];
+//
+//    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
+//    [self displayMessage:text asType: type];
+//}
+//
+//- (void)client:(PubNub *)pubnub didReceiveStatus:(PNStatus *)event {
+//    NSString *text = [NSString stringWithFormat:@"status: %@", event.stringifiedCategory];
+//
+//    [self displayMessage:text asType:@"[STATUS: connection]"];
+//    [self submitUpdate:@"Harmless." forEntry:kEntryEarth toChannel:kChannelGuide];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -156,6 +232,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   }];
   
   [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
+    
       
   }];
     
@@ -849,11 +926,10 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   return 70;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  _reactionView.hidden = true;
+    if (indexPath.row != 0) {
+        [self submitUpdate:_reactionUnicodeArr[indexPath.row-1] forEntry:kEntryEarth toChannel:kChannelGuide];
+    }
+    _reactionView.hidden = true;
 }
-
-
-
-
 
 @end
