@@ -11,6 +11,7 @@ import android.widget.ToggleButton;
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
 import com.openschool.adapter.OpponentsFromCallAdapter;
+import com.pubnub.api.callbacks.SubscribeCallback;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.videochat.webrtc.QBRTCAudioTrack;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCClientAudioTracksCallback;
@@ -40,6 +41,15 @@ public class AudioConversationFragment extends BaseConversationFragment implemen
         audioSwitchToggleButton = (ToggleButton) view.findViewById(R.id.toggle_speaker);
         audioSwitchToggleButton.setVisibility(View.VISIBLE);
         super.initViews(view);
+    }
+
+    @Override
+    public void onReady() {
+    }
+
+    @Override
+    public SubscribeCallback provideListener(){
+        return null;
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.facebook.react.bridge.Callback;
 
+import com.openschool.BuildConfig;
 import com.openschool.R;
 import com.openschool.fragments.AudioConversationFragment;
 import com.openschool.fragments.BaseConversationFragment;
@@ -27,7 +29,12 @@ import com.openschool.fragments.VideoConversationFragment;
 import com.openschool.util.Consts;
 import com.openschool.util.FragmentExecuotr;
 import com.openschool.util.NetworkConnectionChecker;
+import com.openschool.util.ParentActivityImpl;
 import com.openschool.util.WebRtcSessionManager;
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.enums.PNLogVerbosity;
+import com.pubnub.api.enums.PNReconnectionPolicy;
 import com.quickblox.conference.ConferenceClient;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.QBConferenceRole;
@@ -56,7 +63,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * QuickBlox team
  */
 public class CallActivity extends BaseActivity implements QBRTCSessionStateCallback<ConferenceSession>, ConferenceSessionCallbacks,
-        OnCallEventsController, ConversationFragmentCallbackListener, NetworkConnectionChecker.OnConnectivityChangedListener {
+        OnCallEventsController, ConversationFragmentCallbackListener, NetworkConnectionChecker.OnConnectivityChangedListener, ParentActivityImpl {
 
 //    private static final String TAG = CallActivity.class.getSimpleName();
     private static final String TAG = "KDKDKD";
@@ -90,6 +97,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private String title;
     private static Callback _callback;
 
+    private PubNub mPubNub; // a field of MainActivity.java
 
     public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID, String title, Callback callBack) {
 
@@ -132,6 +140,8 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         initWiFiManagerListener();
 
         connectionView = (LinearLayout) View.inflate(this, R.layout.connection_popup, null);
+
+        initializePubNub();
 
         startConversationFragment();
     }
@@ -651,5 +661,29 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
             releaseCurrentSession();
             finish();
         }
+    }
+
+    private void initializePubNub() {
+        // tag::KEYS-2[]
+        String pubKey = BuildConfig.PUB_KEY;
+        String subKey = BuildConfig.SUB_KEY;
+        // end::KEYS-2[]
+
+        // tag::INIT-1.2[]
+
+        PNConfiguration pnConfiguration = new PNConfiguration();
+        pnConfiguration.setPublishKey(pubKey);
+        pnConfiguration.setSubscribeKey(subKey);
+        pnConfiguration.setLogVerbosity(PNLogVerbosity.BODY);
+        pnConfiguration.setReconnectionPolicy(PNReconnectionPolicy.LINEAR);
+        pnConfiguration.setMaximumReconnectionRetries(10);
+
+        mPubNub = new PubNub(pnConfiguration);
+        // end::INIT-1.2[]
+    }
+
+    @Override
+    public PubNub getPubNub() {
+        return mPubNub;
     }
 }
