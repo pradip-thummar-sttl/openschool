@@ -88,23 +88,28 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" backgroundImage="addreaction"/>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBL-me-Q8f">
+                                                    <rect key="frame" x="8" y="116" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15q-h1-Vu7">
-                                                    <rect key="frame" x="107" y="76.5" width="30" height="30"/>
+                                                    <rect key="frame" x="107" y="101" width="30" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Ijj-du-1W4"/>
                                                         <constraint firstAttribute="width" constant="30" id="Y8U-1z-Zpd"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="mic" catalog="system"/>
                                                     <connections>
                                                         <action selector="didPressMuteButton:" destination="dMc-NP-8wD" eventType="touchUpInside" id="ifN-yn-ELo"/>
                                                     </connections>
                                                 </button>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="local" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRx-qY-Pyw">
-                                                    <rect key="frame" x="0.0" y="115" width="145" height="24"/>
+                                                    <rect key="frame" x="0.0" y="139" width="145" height="0.0"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.46114864864864863" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="Ywk-Ld-yOZ"/>
+                                                        <constraint firstAttribute="height" id="Ywk-Ld-yOZ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -127,11 +132,14 @@
                                             <constraint firstAttribute="topMargin" secondItem="vI2-xq-eEs" secondAttribute="top" id="fix-nd-4gS"/>
                                             <constraint firstAttribute="trailing" secondItem="HTv-bT-QBz" secondAttribute="trailing" id="gBN-1z-XhZ"/>
                                             <constraint firstAttribute="leadingMargin" secondItem="vI2-xq-eEs" secondAttribute="leading" id="gcd-GK-JS8"/>
+                                            <constraint firstItem="eBL-me-Q8f" firstAttribute="centerY" secondItem="15q-h1-Vu7" secondAttribute="centerY" id="m8m-Ca-b50"/>
+                                            <constraint firstItem="eBL-me-Q8f" firstAttribute="leading" secondItem="dMc-NP-8wD" secondAttribute="leadingMargin" id="oIO-zd-gSb"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="15q-h1-Vu7" secondAttribute="trailing" id="pnw-ho-LAK"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="addReactionBtn" destination="Fqb-zF-Vtq" id="rE7-A2-3IN"/>
                                             <outlet property="containerView" destination="HTv-bT-QBz" id="f5d-q5-1Us"/>
+                                            <outlet property="emojiLbl" destination="eBL-me-Q8f" id="eum-EQ-GvE"/>
                                             <outlet property="muteButton" destination="15q-h1-Vu7" id="20l-qA-qB2"/>
                                             <outlet property="nameLabel" destination="u6X-FX-CXC" id="oZa-Ia-g3J"/>
                                             <outlet property="nameView" destination="vI2-xq-eEs" id="6mU-Yj-aUG"/>
@@ -299,7 +307,6 @@
     </scenes>
     <resources>
         <image name="addreaction" width="24" height="24"/>
-        <image name="mic" catalog="system" width="108" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

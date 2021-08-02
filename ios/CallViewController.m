@@ -122,7 +122,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   self.reactionView.layer.cornerRadius = 10;
   self.reactionTableView.layer.cornerRadius = 10;
   self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
-  self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"0x1F44A", @"0x1F44F", @"0x263A", @"0x1F496", @"0x1F44B", @"0x1F44D", nil];
+  self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"👊",@"🙌",@"🙂",@"💖",@"👏",@"👍", nil];
   [self.reactionTableView setDelegate:self];
   [self.reactionTableView setDataSource:self];
   self.endCallButton.layer.cornerRadius = 10;
@@ -373,6 +373,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
+
+  if (_messages.count != 0) {
+    reusableCell.emojiLbl.text = _messages[1][@"entryMessage"];
+  }
+ 
   reusableCell.addReactionBtn.tag = indexPath.row;
   [reusableCell.addReactionBtn addTarget:self action:@selector(addReaction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -930,6 +935,8 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
         [self submitUpdate:_reactionUnicodeArr[indexPath.row-1] forEntry:kEntryEarth toChannel:kChannelGuide];
     }
     _reactionView.hidden = true;
+  [self.opponentsCollectionView reloadData];
+  
 }
 
 @end
