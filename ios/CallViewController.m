@@ -166,6 +166,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
     NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
     [self.messages insertObject:updateEntry atIndex:0];
+  [self.opponentsCollectionView reloadData];
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 //
 //    [self.tableView beginUpdates];
@@ -180,11 +181,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 #pragma mark - PubNub event listeners
 
 - (void)client:(PubNub *)pubnub didReceiveMessage:(PNMessageResult *)event {
-    NSString *text = [NSString stringWithFormat:@"entry: %@, update: %@",
-                      event.data.message[@"entry"],
-                      event.data.message[@"update"]];
+//    NSString *text = [NSString stringWithFormat:@"entry: %@, update: %@",
+//                      event.data.message[@"entry"],
+//                      event.data.message[@"update"]];
 
-    [self displayMessage:text asType:@"[MESSAGE: received]"];
+    [self displayMessage:event.data.message[@"update"] asType:@"[MESSAGE: received]"];
 }
 
 //- (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
@@ -375,7 +376,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
 
   if (_messages.count != 0) {
-    reusableCell.emojiLbl.text = _messages[1][@"entryMessage"];
+    reusableCell.emojiLbl.text = _messages[0][@"entryMessage"];
   }
  
   reusableCell.addReactionBtn.tag = indexPath.row;
