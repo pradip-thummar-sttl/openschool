@@ -91,7 +91,7 @@ const TLDetail = (props) => {
                         </View>
                         <View style={PAGESTYLE.checkBoxGrp}>
                             <FlatList
-                                data={props.lessonData.PupilList}
+                                data={props.lessonData.Allpupillist}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.checkBoxLabelNone}>

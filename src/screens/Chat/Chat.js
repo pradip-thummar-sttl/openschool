@@ -90,8 +90,11 @@ const Chat = (props) => {
 
     useEffect(() => {
         pubnub.addListener({ message: handleMessage });
+    }, [])
+
+    useEffect(() => {
         pubnub.subscribe({ channels });
-    }, [pubnub, channels]);
+    }, [pubnub, channels,]);
 
 
     const onPressTab = (index) => {

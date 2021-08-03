@@ -81,6 +81,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected ArrayList<QBUser> opponents = new ArrayList<>();
     protected ArrayList<QBUser> opponentsTemp;
     protected ArrayList<Integer> opponentsIds;
+    protected ArrayList<String> channels;
     private LocalViewOnClickListener localViewOnClickListener;
     private Set<Integer> usersToDestroy;
     private boolean allCallbacksInit;
@@ -157,10 +158,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         conversationFragmentCallbackListener.addCurrentCallStateCallback(this);
-
-        onReady();
-        hostActivity.getPubNub().addListener(provideListener());
-        subscribe();
     }
 
     @Nullable
@@ -175,6 +172,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         isTeacher = this.getArguments().getBoolean(Consts.EXTRA_DIALOG_IS_TEACHER);
         teacherQBUserID = this.getArguments().getString(Consts.EXTRA_TEACHER_USER_ID);
         title = this.getArguments().getString(Consts.TITLE);
+        channels = this.getArguments().getStringArrayList(Consts.EXTRA_CHANNELS);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
         System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
@@ -194,6 +192,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         initActionBar();
         initButtonsListener();
         prepareAndShowOutgoingScreen();
+
+        onReady();
+        hostActivity.getPubNub().addListener(provideListener());
+        subscribe();
 
         return view;
     }
@@ -304,8 +306,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     @Override
-    public void onEmojiItemClick(int position, String message) {
-        sendEmoji(message, currentUserID);
+    public void onEmojiItemClick(String channel, String message) {
+        sendEmoji(channel, message, currentUserID);
     }
 
     private void adjustOpponentAudio(int userID, boolean isAudioEnabled) {
@@ -573,11 +575,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
 
-        icPEmoji1.setOnClickListener(v -> sendEmoji("0", currentUserID));
+        icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID));
 
-        icPEmoji2.setOnClickListener(v -> sendEmoji("1", currentUserID));
+        icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
 
-        icPEmoji3.setOnClickListener(v -> sendEmoji("2", currentUserID));
+        icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID));
     }
 
     protected void actionButtonsEnabled(boolean inability) {
@@ -998,13 +1000,16 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private void subscribe() {
-        List<String> channels = new ArrayList<>();
-        channels.add("MYEDOS_" + teacherQBUserID);
+        System.out.println("KDKDKD: this.channels " + this.channels);
+        List<String> channels = this.channels;
+        channels.add("6103cbb62cb3060068a3da1c");
+
+        System.out.println("KDKDKD: channels " + channels);
 
         hostActivity.getPubNub()
                 .subscribe()
-//                .channels(Collections.singletonList("MYEDOS_" + teacherQBUserID))
                 .channels(channels)
+//                .channels(channels)
 //                .withPresence()
                 .execute();
     }
@@ -1036,10 +1041,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         return new String(Character.toChars(originalUnicode));
     }
 
-    protected void sendEmoji(String message, String currentUserID) {
+    protected void sendEmoji(String channel, String message, String currentUserID) {
+        System.out.println("KDKDKD: channel send" + channel);
         hostActivity.getPubNub()
                 .publish()
-                .channel("MYEDOS_" + teacherQBUserID)
+                .channel(channel)
                 .message(isTeacher ? message : message + "#@#" + currentUserID)
                 .async(new PNCallback<PNPublishResult>() {
                     @Override

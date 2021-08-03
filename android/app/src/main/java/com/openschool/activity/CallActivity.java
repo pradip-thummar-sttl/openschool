@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.facebook.react.bridge.Callback;
 
+import com.facebook.react.bridge.ReadableArray;
 import com.openschool.BuildConfig;
 import com.openschool.R;
 import com.openschool.fragments.AudioConversationFragment;
@@ -95,11 +96,12 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private String currentName;
     private String teacherQBUserID;
     private String title;
+    private ArrayList<String> channelList;
     private static Callback _callback;
 
     private PubNub mPubNub; // a field of MainActivity.java
 
-    public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID, String title, Callback callBack) {
+    public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID, String title, List<String> channels, Callback callBack) {
 
         _callback = callBack;
         Intent intent = new Intent(context, CallActivity.class);
@@ -112,6 +114,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         intent.putExtra(Consts.EXTRA_DIALOG_IS_TEACHER, isTeacher);
         intent.putExtra(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
         intent.putExtra(Consts.TITLE, title);
+        intent.putExtra(Consts.EXTRA_CHANNELS, (Serializable) channels);
 
         context.startActivity(intent);
     }
@@ -171,6 +174,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         isTeacher = getIntent().getBooleanExtra(Consts.EXTRA_DIALOG_IS_TEACHER, false);
         teacherQBUserID = getIntent().getStringExtra(Consts.EXTRA_TEACHER_USER_ID);
         title = getIntent().getStringExtra(Consts.TITLE);
+        channelList = (ArrayList<String>) getIntent().getSerializableExtra(Consts.EXTRA_CHANNELS);
     }
 
     private void initAudioManager() {
@@ -461,6 +465,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         bundle.putBoolean(Consts.EXTRA_DIALOG_IS_TEACHER, isTeacher);
         bundle.putString(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
         bundle.putString(Consts.TITLE, title);
+        bundle.putStringArrayList(Consts.EXTRA_CHANNELS, channelList);
 
         BaseConversationFragment conversationFragment = BaseConversationFragment.newInstance(
                 isVideoCall

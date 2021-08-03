@@ -207,14 +207,15 @@ const PupuilDashboard = (props) => {
 
     const startLiveClassAndroid = () => {
         try {
-            let qBUserIDs = [], userNames = [], names = []
+            let qBUserIDs = [], userNames = [], names = [], channels = []
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
-            dataOfSubView.PupilList.forEach(pupil => {
+            dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
-                names.push(pupil.FirstName + " " + pupil.LastName)
+                names.push(pupil.PupilName)
             });
 
+            channels.push(dataOfSubView.TeacherID + "_" + User.user.UserDetialId)
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
@@ -224,7 +225,7 @@ const PupuilDashboard = (props) => {
             console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, channels, (error, ID) => {
                     console.log('Class Started');
                 });
             } else {
@@ -420,7 +421,7 @@ const PupuilDashboard = (props) => {
                                                                                         <View style={PAGESTYLE.timedateGrp}>
                                                                                             <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                                 <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                                                                <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                                                                <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                                             </View>
                                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                                                                                                 <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
@@ -434,7 +435,7 @@ const PupuilDashboard = (props) => {
                                                                                         <View style={STYLE.hrCommon}></View>
                                                                                         <View style={PAGESTYLE.mediaMain}>
                                                                                             <FlatList
-                                                                                                data={dataOfSubView.PupilList}
+                                                                                                data={dataOfSubView.Allpupillist}
                                                                                                 style={{ width: '100%' }}
                                                                                                 renderItem={({ item, index }) => (
                                                                                                     <TouchableOpacity style={PAGESTYLE.mediabarTouch}>

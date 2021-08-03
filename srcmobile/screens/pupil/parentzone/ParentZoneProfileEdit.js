@@ -372,6 +372,7 @@ const ParentZoneProfileEdit = (props) => {
                                 ref={t4}
                                 onSubmitEditing={() => { t5.current.focus(); }}
                                 multiline={true}
+                                value={note}
                                 autoCapitalize={'sentences'}
                                 numberOfLines={4}
                                 placeholder='Write something about your pupil here…'
@@ -549,7 +550,7 @@ const ParentZoneProfileEdit = (props) => {
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}
                     mode="date"
-                    minimumDate={new Date()}
+                    maximumDate={new Date()}
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
                 />

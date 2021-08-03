@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -92,7 +93,8 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.list_item_opponent_from_call, null);
-        v.findViewById(R.id.innerLayout).setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, itemHeight));
+        v.findViewById(R.id.innerLayout)
+                .setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, itemHeight));
 
         final ViewHolder vh = new ViewHolder(v);
 
@@ -124,6 +126,12 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         final QBUser user = opponents.get(position);
         int userID = user.getId();
         holder.opponentsName.setText(user.getFullName());
+
+//        float scale = context.getResources().getDisplayMetrics().density;
+//        int dpAsPixels = (int) (85 * scale + 0.5f);
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+//        params.setMargins(0, 0, 0, opponents.size() - 1 == position ? dpAsPixels : 0);
+//        holder.parentLayout.setLayoutParams(params);
 
         if (session.getMediaStreamManager() != null) {
             holder.toggleButton.setChecked(session.getMediaStreamManager().getAudioTrack(userID).enabled());
@@ -164,42 +172,42 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(vh.getAdapterPosition(), "0");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "0");
             }
         });
         ImageView iv2 = popupView.findViewById(R.id.iv2);
         iv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(vh.getAdapterPosition(), "1");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "1");
             }
         });
         ImageView iv3 = popupView.findViewById(R.id.iv3);
         iv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(vh.getAdapterPosition(), "2");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "2");
             }
         });
         ImageView iv4 = popupView.findViewById(R.id.iv4);
         iv4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(vh.getAdapterPosition(), "3");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "3");
             }
         });
         ImageView iv5 = popupView.findViewById(R.id.iv5);
         iv5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(vh.getAdapterPosition(), "4");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "4");
             }
         });
         ImageView iv6 = popupView.findViewById(R.id.iv6);
         iv6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(vh.getAdapterPosition(), "5");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "5");
             }
         });
     }
@@ -214,7 +222,7 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
 
         void onToggleButtonItemClick(int position, boolean isChecked);
 
-        void onEmojiItemClick(int position, String message);
+        void onEmojiItemClick(String channel, String message);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -225,6 +233,8 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         TextView tvPupilEmoji;
         QBConferenceSurfaceView opponentView;
         ProgressBar progressBar;
+        RelativeLayout innerLayout;
+        FrameLayout parentLayout;
         private int userId;
 
         public ViewHolder(View itemView) {
@@ -235,6 +245,8 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
             tvPupilEmoji = (TextView) itemView.findViewById(R.id.tvPupilEmoji);
             opponentView = (QBConferenceSurfaceView) itemView.findViewById(R.id.opponentView);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar_adapter);
+            innerLayout = (RelativeLayout) itemView.findViewById(R.id.innerLayout);
+            parentLayout = (FrameLayout) itemView.findViewById(R.id.parentLayout);
 
             btnEmojiTeacher = (ImageView) itemView.findViewById(R.id.btnEmojiTeacher);
         }

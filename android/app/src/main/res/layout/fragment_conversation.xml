@@ -24,7 +24,6 @@
             android:id="@+id/grid_opponents"
             style="@style/MatchParent"
             android:background="@color/white"
-            android:paddingBottom="85dp"
             tools:listitem="@layout/list_item_opponent_from_call" />
 
         <FrameLayout

@@ -11,11 +11,11 @@ import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity, showMe
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import RBSheet from "react-native-raw-bottom-sheet";
 import moment from 'moment';
-import { User } from "../../../../src/utils/Model";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import MESSAGE from "../../../utils/Messages";
 import { Download } from "../../../utils/Download";
+import { User } from "../../../utils/Model";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -97,24 +97,30 @@ const Popupdata = (props) => {
 
     const startLiveClassAndroid = () => {
         try {
-            let qBUserIDs = [], userNames = [], names = []
+            let qBUserIDs = [], userNames = [], names = [], channels = []
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
-            props.data.PupilList.forEach(pupil => {
+            props.data.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
-                names.push(pupil.FirstName + " " + pupil.LastName)
+                names.push(pupil.PupilName)
+                if (!props.isPupil) {
+                    channels.push(props.data.TeacherID + "_" + pupil.PupilId)
+                }
             });
 
+            if (props.isPupil) {
+                channels.push(props.data.TeacherID + "_" + User.user.UserDetialId)
+            }
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
             let teacherQBUserID = props.data.TeacherQBUserID
             let title = props.data.LessonTopic
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+            console.log('KDKD: ', dialogID, User.user.QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, ID) => {
                     console.log('Class Started');
 
                     if (!props.isPupil) {
@@ -185,7 +191,7 @@ const Popupdata = (props) => {
             >
                 {props.isLesson ?
                     <ScrollView>
-                        <TouchableOpacity activeOpacity={1} style={{paddingBottom: 80,}}>
+                        <TouchableOpacity activeOpacity={1} style={{ paddingBottom: 80, }}>
                             <View style={styles.tabcontent}>
                                 <View style={styles.beforeBorder}>
                                     <Text h2 style={styles.titleTab}>{props.data.SubjectName}</Text>
@@ -306,7 +312,7 @@ const Popupdata = (props) => {
                                                         style={{ ...styles.buttonGrp, paddingVertical: 13 }}
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.white} /> :
-                                                    <Text style={[styles.bottomDrwerButtonGreen]}>Start Class</Text>
+                                                    <Text style={[styles.bottomDrwerButtonGreen]}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
                                             }
 
                                         </TouchableOpacity>

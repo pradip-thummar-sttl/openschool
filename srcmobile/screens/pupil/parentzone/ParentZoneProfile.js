@@ -12,6 +12,7 @@ import moment from 'moment';
 import { baseUrl } from "../../../utils/Constant";
 
 const PupilProfileView = (props) => {
+    console.log('props.data', props.data);
     // const item = props.route.params.item;
     const [isHide, action] = useState(true);
     
