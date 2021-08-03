@@ -135,7 +135,7 @@ const GroupSetUp = () => {
     };
 
     const SelectedPupillist = (props) => (
-        <View style={{ width: '33%', }}>
+        <View>
             <View style={PAGESTYLE.selectedPupilParent}>
                 <Image
                     style={PAGESTYLE.selectedMediabar}
@@ -276,7 +276,7 @@ const GroupSetUp = () => {
                     placeholder="Enter group name"
                     autoCapitalize={'sentences'}
                     maxLength={40}
-                    placeholderTextColor={COLORS.lightplaceholder}
+                    placeholderTextColor={COLORS.darkGrayIntro}
                     value={groupName}
                     onChangeText={groupName => { setGroupName(groupName) }} />
                 {selectedPupils.length > 0 ?
@@ -287,23 +287,24 @@ const GroupSetUp = () => {
                             keyExtractor={(item) => item.id}
                             showsVerticalScrollIndicator={false}
                             numColumns={3}
-                            columnWrapperStyle={{ justifyContent: "space-around", margin: 10 }} />
-                        <View style={PAGESTYLE.bar}></View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <TouchableOpacity
-                                style={{ ...PAGESTYLE.buttonParent, backgroundColor: COLORS.dashboardGreenButton, }}
-                                onPress={() => { saveGroup() }}>
-                                <Text style={PAGESTYLE.button}>Assign Group</Text>
-                            </TouchableOpacity>
+                            columnWrapperStyle={{ justifyContent: "flex-start", margin: 0 }} />
+                        <View style={PAGESTYLE.bar2}></View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonParent}
+                                onPress={() => { saveGroup() }}>
+                                <Text style={{ ...PAGESTYLE.button, color: COLORS.dashboardGreenButton }}>Assign Group</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{ ...PAGESTYLE.buttonParent, backgroundColor: COLORS.dashboardGreenButton, }}
                                 onPress={() => { reset() }}>
-                                <Text style={{ ...PAGESTYLE.button, color: COLORS.dashboardGreenButton }}>Reset</Text>
+                                <Text style={PAGESTYLE.button}>Reset</Text>
                             </TouchableOpacity>
                         </View>
                     </>
                     :
-                    <View>
+                    <View style={PAGESTYLE.createGrpBlock}>
+                        <Image source={Images.createGrpImageLogo} style={PAGESTYLE.createGrpImage} />
                         <Text style={PAGESTYLE.label}>Tap on the pupil to create a new group!</Text>
                     </View>
                 }

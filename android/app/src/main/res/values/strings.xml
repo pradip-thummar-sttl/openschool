@@ -40,5 +40,6 @@
     <string name="camera_swicth_failed">\"Failed switch camera\"</string>
     <string name="opponents">and %s other</string>
     <string name="subtitle_text_logged_in_as">Logged in as %s</string>
+    <string name="wait_a_moment">Wait a moment...</string>
 </resources>
 

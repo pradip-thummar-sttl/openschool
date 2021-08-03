@@ -96,23 +96,30 @@ const Popupdata = (props) => {
 
     const startLiveClassAndroid = () => {
         try {
-            let qBUserIDs = [], userNames = [], names = []
+            let qBUserIDs = [], userNames = [], names = [], channels = []
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
-            props.data.PupilList.forEach(pupil => {
+            props.data.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
-                names.push(pupil.FirstName + " " + pupil.LastName)
+                names.push(pupil.PupilName)
+                if (!props.isPupil) {
+                    channels.push(props.data.TeacherID + "_" + pupil.PupilId)
+                }
             });
 
+            if (props.isPupil) {
+                channels.push(props.data.TeacherID + "_" + User.user.UserDetialId)
+            }
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
+            let teacherQBUserID = props.data.TeacherQBUserID
             let title = props.data.LessonTopic
 
 
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, ID) => {
                     console.log('Class Started');
 
                     if (!props.isPupil) {
@@ -280,7 +287,7 @@ const Popupdata = (props) => {
                                                                 style={{ ...styles.buttonGrp, paddingVertical: 13 }}
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                 color={COLORS.white} /> :
-                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
 
                                                     }
                                                 </TouchableOpacity>

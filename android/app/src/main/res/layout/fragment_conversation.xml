@@ -5,6 +5,17 @@
     style="@style/MatchParent"
     android:background="@color/white">
 
+    <TextView
+        android:id="@+id/opponentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/wait_a_moment"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,7 +23,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/grid_opponents"
             style="@style/MatchParent"
-            android:visibility="visible"
+            android:background="@color/white"
             tools:listitem="@layout/list_item_opponent_from_call" />
 
         <FrameLayout
@@ -22,8 +33,8 @@
             android:layout_above="@+id/element_set_call_buttons"
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="90dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="90dp">
 
             <com.quickblox.conference.view.QBConferenceSurfaceView
                 android:id="@+id/local_video_view"
@@ -66,8 +77,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:paddingHorizontal="15dp"
-        android:background="@drawable/shape_top_gradient">
+        android:background="@drawable/shape_top_gradient"
+        android:paddingHorizontal="15dp">
 
         <TextView
             android:id="@+id/tvTitle"
@@ -94,6 +105,15 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tvTeacherEmoji"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/element_set_call_buttons"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="35dp" />
+
     <include
         android:id="@+id/element_set_call_buttons"
         layout="@layout/view_action_buttons_conversation_fragment"
@@ -101,5 +121,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <include
+        android:id="@+id/element_set_pupil_emoji"
+        layout="@layout/view_action_pupil_emoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

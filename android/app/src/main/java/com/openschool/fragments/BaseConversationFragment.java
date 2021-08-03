@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,7 +35,12 @@ import com.openschool.activity.WhiteBoardActivity;
 import com.openschool.adapter.OpponentsFromCallAdapter;
 import com.openschool.util.CollectionsUtils;
 import com.openschool.util.Consts;
+import com.openschool.util.PNFragmentImpl;
+import com.openschool.util.ParentActivityImpl;
 import com.openschool.util.WebRtcSessionManager;
+import com.pubnub.api.callbacks.PNCallback;
+import com.pubnub.api.models.consumer.PNPublishResult;
+import com.pubnub.api.models.consumer.PNStatus;
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.model.QBDialogType;
 import com.quickblox.conference.ConferenceSession;
@@ -61,14 +65,14 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class BaseConversationFragment extends BaseToolBarFragment implements CallActivity.CurrentCallStateCallback, QBRTCSessionStateCallback<ConferenceSession>,
-        QBRTCClientVideoTracksCallbacks<ConferenceSession>, OpponentsFromCallAdapter.OnAdapterEventListener {
+        QBRTCClientVideoTracksCallbacks<ConferenceSession>, OpponentsFromCallAdapter.OnAdapterEventListener, PNFragmentImpl {
 
     private static final String TAG = BaseConversationFragment.class.getSimpleName();
 
     protected static final long LOCAL_TRACk_INITIALIZE_DELAY = 500;
     private static final int REQUEST_ADD_OCCUPANTS = 175;
 
-    private static final int DISPLAY_ROW_AMOUNT = 3;
+    private static final int DISPLAY_ROW_AMOUNT = 2;
     private static final int SMALL_CELLS_AMOUNT = 8;
     private static final int LARGE_CELLS_AMOUNT = 12;
 
@@ -77,6 +81,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected ArrayList<QBUser> opponents = new ArrayList<>();
     protected ArrayList<QBUser> opponentsTemp;
     protected ArrayList<Integer> opponentsIds;
+    protected ArrayList<String> channels;
     private LocalViewOnClickListener localViewOnClickListener;
     private Set<Integer> usersToDestroy;
     private boolean allCallbacksInit;
@@ -97,9 +102,15 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
     private TextView handUpCall;
+    private TextView tvTeacherEmoji;
     private TextView tvTitle;
     private ImageView button_screen_sharing;
     private ImageView whiteboard;
+    private ImageView icPEmoji1;
+    private ImageView icPEmoji2;
+    private ImageView icPEmoji3;
+    private LinearLayout llShare;
+    private LinearLayout llPupilEmoji;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
     protected View outgoingOpponentsRelativeLayout;
     protected TextView allOpponentsTextView;
@@ -113,7 +124,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected String teacherQBUserID;
     protected String title;
 
+    ParentActivityImpl hostActivity;
+
     private SparseArray<OpponentsFromCallAdapter.ViewHolder> opponentViewHolders;
+
+    public abstract void onReady();
 
     public static BaseConversationFragment newInstance(BaseConversationFragment baseConversationFragment) {
         Bundle args = new Bundle();
@@ -134,6 +149,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             throw new ClassCastException(activity.toString()
                     + " must implement ConversationFragmentCallbackListener");
         }
+
+        this.hostActivity = (ParentActivityImpl) activity;
     }
 
     @Override
@@ -155,6 +172,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         isTeacher = this.getArguments().getBoolean(Consts.EXTRA_DIALOG_IS_TEACHER);
         teacherQBUserID = this.getArguments().getString(Consts.EXTRA_TEACHER_USER_ID);
         title = this.getArguments().getString(Consts.TITLE);
+        channels = this.getArguments().getStringArrayList(Consts.EXTRA_CHANNELS);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
         System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
@@ -174,6 +192,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         initActionBar();
         initButtonsListener();
         prepareAndShowOutgoingScreen();
+
+        onReady();
+        hostActivity.getPubNub().addListener(provideListener());
+        subscribe();
 
         return view;
     }
@@ -283,6 +305,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         adjustOpponentAudio(userId, isAudioEnabled);
     }
 
+    @Override
+    public void onEmojiItemClick(String channel, String message) {
+        sendEmoji(channel, message, currentUserID);
+    }
+
     private void adjustOpponentAudio(int userID, boolean isAudioEnabled) {
         currentSession.getMediaStreamManager().getAudioTrack(userID).setEnabled(isAudioEnabled);
     }
@@ -389,6 +416,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     @Override
     public void onDestroy() {
         conversationFragmentCallbackListener.removeCurrentCallStateCallback(this);
+        hostActivity.getPubNub().removeListener(provideListener());
+
         super.onDestroy();
     }
 
@@ -401,9 +430,15 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
+        tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
         whiteboard = (ImageView) view.findViewById(R.id.whiteboard);
+        icPEmoji1 = (ImageView) view.findViewById(R.id.icPEmoji1);
+        icPEmoji2 = (ImageView) view.findViewById(R.id.icPEmoji2);
+        icPEmoji3 = (ImageView) view.findViewById(R.id.icPEmoji3);
+        llShare = (LinearLayout) view.findViewById(R.id.llShare);
+        llPupilEmoji = (LinearLayout) view.findViewById(R.id.llPupilEmoji);
         outgoingOpponentsRelativeLayout = view.findViewById(R.id.layout_background_outgoing_screen);
         allOpponentsTextView = (TextView) view.findViewById(R.id.text_outgoing_opponents_names);
         ringingTextView = (TextView) view.findViewById(R.id.text_ringing);
@@ -461,8 +496,16 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         int itemHeight = 0;
         if (!isTeacher) {
             itemHeight = recycleViewHeight;
+            llShare.setVisibility(View.GONE);
+            icPEmoji1.setVisibility(View.VISIBLE);
+            icPEmoji2.setVisibility(View.VISIBLE);
+            icPEmoji3.setVisibility(View.VISIBLE);
         } else {
-            itemHeight = recycleViewHeight / DISPLAY_ROW_AMOUNT;
+            itemHeight = opponents.size() == 1 ? recycleViewHeight : recycleViewHeight / DISPLAY_ROW_AMOUNT;
+            llShare.setVisibility(View.VISIBLE);
+            icPEmoji1.setVisibility(View.GONE);
+            icPEmoji2.setVisibility(View.GONE);
+            icPEmoji3.setVisibility(View.GONE);
         }
         opponentsAdapter = new OpponentsFromCallAdapter(getActivity(), currentSession, qbUsers,
                 (int) getResources().getDimension(R.dimen.item_width),
@@ -528,19 +571,15 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
-        button_screen_sharing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startScreenSharing();
-            }
-        });
+        button_screen_sharing.setOnClickListener(v -> startScreenSharing());
 
-        whiteboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), WhiteBoardActivity.class));
-            }
-        });
+        whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
+
+        icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID));
+
+        icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
+
+        icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID));
     }
 
     protected void actionButtonsEnabled(boolean inability) {
@@ -869,26 +908,45 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         @Override
         public int getSpanSize(int position) {
             int itemCount = opponentsAdapter.getItemCount();
-            if (itemCount % 4 == 0) {
-                return 3;
+            System.out.println("KDKDKD: " + itemCount + " " + position);
+
+            if (!isTeacher) {
+                return 12;
             }
 
-            if (itemCount % 4 == 1) {
-                //check last position
+            if (itemCount <= 2) {
+                return 12;
+            }
+
+            if (itemCount % 2 == 0) {
+                return 6;
+            } else {
                 if (position == itemCount - 1) {
                     return 12;
-                }
-            } else if (itemCount % 4 == 2) {
-                if (position == itemCount - 1 || position == itemCount - 2) {
+                } else {
                     return 6;
                 }
-            } else if (itemCount % 4 == 3) {
-                if (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3) {
-                    return 4;
-                }
             }
-
-            return 3;
+//            if (itemCount % 4 == 0) {
+//                return 3;
+//            }
+//
+//            if (itemCount % 4 == 1) {
+//                //check last position
+//                if (position == itemCount - 1) {
+//                    return 12;
+//                }
+//            } else if (itemCount % 4 == 2) {
+//                if (position == itemCount - 1 || position == itemCount - 2) {
+//                    return 6;
+//                }
+//            } else if (itemCount % 4 == 3) {
+//                if (position == itemCount - 1 || position == itemCount - 2 || position == itemCount - 3) {
+//                    return 4;
+//                }
+//            }
+//
+//            return 3;
         }
     }
 
@@ -939,5 +997,61 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private void toggleCameraInternal(boolean flag) {
         Log.d(TAG, "Camera was switched!");
         updateVideoView(localVideoView, flag);
+    }
+
+    private void subscribe() {
+        System.out.println("KDKDKD: this.channels " + this.channels);
+        List<String> channels = this.channels;
+        channels.add("6103cbb62cb3060068a3da1c");
+
+        System.out.println("KDKDKD: channels " + channels);
+
+        hostActivity.getPubNub()
+                .subscribe()
+                .channels(channels)
+//                .channels(channels)
+//                .withPresence()
+                .execute();
+    }
+
+    protected void setEmojiForPupil(String message) {
+        System.out.println("KDKDKD: Pupil message " + message);
+        String tempIndex = message.replace("\"", "");
+        if (!isTeacher) {
+            int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
+            tvTeacherEmoji.setText(getEmoticon(teacherEmojis[Integer.parseInt(tempIndex)]));
+        }
+    }
+
+    protected void setEmojiForTeacher(String message) {
+        System.out.println("KDKDKD: Teacher message " + message);
+        String tempMsg = message.replace("\"", "");
+        String[] splitStr = tempMsg.split("#@#");
+        System.out.println("KDKDKD: Teacher message splited " + splitStr);
+
+        final OpponentsFromCallAdapter.ViewHolder holder = getViewHolderForOpponent(Integer.parseInt(splitStr[1]));
+        if (holder == null) {
+            return;
+        }
+
+        holder.setPupilEmoji(splitStr[0]);
+    }
+
+    public String getEmoticon(int originalUnicode) {
+        return new String(Character.toChars(originalUnicode));
+    }
+
+    protected void sendEmoji(String channel, String message, String currentUserID) {
+        System.out.println("KDKDKD: channel send" + channel);
+        hostActivity.getPubNub()
+                .publish()
+                .channel(channel)
+                .message(isTeacher ? message : message + "#@#" + currentUserID)
+                .async(new PNCallback<PNPublishResult>() {
+                    @Override
+                    public void onResponse(PNPublishResult result, PNStatus status) {
+                        System.out.println("KDKDKD: Sender " + status.getStatusCode());
+                    }
+                });
     }
 }

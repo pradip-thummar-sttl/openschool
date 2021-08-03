@@ -581,7 +581,7 @@ const ParentZoneProfileEdit = (props) => {
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}
                     mode="date"
-                    minimumDate={new Date()}
+                    maximumDate={new Date()}
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
                 />

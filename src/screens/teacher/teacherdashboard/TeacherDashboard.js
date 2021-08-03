@@ -265,12 +265,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     const startLiveClassAndroid = () => {
         try {
-            let qBUserIDs = [], userNames = [], names = []
+            let qBUserIDs = [], userNames = [], names = [], channels = []
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
-            dataOfSubView.PupilList.forEach(pupil => {
+            dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
-                names.push(pupil.FirstName + " " + pupil.LastName)
+                names.push(pupil.PupilName)
+                channels.push(dataOfSubView.TeacherID + "_" + pupil.PupilId)
             });
 
             let dialogID = dataOfSubView.QBDilogID
@@ -281,7 +282,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
             if (Platform.OS == 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, (error, ID) => {
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, ID) => {
                     console.log('Class Started');
                     let data = {
                         LessonStart: false,
@@ -465,7 +466,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <View style={PAGESTYLE.timedateGrp}>
                                                                         <View style={PAGESTYLE.dateWhiteBoard}>
                                                                             <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('ll')}</Text>
+                                                                            <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                         </View>
                                                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                                                                             <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
@@ -478,8 +479,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     </View>
                                                                     <View style={STYLE.hrCommon}></View>
                                                                     <View style={PAGESTYLE.mediaMain}>
-                                                                        {dataOfSubView.PupilList ?
-                                                                            dataOfSubView.PupilList.map((data, index) => (
+                                                                        {dataOfSubView.Allpupillist ?
+                                                                            dataOfSubView.Allpupillist.map((data, index) => (
                                                                                 <TouchableOpacity
                                                                                     style={PAGESTYLE.mediabarTouch}
                                                                                     activeOpacity={opacity}>

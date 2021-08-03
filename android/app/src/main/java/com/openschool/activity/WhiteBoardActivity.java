@@ -1,10 +1,8 @@
 package com.openschool.activity;
 
-import android.annotation.TargetApi;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -29,18 +27,12 @@ public class WhiteBoardActivity extends AppCompatActivity {
         });
         WebView wvBoard = findViewById(R.id.wvBoard);
         wvBoard.getSettings().setJavaScriptEnabled(true);
-        wvBoard.setWebViewClient(new WebViewClient() {
-            @SuppressWarnings("deprecation")
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            }
-
-            @TargetApi(android.os.Build.VERSION_CODES.M)
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
-                onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
-            }
-        });
-        wvBoard.loadUrl("http://14.143.90.234:10082/web/CoDoodler/CoDoodler.html");
+        wvBoard.setWebViewClient(new WebViewClient());
+        wvBoard.setWebChromeClient(new WebChromeClient());
+        wvBoard.getSettings().setAllowContentAccess(true);
+        wvBoard.getSettings().setDomStorageEnabled(true);
+        wvBoard.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36");
+//        wvBoard.loadUrl("http://14.143.90.234:10082/web/CoDoodler/CoDoodler.html");
+        wvBoard.loadUrl("https://www.divinetreeindia.com/codoodler/CoDoodler.html");
     }
 }
