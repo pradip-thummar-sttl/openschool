@@ -80,12 +80,12 @@ const Chat = (props) => {
         if (message.trim().length == 0) {
             return
         }
-        
+
         message = message + '#@#' + User.user.FirstName + ' ' + User.user.LastName + '#@#' + User.user.ProfilePicture
 
         if (message) {
             pubnub
-            .publish({ channel: channels[0], message })
+                .publish({ channel: channels[0], message })
                 .then(() => setMessage(''))
                 .catch((msg) => console.log(msg));
         }
@@ -96,25 +96,27 @@ const Chat = (props) => {
         addMessage([])
     }
 
+    useEffect(() => {
+        pubnub.addListener({ message: handleMessage });
+    }, [])
 
     useEffect(() => {
-        pubnub.addListener({ message: handleMessage });   
         pubnub.subscribe({ channels });
     }, [pubnub, channels,]);
 
 
-   
+
     return (
 
-        <View style={{flex:1}}>
-           
+        <View style={{ flex: 1 }}>
 
-            <KeyboardAwareScrollView 
-            enableOnAndroid={true}
-            extraScrollHeight={90}
-            scrollEnabled
-            enableAutomaticScroll={(Platform.OS === 'ios')}
-            contentContainerStyle={{ flex:1}}
+
+            <KeyboardAwareScrollView
+                enableOnAndroid={true}
+                extraScrollHeight={90}
+                scrollEnabled
+                enableAutomaticScroll={(Platform.OS === 'ios')}
+                contentContainerStyle={{ flex: 1 }}
             >
                 <View style={Styles.views}>
 
@@ -134,7 +136,7 @@ const Chat = (props) => {
                                     )
                                 }}
                             />
-                           
+
                         </View>
                         <View style={Styles.textView}>
                             <TextInput

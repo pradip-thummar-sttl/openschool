@@ -5,11 +5,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.openschool.R;
 import com.openschool.adapter.OpponentsFromCallAdapter;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.callbacks.SubscribeCallback;
+import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.view.QBConferenceSurfaceView;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
@@ -28,10 +34,13 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
     private String TAG = VideoConversationFragment.class.getSimpleName();
 
     private ToggleButton cameraToggle;
+    private ImageView btnEmoji;
     public static CameraState cameraState = CameraState.DISABLED_FROM_USER;
 
     private QBRTCVideoTrack localVideoTrack;
     protected boolean isCurrentCameraFront;
+
+    private SubscribeCallback mPubNubListener;
 
 
     @Override
@@ -53,6 +62,8 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
     @Override
     public void onStart() {
         super.onStart();
+        initListener();
+//        subscribe();
         Log.i(TAG, "onStart");
     }
 
@@ -100,6 +111,7 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        hostActivity.getPubNub().removeListener(mPubNubListener);
         Log.d(TAG, "onDestroyView");
     }
 
@@ -211,5 +223,45 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
         NONE,
         DISABLED_FROM_USER,
         ENABLED_FROM_USER
+    }
+
+    @Override
+    public void onReady() {
+        initListener();
+    }
+
+    @Override
+    public SubscribeCallback provideListener() {
+        return mPubNubListener;
+    }
+
+    private void initListener() {
+        mPubNubListener = new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+            }
+
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+//                handleNewMessage(message);
+                //handle incomming message from here
+                try {
+                    System.out.println("KDKDKD: Receiver " + message.getMessage().toString());
+                    if (!isTeacher) {
+                        setEmojiForPupil(message.getMessage().toString());
+                    } else {
+                        setEmojiForTeacher(message.getMessage().toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+
+            }
+        };
     }
 }

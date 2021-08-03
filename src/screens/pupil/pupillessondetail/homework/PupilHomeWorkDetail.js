@@ -177,6 +177,7 @@ const PupilHomeWorkDetail = (props) => {
                                                     style={PAGESTYLE.checkMark}
                                                     value={item.IsCheck}
                                                     boxType={'square'}
+                                                    disabled
                                                     onCheckColor={COLORS.white}
                                                     onFillColor={COLORS.dashboardPupilBlue}
                                                     onTintColor={COLORS.dashboardPupilBlue}

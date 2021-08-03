@@ -10,10 +10,12 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_margin="10dp"
-        android:padding="10dp"
+        android:background="@drawable/shape_round_white"
+        android:elevation="5dp"
+        android:padding="12dp"
         android:src="@drawable/back_arrow2" />
 
 </RelativeLayout>

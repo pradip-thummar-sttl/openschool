@@ -50,10 +50,12 @@ public class CallModule extends ReactContextBaseJavaModule {
                                   boolean isTeacher,
                                   String teacherQBUserID,
                                   String title,
+                                  ReadableArray channels,
                                   Callback callBack) {
 
         ArrayList<QBUser> selectedUsers = new ArrayList<>();
         List<Integer> selectedOccupants = new ArrayList<>();
+        List<String> channelList = new ArrayList<>();
         for (int i = 0; i < occupants.size(); i++) {
             QBUser qbUser = new QBUser();
             StringifyArrayList<String> userTags = new StringifyArrayList<>();
@@ -63,17 +65,26 @@ public class CallModule extends ReactContextBaseJavaModule {
             qbUser.setFullName(names.getString(i));
             qbUser.setEmail(userNames.getString(i));
             qbUser.setLogin(userNames.getString(i));
+            if (isTeacher) {
+                qbUser.setCustomData(channels.getString(i));
+            }
             qbUser.setTags(userTags);
 
             selectedUsers.add(qbUser);
             selectedOccupants.add(Integer.parseInt(occupants.getString(i)));
+            if (isTeacher) {
+                channelList.add(channels.getString(i));
+            }
         }
 
+        if (!isTeacher) {
+            channelList.add(channels.getString(0));
+        }
         System.out.println("KDKD: Welcome to the CallModule! " + dialogID + " " + currentUserID + " " + currentName + " " + occupants + " " + userNames + " " + names + " " + teacherQBUserID + " " + isTeacher + selectedUsers.size());
-        startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, teacherQBUserID, title, callBack);
+        startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, teacherQBUserID, title, channelList, callBack);
     }
 
-    private void startConference(final String dialogID, String currentUserID, String currentName, ArrayList<QBUser> selectedUsers, boolean isVideoCall, final List<Integer> occupants, final boolean asListener, boolean isTeacher, String teacherQBUserID, String title, Callback callBack) {
+    private void startConference(final String dialogID, String currentUserID, String currentName, ArrayList<QBUser> selectedUsers, boolean isVideoCall, final List<Integer> occupants, final boolean asListener, boolean isTeacher, String teacherQBUserID, String title, final List<String> channels, Callback callBack) {
         ConferenceClient client = ConferenceClient.getInstance(getCurrentActivity());
 
         QBRTCTypes.QBConferenceType conferenceType = isVideoCall
@@ -85,7 +96,7 @@ public class CallModule extends ReactContextBaseJavaModule {
             public void onSuccess(ConferenceSession session) {
                 webRtcSessionManager.setCurrentSession(session);
 
-                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID, title, callBack);
+                CallActivity.start(getCurrentActivity(), dialogID, currentName, currentUserID, occupants, selectedUsers, asListener, isTeacher, teacherQBUserID, title, channels, callBack);
             }
 
             @Override

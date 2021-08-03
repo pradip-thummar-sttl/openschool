@@ -24,7 +24,7 @@ export default StyleSheet.create({
     right: {
         paddingTop: 10,
         paddingHorizontal:Platform.OS==='ios'? hp(1.5):hp(0),
-        flex: 1
+        height: '82%',
     },
     pupilParent: {
         flexDirection: 'row',
