@@ -172,7 +172,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
-            // if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
                 // showMessage('time to start')
                 let data = {
                     LessonStart: true,
@@ -188,11 +188,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     setLoading(false)
 
                 })
-            // } else {
-            //     setLoading(false)
-            //     showMessage(MESSAGE.scheduledTimeStart)
-            // }
-            // 
+            } else {
+                setLoading(false)
+                showMessage(MESSAGE.scheduledTimeStart)
+            }
+            
             console.log('time of current', currentTime, dataOfSubView.StartTime, dataOfSubView.EndTime)
         }
     }
@@ -203,7 +203,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
             dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
-                userNames.push(pupil.Email)
+                userNames.push(pupil.PupilEmail)
                 names.push(pupil.PupilName)
                 channels.push(dataOfSubView.TeacherID + "_" + pupil.PupilId)
             });
