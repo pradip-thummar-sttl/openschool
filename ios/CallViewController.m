@@ -84,7 +84,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) NSMutableArray *reactionUnicodeArr;
 
 @property (nonatomic, strong) PubNub *pubnub;
-@property (nonatomic, strong) NSMutableArray<NSDictionary *> *messages;
+@property (nonatomic, strong) NSString *messages;
+
+@property (strong, nonatomic) NSString *selectedChannel;
+@property (strong, nonatomic) NSString *selectedId;
 
 @end
 
@@ -110,10 +113,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   pnconfig.uuid = @"myUniqueUUID";
   self.pubnub = [PubNub clientWithConfiguration:pnconfig];
   
-  [self.pubnub addListener:self];
-  [self.pubnub subscribeToChannels: @[kChannelGuide] withPresence:YES];
-  
-  self.messages = [NSMutableArray new];
+ 
 }
 
 - (void)viewDidLoad {
@@ -130,7 +130,18 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     self.session = [[QBRTCConferenceClient instance] createSessionWithChatDialogID:_dialogID conferenceType:_conferenceType > 0 ? _conferenceType : QBRTCConferenceTypeVideo];
     
     if (_conferenceType > 0) {
+      if (_isTeacher) {
         self.users = [_selectedUsers mutableCopy];
+      }else{
+        for (int i=0; i<=_selectedUsers.count-1; i++) {
+          QBUUser *user = _selectedUsers[i];
+          if (user.ID == [_teacherQBUserID integerValue]) {
+            [self.users addObject:user];
+            return;
+          }
+        }
+      }
+        
     }
     else {
         self.users = [[NSMutableArray alloc] init];
@@ -150,12 +161,17 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     self.view.backgroundColor = self.opponentsCollectionView.backgroundColor =
     [UIColor colorWithRed:0.1465 green:0.1465 blue:0.1465 alpha:1.0];
+  
+  [self.pubnub addListener:self];
+  [self.pubnub subscribeToChannels: self.channels withPresence:YES];
+  
+  self.messages = @"";
 }
 
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
-    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:kChannelGuide
+    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
           withCompletion:^(PNPublishStatus *status) {
 
         NSString *text = update;
@@ -165,7 +181,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
     NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
-    [self.messages insertObject:updateEntry atIndex:0];
+    self.messages = message;
   [self.opponentsCollectionView reloadData];
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 //
@@ -188,21 +204,21 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     [self displayMessage:event.data.message[@"update"] asType:@"[MESSAGE: received]"];
 }
 
-//- (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
-//    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
-//                      event.data.presence.uuid,
-//                      event.data.channel];
+- (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
+    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
+                      event.data.presence.uuid,
+                      event.data.channel];
+
+    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
+    [self displayMessage:text asType: type];
+}
 //
-//    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
-//    [self displayMessage:text asType: type];
-//}
-//
-//- (void)client:(PubNub *)pubnub didReceiveStatus:(PNStatus *)event {
-//    NSString *text = [NSString stringWithFormat:@"status: %@", event.stringifiedCategory];
-//
-//    [self displayMessage:text asType:@"[STATUS: connection]"];
-//    [self submitUpdate:@"Harmless." forEntry:kEntryEarth toChannel:kChannelGuide];
-//}
+- (void)client:(PubNub *)pubnub didReceiveStatus:(PNStatus *)event {
+    NSString *text = [NSString stringWithFormat:@"status: %@", event.stringifiedCategory];
+
+    [self displayMessage:text asType:@"[STATUS: connection]"];
+    [self submitUpdate:@"Harmless." forEntry:kEntryEarth toChannel:_selectedChannel];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -350,6 +366,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)addReaction:(UIButton*)sender
 {
    //Write a code you want to execute on buttons click event
+  _selectedId = self.users[sender.tag];
+  _selectedChannel=_channels[sender.tag];
   _reactionView.hidden = false;
 }
 
@@ -375,16 +393,18 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
 
-  if (_messages.count != 0) {
-    reusableCell.emojiLbl.text = _messages[0][@"entryMessage"];
+  if (![_messages isEqualToString:@""]) {
+    reusableCell.emojiLbl.text = _messages;
   }
  
   reusableCell.addReactionBtn.tag = indexPath.row;
   [reusableCell.addReactionBtn addTarget:self action:@selector(addReaction:) forControlEvents:UIControlEventTouchUpInside];
-    
+  NSString *title = user.fullName ? user.fullName : kUnknownUserLabel;
+  reusableCell.name = title;
+  reusableCell.nameColor = [UIColor colorNamed: @"white"];
     if (user.ID != [QBSession currentSession].currentUser.ID) {
         // label for user
-        NSString *title = user.fullName ?: kUnknownUserLabel;
+        NSString *title = user.fullName ? user.fullName : kUnknownUserLabel;
         reusableCell.name = title;
       reusableCell.nameColor = [UIColor colorNamed: @"white"];//[PlaceholderGenerator colorForString:title];
         // mute button
@@ -470,6 +490,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (session == self.session) {
     // adding user to the collection
     [self addToCollectionUserWithID:userID];
+   
+   
   }
 }
 
@@ -563,6 +585,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (session == self.session) {
     
     // subscribing to user to receive his media
+  
     [self.session subscribeToUserWithID:userID];
   }
 }
@@ -709,21 +732,28 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)addToCollectionUserWithID:(NSNumber *)userID {
   
   QBUUser *user = [self userWithID:userID];
-  if ([self.users indexOfObject:user] != NSNotFound) {
-    return;
+  if (_isTeacher) {
+    if ([self.users indexOfObject:user] != NSNotFound) {
+      return;
+    }
+    [self.users insertObject:user atIndex:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    
+    __weak __typeof(self)weakSelf = self;
+    [self.opponentsCollectionView performBatchUpdates:^{
+      
+      [weakSelf.opponentsCollectionView insertItemsAtIndexPaths:@[indexPath]];
+      
+    } completion:^(BOOL finished) {
+      
+      [weakSelf refreshVideoViews];
+    }];
+    
+  }else{
+    [self.users addObject:user];
+    [self.opponentsCollectionView reloadData];
   }
-  [self.users insertObject:user atIndex:0];
-  NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-  
-  __weak __typeof(self)weakSelf = self;
-  [self.opponentsCollectionView performBatchUpdates:^{
-    
-    [weakSelf.opponentsCollectionView insertItemsAtIndexPaths:@[indexPath]];
-    
-  } completion:^(BOOL finished) {
-    
-    [weakSelf refreshVideoViews];
-  }];
+ 
   
 }
 
@@ -933,7 +963,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != 0) {
-        [self submitUpdate:_reactionUnicodeArr[indexPath.row-1] forEntry:kEntryEarth toChannel:kChannelGuide];
+        [self submitUpdate:_reactionUnicodeArr[indexPath.row-1] forEntry:kEntryEarth toChannel:_selectedChannel];
     }
     _reactionView.hidden = true;
   [self.opponentsCollectionView reloadData];

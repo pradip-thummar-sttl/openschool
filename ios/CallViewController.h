@@ -25,6 +25,8 @@
 @property (nonatomic) BOOL asListener;
 @property (nonatomic) BOOL isTeacher;
 @property (strong, nonatomic) NSString *teacherQBUserID;
+@property (strong, nonatomic) NSString *titlee;
+@property (strong, nonatomic) NSArray *channels;
 
 typedef void (^CompleteCall)(BOOL isFinished);
 @property (copy, nonatomic) CompleteCall completeCall;
