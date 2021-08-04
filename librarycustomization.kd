@@ -31,3 +31,9 @@ rctCheckBox: {
 public static String fileNamePrefix = "MYED_Recording";
 
 String filename = fileNamePrefix  + "." + fileType;
+
+==========================================================
+
+node_modules/quickblox-react-native-sdk
+- Rename call_service_notification_text from string.xml
+- Replace App icon from mipmap

@@ -211,7 +211,7 @@ const PupuilDashboard = (props) => {
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
             dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
-                userNames.push(pupil.Email)
+                userNames.push(pupil.PupilEmail)
                 names.push(pupil.PupilName)
             });
 

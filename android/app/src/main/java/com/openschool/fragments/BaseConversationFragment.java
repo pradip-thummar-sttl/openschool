@@ -1000,12 +1000,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private void subscribe() {
-        System.out.println("KDKDKD: this.channels " + this.channels);
-        List<String> channels = this.channels;
-        channels.add("6103cbb62cb3060068a3da1c");
-
         System.out.println("KDKDKD: channels " + channels);
-
         hostActivity.getPubNub()
                 .subscribe()
                 .channels(channels)
@@ -1024,10 +1019,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void setEmojiForTeacher(String message) {
-        System.out.println("KDKDKD: Teacher message " + message);
         String tempMsg = message.replace("\"", "");
         String[] splitStr = tempMsg.split("#@#");
-        System.out.println("KDKDKD: Teacher message splited " + splitStr);
 
         final OpponentsFromCallAdapter.ViewHolder holder = getViewHolderForOpponent(Integer.parseInt(splitStr[1]));
         if (holder == null) {
@@ -1053,5 +1046,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                         System.out.println("KDKDKD: Sender " + status.getStatusCode());
                     }
                 });
+
+
+        // 0x1F44F#@#13248732468578
     }
 }

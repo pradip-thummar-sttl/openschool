@@ -52,7 +52,7 @@ export default StyleSheet.create({
 
     //
     views: {
-        flexDirection: 'row',
+        height: '62%',
     },
     leftView: {
         marginLeft: hp(2),
@@ -109,11 +109,12 @@ export default StyleSheet.create({
     },
     mesagesView: {
         width: '100%',
-        height: hp(70),
-        marginBottom: wp(3),
+        height: '100%',
+        paddingBottom: 120,
+        paddingHorizontal: 10
     },
     textView: {
-        width: '100%',
+        width: '95%',
         height: hp(12),
         borderRadius: 10,
         borderWidth: 1,
@@ -122,6 +123,8 @@ export default StyleSheet.create({
         // position: 'absolute',
         // bottom: 10,
         alignSelf: 'center',
+        position: 'absolute',
+        bottom: 0,
         // bottom:0,
     },
     messageCell: {
@@ -144,7 +147,8 @@ export default StyleSheet.create({
     messageText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.4),
-        marginTop: wp(0.2)
+        marginTop: wp(0.2),
+        width: '80%',
     },
     teachers: {
         fontFamily: FONTS.fontRegular,
