@@ -133,6 +133,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
       if (_isTeacher) {
         self.users = [_selectedUsers mutableCopy];
       }else{
+        self.users = [[NSMutableArray alloc]init];
         for (int i=0; i<=_selectedUsers.count-1; i++) {
           QBUUser *user = _selectedUsers[i];
           if (user.ID == [_teacherQBUserID integerValue]) {
@@ -210,14 +211,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
                       event.data.channel];
 
     NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
-    [self displayMessage:text asType: type];
+//    [self displayMessage:text asType: type];
 }
 //
 - (void)client:(PubNub *)pubnub didReceiveStatus:(PNStatus *)event {
     NSString *text = [NSString stringWithFormat:@"status: %@", event.stringifiedCategory];
 
-    [self displayMessage:text asType:@"[STATUS: connection]"];
-    [self submitUpdate:@"Harmless." forEntry:kEntryEarth toChannel:_selectedChannel];
+//    [self displayMessage:text asType:@"[STATUS: connection]"];
+//    [self submitUpdate:@"Harmless." forEntry:kEntryEarth toChannel:_selectedChannel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -366,7 +367,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)addReaction:(UIButton*)sender
 {
    //Write a code you want to execute on buttons click event
-  _selectedId = self.users[sender.tag];
+  QBUUser *user = self.users[sender.tag];
+  _selectedId = [NSString stringWithFormat:@"%lu", (unsigned long)user.ID];
   _selectedChannel=_channels[sender.tag];
   _reactionView.hidden = false;
 }
@@ -393,8 +395,22 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
 
+ 
   if (![_messages isEqualToString:@""]) {
-    reusableCell.emojiLbl.text = _messages;
+    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+    if (_isTeacher) {
+      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+      }else
+      {
+        reusableCell.emojiLbl.text=@"";
+      }
+    }else{
+//      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+//      }
+    }
+    
   }
  
   reusableCell.addReactionBtn.tag = indexPath.row;
@@ -405,7 +421,12 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     if (user.ID != [QBSession currentSession].currentUser.ID) {
         // label for user
         NSString *title = user.fullName ? user.fullName : kUnknownUserLabel;
+      if (_isTeacher) {
         reusableCell.name = title;
+      }else{
+        reusableCell.name = @"";
+      }
+        
       reusableCell.nameColor = [UIColor colorNamed: @"white"];//[PlaceholderGenerator colorForString:title];
         // mute button
         reusableCell.isMuted = NO;
@@ -750,6 +771,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
   }else{
+    if ([self.users indexOfObject:user] != NSNotFound) {
+      return;
+    }
     [self.users addObject:user];
     [self.opponentsCollectionView reloadData];
   }
@@ -963,7 +987,8 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != 0) {
-        [self submitUpdate:_reactionUnicodeArr[indexPath.row-1] forEntry:kEntryEarth toChannel:_selectedChannel];
+      NSString *str = [NSString stringWithFormat:@"%@@#@%@", _reactionUnicodeArr[indexPath.row-1],_selectedId];
+        [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
     }
     _reactionView.hidden = true;
   [self.opponentsCollectionView reloadData];
