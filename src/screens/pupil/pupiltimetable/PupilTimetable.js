@@ -126,7 +126,7 @@ const PupilTimetable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
+                <View style={{ ...PAGESTYLE.day, width: cellWidth, height: 66, marginBottom: 15, borderColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }} />
             );
         }
     }
@@ -170,7 +170,7 @@ const PupilTimetable = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.white }}>
                 <Header3
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
@@ -190,8 +190,8 @@ const PupilTimetable = (props) => {
                         timeTableData.length > 0 ?
                             <View style={PAGESTYLE.mainPage}>
                                 <View>
-                                    {days.map((data) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null }}>
+                                    {days.map((data, index) => (
+                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}

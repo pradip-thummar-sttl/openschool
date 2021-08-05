@@ -144,12 +144,14 @@ export default StyleSheet.create({
         alignSelf:'center',
     },
     pupilDetailLink: {
-        width: hp(12),
         alignItems: 'flex-end',
+        position: 'absolute',
+        right: 20,
     },
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+        
     },
     pupilImage: {
         width: hp(3.7),
@@ -181,22 +183,20 @@ export default StyleSheet.create({
     },
     firstColumn:{
       paddingLeft: hp(4.5),
-      width:hp(20),
+      width:hp(25),
     },
     secoundColumn:{
-        width:hp(19),
+        width:hp(22),
     },
     lastColumn:{
         width:hp(30.55),
     },
     yesText:{
       fontFamily: FONTS.fontSemiBold,
-      color:COLORS.dashboardPupilBlue, 
       fontSize:hp(1.82), 
     },
     noText:{
         fontFamily: FONTS.fontSemiBold,
-        color:COLORS.yellowDark, 
         fontSize:hp(1.82), 
     },
     whiteBg: {

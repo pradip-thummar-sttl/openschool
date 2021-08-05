@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     topBg: {
         width: '100%',
         height: hp(16.77),
-        resizeMode: Platform.OS == 'android' ? 'cover' : 'contain',
+        resizeMode: Platform.OS == 'android' ? 'cover' : 'cover',
         position: 'absolute',
         top: hp(-0.3),
     }

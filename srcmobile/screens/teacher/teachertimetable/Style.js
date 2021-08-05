@@ -19,18 +19,19 @@ export default StyleSheet.create({
         position: 'absolute',
         top: 0,
         left:0,
-        height: hp(9),
+        height: 66,
     },
     lable: {
         width: hp(7),
-        height: hp(9),
+        height: 50,
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
     },
     dayRightmain: {
-        height: hp(9),
+        height: 66,
         paddingLeft: hp(1.48),
         paddingTop: hp(1.48),
+        marginBottom: 15,
     },
     labledataTitle: {
         fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8),
@@ -40,11 +41,11 @@ export default StyleSheet.create({
     },
     dayLeft: {
         width: hp(7),
-        height: hp(9),
         alignItems: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
         paddingTop: hp(1),
+        marginBottom: 15,
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
@@ -88,8 +89,7 @@ export default StyleSheet.create({
         // marginTop:hp(3.25),
     },
     backgroundTable:{
-        backgroundColor:COLORS.backgroundColorCommon,
+        backgroundColor:COLORS.white,
         flex: 1, 
-        marginTop:hp(3.25),
     },
 });

@@ -23,8 +23,9 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.userInfo}>
                         <Image style={styles.headerProfile} source={Images.proffileLogo} />
                         <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text>
+                            {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
+                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>MYED Open School</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -107,8 +108,9 @@ const Sidebar = (props) => {
                     <TouchableOpacity style={styles.userInfo}>
                         <Image style={styles.headerProfile} source={Images.proffileLogo} />
                         <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text>
+                            {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
+                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>MYED Open School</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>

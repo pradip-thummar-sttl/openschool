@@ -15,6 +15,7 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import MESSAGE from "../../../utils/Messages";
 import { Download } from "../../../utils/Download";
+import { FlatList } from "react-native-gesture-handler";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -165,8 +166,8 @@ const Popupdata = (props) => {
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, width: cellWidth * props.span }}></View>
+                <View style={{ ...PAGESTYLE.dayRightmain, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
+                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: COLORS.videoLinkBorder, width: cellWidth * props.span, borderTopColor: COLORS.videoLinkBorder, borderBottomColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }}></View>
                     <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 10 }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
@@ -228,26 +229,26 @@ const Popupdata = (props) => {
                                             <TouchableOpacity>
                                                 <Text style={styles.linkText}>see more</Text>
                                             </TouchableOpacity> */}
-                                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
-                                                {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                                            {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                                                <View style={styles.fileBoxGrpWrap}>
+                                                    <Text style={styles.requireText}>Attachment(s)</Text>
                                                     <FlatList
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
-                                                                <View style={PAGESTYLE.fileGrp}>
-                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                            <TouchableOpacity onPress={() => Download(item)} style={styles.downloaBtn}>
+                                                                <View style={styles.fileGrp}>
+                                                                    <Text numberOfLines={1} style={[styles.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                    <Image source={Images.Download} style={styles.downloadIcon} />
                                                                 </View>
                                                             </TouchableOpacity>
                                                         )}
                                                         keyExtractor={(item, index) => index.toString()}
                                                     />
-                                                    :
-                                                    <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
-                                                }
-                                            </View>
+                                                </View>
+                                                :
+                                                null
+                                            }
                                         </View>
                                         <View style={styles.requirementofClass}>
                                             <Text style={styles.requireText}>Items that your class will need</Text>

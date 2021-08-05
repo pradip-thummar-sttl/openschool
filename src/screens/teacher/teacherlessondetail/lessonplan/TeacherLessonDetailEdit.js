@@ -753,6 +753,7 @@ const TLDetailEdit = (props) => {
 
                 }
                 console.log('hello response arr', arr)
+
                 setMaterialArr(arr)
             });
 

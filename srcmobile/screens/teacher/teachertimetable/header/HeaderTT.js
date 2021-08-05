@@ -38,7 +38,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{ backgroundColor: COLORS.white }}>
+        <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.videoLinkBorder }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>

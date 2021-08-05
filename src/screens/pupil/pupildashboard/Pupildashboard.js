@@ -452,9 +452,9 @@ const PupuilDashboard = (props) => {
                                                                                                 <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                                                                                 <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
                                                                                             </TouchableOpacity> */}
-                                                                                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                                                                <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
-                                                                                                {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                                            {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                                                <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                                                                    <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
                                                                                                     <FlatList
                                                                                                         data={dataOfSubView.MaterialList}
                                                                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
@@ -468,10 +468,10 @@ const PupuilDashboard = (props) => {
                                                                                                         )}
                                                                                                         keyExtractor={(item, index) => index.toString()}
                                                                                                     />
-                                                                                                    :
-                                                                                                    <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
-                                                                                                }
-                                                                                            </View>
+                                                                                                </View>
+                                                                                                :
+                                                                                                null
+                                                                                            }
                                                                                         </View>
                                                                                         <View style={PAGESTYLE.requirementofClass}>
                                                                                             <Text style={PAGESTYLE.requireText}>What you will need</Text>

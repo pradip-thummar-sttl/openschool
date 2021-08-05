@@ -49,8 +49,9 @@ const Sidebar = (props) => {
                     {
                         isSmall? null:
                         <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
+                            {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
+                            <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>MYED Open School</Text>
                         </View>
                     }
                 </TouchableOpacity>

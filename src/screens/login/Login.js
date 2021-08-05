@@ -417,6 +417,7 @@ const styles = StyleSheet.create({
     },
     lefImage: {
         width: '50%',
+        marginLeft: -2,
     },
     rightContent: {
         width: '50%',

@@ -18,13 +18,13 @@ const TLDetail = (props) => {
             <View style={PAGESTYLE.containerWrap}>
                 <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                     <View style={PAGESTYLE.timedateGrp}>
-                        <View style={PAGESTYLE.dateWhiteBoard}>
+                        <View style={PAGESTYLE.dateWhiteBoard1}>
                             <Text style={PAGESTYLE.subjectText}>Subject</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <Text style={PAGESTYLE.labelTextMain}>{props.lessonData.SubjectName}</Text>
                             </View>
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeSpace]}>
+                        <View style={[PAGESTYLE.dateWhiteBoard1, PAGESTYLE.timeSpace1]}>
                             <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <Text style={PAGESTYLE.labelTextMain}>{props.lessonData.LessonTopic} </Text>
@@ -51,7 +51,7 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={PAGESTYLE.alignRow}>
                                 <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} />
-                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.GroupName}</Text>
+                                <Text style={PAGESTYLE.datetimeText} numberOfLines={1}>{props.lessonData.GroupName}</Text>
                             </View>
                         </View>
                     </View>
@@ -124,24 +124,24 @@ const TLDetail = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>
-                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <Text style={PAGESTYLE.requireText}>Learning material</Text>
+                    {props.lessonData.MaterialList.length > 0 ?
+                        <View style={PAGESTYLE.fileBoxGrpWrap}>
+                            <Text style={PAGESTYLE.requireText}>Learning material</Text>
 
-                        {props.lessonData.MaterialList.length > 0 ?
-                            props.lessonData.MaterialList.map((item, index) => {
+                            {props.lessonData.MaterialList.map((item, index) => {
                                 return (
                                     <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>
                                     </View>
                                 )
-                            })
-                            :
-                            <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No material uploaded!</Text>
-                        }
-                    </View>
+                            })}
+                        </View>
+                        :
+                        null
+                    }
 
                     {props.lessonData.RecommendedList.length > 0 ?
                         <FlatList
@@ -157,34 +157,36 @@ const TLDetail = (props) => {
                         :
                         null
                     }
-                    <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                        <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                        {props.lessonData.RecordingList ?
-                            props.lessonData.RecordingList.map((item, index) => {
+
+                    {props.lessonData.RecordingList ?
+                        <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                            <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
+                            {props.lessonData.RecordingList.map((item, index) => {
                                 return (
                                     <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:hp(20)}]}>{item.originalname}</Text>
+                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                         </TouchableOpacity>
                                     </View>
                                 )
-                            })
-                            :
-                            <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No lesson recording found!</Text>
-                        }
-                    </View>
-                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
-                        {props.lessonData.ChatTranscript ?
+                            })}
+                        </View>
+                        :
+                        null
+                    }
+
+                    {props.lessonData.ChatTranscript ?
+                        <View style={PAGESTYLE.fileBoxGrpWrap}>
+                            <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Filename</Text>
                                 <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                             </View>
-                            :
-                            <Text style={{ fontSize: hp(1.75), textAlign: 'center' }}>No chat transcript found!</Text>
-                        }
-                    </View>
+                        </View>
+                        :
+                        null
+                    }
                 </View>
             </View>
         </View>

@@ -165,8 +165,8 @@ const Popupdata = (props) => {
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={() => refRBSheet.current.open()}>
-                <View style={{ ...PAGESTYLE.dayRightmain, zIndex: 1, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, width: cellWidth * props.span }}></View>
+                <View style={{ ...PAGESTYLE.dayRightmain, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
+                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: COLORS.videoLinkBorder, width: cellWidth * props.span }}></View>
                     <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 10 }}>{props.title}</Text>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
@@ -237,9 +237,9 @@ const Popupdata = (props) => {
                                     <TouchableOpacity>
                                         <Text style={styles.linkText}>see more</Text>
                                     </TouchableOpacity> */}
-                                            <View style={styles.fileBoxGrpWrap}>
-                                                <Text style={styles.requireText}>Attachment(s)</Text>
-                                                {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                                            {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                                                <View style={styles.fileBoxGrpWrap}>
+                                                    <Text style={styles.requireText}>Attachment(s)</Text>
                                                     <FlatList
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
@@ -253,10 +253,10 @@ const Popupdata = (props) => {
                                                         )}
                                                         keyExtractor={(item, index) => index.toString()}
                                                     />
-                                                    :
-                                                    <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
-                                                }
-                                            </View>
+                                                </View>
+                                                :
+                                                null
+                                            }
                                         </View>
                                         <View style={styles.requirementofClass}>
                                             <Text style={styles.requireText}>Items that your class will need</Text>

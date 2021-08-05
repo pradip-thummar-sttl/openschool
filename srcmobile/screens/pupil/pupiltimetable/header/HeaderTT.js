@@ -40,7 +40,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{backgroundColor: COLORS.white, shadowColor: COLORS.black,shadowOffset: { width: 0, height: hp(1), }, shadowOpacity: 0.05, shadowRadius: hp(1),paddingBottom: hp(1.5)}}>
+        <View style={{ backgroundColor: COLORS.white, shadowColor: COLORS.black, shadowOffset: { width: 0, height: hp(1), }, shadowOpacity: 0.05, shadowRadius: hp(1), paddingBottom: hp(1.5) }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
@@ -78,7 +78,7 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
                         placeholder="Search subject etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
@@ -297,6 +297,17 @@ const HeaderTT = (props) => {
 export default HeaderTT;
 
 const styles = StyleSheet.create({
+    headerBarMainWhite: {
+        paddingLeft: hp(2.99),
+        paddingRight: hp(4.16),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
+        backgroundColor: COLORS.white,
+        paddingBottom: hp(1.5),
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 1, },
+        shadowOpacity: 0.08,
+        shadowRadius: 2,
+    },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
