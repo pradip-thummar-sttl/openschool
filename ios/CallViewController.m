@@ -108,6 +108,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     [[QBRTCConferenceClient instance] addDelegate:self];
     [[QBRTCAudioSession instance] addDelegate:self];
   
+  
+  
+  
   PNConfiguration *pnconfig = [PNConfiguration configurationWithPublishKey:@"pub-c-bd967178-53ea-4b05-954a-2666bb3b6337"
                                                               subscribeKey:@"sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267"];
   pnconfig.uuid = @"myUniqueUUID";
@@ -121,6 +124,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _reactionView.hidden = true;
   self.reactionView.layer.cornerRadius = 10;
   self.reactionTableView.layer.cornerRadius = 10;
+  _userCameraView.layer.cornerRadius = 10;
   self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
   self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"👊",@"🙌",@"🙂",@"💖",@"👏",@"👍", nil];
   [self.reactionTableView setDelegate:self];
@@ -142,12 +146,35 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           }
         }
       }
-        
     }
     else {
         self.users = [[NSMutableArray alloc] init];
     }
     
+//      QBRTCVideoFormat *videoFormat = [[QBRTCVideoFormat alloc] init];
+//      videoFormat.frameRate = 30;
+//      videoFormat.pixelFormat = QBRTCPixelFormat420f;
+//      videoFormat.width = 640;
+//      videoFormat.height = 480;
+//
+//      // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
+//      self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:videoFormat position:AVCaptureDevicePositionFront]; // or AVCaptureDevicePositionBack
+//
+//      // add video capture to session's local media stream
+//      self.session.localMediaStream.videoTrack.videoCapture = self.cameraCapture;
+//      self.cameraCapture.previewLayer.frame = self.userCameraView.bounds;
+//      [self.cameraCapture startSession:nil];
+//
+//      [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
+//  LocalVideoView *localVideoView = [[LocalVideoView alloc] initWithPreviewlayer:self.cameraCapture.previewLayer];
+//  self.videoViews[opponentID] = localVideoView;
+//  localVideoView.delegate = self;
+//  self.localVideoView = localVideoView;
+//  self.localVideoView.frame = self.userCameraView.bounds;
+//  [self.userCameraView addSubview:self.localVideoView];
+  
+  [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
+  
     if (self.session.conferenceType == QBRTCConferenceTypeVideo
         && _conferenceType > 0) {
 #if !(TARGET_IPHONE_SIMULATOR)
@@ -157,6 +184,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         [self.cameraCapture startSession:nil];
 #endif
     }
+  
+  
     
     [self configureGUI];
     

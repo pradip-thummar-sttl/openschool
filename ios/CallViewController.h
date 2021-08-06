@@ -33,6 +33,7 @@ typedef void (^CompleteCall)(BOOL isFinished);
 @property (weak, nonatomic) IBOutlet UIButton *endCallButton;
 @property (weak, nonatomic) IBOutlet UIView *reactionView;
 @property (weak, nonatomic) IBOutlet UITableView *reactionTableView;
+@property (weak, nonatomic) IBOutlet UIView *userCameraView;
 
 
 

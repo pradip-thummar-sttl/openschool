@@ -212,6 +212,14 @@
                                     <constraint firstAttribute="bottom" secondItem="Z9W-8C-UQ4" secondAttribute="bottom" id="vKz-Ff-SNw"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITG-0D-9JZ">
+                                <rect key="frame" x="219" y="401" width="150" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Jlq-4S-0UL"/>
+                                    <constraint firstAttribute="height" constant="200" id="ZXZ-Vf-yUI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -220,9 +228,11 @@
                             <constraint firstItem="RRF-Dg-H0a" firstAttribute="centerX" secondItem="S1Y-7c-ZeL" secondAttribute="centerX" id="Z3A-H8-r6l"/>
                             <constraint firstItem="t9G-q1-P8b" firstAttribute="top" secondItem="nvl-aP-B6G" secondAttribute="bottom" id="bf1-8B-aU8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XSo-do-uta" secondAttribute="trailing" constant="10" id="dLx-Kd-AWX"/>
+                            <constraint firstItem="nvl-aP-B6G" firstAttribute="top" secondItem="ITG-0D-9JZ" secondAttribute="bottom" constant="10" id="eQn-jP-S96"/>
                             <constraint firstItem="nvl-aP-B6G" firstAttribute="leading" secondItem="S1Y-7c-ZeL" secondAttribute="leading" id="gZV-nt-eqX"/>
                             <constraint firstItem="XSo-do-uta" firstAttribute="top" secondItem="lSA-8n-FQr" secondAttribute="bottom" constant="10" id="iKg-bY-1Ht"/>
                             <constraint firstAttribute="trailing" secondItem="nvl-aP-B6G" secondAttribute="trailing" id="kgK-zJ-To9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ITG-0D-9JZ" secondAttribute="trailing" constant="-10" id="mHC-SV-qN2"/>
                             <constraint firstItem="VGE-Qc-V5u" firstAttribute="top" secondItem="S1Y-7c-ZeL" secondAttribute="top" id="twt-yo-D0y"/>
                             <constraint firstItem="nvl-aP-B6G" firstAttribute="top" secondItem="VGE-Qc-V5u" secondAttribute="bottom" id="uef-i7-u9s"/>
                             <constraint firstAttribute="trailing" secondItem="VGE-Qc-V5u" secondAttribute="trailing" id="wLA-5S-AML"/>
@@ -236,6 +246,7 @@
                         <outlet property="reactionTableView" destination="Z9W-8C-UQ4" id="vLg-ZI-euK"/>
                         <outlet property="reactionView" destination="RRF-Dg-H0a" id="pwl-qB-EDr"/>
                         <outlet property="toolbar" destination="nvl-aP-B6G" id="GEn-4J-gzj"/>
+                        <outlet property="userCameraView" destination="ITG-0D-9JZ" id="UQd-M4-jRn"/>
                         <segue destination="135-Aq-RQy" kind="show" identifier="PresentUsersViewController" id="Myx-To-20X"/>
                     </connections>
                 </viewController>
