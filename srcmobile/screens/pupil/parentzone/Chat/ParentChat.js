@@ -110,51 +110,46 @@ const ParentChat = (props) => {
                             </TouchableOpacity>
                         ))}
                     </View>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, }}>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
                         <View style={Styles.views}>
-
-                            <View style={Styles.rightView}>
-                                <View style={Styles.mesagesView}>
-                                    <FlatList
-                                        data={messages}
-                                        renderItem={({ item, index }) => {
-                                            return (
-                                                <View style={Styles.messageCell}>
-                                                    <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
-                                                    <View style={Styles.messageSubCell}>
-                                                        <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
-                                                        <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
-                                                    </View>
+                            <View style={Styles.mesagesView}>
+                                <FlatList
+                                    data={messages}
+                                    renderItem={({ item, index }) => {
+                                        return (
+                                            <View style={Styles.messageCell}>
+                                                <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
+                                                <View style={Styles.messageSubCell}>
+                                                    <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('hh:mm')}</Text></Text>
+                                                    <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
                                                 </View>
-                                            )
-                                        }}
-                                    />
+                                            </View>
+                                        )
+                                    }}
+                                />
 
-                                </View>
-                                <View style={Styles.textView}>
-                                    <TextInput
-                                        style={Styles.input}
-                                        multiline={true}
-                                        placeholder={placeholder}
-                                        placeholderTextColor={COLORS.menuLightFonts}
-                                        value={message}
-                                        onChangeText={(text) => setMessage(text)}
-                                    />
-                                    <View style={Styles.buttonView}>
-                                        {/* <TouchableOpacity>
+                            </View>
+                            <View style={Styles.textView}>
+                                <TextInput
+                                    style={Styles.input}
+                                    multiline={true}
+                                    placeholder={placeholder}
+                                    placeholderTextColor={COLORS.menuLightFonts}
+                                    value={message}
+                                    onChangeText={(text) => setMessage(text)}
+                                />
+                                <View style={Styles.buttonView}>
+                                    {/* <TouchableOpacity>
                     <Image style={Styles.btn} source={Images.paperClip} />
                 </TouchableOpacity>
                 <TouchableOpacity >
                     <Image style={Styles.btn} source={Images.imageUpload} />
                 </TouchableOpacity> */}
-                                        <TouchableOpacity onPress={() => sendMessage(message)}>
-                                            <Image style={Styles.btn} source={Images.send} />
-                                        </TouchableOpacity>
-                                    </View>
+                                    <TouchableOpacity onPress={() => sendMessage(message)}>
+                                        <Image style={Styles.btn} source={Images.send} />
+                                    </TouchableOpacity>
                                 </View>
-
                             </View>
-
                         </View>
                     </KeyboardAwareScrollView>
                 </>

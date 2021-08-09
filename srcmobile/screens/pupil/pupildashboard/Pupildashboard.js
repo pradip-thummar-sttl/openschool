@@ -189,9 +189,7 @@ const PupuilDashboard = (props) => {
 
                 })
             } else {
-                startLiveClassAndroid()
-
-                // showMessage(MESSAGE.scheduledTime)
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }
@@ -203,7 +201,7 @@ const PupuilDashboard = (props) => {
             // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
             dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
-                userNames.push(pupil.Email)
+                userNames.push(pupil.PupilEmail)
                 names.push(pupil.PupilName)
             });
 
@@ -394,6 +392,7 @@ const PupuilDashboard = (props) => {
                                                                 renderItem={renderItem}
                                                                 keyExtractor={(item) => item.id}
                                                                 extraData={selectedId}
+                                                                nestedScrollEnabled
                                                             />
                                                         </SafeAreaView>
                                                         <RBSheet
@@ -572,6 +571,7 @@ const PupuilDashboard = (props) => {
                                                                 renderItem={renderItemHomework}
                                                                 keyExtractor={(item) => item.id}
                                                                 extraData={selectedId}
+                                                                nestedScrollEnabled
                                                             />
                                                         </SafeAreaView>
                                                         <RBSheet

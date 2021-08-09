@@ -20,18 +20,18 @@ const PupilHomeWorkSubmitted = (props) => {
     const { item } = props.route.params
     const [materialArr, setMaterialArr] = useState(item.HomeworkList)
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={PAGESTYLE.whiteBg}>
@@ -81,7 +81,7 @@ const PupilHomeWorkSubmitted = (props) => {
                                                         value={item.IsCheck}
                                                         boxType={'square'}
                                                         onCheckColor={COLORS.white}
-                                                        tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
+                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                         onFillColor={COLORS.dashboardPupilBlue}
                                                         onTintColor={COLORS.dashboardPupilBlue}
                                                         tintColor={COLORS.dashboardPupilBlue}
@@ -90,19 +90,20 @@ const PupilHomeWorkSubmitted = (props) => {
                                                 </View>
                                             </View>
                                         )}
-                                        
-                                        />
+
+                                    />
                                 </View>
                             </View>
                         </View >
-                            {/* style={PAGESTYLE.rightSideBar} */}
-                        <View style={PAGESTYLE.rightSideBar} > 
+                        {/* style={PAGESTYLE.rightSideBar} */}
+                        <View style={PAGESTYLE.rightSideBar} >
                             <View style={PAGESTYLE.uploadBoardBlock}>
                                 {/* <Image source={Images.UploadHomeWorkMobile} style={PAGESTYLE.uploadBoardsubmit} /> */}
                                 <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
                                 <FlatList
                                     data={item.HomeworkList}
-                                    style={{  width: '100%', }}
+                                    style={{ width: '100%', }}
+                                    contentContainerStyle={{ alignItems: 'center' }}
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>

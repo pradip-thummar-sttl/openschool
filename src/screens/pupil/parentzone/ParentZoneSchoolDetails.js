@@ -26,6 +26,21 @@ const ParentZoneSchoolDetails = (props) => {
     const [zip, setZip] = useState('');
 
     useEffect(() => {
+        Service.get(`${EndPoints.GetTeachersList}/${props.data.Pupilid}`, (res) => {
+            if (res.code == 200) {
+                let teacherName = ''
+                for (let i = 0; i < res.data.length; i++) {
+                    const ele = res.data[i];
+                    teacherName = teacherName + (ele.TeacherFirstName + " " + ele.TeacherLastName) + (i == res.data.length - 1 ? '' : ' ')
+                }
+                setTeacherName(teacherName)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+    }, [])
+
+    useEffect(() => {
         console.log('schoolData', schoolData);
         setSchoolFirstName(schoolData.SchoolFirstName)
         setSchoolLastName(schoolData.SchoolLastName)

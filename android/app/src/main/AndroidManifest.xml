@@ -23,7 +23,8 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.WhiteBoardActivity"></activity>
+        <activity android:name=".activity.PollingActivity"></activity>
+        <activity android:name=".activity.WhiteBoardActivity" />
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
