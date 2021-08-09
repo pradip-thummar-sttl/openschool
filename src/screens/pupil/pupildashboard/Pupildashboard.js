@@ -339,6 +339,7 @@ const PupuilDashboard = (props) => {
                     onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
                     onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
+                    navigateUser={() => { setPupilLessonDetail(false); props.navigation.replace('Users'); setSelectedIndex(5) }}
                 />
                 : null
             }

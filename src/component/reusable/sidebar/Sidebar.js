@@ -8,6 +8,7 @@ import Images from '../../../utils/Images';
 import { baseUrl, opacity } from "../../../utils/Constant";
 import Users from "../../../screens/users/Users";
 import { User } from "../../../utils/Model";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -51,6 +52,12 @@ const Sidebar = (props) => {
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
         // setSelectedIndex(1);
+    }
+
+    const teacherLogout = () =>{
+        AsyncStorage.setItem('user', JSON.stringify(null))
+        props.navigateUser()
+        
     }
 
     console.log('module index', props.moduleIndex)
@@ -144,6 +151,20 @@ const Sidebar = (props) => {
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
+                        }
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => {teacherLogout(), toggleAnimation(true) }}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={Images.Faqs}
+                        />
+                        {
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         }
                     </TouchableOpacity>
                 </View>
