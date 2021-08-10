@@ -13,7 +13,7 @@ const CGRect kDefRect = {0, 0, 44, 44};
 const CGRect kDefDeclineRect = {0, 0, 96, 44};
 const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
 
-#define kDefBackgroundColor [UIColor colorWithRed:0.8118 green:0.8118 blue:0.8118 alpha:1.0]
+#define kDefBackgroundColor [UIColor colorWithRed:0 green:0.0 blue:0.0 alpha:0.3]
 #define kDefSelectedColor [UIColor colorWithRed:0.3843 green:0.3843 blue:0.3843 alpha:1.0]
 #define kDefDeclineColor [UIColor colorWithRed:0.8118 green:0.0 blue:0.0784 alpha:1.0]
 #define kDefAnswerColor [UIColor colorWithRed:0.1434 green:0.7587 blue:0.1851 alpha:1.0]
@@ -27,6 +27,7 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
                 selectedColor:(UIColor *)selectedColor  {
     
     QBButton *button = [[QBButton alloc] initWithFrame:frame];
+   
     button.backgroundColor = backgroundColor;
     button.selectedColor = selectedColor;
     
@@ -58,6 +59,7 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
     
     button.iconView = [self iconViewWithNormalImage:@"camera_on_ic"
                                       selectedImage:@"camera_off_ic"];
+  button.labelName.text = @"video";
     return button;
 }
 
@@ -139,8 +141,25 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
   
   button.pushed = YES;
   
-  button.iconView = [self iconViewWithNormalImage:@"mute_on_ic"
-                                    selectedImage:@"mute_off_ic"];
+  
+  button.iconView = [self iconViewWithNormalImage:@"whiteboard"
+                                    selectedImage:@"whiteboard"];
+  button.labelName.text = @"video";
+  return button;
+}
+
++ (QBButton *)switchCamera {
+    
+  QBButton *button = [self buttonWithFrame:kDefRect
+                           backgroundColor:kDefBackgroundColor
+                             selectedColor:kDefSelectedColor];
+  
+  button.pushed = YES;
+  
+  
+  button.iconView = [self iconViewWithNormalImage:@"switchCamera"
+                                    selectedImage:@"switchCamera"];
+  button.labelName.text = @"video";
   return button;
 }
 

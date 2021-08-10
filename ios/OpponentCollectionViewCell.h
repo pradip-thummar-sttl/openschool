@@ -13,6 +13,8 @@
 @interface OpponentCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) UIView *videoView;
+@property (weak, nonatomic) IBOutlet UIButton *addReactionBtn;
+@property (weak, nonatomic) IBOutlet UILabel *emojiLbl;
 
 /**
  *  Mute user block action.

@@ -83,6 +83,7 @@
 		887374EE265E35540035B788 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374ED265E35530035B788 /* GLKit.framework */; };
 		887374F0265E35670035B788 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374EF265E35670035B788 /* Accelerate.framework */; };
 		887374F2265E35B70035B788 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374F1265E35A20035B788 /* libresolv.tbd */; };
+		8875108B26B2B47C009A35A9 /* ReactionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8875108A26B2B47C009A35A9 /* ReactionTableViewCell.m */; };
 		889633C62667879E00E6DE4F /* CallModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 889633C52667879E00E6DE4F /* CallModule.m */; };
 		88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D20504265E253200D97116 /* RCTCalendarModule.m */; };
 		88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */; };
@@ -238,6 +239,8 @@
 		887374ED265E35530035B788 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		887374EF265E35670035B788 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		887374F1265E35A20035B788 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		8875108926B2B47C009A35A9 /* ReactionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactionTableViewCell.h; sourceTree = "<group>"; };
+		8875108A26B2B47C009A35A9 /* ReactionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactionTableViewCell.m; sourceTree = "<group>"; };
 		8884886F266E1A9800B9D17C /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
 		889633C42667879E00E6DE4F /* CallModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallModule.h; sourceTree = "<group>"; };
 		889633C52667879E00E6DE4F /* CallModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallModule.m; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 			children = (
 				882EA035266A1E2D000B9813 /* OpponentCollectionViewCell.h */,
 				882EA036266A1E2D000B9813 /* OpponentCollectionViewCell.m */,
+				8875108926B2B47C009A35A9 /* ReactionTableViewCell.h */,
+				8875108A26B2B47C009A35A9 /* ReactionTableViewCell.m */,
 			);
 			name = OpponentCollectionViewCell;
 			sourceTree = "<group>";
@@ -1169,6 +1174,7 @@
 				882EA0D2266A22AB000B9813 /* DialogTableViewCell.m in Sources */,
 				882EA02E266A1DF5000B9813 /* LocalVideoView.m in Sources */,
 				882EA0A5266A2173000B9813 /* SVIndefiniteAnimatedView.m in Sources */,
+				8875108B26B2B47C009A35A9 /* ReactionTableViewCell.m in Sources */,
 				882EA08A266A2133000B9813 /* UIViewController+InfoScreen.m in Sources */,
 				882EA0B6266A21E0000B9813 /* PlaceholderGenerator.m in Sources */,
 				882EA07E266A1FA5000B9813 /* QBProfile.m in Sources */,

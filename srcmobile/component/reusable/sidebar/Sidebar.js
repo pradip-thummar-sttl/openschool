@@ -7,6 +7,7 @@ import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { baseUrl, opacity } from "../../../utils/Constant";
 import { User } from "../../../utils/Model";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -14,6 +15,17 @@ const Sidebar = (props) => {
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
         setSelectedIndex(1);
+    }
+
+    const teacherLogout = () =>{
+        AsyncStorage.setItem('user', JSON.stringify(null))
+        props.navigation.replace('Users');
+    }
+
+    const PupilLogout = () =>{
+         AsyncStorage.setItem('pupil', JSON.stringify(null))
+        props.navigation.replace('Users');
+
     }
 
     return (
@@ -89,6 +101,17 @@ const Sidebar = (props) => {
                             />
                             <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
                         </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { teacherLogout(); setSelectedModule(6); props.navigation.closeDrawer() }}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={Images.Faqs}
+                            />
+                            <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
@@ -155,6 +178,13 @@ const Sidebar = (props) => {
                                 source={Images.OpenSchool}
                             />
                             <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{PupilLogout();setSelectedModule(6); props.navigation.closeDrawer()}} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+                            <Image
+                                style={styles.menuIcon}
+                                source={Images.MyAvatar}
+                            />
+                            <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         </TouchableOpacity>
                     </View>
                     {/* <View style={styles.cartoon}>

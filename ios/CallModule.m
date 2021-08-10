@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 @implementation CallModule
 RCT_EXPORT_MODULE(CallModuleIos)
-RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSString *)currentUserID currentName:(NSString*)currentName occupants:(NSArray *)occupants userNames:(NSArray*)userNames names:(NSArray*)names isTeacher:(BOOL)isTeacher teacherQBUserID:(NSString*)teacherQBUserID isPopup:(BOOL)isPopup successCallback:(RCTResponseSenderBlock)successCallback){
+RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSString *)currentUserID currentName:(NSString*)currentName occupants:(NSArray *)occupants userNames:(NSArray*)userNames names:(NSArray*)names isTeacher:(BOOL)isTeacher teacherQBUserID:(NSString*)teacherQBUserID isPopup:(BOOL)isPopup title:(NSString *)title channels:(NSArray*)channels successCallback:(RCTResponseSenderBlock)successCallback){
 
   NSMutableArray *selectedUsers = [[NSMutableArray alloc]init];
   NSMutableArray *selectedOccupants = [[NSMutableArray alloc]init];
@@ -51,6 +51,8 @@ RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSStrin
   VC.isTeacher=isTeacher;
   VC.teacherQBUserID=teacherQBUserID;
   VC.conferenceType = QBRTCConferenceTypeVideo;
+  VC.channels = channels;
+  VC.titlee = title;
  
   VC.modalPresentationStyle = UIModalPresentationFullScreen;
   VC.completeCall = ^(BOOL isFinished) {

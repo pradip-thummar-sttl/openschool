@@ -600,6 +600,7 @@ const TLDetailEdit = (props) => {
                 names.push(pupil.FirstName + " " + pupil.LastName)
             });
 
+            console.log('user ids', userIDs)
             try {
                 if (Platform.OS == 'android') {
                     DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {

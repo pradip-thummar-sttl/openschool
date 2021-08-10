@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "mute-ic.png",
+      "filename" : "mute.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "mute-ic@2x.png",
+      "filename" : "mute@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "mute-ic@3x.png",
+      "filename" : "mute@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

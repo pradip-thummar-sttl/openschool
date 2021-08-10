@@ -42,39 +42,47 @@ class Login extends Component {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
         if (this.props.route.params.userType == 'Pupil') {
             AsyncStorage.getItem('pupil').then((value) => {
-                var user = JSON.parse(value)
-                if (user.isRemember) {
-                    console.log('user of async', user)
+                if (value) {
+                    var user = JSON.parse(value)
+                    if (user.isRemember) {
+                        console.log('user of async', user)
 
-                    this.setState({
-                        userName: user.Email,
-                        password: user.Password,
-                        PushToken: user.PushToken,
-                        Device: user.Device,
-                        OS: user.OS,
-                        AccessedVia: user.AccessedVia,
-                        isRemember: user.isRemember
-                    })
-                } else {
+                        this.setState({
+                            userName: user.Email,
+                            password: user.Password,
+                            PushToken: user.PushToken,
+                            Device: user.Device,
+                            OS: user.OS,
+                            AccessedVia: user.AccessedVia,
+                            isRemember: user.isRemember
+                        })
+                        this.isFieldsValidated()
+                    } else {
+                    }
                 }
+
             })
         } else {
             AsyncStorage.getItem('user').then((value) => {
-                var user = JSON.parse(value)
-                if (user.isRemember) {
-                    console.log('user of async', user)
+                if (value) {
+                    var user = JSON.parse(value)
+                    if (user.isRemember) {
+                        console.log('user of async', user, value)
 
-                    this.setState({
-                        userName: user.Email,
-                        password: user.Password,
-                        PushToken: user.PushToken,
-                        Device: user.Device,
-                        OS: user.OS,
-                        AccessedVia: user.AccessedVia,
-                        isRemember: user.isRemember
-                    })
-                } else {
+                        this.setState({
+                            userName: user.Email,
+                            password: user.Password,
+                            PushToken: user.PushToken,
+                            Device: user.Device,
+                            OS: user.OS,
+                            AccessedVia: user.AccessedVia,
+                            isRemember: user.isRemember
+                        })
+                        this.isFieldsValidated()
+                    } else {
+                    }
                 }
+
             })
         }
         if (isRemember) {
