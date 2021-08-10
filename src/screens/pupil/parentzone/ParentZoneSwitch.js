@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     topBg: {
         width: '100%',
         height: hp(16.77),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         position: 'absolute',
         top: hp(-0.3),
     },
