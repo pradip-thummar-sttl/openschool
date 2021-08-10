@@ -104,7 +104,7 @@ const Images = {
     schoolLoginIcon: require('../assets/images/school-icon.png'),
     teacherLoginIcon: require('../assets/images/teacher-icon.png'),
     pupilLoginIcon: require('../assets/images/pupil-icon.png'),
-    illuTopBg: require('../assets/images/illus-top.png'),
+    illuTopBg: require('../assets/images/illus-top3.png'),
     loginMainBackteacher: require('../assets/images/loginMaintopteacher2.png'),
     introSlideOne: require('../assets/images/pupil-intro-screen-1_2.png'),
     introSlideTwo: require('../assets/images/pupil-intro-screen-2_2.png'),

@@ -493,7 +493,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(46.87),
         height:hp(14.41),
-        top: -101,
+        top: hp(-12.35),
         right: 50,
     },
     bookPositionBg: {
@@ -519,15 +519,14 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     achivementRobot:{
-        width:hp(57.86),
-        resizeMode: 'contain',
+        width: '67%',
         shadowColor: COLORS.transparent,
-        marginLeft: hp(7.55),
+        alignItems: 'center',
     },
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        width :hp(43.48),
+        width: '33%',
         alignItems:'center',
         backgroundColor:COLORS.white,
         borderRadius:hp(1.8),
@@ -591,7 +590,6 @@ export default StyleSheet.create({
     },
     cartoon:{
         resizeMode: 'contain',
-        alignItems:'center',
         width:hp(57.51),
         height:hp(35.18),
     },
