@@ -11,6 +11,7 @@
 @interface QBButton : UIButton
 
 @property (strong, nonatomic) UIImageView *iconView;
+@property (strong, nonatomic) UILabel *labelName;
 
 @property (nonatomic, assign, getter=isPushed) BOOL pushed;
 @property (nonatomic, assign) BOOL pressed;

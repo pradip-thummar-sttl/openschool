@@ -230,7 +230,7 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,title, channels, false, (id) => {
                     console.log('hi id:---------', id)
                 })
             }
@@ -339,6 +339,7 @@ const PupuilDashboard = (props) => {
                     onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
                     onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
+                    navigateUser={() => { setPupilLessonDetail(false); props.navigation.replace('Users'); setSelectedIndex(5) }}
                 />
                 : null
             }

@@ -25,7 +25,16 @@
 @property (nonatomic) BOOL asListener;
 @property (nonatomic) BOOL isTeacher;
 @property (strong, nonatomic) NSString *teacherQBUserID;
+@property (strong, nonatomic) NSString *titlee;
+@property (strong, nonatomic) NSArray *channels;
 
 typedef void (^CompleteCall)(BOOL isFinished);
 @property (copy, nonatomic) CompleteCall completeCall;
+@property (weak, nonatomic) IBOutlet UIButton *endCallButton;
+@property (weak, nonatomic) IBOutlet UIView *reactionView;
+@property (weak, nonatomic) IBOutlet UITableView *reactionTableView;
+@property (weak, nonatomic) IBOutlet UIView *userCameraView;
+
+
+
 @end

@@ -7,6 +7,7 @@ import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { baseUrl } from "../../../utils/Constant";
 import { User } from "../../../utils/Model";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -40,6 +41,13 @@ const Sidebar = (props) => {
         width: animationValue,
     }
 
+   
+
+    const PupilLogout = () =>{
+         AsyncStorage.setItem('pupil', JSON.stringify(null))
+        props.navigateUser();
+
+    }
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
@@ -115,6 +123,16 @@ const Sidebar = (props) => {
                         {
                             isSmall? null:
                             <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>PupilLogout()} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
+                        <Image
+                            style={styles.menuIcon}
+                            source={Images.OpenSchool}
+                        />
+                        {
+                            isSmall? null:
+                            <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         }
                     </TouchableOpacity>
                 </View>

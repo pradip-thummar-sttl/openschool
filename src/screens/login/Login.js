@@ -56,6 +56,7 @@ class Login extends Component {
                         AccessedVia: user.AccessedVia,
                         isRemember: user.isRemember
                     })
+                    this.isFieldsValidated()
                 } else {
                 }
             })
@@ -74,6 +75,7 @@ class Login extends Component {
                         AccessedVia: user.AccessedVia,
                         isRemember: user.isRemember
                     })
+                    this.isFieldsValidated()
                 } else {
                 }
             })
