@@ -41,7 +41,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     dayLeft: {
-        width: 65,
+        width: 68,
         height: 66,
         alignItems: 'center',
         paddingLeft: hp(1),

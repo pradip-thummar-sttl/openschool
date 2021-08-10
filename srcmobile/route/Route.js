@@ -90,15 +90,15 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-            <Stack.Navigator headerMode='none' screenOptions={{ gestureEnabled: false }} initialRouteName="Splash">
-                <Stack.Screen name="Splash" component={Splash} options={{swipeEnabled: false,}} />
-                <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} options={{swipeEnabled: false,}} />
-                <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} options={{swipeEnabled: false,}} />
-                <Stack.Screen name="Users" component={Users} options={{swipeEnabled: false,}} />
-                <Stack.Screen name="Login" component={Login} options={{swipeEnabled: false,}} />
-                <Stack.Screen name="PupilRegister" component={PupilRegister} options={{swipeEnabled: false,}}/>
-                <Stack.Screen name="PupilVerify" component={PupilVerify} options={{swipeEnabled: false,}} />
-                <Stack.Screen name="PupilConnect" component={PupilConnect} options={{swipeEnabled: false,}} />
+            <Stack.Navigator headerMode='none' initialRouteName="Splash">
+                <Stack.Screen name="Splash" component={Splash} />
+                <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
+                <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
+                <Stack.Screen name="Users" component={Users} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="PupilRegister" component={PupilRegister} />
+                <Stack.Screen name="PupilVerify" component={PupilVerify} />
+                <Stack.Screen name="PupilConnect" component={PupilConnect} />
                 <Stack.Screen name="Popup" component={Popup} />
                 <Stack.Screen name="Popupuser" component={Popupuser} />
                 <Stack.Screen name="Sidebar" component={Sidebar} />

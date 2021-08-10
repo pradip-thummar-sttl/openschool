@@ -382,7 +382,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 0 }}
                     renderItem={({ item, index }) => (
                         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
-                            <Text style={{ fontSize: 14 }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: hp(1.70), }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -612,6 +612,12 @@ const TLDetailAdd = (props) => {
             saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
             let userIDs = [], userNames = [], names = [];
+            selectedParticipants.PupilList.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.PupilName)
+            });
+            
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)

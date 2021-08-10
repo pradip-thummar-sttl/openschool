@@ -123,71 +123,75 @@ const TLDetail = (props) => {
                         </View>
                     </View>
                 </View>
-                <View style={PAGESTYLE.rightSideBar}>
-                    {props.lessonData.MaterialList.length > 0 ?
-                        <View style={PAGESTYLE.fileBoxGrpWrap}>
-                            <Text style={PAGESTYLE.requireText}>Learning material</Text>
+                {props.lessonData.ChatTranscript.length > 0 || props.lessonData.RecommendedList.length > 0 || props.lessonData.MaterialList.length > 0 ?
+                    <View style={PAGESTYLE.rightSideBar}>
+                        {props.lessonData.MaterialList.length > 0 ?
+                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                <Text style={PAGESTYLE.requireText}>Learning material</Text>
 
-                            {props.lessonData.MaterialList.map((item, index) => {
-                                return (
-                                    <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
-                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
-                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                        </TouchableOpacity>
-                                    </View>
-                                )
-                            })}
-                        </View>
-                        :
-                        null
-                    }
-
-                    {props.lessonData.RecommendedList.length > 0 ?
-                        <FlatList
-                            data={props.lessonData.RecommendedList}
-                            style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
-                            renderItem={({ item, index }) => (
-                                <View style={PAGESTYLE.thumbVideo}>
-                                    <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                                </View>
-                            )}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
-                        :
-                        null
-                    }
-
-                    {props.lessonData.RecordingList ?
-                        <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                            <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                            {props.lessonData.RecordingList.map((item, index) => {
-                                return (
-                                    <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
-                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
-                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
-                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                        </TouchableOpacity>
-                                    </View>
-                                )
-                            })}
-                        </View>
-                        :
-                        null
-                    }
-
-                    {props.lessonData.ChatTranscript ?
-                        <View style={PAGESTYLE.fileBoxGrpWrap}>
-                            <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                {props.lessonData.MaterialList.map((item, index) => {
+                                    return (
+                                        <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
+                                            <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
+                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                            </TouchableOpacity>
+                                        </View>
+                                    )
+                                })}
                             </View>
-                        </View>
-                        :
-                        null
-                    }
-                </View>
+                            :
+                            null
+                        }
+
+                        {props.lessonData.RecommendedList.length > 0 ?
+                            <FlatList
+                                data={props.lessonData.RecommendedList}
+                                style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
+                                renderItem={({ item, index }) => (
+                                    <View style={PAGESTYLE.thumbVideo}>
+                                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                                    </View>
+                                )}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                            :
+                            null
+                        }
+
+                        {props.lessonData.RecordingList ?
+                            <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
+                                <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
+                                {props.lessonData.RecordingList.map((item, index) => {
+                                    return (
+                                        <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
+                                            <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
+                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                            </TouchableOpacity>
+                                        </View>
+                                    )
+                                })}
+                            </View>
+                            :
+                            null
+                        }
+
+                        {props.lessonData.ChatTranscript ?
+                            <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
+                                <View style={PAGESTYLE.fileGrp}>
+                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
+                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                </View>
+                            </View>
+                            :
+                            null
+                        }
+                    </View>
+                    :
+                    null
+                }
             </View>
         </View>
 

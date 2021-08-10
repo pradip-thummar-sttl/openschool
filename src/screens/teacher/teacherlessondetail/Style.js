@@ -287,7 +287,7 @@ export default StyleSheet.create({
     },
     checkBoxLabelNone: {
         flexDirection: 'row',
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         paddingVertical: 10,
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
@@ -308,8 +308,9 @@ export default StyleSheet.create({
     },
     checkBoxLabelText: {
         lineHeight: hp(2.82),
-        fontSize: hp(1.85),
+        fontSize: hp(1.70),
         fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGrayIntro,
         paddingRight: hp(1),
         marginLeft: 15,
     },
@@ -350,7 +351,7 @@ export default StyleSheet.create({
     },
     toggleText: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.85),
+        fontSize: hp(1.70),
         lineHeight: hp(3.60),
     },
     rightSideBar: {
@@ -668,7 +669,7 @@ export default StyleSheet.create({
     },
     blockSpaceBottom: {
         marginBottom: hp(2.6),
-        marginTop: hp(2),
+        marginTop: hp(4),
         width:'100%'
     },
     dueDateWrap: {

@@ -1550,7 +1550,7 @@ export default StyleSheet.create({
         borderRadius:10,
         borderWidth:1,
         borderColor:COLORS.borderGrp,
-        width:hp(25),
+        width:hp(20),
         marginLeft:hp(1.8)
         
     },

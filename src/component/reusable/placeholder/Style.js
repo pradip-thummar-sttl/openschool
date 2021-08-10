@@ -39,5 +39,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textAlign : 'center',
         fontSize: 14,
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
     },
 });

@@ -18,6 +18,7 @@ export default StyleSheet.create({
     },
     padLeftRight: {
         flex: 1,
+        paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
     },
     commonInput: {

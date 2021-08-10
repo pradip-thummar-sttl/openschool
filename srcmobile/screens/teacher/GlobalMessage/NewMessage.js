@@ -24,18 +24,18 @@ const NewMessage = (props) => {
     const [selectedParents, setSelectedParents] = useState([])
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
+    }
 
     useEffect(() => {
         if (data) {
@@ -169,34 +169,36 @@ const NewMessage = (props) => {
     }
 
     return (
-        
 
-        <View style={{backgroundColor:'white', height:'100%'}}>
+
+        <View style={{ backgroundColor: 'white', height: '100%' }}>
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
                 onDraft={() => saveMessage('Draft')}
                 onGoback={() => props.navigation.goBack()}
                 status={status} />
-            <View style={[Styles.field1,]}>
-                <Text label style={Style.labelCommon}>Title</Text>
-                <View style={Styles.copyInputParent}>
-                    <TextInput
-                        multiline={false}
-                        numberOfLines={1}
-                        placeholder='Enter title of the message'
-                        returnKeyType={"next"}
-                        onSubmitEditing={() => { t2.current.focus(); }}
-                        value={title}
-                        autoCapitalize={'sentences'}
-                        placeholderStyle={Styles.somePlaceholderStyle}
-                        style={Styles.commonInputTextarea1}
-                        onChangeText={title => setTitle(title)} />
-                </View>
-            </View>
 
-            <View style={Styles.field1}>
-                <View style={Styles.copyInputParent}>
-                    {/* <TextInput
+            <ScrollView style={{ height: '100%' }}>
+                <View style={[Styles.field1,]}>
+                    <Text label style={Style.labelCommon}>Title</Text>
+                    <View style={Styles.copyInputParent}>
+                        <TextInput
+                            multiline={false}
+                            numberOfLines={1}
+                            placeholder='Enter title of the message'
+                            returnKeyType={"next"}
+                            onSubmitEditing={() => { t2.current.focus(); }}
+                            value={title}
+                            autoCapitalize={'sentences'}
+                            placeholderStyle={Styles.somePlaceholderStyle}
+                            style={Styles.commonInputTextarea1}
+                            onChangeText={title => setTitle(title)} />
+                    </View>
+                </View>
+
+                <View style={Styles.field1}>
+                    <View style={Styles.copyInputParent}>
+                        {/* <TextInput
                         multiline={false}
                         placeholder='Enter title of the message'
                         value={event}
@@ -204,25 +206,26 @@ const NewMessage = (props) => {
                         placeholderTextColor={COLORS.black}
                         style={Styles.commonInputTextarea1}
                         onChangeText={eventName => setEvent(eventName)} /> */}
-                    {parentListView()}
+                        {parentListView()}
 
+                    </View>
                 </View>
-            </View>
 
-            <View style={Styles.field1}>
-                <Text label style={Style.labelCommon}>Message</Text>
-                <View style={Styles.copyInputParent}>
-                    <TextInput
-                        ref={t2}
-                        multiline={true}
-                        placeholder='Write a message here'
-                        value={message}
-                        autoCapitalize={'sentences'}
-                        placeholderStyle={Styles.somePlaceholderStyle}
-                        style={[Styles.commonInputTextarea1, Styles.inputHeight]}
-                        onChangeText={message => setMessage(message)} />
+                <View style={Styles.field1}>
+                    <Text label style={Style.labelCommon}>Message</Text>
+                    <View style={Styles.copyInputParent}>
+                        <TextInput
+                            ref={t2}
+                            multiline={true}
+                            placeholder='Write a message here'
+                            value={message}
+                            autoCapitalize={'sentences'}
+                            placeholderStyle={Styles.somePlaceholderStyle}
+                            style={[Styles.commonInputTextarea1, Styles.inputHeight]}
+                            onChangeText={message => setMessage(message)} />
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </View>
 
     )

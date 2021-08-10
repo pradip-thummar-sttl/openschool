@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -17,13 +17,47 @@ const Sidebar = (props) => {
         setSelectedIndex(1);
     }
 
-    const teacherLogout = () =>{
+    const showActionChooserTeacher = () => {
+        Alert.alert(
+            '',
+            'Do you really want to logout?',
+            [{
+                text: 'YES',
+                onPress: () => teacherLogout(),
+            },
+            {
+                text: 'NO',
+                onPress: () => { },
+            },
+            ],
+            { cancelable: true }
+        )
+    }
+
+    const showActionChooserPupil = () => {
+        Alert.alert(
+            '',
+            'Do you really want to logout?',
+            [{
+                text: 'YES',
+                onPress: () => pupilLogout(),
+            },
+            {
+                text: 'NO',
+                onPress: () => { },
+            },
+            ],
+            { cancelable: true }
+        )
+    }
+
+    const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
         props.navigation.replace('Users');
     }
 
-    const PupilLogout = () =>{
-         AsyncStorage.setItem('pupil', JSON.stringify(null))
+    const pupilLogout = () => {
+        AsyncStorage.setItem('pupil', JSON.stringify(null))
         props.navigation.replace('Users');
 
     }
@@ -37,7 +71,7 @@ const Sidebar = (props) => {
                         <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>MYED Open School</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(55) }]}>MYED Open School</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -74,7 +108,7 @@ const Sidebar = (props) => {
                         <TouchableOpacity
                             style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { props.navigation.replace('PupiloverView',{item:0}); setSelectedModule(3); props.navigation.closeDrawer() }}>
+                            onPress={() => { props.navigation.replace('PupiloverView', { item: 0 }); setSelectedModule(3); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Messaging}
@@ -106,7 +140,7 @@ const Sidebar = (props) => {
                         <TouchableOpacity
                             style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { teacherLogout(); setSelectedModule(6); props.navigation.closeDrawer() }}>
+                            onPress={() => { showActionChooserTeacher(); setSelectedModule(6); props.navigation.closeDrawer() }}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.Faqs}
@@ -117,7 +151,7 @@ const Sidebar = (props) => {
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitleBottom,{width:wp(45)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
                         <TouchableOpacity style={styles.moreMenu}>
                             <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -133,7 +167,7 @@ const Sidebar = (props) => {
                         <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>MYED Open School</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(55) }]}>MYED Open School</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -181,7 +215,7 @@ const Sidebar = (props) => {
                             />
                             <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{PupilLogout();setSelectedModule(6); props.navigation.closeDrawer()}} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+                        <TouchableOpacity onPress={() => { showActionChooserPupil(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
                             <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
@@ -195,7 +229,7 @@ const Sidebar = (props) => {
                     <View style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitleBottom,{width:wp(45)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                         </View>
                         <TouchableOpacity style={styles.moreMenu}>
                             <Image style={styles.moreIcon} source={Images.SidebarMore} />
@@ -296,7 +330,7 @@ const styles = StyleSheet.create({
     bottomUser: {
         width: hp(4.2),
         height: hp(4.2),
-        borderRadius:hp(4.2/2)
+        borderRadius: hp(4.2 / 2)
     },
     profileTitleBottom: {
         fontSize: hp(2.0),

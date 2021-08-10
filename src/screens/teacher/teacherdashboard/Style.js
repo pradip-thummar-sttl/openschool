@@ -502,7 +502,7 @@ export default StyleSheet.create({
     },
     pupilName: {
         fontSize: hp(1.82),
-        fontFamily: FONTS.fontRegular,
+        fontFamily:FONTS.fontSemiBold,
         color: COLORS.darkGray,
     },
     pupilgroupName: {

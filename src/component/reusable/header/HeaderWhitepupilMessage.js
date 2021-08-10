@@ -249,10 +249,10 @@ const styles = StyleSheet.create({
         fontSize: hp(1.82),
     },
     buttonGroup: {
-        position: 'relative',
+        position: 'absolute',
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft: 10
+        right: 15,
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         borderRadius: 10,
-        width: width - 295,
+        width: '70%',
         flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {

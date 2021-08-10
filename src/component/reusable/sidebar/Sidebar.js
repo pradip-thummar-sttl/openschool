@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
@@ -54,10 +54,27 @@ const Sidebar = (props) => {
         // setSelectedIndex(1);
     }
 
-    const teacherLogout = () =>{
+    const showActionChooser = () => {
+        Alert.alert(
+            '',
+            'Do you really want to logout?',
+            [{
+                text: 'YES',
+                onPress: () => teacherLogout(),
+            },
+            {
+                text: 'NO',
+                onPress: () => { },
+            },
+            ],
+            { cancelable: true }
+        )
+    }
+
+    const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
         props.navigateUser()
-        
+
     }
 
     console.log('module index', props.moduleIndex)
@@ -158,7 +175,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {teacherLogout(), toggleAnimation(true) }}>
+                        onPress={() => { showActionChooser(), toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
@@ -270,7 +287,7 @@ const styles = StyleSheet.create({
     },
     userInfobottomMain: {
         position: 'absolute',
-        alignSelf:'center',
+        alignSelf: 'center',
         bottom: 0,
         paddingHorizontal: hp(1.35),
         borderColor: COLORS.bottomProfileLightBorder,
@@ -304,7 +321,7 @@ const styles = StyleSheet.create({
     },
     moreMenu: {
         // position: 'absolute',
-        marginLeft:hp(4),
+        marginLeft: hp(4),
         right: 0,
     },
 });

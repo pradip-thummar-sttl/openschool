@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 import { EndPoints } from '../../../service/EndPoints'
 import { Service } from '../../../service/Service'
-import { baseUrl, showMessage } from '../../../utils/Constant'
+import { baseUrl, opacity, showMessage } from '../../../utils/Constant'
 import Images from '../../../utils/Images'
 import STYLE from '../../../utils/Style'
 import HeaderPM from './HeaderPM'
@@ -16,6 +16,7 @@ import { User } from '../../../utils/Model'
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
+    activeOpacity={opacity}
         style={PAGESTYLE.pupilDetailLink}
         onPress={() => props.onPupilClick()}>
         <View style={[PAGESTYLE.pupilData]}>
@@ -34,7 +35,7 @@ const Pupillist = (props, { item }) => (
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn11}>
-                <Text style={PAGESTYLE.pupilgroupName10}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
+                <Text style={PAGESTYLE.pupilgroupName10} numberOfLines={1}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
             {/* </View> */}
             <View style={PAGESTYLE.perfomanceColumn}>
