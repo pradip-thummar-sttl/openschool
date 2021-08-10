@@ -4,6 +4,7 @@ import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
 import { baseUrl, showMessage } from './Constant';
 export const Download = (item) => {
+    console.log('downolad item', item)
     if (Platform.OS === 'ios') {
         downloadFile(item);
     } else {
@@ -74,6 +75,11 @@ export const downloadFile = (item) => {
     //         console.log("++++" + err);
     //         Alert.alert(err.toString());
     //     });
+    if (item.uri) {
+        console.log('hello uri',item.uri )
+
+        FileViewer.open(item.uri)
+    } else {
     const { config, fs } = RNFetchBlob
     const fileName = item.filename.split('/')
     const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
@@ -98,6 +104,7 @@ export const downloadFile = (item) => {
             console.log('hello error')
 
         });
+    }
 };
 
 export const getFileExtention = fileUrl => {
