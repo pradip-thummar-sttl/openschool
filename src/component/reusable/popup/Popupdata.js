@@ -236,9 +236,9 @@ const Popupdata = (props) => {
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                                            <TouchableOpacity onPress={() => {setLoader(true), Download(item, (res) => {
                                                                 setLoader(false)
-                                                            })} style={PAGESTYLE.downloaBtn}>
+                                                            })}} style={PAGESTYLE.downloaBtn}>
                                                                 <View style={PAGESTYLE.fileGrp}>
                                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                     {isMatLoading ?

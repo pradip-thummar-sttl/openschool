@@ -475,7 +475,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                 data={dataOfSubView.MaterialList}
                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                 renderItem={({ item, index }) => (
-                                                                                    <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                                                                    <TouchableOpacity onPress={() => setLoader(true); Download(item, (res) => {
                                                                                         setLoader(false)
                                                                                     })} style={PAGESTYLE.downloaBtn}>
                                                                                         <View style={PAGESTYLE.fileGrp}>

@@ -12,7 +12,9 @@ export const Download = (item, result) => {
     } else {
         try {
             if (PermissionsAndroid.RESULTS.GRANTED === "granted") {
-                downloadFile(item);
+                downloadFile(item,(res) => {
+                    result(res)
+                });
             } else {
                 PermissionsAndroid.request(
                     PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,

@@ -140,9 +140,9 @@ const PupilHomeWorkMarked = (props) => {
                                     data={item.HomeworkList}
                                     style={{ alignSelf: 'center', }}
                                     renderItem={({ item, index }) => (
-                                        <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                        <TouchableOpacity onPress={() => {setLoader(true), Download(item, (res) => {
                                             setLoader(false)
-                                        })} style={PAGESTYLE.downloaBtn}>
+                                        })}} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
                                                 {isMatLoading ?
                                                     <ActivityIndicator

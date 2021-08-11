@@ -107,9 +107,9 @@ const PupilHomeWorkSubmitted = (props) => {
                                     style={{ width: '100%', }}
                                     contentContainerStyle={{ alignItems: 'center' }}
                                     renderItem={({ item, index }) => (
-                                        <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                        <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
                                             setLoader(false)
-                                        })} style={PAGESTYLE.downloaBtn}>
+                                        })}} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
                                                 {isMatLoading ?
                                                     <ActivityIndicator

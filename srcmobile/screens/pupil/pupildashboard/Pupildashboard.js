@@ -465,9 +465,9 @@ const PupuilDashboard = (props) => {
                                                                                                 data={dataOfSubView.MaterialList}
                                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                                 renderItem={({ item, index }) => (
-                                                                                                    <TouchableOpacity onPress={() => Download(item, (res) => {
-                                                                                                        console.log(('hello block is running'));
-                                                                                                    })} style={PAGESTYLE.downloaBtn}>
+                                                                                                    <TouchableOpacity onPress={() =>{setLoader(true); Download(item, (res) => {
+                                                                                                        setLoader(false)
+                                                                                                    })}} style={PAGESTYLE.downloaBtn}>
                                                                                                         <View style={PAGESTYLE.fileGrp}>
                                                                                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                                                             {isMatLoading ?
