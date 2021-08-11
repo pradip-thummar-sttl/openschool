@@ -159,6 +159,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
 
     const [isLoading, setLoading] = useState(false);
+    const [isMatLoading, setLoader] = useState(false)
+
     let currentCount = 0
     useEffect(() => {
         QB.webrtc
@@ -362,8 +364,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
                 navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
                 navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }}
-                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }} /> 
-                
+                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }} />
+
             {
                 isPupilDetail ?
                     <PupilProfileView
@@ -509,10 +511,20 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                     data={dataOfSubView.MaterialList}
                                                                                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                     renderItem={({ item, index }) => (
-                                                                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                                                        <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                                                                            setLoader(false)
+                                                                                        })} style={PAGESTYLE.downloaBtn}>
                                                                                             <View style={PAGESTYLE.fileGrp}>
                                                                                                 <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                {isMatLoading ?
+                                                                                                    <ActivityIndicator
+                                                                                                        style={{ ...PAGESTYLE.downloadIcon }}
+                                                                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                                        color={COLORS.blueBorder} />
+                                                                                                    :
+                                                                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                }
+                                                                                                {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                             </View>
                                                                                         </TouchableOpacity>
                                                                                     )}

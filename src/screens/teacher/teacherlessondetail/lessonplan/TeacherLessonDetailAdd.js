@@ -381,7 +381,7 @@ const TLDetailAdd = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 0 }}
                     renderItem={({ item, index }) => (
-                        <View style={{ flexDirection: 'row',alignItems: 'center',padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
                             <Text style={{ fontSize: 14 }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
@@ -508,7 +508,7 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy,{width:hp(13)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy, { width: hp(13) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                         <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -782,6 +782,13 @@ const TLDetailAdd = (props) => {
                                                 </View>
                                             </View>
                                         </View>
+
+                                        {/*  */}
+                                        <View style={PAGESTYLE.toggleGrp}>
+                                            <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
+                                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                        </View>
+
                                         <View style={PAGESTYLE.timedateGrp}>
                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
                                                 <Text style={PAGESTYLE.subjectText}>Date</Text>
@@ -794,9 +801,15 @@ const TLDetailAdd = (props) => {
                                                 </TouchableOpacity>
                                             </View>
 
-                                            {fromTimeDropDown()}
+                                            {
+                                                IsDeliveredLive ?
+                                                    <>
+                                                        {fromTimeDropDown()}
 
-                                            {toTimeDropDown()}
+                                                        {toTimeDropDown()}
+                                                    </> : null
+                                            }
+
 
                                             {participantsDropDown()}
 
@@ -840,10 +853,10 @@ const TLDetailAdd = (props) => {
                                                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                                 <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
                                             </View>
-                                            <View style={PAGESTYLE.toggleGrp}>
+                                            {/* <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                            </View>
+                                            </View> */}
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />

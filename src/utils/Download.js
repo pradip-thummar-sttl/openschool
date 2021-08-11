@@ -3,29 +3,38 @@ import RNFetchBlob from 'rn-fetch-blob';
 import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
 import { baseUrl, showMessage } from './Constant';
-export const Download = (item) => {
+export const Download = (item, result) => {
     console.log('downolad item', item)
     if (Platform.OS === 'ios') {
-        downloadFile(item);
+        downloadFile(item, (res) => {
+            result(res)
+        });
     } else {
         try {
-            PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-                {
-                    title: 'Storage Permission Required',
-                    message:
-                        'Application needs access to your storage to download File',
-                }
-            ).then((granted) => {
-                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                    // Start downloading
-                    downloadFile(item);
-                    console.log('Storage Permission Granted.');
-                } else {
-                    // If permission denied then show alert
-                    Alert.alert('Error', 'Storage Permission Not Granted');
-                }
-            });
+            if (PermissionsAndroid.RESULTS.GRANTED === "granted") {
+                downloadFile(item);
+            } else {
+                PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    {
+                        title: 'Storage Permission Required',
+                        message:
+                            'Application needs access to your storage to download File',
+                    }
+                ).then((granted) => {
+                    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                        // Start downloading
+                        downloadFile(item,(res) => {
+                            result(res)
+                        });
+                        console.log('Storage Permission Granted.');
+                    } else {
+                        // If permission denied then show alert
+                        Alert.alert('Error', 'Storage Permission Not Granted');
+                    }
+                });
+
+            }
 
         } catch (error) {
             // To handle permission related exception
@@ -34,9 +43,7 @@ export const Download = (item) => {
     }
 }
 
-export const downloadFile = (item) => {
-    // console.log("--------------------");
-
+export const downloadFile = (item, result) => {
     // // Get today's date to add the time suffix in filename
     // let date = new Date();
     // // File URL which we want to download
@@ -75,36 +82,42 @@ export const downloadFile = (item) => {
     //         console.log("++++" + err);
     //         Alert.alert(err.toString());
     //     });
+    // const { config, fs } = RNFetchBlob
     if (item.uri) {
-        console.log('hello uri',item.uri )
+        console.log('hello uri', item.uri)
 
         FileViewer.open(item.uri)
+        result()
     } else {
-    const { config, fs } = RNFetchBlob
-    const fileName = item.filename.split('/')
-    const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
+        const fileName = item.filename.split('/')
+        const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
 
-    const options = {
-        fromUrl: baseUrl + item.filename,
-        toFile: localFile
-    };
-    console.log('options', options);
-    RNFS.downloadFile(options).promise
-        .then((res) => {
-            console.log('hello res', res)
-            FileViewer.open(localFile)
-        })
-        .then(() => {
-            // success
-            console.log('hello avy')
-        })
-        .catch(error => {
-            showMessage('Sorry, unable to find compatible App on your device')
-        }).catch(error=>{
-            console.log('hello error')
+        const options = {
+            fromUrl: baseUrl + item.filename,
+            toFile: localFile
+        };
+        console.log('options', options);
+        RNFS.downloadFile(options).promise
+            .then((res) => {
+                console.log('hello res', res)
+                FileViewer.open(localFile)
+                result()
+            })
+            .then(() => {
+                // success
+                console.log('hello avy')
+                result()
+            })
+            .catch(error => {
+                showMessage('Sorry, unable to find compatible App on your device')
+                result()
+            }).catch(error => {
+                console.log('hello error')
+                result()
 
-        });
+            });
     }
+
 };
 
 export const getFileExtention = fileUrl => {

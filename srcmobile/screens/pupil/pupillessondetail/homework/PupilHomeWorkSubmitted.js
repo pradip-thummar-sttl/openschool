@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, BackHandler, Platform } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, BackHandler, Platform, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -19,6 +19,8 @@ var moment = require('moment');
 const PupilHomeWorkSubmitted = (props) => {
     const { item } = props.route.params
     const [materialArr, setMaterialArr] = useState(item.HomeworkList)
+    const [isMatLoading, setLoader] = useState(false)
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -105,9 +107,19 @@ const PupilHomeWorkSubmitted = (props) => {
                                     style={{ width: '100%', }}
                                     contentContainerStyle={{ alignItems: 'center' }}
                                     renderItem={({ item, index }) => (
-                                        <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                        <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                            setLoader(false)
+                                        })} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
-                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                {isMatLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...PAGESTYLE.markedIcon }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.blueBorder} />
+                                                    :
+                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                }
+                                                {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                             </View>
                                         </TouchableOpacity>
                                     )}

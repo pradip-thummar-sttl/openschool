@@ -157,9 +157,9 @@ const TLHomeWorkInstructionalVideoAdded = (props) => {
                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.thumbVideo}>
+                    {/* <View style={PAGESTYLE.thumbVideo}>
                         <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                    </View>
+                    </View> */}
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity
                             style={PAGESTYLE.buttonGrp}

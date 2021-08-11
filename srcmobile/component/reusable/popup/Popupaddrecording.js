@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../utils/Colors";
@@ -23,12 +23,15 @@ const Popupaddrecording = (props) => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    const onCameraOnly =()=>{
-        refRBSheet.current.close(); 
+    const [isMatLoading, setLoader] = useState(false)
+
+
+    const onCameraOnly = () => {
+        refRBSheet.current.close();
         setTimeout(() => {
             props.onCameraOnly()
         }, 1000);
-               
+
     }
 
     const onChange = (event, selectedDate) => {
@@ -82,9 +85,19 @@ const Popupaddrecording = (props) => {
                     :
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => Download(props.recordingArr[0])}
+                        onPress={() => setLoader(true), Download(props.recordingArr[0], (res) => {
+                            setLoader(false)
+                        })}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
-                        <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
+                        {isMatLoading ?
+                            <ActivityIndicator
+                                style={{ ...styles.recordingLinkIcon }}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.blueBorder} />
+                            :
+                            <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
+                        }
+                        {/* <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} /> */}
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
                     </TouchableOpacity>

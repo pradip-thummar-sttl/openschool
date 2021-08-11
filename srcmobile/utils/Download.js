@@ -3,10 +3,12 @@ import RNFetchBlob from 'rn-fetch-blob';
 import FileViewer from 'react-native-file-viewer';
 import RNFS from 'react-native-fs';
 import { baseUrl, showMessage } from './Constant';
-export const Download = (item) => {
+export const Download = (item, result) => {
     console.log('downolad item', item)
     if (Platform.OS === 'ios') {
-        downloadFile(item);
+        downloadFile(item, (res) => {
+            result(res)
+        });
     } else {
         try {
             if (PermissionsAndroid.RESULTS.GRANTED === "granted") {
@@ -22,7 +24,9 @@ export const Download = (item) => {
                 ).then((granted) => {
                     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                         // Start downloading
-                        downloadFile(item);
+                        downloadFile(item,(res) => {
+                            result(res)
+                        });
                         console.log('Storage Permission Granted.');
                     } else {
                         // If permission denied then show alert
@@ -39,7 +43,7 @@ export const Download = (item) => {
     }
 }
 
-export const downloadFile = (item) => {
+export const downloadFile = (item, result) => {
     // // Get today's date to add the time suffix in filename
     // let date = new Date();
     // // File URL which we want to download
@@ -80,9 +84,10 @@ export const downloadFile = (item) => {
     //     });
     // const { config, fs } = RNFetchBlob
     if (item.uri) {
-        console.log('hello uri',item.uri )
+        console.log('hello uri', item.uri)
 
         FileViewer.open(item.uri)
+        result()
     } else {
         const fileName = item.filename.split('/')
         const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
@@ -96,15 +101,19 @@ export const downloadFile = (item) => {
             .then((res) => {
                 console.log('hello res', res)
                 FileViewer.open(localFile)
+                result()
             })
             .then(() => {
                 // success
                 console.log('hello avy')
+                result()
             })
             .catch(error => {
                 showMessage('Sorry, unable to find compatible App on your device')
+                result()
             }).catch(error => {
                 console.log('hello error')
+                result()
 
             });
     }
