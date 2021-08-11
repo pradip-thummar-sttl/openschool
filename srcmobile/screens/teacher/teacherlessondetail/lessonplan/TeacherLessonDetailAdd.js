@@ -798,6 +798,12 @@ const TLDetailAdd = (props) => {
                                         </View>
                                     </View>
                                 </View>
+
+                                <View style={PAGESTYLE.toggleGrp}>
+                                    <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
+                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                </View>
+
                                 <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
@@ -815,11 +821,15 @@ const TLDetailAdd = (props) => {
                                     {participantsDropDown()}
 
                                 </View>
-                                <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
-                                    {fromTimeDropDown()}
+                                {
+                                    IsDeliveredLive ?
+                                        <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
+                                            {fromTimeDropDown()}
 
-                                    {toTimeDropDown()}
-                                </View>
+                                            {toTimeDropDown()}
+                                        </View> : null
+                                }
+
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
@@ -852,10 +862,10 @@ const TLDetailAdd = (props) => {
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                     <View style={STYLE.hrCommon}></View>
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
-                                    <View style={PAGESTYLE.toggleGrp}>
+                                    {/* <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
                                         <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                    </View>
+                                    </View> */}
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                         <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />

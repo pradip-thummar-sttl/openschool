@@ -85,7 +85,7 @@ const Popupaddrecording = (props) => {
                     
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {console.log(props.recordingArr[0]);Download(props.recordingArr[0])}}
+                        onPress={() => {console.log(props.recordingArr[0]);Download(props.recordingArr[0],(res)=>{})}}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>

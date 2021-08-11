@@ -23,6 +23,7 @@ const Popupdata = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [isMatLoading, setLoader] = useState(false)
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -244,10 +245,21 @@ const Popupdata = (props) => {
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() => Download(item)} style={styles.downloaBtn}>
+                                                            <TouchableOpacity onPress={() =>setLoader(true), Download(item, (res) => {
+                                                                setLoader(false)
+                                                            })} style={styles.downloaBtn}>
                                                                 <View style={styles.fileGrp}>
                                                                     <Text numberOfLines={1} style={[styles.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                    <Image source={Images.Download} style={styles.downloadIcon} />
+
+                                                                    {isMatLoading ?
+                                                                        <ActivityIndicator
+                                                                            style={{ ...styles.downloadIcon }}
+                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                            color={COLORS.blueBorder} />
+                                                                        :
+                                                                        <Image source={Images.Download} style={styles.downloadIcon} />
+                                                                    }
+                                                                    {/* <Image source={Images.Download} style={styles.downloadIcon} /> */}
                                                                 </View>
                                                             </TouchableOpacity>
                                                         )}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -43,6 +43,8 @@ const TLHomeWork = (props) => {
     const [mode, setMode] = useState('date');
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
+    const [isMatLoading, setLoader] = useState(false)
+
 
     useEffect(() => {
         console.log('`${EndPoints.Homework}/${props.id}`', `${EndPoints.Homework}/${props.id}`);
@@ -435,27 +437,37 @@ const TLHomeWork = (props) => {
                             {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
-                                        <View style={PAGESTYLE.fileGrp}>
+                                        <TouchableOpacity onPress={() => item.uri ? removeObject(index, item) : Download(item,(res)=>{
+                                            console.log(('hello block is running'));
+                                        })} style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
-                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
+                                                <View>
                                                     <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
-                                                </TouchableOpacity>
+                                                </View>
                                                 :
-                                                <TouchableOpacity onPress={() => Download(item)}>
-                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                </TouchableOpacity>
+                                                <View>
+                                                    {isMatLoading ?
+                                                            <ActivityIndicator
+                                                                style={{ ...PAGESTYLE.downloadIcon }}
+                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                color={COLORS.blueBorder} />
+                                                            :
+                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                        }
+                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
+                                                </View>
                                             }
-                                        </View>
+                                        </TouchableOpacity>
                                     )
                                 }) : null
                             }
                         </View>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <View style={PAGESTYLE.thumbVideo}>
                                 <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                             </View>
-                        </ScrollView>
+                        </ScrollView> */}
                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}

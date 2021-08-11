@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -44,6 +44,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isGold, setGold] = useState(false);
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
+
+    const [isMatLoading, setLoader] = useState(false)
+
 
     useEffect(() => {
         onStarSelection(data.Rewards)
@@ -237,8 +240,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                         <View style={PAGESTYLE.whiteBg}>
                             <View style={PAGESTYLE.containerWrapTop}>
                                 <View style={PAGESTYLE.userInfoTop}>
-                                    <Text numberOfLines={1} style={[PAGESTYLE.userTopName,{width:wp(45)}]}>{data.PupilName}</Text>
-                                    <Text numberOfLines={1} style={[PAGESTYLE.userTopGroup,{width:wp(45)}]}>{data.GroupName}</Text>
+                                    <Text numberOfLines={1} style={[PAGESTYLE.userTopName, { width: wp(45) }]}>{data.PupilName}</Text>
+                                    <Text numberOfLines={1} style={[PAGESTYLE.userTopGroup, { width: wp(45) }]}>{data.GroupName}</Text>
                                 </View>
                                 <View>
                                     <View style={PAGESTYLE.markedLabel}>
@@ -294,11 +297,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             onTintColor={COLORS.dashboardPupilBlue}
                                                             tintColor={COLORS.dashboardPupilBlue}
                                                         />
-                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText,{width:wp(90)}]}>{item.ItemName}</Text>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(90) }]}>{item.ItemName}</Text>
                                                     </View>
                                                 )}
-                                                // style={{ height: 200 }} 
-                                                />
+                                            // style={{ height: 200 }} 
+                                            />
                                         </View>
                                     </View>
                                 </View>
@@ -311,11 +314,21 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         {console.log('data.HomeworkList', data.HomeworkList)}
                                         <FlatList
                                             data={data.HomeworkList}
-                                            style={{ alignSelf: 'center', marginBottom:hp(1)  }}
+                                            style={{ alignSelf: 'center', marginBottom: hp(1) }}
                                             renderItem={({ item, index }) => (
-                                                <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                                    setLoader(false)
+                                                })} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
-                                                        <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon1} />
+                                                        {isMatLoading ?
+                                                            <ActivityIndicator
+                                                                style={{ ...PAGESTYLE.markedIcon1 }}
+                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                color={COLORS.blueBorder} />
+                                                            :
+                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon1} />
+                                                        }
+                                                        {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon1} /> */}
                                                     </View>
                                                 </TouchableOpacity>
                                             )}

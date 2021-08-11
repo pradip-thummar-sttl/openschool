@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator, ScrollView } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator, ScrollView, FlatList } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../utils/Colors";
@@ -22,7 +22,8 @@ const { CallModule, CallModuleIos } = NativeModules;
 const Popupdata = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isLoading, setLoading] = useState(false);
-
+    const [isMatLoading, setLoader] = useState(false)
+    // const [isRecordLoading, setRecordLoader] = useState(false)
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -236,10 +237,20 @@ const Popupdata = (props) => {
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() => Download(item)} style={styles.downloaBtn}>
+                                                            <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                                                setLoader(false)
+                                                            })} style={styles.downloaBtn}>
                                                                 <View style={styles.fileGrp}>
                                                                     <Text numberOfLines={1} style={[styles.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                    <Image source={Images.Download} style={styles.downloadIcon} />
+                                                                    {isMatLoading ?
+                                                                        <ActivityIndicator
+                                                                            style={{ ...styles.downloadIcon }}
+                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                            color={COLORS.blueBorder} />
+                                                                        :
+                                                                        <Image source={Images.Download} style={styles.downloadIcon} />
+                                                                    }
+
                                                                 </View>
                                                             </TouchableOpacity>
                                                         )}

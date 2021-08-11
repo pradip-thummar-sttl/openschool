@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, PermissionsAndroid, Alert } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, PermissionsAndroid, Alert, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -11,7 +11,10 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 import { Download } from "../../../../utils/Download";
 import { baseUrl } from "../../../../utils/Constant";
+import { floor } from "react-native-reanimated";
 const TLDetail = (props) => {
+    const [isLoading, setLoader] = useState(false)
+    const [isRecordLoading, setRecordLoader] = useState(false)
     console.log('props', props.lessonData.MaterialList);
     return (
         <View style={PAGESTYLE.whiteBg}>
@@ -51,7 +54,7 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={PAGESTYLE.alignRow}>
                                 <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} />
-                                <Text style={PAGESTYLE.datetimeText} numberOfLines={1}>{props.lessonData.GroupName}</Text>
+                                <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: hp(20) }]}>{props.lessonData.GroupName}</Text>
                             </View>
                         </View>
                     </View>
@@ -131,12 +134,23 @@ const TLDetail = (props) => {
 
                                 {props.lessonData.MaterialList.map((item, index) => {
                                     return (
-                                        <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
+                                        <TouchableOpacity onPress={() => {
+                                            setLoader(true); Download(item, (res) => {
+                                                setLoader(false)
+                                            })
+                                        }} style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
-                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
-                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                            </TouchableOpacity>
-                                        </View>
+                                            <View style={PAGESTYLE.downloaBtn}>
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...PAGESTYLE.downloadIcon }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.white} />
+                                                    :
+                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
                                     )
                                 })}
                             </View>
@@ -164,12 +178,24 @@ const TLDetail = (props) => {
                                 <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                 {props.lessonData.RecordingList.map((item, index) => {
                                     return (
-                                        <View style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
+                                        <TouchableOpacity onPress={() => {
+                                            setRecordLoader(true); Download(item, (res) => {
+                                                setRecordLoader(false)
+                                            })
+                                        }} style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
-                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
-                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                            </TouchableOpacity>
-                                        </View>
+                                            <View style={PAGESTYLE.downloaBtn}>
+                                                {isRecordLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...PAGESTYLE.downloadIcon }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.blueBorder} />
+                                                    :
+                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                }
+
+                                            </View>
+                                        </TouchableOpacity>
                                     )
                                 })}
                             </View>

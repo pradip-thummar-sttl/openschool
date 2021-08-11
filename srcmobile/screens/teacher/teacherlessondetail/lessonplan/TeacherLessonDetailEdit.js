@@ -487,7 +487,7 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2,{width:wp(22)}]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2, { width: wp(22) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
@@ -824,6 +824,12 @@ const TLDetailEdit = (props) => {
                                         </View>
                                     </View>
                                 </View>
+
+                                <View style={PAGESTYLE.toggleGrp}>
+                                    <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
+                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                </View>
+
                                 <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
@@ -841,11 +847,17 @@ const TLDetailEdit = (props) => {
                                     {participantsDropDown()}
 
                                 </View>
-                                <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
-                                    {fromTimeDropDown()}
+                                {
+                                    IsDeliveredLive ?
+                                        <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
+                                            {fromTimeDropDown()}
 
-                                    {toTimeDropDown()}
-                                </View>
+                                            {toTimeDropDown()}
+                                        </View> : null
+                                }
+
+
+
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
                                     <TextInput
@@ -878,10 +890,10 @@ const TLDetailEdit = (props) => {
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                     <View style={STYLE.hrCommon}></View>
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
-                                    <View style={PAGESTYLE.toggleGrp}>
+                                    {/* <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
                                         <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                    </View>
+                                    </View> */}
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                         <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
@@ -906,7 +918,7 @@ const TLDetailEdit = (props) => {
                                     materialArr.length != 0 ? materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{item.originalname}</Text>
+                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(75) }]}>{item.originalname}</Text>
                                                 {item.uri ?
                                                     <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                         <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />

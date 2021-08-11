@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -19,19 +19,21 @@ var moment = require('moment');
 const PupilHomeWorkSubmitted = (props) => {
     const { item } = props
     const [materialArr, setMaterialArr] = useState(item.HomeworkList)
-    useEffect(() => {
-        if (Platform.OS==="android") {
-            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
-        return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-      }, []);
+    const [isMatLoading, setLoader] = useState(false)
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+    }, []);
+
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -40,7 +42,7 @@ const PupilHomeWorkSubmitted = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={PAGESTYLE.whiteBg}>
-                <Header13 
+                <Header13
                     goBack={() => props.goBack()}
                     title={item.SubjectName + ' ' + item.LessonTopic}
                     onAlertPress={() => props.onAlertPress()} />
@@ -67,60 +69,70 @@ const PupilHomeWorkSubmitted = (props) => {
                     </View>
                 </View>
                 <ScrollView>
-                <View style={PAGESTYLE.containerWrap}>
-                    <View style={PAGESTYLE.teacherDetailLeft}>
-                        <View style={PAGESTYLE.lessonDesc}>
-                            <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
-                            <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
-                        </View>
-                        <View style={PAGESTYLE.requirementofClass}>
+                    <View style={PAGESTYLE.containerWrap}>
+                        <View style={PAGESTYLE.teacherDetailLeft}>
+                            <View style={PAGESTYLE.lessonDesc}>
+                                <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
+                                <Text style={PAGESTYLE.descriptionText}>{item.HomeworkDescription}</Text>
+                            </View>
+                            <View style={PAGESTYLE.requirementofClass}>
 
-                            <View style={PAGESTYLE.checkBoxGroup}>
-                                <FlatList
-                                    data={item.CheckList}
-                                    renderItem={({ item }) => (
-                                        <View style={PAGESTYLE.checkBoxLabelLine}>
-                                            <View style={PAGESTYLE.alignRow}>
-                                                <CheckBox
-                                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                                    style={PAGESTYLE.checkMark}
-                                                    value={item.IsCheck}
-                                                    boxType={'square'}
-                                                    onCheckColor={COLORS.white}
-                                                    onFillColor={COLORS.dashboardPupilBlue}
-                                                    onTintColor={COLORS.dashboardPupilBlue}
-                                                    tintColor={COLORS.dashboardPupilBlue}
-                                                />
-                                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                <View style={PAGESTYLE.checkBoxGroup}>
+                                    <FlatList
+                                        data={item.CheckList}
+                                        renderItem={({ item }) => (
+                                            <View style={PAGESTYLE.checkBoxLabelLine}>
+                                                <View style={PAGESTYLE.alignRow}>
+                                                    <CheckBox
+                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                                        style={PAGESTYLE.checkMark}
+                                                        value={item.IsCheck}
+                                                        boxType={'square'}
+                                                        onCheckColor={COLORS.white}
+                                                        onFillColor={COLORS.dashboardPupilBlue}
+                                                        onTintColor={COLORS.dashboardPupilBlue}
+                                                        tintColor={COLORS.dashboardPupilBlue}
+                                                    />
+                                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                </View>
                                             </View>
-                                        </View>
-                                    )}
+                                        )}
                                     // style={{ height: 200 }} 
                                     />
+                                </View>
+                            </View>
+                        </View>
+                        <View style={PAGESTYLE.rightSideBar}>
+                            <View style={PAGESTYLE.uploadBoardBlock}>
+                                <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
+                                <FlatList
+                                    data={item.HomeworkList}
+                                    style={{ alignSelf: 'center', width: '95%', }}
+                                    showsVerticalScrollIndicator={false}
+                                    renderItem={({ item, index }) => (
+                                        <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                            setLoader(false)
+                                        })} style={PAGESTYLE.downloaBtn}>
+                                            <View style={PAGESTYLE.alignRow1}>
+                                                {isMatLoading ?
+                                                    <ActivityIndicator
+                                                        style={{ ...PAGESTYLE.markedIcon }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.blueBorder} />
+                                                    :
+                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                }
+                                                {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
+                                            </View>
+                                        </TouchableOpacity>
+                                    )}
+                                    numColumns={3}
+                                    keyExtractor={(item, index) => index.toString()}
+                                />
+
                             </View>
                         </View>
                     </View>
-                    <View style={PAGESTYLE.rightSideBar}>
-                        <View style={PAGESTYLE.uploadBoardBlock}>
-                            <Text style={PAGESTYLE.HomeText}>Uploaded Homework</Text>
-                            <FlatList
-                                data={item.HomeworkList}
-                                style={{alignSelf:'center',  width: '95%',  }}
-                                showsVerticalScrollIndicator={false}
-                                renderItem={({ item, index }) => (
-                                    <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
-                                        <View style={PAGESTYLE.alignRow1}>
-                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                        </View>
-                                    </TouchableOpacity>
-                                )}
-                                numColumns={3}
-                                keyExtractor={(item, index) => index.toString()}
-                            />
-
-                        </View>
-                    </View>
-                </View>
                 </ScrollView>
             </View>
         </View>

@@ -27,6 +27,8 @@ const PupilLessonDetailInternal = (props) => {
     const [item, setItem] = useState(props.route.params.item)
     const [isHomeworkLoading, setHomeworkLoading] = useState(false)
     const [isPaused, setPause] = useState(true)
+    const [isMatLoading, setLoader] = useState(false)
+
 
     useEffect(() => {
         if (Platform.OS==="android") {
@@ -137,12 +139,22 @@ const PupilLessonDetailInternal = (props) => {
                                     item != undefined && item.MaterialList.length > 0 ?
                                         item.MaterialList.map((obj) => {
                                             return (
-                                                <View style={PAGESTYLE.fileGrp}>
+                                                <TouchableOpacity onPress={() => setLoader(true), Download(obj,(res)=>{
+                                                    setLoader(false)
+                                                })} style={PAGESTYLE.fileGrp}>
                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{obj.originalname}</Text>
-                                                    <TouchableOpacity onPress={() => Download(obj)} style={PAGESTYLE.downloaBtn}>
-                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                    </TouchableOpacity>
-                                                </View>
+                                                    <View  style={PAGESTYLE.downloaBtn}>
+                                                    {isMatLoading ?
+                                                            <ActivityIndicator
+                                                                style={{ ...PAGESTYLE.downloadIcon }}
+                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                color={COLORS.blueBorder} />
+                                                            :
+                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                        }
+                                                        {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
+                                                    </View>
+                                                </TouchableOpacity>
                                             )
                                         }) :
                                         <Text style={{ alignSelf: 'center', paddingVertical: 10, }}>No material</Text>

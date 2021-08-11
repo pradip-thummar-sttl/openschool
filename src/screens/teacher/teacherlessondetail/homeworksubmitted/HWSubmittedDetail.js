@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -42,6 +42,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isGold, setGold] = useState(false);
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
+    const [isMatLoading, setLoader] = useState(false)
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -275,7 +277,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                 renderItem={({ item }) => (
                                                     <View style={PAGESTYLE.checkBoxLabelLine}>
                                                         <CheckBox
-                                                            style={[PAGESTYLE.checkMark,{top:5}]}
+                                                            style={[PAGESTYLE.checkMark, { top: 5 }]}
                                                             value={item.IsCheck}
                                                             disabled
                                                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -297,11 +299,21 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         <Text style={PAGESTYLE.uploaded}>Uploaded Homework</Text>
                                         <FlatList
                                             data={data.HomeworkList}
-                                            style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal:10 }}
+                                            style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal: 10 }}
                                             renderItem={({ item, index }) => (
-                                                <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                <TouchableOpacity onPress={() =>setLoader(true), Download(item, (res) => {
+                                                    setLoader(false)
+                                                })} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
-                                                        <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                        {isMatLoading ?
+                                                            <ActivityIndicator
+                                                                style={{ ...PAGESTYLE.markedIcon }}
+                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                color={COLORS.blueBorder} />
+                                                            :
+                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                        }
+                                                        {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                                     </View>
                                                 </TouchableOpacity>
                                             )}

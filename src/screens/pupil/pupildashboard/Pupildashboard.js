@@ -57,6 +57,9 @@ const PupuilDashboard = (props) => {
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
 
+    const [isMatLoading, setLoader] = useState(false)
+
+
 
     let currentCount = 0
     useEffect(() => {
@@ -230,7 +233,7 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,title, channels, false, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, channels, false, (id) => {
                     console.log('hi id:---------', id)
                 })
             }
@@ -460,10 +463,20 @@ const PupuilDashboard = (props) => {
                                                                                                         data={dataOfSubView.MaterialList}
                                                                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                                         renderItem={({ item, index }) => (
-                                                                                                            <TouchableOpacity onPress={() => Download(item)} style={PAGESTYLE.downloaBtn}>
+                                                                                                            <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                                                                                                setLoader(false)
+                                                                                                            })} style={PAGESTYLE.downloaBtn}>
                                                                                                                 <View style={PAGESTYLE.fileGrp}>
                                                                                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                                    {isMatLoading ?
+                                                                                                                        <ActivityIndicator
+                                                                                                                            style={{ ...PAGESTYLE.downloadIcon }}
+                                                                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                                                            color={COLORS.blueBorder} />
+                                                                                                                        :
+                                                                                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                                    }
+                                                                                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                                                 </View>
                                                                                                             </TouchableOpacity>
                                                                                                         )}
