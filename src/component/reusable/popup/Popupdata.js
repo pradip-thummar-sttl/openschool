@@ -15,7 +15,6 @@ import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
 import MESSAGE from "../../../utils/Messages";
 import { Download } from "../../../utils/Download";
-import { FlatList } from "react-native-gesture-handler";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
