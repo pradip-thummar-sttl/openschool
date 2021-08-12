@@ -140,5 +140,13 @@ const Images = {
     callPick: require('../assets/images/Green2.png'),
     callDrop: require('../assets/images/Red2.png'),
     createGrpImageLogo: require('../assets/images/dragdrop-icon-2.png'),
+    
+    pupilFilter: require('../assets/images/pupilfilter2.png'),
+    eraseIcon: require('../assets/images/erase2.png'),
+    clearIcon: require('../assets/images/clear2.png'),
+    undoIcon: require('../assets/images/undo2.png'),
+    savedIcon: require('../assets/images/saved2.png'),
+    saveIcon: require('../assets/images/save2.png'),
+    logout: require('../assets/images/logout2.png'),
 }
 export default Images;

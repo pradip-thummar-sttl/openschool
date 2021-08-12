@@ -178,7 +178,7 @@ const Sidebar = (props) => {
                         onPress={() => { showActionChooser(), toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Faqs}
+                            source={Images.logout}
                         />
                         {
                             isSmall ? null :

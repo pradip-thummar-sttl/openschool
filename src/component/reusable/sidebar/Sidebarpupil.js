@@ -143,7 +143,7 @@ const Sidebar = (props) => {
                     <TouchableOpacity onPress={() => showActionChooser()} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.OpenSchool}
+                            source={Images.logout}
                         />
                         {
                             isSmall ? null :
