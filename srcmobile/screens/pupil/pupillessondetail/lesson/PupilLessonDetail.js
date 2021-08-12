@@ -139,9 +139,9 @@ const PupilLessonDetailInternal = (props) => {
                                     item != undefined && item.MaterialList.length > 0 ?
                                         item.MaterialList.map((obj) => {
                                             return (
-                                                <TouchableOpacity onPress={() => setLoader(true), Download(obj,(res)=>{
+                                                <TouchableOpacity onPress={() => {setLoader(true); Download(obj,(res)=>{
                                                     setLoader(false)
-                                                })} style={PAGESTYLE.fileGrp}>
+                                                })}} style={PAGESTYLE.fileGrp}>
                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{obj.originalname}</Text>
                                                     <View  style={PAGESTYLE.downloaBtn}>
                                                     {isMatLoading ?

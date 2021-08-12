@@ -301,9 +301,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             data={data.HomeworkList}
                                             style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal: 10 }}
                                             renderItem={({ item, index }) => (
-                                                <TouchableOpacity onPress={() =>setLoader(true), Download(item, (res) => {
+                                                <TouchableOpacity onPress={() =>{setLoader(true), Download(item, (res) => {
                                                     setLoader(false)
-                                                })} style={PAGESTYLE.downloaBtn}>
+                                                })}} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
                                                         {isMatLoading ?
                                                             <ActivityIndicator

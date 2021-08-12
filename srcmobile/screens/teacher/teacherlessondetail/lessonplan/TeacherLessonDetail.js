@@ -130,9 +130,9 @@ const TLDetail = (props) => {
                                 data={props.lessonData.MaterialList}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
-                                    <TouchableOpacity onPress={() => setLoader(true), Download(item, (res) => {
+                                    <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
                                         setLoader(false)
-                                    })} style={PAGESTYLE.fileGrp}>
+                                    })}} style={PAGESTYLE.fileGrp}>
                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                         <View style={PAGESTYLE.downloaBtn}>
                                             {isMatLoading ?
@@ -175,9 +175,9 @@ const TLDetail = (props) => {
                             <TouchableOpacity
                                 style={[PAGESTYLE.videoLinkBlock]}
                                 activeOpacity={opacity}
-                                onPress={() => setRecordLoader(true), Download(props.lessonData.RecordingList[0], (res) => {
+                                onPress={() => {setRecordLoader(true); Download(props.lessonData.RecordingList[0], (res) => {
                                     setRecordLoader(false)
-                                })}>
+                                })}}>
                                 {isRecordLoading ?
                                     <ActivityIndicator
                                         style={{ ...PAGESTYLE.videoLinkIcon }}

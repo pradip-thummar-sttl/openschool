@@ -155,7 +155,7 @@ const TLHomeWork = (props) => {
         setScreenVoiceSelected(true)
     }
 
-    const startRecording = async() => {
+    const startRecording = async () => {
         // setRecordingStarted(true)
         // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
 
@@ -167,16 +167,16 @@ const TLHomeWork = (props) => {
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
                     showMessage("We need permission to access  camera")
                 }
-    
+
             }
-        }else{
+        } else {
             const res = await check(PERMISSIONS.IOS.CAMERA);
             if (res === "granted") {
                 setRecordingStarted(true)
@@ -184,14 +184,14 @@ const TLHomeWork = (props) => {
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
                 console.log('hello', res2);
-    
+
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
                 } else {
                     showMessage("We need permission to access  camera")
                 }
-    
+
             }
         }
     }
@@ -307,7 +307,7 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText,{width:wp(75)}]}>{item.ItemName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(75) }]}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -437,9 +437,9 @@ const TLHomeWork = (props) => {
                             {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => item.uri ? removeObject(index, item) : Download(item,(res)=>{
-                                            console.log(('hello block is running'));
-                                        })} style={PAGESTYLE.fileGrp}>
+                                        <TouchableOpacity onPress={() => {item.uri ? removeObject(index, item) : setLoader(true); Download(item, (res) => {
+                                            setLoader(false)
+                                        })}} style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
                                                 <View>
@@ -448,13 +448,13 @@ const TLHomeWork = (props) => {
                                                 :
                                                 <View>
                                                     {isMatLoading ?
-                                                            <ActivityIndicator
-                                                                style={{ ...PAGESTYLE.downloadIcon }}
-                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                color={COLORS.blueBorder} />
-                                                            :
-                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                        }
+                                                        <ActivityIndicator
+                                                            style={{ ...PAGESTYLE.downloadIcon }}
+                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                            color={COLORS.blueBorder} />
+                                                        :
+                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                    }
                                                     {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                 </View>
                                             }
