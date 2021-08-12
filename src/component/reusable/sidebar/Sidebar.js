@@ -160,7 +160,7 @@ const Sidebar = (props) => {
                         onPress={() => {teacherLogout(), toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Faqs}
+                            source={Images.logout}
                         />
                         {
                             isSmall ? null :

@@ -11,6 +11,7 @@ import { getFileExtention } from "../../../utils/Download";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
 import MESSAGE from "../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
+import Images from "../../../utils/Images";
 const WorkSpace = (props) => {
     const [pathCount, setPathCount] = useState(-1)
     const [workSpace, setWorkSpace] = useState([])
@@ -117,9 +118,9 @@ const WorkSpace = (props) => {
                                 setPathCount(1)
                                 console.log('stroke data', data)
                             }}
-                            undoComponent={<View style={PAGESTYLE.functionButton}><Text style={PAGESTYLE.functionText}>Undo</Text></View>}
-                            clearComponent={<View style={PAGESTYLE.functionButton}><Text style={PAGESTYLE.functionText}>Clear</Text></View>}
-                            eraseComponent={<View style={PAGESTYLE.functionButton}><Text style={PAGESTYLE.functionText}>Erase</Text></View>}
+                            undoComponent={<View style={PAGESTYLE.functionButton}><Image style={PAGESTYLE.commonWidthIcon} source={Images.undoIcon} /></View>}
+                            clearComponent={<View style={PAGESTYLE.functionButton}><Image style={PAGESTYLE.commonWidthIcon} source={Images.clearIcon} /></View>}
+                            eraseComponent={<View style={{...PAGESTYLE.functionButton, margin: 0,}}><Image style={PAGESTYLE.erase} source={Images.eraseIcon} /></View>}
                             strokeComponent={color => (
                                 <View style={[{ backgroundColor: color }, PAGESTYLE.strokeColorButton]} />
                             )}
@@ -129,9 +130,9 @@ const WorkSpace = (props) => {
                                 )
                             }}
                             strokeWidthComponent={(w) => {
-                                return (<View style={{ ...PAGESTYLE.strokeWidthButton, borderRadius: 100, width: 41, }}>
+                                return (<View style={{ ...PAGESTYLE.strokeWidthButton }}>
                                     <View style={{
-                                        backgroundColor: 'white', marginHorizontal: 2.5,
+                                        backgroundColor: 'black',
                                         width: Math.sqrt(w / 3) * 10, height: Math.sqrt(w / 3) * 10, borderRadius: Math.sqrt(w / 3) * 10 / 2
                                     }} />
                                 </View>
@@ -139,7 +140,7 @@ const WorkSpace = (props) => {
                             }}
                             defaultStrokeIndex={0}
                             defaultStrokeWidth={5}
-                            saveComponent={<View style={PAGESTYLE.functionGreenButton}><Text style={PAGESTYLE.functionText}>{workSpacePath ? 'Saved!' : 'Save'}</Text></View>}
+                            saveComponent={<View style={PAGESTYLE.functionGreenButton}><Text style={PAGESTYLE.functionText}>{workSpacePath ? <Image source={Images.savedIcon} style={PAGESTYLE.commonWidthIcon} /> : <Image source={Images.saveIcon} style={PAGESTYLE.commonWidthIcon} />}</Text></View>}
                             savePreference={() => {
                                 return {
                                     folder: "RNSketchCanvas",

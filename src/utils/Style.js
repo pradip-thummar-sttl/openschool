@@ -222,7 +222,6 @@ export default StyleSheet.create({
         backgroundColor: COLORS.transparent,
         color: COLORS.buttonGreen,
         fontSize: hp(1.56),
-        fontWeight: '800',
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
