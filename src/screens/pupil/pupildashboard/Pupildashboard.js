@@ -202,7 +202,8 @@ const PupuilDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                showMessage(MESSAGE.scheduledTime)
+                startLiveClassAndroid()
+                // showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }
@@ -225,7 +226,7 @@ const PupuilDashboard = (props) => {
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
             let title = dataOfSubView.LessonTopic
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
             if (Platform.OS == 'android') {
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, channels, (error, ID) => {
@@ -233,7 +234,7 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, channels, false, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,false, title, channels,  (id) => {
                     console.log('hi id:---------', id)
                 })
             }
