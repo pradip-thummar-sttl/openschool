@@ -169,28 +169,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         self.users = [[NSMutableArray alloc] init];
     }
     
-//      QBRTCVideoFormat *videoFormat = [[QBRTCVideoFormat alloc] init];
-//      videoFormat.frameRate = 30;
-//      videoFormat.pixelFormat = QBRTCPixelFormat420f;
-//      videoFormat.width = 640;
-//      videoFormat.height = 480;
-//
-//      // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
-//      self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:videoFormat position:AVCaptureDevicePositionFront]; // or AVCaptureDevicePositionBack
-//
-//      // add video capture to session's local media stream
-//      self.session.localMediaStream.videoTrack.videoCapture = self.cameraCapture;
-//      self.cameraCapture.previewLayer.frame = self.userCameraView.bounds;
-//      [self.cameraCapture startSession:nil];
-//
-//      [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
-//  LocalVideoView *localVideoView = [[LocalVideoView alloc] initWithPreviewlayer:self.cameraCapture.previewLayer];
-//  self.videoViews[opponentID] = localVideoView;
-//  localVideoView.delegate = self;
-//  self.localVideoView = localVideoView;
-//  self.localVideoView.frame = self.userCameraView.bounds;
-//  [self.userCameraView addSubview:self.localVideoView];
-  
+
   
   
     if (self.session.conferenceType == QBRTCConferenceTypeVideo
@@ -200,6 +179,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat
                                                                     position:settings.preferredCameraPostion];
 //      [self.userCameraView addSubview:self.localVideoView];
+      self.cameraCapture.previewLayer.frame = self.userCameraView.frame;
       [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
         [self.cameraCapture startSession:nil];
 #endif
