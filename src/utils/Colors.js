@@ -57,6 +57,7 @@ const COLORS = {
     greyBack: '#F9FAFC',
     introGreyColor:'#454545',
     dateShadow: '#EBAC39',
+    timeTableBorder: '#EDEEF2',
 }
 
 export default COLORS;

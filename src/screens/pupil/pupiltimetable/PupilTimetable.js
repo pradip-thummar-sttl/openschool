@@ -126,7 +126,7 @@ const PupilTimetable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, width: cellWidth, height: 66, marginBottom: 15, borderColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }} />
+                <View style={{ ...PAGESTYLE.day, width: cellWidth, height: hp(10.41), marginBottom: 15, borderColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }} />
             );
         }
     }
@@ -188,7 +188,7 @@ const PupilTimetable = (props) => {
                             color={COLORS.yellowDark} />
                         :
                         timeTableData.length > 0 ?
-                            <View style={PAGESTYLE.mainPage}>
+                            <View style={PAGESTYLE.mainPage1}>
                                 <View>
                                     {days.map((data, index) => (
                                         <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
@@ -197,12 +197,12 @@ const PupilTimetable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, }}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight,paddingLeft: 0, }}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
                                         <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                            <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
+                                            <Text style={{ ...PAGESTYLE.lable, }}>{data}</Text>
 
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (

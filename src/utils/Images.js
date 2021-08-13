@@ -148,5 +148,6 @@ const Images = {
     savedIcon: require('../assets/images/saved2.png'),
     saveIcon: require('../assets/images/save2.png'),
     logout: require('../assets/images/logout2.png'),
+    attachmentTimeTable: require('../assets/images/attachmentTimttable2.png'),
 }
 export default Images;

@@ -18,17 +18,17 @@ export default StyleSheet.create({
         position: 'absolute',
         top: 0,
         left:0,
-        height: 66,
+        height: hp(10.41),
     },
     lable: {
-        width: 55,
-        height: 66,
+        width: hp(10.41),
+        height: hp(10.41),
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
         // marginBottom: 10,
     },
     dayRightmain: {
-        height: 66,
+        height: hp(10.41),
         paddingLeft: hp(1.56),
         paddingTop: 4,
         justifyContent: 'center',
@@ -41,8 +41,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     dayLeft: {
-        width: 68,
-        height: 66,
+        width: hp(10.41),
+        height: hp(10.41),
         alignItems: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
@@ -90,5 +90,16 @@ export default StyleSheet.create({
     },
     days: {
         // marginTop: 45,
+    },
+    attachmentTitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    attachmentIcon: {
+        width: hp(1.03),
+        height: hp(1.95),
+        resizeMode: 'contain',
+        marginRight: 13,
     },
 });

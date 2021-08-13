@@ -167,8 +167,15 @@ const Popupdata = (props) => {
                 activeOpacity={opacity}
                 onPress={toggleModal}>
                 <View style={{ ...PAGESTYLE.dayRightmain, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: COLORS.videoLinkBorder, width: cellWidth * props.span, borderTopColor: COLORS.videoLinkBorder, borderBottomColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }}></View>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 10 }}>{props.title}</Text>
+                    <View style={{ ...PAGESTYLE.backOpacity, width: cellWidth * props.span, borderTopColor: COLORS.timeTableBorder, borderBottomColor: COLORS.timeTableBorder, borderTopWidth: 1, borderBottomWidth: 1, borderRightColor: COLORS.timeTableBorder, borderRightWidth: 1, }}></View>
+                    <View style={PAGESTYLE.attachmentTitle}>
+                        <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 75 }}>{props.title}</Text>
+                        {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                            <Image source={Images.attachmentTimeTable} style={PAGESTYLE.attachmentIcon} />
+                            :
+                            null
+                        }
+                    </View>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>
@@ -236,9 +243,11 @@ const Popupdata = (props) => {
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
-                                                                setLoader(false)
-                                                            })}} style={PAGESTYLE.downloaBtn}>
+                                                            <TouchableOpacity onPress={() => {
+                                                                setLoader(true); Download(item, (res) => {
+                                                                    setLoader(false)
+                                                                })
+                                                            }} style={PAGESTYLE.downloaBtn}>
                                                                 <View style={PAGESTYLE.fileGrp}>
                                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                     {isMatLoading ?
