@@ -217,12 +217,12 @@ export default StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: hp(1.56),
         fontFamily: FONTS.fontBold,
+        zIndex: 10,
     },
     commonButtonBorderedGreen: {
         backgroundColor: COLORS.transparent,
         color: COLORS.buttonGreen,
         fontSize: hp(1.56),
-        fontWeight: '800',
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
@@ -257,7 +257,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.redNotification,
         borderRadius: hp(100),
         position: 'absolute',
-        right: 0,
-        top: 0,
+        right: -3,
+        top: -3,
     },
 });

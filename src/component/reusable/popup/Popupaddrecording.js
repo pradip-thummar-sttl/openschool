@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: 154,
+        width: 170,
         height: 40,
         padding: hp(1.43),
         paddingTop: hp(0.8),

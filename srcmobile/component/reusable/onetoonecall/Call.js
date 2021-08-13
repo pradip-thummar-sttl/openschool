@@ -19,8 +19,10 @@ const Call = (props) => {
     const [pupilData, setPupilData] = useState(params.pupilData)
     const [selectedPupilData, setSelectedPupilData] = useState(params.userInfo ? params.userInfo : {})
     const [isCallStarted, setCallStarted] = useState(false)
-
-    console.log('pupilData', params);
+    const [isAudioMuted, setAudioMuted] = useState(false)
+    const [isVideoMuted, setVideoMuted] = useState(false)
+    const [isFrontCamera, setFrontCamera] = useState(true)
+    const [isEarPhone, setEarPhone] = useState(true)
 
     useEffect(() => {
         if (params.userType == 'Teacher') {
@@ -82,16 +84,48 @@ const Call = (props) => {
             .then(function (session) {
                 console.log('Sesson Ended', session);
                 releaseResource()
-                props.navigation.goBack()
             })
             .catch(function (e) {
                 console.log('Sesson Ended Error', e);
                 releaseResource()
-                props.navigation.goBack()
             })
     }
 
+    const switchAudio = (sessionId) => {
+        setAudioMuted(!isAudioMuted)
+        QB.webrtc
+            .enableAudio({ sessionId, enable: !isAudioMuted })
+            .then(() => { console.log('Audio switched'); })
+            .catch(e => {console.log('Audio switched', e); })
+    }
+
+    const switchVideo = (sessionId) => {
+        setVideoMuted(!isVideoMuted)
+        QB.webrtc
+            .enableVideo({ sessionId, enable: !isVideoMuted })
+            .then(() => { console.log('Video switched'); })
+            .catch(e => { console.log('Video switched', e); })
+    }
+
+    const switchCamera = (sessionId) => {
+        setFrontCamera(!isFrontCamera)
+        QB.webrtc
+            .switchCamera({ sessionId, })
+            .then(() => { console.log('Camera switched'); })
+            .catch(e => { console.log('Camera switched', e); })
+    }
+
+    const switchAudioOutput = () => {
+        setEarPhone(!isEarPhone)
+        QB.webrtc
+            .switchAudioOutput({ output: isEarPhone ? QB.webrtc.AUDIO_OUTPUT.LOUDSPEAKER : QB.webrtc.AUDIO_OUTPUT.EARSPEAKER })
+            .then(() => { console.log('Audio output switched'); })
+            .catch(e => { console.log('Audio output switched', e); })
+    }
+
     const releaseResource = () => {
+        props.navigation.goBack()
+
         QB.webrtc
             .release()
             .then(() => { console.log('released successfully'); })
@@ -144,13 +178,36 @@ const Call = (props) => {
                             <Image style={Style.actionButton} source={Images.callDrop} />
                         </TouchableOpacity>
                     </View>
+
+                    <View style={Style.actionParentBottom}>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => switchAudio(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                            <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => switchVideo(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                            <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => switchCamera(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                            <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => switchAudioOutput()}>
+                            <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                        </TouchableOpacity>
+                    </View>
                 </>
                 :
                 <Text style={Style.profileTitle}>Wait a moment, we're initializing a call...</Text>
             }
             {params.userType == 'Teacher' && !isCallStarted ?
                 <FlatList
-                    style={{ position: 'absolute', height: '100%', marginVertical: 40, width: '100%', backgroundColor: COLORS.white }}
+                    style={{ position: 'absolute', height: '100%', marginVertical: 10, width: '100%', backgroundColor: COLORS.white }}
                     data={pupilData}
                     renderItem={pupilRender}
                     keyExtractor={(item) => item.id}
@@ -158,7 +215,14 @@ const Call = (props) => {
                     showsVerticalScrollIndicator={false}
                     ListHeaderComponent={() => {
                         return (
-                            <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
+                            <View style={Style.listHeaderPArent}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => releaseResource()}>
+                                    <Image style={Style.arrow} source={Images.backArrow} />
+                                </TouchableOpacity>
+                                <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
+                            </View>
                         )
                     }}
                 />

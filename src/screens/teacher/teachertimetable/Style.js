@@ -15,7 +15,6 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     backOpacity:{
-        opacity: 0.4,
         position: 'absolute',
         top: 0,
         left:0,
@@ -23,7 +22,7 @@ export default StyleSheet.create({
     },
     lable: {
         width: 55,
-        height: 49,
+        height: 66,
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
         // marginBottom: 10,
@@ -33,6 +32,7 @@ export default StyleSheet.create({
         paddingLeft: hp(1.56),
         paddingTop: 4,
         justifyContent: 'center',
+        marginBottom: 15,
     },
     labledataTitle: {
         fontSize: hp(1.82),
@@ -41,14 +41,13 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     dayLeft: {
-        width: 65,
+        width: 68,
         height: 66,
         alignItems: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
         paddingTop: hp(1),
         marginBottom: 15,
-        marginRight: 5,
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
@@ -87,9 +86,9 @@ export default StyleSheet.create({
         color:COLORS.darkGray,
     },
     backgroundTable:{
-        backgroundColor:COLORS.backgroundColorCommon,
+        backgroundColor:COLORS.white,
     },
     days: {
-        marginTop: 45,
+        // marginTop: 45,
     },
 });

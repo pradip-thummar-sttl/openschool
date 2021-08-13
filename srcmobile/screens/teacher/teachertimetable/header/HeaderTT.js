@@ -38,7 +38,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{ backgroundColor: COLORS.white }}>
+        <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.videoLinkBorder }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -316,9 +316,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: 40,
+        width: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
+        height: hp(5.20),
         marginRight: hp(1),
     },
     filterGroup: {

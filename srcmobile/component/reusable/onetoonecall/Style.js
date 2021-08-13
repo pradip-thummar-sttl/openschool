@@ -10,7 +10,7 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.white,
         alignItems: 'center',
-        paddingVertical: 50,
+        paddingTop: 50,
         paddingHorizontal: 20,
     },
     profile: {
@@ -33,9 +33,22 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
+    actionParentBottom: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 50,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+    },
     actionButton: {
         width: hp(9),
         height: hp(9),
+        borderRadius: hp(200),
+        backgroundColor: COLORS.lightGrayPupil,
+    },
+    actionButtonBottom: {
+        width: hp(4),
+        height: hp(4),
         borderRadius: hp(200),
         backgroundColor: COLORS.lightGrayPupil,
     },
@@ -71,10 +84,23 @@ export default StyleSheet.create({
         width: hp(0.9),
         resizeMode: 'contain',
     },
+    listHeaderPArent: {
+        flexDirection: 'row',
+        fontSize: hp(1.95),
+        color: COLORS.darkGray,
+        marginVertical: 10,
+        fontFamily: FONTS.fontSemiBold,
+        justifyContent: 'center'
+    },
     listHeader: {
         fontSize: hp(1.95),
         color: COLORS.darkGray,
-        marginBottom: 20,
         fontFamily: FONTS.fontSemiBold,
+        paddingVertical: 5,
+        marginLeft: 10
+    },
+    arrow: {
+        width: hp(2.34),
+        resizeMode: 'contain',
     },
 });

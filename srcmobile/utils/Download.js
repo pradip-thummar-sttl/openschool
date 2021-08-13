@@ -111,7 +111,7 @@ export const downloadFile = (item, result) => {
                 result()
             })
             .catch(error => {
-                showMessage('Sorry, unable to find compatible App on your device')
+                showMessage('Sorry, unable to find compatible App on your device to view this content')
                 result()
             }).catch(error => {
                 console.log('hello error')

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
         paddingBottom: hp(5),
         backgroundColor: COLORS.transparent,
     },
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
 });

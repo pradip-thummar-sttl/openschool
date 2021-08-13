@@ -98,10 +98,9 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
         paddingBottom: hp(1.5),
-        shadowColor: COLORS.SidebarHeaderShadow,
-        shadowOffset: { width: 0, height: 1, },
-        shadowOpacity: 0.08,
-        shadowRadius: 2,
+        borderBottomColor: COLORS.videoLinkBorder,
+        borderBottomWidth: 1,
+        
     },
     headerMain: {
         flexDirection: 'row',
@@ -117,8 +116,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -222,9 +221,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: 40,
+        width: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
+        height: hp(5.20),
         marginRight: hp(1)
     },
     searchParent: {

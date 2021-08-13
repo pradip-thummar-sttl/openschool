@@ -23,9 +23,10 @@ export default StyleSheet.create({
     },
     lable: {
         width: hp(16),
-        height: hp(8.59),
+        height: 66,
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
+        marginBottom: 15,
     },
     dayRightmain: {
         width: hp(16),
@@ -40,12 +41,13 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     dayLeft: {
-        width: hp(15),
-        height: hp(8.59),
+        width: 65,
+        height: 66,
         alignItems: 'center',
         paddingLeft: hp(1),
         paddingRight: hp(1),
         paddingTop: hp(2.5),
+        marginBottom: 15,
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
@@ -98,7 +100,7 @@ export default StyleSheet.create({
         // marginTop:hp(3.25),
     },
     backgroundTable:{
-        backgroundColor:COLORS.backgroundColorCommon,
+        backgroundColor:COLORS.white,
         flex: 1,
         marginTop:hp(3.25),
     },

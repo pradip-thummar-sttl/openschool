@@ -224,7 +224,7 @@ const PupilLessonDetail = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} />
+                    <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} />
                 </View>
             </View>
         )

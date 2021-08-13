@@ -452,41 +452,43 @@ const TLDetailAdd = (props) => {
 
     const pupilListView = () => {
         return (
-            <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <View style={STYLE.hrCommon}></View>
-                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
+            <>
+                {filteredPupils.length > 0 ?
+                    <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
+                        <View style={STYLE.hrCommon}></View>
+                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
+                        {/* <TouchableOpacity style={PAGESTYLE.addItem}>
                     <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
                     <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                 </TouchableOpacity> */}
-                {filteredPupils.length > 0 ?
-                    <FlatList
-                        data={filteredPupils}
-                        style={{ alignSelf: 'center', width: '100%', bottom: 20, paddingStart: 5 }}
-                        renderItem={({ item, index }) => (
-                            <View style={PAGESTYLE.alignRow}>
-                                <CheckBox
-                                    style={PAGESTYLE.checkMark}
-                                    boxType={'square'}
-                                    onCheckColor={COLORS.white}
-                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                    value={isPupilChecked(index)}
-                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                    onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
-                            </View>
-                        )}
-                        numColumns={2}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
+                        <FlatList
+                            data={filteredPupils}
+                            style={{ alignSelf: 'center', width: '100%', bottom: 20, paddingStart: 5 }}
+                            renderItem={({ item, index }) => (
+                                <View style={PAGESTYLE.alignRow}>
+                                    <CheckBox
+                                        style={PAGESTYLE.checkMark}
+                                        boxType={'square'}
+                                        onCheckColor={COLORS.white}
+                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                        onFillColor={COLORS.dashboardPupilBlue}
+                                        onTintColor={COLORS.dashboardPupilBlue}
+                                        tintColor={COLORS.dashboardPupilBlue}
+                                        value={isPupilChecked(index)}
+                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                        onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
+                                    />
+                                    <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
+                                </View>
+                            )}
+                            numColumns={2}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                    </View>
                     :
-                    <Text style={{ alignSelf: 'center' }}>Pupils not available!</Text>
+                    null
                 }
-            </View>
+            </>
         );
     };
 
@@ -853,9 +855,9 @@ const TLDetailAdd = (props) => {
                                     onStopScrrenRecording={() => stopRecording()}
                                     onCameraOnly={() => onCameraOnly()} />
 
-                                {itemCheckListView()}
-
                                 {pupilListView()}
+
+                                {itemCheckListView()}
 
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                     <View style={STYLE.hrCommon}></View>
