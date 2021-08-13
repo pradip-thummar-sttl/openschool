@@ -121,6 +121,24 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+  _doView.layer.cornerRadius=10;
+  _doView.layer.borderWidth = 3;
+  _doView.layer.borderColor = [UIColor whiteColor].CGColor;
+  
+  _raView.layer.cornerRadius=10;
+  _raView.layer.borderWidth = 3;
+  _raView.layer.borderColor = [UIColor whiteColor].CGColor;
+  
+  _thView.layer.cornerRadius=10;
+  _thView.layer.borderWidth = 3;
+  _thView.layer.borderColor = [UIColor whiteColor].CGColor;
+  if (_isTeacher) {
+    _emojiView.hidden = true;
+  }else{
+    _emojiView.hidden = false;
+  }
+  
   _reactionView.hidden = true;
   self.reactionView.layer.cornerRadius = 10;
   self.reactionTableView.layer.cornerRadius = 10;
@@ -173,7 +191,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //  self.localVideoView.frame = self.userCameraView.bounds;
 //  [self.userCameraView addSubview:self.localVideoView];
   
-  [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
+  
   
     if (self.session.conferenceType == QBRTCConferenceTypeVideo
         && _conferenceType > 0) {
@@ -181,8 +199,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         Settings *settings = Settings.instance;
         self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat
                                                                     position:settings.preferredCameraPostion];
+//      [self.userCameraView addSubview:self.localVideoView];
+      [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
         [self.cameraCapture startSession:nil];
 #endif
+    
     }
   
   
@@ -201,12 +222,22 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
+  if (_isTeacher) {
     [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
           withCompletion:^(PNPublishStatus *status) {
 
         NSString *text = update;
         [self displayMessage:text asType:@"[PUBLISH: sent]"];
     }];
+  }else{
+    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
+          withCompletion:^(PNPublishStatus *status) {
+
+        NSString *text = update;
+        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    }];
+  }
+    
 }
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
@@ -277,11 +308,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
       
       weakSelf.muteAudio ^= 1;
   }];
-  
-  [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
-    
+  if (_isTeacher) {
+    [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-  }];
+        
+    }];
+  }
+  
+  
     
     if (self.session.conferenceType == QBRTCConferenceTypeVideo
         && _conferenceType > 0) {
@@ -442,8 +476,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
   }
  
-  reusableCell.addReactionBtn.tag = indexPath.row;
-  [reusableCell.addReactionBtn addTarget:self action:@selector(addReaction:) forControlEvents:UIControlEventTouchUpInside];
+  if (_isTeacher) {
+    reusableCell.addReactionBtn.hidden = false;
+    reusableCell.addReactionBtn.tag = indexPath.row;
+    [reusableCell.addReactionBtn addTarget:self action:@selector(addReaction:) forControlEvents:UIControlEventTouchUpInside];
+  }else{
+    reusableCell.addReactionBtn.hidden = true;
+  }
+ 
   NSString *title = user.fullName ? user.fullName : kUnknownUserLabel;
   reusableCell.name = title;
   reusableCell.nameColor = [UIColor colorNamed: @"white"];
@@ -1018,10 +1058,28 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
     if (indexPath.row != 0) {
       NSString *str = [NSString stringWithFormat:@"%@@#@%@", _reactionUnicodeArr[indexPath.row-1],_selectedId];
         [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
+//      [self.opponentsCollectionView reloadData];
     }
     _reactionView.hidden = true;
-  [self.opponentsCollectionView reloadData];
+ 
   
 }
 
+- (IBAction)dontBtn:(id)sender {
+   NSString *str = [NSString stringWithFormat:@"🤔@#@%@",_currentUserID];
+   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
+//   [self.opponentsCollectionView reloadData];
+}
+- (IBAction)thumbBtn:(id)sender {
+  NSString *str = [NSString stringWithFormat:@"👍@#@%@",_currentUserID];
+  [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
+//  [self.opponentsCollectionView reloadData];
+}
+
+- (IBAction)raiseBtn:(id)sender {
+  NSString *str = [NSString stringWithFormat:@"✋@#@%@",_currentUserID];
+  [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
+//  [self.opponentsCollectionView reloadData];
+}
 @end
+

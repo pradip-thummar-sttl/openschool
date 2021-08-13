@@ -35,6 +35,14 @@ typedef void (^CompleteCall)(BOOL isFinished);
 @property (weak, nonatomic) IBOutlet UITableView *reactionTableView;
 @property (weak, nonatomic) IBOutlet UIView *userCameraView;
 
+@property (weak, nonatomic) IBOutlet UIView *emojiView;
+@property (weak, nonatomic) IBOutlet UIView *doView;
+@property (weak, nonatomic) IBOutlet UIView *raView;
+@property (weak, nonatomic) IBOutlet UIView *thView;
+- (IBAction)dontBtn:(id)sender;
+
+- (IBAction)raiseBtn:(id)sender;
+- (IBAction)thumbBtn:(id)sender;
 
 
 @end
