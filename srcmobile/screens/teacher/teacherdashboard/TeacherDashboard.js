@@ -468,9 +468,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <TouchableOpacity>
                                                                         <Text style={PAGESTYLE.linkText}>see more</Text>
                                                                     </TouchableOpacity> */}
-                                                                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                                        <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
-                                                                        {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                    {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                        <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                                            <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
                                                                             <FlatList
                                                                                 data={dataOfSubView.MaterialList}
                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
@@ -494,10 +494,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                 )}
                                                                                 keyExtractor={(item, index) => index.toString()}
                                                                             />
-                                                                            :
-                                                                            <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
-                                                                        }
-                                                                    </View>
+                                                                        </View>
+                                                                        :
+                                                                        null
+                                                                    }
                                                                 </View>
                                                                 <View style={PAGESTYLE.requirementofClass}>
                                                                     <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>

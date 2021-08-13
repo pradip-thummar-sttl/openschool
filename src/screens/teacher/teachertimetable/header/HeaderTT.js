@@ -98,10 +98,9 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
         paddingBottom: hp(1.5),
-        shadowColor: COLORS.SidebarHeaderShadow,
-        shadowOffset: { width: 0, height: 1, },
-        shadowOpacity: 0.08,
-        shadowRadius: 2,
+        borderBottomColor: COLORS.videoLinkBorder,
+        borderBottomWidth: 1,
+        
     },
     headerMain: {
         flexDirection: 'row',

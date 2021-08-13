@@ -382,7 +382,7 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 0 }}
                     renderItem={({ item, index }) => (
                         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
-                            <Text style={{ fontSize: 14 }}>{item.ItemName}</Text>
+                            <Text style={{ fontSize: hp(1.70), }}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -402,7 +402,7 @@ const TLDetailAdd = (props) => {
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
                         autoCapitalize={'sentences'}
-                        maxLength={40}
+                        maxLength={80}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
@@ -440,42 +440,41 @@ const TLDetailAdd = (props) => {
 
     const pupilListView = () => {
         return (
-            <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
-                <View style={PAGESTYLE.hrTagMIddleReverse}>
-                    <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
-                    <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthlarge]}></View>
-                </View>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                </TouchableOpacity> */}
-                {filteredPupils.length > 0 ?
-                    <FlatList
-                        data={filteredPupils}
-                        style={{ alignSelf: 'center', width: '100%', }}
-                        renderItem={({ item, index }) => (
-                            <View style={PAGESTYLE.alignRow}>
-                                <CheckBox
-                                    style={PAGESTYLE.checkMark}
-                                    boxType={'square'}
-                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                    onCheckColor={COLORS.white}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                    value={isPupilChecked(index)}
-                                    onValueChange={(newValue) => pushPupilItem(newValue, index)}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
+            <>
+                {
+                    filteredPupils.length > 0 ?
+                        <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
+                            <View style={PAGESTYLE.hrTagMIddleReverse}>
+                                <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Select Participants</Text>
+                                <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthlarge]}></View>
                             </View>
-                        )}
-                        numColumns={3}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                    :
-                    <Text style={{ alignSelf: 'center' }}>Pupils not available!</Text>
+                            <FlatList
+                                data={filteredPupils}
+                                style={{ alignSelf: 'center', width: '100%', }}
+                                renderItem={({ item, index }) => (
+                                    <View style={PAGESTYLE.alignRow}>
+                                        <CheckBox
+                                            style={PAGESTYLE.checkMark}
+                                            boxType={'square'}
+                                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                            onCheckColor={COLORS.white}
+                                            onFillColor={COLORS.dashboardPupilBlue}
+                                            onTintColor={COLORS.dashboardPupilBlue}
+                                            tintColor={COLORS.dashboardPupilBlue}
+                                            value={isPupilChecked(index)}
+                                            onValueChange={(newValue) => pushPupilItem(newValue, index)}
+                                        />
+                                        <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
+                                    </View>
+                                )}
+                                numColumns={3}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                        </View>
+                        :
+                        null
                 }
-            </View>
+            </>
         );
     };
 
@@ -526,10 +525,10 @@ const TLDetailAdd = (props) => {
 
     const fromTimeDropDown = () => {
         return (
-            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+            <View style={[PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
                 <Menu onSelect={(item) => setSelectedFromTime(item)}>
-                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap1]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
@@ -552,7 +551,7 @@ const TLDetailAdd = (props) => {
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                 <Text style={PAGESTYLE.subjectText}> </Text>
                 <Menu onSelect={(item) => setSelectedToTime(item)}>
-                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
+                    <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap2]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
@@ -613,6 +612,12 @@ const TLDetailAdd = (props) => {
             saveLesson('RUNNING_FROM_VIRTUAL_DEVICE')
         } else {
             let userIDs = [], userNames = [], names = [];
+            selectedParticipants.PupilList.forEach(pupil => {
+                userIDs.push(pupil.QBUserID)
+                userNames.push(pupil.Email)
+                names.push(pupil.PupilName)
+            });
+            
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
@@ -761,13 +766,13 @@ const TLDetailAdd = (props) => {
                                     <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                                         <View style={PAGESTYLE.hrTagMIddle}>
                                             <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
-                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class details</Text>
+                                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Lesson details</Text>
                                         </View>
                                         <View style={PAGESTYLE.timedateGrp}>
 
                                             {subjectsDropDown()}
 
-                                            <View style={[PAGESTYLE.dropDownFormInput, PAGESTYLE.time]}>
+                                            <View style={[PAGESTYLE.dropDownFormInput1, PAGESTYLE.time]}>
                                                 <Text style={PAGESTYLE.subjectText}>Lesson Topic</Text>
                                                 <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.textBox]}>
                                                     <TextInput
@@ -844,9 +849,9 @@ const TLDetailAdd = (props) => {
                                             onStopScrrenRecording={() => stopRecording()}
                                             onCameraOnly={() => onCameraOnly()} />
 
-                                        {itemCheckListView()}
-
                                         {pupilListView()}
+
+                                        {itemCheckListView()}
 
                                         <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                             <View style={PAGESTYLE.hrTagMIddleReverse}>
