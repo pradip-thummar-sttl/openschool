@@ -805,8 +805,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {

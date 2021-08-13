@@ -115,13 +115,13 @@ const styles = StyleSheet.create({
         marginLeft: 15
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
         // height: hp(4.20),
     },

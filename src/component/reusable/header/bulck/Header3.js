@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
         backgroundColor: COLORS.white,
         paddingBottom: hp(1.5),
         shadowColor: COLORS.SidebarHeaderShadow,
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -219,9 +219,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: 40,
+        width: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
+        height: hp(5.20),
         marginRight: hp(1)
     },
     searchParent: {
