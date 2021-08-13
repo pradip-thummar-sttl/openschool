@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     menuIconWithTitle:{

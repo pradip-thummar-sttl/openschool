@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
         color: COLORS.darkGrayIntro,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -350,10 +350,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         right: -5,
     },
-    calnderDashHeaderIcon: {
-        width: 40,
+    massagesIcon: {
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
     },
     filterGroup: {
         display: 'none',

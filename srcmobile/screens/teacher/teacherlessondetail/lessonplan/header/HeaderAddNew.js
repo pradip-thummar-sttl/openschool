@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
         marginBottom: Platform.OS == 'android' ? hp(-1) : hp(0),
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
-    calnderDashHeaderIcon: {
-        width: 40,
+    massagesIcon: {
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
     },
     filterbarMain: {
         flexDirection: 'row',
