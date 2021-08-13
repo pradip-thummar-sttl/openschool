@@ -43,7 +43,7 @@ const Item = ({ onPress, style, item }) => (
                 </View>
             </View>
             <View style={PAGESTYLE.timingMain}>
-                <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
+                <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                 <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
             </View>
         </View>

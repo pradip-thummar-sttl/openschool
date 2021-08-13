@@ -133,6 +133,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _thView.layer.cornerRadius=10;
   _thView.layer.borderWidth = 3;
   _thView.layer.borderColor = [UIColor whiteColor].CGColor;
+  if (_isTeacher) {
+    _emojiView.hidden = true;
+  }else{
+    _emojiView.hidden = false;
+  }
   
   _reactionView.hidden = true;
   self.reactionView.layer.cornerRadius = 10;
@@ -186,7 +191,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //  self.localVideoView.frame = self.userCameraView.bounds;
 //  [self.userCameraView addSubview:self.localVideoView];
   
-  [self.userCameraView addSubview:self.localVideoView];
+  
   
     if (self.session.conferenceType == QBRTCConferenceTypeVideo
         && _conferenceType > 0) {
@@ -194,8 +199,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         Settings *settings = Settings.instance;
         self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat
                                                                     position:settings.preferredCameraPostion];
+//      [self.userCameraView addSubview:self.localVideoView];
+      [self.userCameraView.layer insertSublayer:self.cameraCapture.previewLayer atIndex:0];
         [self.cameraCapture startSession:nil];
 #endif
+    
     }
   
   
@@ -1050,27 +1058,28 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
     if (indexPath.row != 0) {
       NSString *str = [NSString stringWithFormat:@"%@@#@%@", _reactionUnicodeArr[indexPath.row-1],_selectedId];
         [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
+//      [self.opponentsCollectionView reloadData];
     }
     _reactionView.hidden = true;
-  [self.opponentsCollectionView reloadData];
+ 
   
 }
 
 - (IBAction)dontBtn:(id)sender {
    NSString *str = [NSString stringWithFormat:@"🤔@#@%@",_currentUserID];
    [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
-   [self.opponentsCollectionView reloadData];
+//   [self.opponentsCollectionView reloadData];
 }
 - (IBAction)thumbBtn:(id)sender {
   NSString *str = [NSString stringWithFormat:@"👍@#@%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
-  [self.opponentsCollectionView reloadData];
+//  [self.opponentsCollectionView reloadData];
 }
 
 - (IBAction)raiseBtn:(id)sender {
   NSString *str = [NSString stringWithFormat:@"✋@#@%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
-  [self.opponentsCollectionView reloadData];
+//  [self.opponentsCollectionView reloadData];
 }
 @end
 
