@@ -111,13 +111,16 @@ const PupuilDashboard = (props) => {
             session, // current or new session
             userInfo
         } = payload
-        console.log('Event Received', event, payload);
+        // console.log('Event Received', event, payload);
         switch (type) {
             case QB.webrtc.EVENT_TYPE.CALL:
-                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo })
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo, initiatorId: userId })
                 break;
             case QB.webrtc.EVENT_TYPE.HANG_UP:
                 // props.navigation.goBack()
+                break;
+            case QB.webrtc.EVENT_TYPE.RECEIVED_VIDEO_TRACK:
+                console.log('RECEIVED_VIDEO_TRACK', payload);
                 break;
             default:
                 break;

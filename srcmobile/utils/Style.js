@@ -20,6 +20,7 @@ export default StyleSheet.create({
     padLeftRight: {
         flex: 1,
         paddingRight: hp(2.5),
+        paddingLeft: hp(2.5),
     },
     commonInput: {
         color:COLORS.darkGray,

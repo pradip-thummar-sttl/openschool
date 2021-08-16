@@ -9,16 +9,22 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Images from "../../../utils/Images";
 import COLORS from "../../../utils/Colors";
 import { User } from "../../../utils/Model";
+import WebRTCView from 'quickblox-react-native-sdk/RTCView'
 
 const Call = (props) => {
     const params = props.route.params
 
     const [isLoading, setLoading] = useState(false)
-    const [sessionId, setSessionId] = useState('')
+    const [sessionId, setSessionId] = useState()
     const [isCallAccepted, setCallAccepted] = useState(false)
     const [pupilData, setPupilData] = useState(params.pupilData)
     const [selectedPupilData, setSelectedPupilData] = useState(params.userInfo ? params.userInfo : {})
     const [isCallStarted, setCallStarted] = useState(false)
+    const [isAudioMuted, setAudioMuted] = useState(true)
+    const [isVideoMuted, setVideoMuted] = useState(true)
+    const [isFrontCamera, setFrontCamera] = useState(true)
+    const [isEarPhone, setEarPhone] = useState(true)
+    const [userId, setUserId] = useState()
 
     console.log('pupilData', params);
 
@@ -46,7 +52,7 @@ const Call = (props) => {
 
         const params = {
             opponentsIds: [QBUserID],
-            type: QB.webrtc.RTC_SESSION_TYPE.AUDIO,
+            type: QB.webrtc.RTC_SESSION_TYPE.VIDEO,
             userInfo: userInfo
         }
 
@@ -82,16 +88,16 @@ const Call = (props) => {
             .then(function (session) {
                 console.log('Sesson Ended', session);
                 releaseResource()
-                props.navigation.goBack()
             })
             .catch(function (e) {
                 console.log('Sesson Ended Error', e);
                 releaseResource()
-                props.navigation.goBack()
             })
     }
 
     const releaseResource = () => {
+        props.navigation.goBack()
+
         QB.webrtc
             .release()
             .then(() => { console.log('released successfully'); })
@@ -122,49 +128,99 @@ const Call = (props) => {
     );
 
     return (
-        <View style={Style.mainPage}>
-            {!isLoading ?
-                <>
-                    <Image style={Style.profile} source={{ uri: baseUrl + selectedPupilData.ProfilePicture }} />
-                    <Text style={Style.profileTitle} numberOfLines={1}>{selectedPupilData.FirstName} {selectedPupilData.LastName}</Text>
 
-                    <View style={Style.actionParent}>
-                        {params.userType == 'Pupil' && !isCallAccepted ?
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => acceptCall(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                                <Image style={Style.actionButton} source={Images.callPick} />
-                            </TouchableOpacity>
-                            :
-                            null
-                        }
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => endCall(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                            <Image style={Style.actionButton} source={Images.callDrop} />
-                        </TouchableOpacity>
-                    </View>
-                </>
-                :
-                <Text style={Style.profileTitle}>Wait a moment, we're initializing a call...</Text>
-            }
-            {params.userType == 'Teacher' && !isCallStarted ?
-                <FlatList
-                    style={{ position: 'absolute', height: '100%', marginVertical: 40, width: '100%', backgroundColor: COLORS.white }}
-                    data={pupilData}
-                    renderItem={pupilRender}
-                    keyExtractor={(item) => item.id}
-                    extraData={0}
-                    showsVerticalScrollIndicator={false}
-                    ListHeaderComponent={() => {
-                        return (
-                            <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
-                        )
-                    }}
-                />
+        <View style={Style.main}>
+            {(sessionId || params.sessionId) && (userId || params.initiatorId) ?
+                <View style={{ flex: 1 }}>
+                    <WebRTCView
+                        sessionId={params.userType == 'Teacher' ? sessionId : params.sessionId}
+                        style={{ height: '50%', width: '100%' }} // add styles as necessary
+                        userId={params.userType == 'Teacher' ? userId : params.initiatorId} // your user's Id for local video or occupantId for remote
+                    />
+
+                    {params.userType == 'Teacher' || isCallAccepted ?
+                        <>
+                            {console.log(params.userType == 'Teacher' ? 'T' : 'P', userId, params.initiatorId, sessionId, params.sessionId, User.user.QBUserId)}
+                            <WebRTCView
+                                sessionId={params.userType == 'Teacher' ? sessionId : params.sessionId}
+                                style={{ height: '50%', width: '100%' }} // add styles as necessary
+                                userId={Number(User.user.QBUserId)} // your user's Id for local video or occupantId for remote
+                            />
+                        </>
+                        :
+                        null
+                    }
+                </View>
                 :
                 null
             }
+            <View style={Style.mainPage}>
+                {!isLoading ?
+                    <>
+                        <Image style={Style.profile} source={{ uri: baseUrl + selectedPupilData.ProfilePicture }} />
+                        <Text style={Style.profileTitle} numberOfLines={1}>{selectedPupilData.FirstName} {selectedPupilData.LastName}</Text>
+
+                        <View style={Style.actionParent}>
+                            {params.userType == 'Pupil' && !isCallAccepted ?
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => acceptCall(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                                    <Image style={Style.actionButton} source={Images.callPick} />
+                                </TouchableOpacity>
+                                :
+                                null
+                            }
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => endCall(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                                <Image style={Style.actionButton} source={Images.callDrop} />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={Style.actionParentBottom}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => switchAudio(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => switchVideo(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => switchCamera(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
+                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => switchAudioOutput()}>
+                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                            </TouchableOpacity>
+                        </View>
+                    </>
+                    :
+                    <Text style={Style.profileTitle}>Wait a moment, we're initializing a call...</Text>
+                }
+                {params.userType == 'Teacher' && !isCallStarted ?
+                    <FlatList
+                        style={{ position: 'absolute', height: '100%', marginVertical: 40, width: '100%', backgroundColor: COLORS.white }}
+                        data={pupilData}
+                        renderItem={pupilRender}
+                        keyExtractor={(item) => item.id}
+                        extraData={0}
+                        showsVerticalScrollIndicator={false}
+                        ListHeaderComponent={() => {
+                            return (
+                                <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
+                            )
+                        }}
+                    />
+                    :
+                    null
+                }
+            </View>
         </View>
     )
 }

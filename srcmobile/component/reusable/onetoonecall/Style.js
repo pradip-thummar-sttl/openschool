@@ -6,6 +6,11 @@ import FONTS from '../../../utils/Fonts';
 const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
+    main: {
+        flex: 1,
+        backgroundColor: COLORS.white,
+        alignItems: 'center',
+    },
     mainPage: {
         flex: 1,
         backgroundColor: COLORS.white,
