@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, Alert } from 'react-native';
 import COLORS from '../../../utils/Colors';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { baseUrl, opacity, showMessage } from '../../../utils/Constant';
+import { baseUrl, opacity } from '../../../utils/Constant';
 import { color } from 'react-native-reanimated';
 import { User } from '../../../utils/Model';
 import MESSAGE from '../../../utils/Messages';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class ParentZoneSwitch extends Component {
     constructor(props) {
@@ -22,8 +23,28 @@ export default class ParentZoneSwitch extends Component {
         if (User.user._id == item._id) {
             this.props.navigation.replace('PupuilDashboard')
         } else {
-            showMessage(MESSAGE.loggedInPupil)
+            this.showMessage()
         }
+    }
+
+    showMessage() {
+        Alert.alert(
+            '',
+            MESSAGE.loggedInPupil,
+            [{
+                text: 'LOGOUT',
+                onPress: () => {
+                    AsyncStorage.setItem('pupil', JSON.stringify(null));
+                    this.props.navigation.replace('Users');
+                },
+            },
+            {
+                text: 'CANCEL',
+                onPress: () => {},
+            },
+            ],
+            { cancelable: true }
+        )
     }
 
     render() {
