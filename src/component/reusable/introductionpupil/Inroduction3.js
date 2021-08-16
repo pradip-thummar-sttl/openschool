@@ -16,7 +16,7 @@ const Introduction3 = (props) => {
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Show off your progress</Text>
-               <Text p style={styles.introContent}>Power up your mini avatar with cool accessories and superpowers using rewards you earn by participating in class, submitting your homework and more.</Text>
+               <Text p style={styles.introContent}>Power up your mini avatar with cool accessories and superpowers using rewards you {"\n"}earn by participating in class, submitting your homework and more.</Text>
            </View>
            <View style={styles.buttonGreenStartMain}>
                <TouchableOpacity onPress={() => props.navigateToLogin()}><Text style={styles.buttonGreenStart}>Get Started</Text></TouchableOpacity>
@@ -31,8 +31,9 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(9.23),
-        marginBottom: hp(4),
+        height: hp(61.85),
+        marginBottom: hp(5.85),
+        justifyContent: 'flex-end',
     },
     lefContent:{
         width: '100%',
@@ -46,24 +47,24 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     introTitle: {
-        color:COLORS.darkGrayIntro,
-        fontSize: hp(2.28),
+        color:COLORS.darkGray,
+        fontSize: hp(3.125),
         marginBottom:hp(2.8),
         textAlign: 'center',
         fontFamily: FONTS.fontBold,
     },
     introContent: {
-        fontSize: hp(1.8),
-        color: COLORS.introGreyColor,
-        lineHeight:hp(2.5),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight:hp(2.60),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
-        paddingLeft:hp(31.77),
-        paddingRight:hp(31.77),
+        paddingLeft:hp(7.81),
+        paddingRight:hp(7.81),
     },
     SlideImage: {
         resizeMode: 'contain',
-        height: hp(44.79),
+        height: hp(50.38),
     },
     buttonGreenStartMain: {
         alignSelf: 'center',

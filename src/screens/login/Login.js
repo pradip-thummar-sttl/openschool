@@ -259,8 +259,11 @@ class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <ImageBackground source={Images.LoginBack} style={styles.image}>
-                    </ImageBackground>
+                    {this.props.route.params.userType == 'Pupil' ?
+                        <ImageBackground source={Images.LoginBack} style={styles.image}></ImageBackground>
+                        :
+                        <ImageBackground source={Images.TeacherLoginBack} style={styles.image}></ImageBackground>
+                    }
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start' }}>

@@ -16,7 +16,7 @@ const Introduction3 = (props) => {
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Tailored content recommendations</Text>
-               <Text p style={styles.introContent}>Save hours of research with access to hundreds of curated curriculum-aligned learning resources – recommended to you as you plan your lessons.</Text>
+               <Text p style={styles.introContent}>Save hours of research with access to hundreds of curated curriculum-aligned {"\n"}learning resources – recommended to you as you plan your lessons.</Text>
            </View>
            <View style={styles.buttonGreenStartMain}>
                <TouchableOpacity onPress={() => props.navigateToLogin()}><Text style={styles.buttonGreenStart}>Get Started</Text></TouchableOpacity>
@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     introContent: {
-        fontSize: hp(1.8),
-        color: COLORS.introGreyColor,
-        lineHeight:hp(2.5),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight:hp(2.60),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
-        paddingLeft:hp(31.77),
-        paddingRight:hp(31.77),
+        paddingLeft:hp(7.81),
+        paddingRight:hp(7.81),
     },
     SlideImage: {
         // width: hp(43),
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '20%',
         paddingHorizontal: hp(2),
-        bottom: hp(-0.5),
+        bottom: hp(-1.5),
         paddingLeft:hp(3),
         paddingRight:hp(3),
     },

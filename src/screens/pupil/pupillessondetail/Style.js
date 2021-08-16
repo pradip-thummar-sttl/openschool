@@ -218,11 +218,11 @@ export default StyleSheet.create({
         width: 'auto',
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
-        borderRadius: hp(1.5),
+        borderRadius: 8,
         paddingLeft: hp(1.30),
         paddingRight: hp(2.21),
-        paddingTop: hp(2.60),
-        paddingBottom: hp(2.60),
+        paddingTop: hp(2),
+        paddingBottom: hp(2),
         marginBottom: hp(1.04),
         justifyContent: 'space-between',
     },
@@ -232,8 +232,8 @@ export default StyleSheet.create({
         paddingLeft: hp(1.2),
     },
     checkMark: {
-        width: hp(1.48),
-        height: hp(1.31),
+        width: hp(1.95),
+        height: hp(1.95),
         resizeMode: 'contain',
     },
     toggleGrp: {
@@ -1005,6 +1005,7 @@ export default StyleSheet.create({
     alignRow: {
         flexDirection: 'row',
         width: '68.5%',
+        alignItems: 'center',
     },
     alignRow1: {
         flexDirection: 'row',
