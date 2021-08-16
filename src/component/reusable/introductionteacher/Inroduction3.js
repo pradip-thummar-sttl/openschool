@@ -31,8 +31,9 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(8.37),
-        marginBottom: hp(2),
+        height: hp(65.75),
+        justifyContent: 'flex-end',
+        marginBottom: hp(1.95),
     },
     lefContent:{
         width: '100%',
@@ -64,13 +65,13 @@ const styles = StyleSheet.create({
     SlideImage: {
         // width: hp(43),
         resizeMode: 'contain',
-        height: hp(51),
+        height: hp(55.59),
     },
     buttonGreenStartMain: {
         alignSelf: 'center',
         width: '20%',
         paddingHorizontal: hp(2),
-        bottom: hp(-1.5),
+        bottom: hp(-0.5),
         paddingLeft:hp(3),
         paddingRight:hp(3),
     },

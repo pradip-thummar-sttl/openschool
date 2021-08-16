@@ -19,15 +19,15 @@ const Introduction2 = (props) => {
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(10.34),
-        marginBottom: hp(8.62),
+        height: hp(58.98),
+        justifyContent: 'flex-end',
+        marginBottom: hp(8.72),
     },
     lefContent:{
         width: '100%',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     SlideImage: {
        // width: hp(46),
         resizeMode: 'contain',
-        height: hp(49),
+        height: hp(47.5),
     },
 });
 export default Introduction2;

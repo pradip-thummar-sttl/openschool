@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(4.31),
-        marginBottom: hp(8.99),
+        height: hp(65.75),
+        justifyContent: 'flex-end',
+        marginBottom: hp(1.95),
     },
     lefContent:{
         width: '100%',
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     SlideImage: {
        // width: hp(48),
         resizeMode: 'contain',
-        height: hp(54),
+        height: hp(60.76),
     },
 });
 
