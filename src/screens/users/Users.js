@@ -8,10 +8,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../utils/Constant';
 import { color } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import UserSelectionSvg from '../../SvgComponent/UserSelection/UserSelectionSvg';
-import Pupil from '../../SvgComponent/UserSelection/Pupil';
-import Student from '../../SvgComponent/UserSelection/Student';
-import Teacher from '../../SvgComponent/UserSelection/Teacher';
+import UserSelectionSvg from '../../svg/UserSelection/UserSelectionSvg';
+import Pupil from '../../svg/UserSelection/Pupil';
+import Student from '../../svg/UserSelection/Student';
+import Teacher from '../../svg/UserSelection/Teacher';
 
 export default class Users extends Component {
     constructor(props) {
