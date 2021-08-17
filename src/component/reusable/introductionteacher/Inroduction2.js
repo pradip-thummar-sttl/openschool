@@ -28,16 +28,12 @@ const styles = StyleSheet.create({
         height: hp(58.98),
         justifyContent: 'flex-end',
         marginBottom: hp(8.72),
+        width: '100%',
     },
     lefContent:{
         width: '100%',
         paddingHorizontal: hp(4),
         textAlign: 'center',
-    },
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-        width: '100%',
     },
     introTitle: {
         color:COLORS.darkGrayIntro,
@@ -56,9 +52,9 @@ const styles = StyleSheet.create({
         paddingRight:hp(7.81),
     },
     SlideImage: {
-       // width: hp(46),
+        width: '100%',
         resizeMode: 'contain',
-        height: hp(47.5),
+        height: hp(51),
     },
 });
 export default Introduction2;
