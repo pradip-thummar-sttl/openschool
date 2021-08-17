@@ -8,10 +8,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../utils/Constant';
 import { color } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import UserSelectionSvg from '../../svg/UserSelection/UserSelectionSvg';
-import Pupil from '../../svg/UserSelection/Pupil';
-import Student from '../../svg/UserSelection/Student';
-import Teacher from '../../svg/UserSelection/Teacher';
+import Top from '../../svg/userselection/Top';
+import Pupil from '../../svg/userselection/Pupil';
+import Student from '../../svg/userselection/Student';
+import Teacher from '../../svg/userselection/Teacher';
 
 export default class Users extends Component {
     constructor(props) {
@@ -43,54 +43,47 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/* <ImageBackground style={styles.image}> */}
-                {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
-                <UserSelectionSvg width={'100%'} height={hp(16.77)} />
-                <View style={{ marginTop: wp(15) }}>
-                    <Text style={styles.titleText}>Select the type of user you are</Text>
-                    <View style={styles.userMain}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => null}>
-                            <View style={styles.user}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.schoolLoginIcon} /> */}
-                                <View style={styles.userIcon}>
-                                    <Student height={hp(20.10)} width={hp(20.10)} />
+                <ImageBackground style={styles.image}>
+                    <Image style={styles.topBg} source={Images.illuTopBg} />
+                    <View>
+                        <Text style={styles.titleText}>Select the type of user you are</Text>
+                        <View style={styles.userMain}>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => null}>
+                                <View style={styles.user}>
+                                    {/* <Image
+                                        style={styles.userIcon}
+                                        source={Images.schoolLoginIcon} /> */}
+                                    <Student style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
+                                    <Text style={styles.text}>School</Text>
                                 </View>
-                                <Text style={styles.text}>School</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => this.navigateIntroductionScreen('Teacher')}>
-                            <View style={styles.user}>
-                                {/* <Image
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => this.navigateIntroductionScreen('Teacher')}>
+                                <View style={styles.user}>
+                                    {/* <Image
                                         style={styles.userIcon}
                                         source={Images.teacherLoginIcon} /> */}
-                                <View style={styles.userIcon}>
-                                    <Teacher height={hp(20.10)} width={hp(20.10)} />
+                                    <Teacher style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
+                                    <Text style={styles.text}>Teacher</Text>
                                 </View>
-                                <Text style={styles.text}>Teacher</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => this.navigateIntroductionScreen('Pupil')}>
-                            <View style={styles.user}>
-                                {/* <Image
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => this.navigateIntroductionScreen('Pupil')}>
+                                <View style={styles.user}>
+                                    {/* <Image
                                         style={styles.userIcon}
                                         source={Images.pupilLoginIcon} /> */}
-                                <View style={styles.userIcon}>
-                                    <Pupil height={hp(20.10)} width={hp(20.10)} />
+                                    <Pupil style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
+                                    <Text style={styles.text}>Pupil</Text>
                                 </View>
-                                <Text style={styles.text}>Pupil</Text>
-                            </View>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-                {/* </ImageBackground> */}
+                </ImageBackground>
             </View>
         );
     }
@@ -133,9 +126,9 @@ const styles = StyleSheet.create({
         marginRight: hp(5.5),
     },
     userIcon: {
-        // width: hp(20.10),
-        // height: hp(20.10),
-        // resizeMode: "contain",
+        width: hp(20.10),
+        height: hp(20.10),
+        resizeMode: "contain",
         alignSelf: 'center',
         marginBottom: hp(2),
     },
