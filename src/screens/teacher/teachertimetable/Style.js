@@ -10,6 +10,11 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
     },
+    mainPage1: {
+        flexDirection: 'row',
+        flex: 1,
+        marginTop: hp(-6)
+    },
     container: {
         flex: 1,
         flexDirection: 'row'
@@ -21,11 +26,14 @@ export default StyleSheet.create({
         height: hp(10.41),
     },
     lable: {
-        width: hp(10.41),
-        height: hp(10.41),
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
-        // marginBottom: 10,
+        fontSize: hp(1.82),
+        // marginBottom: 20,
+        //DP
+        marginBottom: 15,
+        height: hp(10.41),
+        paddingTop: hp(8)
     },
     dayRightmain: {
         height: hp(10.41),
@@ -44,10 +52,9 @@ export default StyleSheet.create({
         width: hp(10.41),
         height: hp(10.41),
         alignItems: 'center',
-        paddingLeft: hp(1),
-        paddingRight: hp(1),
-        paddingTop: hp(1),
+        justifyContent: 'center',
         marginBottom: 15,
+        marginLeft: 35,
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
