@@ -5,8 +5,8 @@ function TTabletOnboarding1(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={823.648}
-      height={468.662}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 823.648 468.662"
       {...props}
     >

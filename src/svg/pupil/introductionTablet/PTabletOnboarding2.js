@@ -13,8 +13,8 @@ function PTabletOnboarding2(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={823.647}
-      height={475.662}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 823.647 475.662"
       {...props}
     >

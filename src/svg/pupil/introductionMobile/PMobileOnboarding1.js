@@ -5,8 +5,8 @@ function PMobileOnboarding1(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={341.092}
-      height={344.237}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 341.092 344.237"
       {...props}
     >

@@ -5,8 +5,8 @@ function MobileLoginSideimg(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={375.412}
-      height={336}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 375.412 336"
       {...props}
     >

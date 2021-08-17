@@ -1,12 +1,12 @@
 import * as React from "react"
 import Svg, { G, Rect, Path, Circle, Ellipse } from "react-native-svg"
 
-function MobileOnboarding1(props) {
+function TMobileOnboarding1(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={382.697}
-      height={448.32}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 382.697 448.32"
       {...props}
     >
@@ -587,4 +587,4 @@ function MobileOnboarding1(props) {
   )
 }
 
-export default MobileOnboarding1
+export default TMobileOnboarding1

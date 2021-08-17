@@ -5,8 +5,8 @@ function TMobileOnboarding2(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={375}
-      height={400.851}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 375 400.851"
       {...props}
     >
