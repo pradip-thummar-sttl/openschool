@@ -1,12 +1,12 @@
 import * as React from "react"
 import Svg, { G, Circle, Path, Rect } from "react-native-svg"
 
-function Student(props) {
+function School(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      // width={props.width}
-      // height={props.height}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 134 127"
       {...props}
     >
@@ -103,4 +103,4 @@ function Student(props) {
   )
 }
 
-export default Student;
+export default School;

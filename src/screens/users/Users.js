@@ -10,7 +10,7 @@ import { color } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Top from '../../svg/userselection/Top';
 import Pupil from '../../svg/userselection/Pupil';
-import Student from '../../svg/userselection/Student';
+import School from '../../svg/userselection/School';
 import Teacher from '../../svg/userselection/Teacher';
 
 export default class Users extends Component {
@@ -44,7 +44,8 @@ export default class Users extends Component {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.image}>
-                    <Image style={styles.topBg} source={Images.illuTopBg} />
+                    {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
+                    <Top style={styles.topBg} width={'100%'} height={hp(16.77)} />
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
@@ -55,7 +56,7 @@ export default class Users extends Component {
                                     {/* <Image
                                         style={styles.userIcon}
                                         source={Images.schoolLoginIcon} /> */}
-                                    <Student style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
+                                    <School style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
                                     <Text style={styles.text}>School</Text>
                                 </View>
                             </TouchableOpacity>
