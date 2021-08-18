@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, Alert, Platform } from 'react-native';
 import COLORS from '../../../../utils/Colors';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
@@ -28,23 +28,35 @@ export default class ParentZoneSwitch extends Component {
     }
 
     showMessage() {
-        Alert.alert(
-            '',
-            MESSAGE.loggedInPupil,
-            [{
-                text: 'LOGOUT',
-                onPress: () => {
-                    AsyncStorage.setItem('pupil', JSON.stringify(null));
-                    this.props.navigation.replace('Users');
-                },
-            },
-            {
-                text: 'CANCEL',
-                onPress: () => {},
-            },
-            ],
-            { cancelable: true }
-        )
+        if (Platform.OS == 'ios') {
+            Alert.alert(MESSAGE.loggedInPupil, null,
+                [{
+                    text: 'LOGOUT',
+                    onPress: () => {
+                        AsyncStorage.setItem('pupil', JSON.stringify(null));
+                        this.props.navigation.replace('Users');
+                    },
+                }, {
+                    text: 'CANCEL',
+                    onPress: () => { },
+                },],
+                { cancelable: true }
+            )
+        } else {
+            Alert.alert(null,MESSAGE.loggedInPupil,
+                [{
+                    text: 'LOGOUT',
+                    onPress: () => {
+                        AsyncStorage.setItem('pupil', JSON.stringify(null));
+                        this.props.navigation.replace('Users');
+                    },
+                }, {
+                    text: 'CANCEL',
+                    onPress: () => { },
+                },],
+                { cancelable: true }
+            )
+        }
     }
 
     render() {
@@ -142,7 +154,7 @@ const styles = StyleSheet.create({
         // resizeMode: "auto",
         alignSelf: 'center',
         marginBottom: hp(2),
-        borderRadius: hp(20.10/2),
+        borderRadius: hp(20.10 / 2),
     },
     topBg: {
         width: '100%',
