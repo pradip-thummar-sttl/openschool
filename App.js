@@ -9,7 +9,7 @@ import { MenuProvider } from 'react-native-popup-menu';
 const store = createStore(combineReducers)
 
 
-import RouteTablet from './src/route/Route'
+import RouteTablet from './src/srcTab/route/Route'
 import RouteMobile from './srcmobile/route/Route'
 import { LogBox, View, StatusBar } from 'react-native';
 
@@ -34,10 +34,11 @@ export default function App() {
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <MenuProvider>
-            {isTablet() ?
+            {/* {isTablet() ?
               <RouteTablet /> :
               <RouteMobile />
-            }
+            } */}
+            <RouteTablet />
           </MenuProvider>
         </View>
       </Provider>

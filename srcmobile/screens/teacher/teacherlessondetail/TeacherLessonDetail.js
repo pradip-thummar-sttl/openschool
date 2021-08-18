@@ -24,7 +24,7 @@ import {
 } from 'react-native-popup-menu';
 import COLORS from "../../../utils/Colors";
 import MESSAGE from "../../../utils/Messages";
-import ScreenAndCameraRecording from "../../../../src/screens/teacher/screenandcamera/ScreenandCamera";
+import ScreenAndCameraRecording from "../../../../src/srcTab/screens/teacher/screenandcamera/ScreenandCamera";
 import TLVideoGallery from "../teacherlessondetail/lessonplan/TeacherLessonVideoGallery";
 import moment from "moment";
 
