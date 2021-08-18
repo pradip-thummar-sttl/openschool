@@ -126,7 +126,7 @@ const PupilTimetable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: hp(8.59) }} />
+                <View style={{ ...PAGESTYLE.day, width: cellWidth, height: hp(10.41), marginBottom: 15, borderColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }} />
             );
         }
     }
@@ -170,7 +170,7 @@ const PupilTimetable = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
+            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.white }}>
                 <Header3
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
@@ -188,21 +188,21 @@ const PupilTimetable = (props) => {
                             color={COLORS.yellowDark} />
                         :
                         timeTableData.length > 0 ?
-                            <View style={PAGESTYLE.mainPage}>
+                            <View style={PAGESTYLE.mainPage1}>
                                 <View>
-                                    {days.map((data) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null }}>
+                                    {days.map((data, index) => (
+                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, }}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight,paddingLeft: 0, }}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
                                         <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                            <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
+                                            <Text style={{ ...PAGESTYLE.lable, }}>{data}</Text>
 
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (
@@ -221,7 +221,9 @@ const PupilTimetable = (props) => {
                             // <View style={{ height: hp(13), justifyContent: 'center' }}>
                             //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
                             // </View>
-                            <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                            <ScrollView>
+                                <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                            </ScrollView>
                     }
                 </View>
             </View>

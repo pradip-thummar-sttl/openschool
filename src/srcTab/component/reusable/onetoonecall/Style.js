@@ -6,6 +6,11 @@ import FONTS from '../../../../utils/Fonts';
 const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
+    main: {
+        flex: 1,
+        backgroundColor: COLORS.white,
+        alignItems: 'center',
+    },
     mainPage: {
         flex: 1,
         backgroundColor: COLORS.white,
@@ -42,9 +47,9 @@ export default StyleSheet.create({
     pupilData: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom:hp(2),
+        paddingBottom: hp(2),
         justifyContent: 'space-between',
-        paddingTop:hp(2),
+        paddingTop: hp(2),
         width: '100%',
         borderBottomWidth: 1,
         borderColor: COLORS.dashBoard,
@@ -76,5 +81,11 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         marginBottom: 20,
         fontFamily: FONTS.fontSemiBold,
+    },
+    actionButtonBottom: {
+        width: hp(4),
+        height: hp(4),
+        borderRadius: hp(200),
+        backgroundColor: COLORS.lightGrayPupil,
     },
 });

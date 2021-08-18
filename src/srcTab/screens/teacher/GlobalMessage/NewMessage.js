@@ -13,6 +13,7 @@ import { opacity, showMessage, showMessageWithCallBack } from '../../../../utils
 import CheckBox from '@react-native-community/checkbox';
 import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const NewMessage = (props) => {
     const t2 = useRef(null);
@@ -29,18 +30,18 @@ const NewMessage = (props) => {
     console.log('props.selectedItem', props.selectedItem);
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
     useEffect(() => {
         if (data) {
@@ -59,7 +60,7 @@ const NewMessage = (props) => {
 
     useEffect(() => {
         // Service.get('parentlist/60b0b79a0e74b0373679d1b6/T', (res) => {
-            Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
+        Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -151,11 +152,11 @@ const NewMessage = (props) => {
 
     const parentListView = () => {
         return (
-            <View style={{ marginBottom: 10, width: '65%', flexDirection: 'column', }}>
+            <View style={{ marginBottom: 10, marginTop: 25, width: '65%', flexDirection: 'column', }}>
                 <Text label style={styles.labelCommon}>Recipient</Text>
                 <FlatList
                     data={parentsData}
-                    style={{ width: '100%', paddingHorizontal: 10, }}
+                    style={{ width: '100%', paddingHorizontal: 20, }}
                     renderItem={({ item, index }) => (
                         <View style={{ ...styles.alignRow, marginTop: 10, marginRight: 20 }}>
                             <CheckBox
@@ -183,30 +184,31 @@ const NewMessage = (props) => {
     return (
         <View style={{ height: '100%', backgroundColor: COLORS.white }}>
             <NewMessageHeader
-                    onSent={() => saveMessage('Sent')}
-                    onGoback={() => props.goBack()}
-                    status={status} />
-            <SafeAreaView style={{paddingHorizontal: 20}}>
-                <View style={styles.field1}>
-                    <Text label style={STYLE.labelCommon}>Message Title</Text>
-                    <View style={styles.copyInputParent}>
-                        <TextInput
-                            multiline={false}
-                            placeholder='Enter title of the message'
-                            returnKeyType={"next"}
-                            onSubmitEditing={() => { t2.current.focus(); }}
-                            value={title}
-                            autoCapitalize={'sentences'}
-                            placeholderStyle={styles.somePlaceholderStyle}
-                            placeholderTextColor={COLORS.borderGrp}
-                            style={[styles.commonInputTextarea1, , styles.inputWidth]}
-                            onChangeText={title => setTitle(title)} />
+                onSent={() => saveMessage('Sent')}
+                onGoback={() => props.goBack()}
+                status={status} />
+            <ScrollView>
+                <SafeAreaView style={{ paddingHorizontal: 20 }}>
+                    <View style={styles.field1}>
+                        <Text label style={STYLE.labelCommon}>Message Title</Text>
+                        <View style={styles.copyInputParent}>
+                            <TextInput
+                                multiline={false}
+                                placeholder='Enter title of the message'
+                                returnKeyType={"next"}
+                                onSubmitEditing={() => { t2.current.focus(); }}
+                                value={title}
+                                autoCapitalize={'sentences'}
+                                placeholderStyle={styles.somePlaceholderStyle}
+                                placeholderTextColor={COLORS.borderGrp}
+                                style={[styles.commonInputTextarea1, , styles.inputWidth]}
+                                onChangeText={title => setTitle(title)} />
+                        </View>
                     </View>
-                </View>
 
-                <View style={styles.field1}>
-                    <View style={styles.copyInputParent}>
-                        {/* <TextInput
+                    <View style={styles.field1}>
+                        <View style={styles.copyInputParent}>
+                            {/* <TextInput
                         multiline={false}
                         placeholder='Enter title of the message'
                         value={event}
@@ -214,42 +216,43 @@ const NewMessage = (props) => {
                         placeholderTextColor={COLORS.borderGrp}
                         style={styles.commonInputTextarea1}
                         onChangeText={eventName => setEvent(eventName)} /> */}
-                        {parentListView()}
+                            {parentListView()}
 
-                        <ToggleSwitch onColor={COLORS.dashboardGreenButton}
-                            isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                        />
-                        <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton}
+                                isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
+                            />
+                            <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
 
+                        </View>
                     </View>
-                </View>
 
-                <View style={styles.field1}>
-                    <Text label style={STYLE.labelCommon}>Message</Text>
-                    <View style={styles.copyInputParent}>
-                        <TextInput
-                            ref={t2}
-                            multiline={true}
-                            placeholder='Write a message here'
-                            value={message}
-                            autoCapitalize={'sentences'}
-                            placeholderStyle={styles.somePlaceholderStyle}
-                            placeholderTextColor={COLORS.borderGrp}
-                            style={[styles.commonInputTextarea1, styles.inputHeight]}
-                            onChangeText={message => setMessage(message)} />
+                    <View style={styles.field1}>
+                        <Text label style={STYLE.labelCommon}>Message</Text>
+                        <View style={styles.copyInputParent}>
+                            <TextInput
+                                ref={t2}
+                                multiline={true}
+                                placeholder='Write a message here'
+                                value={message}
+                                autoCapitalize={'sentences'}
+                                placeholderStyle={styles.somePlaceholderStyle}
+                                placeholderTextColor={COLORS.borderGrp}
+                                style={[styles.commonInputTextarea1, styles.inputHeight]}
+                                onChangeText={message => setMessage(message)} />
+                        </View>
                     </View>
-                </View>
-                {status == 'Draft' || status == 'Sent' ?
-                    null
-                    :
-                    <TouchableOpacity style={styles.buttonGroup1}
-                        activeOpacity={opacity}
-                        onPress={() => saveMessage('Draft')}>
-                        <Image style={styles.addIcon} source={Images.CheckIcon} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
-                    </TouchableOpacity>
-                }
-            </SafeAreaView>
+                    {status == 'Draft' || status == 'Sent' ?
+                        null
+                        :
+                        <TouchableOpacity style={styles.buttonGroup1}
+                            activeOpacity={opacity}
+                            onPress={() => saveMessage('Draft')}>
+                            <Image style={styles.addIcon} source={Images.CheckIcon} />
+                            <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
+                        </TouchableOpacity>
+                    }
+                </SafeAreaView>
+            </ScrollView>
         </View>
     )
 }

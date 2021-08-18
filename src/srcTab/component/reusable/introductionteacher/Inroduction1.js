@@ -14,7 +14,7 @@ const Introduction1 = (props) => {
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Do what you do best </Text>
-               <Text p style={styles.introContent}>Spend time on interacting with your pupils, not technology. Plan, teach and mark with ease, all in one place</Text>
+               <Text p style={styles.introContent}>Spend time on interacting with your pupils, not technology. Plan, teach and mark with {"\n"}ease, all in one place</Text>
            </View>
         </View>
     );
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(4.31),
-        marginBottom: hp(8.99),
+        height: hp(65.75),
+        justifyContent: 'flex-end',
+        marginBottom: hp(1.95),
     },
     lefContent:{
         width: '100%',
@@ -46,18 +47,18 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     introContent: {
-        fontSize: hp(1.8),
+        fontSize: hp(1.82),
         color: COLORS.darkGray,
-        lineHeight:hp(2.5),
+        lineHeight:hp(2.60),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
-        paddingLeft:hp(31.77),
-        paddingRight:hp(31.77),
+        paddingLeft:hp(7.81),
+        paddingRight:hp(7.81),
     },
     SlideImage: {
        // width: hp(48),
         resizeMode: 'contain',
-        height: hp(54),
+        height: hp(60.76),
     },
 });
 

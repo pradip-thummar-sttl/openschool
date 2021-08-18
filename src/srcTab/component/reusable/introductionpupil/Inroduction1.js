@@ -14,7 +14,7 @@ const Introduction1 = (props) => {
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Stay connected with your teacher </Text>
-               <Text p style={styles.introContent}>Maintain two-way teacher to pupil and teacher to parent interactions and communication through instant chats, live lesson reactions and much more.</Text>
+               <Text p style={styles.introContent}>Maintain two-way teacher to pupil and teacher to parent interactions and {"\n"}communication through instant chats, live lesson reactions and much more.</Text>
            </View>
         </View>
     );
@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(11.88),
-        marginBottom: hp(9.14),
+        height: hp(59.5),
+        marginBottom: hp(6.90),
+        justifyContent: 'flex-end',
     },
     lefContent:{
         width: '100%',
@@ -46,13 +47,13 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     introContent: {
-        fontSize: hp(1.8),
-        color: COLORS.introGreyColor,
-        lineHeight:hp(2.5),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight:hp(2.60),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
-        paddingLeft:hp(31.77),
-        paddingRight:hp(31.77),
+        paddingLeft:hp(7.81),
+        paddingRight:hp(7.81),
     },
     SlideImage: {
        // width: hp(92.05),

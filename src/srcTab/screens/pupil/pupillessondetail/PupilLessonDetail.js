@@ -66,7 +66,9 @@ const PupilLessonDetail = (props) => {
                 } else {
                     getHomeworkData('', '')
                 }
-                textInput.current.clear()
+                if (textInput.current) {
+                    textInput.current.clear()
+                }
             } else {
                 if (isLesson) {
                     getLessonData(keyword, '')
@@ -224,7 +226,7 @@ const PupilLessonDetail = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} />
+                    <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} />
                 </View>
             </View>
         )

@@ -29,7 +29,7 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.SubjectName}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,]}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(14) }]}>{props.item.LessonTopic}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(15) }]}>{props.item.LessonTopic}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
                 <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
@@ -38,17 +38,17 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8) }]}>{(props.item.LiveSession).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue: COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8) }]}>{(props.item.Publish).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue: COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8) }]}>{props.item.HomeWork}</Text>
-                <View style={PAGESTYLE.pupilDetailLink}>
-                    <Image style={[PAGESTYLE.pupilDetaillinkIcon, { marginRight: hp(2) }]} source={Images.DashboardRightArrow} />
-                </View>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue: COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
             </View>
+            <View style={PAGESTYLE.pupilDetailLink}>
+                    <Image style={[PAGESTYLE.pupilDetaillinkIcon,  ]} source={Images.DashboardRightArrow} />
+                </View>
         </View>
     </TouchableOpacity>
 );

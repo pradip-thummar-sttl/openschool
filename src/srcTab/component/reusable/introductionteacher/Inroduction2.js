@@ -14,30 +14,26 @@ const Introduction2 = (props) => {
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Your classroom, online</Text>
-               <Text p style={styles.introContent}>Teach, answer questions, give feedback and reward your pupils in real-time – just like you would in your own classroom.</Text>
+               <Text p style={styles.introContent}>Teach, answer questions, give feedback and reward your pupils in real-time – just like{"\n"} you would in your own classroom.</Text>
            </View>
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(10.34),
-        marginBottom: hp(8.62),
+        height: hp(58.98),
+        justifyContent: 'flex-end',
+        marginBottom: hp(8.72),
+        width: '100%',
     },
     lefContent:{
         width: '100%',
         paddingHorizontal: hp(4),
         textAlign: 'center',
-    },
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-        width: '100%',
     },
     introTitle: {
         color:COLORS.darkGrayIntro,
@@ -47,18 +43,18 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     introContent: {
-        fontSize: hp(1.8),
+        fontSize: hp(1.82),
         color: COLORS.darkGray,
-        lineHeight:hp(2.5),
+        lineHeight:hp(2.60),
         textAlign: 'center',
         fontFamily: FONTS.fontRegular,
-        paddingLeft:hp(31.77),
-        paddingRight:hp(31.77),
+        paddingLeft:hp(7.81),
+        paddingRight:hp(7.81),
     },
     SlideImage: {
-       // width: hp(46),
+        width: '100%',
         resizeMode: 'contain',
-        height: hp(49),
+        height: hp(51),
     },
 });
 export default Introduction2;

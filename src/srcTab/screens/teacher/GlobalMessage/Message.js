@@ -80,14 +80,14 @@ const Message = (props) => {
                 </View>
 
                 <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-                    <Text style={[PAGESTYLE.pupilName,{marginLeft:-12}]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                    <Text style={[PAGESTYLE.pupilName, { marginLeft: -12 }]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
                 </View>
                 {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
                 <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
             </View> */}
 
                 <View style={PAGESTYLE.pupilProfile}>
-                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText,{marginLeft:-12}]}>{item.item.Status}</Text>
+                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText, { marginLeft: -12 }]}>{item.item.Status}</Text>
                 </View>
 
                 <View style={[PAGESTYLE.lastColumn]}>
@@ -99,7 +99,7 @@ const Message = (props) => {
 
     return (
         <View style={{ width: '93%', }}>
-            <SafeAreaView style={{ backgroundColor: COLORS.white }}>
+            <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
                 {!isAddMessage ?
                     <>
                         <HeaderWhitepupilMessage
@@ -109,31 +109,25 @@ const Message = (props) => {
                             onFilter={(filterBy) => fetchRecord('', filterBy)}
                             onNewMessage={() => setAddMessage(true)} />
 
-                        <View style={PAGESTYLE.pupilTable}>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>MESSAGE TITLE</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>DATE</Text>
-                            </View>
-                            {/* <View style={PAGESTYLE.pupilTableHeadingMain}>
-                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>CLASS</Text>
-                </View> */}
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>STATUS</Text>
-                            </View>
-                            {/* <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
-                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
-                </View> */}
-                        </View>
-                        <View style={{ backgroundColor: COLORS.greyBack }}>
+                        <View style={{ backgroundColor: COLORS.greyBack, flex:1 }}>
                             {isLoading ?
                                 <ActivityIndicator
                                     style={{ flex: 1, marginTop: 20 }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.yellowDark} />
                                 :
-                                messageData.length > 0 ?
+                                messageData.length > 0 ? <>
+                                    <View style={PAGESTYLE.pupilTable}>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>MESSAGE TITLE</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>DATE</Text>
+                                        </View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
+                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>STATUS</Text>
+                                        </View>
+                                    </View>
                                     <FlatList
                                         style={{ height: '77%' }}
                                         data={messageData}
@@ -142,11 +136,14 @@ const Message = (props) => {
                                         extraData={selectedId}
                                         showsVerticalScrollIndicator={false}
                                     />
+                                </>
                                     :
                                     // <View style={{ height: 100, justifyContent: 'center' }}>
                                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                     // </View>
+                                    <View style={{ backgroundColor: COLORS.white, flex:1, justifyContent: 'center', marginHorizontal: 15, marginBottom: 15 }}>
                                     <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
+                                    </View>
                             }
                         </View>
                     </>

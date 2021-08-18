@@ -17,7 +17,7 @@ const SettingHeader = (props) => {
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={require('../../../../assets/images/notification2.png')} />
+                        <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     filterbarMain: {
@@ -153,9 +153,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     calnderDashHeaderIcon: {
-        width: 40,
+        width: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
+        height: hp(5.20),
         marginRight: hp(1)
     },
     searchParent: {

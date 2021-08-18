@@ -54,10 +54,27 @@ const Sidebar = (props) => {
         // setSelectedIndex(1);
     }
 
-    const teacherLogout = () =>{
+    const showActionChooser = () => {
+        Alert.alert(
+            '',
+            'Do you really want to logout?',
+            [{
+                text: 'YES',
+                onPress: () => teacherLogout(),
+            },
+            {
+                text: 'NO',
+                onPress: () => { },
+            },
+            ],
+            { cancelable: true }
+        )
+    }
+
+    const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
         props.navigateUser()
-        
+
     }
 
     console.log('module index', props.moduleIndex)
@@ -69,8 +86,9 @@ const Sidebar = (props) => {
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
-                                <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
-                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
+                                {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
+                                <Text numberOfLines={1} style={styles.profileTitle}>MYED Open School</Text>
                             </View>
                     }
                 </TouchableOpacity>
@@ -157,10 +175,10 @@ const Sidebar = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => {teacherLogout(), toggleAnimation(true) }}>
+                        onPress={() => { showActionChooser(), toggleAnimation(true) }}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.Faqs}
+                            source={Images.logout}
                         />
                         {
                             isSmall ? null :
@@ -269,7 +287,7 @@ const styles = StyleSheet.create({
     },
     userInfobottomMain: {
         position: 'absolute',
-        alignSelf:'center',
+        alignSelf: 'center',
         bottom: 0,
         paddingHorizontal: hp(1.35),
         borderColor: COLORS.bottomProfileLightBorder,
@@ -303,7 +321,7 @@ const styles = StyleSheet.create({
     },
     moreMenu: {
         // position: 'absolute',
-        marginLeft:hp(4),
+        marginLeft: hp(4),
         right: 0,
     },
 });

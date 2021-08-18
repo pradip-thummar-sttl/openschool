@@ -1448,10 +1448,10 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    calnderDashHeaderIcon: {
-        width: 40,
+    massagesIcon: {
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
     },
     homeworkView: {
         width: hp(32.5),
@@ -1550,7 +1550,7 @@ export default StyleSheet.create({
         borderRadius:10,
         borderWidth:1,
         borderColor:COLORS.borderGrp,
-        width:hp(25),
+        width:hp(20),
         marginLeft:hp(1.8)
         
     },

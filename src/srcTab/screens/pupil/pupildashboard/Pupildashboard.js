@@ -111,13 +111,16 @@ const PupuilDashboard = (props) => {
             session, // current or new session
             userInfo
         } = payload
-        console.log('Event Received', event, payload);
+        // console.log('Event Received', event, payload);
         switch (type) {
             case QB.webrtc.EVENT_TYPE.CALL:
-                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo })
+                props.navigation.navigate('Call', { userType: 'Pupil', sessionId: session.id, userInfo: userInfo, initiatorId: userId })
                 break;
             case QB.webrtc.EVENT_TYPE.HANG_UP:
                 // props.navigation.goBack()
+                break;
+            case QB.webrtc.EVENT_TYPE.RECEIVED_VIDEO_TRACK:
+                console.log('RECEIVED_VIDEO_TRACK', payload);
                 break;
             default:
                 break;
@@ -202,7 +205,8 @@ const PupuilDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                showMessage(MESSAGE.scheduledTime)
+                startLiveClassAndroid()
+                // showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }
@@ -225,7 +229,7 @@ const PupuilDashboard = (props) => {
             let teacherQBUserID = dataOfSubView.TeacherQBUserID
             let title = dataOfSubView.LessonTopic
 
-            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
+            console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
             if (Platform.OS == 'android') {
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, channels, (error, ID) => {
@@ -233,7 +237,7 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, title, channels, false, (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,false, title, channels,  (id) => {
                     console.log('hi id:---------', id)
                 })
             }
@@ -456,14 +460,14 @@ const PupuilDashboard = (props) => {
                                                                                                 <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
                                                                                                 <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
                                                                                             </TouchableOpacity> */}
-                                                                                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                                                                <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
-                                                                                                {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                                            {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                                                <View style={PAGESTYLE.fileBoxGrpWrap}>
+                                                                                                    <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
                                                                                                     <FlatList
                                                                                                         data={dataOfSubView.MaterialList}
                                                                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                                         renderItem={({ item, index }) => (
-                                                                                                            <TouchableOpacity onPress={() => {setLoader(true), Download(item, (res) => {
+                                                                                                            <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
                                                                                                                 setLoader(false)
                                                                                                             })}} style={PAGESTYLE.downloaBtn}>
                                                                                                                 <View style={PAGESTYLE.fileGrp}>
@@ -482,10 +486,10 @@ const PupuilDashboard = (props) => {
                                                                                                         )}
                                                                                                         keyExtractor={(item, index) => index.toString()}
                                                                                                     />
-                                                                                                    :
-                                                                                                    <Text style={{ textAlign: 'left' }}>0 Attachment</Text>
-                                                                                                }
-                                                                                            </View>
+                                                                                                </View>
+                                                                                                :
+                                                                                                null
+                                                                                            }
                                                                                         </View>
                                                                                         <View style={PAGESTYLE.requirementofClass}>
                                                                                             <Text style={PAGESTYLE.requireText}>What you will need</Text>

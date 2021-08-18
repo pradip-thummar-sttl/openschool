@@ -10,29 +10,37 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
     },
+    mainPage1: {
+        flexDirection: 'row',
+        flex: 1,
+        marginTop: hp(-6)
+    },
     container: {
         flex: 1,
         flexDirection: 'row'
     },
     backOpacity:{
-        opacity: 0.4,
         position: 'absolute',
         top: 0,
         left:0,
-        height: 66,
+        height: hp(10.41),
     },
     lable: {
-        width: 55,
-        height: 49,
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
-        // marginBottom: 10,
+        fontSize: hp(1.82),
+        // marginBottom: 20,
+        //DP
+        marginBottom: 15,
+        height: hp(10.41),
+        paddingTop: hp(8)
     },
     dayRightmain: {
-        height: 66,
+        height: hp(10.41),
         paddingLeft: hp(1.56),
         paddingTop: 4,
         justifyContent: 'center',
+        marginBottom: 15,
     },
     labledataTitle: {
         fontSize: hp(1.82),
@@ -41,14 +49,12 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     dayLeft: {
-        width: 65,
-        height: 66,
+        width: hp(10.41),
+        height: hp(10.41),
         alignItems: 'center',
-        paddingLeft: hp(1),
-        paddingRight: hp(1),
-        paddingTop: hp(1),
+        justifyContent: 'center',
         marginBottom: 15,
-        marginRight: 5,
+        marginLeft: 35,
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
@@ -87,9 +93,20 @@ export default StyleSheet.create({
         color:COLORS.darkGray,
     },
     backgroundTable:{
-        backgroundColor:COLORS.backgroundColorCommon,
+        backgroundColor:COLORS.white,
     },
     days: {
-        marginTop: 45,
+        // marginTop: 45,
+    },
+    attachmentTitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    attachmentIcon: {
+        width: hp(1.03),
+        height: hp(1.95),
+        resizeMode: 'contain',
+        marginRight: 13,
     },
 });

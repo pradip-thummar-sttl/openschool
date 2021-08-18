@@ -10,6 +10,11 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
     },
+    mainPage1: {
+        flexDirection: 'row',
+        flex: 1,
+        marginTop: hp(-7.35)
+    },
     container: {
         flex: 1,
         flexDirection: 'row'
@@ -17,15 +22,19 @@ export default StyleSheet.create({
     days: {
         flexDirection: 'column'
     },
-    day: {
-        width: 200,
-        height: 100
-    },
+    // day: {
+    //     width: 200,
+    //     height: 100
+    // },
     lable: {
-        width: hp(16),
-        height: hp(8.59),
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
+        fontSize: hp(1.82),
+        // marginBottom: 20,
+        //DP
+        marginBottom: 15,
+        height: hp(10.41),
+        paddingTop: hp(8)
     },
     dayRightmain: {
         width: hp(16),
@@ -40,12 +49,12 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     dayLeft: {
-        width: hp(15),
-        height: hp(8.59),
+        width: hp(10.41),
+        height: hp(10.41),
         alignItems: 'center',
-        paddingLeft: hp(1),
-        paddingRight: hp(1),
-        paddingTop: hp(2.5),
+        justifyContent: 'center',
+        marginBottom: 15,
+        marginLeft: 35,
     },
     lableDay: {
         fontFamily:FONTS.fontSemiBold,
@@ -98,8 +107,8 @@ export default StyleSheet.create({
         // marginTop:hp(3.25),
     },
     backgroundTable:{
-        backgroundColor:COLORS.backgroundColorCommon,
+        backgroundColor:COLORS.white,
         flex: 1,
-        marginTop:hp(3.25),
+        marginTop: 35,
     },
 });

@@ -36,7 +36,7 @@ export default HeaderWhite;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(3.90),
-        paddingRight: hp(2.0),
+        paddingRight: 0,
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
         paddingBottom: hp(2),
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingRight: hp(2.0),
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -54,14 +55,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: 40,
-        height: 40,
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
     },
     calnderDashHeaderIcon: {
-        width: 40,
+        width: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
+        height: hp(5.20),
     },
     filterbarMain: {
         flexDirection: 'row',

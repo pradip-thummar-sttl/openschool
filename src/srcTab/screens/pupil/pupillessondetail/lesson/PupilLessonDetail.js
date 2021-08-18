@@ -164,7 +164,7 @@ const PupilLessonDetailInternal = (props) => {
                                             <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                                                 <View style={PAGESTYLE.largeVideoBlock}>
                                                     {item.RecordingList.length == 0 ?
-                                                        <Image source={require('../../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
+                                                        <Image source={require('../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
                                                         :
                                                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', backgroundColor: COLORS.blueBorder }}>
                                                             <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
@@ -214,7 +214,7 @@ const PupilLessonDetailInternal = (props) => {
                                                         item != undefined && item.MaterialList.length > 0 ?
                                                             item.MaterialList.map((obj) => {
                                                                 return (
-                                                                    <TouchableOpacity onPress={() => {setLoader(true), Download(obj, (res) => {
+                                                                    <TouchableOpacity onPress={() => {setLoader(true); Download(obj, (res) => {
                                                                         setLoader(false)
                                                                     })}} style={PAGESTYLE.fileGrp}>
                                                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{obj.originalname}</Text>
@@ -229,7 +229,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                             }
                                                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                         </View>
-                                                                        {/* <Image source={require('../../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
+                                                                        {/* <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
                                                                     </TouchableOpacity>
                                                                 )
                                                             }) :
@@ -239,7 +239,7 @@ const PupilLessonDetailInternal = (props) => {
                                                 </View>
 
                                                 <View style={PAGESTYLE.thumbVideo}>
-                                                    <Image source={require('../../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
+                                                    <Image source={require('../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
 
                                                 </View>
                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
@@ -252,7 +252,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                         // props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})
                                                                         <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setTappedItem(index), setWorkSpaceEdit(false), setWorkSpace(true) }}>
                                                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>Workspace {index + 1}</Text>
-                                                                            <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                                                            <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                                                                         </TouchableOpacity>
                                                                     )
                                                                 }) :
@@ -261,19 +261,19 @@ const PupilLessonDetailInternal = (props) => {
                                                     </ScrollView>
                                                     {/* <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View>
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View>
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View>
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
                             </View> */}
                                                 </View>
                                             </View>

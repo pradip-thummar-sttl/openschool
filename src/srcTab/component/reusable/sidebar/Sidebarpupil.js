@@ -21,7 +21,7 @@ const Sidebar = (props) => {
 
         if (isSmall) {
             Animated.timing(animationValue, {
-                toValue: 225,
+                toValue: hp(29.29),
                 duration: 500
             }).start(() => {
                 action(false)
@@ -29,7 +29,7 @@ const Sidebar = (props) => {
         }
         else {
             Animated.timing(animationValue, {
-                toValue: 72,
+                toValue: hp(9.375),
                 duration: 500
             }).start(() => {
                 action(true)
@@ -41,67 +41,83 @@ const Sidebar = (props) => {
         width: animationValue,
     }
 
-   
+    const showActionChooser = () => {
+        Alert.alert(
+            '',
+            'Do you really want to logout?',
+            [{
+                text: 'YES',
+                onPress: () => pupilLogout(),
+            },
+            {
+                text: 'NO',
+                onPress: () => { },
+            },
+            ],
+            { cancelable: true }
+        )
+    }
 
-    const PupilLogout = () =>{
-         AsyncStorage.setItem('pupil', JSON.stringify(null))
+    const pupilLogout = () => {
+        AsyncStorage.setItem('pupil', JSON.stringify(null))
         props.navigateUser();
 
     }
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={()=>toggleAnimation()} style={styles.userInfo}>
+                <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
                     <Image style={styles.headerProfile} source={Images.proffileLogo} />
                     {/* { uri: baseUrl + User.user.ProfilePicture } */}
                     {
-                        isSmall? null:
-                        <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text>
-                        </View>
+                        isSmall ? null :
+                            <View style={styles.profileTextMain}>
+                                {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
+                                <Text numberOfLines={1} style={[styles.profileTitle, { width: hp(15) }]}>MYED Open School</Text>
+                            </View>
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
-                    
-                    <TouchableOpacity onPress={()=>props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+
+                    <TouchableOpacity onPress={() => props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onSetting()} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.onSetting()} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
@@ -109,29 +125,29 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.MyAvatar}
                         />
-                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
+                        {
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onParentZone()} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.onParentZone()} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
                             source={Images.OpenSchool}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>PupilLogout()} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => showActionChooser()} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
                         <Image
                             style={styles.menuIcon}
-                            source={Images.OpenSchool}
+                            source={Images.logout}
                         />
                         {
-                            isSmall? null:
-                            <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
+                            isSmall ? null :
+                                <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         }
                     </TouchableOpacity>
                 </View>
@@ -141,15 +157,15 @@ const Sidebar = (props) => {
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                     {
-                        isSmall? null:
-                        <>
-                            <View style={styles.profileTextMain}>
-                                <Text numberOfLines={1} style={[styles.profileTitleBottom,{width:hp(12)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            </View>
-                            <TouchableOpacity style={styles.moreMenu}>
-                                <Image style={styles.moreIcon} source={Images.SidebarMore} />
-                            </TouchableOpacity>
-                        </>
+                        isSmall ? null :
+                            <>
+                                <View style={styles.profileTextMain}>
+                                    <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: hp(12) }]}>{User.user.FirstName} {User.user.LastName}</Text>
+                                </View>
+                                <TouchableOpacity style={styles.moreMenu}>
+                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                </TouchableOpacity>
+                            </>
                     }
                 </View>
             </Animated.View>
@@ -161,11 +177,11 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor:COLORS.SidebarHeaderBack,
+        backgroundColor: COLORS.SidebarHeaderBack,
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,
-        shadowOffset: { 
+        shadowOffset: {
             width: 2,
             height: 0,
         },
@@ -274,7 +290,7 @@ const styles = StyleSheet.create({
     },
     moreMenu: {
         // position: 'absolute',
-        marginLeft:hp(4),
+        marginLeft: hp(4),
         right: 0,
     },
 });

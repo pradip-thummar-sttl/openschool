@@ -405,7 +405,7 @@ export default StyleSheet.create({
         marginBottom: hp(1.30),
     },
     pupilData: {
-        // height:wp(10),
+        height:wp(6),
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius:10,

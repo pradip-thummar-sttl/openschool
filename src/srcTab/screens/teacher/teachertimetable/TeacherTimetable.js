@@ -23,7 +23,7 @@ import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 
 const TeacherTimeTable = (props) => {
-    const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
     const dispatch = useDispatch()
 
@@ -104,6 +104,7 @@ const TeacherTimeTable = (props) => {
 
                     let timeSpan = (et - st);
                     span = (timeSpan == 100) ? 2 : (timeSpan < 100) ? 1 : (timeSpan > 100 && timeSpan < 200) ? 3 : 4;
+                    prevSpan = span;
 
                     lblTitle = `${subName} - ${lessonTopic}`;
                     lblTime = `${startTime} - ${endTime}`;
@@ -122,7 +123,7 @@ const TeacherTimeTable = (props) => {
             );
         } else {
             return (
-                <View style={{ ...PAGESTYLE.day, zIndex: 1, width: cellWidth, height: 66 }} />
+                <View style={{ ...PAGESTYLE.day, width: cellWidth, height: hp(10.41), marginBottom: 15, borderColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, }} />
             );
         }
     }
@@ -200,7 +201,7 @@ const TeacherTimeTable = (props) => {
                                 navigateToAddLesson={() => setTeacherLessonAdd(true)}
                                 refreshList={() => refresh()} />
 
-                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, top: 20, left: 15, }}>
+                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isTimeTableLoading ?
                                     <ActivityIndicator
                                         style={{ flex: 1 }}
@@ -208,21 +209,21 @@ const TeacherTimeTable = (props) => {
                                         color={COLORS.yellowDark} />
                                     :
                                     timeTableData.length > 0 ?
-                                        <View style={{ ...PAGESTYLE.mainPage }}>
+                                        <View style={{ ...PAGESTYLE.mainPage1 }}>
                                             <View style={PAGESTYLE.days}>
-                                                {days.map((data) => (
-                                                    <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay() - 1] == data ? COLORS.daySelect : null }}>
+                                                {days.map((data, index) => (
+                                                    <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
                                                         <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                                     </View>
                                                 ))}
                                             </View>
 
-                                            <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingTop: hp(1.5), paddingLeft: 0, }}
+                                            <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
                                                 horizontal={true}>
 
                                                 {time.map((data, timneKey) => (
-                                                    <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                                        <Text style={{ ...PAGESTYLE.lable }}>{data}</Text>
+                                                    <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth, }}>
+                                                        <Text style={{ ...PAGESTYLE.lable, }}>{data}</Text>
 
                                                         <View style={{ ...PAGESTYLE.timeLabel }}>
                                                             {days.map((data, dayKey) => (
@@ -241,7 +242,9 @@ const TeacherTimeTable = (props) => {
                                         // <View style={{ height: hp(13), justifyContent: 'center' }}>
                                         //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
                                         // </View>
-                                        <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                                        <ScrollView>
+                                            <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                                        </ScrollView>
                                 }
                             </View>
                         </View>

@@ -218,11 +218,11 @@ export default StyleSheet.create({
         width: 'auto',
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
-        borderRadius: hp(1.5),
+        borderRadius: 8,
         paddingLeft: hp(1.30),
         paddingRight: hp(2.21),
-        paddingTop: hp(2.60),
-        paddingBottom: hp(2.60),
+        paddingTop: hp(2),
+        paddingBottom: hp(2),
         marginBottom: hp(1.04),
         justifyContent: 'space-between',
     },
@@ -232,9 +232,8 @@ export default StyleSheet.create({
         paddingLeft: hp(1.2),
     },
     checkMark: {
-        width: hp(1.8),
-        height: hp(1.8),
-        fontFamily: FONTS.fontBold,
+        width: hp(1.95),
+        height: hp(1.95),
         resizeMode: 'contain',
     },
     toggleGrp: {
@@ -927,17 +926,18 @@ export default StyleSheet.create({
         marginRight: hp(4.10),
     },
     videoThumbnail: {
-        width: hp(28.25),
+        width: '100%',
         height: hp(13.54),
         resizeMode: 'contain',
-        borderRadius: hp(0.26),
+        borderRadius: 6,
     },
     videoShadow: {
-        width: hp(27.8),
-        resizeMode: 'contain',
+        width: '100%',
+        resizeMode: 'cover',
         position: 'absolute',
-        top: hp(-1.8),
-        left: hp(0.26),
+        top: 0,
+        left: 0,
+        borderRadius: 6,
     },
     videoPlay: {
         width: hp(5.20),
@@ -1005,6 +1005,7 @@ export default StyleSheet.create({
     alignRow: {
         flexDirection: 'row',
         width: '68.5%',
+        alignItems: 'center',
     },
     alignRow1: {
         flexDirection: 'row',
@@ -1190,7 +1191,7 @@ export default StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         width: hp(28.25),
-        borderRadius: hp(1.08),
+        borderRadius: 6,
         marginRight: hp(1.04),
         backgroundColor: COLORS.white,
         marginBottom: hp(1.5),
@@ -1237,7 +1238,7 @@ export default StyleSheet.create({
     videoCardThumb: {
         position: 'relative',
         flexDirection: 'row',
-        width: hp(28.25),
+        width: '100%',
     },
     lessonDue: {
         height: hp(17.44),
@@ -1331,17 +1332,16 @@ export default StyleSheet.create({
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
-        color: COLORS.darkGray,
-        borderRadius: hp(1),
+        color: COLORS.darkGrayIntro,
+        borderRadius: 6,
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(2.2),
         paddingRight: hp(4),
-        paddingTop: hp(1.2),
-        paddingBottom: hp(1.4),
+        paddingTop: hp(1.1),
+        paddingBottom: hp(1.2),
         alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontSemiBold,
+        fontFamily: FONTS.fontRegular,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
@@ -1422,10 +1422,10 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    calnderDashHeaderIcon: {
-        width: 40,
+    massagesIcon: {
+        width: hp(5.20),
+        height: hp(5.20),
         resizeMode: 'contain',
-        height: 40,
     },
     homeworkView: {
         width: hp(32.5),
@@ -1453,7 +1453,7 @@ export default StyleSheet.create({
         flexDirection: 'row', width:hp(60), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
-        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+        height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 6, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',

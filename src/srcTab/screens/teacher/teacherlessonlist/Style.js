@@ -86,8 +86,8 @@ export default StyleSheet.create({
         shadowColor: COLORS.SidebarHeaderShadow,
         shadowOffset: {width: 0, height: 0,},
         shadowOpacity: 0.12,
-        borderRadius: 8,
-        height: 68,
+        borderRadius: 6,
+        height: 80,
         marginBottom: hp(1),
         borderRadius:hp(1),
     },
@@ -144,12 +144,14 @@ export default StyleSheet.create({
         alignSelf:'center',
     },
     pupilDetailLink: {
-        width: hp(12),
         alignItems: 'flex-end',
+        position: 'absolute',
+        right: 20,
     },
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+        
     },
     pupilImage: {
         width: hp(3.7),
@@ -169,34 +171,32 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     border: {
-        height: hp(5.85),
+        height: hp(4.85),
         backgroundColor: COLORS.borderLesoon,
-        padding: 3,
         borderRadius: hp(5),
         marginRight: hp(2.1),
-        marginLeft: hp(1.8),
+        marginLeft: 12,
         width:hp(0.5),
         position:'absolute',
-        top:hp(-1.5),
+
     },
     firstColumn:{
       paddingLeft: hp(4.5),
-      width:hp(20),
+      width:hp(25),
+      justifyContent: 'center',
     },
     secoundColumn:{
-        width:hp(19),
+        width:hp(22),
     },
     lastColumn:{
         width:hp(30.55),
     },
     yesText:{
       fontFamily: FONTS.fontSemiBold,
-      color:COLORS.dashboardPupilBlue, 
       fontSize:hp(1.82), 
     },
     noText:{
         fontFamily: FONTS.fontSemiBold,
-        color:COLORS.yellowDark, 
         fontSize:hp(1.82), 
     },
     whiteBg: {
