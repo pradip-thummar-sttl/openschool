@@ -12,7 +12,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { opacity } from "../../utils/Constant";
+import { opacity } from "../../../utils/Constant";
 const ChatHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>

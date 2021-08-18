@@ -17,7 +17,7 @@ const SettingHeader = (props) => {
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={require('../../../assets/images/notification2.png')} />
+                        <Image style={styles.massagesIcon} source={require('../../../../assets/images/notification2.png')} />
                     </TouchableOpacity>
                 </View>
             </View>

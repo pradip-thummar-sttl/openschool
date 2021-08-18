@@ -53,12 +53,12 @@ const PupilHomeWorkMarked = (props) => {
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.containerWrapTopPurple}>
                             <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
-                                <Image source={require('../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookPurpleStip} />
+                                <Image source={require('../../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookPurpleStip} />
                                 <Text style={PAGESTYLE.blueStripText}>Homework has been marked!</Text>
                             </View>
                             <View style={PAGESTYLE.userRight}>
                                 <View style={[PAGESTYLE.markedLabel, PAGESTYLE.markSubmittedSpaceLeft]}>
-                                    <Image source={require('../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
+                                    <Image source={require('../../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
                                     <Text style={PAGESTYLE.markedText}>Marked</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>

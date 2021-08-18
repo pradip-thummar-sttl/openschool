@@ -49,12 +49,12 @@ const PupilHomeWorkSubmitted = (props) => {
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
-                            <Image source={require('../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} />
+                            <Image source={require('../../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} />
                             <Text style={PAGESTYLE.blueStripText}>Homework submitted on time!</Text>
                         </View>
                         <View style={PAGESTYLE.userRight}>
                             <View style={PAGESTYLE.markedLabel}>
-                                <Image source={require('../../../../assets/images/submitted2.png')} style={PAGESTYLE.submittedIcon} />
+                                <Image source={require('../../../../../assets/images/submitted2.png')} style={PAGESTYLE.submittedIcon} />
                                 <Text style={PAGESTYLE.markedText}>Submitted</Text>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>

@@ -94,7 +94,7 @@ const Popupaddrecording = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => toggleModal()}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../assets/images/cancel2.png')} />
+                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
@@ -107,11 +107,11 @@ const Popupaddrecording = (props) => {
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
                                     </TouchableOpacity> */}
                                     <TouchableOpacity onPress={() => { toggleModal(); props.onScreeVoice() }} style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={require('../../../assets/images/screen-voice2.png')} />
+                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-voice2.png')} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => { onCameraOnly() }} style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={require('../../../assets/images/camera-only2.png')} />
+                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/camera-only2.png')} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
                                 </View>
