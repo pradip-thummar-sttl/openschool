@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Dimensions, StyleSheet } from 'react-native'
-import FONTS from "../../../utils/Fonts";
-import COLORS from "../../../utils/Colors";
+import FONTS from "../../../../utils/Fonts";
+import COLORS from "../../../../utils/Colors";
 export default StyleSheet.create({
     workSpaceView: {
         paddingVertical: hp(2),

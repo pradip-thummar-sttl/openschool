@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image, FlatList, SafeAreaView, BackHandler, Platform } from 'react-native'
 import NewMessageHeader from '../../../component/reusable/header/NewMessageHeader'
-import COLORS from '../../../utils/Colors';
-import STYLE from '../../../utils/Style';
+import COLORS from '../../../../utils/Colors';
+import STYLE from '../../../../utils/Style';
 import styles from './Styles';
 import ToggleSwitch from 'toggle-switch-react-native';
-import Images from '../../../utils/Images';
+import Images from '../../../../utils/Images';
 
-import { EndPoints } from '../../../service/EndPoints'
-import { User } from '../../../utils/Model'
-import { opacity, showMessage, showMessageWithCallBack } from '../../../utils/Constant'
+import { EndPoints } from '../../../../service/EndPoints'
+import { User } from '../../../../utils/Model'
+import { opacity, showMessage, showMessageWithCallBack } from '../../../../utils/Constant'
 import CheckBox from '@react-native-community/checkbox';
-import { Service } from '../../../service/Service'
-import MESSAGE from '../../../utils/Messages'
+import { Service } from '../../../../service/Service'
+import MESSAGE from '../../../../utils/Messages'
 import { ScrollView } from 'react-native-gesture-handler';
 
 const NewMessage = (props) => {

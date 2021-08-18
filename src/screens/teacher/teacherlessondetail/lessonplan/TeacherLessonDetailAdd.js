@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+import COLORS from "../../../../../utils/Colors";
+import STYLE from '../../../../../utils/Style';
+import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../utils/Fonts';
+import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack, isRunningFromVirtualDevice } from "../../../../utils/Constant";
+import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack, isRunningFromVirtualDevice } from "../../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
-import MESSAGE from "../../../../utils/Messages";
+import MESSAGE from "../../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderAddNew from "./header/HeaderAddNew";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
@@ -23,9 +23,9 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import DocumentPicker from 'react-native-document-picker';
-import { Service } from "../../../../service/Service";
-import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { Service } from "../../../../../service/Service";
+import { EndPoints } from "../../../../../service/EndPoints";
+import { User } from "../../../../../utils/Model";
 import RecordScreen from 'react-native-record-screen';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";

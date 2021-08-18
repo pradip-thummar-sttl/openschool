@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { EndPoints } from '../../../service/EndPoints'
-import { Service } from '../../../service/Service'
-import { baseUrl, opacity, showMessage } from '../../../utils/Constant'
-import Images from '../../../utils/Images'
-import STYLE from '../../../utils/Style'
+import { EndPoints } from '../../../../service/EndPoints'
+import { Service } from '../../../../service/Service'
+import { baseUrl, opacity, showMessage } from '../../../../utils/Constant'
+import Images from '../../../../utils/Images'
+import STYLE from '../../../../utils/Style'
 import HeaderPM from './HeaderPM'
 import PAGESTYLE from './StyleList'
 import GroupSetUp from './GroupSetUp'
-import COLORS from '../../../utils/Colors'
-import { User } from '../../../utils/Model'
+import COLORS from '../../../../utils/Colors'
+import { User } from '../../../../utils/Model'
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity

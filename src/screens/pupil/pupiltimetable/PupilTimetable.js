@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, ActivityIndicator } from "react-native";
-import STYLE from '../../../utils/Style';
+import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
-import { cellWidth, Lesson, opacity, Var } from "../../../utils/Constant";
+import { cellWidth, Lesson, opacity, Var } from "../../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header3 from '../../../component/reusable/header/bulck/Header3'
 import { useDispatch } from "react-redux";
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
-import COLORS from "../../../utils/Colors";
-import { setCalendarEventData } from "../../../actions/action";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import COLORS from "../../../../utils/Colors";
+import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import Images from "../../../utils/Images";
-import MESSAGE from "../../../utils/Messages";
+import Images from "../../../../utils/Images";
+import MESSAGE from "../../../../utils/Messages";
 
 const PupilTimetable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

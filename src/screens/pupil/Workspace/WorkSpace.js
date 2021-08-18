@@ -4,14 +4,14 @@ import WorkSpaceHeader from "../../../component/reusable/header/WorkSpaceHeader"
 import PAGESTYLE from './Style';
 import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
 import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas';
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
-import { getFileExtention } from "../../../utils/Download";
-import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../utils/Constant";
-import MESSAGE from "../../../utils/Messages";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+import { getFileExtention } from "../../../../utils/Download";
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import MESSAGE from "../../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
-import Images from "../../../utils/Images";
+import Images from "../../../../utils/Images";
 const WorkSpace = (props) => {
     const [pathCount, setPathCount] = useState(-1)
     const [workSpace, setWorkSpace] = useState([])

@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import Images from '../../../utils/Images';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import FONTS from '../../../utils/Fonts';
+import FONTS from '../../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
-import { opacity, showMessage } from "../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
 import Header from "./Header";
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import MESSAGE from "../../../utils/Messages";
+import MESSAGE from "../../../../utils/Messages";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (

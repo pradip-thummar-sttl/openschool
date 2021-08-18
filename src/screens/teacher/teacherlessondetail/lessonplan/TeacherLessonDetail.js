@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, PermissionsAndroid, Alert, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+import COLORS from "../../../../../utils/Colors";
+import STYLE from '../../../../../utils/Style';
+import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../utils/Fonts';
+import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
-import { Download } from "../../../../utils/Download";
-import { baseUrl } from "../../../../utils/Constant";
+import { Download } from "../../../../../utils/Download";
+import { baseUrl } from "../../../../../utils/Constant";
 import { floor } from "react-native-reanimated";
 const TLDetail = (props) => {
     const [isLoading, setLoader] = useState(false)

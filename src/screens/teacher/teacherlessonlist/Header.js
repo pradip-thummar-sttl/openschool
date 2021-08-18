@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import Images from '../../../utils/Images';
-import FONTS from '../../../utils/Fonts';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
+import FONTS from '../../../../utils/Fonts';
 import {
     Menu,
     MenuOptions,
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { opacity } from "../../../utils/Constant";
+import { opacity } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 const Header = (props) => {

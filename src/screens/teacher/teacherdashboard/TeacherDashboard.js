@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import Images from '../../../utils/Images';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import FONTS from '../../../utils/Fonts';
+import FONTS from '../../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../utils/Constant";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { appSettings, User } from "../../../utils/Model";
+import { appSettings, User } from "../../../../utils/Model";
 import TeacherTimeTable from "../teachertimetable/TeacherTimetable";
 import TeacherLessonList from "../teacherlessonlist/TeacherLessonList";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -24,10 +24,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import PupilManagement from "../pupilmanagement/PupilManagement";
 import Message from "../GlobalMessage/Message";
 import PupilProfileView from "../pupilmanagement/PupilProfileView";
-import MESSAGE from "../../../utils/Messages";
+import MESSAGE from "../../../../utils/Messages";
 import QB from "quickblox-react-native-sdk";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import { Download } from "../../../utils/Download";
+import { Download } from "../../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules;
 

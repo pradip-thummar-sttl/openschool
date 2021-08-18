@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
+import COLORS from "../../../../../utils/Colors";
+import STYLE from '../../../../../utils/Style';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../utils/Fonts';
+import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
@@ -12,9 +12,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header15 from '../../../../component/reusable/header/bulck/Header15'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
-import Images from "../../../../utils/Images";
-import { Download } from "../../../../utils/Download";
-import { baseUrl, opacity } from "../../../../utils/Constant";
+import Images from "../../../../../utils/Images";
+import { Download } from "../../../../../utils/Download";
+import { baseUrl, opacity } from "../../../../../utils/Constant";
 import Video from "react-native-video";
 var moment = require('moment');
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState, } from "react";
 import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import Images from '../../../utils/Images';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import FONTS from '../../../utils/Fonts';
+import FONTS from '../../../../utils/Fonts';
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import HeaderWhitepupil from "../../../component/reusable/header/HeaderWhitepupil";
 import HeaderWhitewithoutsearch from "../../../component/reusable/header/HeaderWhitewithoutsearch";
@@ -22,11 +22,11 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
 import moment from "moment";
-import { opacity } from "../../../utils/Constant";
+import { opacity } from "../../../../utils/Constant";
 
 const PupilLessonDetail = (props) => {
     console.log('props of homework', props.navigation)

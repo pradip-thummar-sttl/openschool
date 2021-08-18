@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderTT from "./header/HeaderTT";
-import { cellWidth, opacity, showMessage, Var } from "../../../utils/Constant";
+import { cellWidth, opacity, showMessage, Var } from "../../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
-import { EndPoints } from "../../../service/EndPoints";
-import { Service } from "../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { Service } from "../../../../service/Service";
 import { useDispatch } from "react-redux";
-import { setCalendarEventData } from "../../../actions/action";
+import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { User } from "../../../utils/Model";
-import { Lesson } from "../../../utils/Constant";
+import { User } from "../../../../utils/Model";
+import { Lesson } from "../../../../utils/Constant";
 import TLDetail from "../teacherlessondetail/lessonplan/TeacherLessonDetail";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import Images from "../../../utils/Images";
-import MESSAGE from "../../../utils/Messages";
+import Images from "../../../../utils/Images";
+import MESSAGE from "../../../../utils/Messages";
 
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

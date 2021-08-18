@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, ActivityIndicator, } from 'react-native'
 import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
-import { EndPoints } from '../../../service/EndPoints';
-import { Service } from '../../../service/Service';
-import COLORS from '../../../utils/Colors';
-import { opacity, showMessage } from '../../../utils/Constant';
-import Images from '../../../utils/Images';
-import MESSAGE from '../../../utils/Messages';
-import { User } from '../../../utils/Model';
+import { EndPoints } from '../../../../service/EndPoints';
+import { Service } from '../../../../service/Service';
+import COLORS from '../../../../utils/Colors';
+import { opacity, showMessage } from '../../../../utils/Constant';
+import Images from '../../../../utils/Images';
+import MESSAGE from '../../../../utils/Messages';
+import { User } from '../../../../utils/Model';
 import NewMessage from './NewMessage';
 import PAGESTYLE from './Styles';
 

@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, SafeAreaView, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid, NativeEventEmitter } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import Images from '../../../utils/Images';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import FONTS from '../../../utils/Fonts';
+import FONTS from '../../../../utils/Fonts';
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header from "../../../component/reusable/header/Header";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useImperativeHandle } from "react/cjs/react.development";
-import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../utils/Constant";
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
+import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../../utils/Constant";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
 import moment from "moment";
 import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
 import ParentZoneSwitch from "../parentzone/ParentZoneSwitch";
 import Setting from "../../Setting/Setting";
 import Chat from "../../Chat/Chat";
-import MESSAGE from "../../../utils/Messages";
+import MESSAGE from "../../../../utils/Messages";
 import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/PupilHomeWorkSubmitted";
 import PupilHomeWorkMarked from "../../pupil/pupillessondetail/homework/PupilHomeWorkMarked";
 import PupilHomeWorkDetail from "../../pupil/pupillessondetail/homework/PupilHomeWorkDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import QB from "quickblox-react-native-sdk";
 import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
-import { Download } from "../../../utils/Download";
+import { Download } from "../../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules
 
