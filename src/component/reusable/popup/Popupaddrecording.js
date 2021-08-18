@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import FONTS from '../../../utils/Fonts';
-import Images from '../../../utils/Images';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import FONTS from '../../../../utils/Fonts';
+import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
-import { opacity } from "../../../utils/Constant";
-import { Download } from "../../../utils/Download";
+import { opacity } from "../../../../utils/Constant";
+import { Download } from "../../../../utils/Download";
 
 const Popupaddrecording = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);

@@ -2,13 +2,13 @@ import QB from "quickblox-react-native-sdk";
 import React, { useState, useEffect, useRef } from "react";
 import { Image, Text, View } from "react-native"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { baseUrl, opacity, showMessage } from "../../../utils/Constant"
+import { baseUrl, opacity, showMessage } from "../../../../utils/Constant"
 import { initApp } from "./CallConfiguration";
 import Style from './Style'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Images from "../../../utils/Images";
-import COLORS from "../../../utils/Colors";
-import { User } from "../../../utils/Model";
+import Images from "../../../../utils/Images";
+import COLORS from "../../../../utils/Colors";
+import { User } from "../../../../utils/Model";
 import WebRTCView from 'quickblox-react-native-sdk/RTCView'
 
 const Call = (props) => {

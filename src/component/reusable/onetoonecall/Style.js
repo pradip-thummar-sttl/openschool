@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from '../../../utils/Colors';
-import FONTS from '../../../utils/Fonts';
+import COLORS from '../../../../utils/Colors';
+import FONTS from '../../../../utils/Fonts';
 
 const { width, height } = Dimensions.get('window');
 

@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { NativeModules, View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform, ActivityIndicator, ScrollView, FlatList } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import FONTS from '../../../utils/Fonts';
-import Images from '../../../utils/Images';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import FONTS from '../../../../utils/Fonts';
+import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
-import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity, showMessage } from "../../../utils/Constant";
+import { baseUrl, cellWidth, isRunningFromVirtualDevice, Lesson, opacity, showMessage } from "../../../../utils/Constant";
 import PAGESTYLE from '../../../screens/teacher/teachertimetable/Style';
 import moment from 'moment';
-import { User } from "../../../utils/Model";
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import MESSAGE from "../../../utils/Messages";
-import { Download } from "../../../utils/Download";
+import { User } from "../../../../utils/Model";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import MESSAGE from "../../../../utils/Messages";
+import { Download } from "../../../../utils/Download";
 
 const { CallModule, CallModuleIos } = NativeModules;
 

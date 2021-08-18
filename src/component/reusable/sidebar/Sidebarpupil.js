@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import FONTS from '../../../utils/Fonts';
-import Images from '../../../utils/Images';
-import { baseUrl } from "../../../utils/Constant";
-import { User } from "../../../utils/Model";
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import FONTS from '../../../../utils/Fonts';
+import Images from '../../../../utils/Images';
+import { baseUrl } from "../../../../utils/Constant";
+import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Sidebar = (props) => {

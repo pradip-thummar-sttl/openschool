@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { View, Dimensions, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, widthPercentageToDP } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import Images from '../../../utils/Images';
-import FONTS from '../../../utils/Fonts';
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import Images from '../../../../utils/Images';
+import FONTS from '../../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
 const { width, height } = Dimensions.get('window');
@@ -14,7 +14,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { opacity } from "../../../utils/Constant";
+import { opacity } from "../../../../utils/Constant";
 const HeaderWhitepupilMessage = (props) => {
 
     const textInput = useRef(null);

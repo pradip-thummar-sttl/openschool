@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../utils/Colors";
-import STYLE from '../../../utils/Style';
-import FONTS from '../../../utils/Fonts';
-import { opacity } from "../../../utils/Constant";
-import { User } from "../../../utils/Model";
-import Images from "../../../utils/Images";
+import COLORS from "../../../../utils/Colors";
+import STYLE from '../../../../utils/Style';
+import FONTS from '../../../../utils/Fonts';
+import { opacity } from "../../../../utils/Constant";
+import { User } from "../../../../utils/Model";
+import Images from "../../../../utils/Images";
 
 const Header = (props) => {
     return (
