@@ -21,7 +21,7 @@ import TeacherLessonList from '../screens/teacher/teacherlessonlist/TeacherLesso
 import TeacherLessonDetail from '../screens/teacher/teacherlessondetail/TeacherLessonDetail';
 import TeacherLessonEmpty from '../screens/teacher/teachertimetable/TeacherTimetable';
 import TeacherTimeTable from '../screens/teacher/teachertimetable/TeacherTimetable';
-import STYLE from '../utils/Style';
+import STYLE from '../../utils/Style';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
