@@ -35,9 +35,14 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 import RecordScreen from 'react-native-record-screen';
 
-
-
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import Participants from "../../../../../svg/teacher/dashboard/Participants";
+import Clock from "../../../../../svg/teacher/dashboard/Clock";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 
 
 const { DialogModule, Dialog } = NativeModules;
@@ -368,9 +373,8 @@ const TLDetailEdit = (props) => {
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                <Image
-                                    style={PAGESTYLE.userIcon1}
-                                    source={Images.PopupCloseIcon} />
+                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
+                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2)} width={hp(2)} />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -468,7 +472,8 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
@@ -489,8 +494,11 @@ const TLDetailEdit = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                        {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
+                        <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy, { width: hp(13) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
@@ -511,9 +519,11 @@ const TLDetailEdit = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
                 <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
@@ -534,9 +544,11 @@ const TLDetailEdit = (props) => {
                 <Text style={PAGESTYLE.subjectText}> </Text>
                 <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
                         <FlatList
@@ -599,7 +611,7 @@ const TLDetailEdit = (props) => {
                 userNames.push(pupil.Email)
                 names.push(pupil.PupilName)
             });
-            
+
             selectedPupils.forEach(pupil => {
                 userIDs.push(pupil.QBUserID)
                 userNames.push(pupil.Email)
@@ -840,9 +852,11 @@ const TLDetailEdit = (props) => {
                                                 <Text style={PAGESTYLE.subjectText}>Date</Text>
                                                 <TouchableOpacity onPress={() => showDatePicker()}>
                                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                        {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                        <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
@@ -918,7 +932,8 @@ const TLDetailEdit = (props) => {
                                         </View>
 
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                            <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                                            {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
+                                            <UploadDoc style={PAGESTYLE.grpThumbVideo} height={120} width={250} />
                                         </TouchableOpacity>
 
                                         {
@@ -928,7 +943,8 @@ const TLDetailEdit = (props) => {
                                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(25) }]}>{item.originalname}</Text>
                                                         {item.uri ?
                                                             <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                                {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                                                <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                             </TouchableOpacity>
                                                             :
                                                             null
@@ -951,9 +967,9 @@ const TLDetailEdit = (props) => {
                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
                         </View>
                     </View> */}
-                                        <View style={PAGESTYLE.thumbVideo}>
+                                        {/* <View style={PAGESTYLE.thumbVideo}>
                                             <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                                        </View>
+                                        </View> */}
                                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                             <TouchableOpacity
                                                 style={PAGESTYLE.buttonGrp}
@@ -967,6 +983,7 @@ const TLDetailEdit = (props) => {
                                                 <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                                 <View style={PAGESTYLE.videoLinkBlock}>
                                                     <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                                                    <PlayBlue style={PAGESTYLE.videoLinkIcon} height={hp(2.38)} width={hp(2.38)} />
                                                     <Text style={PAGESTYLE.videoLinkText}>{lessonData.RecordedLessonName}</Text>
                                                 </View>
                                             </View>
@@ -979,7 +996,10 @@ const TLDetailEdit = (props) => {
                                                 <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                                                 <View style={PAGESTYLE.fileGrp}>
                                                     <Text style={PAGESTYLE.fileName}>{lessonData.ChatTranscript}</Text>
-                                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
+                                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
+                                                        {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
+                                                        <PlayBlue style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                    </TouchableOpacity>
                                                 </View>
                                             </View>
                                             :

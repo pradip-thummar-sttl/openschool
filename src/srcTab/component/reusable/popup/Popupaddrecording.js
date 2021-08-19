@@ -11,6 +11,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../../utils/Constant";
 import { Download } from "../../../../utils/Download";
+import Recording from "../../../../svg/teacher/lessonhwplanner/Recording";
 
 const Popupaddrecording = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -78,7 +79,8 @@ const Popupaddrecording = (props) => {
                         activeOpacity={opacity}
                         onPress={toggleModal}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
-                        <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                        {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
+                        <Recording style={PAGESTYLE.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
                         <Text style={styles.recordLinkText}>Add Recording</Text>
                     </TouchableOpacity>
                     :
