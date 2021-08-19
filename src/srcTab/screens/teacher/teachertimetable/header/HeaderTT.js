@@ -14,6 +14,10 @@ import {
 import PopupAddNewData from "../../../../component/reusable/popup/Popupaddnewdata";
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 
 const HeaderTT = (props) => {
 
@@ -42,13 +46,15 @@ const HeaderTT = (props) => {
                         onPress={() => props.onCalenderPress()}
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
+                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
+                        <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.onAlertPress()}
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -68,8 +74,13 @@ const HeaderTT = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain', }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 20, resizeMode: 'contain', }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        {isSearchActive ?
+                            <CloseBlack height={20} width={20} />
+                            :
+                            <SearchBlue height={20} width={20} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -100,7 +111,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.5),
         borderBottomColor: COLORS.videoLinkBorder,
         borderBottomWidth: 1,
-        
+
     },
     headerMain: {
         flexDirection: 'row',
@@ -227,7 +238,7 @@ const styles = StyleSheet.create({
         marginRight: hp(1)
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white, marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, marginRight: 10, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

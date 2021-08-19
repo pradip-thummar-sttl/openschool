@@ -11,6 +11,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../../utils/Constant";
 import PopupdataSecond from "./PopupdataSecond";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
+import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
 const PopupAddNewData = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -45,13 +49,15 @@ const PopupAddNewData = (props) => {
                 style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                        <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={2.94} width={2.94} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
@@ -62,7 +68,8 @@ const PopupAddNewData = (props) => {
                                         activeOpacity={opacity}
                                         style={styles.entryData}
                                         onPress={() => { setModalVisible(false); props.navigateToAddLesson() }}>
-                                        <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                        <NewLesson style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>New Lesson</Text>
                                     </TouchableOpacity>
                                     <PopupdataSecond />

@@ -12,6 +12,12 @@ import moment from 'moment';
 import { Download } from "../../../../../utils/Download";
 import { baseUrl } from "../../../../../utils/Constant";
 import { floor } from "react-native-reanimated";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../../svg/teacher/dashboard/Clock";
+import Participants from "../../../../../svg/teacher/dashboard/Participants";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
+import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
+
 const TLDetail = (props) => {
     const [isLoading, setLoader] = useState(false)
     const [isRecordLoading, setRecordLoader] = useState(false)
@@ -38,7 +44,8 @@ const TLDetail = (props) => {
                         <View style={PAGESTYLE.dateWhiteBoard}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={PAGESTYLE.alignRow}>
-                                <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} />
+                                {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} /> */}
+                                <Calender style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('DD/MM/yyyy')}</Text>
                             </View>
 
@@ -46,14 +53,16 @@ const TLDetail = (props) => {
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
                             <View style={PAGESTYLE.alignRow}>
-                                <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} />
+                                {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
+                                <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
                             </View>
                         </View>
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={PAGESTYLE.alignRow}>
-                                <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} />
+                                {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} /> */}
+                                <Participants style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: hp(20) }]}>{props.lessonData.GroupName}</Text>
                             </View>
                         </View>
@@ -80,7 +89,8 @@ const TLDetail = (props) => {
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
                                 <View style={PAGESTYLE.checkBoxLabelLine}>
-                                    <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                    {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
+                                    <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                 </View>
                             )}
@@ -147,7 +157,8 @@ const TLDetail = (props) => {
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.white} />
                                                     :
-                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                    // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                    <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                 }
                                             </View>
                                         </TouchableOpacity>
@@ -191,7 +202,8 @@ const TLDetail = (props) => {
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.blueBorder} />
                                                     :
-                                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                    // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                    <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                 }
 
                                             </View>
@@ -208,7 +220,8 @@ const TLDetail = (props) => {
                                 <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                                 <View style={PAGESTYLE.fileGrp}>
                                     <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
+                                    <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                 </View>
                             </View>
                             :

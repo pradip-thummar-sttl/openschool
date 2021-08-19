@@ -17,6 +17,11 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
 import { User } from "../../../../utils/Model";
+import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
 
 const PopupdataSecond = (props) => {
     const isFromDashboard = props.isFromDashboard
@@ -32,7 +37,7 @@ const PopupdataSecond = (props) => {
         setSelectedToTime('')
         setSelectedFromTime('')
         if (props.goBack != undefined) {
-            props.goBack()   
+            props.goBack()
         }
     };
 
@@ -101,7 +106,7 @@ const PopupdataSecond = (props) => {
         }
         saveEvent()
     }
-    
+
     useEffect(() => {
         setLoading(true)
         Service.get(`${EndPoints.EventType}`, (res) => {
@@ -200,7 +205,8 @@ const PopupdataSecond = (props) => {
                     activeOpacity={opacity}
                     onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
-                        <Image style={styles.timeIcon} source={Images.Clock} />
+                        {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={styles.dateTimetextdummy1}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                         <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
                     </View>
@@ -232,7 +238,8 @@ const PopupdataSecond = (props) => {
                     activeOpacity={opacity}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
-                        <Image style={styles.timeIcon} source={Images.Clock} />
+                        {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={styles.dateTimetextdummy1}>{selectedToTime ? selectedToTime : 'To'}</Text>
                         <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
                     </View>
@@ -268,7 +275,8 @@ const PopupdataSecond = (props) => {
                         style={styles.entryData}
                         activeOpacity={opacity}
                         onPress={toggleModal}>
-                        <Image style={styles.entryIcon} source={Images.NewEvents} />
+                        {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
+                        <NewEvent style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                         <Text style={styles.entryTitle}>New Event</Text>
                     </TouchableOpacity>
             }
@@ -276,7 +284,8 @@ const PopupdataSecond = (props) => {
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -299,7 +308,8 @@ const PopupdataSecond = (props) => {
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <View style={styles.subjectDateTime}>
                                                     <View>
                                                         <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
@@ -362,7 +372,8 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                            {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
+                                            <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
                                             {isLoading ?
@@ -399,7 +410,7 @@ const PopupdataSecond = (props) => {
                                             return (
                                                 <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                                     <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                                    <Text style={{justifyContent: 'center'}}>   {item.EventType}</Text>
+                                                    <Text style={{ justifyContent: 'center' }}>   {item.EventType}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }}
