@@ -28,6 +28,10 @@ import MESSAGE from "../../../../utils/Messages";
 import QB from "quickblox-react-native-sdk";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import { Download } from "../../../../utils/Download";
+import StartNewCall from "../../../../svg/teacher/dashboard/StartNewCall";
+import NewLesson from "../../../../svg/teacher/dashboard/NewLesson";
+import NewCalendar from "../../../../svg/teacher/dashboard/NewCalendar";
+import NewPupil from "../../../../svg/teacher/dashboard/NewPupil";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -394,7 +398,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall(pupilData)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
-                                                        <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground>
+                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground> */}
+                                                        <StartNewCall style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity
@@ -403,7 +408,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     onPress={() => setAddSubject(true)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.yellowBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>New lesson</Text>
-                                                        <ImageBackground style={PAGESTYLE.imageIcon} source={Images.LessonIcon}></ImageBackground>
+                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.LessonIcon}></ImageBackground> */}
+                                                        <NewLesson style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity
@@ -412,13 +418,15 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     onPress={() => setAddEvent(true)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.purpleBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>New calendar {"\n"}entry</Text>
-                                                        <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground>
+                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground> */}
+                                                        <NewCalendar style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity onPress={() => { navigatePupilGroup() }} style={PAGESTYLE.boxDash}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
-                                                        <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground>
+                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground> */}
+                                                        <NewPupil style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
