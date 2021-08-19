@@ -501,7 +501,6 @@ export default StyleSheet.create({
         borderRadius: hp(100),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1.69),
-        resizeMode: 'contain',
     },
     pupilName: {
         fontSize: hp(1.82),
