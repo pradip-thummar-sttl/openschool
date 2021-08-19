@@ -934,6 +934,7 @@ const TLDetailEdit = (props) => {
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                             {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
                                             <UploadDoc style={PAGESTYLE.grpThumbVideo} height={120} width={250} />
+                                            <Text style={{position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold'}}>Upload Material</Text>
                                         </TouchableOpacity>
 
                                         {

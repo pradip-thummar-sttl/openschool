@@ -80,7 +80,7 @@ const Popupaddrecording = (props) => {
                         onPress={toggleModal}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
                         {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
-                        <Recording style={PAGESTYLE.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
+                        <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
                         <Text style={styles.recordLinkText}>Add Recording</Text>
                     </TouchableOpacity>
                     :
