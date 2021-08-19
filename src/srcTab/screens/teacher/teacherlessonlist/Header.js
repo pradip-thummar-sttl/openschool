@@ -124,7 +124,7 @@ const Header = (props) => {
                         </MenuOptions>
                     </Menu>
                     {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
-                    <FilterBlack style={styles.filterIcon} height={1.74} width={1.74} />
+                    <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                 </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}

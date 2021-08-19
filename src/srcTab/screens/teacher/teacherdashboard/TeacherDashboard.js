@@ -41,6 +41,7 @@ import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import MyPupils from "../../../../svg/teacher/dashboard/MyPupils";
 import Engagement from "../../../../svg/teacher/dashboard/Engagement";
 import Efforts from "../../../../svg/teacher/dashboard/Efforts";
+import OrangeStar from "../../../../svg/teacher/dashboard/OrangeStar";
 import GreyStar from "../../../../svg/teacher/dashboard/GreyStar";
 import YellowStar from "../../../../svg/teacher/dashboard/YellowStar";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";

@@ -57,7 +57,7 @@ const PopupAddNewData = (props) => {
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
                         {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
-                        <CloseBlack style={STYLE.cancelButtonIcon} height={2.94} width={2.94} />
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>

@@ -22,6 +22,7 @@ import Calender from "../../../../svg/teacher/dashboard/Calender";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
