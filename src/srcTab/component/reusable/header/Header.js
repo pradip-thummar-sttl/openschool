@@ -7,6 +7,7 @@ import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import Images from "../../../../utils/Images";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
 
 const Header = (props) => {
     return (
@@ -17,7 +18,8 @@ const Header = (props) => {
                     style={styles.notificationBar}
                     onPress={() => props.onAlertPress()}
                     activeOpacity={opacity}>
-                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                    <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     <View style={STYLE.redDot}></View>
                 </TouchableOpacity>
             </View>

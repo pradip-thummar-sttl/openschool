@@ -17,6 +17,7 @@ import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAd
 import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
+import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
 var moment = require('moment');
 
 const Pupillist = (props, { style }) => (
@@ -38,17 +39,18 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue: COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue: COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue: COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
             </View>
             <View style={PAGESTYLE.pupilDetailLink}>
-                    <Image style={[PAGESTYLE.pupilDetaillinkIcon,  ]} source={Images.DashboardRightArrow} />
-                </View>
+                {/* <Image style={[PAGESTYLE.pupilDetaillinkIcon,]} source={Images.DashboardRightArrow} /> */}
+                <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1)} width={hp(1)} />
+            </View>
         </View>
     </TouchableOpacity>
 );

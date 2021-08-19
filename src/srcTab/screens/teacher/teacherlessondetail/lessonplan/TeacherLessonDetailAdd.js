@@ -33,6 +33,9 @@ import { launchCamera } from "react-native-image-picker";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import Participants from "../../../../../svg/teacher/dashboard/Participants";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -485,7 +488,8 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
@@ -506,9 +510,11 @@ const TLDetailAdd = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                        {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
+                        <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy, { width: hp(13) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
@@ -531,7 +537,8 @@ const TLDetailAdd = (props) => {
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap1]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
@@ -554,7 +561,8 @@ const TLDetailAdd = (props) => {
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap2]}>
                         <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
@@ -799,9 +807,11 @@ const TLDetailAdd = (props) => {
                                                 <Text style={PAGESTYLE.subjectText}>Date</Text>
                                                 <TouchableOpacity onPress={() => showDatePicker()}>
                                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                        {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                        <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>

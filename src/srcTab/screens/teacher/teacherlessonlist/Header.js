@@ -14,6 +14,11 @@ import {
 import { opacity } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 const Header = (props) => {
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -46,7 +51,8 @@ const Header = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -64,8 +70,13 @@ const Header = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        {isSearchActive ?
+                            <CloseBlack height={20} width={20} />
+                            :
+                            <SearchBlue height={20} width={20} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -112,13 +123,15 @@ const Header = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
+                    <FilterBlack style={styles.filterIcon} height={1.74} width={1.74} />
                 </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
                 </TouchableOpacity>
             </View>
@@ -143,7 +156,7 @@ const styles = StyleSheet.create({
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',        
+        alignItems: 'center',
     },
     mainTitle: {
         fontSize: hp(2.86),
@@ -222,7 +235,7 @@ const styles = StyleSheet.create({
         width: hp(1.74),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.30),        
+        right: hp(1.30),
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -308,7 +321,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white, marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

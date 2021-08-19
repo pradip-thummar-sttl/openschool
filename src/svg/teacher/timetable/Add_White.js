@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
 
-function Add(props) {
+function AddWhite(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,4 +21,4 @@ function Add(props) {
   )
 }
 
-export default Add
+export default AddWhite
