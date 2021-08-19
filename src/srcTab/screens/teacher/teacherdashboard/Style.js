@@ -60,7 +60,10 @@ export default StyleSheet.create({
         marginBottom: 0.5,
     },
     ScrollViewFlatlist: {
-        height: hp(60),
+        height: hp(67.44),
+    },
+    pupilListing: {
+        maxHeight: hp(67.44),
     },
     arrowSelectedTab: {
         width: 0,
@@ -511,5 +514,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         width:hp(10),
         textAlign:'center'
+    },
+    scrollView: {
+        height: hp(67.44),
     },
 });
