@@ -32,6 +32,15 @@ import StartNewCall from "../../../../svg/teacher/dashboard/StartNewCall";
 import NewLesson from "../../../../svg/teacher/dashboard/NewLesson";
 import NewCalendar from "../../../../svg/teacher/dashboard/NewCalendar";
 import NewPupil from "../../../../svg/teacher/dashboard/NewPupil";
+import MyDay from "../../../../svg/teacher/dashboard/MyDay";
+import More from "../../../../svg/teacher/dashboard/More";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import Participants from "../../../../svg/teacher/dashboard/Participants";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import MyPupils from "../../../../svg/teacher/dashboard/MyPupils";
+import Engagement from "../../../../svg/teacher/dashboard/Engagement";
+import Efforts from "../../../../svg/teacher/dashboard/Efforts";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -86,8 +95,10 @@ const Pupillist = ({ item, onPress }) => (
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>
-                <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
-                <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
+                {/* <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View> */}
+                <Engagement style={PAGESTYLE.perfomanceDotmain} height={hp(1.1)} width={hp(1.1)} />
+                <Efforts style={PAGESTYLE.perfomanceDotmainTwo} height={hp(1.1)} width={hp(1.1)} />
             </View>
             <View style={PAGESTYLE.rewardColumn}>
                 {item.RewardsList.map((item, index) => {
@@ -432,7 +443,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             </View>
                                             <View style={PAGESTYLE.myDay}>
                                                 <View style={[STYLE.viewRow]}>
-                                                    <Image style={PAGESTYLE.dayIcon} source={Images.Myday} />
+                                                    {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
+                                                    <MyDay style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>
@@ -442,7 +454,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     </View>
                                                     <View>
                                                         <TouchableOpacity>
-                                                            <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
+                                                            {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
+                                                            <More style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
                                                         </TouchableOpacity>
                                                     </View>
                                                 </View>
@@ -477,15 +490,18 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                     <View style={PAGESTYLE.timedateGrp}>
                                                                         <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                                            <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                             <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                         </View>
                                                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                            {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                                                                            <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                             <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                                         </View>
                                                                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                            {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
+                                                                            <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                             <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
                                                                         </View>
                                                                     </View>
@@ -519,9 +535,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                     data={dataOfSubView.MaterialList}
                                                                                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                     renderItem={({ item, index }) => (
-                                                                                        <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
-                                                                                            setLoader(false)
-                                                                                        })}} style={PAGESTYLE.downloaBtn}>
+                                                                                        <TouchableOpacity onPress={() => {
+                                                                                            setLoader(true); Download(item, (res) => {
+                                                                                                setLoader(false)
+                                                                                            })
+                                                                                        }} style={PAGESTYLE.downloaBtn}>
                                                                                             <View style={PAGESTYLE.fileGrp}>
                                                                                                 <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                                                 {isMatLoading ?
@@ -549,7 +567,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         {dataOfSubView.CheckList ?
                                                                             dataOfSubView.CheckList.map((data, index) => (
                                                                                 <View style={PAGESTYLE.lessonPoints}>
-                                                                                    <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                    {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
+                                                                                    <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                                                                     <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
                                                                                 </View>
                                                                             ))
@@ -647,13 +666,15 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                                                 <View style={[STYLE.viewRow]}>
-                                                    <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} />
+                                                    {/* <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} /> */}
+                                                    <MyPupils style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>
                                                     <View>
                                                         <TouchableOpacity>
-                                                            <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
+                                                            {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
+                                                            <More style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
                                                         </TouchableOpacity>
                                                     </View>
                                                 </View>
