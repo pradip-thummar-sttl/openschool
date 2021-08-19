@@ -167,8 +167,15 @@ const Popupdata = (props) => {
                 activeOpacity={opacity}
                 onPress={() => refRBSheet.current.open()}>
                 <View style={{ ...PAGESTYLE.dayRightmain, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, backgroundColor: COLORS.videoLinkBorder, width: cellWidth * props.span }}></View>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 10 }}>{props.title}</Text>
+                    <View style={{ ...PAGESTYLE.backOpacity, width: cellWidth * props.span,borderTopColor: COLORS.videoLinkBorder, borderBottomColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, borderRightColor: COLORS.videoLinkBorder, borderRightWidth: 1, }}></View>
+                    <View style={PAGESTYLE.attachmentTitle}>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 75 }}>{props.title}</Text>
+                    {props.data.MaterialList && props.data.MaterialList.length > 0 ?
+                        <Image source={Images.attachmentTimeTable} style={PAGESTYLE.attachmentIcon} />
+                        :
+                        null
+                    }
+                    </View>
                     <View style={PAGESTYLE.row}>
                         <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>

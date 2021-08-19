@@ -224,12 +224,12 @@ const TeacherTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
                                         <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth, }}>
-                                            <Text style={{ ...PAGESTYLE.lable, marginBottom: 15, paddingVertical: 10, }}>{data}</Text>
+                                            <Text style={{ ...PAGESTYLE.lable}}>{data}</Text>
 
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (
