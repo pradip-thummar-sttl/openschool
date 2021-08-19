@@ -61,6 +61,7 @@ const COLORS = {
     sentStatus: '#DDF3FF',
     draftStatus: '#FFEECC',
     draftStatusText: '#FEAD29',
+    timeTableBorder: '#EDEEF2',
 }
 
 export default COLORS;

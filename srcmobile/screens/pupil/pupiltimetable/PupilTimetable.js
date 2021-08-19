@@ -214,7 +214,7 @@ const PupilTimeTable = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} />
-                <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
+                <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
@@ -231,7 +231,7 @@ const PupilTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}
+                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
