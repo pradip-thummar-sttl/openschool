@@ -7,6 +7,9 @@ import FONTS from '../../../../../../utils/Fonts';
 import { opacity } from "../../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import moment from 'moment';
+import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
+import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import Notification from "../../../../../../svg/teacher/dashboard/Notification";
 
 const HeaderUpdate = (props) => {
     return (
@@ -16,7 +19,8 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
@@ -35,7 +39,8 @@ const HeaderUpdate = (props) => {
                             style={styles.buttonGroup}
                             activeOpacity={opacity}
                             onPress={() => props.saveLesson()}>
-                            <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                            {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                            <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                             <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
                         </TouchableOpacity>
                     }
@@ -43,7 +48,8 @@ const HeaderUpdate = (props) => {
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>

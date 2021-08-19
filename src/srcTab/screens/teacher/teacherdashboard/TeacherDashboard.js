@@ -493,6 +493,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 <View style={PAGESTYLE.arrowSelectedTab}></View>
                                                 : null
                                         } */}
+                                                            <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.scrollView}>
                                                                 <View style={PAGESTYLE.tabcontent}>
                                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                     <View style={PAGESTYLE.timedateGrp}>
@@ -605,6 +606,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         </TouchableOpacity>
                                                                     </View>
                                                                 </View>
+                                                            </ScrollView>
                                                                 {/* <View style={PAGESTYLE.tabcontent}>
                                     <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
                                     <View style={PAGESTYLE.timedateGrp}>
@@ -725,6 +727,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <FlatList
                                                                         data={pupilData}
                                                                         renderItem={pupilRender}
+                                                                        style={PAGESTYLE.pupilListing}
                                                                         keyExtractor={(item) => item.id}
                                                                         extraData={selectedId}
                                                                         showsVerticalScrollIndicator={false}

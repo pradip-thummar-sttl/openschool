@@ -58,6 +58,7 @@ const COLORS = {
     introGreyColor:'#454545',
     dateShadow: '#EBAC39',
     timeTableBorder: '#EDEEF2',
+    lightGrey: '#B7B9C3',
 }
 
 export default COLORS;

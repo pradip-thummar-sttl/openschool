@@ -19,6 +19,7 @@ import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 const Header = (props) => {
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -100,7 +101,8 @@ const Header = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={1.48} width={1.48} />
                                             :
                                             null
                                         }
@@ -114,7 +116,8 @@ const Header = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={1.48} width={1.48} />
                                             :
                                             null
                                         }
