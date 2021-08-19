@@ -41,6 +41,7 @@ import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import MyPupils from "../../../../svg/teacher/dashboard/MyPupils";
 import Engagement from "../../../../svg/teacher/dashboard/Engagement";
 import Efforts from "../../../../svg/teacher/dashboard/Efforts";
+import OrangeStar from "../../../../svg/teacher/dashboard/OrangeStar";
 import GreyStar from "../../../../svg/teacher/dashboard/GreyStar";
 import YellowStar from "../../../../svg/teacher/dashboard/YellowStar";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
@@ -492,6 +493,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 <View style={PAGESTYLE.arrowSelectedTab}></View>
                                                 : null
                                         } */}
+                                                            <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.scrollView}>
                                                                 <View style={PAGESTYLE.tabcontent}>
                                                                     <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                     <View style={PAGESTYLE.timedateGrp}>
@@ -604,6 +606,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         </TouchableOpacity>
                                                                     </View>
                                                                 </View>
+                                                            </ScrollView>
                                                                 {/* <View style={PAGESTYLE.tabcontent}>
                                     <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
                                     <View style={PAGESTYLE.timedateGrp}>
@@ -724,6 +727,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     <FlatList
                                                                         data={pupilData}
                                                                         renderItem={pupilRender}
+                                                                        style={PAGESTYLE.pupilListing}
                                                                         keyExtractor={(item) => item.id}
                                                                         extraData={selectedId}
                                                                         showsVerticalScrollIndicator={false}
