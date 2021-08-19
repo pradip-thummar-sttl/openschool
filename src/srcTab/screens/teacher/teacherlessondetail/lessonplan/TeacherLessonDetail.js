@@ -16,7 +16,7 @@ import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import Participants from "../../../../../svg/teacher/dashboard/Participants";
 import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
-import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
+import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 
 const TLDetail = (props) => {
     const [isLoading, setLoader] = useState(false)
