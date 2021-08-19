@@ -19,8 +19,8 @@ export default class Splash extends Component {
         //     //         User.user = user
         //     //         this.props.navigation.replace('TeacherDashboard')
         //     //     } else {
-        //             this.launchNextScreen()
-        //         // }
+        //     this.launchNextScreen()
+        //     // }
         //     // })
         // }, 3000);
     }
@@ -56,8 +56,9 @@ export default class Splash extends Component {
                     onBuffer={this.onBuffer}                // Callback when remote video is buffering
                     onError={this.videoError}
                     onEnd={() => { this.launchNextScreen() }}
-                    resizeMode={'cover'}
-                    style={styles.backgroundVideo} />
+                    // resizeMode={'stretch'}
+                    style={styles.backgroundVideo}
+                    resizeMode={'contain'} />
             </View>
         );
     }
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        backgroundColor: 'rgb(13,178,96)',
     },
     image: {
         flex: 1,

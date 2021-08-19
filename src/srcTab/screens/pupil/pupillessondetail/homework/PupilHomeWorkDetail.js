@@ -20,7 +20,9 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import { User } from "../../../../../utils/Model";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import MESSAGE from "../../../../../utils/Messages";
-import Images from "../../../../../../srcmobile/utils/Images";
+// import Images from "../../../../../../srcmobile/utils/Images";
+import Images from '../../../../../utils/Images';
+
 
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
