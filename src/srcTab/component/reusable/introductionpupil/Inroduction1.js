@@ -5,12 +5,14 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from "../../../../utils/Images";
+import PTabletOnboarding1 from "../../../../svg/pupil/introductionTablet/PTabletOnboarding1";
 
 const Introduction1 = (props) => {
     return (
         <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
-                <Image source={Images.introSlideOne} style={styles.SlideImage}></Image>
+                {/* <Image source={Images.introSlideOne} style={styles.SlideImage}></Image> */}
+                <PTabletOnboarding1 style={styles.SlideImage} height={hp(44.79)} width={hp(92.05)}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Stay connected with your teacher </Text>

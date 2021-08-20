@@ -5,12 +5,14 @@ import COLORS from "../../../utils/Colors";
 import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
+import PMobileOnboarding2 from "../../../../src/svg/pupil/introductionMobile/PMobileOnboarding2";
 
 const Introduction2 = (props) => {
     return (
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
                 <Image source={Images.introSlideTwo} style={styles.SlideImage}></Image>
+                {/* <PMobileOnboarding2 style={styles.SlideImage} height={hp(50.58)} width={hp(48.5)} /> */}
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Learn beyond your {'\n'}classroom</Text>

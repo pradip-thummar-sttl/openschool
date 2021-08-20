@@ -9,6 +9,14 @@ import { baseUrl, opacity } from "../../../../utils/Constant";
 import Users from "../../../screens/users/Users";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Ic_Dashboard from "../../../../svg/Sidebar/Ic_Dashboard";
+import Ic_calendar from "../../../../svg/Sidebar/Ic_calendar";
+import Ic_LessonPlanner from "../../../../svg/Sidebar/Ic_LessonPlanner";
+import Ic_PupilManagement from "../../../../svg/Sidebar/Ic_PupilManagement";
+import Ic_parents from "../../../../svg/Sidebar/Ic_parents";
+import Ic_Faq from "../../../../svg/Sidebar/Ic_Faq";
+import Logout from "../../../../svg/Sidebar/Logout";
+import More from "../../../../svg/teacher/dashboard/More";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -97,10 +105,11 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
-                        />
+                        /> */}
+                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
@@ -110,10 +119,11 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { navigateSidebarIndex(); toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
-                        />
+                        /> */}
+                        <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
@@ -123,10 +133,12 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { props.navigateToLessonAndHomework(); toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
-                        />
+                        /> */}
+                        <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>Lesson Planner</Text>
@@ -136,10 +148,12 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { props.navigateToPupilManagement(); toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
-                        />
+                        /> */}
+                        <Ic_PupilManagement style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>Pupil Management</Text>
@@ -149,10 +163,12 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { props.navigateToParents(); toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
-                        />
+                        /> */}
+                        <Ic_parents style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>Parents</Text>
@@ -162,10 +178,13 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
                         />
+                         */}
+                        <Ic_Faq style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
@@ -176,10 +195,12 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { showActionChooser(), toggleAnimation(true) }}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.logout}
-                        />
+                        /> */}
+                        <Logout style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
@@ -196,7 +217,8 @@ const Sidebar = (props) => {
                                         <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                                     </View>
                                     <TouchableOpacity style={styles.moreMenu}>
-                                        <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                        {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
+                                        <More style={styles.moreIcon} width={hp(3)} height={5} />
                                     </TouchableOpacity>
                                 </>
                         }

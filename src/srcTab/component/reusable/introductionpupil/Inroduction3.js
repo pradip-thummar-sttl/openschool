@@ -6,13 +6,15 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
 import { TouchableOpacity } from "react-native-gesture-handler";
+import PTabletOnboarding3 from "../../../../svg/pupil/introductionTablet/PTabletOnboarding3";
 
 const Introduction3 = (props) => {
     console.log(props);
     return (
         <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
-                <Image source={Images.introSlideThree} style={styles.SlideImage}></Image>
+                {/* <Image source={Images.introSlideThree} style={styles.SlideImage}></Image> */}
+                <PTabletOnboarding3 style={styles.SlideImage} height={hp(60)} width={hp(60)}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Show off your progress</Text>

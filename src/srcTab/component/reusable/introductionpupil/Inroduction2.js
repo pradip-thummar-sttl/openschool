@@ -5,6 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
+import PTabletOnboarding2 from "../../../../svg/pupil/introductionTablet/PTabletOnboarding2";
 
 
 const Introduction2 = (props) => {
@@ -12,6 +13,7 @@ const Introduction2 = (props) => {
         <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
                 <Image source={Images.introSlideTwo} style={styles.SlideImage}></Image>
+                {/* <PTabletOnboarding2 style={styles.SlideImage} width={hp(111.17)} height={hp(62.04)} /> */}
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Learn beyond your classroom</Text>
