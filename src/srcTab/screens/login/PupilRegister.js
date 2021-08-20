@@ -166,17 +166,17 @@ class Login extends Component {
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Days</Text> */}
                 <Menu onSelect={(item) => this.setState({ day: item })}>
-                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, STYLE.commonInput]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day : 'Day'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
                             data={days}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.82), }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 500 }} />
+                            style={{ height: hp(35) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -187,17 +187,17 @@ class Login extends Component {
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Month</Text> */}
                 <Menu onSelect={(item) => this.setState({ month: item })}>
-                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, { width: hp(12) }]}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, STYLE.commonInput]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month : 'Month'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
                             data={months}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.82), }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 500 }} />
+                            style={{ height: hp(35) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -208,17 +208,17 @@ class Login extends Component {
             <View style={styles.dropDownFormInput}>
                 {/* <Text style={styles.subjectText}>Year</Text> */}
                 <Menu onSelect={(item) => this.setState({ year: item })}>
-                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
+                    <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, STYLE.commonInput]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year : 'Year'}</Text>
                         <Image style={styles.dropDownArrow} source={Images.DropArrow} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 20, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
                             data={years}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 15 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.82), }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: 500 }} />
+                            style={{ height: hp(35) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -241,26 +241,27 @@ class Login extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView style={{ flex: 1 }}>
+                    <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
                         <View style={styles.rightRegisterSmlText}>
-                            <Text style={styles.registerSmtText}>Already Registered? <TouchableOpacity onPress={() => this.props.navigation.replace('Login', { userType: 'Pupil' })}><Text style={styles.greenText}>Login</Text></TouchableOpacity></Text>
+                            <Text style={styles.registerSmtText}>Already Registered?</Text>
+                            <TouchableOpacity onPress={() => this.props.navigation.replace('Login', { userType: 'Pupil' })}><Text style={styles.greenText}>Login</Text></TouchableOpacity>
                         </View>
                         <Text h3 style={styles.titleAccountLogin}>Pupil Account</Text>
                         <Text style={[styles.fieldInputLabel]}>What is the learners date of birth?</Text>
                         <View style={styles.loginAccountForm}>
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                            <View style={[styles.alignVert]}>
                                 {
                                     this.daysDropDown()
                                 }
                             </View>
 
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                            <View style={[styles.alignVert]}>
                                 {
                                     this.monthsDropDown()
                                 }
                             </View>
 
-                            <View style={[STYLE.commonInput, styles.alignVert]}>
+                            <View style={[styles.alignVert]}>
                                 {
                                     this.yearsDropDown()
                                 }
@@ -355,6 +356,7 @@ class Login extends Component {
                                             activeOpacity={opacity}
                                             onPress={() => this.setPasswordVisibility()}>
                                             <Image
+                                                style={styles.password}
                                                 source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                         </TouchableOpacity>
                                     </View>
@@ -380,6 +382,7 @@ class Login extends Component {
                                             activeOpacity={opacity}
                                             onPress={() => this.setCPasswordVisibility()}>
                                             <Image
+                                                style={styles.password}
                                                 source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} />
                                         </TouchableOpacity>
                                     </View>
@@ -412,7 +415,6 @@ class Login extends Component {
                             <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
-
                 </View>
             </View>
         );
@@ -522,12 +524,18 @@ const styles = StyleSheet.create({
         alignContent:'flex-start',
     },
     bottomLoginIntro: {
-        marginTop: 50
+        marginTop: 50,
+        marginBottom: 20,
     },
     eye: {
         position: 'absolute',
         alignSelf: 'flex-end',
         right: 20
+    },
+    password: {
+        width: hp(2.47),
+        height: hp(1.69),
+        resizeMode: 'contain',
     },
     eyeParent: {
         justifyContent: 'center'
@@ -575,26 +583,26 @@ const styles = StyleSheet.create({
     greenText: {
         color: COLORS.buttonGreen,
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.75),
-        textAlignVertical:'top',
+        fontSize: hp(1.82),
+        marginLeft: hp(0.65),
     },
     registerSmtText: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.95),
+        fontSize: hp(1.82),
         color: COLORS.lightGray,
-        textAlignVertical:'top',
     },
     rightRegisterSmlText: {
-        justifyContent: 'flex-end',
         alignSelf: 'flex-end',
+        flexDirection: 'row',
+        alignItems: 'center',
         marginTop: hp(3.5),
     },
     titleAccountLogin: {
         textAlign: 'left',
-        color: COLORS.themeBlue,
-        fontSize: hp('4.8%'),
-        marginTop: hp(0.5),
-        marginBottom: hp('4%'),
+        color: COLORS.darkGrayIntro,
+        fontSize: hp(3.125),
+        marginTop: hp(0.78),
+        marginBottom: hp(4.16),
         fontFamily: FONTS.fontBold,
     },
     loginAccountForm: {
@@ -622,6 +630,8 @@ const styles = StyleSheet.create({
     },
     alignVert: {
         alignItems: 'center',
+        width: '33.33%',
+        marginHorizontal: hp(-0.6),
     },
     dateTimetextdummy: {
         fontFamily: FONTS.fontBold,
@@ -631,6 +641,7 @@ const styles = StyleSheet.create({
     //
     dropDownFormInput: {
         width: '100%',
+        paddingHorizontal: hp(0.6),
     },
     subjectText: {
         flexDirection: 'row',
@@ -646,13 +657,14 @@ const styles = StyleSheet.create({
     },
     dropDown: {
         flexDirection: 'row',
-        width: hp(10),
-        color: COLORS.darkGray,
-        fontSize: 18,
+        alignItems: 'center',
+        width: '100%',
+        color: COLORS.darkGrayIntro,
+        fontSize: hp(1.82),
         borderWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
-        borderRadius: hp(1.0),
+        borderRadius: 6,
         lineHeight: hp(2.3),
         height: "100%",
         // paddingLeft: hp(2.0),
@@ -671,7 +683,6 @@ const styles = StyleSheet.create({
         width: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.4),
-        top: hp(2.1),
+        right: hp(1.5),
     },
 });

@@ -8,12 +8,12 @@ import Images from '../../../../utils/Images';
 import { baseUrl } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Ic_Dashboard from "../../../../svg/Sidebar/Ic_Dashboard";
-import Ic_calendar from "../../../../svg/Sidebar/Ic_calendar";
-import Ic_LessonPlanner from "../../../../svg/Sidebar/Ic_LessonPlanner";
-import Ic_Achievement from "../../../../svg/Sidebar/Ic_Achievement";
-import Ic_MyAvatar from "../../../../svg/Sidebar/Ic_MyAvatar";
-import Logout from "../../../../svg/Sidebar/Logout";
+import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
+import Ic_calendar from "../../../../svg/sidebar/Ic_calendar";
+import Ic_LessonPlanner from "../../../../svg/sidebar/Ic_LessonPlanner";
+import Ic_Achievement from "../../../../svg/sidebar/Ic_Achievement";
+import Ic_MyAvatar from "../../../../svg/sidebar/Ic_MyAvatar";
+import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
 
 const Sidebar = (props) => {
