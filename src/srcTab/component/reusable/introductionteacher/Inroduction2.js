@@ -5,12 +5,14 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
+import TTabletOnboarding2 from "../../../../svg/teacher/introductionTablet/TTabletOnboarding2";
 
 const Introduction2 = (props) => {
     return (
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
-                <Image source={Images.teacherintroSlideTwo} style={styles.SlideImage}></Image>
+                {/* <Image source={Images.teacherintroSlideTwo} style={styles.SlideImage}></Image> */}
+                <TTabletOnboarding2 style={styles.SlideImage} height={hp(51)} width={'100%'}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Your classroom, online</Text>

@@ -6,13 +6,15 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
 import { TouchableOpacity } from "react-native-gesture-handler";
+import TTabletOnboarding3 from "../../../../svg/teacher/introductionTablet/TTabletOnboarding3";
 
 const Introduction3 = (props) => {
     console.log(props);
     return (
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
-                <Image source={Images.teacherintroSlideThree} style={styles.SlideImage}></Image>
+                {/* <Image source={Images.teacherintroSlideThree} style={styles.SlideImage}></Image> */}
+                <TTabletOnboarding3 style={styles.SlideImage} height={hp(55.59)} width={hp(80)}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Tailored content recommendations</Text>

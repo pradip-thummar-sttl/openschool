@@ -8,6 +8,13 @@ import Images from '../../../../utils/Images';
 import { baseUrl } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Ic_Dashboard from "../../../../svg/Sidebar/Ic_Dashboard";
+import Ic_calendar from "../../../../svg/Sidebar/Ic_calendar";
+import Ic_LessonPlanner from "../../../../svg/Sidebar/Ic_LessonPlanner";
+import Ic_Achievement from "../../../../svg/Sidebar/Ic_Achievement";
+import Ic_MyAvatar from "../../../../svg/Sidebar/Ic_MyAvatar";
+import Logout from "../../../../svg/Sidebar/Logout";
+import More from "../../../../svg/teacher/dashboard/More";
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -81,50 +88,60 @@ const Sidebar = (props) => {
                 <View style={styles.mainMenu}>
 
                     <TouchableOpacity onPress={() => props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
-                        />
+                        /> */}
+                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
-                        />
+                        /> */}
+                        <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
-                        />
+                        /> */}
+                        <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onSetting()} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
-                        />
+                        /> */}
+                        <Ic_Achievement style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAvatar}
-                        />
+                        /> */}
+                        <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
@@ -141,10 +158,12 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => showActionChooser()} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.logout}
-                        />
+                        /> */}
+                        <Logout style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
@@ -163,7 +182,8 @@ const Sidebar = (props) => {
                                     <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: hp(12) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                                 </View>
                                 <TouchableOpacity style={styles.moreMenu}>
-                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                    <More style={styles.moreIcon} width={hp(3)} height={5} />
+                                    {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                                 </TouchableOpacity>
                             </>
                     }

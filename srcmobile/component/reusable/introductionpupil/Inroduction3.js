@@ -7,6 +7,7 @@ import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PMobileOnboarding3 from "../../../../src/svg/pupil/introductionMobile/PMobileOnboarding3";
 
 
 const Introduction3 = (props) => {
@@ -14,7 +15,8 @@ const Introduction3 = (props) => {
     return (
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
-                <Image source={Images.introSlideThree} style={styles.SlideImage}></Image>
+                {/* <Image source={Images.introSlideThree} style={styles.SlideImage}></Image> */}
+                <PMobileOnboarding3 style={styles.SlideImage} width={hp(41.74)} height={hp(50.98)} />
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Show off your progress</Text>

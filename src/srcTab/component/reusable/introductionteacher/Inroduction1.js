@@ -5,12 +5,14 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from "../../../../utils/Images";
+import TTabletOnboarding1 from "../../../../svg/teacher/introductionTablet/TTabletOnboarding1";
 
 const Introduction1 = (props) => {
     return (
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
-                <Image source={Images.teacherintroSlideOne} style={styles.SlideImage}></Image>
+                {/* <Image source={Images.teacherintroSlideOne} style={styles.SlideImage}></Image> */}
+                <TTabletOnboarding1 style={styles.SlideImage} height= {hp(60.76)} width= {hp(80)}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Do what you do best </Text>
