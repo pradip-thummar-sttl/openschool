@@ -26,7 +26,7 @@ export default StyleSheet.create({
         // height:'100%'
     },
     blankPageImage: {
-        height: 150,
+        height: hp(20.55),
         resizeMode: 'contain',
     },
     blankManageTextBold: {

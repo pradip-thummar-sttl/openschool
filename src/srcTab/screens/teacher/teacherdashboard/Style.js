@@ -126,7 +126,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         position: 'relative',
-        height: hp(12),
+        height: hp(12.76),
     },
     greenBox: {
         backgroundColor: COLORS.lightGreen,
@@ -490,7 +490,8 @@ export default StyleSheet.create({
         right: 3,
     },
     pupilDetaillinkIcon: {
-        width: hp(1),
+        width: hp(0.95),
+        height: hp(1.51),
         resizeMode: 'contain',
         position: 'absolute',
         right: 2,
@@ -498,7 +499,7 @@ export default StyleSheet.create({
     pupilImage: {
         width: hp(3.64),
         height: hp(3.64),
-        borderRadius: hp(100),
+        borderRadius: hp(5),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1.69),
     },

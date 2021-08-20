@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     },
     commonButtonBorderedheader: {
         backgroundColor: COLORS.transparent,
-        color: COLORS.darkGray,
+        color: COLORS.darkGrayIntro,
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
@@ -260,7 +260,6 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
         left: hp(1.8),
         zIndex: 9,
     },

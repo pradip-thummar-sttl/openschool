@@ -411,10 +411,10 @@ const TLDetailAdd = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10, paddingLeft: 12, borderLeftColor: COLORS.borderGrp, borderLeftWidth: 1, }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, fontSize: hp(1.82) }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -893,8 +893,8 @@ const TLDetailAdd = (props) => {
                                         </View>
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                             {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
-                                            <UploadDoc style={PAGESTYLE.grpThumbVideo} height={120} width={250} />
-                                            <Text style={{position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold'}}>Upload Material</Text>
+                                            <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
+                                            <Text style={{position: 'absolute', bottom: hp(4.55), color: COLORS.menuLightFonts, fontFamily: FONTS.fontSemiBold,fontSize: hp(1.82), }}>Upload Material</Text>
                                         </TouchableOpacity>
 
                                         {

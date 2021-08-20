@@ -41,6 +41,7 @@ import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import Participants from "../../../../../svg/teacher/dashboard/Participants";
 import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 
@@ -392,10 +393,10 @@ const TLDetailEdit = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} />
                     <TouchableOpacity
-                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10 }}
+                        style={{ alignSelf: 'flex-end', position: 'absolute', right: 10, paddingLeft: 12, borderLeftColor: COLORS.borderGrp, borderLeftWidth: 1, }}
                         opacity={opacity}
                         onPress={() => pushCheckListItem()}>
-                        <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
+                        <Text style={{ paddingVertical: 8, fontSize: hp(1.82) }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={PAGESTYLE.addItem}>
@@ -459,7 +460,7 @@ const TLDetailEdit = (props) => {
                         keyExtractor={(item, index) => index.toString()}
                     />
                     :
-                    <Text style={{ alignSelf: 'center' }}>Pupils not available!</Text>
+                    <Text style={{ alignSelf: 'center', fontSize: hp(1.92), }}>Pupils not available!</Text>
                 }
             </View>
         );
@@ -933,7 +934,7 @@ const TLDetailEdit = (props) => {
 
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                             {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
-                                            <UploadDoc style={PAGESTYLE.grpThumbVideo} height={120} width={250} />
+                                            <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
                                             <Text style={{position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold'}}>Upload Material</Text>
                                         </TouchableOpacity>
 
@@ -942,10 +943,10 @@ const TLDetailEdit = (props) => {
                                                 return (
                                                     <View style={PAGESTYLE.fileGrp}>
                                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(25) }]}>{item.originalname}</Text>
-                                                        {item.uri ?
+                                                        {item ?
                                                             <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                                 {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                                <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                                <CloseIcon style={PAGESTYLE.closeIcon} height={hp(1.42)} width={hp(1.42)} />
                                                             </TouchableOpacity>
                                                             :
                                                             null

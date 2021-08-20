@@ -299,7 +299,7 @@ const PopupdataSecond = (props) => {
                                                 placeholder='Name of event'
                                                 value={event}
                                                 placeholderStyle={styles.somePlaceholderStyle}
-                                                placeholderTextColor={COLORS.lightGray}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={eventName => setEvent(eventName)} />
                                         </View>
@@ -344,7 +344,7 @@ const PopupdataSecond = (props) => {
                                                 placeholder='Enter Location'
                                                 value={location}
                                                 placeholderStyle={styles.somePlaceholderStyle}
-                                                placeholderTextColor={COLORS.lightGray}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
                                                 style={styles.commonInputTextarea}
                                                 onChangeText={location => setLocation(location)} />
                                         </View>
@@ -482,6 +482,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom: hp(3.90),
+        marginTop: hp(1.95),
     },
     buttonGrp: {
         position: 'relative',

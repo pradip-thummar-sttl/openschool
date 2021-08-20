@@ -100,8 +100,8 @@ const Pupillist = ({ item, onPress }) => (
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>
-                <View style={PAGESTYLE.perfomanceDotmain}><Engagement height={hp(1.1)} width={hp(1.1)} /></View>
-                <View style={PAGESTYLE.perfomanceDotmainTwo}><Efforts height={hp(1.1)} width={hp(1.1)} /></View>
+                <View style={PAGESTYLE.perfomanceDotmain}><Engagement height={hp(1.04)} width={hp(1.04)} /></View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}><Efforts height={hp(1.04)} width={hp(1.04)} /></View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
                 {item.RewardsList.map((item, index) => {
@@ -109,21 +109,21 @@ const Pupillist = ({ item, onPress }) => (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
                                 {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                <OrangeStar style={PAGESTYLE.rewardStartIcon} height={hp(2.15)} width={hp(2.15)} />
+                                <OrangeStar style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
                                     {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                    <GreyStar style={PAGESTYLE.rewardStartIcon} height={hp(2.15)} width={hp(2.15)} />
+                                    <GreyStar style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
                                         {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                        <YellowStar style={PAGESTYLE.rewardStartIcon} height={hp(2.15)} width={hp(2.15)} />
+                                        <YellowStar style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
                                     :
@@ -132,7 +132,7 @@ const Pupillist = ({ item, onPress }) => (
                 })}
             </View>
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1)} width={hp(1)} />
+            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.51)} width={hp(0.95)} />
         </View>
     </TouchableOpacity>
 );

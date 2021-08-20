@@ -1,70 +1,58 @@
 import * as React from "react"
-import Svg, { Defs, LinearGradient, Stop, G, Path } from "react-native-svg"
+import Svg, { G, Path, LinearGradient, Stop } from "react-native-svg"
 
-function NewCalendar(props) {
+function SvgComponent(props) {
   return (
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={props.width}
-      height={props.height}
-      viewBox="0 0 124.377 118.383"
-      {...props}
-    >
-      <Defs>
+    <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99.3 91" {...props}>
+      <G transform="rotate(8 -221.829 373.756)">
+        <Path
+          d="M-28 61c-23-19.7-25.6-54.3-5.8-77.3 19.7-23 54.3-25.6 77.3-5.8 1.3 1.1 2.6 2.4 3.8 3.6l8.3 59.4c.6 4.5-2.5 8.7-7 9.3L-28 61z"
+          opacity={0.788}
+          fill="#fee5ff"
+        />
+        <Path
+          d="M35.2-8.7h-49c-.8 0-1.5.7-1.5 1.5V3.5l26.9 3.1 25.2-3.1V-7.2c-.1-.9-.8-1.5-1.6-1.5z"
+          fill="#ffb4ee"
+        />
         <LinearGradient
           id="prefix__a"
-          x1={0.5}
-          x2={0.5}
-          y2={1}
-          gradientUnits="objectBoundingBox"
+          gradientUnits="userSpaceOnUse"
+          x1={-57.045}
+          y1={-9.986}
+          x2={-57.045}
+          y2={-8.986}
+          gradientTransform="matrix(55.132 7.7484 -6.0564 43.0935 3089.659 875)"
         >
           <Stop offset={0} stopColor="#e269ff" />
           <Stop offset={1} stopColor="#ffc4fb" />
         </LinearGradient>
+        <Path
+          d="M36.3 6.6s-3.1 37.1-8.9 37.5c-3.8.4-7.5.3-11.3-.1l-40-1.9c-.8-.1-.9-1.2.2-1.6 9.3-3.7 8.8-38.1 8.8-38.1l51.2 4.2z"
+          opacity={0.604}
+          fill="url(#prefix__a)"
+        />
         <LinearGradient
           id="prefix__b"
-          x1={0.5}
-          x2={0.5}
-          y2={1}
-          gradientUnits="objectBoundingBox"
+          gradientUnits="userSpaceOnUse"
+          x1={-56.68}
+          y1={-10.902}
+          x2={-56.68}
+          y2={-9.902}
+          gradientTransform="matrix(64.1079 .00002 0 32.339 3634.22 354.426)"
         >
           <Stop offset={0} stopColor="#fce0fa" />
           <Stop offset={1} stopColor="#fff5ff" />
         </LinearGradient>
-      </Defs>
-      <G data-name="illus">
         <Path
-          data-name="Path 3489"
-          d="M26.194 104.698a54.818 54.818 0 1185.639-68.25v59.975a8.278 8.278 0 01-8.277 8.275z"
-          fill="#fee5ff"
-          opacity={0.788}
-        />
-        <Path
-          data-name="Path 3458"
-          d="M98.435 44.419l-48.557-6.824a1.527 1.527 0 00-1.724 1.299l-1.486 10.578 26.17 6.76 25.409.489 1.486-10.578a1.527 1.527 0 00-1.298-1.724z"
-          fill="#ffb4ee"
-        />
-        <Path
-          data-name="Path 3459"
-          d="M55.306 0s2.057 37.128-3.561 38.331a55.228 55.228 0 01-11.2 1.5L.707 43.517c-.842 0-1.039-1.05 0-1.617C9.4 36.947 4.065 2.922 4.065 2.922z"
-          transform="rotate(16 -136.22 179.822)"
-          opacity={0.604}
-          fill="url(#prefix__a)"
-        />
-        <Path
-          data-name="Path 3476"
-          d="M51.127 149.147s-2.846 23.339-11.1 30.38c-.472.632-2.163.92-3.005.92l-48.045-1.487c-.842 0-2.831-.083-1.526-1.526C.185 166.83-1.113 148.108-1.113 148.108z"
-          transform="rotate(8 741.614 441.127)"
+          d="M36.8 2.6S34 25.9 25.7 33c-.5.6-2.2.9-3 .9l-48-1.5c-.8 0-2.8-.1-1.5-1.5C-14.1 20.3-15.4 1.6-15.4 1.6l52.2 1z"
           fill="url(#prefix__b)"
         />
         <Path
-          data-name="Path 3484"
-          d="M98.483 55.891s-6.067 22.716-15.22 28.54c-.556.56-2.27.61-3.104.493l-47.37-8.16c-.835-.117-2.793-.476-1.3-1.723 14.086-8.729 15.407-27.449 15.407-27.449z"
+          d="M36.8 2.6S34 25.9 25.7 33c-.5.6-2.2.9-3 .9l-48-1.5c-.8 0-2.8-.1-1.5-1.5C-14.1 20.3-15.4 1.6-15.4 1.6l52.2 1z"
           fill="#fff0fe"
         />
         <Path
-          data-name="Path 3474"
-          d="M87.122 47.45l.849-6.04a1.525 1.525 0 113.019.424l-.849 6.04a1.525 1.525 0 11-3.02-.424zm-15.115-2.124l.85-6.04a1.526 1.526 0 013.023.424l-.85 6.04a1.526 1.526 0 01-3.023-.424zm-15.211-2.138l.849-6.04a1.527 1.527 0 013.024.424l-.849 6.041a1.527 1.527 0 01-3.024-.425z"
+          d="M24.4-4.2v-6.1c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v6.1c0 .8-.7 1.5-1.5 1.5s-1.5-.6-1.5-1.5zm-15.3 0v-6.1c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v6.1c0 .8-.7 1.5-1.5 1.5s-1.5-.6-1.5-1.5zm-15.3 0v-6.1c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v6.1c0 .8-.7 1.5-1.5 1.5-.9 0-1.5-.6-1.5-1.5z"
           fill="#c472ff"
         />
       </G>
@@ -72,4 +60,4 @@ function NewCalendar(props) {
   )
 }
 
-export default NewCalendar
+export default SvgComponent

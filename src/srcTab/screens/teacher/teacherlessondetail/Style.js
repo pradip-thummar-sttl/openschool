@@ -143,7 +143,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
-        fontSize: hp(1.8),
+        fontSize: hp(1.82),
         marginBottom: hp(0.8),
     },
     lessonTitle: {
@@ -257,6 +257,7 @@ export default StyleSheet.create({
     },
     videoLinkBlockSpaceBottom: {
         marginBottom: hp(3),
+        marginTop: hp(1),
     },
     videoLinkIcon: {
         width: hp(2.38),
@@ -351,7 +352,7 @@ export default StyleSheet.create({
     },
     toggleText: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.70),
+        fontSize: hp(1.82),
         lineHeight: hp(3.60),
     },
     rightSideBar: {
@@ -378,14 +379,13 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: hp(1.8),
-        paddingRight: hp(1.0),
-        paddingTop: hp(0.2),
-        paddingBottom: hp(0.2),
+        paddingLeft: hp(1.69),
+        paddingRight: hp(1.69),
+        height: hp(5.20),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
-        borderRadius: hp(1),
-        marginBottom: hp(0.5),
+        borderRadius: 6,
+        marginBottom: hp(0.65),
     },
     downloadIcon: {
         width: hp(2),
@@ -436,7 +436,7 @@ export default StyleSheet.create({
     },
     commonInput: {
         color: COLORS.darkGray,
-        fontSize: 14,
+        fontSize: hp(1.82),
         borderWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
         overflow: 'hidden',
@@ -606,10 +606,10 @@ export default StyleSheet.create({
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
-        fontSize: 14,
+        fontSize: hp(1.82),
         color: COLORS.menuLightFonts,
         lineHeight: hp(2.60),
-        fontFamily: FONTS.fontSemiBold,
+        fontFamily: FONTS.fontRegular,
     },
     commonInputTextareaNormal: {
         width: '100%',
@@ -640,7 +640,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.transparent,
     },
     dateTimetextdummy: {
-        fontSize: 14,
+        fontSize: hp(1.82),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
         alignSelf: 'center',
@@ -1379,5 +1379,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         marginBottom: 15,
+    },
+    closeIcon: {
+        resizeMode: 'contain',
     },
 });

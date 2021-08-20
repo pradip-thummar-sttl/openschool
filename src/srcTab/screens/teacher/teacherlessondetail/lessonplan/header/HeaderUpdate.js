@@ -20,7 +20,7 @@ const HeaderUpdate = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+                        <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top: 5,
+        top: -3,
     },
     commonButtonGreenheaderwithouticon: {
         backgroundColor: COLORS.dashboardGreenButton,

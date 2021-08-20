@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: 170,
-        height: 40,
+        width: hp(20.15),
+        height: hp(5.20),
         padding: hp(1.43),
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     recordLinkText: {
-        fontSize: 12,
+        fontSize: hp(1.56),
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
