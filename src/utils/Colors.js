@@ -59,6 +59,14 @@ const COLORS = {
     dateShadow: '#EBAC39',
     timeTableBorder: '#EDEEF2',
     lightGrey: '#B7B9C3',
+    editBorder: '#CBCCD8',
+    sentBackColor:'rgba(213,241,254,1)',
+    sentColor:'rgba(48,156,233,1)',
+    draftBackColor:'rgba(255,236,200,1)',
+    draftColor:'rgba(255,164,57,1)',
+    sentStatus: '#DDF3FF',
+    draftStatus: '#FFEECC',
+    draftStatusText: '#FEAD29',
 }
 
 export default COLORS;
