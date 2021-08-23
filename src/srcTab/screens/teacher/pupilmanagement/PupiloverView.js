@@ -13,6 +13,10 @@ import PAGESTYLE from './StyleList'
 import GroupSetUp from './GroupSetUp'
 import COLORS from '../../../../utils/Colors'
 import { User } from '../../../../utils/Model'
+import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
+import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
+import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
+import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
@@ -47,19 +51,22 @@ const Pupillist = (props, { item }) => (
                     return (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Bronze  style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                    {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
-                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                        {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
                                     :
@@ -70,7 +77,8 @@ const Pupillist = (props, { item }) => (
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
             </View>
-            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon}  width={hp(1)} height={hp(3)} />
+            {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
         </View>
     </TouchableOpacity>
 );

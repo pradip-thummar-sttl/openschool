@@ -14,6 +14,7 @@ import moment from 'moment';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { User } from '../../../utils/Model';
 import { baseUrl } from '../../../utils/Constant';
+import Ic_Send from '../../../svg/teacher/pupilmanagement/Ic_Send';
 
 
 // var data = [
@@ -229,7 +230,8 @@ const Chat = (props) => {
                                     <Image style={Styles.btn} source={Images.imageUpload} />
                                 </TouchableOpacity> */}
                                 <TouchableOpacity onPress={() => sendMessage(message)}>
-                                    <Image style={Styles.btn} source={Images.send} />
+                                    <Ic_Send style={Styles.btn} height={hp(3)} width={hp(3)} />
+                                    {/* <Image style={Styles.btn} source={Images.send} /> */}
                                 </TouchableOpacity>
                             </View>
                         </View>

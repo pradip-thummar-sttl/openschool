@@ -10,6 +10,8 @@ import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 import { User } from "../../../../utils/Model";
 import PAGESTYLE from './Style';
+import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
+import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 
 const GroupSetUp = () => {
 
@@ -145,9 +147,11 @@ const GroupSetUp = () => {
                     style={{ justifyContent: 'center', flex: 1 }}
                     activeOpacity={opacity}
                     onPress={() => popPupil(props.index)}>
-                    <Image
+                    {/* <Image
                         style={PAGESTYLE.selectedRemove}
-                        source={Images.PopupCloseIcon} />
+                        source={Images.PopupCloseIcon} /> */}
+
+                        <CloseBlack style={PAGESTYLE.selectedRemove} width={13} height={13}  />
                 </TouchableOpacity>
             </View>
         </View>
@@ -169,9 +173,10 @@ const GroupSetUp = () => {
                     activeOpacity={opacity}
                     onPress={() => pushGroup(props.index)}>
                     {selectedGroup.length == 0 ?
-                        <Image
-                            style={PAGESTYLE.groupEdit}
-                            source={Images.Edit} />
+                        // <Image
+                        //     style={PAGESTYLE.groupEdit}
+                        //     source={Images.Edit} />
+                        <Ic_Edit style={PAGESTYLE.groupEdit} height={15} width={15} />
                         :
                         null
                     }

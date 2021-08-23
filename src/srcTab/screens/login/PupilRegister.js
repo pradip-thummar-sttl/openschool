@@ -28,6 +28,10 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import moment from "moment";
+import TabletPupilLoginSideimg from '../../../svg/teacher/login/TabletPupilLoginSideimg';
+import ShowPassword from '../../../svg/teacher/login/ShowPassword';
+import HidePassword from '../../../svg/teacher/login/HidePassword';
+import ArrowDown from '../../../svg/teacher/login/ArrowDown';
 const { LoginModuleIos, LoginModule } = NativeModules;
 
 var days = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
@@ -168,7 +172,8 @@ class Login extends Component {
                 <Menu onSelect={(item) => this.setState({ day: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, STYLE.commonInput]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day : 'Day'}</Text>
-                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                        <ArrowDown tyle={styles.dropDownArrow} width={hp(1.51)} height={hp(2)} />
+                        {/* <Image style={styles.dropDownArrow} source={Images.DropArrow} /> */}
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
@@ -189,7 +194,8 @@ class Login extends Component {
                 <Menu onSelect={(item) => this.setState({ month: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, STYLE.commonInput]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month : 'Month'}</Text>
-                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                        <ArrowDown tyle={styles.dropDownArrow} width={hp(1.51)} height={hp(2)} />
+                        {/* <Image style={styles.dropDownArrow} source={Images.DropArrow} /> */}
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
@@ -210,7 +216,8 @@ class Login extends Component {
                 <Menu onSelect={(item) => this.setState({ year: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown, STYLE.commonInput]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year : 'Year'}</Text>
-                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                        <ArrowDown tyle={styles.dropDownArrow} width={hp(1.51)} height={hp(2)} />
+                        {/* <Image style={styles.dropDownArrow} source={Images.DropArrow} /> */}
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
@@ -237,8 +244,9 @@ class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <ImageBackground source={Images.LoginBack} style={styles.image}>
-                    </ImageBackground>
+                    {/* <ImageBackground source={Images.LoginBack} style={styles.image}>
+                    </ImageBackground> */}
+                    <TabletPupilLoginSideimg style={styles.image} height={'100%'} width={'100%'} />
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
@@ -355,9 +363,14 @@ class Login extends Component {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => this.setPasswordVisibility()}>
-                                            <Image
+                                            {/* <Image
                                                 style={styles.password}
-                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
+                                                 {
+                                                    this.state.isPasswordHide?
+                                                    <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                                    :<HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                                }
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -381,9 +394,14 @@ class Login extends Component {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => this.setCPasswordVisibility()}>
-                                            <Image
+                                            {/* <Image
                                                 style={styles.password}
-                                                source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
+                                                {
+                                                    this.state.iscPasswordHide?
+                                                    <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                                    :<HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                                }
                                         </TouchableOpacity>
                                     </View>
                                 </View>

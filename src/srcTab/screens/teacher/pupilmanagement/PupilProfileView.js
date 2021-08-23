@@ -18,6 +18,13 @@ import Chat from "../../Chat/Chat";
 import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
+import BronzeFill from "../../../../svg/teacher/pupilmanagement/StarBronze_Fill";
+import Bronze from "../../../../svg/teacher/pupilmanagement/StarBronze";
+import SilverFill from "../../../../svg/teacher/pupilmanagement/StartSilver_Fill";
+import Silver from "../../../../svg/teacher/pupilmanagement/StartSilver";
+import GoldFill from "../../../../svg/teacher/pupilmanagement/StarGold_Fill";
+import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
 
 const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
@@ -137,7 +144,8 @@ const PupilProfileView = (props) => {
                             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{height:'94%'}}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
-                                        <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
+                                        <ImageBackground style={PAGESTYLE.managementopImage} >
+                                            <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'}/>
                                             <View style={PAGESTYLE.thumbTopUser}>
                                                 <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                     source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
@@ -173,19 +181,34 @@ const PupilProfileView = (props) => {
                                             <View style={PAGESTYLE.rewardStarMark}>
                                                 <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
                                                     <View style={PAGESTYLE.centerText}>
-                                                        <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                        {
+                                                            isBronze?
+                                                            <BronzeFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                            :<Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                        }
+                                                        {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
                                                         <Text style={PAGESTYLE.starText}>Bronze star</Text>
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
                                                     <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                        <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    {
+                                                            isSilver?
+                                                            <SilverFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                            :<Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                        }
+                                                        {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
                                                         <Text style={PAGESTYLE.starText}>Silver star</Text>
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
                                                     <View style={PAGESTYLE.centerText}>
-                                                        <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                    {
+                                                            isGold?
+                                                            <GoldFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                            :<Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                        }
+                                                        {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
                                                         <Text style={PAGESTYLE.starText}>Gold star</Text>
                                                     </View>
                                                 </TouchableOpacity>

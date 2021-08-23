@@ -480,6 +480,7 @@ export default StyleSheet.create({
         width: hp(2.15),
         resizeMode: 'contain',
         alignSelf: 'center',
+        marginBottom:hp(1)
     },
     pupilDetailLink: {
         width: '100%',
