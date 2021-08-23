@@ -508,7 +508,7 @@ const TLDetailAdd = (props) => {
 
     const participantsDropDown = () => {
         return (
-            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
+            <View style={[PAGESTYLE.dateWhiteBoard,]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
@@ -533,7 +533,7 @@ const TLDetailAdd = (props) => {
 
     const fromTimeDropDown = () => {
         return (
-            <View style={[PAGESTYLE.timeField]}>
+            <View style={[PAGESTYLE.dateWhiteBoard]}>
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
                 <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap1]}>
@@ -558,7 +558,7 @@ const TLDetailAdd = (props) => {
 
     const toTimeDropDown = () => {
         return (
-            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
+            <View style={[PAGESTYLE.dateWhiteBoard,]}>
                 <Text style={PAGESTYLE.subjectText}> </Text>
                 <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap2]}>
@@ -807,7 +807,7 @@ const TLDetailAdd = (props) => {
                                         </View>
 
                                         <View style={PAGESTYLE.timedateGrp}>
-                                            <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.dateField]}>
+                                            <View style={[PAGESTYLE.dateWhiteBoard,]}>
                                                 <Text style={PAGESTYLE.subjectText}>Date</Text>
                                                 <TouchableOpacity onPress={() => showDatePicker()}>
                                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>

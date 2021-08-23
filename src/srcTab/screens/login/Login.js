@@ -434,6 +434,7 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         justifyContent: "flex-start",
         marginLeft: -2,
+        marginTop: -2,
     },
     lefImage: {
         width: '50%',

@@ -46,6 +46,7 @@ import GreyStar from "../../../../svg/teacher/dashboard/GreyStar";
 import YellowStar from "../../../../svg/teacher/dashboard/YellowStar";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
+import MoreWhite from "../../../../svg/teacher/dashboard/MoreWhite";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -462,7 +463,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <View>
                                                         <TouchableOpacity>
                                                             {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
-                                                            <More style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
+                                                            <MoreWhite style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
                                                         </TouchableOpacity>
                                                     </View>
                                                 </View>
@@ -684,7 +685,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <View>
                                                         <TouchableOpacity>
                                                             {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
-                                                            <More style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
+                                                            <MoreWhite style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
                                                         </TouchableOpacity>
                                                     </View>
                                                 </View>
