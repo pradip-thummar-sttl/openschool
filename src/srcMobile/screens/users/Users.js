@@ -7,6 +7,11 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../../utils/Constant';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Top from '../../../svg/userselection/Top';
+import TopMobile from '../../../svg/userselection/TopMobile';
+import School from '../../../svg/userselection/School';
+import Teacher from '../../../svg/userselection/Teacher';
+import Pupil from '../../../svg/userselection/Pupil';
 
 export default class Users extends Component {
     constructor(props) {
@@ -38,7 +43,8 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={Images.loginTop} style={styles.image}></Image>
+                {/* <Image source={Images.loginTop} style={styles.image}></Image> */}
+                <TopMobile style={styles.image} height={hp(15)} width={'100%'} />
                 <View>
                     <Text style={styles.titleText}>Select the type of user you are</Text>
                     <View style={styles.userMain}>
@@ -46,9 +52,10 @@ export default class Users extends Component {
                             activeOpacity={opacity}
                             onPress={() => null}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.school} />
+                                    source={Images.school} /> */}
+                                    <School style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>School</Text>
                             </View>
                         </TouchableOpacity>
@@ -56,9 +63,10 @@ export default class Users extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.navigateIntroductionScreen('Teacher')}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.teacher} />
+                                    source={Images.teacher} /> */}
+                                    <Teacher style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>Teacher</Text>
                             </View>
                         </TouchableOpacity>
@@ -66,9 +74,10 @@ export default class Users extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.navigateIntroductionScreen('Pupil')}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.pupil} />
+                                    source={Images.pupil} /> */}
+                                    <Pupil style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>Pupil</Text>
                             </View>
                         </TouchableOpacity>
