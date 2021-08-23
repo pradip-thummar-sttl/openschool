@@ -10,14 +10,14 @@ import Users from "../../../screens/users/Users";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
-import Ic_calendar from "../../../../svg/Sidebar/Ic_calendar";
-import Ic_LessonPlanner from "../../../../svg/Sidebar/Ic_LessonPlanner";
-import Ic_PupilManagement from "../../../../svg/Sidebar/Ic_PupilManagement";
-import Ic_parents from "../../../../svg/Sidebar/Ic_parents";
-import Ic_Faq from "../../../../svg/Sidebar/Ic_Faq";
-import Logout from "../../../../svg/Sidebar/Logout";
+import Ic_calendar from "../../../../svg/sidebar/Ic_calendar";
+import Ic_LessonPlanner from "../../../../svg/sidebar/Ic_LessonPlanner";
+import Ic_PupilManagement from "../../../../svg/sidebar/Ic_PupilManagement";
+import Ic_parents from "../../../../svg/sidebar/Ic_parents";
+import Ic_Faq from "../../../../svg/sidebar/Ic_Faq";
+import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
-import Ic_Dashboard from "../../../../svg/Sidebar/Ic_Dashboard";
+import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 
 
 const Sidebar = (props) => {
