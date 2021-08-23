@@ -7,7 +7,7 @@ import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import TMobileOnboarding3 from "../../../../src/svg/teacher/introductionMobile/TMobileOnboarding3";
+import TMobileOnboarding3 from "../../../../svg/teacher/introductionMobile/TMobileOnboarding3";
 
 
 const Introduction3 = (props) => {

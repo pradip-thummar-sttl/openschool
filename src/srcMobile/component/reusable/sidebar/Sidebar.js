@@ -9,16 +9,16 @@ import { baseUrl, opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import Ic_Dashboard from "../../../../src/svg/sidebar/Ic_Dashboard";
-import Ic_calendar from "../../../../src/svg/sidebar/Ic_calendar";
-import Ic_LessonPlanner from "../../../../src/svg/sidebar/Ic_LessonPlanner";
-import Ic_PupilManagement from "../../../../src/svg/sidebar/Ic_PupilManagement";
-import Ic_parents from "../../../../src/svg/sidebar/Ic_parents";
-import Ic_Faq from "../../../../src/svg/sidebar/Ic_Faq";
-import Logout from "../../../../src/svg/sidebar/Logout";
-import Ic_Achievement from "../../../../src/svg/sidebar/Ic_Achievement";
-import Ic_MyAvatar from "../../../../src/svg/sidebar/Ic_MyAvatar";
-import More from "../../../../src/svg/teacher/dashboard/More";
-import Ic_Dashboard from "../../../../src/svg/sidebar/Ic_Dashboard";
+import Ic_calendar from "../../../../svg/sidebar/Ic_calendar";
+import Ic_LessonPlanner from "../../../../svg/sidebar/Ic_LessonPlanner";
+import Ic_PupilManagement from "../../../../svg/sidebar/Ic_PupilManagement";
+import Ic_parents from "../../../../svg/sidebar/Ic_parents";
+import Ic_Faq from "../../../../svg/sidebar/Ic_Faq";
+import Logout from "../../../../svg/sidebar/Logout";
+import Ic_Achievement from "../../../../svg/sidebar/Ic_Achievement";
+import Ic_MyAvatar from "../../../../svg/sidebar/Ic_MyAvatar";
+import More from "../../../../svg/teacher/dashboard/More";
+import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 
 
 

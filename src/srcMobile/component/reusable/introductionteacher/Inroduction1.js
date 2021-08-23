@@ -5,7 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from "../../../../utils/Images";
-import TMobileOnboarding1 from "../../../../src/svg/teacher/introductionMobile/TMobileOnboarding1";
+import TMobileOnboarding1 from "../../../../svg/teacher/introductionMobile/TMobileOnboarding1";
 
 const Introduction1 = (props) => {
     return (

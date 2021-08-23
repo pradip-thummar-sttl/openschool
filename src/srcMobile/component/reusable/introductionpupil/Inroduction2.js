@@ -5,7 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
-import PMobileOnboarding2 from "../../../../src/svg/pupil/introductionMobile/PMobileOnboarding2";
+import PMobileOnboarding2 from "../../../../svg/pupil/introductionMobile/PMobileOnboarding2";
 
 const Introduction2 = (props) => {
     return (
