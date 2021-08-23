@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import Images from '../../../../../srcmobile/utils/Images'
+import Images from '../../../../utils/Images'
+// import Images from '../../../../../srcmobile/utils/Images'
 import AvatarHeader from './AvatarHeader'
 import Styles from './Style'
 var tabs = [

@@ -49,13 +49,13 @@ export default class Splash extends Component {
                 </ImageBackground> */}
 
 
-                <Video source={require('../../../../srcmobile/assets/video/myed_open_school.mp4')}   // Can be a URL or a local file.
+                <Video source={require('../../../assets/video/myed_open_school.mp4')}   // Can be a URL or a local file.
                     ref={(ref) => {
                         this.player = ref
                     }}                                      // Store reference
                     onBuffer={this.onBuffer}                // Callback when remote video is buffering
-                    onError={this.videoError}  
-                    onEnd={()=>{this.launchNextScreen()}} 
+                    onError={this.videoError}
+                    onEnd={() => { this.launchNextScreen() }}
                     resizeMode={'cover'}
                     style={styles.backgroundVideo} />
             </View>
@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
-        
+
         // resizeMode:'stretch'
-      },
+    },
     container: {
         flex: 1,
     },
