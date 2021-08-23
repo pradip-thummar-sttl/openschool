@@ -8,10 +8,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../../utils/Constant';
 import { color } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Top from '../../../svg/userselection/Top';
+import Teacher from '../../../svg/userselection/Teacher';
+import School from '../../../svg/userselection/School';
+import Pupil from '../../../svg/userselection/Pupil';
+
 // import Top from '../../svg/userselection/Top';
-// import Pupil from '../../svg/userselection/Pupil';
-// import School from '../../svg/userselection/School';
-// import Teacher from '../../svg/userselection/Teacher';
+// import Pupil from '../../../svg/userselection/Pupil';
+// import School from '../../../svg/userselection/School';
+// import Teacher from '../../../svg/userselection/Teacher';
 
 export default class Users extends Component {
     constructor(props) {
@@ -44,8 +49,8 @@ export default class Users extends Component {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.image}>
-                    <Image style={styles.topBg} source={Images.illuTopBg} />
-                    {/* <Top style={styles.topBg} width={'100%'} height={hp(16.77)} /> */}
+                    {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
+                    <Top style={styles.topBg} width={'100%'} height={hp(16.77)} />
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
@@ -53,10 +58,10 @@ export default class Users extends Component {
                                 activeOpacity={opacity}
                                 onPress={() => null}>
                                 <View style={styles.user}>
-                                    <Image
+                                    {/* <Image
                                         style={styles.userIcon}
-                                        source={Images.schoolLoginIcon} />
-                                    {/* <School style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} /> */}
+                                        source={Images.schoolLoginIcon} /> */}
+                                    <School style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
                                     <Text style={styles.text}>School</Text>
                                 </View>
                             </TouchableOpacity>
@@ -64,10 +69,10 @@ export default class Users extends Component {
                                 activeOpacity={opacity}
                                 onPress={() => this.navigateIntroductionScreen('Teacher')}>
                                 <View style={styles.user}>
-                                    <Image
+                                    {/* <Image
                                         style={styles.userIcon}
-                                        source={Images.teacherLoginIcon} />
-                                    {/* <Teacher style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} /> */}
+                                        source={Images.teacherLoginIcon} /> */}
+                                    <Teacher style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
                                     <Text style={styles.text}>Teacher</Text>
                                 </View>
                             </TouchableOpacity>
@@ -75,10 +80,10 @@ export default class Users extends Component {
                                 activeOpacity={opacity}
                                 onPress={() => this.navigateIntroductionScreen('Pupil')}>
                                 <View style={styles.user}>
-                                    <Image
+                                    {/* <Image
                                         style={styles.userIcon}
-                                        source={Images.pupilLoginIcon} />
-                                    {/* <Pupil style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} /> */}
+                                        source={Images.pupilLoginIcon} /> */}
+                                    <Pupil style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
                                     <Text style={styles.text}>Pupil</Text>
                                 </View>
                             </TouchableOpacity>

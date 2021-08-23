@@ -1,6 +1,5 @@
 import * as React from "react"
 import Svg, { G, Circle, Path, Rect, Ellipse } from "react-native-svg"
-import PupilManagement from "../../screens/teacher/pupilmanagement/PupilManagement"
 
 function Pupil(props) {
   return (
