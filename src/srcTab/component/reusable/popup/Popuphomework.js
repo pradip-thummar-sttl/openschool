@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
     },
     userProfileimage: {
         width: hp(7),
+        height: hp(7),
+        top: 30,
         resizeMode: 'contain',
     },
     commonInputTextarea: {
@@ -112,7 +114,6 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.2),
         left: hp(1.8),
         zIndex: 9,
     },

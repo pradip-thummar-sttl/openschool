@@ -8,6 +8,7 @@ import Popuphomework from "../../../../component/reusable/popup/Popuphomework";
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 
 const HeaderHW = (props) => {
     return (
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top: 5,
+        alignSelf: 'center',
     },
     commonText: {
         fontSize: hp(1.82),

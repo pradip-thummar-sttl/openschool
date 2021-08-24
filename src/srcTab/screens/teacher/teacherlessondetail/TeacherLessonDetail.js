@@ -394,8 +394,8 @@ const TeacherLessonDetail = (props) => {
                                                                 </MenuOption>
                                                             </MenuOptions>
                                                         </Menu>
-                                                        <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} />
-                                                        <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                                                        {/* <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} /> */}
+                                                        <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                                     </TouchableOpacity>
                                                 </View>
                                                 :

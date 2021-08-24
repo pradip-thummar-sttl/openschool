@@ -97,7 +97,7 @@ export default StyleSheet.create({
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
-        width: '100%'
+        width: '100%',
     },
     datetimeText: {
         fontSize: hp(1.82),
@@ -123,7 +123,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(1.76),
         marginRight:hp(1.04),
-        top: hp(1.5),
+        alignSelf: 'center',
     },
     calIconNoInput: {
         resizeMode: 'contain',
@@ -1176,7 +1176,7 @@ export default StyleSheet.create({
         resizeMode:'contain',
         position:'absolute',
         right:hp(1.6),
-        top:hp(2),
+        alignSelf: 'center'
     },
     plainBg:{
         paddingLeft: hp(3.5),
@@ -1283,7 +1283,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.30),
-        top: hp(1.19),
+        alignSelf: 'center',
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,

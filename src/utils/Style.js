@@ -169,6 +169,7 @@ export default StyleSheet.create({
     },
     cancelButtonIcon: {
         width: hp(2.94),
+        top: 10,
         resizeMode: 'contain',
     },
     popupContentMain: {
