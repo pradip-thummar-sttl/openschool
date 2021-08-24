@@ -7,7 +7,7 @@ import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
 import { opacity } from "../../../../utils/Constant";
 import PopupAddNewData from "../../../component/reusable/popup/Popupaddnewdata";
-
+import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 const HeaderTimeTable = (props) => {
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -25,7 +25,7 @@ const HeaderTimeTable = (props) => {
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
-                <TouchableOpacity><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                <TouchableOpacity><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
                 <Text style={styles.mainTitle}>Title</Text>
             </View>
             <View style={styles.headerRight}>

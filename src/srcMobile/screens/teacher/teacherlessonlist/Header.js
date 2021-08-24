@@ -13,6 +13,7 @@ import {
 } from 'react-native-popup-menu';
 import { opacity } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
+import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import { useState } from "react";
 const Header = (props) => {
     const textInput = useRef(null);
@@ -39,7 +40,7 @@ const Header = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
                     <Text style={styles.mainTitle}>Lesson & homework planner</Text>
                 </View>
 

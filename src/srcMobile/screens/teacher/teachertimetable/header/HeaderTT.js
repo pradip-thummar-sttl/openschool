@@ -16,6 +16,7 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
+import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -41,7 +42,7 @@ const HeaderTT = (props) => {
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.videoLinkBorder }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
                     <Text style={styles.mainTitle}>Timetable</Text>
                 </View>
                 <View style={styles.headerRight}>

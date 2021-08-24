@@ -17,6 +17,7 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import { User } from "../../../../utils/Model";
+import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
@@ -52,7 +53,7 @@ const HeaderPM = (props) => {
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon} /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
                     <Text style={styles.mainTitle}>Parent Zone</Text>
                 </View>
 

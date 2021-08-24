@@ -81,7 +81,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <TopLogo width={hp(5.40)} height={hp(5.40)} />
+                        <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
                         {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
                         <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
@@ -186,7 +186,7 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <TopLogo width={hp(5.40)} height={hp(5.40)} /> 
+                        <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
                         {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
                         <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
