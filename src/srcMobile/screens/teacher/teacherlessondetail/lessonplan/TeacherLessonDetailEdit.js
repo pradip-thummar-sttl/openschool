@@ -33,6 +33,13 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
 import RecordScreen from 'react-native-record-screen';
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import Participants from "../../../../../svg/teacher/dashboard/Participants";
+import Clock from "../../../../../svg/teacher/dashboard/Clock";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
+import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -367,9 +374,8 @@ const TLDetailEdit = (props) => {
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                <Image
-                                    style={PAGESTYLE.userIcon1}
-                                    source={Images.PopupCloseIcon} />
+                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
+                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -465,7 +471,8 @@ const TLDetailEdit = (props) => {
                 <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -486,9 +493,11 @@ const TLDetailEdit = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                        {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
+                        <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2, { width: wp(22) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -509,9 +518,11 @@ const TLDetailEdit = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
                 <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -532,9 +543,11 @@ const TLDetailEdit = (props) => {
                 <Text style={PAGESTYLE.subjectText}> </Text>
                 <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -834,12 +847,14 @@ const TLDetailEdit = (props) => {
                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                            <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <View style={PAGESTYLE.subjectDateTime}>
                                                 <TouchableOpacity onPress={() => showDatePicker()}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                 </TouchableOpacity>
-                                                <Image style={PAGESTYLE.dropDownArrowdatetime2} source={Images.DropArrow} />
+                                                {/* <Image style={PAGESTYLE.dropDownArrowdatetime2} source={Images.DropArrow} /> */}
+                                                <ArrowDown style={PAGESTYLE.dropDownArrowdatetime2} height={hp(1.51)} width={hp(1.51)} />
                                             </View>
                                         </View>
                                     </View>
@@ -911,7 +926,8 @@ const TLDetailEdit = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.uploadBlock}>
                                     <TouchableOpacity onPress={() => addMaterial()} >
-                                        <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} />
+                                        {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
+                                        <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={hp(89.46)} />
                                     </TouchableOpacity>
                                 </View>
                                 {
@@ -921,7 +937,8 @@ const TLDetailEdit = (props) => {
                                                 <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(75) }]}>{item.originalname}</Text>
                                                 {item.uri ?
                                                     <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                        <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                        {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                                        <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                     </TouchableOpacity>
                                                     :
                                                     null
@@ -971,7 +988,8 @@ const TLDetailEdit = (props) => {
                                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                         <View style={PAGESTYLE.videoLinkBlock}>
-                                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
+                                            <DownloadSVG style={PAGESTYLE.videoLinkIcon} height={hp(2.01)} width={hp(2.01)} />
                                             <Text style={PAGESTYLE.videoLinkText}>{lessonData.RecordedLessonName}</Text>
                                         </View>
                                     </View>

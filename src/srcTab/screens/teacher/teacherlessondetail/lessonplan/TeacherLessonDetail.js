@@ -17,6 +17,7 @@ import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import Participants from "../../../../../svg/teacher/dashboard/Participants";
 import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 
 const TLDetail = (props) => {
     const [isLoading, setLoader] = useState(false)
@@ -73,7 +74,8 @@ const TLDetail = (props) => {
                     </View>
                     {props.lessonData.RecordingName ?
                         <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
+                            <PlayBlue style={PAGESTYLE.videoLinkIcon} height={hp(2.38)} width={hp(2.38)} />
                             <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingName}</Text>
                         </TouchableOpacity>
                         :
@@ -175,7 +177,8 @@ const TLDetail = (props) => {
                                 style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.thumbVideo}>
-                                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                                        {/* <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} /> */}
+                                        <DownloadSVG style={PAGESTYLE.grpThumbVideo} height={hp(2.01)} width={hp(2.01)} />
                                     </View>
                                 )}
                                 keyExtractor={(item, index) => index.toString()}

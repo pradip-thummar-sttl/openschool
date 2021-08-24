@@ -17,6 +17,13 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
+import NewLesson from "../../../../../svg/teacher/timetable/NewLesson";
+import NewEvent from "../../../../../svg/teacher/timetable/NewEvent";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -42,17 +49,19 @@ const HeaderTT = (props) => {
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.videoLinkBorder }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Timetable</Text>
                 </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
+                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
+                        <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -66,12 +75,17 @@ const HeaderTT = (props) => {
                                 :
                                 setSearchActive(true)
                         }}>
-                        <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 18, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        {isSearchActive ?
+                            <CloseBlack height={18} width={18} />
+                            :
+                            <SearchBlue height={18} width={18} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical:0,  }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
@@ -81,7 +95,8 @@ const HeaderTT = (props) => {
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     onPress={() => refRBSheet.current.open()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
                 <RBSheet
@@ -101,7 +116,8 @@ const HeaderTT = (props) => {
                 >
                     <View style={styles.popupLarge}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -112,13 +128,15 @@ const HeaderTT = (props) => {
                                             activeOpacity={opacity}
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
-                                            <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                            <NewLesson style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>New Lesson</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
+                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
+                                            <NewEvent style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>New Event</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -380,7 +398,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', marginHorizontal: hp(2), alignItems: 'center', marginBottom: 20,marginTop: 5, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', marginHorizontal: hp(2), alignItems: 'center', marginBottom: 20, marginTop: 5, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

@@ -16,6 +16,9 @@ import moment from 'moment';
 import { User } from "../../../../utils/Model";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
+import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import TickMarkGrey from "../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
 
 const TeacherLessonList = (props) => {
     const userAuthData = useSelector(state => {
@@ -28,31 +31,31 @@ const TeacherLessonList = (props) => {
     const [filterBy, setFilterBy] = useState('')
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
 
     useEffect(() => {
         fetchRecord('', '')
@@ -105,27 +108,43 @@ const TeacherLessonList = (props) => {
                     <View style={PAGESTYLE.subjecRow}>
                         <View style={PAGESTYLE.border}></View>
                         <View style={PAGESTYLE.subjectMain}>
-                            <Text numberOfLines={1} style={[PAGESTYLE.subjectName,{width:150}]}>{item.SubjectName}</Text>
-                            <Text numberOfLines={1} style={[PAGESTYLE.subject,{width:150}]}>{item.LessonTopic}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.subjectName, { width: 150 }]}>{item.SubjectName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.subject, { width: 150 }]}>{item.LessonTopic}</Text>
                         </View>
                     </View>
                     <View style={PAGESTYLE.timingMain}>
                         <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                         <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                     </View>
-                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                    <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} />
                 </View>
                 <View style={PAGESTYLE.row}>
                     <View style={PAGESTYLE.checkMarkedText}>
-                        <Image style={PAGESTYLE.tickIcon} source={item.LiveSession ? Images.CheckIcon : Images.CheckIconGrey} />
+                        {/* <Image style={PAGESTYLE.tickIcon} source={item.LiveSession ? Images.CheckIcon : Images.CheckIconGrey} /> */}
+                        {item.LiveSession ?
+                            <TickMarkBlue style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                            :
+                            <TickMarkGrey style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                        }
                         <Text style={PAGESTYLE.tickText}>Live Lesson</Text>
                     </View>
                     <View style={PAGESTYLE.checkMarkedText}>
-                        <Image style={PAGESTYLE.tickIcon} source={item.Publish ? Images.CheckIcon : Images.CheckIconGrey} />
+                        {/* <Image style={PAGESTYLE.tickIcon} source={item.Publish ? Images.CheckIcon : Images.CheckIconGrey} /> */}
+                        {item.Publish ?
+                            <TickMarkBlue style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                            :
+                            <TickMarkGrey style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                        }
                         <Text style={PAGESTYLE.tickText}>Published</Text>
                     </View>
                     <View style={PAGESTYLE.checkMarkedText}>
-                        <Image style={PAGESTYLE.tickIcon} source={item.HomeWork == 'Yes' ? Images.CheckIcon : Images.CheckIconGrey} />
+                        {/* <Image style={PAGESTYLE.tickIcon} source={item.HomeWork == 'Yes' ? Images.CheckIcon : Images.CheckIconGrey} /> */}
+                        {item.HomeWork == 'Yes' ?
+                            <TickMarkBlue style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                            :
+                            <TickMarkGrey style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                        }
                         <Text style={PAGESTYLE.tickText}>Homework</Text>
                     </View>
                 </View>
@@ -157,7 +176,7 @@ const TeacherLessonList = (props) => {
                     :
                     lessonData.length > 0 ?
                         <FlatList
-                            style={{ paddingHorizontal: 12,marginBottom:10 }}
+                            style={{ paddingHorizontal: 12, marginBottom: 10 }}
                             data={lessonData}
                             renderItem={renderItem}
                             keyExtractor={(item) => item.id}

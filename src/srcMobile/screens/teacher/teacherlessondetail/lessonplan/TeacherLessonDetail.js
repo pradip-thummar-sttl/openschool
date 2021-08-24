@@ -11,6 +11,11 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
 import { Download } from "../../../../../utils/Download";
 import { baseUrl, opacity } from "../../../../../utils/Constant";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../../svg/teacher/dashboard/Clock";
+import Participants from "../../../../../svg/teacher/dashboard/Participants";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
+import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 
 const TLDetail = (props) => {
     console.log('props', props);
@@ -41,7 +46,8 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <View style={PAGESTYLE.alignRow}>
-                                    <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} />
+                                    {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} /> */}
+                                    <Calender style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                     <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('DD/MM/yyyy')}</Text>
                                 </View>
                             </View>
@@ -50,7 +56,8 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <View style={PAGESTYLE.alignRow}>
-                                    <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} />
+                                    {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
+                                    <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                     <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
                                 </View>
                             </View>
@@ -60,7 +67,8 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.subjectText}>Participants</Text>
                         <View style={PAGESTYLE.subjectDateTime}>
                             <View style={PAGESTYLE.alignRow}>
-                                <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} />
+                                {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} /> */}
+                                <Participants style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: wp(50) }]}>{props.lessonData.GroupName}</Text>
                             </View>
                         </View>
@@ -77,7 +85,8 @@ const TLDetail = (props) => {
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
                                 <View style={PAGESTYLE.checkBoxLabelLine}>
-                                    <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                    {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
+                                    <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text numberOfLines={1} style={[PAGESTYLE.lessonPointText, { width: wp(82) }]}>{item.ItemName}</Text>
                                 </View>
                             )}
@@ -141,7 +150,8 @@ const TLDetail = (props) => {
                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                     color={COLORS.blueBorder} />
                                                 :
-                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                             }
                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                         </View>
@@ -184,7 +194,8 @@ const TLDetail = (props) => {
                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                         color={COLORS.blueBorder} />
                                     :
-                                    <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                                    // <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                                    <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                 }
                                 {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
                                 <Text numberOfLines={1} style={[PAGESTYLE.videoLinkText, { width: wp(70) }]}>{props.lessonData.RecordingList[0].originalname}</Text>
@@ -199,7 +210,8 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
+                                <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                             </View>
                         </View>
                         :

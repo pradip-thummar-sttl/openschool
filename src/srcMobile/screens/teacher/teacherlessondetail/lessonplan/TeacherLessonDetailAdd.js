@@ -32,6 +32,12 @@ import moment from "moment";
 import { launchCamera } from "react-native-image-picker";
 // import ImagePicker from 'react-native-image-picker';
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import Participants from "../../../../../svg/teacher/dashboard/Participants";
+import Clock from "../../../../../svg/teacher/dashboard/Clock";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -399,9 +405,8 @@ const TLDetailAdd = (props) => {
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                <Image
-                                    style={PAGESTYLE.userIcon1}
-                                    source={Images.PopupCloseIcon} />
+                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
+                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -499,7 +504,8 @@ const TLDetailAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedSubject(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedSubject ? selectedSubject.SubjectName : 'Select Subject'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
@@ -520,9 +526,11 @@ const TLDetailAdd = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                        {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
+                        <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy, { width: wp(22) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -543,9 +551,11 @@ const TLDetailAdd = (props) => {
                 <Text style={PAGESTYLE.subjectText}>Time</Text>
                 <Menu onSelect={(item) => setSelectedFromTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -566,9 +576,11 @@ const TLDetailAdd = (props) => {
                 <Text style={PAGESTYLE.subjectText}> </Text>
                 <Menu onSelect={(item) => setSelectedToTime(item)}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                        {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
                         <FlatList
@@ -809,10 +821,12 @@ const TLDetailAdd = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
                                         <TouchableOpacity onPress={() => showDatePicker()}>
                                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <View style={PAGESTYLE.subjectDateTimePicker}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                    <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                    <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                 </View>
                                             </View>
                                         </TouchableOpacity>
@@ -882,7 +896,8 @@ const TLDetailAdd = (props) => {
                                     <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                                 </View>
                                 <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                    <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} />
+                                    {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
+                                    <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={hp(89.46)} />
                                 </TouchableOpacity>
 
                                 {
@@ -891,7 +906,8 @@ const TLDetailAdd = (props) => {
                                             <View style={PAGESTYLE.fileGrp}>
                                                 <Text style={PAGESTYLE.fileName}>{item.name}</Text>
                                                 <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </TouchableOpacity>
                                             </View>
                                         )

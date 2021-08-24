@@ -24,6 +24,11 @@ import MESSAGE from "../../../../../utils/Messages";
 import { Download } from "../../../../../utils/Download";
 import RecordScreen from 'react-native-record-screen';
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
+import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 
 const TLHomeWork = (props) => {
     const textInput = useRef(null);
@@ -312,9 +317,8 @@ const TLHomeWork = (props) => {
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                <Image
-                                    style={PAGESTYLE.userIcon1}
-                                    source={Images.PopupCloseIcon} />
+                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
+                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
                         </View>
                         // <View style={{ margin: 8, }}>
@@ -376,13 +380,15 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.dropDownFormInput}>
                                     <Text style={PAGESTYLE.subjectText}>Due Date</Text>
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                        <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                        {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                        <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                         <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
                                             <View>
                                                 <Text style={PAGESTYLE.dateTimetextdummy}>{selectDate}</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} />
+                                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                                     </View>
                                 </View>
                             </View>
@@ -431,7 +437,8 @@ const TLHomeWork = (props) => {
                             <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                         </View>
                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                            <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} />
+                            {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
+                            <UploadMaterial style={PAGESTYLE.dropDownArrow} height={50} width={hp(89.46)} />
                         </TouchableOpacity>
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             {
@@ -443,7 +450,8 @@ const TLHomeWork = (props) => {
                                             <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
                                                 <View>
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </View>
                                                 :
                                                 <View>
@@ -453,7 +461,8 @@ const TLHomeWork = (props) => {
                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                             color={COLORS.blueBorder} />
                                                         :
-                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                     }
                                                     {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                 </View>

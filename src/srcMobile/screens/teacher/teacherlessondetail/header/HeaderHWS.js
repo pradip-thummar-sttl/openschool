@@ -6,6 +6,7 @@ import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
+import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 
 const HeaderHWS = (props) => {
     return (
@@ -15,7 +16,8 @@ const HeaderHWS = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>

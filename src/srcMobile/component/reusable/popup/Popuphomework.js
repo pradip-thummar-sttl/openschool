@@ -8,6 +8,9 @@ import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
 import { baseUrl } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
+import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import HWSubmitBg from "../../../../svg/teacher/lessonhwplanner/HWSubmitBg";
 
 const Popuphomework = (props) => {
     const [isModalVisible, setModalVisible] = useState(true);
@@ -18,15 +21,18 @@ const Popuphomework = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={() => props.onOpenPopup()} style={styles.buttonGroup}>
-                <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
+                {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
+                <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>{props.hwBtnName}</Text>
             </TouchableOpacity>
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={() => { props.onClose() }}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
+                    {/* <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} /> */}
+                    <HWSubmitBg style={STYLE.popupBack} height={hp(10.41)} width={'100%'} />
                     <View style={styles.userProfile}><Image style={styles.userProfileimage} source={{ uri: baseUrl + User.user.ProfilePicture }} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are setting homework for this class</Text>

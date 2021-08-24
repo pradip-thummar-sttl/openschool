@@ -6,6 +6,8 @@ import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
+import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
 
 const HeaderLP = (props) => {
     return (
@@ -15,7 +17,8 @@ const HeaderLP = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>{props.lessonData.SubjectName}</Text>
@@ -36,7 +39,8 @@ const HeaderLP = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}>
-                        <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
+                        {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>

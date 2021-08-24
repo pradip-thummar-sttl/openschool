@@ -17,6 +17,12 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
 import { User } from "../../../../../utils/Model";
+import Clock from "../../../../../svg/teacher/dashboard/Clock";
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import TickMarkWhite from "../../../../../svg/teacher/lessonhwplanner/TickMark_White";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import CalendarUpload from "../../../../../svg/teacher/timetable/CalendarUpload";
 
 const CreateNewEvent = (props) => {
     console.log('props', props);
@@ -67,19 +73,19 @@ const CreateNewEvent = (props) => {
     // };
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         // props.route.params.goBack()
-        props.navigation.goBack() 
+        props.navigation.goBack()
         return true;
-      }
+    }
 
     const isFieldsValidated = () => {
         if (!event.trim()) {
@@ -206,9 +212,11 @@ const CreateNewEvent = (props) => {
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
                     onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
-                    <Image style={styles.calIcon} source={Images.Clock} />
+                    {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
+                    <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                    <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                    {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                    <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
                 </TouchableOpacity>
                 {isFromDropOpen ?
                     <View style={styles.colorDropView}>
@@ -237,9 +245,11 @@ const CreateNewEvent = (props) => {
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap2]}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
-                    <Image style={styles.calIcon} source={Images.Clock} />
+                    {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
+                    <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                    <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                    {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                    <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
                 </TouchableOpacity>
                 {isToDropOpen ?
                     <View style={styles.colorDropView}>
@@ -273,7 +283,8 @@ const CreateNewEvent = (props) => {
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { props.route.params.onGoBack(); props.navigation.goBack(); }}>
-                                        <Image style={styles.arrow} source={Images.backArrow} />
+                                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                                     </TouchableOpacity>
                                     <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
                                     <View style={styles.uploadCalendar}>
@@ -288,7 +299,8 @@ const CreateNewEvent = (props) => {
                                                     onPress={isFieldsValidated}
                                                     style={[styles.buttonGrp, styles.newCheckButton]}
                                                     activeOpacity={opacity}>
-                                                    <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} />
+                                                    {/* <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} /> */}
+                                                    <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
                                                     {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
                                                 </TouchableOpacity>
                                             }
@@ -314,12 +326,14 @@ const CreateNewEvent = (props) => {
                                     <View style={styles.fieldWidthtwo1}>
                                         <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                         <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                            {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                            <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <View style={styles.subjectDateTime}>
                                                 <View>
                                                     <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
                                                 </View>
-                                                <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                             </View>
                                         </TouchableOpacity>
                                     </View>
@@ -375,11 +389,13 @@ const CreateNewEvent = (props) => {
                                                     <TouchableOpacity>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                     </TouchableOpacity>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                    <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity>
-                                                <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                                {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
+                                                <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                             </TouchableOpacity>
                                         </View>
                                     </View>

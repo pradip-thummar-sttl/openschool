@@ -47,6 +47,9 @@ import YellowStar from "../../../../svg/teacher/dashboard/YellowStar";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
 import MoreWhite from "../../../../svg/teacher/dashboard/MoreWhite";
+import Bronze from "../../../../svg/teacher/lessonhwplanner/StarBronze";
+import Silver from "../../../../svg/teacher/lessonhwplanner/StartSilver";
+import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -110,21 +113,21 @@ const Pupillist = ({ item, onPress }) => (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
                                 {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                <OrangeStar style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
+                                <Bronze style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
                                     {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                    <GreyStar style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
+                                    <Silver style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
                                         {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                        <YellowStar style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
+                                        <Gold style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
                                     :

@@ -340,11 +340,13 @@ const Popupdata = (props) => {
                                         <View style={styles.yellowHrTag}></View>
                                         <View style={styles.timedateGrp}>
                                             <View style={styles.dateWhiteBoard}>
-                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <Text style={styles.datetimeText}>{moment(props.data.EventDate).format('DD/MM/yyyy')}</Text>
                                             </View>
                                             <View style={[styles.dateWhiteBoard, styles.time]}>
-                                                <Image style={styles.timeIcon} source={Images.Clock} />
+                                                {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                                                <Clock style={styles.timeIcon} height={hp(1.8)} width={hp(1.8)} />
                                                 <Text style={styles.datetimeText}>{props.data.EventStartTime} - {props.data.EventEndTime}</Text>
                                             </View>
                                         </View>

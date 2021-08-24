@@ -15,6 +15,12 @@ import { opacity } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import { useState } from "react";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 const Header = (props) => {
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -40,7 +46,7 @@ const Header = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Lesson & homework planner</Text>
                 </View>
 
@@ -51,7 +57,8 @@ const Header = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -70,12 +77,17 @@ const Header = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        {isSearchActive ?
+                            <CloseBlack height={15} width={15} />
+                            :
+                            <SearchBlue height={15} width={15} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '95%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical:0 }}
+                        style={{ flex: 1, height: '95%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
                         placeholder="Search subject,class,etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -86,7 +98,10 @@ const Header = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                     <Menu>
-                        <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                        <MenuTrigger>
+                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                            <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                        </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -95,7 +110,8 @@ const Header = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
                                         }
@@ -109,7 +125,8 @@ const Header = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
                                         }
@@ -123,7 +140,8 @@ const Header = (props) => {
                     style={styles.commonButtonGreenheader}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     {/* <Text style={styles.commonButtonGreenheader}></Text> */}
                 </TouchableOpacity>
             </View>
@@ -246,14 +264,14 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         height: hp(5.20),
         width: hp(5.20),
-        marginLeft: 10, 
-        alignItems:'center', 
-        justifyContent:'center'
+        marginLeft: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
 
     },
     addIcon: {
         width: hp(1.55),
-        height:hp(1.55)
+        height: hp(1.55)
         // resizeMode: 'contain',
         // position: 'absolute',
         // top: Platform.OS == 'android' ? hp(1) : hp(1.29),
@@ -330,7 +348,7 @@ const styles = StyleSheet.create({
         marginRight: hp(1.56),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white, marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

@@ -6,6 +6,7 @@ import Images from '../../../../../../utils/Images';
 import FONTS from '../../../../../../utils/Fonts';
 import { opacity } from "../../../../../../utils/Constant";
 import PopupHomeWorkSave from "../../../../../component/reusable/popup/PopupHomeWorkSave";
+import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 const HeaderSave = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -14,7 +15,8 @@ const HeaderSave = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.label} Homework</Text>
                 <View style={styles.headerRight}>
                     {/* <PopupHomeWorkSave /> */}

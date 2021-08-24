@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { G, Path, LinearGradient, Stop } from "react-native-svg"
 
-function SvgComponent(props) {
+function NewCalendar(props) {
   return (
     <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99.3 91" {...props}>
       <G transform="rotate(8 -221.829 373.756)">
@@ -60,4 +60,4 @@ function SvgComponent(props) {
   )
 }
 
-export default SvgComponent
+export default NewCalendar

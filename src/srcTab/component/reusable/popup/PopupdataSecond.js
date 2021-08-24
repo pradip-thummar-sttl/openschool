@@ -22,6 +22,8 @@ import Clock from "../../../../svg/teacher/dashboard/Clock";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import Calender from "../../../../svg/teacher/dashboard/Calender";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
+import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const PopupdataSecond = (props) => {
     const isFromDashboard = props.isFromDashboard
@@ -208,7 +210,8 @@ const PopupdataSecond = (props) => {
                         {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
                         <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={styles.dateTimetextdummy1}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                        <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                        {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                        <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
                     </View>
                 </TouchableOpacity>
                 {isFromDropOpen ?
@@ -241,7 +244,8 @@ const PopupdataSecond = (props) => {
                         {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
                         <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={styles.dateTimetextdummy1}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                        <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                        {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                        <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
                     </View>
                 </TouchableOpacity>
                 {isToDropOpen ?
@@ -314,7 +318,8 @@ const PopupdataSecond = (props) => {
                                                     <View>
                                                         <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
                                                     </View>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                    <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
@@ -364,7 +369,8 @@ const PopupdataSecond = (props) => {
                                                 <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
-                                                        <Image style={styles.dropDownArrowdatetime2} source={Images.DropArrow} />
+                                                        {/* <Image style={styles.dropDownArrowdatetime2} source={Images.DropArrow} /> */}
+                                                        <ArrowDown style={styles.dropDownArrowdatetime2} height={hp(1.51)} width={hp(1.51)} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
@@ -386,7 +392,8 @@ const PopupdataSecond = (props) => {
                                                     onPress={isFieldsValidated}
                                                     style={styles.buttonGrp}
                                                     activeOpacity={opacity}>
-                                                    <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} />
+                                                    {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
+                                                    <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
                                                     <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
                                                 </TouchableOpacity>
                                             }

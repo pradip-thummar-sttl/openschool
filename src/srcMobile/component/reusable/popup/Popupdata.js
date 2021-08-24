@@ -16,7 +16,14 @@ import { EndPoints } from "../../../../service/EndPoints";
 import MESSAGE from "../../../../utils/Messages";
 import { Download } from "../../../../utils/Download";
 import { User } from "../../../../utils/Model";
-
+import Attachment from "../../../../svg/teacher/timetable/Attachment";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import Participants from "../../../../svg/teacher/dashboard/Participants";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
+import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -172,13 +179,15 @@ const Popupdata = (props) => {
                     <View style={PAGESTYLE.attachmentTitle}>
                     <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 75 }}>{props.title}</Text>
                     {props.data.MaterialList && props.data.MaterialList.length > 0 ?
-                        <Image source={Images.attachmentTimeTable} style={PAGESTYLE.attachmentIcon} />
+                        // <Image source={Images.attachmentTimeTable} style={PAGESTYLE.attachmentIcon} />
+                        <Attachment style={PAGESTYLE.attachmentIcon} height={hp(1.95)} width={hp(1.03)} />
                         :
                         null
                     }
                     </View>
                     <View style={PAGESTYLE.row}>
-                        <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} />
+                        {/* <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} /> */}
+                        <Clock style={PAGESTYLE.timeIcon} height={hp(1.8)} width={hp(1.8)} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>
                     </View>
                 </View>
@@ -208,15 +217,18 @@ const Popupdata = (props) => {
                                     <View style={styles.yellowHrTag}></View>
                                     <View style={styles.timedateGrp}>
                                         <View style={styles.dateWhiteBoard}>
-                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                            {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                            <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
                                         </View>
                                         <View style={[styles.dateWhiteBoard, styles.time]}>
-                                            <Image style={styles.timeIcon} source={Images.Clock} />
+                                            {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                                            <Clock style={styles.timeIcon} height={hp(1.8)} width={hp(1.8)} />
                                             <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
                                         </View>
                                         <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                            <Image style={styles.calIcon} source={Images.Group} />
+                                            {/* <Image style={styles.calIcon} source={Images.Group} /> */}
+                                            <Participants style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <Text numberOfLines={1} style={[styles.datetimeText, { width: wp(18) }]}>{props.data.GroupName}</Text>
                                         </View>
                                     </View>
@@ -265,7 +277,8 @@ const Popupdata = (props) => {
                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                             color={COLORS.blueBorder} />
                                                                         :
-                                                                        <Image source={Images.Download} style={styles.downloadIcon} />
+                                                                        // <Image source={Images.Download} style={styles.downloadIcon} />
+                                                                        <DownloadSVG style={styles.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                     }
                                                                     {/* <Image source={Images.Download} style={styles.downloadIcon} /> */}
                                                                 </View>
@@ -283,7 +296,8 @@ const Popupdata = (props) => {
                                             {props.data.CheckList ?
                                                 props.data.CheckList.map((data, index) => (
                                                     <View style={styles.lessonPoints}>
-                                                        <Image source={Images.CheckIcon} style={styles.checkIcon} />
+                                                        {/* <Image source={Images.CheckIcon} style={styles.checkIcon} /> */}
+                                                        <TickMarkBlue style={styles.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                                         <Text style={styles.lessonPointText}>{data.ItemName}</Text>
                                                     </View>
                                                 ))
@@ -294,7 +308,8 @@ const Popupdata = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                            {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
+                                            <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
                                     </View>
                                 </ScrollView>
@@ -350,11 +365,13 @@ const Popupdata = (props) => {
                             <View style={styles.yellowHrTag}></View>
                             <View style={styles.timedateGrp}>
                                 <View style={styles.dateWhiteBoard}>
-                                    <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                    {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                    <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                     <Text style={styles.datetimeText}>{moment(props.data.EventDate).format('DD/MM/yyyy')}</Text>
                                 </View>
                                 <View style={[styles.dateWhiteBoard, styles.time]}>
-                                    <Image style={styles.timeIcon} source={Images.Clock} />
+                                    {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                                    <Clock style={styles.timeIcon} height={hp(1.8)} width={hp(1.8)} />
                                     <Text style={styles.datetimeText}>{props.data.EventStartTime} - {props.data.EventEndTime}</Text>
                                 </View>
                             </View>

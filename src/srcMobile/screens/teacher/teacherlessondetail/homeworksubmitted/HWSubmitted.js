@@ -15,6 +15,9 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import { Service } from "../../../../../service/Service";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
+import ArrowNext from "../../../../../svg/teacher/lessonhwplanner/ArrowNext";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
+import TickMarkGrey from "../../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
 var moment = require('moment');
 
 const Pupillist = (props, item) => (
@@ -26,8 +29,8 @@ const Pupillist = (props, item) => (
                 <View style={PAGESTYLE.thumbAlign}>
                     <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                     <View>
-                        <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName, {width:wp(45)}]}>{props.item.PupilName}</Text>
-                        <Text numberOfLines={1} style={[PAGESTYLE.groupName,{width:wp(45)}]}>{props.item.GroupName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName, { width: wp(45) }]}>{props.item.PupilName}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(45) }]}>{props.item.GroupName}</Text>
                     </View>
                 </View>
                 <View>
@@ -37,15 +40,26 @@ const Pupillist = (props, item) => (
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.rowLine}>
                 <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={props.item.Submited ? Images.CheckIcon : Images.CheckIconGrey} />
+                    {/* <Image style={PAGESTYLE.tickIcon} source={props.item.Submited ? Images.CheckIcon : Images.CheckIconGrey} /> */}
+                    {props.item.Submited ?
+                        <TickMarkBlue style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                        :
+                        <TickMarkGrey style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                    }
                     <Text style={PAGESTYLE.tickText}>Submitted</Text>
                 </View>
                 <View style={PAGESTYLE.checkMarkedText}>
-                    <Image style={PAGESTYLE.tickIcon} source={props.item.Marked ? Images.CheckIcon : Images.CheckIconGrey} />
+                    {/* <Image style={PAGESTYLE.tickIcon} source={props.item.Marked ? Images.CheckIcon : Images.CheckIconGrey} /> */}
+                    {props.item.Marked ?
+                        <TickMarkBlue style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                        :
+                        <TickMarkGrey style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
+                    }
                     <Text style={PAGESTYLE.tickText}>Marked</Text>
                 </View>
                 <View>
-                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                    <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} />
                 </View>
             </View>
         </View>
