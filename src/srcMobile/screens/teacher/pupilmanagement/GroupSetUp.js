@@ -12,6 +12,8 @@ import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 import { User } from "../../../../utils/Model";
 import PAGESTYLE from './Style';
+import Ic_Edit from '../../../../svg/teacher/pupilmanagement/Ic_Edit';
+import UploadImage from '../../../../svg/teacher/pupilmanagement/UploadImage'
 
 const GroupSetUp = (props) => {
     const [groups, setGroups] = useState([])
@@ -53,9 +55,10 @@ const GroupSetUp = (props) => {
                 <TouchableOpacity
                     activeOpacity={opacity}
                     onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList, groupName: item.item.GroupName, isForUpdate: true, groupId: item.item._id }) }}>
-                    <Image
+                    {/* <Image
                         style={PAGESTYLE.groupEdit1}
-                        source={Images.Edit} />
+                        source={Images.Edit} /> */}
+                    <Ic_Edit style={PAGESTYLE.groupEdit1} height={hp(2)} width={hp(2)} />
                 </TouchableOpacity>
             </View>
             <ScrollView
@@ -86,7 +89,8 @@ const GroupSetUp = (props) => {
                 activeOpacity={opacity}
                 onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), isForUpdate: false }) }}>
                 <View style={PAGESTYLE.newGroup}>
-                    <Image style={PAGESTYLE.createIcon} source={Images.uploadIcon} />
+                    {/* <Image style={PAGESTYLE.createIcon} source={Images.uploadIcon} /> */}
+                    <UploadImage style={PAGESTYLE.createIcon} width={hp(2)} height={hp(2)} />
                     <Text style={PAGESTYLE.newGroupLbl}>create new group</Text>
                 </View>
             </TouchableOpacity>
@@ -102,8 +106,8 @@ const GroupSetUp = (props) => {
                             data={groups}
                             renderItem={groupRender}
                             keyExtractor={(item) => item.id}
-                            showsVerticalScrollIndicator={false} 
-                            />
+                            showsVerticalScrollIndicator={false}
+                        />
                         :
                         // <Text style={{ height: hp(6.15), fontSize: hp(2.46), padding: hp(1.23), textAlign: 'center' }}>No data found!</Text>
                         <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />

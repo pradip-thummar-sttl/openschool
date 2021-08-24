@@ -17,6 +17,10 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
+import Ic_Search from '../../../../svg/teacher/pupilmanagement/Ic_Search'
+import CloseBlack from '../../../../svg/teacher/pupilmanagement/Close_Black'
+import AddWhite from '../../../../svg/teacher/timetable/Add_White'
+import Notification from '../../../../svg/teacher/dashboard/Notification'
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -47,7 +51,7 @@ const HeaderPM = (props) => {
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Pupil Management</Text>
                 </View>
 
@@ -55,7 +59,10 @@ const HeaderPM = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <View style={styles.massagesIcon}>
+                            <Notification />
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -71,8 +78,11 @@ const HeaderPM = (props) => {
                                     :
                                     setSearchActive(true)
                             }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                            {isSearchActive ?
+                                <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} /> :
+                                <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />}
                         </TouchableOpacity>
                         <TextInput
                             ref={textInput}
@@ -120,7 +130,8 @@ const HeaderPM = (props) => {
 
                     <TouchableOpacity style={styles.buttonGroup}
                         onPress={() => props.navigateToAddNewUser()}>
-                        <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                        {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                        <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
                         <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity>
                 </View>

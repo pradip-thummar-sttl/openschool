@@ -17,6 +17,7 @@ import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
 import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
 import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
+import NoPupil from '../../../../svg/emptystate/NoPupil';
 
 const { CallModule } = NativeModules;
 
@@ -147,7 +148,7 @@ const PupiloverView = (props) => {
                                                         </View>
                                                         <View style={PAGESTYLE.pupilDetailLink}>
                                                             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                                                            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)}/>
+                                                            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
                                                         </View>
                                                     </View>
                                                 </TouchableOpacity>
@@ -155,7 +156,8 @@ const PupiloverView = (props) => {
                                         })
                                         :
                                         <View style={PAGESTYLE.mainContainer}>
-                                            <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
+                                            {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
+                                            <NoPupil style={PAGESTYLE.noDataImage} height={hp(22)} width={hp(22)} />
                                             <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                                             <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
                                         </View>

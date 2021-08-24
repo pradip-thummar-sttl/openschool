@@ -84,6 +84,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         right: 0,
         top: 5,
+        marginTop:7
     },
     selectedPupilName: {
         fontSize: hp(2.46),
@@ -541,7 +542,7 @@ export default StyleSheet.create({
         height: hp(2.30),
         resizeMode: 'contain',
         alignSelf: 'center',
-        left: hp(0.5)
+        left: hp(0.3)
     },
     performancePArent: {
         borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%'

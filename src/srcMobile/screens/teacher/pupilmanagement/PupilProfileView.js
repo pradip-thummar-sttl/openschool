@@ -16,6 +16,13 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
 import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
+import TickMarkWhite from '../../../../svg/teacher/lessonhwplanner/TickMark_White'
+import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
+import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
+import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
+import BronzeFill from '../../../../svg/teacher/lessonhwplanner/StarBronze_Fill'
+import SilverFill from '../../../../svg/teacher/lessonhwplanner/StartSilver_Fill'
+import GoldFill from '../../../../svg/teacher/lessonhwplanner/StarGold_Fill'
 
 const { CallModule } = NativeModules;
 
@@ -196,34 +203,46 @@ const PupilProfileView = (props) => {
                             <View HR style={STYLE.hrCommon}></View>
                             <View style={PAGESTYLE.rewardSection}>
                                 <View style={PAGESTYLE.fieldDetails}>
-                                    <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between', alignItems:'center'}}>
-                                    <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
-                                    <TouchableOpacity
-                                        style={PAGESTYLE.tickLayoutPArent}
-                                        activeOpacity={opacity}
-                                        onPress={() => setInstantRewards()}>
-                                        <View>
-                                            <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
-                                        </View>
-                                    </TouchableOpacity>
+                                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
+                                        <TouchableOpacity
+                                            style={PAGESTYLE.tickLayoutPArent}
+                                            activeOpacity={opacity}
+                                            onPress={() => setInstantRewards()}>
+                                            <View>
+                                                {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
+                                                <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
+                                            </View>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
                                             <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                    {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                    {isBronze ?
+                                                        <BronzeFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} /> :
+                                                        <Bronze style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />
+                                                    }
                                                     <Text style={PAGESTYLE.starText}>Bronze star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                    {isSilver ?
+                                                        <SilverFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />
+                                                        :
+                                                        <Silver style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />}
                                                     <Text style={PAGESTYLE.starText}>Silver star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                    {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                    {isGold ?
+                                                        <GoldFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} /> :
+                                                        <Gold style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />}
                                                     <Text style={PAGESTYLE.starText}>Gold star</Text>
                                                 </View>
                                             </TouchableOpacity>

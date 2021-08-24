@@ -16,6 +16,7 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
+import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack'
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -36,10 +37,11 @@ const HeaderPMInner = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
-                        <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(75)}]}>{props.name}</Text>
+                        <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
                     </View>
                 </View>
 
