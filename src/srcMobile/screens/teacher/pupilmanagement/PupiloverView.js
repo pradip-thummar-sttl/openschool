@@ -13,6 +13,11 @@ import GroupSetUp from "./GroupSetUp";
 import { User } from "../../../../utils/Model";
 import { baseUrl } from "../../../../utils/Constant";
 
+import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
+import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
+import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
+import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
+
 const { CallModule } = NativeModules;
 
 const PupiloverView = (props) => {
@@ -103,10 +108,10 @@ const PupiloverView = (props) => {
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>
                                                                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(35)}]}>{item.FirstName} {item.LastName}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.groupPupil}>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName,{width:wp(35)}]}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.rewardColumn}>
@@ -114,19 +119,22 @@ const PupiloverView = (props) => {
                                                                 return (
                                                                     item._id == '3' ?
                                                                         <View style={PAGESTYLE.rewardStar}>
-                                                                            <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                                                            {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                                            <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                                                             <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                         </View>
                                                                         :
                                                                         item._id == '6' ?
                                                                             <View style={PAGESTYLE.rewardStar}>
-                                                                                <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                                                                {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                                                <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                                                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                             </View>
                                                                             :
                                                                             item._id == '9' ?
                                                                                 <View style={PAGESTYLE.rewardStar}>
-                                                                                    <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                                                                    {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                                                    <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                                                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                                 </View>
                                                                                 :
@@ -138,7 +146,8 @@ const PupiloverView = (props) => {
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
                                                         </View>
                                                         <View style={PAGESTYLE.pupilDetailLink}>
-                                                            <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                                                            {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                                                            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)}/>
                                                         </View>
                                                     </View>
                                                 </TouchableOpacity>

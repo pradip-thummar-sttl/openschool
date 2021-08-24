@@ -47,14 +47,16 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     dayIcon: {
-        width: hp(2.86),
+        width: hp(4),
         resizeMode: 'contain',
+        alignSelf: 'center',
     },
     dayTitle: {
         color: COLORS.white,
         fontSize: hp(2.03),
         fontFamily: FONTS.fontBold,
         paddingLeft: hp(1.30),
+        alignSelf: 'center'
     },
     datePosition: {
         backgroundColor: COLORS.white,
@@ -525,6 +527,7 @@ export default StyleSheet.create({
         width: hp(2),
         resizeMode: 'contain',
         alignSelf:'center',
+        marginBottom:hp(1)
     },
     pupilDetailLink: {
         width: hp(1.95),

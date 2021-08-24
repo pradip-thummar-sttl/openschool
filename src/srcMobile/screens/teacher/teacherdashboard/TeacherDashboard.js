@@ -19,6 +19,13 @@ import MESSAGE from "../../../../utils/Messages";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import QB from "quickblox-react-native-sdk";
 import { Download } from "../../../../utils/Download";
+// svgs
+import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
+import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
+import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
+import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
+import MyPupils from '../../../../svg/teacher/dashboard/MyPupils'
+import MyDay from '../../../../svg/teacher/dashboard/MyDay'
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -64,19 +71,22 @@ const Pupillist = ({ item, onPress }) => (
                     return (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} />
+                                {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} />
+                                    {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                    <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
-                                        <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} />
+                                        {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                        <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
                                     :
@@ -367,7 +377,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     <View style={PAGESTYLE.paddMainDash}>
                         <View style={PAGESTYLE.myDay}>
                             <View style={[STYLE.viewRow]}>
-                                <Image style={PAGESTYLE.dayIcon} source={Images.Myday} />
+                                {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
+                                <MyDay style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
                                 <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                             </View>
                             <View style={[PAGESTYLE.rightContent]}>
@@ -475,9 +486,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                 data={dataOfSubView.MaterialList}
                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                 renderItem={({ item, index }) => (
-                                                                                    <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
-                                                                                        setLoader(false)
-                                                                                    })}} style={PAGESTYLE.downloaBtn}>
+                                                                                    <TouchableOpacity onPress={() => {
+                                                                                        setLoader(true); Download(item, (res) => {
+                                                                                            setLoader(false)
+                                                                                        })
+                                                                                    }} style={PAGESTYLE.downloaBtn}>
                                                                                         <View style={PAGESTYLE.fileGrp}>
                                                                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                                             {isMatLoading ?
@@ -610,7 +623,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         </View>
                         <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                             <View style={[STYLE.viewRow]}>
-                                <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} />
+                                {/* <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} /> */}
+                                <MyPupils style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
                                 <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                             </View>
                             <View style={[PAGESTYLE.rightContent]}>

@@ -293,11 +293,12 @@ export default StyleSheet.create({
         width: hp(2),
         resizeMode: 'contain',
         alignSelf: 'center',
+        marginBottom: hp(1)
     },
     pupilDetailLink: {
         width: hp(1.95),
         alignItems: 'flex-end',
-        right: hp(1),
+        right: hp(0.8),
     },
     MainProfile: {
         height: '100%',
