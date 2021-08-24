@@ -18,6 +18,11 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import { User } from "../../../../utils/Model";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
+import Ic_Search from "../../../../svg/teacher/pupilmanagement/Ic_Search";
+import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
+import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
+
+
 
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
@@ -53,7 +58,7 @@ const HeaderPM = (props) => {
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Parent Zone</Text>
                 </View>
 
@@ -65,14 +70,15 @@ const HeaderPM = (props) => {
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => {props.onSwitchPupil(item); setSelectedPupilIndex(index)}}>
+                                        onPress={() => { props.onSwitchPupil(item); setSelectedPupilIndex(index) }}>
                                         <View style={styles.filterList}>
                                             <View style={styles.filterListSub}>
                                                 <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
                                                 <Text numberOfLines={1} style={{ ...styles.filterListText, fontFamily: FONTS.fontSemiBold, width: hp(15) }}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                             {index == selectedPupilIndex ?
-                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                <Ic_BlueCheck style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
                                                 :
                                                 null
                                             }
@@ -112,8 +118,14 @@ const HeaderPM = (props) => {
                                     :
                                     setSearchActive(true)
                             }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            {
+                                isSearchActive ?
+                                    <CloseBlack height={20} width={20} />
+                                    : <Ic_Search height={20} width={20} />
+
+                            }
+                            {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                         </TouchableOpacity>
                         <TextInput
                             ref={textInput}
@@ -134,7 +146,9 @@ const HeaderPM = (props) => {
                                         <View style={styles.filterList}>
                                             <Text style={styles.filterListText}>Title</Text>
                                             {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                <Ic_BlueCheck style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+
                                                 :
                                                 null
                                             }
@@ -148,7 +162,9 @@ const HeaderPM = (props) => {
                                         <View style={styles.filterList}>
                                             <Text style={styles.filterListText}>Date</Text>
                                             {selectedIndex == 1 ?
-                                                <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                <Ic_BlueCheck style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+
+                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                                 :
                                                 null
                                             }
@@ -253,14 +269,14 @@ const styles = StyleSheet.create({
     userparent: {
         width: hp(3.81),
         height: hp(3.81),
-        borderRadius:hp(3.81/2),
+        borderRadius: hp(3.81 / 2),
         marginRight: hp(1.5),
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
         marginRight: hp(1),
-        borderRadius:hp(3.81/2)
+        borderRadius: hp(3.81 / 2)
     },
     userparentInMenuAdd: {
         width: hp(1.47),

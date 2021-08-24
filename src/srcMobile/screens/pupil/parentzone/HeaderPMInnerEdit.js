@@ -16,6 +16,7 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
+import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -56,8 +57,9 @@ const HeaderPMInner = (props) => {
                         </TouchableOpacity>
                         :
                         <TouchableOpacity onPress={() => props.saveProfile()} style={styles.buttonGroup}>
-                            <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
-                            <Text style={styles.commonButtonGreenheader}></Text>
+                            {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
+                            <Ic_CheckWhite style={[styles.addIcon, styles.iconTop]} width={hp(1.55)} height={hp(1.55)} />
+                            {/* <Text style={styles.commonButtonGreenheader}></Text> */}
                         </TouchableOpacity>
                     }
                 </View>
@@ -134,14 +136,19 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent:'center',
+        height: hp(5.20),
+        width: hp(5.20),
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: hp(1),
     },
     addIcon: {
         width: hp(1.55),
         resizeMode: 'contain',
-        position: 'absolute',
-        top: hp(1.52),
-        left: hp(1.8),
-        zIndex: 9,
+        // position: 'absolute',
+        // top: hp(1.52),
+        // left: hp(1.8),
+        // zIndex: 9,
     },
     addIcon1: {
         width: hp(1.55),
@@ -157,11 +164,11 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(2),
-        height: hp(5.20),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
+        // paddingLeft: hp(3.125),
+        // paddingRight: hp(2),
+        // height: hp(5.20),
+        // paddingTop: hp(1.4),
+        // paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,

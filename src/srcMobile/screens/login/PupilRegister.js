@@ -26,6 +26,10 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import moment from "moment";
+import ArrowDown from '../../../svg/teacher/login/ArrowDown';
+import ShowPassword from '../../../svg/teacher/login/ShowPassword';
+import HidePassword from '../../../svg/teacher/login/HidePassword';
+import PupilMobileLoginSideimg from '../../../svg/teacher/login/PupilMobileLoginSideimg';
 const { LoginModuleIos, LoginModule } = NativeModules;
 
 var days = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
@@ -79,13 +83,13 @@ class PupilRegister extends Component {
         } else if (!firstName.trim()) {
             showMessage(MESSAGE.firstName);
             return false;
-        } else if (!lastName.trim() ) {
+        } else if (!lastName.trim()) {
             showMessage(MESSAGE.lastName);
             return false;
         } else if (mobile.trim().length < 5) {
             showMessage(MESSAGE.phone)
             return false;
-        } else if (!userName.trim() || !emailValidate(userName) ) {
+        } else if (!userName.trim() || !emailValidate(userName)) {
             showMessage(MESSAGE.email)
             return false;
         } else if (password.trim().length < 5) {
@@ -166,7 +170,8 @@ class PupilRegister extends Component {
                 <Menu onSelect={(item) => this.setState({ day: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.day ? this.state.day : 'Day'}</Text>
-                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                        <ArrowDown style={styles.dropDownArrow} width={hp(1.51)} height={hp(2)} />
+                        {/* <Image style={styles.dropDownArrow} source={Images.DropArrow} /> */}
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.72), } }}>
                         <FlatList
@@ -187,7 +192,8 @@ class PupilRegister extends Component {
                 <Menu onSelect={(item) => this.setState({ month: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.month ? this.state.month : 'Month'}</Text>
-                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                        <ArrowDown style={styles.dropDownArrow} width={hp(1.51)} height={hp(2)} />
+                        {/* <Image style={styles.dropDownArrow} source={Images.DropArrow} /> */}
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.72), } }}>
                         <FlatList
@@ -208,7 +214,8 @@ class PupilRegister extends Component {
                 <Menu onSelect={(item) => this.setState({ year: item })}>
                     <MenuTrigger style={[styles.subjectDateTime, styles.dropDown]}>
                         <Text style={styles.dateTimetextdummy}>{this.state.year ? this.state.year : 'Year'}</Text>
-                        <Image style={styles.dropDownArrow} source={Images.DropArrow} />
+                        <ArrowDown style={styles.dropDownArrow} width={hp(1.51)} height={hp(2)} />
+                        {/* <Image style={styles.dropDownArrow} source={Images.DropArrow} /> */}
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.72), } }}>
                         <FlatList
@@ -227,7 +234,8 @@ class PupilRegister extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <Image source={Images.loginMainBack} style={styles.image}></Image>
+                    {/* <Image source={Images.loginMainBack} style={styles.image}></Image> */}
+                    <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'}/>
                 </View>
                 <View style={styles.rightContent}>
                     <ScrollView showsVerticalScrollIndicator={false}>
@@ -382,8 +390,13 @@ class PupilRegister extends Component {
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => this.setPasswordVisibility()}>
-                                                <Image
-                                                    style={styles.viewIcon} source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                {
+                                                    this.state.isPasswordHide ?
+                                                        <ShowPassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                        : <HidePassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                }
+                                                {/* <Image
+                                                    style={styles.viewIcon} source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -408,8 +421,13 @@ class PupilRegister extends Component {
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => this.setCPasswordVisibility()}>
-                                                <Image
-                                                    style={styles.viewIcon} source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                {
+                                                    this.state.iscPasswordHide ?
+                                                        <ShowPassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                        : <HidePassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                }
+                                                {/* <Image
+                                                    style={styles.viewIcon} source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -419,7 +437,7 @@ class PupilRegister extends Component {
                                         activeOpacity={opacity}
                                         onPress={() => { this.isFieldsValidated() }}>
                                         <Text
-                                            style={{...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase',}}>Create my account</Text>
+                                            style={{ ...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase', }}>Create my account</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.getStarted}>

@@ -17,6 +17,11 @@ import { EndPoints } from "../../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src';
 import { User } from "../../../../utils/Model";
+import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
+import CalendarTop from "../../../../svg/teacher/timetable/CalendarTop";
+import Ic_Calendar from "../../../../svg/pupil/parentzone/Ic_Calendar";
+import ShowPassword from "../../../../svg/teacher/login/ShowPassword";
+import HidePassword from "../../../../svg/teacher/login/HidePassword";
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
@@ -296,7 +301,8 @@ const ParentZoneProfileEdit = (props) => {
                                     style={PAGESTYLE.editProfileMain}
                                     activeOpacity={opacity}
                                     onPress={() => showActionChooser()}>
-                                    <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} ></Image>
+                                    <Ic_Edit style={PAGESTYLE.editProfileIcon} width={hp(2)} height={hp(2)} />
+                                    {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} ></Image> */}
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -347,7 +353,8 @@ const ParentZoneProfileEdit = (props) => {
                                     maxLength={40}
                                     value={dob}
                                     placeholderTextColor={COLORS.menuLightFonts} />
-                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                <Ic_Calendar style={PAGESTYLE.calIcon} height={hp(2)} width={hp(2)} />
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -416,8 +423,13 @@ const ParentZoneProfileEdit = (props) => {
                                 />
                                 <View style={PAGESTYLE.eye}>
                                     <TouchableOpacity activeOpacity={opacity} onPress={() => setPinVisibility()}>
-                                        <Image
-                                            style={PAGESTYLE.viewIcon} source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
+                                        {
+                                            isPindHide ?
+                                                <ShowPassword style={PAGESTYLE.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                : <HidePassword style={PAGESTYLE.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                        }
+                                        {/* <Image
+                                            style={PAGESTYLE.viewIcon} source={isPindHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -484,8 +496,14 @@ const ParentZoneProfileEdit = (props) => {
                                 />
                                 <View style={PAGESTYLE.eye}>
                                     <TouchableOpacity activeOpacity={opacity} onPress={() => setPasswordVisibility()}>
-                                        <Image
-                                            style={PAGESTYLE.viewIcon} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                        {/* <Image
+                                            style={PAGESTYLE.viewIcon} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
+
+                                        {
+                                            isPasswordHide ?
+                                                <ShowPassword style={PAGESTYLE.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                : <HidePassword style={PAGESTYLE.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                        }
                                     </TouchableOpacity>
                                 </View>
                             </View>

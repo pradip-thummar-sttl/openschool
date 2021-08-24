@@ -10,6 +10,7 @@ import HeaderPM from "./HeaderPM";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import moment from 'moment';
 import { baseUrl } from "../../../../utils/Constant";
+import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 
 const PupilProfileView = (props) => {
     console.log('props.data', props.data);
@@ -31,7 +32,8 @@ const PupilProfileView = (props) => {
                     <View style={PAGESTYLE.mainDetails}>
                         <View style={PAGESTYLE.editProfileButtonMain}>
                             <TouchableOpacity onPress={() => props.navigateToDetail()} style={PAGESTYLE.profileEdit}>
-                                <Image source={Images.EditGreen} style={PAGESTYLE.profileeditButton} />
+                                {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
+                                <Ic_CheckWhite style={PAGESTYLE.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.pupilPerfomance}>

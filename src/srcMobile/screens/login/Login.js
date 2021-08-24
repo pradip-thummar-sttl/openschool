@@ -19,6 +19,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { User } from '../../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
+import MobileLoginSideimg from '../../../svg/teacher/login/MobileLoginSideimg';
+import PupilMobileLoginSideimg from '../../../svg/teacher/login/PupilMobileLoginSideimg';
+import TeacherMobileLoginSideimg from '../../../svg/teacher/login/TeacherMobileLoginSideimg';
+import ShowPassword from '../../../svg/teacher/login/ShowPassword';
+import HidePassword from '../../../svg/teacher/login/HidePassword';
 
 const { LoginModuleIos, LoginModule } = NativeModules;
 
@@ -267,9 +272,11 @@ class Login extends Component {
             <View style={styles.container}>
                 <View style={styles.lefImage}>
                     {this.props.route.params.userType == 'Pupil' ?
-                        <Image source={Images.loginMainBack} style={styles.image}></Image>
+                        // <Image source={Images.loginMainBack} style={styles.image}></Image>
+                        <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'} />
                         :
-                        <Image source={Images.loginMainBackteacher} style={styles.image}></Image>
+                        <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'}/>
+                        // <Image source={Images.loginMainBackteacher} style={styles.image}></Image>
                     }
                 </View>
                 <View style={styles.rightContent}>
@@ -311,8 +318,13 @@ class Login extends Component {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => this.setPasswordVisibility()}>
-                                            <Image
-                                                style={styles.viewIcon} source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                 {
+                                                    this.state.isPasswordHide?
+                                                    <ShowPassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                    :<HidePassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                                }
+                                            {/* <Image
+                                                style={styles.viewIcon} source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                         </TouchableOpacity>
                                     </View>
                                 </View>

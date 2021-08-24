@@ -135,7 +135,7 @@ function PTabletOnboarding2(props) {
               transform="translate(62.441 72.869)"
               fill="#90daff"
               fontSize={21}
-              fontFamily="SegoeUI, Segoe UI"
+              // fontFamily="SegoeUI, Segoe UI"
             >
               <TSpan x={-19.293} y={0}>
                 {"ABC"}
@@ -146,7 +146,7 @@ function PTabletOnboarding2(props) {
               transform="translate(125.491 72.086)"
               fill="#fff"
               fontSize={21}
-              fontFamily="SegoeUI, Segoe UI"
+              // fontFamily="SegoeUI, Segoe UI"
             >
               <TSpan x={-16.98} y={0}>
                 {"123"}

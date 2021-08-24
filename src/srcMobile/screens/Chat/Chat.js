@@ -13,6 +13,8 @@ import { User } from '../../../utils/Model';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import { baseUrl } from '../../../utils/Constant'
+import Ic_Send from '../../../svg/teacher/pupilmanagement/Ic_Send'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // var data = [
 //     { name: 'PUPIL PROFILE', isSelected: true },
@@ -155,7 +157,8 @@ const Chat = (props) => {
                                     <Image style={Styles.btn} source={Images.imageUpload} />
                                 </TouchableOpacity> */}
                                 <TouchableOpacity style={Styles.btnBack} onPress={() => sendMessage(message)}>
-                                    <Image style={Styles.btn} source={Images.send} />
+                                    {/* <Image style={Styles.btn} source={Images.send} /> */}
+                                    <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
                                 </TouchableOpacity>
                             </View>
                         </View>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, ActivityIndicator } from 'react-native'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FlatList } from 'react-native-gesture-handler'
 import COLORS from '../../../../../utils/Colors'
 import Styles from './ChatStyle'
@@ -14,6 +15,7 @@ import { baseUrl, opacity, showMessage } from '../../../../../utils/Constant'
 import { Service } from '../../../../../service/Service'
 import { EndPoints } from '../../../../../service/EndPoints'
 import FONTS from '../../../../../utils/Fonts'
+import Ic_Send from '../../../../../svg/teacher/pupilmanagement/Ic_Send'
 
 const ParentChat = (props) => {
 
@@ -146,7 +148,8 @@ const ParentChat = (props) => {
                     <Image style={Styles.btn} source={Images.imageUpload} />
                 </TouchableOpacity> */}
                                     <TouchableOpacity onPress={() => sendMessage(message)}>
-                                        <Image style={Styles.btn} source={Images.send} />
+                                        {/* <Image style={Styles.btn} source={Images.send} /> */}
+                                        <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
