@@ -7,6 +7,7 @@ import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from "../../../../component/reusable/popup/Popuphomework";
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
 
 const HeaderHW = (props) => {
     return (
@@ -16,7 +17,8 @@ const HeaderHW = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.SubjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
@@ -24,7 +26,8 @@ const HeaderHW = (props) => {
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>

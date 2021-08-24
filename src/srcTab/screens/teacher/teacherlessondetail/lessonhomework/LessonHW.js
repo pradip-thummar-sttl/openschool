@@ -25,6 +25,12 @@ import { Download } from "../../../../../utils/Download";
 import RecordScreen from 'react-native-record-screen';
 
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
+
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -335,9 +341,8 @@ const TLHomeWork = (props) => {
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                <Image
-                                    style={PAGESTYLE.userIcon1}
-                                    source={Images.PopupCloseIcon} />
+                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
+                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2)} width={hp(2)} />
                             </TouchableOpacity>
                         </View>
                         // <View style={{ margin: 8, }}>
@@ -400,13 +405,15 @@ const TLHomeWork = (props) => {
                                         <View style={PAGESTYLE.dueDateWrap}>
                                             <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                         </View>
-                                        <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} />
+                                        {/* <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} /> */}
+                                        <Calender style={PAGESTYLE.calIconHomeWork} height={hp(1.76)} width={hp(1.76)} />
                                         <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
                                             <View>
                                                 <Text style={PAGESTYLE.dateTimetextdummy2}>{selectDate}</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} />
+                                        {/* <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} /> */}
+                                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetimehomeWork} height={hp(1.51)} width={hp(1.51)} />
                                     </View>
                                 </View>
                             </View>
@@ -525,30 +532,36 @@ const TLHomeWork = (props) => {
                     </View> */}
 
                             <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                                {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
+                                <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
+                                <Text style={{ position: 'absolute', bottom: hp(4.55), color: COLORS.menuLightFonts, fontFamily: FONTS.fontSemiBold, fontSize: hp(1.82), }}>Upload Material</Text>
                             </TouchableOpacity>
 
                             {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => {item.uri ?removeObject(index, item): setLoader(true); Download(item,(res)=>{
-                                            setLoader(false)
-                                        })}} style={PAGESTYLE.fileGrp}>
+                                        <TouchableOpacity onPress={() => {
+                                            item.uri ? removeObject(index, item) : setLoader(true); Download(item, (res) => {
+                                                setLoader(false)
+                                            })
+                                        }} style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
                                                 <View >
-                                                    <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} />
+                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </View>
                                                 :
                                                 <View >
-                                                     {isLoading ?
-                                                            <ActivityIndicator
-                                                                style={{ ...PAGESTYLE.downloadIcon }}
-                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                color={COLORS.blueBorder} />
-                                                            :
-                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                        }
+                                                    {isLoading ?
+                                                        <ActivityIndicator
+                                                            style={{ ...PAGESTYLE.downloadIcon }}
+                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                            color={COLORS.blueBorder} />
+                                                        :
+                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                    }
                                                     {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                 </View>
                                             }

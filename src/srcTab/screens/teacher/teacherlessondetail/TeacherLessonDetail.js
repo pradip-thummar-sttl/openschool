@@ -21,6 +21,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import MESSAGE from "../../../../utils/Messages";
 import TLHomeWorkSubmittedDetail from "./homeworksubmitted/HWSubmittedDetail";
@@ -29,6 +30,10 @@ import ScreenAndCameraRecording from "../screenandcamera/ScreenandCamera";
 import TLVideoGallery from "./lessonplan/TeacherLessonVideoGallery";
 import moment from 'moment';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 
 const TeacherLessonDetail = (props) => {
     const textInput = useRef(null);
@@ -343,9 +348,14 @@ const TeacherLessonDetail = (props) => {
                                                                     :
                                                                     null
                                                             }}>
-                                                            <Image
+                                                            {/* <Image
                                                                 style={PAGESTYLE.userIcon1}
-                                                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                                                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                                                            {isSearchActive ?
+                                                                <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
+                                                                :
+                                                                <SearchBlue style={PAGESTYLE.userIcon1} height={20} width={20} />
+                                                            }
                                                         </TouchableOpacity>
                                                     </View>
                                                     <TouchableOpacity style={PAGESTYLE.buttonGroup}>
@@ -359,7 +369,8 @@ const TeacherLessonDetail = (props) => {
                                                                         <View style={PAGESTYLE.filterList}>
                                                                             <Text style={PAGESTYLE.filterListText}>Pupil Name</Text>
                                                                             {selectedIndex == 0 ?
-                                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                                                                 :
                                                                                 null
                                                                             }
@@ -373,7 +384,8 @@ const TeacherLessonDetail = (props) => {
                                                                         <View style={PAGESTYLE.filterList}>
                                                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
                                                                             {selectedIndex == 1 ?
-                                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                                                                 :
                                                                                 null
                                                                             }
@@ -383,6 +395,7 @@ const TeacherLessonDetail = (props) => {
                                                             </MenuOptions>
                                                         </Menu>
                                                         <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} />
+                                                        <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                                     </TouchableOpacity>
                                                 </View>
                                                 :

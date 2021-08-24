@@ -141,11 +141,11 @@ const PupilProfileView = (props) => {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
                         <View style={PAGESTYLE.whiteBg}>
-                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{height:'94%'}}>
+                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         <ImageBackground style={PAGESTYLE.managementopImage} >
-                                            <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'}/>
+                                            <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
                                             <View style={PAGESTYLE.thumbTopUser}>
                                                 <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                     source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
@@ -165,7 +165,7 @@ const PupilProfileView = (props) => {
                                             <Text style={PAGESTYLE.userName}>{moment(props.selectedPupil.Dob).format('DD/MM/yyyy')}</Text>
                                         </View>
                                         <View>
-                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel,{width:wp(15)}]}>Unique I.D (auto-generated)</Text>
+                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel, { width: wp(15) }]}>Unique I.D (auto-generated)</Text>
                                             <Text style={PAGESTYLE.userName}>{props.selectedPupil.UniqueNumber}</Text>
                                         </View>
                                     </View>
@@ -182,9 +182,9 @@ const PupilProfileView = (props) => {
                                                 <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
                                                     <View style={PAGESTYLE.centerText}>
                                                         {
-                                                            isBronze?
-                                                            <BronzeFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
-                                                            :<Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                            isBronze ?
+                                                                <BronzeFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                                : <Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
                                                         }
                                                         {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
                                                         <Text style={PAGESTYLE.starText}>Bronze star</Text>
@@ -192,10 +192,10 @@ const PupilProfileView = (props) => {
                                                 </TouchableOpacity>
                                                 <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
                                                     <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    {
-                                                            isSilver?
-                                                            <SilverFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
-                                                            :<Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                        {
+                                                            isSilver ?
+                                                                <SilverFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                                : <Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
                                                         }
                                                         {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
                                                         <Text style={PAGESTYLE.starText}>Silver star</Text>
@@ -203,10 +203,10 @@ const PupilProfileView = (props) => {
                                                 </TouchableOpacity>
                                                 <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
                                                     <View style={PAGESTYLE.centerText}>
-                                                    {
-                                                            isGold?
-                                                            <GoldFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
-                                                            :<Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)}/>
+                                                        {
+                                                            isGold ?
+                                                                <GoldFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                                : <Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
                                                         }
                                                         {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
                                                         <Text style={PAGESTYLE.starText}>Gold star</Text>
@@ -216,17 +216,17 @@ const PupilProfileView = (props) => {
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.annotationText}>
-                                    <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between', alignItems:'center'}}>
-                                        <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
-                                        <View style={PAGESTYLE.tickLayoutPArent}>
-                                            <TouchableOpacity
-                                                activeOpacity={opacity}
-                                                onPress={() => setInstantRewards()}>
-                                                <View>
-                                                    <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
-                                                </View>
-                                            </TouchableOpacity>
-                                        </View>
+                                        <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
+                                            <View style={PAGESTYLE.tickLayoutPArent}>
+                                                <TouchableOpacity
+                                                    activeOpacity={opacity}
+                                                    onPress={() => setInstantRewards()}>
+                                                    <View>
+                                                        <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
                                         {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
                                         <TextInput

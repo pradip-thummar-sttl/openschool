@@ -6,7 +6,11 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
-import { opacity } from "../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../utils/Constant";
+import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import { User } from "../../../../utils/Model";
+import HWSubmitBg from "../../../../svg/teacher/lessonhwplanner/HWSubmitBg";
 
 const PopupHomeWorkSave = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -28,7 +32,8 @@ const PopupHomeWorkSave = (props) => {
         <View>
             {!props.isMarked && props.isSubmitted ?
                 <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
-                    <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
+                    {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
+                    <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}>mark homework</Text>
                 </TouchableOpacity>
                 :
@@ -37,10 +42,12 @@ const PopupHomeWorkSave = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
-                    <View style={styles.userProfile}><Image style={styles.userProfileimage} source={require('../../../../assets/images/userProfilePopup.png')} /></View>
+                    {/* <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} /> */}
+                    <HWSubmitBg style={STYLE.popupBack} height={hp(10.41)} width={'100%'} />
+                    <View style={styles.userProfile}><Image style={styles.userProfileimage} source={{ uri: baseUrl + User.user.ProfilePicture }} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing save pupil will be notified. You can edit your feedback at any time. </Text>

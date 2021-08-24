@@ -102,7 +102,7 @@ const Header = (props) => {
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
                                             // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={1.48} width={1.48} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
                                         }
@@ -117,7 +117,7 @@ const Header = (props) => {
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
                                             // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={1.48} width={1.48} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
                                         }

@@ -22,6 +22,13 @@ import { Download } from "../../../../../utils/Download";
 import { launchCamera } from "react-native-image-picker";
 import RecordScreen from 'react-native-record-screen';
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import Marked from "../../../../../svg/teacher/lessonhwplanner/Marked";
+import BronzeFill from "../../../../../svg/teacher/lessonhwplanner/StarBronze_Fill";
+import Bronze from "../../../../../svg/teacher/lessonhwplanner/StarBronze";
+import SilverFill from "../../../../../svg/teacher/lessonhwplanner/StartSilver_Fill";
+import Silver from "../../../../../svg/teacher/lessonhwplanner/StartSilver";
+import GoldFill from "../../../../../svg/teacher/lessonhwplanner/StarGold_Fill";
+import Gold from "../../../../../svg/teacher/lessonhwplanner/StarGold";
 
 
 var moment = require('moment');
@@ -245,7 +252,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.userRight}>
                                     <View style={PAGESTYLE.markedLabel}>
-                                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon1} />
+                                        {/* <Image source={Images.Marcked} style={PAGESTYLE.markedIcon1} /> */}
+                                        <Marked style={PAGESTYLE.markedIcon1} height={30} width={30} />
                                         <Text style={PAGESTYLE.markedText}>{data.Marked ? 'Marked' : 'Not Marked'}</Text>
                                     </View>
                                     <View style={PAGESTYLE.dateNameBlock}>
@@ -301,9 +309,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             data={data.HomeworkList}
                                             style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal: 10 }}
                                             renderItem={({ item, index }) => (
-                                                <TouchableOpacity onPress={() =>{setLoader(true), Download(item, (res) => {
-                                                    setLoader(false)
-                                                })}} style={PAGESTYLE.downloaBtn}>
+                                                <TouchableOpacity onPress={() => {
+                                                    setLoader(true), Download(item, (res) => {
+                                                        setLoader(false)
+                                                    })
+                                                }} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
                                                         {isMatLoading ?
                                                             <ActivityIndicator
@@ -364,19 +374,34 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         <View style={PAGESTYLE.rewardStarMark}>
                                             <TouchableOpacity onPress={() => { !data.Marked ? onStarSelection(3) : null }} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                                    {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                    {
+                                                        isBronze ?
+                                                            <BronzeFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                            : <Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                    }
                                                     <Text style={PAGESTYLE.starText}>Bronze star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => { !data.Marked ? onStarSelection(6) : null }} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                                    {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                    {
+                                                        isSilver ?
+                                                            <SilverFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                            : <Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                    }
                                                     <Text style={PAGESTYLE.starText}>Silver star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => { !data.Marked ? onStarSelection(9) : null }} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
-                                                    <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} />
+                                                    {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                    {
+                                                        isGold ?
+                                                            <GoldFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                            : <Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                    }
                                                     <Text style={PAGESTYLE.starText}>Gold star</Text>
                                                 </View>
                                             </TouchableOpacity>

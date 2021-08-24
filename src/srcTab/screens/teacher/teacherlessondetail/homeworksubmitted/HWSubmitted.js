@@ -15,6 +15,7 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import { Service } from "../../../../../service/Service";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
+import ArrowNext from "../../../../../svg/teacher/lessonhwplanner/ArrowNext";
 
 var moment = require('moment');
 
@@ -39,7 +40,8 @@ const Pupillist = (props, { style }) => (
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
                 <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
                 <View style={PAGESTYLE.pupilDetailLink}>
-                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                    <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} />
                 </View>
             </View>
         </View>
