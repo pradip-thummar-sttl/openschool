@@ -21,7 +21,16 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 import QB from "quickblox-react-native-sdk";
 import { Download } from "../../../../utils/Download";
-
+import ArrowNext from "../../../../svg/teacher/pupilmanagement/ArrowNext";
+import MyHomeworkIllus from "../../../../svg/pupil/dashboard/MyHomeworkIllus";
+import MyClassIllus from "../../../../svg/pupil/dashboard/MyClassIllus";
+import MyDayCalendar from "../../../../svg/pupil/dashboard/MyDayCalendar";
+import MoreWhite from "../../../../svg/teacher/dashboard/MoreWhite";
+import CalenderIconSmall from "../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import Group from "../../../../svg/teacher/dashboard/Participants";
+import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
+import TickmarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
@@ -319,7 +328,8 @@ const PupuilDashboard = (props) => {
                 </View>
             </View>
             <TouchableOpacity style={PAGESTYLE.topListingArrow}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} width={hp(0.95)} height={hp(1.51)} />
+                {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
             </TouchableOpacity>
 
         </TouchableOpacity>
@@ -340,7 +350,8 @@ const PupuilDashboard = (props) => {
                 </View>
             </View>
             <TouchableOpacity style={PAGESTYLE.topListingArrow}>
-                <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} width={hp(0.95)} height={hp(1.51)} />
+                {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
             </TouchableOpacity>
 
         </TouchableOpacity>
@@ -363,14 +374,18 @@ const PupuilDashboard = (props) => {
                                         <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
-                                        <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} />
-                                        <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
+                                        <MyClassIllus width= {hp(40)} height= {hp(10)} style={PAGESTYLE.pupilGridTopBg} />
+                                        {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}
+                                        {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}></ImageBackground> */}
+                                        <View style={[PAGESTYLE.datePositionBg]}>
+                                            <MyDayCalendar width= {hp(12.95)} height= {hp(10.22)} style={[PAGESTYLE.datePositionBgIcon]} />
                                             <Text style={PAGESTYLE.date}>Today</Text>
                                             <Text style={PAGESTYLE.month}>{moment().format('D')} {moment().format('MMM')}</Text>
-                                        </ImageBackground>
+                                        </View>
                                         <View>
                                             <TouchableOpacity>
-                                                <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
+                                                <MoreWhite width= {hp(0.7)} height= {hp(2.5)} style={PAGESTYLE.moreDashboard} />
+                                                {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -425,15 +440,18 @@ const PupuilDashboard = (props) => {
                                                                             <View style={PAGESTYLE.yellowHrTag}></View>
                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                                    <CalenderIconSmall width={hp(1.69)} height={hp(1.69)} style={PAGESTYLE.calIcon} />
+                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                                                                     <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                                    <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                                    <Clock width={hp(1.6)} height={hp(1.6)} style={PAGESTYLE.timeIcon} />
+                                                                                    {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
                                                                                     <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                                    <Group width={hp(1.79)} height={hp(1.67)} style={PAGESTYLE.calIcon} />
+                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
                                                                                     <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, PAGESTYLE.grpElipsis]}>{dataOfSubView.GroupName}</Text>
                                                                                 </View>
                                                                             </View>
@@ -463,7 +481,7 @@ const PupuilDashboard = (props) => {
                                                                                     </TouchableOpacity> */}
                                                                                     {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
                                                                                         <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                                                            <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
+                                                                                            <Text style={{...PAGESTYLE.requireText, marginBottom: 20,}}>Attachment(s)</Text>
                                                                                             <FlatList
                                                                                                 data={dataOfSubView.MaterialList}
                                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
@@ -479,7 +497,8 @@ const PupuilDashboard = (props) => {
                                                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                                     color={COLORS.blueBorder} />
                                                                                                                 :
-                                                                                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                                <DownloadSVG width= {hp(2.01)} height= {hp(2.01)} style={PAGESTYLE.downloadIcon} />
+                                                                                                                // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                                                                             }
                                                                                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                                         </View>
@@ -499,7 +518,8 @@ const PupuilDashboard = (props) => {
                                                                                         style={{ width: '100%' }}
                                                                                         renderItem={({ item, index }) => (
                                                                                             <View style={PAGESTYLE.lessonPoints}>
-                                                                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                                <TickmarkBlue style={PAGESTYLE.checkIcon} width={hp(1.40)} height={hp(1.24)} />
+                                                                                                {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                                                                                 <Text numberOfLines={1} style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                             </View>
                                                                                         )}
@@ -508,21 +528,22 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </ScrollView>
                                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10, borderColor: COLORS.dashboardGreenButton, }}>
-                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }}>
-                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton, paddingVertical: 10 }}>Mark As Absent</Text>
+                                                                                <View style={{width: '48%',}}>
+                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }} style={{ ...STYLE.commonButtonBordered, width: '100%'}}>
+                                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
-                                                                                <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton }}>
+                                                                                <View style={{width: '48%',}}>
                                                                                     <TouchableOpacity
+                                                                                        style={{ ...STYLE.commonButtonBordered,backgroundColor: COLORS.dashboardGreenButton, width: '100%',}}
                                                                                         onPress={() => { launchLiveClass() }}>
                                                                                         {
                                                                                             isLoading ?
                                                                                                 <ActivityIndicator
-                                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
+                                                                                                    style={{ ...PAGESTYLE.buttonGrp}}
                                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                     color={COLORS.white} /> :
-                                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Join Class</Text>
+                                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, }}>Join Class</Text>
                                                                                         }
 
                                                                                     </TouchableOpacity>
@@ -548,7 +569,8 @@ const PupuilDashboard = (props) => {
 
                         <View style={PAGESTYLE.dashboardPurpleBox}>
                             <View STYLE={PAGESTYLE.pupilHomeWorkGridTopBgHold}>
-                                <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} />
+                                <MyHomeworkIllus style={PAGESTYLE.pupilHomeWorkGridTopBg} width={hp(40)} height={hp(10)} />
+                                {/* <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} /> */}
                             </View>
                             <View style={PAGESTYLE.purpleBoxTop}>
                                 <View style={PAGESTYLE.myDayPurple}>
@@ -559,7 +581,8 @@ const PupuilDashboard = (props) => {
                                         <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} />
                                         <View>
                                             <TouchableOpacity>
-                                                <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
+                                                <MoreWhite width= {hp(0.7)} height= {hp(2.5)} style={PAGESTYLE.moreDashboard} />
+                                                {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                             </TouchableOpacity>
                                         </View>
                                     </View>

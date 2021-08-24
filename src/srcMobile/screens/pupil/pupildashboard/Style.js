@@ -62,11 +62,11 @@ export default StyleSheet.create({
         width: hp(12.95),
         height: hp(10.22),
     },
-    date: {
-        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
-        fontFamily: FONTS.fontBold,
-        color: COLORS.darkGray,
-        textAlign: 'center',
+    datePositionBgIcon: {
+        width: hp(12.95),
+        height: hp(10.22),
+        resizeMode: 'contain',
+        position: 'absolute',
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
@@ -95,18 +95,16 @@ export default StyleSheet.create({
     },
 
     date: {
-        fontSize: Platform.OS == 'android' ? hp(1.5) : hp(1.82),
-        fontFamily: FONTS.fontBold,
+        fontSize: hp(1.47),
+        fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         textAlign: 'center',
     },
     month: {
-        fontSize: Platform.OS == 'android' ? hp(1.56) : hp(1.56),
-        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.72),
+        fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
-        //bottom: Platform.OS == 'android' ? hp(0.75) : hp(0),
-        //textAlignVertical: 'center',
     },
     moreDashboard: {
         width: hp(0.7),
@@ -128,11 +126,9 @@ export default StyleSheet.create({
     },
     timeIcon: {
         resizeMode: 'contain',
-        width: hp(1.66),
     },
     calIcon: {
         resizeMode: 'contain',
-        width: hp(1.66),
     },
     pupilBoard: {
         marginTop: hp(5),
@@ -399,6 +395,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         paddingBottom: hp(1.2),
         paddingTop: hp(0.5),
+        alignItems: 'center',
     },
     lessonPointsBorder: {
         borderBottomColor: COLORS.commonBorderColor,
@@ -407,7 +404,7 @@ export default StyleSheet.create({
     checkIcon: {
         width: hp(1.7),
         resizeMode: 'contain',
-        top: hp(0.2),
+        // top: hp(0.2),
     },
     lessonPointText: {
         fontSize: hp(1.72),
@@ -498,7 +495,7 @@ export default StyleSheet.create({
         marginTop: hp(22.30),
     },
     purpleBoxTop: {
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
     myDayPurple: {
         backgroundColor: COLORS.dashboardHomeWorkPurple,
@@ -515,7 +512,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(40),
         height: hp(10),
-        top: hp(-9.8),
+        top: hp(-10.9),
         right: hp(-1),
     },
     bookPositionBg: {
