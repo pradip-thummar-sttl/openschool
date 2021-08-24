@@ -1162,6 +1162,7 @@ export default StyleSheet.create({
     mobileUploadLink: {
         width: wp(89.46),
         resizeMode: 'contain',
+        marginVertical: 25,
     },
     smlThumbVideo: {
         width: wp(39.2),
@@ -1205,6 +1206,7 @@ export default StyleSheet.create({
         width: hp(1.40),
         resizeMode: 'contain',
         marginRight: hp(1),
+        alignSelf: 'center',
     },
     checkMarkedText: {
         flexDirection: 'row',

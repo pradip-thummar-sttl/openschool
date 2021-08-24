@@ -927,7 +927,7 @@ const TLDetailEdit = (props) => {
                                 <View style={PAGESTYLE.uploadBlock}>
                                     <TouchableOpacity onPress={() => addMaterial()} >
                                         {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
-                                        <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={hp(89.46)} />
+                                        <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                                     </TouchableOpacity>
                                 </View>
                                 {
@@ -948,7 +948,7 @@ const TLDetailEdit = (props) => {
                                     }) : null
                                 }
 
-                                <View style={PAGESTYLE.videoScroll}>
+                                {/* <View style={PAGESTYLE.videoScroll}>
                                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                                         <TouchableOpacity>
                                             <View style={PAGESTYLE.thumbVideo}>
@@ -975,7 +975,7 @@ const TLDetailEdit = (props) => {
                                             </View>
                                         </TouchableOpacity>
                                     </ScrollView>
-                                </View>
+                                </View> */}
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}

@@ -110,6 +110,7 @@ export default StyleSheet.create({
         width: hp(1.40),
         resizeMode: 'contain',
         marginRight:hp(1),
+        alignSelf: 'center',
     },
     checkMarkedText:{
         flexDirection:'row',

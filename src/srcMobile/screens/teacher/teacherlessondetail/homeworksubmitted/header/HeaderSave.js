@@ -228,7 +228,6 @@ const styles = StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        top: 8,
         marginRight: hp(1.2),
     },
     commonText: {

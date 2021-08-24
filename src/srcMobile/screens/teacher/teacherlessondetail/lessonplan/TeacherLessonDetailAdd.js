@@ -897,7 +897,7 @@ const TLDetailAdd = (props) => {
                                 </View>
                                 <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                     {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
-                                    <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={hp(89.46)} />
+                                    <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                                 </TouchableOpacity>
 
                                 {

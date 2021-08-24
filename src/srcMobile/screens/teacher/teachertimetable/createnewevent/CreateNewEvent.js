@@ -213,7 +213,7 @@ const CreateNewEvent = (props) => {
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
                     onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
-                    <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
+                    <Clock style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
                     {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
                     <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
@@ -246,7 +246,7 @@ const CreateNewEvent = (props) => {
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap2]}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
-                    <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
+                    <Clock style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                     <Text style={{ alignSelf: 'center', paddingStart: 20 }}>{selectedToTime ? selectedToTime : 'To'}</Text>
                     {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
                     <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
