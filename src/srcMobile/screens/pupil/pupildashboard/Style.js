@@ -531,7 +531,7 @@ export default StyleSheet.create({
     checkIconSquare: {
         width: hp(1.95),
         resizeMode: 'contain',
-        top: hp(-0.5),
+        // top: hp(-0.5),
     },
     achivementWrap: {
         flexDirection: 'column',
@@ -543,8 +543,10 @@ export default StyleSheet.create({
     achivementRobot: {
         width: '100%',
         marginTop: hp(6),
+        marginBottom: hp(2),
         justifyContent: 'center',
         flexDirection: 'row',
+        backgroundColor: COLORS.red,
     },
     achivementBox: {
         borderColor: COLORS.dashboardBorder,
@@ -596,6 +598,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         marginBottom: hp(1.30),
+        position: 'absolute',
     },
     starSelectedText: {
         fontFamily: FONTS.fontBold,
@@ -612,7 +615,7 @@ export default StyleSheet.create({
     },
     cartoon: {
         resizeMode: 'contain',
-        alignItems: 'center',
+        alignSelf: 'center',
         width: hp(41.25),
         height: hp(35.71),
     },

@@ -31,6 +31,15 @@ import Clock from "../../../../svg/teacher/dashboard/Clock";
 import Group from "../../../../svg/teacher/dashboard/Participants";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 import TickmarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import MyhomeworkBook from "../../../../svg/pupil/dashboard/MyhomeworkBook";
+import DueIcon from "../../../../svg/pupil/dashboard/HWDue_Orange";
+import SubjectIcon from "../../../../svg/pupil/dashboard/Subject";
+import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import RewardStarback from "../../../../svg/pupil/dashboard/RewardStarback";
+import RobotAvtar from "../../../../svg/pupil/dashboard/RobotAvtar";
+import BronzeStar from "../../../../svg/pupil/dashboard/BronzeStar";
+import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
+import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
@@ -578,7 +587,8 @@ const PupuilDashboard = (props) => {
                                         <Text H3 style={PAGESTYLE.dayTitle}>My Homework</Text>
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
-                                        <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} />
+                                        <MyhomeworkBook style={[PAGESTYLE.bookPositionBg]} width= {hp(13.41)} height= {hp(11.84)} />
+                                        {/* <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} /> */}
                                         <View>
                                             <TouchableOpacity>
                                                 <MoreWhite width= {hp(0.7)} height= {hp(2.5)} style={PAGESTYLE.moreDashboard} />
@@ -634,11 +644,13 @@ const PupuilDashboard = (props) => {
                                                                             <Text h2 style={[PAGESTYLE.titleTab, PAGESTYLE.titleTabSecond]}>{dataOfHWSubView.LessonTopic}</Text>
                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
+                                                                                    <DueIcon width={hp(1.9)} height={hp(2)} style={PAGESTYLE.calIcon} />
+                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.DueToday} /> */}
                                                                                     <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.HomeWorkDate).format('DD/MM/yyyy')}</Text>
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
+                                                                                    <SubjectIcon width={hp(1.59)} height={hp(1.65)} style={PAGESTYLE.calIcon} />
+                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} /> */}
                                                                                     <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
                                                                                 </View>
                                                                             </View>
@@ -653,7 +665,8 @@ const PupuilDashboard = (props) => {
                                                                                         style={{ width: '100%' }}
                                                                                         renderItem={({ item, index }) => (
                                                                                             <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                                                <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                                                <CheckedBlue style={PAGESTYLE.checkIconSquare} width={hp(1.84)} height={hp(1.84)} />
+                                                                                                {/* <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} /> */}
                                                                                                 <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                             </View>
                                                                                         )}
@@ -687,27 +700,28 @@ const PupuilDashboard = (props) => {
                         </View>
                         <View style={PAGESTYLE.achivementWrap}>
                             <View style={PAGESTYLE.achivementBox}>
-                                <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} />
+                                <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35): hp(8.9)} style={PAGESTYLE.rewardStar} />
+                                {/* <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} /> */}
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                 <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                 <View style={PAGESTYLE.paddingDiv}>
                                     <View style={PAGESTYLE.rewardStarMark}>
                                         <View style={PAGESTYLE.centerText}>
-                                            <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
-                                                <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
-                                            </ImageBackground>
+                                            <BronzeStar width={hp(4.94)} height={hp(4.68)} style={[PAGESTYLE.starSelected]} />
+                                            {/* <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
+                                            <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
                                             <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                         </View>
                                         <View style={PAGESTYLE.centerStar}>
-                                            <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
-                                                <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
-                                            </ImageBackground>
+                                            <SilverStar width={hp(4.94)} height={hp(4.68)} style={[PAGESTYLE.starSelected]} />
+                                            {/* <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
+                                            <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
                                             <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                         </View>
                                         <View style={PAGESTYLE.centerText}>
-                                            <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
-                                                <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
-                                            </ImageBackground>
+                                            <GoldStar width={hp(4.94)} height={hp(4.68)} style={[PAGESTYLE.starSelected]} />
+                                            {/* <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
+                                            <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
                                             <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                         </View>
                                     </View>
@@ -717,7 +731,8 @@ const PupuilDashboard = (props) => {
                                 </View>
                             </View>
                             <View style={PAGESTYLE.achivementRobot}>
-                                <Image source={Images.Robot} style={PAGESTYLE.cartoon} />
+                                <RobotAvtar style={PAGESTYLE.cartoon} height={hp(35.71)} width={hp(41.25)} />
+                                {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
                             </View>
                         </View>
                     </View>
