@@ -19,7 +19,7 @@ import Ic_Achievement from "../../../../svg/sidebar/Ic_Achievement";
 import Ic_MyAvatar from "../../../../svg/sidebar/Ic_MyAvatar";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
-
+import TopLogo from "../../../../svg/common/TopLogo";
 
 
 
@@ -81,11 +81,12 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={Images.proffileLogo} />
+                        <TopLogo width={hp(5.40)} height={hp(5.40)} />
+                        {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
                         <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(55) }]}>MYED Open School</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -185,11 +186,12 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={Images.proffileLogo} />
+                        <TopLogo width={hp(5.40)} height={hp(5.40)} /> 
+                        {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
                         <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(55) }]}>MYED Open School</Text>
+                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
                         </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
@@ -297,17 +299,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp(3),
         paddingBottom: hp(2.0),
-        paddingLeft: hp(2.5),
+        paddingLeft: hp(1),
     },
     profileTextMain: {
         paddingLeft: hp(1.5),
         width: hp(19.53),
     },
     profileTitle: {
-        fontSize: hp(2.0),
-        marginBottom: hp(0.1),
+        fontSize: hp(1.82),
         color: COLORS.lightGray,
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
     },
     profileDesi: {
         fontSize: hp(1.6),
