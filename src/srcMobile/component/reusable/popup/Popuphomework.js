@@ -32,7 +32,7 @@ const Popuphomework = (props) => {
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     {/* <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} /> */}
-                    <HWSubmitBg style={STYLE.popupBack} height={hp(10.41)} width={'100%'} />
+                    <HWSubmitBg style={STYLE.popupBack} height={hp(6.4)} width={'100%'} />
                     <View style={styles.userProfile}><Image style={styles.userProfileimage} source={{ uri: baseUrl + User.user.ProfilePicture }} /></View>
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are setting homework for this class</Text>
@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     userProfile: {
-        top: hp(7.5),
-        width: 45,
-        height: 45,
+        top: hp(9),
+        width: 55,
+        height: 55,
         borderWidth: 2,
         borderColor: COLORS.white,
         backgroundColor: COLORS.white,
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     userProfileimage: {
-        width: 40,
-        height: 40,
+        width: 55,
+        height: 55,
         alignSelf: 'center',
         resizeMode: 'contain',
     },
@@ -141,13 +141,14 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     popupTitle: {
-        fontSize: hp(2.34),
+        fontSize: hp(1.98),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        marginBottom: hp(2.6),
+        marginBottom: hp(1.2),
         paddingLeft: wp(7.5),
         paddingRight: wp(7.5),
         textAlign: 'center',
+        marginTop: 35,
     },
     popupText: {
         fontSize: wp(3.46),
