@@ -349,7 +349,6 @@ const Popupdata = (props) => {
                                                         color={COLORS.white} /> :
                                                     <Text style={[styles.bottomDrwerButtonGreen]}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
                                             }
-
                                         </TouchableOpacity>
                                     </View>
                                 </View>
