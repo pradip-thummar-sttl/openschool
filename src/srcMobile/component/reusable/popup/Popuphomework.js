@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
-        width: wp(89.33),
+        width: '100%',
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',

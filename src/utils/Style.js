@@ -173,8 +173,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     popupContentMain: {
-        paddingLeft: hp(3.5),
-        paddingRight: hp(3.5),
+        paddingLeft: hp(1.5),
+        paddingRight: hp(1.5),
         paddingTop: hp(6),
         paddingBottom: hp(4.5),
         alignItems: 'center',
