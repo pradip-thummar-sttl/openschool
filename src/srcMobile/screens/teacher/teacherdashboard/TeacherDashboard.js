@@ -394,7 +394,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={PAGESTYLE.myDay}>
                             <View style={[STYLE.viewRow]}>
                                 {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
-                                <MyDay style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
+                                <MyDay style={PAGESTYLE.dayIcon} height={hp(2.70)} width={hp(2.70)} />
                                 <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                             </View>
                             <View style={[PAGESTYLE.rightContent]}>
@@ -646,7 +646,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                             <View style={[STYLE.viewRow]}>
                                 {/* <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} /> */}
-                                <MyPupils style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
+                                <MyPupils style={PAGESTYLE.dayIcon} height={hp(2.70)} width={hp(2.70)} />
                                 <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                             </View>
                             <View style={[PAGESTYLE.rightContent]}>
