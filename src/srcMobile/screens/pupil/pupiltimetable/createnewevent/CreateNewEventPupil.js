@@ -17,7 +17,12 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
 import { User } from "../../../../../utils/Model";
-
+import ClockIcon from "../../../../../svg/teacher/dashboard/Clock";
+import DownArrow from "../../../../../svg/pupil/timetable/DropDown";
+import WhiteCheck from "../../../../../svg/pupil/timetable/WhiteCheck";
+import CalSmall from "../../../../../svg/teacher/dashboard/Calender";
+import UploadCal from "../.././../../../svg/pupil/timetable/UploadCal";
+import BackArrow from "../../../../../svg/common/BackArrow";
 const CreateNewEventPupil = (props) => {
     console.log('props', props);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -207,9 +212,11 @@ const CreateNewEventPupil = (props) => {
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
                     onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
-                    <Image style={styles.calIcon} source={Images.Clock} />
+                    {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
+                    <ClockIcon style={styles.calIcon} width={hp(1.76)} height={hp(1.76)} />
                     <Text style={{ alignSelf: 'center', paddingStart: hp(2.28), fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8) }}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                    <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                    {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                    <DownArrow style={styles.dropDownArrowdatetime1} width={hp(1.51)} height={hp(0.9)} />
                 </TouchableOpacity>
                 {isFromDropOpen ?
                     <View style={styles.colorDropView2}>
@@ -238,9 +245,11 @@ const CreateNewEventPupil = (props) => {
                     activeOpacity={opacity}
                     style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
-                    <Image style={styles.calIcon} source={Images.Clock} />
+                    <ClockIcon style={styles.calIcon} width={hp(1.76)} height={hp(1.76)} />
+                    {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
                     <Text style={{ alignSelf: 'center', paddingStart: hp(2.28), fontSize: Platform.OS == 'android' ? hp(1.6) : hp(1.8) }}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                    <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                    {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                    <DownArrow style={styles.dropDownArrowdatetime1} width={hp(1.51)} height={hp(0.9)} />
                 </TouchableOpacity>
                 {isToDropOpen ?
                     <View style={styles.colorDropView2}>
@@ -275,7 +284,8 @@ const CreateNewEventPupil = (props) => {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => { props.route.params.onGoBack(); props.navigation.goBack(); }}>
-                                            <Image style={styles.arrow} source={Images.backArrow} />
+                                            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                                            <BackArrow height={hp(2.19)} width={hp(2.48)} style={styles.arrow} />
                                         </TouchableOpacity>
                                         <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
                                     </View>
@@ -291,7 +301,8 @@ const CreateNewEventPupil = (props) => {
                                                     onPress={isFieldsValidated}
                                                     style={[styles.buttonGrp, styles.newCheckButton]}
                                                     activeOpacity={opacity}>
-                                                    <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} />
+                                                    <WhiteCheck style={[styles.checkWhiteIcon]} height={hp(1.58)} width={hp(1.80)} />
+                                                    {/* <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} /> */}
                                                     {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
                                                 </TouchableOpacity>
                                             }
@@ -320,12 +331,14 @@ const CreateNewEventPupil = (props) => {
                                     <View style={styles.fieldWidthtwo1}>
                                         <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                         <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                            <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                            {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                            <CalSmall style={styles.calIcon} width={hp(1.76)} height={hp(1.76)} />
                                             <View style={styles.subjectDateTime}>
                                                 <View>
                                                     <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
                                                 </View>
-                                                <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                <DownArrow style={styles.dropDownArrowdatetime} width={hp(1.51)} height={hp(0.9)} />
                                             </View>
                                         </TouchableOpacity>
                                     </View>
@@ -381,11 +394,13 @@ const CreateNewEventPupil = (props) => {
                                                     <TouchableOpacity>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                     </TouchableOpacity>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                    <DownArrow style={styles.dropDownArrowdatetime} width={hp(1.51)} height={hp(0.9)} />
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity>
-                                                <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                            <TouchableOpacity style={styles.uploadCal}>
+                                                {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
+                                                <UploadCal width={hp(2.21)} height={hp(2.21)} style={styles.uploadCalIcon} />
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -467,6 +482,16 @@ const styles = StyleSheet.create({
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
+    },
+    uploadCal: {
+        width: hp(5.20),
+        height: hp(5.20),
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 1,
     },
     dateandColor: {
         marginRight: hp(1.84),
