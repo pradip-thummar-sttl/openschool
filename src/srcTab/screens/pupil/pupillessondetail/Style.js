@@ -935,8 +935,7 @@ export default StyleSheet.create({
         width: '100%',
         resizeMode: 'cover',
         position: 'absolute',
-        top: 0,
-        left: 0,
+        top: -30,
         borderRadius: 6,
     },
     videoPlay: {
@@ -1241,6 +1240,7 @@ export default StyleSheet.create({
     videoCardThumb: {
         position: 'relative',
         flexDirection: 'row',
+        alignItems: 'center',
         width: '100%',
     },
     lessonDue: {
