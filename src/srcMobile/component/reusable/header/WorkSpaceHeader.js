@@ -5,7 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
-
+import WhiteCheckIcon from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
 import {
     Menu,
     MenuOptions,
@@ -31,7 +31,8 @@ const WorkSpaceHeader = (props) => {
                             props.isWorkspace ?
                                 <TouchableOpacity onPress={() => props.onSaveWorkSpacePress()} style={styles.buttonGroup}>
                                     {/* <Text style={styles.commonButtonGreenheader}>Save Workspace</Text> */}
-                                    <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                                    {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                                    <WhiteCheckIcon style={styles.addIcon} height={hp(1.58)} width={hp(1.80)} />
                                 </TouchableOpacity>
                                 : null
                     }
@@ -50,14 +51,15 @@ const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingHorizontal: hp(2.5),
         backgroundColor: COLORS.white,
-        paddingVertical: 10
+        paddingBottom: 10,
+        paddingTop: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(2.5),
+        fontSize: hp(1.97),
         fontFamily: FONTS.fontSemiBold,
         marginLeft: 15,
     },
@@ -119,6 +121,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: COLORS.buttonGreen,
         height: 40,
         width: 40,
@@ -168,9 +171,6 @@ const styles = StyleSheet.create({
     addIcon: {
         width: hp(1.55),
         resizeMode: 'contain',
-        position: 'absolute',
-        top: hp(1.29),
-        left: hp(1.4),
         zIndex: 9,
     },
     iconTop: {
