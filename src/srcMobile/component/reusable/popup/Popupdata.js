@@ -330,7 +330,7 @@ const Popupdata = (props) => {
                                                 style={styles.buttonGrp}
                                                 activeOpacity={opacity}
                                                 onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
-                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Lesson</Text>
+                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, }}>Edit Lesson</Text>
                                             </TouchableOpacity>
                                         </View>
                                         :
@@ -344,7 +344,7 @@ const Popupdata = (props) => {
                                             {
                                                 isLoading ?
                                                     <ActivityIndicator
-                                                        style={{ ...styles.buttonGrp, paddingVertical: 13 }}
+                                                        style={{ ...styles.buttonGrp, }}
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.white} /> :
                                                     <Text style={[styles.bottomDrwerButtonGreen]}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
@@ -551,7 +551,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(3.5),
+        paddingBottom: hp(2),
         position: 'absolute',
         bottom: hp(-8),
         width: '100%',
@@ -583,10 +583,8 @@ const styles = StyleSheet.create({
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingTop: Platform.OS == 'android' ? hp(1.3) : hp(1.21),
         paddingLeft: Platform.OS == 'android' ? hp(4.5) : hp(3.94),
         paddingRight: Platform.OS == 'android' ? hp(4.5) : hp(3.94),
-        paddingBottom: Platform.OS == 'android' ? hp(1) : hp(1.21),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,

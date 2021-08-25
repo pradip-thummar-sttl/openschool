@@ -122,7 +122,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
         fontSize: hp(1.56),
-        borderRadius: hp(1),
+        borderRadius: 6,
         overflow: 'hidden',
         textAlign: 'center',
         paddingLeft: hp(3.125),
