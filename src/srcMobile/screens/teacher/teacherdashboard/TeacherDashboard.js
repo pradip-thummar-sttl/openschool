@@ -82,21 +82,21 @@ const Pupillist = ({ item, onPress }) => (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
                                 {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2)} height={hp(2)} />
+                                <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.22)} height={hp(2.12)} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
                                     {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                    <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2)} height={hp(2)} />
+                                    <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.22)} height={hp(2.12)} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
                                         {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                        <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2)} height={hp(2)} />
+                                        <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.22)} height={hp(2.12)} />
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
                                     :
