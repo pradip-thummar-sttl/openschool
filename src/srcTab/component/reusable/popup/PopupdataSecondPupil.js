@@ -17,6 +17,11 @@ import { EndPoints } from "../../../../service/EndPoints";
 import moment from "moment";
 import { User } from "../../../../utils/Model";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
 
 const PopupdataSecondPupil = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -119,7 +124,7 @@ const PopupdataSecondPupil = (props) => {
                 console.log('response of get all lesson', res)
                 setDefaults()
                 showMessageWithCallBack(MESSAGE.eventAdded, () => {
-                    props.refreshList(); 
+                    props.refreshList();
                     toggleModal()
                 })
             } else {
@@ -180,9 +185,13 @@ const PopupdataSecondPupil = (props) => {
                     activeOpacity={opacity}
                     onPress={() => { setToDropOpen(false); setFromDropOpen(!isFromDropOpen); setColorDropOpen(false); }}>
                     <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
-                        <Image style={styles.timeIcon} source={Images.Clock} />
+                        {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
+
                         <Text style={styles.dateTimetextdummy1}>{selectedFromTime ? selectedFromTime : 'From'}</Text>
-                        <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                        <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
+
+                        {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
                     </View>
                 </TouchableOpacity>
                 {isFromDropOpen ?
@@ -212,9 +221,11 @@ const PopupdataSecondPupil = (props) => {
                     activeOpacity={opacity}
                     onPress={() => { setToDropOpen(!isToDropOpen); setFromDropOpen(false); setColorDropOpen(false); }}>
                     <View style={[styles.subjectDateTime, styles.dropDownSmallWrap1]}>
-                        <Image style={styles.timeIcon} source={Images.Clock} />
+                        {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
+                        <Clock style={styles.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text style={styles.dateTimetextdummy1}>{selectedToTime ? selectedToTime : 'To'}</Text>
-                        <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} />
+                        {/* <Image style={styles.dropDownArrowdatetime1} source={Images.DropArrow} /> */}
+                        <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
                     </View>
                 </TouchableOpacity>
                 {isToDropOpen ?
@@ -251,7 +262,9 @@ const PopupdataSecondPupil = (props) => {
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -274,10 +287,14 @@ const PopupdataSecondPupil = (props) => {
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                <Calender style={[styles.calIcon, { top: 13 }]} height={hp(1.76)} width={hp(1.76)} />
+
                                                 <View style={styles.subjectDateTime}>
                                                     <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                                                    <ArrowDown style={styles.dropDownArrowdatetime1} height={hp(1.51)} width={hp(1.51)} />
+
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
@@ -327,7 +344,9 @@ const PopupdataSecondPupil = (props) => {
                                                 <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
-                                                        <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
+                                                        
+                                                        {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
@@ -335,7 +354,9 @@ const PopupdataSecondPupil = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                            {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
+                                            <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
+
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
                                             <TouchableOpacity
@@ -436,6 +457,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom:hp(2)
     },
     buttonGrp: {
         position: 'relative',
@@ -564,7 +586,7 @@ const styles = StyleSheet.create({
         width: hp(1.76),
         marginRight: hp(1.04),
         position: 'absolute',
-        alignSelf:'center'
+        alignSelf: 'center'
         // top: hp(1.1),
         // left: hp(1.4),
     },
@@ -637,7 +659,7 @@ const styles = StyleSheet.create({
     // colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
     // colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
     colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
-    colorDropView1: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white,  padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView1: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
     timeField: {
         flex: 0.20

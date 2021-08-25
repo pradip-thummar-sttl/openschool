@@ -28,6 +28,17 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 import QB from "quickblox-react-native-sdk";
 import { initApp } from "../../../component/reusable/onetoonecall/CallConfiguration";
 import { Download } from "../../../../utils/Download";
+import PupilCalendar from "../../../../svg/teacher/dashboard/PupilCalendar";
+import More from "../../../../svg/teacher/dashboard/MoreWhite";
+import HomeworkBook from "../../../../svg/teacher/dashboard/HomeworkBook";
+import HWDueOrange from "../../../../svg/pupil/dashboard/HWDue_Orange";
+import Subject from "../../../../svg/pupil/dashboard/Subject";
+import BronzeStar from "../../../../svg/pupil/dashboard/BronzeStar";
+import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
+import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
+import RobotAvtar from "../../../../svg/pupil/dashboard/RobotAvtar";
+import MyClassIllus from "../../../../svg/pupil/dashboard/MyClassIllus";
+import MyHomeworkIllus from "../../../../svg/pupil/dashboard/MyHomeworkIllus";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -237,7 +248,7 @@ const PupuilDashboard = (props) => {
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID,false, title, channels,  (id) => {
+                CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, false, teacherQBUserID, false, title, channels, (id) => {
                     console.log('hi id:---------', id)
                 })
             }
@@ -380,7 +391,8 @@ const PupuilDashboard = (props) => {
                                         <ScrollView showsVerticalScrollIndicator={false}>
                                             <Header onAlertPress={() => { props.navigation.openDrawer() }} />
                                             <View style={STYLE.padLeftRight}>
-                                                <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} />
+                                                {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}   
+                                                <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />
                                                 <View style={PAGESTYLE.dashboardOrangeBox}>
                                                     <View style={PAGESTYLE.orangeBoxTop}>
                                                         <View style={PAGESTYLE.myDay}>
@@ -388,13 +400,18 @@ const PupuilDashboard = (props) => {
                                                                 <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                                             </View>
                                                             <View style={[PAGESTYLE.rightContent]}>
-                                                                <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
+                                                                {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}> */}
+                                                                <PupilCalendar style={[PAGESTYLE.datePositionBg]} height={81} width={102} />
+                                                                <View style={[PAGESTYLE.datePositionBg]}>
                                                                     <Text style={PAGESTYLE.today}>Today</Text>
                                                                     <Text style={PAGESTYLE.datemonth}>{moment().format('D')} {moment().format('MMM')}</Text>
-                                                                </ImageBackground>
+                                                                </View>
+
+                                                                {/* </ImageBackground> */}
                                                                 <View>
                                                                     <TouchableOpacity>
-                                                                        <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
+                                                                        {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
+                                                                        <More style={PAGESTYLE.moreDashboard} height={28} width={5} />
                                                                     </TouchableOpacity>
                                                                 </View>
                                                             </View>
@@ -467,9 +484,11 @@ const PupuilDashboard = (props) => {
                                                                                                         data={dataOfSubView.MaterialList}
                                                                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                                         renderItem={({ item, index }) => (
-                                                                                                            <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
-                                                                                                                setLoader(false)
-                                                                                                            })}} style={PAGESTYLE.downloaBtn}>
+                                                                                                            <TouchableOpacity onPress={() => {
+                                                                                                                setLoader(true); Download(item, (res) => {
+                                                                                                                    setLoader(false)
+                                                                                                                })
+                                                                                                            }} style={PAGESTYLE.downloaBtn}>
                                                                                                                 <View style={PAGESTYLE.fileGrp}>
                                                                                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                                                                     {isMatLoading ?
@@ -538,17 +557,21 @@ const PupuilDashboard = (props) => {
                                                 </View>
 
                                                 <View style={PAGESTYLE.dashboardPurpleBox}>
-                                                    <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} />
+                                                    {/* <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} /> */}
+                                                    <MyHomeworkIllus style={PAGESTYLE.pupilHomeWorkGridTopBg} width={hp(46.87)} height={hp(14.41)} />
                                                     <View style={PAGESTYLE.purpleBoxTop}>
                                                         <View style={PAGESTYLE.myDayPurple}>
                                                             <View>
                                                                 <Text H3 style={PAGESTYLE.dayTitle}>My Homework</Text>
                                                             </View>
                                                             <View style={[PAGESTYLE.rightContent]}>
-                                                                <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} />
+                                                                {/* <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} /> */}
+                                                                <HomeworkBook style={[PAGESTYLE.bookPositionBg]} height={hp(14.84)} width={hp(17.123)} /> 
                                                                 <View>
                                                                     <TouchableOpacity>
-                                                                        <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} />
+                                                                        <More style={PAGESTYLE.moreDashboard} height={28} width={5} />
+
+                                                                        {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                                                     </TouchableOpacity>
                                                                 </View>
                                                             </View>
@@ -582,11 +605,13 @@ const PupuilDashboard = (props) => {
                                                                                             <Text numberOfLines={1} h2 style={[PAGESTYLE.titleTab]}>{dataOfHWSubView.LessonTopic}</Text>
                                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.DueToday} />
+                                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.DueToday} /> */}
+                                                                                                    <HWDueOrange style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                     <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.HomeWorkDate).format('DD/MM/yyyy')}</Text>
                                                                                                 </View>
                                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                                    <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} />
+                                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} /> */}
+                                                                                                    <Subject style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)}/>
                                                                                                     <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
                                                                                                 </View>
                                                                                             </View>
@@ -637,21 +662,26 @@ const PupuilDashboard = (props) => {
                                                         <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                                         <View style={PAGESTYLE.rewardStarMark}>
                                                             <View style={PAGESTYLE.centerText}>
-                                                                <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}>
+                                                                <BronzeStar style={[PAGESTYLE.starSelected]} height={hp(4.94)} width={hp(4.94)} />
+                                                                <View  style={[PAGESTYLE.starSelected,{position:'absolute'}]}>
                                                                     <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
-                                                                </ImageBackground>
+                                                                </View>
                                                                 <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.centerStar}>
-                                                                <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}>
+                                                            <SilverStar style={[PAGESTYLE.starSelected]} height={hp(4.94)} width={hp(4.94)} />
+
+                                                                <View style={[PAGESTYLE.starSelected,{position:'absolute'}]}>
                                                                     <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
-                                                                </ImageBackground>
+                                                                </View>
                                                                 <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.centerText}>
-                                                                <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}>
+                                                            <GoldStar style={[PAGESTYLE.starSelected]} height={hp(4.94)} width={hp(4.94)} />
+
+                                                                <View style={[PAGESTYLE.starSelected,{position:'absolute'}]}>
                                                                     <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
-                                                                </ImageBackground>
+                                                                </View>
                                                                 <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                                             </View>
                                                         </View>
@@ -661,7 +691,8 @@ const PupuilDashboard = (props) => {
                                                         </View>
                                                     </View>
                                                     <View style={PAGESTYLE.achivementRobot}>
-                                                        <Image source={Images.Robot} style={PAGESTYLE.cartoon} />
+                                                        {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
+                                                        <RobotAvtar style={PAGESTYLE.cartoon} height={hp(45.18)} width={hp(67.51)} />
                                                     </View>
                                                 </View>
                                             </View>
