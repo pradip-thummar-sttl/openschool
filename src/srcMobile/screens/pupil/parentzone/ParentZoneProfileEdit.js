@@ -22,6 +22,7 @@ import CalendarTop from "../../../../svg/teacher/timetable/CalendarTop";
 import Ic_Calendar from "../../../../svg/pupil/parentzone/Ic_Calendar";
 import ShowPassword from "../../../../svg/teacher/login/ShowPassword";
 import HidePassword from "../../../../svg/teacher/login/HidePassword";
+import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
@@ -294,7 +295,8 @@ const ParentZoneProfileEdit = (props) => {
                 <KeyboardAwareScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
-                            <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
+                            {/* <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image> */}
+                            <EditProfileTop_Mobile style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
                             <View style={PAGESTYLE.profileOuter}>
                                 <Image source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} style={PAGESTYLE.profileImage}></Image>
                                 <TouchableOpacity

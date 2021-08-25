@@ -72,7 +72,7 @@ export default StyleSheet.create({
         top: 0,
     },
     fullWidthPrimaryButton: {
-        backgroundColor: COLORS.blueButton,
+        backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
         textAlign: 'center',
         overflow: 'hidden',

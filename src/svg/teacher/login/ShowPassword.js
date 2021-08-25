@@ -5,8 +5,8 @@ function ShowPassword(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={18.528}
-      height={12.357}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 18.528 12.357"
       {...props}
     >

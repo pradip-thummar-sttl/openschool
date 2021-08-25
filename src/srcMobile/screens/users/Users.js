@@ -44,7 +44,7 @@ export default class Users extends Component {
         return (
             <View style={styles.container}>
                 {/* <Image source={Images.loginTop} style={styles.image}></Image> */}
-                <TopMobile style={styles.image} height={hp(15)} width={'100%'} />
+                <TopMobile style={styles.image} height={hp(16)} width={'100%'} />
                 <View>
                     <Text style={styles.titleText}>Select the type of user you are</Text>
                     <View style={styles.userMain}>
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         width: '100%',
         height: hp(15),
+        top: -5
     },
     userMain: {
         justifyContent: "center",

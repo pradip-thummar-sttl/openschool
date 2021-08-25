@@ -22,11 +22,11 @@ export default StyleSheet.create({
     },
     lable: {
         width: hp(7),
-        height: hp(5.98),
+        height: 66,
         fontFamily:FONTS.fontRegular,
         color:COLORS.lightGray,
-        marginBottom: hp(-1.95),
-        marginTop: hp(3),
+        marginBottom: 15,       //hp ma na mukta koi
+        paddingTop: 40,
     },
     dayRightmain: {
         height: 66,

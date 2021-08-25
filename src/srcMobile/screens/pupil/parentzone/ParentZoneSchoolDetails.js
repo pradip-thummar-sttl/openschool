@@ -11,6 +11,7 @@ import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import { User } from "../../../../utils/Model";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
+import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
 
 const ParentZoneSchoolDetails = (props) => {
     const [schoolData, setSchoolData] = useState(props.data);
@@ -56,7 +57,8 @@ const ParentZoneSchoolDetails = (props) => {
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEditSchool} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
-                            <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
+                            {/* <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image> */}
+                            <EditProfileTop_Mobile style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
                         </View>
                     </View>
                     <View style={PAGESTYLE.mainDetailsFormSchool}>

@@ -5,8 +5,8 @@ function HidePassword(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={18.525}
-      height={14.525}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 18.525 14.525"
       {...props}
     >

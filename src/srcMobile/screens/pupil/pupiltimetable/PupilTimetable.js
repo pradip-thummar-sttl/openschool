@@ -222,10 +222,10 @@ const PupilTimeTable = (props) => {
                             color={COLORS.yellowDark} />
                         :
                         timeTableData.length > 0 ?
-                            <View style={{ ...PAGESTYLE.mainPage }}>
+                            <View style={{ ...PAGESTYLE.mainPage, marginTop: -30 }}>
                                 <View style={PAGESTYLE.days}>
                                     {days.map((data, index) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, height: index == 0 ? 50 : 66, }}>
+                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, height: 66, }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}

@@ -11,6 +11,8 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import moment from 'moment';
 import { baseUrl } from "../../../../utils/Constant";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
+import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
+import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
 
 const PupilProfileView = (props) => {
     console.log('props.data', props.data);
@@ -23,7 +25,8 @@ const PupilProfileView = (props) => {
                 <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
-                            <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image>
+                            {/* <Image style={PAGESTYLE.coverImage} source={Images.parentProfilecoverImage}></Image> */}
+                            <EditProfileTop_Mobile style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
                             <View style={PAGESTYLE.profileOuter}>
                                 <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + props.data.ProfilePicture }} />
                             </View>
@@ -33,7 +36,7 @@ const PupilProfileView = (props) => {
                         <View style={PAGESTYLE.editProfileButtonMain}>
                             <TouchableOpacity onPress={() => props.navigateToDetail()} style={PAGESTYLE.profileEdit}>
                                 {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
-                                <Ic_CheckWhite style={PAGESTYLE.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
+                                <EditWhite style={PAGESTYLE.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
                             </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.pupilPerfomance}>
