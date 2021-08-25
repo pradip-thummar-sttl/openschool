@@ -10,7 +10,9 @@ import { baseUrl } from "../../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
 import Images from "../../../../../../src/utils/Images";
-
+import DueIcon from "../../../../../svg/pupil/dashboard/HWDue_Orange";
+import SubmittedIcon from "../../../../../svg/pupil/lessonhwplanner/SubmittedIcon";
+import MarkedIcon from "../../../../../svg/pupil/lessonhwplanner/MarkedIcon";
 
 const PupilLessonDue = (props) => {
     return (
@@ -28,7 +30,8 @@ const PupilLessonDue = (props) => {
                                         return (
                                             <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeWorkDetail(item)}>
                                                 <View style={PAGESTYLE.videoCardThumb}>
-                                                    <Image source={require('../../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} />
+                                                    <DueIcon style={PAGESTYLE.dueIcon} height={hp(1.98)} width={hp(1.79)} />
+                                                    {/* <Image source={require('../../../../../assets/images/dueToday2.png')} style={PAGESTYLE.dueIcon} /> */}
                                                     <Text style={PAGESTYLE.videoDateBlack}>Due: {moment(item.DueDate).format('DD/MM/yyyy')}</Text>
                                                     {/* <Image source={require('../../../../../assets/images/bookmark-on2.png')} style={PAGESTYLE.bookMarkLabelDue} /> */}
                                                 </View>
@@ -56,7 +59,8 @@ const PupilLessonDue = (props) => {
                                         return (
                                             <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeworkesubmited(item)}>
                                                 <View style={PAGESTYLE.videoCardThumb}>
-                                                    <Image source={require('../../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} />
+                                                    <SubmittedIcon width={hp(1.79)} height={hp(1.98)} style={PAGESTYLE.dueIcon} />
+                                                    {/* <Image source={require('../../../../../assets/images/submitted2.png')} style={PAGESTYLE.dueIcon} /> */}
                                                     <Text style={PAGESTYLE.videoDateBlack}>Submitted: {moment(item.SubmitedDate).format('DD/MM/yyyy')}</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>
@@ -84,7 +88,8 @@ const PupilLessonDue = (props) => {
                                         return (
                                             <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilHomeworkemarked(item)}>
                                                 <View style={PAGESTYLE.videoCardThumb}>
-                                                    <Image source={require('../../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} />
+                                                    {/* <Image source={require('../../../../../assets/images/marked2.png')} style={PAGESTYLE.dueIcon} /> */}
+                                                    <MarkedIcon width={hp(1.79)} height={hp(1.98)} style={PAGESTYLE.dueIcon} />
                                                     <Text style={PAGESTYLE.videoDateBlack}>Marked</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.lessonDue, PAGESTYLE.lightSkyBlueDue]}>

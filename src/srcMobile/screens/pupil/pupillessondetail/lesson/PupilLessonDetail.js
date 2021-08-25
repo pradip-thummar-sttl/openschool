@@ -20,8 +20,11 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import { User } from "../../../../../utils/Model";
 import { baseUrl, opacity, showMessage } from "../../../../../utils/Constant";
 import MESSAGE from "../../../../../utils/Messages";
+import VideoBanner from "../../../../../svg/pupil/lessonhwplanner/VideoBanner";
 import Video from "react-native-video";
-
+import WorkSpaceMore from "../../../../../svg/teacher/dashboard/More";
+import DropDownArrow from "../../../../../svg/pupil/timetable/DropDown";
+import DownloadIcon from "../../../../../svg/teacher/lessonhwplanner/Download";
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
     const [item, setItem] = useState(props.route.params.item)
@@ -117,7 +120,8 @@ const PupilLessonDetailInternal = (props) => {
         return (
             <View style={PAGESTYLE.header}>
                 <Text style={PAGESTYLE.headerText}>{section.title}</Text>
-                <Image source={Images.DropArrow} style={PAGESTYLE.arrowAccordion} />
+                {/* <Image source={Images.DropArrow} style={PAGESTYLE.arrowAccordion} /> */}
+                <DropDownArrow height={hp(0.9)} width={hp(1.43)} style={PAGESTYLE.arrowAccordion} />
             </View>
         );
     };
@@ -150,7 +154,8 @@ const PupilLessonDetailInternal = (props) => {
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                 color={COLORS.blueBorder} />
                                                             :
-                                                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                            // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                            <DownloadIcon style={PAGESTYLE.downloadIcon} width={hp(1.90)} height={hp(1.89)} />
                                                         }
                                                         {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                     </View>
@@ -179,7 +184,8 @@ const PupilLessonDetailInternal = (props) => {
                                                 style={PAGESTYLE.fileGrp}
                                                 onPress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: false, item: item.WorkSpacelist, tappedItem: index })}>
                                                 <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
-                                                <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                                <WorkSpaceMore width= {hp(2.27)} height={hp(0.58)} style={PAGESTYLE.moreIcon} />
+                                                {/* <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} /> */}
                                             </TouchableOpacity>
                                         )
                                     }) :
@@ -205,7 +211,8 @@ const PupilLessonDetailInternal = (props) => {
                 <View style={{ height: '93%', paddingBottom: 30 }}>
                     <View style={PAGESTYLE.largeVideoBlock}>
                         {item.RecordingList.length == 0 ?
-                            <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                            <VideoBanner width={'100%'} height={hp(25.86)} style={PAGESTYLE.largeVideo} />
+                            // <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
                             :
                             <View style={{ height: '100%', justifyContent: 'center' }}>
                                 <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}

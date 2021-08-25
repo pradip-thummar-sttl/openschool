@@ -10,6 +10,8 @@ import moment from "moment";
 import { baseUrl } from "../../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
+import LessonVideoBack from "../../../../../svg/pupil/lessonhwplanner/LessonVideoBack";
+import LessonVideoOverlay from "../../../../../svg/pupil/lessonhwplanner/LessonVideoOverlay";
 //import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
@@ -30,8 +32,10 @@ const PupilLesson = (props) => {
                                         return (
                                             <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilLessonDetailInternal(item)}>
                                                 <View style={PAGESTYLE.videoCardThumb}>
-                                                    <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
-                                                    <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
+                                                    {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} /> */}
+                                                    <LessonVideoBack style={PAGESTYLE.videoThumbnail} width={'100%'} height={hp(13.54)} />
+                                                    {/* <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} /> */}
+                                                    <LessonVideoOverlay style={PAGESTYLE.videoShadow} width={'100%'} height={hp(13.54)} />
                                                     <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
                                                     <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} />
                                                 </View>
@@ -58,8 +62,10 @@ const PupilLesson = (props) => {
                                     return (
                                         <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilLessonDetailInternal(item)}>
                                             <View style={PAGESTYLE.videoCardThumb}>
-                                                <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} />
-                                                <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} />
+                                                {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} /> */}
+                                                <LessonVideoBack style={PAGESTYLE.videoThumbnail} width={'100%'} height={hp(13.54)} />
+                                                {/* <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} /> */}
+                                                <LessonVideoOverlay style={PAGESTYLE.videoShadow} width={'100%'} height={hp(13.54)} />
                                                 <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
                                                 <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} />
                                             </View>

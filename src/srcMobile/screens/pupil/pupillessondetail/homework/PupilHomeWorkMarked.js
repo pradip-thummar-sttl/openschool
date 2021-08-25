@@ -16,6 +16,7 @@ import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
 import { baseUrl, opacity } from "../../../../../utils/Constant";
+import MarkedBook from "../../../../../svg/pupil/lessonhwplanner/MarkedBook";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
@@ -63,7 +64,8 @@ const PupilHomeWorkMarked = (props) => {
                                 </View>
                             </View>
                             <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
-                                <Image source={require('../../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookLightBlue} />
+                                <MarkedBook style={PAGESTYLE.bookLightBlue} width={hp(13.5)} height={hp(11.5)} />
+                                {/* <Image source={require('../../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookLightBlue} /> */}
                                 <Text style={PAGESTYLE.blueStripText}>Homework has been marked!</Text>
                             </View>
                         </View>

@@ -952,15 +952,15 @@ export default StyleSheet.create({
     videoThumbnail: {
         width: hp(28.25),
         height: hp(13.54),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         borderRadius: hp(0.26),
     },
     videoShadow: {
-        width: hp(27.8),
-        resizeMode: 'contain',
+        width: '100%',
+        resizeMode: 'cover',
         position: 'absolute',
-        top: hp(-2.5),
-        left: hp(0),
+        top: -27,
+        borderRadius: hp(0.26),
     },
     videoPlay: {
         width: hp(5.20),
@@ -1153,14 +1153,12 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1),
-        top: hp(-6.4),
     },
     bookPurpleStip: {
         width: hp(13.76),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.5),
-        top: hp(-7.5),
+        right: hp(1),
     },
     blueStripText: {
         fontFamily: FONTS.fontSemiBold,
@@ -1282,7 +1280,8 @@ export default StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        width: hp(28.25),
+        width: '100%',
+        borderRadius: hp(0.26),
     },
     lessonDue: {
         height: hp(16.62),
@@ -1306,10 +1305,10 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightOrangeDue,
     },
     lessonThumb: {
-        width: hp(3.64),
-        height: hp(3.64),
+        width: hp(2.46),
+        height: hp(2.46),
         backgroundColor: COLORS.lightGrayPupil,
-        borderRadius: hp(5),
+        borderRadius: hp(100),
     },
     dueVideoUserSpace: {
         paddingLeft: hp(1.04),

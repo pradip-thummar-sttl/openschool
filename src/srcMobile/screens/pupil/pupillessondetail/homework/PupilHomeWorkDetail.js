@@ -21,7 +21,7 @@ import { User } from "../../../../../utils/Model";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import MESSAGE from "../../../../../utils/Messages";
 import Images from "../../../../../utils/Images";
-
+import CalanderIcon from "../../../../../svg/teacher/dashboard/Calender";
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
     const { item } = props.route.params
@@ -150,7 +150,8 @@ const PupilHomeWorkDetail = (props) => {
                                 <View style={[PAGESTYLE.dateNameBlock, PAGESTYLE.spaceSmallUserName]}>
                                     <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                                     <View style={PAGESTYLE.daterow}>
-                                        <Image source={require('../../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
+                                        <CalanderIcon style={PAGESTYLE.calander} width={hp(1.69)} height={hp(1.69)} />
+                                        {/* <Image source={require('../../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} /> */}
                                         <Text style={PAGESTYLE.dueDateTextBold}>{item.DueDate ? moment(item.DueDate).format('DD/MM/yyyy') : '-'}</Text>
                                     </View>
                                 </View>

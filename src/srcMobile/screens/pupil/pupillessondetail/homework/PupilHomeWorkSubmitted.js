@@ -14,6 +14,8 @@ import Header7 from '../../../../component/reusable/header/bulck/Header7'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
+import SubmittedBook from "../../../../../svg/pupil/lessonhwplanner/SubmittedBook";
+
 var moment = require('moment');
 
 const PupilHomeWorkSubmitted = (props) => {
@@ -58,7 +60,8 @@ const PupilHomeWorkSubmitted = (props) => {
                             </View>
                         </View>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
-                            <Image source={require('../../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} />
+                            <SubmittedBook style={PAGESTYLE.bookLightBlue} width={hp(13.02)} height={hp(10.01)} />
+                            {/* <Image source={require('../../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} /> */}
                             <Text style={PAGESTYLE.blueStripText}>Homework submitted on time!</Text>
                         </View>
                     </View>

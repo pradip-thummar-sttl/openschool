@@ -7,6 +7,7 @@ import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
+import MarkedIcon from "../../../../../svg/pupil/lessonhwplanner/MarkedIcon";
 import {
     Menu,
     MenuOptions,
@@ -24,7 +25,8 @@ const HeaderWhite = (props) => {
                     </View>
                 </View>
                 <View style={styles.submittedLogo}>
-                    <Image source={Images.Marcked} style={styles.submittedLogoImage} />
+                    {/* <Image source={Images.Marcked} style={styles.submittedLogoImage} /> */}
+                    <MarkedIcon style={styles.submittedLogoImage} height={hp(1.98)} width={hp(1.79)} />
                     <Text style={styles.submittedText}>Marked</Text>
                 </View>
             </View>
