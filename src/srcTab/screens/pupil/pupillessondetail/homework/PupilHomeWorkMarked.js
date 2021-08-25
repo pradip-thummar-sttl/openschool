@@ -17,6 +17,9 @@ import { Download } from "../../../../../utils/Download";
 import { baseUrl, opacity } from "../../../../../utils/Constant";
 import Video from "react-native-video";
 var moment = require('moment');
+import HwMarkedBook from '../../../../../svg/pupil/lessonhwplanner/HwMarkedBook'
+import Marked from '../../../../../svg/teacher/lessonhwplanner/Marked'
+import PlayBlue from '../../../../../svg/pupil/lessonhwplanner/Play_Blue'
 
 const PupilHomeWorkMarked = (props) => {
     const { item } = props;
@@ -53,12 +56,14 @@ const PupilHomeWorkMarked = (props) => {
                     <View style={PAGESTYLE.containerWrap}>
                         <View style={PAGESTYLE.containerWrapTopPurple}>
                             <View style={[PAGESTYLE.userLeft, PAGESTYLE.markedPurpleStrip]}>
-                                <Image source={require('../../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookPurpleStip} />
+                                {/* <Image source={require('../../../../../assets/images/bookpurplestrip2.png')} style={PAGESTYLE.bookPurpleStip} /> */}
+                                <HwMarkedBook style={PAGESTYLE.bookPurpleStip} height={hp(11.5)} width={hp(11.5)} />
                                 <Text style={PAGESTYLE.blueStripText}>Homework has been marked!</Text>
                             </View>
                             <View style={PAGESTYLE.userRight}>
                                 <View style={[PAGESTYLE.markedLabel, PAGESTYLE.markSubmittedSpaceLeft]}>
-                                    <Image source={require('../../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} />
+                                    {/* <Image source={require('../../../../../assets/images/marked2.png')} style={PAGESTYLE.markedIcon} /> */}
+                                    <Marked style={PAGESTYLE.markedIcon} height={hp(5.2)} width={hp(5.2)} />
                                     <Text style={PAGESTYLE.markedText}>Marked</Text>
                                 </View>
                                 <View style={PAGESTYLE.dateNameBlock}>
@@ -121,7 +126,8 @@ const PupilHomeWorkMarked = (props) => {
                                                         <TouchableOpacity
                                                             activeOpacity={opacity}
                                                             onPress={() => setPause(!isPaused)}>
-                                                            <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                                            {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
+                                                            <PlayBlue style={{ resizeMode: 'cover', alignSelf: 'center' }} height={hp(4)} width={hp(4)} />
                                                         </TouchableOpacity>
                                                         :
                                                         null
@@ -140,9 +146,11 @@ const PupilHomeWorkMarked = (props) => {
                                     data={item.HomeworkList}
                                     style={{ alignSelf: 'center', }}
                                     renderItem={({ item, index }) => (
-                                        <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
-                                            setLoader(false)
-                                        })}} style={PAGESTYLE.downloaBtn}>
+                                        <TouchableOpacity onPress={() => {
+                                            setLoader(true); Download(item, (res) => {
+                                                setLoader(false)
+                                            })
+                                        }} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
                                                 {isMatLoading ?
                                                     <ActivityIndicator

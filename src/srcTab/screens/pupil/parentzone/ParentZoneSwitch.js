@@ -10,6 +10,9 @@ import { color } from 'react-native-reanimated';
 import { User } from '../../../../utils/Model';
 import MESSAGE from '../../../../utils/Messages';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Top from '../../../../svg/userselection/Top'
+import AddNewPupil from '../../../../svg/pupil/parentzone/AddNewPupil'
+import ParentZone from '../../../../svg/pupil/parentzone/ParentZone'
 
 export default class ParentZoneSwitch extends Component {
     constructor(props) {
@@ -43,7 +46,7 @@ export default class ParentZoneSwitch extends Component {
                 { cancelable: true }
             )
         } else {
-            Alert.alert(null,MESSAGE.loggedInPupil,
+            Alert.alert(null, MESSAGE.loggedInPupil,
                 [{
                     text: 'LOGOUT',
                     onPress: () => {
@@ -62,7 +65,9 @@ export default class ParentZoneSwitch extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.topBg} source={Images.illuTopBg} />
+                {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
+                <Top style={styles.topBg} width={'100%'}
+                    height={hp(16.77)} />
                 <View style={{ flex: 1, justifyContent: 'center', }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
@@ -70,9 +75,11 @@ export default class ParentZoneSwitch extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.props.navigation.replace('PupilRegister')}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.parentZoneAdd} />
+                                    source={Images.parentZoneAdd} /> */}
+                                <AddNewPupil style={styles.userIcon} width={hp(20.10)}
+                                    height={hp(20.10)} />
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
@@ -102,7 +109,9 @@ export default class ParentZoneSwitch extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.props.navigation.navigate('Passcode')}>
                             <View style={styles.parentZoneBottom}>
-                                <Image source={Images.parentZoneIcon} style={styles.parentZoneIcon} />
+                                {/* <Image source={Images.parentZoneIcon} style={styles.parentZoneIcon} /> */}
+                                <ParentZone width={hp(4.03)}
+                                    height={hp(3.64)} style={styles.parentZoneIcon} />
                                 <Text style={styles.parentLink}>Parent Zone</Text>
                             </View>
                         </TouchableOpacity>

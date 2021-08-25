@@ -14,6 +14,9 @@ import Header13 from '../../../../component/reusable/header/bulck/Header13'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
+import HWSubmittedTop_Mobile from '../../../../../svg/pupil/lessonhwplanner/HWSubmittedTop_Mobile'
+import Submitted from '../../../../../svg/pupil/lessonhwplanner/Submitted'
+import Book from '../../../../../svg/pupil/lessonhwplanner/Book'
 var moment = require('moment');
 
 const PupilHomeWorkSubmitted = (props) => {
@@ -49,12 +52,14 @@ const PupilHomeWorkSubmitted = (props) => {
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.containerWrapTop}>
                         <View style={[PAGESTYLE.userLeft, PAGESTYLE.submittedBlueStrip]}>
-                            <Image source={require('../../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} />
+                            {/* <Image source={require('../../../../../assets/images/booklightblue2.png')} style={PAGESTYLE.bookLightBlue} /> */}
+                            <Book style={PAGESTYLE.bookLightBlue} height={hp(13.5)} width={hp(13.5)} />
                             <Text style={PAGESTYLE.blueStripText}>Homework submitted on time!</Text>
                         </View>
                         <View style={PAGESTYLE.userRight}>
                             <View style={PAGESTYLE.markedLabel}>
-                                <Image source={require('../../../../../assets/images/submitted2.png')} style={PAGESTYLE.submittedIcon} />
+                                {/* <Image source={require('../../../../../assets/images/submitted2.png')} style={PAGESTYLE.submittedIcon} /> */}
+                                <Submitted style={PAGESTYLE.submittedIcon} height={hp(2.5)} width={hp(2.5)} />
                                 <Text style={PAGESTYLE.markedText}>Submitted</Text>
                             </View>
                             <View style={PAGESTYLE.dateNameBlock}>
@@ -110,9 +115,11 @@ const PupilHomeWorkSubmitted = (props) => {
                                     style={{ alignSelf: 'center', width: '95%', }}
                                     showsVerticalScrollIndicator={false}
                                     renderItem={({ item, index }) => (
-                                        <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
-                                            setLoader(false)
-                                        })}} style={PAGESTYLE.downloaBtn}>
+                                        <TouchableOpacity onPress={() => {
+                                            setLoader(true); Download(item, (res) => {
+                                                setLoader(false)
+                                            })
+                                        }} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
                                                 {isMatLoading ?
                                                     <ActivityIndicator

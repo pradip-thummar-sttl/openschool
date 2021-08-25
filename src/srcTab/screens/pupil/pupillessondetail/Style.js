@@ -553,7 +553,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: hp(3.60),
         lineHeight: hp(3.60),
-        marginTop:wp(2)
+        marginTop: wp(2)
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -987,6 +987,7 @@ export default StyleSheet.create({
     },
     daterow: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
     dateTitleNormal: {
         flexDirection: 'row',
@@ -1010,8 +1011,8 @@ export default StyleSheet.create({
     alignRow1: {
         flexDirection: 'row',
         marginVertical: 5,
-        marginHorizontal:5
-        
+        marginHorizontal: 5
+
     },
     spaceSmallUserName: {
         marginRight: hp(14.32),
@@ -1105,13 +1106,15 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1),
-        top: hp(-5.5),
+        // top: hp(-5.5),
+        top: hp(0.5)
     },
     bookPurpleStip: {
         resizeMode: 'contain',
         position: 'absolute',
-        right: -20,
-        top: -20,
+        right: 20,
+        // right:-20,
+        top: -27,
         height: hp(9.46),
     },
     blueStripText: {
@@ -1450,7 +1453,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     searchParent: {
-        flexDirection: 'row', width:hp(60), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', width: hp(60), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 6, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

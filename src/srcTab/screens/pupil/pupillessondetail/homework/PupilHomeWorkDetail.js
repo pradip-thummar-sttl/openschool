@@ -22,6 +22,8 @@ import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../..
 import MESSAGE from "../../../../../utils/Messages";
 // import Images from "../../../../../../srcmobile/utils/Images";
 import Images from '../../../../../utils/Images';
+import Ic_Calendar from '../../../../../svg/pupil/parentzone/Ic_Calendar'
+import CloseBlack from '../../../../../svg/teacher/timetable/Close_Black'
 
 
 const PupilHomeWorkDetail = (props) => {
@@ -32,18 +34,18 @@ const PupilHomeWorkDetail = (props) => {
 
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.goBack() 
+    const handleBackButtonClick = () => {
+        props.goBack()
         return true;
-      }
+    }
 
     const isFieldsValidated = () => {
         if (materialArr.length <= 0) {
@@ -148,7 +150,8 @@ const PupilHomeWorkDetail = (props) => {
                             <View style={[PAGESTYLE.dateNameBlock, PAGESTYLE.spaceSmallUserName]}>
                                 <Text style={PAGESTYLE.dateTitleNormal}>Due date</Text>
                                 <View style={PAGESTYLE.daterow}>
-                                    <Image source={require('../../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} />
+                                    {/* <Image source={require('../../../../../assets/images/calendar-small-icon2.png')} style={PAGESTYLE.calander} /> */}
+                                    <Ic_Calendar style={PAGESTYLE.calander} height={hp(2)} width={hp(2)} />
                                     <Text style={PAGESTYLE.dueDateTextBold}>{item.DueDate ? moment(item.DueDate).format('DD/MM/yyyy') : '-'}</Text>
                                 </View>
                             </View>
@@ -230,7 +233,8 @@ const PupilHomeWorkDetail = (props) => {
                                             onPress={() => removeDocument(index)}>
                                             <View style={PAGESTYLE.alignRow1}>
                                                 <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
+                                                {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} /> */}
+                                                <CloseBlack style={PAGESTYLE.removeIcon} height={hp(4)} width={hp(4)} />
                                             </View>
                                         </TouchableOpacity>
                                     )
