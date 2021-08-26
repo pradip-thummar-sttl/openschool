@@ -21,6 +21,10 @@ const TLDetail = (props) => {
     console.log('props', props);
     const [isMatLoading, setLoader] = useState(false)
     const [isRecordLoading, setRecordLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
+    const [recordIndex, setRecordIndex] = useState(-1)
+
+
 
     return (
 
@@ -139,12 +143,13 @@ const TLDetail = (props) => {
                                 data={props.lessonData.MaterialList}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
-                                    <TouchableOpacity onPress={() => {setLoader(true); Download(item, (res) => {
+                                    <TouchableOpacity onPress={() => {setLoader(true); setMateIndex(index); Download(item, (res) => {
                                         setLoader(false)
+                                        setMateIndex(-1)
                                     })}} style={PAGESTYLE.fileGrp}>
                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                         <View style={PAGESTYLE.downloaBtn}>
-                                            {isMatLoading ?
+                                            {(isMatLoading && index == mateIndex)?
                                                 <ActivityIndicator
                                                     style={{ ...PAGESTYLE.downloadIcon }}
                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}

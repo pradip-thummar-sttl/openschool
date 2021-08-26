@@ -40,6 +40,7 @@ const PupilLessonDetailInternal = (props) => {
     // const [item, setItem] = useState(props.route.params.item)
     const [item, setItem] = useState(props.item)
     const [isMatLoading, setLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
 
 
     useEffect(() => {
@@ -214,12 +215,13 @@ const PupilLessonDetailInternal = (props) => {
                                                         item != undefined && item.MaterialList.length > 0 ?
                                                             item.MaterialList.map((obj) => {
                                                                 return (
-                                                                    <TouchableOpacity onPress={() => {setLoader(true); Download(obj, (res) => {
+                                                                    <TouchableOpacity onPress={() => {setLoader(true);setMateIndex(index); Download(obj, (res) => {
                                                                         setLoader(false)
+                                                                        setMateIndex(-1)
                                                                     })}} style={PAGESTYLE.fileGrp}>
                                                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{obj.originalname}</Text>
                                                                         <View style={PAGESTYLE.downloaBtn}>
-                                                                            {isMatLoading ?
+                                                                            {(isMatLoading && index==mateIndex) ?
                                                                                 <ActivityIndicator
                                                                                     style={{ ...PAGESTYLE.downloadIcon }}
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}

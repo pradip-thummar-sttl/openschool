@@ -32,6 +32,8 @@ const Popupdata = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [isMatLoading, setLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
+
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -265,13 +267,14 @@ const Popupdata = (props) => {
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() =>{setLoader(true); Download(item, (res) => {
+                                                            <TouchableOpacity onPress={() =>{setLoader(true); setMateIndex(index); Download(item, (res) => {
                                                                 setLoader(false)
+                                                                setMateIndex(-1)
                                                             })}} style={styles.downloaBtn}>
                                                                 <View style={styles.fileGrp}>
                                                                     <Text numberOfLines={1} style={[styles.fileName, { width: wp(70) }]}>{item.originalname}</Text>
 
-                                                                    {isMatLoading ?
+                                                                    {(isMatLoading && index==mateIndex) ?
                                                                         <ActivityIndicator
                                                                             style={{ ...styles.downloadIcon }}
                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}

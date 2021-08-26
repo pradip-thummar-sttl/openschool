@@ -49,6 +49,7 @@ const TLHomeWork = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     const [isMatLoading, setLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
 
 
     useEffect(() => {
@@ -444,8 +445,9 @@ const TLHomeWork = (props) => {
                             {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => {item.uri ? removeObject(index, item) : setLoader(true); Download(item, (res) => {
+                                        <TouchableOpacity onPress={() => {item.uri ? removeObject(index, item) : setLoader(true);setMateIndex(index); Download(item, (res) => {
                                             setLoader(false)
+                                            setMateIndex(-1)
                                         })}} style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
@@ -455,7 +457,7 @@ const TLHomeWork = (props) => {
                                                 </View>
                                                 :
                                                 <View>
-                                                    {isMatLoading ?
+                                                    {(isMatLoading && index==mateIndex) ?
                                                         <ActivityIndicator
                                                             style={{ ...PAGESTYLE.downloadIcon }}
                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}

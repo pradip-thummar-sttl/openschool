@@ -23,6 +23,8 @@ const PupilHomeWorkMarked = (props) => {
     const { item } = props.route.params;
     const [isPaused, setPause] = useState(true)
     const [isMatLoading, setLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
+
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -109,11 +111,12 @@ const PupilHomeWorkMarked = (props) => {
                                             data={item.HomeworkList}
                                             style={{ alignSelf: 'center', }}
                                             renderItem={({ item, index }) => (
-                                                <TouchableOpacity onPress={() =>{setLoader(true); Download(item, (res) => {
+                                                <TouchableOpacity onPress={() =>{setLoader(true); setMateIndex(index); Download(item, (res) => {
                                                    setLoader(false)
+                                                   setMateIndex(-1)
                                                 })}} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow1}>
-                                                        {isMatLoading ?
+                                                        {(isMatLoading && index==mateIndex) ?
                                                             <ActivityIndicator
                                                                 style={{ ...PAGESTYLE.markedIcon }}
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}

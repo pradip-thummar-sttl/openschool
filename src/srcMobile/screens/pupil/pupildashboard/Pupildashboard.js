@@ -63,6 +63,7 @@ const PupuilDashboard = (props) => {
 
     const [isLoading, setLoading] = useState(false);
     const [isMatLoading, setLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
 
     let currentCount = 0
     useEffect(() => {
@@ -495,12 +496,13 @@ const PupuilDashboard = (props) => {
                                                                                                 data={dataOfSubView.MaterialList}
                                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                                 renderItem={({ item, index }) => (
-                                                                                                    <TouchableOpacity onPress={() =>{setLoader(true); Download(item, (res) => {
+                                                                                                    <TouchableOpacity onPress={() =>{setLoader(true); setMateIndex(index); Download(item, (res) => {
                                                                                                         setLoader(false)
+                                                                                                        setMateIndex(-1);
                                                                                                     })}} style={PAGESTYLE.downloaBtn}>
                                                                                                         <View style={PAGESTYLE.fileGrp}>
                                                                                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                                                            {isMatLoading ?
+                                                                                                            {(isMatLoading && mateIndex == index) ?
                                                                                                                 <ActivityIndicator
                                                                                                                     style={{ ...PAGESTYLE.downloadIcon }}
                                                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}

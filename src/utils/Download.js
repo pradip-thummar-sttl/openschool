@@ -95,7 +95,7 @@ export const downloadFile = (item, result) => {
         const localFile = `${RNFS.DocumentDirectoryPath}/${fileName[fileName.length - 1]}`;
 
         const options = {
-            fromUrl: baseUrl + item.filename,
+            fromUrl: (baseUrl + item.filename).replace(/ /g, '%20'),
             toFile: localFile
         };
         console.log('options', options);
@@ -111,6 +111,7 @@ export const downloadFile = (item, result) => {
                 result()
             })
             .catch(error => {
+                console.log('catch error', error);
                 showMessage('Sorry, unable to find compatible App on your device to view this content')
                 result()
             }).catch(error => {

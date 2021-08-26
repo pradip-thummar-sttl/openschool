@@ -50,6 +50,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     const [isMatLoading, setLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -310,12 +311,13 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal: 10 }}
                                             renderItem={({ item, index }) => (
                                                 <TouchableOpacity onPress={() => {
-                                                    setLoader(true), Download(item, (res) => {
+                                                    setLoader(true);setMateIndex(index); Download(item, (res) => {
                                                         setLoader(false)
+                                                        setMateIndex(-1)
                                                     })
                                                 }} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
-                                                        {isMatLoading ?
+                                                        {(isMatLoading && index==mateIndex) ?
                                                             <ActivityIndicator
                                                                 style={{ ...PAGESTYLE.markedIcon }}
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}

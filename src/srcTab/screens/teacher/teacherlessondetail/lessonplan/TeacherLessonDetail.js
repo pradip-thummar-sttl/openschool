@@ -22,6 +22,8 @@ import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 const TLDetail = (props) => {
     const [isLoading, setLoader] = useState(false)
     const [isRecordLoading, setRecordLoader] = useState(false)
+    const [mateIndex, setMateIndex] = useState(-1)
+
     console.log('props', props.lessonData.MaterialList);
     return (
         <View style={PAGESTYLE.whiteBg}>
@@ -147,13 +149,14 @@ const TLDetail = (props) => {
                                 {props.lessonData.MaterialList.map((item, index) => {
                                     return (
                                         <TouchableOpacity onPress={() => {
-                                            setLoader(true); Download(item, (res) => {
+                                            setLoader(true);setMateIndex(index); Download(item, (res) => {
                                                 setLoader(false)
+                                                setMateIndex(-1)
                                             })
                                         }} style={{ ...PAGESTYLE.fileGrp, height: 60 }}>
                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{item.originalname}</Text>
                                             <View style={PAGESTYLE.downloaBtn}>
-                                                {isLoading ?
+                                                {(isMatLoading && index==mateIndex) ?
                                                     <ActivityIndicator
                                                         style={{ ...PAGESTYLE.downloadIcon }}
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
