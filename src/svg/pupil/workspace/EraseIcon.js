@@ -16,7 +16,7 @@ function EraseIcon(props) {
         stroke="#262626"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={1.6}
+        strokeWidth={1.2}
       >
         <Path data-name="Line 230" d="M5.795 5.923l5.535 5.535" />
         <Path

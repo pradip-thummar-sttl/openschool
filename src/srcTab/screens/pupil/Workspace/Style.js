@@ -120,8 +120,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     commonWidthIcon: {
-        width: hp(2.75),
-        height: hp(2.57),
+        // width: hp(2.75),
+        // height: hp(2.57),
         resizeMode: 'contain',
     },
 })
