@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { G, Rect, Circle, Path, Ellipse, } from "react-native-svg"
 
-export default function NoLessonsEvents(props) {
+export default function NoLessonEventsToday(props) {
     return (
       <Svg
         xmlns="http://www.w3.org/2000/svg"

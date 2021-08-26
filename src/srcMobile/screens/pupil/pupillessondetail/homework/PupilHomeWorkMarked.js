@@ -24,8 +24,6 @@ const PupilHomeWorkMarked = (props) => {
     const [isPaused, setPause] = useState(true)
     const [isMatLoading, setLoader] = useState(false)
 
-    console.log('item', item.RecordingList[0].filename);
-
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);

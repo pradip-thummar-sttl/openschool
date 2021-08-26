@@ -142,7 +142,7 @@ const Message = (props) => {
                                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                     // </View>
                                     <View style={{ backgroundColor: COLORS.white, flex:1, justifyContent: 'center', marginHorizontal: 15, marginBottom: 15 }}>
-                                    <EmptyStatePlaceHohder image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
+                                    <EmptyStatePlaceHohder holderType={2} image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
                                     </View>
                             }
                         </View>

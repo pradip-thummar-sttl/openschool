@@ -271,7 +271,7 @@ const GroupSetUp = () => {
                         // <View>
                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
+                        <EmptyStatePlaceHohder holderType={4} image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
             <View style={PAGESTYLE.middle}>
@@ -328,7 +328,7 @@ const GroupSetUp = () => {
                             showsVerticalScrollIndicator={false} />
                         :
                         // <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        <EmptyStatePlaceHohder image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
+                        <EmptyStatePlaceHohder holderType={4} image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
         </SafeAreaView>

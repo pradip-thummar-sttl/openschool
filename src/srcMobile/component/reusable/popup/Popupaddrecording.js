@@ -12,6 +12,10 @@ import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../../utils/Constant";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Download } from "../../../../utils/Download";
+import Recording from "../../../../svg/teacher/lessonhwplanner/Recording";
+import ScreenVoice from "../../../../svg/teacher/lessonhwplanner/ScreenVoice";
+import CameraOnly from "../../../../svg/teacher/lessonhwplanner/CameraOnly";
+import PlayBlue from "../../../../svg/pupil/lessonhwplanner/Play_Blue";
 const Popupaddrecording = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
@@ -79,15 +83,18 @@ const Popupaddrecording = (props) => {
                         activeOpacity={opacity}
                         onPress={() => refRBSheet.current.open()}
                         style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
-                        <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} />
+                        {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
+                        <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
                         <Text style={styles.recordLinkText}>Add Recording</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {setLoader(true); Download(props.recordingArr[0], (res) => {
-                            setLoader(false)
-                        })}}
+                        onPress={() => {
+                            setLoader(true); Download(props.recordingArr[0], (res) => {
+                                setLoader(false)
+                            })
+                        }}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
                         {isMatLoading ?
                             <ActivityIndicator
@@ -95,7 +102,8 @@ const Popupaddrecording = (props) => {
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.blueBorder} />
                             :
-                            <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
+                            // <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
+                            <PlayBlue style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
                         }
                         {/* <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} /> */}
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
@@ -134,12 +142,14 @@ const Popupaddrecording = (props) => {
                                     </TouchableOpacity> */}
                                     <TouchableOpacity style={styles.entryData}
                                         onPress={() => { refRBSheet.current.close(); props.onScreeVoice() }}>
-                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-voice2.png')} />
+                                        {/* <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-voice2.png')} /> */}
+                                        <ScreenVoice style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.entryData}
                                         onPress={() => { onCameraOnly() }}>
-                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/camera-only2.png')} />
+                                        {/* <Image style={styles.entryIcon} source={require('../../../../assets/images/camera-only2.png')} /> */}
+                                        <CameraOnly style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
                                 </View>

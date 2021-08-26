@@ -188,7 +188,7 @@ const TLHomeWorkSubmitted = (props) => {
                         // <View style={{ height: 100, justifyContent: 'center' }}>
                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noHomework1} title2={MESSAGE.noHomework2} />
+                        <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noHomework1} title2={MESSAGE.noHomework2} />
                 }
             </View>
         </View>

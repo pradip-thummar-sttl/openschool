@@ -12,6 +12,9 @@ import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../../utils/Constant";
 import { Download } from "../../../../utils/Download";
 import Recording from "../../../../svg/teacher/lessonhwplanner/Recording";
+import CameraOnly from "../../../../svg/teacher/lessonhwplanner/CameraOnly";
+import ScreenVoice from "../../../../svg/teacher/lessonhwplanner/ScreenVoice";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 
 const Popupaddrecording = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -96,7 +99,8 @@ const Popupaddrecording = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => toggleModal()}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
@@ -109,11 +113,13 @@ const Popupaddrecording = (props) => {
                                         <Text style={styles.entryTitle}>Screen + Camera</Text>
                                     </TouchableOpacity> */}
                                     <TouchableOpacity onPress={() => { toggleModal(); props.onScreeVoice() }} style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-voice2.png')} />
+                                        {/* <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-voice2.png')} /> */}
+                                        <ScreenVoice style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => { onCameraOnly() }} style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/camera-only2.png')} />
+                                        {/* <Image style={styles.entryIcon} source={require('../../../../assets/images/camera-only2.png')} />  */}
+                                        <CameraOnly style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
                                 </View>

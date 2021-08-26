@@ -10,6 +10,7 @@ import { showMessage, showMessageWithCallBack } from '../../../../utils/Constant
 import CheckBox from '@react-native-community/checkbox';
 import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const NewMessage = (props) => {
     const t2 = useRef(null);

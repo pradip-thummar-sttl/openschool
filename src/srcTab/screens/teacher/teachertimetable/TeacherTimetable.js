@@ -243,7 +243,7 @@ const TeacherTimeTable = (props) => {
                                         //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
                                         // </View>
                                         <ScrollView>
-                                            <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                                            <EmptyStatePlaceHohder holderType={3} image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                                         </ScrollView>
                                 }
                             </View>

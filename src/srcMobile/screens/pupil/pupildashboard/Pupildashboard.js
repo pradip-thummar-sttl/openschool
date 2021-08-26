@@ -568,7 +568,7 @@ const PupuilDashboard = (props) => {
                                                     // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                                     //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                     // </View>
-                                                    <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
+                                                    <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                             }
                                         </View>
                                     }
@@ -691,7 +691,7 @@ const PupuilDashboard = (props) => {
                                                     // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                                     //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                     // </View>
-                                                    <EmptyStatePlaceHohder image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
+                                                    <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                             }
                                         </View>
                                     }

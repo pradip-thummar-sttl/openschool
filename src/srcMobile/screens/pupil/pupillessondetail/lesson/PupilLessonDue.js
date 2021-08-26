@@ -109,7 +109,7 @@ const PupilLessonDue = (props) => {
                     }
                 </>
                 :
-                <EmptyStatePlaceHohder image={Images.noCalender} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
+                <EmptyStatePlaceHohder holderType={3} image={Images.noCalender} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
         </View >
 
