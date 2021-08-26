@@ -14,14 +14,20 @@ export default StyleSheet.create({
         borderRadius: 8,
         marginRight: -10,
     },
+    workSpaceViewSaved: {
+        height: '83%',
+        width: '100%',
+        alignSelf: 'center',
+        backgroundColor: 'white',
+    },
     smallVideoImg: {
         marginTop: hp(1),
         marginLeft: wp(1)
     },
     bottomView: {
-        position: 'absolute',
-        bottom: 0,
-        width: wp(95)
+        width: '100%',
+        backgroundColor: COLORS.white,
+        marginTop: -2,
     },
     editorView: {
         flexDirection: 'row',
@@ -44,27 +50,28 @@ export default StyleSheet.create({
     },
     wsView: {
         width: '100%',
-        height: wp(5),
-        borderTopWidth: 1,
-        borderColor: 'rgba(0,0,0,0.2)',
+        height: hp(8),
         flexDirection: 'row',
-        alignItems: "center"
+        alignItems: "flex-start",
+        borderTopWidth: 1,
+        borderTopColor: COLORS.videoLinkBorder,
+        paddingTop: 10,
+        paddingHorizontal: 10,
     },
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: hp(20),
-        justifyContent: 'center',
-        height: '100%',
-        borderRightWidth: 1,
-        borderColor: 'rgba(0,0,0,0.2)',
-        paddingHorizontal: hp(2)
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        paddingHorizontal: hp(2.46),
+        paddingVertical: hp(1.23),
+        borderRadius: 8,
+        marginRight: 8,
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.85),
-        lineHeight: hp(2.60),
+        fontSize: hp(1.56),
     },
     moreIcon: {
         width: hp(2.41),

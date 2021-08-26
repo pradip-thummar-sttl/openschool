@@ -493,7 +493,7 @@ const PupuilDashboard = (props) => {
                                                                                                             }} style={PAGESTYLE.downloaBtn}>
                                                                                                                 <View style={PAGESTYLE.fileGrp}>
                                                                                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
-                                                                                                                    {i(isMatLoading && index==mateIndex) ?
+                                                                                                                    {(isMatLoading && index==mateIndex) ?
                                                                                                                         <ActivityIndicator
                                                                                                                             style={{ ...PAGESTYLE.downloadIcon }}
                                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}

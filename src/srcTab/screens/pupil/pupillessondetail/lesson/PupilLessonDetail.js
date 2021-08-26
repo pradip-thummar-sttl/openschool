@@ -215,13 +215,15 @@ const PupilLessonDetailInternal = (props) => {
                                                         item != undefined && item.MaterialList.length > 0 ?
                                                             item.MaterialList.map((obj, index) => {
                                                                 return (
-                                                                    <TouchableOpacity onPress={() => {setLoader(true);setMateIndex(index); Download(obj, (res) => {
-                                                                        setLoader(false)
-                                                                        setMateIndex(-1)
-                                                                    })}} style={PAGESTYLE.fileGrp}>
+                                                                    <TouchableOpacity onPress={() => {
+                                                                        setLoader(true); setMateIndex(index); Download(obj, (res) => {
+                                                                            setLoader(false)
+                                                                            setMateIndex(-1)
+                                                                        })
+                                                                    }} style={PAGESTYLE.fileGrp}>
                                                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{obj.originalname}</Text>
                                                                         <View style={PAGESTYLE.downloaBtn}>
-                                                                            {(isMatLoading && index==mateIndex) ?
+                                                                            {(isMatLoading && index == mateIndex) ?
                                                                                 <ActivityIndicator
                                                                                     style={{ ...PAGESTYLE.downloadIcon }}
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -261,22 +263,6 @@ const PupilLessonDetailInternal = (props) => {
                                                                 <Text style={{ alignSelf: 'center' }}>No Workspace</Text>
                                                         }
                                                     </ScrollView>
-                                                    {/* <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View>
-                            <View style={PAGESTYLE.fileGrp}>
-                                <Text style={PAGESTYLE.fileName}>Workspace</Text>
-                                <Image source={require('../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
-                            </View> */}
                                                 </View>
                                             </View>
                                         </View>

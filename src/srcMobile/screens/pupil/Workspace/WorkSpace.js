@@ -18,6 +18,7 @@ import ClearIcon from "../../../../svg/pupil/workspace/ClearIcon";
 import SavedIcon from "../../../../svg/pupil/workspace/SavedIcon";
 import SaveIcon from "../../../../svg/pupil/workspace/SaveIcon";
 import UndoIcon from "../../../../svg/pupil/workspace/UndoIcon";
+import COLORS from "../../../../utils/Colors";
 
 const WorkSpace = (props) => {
     const workspaceList = props.route.params.item
@@ -91,7 +92,7 @@ const WorkSpace = (props) => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: COLORS.white, }}>
             {/* <SafeAreaView /> */}
             <WorkSpaceHeader
                 isLoading={isLoading}
@@ -187,17 +188,17 @@ const WorkSpace = (props) => {
                         </View> */}
                     </View>
                     :
-                    <View style={PAGESTYLE.workSpaceView}>
+                    <View style={PAGESTYLE.workSpaceViewSaved}>
                         <View>
                             <Image
-                                style={{ height: '100%', width: '100%' }}
+                                style={{ height: '100%', width: '100%', resizeMode: 'contain', }}
                                 source={{ uri: baseUrl + workspaceList[selectedWorkSpace].filename }} />
                         </View>
                         <View style={PAGESTYLE.bottomView}>
                             <View style={PAGESTYLE.wsView}>
                                 <ScrollView
                                     style={{}}
-                                    showsVerticalScrollIndicator={false}
+                                    showsHorizontalScrollIndicator={false}
                                     horizontal={true}>
                                     {
                                         workspaceList.map((item, index) => {

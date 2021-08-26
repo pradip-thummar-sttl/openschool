@@ -191,10 +191,10 @@ const WorkSpace = (props) => {
                         </View> */}
                     </View>
                     :
-                    <View style={PAGESTYLE.workSpaceView}>
+                    <View style={PAGESTYLE.workSpaceViewSaved}>
                         <View>
                             <Image
-                                style={{ height: '100%', width: '100%' }}
+                                style={{ height: '100%', width: '100%', resizeMode: 'contain', }}
                                 source={{ uri: baseUrl + workspaceList[selectedWorkSpace].filename }} />
                         </View>
                         <View style={PAGESTYLE.bottomView}>
