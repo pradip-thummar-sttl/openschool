@@ -213,7 +213,7 @@ const PupilLessonDetailInternal = (props) => {
                                                     <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                                     {
                                                         item != undefined && item.MaterialList.length > 0 ?
-                                                            item.MaterialList.map((obj) => {
+                                                            item.MaterialList.map((obj, index) => {
                                                                 return (
                                                                     <TouchableOpacity onPress={() => {setLoader(true);setMateIndex(index); Download(obj, (res) => {
                                                                         setLoader(false)

@@ -92,13 +92,13 @@ const Popupaddrecording = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => {
-                            setLoader(true);setMateIndex(index); Download(props.recordingArr[0], (res) => {
+                            setLoader(true); Download(props.recordingArr[0], (res) => {
                                 setLoader(false)
-                                setMateIndex(-1)
+                                // setMateIndex(-1)
                             })
                         }}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
-                        {(isMatLoading && index==mateIndex) ?
+                        {isMatLoading ?
                             <ActivityIndicator
                                 style={{ ...styles.recordingLinkIcon }}
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
