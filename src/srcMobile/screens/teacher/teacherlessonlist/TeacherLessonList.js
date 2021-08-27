@@ -152,7 +152,7 @@ const TeacherLessonList = (props) => {
         </TouchableOpacity>
     );
     return (
-        <View style={PAGESTYLE.mainPage}>
+        <View style={{...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon}}>
             {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
@@ -176,7 +176,7 @@ const TeacherLessonList = (props) => {
                     :
                     lessonData.length > 0 ?
                         <FlatList
-                            style={{ paddingHorizontal: 12, marginBottom: 10 }}
+                            style={{ paddingHorizontal: hp(1.84), marginBottom: hp(1.47) }}
                             data={lessonData}
                             renderItem={renderItem}
                             keyExtractor={(item) => item.id}

@@ -123,7 +123,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.dashboardPupilBlue,
     },
     whiteBg: {
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.backgroundColorCommon,
         // paddingLeft: hp(3.5),
         // paddingRight: hp(3.5),
         paddingBottom: hp(2),

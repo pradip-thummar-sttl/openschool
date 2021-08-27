@@ -43,7 +43,7 @@ const Header = (props) => {
     }, [filterBy])
 
     return (
-        <View style={styles.headerBarMainWhite}>
+        <View style={{ backgroundColor: COLORS.white, borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
@@ -151,20 +151,21 @@ const Header = (props) => {
 export default Header;
 
 const styles = StyleSheet.create({
-    headerBarMainWhite: {
-        paddingLeft: wp(5.33),
-        paddingRight: wp(4),
-        backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
-        marginTop: Platform.OS == 'android' ? hp(-1) : hp(0),
-        // marginBottom: hp(5.85),
-    },
     headerMain: {
+        paddingTop: hp(1),
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: hp(2),
-        paddingTop: hp(1),
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(4.31) : hp(4.31),
+        paddingBottom: hp(1.23),
+        backgroundColor: COLORS.white,
+        zIndex: 1,
+        shadowColor: COLORS.headerShadow,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        marginBottom: hp(1.23),
     },
     mainTitle: {
         fontSize: hp(2.21),
@@ -348,7 +349,7 @@ const styles = StyleSheet.create({
         marginRight: hp(1.56),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white, marginTop: 15,
+        flexDirection: 'row', marginHorizontal: hp(1.84), alignItems: 'center', marginBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         paddingRight: hp(2),
         paddingLeft: hp(2),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(4.61) : hp(4.61),
     },
     headerMain: {
         flexDirection: 'row',
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
         shadowRadius: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',
-        paddingTop: hp(1),
         zIndex: 1,
     },
     notificationBar: {

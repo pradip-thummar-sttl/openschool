@@ -49,6 +49,7 @@ const COLORS = {
     lightOrangeDue:'#FFE5D5',
     SidebarHeaderBack: '#002211',
     SidebarHeaderShadow: '#152232',
+    headerShadow: "rgba(21, 34, 50, 0.6)",
     MenuSelectedback: '#F3F5F9',
     periodColor:'rgba(207,237,254,1)',
     daySelect:'#EDF0F6',

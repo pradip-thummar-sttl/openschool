@@ -41,6 +41,9 @@ export default StyleSheet.create({
         marginTop:hp(1.5),
         width:'100%',
         flex: 1,
+        shadowColor: COLORS.headerShadow,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
     },
     border: {
         height: hp(5.85),

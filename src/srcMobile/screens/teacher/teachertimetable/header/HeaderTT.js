@@ -46,7 +46,7 @@ const HeaderTT = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.videoLinkBorder }}>
+        <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
@@ -158,11 +158,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(2),
         paddingRight: hp(2),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
-        paddingBottom: hp(1),
+        paddingTop: Platform.OS == 'android' ? hp(4.31) : hp(4.31),
+        paddingBottom: hp(1.23),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
+        shadowColor: COLORS.headerShadow,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        marginBottom: hp(1.23),
     },
     mainTitle: {
         fontSize: hp(2.21),
@@ -398,12 +402,12 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', marginHorizontal: hp(2), alignItems: 'center', marginBottom: 20, marginTop: 5, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', marginHorizontal: hp(1.84), alignItems: 'center', marginBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
-        height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
+        height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
     }
 });
