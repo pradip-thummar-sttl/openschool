@@ -7,7 +7,7 @@ import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import moment from "moment";
-import { baseUrl } from "../../../../../utils/Constant";
+import { baseUrl, opacity } from "../../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
 import LessonVideoBack from "../../../../../svg/pupil/lessonhwplanner/LessonVideoBack";
@@ -30,7 +30,10 @@ const PupilLesson = (props) => {
                                     currentWeekLesson.map((item) => {
 
                                         return (
-                                            <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilLessonDetailInternal(item)}>
+                                            <TouchableOpacity
+                                                style={PAGESTYLE.videoCard}
+                                                onPress={() => props.navigatePupilLessonDetailInternal(item)}
+                                                activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.videoCardThumb}>
                                                     {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} /> */}
                                                     <LessonVideoBack style={PAGESTYLE.videoThumbnail} width={'100%'} height={hp(13.54)} />
@@ -60,7 +63,10 @@ const PupilLesson = (props) => {
                             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                                 {lastWeekLesson.map((item) => {
                                     return (
-                                        <TouchableOpacity style={PAGESTYLE.videoCard} onPress={() => props.navigatePupilLessonDetailInternal(item)}>
+                                        <TouchableOpacity
+                                            style={PAGESTYLE.videoCard}
+                                            onPress={() => props.navigatePupilLessonDetailInternal(item)}
+                                            activeOpacity={opacity}>
                                             <View style={PAGESTYLE.videoCardThumb}>
                                                 {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.VideoBack} /> */}
                                                 <LessonVideoBack style={PAGESTYLE.videoThumbnail} width={'100%'} height={hp(13.54)} />

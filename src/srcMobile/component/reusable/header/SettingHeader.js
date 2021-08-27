@@ -7,12 +7,16 @@ import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
+import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 
 const SettingHeader = (props) => {
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
-                <TouchableOpacity onPress={() => props.onAlertPress()}><Image source={Images.menuIconTop} style={styles.menuIcon}/></TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onAlertPress()}>
+                    {/* <Image source={Images.menuIconTop} style={styles.menuIcon} /> */}
+                    <HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} />
+                </TouchableOpacity>
                 <Text style={styles.mainTitle} numberOfLines={1} >Settings & Profile</Text>
             </View>
             <View>
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
         height: hp(5.20),
         resizeMode: 'contain',
     },
-    menuIconWithTitle:{
+    menuIconWithTitle: {
         flexDirection: 'row',
         alignItems: 'center',
     },

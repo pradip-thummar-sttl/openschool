@@ -449,7 +449,7 @@ const TLHomeWork = (props) => {
                                             setLoader(false)
                                             setMateIndex(-1)
                                         })}} style={PAGESTYLE.fileGrp}>
-                                            <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
+                                            <Text style={{...PAGESTYLE.fileName,  width: wp(75)}} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
                                                 <View>
                                                     {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}

@@ -8,6 +8,7 @@ import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
 import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import EditWhite from "../../../../../svg/pupil/parentzone/EditWhite";
 
 const HeaderLP = (props) => {
     return (
@@ -36,11 +37,11 @@ const HeaderLP = (props) => {
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                     </TouchableOpacity> */}
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => props.navigateToEdit()}>
-                        {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
-                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                    <TouchableOpacity activeOpacity={opacity}
+                        onPress={() => props.navigateToEdit()}
+                        style={styles.profileEdit}>
+                        {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
+                        <EditWhite style={styles.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -76,6 +77,19 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
+    },
+    profileeditButton: {
+        width: hp(1.57),
+        height: hp(1.57),
+        resizeMode: 'contain',
+        alignSelf: 'center',
+    },
+    profileEdit: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        alignSelf: 'flex-end',
+        padding: hp(1.5),
+        borderRadius: hp(1),
+        marginBottom: hp(1.32),
     },
     filterbarMain: {
         flexDirection: 'row',

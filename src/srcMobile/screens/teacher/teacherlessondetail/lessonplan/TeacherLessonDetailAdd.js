@@ -904,7 +904,7 @@ const TLDetailAdd = (props) => {
                                     materialArr.length != 0 ? materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={PAGESTYLE.fileName}>{item.name}</Text>
+                                                <Text style={{...PAGESTYLE.fileName,  width: wp(75)}} numberOfLines={1}>{item.name}</Text>
                                                 <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                     {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />

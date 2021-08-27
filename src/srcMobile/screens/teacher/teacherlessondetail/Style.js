@@ -86,6 +86,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         alignSelf: 'center',
         width: '100%',
+        justifyContent: 'center',
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -248,6 +249,7 @@ export default StyleSheet.create({
         marginBottom: hp(4.81),
         flexDirection: 'column',
         justifyContent: 'flex-end',
+        marginTop: 20,
     },
     videoLinkIcon: {
         width: hp(2.38),
