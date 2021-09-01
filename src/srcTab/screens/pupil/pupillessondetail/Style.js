@@ -1197,6 +1197,7 @@ export default StyleSheet.create({
         marginRight: hp(1.04),
         backgroundColor: COLORS.white,
         marginBottom: hp(1.5),
+        overflow: 'hidden',
     },
     videoSubTitleNormal: {
         fontFamily: FONTS.fontRegular,
@@ -1242,6 +1243,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
+        overflow: 'hidden',
     },
     lessonDue: {
         height: hp(17.44),

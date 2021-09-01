@@ -39,7 +39,7 @@ import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import RobotAvtar from "../../../../svg/pupil/dashboard/RobotAvtar";
 import MyClassIllus from "../../../../svg/pupil/dashboard/MyClassIllus";
 import MyHomeworkIllus from "../../../../svg/pupil/dashboard/MyHomeworkIllus";
-
+import RewardStarback from "../../../../svg/pupil/dashboard/RewardStarback";
 const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
@@ -659,7 +659,8 @@ const PupuilDashboard = (props) => {
                                                 </View>
                                                 <View style={PAGESTYLE.achivementWrap}>
                                                     <View style={PAGESTYLE.achivementBox}>
-                                                        <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} />
+                                                        <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : hp(38.8)} height={Platform.OS == 'android' ? hp(9.35): hp(8.9)} style={PAGESTYLE.rewardStar} />
+                                                        {/* <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} /> */}
                                                         <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                                         <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                                         <View style={PAGESTYLE.rewardStarMark}>

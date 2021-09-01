@@ -80,8 +80,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(40.49),
         height:hp(10.67),
-        top: -75,
-        right: 145,
+        top: hp(-9.76),
+        right: hp(18.88),
     },
 
     date: {
@@ -493,7 +493,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: hp(46.87),
         height:hp(14.41),
-        top: hp(-12.35),
+        top: hp(-13.29),
         right: 50,
     },
     bookPositionBg: {
@@ -526,11 +526,12 @@ export default StyleSheet.create({
     achivementBox:{
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
+        borderTopWidth: 0,
         width: '33%',
         alignItems:'center',
         backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
-        overflow:'hidden',
+        borderRadius:6,
+        // overflow:'hidden',
         paddingBottom:hp(3.8),
         shadowColor: COLORS.black,
         shadowOffset: {width: 0,height: 5,},
@@ -554,6 +555,9 @@ export default StyleSheet.create({
         width :hp(43.48),
         height:hp(9.98),
         resizeMode: 'contain',
+        marginTop: -11,
+        borderTopLeftRadius: 6,
+        borderTopRightRadius: 6,
     },
     rewardStarMark:{
         justifyContent: 'space-around',
