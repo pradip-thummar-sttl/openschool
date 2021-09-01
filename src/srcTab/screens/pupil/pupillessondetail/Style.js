@@ -928,14 +928,14 @@ export default StyleSheet.create({
     videoThumbnail: {
         width: '100%',
         height: hp(13.54),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         borderRadius: 6,
     },
     videoShadow: {
         width: '100%',
         resizeMode: 'cover',
         position: 'absolute',
-        top: -30,
+        top: hp(-3.90),
         borderRadius: 6,
     },
     videoPlay: {
