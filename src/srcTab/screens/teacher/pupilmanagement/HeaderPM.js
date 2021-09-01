@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: hp(1), },
+        shadowOffset: { width: 0, height: hp(0.5), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
         paddingBottom: hp(1),

@@ -261,4 +261,18 @@ export default StyleSheet.create({
         right: -3,
         top: -3,
     },
+    commonInputGrayBack: {
+        color:COLORS.darkGray,
+        fontSize: hp('1.8%'),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp('1.0%'),
+        lineHeight:hp(2.3),
+        height: hp(6),
+        backgroundColor: COLORS.backgroundColorCommon,
+        textAlignVertical: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp('2.0%'),
+        fontFamily: FONTS.fontRegular,
+    },
 });

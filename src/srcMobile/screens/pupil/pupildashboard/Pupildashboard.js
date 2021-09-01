@@ -384,17 +384,17 @@ const PupuilDashboard = (props) => {
                                         <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
-                                        <MyClassIllus width= {hp(40)} height= {hp(10)} style={PAGESTYLE.pupilGridTopBg} />
+                                        <MyClassIllus width={hp(40)} height={hp(10)} style={PAGESTYLE.pupilGridTopBg} />
                                         {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}
                                         {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}></ImageBackground> */}
                                         <View style={[PAGESTYLE.datePositionBg]}>
-                                            <MyDayCalendar width= {hp(12.95)} height= {hp(10.22)} style={[PAGESTYLE.datePositionBgIcon]} />
+                                            <MyDayCalendar width={hp(12.95)} height={hp(10.22)} style={[PAGESTYLE.datePositionBgIcon]} />
                                             <Text style={PAGESTYLE.date}>Today</Text>
                                             <Text style={PAGESTYLE.month}>{moment().format('D')} {moment().format('MMM')}</Text>
                                         </View>
                                         <View>
                                             <TouchableOpacity>
-                                                <MoreWhite width= {hp(0.7)} height= {hp(2.5)} style={PAGESTYLE.moreDashboard} />
+                                                <MoreWhite width={hp(0.7)} height={hp(2.5)} style={PAGESTYLE.moreDashboard} />
                                                 {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                             </TouchableOpacity>
                                         </View>
@@ -491,15 +491,17 @@ const PupuilDashboard = (props) => {
                                                                                     </TouchableOpacity> */}
                                                                                     {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
                                                                                         <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                                                            <Text style={{...PAGESTYLE.requireText, marginBottom: 20,}}>Attachment(s)</Text>
+                                                                                            <Text style={{ ...PAGESTYLE.requireText, marginBottom: 20, }}>Attachment(s)</Text>
                                                                                             <FlatList
                                                                                                 data={dataOfSubView.MaterialList}
                                                                                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                                                                 renderItem={({ item, index }) => (
-                                                                                                    <TouchableOpacity onPress={() =>{setLoader(true); setMateIndex(index); Download(item, (res) => {
-                                                                                                        setLoader(false)
-                                                                                                        setMateIndex(-1);
-                                                                                                    })}} style={PAGESTYLE.downloaBtn}>
+                                                                                                    <TouchableOpacity onPress={() => {
+                                                                                                        setLoader(true); setMateIndex(index); Download(item, (res) => {
+                                                                                                            setLoader(false)
+                                                                                                            setMateIndex(-1);
+                                                                                                        })
+                                                                                                    }} style={PAGESTYLE.downloaBtn}>
                                                                                                         <View style={PAGESTYLE.fileGrp}>
                                                                                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                                                                                             {(isMatLoading && mateIndex == index) ?
@@ -508,7 +510,7 @@ const PupuilDashboard = (props) => {
                                                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                                     color={COLORS.blueBorder} />
                                                                                                                 :
-                                                                                                                <DownloadSVG width= {hp(2.01)} height= {hp(2.01)} style={PAGESTYLE.downloadIcon} />
+                                                                                                                <DownloadSVG width={hp(2.01)} height={hp(2.01)} style={PAGESTYLE.downloadIcon} />
                                                                                                                 // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                                                                             }
                                                                                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
@@ -539,19 +541,19 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </ScrollView>
                                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                                <View style={{width: '48%',}}>
-                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }} style={{ ...STYLE.commonButtonBordered, width: '100%'}}>
+                                                                                <View style={{ width: '48%', }}>
+                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }} style={{ ...STYLE.commonButtonBordered, width: '100%' }}>
                                                                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
-                                                                                <View style={{width: '48%',}}>
+                                                                                <View style={{ width: '48%', }}>
                                                                                     <TouchableOpacity
-                                                                                        style={{ ...STYLE.commonButtonBordered,backgroundColor: COLORS.dashboardGreenButton, width: '100%',}}
+                                                                                        style={{ ...STYLE.commonButtonBordered, backgroundColor: COLORS.dashboardGreenButton, width: '100%', }}
                                                                                         onPress={() => { launchLiveClass() }}>
                                                                                         {
                                                                                             isLoading ?
                                                                                                 <ActivityIndicator
-                                                                                                    style={{ ...PAGESTYLE.buttonGrp}}
+                                                                                                    style={{ ...PAGESTYLE.buttonGrp }}
                                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                     color={COLORS.white} /> :
                                                                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, }}>Join Class</Text>
@@ -589,11 +591,11 @@ const PupuilDashboard = (props) => {
                                         <Text H3 style={PAGESTYLE.dayTitle}>My Homework</Text>
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
-                                        <MyhomeworkBook style={[PAGESTYLE.bookPositionBg]} width= {hp(13.41)} height= {hp(11.84)} />
+                                        <MyhomeworkBook style={[PAGESTYLE.bookPositionBg]} width={hp(13.41)} height={hp(11.84)} />
                                         {/* <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} /> */}
                                         <View>
                                             <TouchableOpacity>
-                                                <MoreWhite width= {hp(0.7)} height= {hp(2.5)} style={PAGESTYLE.moreDashboard} />
+                                                <MoreWhite width={hp(0.7)} height={hp(2.5)} style={PAGESTYLE.moreDashboard} />
                                                 {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                             </TouchableOpacity>
                                         </View>
@@ -702,7 +704,7 @@ const PupuilDashboard = (props) => {
                         </View>
                         <View style={PAGESTYLE.achivementWrap}>
                             <View style={PAGESTYLE.achivementBox}>
-                                <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35): hp(8.9)} style={PAGESTYLE.rewardStar} />
+                                <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
                                 {/* <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} /> */}
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                 <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
@@ -729,7 +731,11 @@ const PupuilDashboard = (props) => {
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.lessonstartButtonBottom}>
-                                    <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondBottomButton]}>View avatar</Text></TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={PAGESTYLE.buttonGrp}
+                                        onPress={() => { props.navigation.replace('Avatar'); }}>
+                                        <Text style={[STYLE.commonButtonGreenDashboardSide, PAGESTYLE.pupilSecondBottomButton]}>View avatar</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={PAGESTYLE.achivementRobot}>

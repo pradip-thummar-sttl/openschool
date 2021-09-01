@@ -115,8 +115,7 @@ export default StyleSheet.create({
     },
     groupParent: {
         flexDirection: 'column',
-        padding: 15,
-        paddingTop: 0,
+        padding: 10,
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: 6,

@@ -14,6 +14,8 @@ import CheckBox from '@react-native-community/checkbox';
 import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
 import { ScrollView } from 'react-native-gesture-handler';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import TickMarkGreen from '../../../../svg/teacher/lessonhwplanner/TickMark_Green';
 
 const NewMessage = (props) => {
     const t2 = useRef(null);
@@ -152,7 +154,7 @@ const NewMessage = (props) => {
 
     const parentListView = () => {
         return (
-            <View style={{ marginBottom: 10, marginTop: 25, width: '65%', flexDirection: 'column', }}>
+            <View style={{ marginBottom: 10, width: '65%', flexDirection: 'column', }}>
                 <Text label style={styles.labelCommon}>Recipient</Text>
                 <FlatList
                     data={parentsData}
@@ -247,7 +249,8 @@ const NewMessage = (props) => {
                         <TouchableOpacity style={styles.buttonGroup1}
                             activeOpacity={opacity}
                             onPress={() => saveMessage('Draft')}>
-                            <Image style={styles.addIcon} source={Images.CheckIcon} />
+                            {/* <Image style={styles.addIcon} source={Images.CheckIcon} /> */}
+                            <TickMarkGreen style={styles.addIcon} width={hp(1.55)} height={hp(1.55)}/>
                             <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
                         </TouchableOpacity>
                     }

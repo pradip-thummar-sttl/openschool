@@ -20,9 +20,9 @@ import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 
 const TLDetail = (props) => {
-    const [isLoading, setLoader] = useState(false)
     const [isRecordLoading, setRecordLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
+    const [isMatLoading, setLoader] = useState(false)
 
     console.log('props', props.lessonData.MaterialList);
     return (

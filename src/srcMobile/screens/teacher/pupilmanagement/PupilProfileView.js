@@ -23,6 +23,8 @@ import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import BronzeFill from '../../../../svg/teacher/lessonhwplanner/StarBronze_Fill'
 import SilverFill from '../../../../svg/teacher/lessonhwplanner/StartSilver_Fill'
 import GoldFill from '../../../../svg/teacher/lessonhwplanner/StarGold_Fill'
+import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
+import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
 
 const { CallModule } = NativeModules;
 
@@ -176,7 +178,8 @@ const PupilProfileView = (props) => {
                         <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.mainContainerProfile}>
                                 <View style={PAGESTYLE.profileImageArea}>
-                                    <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image>
+                                    {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
+                                    <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
                                     <View style={PAGESTYLE.profileOuter}>
                                         <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
                                     </View>

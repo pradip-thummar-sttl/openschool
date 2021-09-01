@@ -403,7 +403,7 @@ const TeacherLessonDetail = (props) => {
                                             }
                                         </View>
                                     </View>
-                                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+                                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: COLORS.backgroundColorCommon }}>
                                         <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                                             {tabIndex == 0 ?
                                                 <TLDetail lessonData={lessonData} />

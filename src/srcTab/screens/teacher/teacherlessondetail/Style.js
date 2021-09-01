@@ -202,7 +202,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
-        marginLeft: hp(1),
+        marginLeft: hp(1.5),
     },
     requirementofClass: {
         marginTop: hp(4.68),
@@ -830,7 +830,7 @@ export default StyleSheet.create({
     pupilDetailLink: {
         width: hp(10),
         alignItems: 'flex-end',
-        right: 10
+        right: 20
     },
     pupilDetaillinkIcon: {
         width: hp(1),

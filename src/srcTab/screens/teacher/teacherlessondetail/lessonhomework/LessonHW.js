@@ -69,8 +69,9 @@ const TLHomeWork = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
 
-    const [isLoading, setLoader] = useState(false)
+    // const [isLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
+    const [isMatLoading, setLoader] = useState(false)
 
     // const [isRecordLoading, setRecordLoader] = useState(false)
 

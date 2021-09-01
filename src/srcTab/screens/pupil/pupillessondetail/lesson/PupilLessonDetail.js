@@ -236,7 +236,8 @@ const PupilLessonDetailInternal = (props) => {
                                                                         {/* <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
                                                                     </TouchableOpacity>
                                                                 )
-                                                            }) :
+                                                            })
+                                                            :
                                                             <Text style={{ alignSelf: 'center' }}>No material</Text>
                                                     }
 

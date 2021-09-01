@@ -96,7 +96,7 @@ const Pupillist = ({ item, onPress }) => (
         <View style={[PAGESTYLE.pupilData]}>
             <View style={PAGESTYLE.pupilProfile}>
                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20) }]}>{item.FirstName} {item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20), fontFamily: FONTS.fontSemiBold }]}>{item.FirstName} {item.LastName}</Text>
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>

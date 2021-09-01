@@ -185,7 +185,7 @@ const GroupSetUp = () => {
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false} >
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', marginTop: 8 }}>
                     {props.item.PupilList.map((data, index) => (
                         <TouchableOpacity
                             activeOpacity={opacity}>

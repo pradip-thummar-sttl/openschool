@@ -1136,7 +1136,7 @@ export default StyleSheet.create({
     plainBg: {
         height: '100%',
         padding: 10,
-        backgroundColor: COLORS.commonBorderColor,
+        backgroundColor: COLORS.backgroundColorCommon,
     },
     commonInputFull: {
         width: '100%',

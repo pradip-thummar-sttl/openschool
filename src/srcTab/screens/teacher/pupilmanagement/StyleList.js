@@ -96,8 +96,6 @@ export default StyleSheet.create({
         // backgroundColor: COLORS.white,
         borderRadius: hp(1),
         marginTop: hp(1.30),
-        borderColor: COLORS.commonBorderColor,
-        borderWidth: 1,
         overflow: 'hidden',
     },
     pupilBoard: {

@@ -53,7 +53,7 @@ export default class ParentZoneSwitch extends Component {
         return (
             <View style={styles.container}>
                 {/* <Image source={Images.parentZone} style={styles.image}></Image> */}
-                <SelectPupilTopBg_Mobile style={styles.image} width= {'100%'} height={hp(15)}/>
+                <SelectPupilTopBg_Mobile style={styles.image} width= {'100%'} height={hp(16.5)}/>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         width: '100%',
         height: hp(15),
+        marginTop: -10
     },
     userMain: {
         justifyContent: "center",

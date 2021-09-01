@@ -266,10 +266,10 @@ class Login extends Component {
                     {this.props.route.params.userType == 'Pupil' ?
                         // <ImageBackground source={Images.LoginBack} style={styles.image}></ImageBackground>
                         // <TabletLoginSideimg style={styles.image} height={'100%'} width={'100%'} />
-                        <TabletPupilLoginSideimg style={styles.image} height={'100%'} width={'100%'}/>
+                        <TabletPupilLoginSideimg style={styles.image} height={'102%'} width={'102%'}/>
                         :
                         // <ImageBackground source={Images.TeacherLoginBack} style={styles.image}></ImageBackground>
-                        <TabletLoginSideimg style={styles.image} height={'100%'} width={'100%'} />
+                        <TabletLoginSideimg style={styles.image} height={'102%'} width={'102%'} />
 
                     }
                 </View>
