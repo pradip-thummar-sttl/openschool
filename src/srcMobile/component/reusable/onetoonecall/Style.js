@@ -34,14 +34,14 @@ export default StyleSheet.create({
     actionParent: {
         width: '100%',
         position: 'absolute',
-        bottom: 100,
+        bottom: 150,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
     actionParentBottom: {
         width: '100%',
         position: 'absolute',
-        bottom: 50,
+        bottom: 70,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
@@ -50,11 +50,16 @@ export default StyleSheet.create({
         height: hp(9),
         borderRadius: hp(200),
         backgroundColor: COLORS.lightGrayPupil,
+        alignSelf: 'center',
     },
     actionButtonBottom: {
-        width: hp(4),
-        height: hp(4),
+        width: hp(5),
+        height: hp(5),
         borderRadius: hp(200),
+        borderWidth: 0.5,
+        borderColor: COLORS.lightGrey,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: COLORS.lightGrayPupil,
     },
     pupilData: {
@@ -95,7 +100,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         marginVertical: 10,
         fontFamily: FONTS.fontSemiBold,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     listHeader: {
         fontSize: hp(1.95),
@@ -107,5 +113,6 @@ export default StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
+        alignSelf: 'center',
     },
 });

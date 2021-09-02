@@ -386,7 +386,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             <Sidebar
                 moduleIndex={selectedIndex}
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0) }}
+                navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0); refresh() }}
                 navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
                 navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
                 navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
