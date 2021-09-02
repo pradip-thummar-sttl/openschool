@@ -50,7 +50,7 @@ export default class Users extends Component {
             <View style={styles.container}>
                 <ImageBackground style={styles.image}>
                     {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
-                    <Top style={styles.topBg} width={'100%'} height={hp(16.77)} />
+                    <Top style={styles.topBg} width={'100%'} height={hp(17.4)} />
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
@@ -143,6 +143,6 @@ const styles = StyleSheet.create({
         height: hp(16.77),
         resizeMode: Platform.OS == 'android' ? 'cover' : 'cover',
         position: 'absolute',
-        top: hp(-0.3),
+        top: hp(-1),
     }
 });

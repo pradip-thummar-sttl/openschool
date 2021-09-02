@@ -266,10 +266,10 @@ class Login extends Component {
                     {this.props.route.params.userType == 'Pupil' ?
                         // <ImageBackground source={Images.LoginBack} style={styles.image}></ImageBackground>
                         // <TabletLoginSideimg style={styles.image} height={'100%'} width={'100%'} />
-                        <TabletPupilLoginSideimg style={styles.image} height={'102%'} width={'102%'}/>
+                        <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)}/>
                         :
                         // <ImageBackground source={Images.TeacherLoginBack} style={styles.image}></ImageBackground>
-                        <TabletLoginSideimg style={styles.image} height={'102%'} width={'102%'} />
+                        <TabletLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
 
                     }
                 </View>
@@ -430,15 +430,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     image: {
-        flex: 1,
-        resizeMode: "contain",
+        resizeMode: "cover",
         justifyContent: "flex-start",
         marginLeft: -2,
-        marginTop: -2,
+        marginTop: hp(-0.9),
     },
     lefImage: {
         width: '50%',
-        marginLeft: -2,
+        justifyContent: 'flex-start',
+        alignSelf: 'flex-start',
     },
     rightContent: {
         width: '50%',

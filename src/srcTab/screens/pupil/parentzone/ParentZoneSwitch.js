@@ -67,7 +67,7 @@ export default class ParentZoneSwitch extends Component {
             <View style={styles.container}>
                 {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
                 <Top style={styles.topBg} width={'100%'}
-                    height={hp(16.77)} />
+                    height={hp(17.4)} />
                 <View style={{ flex: 1, justifyContent: 'center', }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
@@ -168,9 +168,9 @@ const styles = StyleSheet.create({
     topBg: {
         width: '100%',
         height: hp(16.77),
-        resizeMode: 'cover',
+        resizeMode: Platform.OS == 'android' ? 'cover' : 'cover',
         position: 'absolute',
-        top: hp(-0.3),
+        top: hp(-1),
     },
     parentZoneIcon: {
         width: hp(4.03),
