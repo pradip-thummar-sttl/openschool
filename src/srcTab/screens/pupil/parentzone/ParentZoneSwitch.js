@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text, Alert, Platform } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, Alert, Platform, Dimensions } from 'react-native';
 import COLORS from '../../../../utils/Colors';
 import FONTS from '../../../../utils/Fonts';
 import Images from '../../../../utils/Images';
@@ -13,6 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Top from '../../../../svg/userselection/Top'
 import AddNewPupil from '../../../../svg/pupil/parentzone/AddNewPupil'
 import ParentZone from '../../../../svg/pupil/parentzone/ParentZone'
+
+const windowWidth = Dimensions.get('window').width;
 
 export default class ParentZoneSwitch extends Component {
     constructor(props) {
@@ -83,26 +85,30 @@ export default class ParentZoneSwitch extends Component {
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
-                        <FlatList
-                            data={this.state.childrenList}
-                            showsHorizontalScrollIndicator={false}
-                            showsVerticalScrollIndicator={false}
-                            renderItem={({ item, index }) => (
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => this.launchPupil(item)}>
-                                    <View style={styles.user}>
-                                        <Image
-                                            style={styles.userIcon}
-                                            source={{ uri: baseUrl + item.ProfilePicture }} />
-                                        <Text style={styles.text}>{item.FirstName} {item.LastName}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            )}
-                            //Setting the number of column
-                            horizontal
-                            keyExtractor={(item, index) => index.toString()}
-                        />
+                        <View>
+                            { }
+                            <FlatList
+                                data={this.state.childrenList}
+                                showsHorizontalScrollIndicator={false}
+                                showsVerticalScrollIndicator={false}
+                                style={{ maxWidth: windowWidth - hp(31)}}
+                                renderItem={({ item, index }) => (
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => this.launchPupil(item)}>
+                                        <View style={styles.user}>
+                                            <Image
+                                                style={styles.userIcon}
+                                                source={{ uri: baseUrl + item.ProfilePicture }} />
+                                            <Text style={styles.text}>{item.FirstName} {item.LastName}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )}
+                                //Setting the number of column
+                                horizontal
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                        </View>
                     </View>
                     <View style={{ position: 'absolute', bottom: 20 }}>
                         <TouchableOpacity

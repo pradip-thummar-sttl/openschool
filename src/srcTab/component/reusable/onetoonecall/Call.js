@@ -10,6 +10,17 @@ import Images from "../../../../utils/Images";
 import COLORS from "../../../../utils/Colors";
 import { User } from "../../../../utils/Model";
 import WebRTCView from 'quickblox-react-native-sdk/RTCView'
+import MicOff from "../../../../svg/common/MicOff";
+import MicOn from "../../../../svg/common/MicOn";
+import VideoOff from "../../../../svg/common/VideoOff";
+import VideoOn from "../../../../svg/common/VideoOn";
+import CameraFront from "../../../../svg/common/CameraFront";
+import CameraRear from "../../../../svg/common/CameraRear";
+import PhoneEar from "../../../../svg/common/PhoneEar";
+import PhoneSpeker from "../../../../svg/common/PhoneSpeker";
+import BackArrow from "../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import CallPick from "../../../../svg/common/CallPick";
+import CallDrop from "../../../../svg/common/CallDrop";
 
 const Call = (props) => {
     const params = props.route.params
@@ -95,6 +106,34 @@ const Call = (props) => {
             })
     }
 
+    const switchAudio = (sessionId) => {
+        QB.webrtc
+            .enableAudio({ sessionId, enable: !isAudioMuted })
+            .then(() => { console.log('Audio switched'); setAudioMuted(!isAudioMuted) })
+            .catch(e => { console.log('Audio switched', e); })
+    }
+
+    const switchVideo = (sessionId) => {
+        QB.webrtc
+            .enableVideo({ sessionId, enable: !isVideoMuted })
+            .then(() => { console.log('Video switched'); setVideoMuted(!isVideoMuted) })
+            .catch(e => { console.log('Video switched', e); })
+    }
+
+    const switchCamera = (sessionId) => {
+        QB.webrtc
+            .switchCamera({ sessionId, })
+            .then(() => { console.log('Camera switched'); setFrontCamera(!isFrontCamera) })
+            .catch(e => { console.log('Camera switched', e); })
+    }
+
+    const switchAudioOutput = () => {
+        QB.webrtc
+            .switchAudioOutput({ output: isEarPhone ? QB.webrtc.AUDIO_OUTPUT.LOUDSPEAKER : QB.webrtc.AUDIO_OUTPUT.EARSPEAKER })
+            .then(() => { console.log('Audio output switched'); setEarPhone(!isEarPhone) })
+            .catch(e => { console.log('Audio output switched', e); })
+    }
+
     const releaseResource = () => {
         props.navigation.goBack()
 
@@ -131,14 +170,14 @@ const Call = (props) => {
 
         <View style={Style.main}>
             {(sessionId || params.sessionId) && (userId || params.initiatorId) ?
-                <View style={{ flex: 1 }}>
+                <View style={{ height: '100%', width: '100%' }}>
                     <WebRTCView
                         sessionId={params.userType == 'Teacher' ? sessionId : params.sessionId}
-                        style={{ height: '50%', width: '100%' }} // add styles as necessary
+                        style={{ height: '100%', width: '100%' }} // add styles as necessary
                         userId={params.userType == 'Teacher' ? userId : params.initiatorId} // your user's Id for local video or occupantId for remote
                     />
 
-                    {params.userType == 'Teacher' || isCallAccepted ?
+                    {/* {params.userType == 'Teacher' || isCallAccepted ?
                         <>
                             {console.log(params.userType == 'Teacher' ? 'T' : 'P', userId, params.initiatorId, sessionId, params.sessionId, User.user.QBUserId)}
                             <WebRTCView
@@ -149,7 +188,7 @@ const Call = (props) => {
                         </>
                         :
                         null
-                    }
+                    } */}
                 </View>
                 :
                 null
@@ -157,15 +196,16 @@ const Call = (props) => {
             <View style={Style.mainPage}>
                 {!isLoading ?
                     <>
-                        <Image style={Style.profile} source={{ uri: baseUrl + selectedPupilData.ProfilePicture }} />
-                        <Text style={Style.profileTitle} numberOfLines={1}>{selectedPupilData.FirstName} {selectedPupilData.LastName}</Text>
+                        {/* <Image style={Style.profile} source={{ uri: baseUrl + selectedPupilData.ProfilePicture }} />
+                        <Text style={Style.profileTitle} numberOfLines={1}>{selectedPupilData.FirstName} {selectedPupilData.LastName}</Text> */}
 
                         <View style={Style.actionParent}>
                             {params.userType == 'Pupil' && !isCallAccepted ?
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => acceptCall(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                                    <Image style={Style.actionButton} source={Images.callPick} />
+                                    {/* <Image style={Style.actionButton} source={Images.callPick} /> */}
+                                    <CallPick style={Style.actionButton} height={hp(9)} width={hp(9)} />
                                 </TouchableOpacity>
                                 :
                                 null
@@ -173,30 +213,60 @@ const Call = (props) => {
                             <TouchableOpacity
                                 activeOpacity={opacity}
                                 onPress={() => endCall(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                                <Image style={Style.actionButton} source={Images.callDrop} />
+                                {/* <Image style={Style.actionButton} source={Images.callDrop} /> */}
+                                <CallDrop style={Style.actionButton} height={hp(9)} width={hp(9)} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={Style.actionParentBottom}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
+                                style={Style.actionButtonBottom}
                                 onPress={() => switchAudio(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                {!isAudioMuted ?
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <MicOff height={hp(3)} width={hp(3)} />
+                                    :
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <MicOn height={hp(3)} width={hp(3)} />
+                                }
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
+                                style={Style.actionButtonBottom}
                                 onPress={() => switchVideo(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                {!isVideoMuted ?
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <VideoOff height={hp(3)} width={hp(3)} />
+                                    :
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <VideoOn height={hp(3)} width={hp(3)} />
+                                }
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
+                                style={Style.actionButtonBottom}
                                 onPress={() => switchCamera(params.userType == 'Teacher' ? sessionId : params.sessionId)}>
-                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                {!isFrontCamera ?
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <CameraRear height={hp(3)} width={hp(3)} />
+                                    :
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <CameraFront height={hp(3)} width={hp(3)} />
+                                }
                             </TouchableOpacity>
                             <TouchableOpacity
                                 activeOpacity={opacity}
+                                style={Style.actionButtonBottom}
                                 onPress={() => switchAudioOutput()}>
-                                <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                {/* <Image style={Style.actionButtonBottom} source={Images.callDrop} /> */}
+                                {!isEarPhone ?
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <PhoneEar height={hp(3)} width={hp(3)} />
+                                    :
+                                    // <Image style={Style.actionButtonBottom} source={Images.callDrop} />
+                                    <PhoneSpeker height={hp(3)} width={hp(3)} />
+                                }
                             </TouchableOpacity>
                         </View>
                     </>
@@ -213,7 +283,15 @@ const Call = (props) => {
                         showsVerticalScrollIndicator={false}
                         ListHeaderComponent={() => {
                             return (
-                                <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
+                                <View style={Style.listHeaderPArent}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => releaseResource()}>
+                                        {/* <Image style={Style.arrow} source={Images.backArrow} /> */}
+                                        <BackArrow style={Style.arrow} height={hp(2.34)} width={hp(2.34)} />
+                                    </TouchableOpacity>
+                                    <Text style={Style.listHeader}>Tap any of the pupil to initiate a call..</Text>
+                                </View>
                             )
                         }}
                     />

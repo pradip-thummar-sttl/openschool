@@ -34,7 +34,7 @@ export default StyleSheet.create({
     actionParent: {
         width: '100%',
         position: 'absolute',
-        bottom: 100,
+        bottom: 150,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
@@ -42,7 +42,6 @@ export default StyleSheet.create({
         width: hp(9),
         height: hp(9),
         borderRadius: hp(200),
-        backgroundColor: COLORS.lightGrayPupil,
     },
     pupilData: {
         flexDirection: 'row',
@@ -76,16 +75,41 @@ export default StyleSheet.create({
         width: hp(0.9),
         resizeMode: 'contain',
     },
+    listHeaderPArent: {
+        flexDirection: 'row',
+        fontSize: hp(1.95),
+        color: COLORS.darkGray,
+        marginVertical: 10,
+        fontFamily: FONTS.fontSemiBold,
+        alignItems: 'center',
+    },
     listHeader: {
         fontSize: hp(1.95),
         color: COLORS.darkGray,
-        marginBottom: 20,
         fontFamily: FONTS.fontSemiBold,
+        paddingVertical: 5,
+        marginLeft: 10
+    },
+    arrow: {
+        width: hp(2.34),
+        resizeMode: 'contain',
+        alignSelf: 'center',
     },
     actionButtonBottom: {
-        width: hp(4),
-        height: hp(4),
+        width: hp(5),
+        height: hp(5),
         borderRadius: hp(200),
+        borderWidth: 0.5,
+        borderColor: COLORS.lightGrey,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: COLORS.lightGrayPupil,
+    },
+    actionParentBottom: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 70,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
     },
 });
