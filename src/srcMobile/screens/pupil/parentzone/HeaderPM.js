@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import {
     Menu,
@@ -22,6 +22,8 @@ import Ic_Search from "../../../../svg/teacher/pupilmanagement/Ic_Search";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 
 
 
@@ -65,7 +67,8 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <Menu>
-                        <MenuTrigger><Image style={styles.userparent} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
+                    {/* childrenList.length == 0 ? Images.userparent :  */}
+                        <MenuTrigger><Image style={styles.userparent} source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
                         <MenuOptions style={styles.filterCard}>
                             {childrenList.map((item, index) => (
                                 <MenuOption style={styles.borderList}>
@@ -93,7 +96,10 @@ const HeaderPM = (props) => {
                                     onPress={() => props.navigateToAddNewUser()}>
                                     <View style={styles.filterList}>
                                         <View style={styles.filterListSub}>
-                                            <View style={styles.userparentInMenuAddmain}><Image style={styles.userparentInMenuAdd} source={Images.AddIcon} /></View>
+                                            <View style={styles.userparentInMenuAddmain}>
+                                                {/* <Image style={styles.userparentInMenuAdd} source={Images.AddIcon} /> */}
+                                                <AddWhite style={styles.userparentInMenuAdd} height={hp(1.47)} width={hp(1.47)} />
+                                                </View>
                                             <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>ADD NEW USER</Text>
                                         </View>
                                     </View>
@@ -140,7 +146,10 @@ const HeaderPM = (props) => {
                                 props.onSearchKeyword(keyword);
                             }} />
                         <Menu>
-                            <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                            <MenuTrigger>
+                                {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                                <FilterBlack style={styles.searchMenu}height={15} width={15} />
+                                </MenuTrigger>
                             <MenuOptions style={[styles.filterCard, styles.dateFilter]}>
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity

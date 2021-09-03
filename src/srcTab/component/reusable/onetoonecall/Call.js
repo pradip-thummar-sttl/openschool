@@ -6,7 +6,7 @@ import { baseUrl, opacity, showMessage } from "../../../../utils/Constant"
 import { initApp } from "./CallConfiguration";
 import Style from './Style'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import COLORS from "../../../../utils/Colors";
 import { User } from "../../../../utils/Model";
 import WebRTCView from 'quickblox-react-native-sdk/RTCView'

@@ -7,7 +7,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderTT from "./header/HeaderTT";
 import { cellWidth, opacity, Var } from "../../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata";
-import Popup from "../../../component/reusable/popup/Popup";
+// import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import { useDispatch } from "react-redux";

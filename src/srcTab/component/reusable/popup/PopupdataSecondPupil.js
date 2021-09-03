@@ -23,6 +23,7 @@ import Clock from "../../../../svg/teacher/dashboard/Clock";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const PopupdataSecondPupil = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -365,7 +366,9 @@ const PopupdataSecondPupil = (props) => {
                                                 onPress={isFieldsValidated}
                                                 style={styles.buttonGrp}
                                                 activeOpacity={opacity}>
-                                                <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} />
+                                                {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
+                                                <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
+
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
                                             </TouchableOpacity>
 

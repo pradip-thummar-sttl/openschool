@@ -14,6 +14,8 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
@@ -124,11 +126,15 @@ const NotificationDrawer = (props) => {
                         <View>
                             <Text style={styles.notificationsText}>Live Classes</Text>
                             <View style={styles.classDetail}>
-                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <TouchableOpacity style={styles.closeNotificationbar}>
+                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                    <CloseBlack style={styles.closeIconSmall}/>
+                                 </TouchableOpacity>
                                 <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
                                 <View style={styles.timingJoinClass}>
                                     <View style={styles.timing}>
-                                        <Image source={require('../../../../assets/images/clock2.png')} style={styles.timingClass} />
+                                        <Clock style={styles.timingClass}/>
+                                        {/* <Image source={require('../../../../assets/images/clock2.png')} style={styles.timingClass} /> */}
                                         <Text style={styles.timingText}>09:00 - 09:30</Text>
                                     </View>
                                     <TouchableOpacity>
@@ -140,7 +146,10 @@ const NotificationDrawer = (props) => {
                         <View>
                             <Text style={styles.notificationsText}>Homework</Text>
                             <View style={styles.classDetail}>
-                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <TouchableOpacity style={styles.closeNotificationbar}>
+                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                    <CloseBlack style={styles.closeIconSmall}/>
+                                    </TouchableOpacity>
                                 <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
                                 <View style={styles.timingJoinClass}>
                                     <View style={styles.timing}>
@@ -155,7 +164,11 @@ const NotificationDrawer = (props) => {
                         <View>
                             <Text style={styles.notificationsText}>Personal</Text>
                             <View style={styles.classDetail}>
-                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <TouchableOpacity style={styles.closeNotificationbar}>
+                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                    <CloseBlack style={styles.closeIconSmall}/>
+
+                                    </TouchableOpacity>
                                 <Text style={styles.classsummary}>You have a new message from</Text>
                                 <View style={styles.timingJoinClass}>
                                     <View style={styles.timing}>
@@ -169,7 +182,11 @@ const NotificationDrawer = (props) => {
                         </View>
                         <View>
                             <View style={styles.classDetail}>
-                                <TouchableOpacity style={styles.closeNotificationbar}><Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /></TouchableOpacity>
+                                <TouchableOpacity style={styles.closeNotificationbar}>
+                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                    <CloseBlack style={styles.closeIconSmall}/>
+
+                                    </TouchableOpacity>
                                 <Text style={styles.classsummary}>You have a new message from</Text>
                                 <View style={styles.timingJoinClass}>
                                     <View style={styles.timing}>

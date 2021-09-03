@@ -19,7 +19,7 @@ const Popupuser = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={STYLE.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
                     </TouchableOpacity>
                     <View style={STYLE.popupContentMain}>
                         <Text style={STYLE.popupTitle}>You are starting an instant call</Text>
@@ -33,7 +33,9 @@ const Popupuser = (props) => {
                                     defaultValue='Meeting link: meet.myed/123-455-xyz Dial-in code: (UK) +44 000-000-000 Meeting password: 12345!'
                                     style={styles.commonInputTextarea}
                                 />
-                                <TouchableOpacity style={styles.copyIconMain}><Image source={require('../../../../assets/images/copy-icon2.png')} style={styles.copyIcon} /></TouchableOpacity>
+                                <TouchableOpacity style={styles.copyIconMain}>
+                                    {/* <Image source={require('../../../../assets/images/copy-icon2.png')} style={styles.copyIcon} /> */}
+                                    </TouchableOpacity>
                             </View>
                         </View>
                         <TouchableOpacity><Text style={STYLE.commonButtonGreenDashboardSide}>share details</Text></TouchableOpacity>

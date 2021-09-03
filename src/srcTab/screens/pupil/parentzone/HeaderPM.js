@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import PAGESTYLE from './Style';
 import {
@@ -17,6 +17,10 @@ import { useLinkProps } from "@react-navigation/native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import { User } from "../../../../utils/Model";
+import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
@@ -54,9 +58,11 @@ const HeaderPM = (props) => {
                     <View style={PAGESTYLE.filterListWrapNew}>
                         <Menu>
                             <MenuTrigger style={PAGESTYLE.filterGroup}>
-                                <Image source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
+                            {/* childrenList.length == 0 ? Images.userparent :  */}
+                                <Image source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
                                 <Text style={PAGESTYLE.selectDropList} numberOfLines={1} ellipsizeMode='tail'>{childrenList.length == 0 ? '' : childrenList[selectedPupilIndex].FirstName + ' ' + childrenList[selectedPupilIndex].LastName}</Text>
-                                <Image style={PAGESTYLE.dropArrow} source={Images.DropArrow} />
+                                {/* <Image style={PAGESTYLE.dropArrow} source={Images.DropArrow} /> */}
+                                <ArrowDown style={PAGESTYLE.dropArrow} height={hp(0.95)} width={hp(1.51)} />
                             </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                 {childrenList.map((item, index) => (
@@ -76,7 +82,8 @@ const HeaderPM = (props) => {
                                         activeOpacity={opacity}
                                         onPress={() => props.navigateToAddNewUser()}>
                                         <View style={PAGESTYLE.filterList}>
-                                            <Image style={PAGESTYLE.addIcon} source={Images.AddIcon} />
+                                            {/* <Image style={PAGESTYLE.addIcon} source={Images.AddIcon} /> */}
+                                            <AddWhite style={PAGESTYLE.addIcon} height={hp(1.55)} width={hp(1.55)} />
                                             <Text style={PAGESTYLE.filterListTextAddUser}>add new user</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -88,7 +95,8 @@ const HeaderPM = (props) => {
                     </View>
 
                     <TouchableOpacity style={PAGESTYLE.notificationBar}>
-                        <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={PAGESTYLE.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
 
                 </View>
@@ -141,8 +149,9 @@ const HeaderPM = (props) => {
                                         :
                                         null
                                 }}>
-                                <Image style={{ height: 20, resizeMode: 'contain' }}
-                                    source={Images.SearchIcon} />
+                                {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                                    source={Images.SearchIcon} /> */}
+                                    <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}

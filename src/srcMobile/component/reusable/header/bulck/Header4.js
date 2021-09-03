@@ -20,7 +20,7 @@ import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import CloseBlack from "../../../../../svg/teacher/pupilmanagement/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
-import Ic_BlueCheck from "../../../../../svg/teacher/timetable/ic_blueCheck";
+import Ic_BlueCheck from "../../../../../svg/teacher/timetable/Ic_BlueCheck";
 import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
 import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
 import NewLesson from "../../../../../svg/teacher/timetable/NewLesson";

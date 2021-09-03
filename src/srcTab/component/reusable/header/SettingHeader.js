@@ -6,6 +6,7 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
 
 const SettingHeader = (props) => {
     return (
@@ -17,7 +18,8 @@ const SettingHeader = (props) => {
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={require('../../../../assets/images/notification2.png')} />
+                        {/* <Image style={styles.massagesIcon} source={require('../../../../assets/images/notification2.png')} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>

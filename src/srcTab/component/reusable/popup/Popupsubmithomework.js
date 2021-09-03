@@ -6,6 +6,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 
 const Popuphomework = (props) => {
     const [isModalVisible, setModalVisible] = useState(true);
@@ -22,9 +23,11 @@ const Popuphomework = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={() => { props.onPopupClosed(!isModalVisible); toggleModal() }}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon}/>
                     </TouchableOpacity>
-                    <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
+                    {/* source={require('../../../../assets/images/popup_back.png')} */}
+                    <ImageBackground  style={STYLE.popupBack} />
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
