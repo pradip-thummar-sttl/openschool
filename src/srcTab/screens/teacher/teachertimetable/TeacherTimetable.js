@@ -19,7 +19,7 @@ import TLDetail from "../teacherlessondetail/lessonplan/TeacherLessonDetail";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 
 const TeacherTimeTable = (props) => {
@@ -243,7 +243,7 @@ const TeacherTimeTable = (props) => {
                                         //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
                                         // </View>
                                         <ScrollView>
-                                            <EmptyStatePlaceHohder holderType={3} image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                                            <EmptyStatePlaceHohder holderType={3}  title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                                         </ScrollView>
                                 }
                             </View>

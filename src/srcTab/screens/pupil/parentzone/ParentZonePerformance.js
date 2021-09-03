@@ -3,7 +3,7 @@ import { NativeModules, View, StyleSheet, Text, opacity, TouchableOpacity, H3, S
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import HeaderPM from "./HeaderPM";
@@ -100,11 +100,11 @@ const ParentZonePerformance = (props) => {
                                 <View>
                                     <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
                                     <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
-                                        <Image source={Images.purpleMarkImg} style={PAGESTYLE.purpleMark} />
+                                        <Image  style={PAGESTYLE.purpleMark} />
                                         <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
                                     </View>
                                     <View style={PAGESTYLE.generalRow}>
-                                        <Image source={Images.orangeMarkImg} style={PAGESTYLE.orangeMark} />
+                                        <Image  style={PAGESTYLE.orangeMark} />
                                         <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
                                     </View>
                                 </View>

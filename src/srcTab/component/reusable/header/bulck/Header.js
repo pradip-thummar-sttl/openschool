@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackgroun
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 
 const Header = (props) => {
@@ -12,7 +12,7 @@ const Header = (props) => {
             <Text style={styles.mainTitle}>Common Title</Text>
             <View style={styles.headerRight}>
                 <TouchableOpacity style={styles.notificationBar}>
-                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                 </TouchableOpacity>
             </View>
         </View>

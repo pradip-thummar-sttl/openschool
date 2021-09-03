@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { EndPoints } from '../../../../service/EndPoints';
 import { Service } from '../../../../service/Service';
+import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack';
 import { showMessage, showMessageWithCallBack } from '../../../../utils/Constant';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import MESSAGE from '../../../../utils/Messages';
 import { User } from '../../../../utils/Model';
 import Styles from './StylePassCode';
@@ -153,7 +154,9 @@ const Passcode = (props) => {
                                 : index == 11 ?
                                     <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.withoutRoundButton}>
                                         {/* <Text style={Styles.withoutnumberText}>{item} </Text> */}
-                                        <Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image>
+                                        {/* <Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image> */}
+                                        <BackArrow style={Styles.backSpaceArrow} height={hp(2.58)} width={hp(3.38)} />
+                                        
                                     </TouchableOpacity>
                                     :
                                     <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.roundButton}>

@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import moment from "moment";
@@ -12,6 +12,8 @@ import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/Em
 import MESSAGE from "../../../../../utils/Messages";
 import LessonVideoBack from "../../../../../svg/pupil/lessonhwplanner/LessonVideoBack";
 import LessonVideoOverlay from "../../../../../svg/pupil/lessonhwplanner/LessonVideoOverlay";
+import BookMarkOn from "../../../../../svg/pupil/lessonhwplanner/BookMark_On";
+import BookMarkOff from "../../../../../svg/pupil/lessonhwplanner/BookMark_Off";
 //import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 
 
@@ -40,7 +42,12 @@ const PupilLesson = (props) => {
                                                     {/* <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} /> */}
                                                     <LessonVideoOverlay style={PAGESTYLE.videoShadow} width={'100%'} height={hp(13.54)} />
                                                     <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
-                                                    <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} />
+                                                    {
+                                                        item.SaveLesson ?
+                                                            <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                                            : <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                                    }
+                                                    {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} /> */}
                                                 </View>
                                                 <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                                 <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
@@ -73,7 +80,12 @@ const PupilLesson = (props) => {
                                                 {/* <Image style={PAGESTYLE.videoShadow} source={Images.VideoShadow} /> */}
                                                 <LessonVideoOverlay style={PAGESTYLE.videoShadow} width={'100%'} height={hp(13.54)} />
                                                 <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
-                                                <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} />
+                                                {
+                                                    item.SaveLesson ?
+                                                        <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                                        : <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                                }
+                                                {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} /> */}
                                             </View>
                                             <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                             <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
@@ -91,7 +103,7 @@ const PupilLesson = (props) => {
                     }
                 </>
                 :
-                <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
+                <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
         </View>
 

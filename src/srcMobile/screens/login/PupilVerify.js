@@ -8,7 +8,7 @@ import STYLE from '../../../utils/Style';
 import FONTS from '../../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Images from '../../../utils/Images';
+// import Images from '../../../utils/Images';
 import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice } from '../../../utils/Constant';
 import { Service } from '../../../service/Service';
 import { EndPoints } from '../../../service/EndPoints';
@@ -50,7 +50,7 @@ class PupilVerify extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
-                    <Image source={Images.loginMainBack} style={styles.image}></Image>
+                    {/* <Image source={Images.loginMainBack} style={styles.image}></Image> */}
                 </View>
                 <View style={styles.rightContent}>
                     <ScrollView showsVerticalScrollIndicator={false}>

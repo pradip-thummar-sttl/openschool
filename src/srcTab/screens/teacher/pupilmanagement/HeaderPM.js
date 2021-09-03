@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import {
     Menu,
@@ -16,6 +16,8 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
+import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -52,7 +54,8 @@ const HeaderPM = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -89,8 +92,8 @@ const HeaderPM = (props) => {
                                         :
                                         null
                                 }}>
-                                <Image style={{ height: 20, resizeMode: 'contain' }}
-                                    source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                                {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                                    source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
@@ -107,7 +110,8 @@ const HeaderPM = (props) => {
                                 style={styles.buttonGroup}
                                 activeOpacity={opacity}
                                 onPress={()=> props.navigateToAddNewUser()}>
-                                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                                <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)}/>
                                 <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
                             </TouchableOpacity>
                         </View>

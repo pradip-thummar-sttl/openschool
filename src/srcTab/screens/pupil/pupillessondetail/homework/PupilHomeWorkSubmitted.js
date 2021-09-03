@@ -12,7 +12,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header13 from '../../../../component/reusable/header/bulck/Header13'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
 import HWSubmittedTop_Mobile from '../../../../../svg/pupil/lessonhwplanner/HWSubmittedTop_Mobile'
 import Submitted from '../../../../../svg/pupil/lessonhwplanner/Submitted'
@@ -129,7 +129,9 @@ const PupilHomeWorkSubmitted = (props) => {
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.blueBorder} />
                                                     :
-                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                    // <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                <Doc style={PAGESTYLE.markedIcon} width={hp(10)} height={hp(10)}/>
+                                                    
                                                 }
                                                 {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                             </View>

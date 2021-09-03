@@ -7,11 +7,15 @@ import { EndPoints } from '../../../../service/EndPoints';
 import { Service } from '../../../../service/Service';
 import COLORS from '../../../../utils/Colors';
 import { opacity, showMessage } from '../../../../utils/Constant';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import MESSAGE from '../../../../utils/Messages';
 import { User } from '../../../../utils/Model';
 import NewMessage from './NewMessage';
 import PAGESTYLE from './Styles';
+import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
+import HidePassword from '../../../../svg/teacher/login/HidePassword';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const Message = (props) => {
     const [selectedId, setSelectedId] = useState(null);
@@ -91,7 +95,8 @@ const Message = (props) => {
                 </View>
 
                 <View style={[PAGESTYLE.lastColumn]}>
-                    <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                    <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1)} width={hp(1)} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -142,7 +147,7 @@ const Message = (props) => {
                                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                     // </View>
                                     <View style={{ backgroundColor: COLORS.white, flex:1, justifyContent: 'center', marginHorizontal: 15, marginBottom: 15 }}>
-                                    <EmptyStatePlaceHohder holderType={2} image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
+                                    <EmptyStatePlaceHohder holderType={2} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
                                     </View>
                             }
                         </View>

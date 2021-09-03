@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors"; 
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 
 import {
@@ -13,11 +13,13 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { opacity } from "../../../../../utils/Constant";
+import BackArrow from "../../../../../svg/common/BackArrow";
 const ChatHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity style={{justifyContent:'center'}} onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> {'props.title'}</Text>
+            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                <Text style={styles.mainTitle}><TouchableOpacity style={{justifyContent:'center'}} onPress={() => props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /></TouchableOpacity> {'props.title'}</Text>
                 {/* <View style={styles.headerRight}> */}
                     {/* <TouchableOpacity style={styles.buttonGroup}>
                         <Image style={styles.addIcon} source={Images.CheckIconWhite} />

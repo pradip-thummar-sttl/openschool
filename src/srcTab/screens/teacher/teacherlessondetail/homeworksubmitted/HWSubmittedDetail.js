@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -29,6 +29,7 @@ import SilverFill from "../../../../../svg/teacher/lessonhwplanner/StartSilver_F
 import Silver from "../../../../../svg/teacher/lessonhwplanner/StartSilver";
 import GoldFill from "../../../../../svg/teacher/lessonhwplanner/StarGold_Fill";
 import Gold from "../../../../../svg/teacher/lessonhwplanner/StarGold";
+import Doc from "../../../../../svg/common/Doc";
 
 
 var moment = require('moment');
@@ -323,7 +324,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                 color={COLORS.blueBorder} />
                                                             :
-                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                            // <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                            <Doc style={PAGESTYLE.markedIcon}/>
+                                                            
                                                         }
                                                         {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                                     </View>

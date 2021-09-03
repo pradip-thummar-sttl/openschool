@@ -5,7 +5,8 @@ import COLORS from '../../../../utils/Colors';
 import STYLE from '../../../../utils/Style';
 import styles from './Styles';
 import ToggleSwitch from 'toggle-switch-react-native';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from '../../../../service/EndPoints'
 import { User } from '../../../../utils/Model'
@@ -14,8 +15,9 @@ import CheckBox from '@react-native-community/checkbox';
 import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
 import { ScrollView } from 'react-native-gesture-handler';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import TickMarkGreen from '../../../../svg/teacher/lessonhwplanner/TickMark_Green';
+import Ic_CheckWhite from '../../../../svg/pupil/parentzone/Ic_CheckWhite';
+
 
 const NewMessage = (props) => {
     const t2 = useRef(null);

@@ -6,7 +6,7 @@ import FONTS from '../../../../utils/Fonts';
 import COLORS from '../../../../utils/Colors';
 import HeaderSixteen from "../../../component/reusable/header/bulck/Header16";
 import PAGESTYLE from './Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RNCamera, FaceDetector } from 'react-native-camera';
 
@@ -53,7 +53,7 @@ export default class ScreenAndCameraRecording extends Component {
                         {
                             isRecording ?
                                 <>
-                                    <Image source={Images.recordingTimerIcon} style={PAGESTYLE.recorderTimerIcon} />
+                                    {/* <Image source={Images.recordingTimerIcon} style={PAGESTYLE.recorderTimerIcon} /> */}
                                     <Text style={PAGESTYLE.timer}>04:48</Text>
                                 </>
                                 : null
@@ -61,28 +61,30 @@ export default class ScreenAndCameraRecording extends Component {
                     </View>
 
                     <View style={PAGESTYLE.callControlsmain}>
-                        <TouchableOpacity style={PAGESTYLE.callControl}><Image source={Images.moreHorizontal} style={PAGESTYLE.callControlsIcon} /></TouchableOpacity>
+                        <TouchableOpacity style={PAGESTYLE.callControl}>
+                            {/* <Image source={Images.moreHorizontal} style={PAGESTYLE.callControlsIcon} /> */}
+                            </TouchableOpacity>
                         <TouchableOpacity onPress={() => isRecording ? this.stopVideo() : this.takeVideo()} style={PAGESTYLE.callControl}>
 
-                            {
+                            {/* {
                                 isRecording ?
                                     <Image source={Images.recordButton} style={PAGESTYLE.callControlsIcon} />
                                     : <Image source={Images.recordingTimerIcon} style={PAGESTYLE.callrecordIcon} />
 
-                            }
+                            } */}
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => isRecording ? this.stopVideo() : this.takeVideo()} style={PAGESTYLE.callControl}>
-                            {
+                            {/* {
                                 isRecording ?
                                     <Image source={Images.pauseButton} style={PAGESTYLE.callControlsIcon} />
                                     : <Image source={Images.Play3Icon} style={PAGESTYLE.callControlsIcon} />
 
-                            }
+                            } */}
 
                         </TouchableOpacity>
                     </View>
                     <View style={PAGESTYLE.userVideoMain}>
-                        <Image source={Images.userVideo} style={PAGESTYLE.userVideo} />
+                        {/* <Image source={Images.userVideo} style={PAGESTYLE.userVideo} /> */}
                     </View>
                 </View>
                 {/* </View> */}

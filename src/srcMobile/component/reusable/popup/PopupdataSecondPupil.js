@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -71,14 +71,14 @@ const PopupdataSecondPupil = (props) => {
             style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                 <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -100,24 +100,24 @@ const PopupdataSecondPupil = (props) => {
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What event is it?</Text>
                                             <TouchableOpacity style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
                                                         <Text style={styles.dateTimetextdummy}>14/09/2020</Text>
                                                     </TouchableOpacity>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <View style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.Clock} />
+                                                {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
                                                 <View style={styles.subjectDateTime}>
                                                     <TouchableOpacity>
                                                         <Text style={styles.dateTimetextdummy}>09:00-09:30</Text>
                                                     </TouchableOpacity>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                 </View>
                                             </View>
                                         </View>
@@ -149,7 +149,7 @@ const PopupdataSecondPupil = (props) => {
                                                         <TouchableOpacity>
                                                             <View style={styles.colorSelect}></View>
                                                         </TouchableOpacity>
-                                                        <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                        {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
@@ -157,14 +157,14 @@ const PopupdataSecondPupil = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                            {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
                                             <TouchableOpacity
                                                 onPress={isFieldsValidated}
                                                 style={styles.buttonGrp}
                                                 activeOpacity={opacity}>
-                                                <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} />
+                                                {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
                                             </TouchableOpacity>
 

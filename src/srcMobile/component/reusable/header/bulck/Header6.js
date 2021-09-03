@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -18,7 +18,8 @@ const Header6 = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
+            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                <TouchableOpacity onPress={()=>props.goBack()}> <BackArrow style={styles.arrow} height={hp(2.43)} width={hp(2.43)} />  </TouchableOpacity>
                 <View style={styles.titles}>
                     <Text numberOfLines={1} style={styles.mainTitle}>{props.title}</Text>
                     <Text style={styles.date}>{props.date}</Text>

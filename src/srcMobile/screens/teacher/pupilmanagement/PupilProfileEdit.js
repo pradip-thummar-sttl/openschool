@@ -3,11 +3,12 @@ import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import HeaderPMInnerEdit from "./HeaderPMInnerEdit";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
+import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 
 const { CallModule } = NativeModules;
 
@@ -36,10 +37,14 @@ const PupilProfileEdit = (props) => {
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
-                            <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image>
+                            {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
+                            <TopBackImg style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
+
                             <View style={PAGESTYLE.profileOuter}>
                                 <Image style={PAGESTYLE.profileImage}></Image>
-                                <TouchableOpacity style={PAGESTYLE.editProfileMain}><Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} ></Image></TouchableOpacity>
+                                <TouchableOpacity style={PAGESTYLE.editProfileMain}>
+                                    {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
+                                        </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -76,7 +81,7 @@ const PupilProfileEdit = (props) => {
                                 maxLength={40}
                                 value={"17/07/2012"}
                                 placeholderTextColor={COLORS.menuLightFonts} />
-                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
@@ -106,15 +111,15 @@ const PupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
                             <View style={PAGESTYLE.rewardStarMark}>
                                 <View style={PAGESTYLE.centerText}>
-                                    <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                    {/* <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
                                     <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                 </View>
                                 <View style={PAGESTYLE.centerStar}>
-                                    <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                    {/* <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
                                     <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                 </View>
                                 <View style={PAGESTYLE.centerText}>
-                                    <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground>
+                                    {/* <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
                                     <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                 </View>
                             </View>
@@ -133,7 +138,7 @@ const PupilProfileEdit = (props) => {
                     <View HR style={STYLE.hrCommon}></View>
                     <View style={PAGESTYLE.pupilPerfomanceEdit}>
                         <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                        <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image>
+                        {/* <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image> */}
                     </View>
                 </ScrollView>
             </View>

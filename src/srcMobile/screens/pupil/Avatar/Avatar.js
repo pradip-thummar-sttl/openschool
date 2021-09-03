@@ -6,7 +6,7 @@ import HairRed from '../../../../svg/pupil/myavatar/Hair/HairRed'
 import MouthCheeks from '../../../../svg/pupil/myavatar/Mouth/MouthCheeks'
 import COLORS from '../../../../utils/Colors'
 // import Images from '../../../../srcmobile/utils/Images'
-import Images from '../../../../utils/Images'
+// import Images from '../../../../utils/Images'
 import AvatarHeader from './AvatarHeader'
 import Styles from './Style'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -28,21 +28,21 @@ const Avatar = () => {
 
                 <View style={Styles.rewardStarMark}>
                     <View style={Styles.centerText}>
-                        <ImageBackground source={Images.BronzeStarFill} style={[Styles.starSelected]}>
+                        {/* <ImageBackground source={Images.BronzeStarFill} style={[Styles.starSelected]}>
                             <Text style={Styles.starSelectedText}>18</Text>
-                        </ImageBackground>
+                        </ImageBackground> */}
                         <Text style={Styles.starText}>Bronze stars</Text>
                     </View>
                     <View style={Styles.centerStar}>
-                        <ImageBackground source={Images.SilverStarFill} style={[Styles.starSelected]}>
+                        {/* <ImageBackground source={Images.SilverStarFill} style={[Styles.starSelected]}>
                             <Text style={Styles.starSelectedText}>15</Text>
-                        </ImageBackground>
+                        </ImageBackground> */}
                         <Text style={Styles.starText}>Silver stars</Text>
                     </View>
                     <View style={Styles.centerText}>
-                        <ImageBackground source={Images.GoldStarFill} style={[Styles.starSelected]}>
+                        {/* <ImageBackground source={Images.GoldStarFill} style={[Styles.starSelected]}>
                             <Text style={Styles.starSelectedText}>5</Text>
-                        </ImageBackground>
+                        </ImageBackground> */}
                         <Text style={Styles.starText}>Gold stars</Text>
                     </View>
                 </View>

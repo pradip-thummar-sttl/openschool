@@ -9,7 +9,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/PixelRatio";
 import { Calendar } from 'react-native-calendars';
 import { opacity, Var } from '../../../../utils/Constant';
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { useSelector } from "react-redux";
@@ -33,7 +33,8 @@ const NotificationDrawer = (props) => {
                             activeOpacity={opacity}
                             onPress={() => props.navigation.closeDrawer()}
                         >
-                            <Image source={Images.backArrow} style={styles.closeIcon} />
+                            <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
+                            {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
                         </TouchableOpacity>
                     </View>
                     <Calendar
@@ -113,7 +114,9 @@ const NotificationDrawer = (props) => {
                             activeOpacity={opacity}
                             onPress={() => props.navigation.closeDrawer()}
                         >
-                            <Image source={Images.backArrow} style={styles.closeIcon} />
+                            <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
+
+                            {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
                         </TouchableOpacity>
                         <Text style={styles.drawerTitle} >My Notifications</Text>
                     </View>
@@ -181,7 +184,7 @@ const NotificationDrawer = (props) => {
                     </ScrollView>
                     <View style={styles.bottomButton}>
                         <TouchableOpacity style={styles.buttonTrash}>
-                            <Image source={Images.trashIcon} style={styles.trashIcon} />
+                            {/* <Image source={Images.trashIcon} style={styles.trashIcon} /> */}
                             <Text style={styles.clearText}>Clear all notifications</Text>
                         </TouchableOpacity>
                     </View>

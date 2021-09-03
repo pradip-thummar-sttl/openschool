@@ -4,7 +4,7 @@ import { PubNubProvider, usePubNub } from 'pubnub-react';
 import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import COLORS from '../../../utils/Colors'
-import Images from '../../../utils/Images'
+// import Images from '../../../utils/Images'
 import STYLE from '../../../utils/Style'
 import ChatHeader from './ChatHeader'
 import Styles from './Style'

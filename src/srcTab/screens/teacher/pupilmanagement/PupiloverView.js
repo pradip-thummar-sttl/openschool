@@ -6,7 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { EndPoints } from '../../../../service/EndPoints'
 import { Service } from '../../../../service/Service'
 import { baseUrl, opacity, showMessage } from '../../../../utils/Constant'
-import Images from '../../../../utils/Images'
+// import Images from '../../../../utils/Images'
 import STYLE from '../../../../utils/Style'
 import HeaderPM from './HeaderPM'
 import PAGESTYLE from './StyleList'
@@ -17,6 +17,7 @@ import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
 import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
 import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
+import NoPupil from '../../../../svg/emptystate/NoPupil';
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
@@ -197,7 +198,8 @@ const PupiloverView = (props) => {
                                 </>
                                 :
                                 <View style={PAGESTYLE.mainContainer}>
-                                    <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image>
+                                    {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
+                                    <NoPupil style={PAGESTYLE.noDataImage} height= {300} width={300} />
                                     <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                                     <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
                                 </View>

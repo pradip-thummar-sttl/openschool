@@ -7,7 +7,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -25,6 +25,7 @@ import SilverFill from "../../../../svg/teacher/pupilmanagement/StartSilver_Fill
 import Silver from "../../../../svg/teacher/pupilmanagement/StartSilver";
 import GoldFill from "../../../../svg/teacher/pupilmanagement/StarGold_Fill";
 import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
+import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 
 const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
@@ -144,7 +145,7 @@ const PupilProfileView = (props) => {
                             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
-                                        <ImageBackground style={PAGESTYLE.managementopImage} >
+                                        {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
                                             <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
                                             <View style={PAGESTYLE.thumbTopUser}>
                                                 <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
@@ -153,7 +154,7 @@ const PupilProfileView = (props) => {
                                             {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
                                             </TouchableOpacity> */}
-                                        </ImageBackground>
+                                        {/* </ImageBackground> */}
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
                                         <View style={PAGESTYLE.nameSmlBlock}>
@@ -223,7 +224,8 @@ const PupilProfileView = (props) => {
                                                     activeOpacity={opacity}
                                                     onPress={() => setInstantRewards()}>
                                                     <View>
-                                                        <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} />
+                                                        {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
+                                                        <Ic_CheckWhite style={PAGESTYLE.tickLayout} height={15} width={15} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
@@ -256,16 +258,16 @@ const PupilProfileView = (props) => {
                                             <View>
                                                 <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
                                                 <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
-                                                    <Image source={Images.purpleMarkImg} style={PAGESTYLE.purpleMark} />
+                                                    <Image  style={PAGESTYLE.purpleMark} />
                                                     <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
                                                 </View>
                                                 <View style={PAGESTYLE.generalRow}>
-                                                    <Image source={Images.orangeMarkImg} style={PAGESTYLE.orangeMark} />
+                                                    <Image  style={PAGESTYLE.orangeMark} />
                                                     <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
                                                 </View>
                                             </View>
                                         </View>
-                                        <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} />
+                                        {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                                     </View>
                                     <View>
 

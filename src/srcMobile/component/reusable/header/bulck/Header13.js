@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -13,21 +13,27 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import Ic_CheckWhite from "../../../../../svg/pupil/parentzone/Ic_CheckWhite";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import BackArrow from "../../../../../svg/common/BackArrow";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                        {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                        <Ic_CheckWhite tyle={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>save workspace</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     </TouchableOpacity>
                 </View>
-            </View>           
+            </View>
         </View>
     );
 }
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.25),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-       // marginBottom: hp(5.85),
+        // marginBottom: hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
@@ -222,7 +228,7 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.34),

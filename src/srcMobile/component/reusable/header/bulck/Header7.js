@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -14,12 +14,14 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import BackArrow from "../../../../../svg/common/BackArrow";
 const Headerseven = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.headerMainInner}>
-                    <TouchableOpacity style={styles.widthBackArrow} onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity>
+                {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <TouchableOpacity style={styles.widthBackArrow} onPress={() => props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /> </TouchableOpacity>
                     <View style={styles.titles}>
                         <Text numberOfLines={2} style={[styles.mainTitle,{width:wp(45)}]}>{props.subjectName} {"\n"}{props.topicName}</Text>
                     </View>

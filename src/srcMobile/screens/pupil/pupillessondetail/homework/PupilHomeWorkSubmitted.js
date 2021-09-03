@@ -12,9 +12,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header7 from '../../../../component/reusable/header/bulck/Header7'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
 import SubmittedBook from "../../../../../svg/pupil/lessonhwplanner/SubmittedBook";
+import Doc from "../../../../../svg/common/Doc";
 
 var moment = require('moment');
 
@@ -123,7 +124,9 @@ const PupilHomeWorkSubmitted = (props) => {
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.blueBorder} />
                                                     :
-                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                    // <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                    <Doc style={PAGESTYLE.markedIcon} width={62} height={62} />
+
                                                 }
                                                 {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                             </View>

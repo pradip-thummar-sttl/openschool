@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { baseUrl, opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,6 +20,7 @@ import Ic_MyAvatar from "../../../../svg/sidebar/Ic_MyAvatar";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import TopLogo from "../../../../svg/common/TopLogo";
+import Ic_OpenSchool from "../../../../svg/sidebar/Ic_OpenSchool";
 
 
 
@@ -238,10 +239,14 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { props.navigation.replace('ParentZoneSwitch'); setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
-                            <Image
+                            {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.OpenSchool}
-                            />
+                            />  */}
+                            <Ic_OpenSchool style={styles.menuIcon}height={hp(3.25)} width={hp(3.25)}/>
+
+                             {/* <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} /> */}
+
                             <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { showActionChooserPupil(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>

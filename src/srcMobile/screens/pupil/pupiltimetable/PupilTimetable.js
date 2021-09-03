@@ -15,7 +15,7 @@ import { setCalendarEventData } from "../../../../actions/action";
 import { User } from "../../../../utils/Model";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 
 const PupilTimeTable = (props) => {
@@ -256,7 +256,7 @@ const PupilTimeTable = (props) => {
                             //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                             // </View>
                             <ScrollView>
-                                <EmptyStatePlaceHohder holderType={3} image={Images.noCalender} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
+                                <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                             </ScrollView>
                     }
                 </View>

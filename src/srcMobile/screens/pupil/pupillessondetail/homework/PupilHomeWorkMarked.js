@@ -13,10 +13,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header8 from '../../../../component/reusable/header/bulck/Header8'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
 import { baseUrl, opacity } from "../../../../../utils/Constant";
 import MarkedBook from "../../../../../svg/pupil/lessonhwplanner/MarkedBook";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
+import Doc from "../../../../../svg/common/Doc";
 var moment = require('moment');
 
 const PupilHomeWorkMarked = (props) => {
@@ -122,7 +124,9 @@ const PupilHomeWorkMarked = (props) => {
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                 color={COLORS.blueBorder} />
                                                             :
-                                                            <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                            // <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                            <Doc style={PAGESTYLE.markedIcon} width={62} height={62} />
+                                                            
                                                         }
                                                         {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                                     </View>
@@ -160,7 +164,8 @@ const PupilHomeWorkMarked = (props) => {
                                                     <TouchableOpacity
                                                         activeOpacity={opacity}
                                                         onPress={() => setPause(!isPaused)}>
-                                                        <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                                            <PlayBlue style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} height={30} width={30} />
+                                                        {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
                                                     </TouchableOpacity>
                                                     :
                                                     null

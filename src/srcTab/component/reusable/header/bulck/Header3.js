@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "reac
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import {
     Menu,
@@ -14,6 +14,10 @@ import {
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 
 const HeaderWhite = (props) => {
 
@@ -42,13 +46,16 @@ const HeaderWhite = (props) => {
                         onPress={() => props.onCalenderPress()}
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
+                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
+                        <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.onAlertPress()}
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+
                     </TouchableOpacity>
                 </View>
             </View>
@@ -65,8 +72,13 @@ const HeaderWhite = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                            {
+                                isSearchActive?
+                                <CloseBlack style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+                                :<SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+                            }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}

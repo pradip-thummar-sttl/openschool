@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -20,18 +20,18 @@ const HeaderWhite = (props) => {
                 <Text style={styles.mainTitle}>Common Title</Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
+                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.filterbarMain}>
                 <View style={styles.field}>
-                    <Image
+                    {/* <Image
                         style={styles.userIcon}
-                        source={Images.SearchIcon} />
+                        source={Images.SearchIcon} /> */}
                     <TextInput
                         style={[STYLE.commonInput, styles.searchHeader]}
                         placeholder="Search subject, class, etc"
@@ -46,7 +46,7 @@ const HeaderWhite = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
                                     <Text style={styles.filterListText}>Subject</Text>
-                                    <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                    {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
                                 </View>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
@@ -61,10 +61,10 @@ const HeaderWhite = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonGroup}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
                 </TouchableOpacity>
             </View>

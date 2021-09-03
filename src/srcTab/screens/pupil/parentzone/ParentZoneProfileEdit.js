@@ -5,7 +5,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -16,6 +16,8 @@ import moment from 'moment';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src';
 import MESSAGE from "../../../../utils/Messages";
+import EditProfileTop_Tablet from "../../../../svg/pupil/parentzone/EditProfileTopBg_Tablet";
+import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);
@@ -268,13 +270,15 @@ const ParentZoneProfileEdit = (props) => {
                         <View>
                             <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop}>
-                                    <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
+                                    <ImageBackground style={PAGESTYLE.managementopImage}>
+                                        <EditProfileTop_Tablet style={{position:'absolute'}} height={'100%'} width={'100%'}/>
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => showActionChooser()}>
                                                 <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
-                                                <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} />
+                                                {/* <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} /> */}
+                                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(3.38)} height={hp(3.38)}/>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={PAGESTYLE.topBannerParent}>
@@ -327,7 +331,7 @@ const ParentZoneProfileEdit = (props) => {
                                     <TouchableOpacity activeOpacity={opacity}
                                         onPress={() => showDatePicker()}>
                                         <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
-                                            <Image source={Images.CalenderIconSmall} style={PAGESTYLE.dateIconSml} />
+                                            {/* <Image source={Images.CalenderIconSmall} style={PAGESTYLE.dateIconSml} /> */}
                                             <TextInput
                                                 style={[PAGESTYLE.commonInput, PAGESTYLE.dateField]}
                                                 placeholder="Select"
@@ -337,7 +341,8 @@ const ParentZoneProfileEdit = (props) => {
                                                 value={dob}
                                                 placeholderTextColor={COLORS.menuLightFonts}
                                             />
-                                            <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow1} />
+                                            {/* <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow1} /> */}
+                                        
                                         </View>
                                     </TouchableOpacity>
                                 </View>
@@ -417,8 +422,8 @@ const ParentZoneProfileEdit = (props) => {
 
                                             <View style={PAGESTYLE.eye}>
                                                 <TouchableOpacity activeOpacity={opacity} onPress={() => setPinVisibility()}>
-                                                    <Image
-                                                        style={{ width: 18.52, height: 14.53, resizeMode: 'contain', }} source={isPindHide ? Images.ShowPassword : Images.HidePassword} />
+                                                    {/* <Image
+                                                        style={{ width: 18.52, height: 14.53, resizeMode: 'contain', }} source={isPindHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -499,8 +504,8 @@ const ParentZoneProfileEdit = (props) => {
 
                                             <View style={PAGESTYLE.eye}>
                                                 <TouchableOpacity activeOpacity={opacity} onPress={() => setPasswordVisibility()}>
-                                                    <Image
-                                                        style={{ width: 18.52, height: 14.53, resizeMode: 'contain', }} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} />
+                                                    {/* <Image
+                                                        style={{ width: 18.52, height: 14.53, resizeMode: 'contain', }} source={isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                                 </TouchableOpacity>
                                             </View>
                                         </View>

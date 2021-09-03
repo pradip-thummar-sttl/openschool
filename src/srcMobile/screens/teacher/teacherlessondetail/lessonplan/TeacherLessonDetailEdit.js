@@ -3,7 +3,7 @@ import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOp
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -1002,7 +1002,10 @@ const TLDetailEdit = (props) => {
                                         <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                                         <View style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{lessonData.ChatTranscript}</Text>
-                                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
+                                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
+                                                {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
+                                                <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
+                                                </TouchableOpacity>
                                         </View>
                                     </View>
                                     :

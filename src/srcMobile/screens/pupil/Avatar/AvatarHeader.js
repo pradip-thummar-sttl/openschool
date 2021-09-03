@@ -4,10 +4,11 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
 
 const AvatarHeader = (props) => {
     return (
@@ -24,7 +25,9 @@ const AvatarHeader = (props) => {
                     style={styles.notificationBar}
                     onPress={() => props.onAlertPress()}
                     activeOpacity={opacity}>
-                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                    <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+
                     <View style={STYLE.redDot}></View>
                 </TouchableOpacity>
             </View>

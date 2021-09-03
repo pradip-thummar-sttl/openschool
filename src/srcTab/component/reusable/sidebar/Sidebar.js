@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { baseUrl, opacity } from "../../../../utils/Constant";
 import Users from "../../../screens/users/Users";
 import { User } from "../../../../utils/Model";
@@ -18,6 +18,7 @@ import Ic_Faq from "../../../../svg/sidebar/Ic_Faq";
 import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
+import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 
 
 const Sidebar = (props) => {
@@ -92,7 +93,8 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={Images.proffileLogo} />
+                    {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
+                   <MyEdLogo style={styles.headerProfile} height={40} width={40} />
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>

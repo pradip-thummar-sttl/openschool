@@ -3,7 +3,7 @@ import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -677,7 +677,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder holderType={5} image={Images.noLesson} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
+                                                        <EmptyStatePlaceHohder holderType={5}  title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
@@ -747,7 +747,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         // <View>
                                                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder holderType={4} image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
+                                                        <EmptyStatePlaceHohder holderType={4}  title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                                                 }
                                             </View>
                                         </ScrollView>

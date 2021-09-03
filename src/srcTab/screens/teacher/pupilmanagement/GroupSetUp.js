@@ -6,12 +6,13 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 import { User } from "../../../../utils/Model";
 import PAGESTYLE from './Style';
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
+import Ic_DragnDrop from "../../../../svg/teacher/pupilmanagement/Ic_DragnDrop";
 
 const GroupSetUp = () => {
 
@@ -271,7 +272,7 @@ const GroupSetUp = () => {
                         // <View>
                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder holderType={4} image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
+                        <EmptyStatePlaceHohder holderType={4}  title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
             <View style={PAGESTYLE.middle}>
@@ -309,7 +310,8 @@ const GroupSetUp = () => {
                     </>
                     :
                     <View style={PAGESTYLE.createGrpBlock}>
-                        <Image source={Images.createGrpImageLogo} style={PAGESTYLE.createGrpImage} />
+                        {/* <Image source={Images.createGrpImageLogo} style={PAGESTYLE.createGrpImage} /> */}
+                        <Ic_DragnDrop style={PAGESTYLE.createGrpImage} height={43.57} width={52.91} />
                         <Text style={PAGESTYLE.label}>Tap on the pupil to create a new group!</Text>
                     </View>
                 }
@@ -328,7 +330,7 @@ const GroupSetUp = () => {
                             showsVerticalScrollIndicator={false} />
                         :
                         // <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        <EmptyStatePlaceHohder holderType={4} image={Images.noPupil} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
+                        <EmptyStatePlaceHohder holderType={4}  title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
         </SafeAreaView>

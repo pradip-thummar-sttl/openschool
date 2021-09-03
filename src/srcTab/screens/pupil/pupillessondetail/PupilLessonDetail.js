@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
@@ -27,6 +27,10 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
 import moment from "moment";
 import { opacity } from "../../../../utils/Constant";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 
 const PupilLessonDetail = (props) => {
     console.log('props of homework', props.navigation)
@@ -181,8 +185,13 @@ const PupilLessonDetail = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            {isSearchActive ?
+                            <CloseBlack height={18} width={18} />
+                            :
+                            <SearchBlue height={18} width={18} />
+                        }
+                        {/* <Image style={{ height: 18, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -203,7 +212,8 @@ const PupilLessonDetail = (props) => {
                                     <View style={PAGESTYLE.filterList}>
                                         <Text style={PAGESTYLE.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
                                             :
                                             null
                                         }
@@ -217,7 +227,8 @@ const PupilLessonDetail = (props) => {
                                     <View style={PAGESTYLE.filterList}>
                                         <Text style={PAGESTYLE.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
                                             :
                                             null
                                         }
@@ -226,7 +237,8 @@ const PupilLessonDetail = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} />
+                    {/* <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} /> */}
+                    <FilterBlack style={PAGESTYLE.filterIcon} width={hp(1.74)} height={hp(1.50)}/>
                 </View>
             </View>
         )

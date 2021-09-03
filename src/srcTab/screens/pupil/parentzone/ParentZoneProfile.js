@@ -5,12 +5,13 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import moment from 'moment';
+import EditProfileTop_Tablet from "../../../../svg/pupil/parentzone/EditProfileTopBg_Tablet";
 
 const ParentZoneProfile = (props) => {
     const [isHide, action] = useState(true);
@@ -24,9 +25,11 @@ const ParentZoneProfile = (props) => {
                     <View style={PAGESTYLE.whiteBg}>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.profile}>
-                                <View style={PAGESTYLE.managementBlockTop}>
-                                    <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} />
-                                    <Image style={PAGESTYLE.proffileLogo} source={childrenList.length == 0 ? Images.userparent : { uri: baseUrl + props.data.ProfilePicture }} />
+                                <View style={PAGESTYLE.managementBlockTop} >
+                                    {/* <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} /> */}
+                                    <EditProfileTop_Tablet style={PAGESTYLE.managementopImage} height={hp(14.06)} width={'100%'}/>
+                                    {/* childrenList.length == 0 ? Images.userparent : */}
+                                    <Image style={PAGESTYLE.proffileLogo} source={ { uri: baseUrl + props.data.ProfilePicture }} />
                                     <View style={PAGESTYLE.topBannerParent}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}

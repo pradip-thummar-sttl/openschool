@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../../utils/Colors";
-import Images from '../../../../../../utils/Images';
+// import Images from '../../../../../../utils/Images';
 import FONTS from '../../../../../../utils/Fonts';
 import { opacity } from "../../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
@@ -16,7 +16,7 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
@@ -42,7 +42,7 @@ const HeaderUpdate = (props) => {
                                 style={styles.buttonGroup}
                                 activeOpacity={opacity}
                                 onPress={() => props.saveLesson()}>
-                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                                {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
                             </TouchableOpacity>
                         }
                     </View>

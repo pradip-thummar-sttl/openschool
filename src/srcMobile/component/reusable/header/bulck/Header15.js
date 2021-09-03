@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -19,7 +19,9 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
             <Text style={styles.mainTitle}>
                 <TouchableOpacity onPress={()=>props.goBack()}>
-                <Image style={styles.arrow} source={Images.backArrow} />
+                <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+                    {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                 </TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity onPress={()=>props.onSubmitHomework()} style={styles.buttonGroup}>

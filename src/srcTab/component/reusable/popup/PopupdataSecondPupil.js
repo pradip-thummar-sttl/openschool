@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -22,6 +22,7 @@ import Calender from "../../../../svg/teacher/dashboard/Calender";
 import Clock from "../../../../svg/teacher/dashboard/Clock";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 
 const PopupdataSecondPupil = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -255,7 +256,8 @@ const PopupdataSecondPupil = (props) => {
                 style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>

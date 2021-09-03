@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import TTabletOnboarding1 from "../../../../svg/teacher/introductionTablet/TTabletOnboarding1";
 
 const Introduction1 = (props) => {

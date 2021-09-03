@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { baseUrl } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,6 +16,7 @@ import Ic_MyAvatar from "../../../../svg/sidebar/Ic_MyAvatar";
 import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
+import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 
 
 const Sidebar = (props) => {
@@ -76,7 +77,9 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={Images.proffileLogo} />
+                    {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
+                   <MyEdLogo style={styles.headerProfile} height={40} width={40} />
+
                     {/* { uri: baseUrl + User.user.ProfilePicture } */}
                     {
                         isSmall ? null :
@@ -150,10 +153,13 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onParentZone()} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.OpenSchool}
-                        />
+                        /> */}
+                        {/* open school icon add karvano che */}
+                        <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
@@ -173,7 +179,8 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.cartoon}>
-                    <Image source={Images.cartoon} style={styles.cartoonIcon} />
+                    {/* <Image source={Images.cartoon} style={styles.cartoonIcon} /> */}
+                    {/* cartoon icon add karvano che */}
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />

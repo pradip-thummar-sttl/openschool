@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 
 import {
@@ -12,11 +12,17 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import BackArrow from "../../../../svg/common/BackArrow";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
 const WorkSpaceHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Leave Workspace</Text>
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}>
+                    {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+
+                    </TouchableOpacity> Leave Workspace</Text>
                 <View style={styles.headerRight}>
                     {
                         props.isLoading ?
@@ -33,7 +39,9 @@ const WorkSpaceHeader = (props) => {
                     }
 
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+
                     </TouchableOpacity>
                 </View>
             </View>

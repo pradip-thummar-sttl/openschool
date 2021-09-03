@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, TextInput, Image, FlatList, ActivityIndic
 import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
 import COLORS from '../../../../utils/Colors'
 import { opacity, showMessage } from '../../../../utils/Constant';
-import Images from '../../../../utils/Images'
+// import Images from '../../../../utils/Images'
 import PAGESTYLE from './Style'
 import {
     Menu,
@@ -18,6 +18,10 @@ import { EndPoints } from '../../../../service/EndPoints';
 import { User } from '../../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import MESSAGE from '../../../../utils/Messages';
+import CloseBlack from '../../../../svg/teacher/timetable/Close_Black';
+import SearchBlue from '../../../../svg/teacher/timetable/Search_Blue';
+import AddWhite from '../../../../svg/teacher/timetable/Add_White';
+import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
 var moment = require('moment');
 
 const Message = (props) => {
@@ -60,8 +64,13 @@ const Message = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                            {isSearchActive ?
+                            <CloseBlack height={15} width={15} />
+                            :
+                            <SearchBlue height={15} width={15} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -73,7 +82,9 @@ const Message = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
-                            <MenuTrigger><Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                            <MenuTrigger>
+                                {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
+                                </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                 <MenuOption style={PAGESTYLE.borderList}>
                                     <TouchableOpacity
@@ -81,11 +92,11 @@ const Message = (props) => {
                                         onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Title</Text>
-                                            {selectedIndex == 0 ?
+                                            {/* {selectedIndex == 0 ?
                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
                                                 :
                                                 null
-                                            }
+                                            } */}
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -95,11 +106,11 @@ const Message = (props) => {
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                            {selectedIndex == 1 ?
+                                            {/* {selectedIndex == 1 ?
                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
                                                 :
                                                 null
-                                            }
+                                            } */}
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -111,7 +122,8 @@ const Message = (props) => {
                 <TouchableOpacity
                     style={PAGESTYLE.buttonGroup}
                     onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refresh() })}>
-                    <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} />
+                    {/* <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={PAGESTYLE.addIcon4} height={hp(1.56)} width={hp(1.56)} />
                 </TouchableOpacity>
             </View>
 
@@ -141,7 +153,8 @@ const Message = (props) => {
                     </View>
                     <View style={PAGESTYLE.secondRow}>
                         <Text numberOfLines={1} style={[PAGESTYLE.titleText,{width:'85%'}]}>{item.item.Title}</Text>
-                        <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
+                        {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1)} width={hp(1)}  />
                     </View>
                     <View style={item.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>
                         <Text style={item.item.Status == 'Draft' ? PAGESTYLE.draftText : PAGESTYLE.sentText}>{item.item.Status}</Text>
@@ -222,7 +235,7 @@ const Message = (props) => {
                     // <View style={{ height: 100, justifyContent: 'center' }}>
                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                     // </View>
-                    <EmptyStatePlaceHohder holderType={2} image={Images.noMessage} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
+                    <EmptyStatePlaceHohder holderType={2}  title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
             }
         </View>
     )

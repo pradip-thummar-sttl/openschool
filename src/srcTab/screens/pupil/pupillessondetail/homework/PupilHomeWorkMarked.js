@@ -12,7 +12,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header15 from '../../../../component/reusable/header/bulck/Header15'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
 import { baseUrl, opacity } from "../../../../../utils/Constant";
 import Video from "react-native-video";
@@ -161,7 +161,9 @@ const PupilHomeWorkMarked = (props) => {
                                                         color={COLORS.blueBorder} />
                                                     :
 
-                                                    <Image source={Images.pdfIcon} style={PAGESTYLE.pdfIcon} />
+                                                    // <Image source={Images.pdfIcon} style={PAGESTYLE.pdfIcon} />
+                                                <Doc style={PAGESTYLE.pdfIcon} width={wp(7)} height={wp(7)}/>
+
                                                 }
                                             </View>
                                         </TouchableOpacity>

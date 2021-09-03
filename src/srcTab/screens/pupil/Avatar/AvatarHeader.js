@@ -6,7 +6,7 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 // import Images from "../../../utils/Images";
 
 const AvatarHeader = (props) => {
@@ -18,7 +18,7 @@ const AvatarHeader = (props) => {
                     style={styles.notificationBar}
                     onPress={() => props.onAlertPress()}
                     activeOpacity={opacity}>
-                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <View style={STYLE.redDot}></View>
                 </TouchableOpacity>
             </View>

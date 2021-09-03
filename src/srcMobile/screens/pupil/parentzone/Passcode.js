@@ -5,8 +5,9 @@ import { Service } from '../../../../service/Service';
 import { showMessage, showMessageWithCallBack } from '../../../../utils/Constant';
 import MESSAGE from '../../../../utils/Messages';
 import { User } from '../../../../utils/Model';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import Styles from './StylePassCode';
+import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack';
 
 
 const Passcode = (props) => {
@@ -153,7 +154,8 @@ const Passcode = (props) => {
                                 </TouchableOpacity>
                                 : index == 11 ?
                                     <TouchableOpacity onPress={() => onSelectNumber(item, index)} style={Styles.withoutRoundButton}>
-                                        <Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image>
+                                        {/* <Image style={Styles.backSpaceArrow} source={Images.backSpaceArrow}></Image> */}
+                                        <BackArrow style={Styles.backSpaceArrow} height={hp(2.58)} width={hp(3.38)} />
                                     </TouchableOpacity>
                                     :
                                     <View style={Styles.roundButtonMain}>

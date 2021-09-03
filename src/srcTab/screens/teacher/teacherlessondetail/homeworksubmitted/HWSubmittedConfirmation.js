@@ -9,8 +9,15 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
+import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
+import Bronze from "../../../../../svg/teacher/lessonhwplanner/StarBronze";
+import Silver from "../../../../../svg/teacher/lessonhwplanner/StartSilver";
+import Gold from "../../../../../svg/teacher/lessonhwplanner/StarGold";
+import Marked from "../../../../../svg/teacher/lessonhwplanner/Marked";
+import Recording from "../../../../../svg/teacher/lessonhwplanner/Recording";
 
 const TLHomeWorkSubmittedDetailConfirmation = (props) => {
     return (
@@ -25,7 +32,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                 </View>
                 <View style={PAGESTYLE.userRight}>
                     <View style={PAGESTYLE.markedLabel}>
-                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
+                        {/* <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} /> */}
+                        <Marked style={PAGESTYLE.markedIcon} width={60} height={60}/>
                         <Text style={PAGESTYLE.markedText}>Marked</Text>
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
@@ -108,7 +116,8 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>
                     <View style={PAGESTYLE.uploadBoardBlock}>
-                        <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                        {/* <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} /> */}
+                        <UploadMaterial style={PAGESTYLE.uploadBoard} width={hp(33.07)} height={hp(45.05)} />
                     </View>
                 </View>
             </View>
@@ -125,11 +134,13 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoRecordSpace]}>
-                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
+                            <PlayBlue style={PAGESTYLE.videoLinkIcon} width={hp(2.38)} height={hp(2.38)} />
                             <Text style={PAGESTYLE.videoLinkText}>Homework Feedback - Reuel…</Text>
                         </View>
                         <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                            {/* <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} /> */}
+                            <Recording style={PAGESTYLE.recordingLinkIcon} width={hp(2.34)} height={hp(2.34)}/>
                             <Popupaddrecording />
                         </View>
                     </View>
@@ -139,15 +150,18 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                     <View style={PAGESTYLE.achivementBox}>
                         <View style={PAGESTYLE.rewardStarMark}>
                             <View style={PAGESTYLE.centerText}>
-                                <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                {/* <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
+                                <Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
                                 <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                             </View>
                             <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                {/* <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
+                                <Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
                                 <Text style={PAGESTYLE.starText}>Silver stars</Text>
                             </View>
                             <View style={PAGESTYLE.centerText}>
-                                <Image source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]} />
+                                {/* <Image source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]} /> */}
+                                <Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
                                 <Text style={PAGESTYLE.starText}>Gold stars</Text>
                             </View>
                         </View>

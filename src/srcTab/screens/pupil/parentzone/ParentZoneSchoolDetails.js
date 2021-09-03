@@ -5,11 +5,12 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
+import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 
 const ParentZoneSchoolDetails = (props) => {
     const [isHide, action] = useState(true);
@@ -60,8 +61,9 @@ const ParentZoneSchoolDetails = (props) => {
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.profile}>
                             <View style={PAGESTYLE.managementBlockTop}>
-                                <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
-                                </ImageBackground>
+                                {/* <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg}>
+                                </ImageBackground> */}
+                                <TopBackImg style={PAGESTYLE.managementopImage}  width={'100%'} height={hp(14.06)}/>
                             </View>
                         </View>
                         <View style={[PAGESTYLE.titleInnerRow]}>

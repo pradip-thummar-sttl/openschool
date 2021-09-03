@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { opacity } from "../../../../utils/Constant";
 import PopupAddNewData from "../../../component/reusable/popup/Popupaddnewdata";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
@@ -33,13 +33,13 @@ const HeaderTimeTable = (props) => {
                     onPress={() => props.onCalenderPress()}
                     style={styles.notificationBar}
                     activeOpacity={opacity}>
-                    <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
+                    {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => props.onAlertPress()}
                     style={styles.notificationBar}
                     activeOpacity={opacity}>
-                    <Image style={styles.massagesIcon} source={Images.Notification} />
+                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                 </TouchableOpacity>
             </View>
             <View style={styles.filterbarMain}>
@@ -62,9 +62,9 @@ const HeaderTimeTable = (props) => {
                                 :
                                 setSearchActive(true)
                         }}>
-                        <Image
+                        {/* <Image
                             style={styles.userIcon1}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={styles.buttonGroup}>

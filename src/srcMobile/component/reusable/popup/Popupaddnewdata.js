@@ -5,12 +5,15 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../../utils/Constant";
 import PopupdataSecond from "./PopupdataSecond";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 const PopupAddNewData = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -45,13 +48,15 @@ const PopupAddNewData = (props) => {
                 style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                        <CloseBlack  style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
@@ -59,7 +64,8 @@ const PopupAddNewData = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
                                 <View style={styles.entryContentMain}>
                                     <TouchableOpacity style={styles.entryData}>
-                                        <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                        <NewLesson style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>New Lesson</Text>
                                     </TouchableOpacity>
                                     <PopupdataSecond />

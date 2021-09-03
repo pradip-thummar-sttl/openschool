@@ -21,6 +21,7 @@ import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import Ic_Search from "../../../../svg/teacher/pupilmanagement/Ic_Search";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
+import Notification from "../../../../svg/teacher/dashboard/Notification";
 
 
 
@@ -103,7 +104,9 @@ const HeaderPM = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                    <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+
                     </TouchableOpacity>
                 </View>
             </View>

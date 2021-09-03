@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
@@ -199,8 +199,8 @@ const PupilLessonDetail = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -211,7 +211,9 @@ const PupilLessonDetail = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
-                            <MenuTrigger><Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                            <MenuTrigger>
+                                {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
+                                </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                 <MenuOption style={PAGESTYLE.borderList}>
                                     <TouchableOpacity
@@ -219,11 +221,11 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Subject</Text>
-                                            {selectedIndex == 0 ?
+                                            {/* {selectedIndex == 0 ?
                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
                                                 :
                                                 null
-                                            }
+                                            } */}
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -233,11 +235,11 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                            {selectedIndex == 1 ?
+                                            {/* {selectedIndex == 1 ?
                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
                                                 :
                                                 null
-                                            }
+                                            } */}
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>

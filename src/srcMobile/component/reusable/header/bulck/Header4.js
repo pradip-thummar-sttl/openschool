@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "reac
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import {
     Menu,
@@ -17,6 +17,15 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import CloseBlack from "../../../../../svg/teacher/pupilmanagement/Close_Black";
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import Ic_BlueCheck from "../../../../../svg/teacher/timetable/ic_blueCheck";
+import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
+import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
+import NewLesson from "../../../../../svg/teacher/timetable/NewLesson";
+import NewEvent from "../../../../../svg/teacher/timetable/NewEvent";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 const HeaderFour = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -50,7 +59,9 @@ const HeaderFour = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+
                     </TouchableOpacity>
                 </View>
             </View>
@@ -75,13 +86,22 @@ const HeaderFour = (props) => {
                                 :
                                 setSearchActive(true)
                         }}>
-                        <Image
+                        {/* <Image
                             style={styles.userIcon1}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                            {
+                                isSearchActive ? 
+                                <CloseBlack style={styles.userIcon1} height={hp(1.66)} width={hp(1.66)} />:
+                            <SearchBlue style={styles.userIcon1} height={hp(1.66)} width={hp(1.66)} />
+                            }
+                            
                     </TouchableOpacity>
 
                     <Menu style={{ ...styles.filterIcon }}>
-                        <MenuTrigger><Image style={styles.filterIcon1} source={Images.mobileFilter} /></MenuTrigger>
+                        <MenuTrigger>
+                            {/* <Image style={styles.filterIcon1} source={Images.mobileFilter} /> */}
+                            <FilterBlack style={styles.filterIcon1} height={hp(1.74)} width={hp(1.74)} />
+                            </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -90,7 +110,8 @@ const HeaderFour = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <Ic_BlueCheck style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
                                         }
@@ -104,7 +125,9 @@ const HeaderFour = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date {selectedIndex}</Text>
                                         {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <Ic_BlueCheck style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+
                                             :
                                             null
                                         }
@@ -139,7 +162,9 @@ const HeaderFour = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <Ic_BlueCheck style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+
                                             :
                                             null
                                         }
@@ -153,7 +178,9 @@ const HeaderFour = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <Ic_BlueCheck style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+
                                             :
                                             null
                                         }
@@ -181,7 +208,8 @@ const HeaderFour = (props) => {
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     onPress={() => refRBSheet.current.open()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
                 <RBSheet
@@ -201,7 +229,8 @@ const HeaderFour = (props) => {
                 >
                     <View style={styles.popupLarge}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseIcon style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -212,13 +241,15 @@ const HeaderFour = (props) => {
                                             activeOpacity={opacity}
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
-                                            <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                            <NewLesson style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>New Lesson</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
+                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
+                                            <NewEvent style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>New Event</Text>
                                         </TouchableOpacity>
                                     </View>

@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import {
     Menu,
@@ -21,6 +21,7 @@ import Ic_Search from '../../../../svg/teacher/pupilmanagement/Ic_Search'
 import CloseBlack from '../../../../svg/teacher/pupilmanagement/Close_Black'
 import AddWhite from '../../../../svg/teacher/timetable/Add_White'
 import Notification from '../../../../svg/teacher/dashboard/Notification'
+import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -92,7 +93,10 @@ const HeaderPM = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                     <Menu>
-                        <MenuTrigger><Image style={styles.searchMenu} source={Images.mobileFilter} /></MenuTrigger>
+                        <MenuTrigger>
+                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                            
+                        </MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
@@ -101,7 +105,9 @@ const HeaderPM = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name</Text>
                                         {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+
                                             :
                                             null
                                         }
@@ -115,7 +121,8 @@ const HeaderPM = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>DOB</Text>
                                         {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
                                             :
                                             null
                                         }

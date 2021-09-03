@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -13,18 +13,26 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import Ic_CheckWhite from "../../../../../svg/pupil/parentzone/Ic_CheckWhite";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import BackArrow from "../../../../../svg/common/BackArrow";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+            <Text style={styles.mainTitle}><TouchableOpacity><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                        {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                        <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+
                         <Text style={styles.commonButtonGreenheaderwithicon}>save as marked</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+
                     </TouchableOpacity>
                 </View>
             </View>           

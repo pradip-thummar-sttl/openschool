@@ -3,7 +3,7 @@ import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity,
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import {
     Menu,
@@ -16,6 +16,8 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
+import BackArrow from "../../../../svg/common/BackArrow";
+import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -40,7 +42,8 @@ const HeaderPMInner = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>Editing Profile</Text>
@@ -49,7 +52,8 @@ const HeaderPMInner = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
-                        <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} />
+                        {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
+                        <CheckedBlue style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity>
                 </View>

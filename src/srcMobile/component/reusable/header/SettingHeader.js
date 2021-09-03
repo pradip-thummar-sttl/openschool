@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";

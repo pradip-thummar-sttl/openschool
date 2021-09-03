@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -169,7 +169,7 @@ const TLDetail = (props) => {
                         null
                     }
 
-                    {props.lessonData.RecommendedList.length > 0 ?
+                    {/* {props.lessonData.RecommendedList.length > 0 ?
                         <FlatList
                             data={props.lessonData.RecommendedList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
@@ -182,7 +182,7 @@ const TLDetail = (props) => {
                         />
                         :
                         null
-                    }
+                    } */}
 
                     {props.lessonData.RecordingList.length > 0 ?
                         <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>

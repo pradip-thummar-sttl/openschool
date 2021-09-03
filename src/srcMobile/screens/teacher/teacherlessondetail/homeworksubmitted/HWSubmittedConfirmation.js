@@ -9,7 +9,7 @@ import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 
 const TLHomeWorkSubmittedDetailConfirmation = (props) => {
@@ -25,7 +25,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                 </View>
                 <View style={PAGESTYLE.userRight}>
                     <View style={PAGESTYLE.markedLabel}>
-                        <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} />
+                        {/* <Image source={Images.Marcked} style={PAGESTYLE.markedIcon} /> */}
                         <Text style={PAGESTYLE.markedText}>Marked</Text>
                     </View>
                     <View style={PAGESTYLE.dateNameBlock}>
@@ -108,7 +108,7 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>
                     <View style={PAGESTYLE.uploadBoardBlock}>
-                        <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} />
+                        {/* <Image source={Images.UploadHomeWork} style={PAGESTYLE.uploadBoard} /> */}
                     </View>
                 </View>
             </View>
@@ -125,11 +125,11 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoRecordSpace]}>
-                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
                             <Text style={PAGESTYLE.videoLinkText}>Homework Feedback - Reuel…</Text>
                         </View>
                         <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                            {/* <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} /> */}
                             <Popupaddrecording />
                         </View>
                     </View>
@@ -139,15 +139,15 @@ const TLHomeWorkSubmittedDetailConfirmation = (props) => {
                     <View style={PAGESTYLE.achivementBox}>
                         <View style={PAGESTYLE.rewardStarMark}>
                             <View style={PAGESTYLE.centerText}>
-                                <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} />
+                                {/* <Image source={Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
                                 <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                             </View>
                             <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} />
+                                {/* <Image source={Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
                                 <Text style={PAGESTYLE.starText}>Silver stars</Text>
                             </View>
                             <View style={PAGESTYLE.centerText}>
-                                <Image source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]} />
+                                {/* <Image source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]} /> */}
                                 <Text style={PAGESTYLE.starText}>Gold stars</Text>
                             </View>
                         </View>

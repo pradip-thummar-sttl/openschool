@@ -398,6 +398,7 @@ export default StyleSheet.create({
         width:10,
         height:10,
         borderRadius:hp(1.8),
+        backgroundColor:'purple'
     },
     labelMark:{
         fontFamily: FONTS.fontRegular,
@@ -442,6 +443,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginTop:hp(0.3),
         marginRight:hp(1.5),
+        borderRadius:5,
+        backgroundColor:'orange'
     },
     mngmntgraphImg:{
         width:hp(118.16),

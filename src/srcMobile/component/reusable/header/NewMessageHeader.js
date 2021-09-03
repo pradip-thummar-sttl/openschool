@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
@@ -14,6 +14,8 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { opacity } from "../../../../utils/Constant";
+import BackArrow from "../../../../svg/common/BackArrow";
+import More from "../../../../svg/teacher/dashboard/More";
 const NewMessageHeader = (props) => {
     const menu = useRef(null)
 
@@ -37,7 +39,8 @@ const NewMessageHeader = (props) => {
             <View style={styles.headerMain}>
                 <TouchableOpacity activeOpacity={opacity}
                     onPress={() => props.onGoback()}>
-                    <Image style={styles.arrow} source={Images.backArrow} />
+                    {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                 </TouchableOpacity>
                 <Text style={styles.mainTitle}>New Message</Text>
                 <View style={styles.headerRight}>
@@ -57,7 +60,9 @@ const NewMessageHeader = (props) => {
                             <Menu ref={menu}>
                                 <MenuTrigger>
                                     {/* <TouchableOpacity style={styles.moreMenu}> */}
-                                    <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                                    {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
+                                    <More style={styles.moreIcon} height={hp(4)} width={hp(4)} />
+                                    
                                     {/* </TouchableOpacity> */}
                                 </MenuTrigger>
                                 <MenuOptions>

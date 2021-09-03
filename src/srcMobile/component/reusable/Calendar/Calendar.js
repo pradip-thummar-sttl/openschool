@@ -8,7 +8,8 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import { opacity, Var } from '../../../../utils/Constant';
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
+import BackArrow from '../../../../svg/common/BackArrow';
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
 const Calendars = (props) => {
@@ -43,7 +44,9 @@ const Calendars = (props) => {
                     activeOpacity={opacity}
                     onPress={() => props.navigation.goBack()}
                 >
-                    <Image source={Images.backArrow} style={styles.closeIcon} />
+                    {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
+                    <BackArrow style={styles.closeIcon} height={hp(2)} width={hp(2.4)} />
+                    
                 </TouchableOpacity>
             </View>
             <Calendar

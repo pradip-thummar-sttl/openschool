@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
@@ -42,7 +42,7 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <View style={[styles.sideBarAside]}>
                 <TouchableOpacity style={styles.userInfo}>
-                    <Image style={styles.headerProfile} source={Images.ProfileBack} />
+                    {/* <Image style={styles.headerProfile} source={Images.ProfileBack} /> */}
                     <View style={styles.profileTextMain}>
                         <Text style={styles.profileTitle}>Johney Depp</Text>
                         <Text style={styles.profileDesi}>Administrator</Text>
@@ -51,58 +51,58 @@ const Sidebar = (props) => {
                 <View style={styles.mainMenu}>
 
                     <TouchableOpacity onPress={() => props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
-                        />
+                        /> */}
                         <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
-                        />
+                        /> */}
                         <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
-                        />
+                        /> */}
                         <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onSetting()} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
-                        />
+                        /> */}
                         <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAvatar}
-                        />
+                        /> */}
                         <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
-                        <Image
+                        {/* <Image
                             style={styles.menuIcon}
                             source={Images.OpenSchool}
-                        />
+                        /> */}
                         <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.cartoon}>
-                    <Image source={Images.cartoon} style={styles.cartoonIcon} />
+                    {/* <Image source={Images.cartoon} style={styles.cartoonIcon} /> */}
                 </View>
                 <View style={[styles.userInfo, styles.userInfobottom]}>
-                    <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} />
+                    {/* <Image style={styles.bottomUser} source={Images.ProfileBackSideMenu} /> */}
                     <View style={styles.profileTextMain}>
                         <Text style={styles.profileTitleBottom}>Johney Depp</Text>
                     </View>
                     <TouchableOpacity style={styles.moreMenu}>
-                        <Image style={styles.moreIcon} source={Images.SidebarMore} />
+                        {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                     </TouchableOpacity>
                 </View>
             </View>

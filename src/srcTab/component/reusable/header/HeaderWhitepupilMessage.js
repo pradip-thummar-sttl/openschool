@@ -3,7 +3,7 @@ import { View, Dimensions, StyleSheet, TextInput, Text, TouchableOpacity, Button
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, widthPercentageToDP } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
@@ -48,7 +48,7 @@ const HeaderWhitepupilMessage = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -65,8 +65,8 @@ const HeaderWhitepupilMessage = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -89,11 +89,11 @@ const HeaderWhitepupilMessage = (props) => {
                                     onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Title</Text>
-                                        {selectedIndex == 0 ?
+                                        {/* {selectedIndex == 0 ?
                                             <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             :
                                             null
-                                        }
+                                        } */}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -103,23 +103,23 @@ const HeaderWhitepupilMessage = (props) => {
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
+                                        {/* {selectedIndex == 1 ?
                                             <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             :
                                             null
-                                        }
+                                        } */}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.onNewMessage()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
                 </TouchableOpacity>
             </View>

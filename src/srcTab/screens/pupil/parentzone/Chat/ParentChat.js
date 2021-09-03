@@ -6,7 +6,7 @@ import Styles from './ChatStyle'
 import moment from 'moment';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import { User } from '../../../../../utils/Model';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
@@ -15,6 +15,7 @@ import { Service } from '../../../../../service/Service'
 import { EndPoints } from '../../../../../service/EndPoints'
 import FONTS from '../../../../../utils/Fonts'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Ic_Send from '../../../../../svg/teacher/pupilmanagement/Ic_Send'
 
 const ParentChat = (props) => {
 
@@ -190,7 +191,8 @@ const ParentChat = (props) => {
                                     />
                                     <View style={Styles.buttonView}>
                                         <TouchableOpacity onPress={() => sendMessage(message)}>
-                                            <Image style={Styles.btn} source={Images.send} />
+                                            {/* <Image style={Styles./btn} source={Images.send} /> */}
+                                            <Ic_Send style={Styles.btn} height={hp(2.5)} width={hp(2.5)} />
                                         </TouchableOpacity>
                                     </View>
                                 </View>

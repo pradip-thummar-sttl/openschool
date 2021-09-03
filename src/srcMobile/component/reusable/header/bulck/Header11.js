@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -13,14 +13,21 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import BackArrow from "../../../../../svg/common/BackArrow";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import Ic_BlueCheck from "../../../../../svg/teacher/timetable/ic_blueCheck";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -37,9 +44,11 @@ const HeaderWhite = (props) => {
                 </View>
                 <View style={styles.flexEnd}>
                     <View style={styles.field}>
-                        <Image
+                        {/* <Image
                             style={styles.userIcon}
-                            source={Images.SearchIcon} />
+                            source={Images.SearchIcon} /> */}
+                        <SearchBlue style={styles.userIcon} height={hp(1.9)} width={hp(1.9)} />
+
                         <TextInput
                             style={[STYLE.commonInput, styles.searchHeader]}
                             placeholder="Search subject, class, etc"
@@ -54,7 +63,9 @@ const HeaderWhite = (props) => {
                                 <MenuOption style={styles.borderList}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
-                                        <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                        {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
+                                        <Ic_BlueCheck style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+
                                     </View>
                                 </MenuOption>
                                 <MenuOption style={styles.borderList}>
@@ -69,7 +80,9 @@ const HeaderWhite = (props) => {
                                 </MenuOption>
                             </MenuOptions>
                         </Menu>
-                        <Image style={styles.filterIcon} source={Images.FilterIcon} />
+                        {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
+                    <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+
                     </TouchableOpacity>
                 </View>
                 {/* <TouchableOpacity style={styles.buttonGroup}>

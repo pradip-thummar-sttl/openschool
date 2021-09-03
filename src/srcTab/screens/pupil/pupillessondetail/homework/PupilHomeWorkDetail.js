@@ -21,9 +21,10 @@ import { User } from "../../../../../utils/Model";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import MESSAGE from "../../../../../utils/Messages";
 // import Images from "../../../../../../srcmobile/utils/Images";
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import Ic_Calendar from '../../../../../svg/pupil/parentzone/Ic_Calendar'
 import CloseBlack from '../../../../../svg/teacher/timetable/Close_Black'
+import Doc from "../../../../../svg/common/Doc";
 
 
 const PupilHomeWorkDetail = (props) => {
@@ -232,7 +233,8 @@ const PupilHomeWorkDetail = (props) => {
                                             activeOpacity={opacity}
                                             onPress={() => removeDocument(index)}>
                                             <View style={PAGESTYLE.alignRow1}>
-                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
+                                                {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
+                                                <Doc style={PAGESTYLE.markedIcon} width={hp(10)} height={hp(10)}/>
                                                 {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} /> */}
                                                 <CloseBlack style={PAGESTYLE.removeIcon} height={hp(4)} width={hp(4)} />
                                             </View>

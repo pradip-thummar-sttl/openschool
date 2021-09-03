@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dime
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../../utils/Colors';
-import Images from '../../../utils/Images';
+// import Images from '../../../utils/Images';
 import STYLE from '../../../utils/Style';
 import Introduction1 from '../../component/reusable/introductionpupil/Inroduction1';
 import Introduction2 from '../../component/reusable/introductionpupil/Inroduction2';

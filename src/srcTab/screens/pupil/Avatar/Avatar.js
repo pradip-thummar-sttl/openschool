@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import Images from '../../../../utils/Images'
+// import Images from '../../../../utils/Images'
 // import Images from '../../../../../srcmobile/utils/Images'
 import AvatarHeader from './AvatarHeader'
 import Styles from './Style'
@@ -25,21 +25,21 @@ const Avatar = () => {
                         </View>
                         <View style={Styles.rewardStarMark}>
                             <View style={Styles.centerText}>
-                                <ImageBackground source={Images.BronzeStarFill} style={[Styles.starSelected]}>
+                                {/* <ImageBackground source={Images.BronzeStarFill} style={[Styles.starSelected]}>
                                     <Text style={Styles.starSelectedText}>18</Text>
-                                </ImageBackground>
+                                </ImageBackground> */}
                                 <Text style={Styles.starText}>Bronze stars</Text>
                             </View>
                             <View style={Styles.centerStar}>
-                                <ImageBackground source={Images.SilverStarFill} style={[Styles.starSelected]}>
+                                {/* <ImageBackground source={Images.SilverStarFill} style={[Styles.starSelected]}>
                                     <Text style={Styles.starSelectedText}>15</Text>
-                                </ImageBackground>
+                                </ImageBackground> */}
                                 <Text style={Styles.starText}>Silver stars</Text>
                             </View>
                             <View style={Styles.centerText}>
-                                <ImageBackground source={Images.GoldStarFill} style={[Styles.starSelected]}>
+                                {/* <ImageBackground source={Images.GoldStarFill} style={[Styles.starSelected]}>
                                     <Text style={Styles.starSelectedText}>5</Text>
-                                </ImageBackground>
+                                </ImageBackground> */}
                                 <Text style={Styles.starText}>Gold stars</Text>
                             </View>
                         </View>

@@ -5,7 +5,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -147,7 +147,7 @@ const ParentZonemain = (props) => {
                                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                         // </View>
-                                                        <EmptyStatePlaceHohder holderType={2} image={Images.noMessage} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
+                                                        <EmptyStatePlaceHohder holderType={2} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
                                                 }
                                             </SafeAreaView>
                                         </View>

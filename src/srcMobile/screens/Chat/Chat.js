@@ -8,7 +8,7 @@ import Styles from './Style'
 import moment from 'moment';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Images from '../../../../src/utils/Images';
+// import Images from '../../../../src/utils/Images';/
 import { User } from '../../../utils/Model';
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';

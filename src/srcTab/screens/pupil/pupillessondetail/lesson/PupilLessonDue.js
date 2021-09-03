@@ -8,7 +8,7 @@ import FONTS from '../../../../../utils/Fonts';
 import moment from "moment";
 import { baseUrl } from "../../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import MESSAGE from "../../../../../utils/Messages";
 import DueIcon from "../../../../../svg/pupil/dashboard/HWDue_Orange";
 import SubmittedIcon from "../../../../../svg/pupil/lessonhwplanner/SubmittedIcon";
@@ -110,7 +110,7 @@ const PupilLessonDue = (props) => {
                     }
                 </>
                 :
-                <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
+                <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
         </View >
 

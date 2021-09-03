@@ -3,7 +3,7 @@ import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOp
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -985,7 +985,8 @@ const TLDetailEdit = (props) => {
                                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                                 <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                                 <View style={PAGESTYLE.videoLinkBlock}>
-                                                    <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                                                    {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
+                                                    {/* <PlayBlue style={PAGESTYLE.videoLinkIcon}  height={hp(2.38)} width={hp(2.38)} /> */}
                                                     <PlayBlue style={PAGESTYLE.videoLinkIcon} height={hp(2.38)} width={hp(2.38)} />
                                                     <Text style={PAGESTYLE.videoLinkText}>{lessonData.RecordedLessonName}</Text>
                                                 </View>

@@ -8,7 +8,7 @@ import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import Header6 from '../../../../component/reusable/header/bulck/Header6'
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
@@ -25,6 +25,9 @@ import Video from "react-native-video";
 import WorkSpaceMore from "../../../../../svg/teacher/dashboard/More";
 import DropDownArrow from "../../../../../svg/pupil/timetable/DropDown";
 import DownloadIcon from "../../../../../svg/teacher/lessonhwplanner/Download";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
+import BookMarkOn from "../../../../../svg/pupil/lessonhwplanner/BookMark_On";
+import BookMarkOff from "../../../../../svg/pupil/lessonhwplanner/BookMark_Off";
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
     const [item, setItem] = useState(props.route.params.item)
@@ -167,12 +170,12 @@ const PupilLessonDetailInternal = (props) => {
                                         <Text style={{ alignSelf: 'center', paddingVertical: 10, }}>No material</Text>
                                 }
                             </View>
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                            {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <View style={PAGESTYLE.thumbVideo}>
                                     <Image source={require('../../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
                                     <Image source={require('../../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
                                 </View>
-                            </ScrollView>
+                            </ScrollView> */}
                         </View>
                     </View>
                     :
@@ -227,7 +230,8 @@ const PupilLessonDetailInternal = (props) => {
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => setPause(!isPaused)}>
-                                        <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                        <PlayBlue style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} height={30} width={30} />
+                                        {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
                                     </TouchableOpacity>
                                     :
                                     null
@@ -251,7 +255,12 @@ const PupilLessonDetailInternal = (props) => {
                                 onPress={() => saveLesson(item.SaveLesson ? false : true)}>
                                 <View style={PAGESTYLE.bookMark}>
                                     <Text style={PAGESTYLE.saveBookMarkText}>{item.SaveLesson ? 'Saved!' : 'Save'}</Text>
-                                    <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} />
+                                    {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} /> */}
+                                    {
+                                        item.SaveLesson?
+                                        <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                        :<BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)}/>
+                                    }
                                 </View>
                             </TouchableOpacity>
                         </View>

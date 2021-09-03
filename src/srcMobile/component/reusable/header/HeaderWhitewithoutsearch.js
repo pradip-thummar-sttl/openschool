@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
@@ -13,11 +13,14 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import Notification from "../../../../svg/teacher/dashboard/Notification";
+import BackArrow from "../../../../svg/common/BackArrow";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}><TouchableOpacity><Image style={styles.arrow} source={Images.backArrow} /></TouchableOpacity> Common Title</Text>
+            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                <Text style={styles.mainTitle}><TouchableOpacity> <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /> </TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
@@ -30,7 +33,8 @@ const HeaderWhite = (props) => {
                         <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                     </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>            

@@ -5,7 +5,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -22,7 +22,7 @@ const PupilManagement = () => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.whiteBg}>
                         <View style={PAGESTYLE.managementBlankImgWrap}>
-                            <Image style={PAGESTYLE.blankPageImage} source={Images.managementBlankImg} />
+                            {/* <Image style={PAGESTYLE.blankPageImage} source={Images.managementBlankImg} /> */}
                             <Text style={PAGESTYLE.blankManageTextBold}>There doesn’t seem to be any pupils here</Text>
                             <Text style={PAGESTYLE.blankManageTextNormal}>Start adding pupils to invite them to join the school</Text>
                         </View>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
 import COLORS from '../../../utils/Colors';
 import FONTS from '../../../utils/Fonts';
-import Images from '../../../utils/Images';
+// import Images from '../../../utils/Images';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { opacity } from '../../../utils/Constant';
@@ -15,7 +15,7 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={Images.parentZone} style={styles.image}></Image>
+                {/* <Image source={Images.parentZone} style={styles.image}></Image> */}
                 <View>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
@@ -23,34 +23,34 @@ export default class Users extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.props.navigation.navigate('ParentZonemain')}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.userOne} />
+                                    source={Images.userOne} /> */}
                                 <Text style={styles.text}>Reuel Pardesi</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.userTwo} />
+                                    source={Images.userTwo} /> */}
                                 <Text style={styles.text}>Elysian Pardesi</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <View style={styles.user}>
-                                <Image
+                                {/* <Image
                                     style={styles.userIcon}
-                                    source={Images.addUser} />
+                                    source={Images.addUser} /> */}
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.parentZone}>
                         <TouchableOpacity style={styles.parentZoneClick}>
-                            <Image source={Images.parentZoneIcon} style={styles.parentIcon}></Image>
+                            {/* <Image source={Images.parentZoneIcon} style={styles.parentIcon}></Image> */}
                             <Text style={styles.titleParent}>Parent Zone</Text>
                         </TouchableOpacity>
                     </View>

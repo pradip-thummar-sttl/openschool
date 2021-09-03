@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import PAGESTYLE from './Style';
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import NoLessonsHomework from "../../../../svg/emptystate/NoLessonHomework";
 import NotSentGlobalMessages from "../../../../svg/emptystate/NotSentGlobalMessages";

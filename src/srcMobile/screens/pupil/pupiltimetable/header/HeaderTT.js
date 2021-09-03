@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "reac
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import {
     Menu,
@@ -50,12 +50,12 @@ const HeaderTT = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
+                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
+                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -74,8 +74,8 @@ const HeaderTT = (props) => {
                                 :
                                 null
                         }}>
-                        <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
+                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -91,7 +91,7 @@ const HeaderTT = (props) => {
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     onPress={() => props.navigateToCreateNewEvent()}>
-                    <Image style={styles.addIcon} source={Images.AddIconWhite} />
+                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
                 <RBSheet
@@ -111,7 +111,7 @@ const HeaderTT = (props) => {
                 >
                     <View style={styles.popupLarge}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -122,13 +122,13 @@ const HeaderTT = (props) => {
                                             activeOpacity={opacity}
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
-                                            <Image style={styles.entryIcon} source={Images.NewLessons} />
+                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
                                             <Text style={styles.entryTitle}>New Lesson</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            <Image style={styles.entryIcon} source={Images.NewEvents} />
+                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                                             <Text style={styles.entryTitle}>New Event</Text>
                                         </TouchableOpacity>
                                     </View>

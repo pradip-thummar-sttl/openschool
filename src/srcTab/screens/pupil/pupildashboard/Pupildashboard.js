@@ -3,7 +3,7 @@ import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
@@ -39,7 +39,12 @@ import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import RobotAvtar from "../../../../svg/pupil/dashboard/RobotAvtar";
 import MyClassIllus from "../../../../svg/pupil/dashboard/MyClassIllus";
 import MyHomeworkIllus from "../../../../svg/pupil/dashboard/MyHomeworkIllus";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import Participants from "../../../../svg/teacher/dashboard/Participants";
+import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import RewardStarback from "../../../../svg/pupil/dashboard/RewardStarback";
+
 const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
@@ -446,15 +451,18 @@ const PupuilDashboard = (props) => {
                                                                                         <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                                         <View style={PAGESTYLE.timedateGrp}>
                                                                                             <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                                                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                                                                                                <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                 <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                                             </View>
                                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                                                <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
+                                                                                                {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
+                                                                                                <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                 <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                                                             </View>
                                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                                <Image style={PAGESTYLE.calIcon} source={Images.Group} />
+                                                                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
+                                                                                                <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)}/>
                                                                                                 <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
                                                                                             </View>
                                                                                         </View>
@@ -499,7 +507,9 @@ const PupuilDashboard = (props) => {
                                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                                             color={COLORS.blueBorder} />
                                                                                                                         :
-                                                                                                                        <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                                        <></>
+                                                                                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                                                        // ahi download icon add karvo
                                                                                                                     }
                                                                                                                     {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                                                 </View>
@@ -519,7 +529,8 @@ const PupuilDashboard = (props) => {
                                                                                                 style={{ width: '100%' }}
                                                                                                 renderItem={({ item, index }) => (
                                                                                                     <View style={PAGESTYLE.lessonPoints}>
-                                                                                                        <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
+                                                                                                        {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
+                                                                                                        <CheckedBlue style={PAGESTYLE.checkIcon} width={hp(1.7)} height={hp(1.7)} />
                                                                                                         <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                                     </View>
                                                                                                 )}
@@ -550,7 +561,7 @@ const PupuilDashboard = (props) => {
                                                                             // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                                                             //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                                             // </View>
-                                                                            <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
+                                                                            <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                                     }
                                                                 </View>
                                                             }
@@ -626,7 +637,9 @@ const PupuilDashboard = (props) => {
                                                                                                     style={{ width: '100%' }}
                                                                                                     renderItem={({ item, index }) => (
                                                                                                         <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                                                            <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} />
+                                                                                                            {/* <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} /> */}
+                                                                                                        <CheckedBlue style={PAGESTYLE.checkIconSquare} width={15} height={15} />
+                                                                                                            
                                                                                                             <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                                         </View>
                                                                                                     )}
@@ -648,7 +661,7 @@ const PupuilDashboard = (props) => {
                                                                             // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
                                                                             //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                                                             // </View>
-                                                                            <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
+                                                                            <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                                                     }
 
                                                                 </View>

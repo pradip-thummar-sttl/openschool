@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "reac
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../../utils/Colors";
 import STYLE from '../../../../../../utils/Style';
-import Images from '../../../../../../utils/Images';
+// import Images from '../../../../../../utils/Images';
 import FONTS from '../../../../../../utils/Fonts';
 import { opacity } from "../../../../../../utils/Constant";
 const HeaderGallery = (props) => {
@@ -14,7 +14,7 @@ const HeaderGallery = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        <Image style={styles.arrow} source={Images.backArrow} />
+                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                     </TouchableOpacity>
                     <Text style={styles.mainTitle}>Recommended Content</Text>
                 </View>
@@ -29,7 +29,7 @@ const HeaderGallery = (props) => {
                         style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        <Image style={styles.infoIcon} source={Images.InfoIcon} />
+                        {/* <Image style={styles.infoIcon} source={Images.InfoIcon} /> */}
                     </TouchableOpacity> 
                 </View>
             </View>
@@ -41,9 +41,9 @@ const HeaderGallery = (props) => {
                 </View> */}
                 <View style={styles.flexEnd}>
                     <View style={styles.field}>
-                        <Image
+                        {/* <Image
                             style={styles.userIcon}
-                            source={Images.SearchIcon} />
+                            source={Images.SearchIcon} /> */}
                         <TextInput
                             style={[styles.searchHeader]}
                             placeholder="Search subject, class, etc"

@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -45,7 +45,7 @@ const TLHomeWorkInstructionalVideoWithRecording = (props) => {
                                 <View style={PAGESTYLE.dueDateWrap}>
                                     <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                 </View>
-                                <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
+                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                 <View style={PAGESTYLE.subjectDateTime}>
                                     <DateTimePicker
                                         style={PAGESTYLE.dateTime}
@@ -68,11 +68,11 @@ const TLHomeWorkInstructionalVideoWithRecording = (props) => {
                     </View>
                     <View style={PAGESTYLE.videoRecording}>
                         <View style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoRecordSpace]}>
-                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
+                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
                             <Text style={PAGESTYLE.videoLinkText}>The Amazon Rainforest...</Text>
                         </View>
                         <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
+                            {/* <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} /> */}
                             <Popupaddrecording />
                         </View>
                     </View>
@@ -133,7 +133,7 @@ const TLHomeWorkInstructionalVideoWithRecording = (props) => {
                             </View>
                         </View>
                         <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
+                            {/* <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} /> */}
                             <Text style={PAGESTYLE.addItemText}>Add another item</Text>
                         </TouchableOpacity>
                     </View>
@@ -144,20 +144,24 @@ const TLHomeWorkInstructionalVideoWithRecording = (props) => {
                         <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                     </View>
                     <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
+                        {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
                     </View>
                     <View style={PAGESTYLE.fileBoxGrpWrap}>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
+                                {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /> */}
+                                </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fileGrp}>
                             <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
+                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
+                                {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /> */}
+                                </TouchableOpacity>
                         </View>
                     </View>
                     <View style={PAGESTYLE.thumbVideo}>
-                        <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
+                        {/* <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} /> */}
                     </View>
                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                         <TouchableOpacity

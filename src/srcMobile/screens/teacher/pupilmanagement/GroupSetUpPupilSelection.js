@@ -6,13 +6,14 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import MESSAGE from "../../../../utils/Messages";
 import { User } from "../../../../utils/Model";
 import STYLE from "../../../../utils/Style";
 import PAGESTYLE from './Style';
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import BackArrow from "../../../../svg/common/BackArrow";
 
 const GroupSetUpPupilSelection = (props) => {
 
@@ -198,7 +199,9 @@ const GroupSetUpPupilSelection = (props) => {
             <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={() => props.navigation.goBack()}>
-                <Image style={PAGESTYLE.arrow} source={Images.backArrow} />
+                {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
+                <BackArrow style={PAGESTYLE.arrow} height={hp(2.34)} width={hp(2.34)} />
+                
             </TouchableOpacity>
             <TextInput
                 returnKeyType={"done"}
@@ -226,7 +229,7 @@ const GroupSetUpPupilSelection = (props) => {
                         // <View>
                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder holderType={4} image={Images.noPupil} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
+                        <EmptyStatePlaceHohder holderType={4}  title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',paddingHorizontal: hp(2.46), }}>

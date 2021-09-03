@@ -20,8 +20,10 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import { User } from "../../../../../utils/Model";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import MESSAGE from "../../../../../utils/Messages";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import CalanderIcon from "../../../../../svg/teacher/dashboard/Calender";
+import Doc from "../../../../../svg/common/Doc";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 const PupilHomeWorkDetail = (props) => {
     const [isSubmitPopup, setSubmitPopup] = useState(false)
     const { item } = props.route.params
@@ -210,34 +212,38 @@ const PupilHomeWorkDetail = (props) => {
                                                             activeOpacity={opacity}
                                                             onPress={() => removeDocument(index)}>
                                                             <View style={PAGESTYLE.alignRow1}>
-                                                                <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                                                <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} />
+                                                                {/* <UploadMaterial /> */}
+                                                                {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
+                                                                {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.removeIcon} /> */}
+
+                                                                <Doc style={PAGESTYLE.markedIcon} width={62} height={62} />
+                                                                <CloseBlack style={PAGESTYLE.removeIcon} height={30} width={30} />
                                                             </View>
                                                         </TouchableOpacity>
-                                                    )
+                                                            )
                                                 })}
                                             </View>
                                         </ScrollView>
                                     </View>
+                                    </View>
                                 </View>
-                            </View>
                         </ScrollView>
                     </View>
-                    <View style={[PAGESTYLE.fullButtonMain]}>
-                        <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.buttonGrp}><Text style={[PAGESTYLE.commonButtonGreenheaderFullWidth, PAGESTYLE.fullButton]}>submit homework</Text></TouchableOpacity>
+                        <View style={[PAGESTYLE.fullButtonMain]}>
+                            <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.buttonGrp}><Text style={[PAGESTYLE.commonButtonGreenheaderFullWidth, PAGESTYLE.fullButton]}>submit homework</Text></TouchableOpacity>
+                        </View>
                     </View>
+                    {
+                        isSubmitPopup ?
+                            <Popuphomework
+                                isLoading={isLoading}
+                                OnSubmitHomeworkPress={() => onSubmitHomework()}
+                                onPopupClosed={(flag) => setSubmitPopup(flag)} />
+                            :
+                            null
+                    }
                 </View>
-                {
-                    isSubmitPopup ?
-                        <Popuphomework
-                            isLoading={isLoading}
-                            OnSubmitHomeworkPress={() => onSubmitHomework()}
-                            onPopupClosed={(flag) => setSubmitPopup(flag)} />
-                        :
-                        null
-                }
             </View>
-        </View>
-    );
+            );
 }
-export default PupilHomeWorkDetail;
+            export default PupilHomeWorkDetail;

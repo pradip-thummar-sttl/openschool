@@ -6,7 +6,7 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 
 const Header = (props) => {

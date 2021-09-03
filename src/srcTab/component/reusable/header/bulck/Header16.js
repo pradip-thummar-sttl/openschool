@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, Ima
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-import Images from '../../../../../utils/Images';
+// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import Popuphomework from '../../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../../reusable/popup/Popupsubmithomework';
@@ -13,6 +13,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import Ic_CheckWhite from "../../../../../svg/pupil/parentzone/Ic_CheckWhite";
 const HeaderSixteen = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -22,7 +23,9 @@ const HeaderSixteen = (props) => {
                     {
                         props.isSaveRecord ?
                             <TouchableOpacity onPress={()=>props.onSave()} style={styles.buttonGroup}>
-                                <Image style={styles.addIcon} source={Images.CheckIconWhite} />
+                                {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                        <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+
                                 <Text style={styles.commonButtonGreenheaderwithicon}>save recording</Text>
                             </TouchableOpacity> : null
                     }

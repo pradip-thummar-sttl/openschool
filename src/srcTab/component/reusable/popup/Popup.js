@@ -18,9 +18,9 @@ const Popup = (props) => {
             <Modal isVisible={isModalVisible}>
                 <View style={STYLE.popupCard}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
+                        {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
                     </TouchableOpacity>
-                    <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} />
+                    {/* <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} /> */}
                     <View style={STYLE.popupContentMain}>
                         <Text style={STYLE.popupTitle}>Heading</Text>
                         <Text style={STYLE.popupText}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</Text>

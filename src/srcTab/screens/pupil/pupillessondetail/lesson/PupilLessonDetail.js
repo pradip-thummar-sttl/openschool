@@ -10,7 +10,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import moment from "moment";
-import Images from "../../../../../utils/Images";
+// import Images from "../../../../../utils/Images";
 import { Download } from "../../../../../utils/Download";
 import WorkSpace from "../../Workspace/WorkSpace";
 import { Service } from "../../../../../service/Service";
@@ -23,6 +23,10 @@ import { baseUrl, opacity, showMessage } from "../../../../../utils/Constant";
 import MESSAGE from "../../../../../utils/Messages";
 import Video from "react-native-video";
 import { set } from "react-native-reanimated";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
+import DownloadSVG from '../../../../../svg/teacher/lessonhwplanner/Download'
+import BookMarkOn from "../../../../../svg/pupil/lessonhwplanner/BookMark_On";
+import BookMarkOff from "../../../../../svg/pupil/lessonhwplanner/BookMark_Off";
 
 
 const PupilLessonDetailInternal = (props) => {
@@ -165,7 +169,8 @@ const PupilLessonDetailInternal = (props) => {
                                             <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
                                                 <View style={PAGESTYLE.largeVideoBlock}>
                                                     {item.RecordingList.length == 0 ?
-                                                        <Image source={require('../../../../../assets/images/videoLarge2.png')} style={PAGESTYLE.largeVideo} />
+                                                    // source={require('../../../../../assets/images/videoLarge2.png')} 
+                                                        <Image style={PAGESTYLE.largeVideo} />
                                                         :
                                                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', backgroundColor: COLORS.blueBorder }}>
                                                             <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
@@ -177,7 +182,8 @@ const PupilLessonDetailInternal = (props) => {
                                                                 <TouchableOpacity
                                                                     activeOpacity={opacity}
                                                                     onPress={() => setPause(!isPaused)}>
-                                                                    <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} />
+                                                                    {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
+                                                                    <PlayBlue tyle={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} height={30} width={30} />
                                                                 </TouchableOpacity>
                                                                 :
                                                                 null
@@ -194,7 +200,12 @@ const PupilLessonDetailInternal = (props) => {
                                                         <TouchableOpacity activeOpacity={opacity}
                                                             onPress={() => saveLesson(item.SaveLesson ? false : true)}>
                                                             <View style={PAGESTYLE.bookMark}>
-                                                                <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} />
+                                                                {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} /> */}
+                                                                {
+                                                                    item.SaveLesson?
+                                                                    <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.43)} width={hp(2.43)} />:
+                                                                    <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.43)} width={hp(2.43)} />
+                                                                }
                                                                 <Text style={PAGESTYLE.saveBookMarkText}>{item.SaveLesson ? 'Saved!' : 'Save'}</Text>
                                                             </View>
                                                         </TouchableOpacity>
@@ -229,7 +240,9 @@ const PupilLessonDetailInternal = (props) => {
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                     color={COLORS.blueBorder} />
                                                                                 :
-                                                                                <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                                // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
+                                                                        <DownloadSVG style={styles.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
+                                                                                
                                                                             }
                                                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                         </View>
@@ -243,10 +256,10 @@ const PupilLessonDetailInternal = (props) => {
 
                                                 </View>
 
-                                                <View style={PAGESTYLE.thumbVideo}>
+                                                {/* <View style={PAGESTYLE.thumbVideo}>
                                                     <Image source={require('../../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
 
-                                                </View>
+                                                </View> */}
                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
                                                     <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
                                                     <ScrollView style={{ height: '50%' }} showsVerticalScrollIndicator={false}>
@@ -257,7 +270,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                         // props.navigation.navigate('WorkSpace',{id:item.LessonId, isWorkspace:false, item:obj.filename})
                                                                         <TouchableOpacity style={PAGESTYLE.fileGrp} onPress={() => { setTappedItem(index), setWorkSpaceEdit(false), setWorkSpace(true) }}>
                                                                             <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>Workspace {index + 1}</Text>
-                                                                            <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} />
+                                                                            {/* <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} /> */}
                                                                         </TouchableOpacity>
                                                                     )
                                                                 }) :

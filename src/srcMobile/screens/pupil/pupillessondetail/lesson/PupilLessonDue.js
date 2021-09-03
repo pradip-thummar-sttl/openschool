@@ -9,7 +9,7 @@ import moment from "moment";
 import { baseUrl } from "../../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
-import Images from "../../../../../../src/utils/Images";
+// import Images from "../../../../../../src/utils/Images";
 import DueIcon from "../../../../../svg/pupil/dashboard/HWDue_Orange";
 import SubmittedIcon from "../../../../../svg/pupil/lessonhwplanner/SubmittedIcon";
 import MarkedIcon from "../../../../../svg/pupil/lessonhwplanner/MarkedIcon";
@@ -109,7 +109,7 @@ const PupilLessonDue = (props) => {
                     }
                 </>
                 :
-                <EmptyStatePlaceHohder holderType={3} image={Images.noCalender} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
+                <EmptyStatePlaceHohder holderType={3}  title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
         </View >
 

@@ -11,7 +11,7 @@ import { getFileExtention } from "../../../../utils/Download";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
 import { ScrollView } from "react-native-gesture-handler";
-import Images from "../../../../utils/Images";
+// import Images from "../../../../utils/Images";
 import EraseIcon from "../../../../svg/pupil/workspace/EraseIcon";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ClearIcon from "../../../../svg/pupil/workspace/ClearIcon";

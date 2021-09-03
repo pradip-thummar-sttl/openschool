@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 // import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -16,6 +16,8 @@ import { EndPoints } from "../../../../service/EndPoints";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FlatList } from "react-native-gesture-handler";
 import moment from "moment";
+import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
+import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const PopupdataSecond = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -141,14 +143,16 @@ const PopupdataSecond = (props) => {
                 style={styles.entryData}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <Image style={styles.entryIcon} source={Images.NewEvents} />
+                {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
+                <NewEvent style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                 <Text style={styles.entryTitle}>New Event</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                            <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} />
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
@@ -167,7 +171,8 @@ const PopupdataSecond = (props) => {
                                                         onPress={isFieldsValidated}
                                                         style={[styles.buttonGrp, styles.newCheckButton]}
                                                         activeOpacity={opacity}>
-                                                        <Image style={[styles.checkWhiteIcon]} source={require('../../../../assets/images/white-check-icon2.png')} />
+                                                            {/* <TickMarkWhite style={[styles.checkWhiteIcon]} height={} width={} /> */}
+                                                        {/* <Image style={[styles.checkWhiteIcon]} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
                                                         {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
                                                     </TouchableOpacity>
                                                 }
@@ -196,24 +201,24 @@ const PopupdataSecond = (props) => {
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What day is it?</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.CalenderIconSmall} />
+                                                {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                                 <View style={styles.subjectDateTime}>
                                                     <View>
                                                         <Text style={styles.dateTimetextdummy}>{selectDate}</Text>
                                                     </View>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo}>
                                             <Text label style={STYLE.labelCommon}>What time is it?</Text>
                                             <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.Clock} />
+                                                {/* <Image style={styles.calIcon} source={Images.Clock} /> */}
                                                 <View style={styles.subjectDateTime}>
                                                     <View>
                                                         <Text style={styles.dateTimetextdummy}>{selectTime}</Text>
                                                     </View>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
@@ -247,11 +252,11 @@ const PopupdataSecond = (props) => {
                                                         <TouchableOpacity>
                                                             <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                         </TouchableOpacity>
-                                                        <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
+                                                        {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity>
-                                                    <Image style={styles.uploadCalIcon} source={Images.UploadCalender} />
+                                                    {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -490,7 +495,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: hp(-1.3),
     },
-    titleSave:{
+    titleSave: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

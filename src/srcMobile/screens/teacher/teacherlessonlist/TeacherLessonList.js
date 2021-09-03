@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-import Images from '../../../../utils/Images';
+// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -187,7 +187,7 @@ const TeacherLessonList = (props) => {
                         // <View style={{ height: 100, justifyContent: 'center' }}>
                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder holderType={1} image={Images.noLessonHW} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
+                        <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                 }
             </View>
         </View>
