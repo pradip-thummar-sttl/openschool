@@ -273,9 +273,9 @@ class Login extends Component {
                 <View style={styles.lefImage}>
                     {this.props.route.params.userType == 'Pupil' ?
                         // <Image source={Images.loginMainBack} style={styles.image}></Image>
-                        <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'} />
+                        <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                         :
-                        <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'}/>
+                        <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                         // <Image source={Images.loginMainBackteacher} style={styles.image}></Image>
                     }
                 </View>
@@ -318,11 +318,11 @@ class Login extends Component {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => this.setPasswordVisibility()}>
-                                                 {
-                                                    this.state.isPasswordHide?
+                                            {
+                                                this.state.isPasswordHide ?
                                                     <ShowPassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
-                                                    :<HidePassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
-                                                }
+                                                    : <HidePassword style={styles.viewIcon} height={hp(1.69)} width={hp(2.47)} />
+                                            }
                                             {/* <Image
                                                 style={styles.viewIcon} source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
                                         </TouchableOpacity>

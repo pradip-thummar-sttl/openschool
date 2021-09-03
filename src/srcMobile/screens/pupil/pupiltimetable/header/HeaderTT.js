@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: wp(5.33),
         paddingRight: wp(4),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(1.23) : hp(5.85),
         paddingBottom: hp(1),
         backgroundColor: COLORS.white,
         width: '100%',

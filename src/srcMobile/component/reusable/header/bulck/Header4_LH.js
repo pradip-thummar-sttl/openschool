@@ -48,7 +48,7 @@ export default Header4_LH;
 const styles = StyleSheet.create({
     headerBarMainWhite: {
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
+        paddingTop: Platform.OS == 'android' ? hp(1.23) : hp(4),
     },
     headerMain: {
         flexDirection: 'row',

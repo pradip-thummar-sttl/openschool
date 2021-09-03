@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: hp(2.46),
         paddingRight: hp(1.84),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(4.31) : hp(4.31),
+        paddingTop: Platform.OS == 'android' ? hp(1.23) : hp(4.31),
         shadowColor: COLORS.headerShadow,
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,

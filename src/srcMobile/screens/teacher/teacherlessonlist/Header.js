@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(2),
         paddingRight: hp(2),
-        paddingTop: Platform.OS == 'android' ? hp(4.31) : hp(4.31),
+        paddingTop: Platform.OS == 'android' ? hp(1.23) : hp(4.31),
         paddingBottom: hp(1.23),
         backgroundColor: COLORS.white,
         zIndex: 1,

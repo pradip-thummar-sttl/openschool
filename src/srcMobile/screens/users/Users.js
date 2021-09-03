@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, Platform } from 'react-native';
 import COLORS from '../../../utils/Colors';
 import FONTS from '../../../utils/Fonts';
 import Images from '../../../utils/Images';
@@ -44,7 +44,7 @@ export default class Users extends Component {
         return (
             <View style={styles.container}>
                 {/* <Image source={Images.loginTop} style={styles.image}></Image> */}
-                <TopMobile style={styles.image} height={hp(16)} width={'100%'} />
+                <TopMobile style={styles.image} height={Platform.OS == 'android' ? hp(17.5) : hp(16)} width={'100%'} />
                 <View>
                     <Text style={styles.titleText}>Select the type of user you are</Text>
                     <View style={styles.userMain}>
