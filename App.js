@@ -9,8 +9,8 @@ import { MenuProvider } from 'react-native-popup-menu';
 const store = createStore(combineReducers)
 
 
-import RouteTablet from './src/route/Route'
-import RouteMobile from './srcmobile/route/Route'
+import RouteTablet from './src/srcTab/route/Route'
+import RouteMobile from './src/srcMobile/route/Route'
 import { LogBox, View, StatusBar } from 'react-native';
 
 LogBox.ignoreAllLogs();

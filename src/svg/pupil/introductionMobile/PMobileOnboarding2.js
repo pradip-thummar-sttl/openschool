@@ -394,7 +394,7 @@ function PMobileOnboarding2(props) {
             transform="translate(36.677 48.824)"
             fill="#90daff"
             fontSize={13}
-            fontFamily="SegoeUI, Segoe UI"
+            // fontFamily="SegoeUI, Segoe UI"
           >
             <TSpan x={-11.943} y={0}>
               {"ABC"}
@@ -405,7 +405,7 @@ function PMobileOnboarding2(props) {
             transform="translate(78.926 48.303)"
             fill="#fff"
             fontSize={13}
-            fontFamily="SegoeUI, Segoe UI"
+            // fontFamily="SegoeUI, Segoe UI"
           >
             <TSpan x={-10.512} y={0}>
               {"123"}

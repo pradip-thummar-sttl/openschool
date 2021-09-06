@@ -15,6 +15,7 @@ const COLORS = {
     lightGray: '#9699A5',
     buttonGreen: '#049160',
     menuLightFonts: '#B4B6BE',
+    popupPlaceHolder: '#D5D7D9',
     borderLesoon: '#FFCC22',
     linkLightPurple: '#676794',
     bottomProfileLightBorder:'#F1F2F7',
@@ -48,6 +49,7 @@ const COLORS = {
     lightOrangeDue:'#FFE5D5',
     SidebarHeaderBack: '#002211',
     SidebarHeaderShadow: '#152232',
+    headerShadow: "rgba(21, 34, 50, 0.6)",
     MenuSelectedback: '#F3F5F9',
     periodColor:'rgba(207,237,254,1)',
     daySelect:'#EDF0F6',
@@ -58,6 +60,15 @@ const COLORS = {
     introGreyColor:'#454545',
     dateShadow: '#EBAC39',
     timeTableBorder: '#EDEEF2',
+    lightGrey: '#B7B9C3',
+    editBorder: '#CBCCD8',
+    sentBackColor:'rgba(213,241,254,1)',
+    sentColor:'rgba(48,156,233,1)',
+    draftBackColor:'rgba(255,236,200,1)',
+    draftColor:'rgba(255,164,57,1)',
+    sentStatus: '#DDF3FF',
+    draftStatus: '#FFEECC',
+    draftStatusText: '#FEAD29',
 }
 
 export default COLORS;

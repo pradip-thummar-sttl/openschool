@@ -37,3 +37,48 @@ String filename = fileNamePrefix  + "." + fileType;
 node_modules/quickblox-react-native-sdk
 - Rename call_service_notification_text from string.xml
 - Replace App icon from mipmap
+
+==========================================================
+
+RCT_REMAP_METHOD(stopRecording, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (@available(iOS 11.0, *)) {
+            [[RPScreenRecorder sharedRecorder] stopCaptureWithHandler:^(NSError * _Nullable error) {
+                if (!error) {
+                    if (self.writer.status == AVAssetWriterStatusUnknown ||
+                        self.writer.status == AVAssetWriterStatusCompleted || self.writer.status == AVAssetWriterStatusFailed || self.writer.status == AVAssetWriterStatusCancelled) {
+                            NSLog(@"asset writer was in an unexpected state (%@)", @(self.writer.status));
+                        NSDictionary *result = [NSDictionary dictionaryWithObject:self.writer.outputURL.absoluteString forKey:@"outputURL"];
+                        resolve([self successResponse:result]);
+                        self.audioInput = nil;
+                        self.micInput = nil;
+                        self.videoInput = nil;
+                        self.writer = nil;
+                        self.screenRecorder = nil;
+//                            return;
+                        } else {
+                    [self.audioInput markAsFinished];
+                    [self.micInput markAsFinished];
+                    [self.videoInput markAsFinished];
+                    [self.writer finishWritingWithCompletionHandler:^{
+                        
+                        NSDictionary *result = [NSDictionary dictionaryWithObject:self.writer.outputURL.absoluteString forKey:@"outputURL"];
+                        resolve([self successResponse:result]);
+                        
+                        //                    UISaveVideoAtPathToSavedPhotosAlbum(self.writer.outputURL.absoluteString, nil, nil, nil);
+                        NSLog(@"finishWritingWithCompletionHandler: Recording stopped successfully. Cleaning up... %@", result);
+                        self.audioInput = nil;
+                        self.micInput = nil;
+                        self.videoInput = nil;
+                        self.writer = nil;
+                        self.screenRecorder = nil;
+                    }];
+                        }
+                }
+            }];
+        } else {
+            // Fallback on earlier versions
+        }
+    });
+}
