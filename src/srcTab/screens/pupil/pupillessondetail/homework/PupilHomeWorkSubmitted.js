@@ -17,6 +17,7 @@ import { Download } from "../../../../../utils/Download";
 import HWSubmittedTop_Mobile from '../../../../../svg/pupil/lessonhwplanner/HWSubmittedTop_Mobile'
 import Submitted from '../../../../../svg/pupil/lessonhwplanner/Submitted'
 import Book from '../../../../../svg/pupil/lessonhwplanner/Book'
+import Doc from "../../../../../svg/common/Doc";
 var moment = require('moment');
 
 const PupilHomeWorkSubmitted = (props) => {

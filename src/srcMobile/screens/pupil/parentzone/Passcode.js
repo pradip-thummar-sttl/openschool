@@ -8,6 +8,8 @@ import { User } from '../../../../utils/Model';
 // import Images from '../../../../utils/Images';
 import Styles from './StylePassCode';
 import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 
 const Passcode = (props) => {

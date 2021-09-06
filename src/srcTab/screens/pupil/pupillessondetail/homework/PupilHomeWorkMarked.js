@@ -20,6 +20,7 @@ var moment = require('moment');
 import HwMarkedBook from '../../../../../svg/pupil/lessonhwplanner/HwMarkedBook'
 import Marked from '../../../../../svg/teacher/lessonhwplanner/Marked'
 import PlayBlue from '../../../../../svg/pupil/lessonhwplanner/Play_Blue'
+import Doc from "../../../../../svg/common/Doc";
 
 const PupilHomeWorkMarked = (props) => {
     const { item } = props;
@@ -177,6 +178,6 @@ const PupilHomeWorkMarked = (props) => {
                 </View>
             </View>
         </View>
-    );
+    )
 }
 export default PupilHomeWorkMarked;

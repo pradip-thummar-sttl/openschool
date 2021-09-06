@@ -20,10 +20,12 @@ const Headerseven = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.headerMainInner}>
-                {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                    <TouchableOpacity style={styles.widthBackArrow} onPress={() => props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /> </TouchableOpacity>
+                    {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <TouchableOpacity style={styles.widthBackArrow} onPress={() => props.goBack()}>
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+                    </TouchableOpacity>
                     <View style={styles.titles}>
-                        <Text numberOfLines={2} style={[styles.mainTitle,{width:wp(45)}]}>{props.subjectName} {"\n"}{props.topicName}</Text>
+                        <Text numberOfLines={2} style={[styles.mainTitle, { width: wp(45) }]}>{props.subjectName} {"\n"}{props.topicName}</Text>
                     </View>
                 </View>
                 <View style={styles.submittedLogo}>

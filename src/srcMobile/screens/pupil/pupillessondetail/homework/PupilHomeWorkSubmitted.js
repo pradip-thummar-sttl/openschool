@@ -6,10 +6,10 @@ import STYLE from '../../../../../utils/Style';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
-import ToggleSwitch from 'toggle-switch-react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
+// import ToggleSwitch from 'toggle-switch-react-native';
+// import RNPickerSelect from 'react-native-picker-select';
+// import DateTimePicker from '@react-native-community/datetimepicker';
+// import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 import Header7 from '../../../../component/reusable/header/bulck/Header7'
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 // import Images from "../../../../../utils/Images";
@@ -69,8 +69,8 @@ const PupilHomeWorkSubmitted = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false}  >
-                    <View style={[PAGESTYLE.containerWrap,]}>
+                <ScrollView showsVerticalScrollIndicator={false} >
+                    <View style={[PAGESTYLE.containerWrap]}>
                         <View style={PAGESTYLE.teacherDetailLeft}>
                             <View style={PAGESTYLE.lessonDesc}>
                                 <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
@@ -126,7 +126,6 @@ const PupilHomeWorkSubmitted = (props) => {
                                                     :
                                                     // <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
                                                     <Doc style={PAGESTYLE.markedIcon} width={62} height={62} />
-
                                                 }
                                                 {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                             </View>

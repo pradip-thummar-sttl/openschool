@@ -11,6 +11,8 @@ import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const ParentZoneSchoolDetails = (props) => {
     const [isHide, action] = useState(true);

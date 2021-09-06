@@ -18,6 +18,8 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker/src'
 import MESSAGE from "../../../../utils/Messages";
 import EditProfileTop_Tablet from "../../../../svg/pupil/parentzone/EditProfileTopBg_Tablet";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const ParentZoneProfileEdit = (props) => {
     const [isHide, action] = useState(true);

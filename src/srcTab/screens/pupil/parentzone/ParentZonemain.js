@@ -24,6 +24,8 @@ import ParentZonePerformance from "./ParentZonePerformance";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
 import ParentChat from "./Chat/ParentChat";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 var moment = require('moment');
 
 const MessageList = (props, { style }) => (

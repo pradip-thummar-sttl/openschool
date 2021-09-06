@@ -13,6 +13,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import BackArrow from "../../../../../svg/common/BackArrow";
 const Header6 = (props) => {
     console.log('props', props);
     return (

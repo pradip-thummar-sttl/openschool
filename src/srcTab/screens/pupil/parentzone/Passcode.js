@@ -8,6 +8,8 @@ import { showMessage, showMessageWithCallBack } from '../../../../utils/Constant
 import MESSAGE from '../../../../utils/Messages';
 import { User } from '../../../../utils/Model';
 import Styles from './StylePassCode';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const Passcode = (props) => {
     const [t1, setT1] = useState("")

@@ -246,4 +246,4 @@ const PupilHomeWorkDetail = (props) => {
             </View>
             );
 }
-            export default PupilHomeWorkDetail;
+export default PupilHomeWorkDetail;
