@@ -77,7 +77,7 @@ const Message = (props) => {
     const MessageList = (item, { style }) => (
         <TouchableOpacity
             activeOpacity={opacity}
-            onPress={() => { setAddMessage(true); setSelectedItem(item.item) }}>
+            onPress={() => { setSelectedItem(item.item); setAddMessage(true); }}>
             <View style={[PAGESTYLE.pupilData]}>
                 <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn]}>
                     <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,]}>{item.item.Title}</Text>
@@ -96,7 +96,7 @@ const Message = (props) => {
 
                 <View style={[PAGESTYLE.lastColumn]}>
                     {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                    <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1)} width={hp(1)} />
+                    <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.51)} width={hp(1.51)} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -156,7 +156,7 @@ const Message = (props) => {
                     <NewMessage
                         selectedItem={selectedItem}
                         onGoBack={() => { setAddMessage(false); fetchRecord('', '') }}
-                        goBack={() => setAddMessage(false)} />
+                        goBack={() => {setAddMessage(false); setSelectedItem(null) }} />
                 }
             </SafeAreaView>
         </View>

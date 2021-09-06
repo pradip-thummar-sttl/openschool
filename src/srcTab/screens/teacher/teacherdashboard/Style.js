@@ -299,7 +299,7 @@ export default StyleSheet.create({
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
-        top: hp(0.2),
+        alignSelf: 'center',
         right: hp(1),
     },
     fileGrp: {

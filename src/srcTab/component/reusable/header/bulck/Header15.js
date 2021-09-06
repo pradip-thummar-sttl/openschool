@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top: 5,
+        alignSelf: 'center',
     },
     commonText: {
         fontSize: hp(1.82),

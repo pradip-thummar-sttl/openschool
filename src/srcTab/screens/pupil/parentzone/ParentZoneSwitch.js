@@ -39,7 +39,7 @@ export default class ParentZoneSwitch extends Component {
                     text: 'LOGOUT',
                     onPress: () => {
                         AsyncStorage.setItem('pupil', JSON.stringify(null));
-                        this.props.navigation.replace('Users');
+                        this.props.navigation.replace('Login', { userType: "Pupil" });
                     },
                 }, {
                     text: 'CANCEL',
@@ -53,7 +53,7 @@ export default class ParentZoneSwitch extends Component {
                     text: 'LOGOUT',
                     onPress: () => {
                         AsyncStorage.setItem('pupil', JSON.stringify(null));
-                        this.props.navigation.replace('Users');
+                        this.props.navigation.replace('Login', { userType: "Pupil" });
                     },
                 }, {
                     text: 'CANCEL',

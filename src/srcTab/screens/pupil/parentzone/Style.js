@@ -429,6 +429,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginTop: hp(0.3),
         marginRight: hp(1.5),
+        backgroundColor:'#BE8CFF',
+        borderRadius:5
     },
     orangeMark: {
         width: hp(1.82),

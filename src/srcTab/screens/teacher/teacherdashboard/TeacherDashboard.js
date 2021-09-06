@@ -478,7 +478,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.yellowDark} />
                                                     :
-                                                    dashData.length > 0 ?
+                                                    dashData.length > 0 && dataOfSubView ?
                                                         <View style={STYLE.viewRow}>
                                                             <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                                                 <FlatList
@@ -555,7 +555,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                             })
                                                                                         }} style={PAGESTYLE.downloaBtn}>
                                                                                             <View style={PAGESTYLE.fileGrp}>
-                                                                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: '80%' }]}>{item.originalname}</Text>
                                                                                                 {(isMatLoading && index==mateIndex) ?
                                                                                                     <ActivityIndicator
                                                                                                         style={{ ...PAGESTYLE.downloadIcon }}

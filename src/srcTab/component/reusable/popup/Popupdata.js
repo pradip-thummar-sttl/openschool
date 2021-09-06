@@ -266,7 +266,7 @@ const Popupdata = (props) => {
                                                                 })
                                                             }} style={PAGESTYLE.downloaBtn}>
                                                                 <View style={PAGESTYLE.fileGrp}>
-                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: '80%' }]}>{item.originalname}</Text>
                                                                     {(isMatLoading && index==mateIndex) ?
                                                                         <ActivityIndicator
                                                                             style={{ ...styles.downloadIcon }}

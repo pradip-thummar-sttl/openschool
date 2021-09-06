@@ -96,7 +96,7 @@ const ParentZonemain = (props) => {
             {/* <Sidebar hide={() => action(!isHide)} /> */}
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <HeaderPM
-                    onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
+                    onSwitchPupil={(pupilData) => { setPupilIndex(pupilData)}}
                     data={pupilData}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}

@@ -14,7 +14,7 @@ const Introduction3 = (props) => {
         <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
                 {/* <Image source={Images.introSlideThree} style={styles.SlideImage}></Image> */}
-                <PTabletOnboarding3 style={styles.SlideImage} height={hp(60)} width={hp(60)}/>
+                <PTabletOnboarding3 style={styles.SlideImage} height={hp(50)} width={hp(100)}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Show off your progress</Text>

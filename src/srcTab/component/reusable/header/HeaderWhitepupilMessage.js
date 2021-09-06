@@ -15,6 +15,7 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { opacity } from "../../../../utils/Constant";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 const HeaderWhitepupilMessage = (props) => {
 
     const textInput = useRef(null);
@@ -120,6 +121,7 @@ const HeaderWhitepupilMessage = (props) => {
                     activeOpacity={opacity}
                     onPress={() => props.onNewMessage()}>
                     {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)}/>
                     <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
                 </TouchableOpacity>
             </View>

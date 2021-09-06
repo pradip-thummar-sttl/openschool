@@ -183,7 +183,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                     activeOpacity={opacity}
                                                                     onPress={() => setPause(!isPaused)}>
                                                                     {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
-                                                                    <PlayBlue tyle={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} height={30} width={30} />
+                                                                    <PlayBlue style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} height={30} width={30} />
                                                                 </TouchableOpacity>
                                                                 :
                                                                 null
@@ -241,7 +241,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                                     color={COLORS.blueBorder} />
                                                                                 :
                                                                                 // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                                        <DownloadSVG style={styles.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
+                                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                                 
                                                                             }
                                                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}

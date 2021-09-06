@@ -44,6 +44,7 @@ import Clock from "../../../../svg/teacher/dashboard/Clock";
 import Participants from "../../../../svg/teacher/dashboard/Participants";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import RewardStarback from "../../../../svg/pupil/dashboard/RewardStarback";
+import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -500,16 +501,15 @@ const PupuilDashboard = (props) => {
                                                                                                                 })
                                                                                                             }} style={PAGESTYLE.downloaBtn}>
                                                                                                                 <View style={PAGESTYLE.fileGrp}>
-                                                                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
+                                                                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: '80%' }]}>{item.originalname}</Text>
                                                                                                                     {(isMatLoading && index==mateIndex) ?
                                                                                                                         <ActivityIndicator
                                                                                                                             style={{ ...PAGESTYLE.downloadIcon }}
                                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                                             color={COLORS.blueBorder} />
                                                                                                                         :
-                                                                                                                        <></>
                                                                                                                         // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                                                                                        // ahi download icon add karvo
+                                                                                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                                                                     }
                                                                                                                     {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                                                 </View>

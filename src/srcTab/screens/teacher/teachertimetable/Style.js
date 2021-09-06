@@ -109,4 +109,17 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginRight: 13,
     },
+    fileGrp: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingLeft: hp(1.6),
+        paddingRight: hp(1.6),
+        paddingTop: hp(1),
+        paddingBottom: hp(1),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+    },
 });

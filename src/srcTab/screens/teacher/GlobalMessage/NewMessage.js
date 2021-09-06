@@ -31,8 +31,6 @@ const NewMessage = (props) => {
     const [parentsData, setPatrentsData] = useState([])
     const [selectedParents, setSelectedParents] = useState([])
 
-    console.log('props.selectedItem', props.selectedItem);
-
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);

@@ -577,7 +577,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.29),
+        alignSelf: 'center',
         left: hp(1.8),
         zIndex: 9,
     },
