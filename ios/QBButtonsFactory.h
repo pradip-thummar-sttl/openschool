@@ -21,5 +21,6 @@
 + (QBButton *)answer;
 + (QBButton *)whiteBoard ;
 + (QBButton *)switchCamera;
++ (QBButton *)screenRecording;
 
 @end
