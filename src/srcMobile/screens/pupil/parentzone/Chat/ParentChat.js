@@ -112,7 +112,7 @@ const ParentChat = (props) => {
                             </TouchableOpacity>
                         ))}
                     </View>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+                    {/* <KeyboardAwareScrollView>
                         <View style={Styles.views}>
                             <View style={Styles.mesagesView}>
                                 <FlatList
@@ -141,20 +141,59 @@ const ParentChat = (props) => {
                                     onChangeText={(text) => setMessage(text)}
                                 />
                                 <View style={Styles.buttonView}>
-                                    {/* <TouchableOpacity>
-                    <Image style={Styles.btn} source={Images.paperClip} />
-                </TouchableOpacity>
-                <TouchableOpacity >
-                    <Image style={Styles.btn} source={Images.imageUpload} />
-                </TouchableOpacity> */}
+
                                     <TouchableOpacity onPress={() => sendMessage(message)}>
-                                        {/* <Image style={Styles.btn} source={Images.send} /> */}
+
                                         <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
-                    </KeyboardAwareScrollView>
+                    </KeyboardAwareScrollView> */}
+                    <View style={Styles.views}>
+                        <KeyboardAwareScrollView enableOnAndroid={true}
+                            extraScrollHeight={(Platform.OS === 'ios' ? 110 : 180)}
+                            scrollEnabled
+                            // enableAutomaticScroll={(Platform.OS === 'ios')}
+                            automaticallyAdjustContentInsets={false}
+                        >
+                            <View style={{ height: hp(72), width: '100%' }} >
+                                <View style={Styles.mesagesView}>
+                                    <FlatList
+                                        data={messages}
+                                        renderItem={({ item, index }) => {
+                                            return (
+                                                <View style={Styles.messageCell}>
+                                                    <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
+                                                    <View style={Styles.messageSubCell}>
+                                                        <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('HH:mm')}</Text></Text>
+                                                        <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
+                                                    </View>
+                                                </View>
+                                            )
+                                        }}
+                                    />
+                                </View>
+                                <View style={Styles.textView}>
+                                    <TextInput
+                                        style={Styles.input}
+                                        multiline={true}
+                                        placeholder={placeholder}
+                                        placeholderTextColor={COLORS.menuLightFonts}
+                                        value={message}
+                                        onChangeText={(text) => setMessage(text)}
+                                    />
+                                    <View style={Styles.buttonView}>
+
+                                        <TouchableOpacity onPress={() => sendMessage(message)}>
+
+                                            <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </KeyboardAwareScrollView>
+                    </View>
                 </>
                 :
                 <ActivityIndicator

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet, Platform } from 'react-native'
 import COLORS from '../../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../../utils/Fonts';
@@ -52,7 +52,9 @@ export default StyleSheet.create({
 
     //
     views: {
-        height: '62%',
+        height: Platform.OS == 'android' ? '60%' : '52%',
+        width: '100%',
+        // flex: 1
     },
     leftView: {
         marginLeft: hp(2),
@@ -105,7 +107,7 @@ export default StyleSheet.create({
         marginTop: hp(2),
         width: wp(90),
         height: hp(55),
-        
+
     },
     mesagesView: {
         width: '100%',
@@ -125,6 +127,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute',
         bottom: 0,
+        zIndex: 100
         // bottom:0,
     },
     messageCell: {
