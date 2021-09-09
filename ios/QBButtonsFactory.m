@@ -100,6 +100,17 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
     return button;
 }
 
++ (QBButton *)screenRecording {
+    
+    QBButton *button = [self buttonWithFrame:kDefRect
+                             backgroundColor:kDefBackgroundColor
+                               selectedColor:kDefSelectedColor];
+    
+    button.iconView = [self iconViewWithNormalImage:@"screensharing_ic"
+                                      selectedImage:@"screensharing_ic"];
+    return button;
+}
+
 + (QBButton *)answer {
     
     QBButton *button = [self buttonWithFrame:kDefRect
