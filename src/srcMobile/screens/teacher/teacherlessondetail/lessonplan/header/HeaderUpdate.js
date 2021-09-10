@@ -7,6 +7,9 @@ import FONTS from '../../../../../../utils/Fonts';
 import { opacity } from "../../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import moment from 'moment';
+import AddWhite from "../../../../../../svg/teacher/timetable/Add_White";
+import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import EditWhite from "../../../../../../svg/pupil/parentzone/EditWhite";
 
 const HeaderUpdate = (props) => {
     return (
@@ -17,6 +20,7 @@ const HeaderUpdate = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
@@ -43,6 +47,7 @@ const HeaderUpdate = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => props.saveLesson()}>
                                 {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                                <EditWhite style={styles.addIcon} height={12} width={12} />
                             </TouchableOpacity>
                         }
                     </View>

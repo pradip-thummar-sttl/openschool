@@ -154,7 +154,7 @@ const Message = (props) => {
                     <View style={PAGESTYLE.secondRow}>
                         <Text numberOfLines={1} style={[PAGESTYLE.titleText,{width:'85%'}]}>{item.item.Title}</Text>
                         {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1)} width={hp(1)}  />
+                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.54)} width={hp(1.54)}  />
                     </View>
                     <View style={item.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>
                         <Text style={item.item.Status == 'Draft' ? PAGESTYLE.draftText : PAGESTYLE.sentText}>{item.item.Status}</Text>

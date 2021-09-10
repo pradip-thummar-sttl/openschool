@@ -17,6 +17,12 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
+import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import Calender from "../../../../../svg/teacher/dashboard/Calender";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
+import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -44,18 +50,20 @@ const HeaderTT = (props) => {
         <View style={{ backgroundColor: COLORS.white, shadowColor: COLORS.black, shadowOffset: { width: 0, height: hp(1), }, shadowOpacity: 0.05, shadowRadius: hp(1), paddingBottom: hp(1.5) }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Timetable</Text>
                 </View>
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}>
                         {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
+                        <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.2)} width={hp(5.2)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -76,6 +84,11 @@ const HeaderTT = (props) => {
                         }}>
                         {/* <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        {isSearchActive ?
+                            <CloseBlack height={15} width={15} />
+                            :
+                            <SearchBlue height={15} width={15} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -92,6 +105,7 @@ const HeaderTT = (props) => {
                     style={styles.buttonGroup}
                     onPress={() => props.navigateToCreateNewEvent()}>
                     {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
                 <RBSheet
