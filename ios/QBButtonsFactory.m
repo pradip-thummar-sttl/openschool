@@ -105,9 +105,9 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
     QBButton *button = [self buttonWithFrame:kDefRect
                              backgroundColor:kDefBackgroundColor
                                selectedColor:kDefSelectedColor];
-    
-    button.iconView = [self iconViewWithNormalImage:@"screensharing_ic"
-                                      selectedImage:@"screensharing_ic"];
+    button.pushed = YES;
+    button.iconView = [self iconViewWithNormalImage:@"record_on"
+                                      selectedImage:@"record_off"];
     return button;
 }
 
