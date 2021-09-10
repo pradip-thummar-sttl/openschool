@@ -456,6 +456,7 @@ export default StyleSheet.create({
         position: 'absolute',
         left: hp(4.8),
         bottom: hp(-1.6),
+        backgroundColor: COLORS.white
     },
     editProfileIcon: {
         width: hp(3.38),
