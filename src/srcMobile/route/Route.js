@@ -64,6 +64,8 @@ import { PubNubProvider, usePubNub } from 'pubnub-react';
 import Avatar from '../screens/pupil/Avatar/Avatar';
 import ParentZonePerformance from '../screens/pupil/parentzone/ParentZonePerformance';
 import Call from '../component/reusable/onetoonecall/Call';
+import IntroductionSchool from '../screens/introduction/introductionSchool';
+import SchoolDashBoard from '../screens/school/scholldashboard/SchoolDashBoard';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -90,10 +92,11 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-            <Stack.Navigator headerMode='none' initialRouteName="Splash">
+            <Stack.Navigator headerMode='none' initialRouteName="SchoolDashBoard">
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
+                <Stack.Screen name="IntroductionSchool" component={IntroductionSchool} />
                 <Stack.Screen name="Users" component={Users} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="PupilRegister" component={PupilRegister} />
@@ -110,6 +113,7 @@ function ScreenStack() {
                 <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
                 <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
                 <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
+                <Stack.Screen name="SchoolDashBoard" component={SchoolDashBoard} />
                 <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
                 <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
                 <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />

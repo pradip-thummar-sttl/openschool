@@ -66,6 +66,23 @@ const Sidebar = (props) => {
         )
     }
 
+    const showActionChooserSchool = () => {
+        Alert.alert(
+            '',
+            'Do you really want to logout?',
+            [{
+                text: 'YES',
+                onPress: () => schoolLogout(),
+            },
+            {
+                text: 'NO',
+                onPress: () => { },
+            },
+            ],
+            { cancelable: true }
+        )
+    }
+
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
         props.navigation.replace('Users');
@@ -73,6 +90,11 @@ const Sidebar = (props) => {
 
     const pupilLogout = () => {
         AsyncStorage.setItem('pupil', JSON.stringify(null))
+        props.navigation.replace('Users');
+
+    }
+    const schoolLogout = () => {
+        AsyncStorage.setItem('school', JSON.stringify(null))
         props.navigation.replace('Users');
 
     }
@@ -110,7 +132,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Teacher}
                             /> */}
-                             <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                            <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                             <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -121,7 +143,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Pupil}
                             /> */}
-                             <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                            <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                             <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>Lesson Planner</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -132,7 +154,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Messaging}
                             /> */}
-                             <Ic_PupilManagement style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                            <Ic_PupilManagement style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                             <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>Pupil Management</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -144,7 +166,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Parents}
                             /> */}
-                             <Ic_parents style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                            <Ic_parents style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                             <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>Parents</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -155,7 +177,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Faqs}
                             /> */}
-                             <Ic_Faq style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                            <Ic_Faq style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                             <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
                         </TouchableOpacity>
 
@@ -167,7 +189,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Faqs}
                             /> */}
-                             <Logout style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                            <Logout style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                             <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         </TouchableOpacity>
                     </View>
@@ -183,96 +205,186 @@ const Sidebar = (props) => {
                     </View>
                 </View>
             </View>
-            :
-            <View style={styles.sidebarHeader}>
-                <View style={[styles.sideBarAside]}>
-                    <TouchableOpacity style={styles.userInfo}>
-                        <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
-                        {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                        <View style={styles.profileTextMain}>
-                            {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+            : User.user.UserType == 'School' ?
+                <View style={styles.sidebarHeader}>
+                    <View style={[styles.sideBarAside]}>
+                        <TouchableOpacity style={styles.userInfo}>
+                            <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
+                            {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
+                            <View style={styles.profileTextMain}>
+                                {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.mainMenu}>
+                                <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.mainMenu}>
 
-                        <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
-                            {/* <Image
+                            <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}
                             /> */}
-                             <Ic_Dashboard style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
-                            <Text style={[styles.menuText, selectedModule == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); setSelectedModule(1); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}>
+                                <Ic_Dashboard style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); setSelectedModule(1); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}>
 
-                            {/* <Image
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.Teacher}
                             /> */}
-                             <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
-                            <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { props.navigation.replace('PupilLessonDetail'); setSelectedModule(2); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
-                            {/* <Image
+                                <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>Teacher</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('PupilLessonDetail'); setSelectedModule(2); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}
                             /> */}
-                             <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
-                            <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
-                            {/* <Image
+                                <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>Pupils</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAchievements}
                             /> */}
-                             <Ic_Achievement style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
-                            <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { props.navigation.replace('Avatar'); setSelectedModule(4); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
-                            {/* <Image
+                                <Ic_Achievement style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>Messaging</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('Avatar'); setSelectedModule(4); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
                             /> */}
-                             <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
-                            <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { props.navigation.replace('ParentZoneSwitch'); setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
-                            {/* <Image
+                                <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>Parents</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('ParentZoneSwitch'); setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.OpenSchool}
                             />  */}
-                            <Ic_OpenSchool style={styles.menuIcon}height={hp(3.25)} width={hp(3.25)}/>
+                                <Ic_OpenSchool style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
 
-                             {/* <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} /> */}
+                                {/* <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} /> */}
 
-                            <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { showActionChooserPupil(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
-                            {/* <Image
+                                <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { showActionChooserSchool(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+                                {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
                             /> */}
-                             <Logout style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
-                            <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {/* <View style={styles.cartoon}>
+                                <Logout style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {/* <View style={styles.cartoon}>
                         <Image source={Images.cartoon} style={styles.cartoonIcon} />
                     </View> */}
-                    <View style={[styles.userInfo, styles.userInfobottom]}>
-                        <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
-                        <View style={styles.profileTextMain}>
-                            <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
+                        <View style={[styles.userInfo, styles.userInfobottom]}>
+                            <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                            <View style={styles.profileTextMain}>
+                                <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            </View>
+                            <TouchableOpacity style={styles.moreMenu}>
+                                {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
+                                <More style={styles.moreIcon} height={5} width={hp(3)} />
+                            </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={styles.moreMenu}>
-                            {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
-                            <More style={styles.moreIcon} height={5} width={hp(3)} />
-                        </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+                :
+                <View style={styles.sidebarHeader}>
+                    <View style={[styles.sideBarAside]}>
+                        <TouchableOpacity style={styles.userInfo}>
+                            <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
+                            {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
+                            <View style={styles.profileTextMain}>
+                                {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
+                                <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.mainMenu}>
+
+                            <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.Dashboard}
+                            /> */}
+                                <Ic_Dashboard style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); setSelectedModule(1); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}>
+
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.Teacher}
+                            /> */}
+                                <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('PupilLessonDetail'); setSelectedModule(2); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.MyLessons}
+                            /> */}
+                                <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.MyAchievements}
+                            /> */}
+                                <Ic_Achievement style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('Avatar'); setSelectedModule(4); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.MyAvatar}
+                            /> */}
+                                <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('ParentZoneSwitch'); setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.OpenSchool}
+                            />  */}
+                                <Ic_OpenSchool style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+
+                                {/* <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} /> */}
+
+                                <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { showActionChooserPupil(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+                                {/* <Image
+                                style={styles.menuIcon}
+                                source={Images.MyAvatar}
+                            /> */}
+                                <Logout style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {/* <View style={styles.cartoon}>
+                        <Image source={Images.cartoon} style={styles.cartoonIcon} />
+                    </View> */}
+                        <View style={[styles.userInfo, styles.userInfobottom]}>
+                            <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                            <View style={styles.profileTextMain}>
+                                <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
+                            </View>
+                            <TouchableOpacity style={styles.moreMenu}>
+                                {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
+                                <More style={styles.moreIcon} height={5} width={hp(3)} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
 
     );
 }

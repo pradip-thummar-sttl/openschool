@@ -281,17 +281,17 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher Login' : 'Pupil Login'}</Text>
+                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
-                                <Text style={styles.labelInput}>Email</Text>
+                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School'? "Annotation" :"Email"}</Text>
                                 <TextInput
                                     onFocus={() => this.setState({ isEmailFocused: true })}
                                     onBlur={() => this.setState({ isEmailFocused: false })}
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                    placeholder="Enter email"
+                                    placeholder={this.props.route.params.userType == 'School'? "Enter Annotation" :"Enter email"}
                                     autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}
