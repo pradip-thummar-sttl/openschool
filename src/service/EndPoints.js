@@ -61,4 +61,6 @@ export const EndPoints = {
     AddInstantReward: 'addinstantreward',
     PupilUploadProfile: 'pupiluploadProfile',
     GetTeachersList: 'getteacherslist',
+
+    TeacherBySchoolId: 'teacherbyschoolid',
 }

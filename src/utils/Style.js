@@ -20,6 +20,7 @@ export default StyleSheet.create({
         flex: 1,
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
+        width: '100%'
     },
     commonInput: {
         color:COLORS.themeBlue,

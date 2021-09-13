@@ -33,12 +33,21 @@ export default class Users extends Component {
                 }
             })
 
-        } else {
+        } else if (type === 'Pupil') {
             AsyncStorage.getItem('introducePupil').then((value) => {
                 if (value) {
                     this.props.navigation.navigate('Login', { userType: "Pupil" })
                 } else {
                     this.props.navigation.navigate('IntroductionPupil')
+                }
+            })
+
+        }else {
+            AsyncStorage.getItem('introduceSchool').then((value) => {
+                if (value) {
+                    this.props.navigation.navigate('Login', { userType: "School" })
+                } else {
+                    this.props.navigation.navigate('IntroductionSchool')
                 }
             })
 
@@ -56,7 +65,7 @@ export default class Users extends Component {
                         <View style={styles.userMain}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => null}>
+                                onPress={() => this.navigateIntroductionScreen('School')}>
                                 <View style={styles.user}>
                                     {/* <Image
                                         style={styles.userIcon}

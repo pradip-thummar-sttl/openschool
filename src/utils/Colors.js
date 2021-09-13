@@ -69,6 +69,9 @@ const COLORS = {
     sentStatus: '#DDF3FF',
     draftStatus: '#FFEECC',
     draftStatusText: '#FEAD29',
+    pinkInsights: '#dd7eff',
+    greenSchool: '#00b754',
+
 }
 
 export default COLORS;
