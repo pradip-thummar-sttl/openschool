@@ -66,6 +66,9 @@ import ParentZonePerformance from '../screens/pupil/parentzone/ParentZonePerform
 import Call from '../component/reusable/onetoonecall/Call';
 import IntroductionSchool from '../screens/introduction/introductionSchool';
 import SchoolDashBoard from '../screens/school/scholldashboard/SchoolDashBoard';
+import SchoolSetting from '../screens/school/setting/SchoolSetting';
+import SchoolProfileView from '../screens/school/profile/SchoolProfileView';
+import SchoolProfileEdit from '../screens/school/profile/SchoolProfileEdit';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -92,7 +95,7 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-            <Stack.Navigator headerMode='none' initialRouteName="SchoolDashBoard">
+            <Stack.Navigator headerMode='none' initialRouteName="SchoolProfileView">
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
@@ -150,6 +153,9 @@ function ScreenStack() {
                 <Stack.Screen name="ParentChat" component={ParentChat} />
                 <Stack.Screen name="Avatar" component={Avatar} />
                 <Stack.Screen name="Call" component={Call} />
+                <Stack.Screen name="SchoolSetting" component={SchoolSetting} />
+                <Stack.Screen name="SchoolProfileView" component={SchoolProfileView} />
+                <Stack.Screen name="SchoolProfileEdit" component={SchoolProfileEdit} />
             </Stack.Navigator>
         </PubNubProvider>
     );
