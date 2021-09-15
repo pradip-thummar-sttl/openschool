@@ -16,7 +16,7 @@ export default class Introduction extends Component {
         super(props);
     }
     navigateToLogin(){
-        AsyncStorage.setItem('introduceTeacher', "true")
+        AsyncStorage.setItem('introduceSchool', "true")
         this.props.navigation.replace('Login', { userType: "School" })
     }
 

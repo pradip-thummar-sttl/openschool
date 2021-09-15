@@ -69,6 +69,9 @@ import SchoolDashBoard from '../screens/school/scholldashboard/SchoolDashBoard';
 import SchoolSetting from '../screens/school/setting/SchoolSetting';
 import SchoolProfileView from '../screens/school/profile/SchoolProfileView';
 import SchoolProfileEdit from '../screens/school/profile/SchoolProfileEdit';
+import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
+import SchoolMessage from '../screens/school/globalmessage/SchoolMessage';
+import TeacherManagement from '../screens/school/teacherManagament/TeacherManagement';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -95,7 +98,7 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-            <Stack.Navigator headerMode='none' initialRouteName="SchoolProfileView">
+            <Stack.Navigator headerMode='none' initialRouteName="Splash">
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
@@ -156,6 +159,9 @@ function ScreenStack() {
                 <Stack.Screen name="SchoolSetting" component={SchoolSetting} />
                 <Stack.Screen name="SchoolProfileView" component={SchoolProfileView} />
                 <Stack.Screen name="SchoolProfileEdit" component={SchoolProfileEdit} />
+                <Stack.Screen name="SchoolNewMessage" component={SchoolNewMessage} />
+                <Stack.Screen name="SchoolMessage" component={SchoolMessage} />
+                <Stack.Screen name="TeacherManagement" component={TeacherManagement} />
             </Stack.Navigator>
         </PubNubProvider>
     );

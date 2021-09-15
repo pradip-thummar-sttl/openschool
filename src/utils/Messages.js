@@ -88,6 +88,9 @@ const MESSAGE = {
     teacherNotStarted: 'Teacher has not started class yet!',
 
     noTeacher: 'No teacher here yet',
+
+    teacherManage1:"There doesn't seem to be any teachers here",
+    teacherManage2:"Start adding teacher o invite them join the school",
 }
 
 export default MESSAGE;

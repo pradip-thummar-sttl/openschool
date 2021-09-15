@@ -28,13 +28,15 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     blankManageTextBold: {
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: FONTS.fontBold,
         textAlign: 'center',
-        marginTop: 50
+        marginTop: 50,
+        lineHeight:hp(3)
     },
     nodataContent: {
         alignSelf: 'center',
-        textAlign : 'center'
+        textAlign : 'center',
+         lineHeight:hp(3)
     },
 });

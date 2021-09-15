@@ -79,4 +79,52 @@ export default StyleSheet.create({
         paddingLeft: hp(1.30),
         alignSelf: 'center',
     },
+    //
+    pupilProfile: {
+        width: Platform.OS == 'android' ? hp(39.5) : hp(26),
+        flexDirection:'row',
+    },
+    groupColumnmain: {
+        width: hp(17.97),
+    },
+    groupColumn: {
+        width: hp(5.59),
+        alignItems: 'center',
+    },
+    pupilgroupName: {
+        textAlign: 'center',
+    },
+    pupilData: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingBottom:hp(2),
+        justifyContent: 'space-between',
+        paddingTop:hp(2),
+        width: '90%',
+        borderBottomWidth: 1,
+        borderColor: COLORS.dashBoard,
+        alignSelf:'center',
+    },
+    rowProfile: {
+        flexDirection: 'row',
+    },
+    pupilImage: {
+        width: hp(3.64),
+        height: hp(3.64),
+        borderRadius: hp(100),
+        backgroundColor: COLORS.lightGrayPupil,
+        marginRight: hp(1.5),
+        // top: hp(1.1),
+        alignSelf:'center',
+    },
+    pupilName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGray,
+    },
+    pupilgroupName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
 })

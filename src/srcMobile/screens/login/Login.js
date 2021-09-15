@@ -67,6 +67,28 @@ class Login extends Component {
                 }
 
             })
+        } else if (this.props.route.params.userType == 'School') {
+            AsyncStorage.getItem('school').then((value) => {
+                if (value) {
+                    var user = JSON.parse(value)
+                    if (user.isRemember) {
+                        console.log('user of async', user)
+
+                        this.setState({
+                            userName: user.Email,
+                            password: user.Password,
+                            PushToken: user.PushToken,
+                            Device: user.Device,
+                            OS: user.OS,
+                            AccessedVia: user.AccessedVia,
+                            isRemember: user.isRemember
+                        })
+                        this.isFieldsValidated()
+                    } else {
+                    }
+                }
+
+            })
         } else {
             AsyncStorage.getItem('user').then((value) => {
                 if (value) {
@@ -240,7 +262,9 @@ class Login extends Component {
     launchNextScrren(res, data) {
         if (this.props.route.params.userType == 'Pupil') {
             AsyncStorage.setItem('pupil', JSON.stringify(data))
-        } else {
+        } else if (this.props.route.params.userType == 'School') {
+            AsyncStorage.setItem('school', JSON.stringify(data))
+        }else {
             AsyncStorage.setItem('user', JSON.stringify(data))
         }
         this.props.setUserAuthData(res)
@@ -252,7 +276,10 @@ class Login extends Component {
             } else {
                 this.props.navigation.replace('ParentZoneSwitch')
             }
-        } else {
+        } else if (res.UserType === "School") {
+            this.props.navigation.replace('SchoolDashBoard')
+        }
+        else {
             this.props.navigation.replace('PupuilDashboard')
         }
         // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')

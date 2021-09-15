@@ -219,7 +219,7 @@ const Sidebar = (props) => {
                         </TouchableOpacity>
                         <View style={styles.mainMenu}>
 
-                            <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('SchoolDashBoard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.Dashboard}
@@ -227,7 +227,7 @@ const Sidebar = (props) => {
                                 <Ic_Dashboard style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { props.navigation.replace('PupilTimetable'); setSelectedModule(1); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('TeacherManagement'); setSelectedModule(1); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 1 ? styles.menuItemSelected : null]}>
 
                                 {/* <Image
                                 style={styles.menuIcon}
@@ -244,7 +244,7 @@ const Sidebar = (props) => {
                                 <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>Pupils</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('SchoolMessage'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAchievements}
