@@ -18,8 +18,10 @@ import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 
-const HeaderTT = (props) => {
+const HeaderTM = (props) => {
 
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -93,6 +95,45 @@ const HeaderTT = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                    <Menu style={{ marginLeft: 10 }}>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
+                        <MenuOptions style={styles.filterListWrap}>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Subject</Text>
+                                        {selectedIndex == 0 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Date</Text>
+                                        {selectedIndex == 1 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
+                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
+                    <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                </View>
                 <PopupAddNewData
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
@@ -100,7 +141,7 @@ const HeaderTT = (props) => {
         </View>
     );
 }
-export default HeaderTT;
+export default HeaderTM;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {

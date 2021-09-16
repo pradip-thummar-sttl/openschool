@@ -1,38 +1,58 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import { ActivityIndicator, Platform, View, TouchableOpacity, Text, Image } from "react-native";
 import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderTT from "./header/HeaderTT";
-import { cellWidth, opacity, showMessage, Var } from "../../../../utils/Constant";
-import Popupdata from "../../../component/reusable/popup/Popupdata";
-import Popup from "../../../component/reusable/popup/Popup";
+import HeaderTM from "./header/HeaderTM";
+import { baseUrl, showMessage, Var } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import { useDispatch } from "react-redux";
-import { setCalendarEventData } from "../../../../actions/action";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { User } from "../../../../utils/Model";
-import { Lesson } from "../../../../utils/Constant";
-import TLDetail from "../teacherlessondetail/lessonplan/TeacherLessonDetail";
-import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
-import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
+import ArrowNext from "../../../../svg/teacher/pupilmanagement/ArrowNext";
+import NoPupil from "../../../../svg/emptystate/NoPupil";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-// import Images from "../../../../utils/Images";
-import MESSAGE from "../../../../utils/Messages";
+import TeacherProfileView from "./TeacherProfileView";
+import TeacherProfileAdd from "./TeacherProfileAdd";
+
+const Pupillist = (props, { item }) => (
+    <TouchableOpacity onPress={() => { props.onPress() }}>
+        <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilProfile}>
+                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20), fontFamily: FONTS.fontSemiBold }]}>{item.FirstName} {item.LastName}</Text>
+            </View>
+            <View style={PAGESTYLE.groupColumnmain}>
+                <View style={PAGESTYLE.groupColumn}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.TeachingYear}</Text>
+                </View>
+            </View>
+            <View style={PAGESTYLE.perfomanceColumn}>
+                <View style={PAGESTYLE.perfomanceDotmain}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.LessonCount}</Text>
+                </View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.HomeworkCount}</Text>
+                </View>
+            </View>
+            <View style={PAGESTYLE.rewardColumn}>
+                <View style={PAGESTYLE.rewardStar}>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.pupilgroupName, width: hp(20), }}>{item.Email}</Text>
+                </View>
+            </View>
+            {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.51)} width={hp(0.95)} />
+        </View>
+    </TouchableOpacity>
+);
 
 const TeacherManagement = (props) => {
-    const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    const time = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'];
-    const dispatch = useDispatch()
-    
-    const [isTeacherLessonDetail, setTeacherLessonDetail] = useState(false)
-    const [isTeacherLessonAdd, setTeacherLessonAdd] = useState(false)
+
+    const [isTeacherDetail, setTeacherDetail] = useState(false)
+    const [isTeacherAdd, setTeacherAdd] = useState(false)
     const [teacherDetailData, setTeacherDetailData] = useState({})
     const [isHide, action] = useState(true);
-    const [timeTableData, setTimeTableData] = useState([])
-    const [isTimeTableLoading, setTimeTableLoading] = useState(true)
+    const [teacherData, setTeacherData] = useState([])
+    const [isDataLoading, setDataLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
 
@@ -41,23 +61,23 @@ const TeacherManagement = (props) => {
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
-        setTimeTableLoading(true)
+        isDataLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
         }
 
-        console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
-        Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
-            setTimeTableLoading(false)
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+            isDataLoading(false)
             if (res.code == 200) {
                 // console.log('response of get all lesson event:', res)
-                setTimeTableData(res.data)
+                setTeacherData(res.data)
                 // dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
+            isDataLoading(false)
             console.log('response of get all lesson error', err)
         })
 
@@ -68,84 +88,86 @@ const TeacherManagement = (props) => {
         fetchRecord('', '')
     }
 
+    const pupilRender = ({ item }) => {
+        return (
+            <Pupillist
+                item={item}
+                onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}
+            />
+        );
+    };
+
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
-            {/* <Sidebar
-                moduleIndex={1}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            {
-                isTeacherLessonDetail ?
-                    <TLDetailEdit
-                        goBack={() => setTeacherLessonDetail(false)}
-                        onRefresh={() => refresh()}
-                        data={teacherDetailData} />
+            <View style={{ width: isHide ? '100%' : '78%' }}>
+                <HeaderTM
+                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                    navigateToAddLesson={() => setTeacherAdd(true)}
+                    refreshList={() => refresh()} />
+                {isTeacherAdd ?
+                    <TeacherProfileAdd
+                        navigateToBack={() => setTeacherDetail(false)} />
                     :
-                    isTeacherLessonAdd ?
-                        <TLDetailAdd
-                            goBack={() => setTeacherLessonAdd(false)}
-                            onRefresh={() => refresh()} />
+                    isTeacherDetail ?
+                        <TeacherProfileView
+                            navigateToBack={() => setTeacherDetail(false)} />
                         :
-                        <View style={{ width: isHide ? '100%' : '78%' }}>
-                            {/* <HeaderTT
-                                onAlertPress={() => { props.navigation.openDrawer() }}
-                                onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                                onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                                onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                                navigateToAddLesson={() => setTeacherLessonAdd(true)}
-                                refreshList={() => refresh()} /> */}
-
-                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
-                                {isTimeTableLoading ?
-                                    <ActivityIndicator
-                                        style={{ flex: 1 }}
-                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                        color={COLORS.yellowDark} />
-                                    :
-                                    timeTableData.length > 0 ?
-                                        <View style={{ ...PAGESTYLE.mainPage1 }}>
-                                            <View style={PAGESTYLE.days}>
-                                                {days.map((data, index) => (
-                                                    <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
-                                                        <Text style={PAGESTYLE.lableDay}>{data}</Text>
-                                                    </View>
-                                                ))}
+                        <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
+                            {isDataLoading ?
+                                <ActivityIndicator
+                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                    color={COLORS.blueButton} />
+                                :
+                                teacherData.length > 0 ?
+                                    <View>
+                                        <View style={PAGESTYLE.pupilTable}>
+                                            <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total {teacherData.length} Teachers</Text>
                                             </View>
-
-                                            <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
-                                                horizontal={true}>
-
-                                                {time.map((data, timneKey) => (
-                                                    <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth, }}>
-                                                        <Text style={{ ...PAGESTYLE.lable, }}>{data}</Text>
-
-                                                        <View style={{ ...PAGESTYLE.timeLabel }}>
-                                                            {days.map((data, dayKey) => (
-                                                                dayKey != 0 ?
-                                                                    setData(dayKey, timneKey)
-                                                                    :
-                                                                    null
-
-                                                            ))}
-                                                        </View>
-                                                    </View>
-                                                ))}
-                                            </ScrollView>
+                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
+                                            </View>
+                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Scheduled Activity</Text>
+                                                <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
+                                                </View>
+                                            </View>
+                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Contact</Text>
+                                            </View>
                                         </View>
-                                        :
-                                        // <View style={{ height: hp(13), justifyContent: 'center' }}>
-                                        //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
-                                        // </View>
-                                        <ScrollView>
-                                            <EmptyStatePlaceHohder holderType={3}  title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
-                                        </ScrollView>
-                                }
-                            </View>
+                                        <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
+                                        <View style={PAGESTYLE.pupilTabledata}>
+                                            <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
+                                                <FlatList
+                                                    data={teacherData}
+                                                    renderItem={pupilRender}
+                                                    style={PAGESTYLE.pupilListing}
+                                                    keyExtractor={(item) => item.id}
+                                                    extraData={selectedId}
+                                                    showsVerticalScrollIndicator={false}
+                                                    nestedScrollEnabled
+                                                />
+                                            </SafeAreaView>
+                                        </View>
+                                    </View>
+                                    :
+
+                                    // <View>
+                                    //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                    // </View>
+                                    <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
+                            }
                         </View>
-            }
+                }
+            </View>
         </View >
     );
 }

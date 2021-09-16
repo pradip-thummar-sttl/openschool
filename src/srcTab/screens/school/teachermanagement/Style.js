@@ -122,4 +122,168 @@ export default StyleSheet.create({
         borderRadius: hp(0.8),
         marginBottom: hp(1.04),
     },
+    pupilTableHeadingMain: {
+        width: hp(15.90),
+    },
+    tabpupil2: {
+        width: hp(15.97),
+    },
+    tabpupil22: {
+        width: hp(13.97),
+    },
+    tabpupil3: {
+        width: hp(20.18),
+        marginRight: hp(9.50),
+    },
+    tabpupil4: {
+        width: hp(18.22),
+    },
+    pupilTableHeadingMainTitle: {
+        fontSize: hp(1.82),
+        lineHeight: hp(2.60),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+    },
+    pupilTableHeadingMainsubTitle: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
+        lineHeight: hp(2.08),
+        marginRight: hp(2.60),
+    },
+    pupilTableHeadingMainsubTitlestar: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
+        lineHeight: hp(2.08),
+        marginRight: hp(0.91),
+    },
+    pupilTableHeadingsubMain: {
+        flexDirection: 'row',
+    },
+    pupilhrCustomMargin: {
+        marginTop: hp(1.95),
+        marginBottom: hp(1.30),
+    },
+    mainContainer: {
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: hp(1.5),
+        paddingTop: hp(2),
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1),
+    },
+    noDataImage: {
+        height: 300,
+        resizeMode: 'contain',
+        alignSelf: 'center',
+        marginBottom: 50
+    },
+    nodataTitle: {
+        alignSelf: 'center',
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: 18,
+        textAlign : 'center',
+        marginBottom: 10,
+    },
+    nodataContent: {
+        alignSelf: 'center',
+        fontSize: 18,
+        textAlign : 'center'
+    },
+    pupilTable: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginLeft:hp(4.5),
+        marginBottom: 10,
+        // backgroundColor: COLORS.white
+    },
+    pupilData: {
+        height:wp(6),
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius:10,
+        backgroundColor:'white',
+        marginBottom:wp(1),
+        paddingHorizontal:hp(2)
+        //  marginLeft:hp(4.5)
+    },
+    pupilProfile: {
+        width: hp(15),
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    groupColumnmain: {
+        width: hp(17.97),
+        backgroundColor:'blue'
+        
+    },
+    groupColumn: {
+        width: hp(10.59),
+        alignItems: 'center',
+        justifyContent:'center',
+        marginLeft:hp(-2)
+    },
+    groupColumn1: {
+        width: hp(10.59),
+        alignItems: 'center',
+    },
+    groupColumn11: {
+        width: hp(10.59),
+        alignItems: 'flex-start',
+        marginLeft:hp(5)
+    },
+    pupilgroupName: {
+        textAlign: 'center',
+    },
+    perfomanceColumn: {
+        flexDirection: 'row',
+        width: hp(20.18),
+        marginLeft:hp(4),
+        marginRight: hp(9.50),
+    },
+    pupilImage: {
+        width: hp(3.7),
+        height: hp(3.7),
+        borderRadius: hp(100),
+        backgroundColor: COLORS.lightGrayPupil,
+        marginRight: hp(1),
+    },
+    pupilName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    pupilgroupName: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+    },
+    pupilgroupName1: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        marginLeft:22,
+        width:100,
+        textAlign:'center'
+    },
+    pupilgroupName10: {
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.darkGray,
+        width:100,
+        textAlign:'center'
+    },
+    rewardColumn: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    pupilDetaillinkIcon: {
+        width: hp(1),
+        resizeMode: 'contain',
+        right: 20,
+        position: 'absolute',
+    },
 });
