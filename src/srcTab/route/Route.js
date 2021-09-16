@@ -62,6 +62,10 @@ import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import Avatar from '../screens/pupil/Avatar/Avatar';
 import Call from '../component/reusable/onetoonecall/Call';
+import SchoolMessage from '../screens/school/globalmessage/SchoolMessage';
+import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
+import SchoolSetting from '../screens/school/setting/SchoolSetting';
+import TeacherManagement from '../screens/school/teachermanagement/TeacherManagement';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
@@ -144,6 +148,10 @@ function ScreenStack() {
                 <Stack.Screen name="Call" component={Call} />
 
                 <Stack.Screen name="SchoolDashboard" component={SchoolDashboard} />
+                <Stack.Screen name="SchoolSetting" component={SchoolSetting} />
+                <Stack.Screen name="SchoolMessage" component={SchoolMessage} />
+                <Stack.Screen name="SchoolNewMessage" component={SchoolNewMessage} />
+                <Stack.Screen name="TeacherManagement" component={TeacherManagement} />
             </Stack.Navigator>
         </PubNubProvider>
     );

@@ -384,7 +384,7 @@ export default StyleSheet.create({
         paddingBottom: hp(3.51),
     },
     pupilTableHeadingMain: {
-        width: hp(35.80),
+        width: hp(28.80),
     },
     tabpupil2: {
         width: hp(17.97),
@@ -431,7 +431,7 @@ export default StyleSheet.create({
         marginVertical: 6,
     },
     pupilProfile: {
-        width: hp(35.80),
+        width: hp(28.80),
         flexDirection: 'row',
         alignItems: 'center',
     },

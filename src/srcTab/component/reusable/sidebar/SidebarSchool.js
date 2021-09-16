@@ -64,7 +64,7 @@ const SidebarSchool = (props) => {
     }
 
     const navigateSidebarIndex = (index) => {
-        props.navigateToTimetable()
+        props.navigateToTeachers()
         // setSelectedIndex(1);
     }
 
@@ -154,7 +154,7 @@ const SidebarSchool = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToPupilManagement(); toggleAnimation(true) }}>
+                        onPress={() => { props.navigateToMessaging(); toggleAnimation(true) }}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}

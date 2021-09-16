@@ -52,6 +52,8 @@ import Silver from "../../../../svg/teacher/lessonhwplanner/StartSilver";
 import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
 import Insights from "../../../../svg/school/dashboard/Insights";
 import SidebarSchool from "../../../component/reusable/sidebar/SidebarSchool";
+import SchoolMessage from "../globalmessage/SchoolMessage";
+import TeacherManagement from "../teachermanagement/TeacherManagement";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -102,40 +104,21 @@ const Pupillist = ({ item, onPress }) => (
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.GroupName ? item.GroupName : '-'}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.TeachingYear}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>
-                <View style={PAGESTYLE.perfomanceDotmain}><Engagement height={hp(1.04)} width={hp(1.04)} /></View>
-                <View style={PAGESTYLE.perfomanceDotmainTwo}><Efforts height={hp(1.04)} width={hp(1.04)} /></View>
+                <View style={PAGESTYLE.perfomanceDotmain}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.LessonCount}</Text>
+                </View>
+                <View style={PAGESTYLE.perfomanceDotmainTwo}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.HomeworkCount}</Text>
+                </View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
-                {item.RewardsList.map((item, index) => {
-                    return (
-                        item._id == '3' ?
-                            <View style={PAGESTYLE.rewardStar}>
-                                {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                <Bronze style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
-                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                            </View>
-                            :
-                            item._id == '6' ?
-                                <View style={PAGESTYLE.rewardStar}>
-                                    {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                    <Silver style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
-                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                </View>
-                                :
-                                item._id == '9' ?
-                                    <View style={PAGESTYLE.rewardStar}>
-                                        {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                        <Gold style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
-                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                    </View>
-                                    :
-                                    null
-                    )
-                })}
+                <View style={PAGESTYLE.rewardStar}>
+                    <Text numberOfLines={1} style={{...PAGESTYLE.pupilgroupName, width:hp(20),}}>{item.Email}</Text>
+                </View>
             </View>
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
             <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.51)} width={hp(0.95)} />
@@ -174,14 +157,14 @@ const SchoolDashboard = (props) => {
     })
     const [dashData, setdashData] = useState([])
     const [schoolData, setSchoolData] = useState([])
-    const [isDashDataLoading, setDashDataLoading] = useState(true)
+    const [isDashDataLoading, setDashDataLoading] = useState(false)
     const [isSchoolDataLoading, setSchoolDataLoading] = useState(true)
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [isTeacherLessonDetail, setTeacherLessonDetail] = useState(false)
     const [isAddSubject, setAddSubject] = useState(false)
     const [isAddEvent, setAddEvent] = useState(false)
     const [isPupilManagement, setPupilManagement] = useState(false)
-    const [pupilManagementselectedTab, setPupilManagementselectedTab] = useState(0)
+    const [messagingTab, setMessagingTab] = useState(0)
     const [isPupilDetail, setPupilDetail] = useState(false)
     const [selectedPupil, setSelectedPupil] = useState({})
 
@@ -252,9 +235,7 @@ const SchoolDashboard = (props) => {
             Filterby: ''
         }
 
-        console.log(`${EndPoints.TeacherBySchoolId}/${User.user._id}`);
-
-        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user._id}`, (res) => {
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setSchoolDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all pupil data', res)
@@ -369,7 +350,7 @@ const SchoolDashboard = (props) => {
         setDataOfSubView(dashData[index])
     }
     const navigatePupilGroup = () => {
-        setPupilManagementselectedTab(1)
+        setMessagingTab(1)
         setTeacherLessonDetail(false);
         setAddSubject(false);
         setSelectedIndex(3)
@@ -396,9 +377,9 @@ const SchoolDashboard = (props) => {
                 moduleIndex={selectedIndex}
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0); refresh() }}
-                navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
+                navigateToTeachers={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
                 navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
-                navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
+                navigateToMessaging={() => { setMessagingTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
                 navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }}
                 navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }} />
 
@@ -675,25 +656,20 @@ const SchoolDashboard = (props) => {
                                                             <View style={PAGESTYLE.pupilTable}>
                                                                 <View style={PAGESTYLE.pupilTableHeadingMain}>
                                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text>
+                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total {schoolData.length} Teachers</Text>
                                                                 </View>
                                                                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
+                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
                                                                 </View>
                                                                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
-                                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
+                                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Scheduled Activity</Text>
                                                                     <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
+                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
+                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
                                                                     </View>
                                                                 </View>
                                                                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
-                                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                                                    <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
-                                                                    </View>
+                                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Contact</Text>
                                                                 </View>
                                                             </View>
                                                             <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
@@ -724,13 +700,13 @@ const SchoolDashboard = (props) => {
                                 </View>
                                 :
                                 selectedIndex == 1 ?
-                                    <TeacherTimeTable navigation={props.navigation} />
+                                    <TeacherManagement navigation={props.navigation} />
                                     :
                                     selectedIndex == 2 ?
                                         <TeacherLessonList navigation={props.navigation} />
                                         :
                                         selectedIndex == 3 ?
-                                            <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
+                                            <SchoolMessage navigation={props.navigation} tabs={messagingTab} />
                                             :
                                             <Message navigation={props.navigation} />
 
