@@ -154,6 +154,7 @@ const PupiloverView = (props) => {
                             pupilData.length > 0 ?
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
+                                        <View style={{width: hp(2)}}></View>
                                         <View style={PAGESTYLE.pupilTableHeadingMain}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
