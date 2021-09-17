@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class ScreenRecorder;
 @class QBChatDialog;
 @class UsersDataSource;
 
@@ -44,5 +45,6 @@ typedef void (^CompleteCall)(BOOL isFinished);
 - (IBAction)raiseBtn:(id)sender;
 - (IBAction)thumbBtn:(id)sender;
 
+//- (ScreenRecorder *)returnSwiftClassInstance;
 
 @end

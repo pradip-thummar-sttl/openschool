@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 QuickBlox Team. All rights reserved.
 //
 
+
 #import "CallViewController.h"
+
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -24,6 +26,9 @@
 #import "WhiteboardVC.h"
 #import "ReactionTableViewCell.h"
 #import <PubNub/PubNub.h>
+#import "MYED_Open_School-Swift.h"
+
+
 
 #pragma mark Statics
 
@@ -89,7 +94,13 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) NSString *selectedChannel;
 @property (strong, nonatomic) NSString *selectedId;
 
+@property (assign, nonatomic) BOOL isRecording;
+
+//@property (weak, nonatomic)ScreenRecorder *screenRecord;
+
+
 @end
+
 
 @implementation CallViewController
 
@@ -122,6 +133,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+  
+  self.isRecording = false;
   _doView.layer.cornerRadius=10;
   _doView.layer.borderWidth = 3;
   _doView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -279,6 +292,41 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     __weak __typeof(self)weakSelf = self;
   
+ [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
+   
+   weakSelf.muteAudio ^= 1;
+   if (!weakSelf.isRecording) {
+//     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
+//          NSLog(@"rcording progress... %@", error);
+//        } onCompletion:^(NSError * error) {
+//          NSLog(@"rcording error... %@", error);
+//        }];
+     weakSelf.isRecording = true;
+     
+     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+       NSLog(@"error of recording", error);
+     }];
+//    weakSelf.screenRecord
+//     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
+//       NSLog(@"rcording progress... %@", error);
+//     }];
+     
+    
+   }else{
+//     [[ScreenRecordCoordinator recordCordinator] stopRecording];
+     weakSelf.isRecording = false;
+     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error) {
+            NSLog(@"stop recording Error", error);
+     }];
+//     [[ScreenRecorder shareInstance]
+//     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
+//       NSLog(@"rcording progress... %@", error);
+//     }]
+   }
+    }];
+ 
+ 
+ 
   [self.toolbar addButton:[QBButtonsFactory switchCamera] action:^(UIButton *sender) {
     Settings *settings = Settings.instance;
     self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionFront];
