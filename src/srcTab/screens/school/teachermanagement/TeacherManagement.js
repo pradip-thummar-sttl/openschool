@@ -113,69 +113,72 @@ const TeacherManagement = (props) => {
                         selectedPupil={teacherDetailData}
                         navigateToBack={() => setTeacherDetail(false)} />
                     :
-                    <>
-                        <HeaderTM
-                            onAlertPress={() => { props.navigation.openDrawer() }}
-                            onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                            onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                            onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                            onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                            navigateToAddLesson={() => setTeacherAdd(true)}
-                            refreshList={() => refresh()} />
-                        <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
-                            {isDataLoading ?
-                                <ActivityIndicator
-                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                    color={COLORS.blueButton} />
-                                :
-                                teacherData.length > 0 ?
-                                    <View>
-                                        <View style={PAGESTYLE.pupilTable}>
-                                            <View style={{ width: '2%' }}>
-                                            </View>
-                                            <View style={{ width: '5%' }}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Title</Text>
-                                            </View>
-                                            <View style={{ width: '20%', }}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
-                                            </View>
-                                            <View style={{ width: '23%', }}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
-                                            </View>
-                                            <View style={{ width: '25%' }}>
-                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
-                                                <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
+                    isTeacherAdd ?
+                        <TeacherProfileAdd />
+                        :
+                        <>
+                            <HeaderTM
+                                onAlertPress={() => { props.navigation.openDrawer() }}
+                                onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                                onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                                onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                                refreshList={() => refresh()}
+                                navigateToAddTeacher={() => setTeacherAdd(true)} />
+                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
+                                {isDataLoading ?
+                                    <ActivityIndicator
+                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                        color={COLORS.blueButton} />
+                                    :
+                                    teacherData.length > 0 ?
+                                        <View>
+                                            <View style={PAGESTYLE.pupilTable}>
+                                                <View style={{ width: '2%' }}>
+                                                </View>
+                                                <View style={{ width: '5%' }}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Title</Text>
+                                                </View>
+                                                <View style={{ width: '20%', }}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
+                                                </View>
+                                                <View style={{ width: '23%', }}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
+                                                </View>
+                                                <View style={{ width: '25%' }}>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
+                                                    <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
+                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
+                                                    </View>
+                                                </View>
+                                                <View style={{ width: '25%' }}>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Contact</Text>
                                                 </View>
                                             </View>
-                                            <View style={{ width: '25%' }}>
-                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Contact</Text>
+                                            <View style={PAGESTYLE.pupilTabledata}>
+                                                <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
+                                                    <FlatList
+                                                        data={teacherData}
+                                                        renderItem={pupilRender}
+                                                        style={PAGESTYLE.pupilListing}
+                                                        keyExtractor={(item) => item.id}
+                                                        extraData={null}
+                                                        showsVerticalScrollIndicator={false}
+                                                        nestedScrollEnabled
+                                                    />
+                                                </SafeAreaView>
                                             </View>
                                         </View>
-                                        <View style={PAGESTYLE.pupilTabledata}>
-                                            <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                                                <FlatList
-                                                    data={teacherData}
-                                                    renderItem={pupilRender}
-                                                    style={PAGESTYLE.pupilListing}
-                                                    keyExtractor={(item) => item.id}
-                                                    extraData={null}
-                                                    showsVerticalScrollIndicator={false}
-                                                    nestedScrollEnabled
-                                                />
-                                            </SafeAreaView>
-                                        </View>
-                                    </View>
-                                    :
+                                        :
 
-                                    // <View>
-                                    //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    // </View>
-                                    <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
-                            }
-                        </View>
-                    </>
+                                        // <View>
+                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                        // </View>
+                                        <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
+                                }
+                            </View>
+                        </>
                 }
             </View>
         </View >

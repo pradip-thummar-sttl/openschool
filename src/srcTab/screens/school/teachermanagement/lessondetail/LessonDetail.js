@@ -287,19 +287,7 @@ const LessonDetail = (props) => {
                                 <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
                             </TouchableOpacity>
                         </View>
-                        {tabIndex == 0 ?
-                            <View style={PAGESTYLE.lessonstartButton}>
-                                <TouchableOpacity
-                                    style={PAGESTYLE.buttonGrp}
-                                    activeOpacity={opacity}
-                                    // props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })
-                                    onPress={() => { setTLDetailEdit(true) }}>
-                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
-                                </TouchableOpacity>
-                            </View>
-                            :
-                            null
-                        }
+                        
                         {tabIndex == 2 ?
                             <View style={PAGESTYLE.filterbarMain}>
                                 <View style={PAGESTYLE.field}>

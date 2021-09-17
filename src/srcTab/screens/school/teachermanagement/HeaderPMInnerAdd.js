@@ -18,18 +18,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
-const HeaderPMInner = (props) => {
-    const refRBSheet = useRef();
-    const textInput = useRef(null);
-    const [tabIndex, setSelectedTab] = useState(props.tabSelected);
-    const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
-    const [isModalVisible, setModalVisible] = useState(false)
-
-    useEffect(() => {
-        // props.onFilter(filterBy)
-    }, [filterBy])
+const HeaderPMInnerAdd = (props) => {
 
     return (
         <View style={styles.headerMain}>
@@ -42,7 +31,7 @@ const HeaderPMInner = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>{props.pupilName}</Text>
+                        <Text style={styles.mainTitle}>Add New Teacher</Text>
                     </View>
                 </View>
 
@@ -55,36 +44,10 @@ const HeaderPMInner = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.whiteBg}>
-                <View style={styles.lessonPlanTop}>
-                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                        <View style={styles.lessonPlanTab}>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(0), props.tabIndex(0) }}>
-                                <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>Teacher profile</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(1), props.tabIndex(1) }}>
-                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>Chat</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
-                                <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Lesson {'&'} Homework</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
-                </View>
-            </View>
         </View>
     );
 }
-export default HeaderPMInner;
+export default HeaderPMInnerAdd;
 
 const styles = StyleSheet.create({
     headerMaintop: {

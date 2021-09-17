@@ -90,7 +90,7 @@ const HeaderTM = (props) => {
                         }} />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                    <Menu style={{ }}>
+                    <Menu style={{}}>
                         <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
@@ -130,7 +130,8 @@ const HeaderTM = (props) => {
                 </View>
                 <PopupAddNewData
                     navigateToAddLesson={() => props.navigateToAddLesson()}
-                    refreshList={() => props.refreshList()} />
+                    refreshList={() => props.refreshList()}
+                    navigateToAddTeacher={() => props.navigateToAddTeacher()} />
             </View>
         </View>
     );

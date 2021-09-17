@@ -59,7 +59,7 @@ const LessonList = (props) => {
         return (
             <Pupillist
                 item={item}
-                navigateToDetail={() => { setItem(item), setTLDetail(true) }}
+                navigateToDetail={() => { setItem(item), setTLDetail(true), props.setLessonDetail(true) }}
             />
         );
     };
@@ -165,7 +165,7 @@ const LessonList = (props) => {
                 isTLDetail ?
                         <TeacherLessonDetail
                             data={data}
-                            goBack={() => { refresh(), setTLDetail(false) }}
+                            goBack={() => { refresh(), setTLDetail(false), props.setLessonDetail(false) }}
                             onAlertPress={() => props.navigation.openDrawer()} />
                         :
                         renderList()

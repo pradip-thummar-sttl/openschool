@@ -40,6 +40,7 @@ const TeacherProfileView = (props) => {
     const [isSilver, setSilver] = useState(false);
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
+    const [isLessonDetail, setLessonDetail] = useState(false);
 
     const activityConfig = {
         width: 300,
@@ -135,9 +136,15 @@ const TeacherProfileView = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage1}>
-            <HeaderPMInner
-                navigateToBack={() => props.navigateToBack()} tabIndex={(index) => { setTabSelected(index) }}
-                pupilName={props.selectedPupil.FirstName + ' ' + props.selectedPupil.LastName} />
+            {!isLessonDetail ?
+                <HeaderPMInner
+                    navigateToBack={() => props.navigateToBack()} 
+                    tabIndex={(index) => { setTabSelected(index) }}
+                    tabSelected={tabSelected}
+                    pupilName={props.selectedPupil.FirstName + ' ' + props.selectedPupil.LastName} />
+                :
+                null
+            }
             {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
@@ -249,7 +256,9 @@ const TeacherProfileView = (props) => {
                             <Chat tabs={tabSelected} data={props.selectedPupil} />
                         </View>
                         :
-                        <LessonList data={props.selectedPupil} />
+                        <LessonList
+                            data={props.selectedPupil}
+                            setLessonDetail={(flag) => setLessonDetail(flag)} />
             }
 
         </View>

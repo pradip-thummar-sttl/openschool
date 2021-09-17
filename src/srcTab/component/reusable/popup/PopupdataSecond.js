@@ -24,6 +24,8 @@ import Calender from "../../../../svg/teacher/dashboard/Calender";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
+import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
+import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 
 const PopupdataSecond = (props) => {
     const isFromDashboard = props.isFromDashboard
@@ -280,8 +282,8 @@ const PopupdataSecond = (props) => {
                         activeOpacity={opacity}
                         onPress={toggleModal}>
                         {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                        <NewEvent style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                        <Text style={styles.entryTitle}>New Event</Text>
+                        <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                        <Text style={styles.entryTitle}>Import from CSV</Text>
                     </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>
@@ -556,8 +558,8 @@ const styles = StyleSheet.create({
         paddingRight: hp(0.9),
     },
     entryData: {
-        paddingLeft: hp(4.23),
-        paddingRight: hp(4.23),
+        marginRight: 30,
+        alignItems: 'center'
     },
     entryIcon: {
         width: hp(11.19),

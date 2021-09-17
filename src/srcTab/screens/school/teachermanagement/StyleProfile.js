@@ -193,6 +193,51 @@ export default StyleSheet.create({
         flexDirection:'row',
         height:hp(12.5),
     },
+    commonInput: {
+        color:COLORS.darkGrayIntro,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: 6,
+        lineHeight: 20,
+        height: 40,
+        paddingHorizontal: 10,
+        textAlignVertical: 'center',
+        fontFamily: FONTS.fontRegular,
+    },
+    loginAccountForm: {
+
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+        marginBottom: hp('2.0%'),
+    },
+    filedSpace: {
+        width: hp(38.4),
+        marginRight: hp(2.5),
+    },
+    formSpace: {
+        marginLeft: 172,
+        marginRight: 250,
+    },
+    fieldInputLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
+    },
+    field: {
+        position: 'relative',
+        // marginRight: hp(1.69),
+    },
+    fullInput: {
+        width: hp(79.5),
+        paddingTop: hp(1.5),
+    },
+    profileFormTopSpace: {
+        marginTop: hp(2),
+    },
     managementopImage:{
         width:'100%',
         height:hp(14.06),
@@ -481,6 +526,35 @@ export default StyleSheet.create({
     insightMain: {
         fontSize: 20,
         fontFamily: FONTS.fontBold,
-    }
-
+    },pzEditIcon: {
+        width: hp(2.58),
+        height: hp(2.58),
+        resizeMode: 'contain',
+        position: 'absolute',
+        left: hp(4.8),
+        bottom: hp(-1.6),
+        borderRadius: 15,
+        borderColor: COLORS.greyInsightLable,
+    },
+    topBannerParent: {
+        paddingHorizontal: 10,
+        position: 'absolute',
+        right: 32,
+        top: 17,
+    },
+    topBannerBtn1: {
+        fontFamily: FONTS.fontBold,
+        color: COLORS.white,
+        fontSize: 12,
+        lineHeight: 37.5,
+        textTransform: 'uppercase',
+        borderRadius: 8,
+        borderWidth: 1,
+        width: 128,
+        height: 40,
+        textAlign: 'center',
+        overflow: 'hidden',
+        borderColor: COLORS.buttonGreen,
+        backgroundColor: COLORS.buttonGreen,
+    },
 });
