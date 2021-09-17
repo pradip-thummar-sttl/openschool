@@ -93,7 +93,7 @@ export default StyleSheet.create({
         color:COLORS.darkGray,
     },
     backgroundTable:{
-        backgroundColor:COLORS.white,
+        backgroundColor:COLORS.backgroundColorCommon,
     },
     days: {
         // marginTop: 45,
@@ -197,7 +197,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         marginLeft:hp(4.5),
-        marginBottom: 10,
+        marginVertical: 20,
         // backgroundColor: COLORS.white
     },
     pupilData: {
@@ -211,20 +211,18 @@ export default StyleSheet.create({
         //  marginLeft:hp(4.5)
     },
     pupilProfile: {
-        width: hp(15),
+        width: '9%',
         flexDirection: 'row',
         alignItems: 'center',
     },
     groupColumnmain: {
-        width: hp(17.97),
-        backgroundColor:'blue'
-        
+        width: '23%',
+    },
+    nameColumnmain: {
+        width: '20%',
     },
     groupColumn: {
-        width: hp(10.59),
-        alignItems: 'center',
         justifyContent:'center',
-        marginLeft:hp(-2)
     },
     groupColumn1: {
         width: hp(10.59),
@@ -240,9 +238,7 @@ export default StyleSheet.create({
     },
     perfomanceColumn: {
         flexDirection: 'row',
-        width: hp(20.18),
-        marginLeft:hp(4),
-        marginRight: hp(9.50),
+        width: '25%',
     },
     pupilImage: {
         width: hp(3.7),
@@ -279,6 +275,7 @@ export default StyleSheet.create({
     rewardColumn: {
         flexDirection: 'row',
         alignItems: 'center',
+        width: '25%',
     },
     pupilDetaillinkIcon: {
         width: hp(1),
@@ -286,4 +283,13 @@ export default StyleSheet.create({
         right: 20,
         position: 'absolute',
     },
+    perfomanceDotmain: {
+        marginHorizontal: '15%',
+    },
+    pupilListing: {
+        maxHeight: hp(67.44),
+    },
+    pupilTabledata: {
+        marginHorizontal: 20,
+    }
 });

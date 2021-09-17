@@ -1,13 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../../utils/Colors";
-// import Images from '../../../../../utils/Images';
-import FONTS from '../../../../../utils/Fonts';
-import { opacity } from "../../../../../utils/Constant";
+import COLORS from "../../../../../../utils/Colors";
+// import Images from '../../../../../../utils/Images';
+import FONTS from '../../../../../../utils/Fonts';
+import { opacity } from "../../../../../../utils/Constant";
 import moment from 'moment';
-import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
-import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import Notification from "../../../../../../svg/teacher/dashboard/Notification";
 
 const HeaderHWS = (props) => {
     return (

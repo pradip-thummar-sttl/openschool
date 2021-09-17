@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, Image, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../../utils/Colors";
-import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
+import COLORS from "../../../../../../utils/Colors";
+// import Images from '../../../../../../utils/Images';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../../utils/Fonts';
-import CheckBox from '@react-native-community/checkbox';
-import ToggleSwitch from 'toggle-switch-react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { baseUrl, opacity, showMessage } from "../../../../../utils/Constant";
-import { EndPoints } from "../../../../../service/EndPoints";
-import { Service } from "../../../../../service/Service";
-import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import MESSAGE from "../../../../../utils/Messages";
-import ArrowNext from "../../../../../svg/teacher/lessonhwplanner/ArrowNext";
+import { baseUrl, opacity, showMessage } from "../../../../../../utils/Constant";
+import { EndPoints } from "../../../../../../service/EndPoints";
+import { Service } from "../../../../../../service/Service";
+import EmptyStatePlaceHohder from "../../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../../../../utils/Messages";
+import ArrowNext from "../../../../../../svg/teacher/lessonhwplanner/ArrowNext";
 
 var moment = require('moment');
 
-const Pupillist = (props, { style }) => (
+const Pupillist = (props, { }) => (
     <TouchableOpacity
         activeOpacity={opacity}
         onPress={() => props.navigateToDetail()}>
@@ -49,7 +43,7 @@ const Pupillist = (props, { style }) => (
 );
 
 const TLHomeWorkSubmitted = (props) => {
-    const [isHide, action] = useState(true);
+    const [] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const [homeworkData, setHomeworkData] = useState([]);
@@ -81,17 +75,7 @@ const TLHomeWorkSubmitted = (props) => {
         }
     }, [isSearchActive])
 
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-            />
-        );
-    };
-    const pupilRender = ({ item, index }) => {
+    const pupilRender = ({ item }) => {
         return (
             <Pupillist
                 item={item}
@@ -126,10 +110,6 @@ const TLHomeWorkSubmitted = (props) => {
         })
     }
 
-    const refresh = () => {
-        console.log('refreshed');
-        fetchRecord('', '')
-    }
 
     return (
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, Platform, View, TouchableOpacity, Text, Image } from "react-native";
+import { ActivityIndicator, Platform, View, TouchableOpacity, Text, Image, SafeAreaView } from "react-native";
 import COLORS from "../../../../utils/Colors";
 import PAGESTYLE from './Style';
 import HeaderTM from "./header/HeaderTM";
@@ -13,30 +13,38 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import TeacherProfileView from "./TeacherProfileView";
 import TeacherProfileAdd from "./TeacherProfileAdd";
+import MESSAGE from "../../../../utils/Messages";
+import { FlatList } from "react-native-gesture-handler";
+import FONTS from "../../../../utils/Fonts";
 
-const Pupillist = (props, { item }) => (
+const Pupillist = (props) => (
     <TouchableOpacity onPress={() => { props.onPress() }}>
         <View style={[PAGESTYLE.pupilData]}>
             <View style={PAGESTYLE.pupilProfile}>
-                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20), fontFamily: FONTS.fontSemiBold }]}>{item.FirstName} {item.LastName}</Text>
+                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>Mr.</Text>
+            </View>
+            <View style={PAGESTYLE.nameColumnmain}>
+                <View style={PAGESTYLE.groupColumn}>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: '75%', fontFamily: FONTS.fontSemiBold }]}>{props.item.FirstName} {props.item.LastName}</Text>
+                </View>
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.TeachingYear}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{props.item.TeachingYear}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>
                 <View style={PAGESTYLE.perfomanceDotmain}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.LessonCount}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{props.item.LessonCount}</Text>
                 </View>
-                <View style={PAGESTYLE.perfomanceDotmainTwo}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.HomeworkCount}</Text>
+                <View style={PAGESTYLE.perfomanceDotmain}>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{props.item.HomeworkCount}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>
                 <View style={PAGESTYLE.rewardStar}>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.pupilgroupName, width: hp(20), }}>{item.Email}</Text>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.pupilgroupName, width: '75%' }}>{props.item.Email}</Text>
                 </View>
             </View>
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
@@ -61,14 +69,14 @@ const TeacherManagement = (props) => {
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
-        isDataLoading(true)
+        setDataLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            isDataLoading(false)
+            setDataLoading(false)
             if (res.code == 200) {
                 // console.log('response of get all lesson event:', res)
                 setTeacherData(res.data)
@@ -77,7 +85,7 @@ const TeacherManagement = (props) => {
                 showMessage(res.message)
             }
         }, (err) => {
-            isDataLoading(false)
+            setDataLoading(false)
             console.log('response of get all lesson error', err)
         })
 
@@ -100,22 +108,20 @@ const TeacherManagement = (props) => {
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                <HeaderTM
-                    onAlertPress={() => { props.navigation.openDrawer() }}
-                    onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                    onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                    navigateToAddLesson={() => setTeacherAdd(true)}
-                    refreshList={() => refresh()} />
-                {isTeacherAdd ?
-                    <TeacherProfileAdd
+                {isTeacherDetail ?
+                    <TeacherProfileView
+                        selectedPupil={teacherDetailData}
                         navigateToBack={() => setTeacherDetail(false)} />
                     :
-                    isTeacherDetail ?
-                        <TeacherProfileView
-                            navigateToBack={() => setTeacherDetail(false)} />
-                        :
+                    <>
+                        <HeaderTM
+                            onAlertPress={() => { props.navigation.openDrawer() }}
+                            onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                            onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                            onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                            onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                            navigateToAddLesson={() => setTeacherAdd(true)}
+                            refreshList={() => refresh()} />
                         <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                             {isDataLoading ?
                                 <ActivityIndicator
@@ -125,25 +131,28 @@ const TeacherManagement = (props) => {
                                 teacherData.length > 0 ?
                                     <View>
                                         <View style={PAGESTYLE.pupilTable}>
-                                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total {teacherData.length} Teachers</Text>
+                                            <View style={{ width: '2%' }}>
                                             </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                            <View style={{ width: '5%' }}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Title</Text>
+                                            </View>
+                                            <View style={{ width: '20%', }}>
+                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
+                                            </View>
+                                            <View style={{ width: '23%', }}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
                                             </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
-                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Scheduled Activity</Text>
+                                            <View style={{ width: '25%' }}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
                                                 <View style={PAGESTYLE.pupilTableHeadingsubMain}>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
                                                 </View>
                                             </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
-                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Contact</Text>
+                                            <View style={{ width: '25%' }}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Contact</Text>
                                             </View>
                                         </View>
-                                        <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
                                         <View style={PAGESTYLE.pupilTabledata}>
                                             <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                                 <FlatList
@@ -151,7 +160,7 @@ const TeacherManagement = (props) => {
                                                     renderItem={pupilRender}
                                                     style={PAGESTYLE.pupilListing}
                                                     keyExtractor={(item) => item.id}
-                                                    extraData={selectedId}
+                                                    extraData={null}
                                                     showsVerticalScrollIndicator={false}
                                                     nestedScrollEnabled
                                                 />
@@ -166,6 +175,7 @@ const TeacherManagement = (props) => {
                                     <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
                             }
                         </View>
+                    </>
                 }
             </View>
         </View >

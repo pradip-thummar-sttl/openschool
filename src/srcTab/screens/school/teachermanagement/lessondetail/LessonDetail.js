@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, Platform, BackHandler } from "react-native";
-import STYLE from '../../../../utils/Style';
+import STYLE from '../../../../../utils/Style';
 import PAGESTYLE from './Style';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 
-import { opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import { opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import TLDetail from "./lessonplan/LessonDetail";
-import TLHomeWork from '../teacherlessondetail/lessonhomework/LessonHW';
-import TLHomeWorkSubmitted from '../teacherlessondetail/homeworksubmitted/HWSubmitted';
+import TLHomeWork from '../lessondetail/lessonhomework/LessonHW';
+import TLHomeWorkSubmitted from '../lessondetail/homeworksubmitted/HWSubmitted';
 import HeaderLP from "./header/HeaderLP";
 import HeaderHW from "./header/HeaderHW";
 import HeaderHWS from "./header/HeaderHWS";
-import { Service } from "../../../../service/Service";
-import { Addhomework, User } from "../../../../utils/Model";
-import { EndPoints } from "../../../../service/EndPoints";
+import { Service } from "../../../../../service/Service";
+import { Addhomework, User } from "../../../../../utils/Model";
+import { EndPoints } from "../../../../../service/EndPoints";
 // import Images from '../../../../utils/Images';
 import {
     Menu,
@@ -22,22 +21,18 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import MESSAGE from "../../../../utils/Messages";
-import TLHomeWorkSubmittedDetail from "./homeworksubmitted/HWSubmittedDetail";
-import TLDetailEdit from "./lessonplan/TeacherLessonDetailEdit";
-import ScreenAndCameraRecording from "../screenandcamera/ScreenandCamera";
-import TLVideoGallery from "./lessonplan/TeacherLessonVideoGallery";
+import COLORS from "../../../../../utils/Colors";
+import MESSAGE from "../../../../../utils/Messages";
 import moment from 'moment';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
-import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
-import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
-import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 
 const LessonDetail = (props) => {
     const textInput = useRef(null);
-    const [isHide, action] = useState(true);
+    const [isHide, action] = useState(true); 
     const [tabIndex, setSelectedTab] = useState(0);
     const [lessonData, setLessonData] = useState(props.data);
     const [isVisiblePopup, setVisiblePopup] = useState(false)
@@ -241,200 +236,180 @@ const LessonDetail = (props) => {
                 navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
-            {
-                isTLHomeWorkSubmittedDetail ?
-                    <TLHomeWorkSubmittedDetail
-                        item={data}
-                        goBack={() => { setTLHomeWorkSubmittedDetail(false) }}
-                        onAlertPress={() => { props.onAlertPress() }} />
-                    : isTLDetailEdit ?
-                        <TLDetailEdit
-                            goBack={() => { props.goBack(); setTLDetailEdit(false) }}
-                            onAlertPress={() => { props.onAlertPress() }}
-                            data={lessonData}
-                            onRefresh={() => null} />
-                        : isScreenAndCameraRecording ?
-                            <ScreenAndCameraRecording
-                                goBack={() => { setScreenAndCameraRecording(false) }}
-                                onAlertPress={() => { props.onAlertPress() }} />
-                            : isTLVideoGallery ?
-                                <TLVideoGallery goBack={() => { setTLVideoGallery(false) }}
-                                    onAlertPress={() => { props.onAlertPress() }} />
-                                :
-                                <View style={{ width: isHide ? '100%' : '78%' }}>
-                                    {tabIndex == 0 ?
-                                        <HeaderLP
-                                            lessonData={lessonData}
-                                            date={lessonData.Date}
-                                            navigateToBack={() => props.goBack()}
-                                            onAlertPress={() => { props.onAlertPress() }} />
-                                        : tabIndex == 1 ?
-                                            <HeaderHW
-                                                hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
-                                                SubjectName={lessonData.SubjectName}
-                                                date={lessonData.Date}
-                                                setHomework={() => onAddHomework()}
-                                                navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => { props.onAlertPress() }}
-                                                onClose={() => setVisiblePopup(false)}
-                                                isVisible={isVisiblePopup}
-                                                onOpenPopup={() => isFiedlsValidated()}
-                                                isHomeworkLoading={isHomeworkLoading}
-                                            />
 
-                                            :
-                                            <HeaderHWS
-                                                subjectName={lessonData.SubjectName}
-                                                date={lessonData.Date}
-                                                navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => { props.onAlertPress() }} />
-                                    }
-                                    <View style={PAGESTYLE.whiteBg}>
-                                        <View style={PAGESTYLE.lessonPlanTop}>
-                                            <View style={PAGESTYLE.lessonPlanTab}>
-                                                <TouchableOpacity
-                                                    style={PAGESTYLE.tabs}
-                                                    activeOpacity={opacity}
-                                                    onPress={() => setSelectedTab(0)}>
-                                                    <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson plan</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity
-                                                    style={PAGESTYLE.tabs}
-                                                    activeOpacity={opacity}
-                                                    onPress={() => setSelectedTab(1)}>
-                                                    <Text style={[PAGESTYLE.tabsText, tabIndex == 1 ? PAGESTYLE.tabsTextSelected : null]}>lesson homework</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity
-                                                    style={PAGESTYLE.tabs}
-                                                    activeOpacity={opacity}
-                                                    onPress={() => setSelectedTab(2)}>
-                                                    <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                            {tabIndex == 0 ?
-                                                <View style={PAGESTYLE.lessonstartButton}>
-                                                    <TouchableOpacity
-                                                        style={PAGESTYLE.buttonGrp}
-                                                        activeOpacity={opacity}
-                                                        // props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })
-                                                        onPress={() => { setTLDetailEdit(true) }}>
-                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
-                                                    </TouchableOpacity>
-                                                </View>
+            <View style={{ width: isHide ? '100%' : '78%' }}>
+                {tabIndex == 0 ?
+                    <HeaderLP
+                        lessonData={lessonData}
+                        date={lessonData.Date}
+                        navigateToBack={() => props.goBack()}
+                        onAlertPress={() => { props.onAlertPress() }} />
+                    : tabIndex == 1 ?
+                        <HeaderHW
+                            hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
+                            SubjectName={lessonData.SubjectName}
+                            date={lessonData.Date}
+                            setHomework={() => onAddHomework()}
+                            navigateToBack={() => props.goBack()}
+                            onAlertPress={() => { props.onAlertPress() }}
+                            onClose={() => setVisiblePopup(false)}
+                            isVisible={isVisiblePopup}
+                            onOpenPopup={() => isFiedlsValidated()}
+                            isHomeworkLoading={isHomeworkLoading}
+                        />
+
+                        :
+                        <HeaderHWS
+                            subjectName={lessonData.SubjectName}
+                            date={lessonData.Date}
+                            navigateToBack={() => props.goBack()}
+                            onAlertPress={() => { props.onAlertPress() }} />
+                }
+                <View style={PAGESTYLE.whiteBg}>
+                    <View style={PAGESTYLE.lessonPlanTop}>
+                        <View style={PAGESTYLE.lessonPlanTab}>
+                            <TouchableOpacity
+                                style={PAGESTYLE.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(0)}>
+                                <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson plan</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={PAGESTYLE.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(1)}>
+                                <Text style={[PAGESTYLE.tabsText, tabIndex == 1 ? PAGESTYLE.tabsTextSelected : null]}>lesson homework</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={PAGESTYLE.tabs}
+                                activeOpacity={opacity}
+                                onPress={() => setSelectedTab(2)}>
+                                <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {tabIndex == 0 ?
+                            <View style={PAGESTYLE.lessonstartButton}>
+                                <TouchableOpacity
+                                    style={PAGESTYLE.buttonGrp}
+                                    activeOpacity={opacity}
+                                    // props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })
+                                    onPress={() => { setTLDetailEdit(true) }}>
+                                    <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            null
+                        }
+                        {tabIndex == 2 ?
+                            <View style={PAGESTYLE.filterbarMain}>
+                                <View style={PAGESTYLE.field}>
+                                    <TextInput
+                                        ref={textInput}
+                                        style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
+                                        placeholder="Search pupil"
+                                        maxLength={50}
+                                        placeholderTextColor={COLORS.menuLightFonts}
+                                        onChangeText={keyword => {
+                                            setSearchKeyword(keyword);
+                                        }} />
+                                    <TouchableOpacity
+                                        style={PAGESTYLE.userIcon1Parent}
+                                        activeOpacity={opacity}
+                                        onPress={() => {
+                                            searchKeyword ?
+                                                isSearchActive ?
+                                                    setSearchActive(false)
+                                                    :
+                                                    setSearchActive(true)
                                                 :
                                                 null
-                                            }
-                                            {tabIndex == 2 ?
-                                                <View style={PAGESTYLE.filterbarMain}>
-                                                    <View style={PAGESTYLE.field}>
-                                                        <TextInput
-                                                            ref={textInput}
-                                                            style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                                                            placeholder="Search pupil"
-                                                            maxLength={50}
-                                                            placeholderTextColor={COLORS.menuLightFonts}
-                                                            onChangeText={keyword => {
-                                                                setSearchKeyword(keyword);
-                                                            }} />
-                                                        <TouchableOpacity
-                                                            style={PAGESTYLE.userIcon1Parent}
-                                                            activeOpacity={opacity}
-                                                            onPress={() => {
-                                                                searchKeyword ?
-                                                                    isSearchActive ?
-                                                                        setSearchActive(false)
-                                                                        :
-                                                                        setSearchActive(true)
-                                                                    :
-                                                                    null
-                                                            }}>
-                                                            {/* <Image
+                                        }}>
+                                        {/* <Image
                                                                 style={PAGESTYLE.userIcon1}
                                                                 source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                                                            {isSearchActive ?
-                                                                <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
-                                                                :
-                                                                <SearchBlue style={PAGESTYLE.userIcon1} height={20} width={20} />
-                                                            }
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                    <TouchableOpacity style={PAGESTYLE.buttonGroup}>
-                                                        <Menu style={PAGESTYLE.filterGroup}>
-                                                            <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
-                                                            <MenuOptions style={PAGESTYLE.filterListWrap}>
-                                                                <MenuOption style={PAGESTYLE.borderList}>
-                                                                    <TouchableOpacity
-                                                                        activeOpacity={opacity}
-                                                                        onPress={() => { setFilterBy('Pupil Name'); setSelectedIndex(0) }}>
-                                                                        <View style={PAGESTYLE.filterList}>
-                                                                            <Text style={PAGESTYLE.filterListText}>Pupil Name</Text>
-                                                                            {selectedIndex == 0 ?
-                                                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                                                :
-                                                                                null
-                                                                            }
-                                                                        </View>
-                                                                    </TouchableOpacity>
-                                                                </MenuOption>
-                                                                <MenuOption style={PAGESTYLE.borderList}>
-                                                                    <TouchableOpacity
-                                                                        activeOpacity={opacity}
-                                                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                                                        <View style={PAGESTYLE.filterList}>
-                                                                            <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                                                            {selectedIndex == 1 ?
-                                                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                                                :
-                                                                                null
-                                                                            }
-                                                                        </View>
-                                                                    </TouchableOpacity>
-                                                                </MenuOption>
-                                                            </MenuOptions>
-                                                        </Menu>
-                                                        {/* <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} /> */}
-                                                        <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
-                                                    </TouchableOpacity>
-                                                </View>
-                                                :
-                                                null
-                                            }
-                                        </View>
-                                    </View>
-                                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: COLORS.backgroundColorCommon }}>
-                                        <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
-                                            {tabIndex == 0 ?
-                                                <TLDetail lessonData={lessonData} />
-                                                : tabIndex == 1 ?
-                                                    <TLHomeWork
-                                                        id={lessonData._id}
-                                                        updateBtnName={(flag) => setUpdate(flag)}
-                                                        navigateScreeCamera={() => { setScreenAndCameraRecording(true) }}
-                                                        navigateToVideoGallery={() => { setTLVideoGallery(true) }} />
-                                                    :
-                                                    <TLHomeWorkSubmitted
-                                                        lessonId={lessonData._id}
-                                                        searchKeyword={searchKeyword}
-                                                        filterBy={filterBy}
-                                                        searchActive={isSearchActive}
-                                                        navigateToDetail={(data) => { setItem(data), setTLHomeWorkSubmittedDetail(true) }}
-                                                        onGoBack={() => setHSDataChanged(true)}
-                                                        dataChanged={isHSDataChanged} />
-
-                                            }
-                                            {/* <TLDetailEdit /> */}
-                                            {/* <TLDetailAdd /> */}
-                                            {/* <TLVideoGallery /> */}
-                                            {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                                            {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                                            {/* <TLHomeWorkSubmittedDetail /> */}
-                                            {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
-                                        </ScrollView>
-                                    </KeyboardAwareScrollView>
+                                        {isSearchActive ?
+                                            <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
+                                            :
+                                            <SearchBlue style={PAGESTYLE.userIcon1} height={20} width={20} />
+                                        }
+                                    </TouchableOpacity>
                                 </View>
-            }
+                                <TouchableOpacity style={PAGESTYLE.buttonGroup}>
+                                    <Menu style={PAGESTYLE.filterGroup}>
+                                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
+                                        <MenuOptions style={PAGESTYLE.filterListWrap}>
+                                            <MenuOption style={PAGESTYLE.borderList}>
+                                                <TouchableOpacity
+                                                    activeOpacity={opacity}
+                                                    onPress={() => { setFilterBy('Pupil Name'); setSelectedIndex(0) }}>
+                                                    <View style={PAGESTYLE.filterList}>
+                                                        <Text style={PAGESTYLE.filterListText}>Pupil Name</Text>
+                                                        {selectedIndex == 0 ?
+                                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                            <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                            :
+                                                            null
+                                                        }
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </MenuOption>
+                                            <MenuOption style={PAGESTYLE.borderList}>
+                                                <TouchableOpacity
+                                                    activeOpacity={opacity}
+                                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                                    <View style={PAGESTYLE.filterList}>
+                                                        <Text style={PAGESTYLE.filterListText}>Date</Text>
+                                                        {selectedIndex == 1 ?
+                                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                            <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                            :
+                                                            null
+                                                        }
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </MenuOption>
+                                        </MenuOptions>
+                                    </Menu>
+                                    {/* <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} /> */}
+                                    <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            null
+                        }
+                    </View>
+                </View>
+                <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: COLORS.backgroundColorCommon }}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
+                        {tabIndex == 0 ?
+                            <TLDetail lessonData={lessonData} />
+                            : tabIndex == 1 ?
+                                <TLHomeWork
+                                    id={lessonData._id}
+                                    updateBtnName={(flag) => setUpdate(flag)}
+                                    navigateScreeCamera={() => { setScreenAndCameraRecording(true) }}
+                                    navigateToVideoGallery={() => { setTLVideoGallery(true) }} />
+                                :
+                                <TLHomeWorkSubmitted
+                                    lessonId={lessonData._id}
+                                    searchKeyword={searchKeyword}
+                                    filterBy={filterBy}
+                                    searchActive={isSearchActive}
+                                    navigateToDetail={(data) => { setItem(data), setTLHomeWorkSubmittedDetail(true) }}
+                                    onGoBack={() => setHSDataChanged(true)}
+                                    dataChanged={isHSDataChanged} />
+
+                        }
+                        {/* <TLDetailEdit /> */}
+                        {/* <TLDetailAdd /> */}
+                        {/* <TLVideoGallery /> */}
+                        {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
+                        {/* <TLHomeWorkInstructionalVideoAdded /> */}
+                        {/* <TLHomeWorkSubmittedDetail /> */}
+                        {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                    </ScrollView>
+                </KeyboardAwareScrollView>
+            </View>
         </View>
     );
 }

@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
+import COLORS from "../../../../../utils/Colors";
 // import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import FONTS from '../../../../utils/Fonts';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
-import { opacity, showMessage } from "../../../../utils/Constant";
-import Header from "./Header";
-import { Service } from "../../../../service/Service";
-import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
-import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
-import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-import MESSAGE from "../../../../utils/Messages";
-import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
+import { opacity, showMessage } from "../../../../../utils/Constant";
+import { Service } from "../../../../../service/Service";
+import { EndPoints } from "../../../../../service/EndPoints";
+import { User } from "../../../../../utils/Model";
+import TeacherLessonDetail from "../lessondetail/LessonDetail";
+import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import MESSAGE from "../../../../../utils/Messages";
+import ArrowNext from "../../../../../svg/teacher/lessonhwplanner/ArrowNext";
 var moment = require('moment');
 
-const Pupillist = (props, { style }) => (
+const Pupillist = (props, { }) => (
     <TouchableOpacity
         activeOpacity={opacity}
         onPress={() => props.navigateToDetail()}>
@@ -55,21 +50,11 @@ const Pupillist = (props, { style }) => (
 );
 
 const LessonList = (props) => {
-    const [isHide, action] = useState(true);
+    const [isHide] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
-    const [isAddSubject, setAddSubject] = useState(false)
+    const [] = useState(false)
     const [isTLDetail, setTLDetail] = useState(false)
     const [data, setItem] = useState([])
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-            />
-        );
-    };
     const pupilRender = ({ item }) => {
         return (
             <Pupillist
@@ -81,8 +66,8 @@ const LessonList = (props) => {
 
     const [lessonData, setLessonData] = useState([])
     const [isLessonLoading, setLessonLoading] = useState(true)
-    const [searchKeyword, setSearchKeyword] = useState('')
-    const [filterBy, setFilterBy] = useState('')
+    const [] = useState('')
+    const [] = useState('')
 
 
 
@@ -97,8 +82,7 @@ const LessonList = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-
-        Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
+        Service.post(data, `${EndPoints.GetLessionById}/${props.data.TeacherId}`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

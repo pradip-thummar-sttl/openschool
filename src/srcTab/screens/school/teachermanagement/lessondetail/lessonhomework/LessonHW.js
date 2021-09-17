@@ -1,35 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../../utils/Colors";
-import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
+import COLORS from "../../../../../../utils/Colors";
+import STYLE from '../../../../../../utils/Style';
+// import Images from '../../../../../../utils/Images';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../../utils/Fonts';
+import FONTS from '../../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Popupaddrecording from '../../../../component/reusable/popup/Popupaddrecording';
-import { opacity, showMessage } from "../../../../../utils/Constant";
+import Popupaddrecording from '../../../../../component/reusable/popup/Popupaddrecording';
+import { opacity, showMessage } from "../../../../../../utils/Constant";
 import DocumentPicker from 'react-native-document-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import ImagePicker, { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import moment from "moment";
-import { Addhomework } from "../../../../../utils/Model";
-import { Service } from "../../../../../service/Service";
-import { EndPoints } from "../../../../../service/EndPoints";
+import { Addhomework } from "../../../../../../utils/Model";
+import { Service } from "../../../../../../service/Service";
+import { EndPoints } from "../../../../../../service/EndPoints";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import MESSAGE from "../../../../../utils/Messages";
-import { Download } from "../../../../../utils/Download";
+import MESSAGE from "../../../../../../utils/Messages";
+import { Download } from "../../../../../../utils/Download";
 import RecordScreen from 'react-native-record-screen';
 
 import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
-import Calender from "../../../../../svg/teacher/dashboard/Calender";
-import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
-import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
-import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
-import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
+import Calender from "../../../../../../svg/teacher/dashboard/Calender";
+import ArrowDown from "../../../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import UploadDoc from "../../../../../../svg/teacher/lessonhwplanner/UploadDoc";
+import CloseBlack from "../../../../../../svg/teacher/timetable/Close_Black";
+import DownloadSVG from "../../../../../../svg/teacher/lessonhwplanner/Download";
 
 var checkItem = [
     {

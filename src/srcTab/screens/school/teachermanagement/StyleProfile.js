@@ -236,10 +236,10 @@ export default StyleSheet.create({
         color:COLORS.darkGray,
     },
     nameSmlBlock:{
-        marginRight:hp(13),
+        width: '25%',
     },
     dateSmlBlock:{
-        marginRight:hp(13),
+        width: '25%',
     },
     paragraphText:{
         fontFamily:FONTS.fontRegular,
@@ -282,25 +282,15 @@ export default StyleSheet.create({
         paddingLeft:hp(26.04),
     },
     ratingBlock:{
-        width:hp(43.35),
-        marginLeft:hp(1.95),
+        width:'100%',
         marginTop: hp(2.5),
-        marginRight:hp(3.9),
     },
     achivementBox:{
-        borderColor: COLORS.dashboardBorder,
-        borderWidth: 1,
-        width :hp(43.48),
+        width :'100%',
+        height: 150,
         alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
-        elevation: 1,
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
-        shadowColor: COLORS.lightGrayPupil,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 1,
+        paddingHorizontal: 10,
+        flexDirection: 'row'
     },
     starSelectedText:{
         fontFamily: FONTS.fontBold,
@@ -332,11 +322,12 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     ratingTitle:{
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontBold,
         fontSize: hp(1.82),
-        color:COLORS.menuLightFonts,
+        color:COLORS.darkGray,
         paddingBottom:hp(1.5),
-        marginBottom:wp(1.2)
+        marginBottom:wp(1.2),
+        marginLeft: hp(1.95),
     },
     separater:{
         borderLeftWidth:1,
@@ -474,4 +465,22 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginBottom: 30,
     },
+    insightBox: {
+        backgroundColor: COLORS.greyInsight,
+        borderRadius: 10,
+        flex: 1,
+        height: 150,
+        marginHorizontal: 10,
+        paddingHorizontal: 15,
+        justifyContent: 'center',
+    },
+    insightLabel: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontBold,
+    },
+    insightMain: {
+        fontSize: 20,
+        fontFamily: FONTS.fontBold,
+    }
+
 });

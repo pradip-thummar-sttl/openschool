@@ -42,15 +42,8 @@ const HeaderTM = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>TimeTable - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
+                <Text style={styles.mainTitle}>Teacher Management</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity
-                        onPress={() => props.onCalenderPress()}
-                        style={styles.notificationBar}
-                        activeOpacity={opacity}>
-                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
-                        <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
-                    </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.onAlertPress()}
                         style={styles.notificationBar}
@@ -64,6 +57,7 @@ const HeaderTM = (props) => {
 
 
             <View style={styles.searchParent}>
+                <Text style={[styles.tabsText, styles.tabsTextSelected]}>Teacher Overview</Text>
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
@@ -87,7 +81,7 @@ const HeaderTM = (props) => {
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, class, etc"
+                        placeholder="Search teacher"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
@@ -95,8 +89,8 @@ const HeaderTM = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                    <Menu style={{ marginLeft: 10 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                    <Menu style={{ }}>
                         <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
@@ -286,5 +280,21 @@ const styles = StyleSheet.create({
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+    tabsText: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(1.56),
+        textTransform: 'uppercase',
+        marginRight: 50,
+    },
+    tabsTextSelected: {
+        color: COLORS.buttonGreen,
+    },
+    filterIcon: {
+        width: hp(1.74),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.30),
+    },
 });

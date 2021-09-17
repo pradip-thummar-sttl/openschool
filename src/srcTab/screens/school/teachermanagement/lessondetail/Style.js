@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import COLORS from '../../../../utils/Colors';
+import COLORS from '../../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import FONTS from '../../../../utils/Fonts';
+import FONTS from '../../../../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 // import { back } from 'react-native/Libraries/Animated/src/Easing';
 

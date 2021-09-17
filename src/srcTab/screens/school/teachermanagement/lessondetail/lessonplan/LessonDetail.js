@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, PermissionsAndroid, Alert, ActivityIndicator } from "react-native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import COLORS from "../../../../../utils/Colors";
-import STYLE from '../../../../../utils/Style';
+import { View, Text, TouchableOpacity, Image, FlatList, Platform, ActivityIndicator } from "react-native";
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import COLORS from "../../../../../../utils/Colors";
+import STYLE from '../../../../../../utils/Style';
 // import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../../utils/Fonts';
-import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
 import moment from 'moment';
-import { Download } from "../../../../../utils/Download";
-import { baseUrl } from "../../../../../utils/Constant";
-import { floor } from "react-native-reanimated";
-import Calender from "../../../../../svg/teacher/dashboard/Calender";
-import Clock from "../../../../../svg/teacher/dashboard/Clock";
-import Participants from "../../../../../svg/teacher/dashboard/Participants";
-import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
-import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
-import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
+import { Download } from "../../../../../../utils/Download";
+import { baseUrl } from "../../../../../../utils/Constant";
+import Calender from "../../../../../../svg/teacher/dashboard/Calender";
+import Clock from "../../../../../../svg/teacher/dashboard/Clock";
+import Participants from "../../../../../../svg/teacher/dashboard/Participants";
+import TickMarkBlue from "../../../../../../svg/teacher/dashboard/TickMark_Blue";
+import DownloadSVG from "../../../../../../svg/teacher/lessonhwplanner/Download";
+import PlayBlue from "../../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 
 const TLDetail = (props) => {
     const [isRecordLoading, setRecordLoader] = useState(false)
@@ -91,7 +88,7 @@ const TLDetail = (props) => {
                         <FlatList
                             data={props.lessonData.CheckList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
-                            renderItem={({ item, index }) => (
+                            renderItem={({ item }) => (
                                 <View style={PAGESTYLE.checkBoxLabelLine}>
                                     {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                     <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
@@ -110,7 +107,7 @@ const TLDetail = (props) => {
                             <FlatList
                                 data={props.lessonData.Allpupillist}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
-                                renderItem={({ item, index }) => (
+                                renderItem={({ item }) => (
                                     <View style={PAGESTYLE.checkBoxLabelNone}>
                                         <Image source={{ uri: baseUrl + item.ProfilePicture }} style={PAGESTYLE.userIconPupil} />
                                         <Text style={PAGESTYLE.checkBoxLabelTextNone}>{item.PupilName}</Text>
@@ -150,7 +147,7 @@ const TLDetail = (props) => {
                                     {props.lessonData.MaterialList.map((item, index) => {
                                         return (
                                             <TouchableOpacity onPress={() => {
-                                                setLoader(true); setMateIndex(index); Download(item, (res) => {
+                                                setLoader(true); setMateIndex(index); Download(item, () => {
                                                     setLoader(false)
                                                     setMateIndex(-1)
                                                 })
@@ -179,7 +176,7 @@ const TLDetail = (props) => {
                                 <FlatList
                                     data={props.lessonData.RecommendedList}
                                     style={{ alignSelf: 'center', width: '100%', bottom: hp(2.60), marginTop: hp(1.30) }}
-                                    renderItem={({ item, index }) => (
+                                    renderItem={({  }) => (
                                         <View style={PAGESTYLE.thumbVideo}>
                                             {/* <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} /> */}
                                             <DownloadSVG style={PAGESTYLE.grpThumbVideo} height={hp(2.01)} width={hp(2.01)} />
@@ -194,10 +191,10 @@ const TLDetail = (props) => {
                             {props.lessonData.RecordingList ?
                                 <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                                     <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                                    {props.lessonData.RecordingList.map((item, index) => {
+                                    {props.lessonData.RecordingList.map((item) => {
                                         return (
                                             <TouchableOpacity onPress={() => {
-                                                setRecordLoader(true); Download(item, (res) => {
+                                                setRecordLoader(true); Download(item, () => {
                                                     setRecordLoader(false)
                                                 })
                                             }} style={{ ...PAGESTYLE.fileGrp, height: 60 }}>

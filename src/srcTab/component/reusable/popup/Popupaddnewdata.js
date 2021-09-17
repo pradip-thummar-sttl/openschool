@@ -51,7 +51,7 @@ const PopupAddNewData = (props) => {
                 onPress={toggleModal}>
                 {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
-                <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
+                <Text style={styles.commonButtonGreenheader}>Add Teacher</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
