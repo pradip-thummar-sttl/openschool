@@ -12,7 +12,7 @@ const Introduction2 = (props) => {
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
                 {/* <Image source={Images.teacherintroSlideTwo} style={styles.SlideImage}></Image> */}
-                <TTabletOnboarding2 style={styles.SlideImage} height={hp(51)} width={'100%'}/>
+                <TTabletOnboarding2 style={styles.SlideImage} height={'100%'} width={'100%'}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Your classroom, online</Text>
@@ -27,9 +27,8 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        height: hp(58.98),
+        height: hp(67.70),
         justifyContent: 'flex-end',
-        marginBottom: hp(8.72),
         width: '100%',
     },
     lefContent:{
@@ -54,9 +53,6 @@ const styles = StyleSheet.create({
         paddingRight:hp(7.81),
     },
     SlideImage: {
-        width: '100%',
-        resizeMode: 'contain',
-        height: hp(51),
     },
 });
 export default Introduction2;
