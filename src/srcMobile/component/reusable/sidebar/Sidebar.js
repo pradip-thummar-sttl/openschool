@@ -236,7 +236,7 @@ const Sidebar = (props) => {
                                 <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>Teacher</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { props.navigation.replace('PupilLessonDetail'); setSelectedModule(2); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('TeacheroverView'); setSelectedModule(2); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}

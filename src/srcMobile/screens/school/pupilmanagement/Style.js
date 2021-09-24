@@ -352,12 +352,6 @@ export default StyleSheet.create({
         color: COLORS.lightGray,
         marginBottom: 3,
     },
-    label1: {
-        fontSize: hp(1.2),
-        fontFamily: FONTS.fontRegular,
-        color: COLORS.lightGray,
-        marginBottom: 3,
-    },
     labelForm: {
         fontSize: hp(1.8),
         fontFamily: FONTS.fontRegular,
@@ -551,7 +545,7 @@ export default StyleSheet.create({
         left: hp(0.3)
     },
     performancePArent: {
-        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%', marginTop:hp(1)
+        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%'
     },
     colorLeftParent: {
         flexDirection: 'row', alignItems: 'center', marginHorizontal: 15
@@ -570,10 +564,5 @@ export default StyleSheet.create({
     },
     bottomText: {
         color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10 
-    },
-    rowProfile: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    squreView:{ borderRadius: 10, height: 100, width: 100, backgroundColor: COLORS.greyBack, justifyContent: 'center', padding: 8 }
+    }
 });

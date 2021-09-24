@@ -4,9 +4,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
-import PAGESTYLE from './ProfileStyle';
+import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
-import HeaderPMInner from "./HeaderPTInner";
+import HeaderPMInner from "./HeaderPMInner";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import moment from 'moment';
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
@@ -25,12 +25,10 @@ import SilverFill from '../../../../svg/teacher/lessonhwplanner/StartSilver_Fill
 import GoldFill from '../../../../svg/teacher/lessonhwplanner/StarGold_Fill'
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
-import HeaderPTInner from "./HeaderPTInner";
-import STLessonList from "./schoolLessonlist/STLessonList";
 
 const { CallModule } = NativeModules;
 
-const TeacherProfileView = (props) => {
+const PupilProfileView = (props) => {
     const item = props.route.params.item;
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
@@ -40,12 +38,10 @@ const TeacherProfileView = (props) => {
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
 
-    // console.log('item', item);
+    console.log('item', item);
     // const handleOnClick = (index) => {
     //     setTabSelected(index)
     // }
-
-    console.log('item of teacher profile view', item)
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -169,10 +165,10 @@ const TeacherProfileView = (props) => {
 
     return (
         <View>
-            <HeaderPTInner
+            <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('TeacherProfileEdit', { item: item })}
+                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />
@@ -195,10 +191,6 @@ const TeacherProfileView = (props) => {
                                     <Text P style={PAGESTYLE.data}>{item.FirstName} {item.LastName}</Text>
                                 </View>
                                 <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>Teaching Year</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.TeachingYear}</Text>
-                                </View>
-                                <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
                                     <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
                                 </View>
@@ -207,12 +199,12 @@ const TeacherProfileView = (props) => {
                                     <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
                                 </View>
                                 <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>status</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.Active ? "Active" : 'Deactive'}</Text>
+                                    <Text LABLE style={PAGESTYLE.label}>Notes</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.Note ? item.Note : '-'}</Text>
                                 </View>
                             </View>
                             <View HR style={STYLE.hrCommon}></View>
-                            {/* <View style={PAGESTYLE.rewardSection}>
+                            <View style={PAGESTYLE.rewardSection}>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
@@ -221,6 +213,7 @@ const TeacherProfileView = (props) => {
                                             activeOpacity={opacity}
                                             onPress={() => setInstantRewards()}>
                                             <View>
+                                                {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
                                                 <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
                                             </View>
                                         </TouchableOpacity>
@@ -229,6 +222,7 @@ const TeacherProfileView = (props) => {
                                         <View style={PAGESTYLE.rewardStarMark}>
                                             <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
+                                                    {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
                                                     {isBronze ?
                                                         <BronzeFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} /> :
                                                         <Bronze style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />
@@ -238,6 +232,7 @@ const TeacherProfileView = (props) => {
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
                                                 <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
+                                                    {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
                                                     {isSilver ?
                                                         <SilverFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />
                                                         :
@@ -247,6 +242,7 @@ const TeacherProfileView = (props) => {
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
                                                 <View style={PAGESTYLE.centerText}>
+                                                    {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
                                                     {isGold ?
                                                         <GoldFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} /> :
                                                         <Gold style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />}
@@ -255,8 +251,8 @@ const TeacherProfileView = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                     </View>
-                                </View> */}
-                            {/* <View style={PAGESTYLE.fieldDetails}>
+                                </View>
+                                <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>What is the reward for?</Text>
                                     <TextInput
                                         returnKeyType={"next"}
@@ -268,16 +264,11 @@ const TeacherProfileView = (props) => {
                                         value={feedBack}
                                         onChangeText={feedback => setFeedback(feedback)} />
                                 </View>
-                            </View> */}
-                            {/* <View HR style={STYLE.hrCommon}></View> */}
+                            </View>
+                            <View HR style={STYLE.hrCommon}></View>
                             <View style={PAGESTYLE.pupilPerfomance}>
-                                <Text H2 style={PAGESTYLE.titlePerfomance}>Teacher Insights</Text>
+                                <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
                                 {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
-
-                                <View style={PAGESTYLE.squreView}>
-                                    <Text style={PAGESTYLE.data}>25</Text>
-                                    <Text style={PAGESTYLE.label1}>Scheduled lessons</Text>
-                                </View>
 
                                 <View style={PAGESTYLE.performancePArent}>
                                     <ActivityRings
@@ -300,17 +291,14 @@ const TeacherProfileView = (props) => {
                             </View>
                         </ScrollView>
                     </View>
-                    : tabSelected === 1 ?
-                        <View style={PAGESTYLE.MainProfile}>
-                            <Chat tabs={tabSelected} data={item} />
-                        </View> :
-                        <STLessonList
-                            navigateDetails={(items) => props.navigation.navigate('SchoolTeacherLessonDetail', { 'data': items })}
-                            id={item.TeacherId} />
+                    :
+                    <View style={PAGESTYLE.MainProfile}>
+                        <Chat tabs={tabSelected} data={item} />
+                    </View>
             }
 
         </View>
     );
 }
 
-export default TeacherProfileView;
+export default PupilProfileView;
