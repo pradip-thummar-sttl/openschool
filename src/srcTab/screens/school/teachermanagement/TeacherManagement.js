@@ -22,7 +22,7 @@ const Pupillist = (props) => (
         <View style={[PAGESTYLE.pupilData]}>
             <View style={PAGESTYLE.pupilProfile}>
                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
-                <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>Mr.</Text>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{props.item.TitleName}</Text>
             </View>
             <View style={PAGESTYLE.nameColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
@@ -110,11 +110,12 @@ const TeacherManagement = (props) => {
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 {isTeacherDetail ?
                     <TeacherProfileView
-                        selectedPupil={teacherDetailData}
+                        selectedTeacher={teacherDetailData}
                         navigateToBack={() => setTeacherDetail(false)} />
                     :
                     isTeacherAdd ?
-                        <TeacherProfileAdd />
+                        <TeacherProfileAdd 
+                            navigateToBack={() => setTeacherAdd(false)} />
                         :
                         <>
                             <HeaderTM
@@ -124,7 +125,8 @@ const TeacherManagement = (props) => {
                                 onSearch={() => fetchRecord(searchKeyword, filterBy)}
                                 onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                                 refreshList={() => refresh()}
-                                navigateToAddTeacher={() => setTeacherAdd(true)} />
+                                navigateToAddTeacher={() => setTeacherAdd(true)}
+                                onFilter={(filterBy) => fetchRecord('', filterBy)} />
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isDataLoading ?
                                     <ActivityIndicator
@@ -134,7 +136,7 @@ const TeacherManagement = (props) => {
                                     teacherData.length > 0 ?
                                         <View>
                                             <View style={PAGESTYLE.pupilTable}>
-                                                <View style={{ width: '2%' }}>
+                                                <View style={{ width: '3%' }}>
                                                 </View>
                                                 <View style={{ width: '5%' }}>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Title</Text>

@@ -21,7 +21,7 @@ import TLDetailAdd from "../../teacher/teacherlessondetail/lessonplan/TeacherLes
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import PupilManagement from "../../teacher/pupilmanagement/PupilManagement";
+import PupilManagement from "../../school/pupilmanagement/PupilManagement";
 import Message from "../../teacher/GlobalMessage/Message";
 import PupilProfileView from "../../teacher/pupilmanagement/PupilProfileView";
 import MESSAGE from "../../../../utils/Messages";
@@ -378,7 +378,7 @@ const SchoolDashboard = (props) => {
                 hide={() => action(!isHide)}
                 navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0); refresh() }}
                 navigateToTeachers={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
-                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
+                navigateToPupils={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
                 navigateToMessaging={() => { setMessagingTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
                 navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }}
                 navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }} />
@@ -703,7 +703,7 @@ const SchoolDashboard = (props) => {
                                     <TeacherManagement navigation={props.navigation} />
                                     :
                                     selectedIndex == 2 ?
-                                        <TeacherLessonList navigation={props.navigation} />
+                                        <PupilManagement navigation={props.navigation} />
                                         :
                                         selectedIndex == 3 ?
                                             <SchoolMessage navigation={props.navigation} tabs={messagingTab} />

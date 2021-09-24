@@ -282,8 +282,8 @@ const PopupdataSecond = (props) => {
                         activeOpacity={opacity}
                         onPress={toggleModal}>
                         {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                        <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                        <Text style={styles.entryTitle}>Import from CSV</Text>
+                        <NewEvent style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                        <Text style={styles.entryTitle}>New Event</Text>
                     </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>

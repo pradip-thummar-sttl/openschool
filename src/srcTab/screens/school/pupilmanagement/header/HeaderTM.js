@@ -20,7 +20,6 @@ import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
-import PopupaddnewdataTM from "../../../../component/reusable/popup/PopupaddnewdataTM";
 
 const HeaderTM = (props) => {
 
@@ -133,7 +132,7 @@ const HeaderTM = (props) => {
                     {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                     <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                 </View>
-                <PopupaddnewdataTM
+                <PopupAddNewData
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()}
                     navigateToAddTeacher={() => props.navigateToAddTeacher()} />

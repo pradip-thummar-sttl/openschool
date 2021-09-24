@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
+// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
@@ -14,7 +15,9 @@ import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
-const PopupAddNewData = (props) => {
+import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
+import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
+const PopupaddnewdataPM = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -50,7 +53,7 @@ const PopupAddNewData = (props) => {
                 onPress={toggleModal}>
                 {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
-                <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
+                <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
@@ -61,17 +64,17 @@ const PopupAddNewData = (props) => {
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
-                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add a new entry</Text>
+                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
                                 <View style={styles.entryContentMain}>
+                                    <PopupdataSecond />
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         style={styles.entryData}
-                                        onPress={() => { setModalVisible(false); props.navigateToAddLesson() }}>
+                                        onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
                                         {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                        <NewLesson style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                                        <Text style={styles.entryTitle}>New Lesson</Text>
+                                        <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                                        <Text style={styles.entryTitle}>Add Mnually</Text>
                                     </TouchableOpacity>
-                                    <PopupdataSecond />
                                 </View>
                             </View>
                         </View>
@@ -81,7 +84,7 @@ const PopupAddNewData = (props) => {
         </View>
     );
 }
-export default PopupAddNewData;
+export default PopupaddnewdataPM;
 
 const styles = StyleSheet.create({
     cancelButton: {
@@ -112,12 +115,12 @@ const styles = StyleSheet.create({
     entryContentMain: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft: hp(-4.23),
-        marginRight: hp(-4.23),
+        // marginLeft: hp(-4.23),
+        // marginRight: hp(-4.23),
     },
     entryData: {
-        paddingLeft: hp(4.23),
-        paddingRight: hp(4.23),
+        marginLeft: 30,
+        alignItems: 'center',
     },
     entryIcon: {
         width: hp(11.19),

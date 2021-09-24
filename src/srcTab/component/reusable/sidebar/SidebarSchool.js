@@ -125,7 +125,7 @@ const SidebarSchool = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { navigateSidebarIndex(); toggleAnimation(true) }}>
+                        onPress={() => { props.navigateToTeachers(); toggleAnimation(true) }}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
@@ -139,7 +139,7 @@ const SidebarSchool = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToLessonAndHomework(); toggleAnimation(true) }}>
+                        onPress={() => { props.navigateToPupils(); toggleAnimation(true) }}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}

@@ -91,6 +91,9 @@ const MESSAGE = {
     noInsights2: 'Start using the app to gather more insights',
     noTeacher1: 'No teachers here yet',
     noTeacher2: 'Take it easy and enjoy a break',
+
+    selectTeacher: 'Please select any teacher',
+    classSetup: 'Class setup successfully',
 }
 
 export default MESSAGE;

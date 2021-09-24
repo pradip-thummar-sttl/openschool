@@ -26,33 +26,105 @@ import Silver from "../../../../svg/teacher/pupilmanagement/StartSilver";
 import GoldFill from "../../../../svg/teacher/pupilmanagement/StarGold_Fill";
 import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import HeaderPMInnerAdd from "./HeaderPMInnerAdd";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
+import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
 
-const TeacherProfileAdd = (props) => {
+const PupilProfileAdd = (props) => {
     const [isHide, action] = useState(true);
+    const [userType, setUserType] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [teachingYear, setTeachingYear] = useState('');
+    const [selectedDate, setSelectedDate] = useState('')
+    const [assignedTeacher, setAssignedTeacher] = useState('');
     const [email, setEmail] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [parentFirstName, setParentFirstName] = useState('');
+    const [parentLastName, setParentLastName] = useState('');
     const [profileUri, setProfileUri] = useState('')
     const [isLoading, setLoading] = useState(false)
+    const [teachers, setTeachers] = useState([])
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const t1 = useRef(null);
     const t2 = useRef(null);
     const t3 = useRef(null);
     const t4 = useRef(null);
 
-    useEffect(()=> {
+    useEffect(() => {
+        loadTeacher()
+
+        getUserType()
+
         let w = PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width)
         let h = PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height)
-        let d = Math.sqrt(w*w + h*h)
+        let d = Math.sqrt(w * w + h * h)
         let density = PixelRatio.get()
         let ppi = 160 * density
         let inches = d / ppi
         console.log('inchs', inches, d, ppi, Math.ceil(d), w, h);
     }, [])
+
+    const loadTeacher = () => {
+        const data = {
+            Searchby: "",
+            Filterby: ""
+        }
+
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setTeachers(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
+
+    const teacherDropDown = () => {
+        return (
+            <View style={PAGESTYLE.dropDownFormInput}>
+                <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
+                <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+                    <MenuTrigger style={[PAGESTYLE.dropDown]}>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                        <FlatList
+                            data={teachers}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                            )}
+                            style={{ height: 190 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
+    const getUserType = () => {
+        Service.get(EndPoints.GetAllUserType, (res) => {
+            if (res.flag) {
+                var userData = res.data
+                userData.map((item) => {
+                    if (item.Name === 'Pupil') {
+                        setUserType(item.Name)
+                    }
+                })
+            } else {
+            }
+        }, (err) => {
+        })
+    }
 
     const validateFields = () => {
         if (!firstName.trim()) {
@@ -61,17 +133,20 @@ const TeacherProfileAdd = (props) => {
         } else if (!lastName.trim()) {
             showMessage(MESSAGE.lastName)
             return false
-        } else if (!dob.trim()) {
+        } else if (!selectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false
-        } else if (!relation.trim()) {
-            showMessage(MESSAGE.relation)
-            return false
-        } else if (!code.trim()) {
-            showMessage(MESSAGE.passCode)
-            return false
-        } else if (!parentName.trim()) {
+        } else if (!parentFirstName.trim()) {
             showMessage(MESSAGE.parentNAme)
+            return false
+        } else if (!parentLastName.trim()) {
+            showMessage(MESSAGE.parentNAme)
+            return false
+        } else if (!email.trim()) {
+            showMessage(MESSAGE.email)
+            return false
+        } else if (!mobile.trim()) {
+            showMessage(MESSAGE.phone)
             return false
         }
 
@@ -82,10 +157,17 @@ const TeacherProfileAdd = (props) => {
         // setLoading(true)
 
         let data = {
+            SchoolId: User.user.UserDetialId,
+            TeacherId: selectedTeacher,
+            ParentFirstName: parentFirstName,
+            ParentLastName: parentLastName,
             FirstName: firstName,
             LastName: lastName,
-            TeachingYear: '',
-            Email: '',
+            Email: email,
+            MobileNumber: mobile,
+            CreatedBy: User.user.UserDetialId,
+            UserTypeId: userType,
+            Invited: 'false',
         }
 
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
@@ -179,6 +261,20 @@ const TeacherProfileAdd = (props) => {
         );
     }
 
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
+        hideDatePicker();
+    };
+
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
@@ -215,21 +311,6 @@ const TeacherProfileAdd = (props) => {
                             </View>
                             <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
                                 <View>
-                                    <Text style={PAGESTYLE.fieldInputLabel}>Teaching Year</Text>
-                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
-                                        <TextInput
-                                            returnKeyType={"next"}
-                                            style={PAGESTYLE.commonInput}
-                                            autoCapitalize={false}
-                                            maxLength={40}
-                                            value={teachingYear}
-                                            placeholderTextColor={COLORS.darkGray}
-                                        />
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
-                                <View>
                                     <Text style={PAGESTYLE.fieldInputLabel}>First Name</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TextInput
@@ -265,6 +346,75 @@ const TeacherProfileAdd = (props) => {
                                 </View>
                             </View>
 
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
+                                <View>
+                                    <Text style={PAGESTYLE.fieldInputLabel}>Date of Birth</Text>
+                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+                                        <TouchableOpacity onPress={() => showDatePicker()}>
+                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row' }]}>
+                                                <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
+                                                <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
+                                                <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={PAGESTYLE.fieldInputLabel}>Unique ID (auto-generated)</Text>
+                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+                                        <TextInput
+                                            ref={t4}
+                                            returnKeyType={"done"}
+                                            style={PAGESTYLE.commonInput}
+                                            autoCapitalize={false}
+                                            maxLength={40}
+                                            placeholderTextColor={COLORS.lightplaceholder}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
+                                <View>
+                                    {teacherDropDown()}
+                                </View>
+                            </View>
+                            <View style={PAGESTYLE.hrLine} />
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 25 }]}>
+                                <View>
+                                    <Text style={PAGESTYLE.fieldInputLabel}>Parent's First Name</Text>
+                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+                                        <TextInput
+                                            ref={t1}
+                                            returnKeyType={"next"}
+                                            onSubmitEditing={() => { t2.current.focus(); }}
+                                            style={PAGESTYLE.commonInput}
+                                            autoCapitalize={false}
+                                            maxLength={40}
+                                            value={firstName}
+                                            placeholderTextColor={COLORS.darkGray}
+                                            onChangeText={firstName => setParentFirstName(firstName)}
+                                        />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={PAGESTYLE.fieldInputLabel}>Parent's Last Name</Text>
+                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+
+                                        <TextInput
+                                            ref={t2}
+                                            returnKeyType={"next"}
+                                            onSubmitEditing={() => { t3.current.focus(); }}
+                                            style={PAGESTYLE.commonInput}
+                                            autoCapitalize={false}
+                                            maxLength={40}
+                                            value={lastName}
+                                            placeholderTextColor={COLORS.lightplaceholder}
+                                            onChangeText={lastName => setParentLastName(lastName)}
+                                        />
+
+                                    </View>
+                                </View>
+                            </View>
 
                             <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
                                 <View>
@@ -284,7 +434,7 @@ const TeacherProfileAdd = (props) => {
                                     </View>
                                 </View>
                                 <View>
-                                    <Text style={PAGESTYLE.fieldInputLabel}>Unique ID (auto-generated)</Text>
+                                    <Text style={PAGESTYLE.fieldInputLabel}>Mobile Number</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TextInput
                                             ref={t4}
@@ -293,15 +443,23 @@ const TeacherProfileAdd = (props) => {
                                             autoCapitalize={false}
                                             maxLength={40}
                                             placeholderTextColor={COLORS.lightplaceholder}
+                                            onChangeText={number => setMobile(number)}
                                         />
                                     </View>
                                 </View>
                             </View>
                         </View>
+                        <DateTimePickerModal
+                            isVisible={isDatePickerVisible}
+                            mode="date"
+                            minimumDate={new Date()}
+                            onConfirm={handleConfirm}
+                            onCancel={hideDatePicker}
+                        />
                     </KeyboardAwareScrollView>
                 </View>
             </View>
         </View>
     );
 }
-export default TeacherProfileAdd;
+export default PupilProfileAdd;
