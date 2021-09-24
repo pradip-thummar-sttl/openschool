@@ -63,5 +63,6 @@ export const EndPoints = {
     GetTeachersList: 'getteacherslist',
 
     // teacher get 
-    TeacherBySchoolId:"teacherbyschoolid"
+    TeacherBySchoolId:"teacherbyschoolid",
+    GetAllTeacher:"teacher",
 }

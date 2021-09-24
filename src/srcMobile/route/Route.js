@@ -72,6 +72,10 @@ import SchoolProfileEdit from '../screens/school/profile/SchoolProfileEdit';
 import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
 import SchoolMessage from '../screens/school/globalmessage/SchoolMessage';
 import TeacherManagement from '../screens/school/teacherManagament/TeacherManagement';
+import TeacherProfileView from '../screens/school/teacherManagament/TeacherProfileView';
+import TeacherProfileEdit from '../screens/school/teacherManagament/TeacherProfileEdit';
+import AddNewTeacher from '../screens/school/teacherManagament/AddNewTeacher';
+import SchoolTeacherLessonDetail from '../screens/school/teacherManagament/teacherlessionDetail/SchoolTeacherLessonDetail';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -162,6 +166,10 @@ function ScreenStack() {
                 <Stack.Screen name="SchoolNewMessage" component={SchoolNewMessage} />
                 <Stack.Screen name="SchoolMessage" component={SchoolMessage} />
                 <Stack.Screen name="TeacherManagement" component={TeacherManagement} />
+                <Stack.Screen name="TeacherProfileView" component={TeacherProfileView} />
+                <Stack.Screen name="TeacherProfileEdit" component={TeacherProfileEdit} />
+                <Stack.Screen name="AddNewTeacher" component={AddNewTeacher} />
+                <Stack.Screen name="SchoolTeacherLessonDetail" component={SchoolTeacherLessonDetail} />
             </Stack.Navigator>
         </PubNubProvider>
     );

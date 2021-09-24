@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, FlatList, Image, ToastAndroid, BackHandler } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, FlatList, Image, ToastAndroid, BackHandler, Platform } from 'react-native'
 import MoreWhite from '../../../../svg/teacher/dashboard/MoreWhite';
 import MyDay from '../../../../svg/teacher/dashboard/MyDay';
 import Header from "../../../component/reusable/header/Header";
@@ -52,7 +52,7 @@ const SchoolDashBoard = (props) => {
     }
 
     const refresh = () => {
-        // Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
+        // Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user.UserDetialId}`, (res) => {
         //     setDashDataLoading(false)
         //     if (res.code == 200) {
         //         setdashData(res.data)
@@ -64,12 +64,15 @@ const SchoolDashBoard = (props) => {
         //     console.log('response of get all lesson error', err)
         // })
 
+        // console.log('response of get all teacher', User.user)
+
+
         let data={
-            "Searchby":"",
-            "Filterby":"-1"
+            Searchby:"",
+            Filterby:-1
         }
 
-        Service.post(data,`${EndPoints.TeacherBySchoolId}/${User.user._id}`, (res) => {
+        Service.post(data,`${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 setPupilData(res.data)

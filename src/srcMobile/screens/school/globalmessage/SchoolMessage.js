@@ -187,7 +187,7 @@ const SchoolMessage = (props) => {
             Filterby: filterBy
         }
 
-        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user.UserDetialId}/S`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

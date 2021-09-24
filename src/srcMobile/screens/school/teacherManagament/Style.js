@@ -618,11 +618,13 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(2.0),
+        width:'100%'
     },
     pupilProfile: {
-        width: hp(15.80),
+        width: hp(50),
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent:'space-between'
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -673,7 +675,10 @@ export default StyleSheet.create({
     },
     pupilDetailLink: {
         width: hp(10),
+        position:'absolute',
+        right:wp(2),
         alignItems: 'flex-end',
+        justifyContent:'flex-end'
     },
     pupilDetaillinkIcon: {
         width: hp(1),
@@ -1724,5 +1729,10 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+    },
+    rowProfile: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft:wp(2)
     },
 });
