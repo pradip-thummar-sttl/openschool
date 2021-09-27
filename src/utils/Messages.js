@@ -86,6 +86,14 @@ const MESSAGE = {
     selectReward: 'Please select any reward for pupil',
     rewarded: 'Pupil has been rewarded',
     teacherNotStarted: 'Teacher has not started class yet!',
+
+    noInsights1: 'No insights yet',
+    noInsights2: 'Start using the app to gather more insights',
+    noTeacher1: 'No teachers here yet',
+    noTeacher2: 'Take it easy and enjoy a break',
+
+    selectTeacher: 'Please select any teacher',
+    classSetup: 'Class setup successfully',
 }
 
 export default MESSAGE;

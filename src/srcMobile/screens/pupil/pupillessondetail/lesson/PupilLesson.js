@@ -44,8 +44,8 @@ const PupilLesson = (props) => {
                                                     <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
                                                     {
                                                         item.SaveLesson ?
-                                                            <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
-                                                            : <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                                            <BookMarkOn style={PAGESTYLE.bookMarkLabel} height={hp(2.12)} width={hp(1.81)} />
+                                                            : <BookMarkOff style={PAGESTYLE.bookMarkLabel} height={hp(2.12)} width={hp(1.81)} />
                                                     }
                                                     {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} /> */}
                                                 </View>
@@ -82,8 +82,8 @@ const PupilLesson = (props) => {
                                                 <Text style={PAGESTYLE.videoDate}>{moment(item.LessonDate).format('DD/MM/YYYY')}</Text>
                                                 {
                                                     item.SaveLesson ?
-                                                        <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
-                                                        : <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                                        <BookMarkOn style={PAGESTYLE.bookMarkLabel} height={hp(2.12)} width={hp(1.81)} />
+                                                        : <BookMarkOff style={PAGESTYLE.bookMarkLabel} height={hp(2.12)} width={hp(1.81)} />
                                                 }
                                                 {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkLabel} /> */}
                                             </View>

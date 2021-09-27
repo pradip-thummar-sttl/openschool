@@ -5,8 +5,8 @@ function Ic_calendar(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={26.012}
-      height={24.767}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 26.012 24.767"
       {...props}
     >

@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from '../../../../service/EndPoints'
@@ -21,21 +21,21 @@ import NoPupil from '../../../../svg/emptystate/NoPupil';
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
-    activeOpacity={opacity}
+        activeOpacity={opacity}
         style={PAGESTYLE.pupilDetailLink}
         onPress={() => props.onPupilClick()}>
         <View style={[PAGESTYLE.pupilData]}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
-            <View style={[PAGESTYLE.pupilProfile, ]}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(10)}]}>{props.item.FirstName}</Text>
+            <View style={[PAGESTYLE.pupilProfile,]}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(10) }]}>{props.item.FirstName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(10)}]}>{props.item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(10) }]}>{props.item.LastName}</Text>
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1,{width:wp(8)}]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(8) }]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
@@ -52,21 +52,21 @@ const Pupillist = (props, { item }) => (
                     return (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                <Bronze  style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                 {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                    <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                     {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
-                                <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                        <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                         {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
@@ -78,7 +78,7 @@ const Pupillist = (props, { item }) => (
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
             </View>
-            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon}  width={hp(1)} height={hp(3)} />
+            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} width={hp(1)} height={hp(3)} />
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
         </View>
     </TouchableOpacity>
@@ -94,7 +94,7 @@ const PupiloverView = (props) => {
 
     useEffect(() => {
         console.log('`${EndPoints.PupilByTeacherId}/${User.user._id}`', `${EndPoints.PupilByTeacherId}/${User.user._id}`);
-        // fetchRecord('', '')
+        fetchRecord('', '')
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
@@ -200,7 +200,7 @@ const PupiloverView = (props) => {
                                 :
                                 <View style={PAGESTYLE.mainContainer}>
                                     {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
-                                    <NoPupil style={PAGESTYLE.noDataImage} height= {300} width={300} />
+                                    <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
                                     <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                                     <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
                                 </View>
