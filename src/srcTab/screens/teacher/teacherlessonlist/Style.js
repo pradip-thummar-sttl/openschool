@@ -35,7 +35,7 @@ export default StyleSheet.create({
         paddingBottom: hp(3.51),
     },
     pupilTableHeadingMain: {
-        width: hp(15.80),
+        width: '13%',
         fontFamily: FONTS.fontRegular,
         color:COLORS.menuLightFonts,
     },
@@ -92,7 +92,7 @@ export default StyleSheet.create({
         borderRadius:hp(1),
     },
     pupilProfile: {
-        width: hp(15.80),
+        width: '13%',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -182,15 +182,15 @@ export default StyleSheet.create({
     },
     firstColumn:{
       paddingLeft: hp(4.5),
-      width:hp(25),
+      width: '17%',
       justifyContent: 'center',
     },
     secoundColumn:{
-        width:hp(22),
+        width: '17%',
     },
-    lastColumn:{
-        width:hp(30.55),
-    },
+    // lastColumn:{
+    //     width:hp(30.55),
+    // },
     yesText:{
       fontFamily: FONTS.fontSemiBold,
       fontSize:hp(1.82), 

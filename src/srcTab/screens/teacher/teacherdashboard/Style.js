@@ -63,7 +63,7 @@ export default StyleSheet.create({
         height: hp(67.44),
     },
     pupilListing: {
-        maxHeight: hp(67.44),
+        // maxHeight: hp(67.44),
     },
     arrowSelectedTab: {
         width: 0,
