@@ -1,5 +1,5 @@
 const MESSAGE = {
-    email: "Please enter email",
+    email: "Please enter valid email",
     phone: "Please enter valid mobile number",
     password: "Password must contains at least five characters",
     cpassword: "Please enter confirm password",
@@ -94,6 +94,11 @@ const MESSAGE = {
 
     selectTeacher: 'Please select any teacher',
     classSetup: 'Class setup successfully',
+    parentFirstName: 'Please enter parent first name',
+    parentLastName: 'Please enter parent last name',
+    inviteSent: 'Invitation sent successfully',
+    selectYear: 'Please select teaching year',
+    selectTitle: 'Please select title',
 }
 
 export default MESSAGE;

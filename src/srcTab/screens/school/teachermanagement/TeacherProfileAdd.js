@@ -6,7 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
-import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
 // import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
@@ -29,49 +29,90 @@ import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import HeaderPMInnerAdd from "./HeaderPMInnerAdd";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
+import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 
 const TeacherProfileAdd = (props) => {
     const [isHide, action] = useState(true);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [teachingYear, setTeachingYear] = useState('');
     const [email, setEmail] = useState('');
     const [profileUri, setProfileUri] = useState('')
     const [isLoading, setLoading] = useState(false)
+    const [userType, setUserType] = useState('');
+    const [titles, setTitile] = useState([])
+    const [selectedTitle, setSelectedTitle] = useState([])
+    const [teachingYear, setTeachingYear] = useState([])
+    const [selectedYear, setSelectedYear] = useState([])
 
     const t1 = useRef(null);
     const t2 = useRef(null);
     const t3 = useRef(null);
-    const t4 = useRef(null);
 
-    useEffect(()=> {
-        let w = PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width)
-        let h = PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height)
-        let d = Math.sqrt(w*w + h*h)
-        let density = PixelRatio.get()
-        let ppi = 160 * density
-        let inches = d / ppi
-        console.log('inchs', inches, d, ppi, Math.ceil(d), w, h);
+    useEffect(() => {
+        loadTeachingYear()
+
+        loadTitle()
+
+        getUserType()
     }, [])
 
+    const loadTeachingYear = () => {
+        Service.get(`${EndPoints.TeachingYear}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setTeachingYear(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
+
+    const loadTitle = () => {
+        Service.get(`${EndPoints.Title}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setTitile(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
+
+    const getUserType = () => {
+        Service.get(EndPoints.GetAllUserType, (res) => {
+            if (res.flag) {
+                var userData = res.data
+                userData.map((item) => {
+                    if (item.Name === 'Pupil') {
+                        setUserType(item._id)
+                    }
+                })
+            } else {
+            }
+        }, (err) => {
+        })
+    }
+
     const validateFields = () => {
-        if (!firstName.trim()) {
+        if (!selectedYear.length > 0) {
+            showMessage(MESSAGE.selectYear)
+            return false
+        } else if (!selectedTitle.length > 0) {
+            showMessage(MESSAGE.selectTitle)
+            return false
+        } else if (!firstName.trim()) {
             showMessage(MESSAGE.firstName)
             return false
         } else if (!lastName.trim()) {
             showMessage(MESSAGE.lastName)
             return false
-        } else if (!dob.trim()) {
-            showMessage(MESSAGE.selectDOB)
-            return false
-        } else if (!relation.trim()) {
-            showMessage(MESSAGE.relation)
-            return false
-        } else if (!code.trim()) {
-            showMessage(MESSAGE.passCode)
-            return false
-        } else if (!parentName.trim()) {
-            showMessage(MESSAGE.parentNAme)
+        } else if (!email.trim() || !emailValidate(email)) {
+            showMessage(MESSAGE.email)
             return false
         }
 
@@ -82,16 +123,23 @@ const TeacherProfileAdd = (props) => {
         // setLoading(true)
 
         let data = {
+            SchoolId: User.user.UserDetialId,
             FirstName: firstName,
             LastName: lastName,
-            TeachingYear: '',
-            Email: '',
+            TeachingYear: selectedYear[selectedYear.length - 1]._id,
+            Email: email,
+            CreatedBy: User.user.UserDetialId,
+            UserTypeId: userType,
+            IsInvited: 'false',
+            Title: selectedTitle[selectedTitle.length - 1]._id
         }
 
-        Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
+        console.log('data', data);
+
+        Service.post(data, `${EndPoints.Teacher}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
-                uploadProfile(res.data)
+                uploadProfile(res.data._id)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -102,24 +150,28 @@ const TeacherProfileAdd = (props) => {
         })
     }
 
-    const uploadProfile = (updatedData) => {
+    const uploadProfile = (teacherId) => {
         if (!profileUri) {
             setLoading(false)
+            resetFeilds()
+            showMessage(MESSAGE.inviteSent)
             return
         }
 
         let data = new FormData();
         let ext = profileUri.uri.split('.');
 
-        data.append('materiallist', {
+        data.append('file', {
             uri: profileUri.uri,
             name: profileUri.uri.split('/'),
             type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
         });
 
-        Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
+        Service.postFormData(data, `${EndPoints.TeacherUploadProfile}/${teacherId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
+                resetFeilds()
+                showMessage(MESSAGE.inviteSent)
                 console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
@@ -179,6 +231,60 @@ const TeacherProfileAdd = (props) => {
         );
     }
 
+    const resetFeilds = () => {
+        setSelectedYear([])
+        setSelectedTitle([])
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+    }
+
+    const yearDropDown = () => {
+        return (
+            <View style={PAGESTYLE.dropDownFormInput}>
+                <Text style={PAGESTYLE.fieldInputLabel}>Teaching Year</Text>
+                <Menu onSelect={(item) => setSelectedYear([...selectedYear, item])}>
+                    <MenuTrigger style={[PAGESTYLE.dropDown]}>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedYear.length > 0 ? selectedYear[selectedYear.length - 1].Title : 'Select a Year'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                        <FlatList
+                            data={teachingYear}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                            )}
+                            style={{ height: 190 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
+    const titleDropDown = () => {
+        return (
+            <View style={PAGESTYLE.dropDownFormInput}>
+                <Text style={PAGESTYLE.fieldInputLabel}>Title</Text>
+                <Menu onSelect={(item) => setSelectedTitle([...selectedTitle, item])}>
+                    <MenuTrigger style={[PAGESTYLE.dropDown]}>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTitle.length > 0 ? selectedTitle[selectedTitle.length - 1].Title : 'Select a Title'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                        <FlatList
+                            data={titles}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                            )}
+                            style={{ height: 190 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
@@ -214,19 +320,13 @@ const TeacherProfileAdd = (props) => {
                                 {/* </ImageBackground> */}
                             </View>
                             <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
-                                <View>
-                                    <Text style={PAGESTYLE.fieldInputLabel}>Teaching Year</Text>
-                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
-                                        <TextInput
-                                            returnKeyType={"next"}
-                                            style={PAGESTYLE.commonInput}
-                                            autoCapitalize={false}
-                                            maxLength={40}
-                                            value={teachingYear}
-                                            placeholderTextColor={COLORS.darkGray}
-                                        />
-                                    </View>
+                                <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+                                    {yearDropDown()}
                                 </View>
+                                <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+                                    {titleDropDown()}
+                                </View>
+
                             </View>
                             <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
                                 <View>
@@ -276,23 +376,11 @@ const TeacherProfileAdd = (props) => {
                                             returnKeyType={"done"}
                                             style={PAGESTYLE.commonInput}
                                             autoCapitalize={false}
+                                            keyboardType={'email-address'}
                                             maxLength={40}
                                             value={email}
                                             placeholderTextColor={COLORS.lightplaceholder}
                                             onChangeText={email => setEmail(email)}
-                                        />
-                                    </View>
-                                </View>
-                                <View>
-                                    <Text style={PAGESTYLE.fieldInputLabel}>Unique ID (auto-generated)</Text>
-                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
-                                        <TextInput
-                                            ref={t4}
-                                            returnKeyType={"done"}
-                                            style={PAGESTYLE.commonInput}
-                                            autoCapitalize={false}
-                                            maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
                                         />
                                     </View>
                                 </View>

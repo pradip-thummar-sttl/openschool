@@ -6,7 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
-import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
 // import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
@@ -55,19 +55,13 @@ const PupilProfileAdd = (props) => {
     const t2 = useRef(null);
     const t3 = useRef(null);
     const t4 = useRef(null);
+    const t5 = useRef(null);
+    const t6 = useRef(null);
 
     useEffect(() => {
         loadTeacher()
 
         getUserType()
-
-        let w = PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').width)
-        let h = PixelRatio.getPixelSizeForLayoutSize(Dimensions.get('window').height)
-        let d = Math.sqrt(w * w + h * h)
-        let density = PixelRatio.get()
-        let ppi = 160 * density
-        let inches = d / ppi
-        console.log('inchs', inches, d, ppi, Math.ceil(d), w, h);
     }, [])
 
     const loadTeacher = () => {
@@ -117,7 +111,7 @@ const PupilProfileAdd = (props) => {
                 var userData = res.data
                 userData.map((item) => {
                     if (item.Name === 'Pupil') {
-                        setUserType(item.Name)
+                        setUserType(item._id)
                     }
                 })
             } else {
@@ -137,12 +131,12 @@ const PupilProfileAdd = (props) => {
             showMessage(MESSAGE.selectDOB)
             return false
         } else if (!parentFirstName.trim()) {
-            showMessage(MESSAGE.parentNAme)
+            showMessage(MESSAGE.parentFirstName)
             return false
         } else if (!parentLastName.trim()) {
-            showMessage(MESSAGE.parentNAme)
+            showMessage(MESSAGE.parentLastName)
             return false
-        } else if (!email.trim()) {
+        } else if (!email.trim() || !emailValidate(email)) {
             showMessage(MESSAGE.email)
             return false
         } else if (!mobile.trim()) {
@@ -158,7 +152,7 @@ const PupilProfileAdd = (props) => {
 
         let data = {
             SchoolId: User.user.UserDetialId,
-            TeacherId: selectedTeacher,
+            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             ParentFirstName: parentFirstName,
             ParentLastName: parentLastName,
             FirstName: firstName,
@@ -167,13 +161,16 @@ const PupilProfileAdd = (props) => {
             MobileNumber: mobile,
             CreatedBy: User.user.UserDetialId,
             UserTypeId: userType,
-            Invited: 'false',
+            IsInvited: 'false',
+            Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
         }
 
-        Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
+        console.log('data', data);
+
+        Service.post(data, `${EndPoints.Pupil}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
-                uploadProfile(res.data)
+                uploadProfile(res.data._id)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -184,16 +181,17 @@ const PupilProfileAdd = (props) => {
         })
     }
 
-    const uploadProfile = (updatedData) => {
+    const uploadProfile = (pupilId) => {
         if (!profileUri) {
             setLoading(false)
+            showMessage(MESSAGE.inviteSent)
             return
         }
 
         let data = new FormData();
         let ext = profileUri.uri.split('.');
 
-        data.append('materiallist', {
+        data.append('file', {
             uri: profileUri.uri,
             name: profileUri.uri.split('/'),
             type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
@@ -202,6 +200,7 @@ const PupilProfileAdd = (props) => {
         Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
+                showMessage(MESSAGE.inviteSent)
                 console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
@@ -275,6 +274,17 @@ const PupilProfileAdd = (props) => {
         hideDatePicker();
     };
 
+    const resetFeilds = () => {
+        setFirstName('')
+        setLastName('')
+        setSelectedDate('')
+        setSelectedTeacher([])
+        setParentFirstName('')
+        setParentLastName('')
+        setEmail('')
+        setMobile('')
+    }
+
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
@@ -293,7 +303,7 @@ const PupilProfileAdd = (props) => {
                                         activeOpacity={opacity}
                                         onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
-                                            source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
+                                            source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
                                         <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
                                     </TouchableOpacity>
                                 </View>
@@ -360,21 +370,6 @@ const PupilProfileAdd = (props) => {
                                     </View>
                                 </View>
                                 <View>
-                                    <Text style={PAGESTYLE.fieldInputLabel}>Unique ID (auto-generated)</Text>
-                                    <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
-                                        <TextInput
-                                            ref={t4}
-                                            returnKeyType={"done"}
-                                            style={PAGESTYLE.commonInput}
-                                            autoCapitalize={false}
-                                            maxLength={40}
-                                            placeholderTextColor={COLORS.lightplaceholder}
-                                        />
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace]}>
-                                <View>
                                     {teacherDropDown()}
                                 </View>
                             </View>
@@ -384,13 +379,13 @@ const PupilProfileAdd = (props) => {
                                     <Text style={PAGESTYLE.fieldInputLabel}>Parent's First Name</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TextInput
-                                            ref={t1}
+                                            ref={t3}
                                             returnKeyType={"next"}
-                                            onSubmitEditing={() => { t2.current.focus(); }}
+                                            onSubmitEditing={() => { t4.current.focus(); }}
                                             style={PAGESTYLE.commonInput}
                                             autoCapitalize={false}
                                             maxLength={40}
-                                            value={firstName}
+                                            value={parentFirstName}
                                             placeholderTextColor={COLORS.darkGray}
                                             onChangeText={firstName => setParentFirstName(firstName)}
                                         />
@@ -401,13 +396,13 @@ const PupilProfileAdd = (props) => {
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
 
                                         <TextInput
-                                            ref={t2}
+                                            ref={t4}
                                             returnKeyType={"next"}
-                                            onSubmitEditing={() => { t3.current.focus(); }}
+                                            onSubmitEditing={() => { t5.current.focus(); }}
                                             style={PAGESTYLE.commonInput}
                                             autoCapitalize={false}
                                             maxLength={40}
-                                            value={lastName}
+                                            value={parentLastName}
                                             placeholderTextColor={COLORS.lightplaceholder}
                                             onChangeText={lastName => setParentLastName(lastName)}
                                         />
@@ -422,10 +417,12 @@ const PupilProfileAdd = (props) => {
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
 
                                         <TextInput
-                                            ref={t3}
-                                            returnKeyType={"done"}
+                                            ref={t5}
+                                            onSubmitEditing={() => { t6.current.focus(); }}
+                                            returnKeyType={"next"}
                                             style={PAGESTYLE.commonInput}
                                             autoCapitalize={false}
+                                            keyboardType={'email-address'}
                                             maxLength={40}
                                             value={email}
                                             placeholderTextColor={COLORS.lightplaceholder}
@@ -437,11 +434,13 @@ const PupilProfileAdd = (props) => {
                                     <Text style={PAGESTYLE.fieldInputLabel}>Mobile Number</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TextInput
-                                            ref={t4}
+                                            ref={t6}
                                             returnKeyType={"done"}
                                             style={PAGESTYLE.commonInput}
                                             autoCapitalize={false}
+                                            keyboardType={'phone-pad'}
                                             maxLength={40}
+                                            value={mobile}
                                             placeholderTextColor={COLORS.lightplaceholder}
                                             onChangeText={number => setMobile(number)}
                                         />
@@ -452,7 +451,7 @@ const PupilProfileAdd = (props) => {
                         <DateTimePickerModal
                             isVisible={isDatePickerVisible}
                             mode="date"
-                            minimumDate={new Date()}
+                            maximumDate={new Date()}
                             onConfirm={handleConfirm}
                             onCancel={hideDatePicker}
                         />

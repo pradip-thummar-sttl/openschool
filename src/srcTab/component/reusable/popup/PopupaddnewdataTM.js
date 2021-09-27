@@ -17,6 +17,7 @@ import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
+import PopupdataSecondCSVUpload from "./PopupdataSecondCSVUpload";
 const PopupaddnewdataTM = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -66,7 +67,7 @@ const PopupaddnewdataTM = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
                                 <View style={styles.entryContentMain}>
-                                    <PopupdataSecond />
+                                    <PopupdataSecondCSVUpload />
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         style={styles.entryData}
