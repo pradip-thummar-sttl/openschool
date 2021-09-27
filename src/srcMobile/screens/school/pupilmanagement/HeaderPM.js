@@ -22,6 +22,8 @@ import CloseBlack from '../../../../svg/teacher/pupilmanagement/Close_Black'
 import AddWhite from '../../../../svg/teacher/timetable/Add_White'
 import Notification from '../../../../svg/teacher/dashboard/Notification'
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
+import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -134,7 +136,8 @@ const HeaderPM = (props) => {
                 </View>
 
                 <TouchableOpacity style={styles.buttonGroup}
-                    onPress={() => props.navigateToAddNewUser()}>
+                    onPress={() => refRBSheet.current.open() }>
+                        {/* props.navigateToAddNewUser() */}
                     {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
@@ -160,6 +163,52 @@ const HeaderPM = (props) => {
                     </ScrollView>
                 </View>
             </View>
+            <RBSheet
+                    ref={refRBSheet}
+                    closeOnDragDown={true}
+                    height={[hp(55.88)]}
+                    style={{ position: 'relative', }}
+                    closeOnPressMask={true}
+                    customStyles={{
+                        wrapper: {
+                            backgroundColor: COLORS.bottomSlideUpBack
+                        },
+                        draggableIcon: {
+                            backgroundColor: COLORS.darkGray
+                        }
+                    }}
+                >
+                    <View style={styles.popupLarge}>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={styles.popupContent}>
+                            <View style={styles.tabcontent}>
+                                <View style={styles.beforeBorder}>
+                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
+                                    <View style={styles.entryContentMain}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
+                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                            <NewLesson style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                            <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
+                                            <NewEvent style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                            <Text style={styles.entryTitle}>ADD MANUALLy</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </RBSheet>
         </View>
     );
 }

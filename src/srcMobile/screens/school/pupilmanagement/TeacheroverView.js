@@ -90,6 +90,7 @@ const TeacheroverView = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    navigateToCreateNewEvent={()=>props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
