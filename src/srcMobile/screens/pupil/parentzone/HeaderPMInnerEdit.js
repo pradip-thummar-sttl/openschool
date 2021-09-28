@@ -17,6 +17,7 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
+import BackArrow from "../../../../svg/common/BackArrow";
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -40,6 +41,7 @@ const HeaderPMInner = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>Editing Profile</Text>

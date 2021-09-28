@@ -33,12 +33,21 @@ export default class Users extends Component {
                 }
             })
 
-        } else {
+        } else if (type === 'Pupil') {
             AsyncStorage.getItem('introducePupil').then((value) => {
                 if (value) {
                     this.props.navigation.navigate('Login', { userType: "Pupil" })
                 } else {
                     this.props.navigation.navigate('IntroductionPupil')
+                }
+            })
+
+        }else {
+            AsyncStorage.getItem('introduceSchool').then((value) => {
+                if (value) {
+                    this.props.navigation.navigate('Login', { userType: "School" })
+                } else {
+                    this.props.navigation.navigate('IntroductionSchool')
                 }
             })
 
@@ -50,8 +59,7 @@ export default class Users extends Component {
             <View style={styles.container}>
                 <ImageBackground style={styles.image}>
                     {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
-                    {/* <Top style={styles.topBg} width={wp(100)} height={hp(17.4)} /> */}
-                    <View style={{height: hp(23.5), overflow: 'hidden', width: '100%', position: 'absolute', top: -5,}}>
+                    <View style={{height: hp(23.5), overflow: 'hidden', width: '100%', position: 'absolute', top: 0,}}>
                         <Top style={styles.topBg} width={'100%'} height={'100%'} />
                     </View>
                     <View>
@@ -59,7 +67,7 @@ export default class Users extends Component {
                         <View style={styles.userMain}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => null}>
+                                onPress={() => this.navigateIntroductionScreen('School')}>
                                 <View style={styles.user}>
                                     {/* <Image
                                         style={styles.userIcon}

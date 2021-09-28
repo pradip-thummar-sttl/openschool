@@ -1070,6 +1070,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginBottom: hp(0.5),
         marginTop: hp(1),
+        marginRight: 10
     },
     closeNotificationbar: {
         width: hp(1),

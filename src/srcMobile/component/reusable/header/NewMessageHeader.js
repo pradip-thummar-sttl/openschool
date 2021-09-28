@@ -61,7 +61,7 @@ const NewMessageHeader = (props) => {
                                 <MenuTrigger>
                                     {/* <TouchableOpacity style={styles.moreMenu}> */}
                                     {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
-                                    <More style={styles.moreIcon} height={hp(4)} width={hp(4)} />
+                                    <More style={styles.moreIcon} height={hp(2.5)} width={hp(2.5)} />
                                     
                                     {/* </TouchableOpacity> */}
                                 </MenuTrigger>

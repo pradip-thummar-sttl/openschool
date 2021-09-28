@@ -63,7 +63,7 @@ export default StyleSheet.create({
         height: hp(67.44),
     },
     pupilListing: {
-        maxHeight: hp(67.44),
+        // maxHeight: hp(67.44),
     },
     arrowSelectedTab: {
         width: 0,
@@ -384,17 +384,18 @@ export default StyleSheet.create({
         paddingBottom: hp(3.51),
     },
     pupilTableHeadingMain: {
-        width: hp(35.80),
+        width: '30%',
     },
     tabpupil2: {
-        width: hp(17.97),
+        width: '15%',
+        marginRight: Platform.OS == "android" ? hp(10) : hp(8.5),
     },
     tabpupil3: {
-        width: hp(20.18),
+        width: '18.7%',
         marginRight: hp(9.50),
     },
     tabpupil4: {
-        width: hp(18.22),
+        width: '20%',
     },
     pupilTableHeadingMainTitle: {
         fontSize: hp(1.82),
@@ -420,6 +421,8 @@ export default StyleSheet.create({
     },
     pupilTableHeadingsubMain: {
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     pupilhrCustomMargin: {
         marginTop: hp(1.95),
@@ -431,12 +434,13 @@ export default StyleSheet.create({
         marginVertical: 6,
     },
     pupilProfile: {
-        width: hp(35.80),
+        width: '30%',
         flexDirection: 'row',
         alignItems: 'center',
     },
     groupColumnmain: {
-        width: hp(17.97),
+        width: '15%',
+        marginRight: Platform.OS == "android" ? hp(11) : hp(8.5),
     },
     groupColumn: {
         // width: hp(5.59),
@@ -447,8 +451,9 @@ export default StyleSheet.create({
     // },
     perfomanceColumn: {
         flexDirection: 'row',
-        width: hp(20.18),
-        marginRight: hp(9.50),
+        width: '16.5%',
+        marginRight: Platform.OS == "android" ? hp(12.8) : hp(12.4),
+        justifyContent: 'center',
     },
     perfomanceDotmain: {
         width: hp(10.80),
@@ -473,6 +478,8 @@ export default StyleSheet.create({
     rewardColumn: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
+        width: '20%',
     },
     rewardStar: {
         width: hp(5.5),
@@ -512,8 +519,8 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        width:hp(10),
-        textAlign:'center'
+        width: hp(10),
+        textAlign: 'center'
     },
     scrollView: {
         height: hp(67.44),

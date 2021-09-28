@@ -223,8 +223,7 @@ const PupuilDashboard = (props) => {
                     setLoading(false)
                 })
             } else {
-                startLiveClassAndroid()
-                // showMessage(MESSAGE.scheduledTime)
+                showMessage(MESSAGE.scheduledTime)
                 setLoading(false)
             }
         }

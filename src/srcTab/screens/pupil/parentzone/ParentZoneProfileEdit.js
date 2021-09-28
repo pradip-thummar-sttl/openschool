@@ -273,14 +273,14 @@ const ParentZoneProfileEdit = (props) => {
                             <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage}>
-                                        <EditProfileTop_Tablet style={{position:'absolute'}} height={'100%'} width={'100%'}/>
+                                        <EditProfileTop_Tablet style={{ position: 'absolute' }} height={'100%'} width={'100%'} />
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => showActionChooser()}>
                                                 <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
                                                 {/* <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} /> */}
-                                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(3.38)} height={hp(3.38)}/>
+                                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(3.38)} height={hp(3.38)} />
                                             </TouchableOpacity>
                                         </View>
                                         <View style={PAGESTYLE.topBannerParent}>
@@ -344,7 +344,7 @@ const ParentZoneProfileEdit = (props) => {
                                                 placeholderTextColor={COLORS.menuLightFonts}
                                             />
                                             {/* <Image source={Images.DropArrow} style={PAGESTYLE.dropArrow1} /> */}
-                                        
+
                                         </View>
                                     </TouchableOpacity>
                                 </View>

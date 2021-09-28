@@ -34,10 +34,10 @@ const Pupillist = (props, { style }) => (
             <View style={PAGESTYLE.pupilProfile}>
                 <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
             </View>
-            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
                 <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
             </View>
-            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.marked]}>
                 <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
                 <View style={PAGESTYLE.pupilDetailLink}>
                     {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
@@ -144,10 +144,10 @@ const TLHomeWorkSubmitted = (props) => {
                 <View style={PAGESTYLE.pupilTableHeadingMain}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Submitted</Text>
                 </View>
-                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
+                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.date]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Submission date</Text>
                 </View>
-                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
+                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.marked]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
                 </View>
             </View>

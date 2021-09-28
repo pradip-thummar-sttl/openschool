@@ -1,5 +1,5 @@
 const MESSAGE = {
-    email: "Please enter email",
+    email: "Please enter valid email",
     phone: "Please enter valid mobile number",
     password: "Password must contains at least five characters",
     cpassword: "Please enter confirm password",
@@ -91,6 +91,18 @@ const MESSAGE = {
 
     teacherManage1:"There doesn't seem to be any teachers here",
     teacherManage2:"Start adding teacher o invite them join the school",
+    noInsights1: 'No insights yet',
+    noInsights2: 'Start using the app to gather more insights',
+    noTeacher1: 'No teachers here yet',
+    noTeacher2: 'Take it easy and enjoy a break',
+
+    selectTeacher: 'Please select any teacher',
+    classSetup: 'Class setup successfully',
+    parentFirstName: 'Please enter parent first name',
+    parentLastName: 'Please enter parent last name',
+    inviteSent: 'Invitation sent successfully',
+    selectYear: 'Please select teaching year',
+    selectTitle: 'Please select title',
 }
 
 export default MESSAGE;

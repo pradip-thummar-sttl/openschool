@@ -9,7 +9,7 @@ import FONTS from '../../../utils/Fonts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import Images from '../../../utils/Images';
-import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice } from '../../../utils/Constant';
+import { opacity, showMessage, isDesignBuild, isRunningFromVirtualDevice, emailValidate } from '../../../utils/Constant';
 import { Service } from '../../../service/Service';
 import { EndPoints } from '../../../service/EndPoints';
 import { connect } from 'react-redux';
@@ -64,8 +64,27 @@ class Login extends Component {
                 } else {
                 }
             })
-        } else {
+        } else if (this.props.route.params.userType == 'Teacher') {
             AsyncStorage.getItem('user').then((value) => {
+                var user = JSON.parse(value)
+                if (user.isRemember) {
+                    console.log('user of async', user)
+
+                    this.setState({
+                        userName: user.Email,
+                        password: user.Password,
+                        PushToken: user.PushToken,
+                        Device: user.Device,
+                        OS: user.OS,
+                        AccessedVia: user.AccessedVia,
+                        isRemember: user.isRemember
+                    })
+                    this.isFieldsValidated()
+                } else {
+                }
+            })
+        } else {
+            AsyncStorage.getItem('school').then((value) => {
                 var user = JSON.parse(value)
                 if (user.isRemember) {
                     console.log('user of async', user)
@@ -94,7 +113,7 @@ class Login extends Component {
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
-        if (!userName) {
+        if (!userName || !emailValidate(userName)) {
             showMessage(MESSAGE.email)
             return false;
         } else if (!password) {
@@ -123,6 +142,7 @@ class Login extends Component {
                     AccessedVia: AccessedVia,
                     UserType: userType
                 }
+                console.log('data', data);
 
                 Service.post(data, EndPoints.Login, (res) => {
                     if (res.code == 200) {
@@ -233,8 +253,10 @@ class Login extends Component {
     launchNextScrren(res, data) {
         if (this.props.route.params.userType == 'Pupil') {
             AsyncStorage.setItem('pupil', JSON.stringify(data))
-        } else {
+        } else if (this.props.route.params.userType == 'Teacher') {
             AsyncStorage.setItem('user', JSON.stringify(data))
+        } else {
+            AsyncStorage.setItem('school', JSON.stringify(data))
         }
         this.props.setUserAuthData(res)
         if (res.UserType === "Teacher") {
@@ -246,7 +268,7 @@ class Login extends Component {
                 this.props.navigation.replace('ParentZoneSwitch')
             }
         } else {
-            this.props.navigation.replace('PupuilDashboard')
+            this.props.navigation.replace('SchoolDashboard')
         }
         // this.props.navigation.replace('LessonandHomeworkPlannerDashboard')
     }
@@ -266,7 +288,7 @@ class Login extends Component {
                     {this.props.route.params.userType == 'Pupil' ?
                         // <ImageBackground source={Images.LoginBack} style={styles.image}></ImageBackground>
                         // <TabletLoginSideimg style={styles.image} height={'100%'} width={'100%'} />
-                        <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)}/>
+                        <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
                         :
                         // <ImageBackground source={Images.TeacherLoginBack} style={styles.image}></ImageBackground>
                         <TabletLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
@@ -275,7 +297,7 @@ class Login extends Component {
                 </View>
                 <View style={styles.rightContent}>
                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start' }}>
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher Login' : 'Pupil Login'}</Text>
+                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
 
                         <View style={styles.loginForm}>
                             <Text style={styles.fieldInputLabel}>Email</Text>
@@ -317,12 +339,12 @@ class Login extends Component {
                                             {/* <Image
                                                 style={styles.password}
                                                 source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
-                                                {
-                                                    this.state.isPasswordHide?
+                                            {
+                                                this.state.isPasswordHide ?
                                                     <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                    :<HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                }
-                                                
+                                                    : <HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                            }
+
                                         </TouchableOpacity>
                                     </View>
                                 </View>

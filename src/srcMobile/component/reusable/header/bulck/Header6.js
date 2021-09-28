@@ -15,17 +15,18 @@ import {
 } from 'react-native-popup-menu';
 import BackArrow from "../../../../../svg/common/BackArrow";
 const Header6 = (props) => {
-    console.log('props', props);
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                <TouchableOpacity onPress={()=>props.goBack()}> <BackArrow style={styles.arrow} height={hp(2.43)} width={hp(2.43)} />  </TouchableOpacity>
+                {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                <TouchableOpacity onPress={() => props.goBack()}>
+                    <BackArrow style={styles.arrow} height={hp(2.43)} width={hp(2.43)} />
+                </TouchableOpacity>
                 <View style={styles.titles}>
                     <Text numberOfLines={1} style={styles.mainTitle}>{props.title}</Text>
                     <Text style={styles.date}>{props.date}</Text>
                 </View>
-            </View>            
+            </View>
         </View>
     );
 }

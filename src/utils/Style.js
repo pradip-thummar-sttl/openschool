@@ -20,6 +20,7 @@ export default StyleSheet.create({
         flex: 1,
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
+        width: '100%'
     },
     commonInput: {
         color:COLORS.themeBlue,
@@ -125,8 +126,7 @@ export default StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(3.125),
+        alignItems: 'center',
         paddingTop: hp(1.21),
         paddingBottom: hp(1.21),
         alignSelf: 'center',
