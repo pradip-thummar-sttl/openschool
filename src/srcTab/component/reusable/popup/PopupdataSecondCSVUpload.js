@@ -8,18 +8,76 @@ import FONTS from '../../../../utils/Fonts';
 // import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
 // import DateTimePicker from '@react-native-community/datetimepicker';
-import { opacity } from "../../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
+import UploadCSV from "../../../../svg/school/teachermanagment/UploadCSV";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import DocumentPicker from "react-native-document-picker";
 
 const PopupdataSecondCSVUpload = (props) => {
     const isFromDashboard = props.isFromDashboard
     console.log('isFromDashboard', isFromDashboard);
 
     const [isModalVisible, setModalVisible] = useState();
+    const [csv, setCSV] = useState([])
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
+
+    const addCSV = () => {
+        console.log('hihihihihihi')
+        var arr = [...csv]
+        try {
+            DocumentPicker.pick({
+                type: [DocumentPicker.types.xlsx,],
+            }).then((results) => {
+                console.log('results', results);
+                setCSV(results)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const uploadProfile = (pupilId) => {
+        if (!profileUri) {
+            setLoading(false)
+            showMessage(MESSAGE.inviteSent)
+            return
+        }
+
+        let data = new FormData();
+        let ext = profileUri.uri.split('.');
+
+        data.append('file', {
+            uri: profileUri.uri,
+            name: profileUri.uri.split('/'),
+            type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+        });
+
+        Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
+            if (res.code == 200) {
+                setLoading(false)
+                showMessage(MESSAGE.inviteSent)
+                console.log('response of save lesson', res)
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
+    }
+
 
     return (
         <View>
@@ -32,15 +90,19 @@ const PopupdataSecondCSVUpload = (props) => {
                 <Text style={styles.entryTitle}>Import From CSV</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
-                <KeyboardAwareScrollView>
+                <View style={styles.popupLarge}>
+                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
+                    <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
+                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                    </TouchableOpacity>
                     <View style={styles.popupCard}>
-                        <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
-                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        <TouchableOpacity style={styles.upload} onPress={() => addCSV()}>
+                                <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
+                                <Text style={styles.labelUpload}>Click here to select source</Text>
                         </TouchableOpacity>
-
                     </View>
-                </KeyboardAwareScrollView>
+                </View>
             </Modal>
         </View>
     );
@@ -57,12 +119,23 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(2),
-        width: hp(60.54),
+        width: '90%',
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
         fontFamily: FONTS.fontRegular,
         position: 'relative',
+    },
+    popupLarge: {
+        backgroundColor: COLORS.white,
+        borderRadius: hp(2),
+        width: hp(80.59),
+        alignItems: 'center',
+        alignSelf: 'center',
+        overflow: 'hidden',
+        fontFamily: FONTS.fontRegular,
+        position: 'relative',
+        paddingBottom: hp(3),
     },
     popupContent: {
         width: '100%',
@@ -80,7 +153,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         lineHeight: hp(4.55),
         color: COLORS.darkGray,
-        marginBottom: hp(6.51),
+        marginVertical: hp(3.51),
     },
     uploadCalIcon: {
         width: hp(5.20),
@@ -165,6 +238,25 @@ const styles = StyleSheet.create({
         height: hp(11.19),
         resizeMode: 'contain',
         marginBottom: hp(2.6),
+    },
+    upload: {
+        width: '100%',
+        height: 200,
+        backgroundColor: COLORS.backgroundColorCommon,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: 6,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+        borderStyle: 'dashed',
+    },
+    labelUpload: {
+        fontSize: 14,
+        textAlign: 'center',
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        marginTop: 10
     },
     entryTitle: {
         fontSize: hp(1.56),
