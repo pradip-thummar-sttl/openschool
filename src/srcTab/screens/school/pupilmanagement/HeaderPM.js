@@ -78,7 +78,7 @@ const HeaderPM = (props) => {
                             style={styles.tabs}
                             activeOpacity={opacity}
                             onPress={() => { props.onTabSelected(1); setSelectedTab(1) }}>
-                            <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
+                            <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>class set up</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

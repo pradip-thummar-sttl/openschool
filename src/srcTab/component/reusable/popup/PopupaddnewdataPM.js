@@ -17,6 +17,7 @@ import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
+import PopupdataSecondCSVUpload from "./PopupdataSecondCSVUpload";
 const PopupaddnewdataPM = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -57,7 +58,7 @@ const PopupaddnewdataPM = (props) => {
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => { toggleModal() }}>
                         {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
@@ -66,7 +67,7 @@ const PopupaddnewdataPM = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
                                 <View style={styles.entryContentMain}>
-                                    <PopupdataSecond />
+                                    <PopupdataSecondCSVUpload />
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         style={styles.entryData}

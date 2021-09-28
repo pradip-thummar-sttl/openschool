@@ -11,13 +11,13 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
+import PopupdataSecond from "../../popup/PopupdataSecond";
 
 const HeaderWhite = (props) => {
 
@@ -91,7 +91,7 @@ const HeaderWhite = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <PopupdataSecondPupil
+                <PopupdataSecond
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
             </View>
