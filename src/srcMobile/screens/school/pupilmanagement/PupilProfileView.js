@@ -33,6 +33,12 @@ const PupilProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
+
+    const [joinedLesson, setJoinedLesson] = useState(0)
+    const [submittedHomework, setSubmittedHomework] = useState(0)
+    const [missedLesson, setMissedLesson] = useState(0)
+    const [isLessonDetail, setLessonDetail] = useState(false);
+
     const [isBronze, setBronze] = useState(false);
     const [isSilver, setSilver] = useState(false);
     const [isGold, setGold] = useState(false);
@@ -82,6 +88,9 @@ const PupilProfileView = (props) => {
     }, [chartData])
 
     const getLessonData = () => {
+
+        
+
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -91,6 +100,8 @@ const PupilProfileView = (props) => {
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
+                setJoinedLesson(res.data.joinlesson)
+                setMissedLesson(res.data.totallesson - res.data.joinlesson)
                 getHomeworkData(data)
             } else {
                 showMessage(res.message)
@@ -110,6 +121,7 @@ const PupilProfileView = (props) => {
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
+                setSubmittedHomework(res.data.total)
                 lessonData.push(data)
                 setChartData(lessonData)
             } else {
