@@ -28,6 +28,8 @@ import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
 import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import FONTS from "../../../../utils/Fonts";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
+import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 const HeaderTM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -160,14 +162,14 @@ const HeaderTM = (props) => {
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
                                             {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                            <NewLesson style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                            <ImportCSV style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
                                             {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                                            <NewEvent style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                            <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>ADD MANUALLy</Text>
                                         </TouchableOpacity>
                                     </View>
