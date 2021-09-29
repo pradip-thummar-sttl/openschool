@@ -92,8 +92,8 @@ const TeacheroverView = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, '')}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
-                    navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
+                    // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
@@ -108,7 +108,7 @@ const TeacheroverView = (props) => {
                                     pupilData.length > 0 ?
                                         pupilData.map((item, index) => {
                                             return (
-                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
+                                                <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
                                                     <View style={[PAGESTYLE.pupilData]}>
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -16,8 +16,10 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
-import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack'
-const HeaderPMInner = (props) => {
+import BackArrow from "../../../../svg/common/BackArrow";
+import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import WhiteCheck from "../../../../svg/pupil/timetable/WhiteCheck";
+const AddNewTeacherHeader = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
     const [tabIndex, setSelectedTab] = useState(0);
@@ -25,11 +27,15 @@ const HeaderPMInner = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-
+    const showAlert = () =>{
+        Alert.alert(
+           'Record successfully Saved...'
+        )
+     }
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-
+    
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -41,58 +47,22 @@ const HeaderPMInner = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
-                        <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
+                        <Text style={styles.mainTitle}>Add New Pupil</Text>
                     </View>
                 </View>
 
-                {/* {tabIndex == 0 ?
-                    <View style={styles.headerRight}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => props.navigateToPupilProfileEdit()}>
-                            <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
-                        </TouchableOpacity>
-                    </View>
-                    :
-                    null
-                } */}
-            </View>
-            <View style={styles.whiteBg}>
-                <View style={styles.lessonPlanTop}>
-                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                        <View style={styles.lessonPlanTab}>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(0), props.tabIndex(0) }}>
-                                <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>Pupil profile</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(1), props.tabIndex(1) }}>
-                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>Parent Chat</Text>
-                            </TouchableOpacity>
-                            {/* <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
-                                <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Pupil chat</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(3), props.tabIndex(3) }}>
-                                <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>School chat</Text>
-                            </TouchableOpacity> */}
-                        </View>
-                    </ScrollView>
+                <View style={styles.headerRight}>
+                    <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
+                        {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
+                        <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
+                        <Text style={styles.commonButtonGreenheader}></Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
     );
 }
-export default HeaderPMInner;
+export default AddNewTeacherHeader;
 
 const styles = StyleSheet.create({
     headerMaintop: {
@@ -101,16 +71,17 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
-        paddingLeft: hp(2.46),
+        paddingLeft: hp(2),
         paddingRight: hp(2),
-        paddingBottom: 10,
+        paddingBottom: hp(1.23),
+        paddingTop: hp(2.3),
     },
     headerMain: {
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.5),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
@@ -134,14 +105,12 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     whiteBg: {
-        paddingLeft: hp(2.46),
+        padding: hp(2),
         flexDirection: 'row',
         alignItems: 'center',
     },
     lessonPlanTop: {
         flexDirection: 'row',
-        paddingBottom: 15,
-        paddingTop: 15,
     },
     lessonPlanTab: {
         flexDirection: 'row',
@@ -158,5 +127,35 @@ const styles = StyleSheet.create({
     },
     tabsTextSelected: {
         color: COLORS.buttonGreen,
+    },
+    buttonGroup: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
+    },
+    addIcon: {
+        width: hp(1.55),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(1.52),
+        left: hp(1.8),
+        zIndex: 9,
+    },
+    commonButtonGreenheader: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(2),
+        height: hp(5.20),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
 });
