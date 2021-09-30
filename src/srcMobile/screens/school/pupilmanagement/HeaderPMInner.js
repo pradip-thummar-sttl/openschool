@@ -17,6 +17,7 @@ import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack'
+import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -45,17 +46,19 @@ const HeaderPMInner = (props) => {
                     </View>
                 </View>
 
-                {/* {tabIndex == 0 ?
+                {tabIndex == 0 ?
                     <View style={styles.headerRight}>
                         <TouchableOpacity
+                        style={styles.editButton}
                             activeOpacity={opacity}
                             onPress={() => props.navigateToPupilProfileEdit()}>
-                            <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
+                            {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
+                            <Ic_Edit style={styles.massagesIcon}width={hp(3.20)} height={hp(3.20)}/>
                         </TouchableOpacity>
                     </View>
                     :
                     null
-                } */}
+                }
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
@@ -159,4 +162,17 @@ const styles = StyleSheet.create({
     tabsTextSelected: {
         color: COLORS.buttonGreen,
     },
+    headerRight: {
+        alignSelf: 'flex-end',
+        right: 10,
+    },
+    editButton:{
+        borderRadius:10,
+        height:hp(5.20),
+        width:hp(5.20),
+         borderWidth:1,
+         borderColor:COLORS.borderGrp,
+         alignItems:'center',
+         justifyContent:'center'
+    }
 });

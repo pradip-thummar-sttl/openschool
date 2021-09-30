@@ -9,24 +9,26 @@ import FONTS from '../../../../utils/Fonts';
 import HeaderPMInnerEdit from "./HeaderPMInnerEdit";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 
 const { CallModule } = NativeModules;
 
 const PupilProfileEdit = (props) => {
     const [isHide, action] = useState(true);
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
-        props.navigation.goBack() 
+    const handleBackButtonClick = () => {
+        props.navigation.goBack()
         return true;
-      }
+    }
     return (
         <View>
             <HeaderPMInnerEdit
@@ -44,7 +46,7 @@ const PupilProfileEdit = (props) => {
                                 <Image style={PAGESTYLE.profileImage}></Image>
                                 <TouchableOpacity style={PAGESTYLE.editProfileMain}>
                                     {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                        </TouchableOpacity>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -73,15 +75,22 @@ const PupilProfileEdit = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-                            <TextInput
+                            {/* <TextInput
                                 returnKeyType={"next"}
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Date of Birth"
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={"17/07/2012"}
-                                placeholderTextColor={COLORS.menuLightFonts} />
+                                placeholderTextColor={COLORS.menuLightFonts} /> */}
                             {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                            <TouchableOpacity onPress={() => showDatePicker()}>
+                                <View style={[PAGESTYLE.commonInput, { flexDirection: 'row' }]}>
+                                    <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
+                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
+                                    <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                                </View>
+                            </TouchableOpacity>
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>

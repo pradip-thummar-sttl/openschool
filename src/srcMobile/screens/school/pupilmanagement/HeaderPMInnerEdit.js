@@ -52,7 +52,7 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={()=>props.OnSaveEdit()} style={styles.buttonGroup}>
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
                         <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheader}></Text>

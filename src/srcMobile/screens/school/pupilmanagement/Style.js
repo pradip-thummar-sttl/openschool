@@ -329,6 +329,9 @@ export default StyleSheet.create({
         width: hp(13),
         height: hp(13),
         borderRadius: hp(13/2),
+        backgroundColor:COLORS.borderGrp,
+        borderWidth:5,
+        borderColor:COLORS.white
         // resizeMode: 'contain',
     },
     mainDetails: {
@@ -498,9 +501,9 @@ export default StyleSheet.create({
     },
     calIcon: {
         position: 'absolute',
-        alignSelf: 'flex-end',
-        right: hp(2.46),
-        bottom: 15,
+        alignSelf: 'center',
+        marginLeft: hp(1),
+        // bottom: 15,
         width: hp(2),
         resizeMode: 'contain',
     },
@@ -580,4 +583,42 @@ export default StyleSheet.create({
         color: COLORS.lightGray,
         marginBottom: 3,
     },
+    commonInput: {
+        color: COLORS.darkGrayIntro,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: 6,
+        lineHeight: 20,
+        height: 40,
+        paddingHorizontal: 10,
+        textAlignVertical: 'center',
+        fontFamily: FONTS.fontRegular,
+    },
+    dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+        marginLeft:hp(2)
+    },
+    dropDownArrow:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.4),
+        alignSelf: 'center',
+    },
+    pzEditIcon: {
+        width: hp(2.58),
+        height: hp(2.58),
+        resizeMode: 'contain',
+        position: 'absolute',
+        left: hp(4.8),
+        bottom: hp(-1.6),
+        borderRadius: 15,
+        borderColor: COLORS.greyInsightLable,
+    },
+    
 });

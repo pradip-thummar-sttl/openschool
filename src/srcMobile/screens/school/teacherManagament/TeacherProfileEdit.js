@@ -13,7 +13,6 @@ import HeaderPTInnerEdit from "./HeaderPTInnerEdit";
 const { CallModule } = NativeModules;
 
 const TeacherProfileEdit = (props) => {
-    const [isHide, action] = useState(true);
     useEffect(() => {
         if (Platform.OS==="android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -27,6 +26,244 @@ const TeacherProfileEdit = (props) => {
         props.navigation.goBack() 
         return true;
       }
+      const [isHide, action] = useState(true);
+      const [userType, setUserType] = useState('');
+      const [firstName, setFirstName] = useState('');
+      const [lastName, setLastName] = useState('');
+      const [selectedDate, setSelectedDate] = useState('')
+      const [assignedTeacher, setAssignedTeacher] = useState('');
+      const [email, setEmail] = useState('');
+      const [mobile, setMobile] = useState('');
+      const [parentFirstName, setParentFirstName] = useState('');
+      const [parentLastName, setParentLastName] = useState('');
+      const [profileUri, setProfileUri] = useState('')
+      const [isLoading, setLoading] = useState(false)
+      const [teachers, setTeachers] = useState([])
+      const [selectedTeacher, setSelectedTeacher] = useState([])
+      const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  
+      const t1 = useRef(null);
+      const t2 = useRef(null);
+      const t3 = useRef(null);
+      const t4 = useRef(null);
+      const t5 = useRef(null);
+      const t6 = useRef(null);
+  
+      useEffect(() => {
+          loadTeacher()
+  
+          getUserType()
+      }, [])
+  
+      const loadTeacher = () => {
+          const data = {
+              Searchby: "",
+              Filterby: ""
+          }
+  
+          Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+              console.log('response of GetSubjectBySchoolId response', res)
+              if (res.code == 200) {
+                  setTeachers(res.data)
+              } else {
+                  showMessage(res.message)
+              }
+          }, (err) => {
+              console.log('error of GetSubjectBySchoolId', err)
+          })
+      }
+  
+      const teacherDropDown = () => {
+          return (
+              <View style={PAGESTYLE.dropDownFormInput}>
+                  <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
+                  <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+                      <MenuTrigger style={[PAGESTYLE.dropDown]}>
+                          <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
+                          {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                          <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                      </MenuTrigger>
+                      <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                          <FlatList
+                              data={teachers}
+                              renderItem={({ item }) => (
+                                  <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                              )}
+                              style={{ height: 190 }} />
+                      </MenuOptions>
+                  </Menu>
+              </View>
+          );
+      };
+  
+      const getUserType = () => {
+          Service.get(EndPoints.GetAllUserType, (res) => {
+              if (res.flag) {
+                  var userData = res.data
+                  userData.map((item) => {
+                      if (item.Name === 'Pupil') {
+                          setUserType(item._id)
+                      }
+                  })
+              } else {
+              }
+          }, (err) => {
+          })
+      }
+  
+      const validateFields = () => {
+          if (!firstName.trim()) {
+              showMessage(MESSAGE.firstName)
+              return false
+          } else if (!lastName.trim()) {
+              showMessage(MESSAGE.lastName)
+              return false
+          } else if (!selectedDate.trim()) {
+              showMessage(MESSAGE.selectDOB)
+              return false
+          } else if (!parentFirstName.trim()) {
+              showMessage(MESSAGE.parentFirstName)
+              return false
+          } else if (!parentLastName.trim()) {
+              showMessage(MESSAGE.parentLastName)
+              return false
+          } else if (!email.trim() || !emailValidate(email)) {
+              showMessage(MESSAGE.email)
+              return false
+          } else if (!mobile.trim()) {
+              showMessage(MESSAGE.phone)
+              return false
+          }
+  
+          saveProfile()
+      }
+  
+      const saveProfile = () => {
+          // setLoading(true)
+  
+          let data = {
+              SchoolId: User.user.UserDetialId,
+              TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
+              ParentFirstName: parentFirstName,
+              ParentLastName: parentLastName,
+              FirstName: firstName,
+              LastName: lastName,
+              Email: email,
+              MobileNumber: mobile,
+              CreatedBy: User.user.UserDetialId,
+              UserTypeId: userType,
+              IsInvited: 'false',
+              Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
+          }
+  
+          console.log('data', data);
+  
+          Service.post(data, `${EndPoints.Pupil}`, (res) => {
+              if (res.code == 200) {
+                  console.log('response of save lesson', res)
+                  uploadProfile(res.data._id)
+              } else {
+                  showMessage(res.message)
+                  setLoading(false)
+              }
+          }, (err) => {
+              console.log('response of get all lesson error', err)
+              setLoading(false)
+          })
+      }
+  
+      const uploadProfile = (pupilId) => {
+          if (!profileUri) {
+              setLoading(false)
+              showMessage(MESSAGE.inviteSent)
+              return
+          }
+  
+          let data = new FormData();
+          let ext = profileUri.uri.split('.');
+  
+          data.append('file', {
+              uri: profileUri.uri,
+              name: profileUri.uri.split('/'),
+              type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+          });
+  
+          Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
+              if (res.code == 200) {
+                  setLoading(false)
+                  showMessage(MESSAGE.inviteSent)
+                  console.log('response of save lesson', res)
+              } else {
+                  showMessage(res.message)
+                  setLoading(false)
+              }
+          }, (err) => {
+              setLoading(false)
+              console.log('response of get all lesson error', err)
+          })
+  
+      }
+  
+      const showActionChooser = () => {
+          Alert.alert(
+              '',
+              'Browse a profile picture',
+              [{
+                  text: 'TAKE PHOTO',
+                  onPress: () => captureImage(),
+              },
+              {
+                  text: 'CHOOSE PHOTO',
+                  onPress: () => chooseImage(),
+              },
+              ],
+              { cancelable: true }
+          )
+      }
+  
+      const captureImage = () => {
+          launchCamera(
+              {
+                  mediaType: 'photo',
+                  includeBase64: false,
+                  maxHeight: 200,
+                  maxWidth: 200,
+              },
+              (response) => {
+                  console.log('response', response);
+                  setProfileUri(response)
+              },
+          )
+      }
+  
+      const chooseImage = () => {
+          launchImageLibrary(
+              {
+                  mediaType: 'photo',
+                  includeBase64: false,
+                  maxHeight: 200,
+                  maxWidth: 200,
+              },
+              (response) => {
+                  console.log('response', response);
+                  setProfileUri(response)
+              }
+          );
+      }
+  
+      const showDatePicker = () => {
+          setDatePickerVisibility(true);
+      };
+  
+      const hideDatePicker = () => {
+          setDatePickerVisibility(false);
+      };
+  
+      const handleConfirm = (date) => {
+          // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+          setSelectedDate(moment(date).format('DD/MM/yyyy'))
+          hideDatePicker();
+      };
     return (
         <View>
             <HeaderPTInnerEdit
@@ -58,7 +295,9 @@ const TeacherProfileEdit = (props) => {
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={"Reuel"}
-                                placeholderTextColor={COLORS.menuLightFonts} />
+                                placeholderTextColor={COLORS.menuLightFonts} 
+                                onChangeText={firstName => setFirstName(firstName)}
+                                />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
@@ -69,7 +308,9 @@ const TeacherProfileEdit = (props) => {
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={"Pardesi"}
-                                placeholderTextColor={COLORS.menuLightFonts} />
+                                placeholderTextColor={COLORS.menuLightFonts} 
+                                onChangeText={firstName => setFirstName(firstName)}
+                                />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
