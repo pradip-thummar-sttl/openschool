@@ -67,7 +67,7 @@ const PopupaddnewdataPM = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
                                 <View style={styles.entryContentMain}>
-                                    <PopupdataSecondCSVUpload />
+                                    <PopupdataSecondCSVUpload userType={'Pupil'} />
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         style={styles.entryData}
