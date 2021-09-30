@@ -16,53 +16,54 @@ const tabs = [
     { name: 'HAIR', isSelected: false, },
     { name: 'EYES', isSelected: false, },
     { name: 'MOUTH', isSelected: false, },
-    { name: 'CLOTHES', isSelected: false, }]
+    // { name: 'CLOTHES', isSelected: false, }
+]
 
 
 const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
 
 const bodyColorImage = [
-    require('../../../../assets/Avtar/Body/bodyBlue.png'),
-    require('../../../../assets/Avtar/Body/bodyCoral.png'),
-    require('../../../../assets/Avtar/Body/bodyGreen.png'),
-    require('../../../../assets/Avtar/Body/bodyOrange.png'),
-    require('../../../../assets/Avtar/Body/bodyPupral.png'),
-    require('../../../../assets/Avtar/Body/bodyYellow.png')
+    { image: require('../../../../assets/Avtar/Body/bodyBlue.png'), isSelected: true },
+    { image: require('../../../../assets/Avtar/Body/bodyCoral.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Body/bodyGreen.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Body/bodyOrange.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Body/bodyPupral.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Body/bodyYellow.png'), isSelected: false }
 ]
 
 
 const hairImage = [
-    require('../../../../assets/Avtar/Hair/hair1.png'),
-    require('../../../../assets/Avtar/Hair/hair2.png'),
-    require('../../../../assets/Avtar/Hair/hair3.png'),
-    require('../../../../assets/Avtar/Hair/hair4.png'),
-    require('../../../../assets/Avtar/Hair/hair5.png'),
-    require('../../../../assets/Avtar/Hair/hair6.png')
+    { image: require('../../../../assets/Avtar/Hair/hair1.png'), isSelected: true },
+    { image: require('../../../../assets/Avtar/Hair/hair2.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Hair/hair3.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Hair/hair4.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Hair/hair5.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Hair/hair6.png'), isSelected: false },
 ]
 
 const eyeImage = [
-    require('../../../../assets/Avtar/Eyes/eye1.png'),
-    require('../../../../assets/Avtar/Eyes/eye2.png'),
-    require('../../../../assets/Avtar/Eyes/eye3.png'),
-    require('../../../../assets/Avtar/Eyes/eye4.png'),
-    require('../../../../assets/Avtar/Eyes/eye5.png'),
-    require('../../../../assets/Avtar/Eyes/eye6.png')
+    { image: require('../../../../assets/Avtar/Eyes/eye1.png'), isSelected: true },
+    { image: require('../../../../assets/Avtar/Eyes/eye2.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Eyes/eye3.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Eyes/eye4.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Eyes/eye5.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Eyes/eye6.png'), isSelected: false },
 ]
 
 const mouthImage = [
-    require('../../../../assets/Avtar/Mouth/mouth1.png'),
-    require('../../../../assets/Avtar/Mouth/mouth2.png'),
-    require('../../../../assets/Avtar/Mouth/mouth3.png'),
-    require('../../../../assets/Avtar/Mouth/mouth4.png'),
-    require('../../../../assets/Avtar/Mouth/mouth5.png'),
-    require('../../../../assets/Avtar/Mouth/mouth6.png')
+    { image: require('../../../../assets/Avtar/Mouth/mouth1.png'), isSelected: true },
+    { image: require('../../../../assets/Avtar/Mouth/mouth2.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Mouth/mouth3.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Mouth/mouth4.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Mouth/mouth5.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Mouth/mouth6.png'), isSelected: false }
 ]
 
 const outfitImage = [
-    require('../../../../assets/Avtar/Outfits/outfit1.png'),
-    require('../../../../assets/Avtar/Outfits/outfit2.png'),
-    require('../../../../assets/Avtar/Outfits/outfit3.png'),
-    require('../../../../assets/Avtar/Outfits/outfit4.png'),
+    { image: require('../../../../assets/Avtar/Outfits/outfit1.png'), isSelected: true },
+    { image: require('../../../../assets/Avtar/Outfits/outfit2.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Outfits/outfit3.png'), isSelected: false },
+    { image: require('../../../../assets/Avtar/Outfits/outfit4.png'), isSelected: false }
 ]
 
 const Avatar = () => {
@@ -74,8 +75,13 @@ const Avatar = () => {
     const [currentSelectedEyes, setCurrentSelectedEyes] = useState(0);
     const [currentSelectedMouth, setCurrentSelectedMouth] = useState(0);
 
-    const changeTab = (index) => {
+    const [colourAvtar, setColourAvtar] = useState(bodyColorImage);
+    const [hairAvtar, setHairAvtar] = useState(hairImage);
+    const [eyesAvtar, setEyesAvtar] = useState(eyeImage);
+    const [mouthAvtar, setMouthAvtar] = useState(mouthImage);
+    const [clothsAvtar, setClothsAvtar] = useState(outfitImage);
 
+    const changeTab = (index) => {
         let newArr = [...stateOptions];
         newArr.map((item) => {
             item.isSelected = false;
@@ -88,35 +94,60 @@ const Avatar = () => {
     const currentSelectedTab = () => {
 
         if (currentSelected === 'COLOUR') {
-            return bodyColorImage
+            return colourAvtar
         }
         else if (currentSelected === 'HAIR') {
-            return hairImage
+            return hairAvtar
         }
         else if (currentSelected === 'EYES') {
-            return eyeImage
+            return eyesAvtar
         }
         else if (currentSelected === 'MOUTH') {
-            return mouthImage
+            return mouthAvtar
         }
         else {
-            return outfitImage
+            return clothsAvtar
         }
     }
 
     const onPressAvtarParts = (index) => {
 
         if (currentSelected === 'COLOUR') {
+
+            let newArr = [...colourAvtar];
+            newArr.map((item) => {
+                item.isSelected = false;
+            })
+            newArr[index].isSelected = true;
             setCurrentSelectedColour(index)
+            setColourAvtar(newArr)
         }
         else if (currentSelected === 'HAIR') {
+            let newArr = [...hairAvtar];
+            newArr.map((item) => {
+                item.isSelected = false;
+            })
+            newArr[index].isSelected = true;
             setCurrentSelectedHair(index)
+            setHairAvtar(newArr);
         }
         else if (currentSelected === 'EYES') {
+            let newArr = [...eyesAvtar];
+            newArr.map((item) => {
+                item.isSelected = false;
+            })
+            newArr[index].isSelected = true;
             setCurrentSelectedEyes(index)
+            setEyesAvtar(newArr)
         }
         else if (currentSelected === 'MOUTH') {
+            let newArr = [...mouthAvtar];
+            newArr.map((item) => {
+                item.isSelected = false;
+            })
+            newArr[index].isSelected = true;
             setCurrentSelectedMouth(index)
+            setMouthAvtar(newArr)
         }
         else {
             return outfitImage
@@ -126,22 +157,22 @@ const Avatar = () => {
     const hairImageSet = () => {
 
         if (currentSelectedHair === 1) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: hp(11.5) }} ></Image>
+            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: hp(11.5) }} ></Image>
         }
         else if (currentSelectedHair === 2) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: hp(13) }} ></Image>
+            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: hp(13) }} ></Image>
         }
         else if (currentSelectedHair === 3) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
+            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
         }
         else if (currentSelectedHair === 4) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
+            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
         }
         else if (currentSelectedHair === 5) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
+            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
         }
         else {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10 }} ></Image>
+            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10 }} ></Image>
         }
 
     }
@@ -181,13 +212,12 @@ const Avatar = () => {
                             </View>
                         </View>
                     </View>
-                    <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5),height:hp(60) }} >
+                    <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
                         {/* Avatar editing View */}
                         {hairImageSet()}
-                        <Image source={bodyColorImage[currentSelectedColour]} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', }} ></Image>
-                        <Image source={eyeImage[currentSelectedEyes]} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(13), zIndex: 20 }} ></Image>
-                        <Image source={mouthImage[currentSelectedMouth]} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(20), zIndex: 20 }} ></Image>
-                        {/* <Image source={require('../../../../assets/Avtar/Outfits/outfit3.png')} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', bottom: 0, zIndex:0 }} ></Image> */}
+                        <Image source={colourAvtar[currentSelectedColour].image} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', }} ></Image>
+                        <Image source={eyesAvtar[currentSelectedEyes].image} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(13), zIndex: 20 }} ></Image>
+                        <Image source={mouthAvtar[currentSelectedMouth].image} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(20), zIndex: 20 }} ></Image>
                     </View>
                 </View>
 
@@ -211,8 +241,8 @@ const Avatar = () => {
                             data={currentSelectedTab()}
                             renderItem={({ item, index }) => {
                                 return (
-                                    <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index] }]}>
-                                        <Image source={item} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
+                                    <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
+                                        <Image source={item.image} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
                                     </TouchableOpacity>
                                 )
                             }}
