@@ -126,19 +126,22 @@ const Avatar = () => {
     const hairImageSet = () => {
 
         if (currentSelectedHair === 1) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(9), zIndex: 10, left: hp(11.5) }} ></Image>
+            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: hp(11.5) }} ></Image>
         }
         else if (currentSelectedHair === 2) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(8), zIndex: 10, right:hp(13) }} ></Image>
+            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: hp(13) }} ></Image>
         }
         else if (currentSelectedHair === 3) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(22), height: hp(22), resizeMode: 'contain', position: 'absolute', top: hp(5.5), zIndex: 10,  }} ></Image>
+            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
         }
         else if (currentSelectedHair === 4) {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(22), height: hp(22), resizeMode: 'contain', position: 'absolute', top: hp(4), zIndex: 10,  }} ></Image>
+            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
+        }
+        else if (currentSelectedHair === 5) {
+            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
         }
         else {
-            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5), zIndex: 10 }} ></Image>
+            return <Image source={hairImage[currentSelectedHair]} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10 }} ></Image>
         }
 
     }
@@ -178,12 +181,12 @@ const Avatar = () => {
                             </View>
                         </View>
                     </View>
-                    <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), flex: 1 }} >
+                    <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5),height:hp(60) }} >
                         {/* Avatar editing View */}
                         {hairImageSet()}
-                        <Image source={bodyColorImage[currentSelectedColour]} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', bottom: 0 }} ></Image>
-                        <Image source={eyeImage[currentSelectedEyes]} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(15), zIndex: 20 }} ></Image>
-                        <Image source={mouthImage[currentSelectedMouth]} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(22), zIndex: 20 }} ></Image>
+                        <Image source={bodyColorImage[currentSelectedColour]} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', }} ></Image>
+                        <Image source={eyeImage[currentSelectedEyes]} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(13), zIndex: 20 }} ></Image>
+                        <Image source={mouthImage[currentSelectedMouth]} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(20), zIndex: 20 }} ></Image>
                         {/* <Image source={require('../../../../assets/Avtar/Outfits/outfit3.png')} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', bottom: 0, zIndex:0 }} ></Image> */}
                     </View>
                 </View>
