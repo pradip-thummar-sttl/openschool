@@ -13,6 +13,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import BronzeStar from "../../../../svg/pupil/dashboard/BronzeStar";
 import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
 import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
+import { Service } from '../../../../service/Service'
+import { EndPoints } from '../../../../service/EndPoints'
+import { User } from '../../../../utils/Model'
 
 var tabs = [
     { name: 'COLOUR', isSelected: false },
@@ -68,8 +71,9 @@ const outfitImage = [
     { image: require('../../../../assets/Avtar/Outfits/outfit4.png'), isSelected: false }
 ]
 
-const Avatar = () => {
+const Avatar = (prop) => {
 
+    const props = prop.route.params
     const [stateOptions, setStateValues] = useState(tabs);
     const [currentSelected, setCurrentSelected] = useState('COLOUR');
     const [currentSelectedColour, setCurrentSelectedColour] = useState(0);
@@ -82,6 +86,37 @@ const Avatar = () => {
     const [eyesAvtar, setEyesAvtar] = useState(eyeImage);
     const [mouthAvtar, setMouthAvtar] = useState(mouthImage);
     const [clothsAvtar, setClothsAvtar] = useState(outfitImage);
+
+    const [bronze, setBronze] = useState(0)
+    const [silver, setSilver] = useState(0)
+    const [gold, setGold] = useState(0)
+
+    useEffect(()=> {
+        Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of my day', res)
+            if (res.flag) {
+                res.data.forEach(element => {
+                    switch (element._id) {
+                        case '3':
+                            setBronze(element.count)
+                            break;
+                        case '6':
+                            setSilver(element.count)
+                            break;
+                        case '9':
+                            setGold(element.count)
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            } else {
+                showMessage(res.message)
+                setMyDayLoading(false)
+            }
+        }, (err) => {
+        })
+    }, [])
 
     const changeTab = (index) => {
         let newArr = [...stateOptions];
@@ -183,11 +218,11 @@ const Avatar = () => {
 
     return (
         <View>
-            <AvatarHeader />
+            <AvatarHeader onAlertPress={() => { prop.navigation.openDrawer() }} />
             <View style={Styles.mainView}>
                 <View style={Styles.yellowView}>
                     <Text style={Styles.subText}>Your stars convert to</Text>
-                    <Text style={Styles.headText}>60 points</Text>
+                    <Text style={Styles.headText}>{bronze + silver + gold} points</Text>
                 </View>
 
                 <View style={Styles.rewardStarMark}>
@@ -196,6 +231,7 @@ const Avatar = () => {
                             <Text style={Styles.starSelectedText}>18</Text>
                         </ImageBackground> */}
                         <BronzeStar width={hp(5)} height={hp(5)} />
+                        <Text style={Styles.starSelectedText}>{bronze}</Text>
                         <Text style={Styles.starText}>Bronze stars</Text>
                     </View>
                     <View style={Styles.centerStar}>
@@ -203,6 +239,7 @@ const Avatar = () => {
                             <Text style={Styles.starSelectedText}>15</Text>
                         </ImageBackground> */}
                         <SilverStar width={hp(5)} height={hp(5)} />
+                        <Text style={Styles.starSelectedText}>{silver}</Text>
                         <Text style={Styles.starText}>Silver stars</Text>
                     </View>
                     <View style={Styles.centerStar}>
@@ -210,6 +247,7 @@ const Avatar = () => {
                             <Text style={Styles.starSelectedText}>5</Text>
                         </ImageBackground> */}
                         <GoldStar width={hp(5)} height={hp(5)} />
+                        <Text style={Styles.starSelectedText}>{gold}</Text>
                         <Text style={Styles.starText}>Gold stars</Text>
                     </View>
                 </View>

@@ -64,8 +64,9 @@ export default StyleSheet.create({
     starSelectedText: {
         fontFamily: FONTS.fontBold,
         color: COLORS.white,
-        fontSize: hp(1.82),
+        fontSize: hp(1.40),
         lineHeight: hp(5.1),
+        position: 'absolute',
     },
     centerStar: {
         borderLeftWidth: 1,

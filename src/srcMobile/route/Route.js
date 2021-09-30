@@ -90,7 +90,7 @@ export default function Route() {
 function ScreenStack() {
     return (
         <PubNubProvider client={pubnubDetail}>
-            <Stack.Navigator headerMode='none' initialRouteName="Avatar">
+            <Stack.Navigator headerMode='none' initialRouteName="Splash">
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />

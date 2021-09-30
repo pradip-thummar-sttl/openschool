@@ -10,6 +10,9 @@ import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
 import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from '../../../../utils/Colors';
+import { Service } from '../../../../service/Service'
+import { EndPoints } from '../../../../service/EndPoints'
+import { User } from '../../../../utils/Model'
 
 const tabs = [
     { name: 'COLOUR', isSelected: true },
@@ -80,6 +83,37 @@ const Avatar = () => {
     const [eyesAvtar, setEyesAvtar] = useState(eyeImage);
     const [mouthAvtar, setMouthAvtar] = useState(mouthImage);
     const [clothsAvtar, setClothsAvtar] = useState(outfitImage);
+
+    const [bronze, setBronze] = useState(0)
+    const [silver, setSilver] = useState(0)
+    const [gold, setGold] = useState(0)
+
+    useEffect(()=> {
+        Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of my day', res)
+            if (res.flag) {
+                res.data.forEach(element => {
+                    switch (element._id) {
+                        case '3':
+                            setBronze(element.count)
+                            break;
+                        case '6':
+                            setSilver(element.count)
+                            break;
+                        case '9':
+                            setGold(element.count)
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            } else {
+                showMessage(res.message)
+                setMyDayLoading(false)
+            }
+        }, (err) => {
+        })
+    }, [])
 
     const changeTab = (index) => {
         let newArr = [...stateOptions];
@@ -186,7 +220,7 @@ const Avatar = () => {
                     <View style={Styles.starView}>
                         <View style={Styles.yellowView}>
                             <Text style={Styles.subText}>Your stars convert to</Text>
-                            <Text style={Styles.headText}>60 points</Text>
+                            <Text style={Styles.headText}>{bronze + silver + gold} points</Text>
                         </View>
                         <View style={Styles.rewardStarMark}>
                             <View style={Styles.centerStar}>
@@ -194,6 +228,7 @@ const Avatar = () => {
                                     <Text style={Styles.starSelectedText}>18</Text>
                                 </ImageBackground> */}
                                 <BronzeStar width={hp(6)} height={hp(6)} />
+                                <Text style={Styles.starSelectedText}>{bronze}</Text>
                                 <Text style={Styles.starText}>Bronze stars</Text>
                             </View>
                             <View style={Styles.centerStar}>
@@ -201,6 +236,7 @@ const Avatar = () => {
                                     <Text style={Styles.starSelectedText}>15</Text>
                                 </ImageBackground> */}
                                 <SilverStar width={hp(6)} height={hp(6)} />
+                                <Text style={Styles.starSelectedText}>{silver}</Text>
                                 <Text style={Styles.starText}>Silver stars</Text>
                             </View>
                             <View style={Styles.centerStar}>
@@ -208,6 +244,7 @@ const Avatar = () => {
                                     <Text style={Styles.starSelectedText}>5</Text>
                                 </ImageBackground> */}
                                 <GoldStar width={hp(6)} height={hp(6)} />
+                                <Text style={Styles.starSelectedText}>{gold}</Text>
                                 <Text style={Styles.starText}>Gold stars</Text>
                             </View>
                         </View>

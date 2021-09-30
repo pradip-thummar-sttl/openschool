@@ -19,6 +19,7 @@ import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
 import ParentZoneSwitch from "../parentzone/ParentZoneSwitch";
 import Setting from "../../Setting/Setting";
+import Avatar from "../../pupil/Avatar/Avatar";
 import Chat from "../../Chat/Chat";
 import MESSAGE from "../../../../utils/Messages";
 import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/PupilHomeWorkSubmitted";
@@ -363,6 +364,7 @@ const PupuilDashboard = (props) => {
                     navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
                     onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
+                    onAvatar={() => { setPupilLessonDetail(false); setSelectedIndex(4) }}
                     onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
                     navigateUser={() => { setPupilLessonDetail(false); props.navigation.replace('Users'); setSelectedIndex(5) }}
                 />
@@ -722,7 +724,7 @@ const PupuilDashboard = (props) => {
                                             : selectedIndex == 3 ?
                                                 <Setting navigation={props.navigation} />
                                                 : selectedIndex == 4 ?
-                                                    null
+                                                    <Avatar navigation={props.navigation} />
                                                     :
                                                     <ParentZoneSwitch navigation={props.navigation} />
 
