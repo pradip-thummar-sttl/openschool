@@ -337,7 +337,7 @@ export default StyleSheet.create({
         paddingHorizontal: hp(2),
     },
     mainDetailsForm: {
-        marginTop: hp(10),
+        marginVertical: hp(10),
         paddingHorizontal: hp(2),
     },
     fieldDetails: {
@@ -517,6 +517,16 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderRadius: hp(100),
         resizeMode: 'contain',
+    },
+    editProfileMain11: {
+        position: 'absolute',
+        bottom: hp(-1.6),
+        width: hp(4),
+        height: hp(4),
+        backgroundColor: COLORS.black,
+        borderColor: COLORS.editBorder,
+        borderWidth: 1,
+        borderRadius: hp(100),
     },
     editProfileIcon: {
         width: hp(2),

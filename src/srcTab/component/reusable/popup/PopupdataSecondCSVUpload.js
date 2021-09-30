@@ -30,7 +30,6 @@ const PopupdataSecondCSVUpload = (props) => {
 
     const addCSV = () => {
         console.log('hihihihihihi')
-        var arr = [...csv]
         try {
             DocumentPicker.pick({
                 type: [DocumentPicker.types.xlsx,],
@@ -55,14 +54,14 @@ const PopupdataSecondCSVUpload = (props) => {
         let url;
 
         if (props.userType == 'Teacher') {
-            url = `${EndPoints.TeacherUpload}/${User.user.UserDetailId}`
+            url = `${EndPoints.TeacherUpload}/${User.user.UserDetialId}`
         } else {
-            url = `${EndPoints.PupilUpload}/${User.user.UserDetailId}`
+            url = `${EndPoints.PupilUpload}/${User.user.UserDetialId}`
         }
 
         data.append('file', {
             uri: csv.uri,
-            name: csv.uri.split('/'),
+            name: csv.name,
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         });
 

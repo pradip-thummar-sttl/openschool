@@ -69,12 +69,12 @@ const SchoolDashBoard = (props) => {
         // console.log('response of get all teacher', User.user)
 
 
-        let data={
-            Searchby:"",
-            Filterby:-1
+        let data = {
+            Searchby: "",
+            Filterby: -1
         }
 
-        Service.post(data,`${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 setPupilData(res.data)
@@ -112,10 +112,10 @@ const SchoolDashBoard = (props) => {
     return (
         <View >
             <Header onAlertPress={() => props.navigation.openDrawer()} />
-            <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '85%' }]}>
+            <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>
-                    <Insights style={PAGESTYLE.dayIcon} height={hp(2.9)} width={hp(2.9)} />
+                        <Insights style={PAGESTYLE.dayIcon} height={hp(2.9)} width={hp(2.9)} />
                         <Text H3 style={PAGESTYLE.dayTitle}>Insights</Text>
                     </View>
                     <TouchableOpacity>

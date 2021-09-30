@@ -47,7 +47,6 @@ export const Service = {
     },
 
     postFormData: (data, endPoint, success, error) => {
-        console.log('`${baseUrl}${endPoint}`', `${baseUrl}${endPoint}`);
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {

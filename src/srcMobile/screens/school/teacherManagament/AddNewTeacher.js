@@ -6,7 +6,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
-import { baseUrl, emailValidate, showMessage } from "../../../../utils/Constant";
+import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
 // import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
@@ -20,6 +20,7 @@ import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-m
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 
 const AddNewTeacher = (props) => {
@@ -90,9 +91,29 @@ const AddNewTeacher = (props) => {
         })
     }
 
+    const validateFields = () => {
+        if (!selectedYear.length > 0) {
+            showMessage(MESSAGE.selectYear)
+            return false
+        } else if (!selectedTitle.length > 0) {
+            showMessage(MESSAGE.selectTitle)
+            return false
+        } else if (!firstName.trim()) {
+            showMessage(MESSAGE.firstName)
+            return false
+        } else if (!lastName.trim()) {
+            showMessage(MESSAGE.lastName)
+            return false
+        } else if (!email.trim() || !emailValidate(email)) {
+            showMessage(MESSAGE.email)
+            return false
+        }
+
+        saveProfile()
+    }
 
     const saveProfile = () => {
-        // setLoading(true)
+        setLoading(true)
 
         let data = {
             SchoolId: User.user.UserDetialId,
@@ -105,8 +126,6 @@ const AddNewTeacher = (props) => {
             IsInvited: 'false',
             Title: selectedTitle[selectedTitle.length - 1]._id
         }
-
-        console.log('data', data);
 
         Service.post(data, `${EndPoints.Teacher}`, (res) => {
             if (res.code == 200) {
@@ -131,12 +150,11 @@ const AddNewTeacher = (props) => {
         }
 
         let data = new FormData();
-        let ext = profileUri.uri.split('.');
 
         data.append('file', {
             uri: profileUri.uri,
-            name: profileUri.uri.split('/'),
-            type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+            name: profileUri.fileName,
+            type: profileUri.type
         });
 
         Service.postFormData(data, `${EndPoints.TeacherUploadProfile}/${teacherId}`, (res) => {
@@ -156,6 +174,22 @@ const AddNewTeacher = (props) => {
 
     }
 
+    const showActionChooser = () => {
+        Alert.alert(
+            '',
+            'Browse a profile picture',
+            [{
+                text: 'TAKE PHOTO',
+                onPress: () => captureImage(),
+            },
+            {
+                text: 'CHOOSE PHOTO',
+                onPress: () => chooseImage(),
+            },
+            ],
+            { cancelable: true }
+        )
+    }
 
     const captureImage = () => {
         launchCamera(
@@ -167,7 +201,7 @@ const AddNewTeacher = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             },
         )
     }
@@ -182,7 +216,7 @@ const AddNewTeacher = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             }
         );
     }
@@ -200,7 +234,7 @@ const AddNewTeacher = (props) => {
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.labelForm}>Teaching Year</Text>
                 <Menu onSelect={(item) => setSelectedYear([...selectedYear, item])}>
-                <MenuTrigger style={{...STYLE.commonInputGrayBack, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <MenuTrigger style={{ ...STYLE.commonInputGrayBack, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedYear.length > 0 ? selectedYear[selectedYear.length - 1].Title : 'Select a Year'}</Text>
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
@@ -223,7 +257,7 @@ const AddNewTeacher = (props) => {
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.labelForm}>Title</Text>
                 <Menu onSelect={(item) => setSelectedTitle([...selectedTitle, item])}>
-                    <MenuTrigger style={{...STYLE.commonInputGrayBack, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <MenuTrigger style={{ ...STYLE.commonInputGrayBack, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTitle.length > 0 ? selectedTitle[selectedTitle.length - 1].Title : 'Select a Title'}</Text>
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
@@ -246,9 +280,12 @@ const AddNewTeacher = (props) => {
             <HeaderPTInnerEdit
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
+                onSavePressed={() => validateFields()}
             />
             <View style={PAGESTYLE.MainProfile}>
-                <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
+                <KeyboardAwareScrollView
+                    style={PAGESTYLE.scrollViewCommonPupilEdit}
+                    showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
                             {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
@@ -257,10 +294,14 @@ const AddNewTeacher = (props) => {
                             <View style={PAGESTYLE.profileOuter}>
                                 <Image style={PAGESTYLE.profileImage}
                                     source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                <TouchableOpacity style={PAGESTYLE.editProfileMain}>
-                                    {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                    <Ic_Edit style={PAGESTYLE.editProfileIcon} width={hp(2)} height={hp(2)} />
-                                </TouchableOpacity>
+                                <View style={PAGESTYLE.editProfileMain}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => showActionChooser()}>
+                                        {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
+                                        <Ic_Edit style={PAGESTYLE.editProfileIcon} width={hp(2)} height={hp(2)} />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -295,7 +336,7 @@ const AddNewTeacher = (props) => {
                                 maxLength={40}
                                 value={lastName}
                                 placeholderTextColor={COLORS.lightplaceholder}
-                                onChangeText={lastName => setLastName(lastName)}/>
+                                onChangeText={lastName => setLastName(lastName)} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Email</Text>
@@ -311,7 +352,7 @@ const AddNewTeacher = (props) => {
                                 onChangeText={email => setEmail(email)} />
                         </View>
                     </View>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             </View>
         </View>
     );
