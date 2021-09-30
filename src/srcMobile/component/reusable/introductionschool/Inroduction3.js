@@ -8,6 +8,7 @@ import FONTS from '../../../../utils/Fonts';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PMobileOnboarding3 from "../../../../svg/pupil/introductionMobile/PMobileOnboarding3";
+import SMobileOnboarding3 from "../../../../svg/school/introductionMobile/SMobileOnboarding3";
 
 
 const Introduction3 = (props) => {
@@ -16,11 +17,11 @@ const Introduction3 = (props) => {
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
                 {/* <Image source={Images.introSlideThree} style={styles.SlideImage}></Image> */}
-                <PMobileOnboarding3 style={styles.SlideImage} width={hp(41.74)} height={hp(50.98)} />
+                <SMobileOnboarding3 style={styles.SlideImage} width={hp(41.74)} height={hp(50.98)} />
             </View>
             <View style={styles.lefContent}>
-               <Text h2 style={styles.introTitle}>Show off your progress</Text>
-               <Text p style={styles.introContent}>Power up your mini avatar with cool accessories and superpowers using rewards you earn by participating in class, submitting your homework and more.</Text>
+               <Text h2 style={styles.introTitle}>Fast and easy setup</Text>
+               <Text p style={styles.introContent}>Easily transfer data using CSV uploads to quickly set up your school, teacher and pupil accounts in just a few clicks.</Text>
            </View>
            <View style={styles.buttonGreenStartMain}>
                <TouchableOpacity onPress={() => props.navigateToLogin()}><Text style={styles.buttonGreenStart}>Get Started</Text></TouchableOpacity>

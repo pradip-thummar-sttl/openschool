@@ -74,7 +74,10 @@ const TeacherManagement = (props) => {
                     <View style={PAGESTYLE.pupilProfile}>
                         <View style={PAGESTYLE.rowProfile}>
                             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+                            <View>
+                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { fontFamily: FONTS.fontBold, width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(45) }]}>{item.Email}</Text>
+                            </View>
                         </View>
                         <View style={PAGESTYLE.groupPupil}>
                             <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.TeachingYear ? item.TeachingYear : '-'}</Text>
