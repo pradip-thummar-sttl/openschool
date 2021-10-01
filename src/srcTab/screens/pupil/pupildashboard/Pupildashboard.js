@@ -19,7 +19,6 @@ import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
 import ParentZoneSwitch from "../parentzone/ParentZoneSwitch";
 import Setting from "../../Setting/Setting";
-import Avatar from "../../pupil/Avatar/Avatar";
 import Chat from "../../Chat/Chat";
 import MESSAGE from "../../../../utils/Messages";
 import PupilHomeWorkSubmitted from "../../pupil/pupillessondetail/homework/PupilHomeWorkSubmitted";
@@ -46,6 +45,7 @@ import Participants from "../../../../svg/teacher/dashboard/Participants";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import RewardStarback from "../../../../svg/pupil/dashboard/RewardStarback";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
+import Avatar from "../Avatar/Avatar";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -703,7 +703,7 @@ const PupuilDashboard = (props) => {
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.lessonstartButtonTroffy}>
-                                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity>
+                                                            {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity> */}
                                                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>edit avatar</Text></TouchableOpacity>
                                                         </View>
                                                     </View>
