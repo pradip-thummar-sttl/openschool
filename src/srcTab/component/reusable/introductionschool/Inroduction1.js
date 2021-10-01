@@ -12,7 +12,7 @@ const Introduction1 = (props) => {
         <View style={{...STYLE.viewBox, backgroundColor: COLORS.white}}>
             <View style={styles.imageArea}>
                 {/* <Image source={Images.introSlideOne} style={styles.SlideImage}></Image> */}
-                <STabletOnboarding1 style={styles.SlideImage} height={hp(44.79)} width={hp(92.05)}/>
+                <STabletOnboarding1 style={styles.SlideImage} width={'100%'} height={hp(47.23)}/>
             </View>
             <View style={styles.lefContent}>
                <Text h2 style={styles.introTitle}>Always there for pupils </Text>
@@ -25,11 +25,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    imageArea: {        
-        alignSelf: 'center',
-        height: hp(59.5),
-        marginBottom: hp(6.90),
+    imageArea: {
+        alignItems: 'center',
+        height: hp(61.09),
+        marginBottom: hp(6.51),
         justifyContent: 'flex-end',
+        width: '100%',
     },
     lefContent:{
         width: '100%',
@@ -59,8 +60,6 @@ const styles = StyleSheet.create({
     },
     SlideImage: {
        // width: hp(92.05),
-        resizeMode: 'contain',
-        height: hp(44.79),
     },
 });
 

@@ -8,6 +8,7 @@ function STabletOnboarding2(props) {
       width={props.width}
       height={props.height}
       {...props}
+      viewBox="0 0 658.521 357"
     >
       <G data-name="Group 2190" transform="translate(-182.739 -115)">
         <G data-name="Group 1721" transform="translate(-7.667 6.297)">
