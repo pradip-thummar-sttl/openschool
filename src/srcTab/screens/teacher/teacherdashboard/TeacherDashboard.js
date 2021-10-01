@@ -743,7 +743,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                             return (
                                                                                 <Pupillist
                                                                                     item={data}
-                                                                                    onPress={() => { setSelectedPupil(item); setPupilDetail(true) }}
+                                                                                    onPress={() => { setSelectedPupil(data); setPupilDetail(true) }}
                                                                                 />
                                                                             )
                                                                         })}
