@@ -5,18 +5,18 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 // import Images from '../../../../utils/Images';
-import PMobileOnboarding2 from "../../../../svg/pupil/introductionMobile/PMobileOnboarding2";
+import PMobileOnboarding2 from "../../../../svg//school/introductionMobile/PMobileOnboarding2";
 
 const Introduction2 = (props) => {
     return (
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
                 {/* <Image source={Images.introSlideTwo} style={styles.SlideImage}></Image> */}
-                <PMobileOnboarding2 style={styles.SlideImage} height={hp(50.58)} width={hp(48.5)} />
+                <PMobileOnboarding2 style={styles.SlideImage} height={hp(41.58)} width={'100%'} />
             </View>
             <View style={styles.lefContent}>
-               <Text h2 style={styles.introTitle}>Learn beyond your {'\n'}classroom</Text>
-               <Text p style={styles.introContent}>Curious to learn something new outside of your classroom? Access our vast content library with hundreds of unique videos – open to all pupils, whether your school subscribes or not.</Text>
+               <Text h2 style={styles.introTitle}>Secure, encrypted and safe</Text>
+               <Text p style={styles.introContent}>Designed with data privacy and protection at its heart, MyEd Open School is safe, secure and only accessible by your school and pupils.</Text>
            </View>
         </View>
     );
@@ -28,8 +28,10 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(7.38),
-        marginBottom: hp(4.92),
+        marginBottom: hp(12.76),
+        height: hp(58.46),
+        width: '100%',
+        justifyContent: 'flex-end',
     },
     lefContent:{
         width: '100%',

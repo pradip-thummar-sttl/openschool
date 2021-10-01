@@ -32,7 +32,6 @@ function ImportCSV(props) {
           transform="translate(197.873 -236.884)"
           fill="#d06444"
           fontSize={15}
-          fontFamily="Impact"
         >
           <TSpan x={-11.957} y={0}>
             {"CSV"}
