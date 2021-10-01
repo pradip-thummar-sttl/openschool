@@ -141,7 +141,7 @@ const SGroupSetUpPupilSelection = (props) => {
         // })
 
         //
-        if (!selectedTeacher) {
+        if (selectedTeacher.length<=0) {
             showMessage(MESSAGE.selectTeacher)
             return
         } else if (selectedPupils.length == 0) {
@@ -156,13 +156,13 @@ const SGroupSetUpPupilSelection = (props) => {
 
         let data = {
             SchoolId: User.user.UserDetialId,
-            TeacherId: selectedTeacher.TeacherId,
+            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             CreatedBy: User.user.UserDetialId,
             PupilList: list
         }
         setGroupLoading(true)
         console.log('data', data);
-        Service.post(data, `${EndPoints.Groupsetup}`, (res) => {
+        Service.post(data, `${EndPoints.ClassSetup}`, (res) => {
             setGroupLoading(false)
             if (res.code == 200) {
                 reset()
