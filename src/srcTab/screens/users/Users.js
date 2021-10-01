@@ -33,12 +33,21 @@ export default class Users extends Component {
                 }
             })
 
-        } else {
+        } else if (type === 'Pupil') {
             AsyncStorage.getItem('introducePupil').then((value) => {
                 if (value) {
                     this.props.navigation.navigate('Login', { userType: "Pupil" })
                 } else {
                     this.props.navigation.navigate('IntroductionPupil')
+                }
+            })
+
+        }else {
+            AsyncStorage.getItem('introduceSchool').then((value) => {
+                if (value) {
+                    this.props.navigation.navigate('Login', { userType: "School" })
+                } else {
+                    this.props.navigation.navigate('IntroductionSchool')
                 }
             })
 
@@ -50,13 +59,15 @@ export default class Users extends Component {
             <View style={styles.container}>
                 <ImageBackground style={styles.image}>
                     {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
-                    <Top style={styles.topBg} width={'100%'} height={hp(17.4)} />
+                    <View style={{height: hp(23.5), overflow: 'hidden', width: '100%', position: 'absolute', top: 0,}}>
+                        <Top style={styles.topBg} width={'100%'} height={'100%'} />
+                    </View>
                     <View>
                         <Text style={styles.titleText}>Select the type of user you are</Text>
                         <View style={styles.userMain}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => null}>
+                                onPress={() => this.navigateIntroductionScreen('School')}>
                                 <View style={styles.user}>
                                     {/* <Image
                                         style={styles.userIcon}
@@ -138,11 +149,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: hp(2),
     },
+    // topBg: {
+    //     width: '100%',
+    //     height: hp(16.77),
+    //     resizeMode: Platform.OS == 'android' ? 'cover' : 'cover',
+    //     position: 'absolute',
+    //     top: hp(-1),
+    // }
     topBg: {
         width: '100%',
-        height: hp(16.77),
-        resizeMode: Platform.OS == 'android' ? 'cover' : 'cover',
         position: 'absolute',
-        top: hp(-1),
+        top: Platform.OS == 'ios' ? hp(-3.7) : 0,
+        resizeMode: 'cover',
     }
 });

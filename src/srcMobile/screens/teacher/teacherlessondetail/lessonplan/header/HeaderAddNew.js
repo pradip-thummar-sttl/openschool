@@ -8,6 +8,7 @@ import { opacity } from "../../../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import moment from "moment";
 import BackArrow from "../../../../../../svg/common/BackArrow";
+import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const HeaderAddNew = (props) => {
     console.log('props', props);
@@ -46,6 +47,7 @@ const HeaderAddNew = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => props.saveLesson()}>
                                 {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                                <TickMarkWhite style={styles.addIcon} height={12} width={12} />
                                 
                             </TouchableOpacity>
                         }

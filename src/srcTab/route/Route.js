@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Users from '../screens/users/Users';
 import IntroductionTeacher from '../screens/introduction/IntroductionTeacher';
 import IntroductionPupil from '../screens/introduction/IntroductionPupil';
+import IntroductionSchool from '../screens/introduction/IntroductionSchool';
 import Login from '../screens/login/Login';
 import PupilRegister from '../screens/login/PupilRegister';
 import PupilConnect from '../screens/login/PupilConnect';
@@ -14,6 +15,7 @@ import Sidebar from '../component/reusable/sidebar/Sidebar';
 import Header from '../component/reusable/header/Header';
 import NotificationDrawer from '../component/reusable/notificationdrawer/NotificationDrawer';
 import TeacherDashboard from '../screens/teacher/teacherdashboard/TeacherDashboard';
+import SchoolDashboard from '../screens/school/schooldashboard/SchoolDashboard';
 import PupilLessonEmpty from '../screens/pupil/pupillessonempty/PupilLessonEmpty';
 import PupuilDashboard from '../screens/pupil/pupildashboard/Pupildashboard';
 import PupuilDashboardHomeWorkState from '../screens/pupil/pupildashboardhomeworkstate/Pupildashboardhomeworkstate';
@@ -60,6 +62,10 @@ import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import Avatar from '../screens/pupil/Avatar/Avatar';
 import Call from '../component/reusable/onetoonecall/Call';
+import SchoolMessage from '../screens/school/globalmessage/SchoolMessage';
+import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
+import SchoolSetting from '../screens/school/setting/SchoolSetting';
+import TeacherManagement from '../screens/school/teachermanagement/TeacherManagement';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
@@ -90,6 +96,7 @@ function ScreenStack() {
                 <Stack.Screen name="Users" component={Users} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
+                <Stack.Screen name="IntroductionSchool" component={IntroductionSchool} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="PupilRegister" component={PupilRegister} />
                 <Stack.Screen name="PupilConnect" component={PupilConnect} />
@@ -139,6 +146,12 @@ function ScreenStack() {
                 <Stack.Screen name="ParentChat" component={ParentChat} />
                 <Stack.Screen name="Avatar" component={Avatar} />
                 <Stack.Screen name="Call" component={Call} />
+
+                <Stack.Screen name="SchoolDashboard" component={SchoolDashboard} />
+                <Stack.Screen name="SchoolSetting" component={SchoolSetting} />
+                <Stack.Screen name="SchoolMessage" component={SchoolMessage} />
+                <Stack.Screen name="SchoolNewMessage" component={SchoolNewMessage} />
+                <Stack.Screen name="TeacherManagement" component={TeacherManagement} />
             </Stack.Navigator>
         </PubNubProvider>
     );

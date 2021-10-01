@@ -37,6 +37,8 @@
 			</dict>
 		</dict>
 	</dict>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Save Sample Video to Camera Roll</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow use of camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

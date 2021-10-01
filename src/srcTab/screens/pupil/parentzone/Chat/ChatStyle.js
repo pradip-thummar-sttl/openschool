@@ -53,6 +53,7 @@ export default StyleSheet.create({
     //
     views: {
         flexDirection: 'row',
+        backgroundColor: COLORS.white
     },
     leftView: {
         marginLeft: hp(2),

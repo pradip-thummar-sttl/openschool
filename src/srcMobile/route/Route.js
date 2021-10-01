@@ -64,6 +64,21 @@ import { PubNubProvider, usePubNub } from 'pubnub-react';
 import Avatar from '../screens/pupil/Avatar/Avatar';
 import ParentZonePerformance from '../screens/pupil/parentzone/ParentZonePerformance';
 import Call from '../component/reusable/onetoonecall/Call';
+import IntroductionSchool from '../screens/introduction/introductionSchool';
+import SchoolDashBoard from '../screens/school/scholldashboard/SchoolDashBoard';
+import SchoolSetting from '../screens/school/setting/SchoolSetting';
+import SchoolProfileView from '../screens/school/profile/SchoolProfileView';
+import SchoolProfileEdit from '../screens/school/profile/SchoolProfileEdit';
+import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
+import SchoolMessage from '../screens/school/globalmessage/SchoolMessage';
+import TeacherManagement from '../screens/school/teacherManagament/TeacherManagement';
+import TeacherProfileView from '../screens/school/teacherManagament/TeacherProfileView';
+import TeacherProfileEdit from '../screens/school/teacherManagament/TeacherProfileEdit';
+import AddNewTeacher from '../screens/school/teacherManagament/AddNewTeacher';
+import SchoolTeacherLessonDetail from '../screens/school/teacherManagament/teacherlessionDetail/SchoolTeacherLessonDetail';
+import TeacheroverView from '../screens/school/pupilmanagement/TeacheroverView';
+import SPupilProfileView from '../screens/school/pupilmanagement/SPupilProfileView';
+import SAddNewTeacher from '../screens/school/pupilmanagement/SAddNewTeacher';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -94,6 +109,7 @@ function ScreenStack() {
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="IntroductionPupil" component={IntroductionPupil} />
                 <Stack.Screen name="IntroductionTeacher" component={IntroductionTeacher} />
+                <Stack.Screen name="IntroductionSchool" component={IntroductionSchool} />
                 <Stack.Screen name="Users" component={Users} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="PupilRegister" component={PupilRegister} />
@@ -110,6 +126,7 @@ function ScreenStack() {
                 <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
                 <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
                 <Stack.Screen name="PupuilDashboard" component={PupuilDashboard} />
+                <Stack.Screen name="SchoolDashBoard" component={SchoolDashBoard} />
                 <Stack.Screen name="PupuilDashboardHomeWorkState" component={PupuilDashboardHomeWorkState} />
                 <Stack.Screen name="TeacherTimeTable" component={TeacherTimeTable} />
                 <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
@@ -146,6 +163,19 @@ function ScreenStack() {
                 <Stack.Screen name="ParentChat" component={ParentChat} />
                 <Stack.Screen name="Avatar" component={Avatar} />
                 <Stack.Screen name="Call" component={Call} />
+                <Stack.Screen name="SchoolSetting" component={SchoolSetting} />
+                <Stack.Screen name="SchoolProfileView" component={SchoolProfileView} />
+                <Stack.Screen name="SchoolProfileEdit" component={SchoolProfileEdit} />
+                <Stack.Screen name="SchoolNewMessage" component={SchoolNewMessage} />
+                <Stack.Screen name="SchoolMessage" component={SchoolMessage} />
+                <Stack.Screen name="TeacherManagement" component={TeacherManagement} />
+                <Stack.Screen name="TeacherProfileView" component={TeacherProfileView} />
+                <Stack.Screen name="TeacherProfileEdit" component={TeacherProfileEdit} />
+                <Stack.Screen name="AddNewTeacher" component={AddNewTeacher} />
+                <Stack.Screen name="SchoolTeacherLessonDetail" component={SchoolTeacherLessonDetail} />
+                <Stack.Screen name="TeacheroverView" component={TeacheroverView} />
+                <Stack.Screen name="SPupilProfileView" component={SPupilProfileView} />
+                <Stack.Screen name="SAddNewTeacher" component={SAddNewTeacher} />
             </Stack.Navigator>
         </PubNubProvider>
     );

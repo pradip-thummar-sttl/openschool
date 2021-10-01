@@ -717,8 +717,18 @@ export default StyleSheet.create({
         paddingRight: hp(2.21),
         paddingBottom: hp(3.51),
     },
+    marked: {
+        width: '15%',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+    },
     pupilTableHeadingMain: {
-        width: hp(15.80),
+        width: '15%',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+    },
+    date: {
+        width: '15%',
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
     },
@@ -776,7 +786,7 @@ export default StyleSheet.create({
         marginBottom:hp(0.78),
     },
     pupilProfile: {
-        width: hp(15.80),
+        width: '15%',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -828,9 +838,8 @@ export default StyleSheet.create({
         alignSelf: 'center',
     },
     pupilDetailLink: {
-        width: hp(10),
+        width: '65%',
         alignItems: 'flex-end',
-        right: 20
     },
     pupilDetaillinkIcon: {
         width: hp(1),
@@ -866,10 +875,10 @@ export default StyleSheet.create({
     },
     firstColumn: {
         paddingLeft: hp(4.5),
-        width: hp(34.55),
+        width: '28%',
     },
     secoundColumn: {
-        width: hp(22.55),
+        width: '28%',
     },
     lastColumn: {
         width: hp(18.55),

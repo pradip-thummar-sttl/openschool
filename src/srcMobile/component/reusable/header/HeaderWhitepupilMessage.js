@@ -30,7 +30,7 @@ const HeaderWhitepupilMessage = (props) => {
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
-                    <Text style={styles.mainTitle}>Global Messaging</Text>
+                    <Text style={styles.mainTitle}>{props.title}</Text>
                 </View>
 
                 <View style={styles.headerRight}>

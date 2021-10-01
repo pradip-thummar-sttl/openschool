@@ -29,6 +29,8 @@ import moment from "moment";
 import { opacity } from "../../../../utils/Constant";
 import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 
 
 const PupilLessonDetail = (props) => {
@@ -201,10 +203,15 @@ const PupilLessonDetail = (props) => {
                         }}>
                         {/* <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        {isSearchActive ?
+                            <CloseBlack height={15} width={15} />
+                            :
+                            <SearchBlue height={15} width={15} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }} />
@@ -213,7 +220,7 @@ const PupilLessonDetail = (props) => {
                         <Menu style={PAGESTYLE.filterGroup}>
                             <MenuTrigger>
                                 {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
-                                </MenuTrigger>
+                            </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                 <MenuOption style={PAGESTYLE.borderList}>
                                     <TouchableOpacity

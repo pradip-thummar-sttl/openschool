@@ -60,5 +60,18 @@ export const EndPoints = {
     LessonCheck:"lessoncheck",
     AddInstantReward: 'addinstantreward',
     PupilUploadProfile: 'pupiluploadProfile',
+    TeacherUploadProfile: 'teacheruploadProfile',
     GetTeachersList: 'getteacherslist',
+
+    GetAllTeacher:"teacher",
+    TeacherBySchoolId: 'teacherbyschoolid',
+    TeacherDetails: 'teacherdetails',
+    PupilByShoolId: 'pupilbyschoolid',
+    GetClassSetup: 'getclasssetup',
+    PupilUpload: 'pupilupload',
+    TeacherUpload: 'teacherupload',
+    Pupil: 'pupil',
+    Teacher: 'teacher',
+    Title: 'title',
+    TeachingYear: 'teachingyear',
 }

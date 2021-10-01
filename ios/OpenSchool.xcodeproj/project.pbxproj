@@ -19,6 +19,7 @@
 		540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C803CDC5ED40679094DFEC /* Poppins-Italic.ttf */; };
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */; };
 		882EA01C266A1DB3000B9813 /* CallPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA01B266A1DB3000B9813 /* CallPermissions.m */; };
 		882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882EA01E266A1DD7000B9813 /* Call.storyboard */; };
 		882EA02B266A1DF5000B9813 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA021266A1DF4000B9813 /* StatsView.m */; };
@@ -126,6 +127,8 @@
 		4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
+		882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSchool-Bridging-Header.h"; sourceTree = "<group>"; };
 		882EA008266A1CAA000B9813 /* CallTestPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallTestPrefixHeader.pch; sourceTree = "<group>"; };
 		882EA01A266A1DB3000B9813 /* CallPermissions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallPermissions.h; sourceTree = "<group>"; };
 		882EA01B266A1DB3000B9813 /* CallPermissions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallPermissions.m; sourceTree = "<group>"; };
@@ -410,10 +413,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		882BE51326E8AFC00080CF69 /* RecorderClass */ = {
+			isa = PBXGroup;
+			children = (
+				8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */,
+				882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */,
+			);
+			path = RecorderClass;
+			sourceTree = "<group>";
+		};
 		882EA016266A1D55000B9813 /* conference */ = {
 			isa = PBXGroup;
 			children = (
+				882BE51326E8AFC00080CF69 /* RecorderClass */,
 				882EA0D7266A270A000B9813 /* Main.storyboard */,
+				888E884E26E7638600148085 /* ScreenRecorder */,
 				882EA0A6266A217E000B9813 /* Users */,
 				882EA096266A2166000B9813 /* SVProgressHUD */,
 				882EA07F266A20CC000B9813 /* InfoScreen */,
@@ -817,6 +831,13 @@
 			name = UserTableViewCell;
 			sourceTree = "<group>";
 		};
+		888E884E26E7638600148085 /* ScreenRecorder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ScreenRecorder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -912,7 +933,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 7NDT2F7TY6;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1185,6 +1206,7 @@
 				882EA02B266A1DF5000B9813 /* StatsView.m in Sources */,
 				882EA03F266A1E48000B9813 /* QBButton.m in Sources */,
 				882EA058266A1F41000B9813 /* BaseSettingsCell.m in Sources */,
+				8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */,
 				882EA092266A2148000B9813 /* InfoTableViewController.m in Sources */,
 				882EA06D266A1F58000B9813 /* SettingCell.m in Sources */,
 				882EA0C6266A224D000B9813 /* MainTableViewController.m in Sources */,
@@ -1247,6 +1269,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1269,6 +1292,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = OpenSchoolTests/Info.plist;
@@ -1295,6 +1319,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7NDT2F7TY6;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CallTestPrefixHeader.pch";
@@ -1309,6 +1334,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvertouch.openschool;
 				PRODUCT_NAME = "MYED Open School";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "MYED_Open_School-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1326,6 +1353,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7NDT2F7TY6;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CallTestPrefixHeader.pch";
 				INFOPLIST_FILE = OpenSchool/Info.plist;
@@ -1340,6 +1368,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.silvertouch.openschool;
 				PRODUCT_NAME = "MYED Open School";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "MYED_Open_School-Swift.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

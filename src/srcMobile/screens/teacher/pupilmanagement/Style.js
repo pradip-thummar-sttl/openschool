@@ -83,7 +83,7 @@ export default StyleSheet.create({
         width: hp(2),
         resizeMode: 'contain',
         right: 0,
-        top: 5,
+        top: Platform.OS == 'android' ? 0 : 5,
         marginTop:7
     },
     selectedPupilName: {
