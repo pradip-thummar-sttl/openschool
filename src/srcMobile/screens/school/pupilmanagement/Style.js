@@ -610,6 +610,7 @@ export default StyleSheet.create({
         right:hp(1.4),
         alignSelf: 'center',
     },
+    
     pzEditIcon: {
         width: hp(2.58),
         height: hp(2.58),
@@ -619,6 +620,34 @@ export default StyleSheet.create({
         bottom: hp(-1.6),
         borderRadius: 15,
         borderColor: COLORS.greyInsightLable,
+    },
+    subjectText: {
+        flexDirection: 'row',
+        fontFamily: FONTS.fontBold,
+        color: COLORS.darkGray,
+        fontSize: hp(2.40),
+        marginBottom: hp(0.8),
+    },
+    dropDownFormInput: {
+        width: '90%',
+        alignSelf:'center'
+    },
+    dropDown: {
+        flexDirection: 'row',
+        width: '100%',
+        color: COLORS.darkGray,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        overflow: 'hidden',
+        borderRadius: hp(1.0),
+        lineHeight: hp(2.3),
+        height: hp(6),
+        paddingLeft: hp(2.0),
+        paddingRight: hp(2.0),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        fontFamily: FONTS.fontRegular,
     },
     
 });
