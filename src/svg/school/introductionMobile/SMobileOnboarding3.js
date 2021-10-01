@@ -13,15 +13,16 @@ function SMobileOnboarding3(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={356.872}
-      height={518.019}
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 356.872 518.019"
       {...props}
     >
       <G transform="translate(-57.921 40.811)">
         <Rect
           data-name="Rectangle 17683"
-          width={props.width}
-          height={props.height}
+          width={326.569}
+          height={391.617}
           rx={106}
           transform="translate(72.715 19.81)"
           fill="#cefa84"
