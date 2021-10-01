@@ -77,6 +77,8 @@ import TeacherProfileEdit from '../screens/school/teacherManagament/TeacherProfi
 import AddNewTeacher from '../screens/school/teacherManagament/AddNewTeacher';
 import SchoolTeacherLessonDetail from '../screens/school/teacherManagament/teacherlessionDetail/SchoolTeacherLessonDetail';
 import TeacheroverView from '../screens/school/pupilmanagement/TeacheroverView';
+import SPupilProfileView from '../screens/school/pupilmanagement/SPupilProfileView';
+import SAddNewTeacher from '../screens/school/pupilmanagement/SAddNewTeacher';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -172,6 +174,8 @@ function ScreenStack() {
                 <Stack.Screen name="AddNewTeacher" component={AddNewTeacher} />
                 <Stack.Screen name="SchoolTeacherLessonDetail" component={SchoolTeacherLessonDetail} />
                 <Stack.Screen name="TeacheroverView" component={TeacheroverView} />
+                <Stack.Screen name="SPupilProfileView" component={SPupilProfileView} />
+                <Stack.Screen name="SAddNewTeacher" component={SAddNewTeacher} />
             </Stack.Navigator>
         </PubNubProvider>
     );

@@ -18,6 +18,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import WhiteCheck from "../../../../svg/pupil/timetable/WhiteCheck";
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -53,7 +54,7 @@ const HeaderPMInner = (props) => {
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
-                        <CheckedBlue style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
+                        <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity>
                 </View>

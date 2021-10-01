@@ -140,7 +140,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => props.onAvatar()} style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAvatar}

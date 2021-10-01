@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
     mainView: {
-        flex:1,
+        flex: 1,
         // height: hp(67),
         // padding: hp(2),
     },
@@ -28,13 +28,13 @@ export default StyleSheet.create({
     yellowView: {
         width: '100%',
         height: hp(20),
-        paddingLeft:wp(2),
+        paddingLeft: wp(2),
         backgroundColor: 'orange',
     },
     subText: {
         fontSize: hp(2.2),
         fontFamily: FONTS.fontRegular,
-        marginTop:hp(3)
+        marginTop: hp(3)
     },
     headText: {
         fontSize: hp(3.5),
@@ -43,15 +43,15 @@ export default StyleSheet.create({
     rewardStarMark: {
         justifyContent: 'space-around',
         width: '90%',
-        height:hp(12),
+        height: hp(12),
         marginBottom: hp(3),
         flexDirection: 'row',
         paddingTop: hp(1.8),
         paddingBottom: hp(1.8),
-        backgroundColor:'white',
-        alignSelf:'center',
-        marginTop:hp(-6),
-         borderRadius:10
+        backgroundColor: 'white',
+        alignSelf: 'center',
+        marginTop: hp(-6),
+        borderRadius: 10
     },
     starSelected: {
         width: hp(4.94),
@@ -64,8 +64,9 @@ export default StyleSheet.create({
     starSelectedText: {
         fontFamily: FONTS.fontBold,
         color: COLORS.white,
-        fontSize: hp(1.82),
+        fontSize: hp(1.40),
         lineHeight: hp(5.1),
+        position: 'absolute',
     },
     centerStar: {
         borderLeftWidth: 1,
@@ -78,25 +79,28 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
+        marginTop: 10
     },
 
     // Right View
     borderView: {
         width: "100%",
         height: hp(60),
-        borderWidth: 1,
-        borderColor: COLORS.borderGrp,
+        // borderWidth: 1,
+        // borderColor: COLORS.borderGrp,
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     tabView: {
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     tabBtn: {
         alignItems: 'center',
         justifyContent: 'center',
         // marginRight: wp(2),
-        marginHorizontal:wp(3),
+        marginHorizontal: wp(3),
         marginVertical: hp(1.5),
     },
     tabText: {
@@ -104,11 +108,21 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.lightGray
     },
-    itemBtn:{
-        width:hp(12),
-        height:hp(12),
+    itemBtn: {
+        width: hp(12),
+        height: hp(12),
         margin:10,
-        borderRadius:10,
-        backgroundColor:'orange'  
-      }
+        borderRadius: 10,
+        backgroundColor: 'orange',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    centerStar: {
+        borderLeftWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        borderRightWidth: 1,
+        width: hp(14.32),
+        alignItems: 'center',
+    },
 })

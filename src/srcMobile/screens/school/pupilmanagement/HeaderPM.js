@@ -159,7 +159,7 @@ const HeaderPM = (props) => {
                                 style={styles.tabs}
                                 activeOpacity={opacity}
                                 onPress={() => { props.setSelectedTabIndex(1); setSelectedTab(1) }}>
-                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>group set up</Text>
+                                <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>Class set up</Text>
                             </TouchableOpacity>
                         </View>
                     </ScrollView>
@@ -188,7 +188,7 @@ const HeaderPM = (props) => {
                         <View style={styles.popupContent}>
                             <View style={styles.tabcontent}>
                                 <View style={styles.beforeBorder}>
-                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
+                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupil</Text>
                                     <View style={styles.entryContentMain}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
@@ -203,7 +203,7 @@ const HeaderPM = (props) => {
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
                                             {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                                             <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
-                                            <Text style={styles.entryTitle}>ADD MANUALLy</Text>
+                                            <Text style={styles.entryTitle}>ADD MANUALLY</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>

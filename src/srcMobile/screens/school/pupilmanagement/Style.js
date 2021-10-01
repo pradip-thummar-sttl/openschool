@@ -564,5 +564,20 @@ export default StyleSheet.create({
     },
     bottomText: {
         color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10 
-    }
+    },
+    squreView:{ 
+        borderRadius: 10, 
+        height: 100, 
+        width: 100, 
+        backgroundColor: COLORS.greyBack, 
+        justifyContent: 'center', 
+        padding: 8 ,
+        margin:10
+    },
+    label1: {
+        fontSize: hp(1.2),
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.lightGray,
+        marginBottom: 3,
+    },
 });

@@ -28,10 +28,16 @@ import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileT
 
 const { CallModule } = NativeModules;
 
-const PupilProfileView = (props) => {
+const SPupilProfileView = (props) => {
     const item = props.route.params.item;
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
+
+
+    const [joinedLesson, setJoinedLesson] = useState(0)
+    const [submittedHomework, setSubmittedHomework] = useState(0)
+    const [missedLesson, setMissedLesson] = useState(0)
+    const [isLessonDetail, setLessonDetail] = useState(false);
 
     const [isBronze, setBronze] = useState(false);
     const [isSilver, setSilver] = useState(false);
@@ -82,6 +88,9 @@ const PupilProfileView = (props) => {
     }, [chartData])
 
     const getLessonData = () => {
+
+
+
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -91,6 +100,8 @@ const PupilProfileView = (props) => {
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
+                setJoinedLesson(res.data.joinlesson)
+                setMissedLesson(res.data.totallesson - res.data.joinlesson)
                 getHomeworkData(data)
             } else {
                 showMessage(res.message)
@@ -110,6 +121,7 @@ const PupilProfileView = (props) => {
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
+                setSubmittedHomework(res.data.total)
                 lessonData.push(data)
                 setChartData(lessonData)
             } else {
@@ -199,12 +211,28 @@ const PupilProfileView = (props) => {
                                     <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
                                 </View>
                                 <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>Notes</Text>
+                                    <Text LABLE style={PAGESTYLE.label}>Parents Name</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.ParentFirstName} {item.ParentLastName}</Text>
+                                </View>
+                                <View style={PAGESTYLE.fieldDetails}>
+                                    <Text LABLE style={PAGESTYLE.label}>Parents Email</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.Email ? item.Email : '-'}</Text>
+                                </View>
+                                <View style={PAGESTYLE.fieldDetails}>
+                                    <Text LABLE style={PAGESTYLE.label}>Parents Tel.</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.MobileNumber ? item.MobileNumber : '-'}</Text>
+                                </View>
+                                <View style={PAGESTYLE.fieldDetails}>
+                                    <Text LABLE style={PAGESTYLE.label}>Assign to</Text>
                                     <Text P style={PAGESTYLE.data}>{item.Note ? item.Note : '-'}</Text>
+                                </View>
+                                <View style={PAGESTYLE.fieldDetails}>
+                                    <Text LABLE style={PAGESTYLE.label}>Status</Text>
+                                    <Text P style={PAGESTYLE.data}>{item.IsActive ? 'Active' : 'Deactive'}</Text>
                                 </View>
                             </View>
                             <View HR style={STYLE.hrCommon}></View>
-                            <View style={PAGESTYLE.rewardSection}>
+                            {/* <View style={PAGESTYLE.rewardSection}>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
@@ -212,28 +240,28 @@ const PupilProfileView = (props) => {
                                             style={PAGESTYLE.tickLayoutPArent}
                                             activeOpacity={opacity}
                                             onPress={() => setInstantRewards()}>
-                                            <View>
-                                                {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
-                                                <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
+                                            <View> */}
+                            {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
+                            {/* <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
                                             </View>
                                         </TouchableOpacity>
-                                    </View>
-                                    <View style={PAGESTYLE.achivementBox}>
+                                    </View> */}
+                            {/* <View style={PAGESTYLE.achivementBox}>
                                         <View style={PAGESTYLE.rewardStarMark}>
                                             <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
-                                                <View style={PAGESTYLE.centerText}>
-                                                    {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
-                                                    {isBronze ?
+                                                <View style={PAGESTYLE.centerText}> */}
+                            {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
+                            {/* {isBronze ?
                                                         <BronzeFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} /> :
                                                         <Bronze style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />
                                                     }
                                                     <Text style={PAGESTYLE.starText}>Bronze star</Text>
-                                                </View>
-                                            </TouchableOpacity>
+                                                </View> */}
+                            {/* </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
-                                                <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                    {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
-                                                    {isSilver ?
+                                                <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}> */}
+                            {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
+                            {/* {isSilver ?
                                                         <SilverFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />
                                                         :
                                                         <Silver style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />}
@@ -241,17 +269,17 @@ const PupilProfileView = (props) => {
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
-                                                <View style={PAGESTYLE.centerText}>
-                                                    {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
-                                                    {isGold ?
+                                                <View style={PAGESTYLE.centerText}> */}
+                            {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
+                            {/* {isGold ?
                                                         <GoldFill style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} /> :
                                                         <Gold style={[PAGESTYLE.starSelected]} height={hp(5)} width={hp(5)} />}
                                                     <Text style={PAGESTYLE.starText}>Gold star</Text>
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
-                                    </View>
-                                </View>
+                                    </View> */}
+                            {/* </View>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>What is the reward for?</Text>
                                     <TextInput
@@ -264,8 +292,23 @@ const PupilProfileView = (props) => {
                                         value={feedBack}
                                         onChangeText={feedback => setFeedback(feedback)} />
                                 </View>
+                            </View> */}
+                            {/* <View HR style={STYLE.hrCommon}></View> */}
+                            <View style={{flexDirection:'row',}}>
+                                <View style={PAGESTYLE.squreView}>
+                                    <Text style={PAGESTYLE.data}>{joinedLesson}</Text>
+                                    <Text style={PAGESTYLE.label1}>Attended lessons</Text>
+                                </View>
+                                <View style={PAGESTYLE.squreView}>
+                                    <Text style={PAGESTYLE.data}>{submittedHomework}</Text>
+                                    <Text style={PAGESTYLE.label1}>Homework Submitted</Text>
+                                </View>
+                                <View style={PAGESTYLE.squreView}>
+                                    <Text style={PAGESTYLE.data}>{missedLesson}</Text>
+                                    <Text style={PAGESTYLE.label1}>Missed lessons</Text>
+                                </View>
                             </View>
-                            <View HR style={STYLE.hrCommon}></View>
+
                             <View style={PAGESTYLE.pupilPerfomance}>
                                 <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
                                 {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
@@ -301,4 +344,4 @@ const PupilProfileView = (props) => {
     );
 }
 
-export default PupilProfileView;
+export default SPupilProfileView;
