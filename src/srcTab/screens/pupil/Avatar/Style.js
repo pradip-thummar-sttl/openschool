@@ -66,8 +66,9 @@ export default StyleSheet.create({
     starSelectedText: {
         fontFamily: FONTS.fontBold,
         color: COLORS.white,
-        fontSize: hp(1.82),
+        fontSize: hp(1.60),
         lineHeight: hp(5.1),
+        position: 'absolute',
     },
     centerStar: {
         borderLeftWidth: 1,
@@ -80,6 +81,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
+        marginTop: 10
     },
 
     // Right View
@@ -106,11 +108,14 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.lightGray
     },
-    itemBtn:{
-        width:wp(15),
-        height:wp(15),
-        margin:10,
-        borderRadius:10,
-        backgroundColor:'orange'  
-      }
+    itemBtn: {
+        width: wp(15),
+        height: wp(15),
+        margin: 10,
+        borderRadius: 10,
+        backgroundColor: 'orange',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    centerStar: { alignItems: 'center', justifyContent: 'center' }
 })
