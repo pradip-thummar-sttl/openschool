@@ -6,8 +6,9 @@ function STabletOnboarding1(props) {
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width={props.width}
-      height={props.height}
+      height={props.heigth}
       {...props}
+      viewBox="0 0 844.08 362.79"
     >
       <G data-name="Group 2189">
         <G data-name="Group 2075">
@@ -473,11 +474,6 @@ function STabletOnboarding1(props) {
             data-name="Rectangle 17761"
             d="M152.436 3.844a55 55 0 0155 55v6a82 82 0 01-82 82 32 32 0 01-32-32v-52a59 59 0 0159-59z"
             fill="#8738bd"
-          />
-          <Path
-            data-name="Rectangle 17939"
-            fill="#fff"
-            d="M-103.565 217.844h623v108h-623z"
           />
           <G data-name="TEACHER">
             <G data-name="Group 1832" transform="translate(74.204 16.081)">

@@ -26,14 +26,37 @@ const GroupSetUp = (props) => {
     const [isPupilLoading, setPupilLoading] = useState([])
     const [isGroupLoading, setGroupLoading] = useState([])
 
+    // const [pupilsClone, setPupilsClone] = useState([])
+    // const [groupsClone, setGroupsClone] = useState([])
     useEffect(() => {
         refresh()
     }, [])
 
     const refresh = () => {
-        setGroupLoading(true)
+        // setGroupLoading(true)
 
-        Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
+        // Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
+        //     setGroupLoading(false)
+        //     if (res.code == 200) {
+        //         setGroups(res.data)
+        //         setGroupsClone(res.data)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     setGroupLoading(false)
+        //     console.log('error of GetParticipants', err)
+        // })
+
+        loadGroup()
+
+    }
+
+    const loadGroup = () => {
+        setGroupLoading(true)
+        console.log('User.user.UserDetialId', User.user.UserDetialId);
+        Service.get(`${EndPoints.GetClassSetup}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of groups', res);
             setGroupLoading(false)
             if (res.code == 200) {
                 setGroups(res.data)
@@ -42,10 +65,10 @@ const GroupSetUp = (props) => {
                 showMessage(res.message)
             }
         }, (err) => {
-            setGroupLoading(false)
-            console.log('error of GetParticipants', err)
-        })
+            console.log('response of groups error', err);
 
+            setGroupLoading(false)
+        })
     }
 
     const Grouplist = (item) => (
@@ -54,7 +77,7 @@ const GroupSetUp = (props) => {
                 <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.GroupName}</Text>
                 <TouchableOpacity
                     activeOpacity={opacity}
-                    onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList, groupName: item.item.GroupName, isForUpdate: true, groupId: item.item._id }) }}>
+                    onPress={() => { props.props.navigation.navigate('SGroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList, groupName: item.item.GroupName, isForUpdate: true, groupId: item.item._id }) }}>
                     {/* <Image
                         style={PAGESTYLE.groupEdit1}
                         source={Images.Edit} /> */}
@@ -87,7 +110,7 @@ const GroupSetUp = (props) => {
         <SafeAreaView style={PAGESTYLE.mainPage1}>
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={() => { props.props.navigation.navigate('GroupSetUpPupilSelection', { onRefresh: () => refresh(), isForUpdate: false }) }}>
+                onPress={() => { props.props.navigation.navigate('SGroupSetUpPupilSelection', { onRefresh: () => refresh(), isForUpdate: false }) }}>
                 <View style={PAGESTYLE.newGroup}>
                     {/* <Image style={PAGESTYLE.createIcon} source={Images.uploadIcon} /> */}
                     <UploadImage style={PAGESTYLE.createIcon} width={hp(2)} height={hp(2)} />

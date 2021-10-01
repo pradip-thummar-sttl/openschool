@@ -18,13 +18,14 @@ function STabletOnboarding3(props) {
       width={props.width}
       height={props.height}
       {...props}
+      viewBox="0 0 1024 425.138"
     >
       <Defs>
         <ClipPath id="prefix__a">
           <Path fill="none" d="M0 0h225.76v61.059H0z" />
         </ClipPath>
       </Defs>
-      <G data-name="Group 2189" transform="translate(0 -56.862)">
+      <G data-name="Group 2191" transform="translate(0 -56.862)">
         <Path data-name="Rectangle 17684" fill="#fff" d="M0 259h1024v104H0z" />
         <Rect
           data-name="Rectangle 17683"

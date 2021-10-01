@@ -5,8 +5,6 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 // import Images from "../../../../utils/Images";
-import PMobileOnboarding1 from "../../../../svg/pupil/introductionMobile/PMobileOnboarding1";
-import SMobileOnboarding3 from "../../../../svg/school/introductionMobile/SMobileOnboarding3";
 import SMobileOnboarding1 from "../../../../svg/school/introductionMobile/SMobileOnboarding1";
 
 const Introduction1 = (props) => {
@@ -14,11 +12,11 @@ const Introduction1 = (props) => {
         <View style={STYLE.viewBox}>
             <View style={styles.imageArea}>
                 {/* <Image source={Images.introSlideOne} style={styles.SlideImage}></Image> */}
-                <SMobileOnboarding1 style={styles.SlideImage} height={hp(42.36)} width={hp(41.99)} />
+                <SMobileOnboarding1 style={styles.SlideImage} height={hp(45.37)} width={'100%'} />
             </View>
             <View style={styles.lefContent}>
-               <Text h2 style={styles.introTitle}>Always there for pupils </Text>
-               <Text p style={styles.introContent}>Identify and support any pupil that may{'\n'}need extra attention with insights into{'\n'}their attendance, participation and{'\n'}achievements.</Text>
+               <Text h2 style={styles.introTitle}>Always there for pupils</Text>
+               <Text p style={styles.introContent}>Identify and support any pupil that may need extra attention with insights into their attendance, participation and achievements.</Text>
            </View>
         </View>
     );
@@ -29,8 +27,10 @@ const styles = StyleSheet.create({
     },
     imageArea: {        
         alignSelf: 'center',
-        marginTop: hp(11.88),
-        marginBottom: hp(9.14),
+        marginBottom: hp(12.76),
+        height: hp(58.46),
+        width: '100%',
+        justifyContent: 'flex-end',
     },
     lefContent:{
         width: '100%',

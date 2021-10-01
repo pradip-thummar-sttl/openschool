@@ -180,7 +180,7 @@ const SPupilProfileView = (props) => {
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
+                navigateToPupilProfileEdit={() => props.navigation.replace('SPupilProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />

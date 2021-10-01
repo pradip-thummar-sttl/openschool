@@ -14,8 +14,10 @@ import STYLE from "../../../../utils/Style";
 import PAGESTYLE from './Style';
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import BackArrow from "../../../../svg/common/BackArrow";
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
+import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
 
-const GroupSetUpPupilSelection = (props) => {
+const SGroupSetUpPupilSelection = (props) => {
 
     const [groups, setGroups] = useState([])
     const [pupils, setPupils] = useState([])
@@ -26,6 +28,9 @@ const GroupSetUpPupilSelection = (props) => {
     const [groupName, setGroupName] = useState(props.route.params.isForUpdate ? props.route.params.groupName : '')
     const [isPupilLoading, setPupilLoading] = useState([])
     const [isGroupLoading, setGroupLoading] = useState([])
+
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [teachers, setTeachers] = useState([])
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -40,35 +45,104 @@ const GroupSetUpPupilSelection = (props) => {
         props.navigation.goBack()
         return true;
     }
+
     useEffect(() => {
+        loadTeacher()
         setPupilLoading(true)
 
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
                 setPupilsClone(res.data)
-
-                if (props.route.params.data) {
-                    let list = []
-                    props.route.params.data.forEach(element => {
-                        list.push({ PupilId: element.PupilId })
-                    });
-                    setSelectedPupils(list)
-                } else {
-                }
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             setPupilLoading(false)
             console.log('error of GetPupilByTeacherId', err)
+
         })
+
     }, [])
 
+    const loadTeacher = () => {
+        console.log('User.user.UserDetialId', User.user.UserDetialId);
+        const data = {
+            Searchby: "",
+            Filterby: ""
+        }
+
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setTeachers(res.data)
+                // setTeacherClone(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
     const saveGroup = () => {
-        if (groupName.trim().length == 0) {
-            showMessage(MESSAGE.groupName)
+        // if (groupName.trim().length == 0) {
+        //     showMessage(MESSAGE.groupName)
+        //     return
+        // } else if (selectedPupils.length == 0) {
+        //     showMessage(MESSAGE.selectPupil)
+        //     return
+        // }
+
+        // let list = []
+        // selectedPupils.forEach(element => {
+        //     list.push({ PupilId: element.PupilId })
+        // });
+
+        // let data, url
+        // if (!props.route.params.isForUpdate) {
+        //     url = `${EndPoints.Groupsetup}`
+        //     data = {
+        //         GroupName: groupName,
+        //         TeacherId: User.user._id,
+        //         CreatedBy: User.user._id,
+        //         PupilList: list
+        //     }
+        // } else {
+        //     url = `${EndPoints.UpdateGroupSetup}/${props.route.params.groupId}`
+        //     data = {
+        //         GroupName: groupName,
+        //         UpdatedBy: User.user._id,
+        //         PupilList: list
+        //     }
+        // }
+
+        // Service.post(data, url, (res) => {
+        //     setPupilLoading(false)
+        //     if (res.code == 200) {
+        //         reset()
+        //         if (!props.route.params.isForUpdate) {
+        //             showMessageWithCallBack(MESSAGE.groupCreate, () => {
+        //                 props.route.params.onRefresh();
+        //                 props.navigation.goBack()
+        //             })
+        //         } else {
+        //             showMessageWithCallBack(MESSAGE.groupUpdated, () => {
+        //                 props.route.params.onRefresh();
+        //                 props.navigation.goBack()
+        //             })
+        //         }
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     setPupilLoading(false)
+        //     console.log('error of GetPupilByTeacherId', err)
+        // })
+
+        //
+        if (selectedTeacher.length<=0) {
+            showMessage(MESSAGE.selectTeacher)
             return
         } else if (selectedPupils.length == 0) {
             showMessage(MESSAGE.selectPupil)
@@ -80,45 +154,25 @@ const GroupSetUpPupilSelection = (props) => {
             list.push({ PupilId: element.PupilId })
         });
 
-        let data, url
-        if (!props.route.params.isForUpdate) {
-            url = `${EndPoints.Groupsetup}`
-            data = {
-                GroupName: groupName,
-                TeacherId: User.user._id,
-                CreatedBy: User.user._id,
-                PupilList: list
-            }
-        } else {
-            url = `${EndPoints.UpdateGroupSetup}/${props.route.params.groupId}`
-            data = {
-                GroupName: groupName,
-                UpdatedBy: User.user._id,
-                PupilList: list
-            }
+        let data = {
+            SchoolId: User.user.UserDetialId,
+            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
+            CreatedBy: User.user.UserDetialId,
+            PupilList: list
         }
-
-        Service.post(data, url, (res) => {
-            setPupilLoading(false)
+        setGroupLoading(true)
+        console.log('data', data);
+        Service.post(data, `${EndPoints.ClassSetup}`, (res) => {
+            setGroupLoading(false)
             if (res.code == 200) {
                 reset()
-                if (!props.route.params.isForUpdate) {
-                    showMessageWithCallBack(MESSAGE.groupCreate, () => {
-                        props.route.params.onRefresh();
-                        props.navigation.goBack()
-                    })
-                } else {
-                    showMessageWithCallBack(MESSAGE.groupUpdated, () => {
-                        props.route.params.onRefresh();
-                        props.navigation.goBack()
-                    })
-                }
+                // loadGroup()
+                showMessage(MESSAGE.classSetup)
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
-            setPupilLoading(false)
-            console.log('error of GetPupilByTeacherId', err)
+            setGroupLoading(false)
         })
     }
 
@@ -145,6 +199,42 @@ const GroupSetUpPupilSelection = (props) => {
         }
     }
 
+    const pushGroup = (_index) => {
+        if (selectedPupils.length != 0) {
+            showMessage('Please reset your list first')
+            return
+        }
+
+        setSelectedTeacher([...selectedTeacher, groupsClone[_index]])
+
+        const newList = [], newSelectedList = []
+        pupilsClone.map((item1) => {
+            let flag = false
+            groupsClone[_index].PupilList.map((item2) => {
+                if (item1._id == item2.PupilId) {
+                    flag = true
+                }
+            })
+            if (!flag) {
+                newList.push(item1)
+            } else {
+                newSelectedList.push(item1)
+            }
+        });
+        setPupilsClone(newList)
+        setSelectedPupils(newSelectedList)
+        setGroupName(groupsClone[_index].GroupName)
+    }
+
+    const reset = () => {
+        setPupilsClone(pupils)
+        setGroupsClone(groups)
+        setSelectedPupils([])
+        setSelectedGroup([])
+        setGroupName('')
+        setSelectedTeacher([])
+    }
+
     const Pupillist = (props) => (
         // <TouchableOpacity
         //     activeOpacity={opacity}
@@ -154,7 +244,7 @@ const GroupSetUpPupilSelection = (props) => {
                 <Image
                     style={PAGESTYLE.mediabar}
                     source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName1,{width:wp(60)}]} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName1, { width: wp(60) }]} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
                 <View style={PAGESTYLE.checkMark}>
                     <CheckBox
                         boxType={'square'}
@@ -189,21 +279,45 @@ const GroupSetUpPupilSelection = (props) => {
         // setPupilsClone(newList)
     }
 
-    const reset = () => {
-        setGroupName('')
-        setSelectedPupils([])
-    }
+    // const reset = () => {
+    //     setGroupName('')
+    //     setSelectedPupils([])
+    // }
+
+
+    const teacherDropDown = () => {
+        return (
+            <View style={PAGESTYLE.dropDownFormInput}>
+                <Text style={PAGESTYLE.subjectText}>Assign Teacher</Text>
+                <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+                    <MenuTrigger style={[PAGESTYLE.dropDown]}>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                        <FlatList
+                            data={teachers}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                            )}
+                            style={{ height: 190 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
 
     return (
         <SafeAreaView style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.white }}>
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={() => props.navigation.goBack()}>
+                onPress={() => { props.route.params.onRefresh(); props.navigation.goBack() }}>
                 {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
                 <BackArrow style={PAGESTYLE.arrow} height={hp(2.34)} width={hp(2.34)} />
-                
+
             </TouchableOpacity>
-            <TextInput
+            {/* <TextInput
                 returnKeyType={"done"}
                 style={PAGESTYLE.input1}
                 placeholder="Enter group name"
@@ -211,7 +325,8 @@ const GroupSetUpPupilSelection = (props) => {
                 maxLength={40}
                 placeholderTextColor={COLORS.darkGrayIntro}
                 value={groupName}
-                onChangeText={groupName => { setGroupName(groupName) }} />
+                onChangeText={groupName => { setGroupName(groupName) }} /> */}
+            {teacherDropDown()}
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.left1}>
                 {isPupilLoading ?
@@ -229,14 +344,19 @@ const GroupSetUpPupilSelection = (props) => {
                         // <View>
                         //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                         // </View>
-                        <EmptyStatePlaceHohder holderType={4}  title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
+                        <EmptyStatePlaceHohder holderType={4} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',paddingHorizontal: hp(2.46), }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', paddingHorizontal: hp(2.46), }}>
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>
-                        <Text style={PAGESTYLE.button1}>Assign Group</Text>
+                        {isGroupLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            : <Text style={PAGESTYLE.button1}>Assign Group</Text>}
+
                     </TouchableOpacity>
                 </View>
                 <View style={{ ...PAGESTYLE.buttonParent1, }}>
@@ -249,4 +369,4 @@ const GroupSetUpPupilSelection = (props) => {
         </SafeAreaView>
     );
 }
-export default GroupSetUpPupilSelection;
+export default SGroupSetUpPupilSelection;

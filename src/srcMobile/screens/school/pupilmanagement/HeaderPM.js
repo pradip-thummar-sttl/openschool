@@ -71,6 +71,7 @@ const HeaderPM = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            {props.tabs === 0?
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
                     <TouchableOpacity
@@ -144,7 +145,8 @@ const HeaderPM = (props) => {
                     <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
-            </View>
+            </View>:null
+}
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
