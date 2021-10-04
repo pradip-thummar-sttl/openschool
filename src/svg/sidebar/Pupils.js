@@ -5,8 +5,9 @@ function Pupils(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={24.612}
-      height={26.041}
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 24.612 26.041"
       {...props}
     >
       <G transform="translate(-24 -257.31)">

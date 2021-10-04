@@ -94,7 +94,7 @@ const Sidebar = (props) => {
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
                     {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                   <MyEdLogo style={styles.headerProfile} height={40} width={40} />
+                    <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} />
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
@@ -327,10 +327,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     bottomUser: {
-        width: 32,
-        height: 32,
+        width: hp(4.16),
+        height: hp(4.16),
         // resizeMode: 'contain',
-        borderRadius: 16,
+        borderRadius: hp(4.16),
     },
     profileTitleBottom: {
         fontSize: hp(2.0),

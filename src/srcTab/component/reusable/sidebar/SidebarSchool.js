@@ -97,7 +97,7 @@ const SidebarSchool = (props) => {
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
                     {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                   <MyEdLogo style={styles.headerProfile} height={40} width={40} />
+                   <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} />
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
@@ -116,7 +116,7 @@ const SidebarSchool = (props) => {
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         /> */}
-                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.38)} height={hp(3.25)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
@@ -130,7 +130,7 @@ const SidebarSchool = (props) => {
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         /> */}
-                        <Teachers style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Teachers style={styles.menuIcon} width={hp(3.38)} height={hp(3.125)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
@@ -144,7 +144,7 @@ const SidebarSchool = (props) => {
                             style={styles.menuIcon}
                             source={Images.Pupil}
                         /> */}
-                        <Pupils style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Pupils style={styles.menuIcon} width={hp(3.20)} height={hp(3.390)} />
 
                         {
                             isSmall ? null :
@@ -159,7 +159,7 @@ const SidebarSchool = (props) => {
                             style={styles.menuIcon}
                             source={Images.Messaging}
                         /> */}
-                        <Messaging style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Messaging style={styles.menuIcon} width={hp(3.52)} height={hp(2.78)} />
 
                         {
                             isSmall ? null :
@@ -174,7 +174,7 @@ const SidebarSchool = (props) => {
                             style={styles.menuIcon}
                             source={Images.Parents}
                         /> */}
-                        <Ic_parents style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_parents style={styles.menuIcon} width={hp(3.20)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :
@@ -190,7 +190,7 @@ const SidebarSchool = (props) => {
                             source={Images.Faqs}
                         />
                          */}
-                        <Ic_Faq style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Faq style={styles.menuIcon} width={hp(3.20)} height={hp(3.20)} />
 
                         {
                             isSmall ? null :
@@ -330,10 +330,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     bottomUser: {
-        width: 32,
-        height: 32,
+        width: hp(4.16),
+        height: hp(4.16),
         // resizeMode: 'contain',
-        borderRadius: 16,
+        borderRadius: hp(4.16),
     },
     profileTitleBottom: {
         fontSize: hp(2.0),
@@ -341,8 +341,8 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     menuIcon: {
-        width: hp(3.25),
-        height: hp(3.25)
+        // width: hp(3.25),
+        // height: hp(3.25)
     },
     moreIcon: {
         width: hp(3),

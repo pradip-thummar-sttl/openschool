@@ -117,7 +117,7 @@ const Pupillist = ({ item, onPress }) => (
             </View>
             <View style={PAGESTYLE.rewardColumn}>
                 <View style={PAGESTYLE.rewardStar}>
-                    <Text numberOfLines={1} style={{...PAGESTYLE.pupilgroupName, width:hp(20),}}>{item.Email}</Text>
+                    <Text numberOfLines={1} style={{...PAGESTYLE.pupilgroupName, width:hp(25),textAlign: 'left',}}>{item.Email}</Text>
                 </View>
             </View>
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
@@ -408,9 +408,9 @@ const SchoolDashboard = (props) => {
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.myDay}>
-                                                <View style={[STYLE.viewRow]}>
+                                                <View style={{...STYLE.viewRow, alignItems: 'center',position: 'relative',}}>
                                                     {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
-                                                    <Insights style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
+                                                    <Insights style={{...PAGESTYLE.dayIcon, top:4}} height={hp(3.25)} width={hp(4.33)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>Insights</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>
@@ -631,9 +631,9 @@ const SchoolDashboard = (props) => {
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
-                                                <View style={[STYLE.viewRow]}>
+                                                <View style={{...STYLE.viewRow,alignItems: 'center',position: 'relative',}}>
                                                     {/* <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} /> */}
-                                                    <MyPupils style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
+                                                    <MyPupils style={{...PAGESTYLE.dayIcon, top: 0,}} height={hp(3.25)} width={hp(3.25)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>My Teachers</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>
@@ -654,25 +654,25 @@ const SchoolDashboard = (props) => {
                                                     schoolData.length > 0 ?
                                                         <View>
                                                             <View style={PAGESTYLE.pupilTable}>
-                                                                <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                                                <View style={{...PAGESTYLE.pupilTableHeadingMain, width: '25%',}}>
                                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
                                                                     <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total {schoolData.length} Teachers</Text>
                                                                 </View>
-                                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                                                <View style={{...PAGESTYLE.pupilTableHeadingMain, width: '16%',}}>
                                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
                                                                 </View>
-                                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                                                <View style={{...PAGESTYLE.pupilTableHeadingMain, width: '20%',}}>
                                                                     <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Scheduled Activity</Text>
                                                                     <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
-                                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
+                                                                        <Text style={{...PAGESTYLE.pupilTableHeadingMainsubTitle,width: '40%',textAlign: 'center',}}>Lessons</Text>
+                                                                        <Text style={{...PAGESTYLE.pupilTableHeadingMainsubTitle,width: '57%',textAlign: 'center',}}>Homework</Text>
                                                                     </View>
                                                                 </View>
-                                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                                                <View style={{...PAGESTYLE.pupilTableHeadingMain, width: '35%',textAlign: 'center'}}>
                                                                     <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Contact</Text>
                                                                 </View>
                                                             </View>
-                                                            <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
+                                                            <View style={{...STYLE.hrCommon, marginBottom:6,}}></View>
                                                             <View style={PAGESTYLE.pupilTabledata}>
                                                                 <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
                                                                     <FlatList
