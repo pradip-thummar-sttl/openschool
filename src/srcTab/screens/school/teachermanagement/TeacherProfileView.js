@@ -142,11 +142,10 @@ const TeacherProfileView = (props) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={PAGESTYLE.graphBlock}>
+                                {/* <View style={PAGESTYLE.graphBlock}>
                                     <View style={PAGESTYLE.graphBox}>
                                         <View style={PAGESTYLE.generalRow}>
                                             <View style={PAGESTYLE.chartBlock}>
-                                                {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
                                                 <ActivityRings
                                                     data={chartData}
                                                     config={activityConfig} />
@@ -163,12 +162,11 @@ const TeacherProfileView = (props) => {
                                                 </View>
                                             </View>
                                         </View>
-                                        {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                                     </View>
                                     <View>
 
                                     </View>
-                                </View>
+                                </View> */}
                             </KeyboardAwareScrollView>
                         </View>
                     </View>

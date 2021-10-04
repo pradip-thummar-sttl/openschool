@@ -13,7 +13,7 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { opacity } from "../../../../utils/Constant";
+import { opacity, showMessage } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -30,8 +30,16 @@ import FONTS from "../../../../utils/Fonts";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import UploadCSV from "../../../../svg/school/teachermanagment/UploadCSV";
+import { Service } from "../../../../service/Service";
+import MESSAGE from "../../../../utils/Messages";
+import { EndPoints } from "../../../../service/EndPoints";
+import DocumentPicker from "react-native-document-picker";
+import { User } from "../../../../utils/Model";
 const HeaderTM = (props) => {
     const refRBSheet = useRef();
+    const refRBSheetCSV = useRef();
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -48,8 +56,58 @@ const HeaderTM = (props) => {
     }, [isSearchActive])
 
     useEffect(() => {
-        // props.onFilter(filterBy)
+        props.onFilter(filterBy)
     }, [filterBy])
+
+    const addCSV = () => {
+        console.log('hihihihihihi')
+        try {
+            DocumentPicker.pick({
+                type: [DocumentPicker.types.xlsx,],
+            }).then((results) => {
+                console.log('results', results);
+                // setCSV(results)
+                uploadProfile(results)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const uploadProfile = (csv) => {
+        
+        let data = new FormData();
+        let url;
+
+        if (props.userType == 'Teacher') {
+            url = `${EndPoints.TeacherUpload}/${User.user.UserDetialId}`
+        } else {
+            url = `${EndPoints.PupilUpload}/${User.user.UserDetialId}`
+        }
+
+        data.append('file', {
+            uri: csv.uri,
+            name: csv.name,
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+
+        Service.postFormData(data, url, (res) => {
+            if (res.code == 200) {
+                showMessage(MESSAGE.inviteSent)
+                console.log('response of save lesson', res)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('response of get all lesson error', err)
+        })
+
+    }
 
     return (
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
@@ -98,31 +156,44 @@ const HeaderTM = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
 
-                    {/* <TouchableOpacity style={styles.buttonGroup}> */}
-                        <Menu style={styles.filterGroup}>
-                            <MenuTrigger><FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)}/></MenuTrigger>
-                            <MenuOptions style={styles.filterListWrap}>
-                                <MenuOption style={styles.borderList}>
+                    <Menu>
+                        <MenuTrigger>
+                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                            <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                        </MenuTrigger>
+                        <MenuOptions style={styles.filterListWrap}>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('1'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Subject</Text>
-                                        {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
+                                        <Text style={styles.filterListText}>Name (Ascending)</Text>
+                                        {selectedIndex == 0 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
                                     </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('-1'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Date</Text>
+                                        <Text style={styles.filterListText}>Name (Desending)</Text>
+                                        {selectedIndex == 1 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
                                     </View>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                    </View>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                        {/* <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)}/> */}
-                        {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
-                    {/* </TouchableOpacity> */}
+                                </TouchableOpacity>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
                     {/*  */}
                 </View>
                 <TouchableOpacity
@@ -160,21 +231,51 @@ const HeaderTM = (props) => {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
+                                            onPress={() => { refRBSheet.current.close(); refRBSheetCSV.current.open() }}>
                                             {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                            <ImportCSV style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                            <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
                                             <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
                                             {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                                            <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                            <ImportIndividual style={styles.entryIcon} height={hp(12)} width={hp(12)} />
                                             <Text style={styles.entryTitle}>ADD MANUALLy</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>
+                        </View>
+                    </View>
+                </RBSheet>
+
+                <RBSheet
+                    ref={refRBSheetCSV}
+                    closeOnDragDown={true}
+                    height={[hp(35.88)]}
+                    style={{ position: 'relative', }}
+                    closeOnPressMask={true}
+                    customStyles={{
+                        wrapper: {
+                            backgroundColor: COLORS.bottomSlideUpBack
+                        },
+                        draggableIcon: {
+                            backgroundColor: COLORS.darkGray
+                        }
+                    }}
+                >
+                    <View style={styles.popupLarge}>
+                        <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => toggleModal()}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={styles.popupCard}>
+                            <TouchableOpacity style={styles.upload} onPress={() => addCSV()}>
+                                <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
+                                <Text style={styles.labelUpload}>Click here to select source</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </RBSheet>
@@ -199,7 +300,6 @@ const styles = StyleSheet.create({
         shadowColor: COLORS.headerShadow,
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
-        marginBottom: hp(1.23),
     },
     mainTitle: {
         fontSize: hp(2.21),
@@ -266,6 +366,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(0.5),
+        alignSelf: 'center'
         // top: hp(1.19),
     },
     filterIcon1: {
@@ -343,15 +444,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        right: hp(0),
-        width: hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -407,24 +500,32 @@ const styles = StyleSheet.create({
         position: 'relative',
         paddingBottom: hp(6.5),
     },
+    popupCard: {
+        backgroundColor: COLORS.white,
+        borderRadius: hp(2),
+        width: '90%',
+        alignItems: 'center',
+        alignSelf: 'center',
+        overflow: 'hidden',
+        fontFamily: FONTS.fontRegular,
+        position: 'relative',
+    },
     titleTab: {
         fontSize: hp(2.05),
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(3.38),
         color: COLORS.darkGray,
-        marginBottom: hp(5),
+        marginBottom: hp(3),
         marginTop: hp(3),
     },
     entryContentMain: {
         alignItems: 'center',
     },
     entryData: {
-        marginBottom: hp(5.14)
+        marginBottom: hp(5.14),
+        alignItems: 'center'
     },
     entryIcon: {
-        width: hp(10),
-        height: hp(10),
-        resizeMode: 'contain',
         marginBottom: hp(2.28),
     },
     entryTitle: {
@@ -435,12 +536,31 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', marginHorizontal: hp(1.84), alignItems: 'center', marginBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
+        flexDirection: 'row', paddingHorizontal: hp(1.84), alignItems: 'center', paddingBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
         height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+    upload: {
+        width: '50%',
+        height: 150,
+        backgroundColor: COLORS.backgroundColorCommon,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: 6,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+        borderStyle: 'dashed',
+    },
+    labelUpload: {
+        fontSize: 14,
+        textAlign: 'center',
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.menuLightFonts,
+        marginTop: 10
+    },
 });

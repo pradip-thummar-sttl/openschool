@@ -159,12 +159,11 @@ const TeacherProfileAdd = (props) => {
         }
 
         let data = new FormData();
-        let ext = profileUri.uri.split('.');
 
         data.append('file', {
             uri: profileUri.uri,
-            name: profileUri.uri.split('/'),
-            type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+            name: profileUri.fileName,
+            type: profileUri.type
         });
 
         Service.postFormData(data, `${EndPoints.TeacherUploadProfile}/${teacherId}`, (res) => {
@@ -211,7 +210,7 @@ const TeacherProfileAdd = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             },
         )
     }
@@ -226,7 +225,7 @@ const TeacherProfileAdd = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             }
         );
     }

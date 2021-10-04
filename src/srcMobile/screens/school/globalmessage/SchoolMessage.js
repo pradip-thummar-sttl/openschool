@@ -121,7 +121,7 @@ const SchoolMessage = (props) => {
                 </View>
                 <TouchableOpacity
                     style={PAGESTYLE.buttonGroup}
-                    onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refresh() })}>
+                    onPress={() => props.navigation.navigate('SchoolNewMessage', { onGoBack: () => refresh() })}>
                     {/* <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} /> */}
                     <AddWhite style={PAGESTYLE.addIcon4} height={hp(1.56)} width={hp(1.56)} />
                 </TouchableOpacity>
@@ -145,7 +145,7 @@ const SchoolMessage = (props) => {
         return (
             <TouchableOpacity
                 activeOpacity={opacity}
-                onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => fetchRecord('', ''), data: item.item })}>
+                onPress={() => props.navigation.navigate('SchoolNewMessage', { onGoBack: () => fetchRecord('', ''), data: item.item })}>
                 <View style={PAGESTYLE.flateMainView}>
                     <View style={PAGESTYLE.firstRow}>
                         <Text style={PAGESTYLE.dateText}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>

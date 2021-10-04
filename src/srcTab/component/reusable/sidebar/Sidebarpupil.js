@@ -27,7 +27,11 @@ const Sidebar = (props) => {
     //     props.hide();
     // }
 
-    toggleAnimation = () => {
+    const toggleAnimation = (flag) => {
+
+        if (flag && isSmall) {
+            return
+        }
 
         if (isSmall) {
             Animated.timing(animationValue, {
@@ -91,7 +95,7 @@ const Sidebar = (props) => {
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
 
-                    <TouchableOpacity onPress={() => props.navigateToDashboard()} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
@@ -103,7 +107,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => props.navigateToTimetable()} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { props.navigateToTimetable(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
@@ -115,7 +119,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => props.onLessonAndHomework()} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { props.onLessonAndHomework(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyLessons}
@@ -127,7 +131,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => props.onSetting()} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
@@ -139,7 +143,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => props.onAvatar()} style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { props.onAvatar(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAvatar}
@@ -151,7 +155,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => props.onParentZone()} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { props.onParentZone(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.OpenSchool}
@@ -164,7 +168,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => showActionChooser()} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { showActionChooser(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.logout}

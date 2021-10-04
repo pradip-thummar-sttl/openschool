@@ -614,10 +614,9 @@ export default StyleSheet.create({
         backgroundColor: COLORS.white,
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: 1, },
-        elevation: 3,
-        borderRadius: hp(1.95),
+        elevation: 1,
         height: hp(8.85),
-        borderRadius: hp(2.0),
+        borderRadius: 10,
         width:'100%'
     },
     pupilProfile: {

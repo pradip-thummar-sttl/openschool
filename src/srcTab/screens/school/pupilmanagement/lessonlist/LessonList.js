@@ -28,17 +28,14 @@ const Pupillist = (props, { }) => (
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
                 <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{moment(props.item.Date).format('DD/MM/yyyy')}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
+            <View style={{...PAGESTYLE.pupilProfile, width: hp(12)}}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12), }]}>{props.item.GroupName ? props.item.GroupName : '-'}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
+            <View style={{...PAGESTYLE.pupilProfile, width: hp(17)}}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(17), }]}>{props.item.TeacherFirstName + ' ' + props.item.TeacherLastName}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
-            </View>
-            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
+            <View style={{...PAGESTYLE.pupilProfile, width: hp(17)}}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(17) }]}>{props.item.GroupName ? props.item.GroupName : '-'}</Text>
             </View>
             <View style={PAGESTYLE.pupilDetailLink}>
                 {/* <Image style={[PAGESTYLE.pupilDetaillinkIcon,]} source={Images.DashboardRightArrow} /> */}
@@ -81,7 +78,7 @@ const LessonList = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-        Service.post(data, `${EndPoints.GetLessionById}/${props.data.TeacherId}`, (res) => {
+        Service.post(data, `${EndPoints.GetAllPupilLessonList}/${props.data.PupilId}`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -115,17 +112,14 @@ const LessonList = (props) => {
                             <View style={PAGESTYLE.pupilTableHeadingMain}>
                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>
                             </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
+                            <View style={{...PAGESTYLE.pupilTableHeadingMain, width: hp(12)}}>
                                 <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
                             </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Live Lesson</Text>
+                            <View style={{...PAGESTYLE.pupilTableHeadingMain, width: hp(17)}}>
+                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teacher's Name</Text>
                             </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Published</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Homework</Text>
+                            <View style={{...PAGESTYLE.pupilTableHeadingMain, width: hp(17)}}>
+                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Feedback</Text>
                             </View>
                         </View>
                         <View style={PAGESTYLE.pupilTabledata}>

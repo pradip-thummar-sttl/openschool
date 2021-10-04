@@ -15,26 +15,28 @@ import UploadCSV from "../../../../svg/school/teachermanagment/UploadCSV";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
+import { User } from "../../../../utils/Model";
+import MESSAGE from "../../../../utils/Messages";
 
 const PopupdataSecondCSVUpload = (props) => {
     const isFromDashboard = props.isFromDashboard
     console.log('isFromDashboard', isFromDashboard);
 
     const [isModalVisible, setModalVisible] = useState();
-    const [csv, setCSV] = useState([])
+    const [csv, setCSV] = useState(null)
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
 
     const addCSV = () => {
         console.log('hihihihihihi')
-        var arr = [...csv]
         try {
             DocumentPicker.pick({
                 type: [DocumentPicker.types.xlsx,],
             }).then((results) => {
                 console.log('results', results);
-                setCSV(results)
+                // setCSV(results)
+                uploadProfile(results)
             });
 
         } catch (err) {
@@ -46,33 +48,31 @@ const PopupdataSecondCSVUpload = (props) => {
         }
     }
 
-    const uploadProfile = (pupilId) => {
-        if (!profileUri) {
-            setLoading(false)
-            showMessage(MESSAGE.inviteSent)
-            return
+    const uploadProfile = (csv) => {
+        
+        let data = new FormData();
+        let url;
+
+        if (props.userType == 'Teacher') {
+            url = `${EndPoints.TeacherUpload}/${User.user.UserDetialId}`
+        } else {
+            url = `${EndPoints.PupilUpload}/${User.user.UserDetialId}`
         }
 
-        let data = new FormData();
-        let ext = profileUri.uri.split('.');
-
         data.append('file', {
-            uri: profileUri.uri,
-            name: profileUri.uri.split('/'),
-            type: 'image/' + (ext.length > 0 ? ext[1] : 'jpeg')
+            uri: csv.uri,
+            name: csv.name,
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         });
 
-        Service.postFormData(data, `${EndPoints.PupilUploadProfile}/${pupilId}`, (res) => {
+        Service.postFormData(data, url, (res) => {
             if (res.code == 200) {
-                setLoading(false)
                 showMessage(MESSAGE.inviteSent)
                 console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
-                setLoading(false)
             }
         }, (err) => {
-            setLoading(false)
             console.log('response of get all lesson error', err)
         })
 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.5),
         zIndex: 9,
-        top: hp(1),
+        top: hp(0.5),
     },
     popupCard: {
         backgroundColor: COLORS.white,

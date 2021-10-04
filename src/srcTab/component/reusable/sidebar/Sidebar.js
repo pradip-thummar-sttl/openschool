@@ -32,7 +32,7 @@ const Sidebar = (props) => {
 
     console.log('props', props);
 
-    toggleAnimation = (flag) => {
+    const toggleAnimation = (flag) => {
 
         if (flag && isSmall) {
             return

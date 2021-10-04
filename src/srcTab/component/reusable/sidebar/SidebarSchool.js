@@ -215,21 +215,24 @@ const SidebarSchool = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfobottomMain]}>
-                    <View style={[styles.userInfobottom]}>
-                        <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
-                        {
-                            isSmall ? null :
-                                <>
-                                    <View style={styles.profileTextMain}>
-                                        <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
-                                    </View>
-                                    <TouchableOpacity style={styles.moreMenu}>
-                                        {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
-                                        <More style={styles.moreIcon} width={hp(3)} height={5} />
-                                    </TouchableOpacity>
-                                </>
-                        }
-                    </View>
+                    <TouchableOpacity
+                        style={[styles.userInfobottom, props.moduleIndex == 7 ? styles.menuItemSelected : null]}
+                        activeOpacity={opacity}
+                        onPress={() => { props.navigateToSettings(); toggleAnimation(true) }}>
+                            <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
+                            {
+                                isSmall ? null :
+                                    <>
+                                        <View style={styles.profileTextMain}>
+                                            <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
+                                        </View>
+                                        <TouchableOpacity style={styles.moreMenu}>
+                                            {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
+                                            <More style={styles.moreIcon} width={hp(3)} height={5} />
+                                        </TouchableOpacity>
+                                    </>
+                            }
+                    </TouchableOpacity>
                 </View>
             </Animated.View>
         </View>

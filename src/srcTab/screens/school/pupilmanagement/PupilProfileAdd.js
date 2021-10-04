@@ -240,7 +240,7 @@ const PupilProfileAdd = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             },
         )
     }
@@ -255,7 +255,7 @@ const PupilProfileAdd = (props) => {
             },
             (response) => {
                 console.log('response', response);
-                setProfileUri(response.uri)
+                setProfileUri(response)
             }
         );
     }

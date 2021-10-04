@@ -39,6 +39,7 @@ const TeacherProfileView = (props) => {
     const [isSilver, setSilver] = useState(false);
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
+    const [teacherCountData, setTeacherCountData] = useState([])
 
     // console.log('item', item);
     // const handleOnClick = (index) => {
@@ -79,6 +80,18 @@ const TeacherProfileView = (props) => {
 
     useEffect(() => {
         getLessonData()
+
+        console.log(`${EndPoints.TeacherDetails}/${item.TeacherId}`);
+        Service.get(`${EndPoints.TeacherDetails}/${item.TeacherId}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                setTeacherCountData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
     }, [])
 
     useEffect(() => {
@@ -274,12 +287,36 @@ const TeacherProfileView = (props) => {
                                 <Text H2 style={PAGESTYLE.titlePerfomance}>Teacher Insights</Text>
                                 {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
 
-                                <View style={PAGESTYLE.squreView}>
-                                    <Text style={PAGESTYLE.data}>25</Text>
-                                    <Text style={PAGESTYLE.label1}>Scheduled lessons</Text>
+                                <View style={PAGESTYLE.achivementBox}>
+                                    <View style={PAGESTYLE.insightBox}>
+                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.ScheduledLesson}</Text>
+                                        <Text style={PAGESTYLE.insightLabel}>Scheduled Lessons</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.insightBox}>
+                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSet}</Text>
+                                        <Text style={PAGESTYLE.insightLabel}>Homework Set</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.insightBox}>
+                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.ActivePupile}</Text>
+                                        <Text style={PAGESTYLE.insightLabel}>Active Pupils</Text>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.achivementBox}>
+                                    <View style={PAGESTYLE.insightBox}>
+                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.PreviousLesson}</Text>
+                                        <Text style={PAGESTYLE.insightLabel}>Previous Lessons</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.insightBox}>
+                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSubmited}</Text>
+                                        <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.insightBox}>
+                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.InActivePupile}</Text>
+                                        <Text style={PAGESTYLE.insightLabel}>Inactive Pupils</Text>
+                                    </View>
                                 </View>
 
-                                <View style={PAGESTYLE.performancePArent}>
+                                {/* <View style={PAGESTYLE.performancePArent}>
                                     <ActivityRings
                                         data={chartData}
                                         config={activityConfig} />
@@ -296,7 +333,7 @@ const TeacherProfileView = (props) => {
                                     </View>
                                     <View HR style={STYLE.hrCommon}></View>
                                     <Text style={PAGESTYLE.bottomText}>Based on {item.FirstName + ' ' + item.LastName}'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
-                                </View>
+                                </View> */}
                             </View>
                         </ScrollView>
                     </View>

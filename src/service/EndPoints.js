@@ -74,4 +74,5 @@ export const EndPoints = {
     Teacher: 'teacher',
     Title: 'title',
     TeachingYear: 'teachingyear',
+    ClassSetup: 'classsetup',
 }

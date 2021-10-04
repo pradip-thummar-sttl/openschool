@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../../utils/Colors';
 // import Images from '../../../utils/Images';
@@ -13,9 +13,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default class Introduction extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            activeDot: 1
+        }
     }
 
-    navigateToLogin(){
+    navigateToLogin() {
         AsyncStorage.setItem('introducePupil', "true")
         this.props.navigation.replace('Login', { userType: "Pupil" })
     }
@@ -32,10 +36,11 @@ export default class Introduction extends Component {
                     }
                     style={styles.slider}
                     slideCount={3}
-                    dots={true}
+                    dots={this.state.activeDot >= 3 ? false : true}
                     dotActiveColor={COLORS.dotActive}
                     dotInactiveColor={COLORS.transparent}
                     dotsContainerStyle={styles.dotContainer}
+                    activeDot={(activeDot) => { this.setState({ activeDot })}}
                 />
             </View>
         );
