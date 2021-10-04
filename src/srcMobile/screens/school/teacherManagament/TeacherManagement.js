@@ -59,62 +59,35 @@ const TeacherManagement = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const textInput = useRef(null);
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [filterBy, setFilterBy] = useState('')
     const [keyword, setKeyword] = useState('')
 
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
+    const [searchKeyword, setSearchKeyword] = useState('')
     const [messageData, setMessageData] = useState([])
 
-    const MessageList = ({item}) => {
-        console.log('log of item', item)
+    const MessageList = ({ item }) => {
         return (
-            <TouchableOpacity style={{marginBottom:10}} onPress={() => props.navigation.navigate('TeacherProfileView', { item: item })}>
-                <View style={[PAGESTYLE.pupilData]}>
-                    <View style={PAGESTYLE.pupilProfile}>
-                        <View style={PAGESTYLE.rowProfile}>
-                            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
-                        </View>
-                        <View style={PAGESTYLE.groupPupil}>
-                            <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.TeachingYear ? item.TeachingYear : '-'}</Text>
+            <TouchableOpacity
+                activeOpacity={opacity}
+                style={{ ...PAGESTYLE.pupilData, marginBottom: 8 }}
+                onPress={() => props.navigation.navigate('TeacherProfileView', { item: item })}>
+                <View style={PAGESTYLE.pupilProfile}>
+                    <View style={PAGESTYLE.rowProfile}>
+                        <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                        <View>
+                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { fontFamily: FONTS.fontBold, width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(45) }]}>{item.Email}</Text>
                         </View>
                     </View>
-                    {/* <View style={PAGESTYLE.rewardColumn}> */}
-                        {/* {item.RewardsList.map((item, index) => {
-                            return (
-                                item._id == '3' ?
-                                    <View style={PAGESTYLE.rewardStar}> */}
-                                        {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                        {/* <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                    </View>
-                                    :
-                                    item._id == '6' ?
-                                        <View style={PAGESTYLE.rewardStar}> */}
-                                            {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                            {/* <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                        </View>
-                                        :
-                                        item._id == '9' ?
-                                            <View style={PAGESTYLE.rewardStar}> */}
-                                                {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                {/* <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                            </View>
-                                            :
-                                            null */}
-                            {/* )
-                        })} */}
-                        {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
-                    {/* </View> */}
-                    <View style={PAGESTYLE.pupilDetailLink}>
-                        {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
+                    <View style={PAGESTYLE.groupPupil}>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.TeachingYear ? item.TeachingYear : '-'}</Text>
                     </View>
+                </View>
+                <View style={PAGESTYLE.pupilDetailLink}>
+                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                    <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
                 </View>
             </TouchableOpacity>
         )
@@ -133,7 +106,7 @@ const TeacherManagement = (props) => {
     // }, [])
 
     useEffect(() => {
-        fetchRecord('', filterBy)
+        fetchRecord('', '')
     }, [filterBy])
 
     const fetchRecord = (searchby, filterBy) => {
@@ -143,7 +116,8 @@ const TeacherManagement = (props) => {
             Filterby: filterBy
         }
 
-        Service.get(`${EndPoints.GetAllTeacher}`, (res) => {
+        console.log(`${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, data);
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -184,7 +158,8 @@ const TeacherManagement = (props) => {
                 navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                 refreshList={() => refresh()}
                 title={'Teacher Management'}
-            />
+                userType={'Teacher'}
+                onFilter={(filterBy) => fetchRecord('', filterBy)} />
 
             {/* {searchHeader()} */}
             {isLoading ?
@@ -195,7 +170,7 @@ const TeacherManagement = (props) => {
                 :
                 messageData.length > 0 ?
                     <FlatList
-                        style={{ marginTop: 10, height: '80%', padding:10 }}
+                        style={{ height: '80%', marginHorizontal: 10 }}
                         data={messageData}
                         renderItem={messageRender}
                         keyExtractor={(item) => item.id}

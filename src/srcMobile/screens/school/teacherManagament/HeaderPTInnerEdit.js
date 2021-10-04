@@ -27,15 +27,11 @@ const HeaderPTInnerEdit = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const showAlert = () =>{
-        Alert.alert(
-           'Record successfully Saved...'
-        )
-     }
+
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-    
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -47,12 +43,12 @@ const HeaderPTInnerEdit = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>Editing Profile</Text>
+                        <Text style={styles.mainTitle}>Add New Teacher</Text>
                     </View>
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.OnSaveEdit()} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onSavePressed()} style={styles.buttonGroup}>
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
                         <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheader}></Text>
@@ -70,18 +66,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         justifyContent: 'space-between',
-        borderBottomWidth: 1, borderColor: COLORS.dashBoard,
+        // borderBottomWidth: 1, borderColor: COLORS.dashBoard,
         paddingLeft: hp(2),
         paddingRight: hp(2),
-        paddingBottom: hp(1.23),
-        paddingTop: hp(2.3),
     },
     headerMain: {
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.5),
+        paddingVertical: Platform.OS == 'android' ? hp(2) : hp(3.5),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
@@ -132,8 +126,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'center',
-        marginRight: hp(1.69),
+        justifyContent: 'center',
     },
     addIcon: {
         width: hp(1.55),

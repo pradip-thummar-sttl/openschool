@@ -329,6 +329,7 @@ export default StyleSheet.create({
         width: hp(13),
         height: hp(13),
         borderRadius: hp(13/2),
+        backgroundColor: COLORS.lightGrey
         // resizeMode: 'contain',
     },
     mainDetails: {
@@ -336,7 +337,7 @@ export default StyleSheet.create({
         paddingHorizontal: hp(2),
     },
     mainDetailsForm: {
-        marginTop: hp(10),
+        marginVertical: hp(10),
         paddingHorizontal: hp(2),
     },
     fieldDetails: {
@@ -357,6 +358,26 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
         marginBottom: 3,
+    },
+    achivementBox:{
+        width :'100%',
+        height: 110,
+        alignItems:'center',
+        flexDirection: 'row',
+        marginTop: 50,
+    },
+    insightBox: {
+        backgroundColor: COLORS.greyInsight,
+        borderRadius: 10,
+        flex: 1,
+        height: 150,
+        marginHorizontal: 5,
+        paddingHorizontal: 15,
+        paddingTop: 40
+    },
+    insightLabel: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontBold,
     },
     labelForm: {
         fontSize: hp(1.8),
@@ -496,6 +517,16 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderRadius: hp(100),
         resizeMode: 'contain',
+    },
+    editProfileMain11: {
+        position: 'absolute',
+        bottom: hp(-1.6),
+        width: hp(4),
+        height: hp(4),
+        backgroundColor: COLORS.black,
+        borderColor: COLORS.editBorder,
+        borderWidth: 1,
+        borderRadius: hp(100),
     },
     editProfileIcon: {
         width: hp(2),

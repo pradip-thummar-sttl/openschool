@@ -13,6 +13,8 @@ import { baseUrl, showMessage } from '../../../../utils/Constant';
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
 import { User } from '../../../../utils/Model';
+import MyPupils from '../../../../svg/teacher/dashboard/MyPupils';
+import Insights from '../../../../svg/school/dashboard/Insights';
 
 const SchoolDashBoard = (props) => {
 
@@ -67,12 +69,12 @@ const SchoolDashBoard = (props) => {
         // console.log('response of get all teacher', User.user)
 
 
-        let data={
-            Searchby:"",
-            Filterby:-1
+        let data = {
+            Searchby: "",
+            Filterby: -1
         }
 
-        Service.post(data,`${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 setPupilData(res.data)
@@ -95,7 +97,7 @@ const SchoolDashBoard = (props) => {
 
                     <View >
                         <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(40) }]}>{item.FirstName} {item.LastName}</Text>
-                        <Text numberOfLines={1} style={PAGESTYLE.groupName}>{'hello'}</Text>
+                        <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.TeachingYear}</Text>
                     </View>
 
                 </View>
@@ -110,10 +112,10 @@ const SchoolDashBoard = (props) => {
     return (
         <View >
             <Header onAlertPress={() => props.navigation.openDrawer()} />
-            <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '85%' }]}>
+            <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>
-                        <MyDay style={PAGESTYLE.dayIcon} height={hp(2.5)} width={hp(2.5)} />
+                        <Insights style={PAGESTYLE.dayIcon} height={hp(2.9)} width={hp(2.9)} />
                         <Text H3 style={PAGESTYLE.dayTitle}>Insights</Text>
                     </View>
                     <TouchableOpacity>
@@ -135,12 +137,12 @@ const SchoolDashBoard = (props) => {
                             />
                         </SafeAreaView>
                     </View> */}
-                    <EmptyStatePlaceHohder holderType={5} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
+                    <EmptyStatePlaceHohder holderType={7} title1={MESSAGE.noInsights1} title2={MESSAGE.noInsights2} />
                 </View>
 
-                <View style={[PAGESTYLE.viewRow, { marginTop: hp(2), backgroundColor: COLORS.buttonGreen }]}>
+                <View style={[PAGESTYLE.viewRow, { marginTop: hp(2), backgroundColor: COLORS.greenSchool }]}>
                     <View style={PAGESTYLE.iconView}>
-                        <MyDay style={PAGESTYLE.dayIcon} height={hp(2.5)} width={hp(2.5)} />
+                        <MyPupils style={PAGESTYLE.dayIcon} height={hp(2.5)} width={hp(2.5)} />
                         <Text H3 style={PAGESTYLE.dayTitle}>My Teachers</Text>
                     </View>
                     <TouchableOpacity>

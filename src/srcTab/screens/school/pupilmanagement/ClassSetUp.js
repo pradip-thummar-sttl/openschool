@@ -98,7 +98,7 @@ const ClassSetUp = () => {
     }, [selectedTeacher])
 
     const saveGroup = () => {
-        if (!selectedTeacher) {
+        if (selectedTeacher.length == 0) {
             showMessage(MESSAGE.selectTeacher)
             return
         } else if (selectedPupils.length == 0) {
@@ -113,13 +113,13 @@ const ClassSetUp = () => {
 
         let data = {
             SchoolId: User.user.UserDetialId,
-            TeacherId: selectedTeacher.TeacherId,
+            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             CreatedBy: User.user.UserDetialId,
             PupilList: list
         }
 
         console.log('data', data);
-        Service.post(data, `${EndPoints.Groupsetup}`, (res) => {
+        Service.post(data, `${EndPoints.ClassSetup}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 reset()
@@ -271,7 +271,7 @@ const ClassSetUp = () => {
         setSelectedPupils([])
         setSelectedGroup([])
         setGroupName('')
-        setSelectedTeacher(null)
+        setSelectedTeacher([])
     }
 
     const teacherDropDown = () => {

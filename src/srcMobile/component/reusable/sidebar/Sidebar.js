@@ -21,6 +21,9 @@ import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import TopLogo from "../../../../svg/common/TopLogo";
 import Ic_OpenSchool from "../../../../svg/sidebar/Ic_OpenSchool";
+import Teachers from "../../../../svg/sidebar/Teachers";
+import Pupils from "../../../../svg/sidebar/Pupils";
+import Messaging from "../../../../svg/sidebar/Messaging";
 
 
 
@@ -233,7 +236,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.Teacher}
                             /> */}
-                                <Ic_calendar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Teachers style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 1 ? styles.selectedMenuText : null]}>Teacher</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { props.navigation.replace('TeacheroverView'); setSelectedModule(2); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 2 ? styles.menuItemSelected : null]}>
@@ -241,7 +244,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.MyLessons}
                             /> */}
-                                <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Pupils style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>Pupils</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { props.navigation.replace('SchoolMessage'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
@@ -249,7 +252,7 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.MyAchievements}
                             /> */}
-                                <Ic_Achievement style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                <Messaging style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>Messaging</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { props.navigation.replace('Avatar'); setSelectedModule(4); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
@@ -288,7 +291,7 @@ const Sidebar = (props) => {
                             <View style={styles.profileTextMain}>
                                 <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                             </View>
-                            <TouchableOpacity style={styles.moreMenu}>
+                            <TouchableOpacity onPress={() => { props.navigation.replace('SchoolSetting'); setSelectedModule(7); props.navigation.closeDrawer() }} style={styles.moreMenu}>
                                 {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                                 <More style={styles.moreIcon} height={5} width={hp(3)} />
                             </TouchableOpacity>

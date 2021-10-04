@@ -54,6 +54,8 @@ import Insights from "../../../../svg/school/dashboard/Insights";
 import SidebarSchool from "../../../component/reusable/sidebar/SidebarSchool";
 import SchoolMessage from "../globalmessage/SchoolMessage";
 import TeacherManagement from "../teachermanagement/TeacherManagement";
+import SchoolSetting from "../setting/SchoolSetting";
+import TeacherProfileView from "../teachermanagement/TeacherProfileView";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -117,7 +119,7 @@ const Pupillist = ({ item, onPress }) => (
             </View>
             <View style={PAGESTYLE.rewardColumn}>
                 <View style={PAGESTYLE.rewardStar}>
-                    <Text numberOfLines={1} style={{...PAGESTYLE.pupilgroupName, width:hp(20),}}>{item.Email}</Text>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.pupilgroupName, width: hp(20), }}>{item.Email}</Text>
                 </View>
             </View>
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
@@ -165,8 +167,8 @@ const SchoolDashboard = (props) => {
     const [isAddEvent, setAddEvent] = useState(false)
     const [isPupilManagement, setPupilManagement] = useState(false)
     const [messagingTab, setMessagingTab] = useState(0)
-    const [isPupilDetail, setPupilDetail] = useState(false)
-    const [selectedPupil, setSelectedPupil] = useState({})
+    const [isTeacherDetail, setTeacherDetail] = useState(false)
+    const [teacherDetailData, setTeacherDetailData] = useState({})
 
 
     const [isLoading, setLoading] = useState(false);
@@ -341,7 +343,7 @@ const SchoolDashboard = (props) => {
         return (
             <Pupillist
                 item={item}
-                onPress={() => { setSelectedPupil(item); setPupilDetail(true) }}
+                onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}
             />
         );
     };
@@ -381,13 +383,14 @@ const SchoolDashboard = (props) => {
                 navigateToPupils={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
                 navigateToMessaging={() => { setMessagingTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
                 navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }}
-                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }} />
+                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }}
+                navigateToSettings={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(7) }} />
 
             {
-                isPupilDetail ?
-                    <PupilProfileView
-                        selectedPupil={selectedPupil}
-                        navigateToBack={() => { setPupilDetail(false) }} />
+                isTeacherDetail ?
+                    <TeacherProfileView
+                        selectedTeacher={teacherDetailData}
+                        navigateToBack={() => setTeacherDetail(false)} />
 
                     :
                     isTeacherLessonDetail ?
@@ -708,7 +711,10 @@ const SchoolDashboard = (props) => {
                                         selectedIndex == 3 ?
                                             <SchoolMessage navigation={props.navigation} tabs={messagingTab} />
                                             :
-                                            <Message navigation={props.navigation} />
+                                            selectedIndex == 4 ?
+                                                <Message navigation={props.navigation} />
+                                                :
+                                                <SchoolSetting navigation={props.navigation} />
 
             }
             {isAddEvent ?

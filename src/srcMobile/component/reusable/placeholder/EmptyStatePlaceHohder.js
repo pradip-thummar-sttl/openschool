@@ -11,6 +11,7 @@ import NoPupil from "../../../../svg/emptystate/NoPupil";
 import NoLessonEventsToday from "../../../../svg/emptystate/NoLessonEventsToday";
 import NoLessonEventYet from "../../../../svg/emptystate/NoLessonEventYet";
 import NoTeacher from "../../../../svg/emptystate/NoTeacher";
+import NoInsights from "../../../../svg/emptystate/NoInsights";
 
 const EmptyStatePlaceHohder = (props) => {
     console.log('props.image', props.title1);
@@ -33,7 +34,10 @@ const EmptyStatePlaceHohder = (props) => {
                             props.holderType == 5 ?
                                 <NoLessonEventsToday style={PAGESTYLE.blankPageImage} height={hp(20.55)} width={hp(20.55)} />
                                 :
-                                <NoTeacher style={PAGESTYLE.blankPageImage} height={hp(20.55)} width={hp(20.55)} />
+                                props.holderType == 6 ?
+                                    <NoTeacher style={PAGESTYLE.blankPageImage} height={hp(20.55)} width={hp(20.55)} />
+                                    :
+                                    <NoInsights style={PAGESTYLE.blankPageImage} height={hp(20.55)} width={hp(20.55)} />
             }
             {/* <NoLessonEvents style={PAGESTYLE.blankPageImage} height={hp(18)} width={hp(18)} /> */}
             <Text style={PAGESTYLE.blankManageTextBold}>{props.title1}</Text>
