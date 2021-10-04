@@ -274,5 +274,10 @@ export default StyleSheet.create({
         paddingLeft: hp(2),
         paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontRegular,
+        
     },
+    common:{
+        flexDirection:'row',
+        alignItems:'center',
+    }
 });

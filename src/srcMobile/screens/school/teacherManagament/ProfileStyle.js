@@ -606,5 +606,34 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    squreView:{ borderRadius: 10, height: 100, width: 100, backgroundColor: COLORS.greyBack, justifyContent: 'center', padding: 8 }
+    squreView:{ borderRadius: 10, height: 100, width: 100, backgroundColor: COLORS.greyBack, justifyContent: 'center', padding: 8 },
+    fieldInputLabel: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
+    },
+    calIcon: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+        marginRight:hp(1.04),
+        alignSelf: 'center',
+    },
+    dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+    },
+    dropDownArrow:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.4),
+        alignSelf: 'center',
+    },
+    dropDownFormInput: {
+        width: '100%',
+        marginBottom:hp(3)
+    },
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -52,7 +52,7 @@ const AddNewTeacherHeader = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.OnSaveEdit()} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={()=>props.onSavePressed()} style={styles.buttonGroup}>
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
                         <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheader}></Text>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, BackHandler, Platform, Alert } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, BackHandler, Platform,TextInput, Alert  } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Alert, Image, Text, View } from "react-native";
-import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+// import { Alert, Image, Text, View } from "react-native";
+// import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 // import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from "../../../../service/EndPoints";
@@ -18,7 +18,7 @@ import ActivityRings from "react-native-activity-rings";
 // import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 // import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
-import MESSAGE from "../../../../utils/Messages";
+// import MESSAGE from "../../../../utils/Messages";
 import AddNewTeacherHeader from "./AddNewTeacherHeader";
 import MESSAGE from "../../../../utils/Messages";
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
@@ -32,6 +32,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 
 const AddNewTeacher = (props) => {
+
+    const [chartData, setChartData] = useState([])
 
     const [isHide, action] = useState(true);
     const [firstName, setFirstName] = useState('');
@@ -49,7 +51,10 @@ const AddNewTeacher = (props) => {
     const t2 = useRef(null);
     const t3 = useRef(null);
 
-
+    const activityConfig = {
+        width: 200,
+        height: 200
+    };
     useEffect(() => {
         loadTeachingYear()
 

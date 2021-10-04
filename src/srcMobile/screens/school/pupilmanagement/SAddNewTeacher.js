@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, BackHandler, Platform } from "react-native";
+import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, BackHandler, Platform, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -15,6 +15,11 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 // import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import MESSAGE from "../../../../utils/Messages";
+import { baseUrl, emailValidate, opacity } from "../../../../utils/Constant";
+import { User } from "../../../../utils/Model";
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
+import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
+
 const { CallModule } = NativeModules;
 
 const SAddNewTeacher = (props) => {
@@ -32,6 +37,8 @@ const SAddNewTeacher = (props) => {
     const [parentFirstName, setParentFirstName] = useState('');
     const [parentLastName, setParentLastName] = useState('');
     const [profileUri, setProfileUri] = useState('')
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [teachers, setTeachers] = useState([])
 
     const myref = useRef(null);
 
@@ -193,6 +200,30 @@ const SAddNewTeacher = (props) => {
             }
         );
     }
+
+    const teacherDropDown = () => {
+        return (
+            <View style={PAGESTYLE.dropDownFormInput}>
+                <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
+                <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+                    <MenuTrigger style={[STYLE.commonInputGrayBack, STYLE.common]}>
+                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
+                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                    </MenuTrigger>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                        <FlatList
+                            data={teachers}
+                            renderItem={({ item }) => (
+                                <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                            )}
+                            style={{ height: 190 }} />
+                    </MenuOptions>
+                </Menu>
+            </View>
+        );
+    };
+
     return (
         <View>
             <AddNewTeacherHeader
@@ -233,7 +264,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"Reuel"}
+                                value={firstName}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setFirstName(firstName)}
                             />
@@ -246,7 +277,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"Pardesi"}
+                                value={lastName}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setLastName(firstName)}
                             />
@@ -259,12 +290,15 @@ const SAddNewTeacher = (props) => {
                                 placeholder="Email"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"17/07/2012"}
+                                value={selectedDate}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setSelectedDate(firstName)}
                             />
                             {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                         </View>
+                        <View>
+                                    {teacherDropDown()}
+                                </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
                             <TextInput
@@ -273,7 +307,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="Unique I.D (auto-generated)"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"RP170712"}
+                                value={""}
                                 placeholderTextColor={COLORS.menuLightFonts} />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -284,7 +318,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="Unique I.D (auto-generated)"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"RP170712"}
+                                value={assignedTeacher}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setAssignedTeacher(firstName)}
                             />
@@ -299,7 +333,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"Reuel"}
+                                value={parentFirstName}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setParentFirstName(firstName)}
                             />
@@ -312,7 +346,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"Pardesi"}
+                                value={parentLastName}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setParentLastName(firstName)}
                             />
@@ -325,7 +359,7 @@ const SAddNewTeacher = (props) => {
                                 placeholder="Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={"ann.le@email.com"}
+                                value={email}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setEmail(firstName)}
                             />
