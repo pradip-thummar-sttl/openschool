@@ -19,7 +19,7 @@ import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 // import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import WhiteCheck from "../../../../svg/pupil/timetable/WhiteCheck";
-const HeaderPTInnerEdit = (props) => {
+const AddNewTeacherHeader = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
     const [tabIndex, setSelectedTab] = useState(0);
@@ -47,7 +47,7 @@ const HeaderPTInnerEdit = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>Editing Profile</Text>
+                        <Text style={styles.mainTitle}>Add New Teacher</Text>
                     </View>
                 </View>
 
@@ -62,7 +62,7 @@ const HeaderPTInnerEdit = (props) => {
         </View>
     );
 }
-export default HeaderPTInnerEdit;
+export default AddNewTeacherHeader;
 
 const styles = StyleSheet.create({
     headerMaintop: {

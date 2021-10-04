@@ -279,9 +279,9 @@ const TeacherProfileEdit = (props) => {
 
                             <View style={PAGESTYLE.profileOuter}>
                                 <Image style={PAGESTYLE.profileImage}></Image>
-                                <TouchableOpacity style={PAGESTYLE.editProfileMain}>
+                                <TouchableOpacity onPress={()=>showActionChooser()} style={PAGESTYLE.editProfileMain}>
                                     {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                        </TouchableOpacity>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
