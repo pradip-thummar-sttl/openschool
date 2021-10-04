@@ -13,6 +13,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default class Introduction extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            activeDot: 1
+        }
     }
     navigateToLogin(){
         AsyncStorage.setItem('introducePupil', "true")
@@ -32,10 +36,11 @@ export default class Introduction extends Component {
                     }
                     style={styles.slider}
                     slideCount={3}
-                    dots={true}
+                    dots={this.state.activeDot >= 3 ? false : true}
                     dotActiveColor={COLORS.dotActive}
                     dotInactiveColor={COLORS.transparent}
                     dotsContainerStyle={styles.dotContainer}
+                    activeDot={(activeDot) => { this.setState({ activeDot })}}
                 />
             </View>
         );

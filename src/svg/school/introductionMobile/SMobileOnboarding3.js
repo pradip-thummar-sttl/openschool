@@ -9,7 +9,7 @@ import Svg, {
   Circle,
 } from "react-native-svg"
 
-function PMobileOnboarding3(props) {
+function SMobileOnboarding3(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -631,4 +631,4 @@ function PMobileOnboarding3(props) {
   )
 }
 
-export default PMobileOnboarding3
+export default SMobileOnboarding3

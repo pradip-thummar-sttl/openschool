@@ -82,3 +82,11 @@ RCT_REMAP_METHOD(stopRecording, resolver:(RCTPromiseResolveBlock)resolve rejecte
         }
     });
 }
+
+============
+
+react-native-view-slider
+
+index.js: line 151
+
+onMomentumScrollEnd={() => this.props.activeDot(activeDot)}

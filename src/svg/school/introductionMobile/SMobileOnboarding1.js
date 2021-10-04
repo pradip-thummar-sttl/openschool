@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { G, Rect, Path, Circle, Ellipse } from "react-native-svg"
 
-function PMobileOnboarding1(props) {
+function SMobileOnboarding1(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -570,4 +570,4 @@ function PMobileOnboarding1(props) {
   )
 }
 
-export default PMobileOnboarding1
+export default SMobileOnboarding1

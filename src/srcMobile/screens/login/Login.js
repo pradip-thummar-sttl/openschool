@@ -311,14 +311,14 @@ class Login extends Component {
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
-                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School'? "Annotation" :"Email"}</Text>
+                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School'? "email" :"Email"}</Text>
                                 <TextInput
                                     onFocus={() => this.setState({ isEmailFocused: true })}
                                     onBlur={() => this.setState({ isEmailFocused: false })}
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                    placeholder={this.props.route.params.userType == 'School'? "Enter Annotation" :"Enter email"}
+                                    placeholder={this.props.route.params.userType == 'School'? "Enter email" :"Enter email"}
                                     autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}
