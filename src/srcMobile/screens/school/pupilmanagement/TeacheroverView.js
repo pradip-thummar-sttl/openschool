@@ -93,6 +93,7 @@ const TeacheroverView = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    navigateToAddLesson={()=>{}}
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                 />
                 {selectedTabIndex == 0 ?

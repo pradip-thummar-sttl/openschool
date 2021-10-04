@@ -231,7 +231,7 @@ const HeaderTM = (props) => {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); refRBSheetCSV.current.open() }}>
+                                            onPress={() => { refRBSheet.current.close(); props.openCsv() }}>
                                             {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
                                             <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
                                             <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
