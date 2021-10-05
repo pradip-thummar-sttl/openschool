@@ -17,16 +17,12 @@ export default StyleSheet.create({
         flexDirection: 'row',
         borderRadius: hp(1),
         justifyContent: 'space-between',
-        height: hp(8.5),
+        alignItems: 'center',
+        height: hp(7.81),
     },
     rightContent: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    dayIcon: {
-        width: hp(4),
-        resizeMode: 'contain',
-        alignSelf: 'center',
     },
     dayTitle: {
         color: COLORS.white,
@@ -383,9 +379,6 @@ export default StyleSheet.create({
         paddingRight: hp(2.21),
         paddingBottom: hp(3.51),
     },
-    pupilTableHeadingMain: {
-        width: hp(28.80),
-    },
     tabpupil2: {
         width: hp(17.97),
     },
@@ -420,23 +413,26 @@ export default StyleSheet.create({
     },
     pupilTableHeadingsubMain: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        alignItems: 'center',
     },
     pupilhrCustomMargin: {
         marginTop: hp(1.95),
-        marginBottom: hp(0),
+        marginBottom: hp(1.30),
     },
     pupilData: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginVertical: 6,
+        marginVertical: hp(1.56),
     },
     pupilProfile: {
-        width: hp(28.80),
+        width: '25%',
         flexDirection: 'row',
         alignItems: 'center',
     },
     groupColumnmain: {
-        width: hp(17.97),
+        width: '16%',
     },
     groupColumn: {
         // width: hp(5.59),
@@ -447,16 +443,18 @@ export default StyleSheet.create({
     // },
     perfomanceColumn: {
         flexDirection: 'row',
-        width: hp(20.18),
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '20%',
         marginRight: hp(9.50),
     },
     perfomanceDotmain: {
-        width: hp(10.80),
+        width: 'auto',
         alignItems: 'center',
         marginRight: hp(2.60),
     },
     perfomanceDotmainTwo: {
-        width: hp(7),
+        width: 'auto',
         alignItems: 'center',
     },
     perfomanceDots: {
@@ -472,7 +470,6 @@ export default StyleSheet.create({
     },
     rewardColumn: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
     rewardStar: {
         width: hp(5.5),
@@ -513,7 +510,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
         width:hp(10),
-        textAlign:'center'
+        textAlign:'center',
     },
     scrollView: {
         height: hp(67.44),

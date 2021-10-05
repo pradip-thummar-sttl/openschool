@@ -37,14 +37,14 @@
 			</dict>
 		</dict>
 	</dict>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Save Sample Video to Camera Roll</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow use of camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please allow use of microphone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Save Sample Video to Camera Roll</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Bold.ttf</string>

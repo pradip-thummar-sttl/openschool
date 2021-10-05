@@ -470,7 +470,7 @@ const styles = StyleSheet.create({
     titleLogin: {
         textAlign: 'left',
         color: COLORS.themeBlue,
-        fontSize: hp('4.8%'),
+        fontSize: hp(3.125),
         marginTop: hp('18.22%'),
         marginBottom: hp('4%'),
         marginLeft: hp('8.4%'),
