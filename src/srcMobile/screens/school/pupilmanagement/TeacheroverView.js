@@ -18,6 +18,7 @@ import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
 import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import NoPupil from '../../../../svg/emptystate/NoPupil';
+import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 
 const { CallModule } = NativeModules;
 
@@ -28,7 +29,7 @@ const TeacheroverView = (props) => {
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [searchKeyword, setSearchKeyword] = useState('')
-
+    const [isCsvPopup, setCsvPopup] = useState(false)
 
     let currentCount = 0
     useEffect(() => {
@@ -82,8 +83,10 @@ const TeacheroverView = (props) => {
     }
 
     return (
+        console.log('iscsvpopup', isCsvPopup),
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
+            {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -93,7 +96,7 @@ const TeacheroverView = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
-                    navigateToAddLesson={()=>{}}
+                    navigateToCsvPopup={()=>{ setCsvPopup(true);console.log('iscsvpopup', isCsvPopup);}}
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                 />
                 {selectedTabIndex == 0 ?

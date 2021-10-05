@@ -26,6 +26,7 @@ import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
 import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
+import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -35,6 +36,8 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
+    // const [isCsvPopup, setCsvPopup] = useState(false)
+
 
     useEffect(() => {
         if (!isSearchActive) {
@@ -54,6 +57,8 @@ const HeaderPM = (props) => {
 
     return (
         <View style={styles.headerMain}>
+            {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
+
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
@@ -71,82 +76,82 @@ const HeaderPM = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            {props.tabs === 0?
-            <View style={styles.searchParent}>
-                <View style={styles.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
-                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
+            {props.tabs === 0 ?
+                <View style={styles.searchParent}>
+                    <View style={styles.searchInner}>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => {
+                                isSearchActive ?
+                                    setSearchActive(false)
+                                    :
+                                    setSearchActive(true)
+                            }}>
+                            {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                        {isSearchActive ?
-                            <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} /> :
-                            <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />}
-                    </TouchableOpacity>
-                    <TextInput
-                        ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search pupil"
-                        placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            setKeyword(keyword);
-                            props.onSearchKeyword(keyword);
-                        }} />
-                    <Menu>
-                        <MenuTrigger>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
-                            
-                        </MenuTrigger>
-                        <MenuOptions>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+                            {isSearchActive ?
+                                <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} /> :
+                                <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />}
+                        </TouchableOpacity>
+                        <TextInput
+                            ref={textInput}
+                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                            placeholder="Search pupil"
+                            placeholderTextColor={COLORS.menuLightFonts}
+                            onChangeText={keyword => {
+                                setKeyword(keyword);
+                                props.onSearchKeyword(keyword);
+                            }} />
+                        <Menu>
+                            <MenuTrigger>
+                                {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
 
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>DOB</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
-                </View>
+                            </MenuTrigger>
+                            <MenuOptions>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Name</Text>
+                                            {selectedIndex == 0 ?
+                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
 
-                <TouchableOpacity style={styles.buttonGroup}
-                    onPress={() => refRBSheet.current.open() }>
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>DOB</Text>
+                                            {selectedIndex == 1 ?
+                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                            </MenuOptions>
+                        </Menu>
+                    </View>
+
+                    <TouchableOpacity style={styles.buttonGroup}
+                        onPress={() => refRBSheet.current.open()}>
                         {/* props.navigateToAddNewUser() */}
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
-                    <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
-                    <Text style={styles.commonButtonGreenheader}></Text>
-                </TouchableOpacity>
-            </View>:null
-}
+                        {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                        <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
+                        <Text style={styles.commonButtonGreenheader}></Text>
+                    </TouchableOpacity>
+                </View> : null
+            }
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
@@ -168,51 +173,58 @@ const HeaderPM = (props) => {
                 </View>
             </View>
             <RBSheet
-                    ref={refRBSheet}
-                    closeOnDragDown={true}
-                    height={[hp(55.88)]}
-                    style={{ position: 'relative', }}
-                    closeOnPressMask={true}
-                    customStyles={{
-                        wrapper: {
-                            backgroundColor: COLORS.bottomSlideUpBack
-                        },
-                        draggableIcon: {
-                            backgroundColor: COLORS.darkGray
-                        }
-                    }}
-                >
-                    <View style={styles.popupLarge}>
-                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
-                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
-                        </TouchableOpacity>
-                        <View style={styles.popupContent}>
-                            <View style={styles.tabcontent}>
-                                <View style={styles.beforeBorder}>
-                                    <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupil</Text>
-                                    <View style={styles.entryContentMain}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
-                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                            <ImportCSV style={styles.entryIcon} height={hp(10)} width={hp(10)} />
-                                            <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                                            <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
-                                            <Text style={styles.entryTitle}>ADD MANUALLY</Text>
-                                        </TouchableOpacity>
-                                    </View>
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                height={[hp(55.88)]}
+                style={{ position: 'relative', }}
+                closeOnPressMask={true}
+                customStyles={{
+                    wrapper: {
+                        backgroundColor: COLORS.bottomSlideUpBack
+                    },
+                    draggableIcon: {
+                        backgroundColor: COLORS.darkGray
+                    }
+                }}
+            >
+                <View style={styles.popupLarge}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
+                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                    </TouchableOpacity>
+                    <View style={styles.popupContent}>
+                        <View style={styles.tabcontent}>
+                            <View style={styles.beforeBorder}>
+                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupil</Text>
+                                <View style={styles.entryContentMain}>
+                                    {/* <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        style={styles.entryData}
+                                        onPress={() => { refRBSheet.current.close(); props.navigateToCsvPopup() }}> */}
+                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                        {/* <ImportCSV style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                        <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
+                                    </TouchableOpacity> */}
+                                    <MPopupdataSecondCSVUpload />
+                                    <TouchableOpacity
+                                        style={styles.entryData}
+                                        onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                        {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
+                                        <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
+                                        <Text style={styles.entryTitle}>ADD MANUALLY</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
                     </View>
-                </RBSheet>
+                </View>
+            </RBSheet>
+            {/* { */}
+            {/* // isCsvPopup ? */}
+            {/* <View> */}
+            {/* </View> */}
+            {/* // : null */}
+            {/* // } */}
         </View>
     );
 }
@@ -460,6 +472,7 @@ const styles = StyleSheet.create({
     },
     entryContentMain: {
         alignItems: 'center',
+        justifyContent:'center'
     },
     entryData: {
         marginBottom: hp(5.14)

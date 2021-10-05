@@ -37,6 +37,7 @@ import MESSAGE from "../../../../utils/Messages";
 import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
 import { User } from "../../../../utils/Model";
+import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 const HeaderTM = (props) => {
     const refRBSheet = useRef();
     const refRBSheetCSV = useRef();
@@ -228,14 +229,15 @@ const HeaderTM = (props) => {
                                 <View style={styles.beforeBorder}>
                                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
                                     <View style={styles.entryContentMain}>
-                                        <TouchableOpacity
+                                        {/* <TouchableOpacity
                                             activeOpacity={opacity}
                                             style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.openCsv() }}>
+                                            onPress={() => { refRBSheet.current.close(); props.openCsv() }}> */}
                                             {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                            <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
+                                            {/* <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
                                             <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
-                                        </TouchableOpacity>
+                                        </TouchableOpacity> */}
+                                        <MPopupdataSecondCSVUpload />
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
