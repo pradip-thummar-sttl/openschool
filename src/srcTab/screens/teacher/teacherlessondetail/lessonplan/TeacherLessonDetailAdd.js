@@ -376,6 +376,12 @@ const TLDetailAdd = (props) => {
         return true;
     }
 
+    const editNewText = (text, index) => {
+        let newArray = [...itemCheckList];
+        newArray[index].ItemName = text
+        setItemCheckList(newArray)
+    }
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
@@ -388,7 +394,11 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: 0 }}
                     renderItem={({ item, index }) => (
                         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
-                            <Text style={{ fontSize: hp(1.70), }}>{item.ItemName}</Text>
+                            {/* <Text style={{ fontSize: hp(1.70), }}>{item.ItemName}</Text> */}
+                            <TextInput
+                                style={{ width: '90%', height: 41, }}
+                                onChangeText={text => { editNewText(text, index) }}
+                                value={item.ItemName} />
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -894,7 +904,7 @@ const TLDetailAdd = (props) => {
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                             {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
                                             <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
-                                            <Text style={{position: 'absolute', bottom: hp(4.55), color: COLORS.menuLightFonts, fontFamily: FONTS.fontSemiBold,fontSize: hp(1.82), }}>Upload Material</Text>
+                                            <Text style={{ position: 'absolute', bottom: hp(4.55), color: COLORS.menuLightFonts, fontFamily: FONTS.fontSemiBold, fontSize: hp(1.82), }}>Upload Material</Text>
                                         </TouchableOpacity>
 
                                         {

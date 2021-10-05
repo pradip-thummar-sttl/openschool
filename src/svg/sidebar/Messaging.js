@@ -5,8 +5,9 @@ function Messaging(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={27.039}
-      height={21.406}
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 27.039 21.406"
       {...props}
     >
       <G transform="translate(-69.22 -3325.8)">

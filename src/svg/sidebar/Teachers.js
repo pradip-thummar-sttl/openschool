@@ -3,7 +3,7 @@ import Svg, { G, Rect, Path, Circle } from "react-native-svg"
 
 function Teachers(props) {
   return (
-    <Svg xmlns="http://www.w3.org/2000/svg" width={26} height={24} {...props}>
+    <Svg xmlns="http://www.w3.org/2000/svg" width={props.width} height={props.height} viewBox="0 0 26 24" {...props}>
       <G transform="translate(.244 -2.767)">
         <Rect
           data-name="Rectangle 17975"
