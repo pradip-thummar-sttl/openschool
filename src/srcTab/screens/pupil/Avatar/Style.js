@@ -19,7 +19,7 @@ export default StyleSheet.create({
         paddingHorizontal: hp(1.5)
     },
     starView: {
-        width: hp(50),
+        width: hp(45),
         height: wp(20),
         borderRadius: 10,
         backgroundColor: 'white',
@@ -67,7 +67,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
         color: COLORS.white,
         fontSize: hp(1.60),
-        lineHeight: hp(5.1),
+        top: hp(2.5),
         position: 'absolute',
     },
     centerStar: {
@@ -86,7 +86,7 @@ export default StyleSheet.create({
 
     // Right View
     borderView: {
-        width: hp(73),
+        width: hp(70),
         height: wp(60),
         borderWidth: 1,
         borderRadius: 10,
@@ -117,5 +117,5 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    centerStar: { alignItems: 'center', justifyContent: 'center' }
+    centerStar: { alignItems: 'center', justifyContent: 'center', }
 })
