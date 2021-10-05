@@ -390,6 +390,12 @@ const TLDetailAdd = (props) => {
         return true;
     }
 
+    const editNewText = (text, index) => {
+        let newArray = [...itemCheckList];
+        newArray[index].ItemName = text
+        setItemCheckList(newArray)
+    }
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
@@ -400,7 +406,11 @@ const TLDetailAdd = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: hp(1), }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
-                            <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text>
+                            {/* <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text> */}
+                            <TextInput
+                                style={{ width: '90%', height: 41, fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
+                                onChangeText={text => { editNewText(text, index) }}
+                                value={item.ItemName} />
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -904,7 +914,7 @@ const TLDetailAdd = (props) => {
                                     materialArr.length != 0 ? materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={{...PAGESTYLE.fileName,  width: wp(75)}} numberOfLines={1}>{item.name}</Text>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name}</Text>
                                                 <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                     {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
