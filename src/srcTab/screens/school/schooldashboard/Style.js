@@ -444,7 +444,7 @@ export default StyleSheet.create({
     perfomanceColumn: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         width: '20%',
         marginRight: hp(9.50),
     },
