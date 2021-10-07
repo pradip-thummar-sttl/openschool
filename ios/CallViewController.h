@@ -29,7 +29,7 @@
 @property (strong, nonatomic) NSString *titlee;
 @property (strong, nonatomic) NSArray *channels;
 
-typedef void (^CompleteCall)(BOOL isFinished);
+typedef void (^CompleteCall)(BOOL isFinished, NSString *url);
 @property (copy, nonatomic) CompleteCall completeCall;
 @property (weak, nonatomic) IBOutlet UIButton *endCallButton;
 @property (weak, nonatomic) IBOutlet UIView *reactionView;

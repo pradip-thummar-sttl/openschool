@@ -156,6 +156,28 @@ const Popupdata = (props) => {
                         Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
                         }, (err) => {
                         })
+                        if (id != "") {
+                            let formData = new FormData();
+
+                            let ext = id.split('.');
+                            let names = id.split('/');
+                            let name = names[names.length - 1];
+
+
+                            formData.append('file', {
+                                uri: id,
+                                // name: element.fileName,
+                                name: name,
+                                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                            });
+
+                            Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${props.data._id}`, (res) => {
+                                console.log('response of save recording', res)
+                            }, (err) => {
+                                console.log('error of save recording', err)
+                            })
+
+                        }
                     }
                 })
             }
@@ -267,7 +289,7 @@ const Popupdata = (props) => {
                                                             }} style={PAGESTYLE.downloaBtn}>
                                                                 <View style={PAGESTYLE.fileGrp}>
                                                                     <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: '80%' }]}>{item.originalname}</Text>
-                                                                    {(isMatLoading && index==mateIndex) ?
+                                                                    {(isMatLoading && index == mateIndex) ?
                                                                         <ActivityIndicator
                                                                             style={{ ...styles.downloadIcon }}
                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}

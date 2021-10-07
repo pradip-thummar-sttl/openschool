@@ -75,4 +75,7 @@ export const EndPoints = {
     Title: 'title',
     TeachingYear: 'teachingyear',
     ClassSetup: 'classsetup',
+
+    //
+    SaveLessionRecord:"lessionrecord",
 }
