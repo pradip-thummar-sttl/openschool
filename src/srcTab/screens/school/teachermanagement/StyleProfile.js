@@ -192,6 +192,7 @@ export default StyleSheet.create({
     managementBlockTop:{
         flexDirection:'row',
         height:hp(12.5),
+        position: 'relative',
     },
     commonInput: {
         color:COLORS.darkGrayIntro,
@@ -311,10 +312,10 @@ export default StyleSheet.create({
         marginTop: hp(2),
     },
     managementopImage:{
-        width:'100%',
-        height:hp(14.06),
-        resizeMode: 'contain',
-        position:'relative',
+        width: '100%',
+        position: 'absolute',
+        top: Platform.OS == 'ios' ? hp(-3.7) : 0,
+        resizeMode: 'cover',
     },
     thumbTopUser:{
         width: hp(12.5),

@@ -76,15 +76,17 @@ const TeacherProfileView = (props) => {
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                        <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
+                                        <View style={{height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0,}}>
+                                            <TopBackImg style={PAGESTYLE.managementopImage} height={'100%'} width={'100%'} />
+                                        </View>
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                 source={{ uri: baseUrl + item.ProfilePicture }} />
                                         </View>
                                         {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                        {/* </ImageBackground> */}
+                                            </TouchableOpacity> 
+                                        </ImageBackground> */}
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
                                         <View style={PAGESTYLE.nameSmlBlock}>
