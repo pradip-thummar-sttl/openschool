@@ -47,6 +47,7 @@ export const EndPoints = {
     UpdateParent: 'updateparent',
     SaveLessonByPupil: 'savelessionbypupil',
     GetPupilRewards: 'getpupilrewards',
+    GetAllAvtar : 'getallavatar',
 
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",

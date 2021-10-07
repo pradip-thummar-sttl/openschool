@@ -13,7 +13,7 @@ import COLORS from '../../../../utils/Colors';
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
 import { User } from '../../../../utils/Model'
-
+import { baseUrl } from '../../../../utils/Constant';
 const tabs = [
     { name: 'COLOUR', isSelected: true },
     { name: 'HAIR', isSelected: false, },
@@ -25,50 +25,6 @@ const tabs = [
 
 const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
 
-const bodyColorImage = [
-    { image: require('../../../../assets/Avtar/Body/bodyBlue.png'), isSelected: true },
-    { image: require('../../../../assets/Avtar/Body/bodyCoral.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Body/bodyGreen.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Body/bodyOrange.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Body/bodyPupral.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Body/bodyYellow.png'), isSelected: false }
-]
-
-
-const hairImage = [
-    { image: require('../../../../assets/Avtar/Hair/hair1.png'), isSelected: true },
-    { image: require('../../../../assets/Avtar/Hair/hair2.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Hair/hair3.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Hair/hair4.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Hair/hair5.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Hair/hair6.png'), isSelected: false },
-]
-
-const eyeImage = [
-    { image: require('../../../../assets/Avtar/Eyes/eye1.png'), isSelected: true },
-    { image: require('../../../../assets/Avtar/Eyes/eye2.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Eyes/eye3.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Eyes/eye4.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Eyes/eye5.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Eyes/eye6.png'), isSelected: false },
-]
-
-const mouthImage = [
-    { image: require('../../../../assets/Avtar/Mouth/mouth1.png'), isSelected: true },
-    { image: require('../../../../assets/Avtar/Mouth/mouth2.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Mouth/mouth3.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Mouth/mouth4.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Mouth/mouth5.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Mouth/mouth6.png'), isSelected: false }
-]
-
-const outfitImage = [
-    { image: require('../../../../assets/Avtar/Outfits/outfit1.png'), isSelected: true },
-    { image: require('../../../../assets/Avtar/Outfits/outfit2.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Outfits/outfit3.png'), isSelected: false },
-    { image: require('../../../../assets/Avtar/Outfits/outfit4.png'), isSelected: false }
-]
-
 const Avatar = () => {
 
     const [stateOptions, setStateValues] = useState(tabs);
@@ -78,17 +34,21 @@ const Avatar = () => {
     const [currentSelectedEyes, setCurrentSelectedEyes] = useState(0);
     const [currentSelectedMouth, setCurrentSelectedMouth] = useState(0);
 
-    const [colourAvtar, setColourAvtar] = useState(bodyColorImage);
-    const [hairAvtar, setHairAvtar] = useState(hairImage);
-    const [eyesAvtar, setEyesAvtar] = useState(eyeImage);
-    const [mouthAvtar, setMouthAvtar] = useState(mouthImage);
-    const [clothsAvtar, setClothsAvtar] = useState(outfitImage);
+
+    const [colourAvtar, setColourAvtar] = useState([]);
+    const [hairAvtar, setHairAvtar] = useState([]);
+    const [eyesAvtar, setEyesAvtar] = useState([]);
+    const [mouthAvtar, setMouthAvtar] = useState([]);
+    const [clothsAvtar, setClothsAvtar] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(true);
+
 
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
 
-    useEffect(()=> {
+    useEffect(() => {
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag) {
@@ -113,6 +73,99 @@ const Avatar = () => {
             }
         }, (err) => {
         })
+
+        Service.get(EndPoints.GetAllAvtar, (res) => {
+
+            console.log('get avtar ', res)
+
+            res.data.forEach(element => {
+
+                if (element.Type === 'colour') {
+                    let colour = [];
+                    colour = element.imglist
+                    colour.map((data, index) => {
+                        if (index === 0) {
+                            data['isSelected'] = true
+                        }
+                        else {
+                            data['isSelected'] = false
+                        }
+                    })
+                    setColourAvtar(colour)
+                    console.log('colour', colour)
+                    console.log('colour', colourAvtar)
+                }
+                else if (element.Type === 'hair') {
+                    let hair = [];
+                    hair = element.imglist
+                    hair.map((data, index) => {
+                        if (index === 0) {
+                            data['isSelected'] = true
+                        }
+                        else {
+                            data['isSelected'] = false
+                        }
+                    })
+                    setHairAvtar(hair)
+                    console.log('hair', hair)
+                    console.log('hair', hairAvtar)
+                }
+                else if (element.Type === 'eyes') {
+                    let eyes = [];
+                    eyes = element.imglist
+                    eyes.map((data, index) => {
+                        if (index === 0) {
+                            data['isSelected'] = true
+                        }
+                        else {
+                            data['isSelected'] = false
+                        }
+                    })
+                    setEyesAvtar(eyes)
+                    console.log('eyes', eyes)
+                    console.log('eyes', eyesAvtar)
+                }
+                else if (element.Type === 'mouth') {
+                    let mouth = [];
+                    mouth = element.imglist
+                    mouth.map((data, index) => {
+                        if (index === 0) {
+                            data['isSelected'] = true
+                        }
+                        else {
+                            data['isSelected'] = false
+                        }
+                    })
+                    setMouthAvtar(mouth)
+                    console.log('mouth', mouth)
+                    console.log('mouth', mouthAvtar)
+                }
+                else if (element.Type === 'clothes') {
+                    let clothes = [];
+                    clothes = element.imglist
+                    clothes.map((data, index) => {
+                        if (index === 0) {
+                            data['isSelected'] = true
+                        }
+                        else {
+                            data['isSelected'] = false
+                        }
+                    })
+                    setClothsAvtar(clothes)
+                    console.log('cloth', clothes)
+                    console.log('cloth', clothsAvtar)
+                    setTimeout(() => {
+                        setIsLoading(false)
+                    }, 1000)
+
+                }
+            });
+
+
+        }, (err) => {
+            console.log('err', err)
+        })
+
     }, [])
 
     const changeTab = (index) => {
@@ -184,31 +237,8 @@ const Avatar = () => {
             setMouthAvtar(newArr)
         }
         else {
-            return outfitImage
+            return clothsAvtar
         }
-    }
-
-    const hairImageSet = () => {
-
-        if (currentSelectedHair === 1) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: hp(11.5) }} ></Image>
-        }
-        else if (currentSelectedHair === 2) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: hp(13) }} ></Image>
-        }
-        else if (currentSelectedHair === 3) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
-        }
-        else if (currentSelectedHair === 4) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
-        }
-        else if (currentSelectedHair === 5) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
-        }
-        else {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10 }} ></Image>
-        }
-
     }
 
     return (
@@ -224,67 +254,77 @@ const Avatar = () => {
                         </View>
                         <View style={Styles.rewardStarMark}>
                             <View style={Styles.centerStar}>
-                                {/* <ImageBackground source={Images.BronzeStarFill} style={[Styles.starSelected]}>
-                                    <Text style={Styles.starSelectedText}>18</Text>
-                                </ImageBackground> */}
                                 <BronzeStar width={hp(6)} height={hp(6)} />
                                 <Text style={Styles.starSelectedText}>{bronze}</Text>
                                 <Text style={Styles.starText}>Bronze stars</Text>
                             </View>
                             <View style={Styles.centerStar}>
-                                {/* <ImageBackground source={Images.SilverStarFill} style={[Styles.starSelected]}>
-                                    <Text style={Styles.starSelectedText}>15</Text>
-                                </ImageBackground> */}
                                 <SilverStar width={hp(6)} height={hp(6)} />
                                 <Text style={Styles.starSelectedText}>{silver}</Text>
                                 <Text style={Styles.starText}>Silver stars</Text>
                             </View>
                             <View style={Styles.centerStar}>
-                                {/* <ImageBackground source={Images.GoldStarFill} style={[Styles.starSelected]}>
-                                    <Text style={Styles.starSelectedText}>5</Text>
-                                </ImageBackground> */}
                                 <GoldStar width={hp(6)} height={hp(6)} />
                                 <Text style={Styles.starSelectedText}>{gold}</Text>
                                 <Text style={Styles.starText}>Gold stars</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
-                        {/* Avatar editing View */}
-                        {hairImageSet()}
-                        <Image source={colourAvtar[currentSelectedColour].image} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', }} ></Image>
-                        <Image source={eyesAvtar[currentSelectedEyes].image} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(13), zIndex: 20 }} ></Image>
-                        <Image source={mouthAvtar[currentSelectedMouth].image} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(20), zIndex: 20 }} ></Image>
-                    </View>
+                    {isLoading == false ?
+                        <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
+                            {/* Avatar editing View */}
+                            {currentSelectedHair == 0 ?
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: hp(11.5) }} ></Image>
+                                : null}
+                            {currentSelectedHair == 1 ?
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10 }} ></Image>
+                                : null}
+                            {currentSelectedHair == 2 ?
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: hp(13) }} ></Image>
+                                : null}
+                            {currentSelectedHair == 3 ?
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
+                                : null}
+                            {currentSelectedHair == 4 ?
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
+                                : null}
+                            {currentSelectedHair == 5 ?
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
+                                : null}
+                            <Image source={{ uri: baseUrl + [colourAvtar[currentSelectedColour].Images] }} style={{ width: hp(25), height: hp(50), resizeMode: 'contain', position: 'absolute', }} ></Image>
+                            <Image source={{ uri: baseUrl + eyesAvtar[currentSelectedEyes].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(13), zIndex: 20 }} ></Image>
+                            <Image source={{ uri: baseUrl + mouthAvtar[currentSelectedMouth].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(20), zIndex: 20 }} ></Image>
+                        </View> : null}
                 </View>
 
                 {/* Right View */}
                 <View style={Styles.rightView}>
                     <View style={Styles.borderView}>
                         {/* Tabs */}
-                        <View style={Styles.tabView}>
-                            {
-                                stateOptions.map((item, index) => {
-                                    console.log('item', item)
+                        {isLoading == false ?
+                            <View style={Styles.tabView}>
+                                {
+                                    stateOptions.map((item, index) => {
+                                        return (
+                                            <TouchableOpacity onPress={() => changeTab(index)} style={Styles.tabBtn}>
+                                                <Text style={[Styles.tabText, { color: item.isSelected === true ? COLORS.buttonGreen : COLORS.lightGray }]}>{item.name}</Text>
+                                            </TouchableOpacity>
+                                        )
+                                    })
+                                }
+                            </View> : null}
+                        {isLoading == false ?
+                            <FlatList
+                                data={currentSelectedTab()}
+                                renderItem={({ item, index }) => {
                                     return (
-                                        <TouchableOpacity onPress={() => changeTab(index)} style={Styles.tabBtn}>
-                                            <Text style={[Styles.tabText, { color: item.isSelected === true ? COLORS.buttonGreen : COLORS.lightGray }]}>{item.name}</Text>
+                                        <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
+                                            <Image source={{ uri: baseUrl + item.Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
                                         </TouchableOpacity>
                                     )
-                                })
-                            }
-                        </View>
-                        <FlatList
-                            data={currentSelectedTab()}
-                            renderItem={({ item, index }) => {
-                                return (
-                                    <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
-                                        <Image source={item.image} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
-                                    </TouchableOpacity>
-                                )
-                            }}
-                            numColumns={3}
-                        />
+                                }}
+                                numColumns={3}
+                            /> : null}
                     </View>
                 </View>
             </View>
