@@ -18,6 +18,7 @@ import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import PopupdataSecond from "../../popup/PopupdataSecond";
+import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 
 const HeaderWhite = (props) => {
 
@@ -74,11 +75,11 @@ const HeaderWhite = (props) => {
                         }}>
                         {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                            {
-                                isSearchActive?
+                        {
+                            isSearchActive ?
                                 <CloseBlack style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
-                                :<SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
-                            }
+                                : <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+                        }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
@@ -91,7 +92,7 @@ const HeaderWhite = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <PopupdataSecond
+                <PopupdataSecondPupil
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
             </View>
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
         marginRight: hp(1)
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,marginTop: 15,
+        flexDirection: 'row', alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white, marginTop: 15,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, marginRight: 10, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
