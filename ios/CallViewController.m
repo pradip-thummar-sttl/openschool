@@ -94,6 +94,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) NSString *selectedChannel;
 @property (strong, nonatomic) NSString *selectedId;
 
+@property (strong, nonatomic) NSString *recordUrl;
+
 @property (assign, nonatomic) BOOL isRecording;
 
 //@property (weak, nonatomic)ScreenRecorder *screenRecord;
@@ -133,7 +135,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  
+  self.recordUrl=@"";
   self.isRecording = false;
   _doView.layer.cornerRadius=10;
   _doView.layer.borderWidth = 3;
@@ -282,9 +284,30 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 }
 - (IBAction)onEndCallButton:(id)sender {
     [self.session leave];
-    if( self.completeCall ){
-      self.completeCall(true);
-       }
+  if (self.isRecording) {
+    self.isRecording = false;
+    [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+      NSLog(@"stop recording Error %@", url);
+      if( self.completeCall ){
+        self.completeCall(true, [NSString stringWithFormat:@"%@",url]);
+  //      self.completeCall(true);
+      }
+    }];
+  }else{
+    if ([self.recordUrl isEqualToString:@""]) {
+      if( self.completeCall ){
+        self.completeCall(true, @"");
+  //      self.completeCall(true);
+      }
+    }else{
+      if( self.completeCall ){
+        self.completeCall(true, self.recordUrl);
+  //      self.completeCall(true);
+      }
+    }
+   
+  }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -304,7 +327,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
      weakSelf.isRecording = true;
      
      [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
-       NSLog(@"error of recording", error);
+       NSLog(@"error of recording %@", error);
      }];
 //    weakSelf.screenRecord
 //     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
@@ -315,8 +338,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
    }else{
 //     [[ScreenRecordCoordinator recordCordinator] stopRecording];
      weakSelf.isRecording = false;
-     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error) {
-            NSLog(@"stop recording Error", error);
+     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+            NSLog(@"stop recording Error %@", url);
+       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
      }];
 //     [[ScreenRecorder shareInstance]
 //     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){

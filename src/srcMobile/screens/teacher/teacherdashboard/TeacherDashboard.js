@@ -261,6 +261,28 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
+                    if (id != "") {
+                        let formData = new FormData();
+
+                        let ext = id.split('.');
+                        let names = id.split('/');
+                        let name = names[names.length - 1];
+
+
+                        formData.append('file', {
+                            uri: id,
+                            // name: element.fileName,
+                            name: name,
+                            type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                        });
+
+                        Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${dataOfSubView._id}`, (res) => {
+                            console.log('response of save recording', res)
+                        }, (err) => {
+                            console.log('error of save recording', err)
+                        })
+
+                    }
                 })
             }
 

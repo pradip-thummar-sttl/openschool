@@ -80,6 +80,7 @@ const Avatar = (prop) => {
     const [currentSelectedHair, setCurrentSelectedHair] = useState(0);
     const [currentSelectedEyes, setCurrentSelectedEyes] = useState(0);
     const [currentSelectedMouth, setCurrentSelectedMouth] = useState(0);
+    const [currentSelectedCloth, setCurrentSelectedCloth] = useState(0);
 
     const [colourAvtar, setColourAvtar] = useState(bodyColorImage);
     const [hairAvtar, setHairAvtar] = useState(hairImage);
@@ -187,7 +188,14 @@ const Avatar = (prop) => {
             setMouthAvtar(newArr)
         }
         else {
-            return outfitImage
+            // return outfitImage
+            let newArr = [...clothsAvtar];
+            newArr.map((item) => {
+                item.isSelected = false;
+            })
+            newArr[index].isSelected = true;
+            setCurrentSelectedCloth(index)
+            setClothsAvtar(newArr)
         }
     }
 
@@ -284,6 +292,7 @@ const Avatar = (prop) => {
                         <Image source={colourAvtar[currentSelectedColour].image} style={{ width: hp(20), height: hp(35), resizeMode: 'contain', position: 'absolute', }} ></Image>
                         <Image source={eyesAvtar[currentSelectedEyes].image} style={{ width: hp(8), height: hp(8), resizeMode: 'contain', position: 'absolute', top: hp(6), zIndex: 20 }} ></Image>
                         <Image source={mouthAvtar[currentSelectedMouth].image} style={{ width: hp(8), height: hp(8), resizeMode: 'contain', position: 'absolute', top: hp(12), zIndex: 20 }} ></Image>
+                        {/* <Image source={clothsAvtar[currentSelectedCloth].image} style={{ width: hp(23), height: hp(38), resizeMode: 'contain', position: 'absolute', top: hp(1), zIndex: 20 }} ></Image> */}
                     </View>
 
                     <View style={{ borderColor: COLORS.borderGrp, borderWidth: 1, width: '100%' }} />

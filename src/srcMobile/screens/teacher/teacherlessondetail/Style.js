@@ -308,6 +308,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.4),
         paddingRight: hp(2),
+        width: '90%',
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),

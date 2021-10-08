@@ -63,6 +63,7 @@ public enum WylerError: Error {
     } else {
       let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
       newVideoOutputURL = URL(fileURLWithPath: documentsPath.appendingPathComponent("recordedNewVideo.mp4"))
+//      newVideoOutputURL = URL(string: documentsPath.appendingPathComponent("recordedNewVideo.mp4"))!
       self.videoOutputURL = newVideoOutputURL
     }
 
@@ -179,12 +180,16 @@ public enum WylerError: Error {
 
   - Parameter errorHandler: Called when an error is found
   */
-  @objc public func stoprecording(errorHandler: @escaping (Error) -> Void) {
+  @objc public func stoprecording(errorHandler: @escaping (Error?,URL) -> Void) {
     RPScreenRecorder.shared().stopCapture( handler: { error in
       if let error = error {
-        errorHandler(error)
+        errorHandler(error,URL(fileURLWithPath: ""))
       }
     })
+//    guard let videoOutputURL = self.videoOutputURL else {
+//      return
+//    }
+//    print("videoOutputURL======>",videoOutputURL)
    
     print("status",self.videoWriter!.status)
     if self.videoWriter?.status == AVAssetWriter.Status.unknown {
@@ -198,36 +203,48 @@ public enum WylerError: Error {
     self.micAudioWriterInput?.markAsFinished()
     self.appAudioWriterInput?.markAsFinished()
     self.videoWriter?.finishWriting {
-      self.saveVideoToCameraRollAfterAuthorized(errorHandler: errorHandler)
+//      self.saveVideoToCameraRollAfterAuthorized(errorHandler: errorHandler)
+      self.saveVideoToCameraRollAfterAuthorized { error, url in
+        errorHandler(error,url)
+      }
     }
     }
   }
 
-  private func saveVideoToCameraRollAfterAuthorized(errorHandler: @escaping (Error) -> Void) {
+  private func saveVideoToCameraRollAfterAuthorized(errorHandler: @escaping (Error?,URL) -> Void) {
 //    if PHPhotoLibrary.authorizationStatus() == .authorized {
 //        self.saveVideoToCameraRoll(errorHandler: errorHandler)
 //    } else {
         PHPhotoLibrary.requestAuthorization({ (status) in
             if status == .authorized {
-                self.saveVideoToCameraRoll(errorHandler: errorHandler)
+              self.saveVideoToCameraRoll { error, url in
+                errorHandler(error,url)
+              }
+             
             } else {
-              errorHandler(WylerError.photoLibraryAccessNotGranted)
+              errorHandler(WylerError.photoLibraryAccessNotGranted,URL(fileURLWithPath: ""))
           }
         })
 //    }
   }
 
-  private func saveVideoToCameraRoll(errorHandler: @escaping (Error) -> Void) {
+  private func saveVideoToCameraRoll(errorHandler: @escaping (Error?, URL) -> Void) {
     guard let videoOutputURL = self.videoOutputURL else {
       return
     }
 
     PHPhotoLibrary.shared().performChanges({
       PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoOutputURL)
-    }, completionHandler: { _, error in
+    }, completionHandler: { saved, error in
+      if saved{
+        print("Saved successfully")
+      }
       if let error = error {
-        errorHandler(error)
+        errorHandler(error,videoOutputURL)
+      }else{
+        errorHandler(error,videoOutputURL)
       }
     })
+    
   }
 }

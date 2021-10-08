@@ -313,6 +313,13 @@ const TLHomeWork = (props) => {
         textInput.current.clear()
         setNewItem('')
     }
+
+    const editNewText = (text, index) => {
+        let newArray = [...itemCheckList];
+        newArray[index].ItemName = text
+        setItemCheckList(newArray)
+    }
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.blockSpaceBottom]}>
@@ -339,7 +346,11 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                            {/* <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text> */}
+                            <TextInput
+                                style={PAGESTYLE.checkBoxLabelText}
+                                onChangeText={text => { editNewText(text, index) }}
+                                value={item.ItemName} />
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
