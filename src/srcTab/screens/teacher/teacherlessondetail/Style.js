@@ -314,6 +314,7 @@ export default StyleSheet.create({
         color: COLORS.darkGrayIntro,
         paddingRight: hp(1),
         marginLeft: 15,
+        width: '92%'
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),

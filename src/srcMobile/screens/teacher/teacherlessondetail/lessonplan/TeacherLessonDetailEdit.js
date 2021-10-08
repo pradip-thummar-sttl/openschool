@@ -359,6 +359,12 @@ const TLDetailEdit = (props) => {
 
     }
 
+    const editNewText = (text, index) => {
+        let newArray = [...itemCheckList];
+        newArray[index].ItemName = text
+        setItemCheckList(newArray)
+    }
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
@@ -369,7 +375,11 @@ const TLDetailEdit = (props) => {
                     style={{ alignSelf: 'center', width: '100%', bottom: hp(2) }}
                     renderItem={({ item, index }) => (
                         <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
-                            <Text style={{ fontSize: hp(1.85), paddingRight: hp(5) }}>{item.ItemName}</Text>
+                            {/* <Text style={{ fontSize: hp(1.85), paddingRight: hp(5) }}>{item.ItemName}</Text> */}
+                            <TextInput
+                                style={{ width: '90%', height: 41, fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
+                                onChangeText={text => { editNewText(text, index) }}
+                                value={item.ItemName} />
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
