@@ -12,6 +12,8 @@
 
 //#import "OpenSchool-Bridging-Header.h"
 
+#import <Firebase.h>
+
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -51,6 +53,8 @@ NSString *const kAccountKey     = @"2xYap5od8h1GCfgxCJ6B";
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"OpenSchool"
                                             initialProperties:nil];
+  
+  [FIRApp configure];
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
