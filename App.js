@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -11,7 +11,7 @@ const store = createStore(combineReducers)
 
 import RouteTablet from './src/srcTab/route/Route'
 import RouteMobile from './src/srcMobile/route/Route'
-import { LogBox, View, StatusBar } from 'react-native';
+import { LogBox, View, StatusBar, Alert } from 'react-native';
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import PushNotification from "react-native-push-notification";
 LogBox.ignoreAllLogs();
@@ -29,8 +29,124 @@ requestMultiple(
 });
 
 export default function App() {
-  useEffect(() => {
-    console.log('hello')
+  const [permissions, setPermissions] = useState({});
+
+  // useEffect(() => {
+  //   PushNotificationIOS.addEventListener('register', onRegistered);
+  //   PushNotificationIOS.addEventListener(
+  //     'registrationError',
+  //     onRegistrationError,
+  //   );
+  //   PushNotificationIOS.addEventListener('notification', onRemoteNotification);
+  //   PushNotificationIOS.addEventListener(
+  //     'localNotification',
+  //     onLocalNotification,
+  //   );
+
+  //   PushNotificationIOS.requestPermissions({
+  //     alert: true,
+  //     badge: true,
+  //     sound: true,
+  //     critical: true,
+  //   }).then(
+  //     (data) => {
+  //       console.log('PushNotificationIOS.requestPermissions', data);
+  //     },
+  //     (data) => {
+  //       console.log('PushNotificationIOS.requestPermissions failed', data);
+  //     },
+  //   );
+
+  //   return () => {
+  //     PushNotificationIOS.removeEventListener('register');
+  //     PushNotificationIOS.removeEventListener('registrationError');
+  //     PushNotificationIOS.removeEventListener('notification');
+  //     PushNotificationIOS.removeEventListener('localNotification');
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  const onRegistered = (deviceToken) => {
+    console.log('token in device', deviceToken);
+    Alert.alert('Registered For Remote Push', `Device Token: ${deviceToken}`, [
+      {
+        text: 'Dismiss',
+        onPress: null,
+      },
+    ]);
+  };
+
+  const onRegistrationError = (error) => {
+    Alert.alert(
+      'Failed To Register For Remote Push',
+      `Error (${error.code}): ${error.message}`,
+      [
+        {
+          text: 'Dismiss',
+          onPress: null,
+        },
+      ],
+    );
+  };
+
+  const onRemoteNotification = (notification) => {
+    const isClicked = notification.getData().userInteraction === 1;
+
+    const result = `
+      Title:  ${notification.getTitle()};\n
+      Subtitle:  ${notification.getSubtitle()};\n
+      Message: ${notification.getMessage()};\n
+      badge: ${notification.getBadgeCount()};\n
+      sound: ${notification.getSound()};\n
+      category: ${notification.getCategory()};\n
+      content-available: ${notification.getContentAvailable()};\n
+      Notification is clicked: ${String(isClicked)}.`;
+
+    if (notification.getTitle() == undefined) {
+      Alert.alert('Silent push notification Received', result, [
+        {
+          text: 'Send local push',
+          onPress: sendLocalNotification,
+        },
+      ]);
+    } else {
+      Alert.alert('Push Notification Received', result, [
+        {
+          text: 'Dismiss',
+          onPress: null,
+        },
+      ]);
+    }
+  };
+
+  const onLocalNotification = (notification) => {
+    const isClicked = notification.getData().userInteraction === 1;
+
+    Alert.alert(
+      'Local Notification Received',
+      `Alert title:  ${notification.getTitle()},
+      Alert subtitle:  ${notification.getSubtitle()},
+      Alert message:  ${notification.getMessage()},
+      Badge: ${notification.getBadgeCount()},
+      Sound: ${notification.getSound()},
+      Thread Id:  ${notification.getThreadID()},
+      Action Id:  ${notification.getActionIdentifier()},
+      User Text:  ${notification.getUserText()},
+      Notification is clicked: ${String(isClicked)}.`,
+      [
+        {
+          text: 'Dismiss',
+          onPress: null,
+        },
+      ],
+    );
+  };
+
+  const showPermissions = () => {
+    PushNotificationIOS.checkPermissions((permissions) => {
+      setPermissions({permissions});
+    });
+  };
+
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
@@ -80,7 +196,7 @@ export default function App() {
        */
       requestPermissions: true,
     });
-  }, [])
+  
   return (
     <>
       {/* <StatusBar hidden /> */}

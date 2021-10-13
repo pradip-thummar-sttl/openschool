@@ -338,6 +338,7 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				8884886F266E1A9800B9D17C /* RCTCalendarModule.h */,
 				88D20504265E253200D97116 /* RCTCalendarModule.m */,
+				E74D156527158F4A000F6E89 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				8833B519266643B1000938B6 /* Mains.storyboard */,
@@ -391,7 +392,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				E74D156527158F4A000F6E89 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* OpenSchool */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* OpenSchoolTests */,
