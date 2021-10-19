@@ -314,7 +314,7 @@ export default StyleSheet.create({
     managementopImage:{
         width: '100%',
         position: 'absolute',
-        top: Platform.OS == 'ios' ? hp(-3.7) : 0,
+        top: 0,
         resizeMode: 'cover',
     },
     thumbTopUser:{

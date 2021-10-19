@@ -358,20 +358,21 @@ export default StyleSheet.create({
         paddingBottom: hp(3.51),
     },
     pupilTableHeadingMain: {
-        width: hp(15.90),
+        width: '13%',
     },
     tabpupil2: {
-        width: hp(15.97),
+        width: '12%',
     },
     tabpupil22: {
-        width: hp(13.97),
+        width: '12%',
     },
     tabpupil3: {
-        width: hp(20.18),
-        marginRight: hp(9.50),
+        width: '20%',
+        // marginRight: hp(9.50),
     },
     tabpupil4: {
-        width: hp(18.22),
+        width: '20%',
+        marginLeft: '2.9%',
     },
     pupilTableHeadingMainTitle: {
         fontSize: hp(1.82),
@@ -393,17 +394,18 @@ export default StyleSheet.create({
         color: COLORS.menuLightFonts,
         textTransform: 'uppercase',
         lineHeight: hp(2.08),
-        marginRight: hp(0.91),
+        width: '33.33%',
     },
     pupilTableHeadingsubMain: {
         flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     pupilhrCustomMargin: {
         marginTop: hp(1.95),
         marginBottom: hp(1.30),
     },
     pupilData: {
-        height:wp(6),
+        height:hp(8.85),
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius:10,
@@ -413,7 +415,7 @@ export default StyleSheet.create({
         //  marginLeft:hp(4.5)
     },
     pupilProfile: {
-        width: hp(15),
+        width: '12%',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -423,36 +425,37 @@ export default StyleSheet.create({
         
     },
     groupColumn: {
-        width: hp(10.59),
-        alignItems: 'center',
-        justifyContent:'center',
-        marginLeft:hp(-2)
+        width: '12%',
+        alignItems: 'flex-start',
+        justifyContent:'flex-start',
+        marginLeft: Platform.OS == 'android' ? hp(1) : hp(0),
     },
     groupColumn1: {
         width: hp(10.59),
         alignItems: 'center',
     },
     groupColumn11: {
-        width: hp(10.59),
+        width: '12%',
         alignItems: 'flex-start',
-        marginLeft:hp(5)
+        // marginLeft:hp(5)
     },
     pupilgroupName: {
         textAlign: 'center',
     },
     perfomanceColumn: {
         flexDirection: 'row',
-        width: hp(20.18),
-        marginLeft:hp(4),
-        marginRight: hp(9.50),
+        justifyContent: 'space-around',
+        width: '20%',
+        // marginLeft:hp(4),
+        // marginRight: hp(9.50),
     },
     perfomanceDotmain: {
-        width: hp(10.80),
+        width: '50%',
         alignItems: 'center',
-        marginRight: hp(2.60),
+        // marginRight: hp(2.60),
     },
     perfomanceDotmainTwo: {
-        width: hp(7),
+        width: '50%',
         alignItems: 'center',
     },
     perfomanceDots: {
@@ -468,11 +471,14 @@ export default StyleSheet.create({
     },
     rewardColumn: {
         flexDirection: 'row',
-        alignItems: 'center',
+        // alignItems: 'center',
+        width: '20%',
+        marginLeft: '2.9%',
+        justifyContent: 'space-around',
     },
     rewardStar: {
-        width: hp(5.5),
-        marginRight: hp(0.91),
+        width: '33.33%',
+        marginRight: Platform.OS == 'android' ? hp(5.9) : hp(2.8),
     },
     rewardStartIcon: {
         width: hp(2.15),
@@ -510,9 +516,8 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        marginLeft:22,
-        width:100,
-        textAlign:'center'
+        // marginLeft:22,
+        // textAlign:'center'
     },
     pupilgroupName10: {
         fontSize: hp(1.82),
