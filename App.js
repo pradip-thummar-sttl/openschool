@@ -17,6 +17,8 @@ import PushNotification from "react-native-push-notification";
 LogBox.ignoreAllLogs();
 import { isTablet } from 'react-native-device-info';
 import { PERMISSIONS, requestMultiple } from 'react-native-permissions';
+import NotificationDrawer from './src/srcTab/component/reusable/notificationdrawer/NotificationDrawer';
+import { NotificationToken } from './src/utils/Model';
 
 requestMultiple(
   [PERMISSIONS.ANDROID.CAMERA,
@@ -151,6 +153,7 @@ export default function App() {
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
         console.log("TOKEN:", token);
+        NotificationToken.token = token
       },
     
       // (required) Called when a remote is received or opened, or local notification is opened

@@ -20,4 +20,8 @@ export const appSettings = {
     authSecret: 'n-BAzvbxcR5ggrj',
     accountKey: '2xYap5od8h1GCfgxCJ6B'
   };
+
+export var NotificationToken = {
+    token: '',   
+};
  

@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { setUserAuthData } from '../../../actions/action';
 import MESSAGE from '../../../utils/Messages';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { User } from '../../../utils/Model';
+import { NotificationToken, User } from '../../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
 import MobileLoginSideimg from '../../../svg/teacher/login/MobileLoginSideimg';
@@ -33,7 +33,7 @@ class Login extends Component {
         this.state = {
             userName: '',
             password: '',
-            PushToken: "Test",
+            PushToken: NotificationToken.token,
             Device: getBrand() + ', ' + getModel() + ', ' + getSystemVersion(),
             OS: Platform.OS,
             AccessedVia: "Mobile",
