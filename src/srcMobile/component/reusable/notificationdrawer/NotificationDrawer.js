@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import Clock from "../../../../svg/teacher/dashboard/Clock";
+import BackArrow from "../../../../svg/common/BackArrow";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
@@ -33,7 +34,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMainDate}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => props.navigation.closeDrawer()}
+                            onPress={() => props.navigation.goBack()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
                             {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
@@ -114,7 +115,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMain}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => props.navigation.closeDrawer()}
+                            onPress={() => props.navigation.goBack()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
 

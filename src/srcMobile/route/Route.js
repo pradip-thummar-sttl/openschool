@@ -180,6 +180,7 @@ function ScreenStack() {
                 <Stack.Screen name="SPupilProfileEdit" component={SPupilProfileEdit} />
                 <Stack.Screen name="SAddNewTeacher" component={SAddNewTeacher} />
                 <Stack.Screen name="SGroupSetUpPupilSelection" component={SGroupSetUpPupilSelection} />
+                <Stack.Screen name="NotificationDrawer" component={NotificationDrawer} />
             </Stack.Navigator>
         </PubNubProvider>
     );

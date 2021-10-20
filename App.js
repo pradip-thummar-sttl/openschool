@@ -159,7 +159,7 @@ export default function App() {
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {
         console.log("NOTIFICATION:", notification);
-    
+     
         // process the notification
     
         // (required) Called when a remote is received or opened, or local notification is opened
