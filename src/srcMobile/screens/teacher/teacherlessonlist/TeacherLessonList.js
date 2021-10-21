@@ -152,7 +152,7 @@ const TeacherLessonList = (props) => {
         </TouchableOpacity>
     );
     return (
-        <View style={{...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon}}>
+        <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
@@ -166,8 +166,8 @@ const TeacherLessonList = (props) => {
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
-
+                    onFilter={(filterBy) => fetchRecord('', filterBy)}
+                    onNotification={() => props.navigation.navigate('NotificationDrawer')} />
                 {isLessonLoading ?
                     <ActivityIndicator
                         style={{ margin: 20 }}

@@ -28,7 +28,7 @@ const HeaderWhite = (props) => {
                         <Ic_CheckWhite tyle={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>save workspace</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onNotification()}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     </TouchableOpacity>

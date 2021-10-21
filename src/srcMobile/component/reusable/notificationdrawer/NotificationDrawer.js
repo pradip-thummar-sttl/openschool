@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import Clock from "../../../../svg/teacher/dashboard/Clock";
+import BackArrow from "../../../../svg/common/BackArrow";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
@@ -24,7 +25,58 @@ const NotificationDrawer = (props) => {
         // console.log('state of user',state)
         return state.AuthReducer.calEventData
     })
-    console.log('cal event data', calEventData)
+    console.log('cal event data', calEventData);
+
+    const [liveClassNotifications, setLiveClassNotifications] = useState([])
+    const [homeworkNotifications, setHomeworkNotifications] = useState([])
+    const [personalNotifications, setPersonalNotifications] = useState([])
+    getAllNotification = () => {
+
+        let data = {
+            userid: "6047645b9a6ac02f68642c72",
+            page: "1",
+            limit: "5"
+        }
+
+        Service.post(data, `${EndPoints.getAllNotifications}`, (res) => {
+            console.log('succss', res);
+            if (res.flag) {
+                let allNotifications = res.data
+                let liveClass = []
+                let homework = []
+                let personal = []
+                allNotifications.map((item) => {
+                    if (item.NotificationType === 'LIVE CLASSES') {
+                        liveClass.push(item)
+                    } else if (item.NotificationType === 'HOMEWORK') {
+                        homework.push(item)
+                    } else if (item.NotificationType === 'PERSONAL') {
+                        personal.push(item)
+                    }
+                })
+
+                setLiveClassNotifications(liveClass)
+                setHomeworkNotifications(homework)
+                setPersonalNotifications(personal)
+            }
+
+
+        }, (err) => {
+            console.log('errr', errrr)
+        })
+
+    }
+
+    deleteNotification = (id) => {
+        Service.get(`${EndPoints.deleteNotification}/${id}`, (res) => {
+            console.log('res-delete', res)
+            if (res.flag) {
+                getAllNotification()
+            }
+        }, (err) => {
+            console.log('Error of calandar event', err);
+        })
+    }
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
@@ -33,7 +85,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMainDate}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => props.navigation.closeDrawer()}
+                            onPress={() => props.navigation.goBack()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
                             {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
@@ -114,7 +166,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMain}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => props.navigation.closeDrawer()}
+                            onPress={() => props.navigation.goBack()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
 

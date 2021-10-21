@@ -29,7 +29,7 @@ const HeaderWhite = (props) => {
 
                         <Text style={styles.commonButtonGreenheaderwithicon}>save as marked</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onNotification()}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
 

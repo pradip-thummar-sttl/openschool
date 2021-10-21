@@ -23,7 +23,7 @@ const AvatarHeader = (props) => {
             <View>
                 <TouchableOpacity
                     style={styles.notificationBar}
-                    onPress={() => props.onAlertPress()}
+                    onPress={() => props.onNotification()}
                     activeOpacity={opacity}>
                     {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
