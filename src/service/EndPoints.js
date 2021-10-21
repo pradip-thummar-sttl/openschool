@@ -78,4 +78,8 @@ export const EndPoints = {
 
     //
     SaveLessionRecord:"lessionrecord",
+
+    //
+    getAllNotifications : 'getnotifocation',
+    deleteNotification : 'notificationdelete'
 }
