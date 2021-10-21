@@ -55,7 +55,7 @@ const Header = (props) => {
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />

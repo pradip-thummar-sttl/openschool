@@ -34,7 +34,7 @@ const NewMessageHeader = (props) => {
                             <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity onPress={() => { }} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => { props.onAlertPress()}} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>

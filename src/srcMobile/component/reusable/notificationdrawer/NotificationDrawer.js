@@ -25,7 +25,58 @@ const NotificationDrawer = (props) => {
         // console.log('state of user',state)
         return state.AuthReducer.calEventData
     })
-    console.log('cal event data', calEventData)
+    console.log('cal event data', calEventData);
+
+    const [liveClassNotifications, setLiveClassNotifications] = useState([])
+    const [homeworkNotifications, setHomeworkNotifications] = useState([])
+    const [personalNotifications, setPersonalNotifications] = useState([])
+    getAllNotification = () => {
+
+        let data = {
+            userid: "6047645b9a6ac02f68642c72",
+            page: "1",
+            limit: "5"
+        }
+
+        Service.post(data, `${EndPoints.getAllNotifications}`, (res) => {
+            console.log('succss', res);
+            if (res.flag) {
+                let allNotifications = res.data
+                let liveClass = []
+                let homework = []
+                let personal = []
+                allNotifications.map((item) => {
+                    if (item.NotificationType === 'LIVE CLASSES') {
+                        liveClass.push(item)
+                    } else if (item.NotificationType === 'HOMEWORK') {
+                        homework.push(item)
+                    } else if (item.NotificationType === 'PERSONAL') {
+                        personal.push(item)
+                    }
+                })
+
+                setLiveClassNotifications(liveClass)
+                setHomeworkNotifications(homework)
+                setPersonalNotifications(personal)
+            }
+
+
+        }, (err) => {
+            console.log('errr', errrr)
+        })
+
+    }
+
+    deleteNotification = (id) => {
+        Service.get(`${EndPoints.deleteNotification}/${id}`, (res) => {
+            console.log('res-delete', res)
+            if (res.flag) {
+                getAllNotification()
+            }
+        }, (err) => {
+            console.log('Error of calandar event', err);
+        })
+    }
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?

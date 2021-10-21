@@ -90,6 +90,7 @@ const PupiloverView = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    onNotification={() => props.navigation.navigate('NotificationDrawer')}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>

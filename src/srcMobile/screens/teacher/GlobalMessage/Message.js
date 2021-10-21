@@ -214,7 +214,9 @@ const Message = (props) => {
     return (
         <View>
             <HeaderWhitepupilMessage
-                onAlertPress={() => props.navigation.openDrawer()} />
+                onAlertPress={() => props.navigation.openDrawer()} 
+                onNotification={() => props.navigation.navigate('NotificationDrawer')}/>
+
 
             {searchHeader()}
             {isLoading ?

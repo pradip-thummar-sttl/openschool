@@ -25,7 +25,7 @@ const HeaderWhite = (props) => {
             {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onNotification()}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
