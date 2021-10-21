@@ -30,6 +30,10 @@ const NotificationDrawer = (props) => {
     const [liveClassNotifications, setLiveClassNotifications] = useState([])
     const [homeworkNotifications, setHomeworkNotifications] = useState([])
     const [personalNotifications, setPersonalNotifications] = useState([])
+
+    useEffect(() => {
+       getAllNotification()
+    }, [])
     getAllNotification = () => {
 
         let data = {

@@ -161,7 +161,7 @@ export default function App() {
         console.log("NOTIFICATION:", notification);
      
         // process the notification
-    
+    Alert.alert(' notification recieve')
         // (required) Called when a remote is received or opened, or local notification is opened
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
