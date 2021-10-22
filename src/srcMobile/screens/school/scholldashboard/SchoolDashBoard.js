@@ -111,7 +111,7 @@ const SchoolDashBoard = (props) => {
 
     return (
         <View >
-            <Header onAlertPress={() => props.navigation.openDrawer()} />
+            <Header onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>props.navigation.navigate('NotificationDrawer')} />
             <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>

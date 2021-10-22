@@ -334,7 +334,7 @@ const PupilLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ backgroundColor: COLORS.white }}>
-                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} />
+                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>props.navigation.navigate('NotificationDrawer')} />
                 {searchHeader()}
                 <View style={PAGESTYLE.whiteBg1}>
                     <View style={PAGESTYLE.lessonPlanTop}>

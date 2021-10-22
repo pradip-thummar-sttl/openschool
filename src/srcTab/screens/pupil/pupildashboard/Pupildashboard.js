@@ -397,7 +397,7 @@ const PupuilDashboard = (props) => {
                                 selectedIndex == 0 ?
                                     <View style={{ width: isHide ? '94%' : '78%' }}>
                                         <ScrollView showsVerticalScrollIndicator={false}>
-                                            <Header onAlertPress={() => { props.navigation.openDrawer() }} />
+                                            <Header onAlertPress={() => { props.navigation.openDrawer() }} onNotification={()=>props.navigation.navigate('NotificationDrawer')} />
                                             <View style={STYLE.padLeftRight}>
                                                 {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}   
                                                 <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />

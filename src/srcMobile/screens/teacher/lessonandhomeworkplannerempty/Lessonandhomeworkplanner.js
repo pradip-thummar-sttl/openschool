@@ -43,7 +43,7 @@ const LessonandHomeworkPlanner = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header />
+                <Header onNotification={()=>props.navigation.navigate('NotificationDrawer')}/>
                 <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.myDay}>
                         <View style={[STYLE.viewRow]}>
