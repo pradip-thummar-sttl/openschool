@@ -132,7 +132,7 @@ const Popupdata = (props) => {
 
             if (Platform.OS == 'android') {
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started');
+                    console.log('Class Started', error, ID);
 
                     if (!props.isPupil) {
                         let data = {

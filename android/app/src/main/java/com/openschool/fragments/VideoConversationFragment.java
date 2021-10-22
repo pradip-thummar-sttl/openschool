@@ -247,11 +247,21 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
 //                handleNewMessage(message);
                 //handle incomming message from here
                 try {
-                    System.out.println("KDKDKD: Receiver " + message.getMessage().toString());
-                    if (!isTeacher) {
-                        setEmojiForPupil(message.getMessage().toString());
+                    String msgReceived = message.getMessage().toString();
+                    System.out.println("KDKDKD: Receiver " + msgReceived);
+
+                    if (msgReceived.contains("##@##")){
+                        if (!isTeacher) {
+                            loadPollingForPupil(msgReceived);
+                        } else {
+                            loadPollingAnswerForTeacher(msgReceived);
+                        }
                     } else {
-                        setEmojiForTeacher(message.getMessage().toString());
+                        if (!isTeacher) {
+                            setEmojiForPupil(msgReceived);
+                        } else {
+                            setEmojiForTeacher(msgReceived);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

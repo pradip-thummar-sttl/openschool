@@ -4,26 +4,90 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/llTitle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/white"
+        android:elevation="5dp"
         android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/ivBack"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:src="@drawable/back_arrow2" />
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:src="@drawable/back_arrow2" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Set up in-class voting"
-            android:textSize="18sp"
+            android:gravity="center_vertical"
             android:padding="10dp"
-            android:gravity="center_vertical"/>
+            android:text="Set up in-class voting"
+            android:textSize="18sp" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llTitle"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/edtQue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="Enter your question here"
+            android:maxLines="4"
+            android:minLines="4" />
+
+        <EditText
+            android:id="@+id/edtOp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="Enter your option1"
+            android:maxLines="2"
+            android:minLines="2" />
+
+        <EditText
+            android:id="@+id/edtOp2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="Enter your option2"
+            android:maxLines="2"
+            android:minLines="2" />
+
+        <EditText
+            android:id="@+id/edtOp3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="Enter your option3"
+            android:maxLines="2"
+            android:minLines="2" />
+
+        <EditText
+            android:id="@+id/edtOp4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="Enter your option4"
+            android:maxLines="2"
+            android:minLines="2" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Create a Poll" />
 
 </RelativeLayout>

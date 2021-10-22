@@ -241,6 +241,7 @@ const PupuilDashboard = (props) => {
             });
 
             channels.push(dataOfSubView.TeacherID + "_" + User.user.UserDetialId)
+            channels.push(dataOfSubView.TeacherID)
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName

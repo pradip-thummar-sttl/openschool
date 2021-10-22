@@ -240,7 +240,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started');
+                    console.log('Class Started', error, ID);
 
                     let data = {
                         LessonStart: false,
