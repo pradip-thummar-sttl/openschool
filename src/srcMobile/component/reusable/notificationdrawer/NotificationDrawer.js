@@ -185,7 +185,7 @@ const NotificationDrawer = (props) => {
                                 <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
                                 <View style={styles.timingJoinClass}>
                                     <View style={styles.timing}>
-                                        <Clock style={styles.timingClass}/>
+                                        <Clock width={hp(1.67)} height={hp(1.67)} style={styles.timingClass}/>
                                         {/* <Image source={require('../../../../assets/images/clock2.png')} style={styles.timingClass} /> */}
                                         <Text style={styles.timingText}>09:00 - 09:30</Text>
                                     </View>
