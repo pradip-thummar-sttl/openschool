@@ -6,6 +6,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 
 const Popupuser = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -17,12 +18,13 @@ const Popupuser = (props) => {
         <View>
             <Text style={STYLE.openClassLink} onPress={toggleModal}>Open Class</Text>
             <Modal isVisible={isModalVisible}>
-                <View style={STYLE.popupCard}>
+                <View style={{...STYLE.popupCard, width: '100%',}}>
                     <TouchableOpacity style={STYLE.cancelButton} onPress={toggleModal}>
+                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
                     </TouchableOpacity>
-                    <View style={STYLE.popupContentMain}>
-                        <Text style={STYLE.popupTitle}>You are starting an instant call</Text>
+                    <View style={{...STYLE.popupContentMain,paddingTop: hp(4),}}>
+                        <Text style={{...STYLE.popupTitle,fontSize: hp(2.5)}}>You are starting an instant call</Text>
                         <Text style={STYLE.popupText}>Share these joining info with others you want in the call:</Text>
                         <View style={styles.field}>
                             <Text label style={STYLE.labelCommon}>Joining Info</Text>
@@ -49,12 +51,12 @@ export default Popupuser;
 
 const styles = StyleSheet.create({
     field: {
-        width: hp(42.96),
-        marginBottom: hp(3),
+        width: '100%',
+        marginBottom: hp(2),
     },
     commonInputTextarea: {
-        width: '75%',
-        height: hp(11),
+        width: '98%',
+        height: hp(15),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1.3),

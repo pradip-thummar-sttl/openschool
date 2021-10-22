@@ -171,7 +171,7 @@ const ClassSetUp = () => {
                         style={PAGESTYLE.selectedRemove}
                         source={Images.PopupCloseIcon} /> */}
 
-                    <CloseBlack style={PAGESTYLE.selectedRemove} width={13} height={13} />
+                    <CloseBlack style={PAGESTYLE.selectedRemove} width={hp(1.69)} height={hp(1.69)} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -196,7 +196,7 @@ const ClassSetUp = () => {
                         // <Image
                         //     style={PAGESTYLE.groupEdit}
                         //     source={Images.Edit} />
-                        <Ic_Edit style={PAGESTYLE.groupEdit} height={15} width={15} />
+                        <Ic_Edit style={PAGESTYLE.groupEdit} height={hp(1.66)} width={hp(1.66)} />
                         :
                         null
                     }
@@ -205,7 +205,7 @@ const ClassSetUp = () => {
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false} >
-                <View style={{ flexDirection: 'row', marginTop: 8 }}>
+                <View style={{ flexDirection: 'row', marginTop: hp(1.95) }}>
                     {props.item.PupilList.map((data, index) => (
                         <TouchableOpacity
                             activeOpacity={opacity}>
@@ -278,19 +278,19 @@ const ClassSetUp = () => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.subjectText}>Assign Teacher</Text>
-                <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+                <Menu style={{marginBottom: hp(2),}} onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length-1].FirstName || selectedTeacher[selectedTeacher.length-1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length-1].LastName || selectedTeacher[selectedTeacher.length-1].TeacherLastName) : 'Select a Teacher'}</Text>
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.82), } }}>
                         <FlatList
                             data={teachers}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.30) }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: hp(26), }} />
                     </MenuOptions>
                 </Menu>
             </View>

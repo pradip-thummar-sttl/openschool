@@ -30,13 +30,13 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - GoogleDataTransport (9.1.0):
+  - GoogleDataTransport (9.1.2):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Environment (7.5.2):
+  - GoogleUtilities/Environment (7.6.0):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.5.2):
+  - GoogleUtilities/Logger (7.6.0):
     - GoogleUtilities/Environment
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -46,9 +46,9 @@ PODS:
   - Permission-Camera (3.0.4):
     - RNPermissions
   - PromisesObjC (2.0.0)
-  - PubNub (4.16.2):
-    - PubNub/Core (= 4.16.2)
-  - PubNub/Core (4.16.2)
+  - PubNub (4.17.0):
+    - PubNub/Core (= 4.17.0)
+  - PubNub/Core (4.17.0)
   - QuickBlox (2.17.10)
   - quickblox-react-native-sdk (0.5.12-beta):
     - QuickBlox (~> 2.17.9)
@@ -332,14 +332,41 @@ PODS:
     - React-Core
   - RNPermissions (3.0.4):
     - React-Core
-  - RNReanimated (1.13.2):
+  - RNReanimated (2.2.3):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - Folly
+    - glog
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-callinvoker
     - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - React-RCTVibration
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (3.8.0):
     - React-Core
     - React-RCTImage
   - RNSketchCanvas (0.8.0):
     - React
-  - RNSVG (12.1.1):
+  - RNSVG (9.12.0):
     - React
   - Yoga (1.14.0)
 
@@ -524,20 +551,20 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
   FirebaseCore: 98b29e3828f0a53651c363937a7f7d92a19f1ba2
   FirebaseCoreDiagnostics: fe77f42da6329d6d83d21fd9d621a6b704413bfc
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
-  GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
+  glog: 5337263514dd6f09803962437687240c5dc39aa4
+  GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
+  GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Permission-Camera: 74dc395c37a06ebe915069c5dca954c7a2a5a2e3
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  PubNub: d2f675a6ec0c03a7ce562c8accc365c1457bf0c6
+  PubNub: 306896876c3089884067609ff25d628a547d2942
   QuickBlox: 49d85c6e1782993fb2383001301b788a8d7dcad3
   quickblox-react-native-sdk: 8b571f113d46bc78e523d0a617eb8fefc6de515e
   Quickblox-WebRTC: 162d2421d91cfb3d4f7e01f87e095633ca52bb1d
@@ -581,12 +608,12 @@ SPEC CHECKSUMS:
   RNFS: 93d5b5535eb39d98e6b19009faa8fe717f7ea45d
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNPermissions: c46788f4cd402287425983e04a4c9bb4356036eb
-  RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
+  RNReanimated: 8744fb15baf4c582367d910f4f32f5097fb350cb
   RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
   RNSketchCanvas: 9c28adb5381543ed55cc98ce6de46479cb3cb12c
-  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  RNSVG: 75670614bca635d3dd64bc267bc199e539cb4fa9
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 1a2056423bf0c99a4efda1bcd1128c55bd93fb2c
+PODFILE CHECKSUM: 04584bbdf8e2c5e39f09cfda6af7ab7db804a327
 
 COCOAPODS: 1.11.2

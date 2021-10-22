@@ -90,7 +90,7 @@ const SchoolDashBoard = (props) => {
         }
     }
     const Pupillist = ({ item, onPress }) => (
-        <TouchableOpacity onPress={() => onPress()}>
+        <TouchableOpacity onPress={() => { props.navigation.navigate('TeacherProfileView', {item: item}); }}>
             <View style={[PAGESTYLE.pupilData]}>
                 <View style={PAGESTYLE.pupilProfile}>
                     <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
@@ -142,7 +142,7 @@ const SchoolDashBoard = (props) => {
 
                 <View style={[PAGESTYLE.viewRow, { marginTop: hp(2), backgroundColor: COLORS.greenSchool }]}>
                     <View style={PAGESTYLE.iconView}>
-                        <MyPupils style={PAGESTYLE.dayIcon} height={hp(2.5)} width={hp(2.5)} />
+                        <MyPupils style={PAGESTYLE.dayIcon} height={hp(2.9)} width={hp(2.9)} />
                         <Text H3 style={PAGESTYLE.dayTitle}>My Teachers</Text>
                     </View>
                     <TouchableOpacity>

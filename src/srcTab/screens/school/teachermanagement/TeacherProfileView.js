@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, Image, ImageBackground, SafeAreaView, Text, View } from "react-native";
+import { ActivityIndicator, Image, ImageBackground, Platform, SafeAreaView, Text, View } from "react-native";
 import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -28,6 +28,7 @@ import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import LessonList from "./lessonlist/LessonList";
 import TeacherChat from "./teacherchat/TeacherChat";
+import { isTablet } from "react-native-device-info";
 
 const TeacherProfileView = (props) => {
     const [isHide, action] = useState(true);
@@ -76,15 +77,17 @@ const TeacherProfileView = (props) => {
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                        <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
+                                        <View style={{height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0}}>
+                                            <TopBackImg style={PAGESTYLE.managementopImage} height={Platform.OS == 'android' && isTablet() ? hp(20.7) : '100%'} width={'100%'} />
+                                        </View>
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                 source={{ uri: baseUrl + item.ProfilePicture }} />
                                         </View>
                                         {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                        {/* </ImageBackground> */}
+                                            </TouchableOpacity> 
+                                        </ImageBackground> */}
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
                                         <View style={PAGESTYLE.nameSmlBlock}>

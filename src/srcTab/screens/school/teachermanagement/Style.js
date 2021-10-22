@@ -150,7 +150,6 @@ export default StyleSheet.create({
         color: COLORS.menuLightFonts,
         textTransform: 'uppercase',
         lineHeight: hp(2.08),
-        marginRight: hp(2.60),
     },
     pupilTableHeadingMainsubTitlestar: {
         fontSize: hp(1.56),
@@ -162,6 +161,9 @@ export default StyleSheet.create({
     },
     pupilTableHeadingsubMain: {
         flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems:'center',
+        width: '100%',
     },
     pupilhrCustomMargin: {
         marginTop: hp(1.95),
@@ -201,7 +203,7 @@ export default StyleSheet.create({
         // backgroundColor: COLORS.white
     },
     pupilData: {
-        height:wp(6),
+        height:hp(8.85),
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius:10,
@@ -216,7 +218,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     groupColumnmain: {
-        width: '23%',
+        width: '13%',
     },
     nameColumnmain: {
         width: '20%',
@@ -234,11 +236,13 @@ export default StyleSheet.create({
         marginLeft:hp(5)
     },
     pupilgroupName: {
-        textAlign: 'center',
+        // textAlign: 'center',
     },
     perfomanceColumn: {
         flexDirection: 'row',
         width: '25%',
+        justifyContent: 'space-around',
+        marginRight: hp(5.6)
     },
     pupilImage: {
         width: hp(3.7),
@@ -283,9 +287,9 @@ export default StyleSheet.create({
         right: 20,
         position: 'absolute',
     },
-    perfomanceDotmain: {
-        marginHorizontal: '15%',
-    },
+    // perfomanceDotmain: {
+    //     width: '50%',
+    // },
     pupilListing: {
         maxHeight: hp(67.44),
     },
