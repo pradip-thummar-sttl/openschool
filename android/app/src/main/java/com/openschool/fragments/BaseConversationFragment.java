@@ -330,11 +330,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                         .getSerializableExtra(Consts.EXTRA_QB_OCCUPANTS_IDS);
                 allOpponents.addAll(0, addedOccupants);
             }
-        } else if (requestCode == CallActivity.POLLING_REQUEST_CODE) {
+        } else if (resultCode == CallActivity.POLLING_REQUEST_CODE) {
             if (data.hasExtra(PollingActivity.POLLING)) {
                 sendPoll(channels.get(channels.size() - 1), data.getStringExtra(PollingActivity.POLLING), currentUserID);
             }
-        } else if (requestCode == CallActivity.POLLING_ANS_REQUEST_CODE) {
+        } else if (resultCode == CallActivity.POLLING_ANS_REQUEST_CODE) {
             if (data.hasExtra(PollingActivity.POLLING_ANS)) {
                 sendPoll(channels.get(channels.size() - 1), data.getStringExtra(PollingActivity.POLLING_ANS), currentUserID);
             }
@@ -1031,6 +1031,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void loadPollingForPupil(String message) {
+        System.out.println("KDKD: message for pupil " + message);
         Intent intent = new Intent(getActivity(), PollingActivity.class);
         intent.putExtra("isForPupil", true);
         intent.putExtra(PollingActivity.POLLING, message);
@@ -1039,7 +1040,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected void loadPollingAnswerForTeacher(String message) {
         String tempMsg = message.replace("\"", "");
-        String[] splitStr = tempMsg.split("#@#");
+        String[] splitStr = tempMsg.split("##@##");
+        System.out.println("KDKD: splitStr " + tempMsg);
 
         final OpponentsFromCallAdapter.ViewHolder holder = getViewHolderForOpponent(Integer.parseInt(splitStr[1]));
         if (holder == null) {
@@ -1089,11 +1091,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void sendPoll(String channel, String message, String currentUserID) {
-        System.out.println("KDKDKD: channel send Poll " + channel);
+        System.out.println("KDKDKD: channel send Poll " + channel + " " + message);
         hostActivity.getPubNub()
                 .publish()
                 .channel(channel)
-                .message(isTeacher ? message : message + "#@#" + currentUserID)
+                .message(isTeacher ? message : message + "##@##" + currentUserID)
                 .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {

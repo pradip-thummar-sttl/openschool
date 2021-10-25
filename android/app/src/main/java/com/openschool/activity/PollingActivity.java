@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +20,10 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     public static final String POLLING_ANS = "POLLING_ANS";
 
     private EditText edtQue, edtOp1, edtOp2, edtOp3, edtOp4;
+    private TextView tvQue, tvOp1, tvOp2, tvOp3, tvOp4;
     private Button btnSubmit;
     private ImageView ivBack;
+    private LinearLayout llTeacher,llPupil;
 
     String selectedAns;
 
@@ -34,34 +38,41 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
         edtOp2 = findViewById(R.id.edtOp3);
         edtOp3 = findViewById(R.id.edtOp2);
         edtOp4 = findViewById(R.id.edtOp4);
+        tvQue = findViewById(R.id.tvQue);
+        tvOp1 = findViewById(R.id.tvOp1);
+        tvOp2 = findViewById(R.id.tvOp2);
+        tvOp3 = findViewById(R.id.tvOp3);
+        tvOp4 = findViewById(R.id.tvOp4);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        llTeacher = findViewById(R.id.llTeacher);
+        llPupil = findViewById(R.id.llPupil);
         btnSubmit = findViewById(R.id.btnSubmit);
 
         ivBack.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+
+        init();
     }
 
     private void init() {
         Intent intent = getIntent();
         if (intent.hasExtra("isForPupil")) {
-            edtQue.setEnabled(false);
-            edtOp1.setEnabled(false);
-            edtOp2.setEnabled(false);
-            edtOp3.setEnabled(false);
-            edtOp4.setEnabled(false);
+            llTeacher.setVisibility(View.GONE);
+            llPupil.setVisibility(View.VISIBLE);
             btnSubmit.setText("SUBMIT YOUR ANSWER");
 
             String data = intent.getStringExtra(PollingActivity.POLLING);
             String poll[] = data.split("##@##");
-            edtQue.setText(poll[0]);
-            edtOp1.setText(poll[1]);
-            edtOp2.setText(poll[2]);
-            edtOp3.setText(poll[3]);
-            edtOp4.setText(poll[4]);
+            tvQue.setText(poll[0]);
+            tvOp1.setText(poll[1]);
+            tvOp2.setText(poll[2]);
+            tvOp3.setText(poll[3]);
+            tvOp4.setText(poll[4]);
 
-            edtOp1.setOnClickListener(this);
-            edtOp2.setOnClickListener(this);
-            edtOp3.setOnClickListener(this);
-            edtOp4.setOnClickListener(this);
+            tvOp1.setOnClickListener(this);
+            tvOp2.setOnClickListener(this);
+            tvOp3.setOnClickListener(this);
+            tvOp4.setOnClickListener(this);
         }
     }
 
@@ -71,36 +82,37 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.ivBack:
                 finish();
                 break;
-            case R.id.edtOp1:
-                selectedAns = "A. " + edtOp1.getText().toString();
-                edtOp1.setBackgroundColor(R.color.colorAccent);
-                edtOp2.setBackgroundColor(R.color.white);
-                edtOp3.setBackgroundColor(R.color.white);
-                edtOp4.setBackgroundColor(R.color.white);
+            case R.id.tvOp1:
+                selectedAns = "A. " + tvOp1.getText().toString();
+                tvOp1.setBackground(getDrawable(R.drawable.shape_poll_selected));
+                tvOp2.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp3.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp4.setBackground(getDrawable(R.drawable.shape_poll));
                 break;
-            case R.id.edtOp2:
-                selectedAns = "B. " + edtOp1.getText().toString();
-                edtOp1.setBackgroundColor(R.color.white);
-                edtOp2.setBackgroundColor(R.color.colorAccent);
-                edtOp3.setBackgroundColor(R.color.white);
-                edtOp4.setBackgroundColor(R.color.white);
+            case R.id.tvOp2:
+                selectedAns = "B. " + tvOp2.getText().toString();
+                tvOp1.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp2.setBackground(getDrawable(R.drawable.shape_poll_selected));
+                tvOp3.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp4.setBackground(getDrawable(R.drawable.shape_poll));
                 break;
-            case R.id.edtOp3:
-                selectedAns = "C. " + edtOp1.getText().toString();
-                edtOp1.setBackgroundColor(R.color.white);
-                edtOp2.setBackgroundColor(R.color.white);
-                edtOp3.setBackgroundColor(R.color.colorAccent);
-                edtOp4.setBackgroundColor(R.color.white);
+            case R.id.tvOp3:
+                selectedAns = "C. " + tvOp3.getText().toString();
+                tvOp1.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp2.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp3.setBackground(getDrawable(R.drawable.shape_poll_selected));
+                tvOp4.setBackground(getDrawable(R.drawable.shape_poll));
                 break;
-            case R.id.edtOp4:
-                selectedAns = "D. " + edtOp1.getText().toString();
-                edtOp1.setBackgroundColor(R.color.white);
-                edtOp2.setBackgroundColor(R.color.white);
-                edtOp3.setBackgroundColor(R.color.white);
-                edtOp4.setBackgroundColor(R.color.colorAccent);
+            case R.id.tvOp4:
+                selectedAns = "D. " + tvOp4.getText().toString();
+                tvOp1.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp2.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp3.setBackground(getDrawable(R.drawable.shape_poll));
+                tvOp4.setBackground(getDrawable(R.drawable.shape_poll_selected));
                 break;
             case R.id.btnSubmit:
                 if (selectedAns != null) {
+                    System.out.println("KDKD: selectedAns " + selectedAns);
                     Intent intent = new Intent();
                     intent.putExtra(POLLING_ANS, selectedAns);
                     setResult(CallActivity.POLLING_ANS_REQUEST_CODE, intent);
@@ -115,6 +127,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
                             edtOp2.getText().toString() + "##@##" +
                             edtOp3.getText().toString() + "##@##" +
                             edtOp4.getText().toString();
+                    System.out.println("KDKD: data" + data);
                     intent.putExtra(POLLING, data);
 
                     setResult(CallActivity.POLLING_REQUEST_CODE, intent);

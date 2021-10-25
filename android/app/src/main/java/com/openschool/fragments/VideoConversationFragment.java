@@ -251,9 +251,9 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
                     System.out.println("KDKDKD: Receiver " + msgReceived);
 
                     if (msgReceived.contains("##@##")){
-                        if (!isTeacher) {
+                        if (!isTeacher && msgReceived.split("##@##").length > 2) {
                             loadPollingForPupil(msgReceived);
-                        } else {
+                        } else if (isTeacher && msgReceived.split("##@##").length <= 2) {
                             loadPollingAnswerForTeacher(msgReceived);
                         }
                     } else {

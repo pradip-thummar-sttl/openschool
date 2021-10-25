@@ -30,6 +30,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llTeacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llTitle"
@@ -80,6 +81,57 @@
             android:hint="Enter your option4"
             android:maxLines="2"
             android:minLines="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPupil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llTitle"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvQue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:ellipsize="end"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvOp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/shape_poll"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tvOp2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/shape_poll"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tvOp3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/shape_poll"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tvOp4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/shape_poll_selected"
+            android:ellipsize="end" />
 
     </LinearLayout>
 

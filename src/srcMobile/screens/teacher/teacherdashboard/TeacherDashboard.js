@@ -158,6 +158,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const refresh = () => {
+        console.log(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`);
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {

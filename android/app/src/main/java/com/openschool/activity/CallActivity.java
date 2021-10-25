@@ -371,7 +371,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
                 hbRecorder.startScreenRecording(data, resultCode, this);
             }
-        } else if (requestCode == POLLING_REQUEST_CODE || requestCode == POLLING_ANS_REQUEST_CODE) {
+        } else if (resultCode == POLLING_REQUEST_CODE || resultCode == POLLING_ANS_REQUEST_CODE) {
             for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                 fragment.onActivityResult(requestCode, resultCode, data);
             }
