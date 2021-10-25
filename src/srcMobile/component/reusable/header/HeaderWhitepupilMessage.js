@@ -18,6 +18,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../utils/Model";
 const HeaderWhitepupilMessage = (props) => {
     const refRBSheet = useRef();
     const [isSearchActive, setSearchActive] = useState(false)
@@ -39,7 +40,11 @@ const HeaderWhitepupilMessage = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                        <View style={STYLE.redDot}></View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

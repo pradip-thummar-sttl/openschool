@@ -5,7 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 // import Images from "../../../../utils/Images";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 
@@ -20,7 +20,11 @@ const Header = (props) => {
                     activeOpacity={opacity}>
                     {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    <View style={STYLE.redDot}></View>
+                    {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+
                 </TouchableOpacity>
             </View>
         </View>

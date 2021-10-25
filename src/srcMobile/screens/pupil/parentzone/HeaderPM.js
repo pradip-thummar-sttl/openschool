@@ -16,7 +16,7 @@ import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import Ic_Search from "../../../../svg/teacher/pupilmanagement/Ic_Search";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
@@ -112,7 +112,11 @@ const HeaderPM = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    <View style={STYLE.redDot}></View>
+                    {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                    {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

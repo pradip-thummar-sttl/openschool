@@ -23,6 +23,7 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -64,7 +65,11 @@ const HeaderTT = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.2)} width={hp(5.2)} />
-                        <View style={STYLE.redDot}></View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

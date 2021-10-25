@@ -36,7 +36,7 @@ import { Service } from "../../../../service/Service";
 import MESSAGE from "../../../../utils/Messages";
 import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 const HeaderTM = (props) => {
     const refRBSheet = useRef();
@@ -127,7 +127,11 @@ const HeaderTM = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                        <View style={STYLE.redDot}></View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

@@ -25,3 +25,6 @@ export var NotificationToken = {
     token: '',   
 };
  
+export var BadgeIcon = {
+    isBadge: false,   
+};

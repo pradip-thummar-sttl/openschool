@@ -18,6 +18,7 @@ import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import Ic_BlueCheck from "../../../../../svg/teacher/timetable/ic_blueCheck";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -28,7 +29,11 @@ const HeaderWhite = (props) => {
                     <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onNotification()}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                        <View style={STYLE.redDot}></View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

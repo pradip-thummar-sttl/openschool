@@ -18,7 +18,7 @@ LogBox.ignoreAllLogs();
 import { isTablet } from 'react-native-device-info';
 import { PERMISSIONS, requestMultiple } from 'react-native-permissions';
 import NotificationDrawer from './src/srcTab/component/reusable/notificationdrawer/NotificationDrawer';
-import { NotificationToken } from './src/utils/Model';
+import { BadgeIcon, NotificationToken } from './src/utils/Model';
 
 requestMultiple(
   [PERMISSIONS.ANDROID.CAMERA,
@@ -161,8 +161,9 @@ export default function App() {
         console.log("NOTIFICATION:", notification);
      
         // process the notification
-    Alert.alert(' notification recieve')
+    // Alert.alert(' notification recieve')
         // (required) Called when a remote is received or opened, or local notification is opened
+        BadgeIcon.isBadge = true
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
     
