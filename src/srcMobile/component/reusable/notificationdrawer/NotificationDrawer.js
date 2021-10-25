@@ -17,6 +17,7 @@ import moment from "moment";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import Clock from "../../../../svg/teacher/dashboard/Clock";
 import BackArrow from "../../../../svg/common/BackArrow";
+import { User } from "../../../../utils/Model";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
@@ -34,10 +35,11 @@ const NotificationDrawer = (props) => {
     useEffect(() => {
         getAllNotification()
     }, [])
-    getAllNotification = () => {
+    const getAllNotification = () => {
 
+        console.log('user dtaaaa===>', User.user)
         let data = {
-            userid: "6047645b9a6ac02f68642c72",
+            userid: User.user.UserType == "Teacher"?User.user._id:User.user.UserDetialId, //"6047645b9a6ac02f68642c72",
             page: "1",
             limit: "5"
         }
@@ -71,7 +73,7 @@ const NotificationDrawer = (props) => {
 
     }
 
-    deleteNotification = (id) => {
+    const deleteNotification = (id) => {
         Service.get(`${EndPoints.deleteNotification}/${id}`, (res) => {
             console.log('res-delete', res)
             if (res.flag) {

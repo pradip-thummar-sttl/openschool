@@ -72,6 +72,7 @@ const HeaderPM = (props) => {
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <View style={styles.massagesIcon}>
                             <Notification />
+                            <View style={STYLE.redDot}></View>
                         </View>
                     </TouchableOpacity>
                 </View>

@@ -64,6 +64,7 @@ const HeaderTT = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.2)} width={hp(5.2)} />
+                        <View style={STYLE.redDot}></View>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -37,6 +37,7 @@ const NewMessageHeader = (props) => {
                     <TouchableOpacity onPress={() => { props.onAlertPress()}} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        <View style={STYLE.redDot}></View>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -20,6 +20,7 @@ const SettingHeader = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={require('../../../../assets/images/notification2.png')} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        <View style={STYLE.redDot}></View>
                     </TouchableOpacity>
                 </View>
             </View>
