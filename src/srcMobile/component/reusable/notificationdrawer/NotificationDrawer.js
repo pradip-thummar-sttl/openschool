@@ -39,7 +39,7 @@ const NotificationDrawer = (props) => {
 
         console.log('user dtaaaa===>', User.user)
         let data = {
-            userid: User.user.UserType == "Teacher"?User.user._id:User.user.UserDetialId, //"6047645b9a6ac02f68642c72",
+            userid: User.user.UserType == "Teacher" ? User.user._id : User.user.UserDetialId, //"6047645b9a6ac02f68642c72",
             page: "1",
             limit: "5"
         }
@@ -83,6 +83,11 @@ const NotificationDrawer = (props) => {
             console.log('Error of calandar event', err);
         })
     }
+
+    const goBackPress = () => {
+        props.route.params.goBack()
+        props.navigation.goBack()
+    }
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
@@ -91,7 +96,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMainDate}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => props.navigation.goBack()}
+                            onPress={() => goBackPress()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
                             {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}

@@ -10,7 +10,7 @@ import HeaderPM from "./HeaderPM";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import GroupSetUp from "./GroupSetUp";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import { baseUrl } from "../../../../utils/Constant";
 
 import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
@@ -78,6 +78,11 @@ const PupiloverView = (props) => {
         })
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => fetchRecord('', '') })
+    }
+
     return (
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
@@ -90,7 +95,7 @@ const PupiloverView = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
-                    onNotification={() => props.navigation.navigate('NotificationDrawer')}
+                    onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>

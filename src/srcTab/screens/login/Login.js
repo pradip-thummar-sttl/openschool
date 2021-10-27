@@ -33,7 +33,7 @@ class Login extends Component {
         this.state = {
             userName: '',
             password: '',
-            PushToken: NotificationToken.token,
+            PushToken: NotificationToken.token.token,
             Device: getBrand() + ', ' + getModel() + ', ' + getSystemVersion(),
             OS: Platform.OS,
             AccessedVia: "Mobile",

@@ -12,7 +12,7 @@ import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import { baseUrl, showMessage } from '../../../../utils/Constant';
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+import { BadgeIcon, User } from '../../../../utils/Model';
 import MyPupils from '../../../../svg/teacher/dashboard/MyPupils';
 import Insights from '../../../../svg/school/dashboard/Insights';
 
@@ -108,10 +108,14 @@ const SchoolDashBoard = (props) => {
         </TouchableOpacity>
     );
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
 
     return (
         <View >
-            <Header onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>props.navigation.navigate('NotificationDrawer')} />
+            <Header onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
             <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>

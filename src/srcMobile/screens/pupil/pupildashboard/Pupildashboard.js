@@ -13,7 +13,7 @@ import { useImperativeHandle } from "react/cjs/react.development";
 import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack, Var } from "../../../../utils/Constant";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 import MESSAGE from "../../../../utils/Messages";
@@ -132,6 +132,10 @@ const PupuilDashboard = (props) => {
     }
 
     useEffect(() => {
+       refresh()
+    }, [BadgeIcon.isBadge])
+
+    const refresh = () => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag === true) {
@@ -182,7 +186,7 @@ const PupuilDashboard = (props) => {
             }
         }, (err) => {
         })
-    }, [])
+    }
 
     const launchLiveClass = () => {
         console.log('data of sub view', dataOfSubView)
@@ -321,6 +325,10 @@ const PupuilDashboard = (props) => {
         setSelectedId(index)
         setDataOfSubView(myClass[index])
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={() => { onPress(); refRBSheet.current.open() }} style={[PAGESTYLE.item, style]}>
@@ -366,6 +374,8 @@ const PupuilDashboard = (props) => {
 
         </TouchableOpacity>
     );
+   
+
     return (
         <View style={PAGESTYLE.mainPage} >
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -374,7 +384,7 @@ const PupuilDashboard = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <Header onNotification={()=>props.navigation.navigate('NotificationDrawer')} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
+                <Header onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>

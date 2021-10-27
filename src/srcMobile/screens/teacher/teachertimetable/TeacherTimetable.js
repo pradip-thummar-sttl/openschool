@@ -13,7 +13,7 @@ import { Service } from "../../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import { Lesson } from "../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 // import Images from "../../../../utils/Images";
@@ -189,6 +189,10 @@ const TeacherTimeTable = (props) => {
         
         return true;
       }
+      const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -208,7 +212,7 @@ const TeacherTimeTable = (props) => {
                     onClearSearch={() => fetchRecord('', '')}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} 
-                    onNotification={()=>props.navigation.navigate('NotificationDrawer')}
+                    onNotification={()=>openNotification()}
                     />
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?

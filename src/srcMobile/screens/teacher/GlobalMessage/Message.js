@@ -15,7 +15,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import FONTS from '../../../../utils/Fonts'
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+import { BadgeIcon, User } from '../../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import MESSAGE from '../../../../utils/Messages';
 import CloseBlack from '../../../../svg/teacher/timetable/Close_Black';
@@ -211,11 +211,16 @@ const Message = (props) => {
         }
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
+
     return (
         <View>
             <HeaderWhitepupilMessage
                 onAlertPress={() => props.navigation.openDrawer()} 
-                onNotification={() => props.navigation.navigate('NotificationDrawer')}/>
+                onNotification={() => openNotification()}/>
 
 
             {searchHeader()}

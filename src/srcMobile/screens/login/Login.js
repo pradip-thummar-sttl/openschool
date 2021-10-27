@@ -33,7 +33,7 @@ class Login extends Component {
         this.state = {
             userName: '',
             password: '',
-            PushToken: NotificationToken.token,
+            PushToken: NotificationToken.token.token,
             Device: getBrand() + ', ' + getModel() + ', ' + getSystemVersion(),
             OS: Platform.OS,
             AccessedVia: "Mobile",
@@ -136,6 +136,8 @@ class Login extends Component {
             if (res.flag) {
                 var userData = res.data
                 var userType = ""
+                console.log('userData', userData);
+                
                 userData.map((item) => {
                     if (item.Name === this.props.route.params.userType) {
                         userType = item._id
@@ -151,6 +153,8 @@ class Login extends Component {
                     AccessedVia: AccessedVia,
                     UserType: userType
                 }
+                
+                console.log('Data', data);
 
                 Service.post(data, EndPoints.Login, (res) => {
                     if (res.code == 200) {

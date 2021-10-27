@@ -13,7 +13,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { isDesignBuild, opacity, showMessage } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
 import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
@@ -151,6 +151,11 @@ const TeacherLessonList = (props) => {
             </View>
         </TouchableOpacity>
     );
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
+
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             {/* <Sidebar
@@ -167,7 +172,7 @@ const TeacherLessonList = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    onNotification={() => props.navigation.navigate('NotificationDrawer')} />
+                    onNotification={() => openNotification()} />
                 {isLessonLoading ?
                     <ActivityIndicator
                         style={{ margin: 20 }}
