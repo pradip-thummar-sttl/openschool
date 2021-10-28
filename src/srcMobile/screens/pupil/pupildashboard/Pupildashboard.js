@@ -132,8 +132,8 @@ const PupuilDashboard = (props) => {
     }
 
     useEffect(() => {
-       refresh()
-    }, [BadgeIcon.isBadge])
+        refresh()
+    }, [])
 
     const refresh = () => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
@@ -327,7 +327,12 @@ const PupuilDashboard = (props) => {
     }
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+        props.navigation.navigate('NotificationDrawer', {
+            onGoBack: () => {
+                console.log('avu')
+                refresh()
+            }
+        })
     }
 
     const Item = ({ item, onPress, style }) => (
@@ -374,7 +379,7 @@ const PupuilDashboard = (props) => {
 
         </TouchableOpacity>
     );
-   
+
 
     return (
         <View style={PAGESTYLE.mainPage} >
@@ -384,7 +389,7 @@ const PupuilDashboard = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <Header onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
+                <Header isOpen={BadgeIcon.isBadge} onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
                         <View style={PAGESTYLE.dashboardOrangeBox}>

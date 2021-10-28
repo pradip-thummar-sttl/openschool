@@ -85,7 +85,7 @@ const NotificationDrawer = (props) => {
     }
 
     const goBackPress = () => {
-        props.route.params.goBack()
+        props.route.params.onGoBack()
         props.navigation.goBack()
     }
     return (
@@ -96,7 +96,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMainDate}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => goBackPress()}
+                            onPress={() => props.navigation.goBack()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
                             {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
@@ -177,7 +177,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMain}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => props.navigation.goBack()}
+                            onPress={() => goBackPress()}
                         >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
 
