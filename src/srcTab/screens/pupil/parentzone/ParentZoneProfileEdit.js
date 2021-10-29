@@ -277,10 +277,11 @@ const ParentZoneProfileEdit = (props) => {
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
+                                                style={{alignItems: 'center',}}
                                                 onPress={() => showActionChooser()}>
                                                 <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
                                                 {/* <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} /> */}
-                                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(3.38)} height={hp(3.38)} />
+                                                <View style={PAGESTYLE.pzEditIcon}><Ic_Edit style={PAGESTYLE.pzEditIconIcon} width={hp(2.25)} height={hp(2.25)} /></View>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={PAGESTYLE.topBannerParent}>
