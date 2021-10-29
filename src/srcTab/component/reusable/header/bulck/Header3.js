@@ -19,6 +19,7 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import PopupdataSecond from "../../popup/PopupdataSecond";
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
+import { BadgeIcon } from "../../../../../utils/Model";
 
 const HeaderWhite = (props) => {
 
@@ -56,7 +57,12 @@ const HeaderWhite = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {/* <View style={STYLE.redDot}></View> */}
 
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -102,6 +108,7 @@ const HeaderWhite = (props) => {
 export default HeaderWhite;
 
 const styles = StyleSheet.create({
+
     headerBarMainWhite: {
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),

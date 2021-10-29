@@ -82,6 +82,10 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
+console.log('poarams', props.route.params);
+        if (props.route.params && props.route.params.index == 2) {
+            setSelectedIndex(2)
+        }
         initApp(callBack => {
             console.log('Pupil callBack', callBack);
             handleIncommingCall()
@@ -356,7 +360,8 @@ const PupuilDashboard = (props) => {
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
 
     return (
@@ -402,7 +407,7 @@ const PupuilDashboard = (props) => {
                                 selectedIndex == 0 ?
                                     <View style={{ width: isHide ? '94%' : '78%' }}>
                                         <ScrollView showsVerticalScrollIndicator={false}>
-                                            <Header onAlertPress={() => { props.navigation.openDrawer() }} onNotification={()=>openNotification()} />
+                                            <Header onAlertPress={() => { openNotification() }} onNotification={()=>openNotification()} />
                                             <View style={STYLE.padLeftRight}>
                                                 {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}   
                                                 <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />

@@ -88,6 +88,22 @@ const NotificationDrawer = (props) => {
         props.route.params.onGoBack()
         props.navigation.goBack()
     }
+
+    onOpenClass=()=>{
+        if (User.user.UserType == "Teacher") {
+            props.navigation.replace('TeacherDashboard')
+        }else{
+            props.navigation.replace('PupuilDashboard')
+        }
+    }
+    onOpenhomework=()=>{
+        if (User.user.UserType == "Teacher") {
+            // props.navigation.replace('TeacherDashboard',{index:2,})
+            props.navigation.replace('TeacherLessonList');
+        }else{
+            props.navigation.replace('PupilLessonDetail')
+        }
+    }
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
@@ -177,8 +193,7 @@ const NotificationDrawer = (props) => {
                     <View style={styles.drawerTitleMain}>
                         <TouchableOpacity style={styles.closeNotificationbarMain}
                             activeOpacity={opacity}
-                            onPress={() => goBackPress()}
-                        >
+                            onPress={() => goBackPress()} >
                             <BackArrow style={styles.closeIcon} height={hp(2.4)} width={hp(2.4)} />
 
                             {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
@@ -205,7 +220,7 @@ const NotificationDrawer = (props) => {
                                                     <View style={styles.timing}>
                                                         <Text style={styles.timingText}>{item.SubDesc}</Text>
                                                     </View>
-                                                    <TouchableOpacity onPress={() => { props.navigation.navigate('PupilLessonDetail') }} >
+                                                    <TouchableOpacity onPress={() => { onOpenClass() }} >
                                                         {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
                                                         <Text style={STYLE.openClassLink}>Open Class</Text>
                                                     </TouchableOpacity>
@@ -260,7 +275,7 @@ const NotificationDrawer = (props) => {
                                                     <View style={styles.timing}>
                                                         <Text style={styles.timingText}>6 submitted</Text>
                                                     </View>
-                                                    <TouchableOpacity onPress={() => { props.navigation.navigate('PupilLessonDetail') }} >
+                                                    <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                         <Text style={STYLE.openClassLink}>Check</Text>
                                                     </TouchableOpacity>
                                                 </View>

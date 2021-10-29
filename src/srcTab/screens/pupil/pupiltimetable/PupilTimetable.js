@@ -10,7 +10,7 @@ import Header3 from '../../../component/reusable/header/bulck/Header3'
 import { useDispatch } from "react-redux";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import COLORS from "../../../../utils/Colors";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -162,6 +162,11 @@ const PupilTimetable = (props) => {
     const refresh = () => {
         fetchRecord('', '')
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -172,7 +177,7 @@ const PupilTimetable = (props) => {
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.white }}>
                 <Header3
-                    onAlertPress={() => { props.navigation.openDrawer() }}
+                    onAlertPress={() => { openNotification() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}

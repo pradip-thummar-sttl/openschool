@@ -15,6 +15,7 @@ import {
 import BackArrow from "../../../../svg/common/BackArrow";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../utils/Model";
 const NewMessageHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -37,7 +38,11 @@ const NewMessageHeader = (props) => {
                     <TouchableOpacity onPress={() => { props.onAlertPress()}} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                        <View style={STYLE.redDot}></View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

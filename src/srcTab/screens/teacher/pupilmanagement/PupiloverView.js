@@ -12,7 +12,7 @@ import HeaderPM from './HeaderPM'
 import PAGESTYLE from './StyleList'
 import GroupSetUp from './GroupSetUp'
 import COLORS from '../../../../utils/Colors'
-import { User } from '../../../../utils/Model'
+import { BadgeIcon, User } from '../../../../utils/Model'
 import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
 import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
 import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
@@ -130,10 +130,15 @@ const PupiloverView = (props) => {
             />
         );
     };
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     return (
         <View style={{ width: '100%', backgroundColor: COLORS.backgroundColorCommon }}>
             <HeaderPM
-                onAlertPress={() => props.navigation.openDrawer()}
+                onAlertPress={() => openNotification()}
                 onTabSelected={(tab) => setSelectedTab(tab)}
                 tabs={props.tabs}
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}

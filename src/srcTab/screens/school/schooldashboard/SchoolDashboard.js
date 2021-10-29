@@ -13,7 +13,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { appSettings, User } from "../../../../utils/Model";
+import { appSettings, BadgeIcon, User } from "../../../../utils/Model";
 import TeacherTimeTable from "../../teacher/teachertimetable/TeacherTimetable";
 import TeacherLessonList from "../../teacher/teacherlessonlist/TeacherLessonList";
 import TLDetailEdit from "../../teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -313,6 +313,11 @@ const SchoolDashboard = (props) => {
         props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <SidebarSchool
@@ -336,18 +341,18 @@ const SchoolDashboard = (props) => {
                     isTeacherLessonDetail ?
                         <TLDetailEdit
                             goBack={() => setTeacherLessonDetail(false)}
-                            onAlertPress={() => props.navigation.openDrawer()}
+                            onAlertPress={() => openNotification()}
                             onRefresh={() => refresh()}
                             data={dataOfSubView} />
                         :
                         isAddSubject ?
                             <TLDetailAdd
                                 goBack={() => { setAddSubject(false) }}
-                                onAlertPress={() => props.navigation.openDrawer()} />
+                                onAlertPress={() => openNotification()} />
                             :
                             selectedIndex == 0 ?
                                 <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
-                                    <Header onAlertPress={() => props.navigation.openDrawer()} />
+                                    <Header onAlertPress={() => openNotification()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.myDay}>

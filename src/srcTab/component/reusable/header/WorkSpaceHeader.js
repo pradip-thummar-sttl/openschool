@@ -14,6 +14,7 @@ import {
 } from 'react-native-popup-menu';
 import BackArrow from "../../../../svg/common/BackArrow";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../utils/Model";
 const WorkSpaceHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -41,7 +42,11 @@ const WorkSpaceHeader = (props) => {
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                        <View style={STYLE.redDot}></View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

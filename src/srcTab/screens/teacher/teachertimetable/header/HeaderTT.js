@@ -18,6 +18,7 @@ import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
+import { BadgeIcon } from "../../../../../utils/Model";
 
 const HeaderTT = (props) => {
 
@@ -55,6 +56,10 @@ const HeaderTT = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

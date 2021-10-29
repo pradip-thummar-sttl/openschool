@@ -67,7 +67,7 @@ const NotificationDrawer = (props) => {
     getAllNotification = () => {
 
         let data = {
-            userid: "6047645b9a6ac02f68642c72",
+            userid: User.user.UserType == "Teacher" ? User.user._id : User.user.UserDetialId,//"6047645b9a6ac02f68642c72",
             page: "1",
             limit: "5"
         }
@@ -112,6 +112,21 @@ const NotificationDrawer = (props) => {
         })
     }
 
+    
+onOpenClass=()=>{
+    if (User.user.UserType == "Teacher") {
+        props.navigation.replace('TeacherDashboard')
+    }else{
+        props.navigation.replace('PupuilDashboard')
+    }
+}
+onOpenhomework=()=>{
+    if (User.user.UserType == "Teacher") {
+        props.navigation.replace('TeacherDashboard',{index:2,})
+    }else{
+        props.navigation.replace('PupuilDashboard',{index:2,})
+    }
+}
     console.log('event data', calEventData);
     return (
         <View style={styles.drawerMain}>
@@ -251,6 +266,7 @@ const NotificationDrawer = (props) => {
                                                         <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
                                                         <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
                                                             {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                            {/* <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} /> */}
                                                             <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
                                                         </TouchableOpacity>
                                                     </View>
@@ -258,7 +274,7 @@ const NotificationDrawer = (props) => {
                                                         <View style={styles.timing}>
                                                             <Text style={styles.timingText}>{item.SubDesc}</Text>
                                                         </View>
-                                                        <TouchableOpacity onPress={() => { props.navigation.navigate('PupilLessonDetail') }} >
+                                                        <TouchableOpacity onPress={() => { onOpenClass() }} >
                                                             {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
                                                             <Text style={STYLE.openClassLink}>Open Class</Text>
                                                         </TouchableOpacity>
@@ -289,7 +305,7 @@ const NotificationDrawer = (props) => {
                                                         <View style={styles.timing}>
                                                             <Text style={styles.timingText}>6 submitted</Text>
                                                         </View>
-                                                        <TouchableOpacity onPress={() => { props.navigation.navigate('PupilLessonDetail') }} >
+                                                        <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                             <Text style={STYLE.openClassLink}>Check</Text>
                                                         </TouchableOpacity>
                                                     </View>
@@ -421,9 +437,10 @@ const styles = StyleSheet.create({
         right: hp(1.95),
     },
     closeIconSmall: {
-        width: hp(2.8),
+        width: hp(2.94),
         resizeMode: 'contain',
         opacity: 0.4,
+        // alignSelf:'flex-end'
     },
     classsummary: {
         paddingRight: hp(5.1),

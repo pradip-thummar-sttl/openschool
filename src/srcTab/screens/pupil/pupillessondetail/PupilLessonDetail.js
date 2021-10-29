@@ -24,7 +24,7 @@ import {
 } from 'react-native-popup-menu';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
 import { opacity } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
@@ -243,10 +243,15 @@ const PupilLessonDetail = (props) => {
             </View>
         )
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     const lessonRender = () => {
         return (
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                <Header4 onAlertPress={() => props.navigation.openDrawer()} />
+                <Header4 onAlertPress={() => openNotification()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
@@ -295,24 +300,24 @@ const PupilLessonDetail = (props) => {
                     <PupilLessonDetailInternal
                         item={item}
                         goBack={() => setLessonDetail(false)}
-                        onAlertPress={() => props.navigation.openDrawer()}
+                        onAlertPress={() => openNotification()}
                     />
                     : isHomeworkDetail ?
                         <PupilHomeWorkDetail
                             item={item}
                             goBack={() => setHomeworkDetail(false)}
-                            onAlertPress={() => props.navigation.openDrawer()} />
+                            onAlertPress={() => openNotification()} />
                         :
                         isHomeWorkSubmitted ?
                             <PupilHomeWorkSubmitted
                                 item={item}
                                 goBack={() => setHomeWorkSubmitted(false)}
-                                onAlertPress={() => props.navigation.openDrawer()} />
+                                onAlertPress={() => openNotification()} />
                             : isHomeWorkMarked ?
                                 <PupilHomeWorkMarked
                                     item={item}
                                     goBack={() => setHomeWorkMarked(false)}
-                                    onAlertPress={() => props.navigation.openDrawer()} />
+                                    onAlertPress={() => openNotification()} />
                                 :
                                 lessonRender()
             }
