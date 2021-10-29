@@ -190,9 +190,9 @@ export default StyleSheet.create({
         top: 32,
     },
     thumbTopUser1: {
-        width: 100,
-        height: 100,
-        borderRadius: 100,
+        width: hp(13),
+        height: hp(13),
+        borderRadius: hp(13),
         borderColor: COLORS.white,
         borderWidth: 4,
     },
@@ -450,13 +450,14 @@ export default StyleSheet.create({
         marginBottom: hp(1.5),
     },
     pzEditIcon: {
-        width: hp(3.38),
-        height: hp(3.38),
-        resizeMode: 'contain',
+        width: hp(4),
+        height: hp(4),
         position: 'absolute',
-        left: hp(4.8),
-        bottom: hp(-1.6),
-        backgroundColor: COLORS.white
+        bottom: hp(-1.5),
+        borderRadius:100,
+        backgroundColor: COLORS.white,
+        alignItems: 'center',
+        justifyContent:'center',
     },
     editProfileIcon: {
         width: hp(3.38),
