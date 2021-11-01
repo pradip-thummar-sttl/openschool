@@ -408,6 +408,142 @@ understand</string>
             </objects>
             <point key="canvasLocation" x="2377" y="310"/>
         </scene>
+        <!--Poll View Controller-->
+        <scene sceneID="gMx-Je-AyC">
+            <objects>
+                <viewController storyboardIdentifier="PollViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="atH-fA-2UT" customClass="PollViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WcX-mB-BDg"/>
+                        <viewControllerLayoutGuide type="bottom" id="2XP-0G-6Lo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FsX-xD-dAf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jd4-8X-ijv">
+                                <rect key="frame" x="21" y="10" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="onBackPress:" destination="atH-fA-2UT" eventType="touchUpInside" id="2id-hU-Oal"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up in-class Voting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4w-K5-ERL">
+                                <rect key="frame" x="65" y="14.5" width="166.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W4A-32-Pd6">
+                                <rect key="frame" x="26" y="45.5" width="323" height="350"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Your Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E3i-d4-AOu">
+                                        <rect key="frame" x="0.0" y="5" width="323" height="84"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="84" id="pXP-t3-SRP"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your option1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCz-a3-ptu">
+                                        <rect key="frame" x="0.0" y="99" width="323" height="50"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="dbb-Wl-Vpq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your option2" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cqc-JL-V8N">
+                                        <rect key="frame" x="0.0" y="159" width="323" height="50"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="wA8-qd-C3X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your option3" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QRn-4M-jM7">
+                                        <rect key="frame" x="0.0" y="219" width="323" height="50"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XM1-HC-xr6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your option4" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-6k-rNd">
+                                        <rect key="frame" x="0.0" y="279" width="323" height="50"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="iB2-2r-ZQl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="QRn-4M-jM7" firstAttribute="leading" secondItem="W4A-32-Pd6" secondAttribute="leading" id="5Dj-jt-61u"/>
+                                    <constraint firstAttribute="trailing" secondItem="E3i-d4-AOu" secondAttribute="trailing" id="5JW-dw-asL"/>
+                                    <constraint firstItem="vCz-a3-ptu" firstAttribute="leading" secondItem="W4A-32-Pd6" secondAttribute="leading" id="5aj-dY-nfX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Cqc-JL-V8N" secondAttribute="trailing" id="6Ne-uq-MkO"/>
+                                    <constraint firstAttribute="height" constant="350" id="B6T-1f-pDx"/>
+                                    <constraint firstItem="QRn-4M-jM7" firstAttribute="top" secondItem="Cqc-JL-V8N" secondAttribute="bottom" constant="10" id="DCF-Bj-hRO"/>
+                                    <constraint firstItem="Cqc-JL-V8N" firstAttribute="top" secondItem="vCz-a3-ptu" secondAttribute="bottom" constant="10" id="FPi-s2-iJd"/>
+                                    <constraint firstItem="E3i-d4-AOu" firstAttribute="leading" secondItem="W4A-32-Pd6" secondAttribute="leading" id="Kvh-cT-Spw"/>
+                                    <constraint firstItem="vCz-a3-ptu" firstAttribute="top" secondItem="E3i-d4-AOu" secondAttribute="bottom" constant="10" id="Oyw-ft-z21"/>
+                                    <constraint firstItem="Cqc-JL-V8N" firstAttribute="leading" secondItem="W4A-32-Pd6" secondAttribute="leading" id="Qzp-ZH-ecB"/>
+                                    <constraint firstItem="E3i-d4-AOu" firstAttribute="top" secondItem="W4A-32-Pd6" secondAttribute="top" constant="5" id="VB3-V7-ri9"/>
+                                    <constraint firstItem="K3v-6k-rNd" firstAttribute="top" secondItem="QRn-4M-jM7" secondAttribute="bottom" constant="10" id="Y9h-ZJ-wWM"/>
+                                    <constraint firstItem="K3v-6k-rNd" firstAttribute="leading" secondItem="W4A-32-Pd6" secondAttribute="leading" id="aqz-ZN-CBr"/>
+                                    <constraint firstAttribute="trailing" secondItem="QRn-4M-jM7" secondAttribute="trailing" id="btM-0V-LAv"/>
+                                    <constraint firstAttribute="trailing" secondItem="K3v-6k-rNd" secondAttribute="trailing" id="n8L-aC-Heb"/>
+                                    <constraint firstAttribute="trailing" secondItem="vCz-a3-ptu" secondAttribute="trailing" id="wPH-8c-X55"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Af-2i-OkL">
+                                <rect key="frame" x="16" y="609" width="343" height="50"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NFg-c3-AIr"/>
+                                </constraints>
+                                <state key="normal" title="CREATE A POLL">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCreatePollPress:" destination="atH-fA-2UT" eventType="touchUpInside" id="nZp-L2-aVF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="P4w-K5-ERL" firstAttribute="leading" secondItem="Jd4-8X-ijv" secondAttribute="trailing" constant="10" id="9Sw-IS-eTb"/>
+                            <constraint firstItem="W4A-32-Pd6" firstAttribute="leading" secondItem="FsX-xD-dAf" secondAttribute="leadingMargin" constant="10" id="Az8-DF-438"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="5Af-2i-OkL" secondAttribute="bottom" constant="8" id="BCQ-7U-cui"/>
+                            <constraint firstItem="Jd4-8X-ijv" firstAttribute="top" secondItem="FsX-xD-dAf" secondAttribute="topMargin" constant="10" id="BkU-WL-uac"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5Af-2i-OkL" secondAttribute="trailing" id="NGn-M6-8RI"/>
+                            <constraint firstItem="W4A-32-Pd6" firstAttribute="top" secondItem="P4w-K5-ERL" secondAttribute="bottom" constant="10" id="hLw-lI-FJx"/>
+                            <constraint firstItem="Jd4-8X-ijv" firstAttribute="leading" secondItem="FsX-xD-dAf" secondAttribute="leadingMargin" constant="5" id="l1K-fL-BHm"/>
+                            <constraint firstItem="P4w-K5-ERL" firstAttribute="centerY" secondItem="Jd4-8X-ijv" secondAttribute="centerY" id="poa-Tf-CgQ"/>
+                            <constraint firstItem="5Af-2i-OkL" firstAttribute="leading" secondItem="FsX-xD-dAf" secondAttribute="leadingMargin" id="s2r-KC-9Jw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W4A-32-Pd6" secondAttribute="trailing" constant="10" id="udV-d7-XV3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="createPollBtn" destination="5Af-2i-OkL" id="jXU-ak-3HG"/>
+                        <outlet property="opt1TxtField" destination="vCz-a3-ptu" id="zbp-Kf-XXh"/>
+                        <outlet property="opt2TxtField" destination="Cqc-JL-V8N" id="gX0-pY-wga"/>
+                        <outlet property="opt3TxtField" destination="QRn-4M-jM7" id="lWd-Oy-WAj"/>
+                        <outlet property="opt4TxtField" destination="K3v-6k-rNd" id="LFX-Iw-u93"/>
+                        <outlet property="queTextView" destination="E3i-d4-AOu" id="vyU-mt-hIf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xrc-Xg-YGo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2148" y="735.38230884557731"/>
+        </scene>
         <!--WhiteboardVC-->
         <scene sceneID="4Lv-4g-0oY">
             <objects>
@@ -469,6 +605,9 @@ understand</string>
         <image name="thumb" width="44" height="38"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

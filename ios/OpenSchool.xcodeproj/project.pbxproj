@@ -86,6 +86,7 @@
 		887374F2265E35B70035B788 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374F1265E35A20035B788 /* libresolv.tbd */; };
 		8875108B26B2B47C009A35A9 /* ReactionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8875108A26B2B47C009A35A9 /* ReactionTableViewCell.m */; };
 		889633C62667879E00E6DE4F /* CallModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 889633C52667879E00E6DE4F /* CallModule.m */; };
+		88BE3A70272FE11400A1693B /* PollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BE3A6F272FE11400A1693B /* PollViewController.m */; };
 		88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D20504265E253200D97116 /* RCTCalendarModule.m */; };
 		88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */; };
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
@@ -248,6 +249,8 @@
 		8884886F266E1A9800B9D17C /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
 		889633C42667879E00E6DE4F /* CallModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallModule.h; sourceTree = "<group>"; };
 		889633C52667879E00E6DE4F /* CallModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallModule.m; sourceTree = "<group>"; };
+		88BE3A6E272FE11400A1693B /* PollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollViewController.h; sourceTree = "<group>"; };
+		88BE3A6F272FE11400A1693B /* PollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollViewController.m; sourceTree = "<group>"; };
 		88D20504265E253200D97116 /* RCTCalendarModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardVC.h; sourceTree = "<group>"; };
 		88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardVC.m; sourceTree = "<group>"; };
@@ -478,6 +481,8 @@
 				882EA023266A1DF4000B9813 /* ZoomedView.m */,
 				88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */,
 				88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */,
+				88BE3A6E272FE11400A1693B /* PollViewController.h */,
+				88BE3A6F272FE11400A1693B /* PollViewController.m */,
 			);
 			name = CallViewController;
 			sourceTree = "<group>";
@@ -1222,6 +1227,7 @@
 				882EA073266A1F58000B9813 /* SettingSwitchCell.m in Sources */,
 				882EA08D266A213A000B9813 /* InfoModel.m in Sources */,
 				882EA02B266A1DF5000B9813 /* StatsView.m in Sources */,
+				88BE3A70272FE11400A1693B /* PollViewController.m in Sources */,
 				882EA03F266A1E48000B9813 /* QBButton.m in Sources */,
 				882EA058266A1F41000B9813 /* BaseSettingsCell.m in Sources */,
 				8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */,
