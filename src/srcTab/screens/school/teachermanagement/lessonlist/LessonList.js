@@ -7,7 +7,7 @@ import PAGESTYLE from './Style';
 import { opacity, showMessage } from "../../../../../utils/Constant";
 import { Service } from "../../../../../service/Service";
 import { EndPoints } from "../../../../../service/EndPoints";
-import { User } from "../../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../../utils/Model";
 import TeacherLessonDetail from "../lessondetail/LessonDetail";
 import EmptyStatePlaceHohder from "../../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../../utils/Messages";
@@ -159,6 +159,11 @@ const LessonList = (props) => {
             </View>
         )
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             {
@@ -166,7 +171,7 @@ const LessonList = (props) => {
                         <TeacherLessonDetail
                             data={data}
                             goBack={() => { refresh(), setTLDetail(false), props.setLessonDetail(false) }}
-                            onAlertPress={() => props.navigation.openDrawer()} />
+                            onAlertPress={() => openNotification()} />
                         :
                         renderList()
             }

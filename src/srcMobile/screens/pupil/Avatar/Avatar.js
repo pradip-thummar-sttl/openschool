@@ -15,7 +15,7 @@ import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
 import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
-import { User } from '../../../../utils/Model'
+import { BadgeIcon, User } from '../../../../utils/Model'
 
 var tabs = [
     { name: 'COLOUR', isSelected: false },
@@ -93,6 +93,9 @@ const Avatar = (prop) => {
     const [gold, setGold] = useState(0)
 
     useEffect(()=> {
+        refresh()
+    }, [])
+    const refresh = () => {
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag) {
@@ -117,8 +120,7 @@ const Avatar = (prop) => {
             }
         }, (err) => {
         })
-    }, [])
-
+    }
     const changeTab = (index) => {
         let newArr = [...stateOptions];
         newArr.map((item) => {
@@ -221,12 +223,16 @@ const Avatar = (prop) => {
         }
 
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
 
 
 
     return (
         <View>
-            <AvatarHeader onAlertPress={() => { prop.navigation.openDrawer() }} />
+            <AvatarHeader onAlertPress={() => { prop.navigation.openDrawer() }} onNotification={()=>openNotification()} />
             <View style={Styles.mainView}>
                 <View style={Styles.yellowView}>
                     <Text style={Styles.subText}>Your stars convert to</Text>

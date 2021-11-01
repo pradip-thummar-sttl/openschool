@@ -13,7 +13,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { appSettings, User } from "../../../../utils/Model";
+import { appSettings, BadgeIcon, User } from "../../../../utils/Model";
 import TeacherTimeTable from "../teachertimetable/TeacherTimetable";
 import TeacherLessonList from "../teacherlessonlist/TeacherLessonList";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -190,6 +190,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
+        if (props.route.params && props.route.params.index == 2) {
+            setSelectedIndex(2)
+        }
         QB.webrtc
             .init(appSettings)
             .then(function () {
@@ -405,6 +408,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const initOneToOneCall = (pupilData) => {
         props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -428,18 +436,18 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     isTeacherLessonDetail ?
                         <TLDetailEdit
                             goBack={() => setTeacherLessonDetail(false)}
-                            onAlertPress={() => props.navigation.openDrawer()}
+                            onAlertPress={() => openNotification()}
                             onRefresh={() => refresh()}
                             data={dataOfSubView} />
                         :
                         isAddSubject ?
                             <TLDetailAdd
                                 goBack={() => { setAddSubject(false) }}
-                                onAlertPress={() => props.navigation.openDrawer()} />
+                                onAlertPress={() => openNotification()} />
                             :
                             selectedIndex == 0 ?
                                 <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
-                                    <Header onAlertPress={() => props.navigation.openDrawer()} />
+                                    <Header onAlertPress={() => openNotification()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>

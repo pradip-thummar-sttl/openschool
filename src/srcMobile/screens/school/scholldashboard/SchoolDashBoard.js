@@ -12,7 +12,7 @@ import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import { baseUrl, showMessage } from '../../../../utils/Constant';
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+import { BadgeIcon, User } from '../../../../utils/Model';
 import MyPupils from '../../../../svg/teacher/dashboard/MyPupils';
 import Insights from '../../../../svg/school/dashboard/Insights';
 
@@ -90,7 +90,7 @@ const SchoolDashBoard = (props) => {
         }
     }
     const Pupillist = ({ item, onPress }) => (
-        <TouchableOpacity onPress={() => onPress()}>
+        <TouchableOpacity onPress={() => { props.navigation.navigate('TeacherProfileView', {item: item}); }}>
             <View style={[PAGESTYLE.pupilData]}>
                 <View style={PAGESTYLE.pupilProfile}>
                     <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
@@ -108,10 +108,14 @@ const SchoolDashBoard = (props) => {
         </TouchableOpacity>
     );
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
 
     return (
         <View >
-            <Header onAlertPress={() => props.navigation.openDrawer()} />
+            <Header onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
             <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>
@@ -142,7 +146,7 @@ const SchoolDashBoard = (props) => {
 
                 <View style={[PAGESTYLE.viewRow, { marginTop: hp(2), backgroundColor: COLORS.greenSchool }]}>
                     <View style={PAGESTYLE.iconView}>
-                        <MyPupils style={PAGESTYLE.dayIcon} height={hp(2.5)} width={hp(2.5)} />
+                        <MyPupils style={PAGESTYLE.dayIcon} height={hp(2.9)} width={hp(2.9)} />
                         <Text H3 style={PAGESTYLE.dayTitle}>My Teachers</Text>
                     </View>
                     <TouchableOpacity>

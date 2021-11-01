@@ -24,6 +24,7 @@ import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
 import NewLesson from "../../../../../svg/teacher/timetable/NewLesson";
 import NewEvent from "../../../../../svg/teacher/timetable/NewEvent";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -58,10 +59,15 @@ const HeaderTT = (props) => {
                         <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

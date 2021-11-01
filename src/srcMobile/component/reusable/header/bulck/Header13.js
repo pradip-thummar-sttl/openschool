@@ -16,6 +16,7 @@ import {
 import Ic_CheckWhite from "../../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import BackArrow from "../../../../../svg/common/BackArrow";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -28,9 +29,14 @@ const HeaderWhite = (props) => {
                         <Ic_CheckWhite tyle={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheaderwithicon}>save workspace</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onNotification()}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

@@ -8,6 +8,8 @@ import { opacity } from "../../../../../../utils/Constant";
 import moment from 'moment';
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
 
 const HeaderHWS = (props) => {
     return (
@@ -37,6 +39,10 @@ const HeaderHWS = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

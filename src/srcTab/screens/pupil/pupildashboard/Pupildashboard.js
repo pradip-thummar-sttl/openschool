@@ -13,7 +13,7 @@ import { useImperativeHandle } from "react/cjs/react.development";
 import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../../utils/Constant";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
 import PupilTimetable from "../pupiltimetable/PupilTimetable";
 import PupilLessonDetail from "../pupillessondetail/PupilLessonDetail";
@@ -82,6 +82,10 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
+console.log('poarams', props.route.params);
+        if (props.route.params && props.route.params.index == 2) {
+            setSelectedIndex(2)
+        }
         initApp(callBack => {
             console.log('Pupil callBack', callBack);
             handleIncommingCall()
@@ -355,6 +359,12 @@ const PupuilDashboard = (props) => {
         </TouchableOpacity>
     );
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage} >
             {selectedIndex != 5 ?
@@ -398,7 +408,7 @@ const PupuilDashboard = (props) => {
                                 selectedIndex == 0 ?
                                     <View style={{ width: isHide ? '94%' : '78%' }}>
                                         <ScrollView showsVerticalScrollIndicator={false}>
-                                            <Header onAlertPress={() => { props.navigation.openDrawer() }} />
+                                            <Header onAlertPress={() => { openNotification() }} onNotification={()=>openNotification()} />
                                             <View style={STYLE.padLeftRight}>
                                                 {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}   
                                                 <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />

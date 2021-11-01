@@ -6,7 +6,7 @@ import HeaderTM from "./header/HeaderTM";
 import { baseUrl, showMessage, Var } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import ArrowNext from "../../../../svg/teacher/pupilmanagement/ArrowNext";
 import NoPupil from "../../../../svg/emptystate/NoPupil";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -104,6 +104,11 @@ const TeacherManagement = (props) => {
             />
         );
     };
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
@@ -119,7 +124,7 @@ const TeacherManagement = (props) => {
                         :
                         <>
                             <HeaderTM
-                                onAlertPress={() => { props.navigation.openDrawer() }}
+                                onAlertPress={() => { openNotification() }}
                                 onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                                 onSearch={() => fetchRecord(searchKeyword, filterBy)}

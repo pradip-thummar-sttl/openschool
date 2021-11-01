@@ -12,7 +12,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../../actions/action";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 // import Images from "../../../../utils/Images";
@@ -195,6 +195,11 @@ const PupilTimeTable = (props) => {
     const refresh = () => {
         fetchRecord('', '')
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
+
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -213,7 +218,8 @@ const PupilTimeTable = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()} />
+                    refreshList={() => refresh()} 
+                    onNotification={()=>openNotification()}/>
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator

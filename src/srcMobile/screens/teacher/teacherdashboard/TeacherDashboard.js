@@ -14,7 +14,7 @@ import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessag
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
-import { appSettings, User } from "../../../../utils/Model";
+import { appSettings, BadgeIcon, User } from "../../../../utils/Model";
 import MESSAGE from "../../../../utils/Messages";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import QB from "quickblox-react-native-sdk";
@@ -363,6 +363,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -372,7 +377,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
-                <Header onAlertPress={() => props.navigation.openDrawer()} />
+                <Header onNotification={()=>openNotification()} onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>

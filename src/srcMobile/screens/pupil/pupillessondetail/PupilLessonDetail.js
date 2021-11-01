@@ -24,7 +24,7 @@ import {
 } from 'react-native-popup-menu';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
 import { opacity } from "../../../../utils/Constant";
 import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
@@ -325,6 +325,10 @@ const PupilLessonDetail = (props) => {
             // </View>
         )
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -334,7 +338,7 @@ const PupilLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ backgroundColor: COLORS.white }}>
-                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} />
+                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
                 {searchHeader()}
                 <View style={PAGESTYLE.whiteBg1}>
                     <View style={PAGESTYLE.lessonPlanTop}>

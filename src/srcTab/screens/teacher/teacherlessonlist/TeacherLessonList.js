@@ -12,7 +12,7 @@ import { opacity, showMessage } from "../../../../utils/Constant";
 import Header from "./Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import TLDetailAdd from "../teacherlessondetail/lessonplan/TeacherLessonDetailAdd";
 import TeacherLessonDetail from "../teacherlessondetail/TeacherLessonDetail";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
@@ -117,12 +117,18 @@ const TeacherLessonList = (props) => {
         fetchRecord('', '')
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
+
 
     const renderList = () => {
         return (
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <Header
-                    onAlertPress={() => props.navigation.openDrawer()}
+                    onAlertPress={() => openNotification()}
                     navigateToAddSubject={() => { setAddSubject(true) }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
@@ -189,12 +195,12 @@ const TeacherLessonList = (props) => {
                 isAddSubject ?
                     <TLDetailAdd
                         goBack={() => { refresh(), setAddSubject(false) }}
-                        onAlertPress={() => props.navigation.openDrawer()} />
+                        onAlertPress={() => openNotification()} />
                     : isTLDetail ?
                         <TeacherLessonDetail
                             data={data}
                             goBack={() => { refresh(), setTLDetail(false) }}
-                            onAlertPress={() => props.navigation.openDrawer()} />
+                            onAlertPress={() => openNotification()} />
                         :
                         renderList()
             }

@@ -18,6 +18,7 @@ import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import Ic_BlueCheck from "../../../../../svg/teacher/timetable/ic_blueCheck";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -25,9 +26,14 @@ const HeaderWhite = (props) => {
             {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}><BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} /></TouchableOpacity> Common Title</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}>
+                    <TouchableOpacity style={styles.notificationBar} onPress={()=>props.onNotification()}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

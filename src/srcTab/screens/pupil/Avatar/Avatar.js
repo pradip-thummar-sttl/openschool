@@ -12,7 +12,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from '../../../../utils/Colors';
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
-import { User } from '../../../../utils/Model'
+import { BadgeIcon, User } from '../../../../utils/Model'
 
 const tabs = [
     { name: 'COLOUR', isSelected: true },
@@ -69,7 +69,7 @@ const outfitImage = [
     { image: require('../../../../assets/Avtar/Outfits/outfit4.png'), isSelected: false }
 ]
 
-const Avatar = () => {
+const Avatar = (props) => {
 
     const [stateOptions, setStateValues] = useState(tabs);
     const [currentSelected, setCurrentSelected] = useState('COLOUR');
@@ -210,10 +210,15 @@ const Avatar = () => {
         }
 
     }
-
+    
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer()
+        // prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
     return (
         <View>
-            <AvatarHeader />
+            <AvatarHeader onAlertPress={()=>openNotification() }/>
             <View style={Styles.mainView}>
                 {/* LeftView */}
                 <View style={Styles.leftView}>

@@ -14,6 +14,7 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -23,7 +24,10 @@ const HeaderWhite = (props) => {
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

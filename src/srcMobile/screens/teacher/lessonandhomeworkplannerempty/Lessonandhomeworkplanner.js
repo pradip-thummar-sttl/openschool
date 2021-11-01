@@ -11,6 +11,7 @@ import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { showMessage } from "../../../../utils/Constant";
+import { BadgeIcon } from "../../../../utils/Model";
 
 const LessonandHomeworkPlanner = (props) => {
     const [isHide, action] = useState(true);
@@ -35,6 +36,11 @@ const LessonandHomeworkPlanner = (props) => {
             />
         );
     };
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -43,7 +49,7 @@ const LessonandHomeworkPlanner = (props) => {
                 navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} />
             <View style={{ width: isHide ? '93%' : '78%' }}>
-                <Header />
+                <Header onNotification={()=>openNotification()}/>
                 <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.myDay}>
                         <View style={[STYLE.viewRow]}>

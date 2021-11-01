@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "126914137982",
+    "project_id": "st-open-school",
+    "storage_bucket": "st-open-school.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126914137982:android:2c4fe8ffe567ca4aac2d2f",
+        "android_client_info": {
+          "package_name": "com.openschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126914137982-v8r025fn04ceulukc068666rm1c5dbjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8aH-gawPfKuw-G_YfJfGREWP6tlOqXeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126914137982-v8r025fn04ceulukc068666rm1c5dbjp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "126914137982-6tvsat17qvp84d9bvr6m7u62uuvd0oca.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.STTLEnterprise.openschool"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

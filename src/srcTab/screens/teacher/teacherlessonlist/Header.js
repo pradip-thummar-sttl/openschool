@@ -20,6 +20,9 @@ import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import { BadgeIcon } from "../../../../utils/Model";
+// import STYLE from "../../../../utils/Style";
+
 const Header = (props) => {
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -54,6 +57,10 @@ const Header = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

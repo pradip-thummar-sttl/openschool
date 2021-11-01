@@ -11,6 +11,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import { opacity } from "../../../../../utils/Constant";
 import HeaderGallery from "./header/HeaderGallery";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
+import { BadgeIcon } from "../../../../../utils/Model";
 
 
 const TLVideoGallery = (props) => {
@@ -28,7 +29,11 @@ const TLVideoGallery = (props) => {
         props.goBack() 
         return true;
       }
-
+      const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -40,7 +45,7 @@ const TLVideoGallery = (props) => {
             <View style={{ width: '100%' }}>
                 <HeaderGallery
                     navigateToBack={() => props.goBack()}
-                    onAlertPress={() => props.navigation.openDrawer()} />
+                    onAlertPress={() => openNotification()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={[PAGESTYLE.whiteBg, PAGESTYLE.leftSpace]}>
                         <Text style={PAGESTYLE.videoTitle}>Videos</Text>

@@ -21,6 +21,7 @@ import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 import PopupaddnewdataTM from "../../../../component/reusable/popup/PopupaddnewdataTM";
+import { BadgeIcon } from "../../../../../utils/Model";
 
 const HeaderTM = (props) => {
 
@@ -55,6 +56,10 @@ const HeaderTM = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

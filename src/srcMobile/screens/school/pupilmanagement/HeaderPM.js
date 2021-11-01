@@ -27,6 +27,7 @@ import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
+import { BadgeIcon } from "../../../../utils/Model";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -67,12 +68,17 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <View style={styles.massagesIcon}>
                             <Notification />
+                            {/* <View style={STYLE.redDot}></View> */}
                         </View>
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

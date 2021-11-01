@@ -8,6 +8,8 @@ import { opacity } from "../../../../../../../utils/Constant";
 import PopupHomeWorkSave from "../../../../../component/reusable/popup/PopupHomeWorkSave";
 import BackArrow from "../../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../../../utils/Model";
+import STYLE from "../../../../../../../utils/Style";
 const HeaderSave = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -32,6 +34,10 @@ const HeaderSave = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

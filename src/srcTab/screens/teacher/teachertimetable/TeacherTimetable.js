@@ -13,7 +13,7 @@ import { Service } from "../../../../service/Service";
 import { useDispatch } from "react-redux";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import { Lesson } from "../../../../utils/Constant";
 import TLDetail from "../teacherlessondetail/lessonplan/TeacherLessonDetail";
 import TLDetailEdit from "../teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -171,6 +171,12 @@ const TeacherTimeTable = (props) => {
         fetchRecord('', '')
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
+
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             {/* <Sidebar
@@ -193,7 +199,7 @@ const TeacherTimeTable = (props) => {
                         :
                         <View style={{ width: isHide ? '100%' : '78%' }}>
                             <HeaderTT
-                                onAlertPress={() => { props.navigation.openDrawer() }}
+                                onAlertPress={() => { openNotification() }}
                                 onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                                 onSearch={() => fetchRecord(searchKeyword, filterBy)}

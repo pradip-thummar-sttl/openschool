@@ -9,6 +9,9 @@ import { useLinkProps } from "@react-navigation/native";
 import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
+
 const HeaderAddNew = (props) => {
     console.log('props', props);
     return (
@@ -49,6 +52,10 @@ const HeaderAddNew = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>
