@@ -37,7 +37,7 @@ const Pupillist = (props, { item }) => (
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(8) }]}>{props.item.GroupName ? props.item.GroupName : '-'}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props.item.GroupName ? props.item.GroupName : 'Group 1A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
@@ -177,7 +177,7 @@ const PupilManagement = (props) => {
                                                         {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                                     </View>
                                                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
-                                                        <Text style={PAGESTYLE.pupilTableHeadingMainTitle}> Class Group</Text>
+                                                        <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class Group</Text>
                                                     </View>
 
                                                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>

@@ -37,6 +37,7 @@ const Avatar = (prop) => {
     const [currentSelectedHair, setCurrentSelectedHair] = useState(0);
     const [currentSelectedEyes, setCurrentSelectedEyes] = useState(0);
     const [currentSelectedMouth, setCurrentSelectedMouth] = useState(0);
+    const [currentSelectedCloth, setCurrentSelectedCloth] = useState(0);
 
     const [colourAvtar, setColourAvtar] = useState([]);
     const [hairAvtar, setHairAvtar] = useState([]);
@@ -240,7 +241,14 @@ const Avatar = (prop) => {
             setMouthAvtar(newArr)
         }
         else {
-            return clothsAvtar
+            // return outfitImage
+            let newArr = [...clothsAvtar];
+            newArr.map((item) => {
+                item.isSelected = false;
+            })
+            newArr[index].isSelected = true;
+            setCurrentSelectedCloth(index)
+            setClothsAvtar(newArr)
         }
     }
 

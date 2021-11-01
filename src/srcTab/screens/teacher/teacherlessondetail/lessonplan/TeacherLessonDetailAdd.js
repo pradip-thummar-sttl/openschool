@@ -396,7 +396,7 @@ const TLDetailAdd = (props) => {
                         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, height: 41, borderWidth: 1, borderRadius: 6, borderColor: COLORS.videoLinkBorder, marginBottom: 8, }}>
                             {/* <Text style={{ fontSize: hp(1.70), }}>{item.ItemName}</Text> */}
                             <TextInput
-                                style={{ width: '90%', height: 41, }}
+                                style={{ width: '90%', height: 41, fontSize: hp(1.70), }}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity

@@ -45,6 +45,7 @@ export default StyleSheet.create({
         width: hp(0.65),
         height: hp(2.60),
         resizeMode: 'contain',
+        right: 5,
     },
     leftTabbing: {
         width: '100%',
@@ -74,7 +75,7 @@ export default StyleSheet.create({
     },
     dayTitle: {
         color: COLORS.white,
-        fontSize: hp(1.6),
+        fontSize: hp(1.97),
         fontFamily: FONTS.fontBold,
         paddingLeft: hp(1.30),
         alignSelf: 'center',

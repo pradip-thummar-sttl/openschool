@@ -26,7 +26,7 @@ const Pupillist = (props) => (
             </View>
             <View style={PAGESTYLE.nameColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
-                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: '75%', fontFamily: FONTS.fontSemiBold }]}>{props.item.FirstName} {props.item.LastName}</Text>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: '75%' }]}>{props.item.FirstName} {props.item.LastName}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
@@ -44,7 +44,7 @@ const Pupillist = (props) => (
             </View>
             <View style={PAGESTYLE.rewardColumn}>
                 <View style={PAGESTYLE.rewardStar}>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.pupilgroupName, width: '75%' }}>{props.item.Email}</Text>
+                    <Text numberOfLines={1} style={{ ...PAGESTYLE.pupilgroupName, width: hp(27.5) }}>{props.item.Email}</Text>
                 </View>
             </View>
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
@@ -144,10 +144,10 @@ const TeacherManagement = (props) => {
                                                 <View style={{ width: '20%', }}>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
                                                 </View>
-                                                <View style={{ width: '23%', }}>
+                                                <View style={{ width: '13%', }}>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
                                                 </View>
-                                                <View style={{ width: '25%' }}>
+                                                <View style={{ width: '25%',alignItems: 'center',marginRight: hp(4), }}>
                                                     <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
                                                     <View style={PAGESTYLE.pupilTableHeadingsubMain}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
@@ -155,7 +155,7 @@ const TeacherManagement = (props) => {
                                                     </View>
                                                 </View>
                                                 <View style={{ width: '25%' }}>
-                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Contact</Text>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle]}>Contact</Text>
                                                 </View>
                                             </View>
                                             <View style={PAGESTYLE.pupilTabledata}>

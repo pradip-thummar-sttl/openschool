@@ -55,13 +55,22 @@ RCT_EXPORT_METHOD(createCallDialogid:(NSString *)dialogID currentUserID:(NSStrin
   VC.titlee = title;
  
   VC.modalPresentationStyle = UIModalPresentationFullScreen;
-  VC.completeCall = ^(BOOL isFinished) {
-         if (isFinished){
-           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-             successCallback(@[@"hello"]);
-           });
-         }
-     };
+  
+  VC.completeCall = ^(BOOL isFinished, NSString *url) {
+    if (isFinished){
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        successCallback(@[url]);
+      });
+    }
+  };
+  
+//  VC.completeCall = ^(BOOL isFinished) {
+//         if (isFinished){
+//           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//             successCallback(@[@"hello"]);
+//           });
+//         }
+//     };
   dispatch_async(dispatch_get_main_queue(), ^{
     
     if (isPopup) {

@@ -1,8 +1,9 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { isTablet } from 'react-native-device-info';
 
 const { width, height } = Dimensions.get('window');
 
@@ -108,7 +109,7 @@ export default StyleSheet.create({
     },
     mesagesView: {
         width: '100%',
-        height: hp(62),
+        height: Platform.OS == 'android' && isTablet() ? hp(58) : hp(62),
         marginBottom: wp(3),
     },
     textView: {
@@ -117,7 +118,7 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        backgroundColor: COLORS.greyBack,
+        backgroundColor: COLORS.greyBack,        
         // position:'absolute',
         // bottom:0
         // bottom:0,
@@ -149,14 +150,15 @@ export default StyleSheet.create({
         height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
-        marginHorizontal:wp(1.5),
-        // marginVertical:hp(1),  
+        marginHorizontal: Platform.OS == 'android' ? hp(1) : hp(2),
+        textAlignVertical: 'top',
+        paddingTop: Platform.OS == 'android' ? hp(1) : hp(2),
     },
     buttonView:{
         position:'absolute',
-        right:hp(2),
-        // bottom:wp(2),
-        alignItems: 'center',
+        right: hp(-1),
+        bottom: hp(2),
+        alignItems: 'flex-end',
         height: '100%',
         flexDirection:'row'
     },
