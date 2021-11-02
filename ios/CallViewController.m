@@ -8,7 +8,7 @@
 
 
 #import "CallViewController.h"
-
+#import "PollViewController.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -363,7 +363,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (_isTeacher) {
     [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-        
+      PollViewController *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+      vc.channels = weakSelf.channels;
+      vc.ispupil = false;
+      [weakSelf presentViewController:vc animated:false completion:nil];
     }];
   }
   

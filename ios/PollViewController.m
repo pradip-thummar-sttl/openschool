@@ -6,9 +6,15 @@
 //
 
 #import "PollViewController.h"
+#import <PubNub/PubNub.h>
+
+static NSString * const kEntryEarth = @"Earth";
+static NSString * const kUpdateEntryMessage = @"entryMessage";
+static NSString * const kUpdateEntryType = @"entryType";
+static NSString * const kChannelGuide = @"the_guide";
 
 @interface PollViewController ()
-
+@property (nonatomic, strong) PubNub *pubnub;
 @end
 
 @implementation PollViewController
@@ -16,6 +22,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  PNConfiguration *pnconfig = [PNConfiguration configurationWithPublishKey:@"pub-c-bd967178-53ea-4b05-954a-2666bb3b6337"
+                                                              subscribeKey:@"sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267"];
+  pnconfig.uuid = @"myUniqueUUID";
+  self.pubnub = [PubNub clientWithConfiguration:pnconfig];
+  
+  [self.pubnub addListener:self];
+  [self.pubnub subscribeToChannels: self.channels withPresence:YES];
+  
+  if (self.ispupil) {
+    [_teacherPollView setHidden:true];
+    [_pupilPollView setHidden:false];
+    [_questionLbl setText:@""];
+    [_opt1Btn setTitle:@"" forState:UIControlStateNormal];
+    [_opt2Btn setTitle:@"" forState:UIControlStateNormal];
+    [_opt3Btn setTitle:@"" forState:UIControlStateNormal];
+    [_opt4Btn setTitle:@"" forState:UIControlStateNormal];
+    
+  }else{
+    [_teacherPollView setHidden:false];
+    [_pupilPollView setHidden:true];
+    [_queTextView setText:@""];
+    [_opt1TxtField setText:@""];
+    [_opt2TxtField setText:@""];
+    [_opt3TxtField setText:@""];
+    [_opt4TxtField setText:@""];
+  }
 }
 
 /*
@@ -29,7 +61,7 @@
 */
 
 - (IBAction)onBackPress:(id)sender {
-  
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)onCreatePollPress:(id)sender {
   if ([_queTextView.text isEqualToString:@""]) {
@@ -63,7 +95,41 @@
                                      preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:nil];
   }else{
+    NSString *str = [NSString stringWithFormat:@"%@@#@%@@#@%@@#@%@@#@%@",_queTextView.text,_opt1TxtField.text,_opt2TxtField.text,_opt3TxtField.text,_opt4TxtField.text];
+    [self.pubnub publish: @{ @"entry": str, @"update": kEntryEarth } toChannel:self.channels[0]
+          withCompletion:^(PNPublishStatus *status) {
+      NSLog(@"print status %@", status);
+//        NSString *text = kEntryEarth;
+//        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    }];
     
   }
+}
+
+//- (void)displayMessage:(NSString *)message asType:(NSString *)type {
+//    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
+////    self.messages = message;
+////  [self.opponentsCollectionView reloadData];
+////    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+////
+////    [self.tableView beginUpdates];
+////    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+////                          withRowAnimation:UITableViewRowAnimationBottom];
+////
+////    [self.tableView endUpdates];
+////  NSLog(@"print messages data %@", self.messages);
+//}
+
+
+- (IBAction)onOpt4Press:(id)sender {
+}
+
+- (IBAction)onOpt3Press:(id)sender {
+}
+
+- (IBAction)onOpt2Press:(id)sender {
+}
+
+- (IBAction)onOpt1Press:(id)sender {
 }
 @end
