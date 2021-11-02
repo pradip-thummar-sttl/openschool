@@ -231,6 +231,7 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         TextView opponentsName;
         TextView connectionStatus;
         TextView tvPupilEmoji;
+        TextView tvPupilPollAns;
         QBConferenceSurfaceView opponentView;
         ProgressBar progressBar;
         RelativeLayout innerLayout;
@@ -243,6 +244,7 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
             opponentsName = (TextView) itemView.findViewById(R.id.opponentName);
             connectionStatus = (TextView) itemView.findViewById(R.id.connectionStatus);
             tvPupilEmoji = (TextView) itemView.findViewById(R.id.tvPupilEmoji);
+            tvPupilPollAns = (TextView) itemView.findViewById(R.id.tvPupilPollAns);
             opponentView = (QBConferenceSurfaceView) itemView.findViewById(R.id.opponentView);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar_adapter);
             innerLayout = (RelativeLayout) itemView.findViewById(R.id.innerLayout);
@@ -262,6 +264,10 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         public void setPupilEmoji(String index) {
             int[] pupilEmojis = {0x1F914, 0x270B, 0x1F44D};
             tvPupilEmoji.setText(getEmoticon(pupilEmojis[Integer.parseInt(index)]));
+        }
+
+        public void setPupilPollAns(String ans) {
+            tvPupilPollAns.setText(ans);
         }
 
         public String getEmoticon(int originalUnicode) {

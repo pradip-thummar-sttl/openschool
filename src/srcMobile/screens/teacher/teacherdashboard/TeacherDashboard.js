@@ -158,6 +158,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const refresh = () => {
+        console.log(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`);
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
@@ -228,9 +229,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.PupilEmail)
                 names.push(pupil.PupilName)
-                channels.push(dataOfSubView.TeacherID + "_" + pupil.PupilId)
+                channels.push(dataOfSubView.TeacherID + "_" + pupil.PupilId)    //For instant reaction
             });
 
+            channels.push(dataOfSubView.TeacherID + "_" + dataOfSubView._id)    //For polling
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
@@ -240,7 +242,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started');
+                    console.log('Class Started', error, ID);
 
                     let data = {
                         LessonStart: false,

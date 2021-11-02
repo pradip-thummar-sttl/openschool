@@ -84,13 +84,25 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/button_hangup_call"
+            android:layout_toLeftOf="@+id/toggle_recording"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:paddingVertical="5dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <ToggleButton
+            android:id="@+id/toggle_recording_view"
+            android:layout_width="@dimen/toggle_button_params"
+            android:layout_height="@dimen/toggle_button_params"
+            android:background="@drawable/call_recording_toggle_background"
+            android:layout_toLeftOf="@+id/button_hangup_call"
+            android:checked="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textOff=""
+            android:textOn="" />
 
         <TextView
             android:id="@+id/button_hangup_call"

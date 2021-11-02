@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
+import com.openschool.activity.PollingActivity;
 import com.openschool.activity.WhiteBoardActivity;
 import com.openschool.adapter.OpponentsFromCallAdapter;
 import com.openschool.util.CollectionsUtils;
@@ -71,6 +72,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected static final long LOCAL_TRACk_INITIALIZE_DELAY = 500;
     private static final int REQUEST_ADD_OCCUPANTS = 175;
+    private final int SCREEN_RECORD_REQUEST_CODE = 1002;
 
     private static final int DISPLAY_ROW_AMOUNT = 2;
     private static final int SMALL_CELLS_AMOUNT = 8;
@@ -101,6 +103,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
+    private ToggleButton toggle_recording_view;
     private TextView handUpCall;
     private TextView tvTeacherEmoji;
     private TextView tvTitle;
@@ -314,7 +317,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         currentSession.getMediaStreamManager().getAudioTrack(userID).setEnabled(isAudioEnabled);
     }
 
-
     @SuppressWarnings("unchecked")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -327,6 +329,14 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 List<Integer> allOccupants = (List<Integer>) data
                         .getSerializableExtra(Consts.EXTRA_QB_OCCUPANTS_IDS);
                 allOpponents.addAll(0, addedOccupants);
+            }
+        } else if (resultCode == CallActivity.POLLING_REQUEST_CODE) {
+            if (data.hasExtra(PollingActivity.POLLING)) {
+                sendPoll(channels.get(channels.size() - 1), data.getStringExtra(PollingActivity.POLLING), currentUserID);
+            }
+        } else if (resultCode == CallActivity.POLLING_ANS_REQUEST_CODE) {
+            if (data.hasExtra(PollingActivity.POLLING_ANS)) {
+                sendPoll(channels.get(channels.size() - 1), data.getStringExtra(PollingActivity.POLLING_ANS), currentUserID);
             }
         }
     }
@@ -428,6 +438,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected void initViews(View view) {
         Log.i(TAG, "initViews");
         toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
+        toggle_recording_view = (ToggleButton) view.findViewById(R.id.toggle_recording_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
         tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
@@ -552,6 +563,13 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
+        toggle_recording_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                conversationFragmentCallbackListener.onStartScreenRecording(isChecked);
+            }
+        });
+
         micToggleCall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -571,7 +589,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
-        button_screen_sharing.setOnClickListener(v -> startScreenSharing());
+        button_screen_sharing.setOnClickListener(v -> {
+//            startScreenSharing()
+            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+        });
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
 
@@ -1009,6 +1030,27 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 .execute();
     }
 
+    protected void loadPollingForPupil(String message) {
+        System.out.println("KDKD: message for pupil " + message);
+        Intent intent = new Intent(getActivity(), PollingActivity.class);
+        intent.putExtra("isForPupil", true);
+        intent.putExtra(PollingActivity.POLLING, message);
+        startActivityForResult(intent, CallActivity.POLLING_ANS_REQUEST_CODE);
+    }
+
+    protected void loadPollingAnswerForTeacher(String message) {
+        String tempMsg = message.replace("\"", "");
+        String[] splitStr = tempMsg.split("##@##");
+        System.out.println("KDKD: splitStr " + tempMsg);
+
+        final OpponentsFromCallAdapter.ViewHolder holder = getViewHolderForOpponent(Integer.parseInt(splitStr[1]));
+        if (holder == null) {
+            return;
+        }
+
+        holder.setPupilPollAns(splitStr[0]);
+    }
+
     protected void setEmojiForPupil(String message) {
         System.out.println("KDKDKD: Pupil message " + message);
         String tempIndex = message.replace("\"", "");
@@ -1046,8 +1088,19 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                         System.out.println("KDKDKD: Sender " + status.getStatusCode());
                     }
                 });
+    }
 
-
-        // 0x1F44F#@#13248732468578
+    protected void sendPoll(String channel, String message, String currentUserID) {
+        System.out.println("KDKDKD: channel send Poll " + channel + " " + message);
+        hostActivity.getPubNub()
+                .publish()
+                .channel(channel)
+                .message(isTeacher ? message : message + "##@##" + currentUserID)
+                .async(new PNCallback<PNPublishResult>() {
+                    @Override
+                    public void onResponse(PNPublishResult result, PNStatus status) {
+                        System.out.println("KDKDKD: Sender Poll " + message + " " + status.getStatusCode());
+                    }
+                });
     }
 }
