@@ -1089,8 +1089,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OpenSchool/Pods-OpenSchool-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Quickblox/Quickblox.framework/Quickblox",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/QuickbloxWebRTC/QuickbloxWebRTC.framework/QuickbloxWebRTC",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/QuickBlox/Quickblox.framework/Quickblox",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Quickblox-WebRTC/QuickbloxWebRTC.framework/QuickbloxWebRTC",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
