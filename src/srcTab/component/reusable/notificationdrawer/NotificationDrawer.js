@@ -17,6 +17,7 @@ import moment from "moment";
 import { User } from "../../../../utils/Model";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 import { useIsDrawerOpen } from '@react-navigation/drawer'
+import Clock from "../../../../svg/teacher/dashboard/Clock";
 
 
 
@@ -115,14 +116,14 @@ const NotificationDrawer = (props) => {
     }
 
 
-    onOpenClass = () => {
+    const onOpenClass = () => {
         if (User.user.UserType == "Teacher") {
             props.navigation.replace('TeacherDashboard')
         } else {
             props.navigation.replace('PupuilDashboard')
         }
     }
-    onOpenhomework = () => {
+    const onOpenhomework = () => {
         if (User.user.UserType == "Teacher") {
             props.navigation.replace('TeacherDashboard', { index: 2, })
         } else {
@@ -260,102 +261,106 @@ const NotificationDrawer = (props) => {
 
                             {
                                 notifications.length ?
-                                notifications.map((item, index)=>{
-                                    return(
-                                       
-                                        item.NotificationType === 'LIVE CLASSES'?
-                                        <View>
-                                        <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>Live Classes</Text>
-                                        <View style={styles.classDetail}>
+                                    notifications.map((item, index) => {
+                                        return (
 
-                                            <>
-                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                    <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
-                                                    <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
-                                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                                        {/* <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} /> */}
-                                                        <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                                <View style={styles.timingJoinClass}>
-                                                    <View style={styles.timing}>
-                                                        <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                            item.NotificationType === 'LIVE CLASSES' ?
+                                                <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                    <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>Live Classes</Text>
+                                                    <View style={styles.classDetail}>
+
+                                                        <>
+                                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                                <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
+                                                                <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                    {/* <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} /> */}
+                                                                    <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                    {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                            <View style={styles.timingJoinClass}>
+                                                                <View style={styles.timing}>
+                                                                    <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
+                                                                    <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                                                </View>
+                                                                <TouchableOpacity onPress={() => { onOpenClass() }} >
+                                                                    {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
+                                                                    <Text style={STYLE.openClassLink}>Open Class</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                        </>
+
+
+
                                                     </View>
-                                                    <TouchableOpacity onPress={() => { onOpenClass() }} >
-                                                        {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
-                                                        <Text style={STYLE.openClassLink}>Open Class</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </>
+                                                </View> : item.NotificationType === 'HOMEWORK' ?
+                                                    <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                        <Text style={styles.notificationsText}>Homework</Text>
+                                                        <View style={styles.classDetail}>
+                                                            <TouchableOpacity style={styles.closeNotificationbar}>
+                                                                {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                            </TouchableOpacity>
+
+                                                            <>
+                                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
+                                                                    <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
+                                                                    <TouchableOpacity onPress={() => deleteNotification(item._id)}>
+                                                                        <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                        {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <View style={styles.timingJoinClass}>
+                                                                    <View style={styles.timing}>
+                                                                        <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                                                    </View>
+                                                                    <TouchableOpacity onPress={() => { onOpenhomework() }} >
+                                                                        <Text style={STYLE.openClassLink}>Check</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            </>
 
 
-
-                                        </View>
-                                    </View>:item.NotificationType === 'HOMEWORK'?
-                                    <View>
-                                    <Text style={styles.notificationsText}>Homework</Text>
-                                    <View style={styles.classDetail}>
-                                        <TouchableOpacity style={styles.closeNotificationbar}>
-                                            {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                        </TouchableOpacity>
-                                        
-                                                <>
-                                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
-                                                        <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
-                                                        <TouchableOpacity onPress={() => deleteNotification(item._id)}>
-                                                            <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                    <View style={styles.timingJoinClass}>
-                                                        <View style={styles.timing}>
-                                                            <Text style={styles.timingText}>6 submitted</Text>
                                                         </View>
-                                                        <TouchableOpacity onPress={() => { onOpenhomework() }} >
-                                                            <Text style={STYLE.openClassLink}>Check</Text>
-                                                        </TouchableOpacity>
                                                     </View>
-                                                </>
-                                       
+                                                    :
+                                                    <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                        <Text style={styles.notificationsText}>Personal</Text>
 
-                                    </View>
-                                </View>
-                                    :
-                                    <View>
-                                    <Text style={styles.notificationsText}>Personal</Text>
-                                   
-                                            <View style={styles.classDetail}>
-                                                <View tyle={styles.timingJoinClass}>
-                                                    <Text style={[styles.classsummary, { width: '80%' }]}>{item.Title}</Text>
-                                                    <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
-                                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                                        <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                                <View style={styles.timingJoinClass}>
-                                                    <View style={styles.timing}>
-                                                        <Text style={styles.timingText}>{item.Description}</Text>
+                                                        <View style={styles.classDetail}>
+                                                            <View tyle={styles.timingJoinClass}>
+                                                                <Text style={[styles.classsummary, { width: '80%' }]}>{item.Title}</Text>
+                                                                <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                    <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                    {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                            <View style={styles.timingJoinClass}>
+                                                                <View style={styles.timing}>
+                                                                    <Text style={styles.timingText}>{item.Description}</Text>
+                                                                </View>
+                                                                <TouchableOpacity onPress={() => { props.navigation.navigate('Passcode') }}>
+                                                                    <Text style={STYLE.openClassLink}>Read</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                        </View>
                                                     </View>
-                                                    <TouchableOpacity onPress={() => { props.navigation.navigate('Passcode') }}>
-                                                        <Text style={STYLE.openClassLink}>Read</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </View>
-                                    </View>
-                                    )
-                                })
-                                   
+                                        )
+                                    })
+
                                     : null
                             }
 
                             {/* ≥ */}
-                           
+
                         </ScrollView>
-                        <View style={styles.bottomButton}>
+                        {/* <View style={styles.bottomButton}>
                             <TouchableOpacity style={styles.buttonTrash}>
-                                {/* <Image source={Images.trashIcon} style={styles.trashIcon} /> */}
+                                <Image source={Images.trashIcon} style={styles.trashIcon} />
                                 <Text style={styles.clearText}>Clear all notifications</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
                     </View>
             }
         </View >
@@ -428,14 +433,18 @@ const styles = StyleSheet.create({
     },
     closeNotificationbar: {
         position: 'absolute',
-        top: hp(0.7),
-        right: hp(1.95),
+        top: -10,
+        right: 0,
     },
     closeIconSmall: {
         width: hp(2.94),
         resizeMode: 'contain',
-        opacity: 0.4,
+        opacity: 0.6,
         // alignSelf:'flex-end'
+    },
+    closeIconSmall1: {
+        width: hp(2.5),
+        resizeMode: 'contain',
     },
     classsummary: {
         paddingRight: hp(5.1),

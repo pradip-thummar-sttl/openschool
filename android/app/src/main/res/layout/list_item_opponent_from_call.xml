@@ -65,12 +65,13 @@
 
         <TextView
             android:id="@+id/tvPupilPollAns"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
+            android:maxLines="2"
             android:layout_below="@+id/tvPupilEmoji"
             android:layout_marginRight="5dp"
-            android:textSize="35dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/opponentName"

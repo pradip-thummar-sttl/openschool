@@ -303,9 +303,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.PupilEmail)
                 names.push(pupil.PupilName)
-                channels.push(dataOfSubView.TeacherID + "_" + pupil.PupilId)
+                channels.push(dataOfSubView.TeacherID + "_" + pupil.PupilId)    //For instant reacttion
             });
-            channels.push(dataOfSubView.TeacherID)
+            channels.push(dataOfSubView.TeacherID + "_" + dataOfSubView._id)    //For polling
 
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId

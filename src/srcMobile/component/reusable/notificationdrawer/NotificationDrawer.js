@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -92,14 +92,14 @@ const NotificationDrawer = (props) => {
         props.navigation.goBack()
     }
 
-    onOpenClass = () => {
+    const onOpenClass = () => {
         if (User.user.UserType == "Teacher") {
             props.navigation.replace('TeacherDashboard')
         } else {
             props.navigation.replace('PupuilDashboard')
         }
     }
-    onOpenhomework = () => {
+    const onOpenhomework = () => {
         if (User.user.UserType == "Teacher") {
             // props.navigation.replace('TeacherDashboard',{index:2,})
             props.navigation.replace('TeacherLessonList');
@@ -211,7 +211,7 @@ const NotificationDrawer = (props) => {
                                     return (
 
                                         item.NotificationType === 'LIVE CLASSES' ?
-                                            <View>
+                                            <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
                                                 <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>Live Classes</Text>
                                                 <View style={styles.classDetail}>
 
@@ -220,12 +220,13 @@ const NotificationDrawer = (props) => {
                                                             <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
                                                             <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
                                                                 {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                                                {/* <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} /> */}
-                                                                <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
+                                                                <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
                                                             </TouchableOpacity>
                                                         </View>
                                                         <View style={styles.timingJoinClass}>
                                                             <View style={styles.timing}>
+                                                                <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
                                                                 <Text style={styles.timingText}>{item.SubDesc}</Text>
                                                             </View>
                                                             <TouchableOpacity onPress={() => { onOpenClass() }} >
@@ -239,7 +240,7 @@ const NotificationDrawer = (props) => {
 
                                                 </View>
                                             </View> : item.NotificationType === 'HOMEWORK' ?
-                                                <View>
+                                                <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
                                                     <Text style={styles.notificationsText}>Homework</Text>
                                                     <View style={styles.classDetail}>
                                                         <TouchableOpacity style={styles.closeNotificationbar}>
@@ -249,13 +250,14 @@ const NotificationDrawer = (props) => {
                                                         <>
                                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
                                                                 <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
-                                                                <TouchableOpacity onPress={() => deleteNotification(item._id)}>
-                                                                    <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
+                                                                <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                    <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                    {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
                                                                 </TouchableOpacity>
                                                             </View>
                                                             <View style={styles.timingJoinClass}>
                                                                 <View style={styles.timing}>
-                                                                    <Text style={styles.timingText}>6 submitted</Text>
+                                                                    <Text style={styles.timingText}>{item.SubDesc}</Text>
                                                                 </View>
                                                                 <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                                     <Text style={STYLE.openClassLink}>Check</Text>
@@ -267,15 +269,15 @@ const NotificationDrawer = (props) => {
                                                     </View>
                                                 </View>
                                                 :
-                                                <View>
+                                                <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
                                                     <Text style={styles.notificationsText}>Personal</Text>
 
                                                     <View style={styles.classDetail}>
                                                         <View tyle={styles.timingJoinClass}>
                                                             <Text style={[styles.classsummary, { width: '80%' }]}>{item.Title}</Text>
                                                             <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
-                                                                {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                                                <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text>
+                                                                <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
                                                             </TouchableOpacity>
                                                         </View>
                                                         <View style={styles.timingJoinClass}>
@@ -462,12 +464,12 @@ const NotificationDrawer = (props) => {
                             </View>
                         </View> */}
                     </ScrollView>
-                    <View style={styles.bottomButton}>
+                    {/* <View style={styles.bottomButton}>
                         <TouchableOpacity style={styles.buttonTrash}>
-                            {/* <Image source={Images.trashIcon} style={styles.trashIcon} /> */}
+                            <Image source={Images.trashIcon} style={styles.trashIcon} />
                             <Text style={styles.clearText}>Clear all notifications</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
             }
         </View >
@@ -479,6 +481,7 @@ export default NotificationDrawer;
 const styles = StyleSheet.create({
     drawerMain: {
         flex: 1,
+        backgroundColor: COLORS.white
     },
     drawerTitleMainDate: {
         borderBottomWidth: 1,
@@ -492,7 +495,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.commonBorderColor,
         paddingLeft: hp(1.95),
-        paddingTop: hp(5.2),
+        paddingTop: Platform.OS == 'android' ? hp(1.6) : hp(5.2),
         paddingBottom: hp(1.6),
         paddingRight: hp(1.95),
         position: 'relative',
@@ -523,16 +526,14 @@ const styles = StyleSheet.create({
     classDetail: {
         padding: hp(1.95),
         marginBottom: -1,
-        borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
         position: 'relative',
     },
     notificationsText: {
         padding: hp(1.95),
         paddingBottom: hp(1),
         paddingTop: hp(1),
-        borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.commonBorderColor,
         color: COLORS.menuLightFonts,
         fontSize: hp(1.56),
         fontFamily: FONTS.fontSemiBold,
@@ -540,13 +541,17 @@ const styles = StyleSheet.create({
     },
     closeNotificationbar: {
         position: 'absolute',
-        top: hp(0.7),
-        right: hp(1.95),
+        top: -10,
+        right: 0,
     },
     closeIconSmall: {
-        width: hp(2.8),
+        width: hp(2.5),
         resizeMode: 'contain',
-        opacity: 0.4,
+        opacity: 0.6,
+    },
+    closeIconSmall1: {
+        width: hp(2.5),
+        resizeMode: 'contain',
     },
     classsummary: {
         paddingRight: hp(5.1),
@@ -570,7 +575,8 @@ const styles = StyleSheet.create({
         marginRight: hp(0.7),
     },
     timingText: {
-        fontSize: hp(1.56),
+        marginLeft: 8,
+        fontSize: hp(1.45),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
     },
