@@ -115,12 +115,15 @@ const Popupdata = (props) => {
                 userNames.push(pupil.PupilEmail)
                 names.push(pupil.PupilName)
                 if (!props.isPupil) {
-                    channels.push(props.data.TeacherID + "_" + pupil.PupilId)
+                    channels.push(props.data.TeacherID + "_" + pupil.PupilId)       //For instant reaction
                 }
             });
 
             if (props.isPupil) {
-                channels.push(props.data.TeacherID + "_" + User.user.UserDetialId)
+                channels.push(props.data.TeacherID + "_" + User.user.UserDetialId) //For instant reaction
+                channels.push(props.data.TeacherID + "_" + props.data._id)        //For polling
+            } else {
+                channels.push(props.data.TeacherID + "_" + dataOfSubView._id)        //For polling
             }
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
@@ -132,7 +135,7 @@ const Popupdata = (props) => {
 
             if (Platform.OS == 'android') {
                 CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started');
+                    console.log('Class Started', error, ID);
 
                     if (!props.isPupil) {
                         let data = {

@@ -31,6 +31,8 @@ public interface ConversationFragmentCallbackListener {
 
     void onStartScreenSharing();
 
+    void onStartScreenRecording(boolean isChecked);
+
     void onSwitchCamera(CameraVideoCapturer.CameraSwitchHandler cameraSwitchHandler);
 
     void onStartJoinConference();

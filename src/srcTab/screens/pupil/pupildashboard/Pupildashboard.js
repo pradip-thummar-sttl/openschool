@@ -244,7 +244,8 @@ console.log('poarams', props.route.params);
                 names.push(pupil.PupilName)
             });
 
-            channels.push(dataOfSubView.TeacherID + "_" + User.user.UserDetialId)
+            channels.push(dataOfSubView.TeacherID + "_" + User.user.UserDetialId)   //For instant reaction
+            channels.push(dataOfSubView.TeacherID + "_" + dataOfSubView._id)        //For polling
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName

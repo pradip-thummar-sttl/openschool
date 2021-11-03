@@ -2,23 +2,30 @@ package com.openschool.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.projection.MediaProjectionManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import com.facebook.react.bridge.Callback;
 
-import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.Callback;
+import com.hbisoft.hbrecorder.HBRecorder;
+import com.hbisoft.hbrecorder.HBRecorderListener;
 import com.openschool.BuildConfig;
 import com.openschool.R;
 import com.openschool.fragments.AudioConversationFragment;
@@ -54,9 +61,13 @@ import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 
 import org.webrtc.CameraVideoCapturer;
 
+import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -64,11 +75,17 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * QuickBlox team
  */
 public class CallActivity extends BaseActivity implements QBRTCSessionStateCallback<ConferenceSession>, ConferenceSessionCallbacks,
-        OnCallEventsController, ConversationFragmentCallbackListener, NetworkConnectionChecker.OnConnectivityChangedListener, ParentActivityImpl {
+        OnCallEventsController, ConversationFragmentCallbackListener, NetworkConnectionChecker.OnConnectivityChangedListener, ParentActivityImpl,
+        HBRecorderListener {
 
-//    private static final String TAG = CallActivity.class.getSimpleName();
+    //    private static final String TAG = CallActivity.class.getSimpleName();
     private static final String TAG = "KDKDKD";
     private static final String ICE_FAILED_REASON = "ICE failed";
+
+    private HBRecorder hbRecorder;
+    private final int SCREEN_RECORD_REQUEST_CODE = 1002;
+    public static final int POLLING_REQUEST_CODE = 1003;
+    public static final int POLLING_ANS_REQUEST_CODE = 1004;
 
     private ConferenceSession currentSession;
     private String hangUpReason;
@@ -102,7 +119,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private PubNub mPubNub; // a field of MainActivity.java
 
     public static void start(Context context, String dialogID, String currentName, String currentUserID, List<Integer> occupants, ArrayList<QBUser> selectedUsers, boolean listenerRole, boolean isTeacher, String teacherQBUserID, String title, List<String> channels, Callback callBack) {
-
+        System.out.println("KDKD: Start()");
         _callback = callBack;
         Intent intent = new Intent(context, CallActivity.class);
         intent.putExtra(Consts.EXTRA_DIALOG_ID, dialogID);
@@ -143,6 +160,9 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         initWiFiManagerListener();
 
         connectionView = (LinearLayout) View.inflate(this, R.layout.connection_popup, null);
+
+        hbRecorder = new HBRecorder(this, this);
+        System.out.println("KDKD: CallActivity " + hbRecorder);
 
         initializePubNub();
 
@@ -344,7 +364,99 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
             } else {
 
             }
+        } else if (requestCode == SCREEN_RECORD_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                //Start screen recording
+                setOutputPath();
+
+                hbRecorder.startScreenRecording(data, resultCode, this);
+            }
+        } else if (resultCode == POLLING_REQUEST_CODE || resultCode == POLLING_ANS_REQUEST_CODE) {
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
+    }
+
+    @Override
+    public void onStartScreenRecording(boolean isChecked) {
+        if (!isChecked) {
+            startRecordingScreen();
+        } else {
+            if (hbRecorder != null) {
+                System.out.println("KDKD: Stopping is in progress");
+                hbRecorder.stopScreenRecording();
+            }
+        }
+    }
+
+    ContentResolver resolver;
+    ContentValues contentValues;
+    Uri mUri;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void setOutputPath() {
+        String filename = generateFileName();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            resolver = this.getContentResolver();
+            contentValues = new ContentValues();
+            contentValues.put(MediaStore.Video.Media.RELATIVE_PATH, "DCIM/" + "OpenSchool");
+            contentValues.put(MediaStore.Video.Media.TITLE, filename);
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, filename);
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4");
+            mUri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
+            //FILE NAME SHOULD BE THE SAME
+            hbRecorder.setFileName(filename);
+            hbRecorder.setOutputUri(mUri);
+        } else {
+            createFolder();
+            hbRecorder.setOutputPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/OpenSchool");
+        }
+    }
+
+    private String generateFileName() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
+        Date curDate = new Date(System.currentTimeMillis());
+//        return formatter.format(curDate).replace(" ", "");
+        return "MY CLASS RECORDING";
+    }
+
+    private void createFolder() {
+        File f1 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "OpenSchool");
+        if (!f1.exists()) {
+            if (f1.mkdirs()) {
+                Log.i("Folder ", "created");
+            }
+        }
+    }
+
+    @Override
+    public void HBRecorderOnStart() {
+        System.out.println("KDKDKD: Recording Started");
+    }
+
+    @Override
+    public void HBRecorderOnComplete() {
+        System.out.println("KDKDKD: Recording Stoped");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            System.out.println("KDKD: " + mUri);
+        } else {
+            File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/OpenSchool");
+            Uri uri = Uri.parse(path.toString());
+            System.out.println(uri);
+            mUri = uri;
+        }
+    }
+
+    @Override
+    public void HBRecorderOnError(int errorCode, String reason) {
+        System.out.println("KDKDKD: " + errorCode + ": " + reason);
+    }
+
+    private void startRecordingScreen() {
+        MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) this.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        Intent permissionIntent = mediaProjectionManager != null ? mediaProjectionManager.createScreenCaptureIntent() : null;
+        startActivityForResult(permissionIntent, SCREEN_RECORD_REQUEST_CODE);
     }
 
     @Override
@@ -500,8 +612,9 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
     @Override
     public void onLeaveCurrentSession() {
-        _callback.invoke(null, "Live class ends");
+        _callback.invoke(null, mUri);
         leaveCurrentSession();
+        finish();
     }
 
     @Override
@@ -663,8 +776,8 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         public void onError(WsException exception) {
             Log.d(TAG, "onError joinDialog exception= " + exception);
             showToast("Join exception: " + exception.getMessage());
-            releaseCurrentSession();
-            finish();
+//            releaseCurrentSession();
+//            finish();
         }
     }
 
