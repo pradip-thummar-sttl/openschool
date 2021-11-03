@@ -44,7 +44,9 @@
             android:ellipsize="end"
             android:hint="Enter your question here"
             android:maxLines="4"
-            android:minLines="4" />
+            android:minLines="4"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_poll" />
 
         <EditText
             android:id="@+id/edtOp1"
@@ -53,7 +55,9 @@
             android:ellipsize="end"
             android:hint="Enter your option1"
             android:maxLines="2"
-            android:minLines="2" />
+            android:minLines="2"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_poll" />
 
         <EditText
             android:id="@+id/edtOp2"
@@ -62,7 +66,9 @@
             android:ellipsize="end"
             android:hint="Enter your option2"
             android:maxLines="2"
-            android:minLines="2" />
+            android:minLines="2"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_poll" />
 
         <EditText
             android:id="@+id/edtOp3"
@@ -71,16 +77,20 @@
             android:ellipsize="end"
             android:hint="Enter your option3"
             android:maxLines="2"
-            android:minLines="2" />
+            android:minLines="2"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_poll" />
 
         <EditText
             android:id="@+id/edtOp4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
+            android:ellipsize="end"Z
             android:hint="Enter your option4"
             android:maxLines="2"
-            android:minLines="2" />
+            android:minLines="2"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_poll" />
 
     </LinearLayout>
 
@@ -130,7 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/shape_poll_selected"
+            android:background="@drawable/shape_poll"
             android:ellipsize="end" />
 
     </LinearLayout>
