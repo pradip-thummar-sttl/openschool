@@ -108,7 +108,7 @@
                                                         <action selector="didPressMuteButton:" destination="dMc-NP-8wD" eventType="touchUpInside" id="ifN-yn-ELo"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT7-9J-5Qn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT7-9J-5Qn">
                                                     <rect key="frame" x="13" y="137" width="0.0" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="Ypm-XJ-ckd"/>
@@ -596,7 +596,7 @@ understand</string>
                                     <constraint firstAttribute="bottom" secondItem="OPZ-hU-Go5" secondAttribute="bottom" constant="10" id="T7B-jS-fLF"/>
                                     <constraint firstItem="oBc-vw-jtT" firstAttribute="top" secondItem="N6A-LF-fWY" secondAttribute="bottom" constant="10" id="aJG-Jn-dwj"/>
                                     <constraint firstAttribute="trailing" secondItem="OPZ-hU-Go5" secondAttribute="trailing" id="aex-Aj-vZa"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="cM5-PX-Dw6"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="cM5-PX-Dw6"/>
                                     <constraint firstAttribute="trailing" secondItem="oBc-vw-jtT" secondAttribute="trailing" id="f8C-hd-GsP"/>
                                     <constraint firstItem="OPZ-hU-Go5" firstAttribute="top" secondItem="FLK-Xi-L7A" secondAttribute="bottom" constant="10" id="h0J-a4-Sns"/>
                                     <constraint firstItem="N6A-LF-fWY" firstAttribute="leading" secondItem="X0n-W0-OV8" secondAttribute="leading" constant="5" id="iG9-OD-PIq"/>

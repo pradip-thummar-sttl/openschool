@@ -277,6 +277,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           vc.pollString = message;
           vc.pupilId = _currentUserID;
           [self presentViewController:vc animated:false completion:nil];
+        }else{
+          self.pollMessage = message;
+          [self.opponentsCollectionView reloadData];
         }
       }
    
