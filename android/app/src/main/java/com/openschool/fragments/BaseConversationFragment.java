@@ -336,7 +336,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         } else if (resultCode == CallActivity.POLLING_ANS_REQUEST_CODE) {
             if (data.hasExtra(PollingActivity.POLLING_ANS)) {
-                sendPoll(channels.get(channels.size() - 1), data.getStringExtra(PollingActivity.POLLING_ANS), currentUserID);
+                sendPoll(channels.get(0), data.getStringExtra(PollingActivity.POLLING_ANS), currentUserID);
             }
         }
     }
