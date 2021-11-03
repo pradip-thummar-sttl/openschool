@@ -90,6 +90,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (nonatomic, strong) PubNub *pubnub;
 @property (nonatomic, strong) NSString *messages;
+@property (nonatomic, strong) NSString *pollMessage;
 
 @property (strong, nonatomic) NSString *selectedChannel;
 @property (strong, nonatomic) NSString *selectedId;
@@ -212,33 +213,73 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   [self.pubnub subscribeToChannels: self.channels withPresence:YES];
   
   self.messages = @"";
+  self.pollMessage = @"";
 }
 
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
-  if (_isTeacher) {
-    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
-          withCompletion:^(PNPublishStatus *status) {
+  
+  if (![update containsString:@"##@##"]) {
+    if (_isTeacher) {
+      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
+            withCompletion:^(PNPublishStatus *status) {
 
-        NSString *text = update;
-        [self displayMessage:text asType:@"[PUBLISH: sent]"];
-    }];
-  }else{
-    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
-          withCompletion:^(PNPublishStatus *status) {
+          NSString *text = update;
+          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      }];
+    }else{
+      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
+            withCompletion:^(PNPublishStatus *status) {
 
-        NSString *text = update;
-        [self displayMessage:text asType:@"[PUBLISH: sent]"];
-    }];
+          NSString *text = update;
+          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      }];
+    }
+  } else {
+//    if (_isTeacher) {
+//      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[_channels.count-1]
+//            withCompletion:^(PNPublishStatus *status) {
+//
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+//      }];
+//    }else{
+//      PollViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+//      vc.channels = self.channels;
+//      vc.ispupil = true;
+//      vc.pollString = update;
+//      vc.pupilId = _currentUserID;
+//      [self presentViewController:vc animated:false completion:nil];
+//    }
+      
+      
   }
+  
+  
     
 }
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
     NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
-    self.messages = message;
-  [self.opponentsCollectionView reloadData];
+      if (![message containsString:@"##@##"]) {
+        self.messages = message;
+        [self.opponentsCollectionView reloadData];
+      }else{
+        NSArray *listItems = [message componentsSeparatedByString:@"##@##"];
+        if (_isTeacher) {
+          self.pollMessage = message;
+          [self.opponentsCollectionView reloadData];
+        }else if (listItems.count > 2) {
+          PollViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+          vc.channels = self.channels;
+          vc.ispupil = true;
+          vc.pollString = message;
+          vc.pupilId = _currentUserID;
+          [self presentViewController:vc animated:false completion:nil];
+        }
+      }
+   
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 //
 //    [self.tableView beginUpdates];
@@ -526,6 +567,23 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }else{
 //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
         reusableCell.emojiLbl.text = [items objectAtIndex:0];
+//      }
+    }
+    
+  }
+  
+  if (![_pollMessage isEqualToString:@""]) {
+    NSArray *items = [_pollMessage componentsSeparatedByString:@"##@##"];
+    if (_isTeacher) {
+      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+        reusableCell.pollLabel.text = [items objectAtIndex:0];
+      }else
+      {
+        reusableCell.pollLabel.text=@"";
+      }
+    }else{
+//      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+        reusableCell.pollLabel.text = [items objectAtIndex:0];
 //      }
     }
     

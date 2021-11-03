@@ -72,7 +72,7 @@ NSString *const kAccountKey     = @"2xYap5od8h1GCfgxCJ6B";
     [QBRTCConfig setDialingTimeInterval:kQBDialingTimeInterval];
     [QBRTCConfig setLogLevel:QBRTCLogLevelVerbose];
         
-    [QBRTCConfig setConferenceEndpoint:@"wss://janus.quickblox.com:8989/"];
+    [QBRTCConfig setConferenceEndpoint:@"wss://groupcallsdemo.quickblox.com/"];
     NSAssert([QBRTCConfig conferenceEndpoint].length > 0, @"Multi-conference server is available only for Enterprise plans. Please refer to https://quickblox.com/developers/EnterpriseFeatures for more information and contacts.");
         
   

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (strong, nonatomic) NSArray *channels;
+@property (strong, nonatomic) NSString *pollString;
+@property (strong, nonatomic) NSString *pupilId;
 @property (nonatomic) BOOL ispupil;
 @property (weak, nonatomic) IBOutlet UIView *teacherPollView;
 

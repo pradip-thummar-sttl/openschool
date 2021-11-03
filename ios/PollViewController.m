@@ -33,15 +33,18 @@ static NSString * const kChannelGuide = @"the_guide";
   if (self.ispupil) {
     [_teacherPollView setHidden:true];
     [_pupilPollView setHidden:false];
-    [_questionLbl setText:@""];
-    [_opt1Btn setTitle:@"" forState:UIControlStateNormal];
-    [_opt2Btn setTitle:@"" forState:UIControlStateNormal];
-    [_opt3Btn setTitle:@"" forState:UIControlStateNormal];
-    [_opt4Btn setTitle:@"" forState:UIControlStateNormal];
+    [_createPollBtn setHidden:true];
+    NSArray *listItems = [self.pollString componentsSeparatedByString:@"##@##"];
+    [_questionLbl setText:listItems[0]];
+    [_opt1Btn setTitle:listItems[1] forState:UIControlStateNormal];
+    [_opt2Btn setTitle:listItems[2] forState:UIControlStateNormal];
+    [_opt3Btn setTitle:listItems[3] forState:UIControlStateNormal];
+    [_opt4Btn setTitle:listItems[4] forState:UIControlStateNormal];
     
   }else{
     [_teacherPollView setHidden:false];
     [_pupilPollView setHidden:true];
+    [_createPollBtn setHidden:false];
     [_queTextView setText:@""];
     [_opt1TxtField setText:@""];
     [_opt2TxtField setText:@""];
@@ -95,12 +98,13 @@ static NSString * const kChannelGuide = @"the_guide";
                                      preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:nil];
   }else{
-    NSString *str = [NSString stringWithFormat:@"%@@#@%@@#@%@@#@%@@#@%@",_queTextView.text,_opt1TxtField.text,_opt2TxtField.text,_opt3TxtField.text,_opt4TxtField.text];
-    [self.pubnub publish: @{ @"entry": str, @"update": kEntryEarth } toChannel:self.channels[0]
+    NSString *str = [NSString stringWithFormat:@"%@##@##%@##@##%@##@##%@##@##%@",_queTextView.text,_opt1TxtField.text,_opt2TxtField.text,_opt3TxtField.text,_opt4TxtField.text];
+    [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[_channels.count - 1]
           withCompletion:^(PNPublishStatus *status) {
       NSLog(@"print status %@", status);
 //        NSString *text = kEntryEarth;
 //        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      [self dismissViewControllerAnimated:YES completion:nil];
     }];
     
   }
@@ -122,14 +126,46 @@ static NSString * const kChannelGuide = @"the_guide";
 
 
 - (IBAction)onOpt4Press:(id)sender {
+  NSString *str = [NSString stringWithFormat:@"%@##@##%@",_opt4Btn.titleLabel.text, self.pupilId];
+  [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[0]
+        withCompletion:^(PNPublishStatus *status) {
+    NSLog(@"print status %@", status);
+//        NSString *text = kEntryEarth;
+//        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 
 - (IBAction)onOpt3Press:(id)sender {
+  NSString *str = [NSString stringWithFormat:@"%@##@##%@",_opt3Btn.titleLabel.text, self.pupilId];
+  [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[0]
+        withCompletion:^(PNPublishStatus *status) {
+    NSLog(@"print status %@", status);
+//        NSString *text = kEntryEarth;
+//        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 
 - (IBAction)onOpt2Press:(id)sender {
+  NSString *str = [NSString stringWithFormat:@"%@##@##%@",_opt2Btn.titleLabel.text, self.pupilId];
+  [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[0]
+        withCompletion:^(PNPublishStatus *status) {
+    NSLog(@"print status %@", status);
+//        NSString *text = kEntryEarth;
+//        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 
 - (IBAction)onOpt1Press:(id)sender {
+  NSString *str = [NSString stringWithFormat:@"%@##@##%@",_opt1Btn.titleLabel.text, self.pupilId];
+  [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[0]
+        withCompletion:^(PNPublishStatus *status) {
+    NSLog(@"print status %@", status);
+//        NSString *text = kEntryEarth;
+//        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 @end
