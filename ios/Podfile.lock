@@ -332,41 +332,14 @@ PODS:
     - React-Core
   - RNPermissions (3.0.4):
     - React-Core
-  - RNReanimated (2.2.3):
-    - DoubleConversion
-    - FBLazyVector
-    - FBReactNativeSpec
-    - Folly
-    - glog
-    - RCTRequired
-    - RCTTypeSafety
-    - React
-    - React-callinvoker
+  - RNReanimated (1.13.3):
     - React-Core
-    - React-Core/DevSupport
-    - React-Core/RCTWebSocket
-    - React-CoreModules
-    - React-cxxreact
-    - React-jsi
-    - React-jsiexecutor
-    - React-jsinspector
-    - React-RCTActionSheet
-    - React-RCTAnimation
-    - React-RCTBlob
-    - React-RCTImage
-    - React-RCTLinking
-    - React-RCTNetwork
-    - React-RCTSettings
-    - React-RCTText
-    - React-RCTVibration
-    - ReactCommon/turbomodule/core
-    - Yoga
   - RNScreens (3.8.0):
     - React-Core
     - React-RCTImage
   - RNSketchCanvas (0.8.0):
     - React
-  - RNSVG (9.12.0):
+  - RNSVG (12.1.1):
     - React
   - Yoga (1.14.0)
 
@@ -608,10 +581,10 @@ SPEC CHECKSUMS:
   RNFS: 93d5b5535eb39d98e6b19009faa8fe717f7ea45d
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNPermissions: c46788f4cd402287425983e04a4c9bb4356036eb
-  RNReanimated: 8744fb15baf4c582367d910f4f32f5097fb350cb
+  RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
   RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
   RNSketchCanvas: 9c28adb5381543ed55cc98ce6de46479cb3cb12c
-  RNSVG: 75670614bca635d3dd64bc267bc199e539cb4fa9
+  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 04584bbdf8e2c5e39f09cfda6af7ab7db804a327
