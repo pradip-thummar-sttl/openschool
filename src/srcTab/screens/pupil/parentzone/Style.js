@@ -706,8 +706,7 @@ export default StyleSheet.create({
         marginBottom: 90,
     },
     dateField: {
-        paddingRight: hp(5),
-        paddingLeft: hp(5),
+        paddingHorizontal: 10,
     },
     dateIconSml: {
         position: 'absolute',
