@@ -89,16 +89,19 @@ const Sidebar = (props) => {
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
         props.navigation.replace('Users');
+        AsyncStorage.setItem('type', null)
     }
 
     const pupilLogout = () => {
         AsyncStorage.setItem('pupil', JSON.stringify(null))
         props.navigation.replace('Users');
+        AsyncStorage.setItem('type', null)
 
     }
     const schoolLogout = () => {
         AsyncStorage.setItem('school', JSON.stringify(null))
         props.navigation.replace('Users');
+        AsyncStorage.setItem('type', null)
 
     }
 
