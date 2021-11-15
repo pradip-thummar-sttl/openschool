@@ -50,6 +50,7 @@ import MoreWhite from "../../../../svg/teacher/dashboard/MoreWhite";
 import Bronze from "../../../../svg/teacher/lessonhwplanner/StarBronze";
 import Silver from "../../../../svg/teacher/lessonhwplanner/StartSilver";
 import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
+import TeacherSetting from "../teacherSetting/TeacherSetting";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -182,6 +183,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [pupilManagementselectedTab, setPupilManagementselectedTab] = useState(0)
     const [isPupilDetail, setPupilDetail] = useState(false)
     const [selectedPupil, setSelectedPupil] = useState({})
+    const [isSetting, setSetting] = useState(false)
 
 
     const [isLoading, setLoading] = useState(false);
@@ -419,12 +421,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             <Sidebar
                 moduleIndex={selectedIndex}
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(0); refresh() }}
-                navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(1) }}
-                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(2) }}
-                navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(3) }}
-                navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSelectedIndex(4) }}
-                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); props.navigation.replace('Users'); setSelectedIndex(4) }} />
+                navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(0); refresh() }}
+                navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(1) }}
+                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(2) }}
+                navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false);setSetting(false); setAddSubject(false); setSelectedIndex(3) }}
+                navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(4) }}
+                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); props.navigation.replace('Users'); setSelectedIndex(4) }}
+                navigateSettings={()=>{setTeacherLessonDetail(false); setAddSubject(false);setSetting(true);setSelectedIndex(5)}} />
 
             {
                 isPupilDetail ?
@@ -805,6 +808,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         :
                                         selectedIndex == 3 ?
                                             <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
+                                            :selectedIndex == 5 ?
+                                            <TeacherSetting navigation={props.navigation}/>
                                             :
                                             <Message navigation={props.navigation} />
 

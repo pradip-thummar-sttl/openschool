@@ -87,7 +87,7 @@ const SidebarSchool = (props) => {
 
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
-        AsyncStorage.setItem('type', null)
+        AsyncStorage.setItem('type', "")
         props.navigateUser()
 
     }
