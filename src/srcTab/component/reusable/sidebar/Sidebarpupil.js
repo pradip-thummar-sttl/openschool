@@ -74,6 +74,7 @@ const Sidebar = (props) => {
 
     const pupilLogout = () => {
         AsyncStorage.setItem('pupil', JSON.stringify(null))
+        AsyncStorage.setItem('type', null)
         props.navigateUser();
 
     }
