@@ -72,14 +72,12 @@ public class CallModule extends ReactContextBaseJavaModule {
 
             selectedUsers.add(qbUser);
             selectedOccupants.add(Integer.parseInt(occupants.getString(i)));
-            if (isTeacher) {
-                channelList.add(channels.getString(i));
-            }
         }
 
-        if (!isTeacher) {
-            channelList.add(channels.getString(0));
+        for (int i = 0; i < channels.size(); i++) {
+            channelList.add(channels.getString(i));
         }
+
         System.out.println("KDKD: Welcome to the CallModule! " + dialogID + " " + currentUserID + " " + currentName + " " + occupants + " " + userNames + " " + names + " " + teacherQBUserID + " " + isTeacher + selectedUsers.size());
         startConference(dialogID, currentUserID, currentName, selectedUsers, true, selectedOccupants, false, isTeacher, teacherQBUserID, title, channelList, callBack);
     }

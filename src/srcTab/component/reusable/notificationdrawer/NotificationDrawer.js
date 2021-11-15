@@ -71,7 +71,7 @@ const NotificationDrawer = (props) => {
         let data = {
             userid: User.user.UserType == "Teacher" ? User.user._id : User.user.UserDetialId,//"6047645b9a6ac02f68642c72",
             page: "1",
-            limit: "5"
+            limit: "50"
         }
 
         Service.post(data, `${EndPoints.getAllNotifications}`, (res) => {
@@ -92,9 +92,9 @@ const NotificationDrawer = (props) => {
                 })
 
                 setNotifications(res.data)
-                setLiveClassNotifications(liveClass)
-                setHomeworkNotifications(homework)
-                setPersonalNotifications(personal)
+                // setLiveClassNotifications(liveClass)
+                // setHomeworkNotifications(homework)
+                // setPersonalNotifications(personal)
             }
 
 
@@ -324,32 +324,64 @@ const NotificationDrawer = (props) => {
                                                         </View>
                                                     </View>
                                                     :
-                                                    <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
-                                                        <Text style={styles.notificationsText}>Personal</Text>
+                                                    item.NotificationType === 'LESSON' ?
+                                                        <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                            <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>LESSON</Text>
+                                                            <View style={styles.classDetail}>
 
-                                                        <View style={styles.classDetail}>
-                                                            <View tyle={styles.timingJoinClass}>
-                                                                <Text style={[styles.classsummary, { width: '80%' }]}>{item.Title}</Text>
-                                                                <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
-                                                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                                                    <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
-                                                                    {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
-                                                                </TouchableOpacity>
+                                                                <>
+                                                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                                        <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
+                                                                        <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                            {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                            <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                            {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                        </TouchableOpacity>
+                                                                    </View>
+                                                                    <View style={styles.timingJoinClass}>
+                                                                        <View style={styles.timing}>
+                                                                            <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
+                                                                            <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                                                        </View>
+                                                                        <TouchableOpacity onPress={() => { onOpenhomework() }} >
+                                                                            {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
+                                                                            <Text style={STYLE.openClassLink}>VIEW</Text>
+                                                                        </TouchableOpacity>
+                                                                    </View>
+                                                                </>
+
+
+
                                                             </View>
-                                                            <View style={styles.timingJoinClass}>
-                                                                <View style={styles.timing}>
-                                                                    <Text style={styles.timingText}>{item.Description}</Text>
+                                                        </View> :
+                                                        <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                            <Text style={styles.notificationsText}>Personal</Text>
+
+                                                            <View style={styles.classDetail}>
+                                                                <View tyle={styles.timingJoinClass}>
+                                                                    <Text style={[styles.classsummary, { width: '80%' }]}>{item.Title}</Text>
+                                                                    <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                        <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                        {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                    </TouchableOpacity>
                                                                 </View>
-                                                                <TouchableOpacity onPress={() => { props.navigation.navigate('Passcode') }}>
-                                                                    <Text style={STYLE.openClassLink}>Read</Text>
-                                                                </TouchableOpacity>
+                                                                <View style={styles.timingJoinClass}>
+                                                                    <View style={styles.timing}>
+                                                                        <Text style={styles.timingText}>{item.Description}</Text>
+                                                                    </View>
+                                                                    <TouchableOpacity onPress={() => { props.navigation.navigate('Passcode') }}>
+                                                                        <Text style={STYLE.openClassLink}>Read</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
                                                             </View>
                                                         </View>
-                                                    </View>
                                         )
                                     })
-
-                                    : null
+                                    :
+                                    <View style={{ height: 100, justifyContent: 'center' }}>
+                                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No new notifications!</Text>
+                                    </View>
                             }
 
                             {/* ≥ */}

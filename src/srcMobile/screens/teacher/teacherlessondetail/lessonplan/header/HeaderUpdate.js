@@ -10,6 +10,7 @@ import moment from 'moment';
 import AddWhite from "../../../../../../svg/teacher/timetable/Add_White";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import EditWhite from "../../../../../../svg/pupil/parentzone/EditWhite";
+import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const HeaderUpdate = (props) => {
     return (
@@ -47,7 +48,7 @@ const HeaderUpdate = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => props.saveLesson()}>
                                 {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
-                                <EditWhite style={styles.addIcon} height={12} width={12} />
+                                <TickMarkWhite style={styles.addIcon} height={12} width={12} />
                             </TouchableOpacity>
                         }
                     </View>
