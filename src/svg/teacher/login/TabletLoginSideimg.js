@@ -6,6 +6,7 @@ function TabletLoginSideimg(props) {
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width={props.width}
+      preserveAspectRatio="xMinYMin slice" 
       height={props.height}
       viewBox="0 0 515.864 768"
       {...props}
