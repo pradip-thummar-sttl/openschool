@@ -147,11 +147,13 @@ const TeacherTimeTable = (props) => {
         }
 
        setScrollIndex(index)
-       console.log('scrollviewref=====>', time[index]);
 
         fetchRecord('', '')
-
-        Service.get(`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
+        let data = {
+            CurrentDate: moment().format('yyyy-MM-DD'),
+            
+        }
+        Service.post(data,`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
             // setTimeTableLoading(false)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
@@ -223,9 +225,10 @@ const TeacherTimeTable = (props) => {
                                 onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                                 onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', 'LiveLesson') }}
                                 navigateToAddLesson={() => setTeacherLessonAdd(true)}
-                                refreshList={() => refresh()} />
+                                refreshList={() => refresh()} 
+                                onFilter={(filter)=>fetchRecord(searchKeyword, filter)} />
 
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isTimeTableLoading ?

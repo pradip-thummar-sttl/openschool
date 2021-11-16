@@ -140,6 +140,8 @@ const NotificationDrawer = (props) => {
                         <Calendar
                             minDate={new Date()}
                             firstDay={1}
+                            onPressArrowLeft={(sub)=>{console.log('subbbbbbbbbbbbbbbbbbbb',sub);}}
+                            onPressArrowRight={(add)=>{console.log('adddddddddddddddddddd',add);}}
                             dayComponent={({ date, state, marking }) => {
                                 return (
                                     <View>

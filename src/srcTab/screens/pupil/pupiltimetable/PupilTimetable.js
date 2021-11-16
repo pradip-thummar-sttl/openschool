@@ -73,7 +73,12 @@ const PupilTimetable = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Service.get(`${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
+        
+
+        let data ={
+            CurrentDate: moment().format('yyyy-MM-DD')
+        }
+        Service.post(data,`${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
@@ -147,11 +152,6 @@ const PupilTimetable = (props) => {
         } else {
             index = (h - 6) * 2
         }
-        
-        // scrollViewRef.current.scrollTo({
-        //     x: scrollViewRef.nativeEvent.contentOffset.x/scrollIndex,
-        //     animated: true,
-        // });
 
        setScrollIndex(index)
        console.log('scrollviewref=====>', time[index]);
@@ -174,7 +174,7 @@ const PupilTimetable = (props) => {
             if (res.code == 200) {
                 console.log('response ', res.data)
                 setTimeTableData(res.data)
-                dispatch(setCalendarEventData(res.data))
+                // dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
             }
@@ -207,7 +207,8 @@ const PupilTimetable = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()} />
+                    refreshList={() => refresh()} 
+                    onFilter={(filter)=>fetchRecord(searchKeyword, filter)} />
 
                 <View style={{ ...PAGESTYLE.backgroundTable, }}>
                     {isTimeTableLoading ?

@@ -20,6 +20,7 @@ import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import PopupdataSecond from "../../popup/PopupdataSecond";
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 import { BadgeIcon } from "../../../../../utils/Model";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 
 const HeaderWhite = (props) => {
 
@@ -98,6 +99,36 @@ const HeaderWhite = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
+                <TouchableOpacity style={styles.buttonGroup}>
+                    <Menu style={styles.filterGroup}>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
+                        <MenuOptions style={styles.filterListWrap}>
+                            {/* <MenuOption style={styles.borderList}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Subject</Text> */}
+                                    {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
+                                {/* </View>
+                            </MenuOption> */}
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity onPress={()=>{props.onFilter('LiveLesson')}}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Live Lesson</Text>
+                                </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity onPress={()=>{props.onFilter('PublishLesson')}}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Publish Lesson</Text>
+                                </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
+                    <FilterBlack style={styles.filterIcon} width={hp(1.74)} height={hp(1.50)}/>
+
+                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
+                </TouchableOpacity>
                 <PopupdataSecondPupil
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
@@ -108,7 +139,20 @@ const HeaderWhite = (props) => {
 export default HeaderWhite;
 
 const styles = StyleSheet.create({
-
+    filterIcon: {
+        width: hp(1.74),
+        height: hp(1.50),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.30),
+        top: hp(1.85),
+    },
+    buttonGroup: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
+    },
     headerBarMainWhite: {
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
