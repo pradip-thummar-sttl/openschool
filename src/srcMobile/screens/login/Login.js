@@ -269,10 +269,10 @@ class Login extends Component {
             AsyncStorage.setItem('type', "Pupil")
         } else if (this.props.route.params.userType == 'School') {
             AsyncStorage.setItem('school', JSON.stringify(data))
-            AsyncStorage.setItem('type', "Teacher")
+            AsyncStorage.setItem('type', "School")
         }else {
             AsyncStorage.setItem('user', JSON.stringify(data))
-            AsyncStorage.setItem('type', "School")
+            AsyncStorage.setItem('type', "Teacher")
         }
         this.props.setUserAuthData(res)
         if (res.UserType === "Teacher") {

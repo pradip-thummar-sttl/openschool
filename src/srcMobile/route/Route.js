@@ -52,6 +52,7 @@ import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import Calendars from '../component/reusable/Calendar/Calendar';
 import Setting from '../screens/Setting/Setting';
+import teacherSetting from '../screens/teacher/teacherSetting/teacherSetting'
 import Message from '../screens/teacher/GlobalMessage/Message';
 import NewMessage from '../screens/teacher/GlobalMessage/NewMessage';
 import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
@@ -151,6 +152,7 @@ function ScreenStack() {
                 <Stack.Screen name="WorkSpace" component={WorkSpace} />
                 <Stack.Screen name="Calendars" component={Calendars} />
                 <Stack.Screen name="Setting" component={Setting} />
+                <Stack.Screen name="TeacherSetting" component={teacherSetting} />
                 <Stack.Screen name="Message" component={Message} />
                 <Stack.Screen name="NewMessage" component={NewMessage} />
                 <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />

@@ -88,20 +88,21 @@ const Sidebar = (props) => {
 
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
+        AsyncStorage.setItem('type', '')
         props.navigation.replace('Users');
-        AsyncStorage.setItem('type', null)
+        
     }
 
     const pupilLogout = () => {
         AsyncStorage.setItem('pupil', JSON.stringify(null))
+        AsyncStorage.setItem('type', '')
         props.navigation.replace('Users');
-        AsyncStorage.setItem('type', null)
 
     }
     const schoolLogout = () => {
         AsyncStorage.setItem('school', JSON.stringify(null))
+        AsyncStorage.setItem('type', '')
         props.navigation.replace('Users');
-        AsyncStorage.setItem('type', null)
 
     }
 
@@ -199,7 +200,9 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={[styles.userInfo, styles.userInfobottom]}>
+                    <TouchableOpacity 
+                    onPress={() => { props.navigation.navigate('TeacherSetting'); props.navigation.closeDrawer() }}
+                    style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
                             <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
@@ -208,7 +211,7 @@ const Sidebar = (props) => {
                             {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                             <More style={styles.moreIcon} height={5} width={hp(3)} />
                         </TouchableOpacity>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             : User.user.UserType == 'School' ?

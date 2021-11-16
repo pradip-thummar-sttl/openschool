@@ -38,6 +38,7 @@ export default class Splash extends Component {
     launchNextScreen() {
         // this.props.navigation.replace('Users')
         AsyncStorage.getItem('type').then((value) => {
+            console.log('-----value------',value)
             if (value === "Teacher") {
                 this.props.navigation.navigate('Login', { userType: "Teacher" })
             } else if (value == "Pupil") {
