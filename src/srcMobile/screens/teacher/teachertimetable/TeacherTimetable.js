@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, BackHandler, Platform, ToastAndroid } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, BackHandler, Platform, ToastAndroid,FlatList } from "react-native";
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -18,6 +18,7 @@ import { Lesson } from "../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 // import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
+import moment from "moment";
 
 
 const TeacherTimeTable = (props) => {
@@ -74,6 +75,7 @@ const TeacherTimeTable = (props) => {
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    const [scrollIndex, setScrollIndex] = useState(0);
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
@@ -113,7 +115,7 @@ const TeacherTimeTable = (props) => {
         if (flag) {
             return (
                 <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
-                    navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })} 
+                    navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })}
                     isLesson={data.Type == Lesson} />
             );
         } else {
@@ -126,6 +128,31 @@ const TeacherTimeTable = (props) => {
     // useEffect(() => {
     //     fetchRecord('', '')
     // }, [])
+
+    useEffect(() => {
+        let time1 = moment().format('HH:mm')
+        const timeSplit = time1.split(':')
+        console.log('times of ============>', timeSplit);
+        const h = timeSplit[0]  //09:30
+        const m = timeSplit[1]  //09:30
+
+        var index
+        if (m >= 30) {
+            index = ((h - 6) * 2) + 1
+        } else {
+            index = (h - 6) * 2
+        }
+
+        // scrollViewRef.current.scrollTo({
+        //     x: scrollViewRef.nativeEvent.contentOffset.x/scrollIndex,
+        //     animated: true,
+        // });
+
+        setScrollIndex(index)
+        console.log('scrollviewref=====>', time[index]);
+
+        fetchRecord('', '')
+    }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
         setTimeTableLoading(true)
@@ -164,34 +191,34 @@ const TeacherTimeTable = (props) => {
     }
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
-      const openNotification = () => {
+    }
+    const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
 
     return (
@@ -211,9 +238,9 @@ const TeacherTimeTable = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => fetchRecord('', '')}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()} 
-                    onNotification={()=>openNotification()}
-                    />
+                    refreshList={() => refresh()}
+                    onNotification={() => openNotification()}
+                />
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
@@ -231,7 +258,7 @@ const TeacherTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
+                                {/* <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
@@ -249,7 +276,32 @@ const TeacherTimeTable = (props) => {
                                             </View>
                                         </View>
                                     ))}
-                                </ScrollView>
+                                </ScrollView> */}
+
+                                <FlatList
+                                    style={{...STYLE.padLeftRight, paddingLeft:0,}}
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                    initialScrollIndex={scrollIndex}
+                                    onScrollToIndexFailed={0}
+                                    data={time}
+                                    renderItem={({ item, index }) => (
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable, }}>{item}</Text>
+
+                                            <View style={PAGESTYLE.timeLabel}>
+                                                {days.map((data, dayKey) => (
+                                                    dayKey != 0 ?
+                                                        setData(dayKey, index)
+                                                        :
+                                                        null
+
+                                                ))}
+                                            </View>
+                                        </View>
+                                    )}
+                                />
+
                             </View>
                             :
                             // <View style={{ height: 100, justifyContent: 'center' }}>

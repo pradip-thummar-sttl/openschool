@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Platform, BackHandler, ToastAndroid } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Platform, BackHandler, ToastAndroid,FlatList } from "react-native";
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -17,6 +17,7 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 // import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
+import moment from "moment";
 
 const PupilTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -72,6 +73,8 @@ const PupilTimeTable = (props) => {
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    const [scrollIndex, setScrollIndex] = useState(0);
+
     let currentCount = 0
     useEffect(() => {
         if (Platform.OS==="android") {
@@ -159,6 +162,31 @@ const PupilTimeTable = (props) => {
         })
     }, [])
 
+    useEffect(() => {
+        let time1 = moment().format('HH:mm')
+        const timeSplit = time1.split(':')
+        console.log('times of ============>', timeSplit);
+        const h = timeSplit[0]  //09:30
+        const m = timeSplit[1]  //09:30
+
+        var index
+        if (m >= 30) {
+            index = ((h - 6) * 2) + 1
+        } else {
+            index = (h - 6) * 2
+        }
+
+        // scrollViewRef.current.scrollTo({
+        //     x: scrollViewRef.nativeEvent.contentOffset.x/scrollIndex,
+        //     animated: true,
+        // });
+
+        setScrollIndex(index)
+        console.log('scrollviewref=====>', time[index]);
+
+        fetchRecord('', '')
+    }, [])
+
     const fetchRecord = (searchBy, filterBy) => {
         setTimeTableLoading(true)
         let data = {
@@ -237,7 +265,7 @@ const PupilTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
+                                {/* <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
                                     horizontal={true}>
 
                                     {time.map((data, timneKey) => (
@@ -255,7 +283,31 @@ const PupilTimeTable = (props) => {
                                             </View>
                                         </View>
                                     ))}
-                                </ScrollView>
+                                </ScrollView> */}
+                                <FlatList
+                                    style={{...STYLE.padLeftRight, paddingLeft:0,}}
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                    initialScrollIndex={scrollIndex}
+                                    onScrollToIndexFailed={0}
+                                    data={time}
+                                    renderItem={({ item, index }) => (
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable, paddingVertical: 8, }}>{item}</Text>
+
+                                            <View style={PAGESTYLE.timeLabel}>
+                                                {days.map((data, dayKey) => (
+                                                    dayKey != 0 ?
+                                                        setData(dayKey, index)
+                                                        :
+                                                        null
+
+                                                ))}
+                                            </View>
+                                        </View>
+                                    )}
+                                />
+
                             </View>
                             :
                             // <View style={{ height: 100, justifyContent: 'center' }}>
