@@ -360,6 +360,7 @@ console.log('poarams', props.route.params);
     );
 
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

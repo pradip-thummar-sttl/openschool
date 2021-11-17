@@ -194,6 +194,7 @@ const TeacherTimeTable = (props) => {
     }
 
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

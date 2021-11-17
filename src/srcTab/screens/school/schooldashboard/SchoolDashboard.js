@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { appSettings, BadgeIcon, User } from "../../../../utils/Model";
@@ -314,6 +314,7 @@ const SchoolDashboard = (props) => {
     }
 
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

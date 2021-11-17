@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -365,6 +365,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
     }

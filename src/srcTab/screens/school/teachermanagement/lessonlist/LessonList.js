@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../../utils/Colors";
 // import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import { opacity, showMessage } from "../../../../../utils/Constant";
+import { opacity, showMessage, Var } from "../../../../../utils/Constant";
 import { Service } from "../../../../../service/Service";
 import { EndPoints } from "../../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../../utils/Model";
@@ -160,6 +160,7 @@ const LessonList = (props) => {
         )
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

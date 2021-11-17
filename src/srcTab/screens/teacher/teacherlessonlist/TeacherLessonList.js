@@ -8,7 +8,7 @@ import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderWhite from "../../../component/reusable/header/HeaderWhite";
-import { opacity, showMessage } from "../../../../utils/Constant";
+import { opacity, showMessage, Var } from "../../../../utils/Constant";
 import Header from "./Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
@@ -118,6 +118,7 @@ const TeacherLessonList = (props) => {
     }
 
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

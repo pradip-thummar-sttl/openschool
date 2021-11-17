@@ -26,7 +26,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
-import { opacity } from "../../../../utils/Constant";
+import { opacity, Var } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
@@ -244,6 +244,7 @@ const PupilLessonDetail = (props) => {
         )
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

@@ -8,7 +8,7 @@ import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
-import { opacity } from "../../../../../utils/Constant";
+import { opacity, Var } from "../../../../../utils/Constant";
 import HeaderGallery from "./header/HeaderGallery";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import { BadgeIcon } from "../../../../../utils/Model";
@@ -30,6 +30,7 @@ const TLVideoGallery = (props) => {
         return true;
       }
       const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

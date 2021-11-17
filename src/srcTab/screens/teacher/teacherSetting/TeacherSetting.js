@@ -8,7 +8,7 @@ import ToggleSwitch from 'toggle-switch-react-native';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../utils/Model";
-import { showMessage } from "../../../../utils/Constant";
+import { showMessage, Var } from "../../../../utils/Constant";
 import SettingHeader from "../../../component/reusable/header/SettingHeader";
 
 const TeacherSetting = (props) => {
@@ -100,6 +100,7 @@ const TeacherSetting = (props) => {
         console.log('type  of mainArray ', mainArray)
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

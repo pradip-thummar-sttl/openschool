@@ -13,6 +13,7 @@ import COLORS from '../../../../utils/Colors';
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
 import { BadgeIcon, User } from '../../../../utils/Model'
+import { Var } from '../../../../utils/Constant'
 
 const tabs = [
     { name: 'COLOUR', isSelected: true },
@@ -212,6 +213,7 @@ const Avatar = (props) => {
     }
     
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
         // prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })

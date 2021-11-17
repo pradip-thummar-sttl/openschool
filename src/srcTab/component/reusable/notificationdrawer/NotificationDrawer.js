@@ -12,12 +12,13 @@ import { opacity, showMessage, Var } from '../../../../utils/Constant';
 // import Images from "../../../../utils/Images";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { User } from "../../../../utils/Model";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 import { useIsDrawerOpen } from '@react-navigation/drawer'
 import Clock from "../../../../svg/teacher/dashboard/Clock";
+import { setCalendarEventData } from "../../../../actions/action";
 
 
 
@@ -43,7 +44,7 @@ const NotificationDrawer = (props) => {
     const [personalNotifications, setPersonalNotifications] = useState([])
 
     const [notifications, setNotifications] = useState([])
-
+    const dispatch = useDispatch()
     useEffect(() => {
         if (Var.isCalender) {
 
@@ -118,9 +119,9 @@ const NotificationDrawer = (props) => {
 
     const onOpenClass = () => {
         if (User.user.UserType == "Teacher") {
-            props.navigation.replace('TeacherDashboard')
+            props.navigation.replace('TeacherDashboard',{ index: 1, })
         } else {
-            props.navigation.replace('PupuilDashboard')
+            props.navigation.replace('PupuilDashboard',{ index: 1, })
         }
     }
     const onOpenhomework = () => {
@@ -130,18 +131,44 @@ const NotificationDrawer = (props) => {
             props.navigation.replace('PupuilDashboard', { index: 2, })
         }
     }
-    console.log('event data', calEventData);
+
+    const onMonthChangeFunction = (month) => {
+
+        let data = {
+            CurrentDate: moment(month.timestamp).format('yyyy-MM-DD')
+        }
+        if (User.user.UserType === "Teacher") {
+            Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
+                console.log('previousMonthDateSet ------- response of calender event is:', res)
+                if (res.code == 200) {
+                    dispatch(setCalendarEventData(res.data))
+                }
+            }, (err) => {
+                console.log('response of calender event eror is:', err)
+            })
+        }else{
+            Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
+                console.log('previousMonthDateSet ------- response of calender event is:', res)
+                if (res.code == 200) {
+                    dispatch(setCalendarEventData(res.data))
+                }
+            }, (err) => {
+                console.log('response of calender event eror is:', err)
+            })
+        }
+        
+    }
+    console.log('event data', Var.isCalender);
     return (
         <View style={styles.drawerMain}>
             {
                 Var.isCalender ?
                     <View style={styles.datepickerDrwaer}>
-                        {Var.isCalender = false}
+                        {/* {Var.isCalender = false} */}
                         <Calendar
                             minDate={new Date()}
                             firstDay={1}
-                            onPressArrowLeft={(sub)=>{console.log('subbbbbbbbbbbbbbbbbbbb',sub);}}
-                            onPressArrowRight={(add)=>{console.log('adddddddddddddddddddd',add);}}
+                            onMonthChange={(month) => onMonthChangeFunction(month)}
                             dayComponent={({ date, state, marking }) => {
                                 return (
                                     <View>

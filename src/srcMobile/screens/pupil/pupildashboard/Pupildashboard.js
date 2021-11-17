@@ -327,6 +327,7 @@ const PupuilDashboard = (props) => {
         setDataOfSubView(myClass[index])
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', {
             onGoBack: () => {
