@@ -61,6 +61,22 @@ const TLDetail = (props) => {
                                 <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
                             </View>
                         </View>
+                        {/* <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                            <Text style={PAGESTYLE.subjectText}>Live Lesson</Text>
+                            <View style={PAGESTYLE.alignRow}> */}
+                                {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
+                                {/* <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
+                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
+                            </View>
+                        </View> */}
+                        {/* <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
+                            <Text style={PAGESTYLE.subjectText}>Publish Lesson</Text>
+                            <View style={PAGESTYLE.alignRow}> */}
+                                {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
+                                {/* <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
+                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
+                            </View>
+                        </View> */}
                         <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={PAGESTYLE.alignRow}>

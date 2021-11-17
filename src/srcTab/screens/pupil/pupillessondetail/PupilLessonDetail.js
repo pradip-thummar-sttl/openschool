@@ -235,6 +235,36 @@ const PupilLessonDetail = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Live Lesson'); setSelectedIndex(2) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Publish Lesson'); setSelectedIndex(3) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 3 ?
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
                         </MenuOptions>
                     </Menu>
                     {/* <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} /> */}
