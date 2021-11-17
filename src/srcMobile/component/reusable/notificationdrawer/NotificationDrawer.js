@@ -94,9 +94,9 @@ const NotificationDrawer = (props) => {
 
     const onOpenClass = () => {
         if (User.user.UserType == "Teacher") {
-            props.navigation.replace('TeacherDashboard')
+            props.navigation.replace('TeacherTimeTable')
         } else {
-            props.navigation.replace('PupuilDashboard')
+            props.navigation.replace('PupilTimetable')
         }
     }
     const onOpenhomework = () => {
