@@ -226,7 +226,7 @@ const TeacherTimeTable = (props) => {
                                 onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                                 onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', 'LiveLesson') }}
+                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                                 navigateToAddLesson={() => setTeacherLessonAdd(true)}
                                 refreshList={() => refresh()} 
                                 onFilter={(filter)=>fetchRecord(searchKeyword, filter)} />

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from './Colors';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import FONTS from './Fonts';
@@ -242,6 +242,13 @@ export default StyleSheet.create({
         color: COLORS.lightGray,
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.3),
+        width: '100%',
+    },
+    labelCommon1: {
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: Platform.OS === 'android'?0: hp(1.3),
         width: '100%',
     },
     recordLinkText: {
