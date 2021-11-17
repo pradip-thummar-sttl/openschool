@@ -293,7 +293,7 @@ const PupilTimeTable = (props) => {
                                     data={time}
                                     renderItem={({ item, index }) => (
                                         <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                            <Text style={{ ...PAGESTYLE.lable, paddingVertical: 8, }}>{item}</Text>
+                                            <Text style={{ ...PAGESTYLE.lable,paddingVertical: 8 }}>{item}</Text>
 
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (
