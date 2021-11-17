@@ -313,6 +313,13 @@ const TLHomeWork = (props) => {
         textInput.current.clear()
         setNewItem('')
     }
+
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.blockSpaceBottom]}>
@@ -450,7 +457,8 @@ const TLHomeWork = (props) => {
                                 onScreeVoice={() => onScreeVoice()}
                                 onStartScrrenRecording={() => startRecording()}
                                 onStopScrrenRecording={() => stopRecording()}
-                                onCameraOnly={() => onCameraOnly()} />
+                                onCameraOnly={() => onCameraOnly()} 
+                                onRemoveRecording={()=>removeRecording()}/>
 
                             <View style={[PAGESTYLE.requirementofClass,]}>
                                 <Text style={PAGESTYLE.requireText}>Create Checklist</Text>

@@ -319,6 +319,12 @@ const TLHomeWork = (props) => {
         newArray[index].ItemName = text
         setItemCheckList(newArray)
     }
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
 
     const itemCheckListView = () => {
         return (
@@ -461,7 +467,8 @@ const TLHomeWork = (props) => {
                                 onScreeVoice={() => onScreeVoice()}
                                 onStartScrrenRecording={() => startRecording()}
                                 onStopScrrenRecording={() => stopRecording()}
-                                onCameraOnly={() => onCameraOnly()} />
+                                onCameraOnly={() => onCameraOnly()} 
+                                onRemoveRecording={()=>removeRecording()}/>
 
                             <View style={[PAGESTYLE.requirementofClass,]}>
                                 <Text style={PAGESTYLE.requireText}>Create Checklist</Text>

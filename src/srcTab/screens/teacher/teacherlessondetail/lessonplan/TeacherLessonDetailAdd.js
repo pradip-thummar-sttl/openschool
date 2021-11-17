@@ -365,6 +365,12 @@ const TLDetailAdd = (props) => {
 
     }
 
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
     const isFieldsValidated = () => {
         if (!lessonTopic.trim()) {
             showMessage(MESSAGE.topic)
@@ -871,7 +877,8 @@ const TLDetailAdd = (props) => {
                                             onScreeVoice={() => onScreeVoice()}
                                             onStartScrrenRecording={() => startRecording()}
                                             onStopScrrenRecording={() => stopRecording()}
-                                            onCameraOnly={() => onCameraOnly()} />
+                                            onCameraOnly={() => onCameraOnly()} 
+                                            onRemoveRecording={()=>removeRecording()}/>
 
                                         {pupilListView()}
 

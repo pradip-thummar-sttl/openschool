@@ -172,6 +172,12 @@ export default StyleSheet.create({
         top: 10,
         resizeMode: 'contain',
     },
+    cancelButtonIcon1: {
+        width: hp(1.94),
+        alignSelf:'center',
+        // top: 10,
+        resizeMode: 'contain',
+    },
     popupContentMain: {
         paddingLeft: hp(1.5),
         paddingRight: hp(1.5),

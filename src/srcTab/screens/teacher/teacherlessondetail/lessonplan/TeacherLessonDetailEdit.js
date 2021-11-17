@@ -362,7 +362,7 @@ const TLDetailEdit = (props) => {
         newArray[index].ItemName = text
         setItemCheckList(newArray)
     }
-    
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
@@ -796,6 +796,11 @@ const TLDetailEdit = (props) => {
             }
         }
     }
+    const removeRecording = () => {
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
 
     const removeObject = (index1, item) => {
         var array = [...materialArr];
@@ -912,7 +917,8 @@ const TLDetailEdit = (props) => {
                                             onScreeVoice={() => onScreeVoice()}
                                             onStartScrrenRecording={() => startRecording()}
                                             onStopScrrenRecording={() => stopRecording()}
-                                            onCameraOnly={() => onCameraOnly()} />
+                                            onCameraOnly={() => onCameraOnly()}
+                                            onRemoveRecording={() => removeRecording()} />
 
                                         {itemCheckListView()}
 
@@ -946,7 +952,7 @@ const TLDetailEdit = (props) => {
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
                                             {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
                                             <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
-                                            <Text style={{position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold'}}>Upload Material</Text>
+                                            <Text style={{ position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold' }}>Upload Material</Text>
                                         </TouchableOpacity>
 
                                         {

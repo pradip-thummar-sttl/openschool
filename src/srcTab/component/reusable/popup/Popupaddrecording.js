@@ -87,13 +87,16 @@ const Popupaddrecording = (props) => {
                         <Text style={styles.recordLinkText}>Add Recording</Text>
                     </TouchableOpacity>
                     :
-                    
+
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {console.log(props.recordingArr[0]);Download(props.recordingArr[0],(res)=>{})}}
-                        style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
+                        onPress={() => { console.log(props.recordingArr[0]); Download(props.recordingArr[0], (res) => { }) }}
+                        style={[styles.recordLinkBlock1, styles.topSpaceRecording]} >
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => {props.onRemoveRecording()}}>
+                            <CloseBlack style={STYLE.cancelButtonIcon1} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
                     </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>
@@ -195,6 +198,20 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
+        
+    },
+    recordLinkBlock1: {
+        width: hp(25.15),
+        height: hp(5.20),
+        padding: hp(1.43),
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp(1),
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     recordLinkBlock2: {
         width: '100%',
