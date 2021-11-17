@@ -46,7 +46,7 @@ const HeaderTT = (props) => {
     }, [isSearchActive])
 
     useEffect(() => {
-        // props.onFilter(filterBy)
+        props.onFilter(filterBy)
     }, [filterBy])
 
     return (

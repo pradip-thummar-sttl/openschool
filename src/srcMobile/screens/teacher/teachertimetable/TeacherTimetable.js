@@ -235,10 +235,11 @@ const TeacherTimeTable = (props) => {
                     onCalenderPress={() => { props.navigation.navigate('Calendars') }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onSearch={() => fetchRecord(searchKeyword, '')}
                     onClearSearch={() => fetchRecord('', '')}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()}
+                    onFilter={(filterBy) => fetchRecord('', filterBy)}
                     onNotification={() => openNotification()}
                 />
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
