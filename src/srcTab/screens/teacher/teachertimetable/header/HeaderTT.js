@@ -110,6 +110,13 @@ const HeaderTT = (props) => {
                             {/* </View>
                             </MenuOption> */}
                             <MenuOption style={styles.borderList}>
+                                <TouchableOpacity onPress={()=>props.onFilter('')} >
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>All</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
                                 <TouchableOpacity onPress={()=>props.onFilter('LiveLesson')} >
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>

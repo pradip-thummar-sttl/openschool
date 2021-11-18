@@ -238,7 +238,7 @@ const PupilLessonDetail = (props) => {
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Live Lesson'); setSelectedIndex(2) }}>
+                                    onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
                                     <View style={PAGESTYLE.filterList}>
                                         <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
                                         {selectedIndex == 2 ?
@@ -253,7 +253,7 @@ const PupilLessonDetail = (props) => {
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Publish Lesson'); setSelectedIndex(3) }}>
+                                    onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
                                     <View style={PAGESTYLE.filterList}>
                                         <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 3 ?
