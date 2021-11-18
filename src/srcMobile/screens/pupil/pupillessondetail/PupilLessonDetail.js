@@ -31,6 +31,7 @@ import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 
 
 const PupilLessonDetail = (props) => {
@@ -219,6 +220,8 @@ const PupilLessonDetail = (props) => {
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
                             <MenuTrigger>
+                            <FilterBlack style={PAGESTYLE.searchMenu} height={15} width={15} />
+
                                 {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
                             </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
@@ -243,6 +246,34 @@ const PupilLessonDetail = (props) => {
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
                                             {/* {selectedIndex == 1 ?
+                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                :
+                                                null
+                                            } */}
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
+                                            {/* {selectedIndex == 0 ?
+                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                :
+                                                null
+                                            } */}
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
+                                            {/* {selectedIndex == 0 ?
                                                 <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
                                                 :
                                                 null
