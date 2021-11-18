@@ -35,13 +35,14 @@ const NotificationDrawer = (props) => {
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
     // console.log('date of week', moment(today).format('YYYY-MM-DD'), moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'))
-    // const [calEventData, setcalEventData] = useState([])
+    // const [calEventData, setcalEventData] = useState(calEventDat)
 
     const isOpen = useIsDrawerOpen()
 
     const [liveClassNotifications, setLiveClassNotifications] = useState([])
     const [homeworkNotifications, setHomeworkNotifications] = useState([])
     const [personalNotifications, setPersonalNotifications] = useState([])
+    const [st, setsta] = useState(0)
 
     const [notifications, setNotifications] = useState([])
     const dispatch = useDispatch()
@@ -141,7 +142,10 @@ const NotificationDrawer = (props) => {
             Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
                 console.log('previousMonthDateSet ------- response of calender event is:', res)
                 if (res.code == 200) {
+                    // setsta(1)
+                    // setcalEventData(res.data)
                     dispatch(setCalendarEventData(res.data))
+                    
                 }
             }, (err) => {
                 console.log('response of calender event eror is:', err)
@@ -150,6 +154,8 @@ const NotificationDrawer = (props) => {
             Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
                 console.log('previousMonthDateSet ------- response of calender event is:', res)
                 if (res.code == 200) {
+                    // setsta(1)
+                    // setcalEventData(res.data)
                     dispatch(setCalendarEventData(res.data))
                 }
             }, (err) => {
@@ -158,7 +164,7 @@ const NotificationDrawer = (props) => {
         }
         
     }
-    console.log('event data', Var.isCalender);
+    console.log('event data', calEventData);
     return (
         <View style={styles.drawerMain}>
             {
@@ -230,6 +236,7 @@ const NotificationDrawer = (props) => {
                                         }
                                         {
                                             Object.keys(calEventData).map((item) => {
+                                            console.log('date strung',item);
                                                 return (
                                                     moment(item).format('yyyy-MM-DD') === date.dateString ?
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
