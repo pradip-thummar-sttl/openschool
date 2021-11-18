@@ -633,10 +633,11 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } else if (recordingArr.length == 0) {
-            showMessage(MESSAGE.recording);
-            return false;
-        }
+        } 
+        // else if (recordingArr.length == 0) {
+        //     showMessage(MESSAGE.recording);
+        //     return false;
+        // }
 
         setLoading(true)
 
