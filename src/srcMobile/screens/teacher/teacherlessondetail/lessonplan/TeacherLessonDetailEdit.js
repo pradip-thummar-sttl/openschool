@@ -804,6 +804,11 @@ const TLDetailEdit = (props) => {
         setMaterialArr(array)
         console.log('hello material', array)
     }
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -904,6 +909,7 @@ const TLDetailEdit = (props) => {
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
+                                    onRemoveRecording={()=>removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
                                     onStopScrrenRecording={() => stopRecording()}
                                     onCameraOnly={() => onCameraOnly()} />

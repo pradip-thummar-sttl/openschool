@@ -371,6 +371,12 @@ const TLHomeWork = (props) => {
         );
     };
 
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
     return (
 
         <KeyboardAwareScrollView>
@@ -429,6 +435,7 @@ const TLHomeWork = (props) => {
                                 onScreeCamera={() => onScreeCamera()}
                                 onScreeVoice={() => onScreeVoice()}
                                 onStartScrrenRecording={() => startRecording()}
+                                onRemoveRecording={()=>removeRecording()}
                                 onStopScrrenRecording={() => stopRecording()}
                                 onCameraOnly={() => onCameraOnly()} />
                         </View>
