@@ -16,6 +16,7 @@ import Recording from "../../../../svg/teacher/lessonhwplanner/Recording";
 import ScreenVoice from "../../../../svg/teacher/lessonhwplanner/ScreenVoice";
 import CameraOnly from "../../../../svg/teacher/lessonhwplanner/CameraOnly";
 import PlayBlue from "../../../../svg/pupil/lessonhwplanner/Play_Blue";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 const Popupaddrecording = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
@@ -110,6 +111,9 @@ const Popupaddrecording = (props) => {
                         {/* <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} /> */}
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
+                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }}>
+                            <CloseBlack height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
                     </TouchableOpacity>
             }
             <RBSheet
