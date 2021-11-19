@@ -26,7 +26,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
-import { opacity } from "../../../../utils/Constant";
+import { opacity, Var } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
@@ -235,6 +235,36 @@ const PupilLessonDetail = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 3 ?
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
                         </MenuOptions>
                     </Menu>
                     {/* <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} /> */}
@@ -244,6 +274,7 @@ const PupilLessonDetail = (props) => {
         )
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

@@ -16,6 +16,7 @@ import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
 import { BadgeIcon, User } from '../../../../utils/Model'
+import { Var } from '../../../../utils/Constant'
 
 var tabs = [
     { name: 'COLOUR', isSelected: false },
@@ -224,6 +225,7 @@ const Avatar = (prop) => {
 
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
     }

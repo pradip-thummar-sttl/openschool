@@ -145,6 +145,8 @@ class Login extends Component {
                 console.log('data', data);
 
                 Service.post(data, EndPoints.Login, (res) => {
+                    console.log('response Login', res)
+
                     if (res.code == 200) {
                         data.isRemember = isRemember
                         User.user = res.data
@@ -152,9 +154,11 @@ class Login extends Component {
                         if (isRunningFromVirtualDevice) {
                             this.updateUserID('RUNNIN_FROM_VIRTUAL_DEVICE', res.data, data)
                         } else {
-                            if (Platform.OS == 'android') {
+                            console.log('call else method',Platform.OS)
+                            if (Platform.OS === 'android') {
                                 this.getDataFromQuickBlox_Android(userName, password, res.data, data)
-                            } else if (Platform.OS == 'ios') {
+                            } else if (Platform.OS === 'ios') {
+                                // console.log('call else method')
                                 this.getDataFromQuickBlox_IOS(userName, password, res.data, data)
                             }
                         }
@@ -200,6 +204,7 @@ class Login extends Component {
     };
 
     getDataFromQuickBlox_IOS = (emailId, password, resData, reqData) => {
+        console.log(' call getDataFromQuickBlox_IOS',);
         var roomIDs = []
         if (this.props.route.params.userType == 'Pupil') {
             resData.RoomId.forEach(element => {
@@ -253,10 +258,13 @@ class Login extends Component {
     launchNextScrren(res, data) {
         if (this.props.route.params.userType == 'Pupil') {
             AsyncStorage.setItem('pupil', JSON.stringify(data))
+            AsyncStorage.setItem('type', "Pupil")
         } else if (this.props.route.params.userType == 'Teacher') {
             AsyncStorage.setItem('user', JSON.stringify(data))
+            AsyncStorage.setItem('type', "Teacher")
         } else {
             AsyncStorage.setItem('school', JSON.stringify(data))
+            AsyncStorage.setItem('type', "School")
         }
         this.props.setUserAuthData(res)
         if (res.UserType === "Teacher") {

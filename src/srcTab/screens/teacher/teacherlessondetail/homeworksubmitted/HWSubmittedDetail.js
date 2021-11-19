@@ -223,6 +223,12 @@ const TLHomeWorkSubmittedDetail = (props) => {
         }
     }
 
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -371,7 +377,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         onScreeVoice={() => onScreeVoice()}
                                         onStartScrrenRecording={() => startRecording()}
                                         onStopScrrenRecording={() => stopRecording()}
-                                        onCameraOnly={() => onCameraOnly()} />
+                                        onCameraOnly={() => onCameraOnly()} 
+                                        onRemoveRecording={()=>removeRecording()}/>
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

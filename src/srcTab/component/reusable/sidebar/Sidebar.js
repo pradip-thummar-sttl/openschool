@@ -84,6 +84,7 @@ const Sidebar = (props) => {
 
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
+        AsyncStorage.setItem('type', "")
         props.navigateUser()
 
     }
@@ -212,7 +213,7 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfobottomMain]}>
-                    <View style={[styles.userInfobottom]}>
+                    <TouchableOpacity onPress={() => { props.navigateSettings(); toggleAnimation(true) }} style={[styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         {
                             isSmall ? null :
@@ -226,7 +227,7 @@ const Sidebar = (props) => {
                                     </TouchableOpacity>
                                 </>
                         }
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </Animated.View>
         </View>

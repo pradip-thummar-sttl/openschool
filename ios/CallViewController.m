@@ -587,7 +587,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //      }
     }else{
 //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-      if (_currentUserID == [items objectAtIndex:1]  ) {
+      if (_currentUserID == [items objectAtIndex:1]) {
         reusableCell.pollLabel.text = [items objectAtIndex:0];
       }else{
         reusableCell.pollLabel.text = @"";

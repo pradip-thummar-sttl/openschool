@@ -10,7 +10,7 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "./Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { isDesignBuild, opacity, showMessage } from "../../../../utils/Constant";
+import { isDesignBuild, opacity, showMessage, Var } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
 import { BadgeIcon, User } from "../../../../utils/Model";
@@ -152,6 +152,7 @@ const TeacherLessonList = (props) => {
         </TouchableOpacity>
     );
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
     }

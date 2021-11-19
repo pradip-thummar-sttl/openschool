@@ -26,7 +26,7 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
-import { opacity } from "../../../../utils/Constant";
+import { opacity, Var } from "../../../../utils/Constant";
 import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
@@ -357,6 +357,7 @@ const PupilLessonDetail = (props) => {
         )
     }
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }

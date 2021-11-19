@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 import { EndPoints } from '../../../../service/EndPoints'
 import { Service } from '../../../../service/Service'
-import { baseUrl, opacity, showMessage } from '../../../../utils/Constant'
+import { baseUrl, opacity, showMessage, Var } from '../../../../utils/Constant'
 // import Images from '../../../../utils/Images'
 import STYLE from '../../../../utils/Style'
 import HeaderPM from './HeaderPM'
@@ -131,6 +131,7 @@ const PupiloverView = (props) => {
         );
     };
     const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, ScrollView } from "react-native";
-import SettingHeader from "../../component/reusable/header/SettingHeader";
+// import SettingHeader from "../../component/reusable/header/SettingHeader";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import FONTS from "../../../utils/Fonts";
-import COLORS from "../../../utils/Colors";
+import FONTS from "../../../../utils/Fonts";
+import COLORS from "../../../../utils/Colors";
 import ToggleSwitch from 'toggle-switch-react-native';
-import { Service } from "../../../service/Service";
-import { EndPoints } from "../../../service/EndPoints";
-import { BadgeIcon, User } from "../../../utils/Model";
-import { showMessage, Var } from "../../../utils/Constant";
-const Setting = (props) => {
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { BadgeIcon, User } from "../../../../utils/Model";
+import { showMessage, Var } from "../../../../utils/Constant";
+import SettingHeader from "../../../component/reusable/header/SettingHeader";
+
+const TeacherSetting = (props) => {
     const [isSwitch, setSwitch] = useState(true)
     const [typeObject, setTypeObject] = useState([])
     const [settings, setSettings] = useState([])
@@ -161,7 +163,7 @@ const Setting = (props) => {
         </View>
     );
 }
-export default Setting;
+export default TeacherSetting;
 
 const styles = StyleSheet.create({
     mainPage: {

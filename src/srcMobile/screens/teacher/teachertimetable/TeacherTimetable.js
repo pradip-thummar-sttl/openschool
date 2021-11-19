@@ -215,8 +215,9 @@ const TeacherTimeTable = (props) => {
         }, 2000);
 
         return true;
-    }
-    const openNotification = () => {
+      }
+      const openNotification = () => {
+        Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }

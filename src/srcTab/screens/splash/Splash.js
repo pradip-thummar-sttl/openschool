@@ -36,7 +36,17 @@ export default class Splash extends Component {
     }
 
     launchNextScreen() {
-        this.props.navigation.replace('Users')
+            AsyncStorage.getItem('type').then((value) => {
+                if (value === "Teacher") {
+                    this.props.navigation.navigate('Login', { userType: "Teacher" })
+                } else if (value == "Pupil") {
+                    this.props.navigation.navigate('Login', { userType: "Pupil" })
+                } else if (value == "School") {
+                    this.props.navigation.navigate('Login', { userType: "School" })
+                }else{
+                    this.props.navigation.replace('Users')
+                }
+            })
     }
 
     render() {

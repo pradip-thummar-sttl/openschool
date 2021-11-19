@@ -131,6 +131,36 @@ const Header = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 3 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
                         </MenuOptions>
                     </Menu>
                     {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
