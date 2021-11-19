@@ -581,7 +581,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 </View>
                                                             </ScrollView>
                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                                                <View style={{ ...STYLE.commonButtonBordered, marginRight: 0 }}>
                                                                     <TouchableOpacity
                                                                         onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
                                                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
@@ -597,7 +597,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                     color={COLORS.white} />
                                                                                 :
-                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10 }}>Start Class</Text>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10, }}>Start Class</Text>
                                                                         }
 
                                                                     </TouchableOpacity>

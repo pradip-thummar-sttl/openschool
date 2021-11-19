@@ -129,6 +129,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp(1.21),
         paddingBottom: hp(1.21),
+        width:wp(45),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
