@@ -7,10 +7,10 @@ import Popupdata from "../../../component/reusable/popup/Popupdata"
 import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
 import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header3 from '../../../component/reusable/header/bulck/Header3'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { BadgeIcon, User } from "../../../../utils/Model";
+import { BadgeIcon, selectedDate, User } from "../../../../utils/Model";
 import COLORS from "../../../../utils/Colors";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -72,6 +72,10 @@ const PupilTimetable = (props) => {
     const scrollViewRef = useRef(null);
     const dispatch = useDispatch()
 
+    const weekTimeTableDate = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.weekTimeTableData
+    })
     useEffect(() => {
         
 
@@ -138,6 +142,22 @@ const PupilTimetable = (props) => {
             );
         }
     }
+    useEffect(() => {
+        // const unsubscribe = props.navigation.addListener('focus', () => {
+        //     // The screen is focused
+        //     // Call any action
+            console.log('======================.=..........................======================');
+            if (weekTimeTableDate != "") {
+                fetchRecord("","",weekTimeTableDate)
+            }
+           
+        //   });
+      
+        //   // Return the function to unsubscribe from the event so it gets removed on unmount
+        //   return unsubscribe;
+        // fetchRecord("","",selectedDate.date)
+        
+    }, [weekTimeTableDate])
 
     useEffect(() => {
         let time1 = moment().format('HH:mm')
@@ -156,23 +176,24 @@ const PupilTimetable = (props) => {
        setScrollIndex(index)
        console.log('scrollviewref=====>', time[index]);
 
-        fetchRecord('', '')
+        fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }, [])
 
-    const fetchRecord = (searchBy, filterBy) => {
+    const fetchRecord = (searchBy, filterBy, currentDate) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            CurrentDate:currentDate
         }
-
+        setTimeTableLoading(true)
         console.log('data', EndPoints.GetTimeTablePupil + '/' + User.user.UserDetialId);
 
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)
-            console.log('response ', res)
+            console.log('response ===================> ', res)
 
             if (res.code == 200) {
-                console.log('response ', res.data)
+                console.log('response====================> ', res.data)
                 setTimeTableData(res.data)
                 // dispatch(setCalendarEventData(res.data))
             } else {
@@ -184,7 +205,7 @@ const PupilTimetable = (props) => {
     }
 
     const refresh = () => {
-        fetchRecord('', '')
+        fetchRecord('', '',moment().format('YYYY-MM-DD'))
     }
     const openNotification = () => {
         Var.isCalender = false
@@ -205,11 +226,11 @@ const PupilTimetable = (props) => {
                     onAlertPress={() => { openNotification() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy,moment().format('YYYY-MM-DD'))}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} 
-                    onFilter={(filter)=>fetchRecord(searchKeyword, filter)} />
+                    onFilter={(filter)=>fetchRecord(searchKeyword, filter,moment().format('YYYY-MM-DD'))} />
 
                 <View style={{ ...PAGESTYLE.backgroundTable, }}>
                     {isTimeTableLoading ?

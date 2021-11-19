@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useFocus } from "react";
+import React, { useState, useEffect, useFocus, createRef, RefObject } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -14,18 +14,20 @@ import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { User } from "../../../../utils/Model";
+import { selectedDate, User } from "../../../../utils/Model";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 import { useIsDrawerOpen } from '@react-navigation/drawer'
 import Clock from "../../../../svg/teacher/dashboard/Clock";
-import { setCalendarEventData } from "../../../../actions/action";
+import { setCalendarEventData, setTimeTableWeekEventData } from "../../../../actions/action";
 
-
+var month = moment().format('MM');;
+var date = moment().format('DD');
+var year = moment().format('YYYY');
 
 const markdate = ["2021-03-26", "2021-03-27"]
 const periodDate = ["2021-03-22", "2021-03-23", "2021-03-24", "2021-03-25", "2021-03-26", "2021-03-27", "2021-03-28"]
 const NotificationDrawer = (props) => {
-    const calEventData = useSelector(state => {
+    const calEventDat = useSelector(state => {
         // console.log('state of user',state)
         return state.AuthReducer.calEventData
     })
@@ -35,8 +37,8 @@ const NotificationDrawer = (props) => {
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
     // console.log('date of week', moment(today).format('YYYY-MM-DD'), moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'))
-    // const [calEventData, setcalEventData] = useState(calEventDat)
-
+    const [calEventData, setcalEventData] = useState(calEventDat)
+    const myRef = createRef()
     const isOpen = useIsDrawerOpen()
 
     const [liveClassNotifications, setLiveClassNotifications] = useState([])
@@ -44,10 +46,17 @@ const NotificationDrawer = (props) => {
     const [personalNotifications, setPersonalNotifications] = useState([])
     const [st, setsta] = useState(0)
 
+
     const [notifications, setNotifications] = useState([])
     const dispatch = useDispatch()
     useEffect(() => {
+        // month = moment().format('MM');
+        // date = moment().format('DD');
+        // year = moment().format('YYYY');
+        // var m = check.format('M');
+        console.log('month calandar event', month, date, year);
         if (Var.isCalender) {
+
 
             // setcalEventData(res.date)
             // Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
@@ -120,9 +129,9 @@ const NotificationDrawer = (props) => {
 
     const onOpenClass = () => {
         if (User.user.UserType == "Teacher") {
-            props.navigation.replace('TeacherDashboard',{ index: 1, })
+            props.navigation.replace('TeacherDashboard', { index: 1, })
         } else {
-            props.navigation.replace('PupuilDashboard',{ index: 1, })
+            props.navigation.replace('PupuilDashboard', { index: 1, })
         }
     }
     const onOpenhomework = () => {
@@ -134,35 +143,73 @@ const NotificationDrawer = (props) => {
     }
 
     const onMonthChangeFunction = (month) => {
+        // const date = moment().format('YYYY-MM-DD')
+        // // const m = month
+        // const d = moment().format('D');
+        // var y = moment().format('YYYY');
+        // console.log('hello index', index, month, year, date);
+        // if (index === 1) {
+        //     console.log('hello 1');
+        //     if (month === 1) {
+        //         console.log('hello 2');
+        //         month = 12
+        //         year = year - 1
+        //     } else {
+        //         console.log('hello 3');
+        //         month = month - 1
+        //     }
+
+        // } else {
+        //     console.log('hello else 1');
+        //     if (month === 12) {
+        //         console.log('hello else 1');
+        //         month = 1
+        //         year = year + 1
+        //     } else {
+        //         console.log('hello else 1');
+        //         month = month + 1
+        //     }
+        // }
+        // console.log("log of current date and time===================>", year, month, date);
+
+        // let datestrings = `${year}-${month}-${date}`
 
         let data = {
-            CurrentDate: moment(month.timestamp).format('yyyy-MM-DD')
+            CurrentDate: moment(month.timestamp).format('YYYY-MM-DD')
         }
+        // console.log('data of current date',data, datestrings);
         if (User.user.UserType === "Teacher") {
             Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
-                console.log('previousMonthDateSet ------- response of calender event is:', res)
+                // console.log('previousMonthDateSet ------- response of calender event is:', res)
                 if (res.code == 200) {
                     // setsta(1)
-                    // setcalEventData(res.data)
-                    dispatch(setCalendarEventData(res.data))
-                    
+                    setcalEventData(res.data)
+                    // dispatch(setCalendarEventData(res.data))
+
+                    // myRef.current.onPressArrowLeft()
+
                 }
             }, (err) => {
                 console.log('response of calender event eror is:', err)
             })
-        }else{
+        } else {
             Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
                 console.log('previousMonthDateSet ------- response of calender event is:', res)
                 if (res.code == 200) {
                     // setsta(1)
-                    // setcalEventData(res.data)
-                    dispatch(setCalendarEventData(res.data))
+                    setcalEventData(res.data)
+                    // dispatch(setCalendarEventData(res.data))
+                    // myRef.current.updateMonth(moment(date.CurrentDate).format('YYYY-MM-DD'), true)
                 }
             }, (err) => {
                 console.log('response of calender event eror is:', err)
             })
         }
-        
+
+    }
+    const onDatePress = (date) => {
+        selectedDate.date = date.dateString
+        dispatch(setTimeTableWeekEventData(date.dateString))
     }
     console.log('event data', calEventData);
     return (
@@ -172,12 +219,16 @@ const NotificationDrawer = (props) => {
                     <View style={styles.datepickerDrwaer}>
                         {/* {Var.isCalender = false} */}
                         <Calendar
+                            ref={myRef}
                             minDate={new Date()}
                             firstDay={1}
                             onMonthChange={(month) => onMonthChangeFunction(month)}
+                            // onDayPress={(day) => { console.log('day press', day); }}
+                            // onPressArrowLeft={(subtractMonth) => { subtractMonth(); onMonthChangeFunction(1) }}
+                            // onPressArrowRight={(addMonth) => { addMonth(); onMonthChangeFunction(2) }}
                             dayComponent={({ date, state, marking }) => {
                                 return (
-                                    <View>
+                                    <TouchableOpacity onPress={() => onDatePress(date)}>
                                         {
                                             moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
                                                 date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD') ?
@@ -236,9 +287,9 @@ const NotificationDrawer = (props) => {
                                         }
                                         {
                                             Object.keys(calEventData).map((item) => {
-                                            console.log('date strung',item);
+                                                // console.log('date strung', item);
                                                 return (
-                                                    moment(item).format('yyyy-MM-DD') === date.dateString ?
+                                                    moment(item).format('YYYY-MM-DD') === date.dateString ?
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                             {
                                                                 calEventData[`${item}`].map((obj) => {
@@ -259,7 +310,7 @@ const NotificationDrawer = (props) => {
 
                                         }
 
-                                    </View>
+                                    </TouchableOpacity>
                                 )
                             }}
                         />
