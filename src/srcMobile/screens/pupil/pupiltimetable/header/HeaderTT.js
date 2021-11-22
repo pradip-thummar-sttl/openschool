@@ -24,6 +24,9 @@ import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import AddWhite from "../../../../../svg/teacher/timetable/Add_White";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 import { BadgeIcon } from "../../../../../utils/Model";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -66,9 +69,9 @@ const HeaderTT = (props) => {
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.2)} width={hp(5.2)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                         {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
@@ -105,6 +108,67 @@ const HeaderTT = (props) => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
                         }} />
+
+                    <Menu>
+                        <MenuTrigger>
+                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                            <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                        </MenuTrigger>
+                        <MenuOptions style={{
+                            backgroundColor: COLORS.white,
+                            borderRadius: hp(1),
+                            shadowColor: COLORS.black,
+                            shadowOffset: { width: 0, height: hp(1), },
+                            shadowOpacity: 0.05,
+                            shadowRadius: hp(1),
+                        }}>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy(''); setSelectedIndex(2) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>All</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList} >
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 0 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 1 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
                 </View>
 
                 <TouchableOpacity

@@ -12,6 +12,11 @@ import { opacity, Var } from '../../../../utils/Constant';
 import BackArrow from '../../../../svg/common/BackArrow';
 import { selectedDate } from '../../../../utils/Model';
 import { setTimeTableWeekEventData } from '../../../../actions/action';
+import { setCalendarEventData } from "../../../../actions/action";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User } from "../../../../utils/Model";
+// import { useDispatch } from "react-redux";
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
 const Calendars = (props) => {
@@ -22,19 +27,19 @@ const Calendars = (props) => {
     // console.log('cal  event data', calEventData)
     const dispatch = useDispatch()
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         // props.route.params.goBack()
-        props.navigation.goBack() 
+        props.navigation.goBack()
         return true;
-      }
+    }
 
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
@@ -43,6 +48,25 @@ const Calendars = (props) => {
         selectedDate.date = date.dateString
         dispatch(setTimeTableWeekEventData(date.dateString))
     }
+  
+
+    const onMonthChangeFunction = (month) => {
+
+        let data = {
+            CurrentDate: moment(month.timestamp).format('yyyy-MM-DD') 
+        }
+
+        Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
+            console.log('previousMonthDateSet ------- response of calender event is:', res)
+            if (res.code == 200) {
+                dispatch(setCalendarEventData(res.data))
+            }
+        }, (err) => {
+            console.log('response of calender event eror is:', err)
+        })
+    }
+
+
     return (
         <View style={{ backgroundColor: 'white', flex: 1 }}>
 
@@ -53,43 +77,44 @@ const Calendars = (props) => {
                 >
                     {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
                     <BackArrow style={styles.closeIcon} height={hp(2)} width={hp(2.4)} />
-                    
+
                 </TouchableOpacity>
             </View>
             <Calendar
                 style={styles.datepickerDrwaer}
                 minDate={new Date()}
                 firstDay={1}
+                onMonthChange={(month) => onMonthChangeFunction(month)}
                 dayComponent={({ date, state, marking }) => {
                     return (
                         <TouchableOpacity onPress={()=>onDatePress(date)}>
                             {
                                 moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
-                                date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD')  ?
-                                    date.dateString == moment(startDate).format('YYYY-MM-DD') ?
-                                        <View style={styles.datemainView1}>
-                                            < View style={styles.dateSubVIew1}>
-                                                <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                    date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD') ?
+                                        date.dateString == moment(startDate).format('YYYY-MM-DD') ?
+                                            <View style={styles.datemainView1}>
+                                                < View style={styles.dateSubVIew1}>
+                                                    <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                </View>
                                             </View>
-                                        </View>
+                                            :
+                                            <View style={styles.dateMainView2}>
+                                                < View style={styles.dateSubVIew1}>
+                                                    <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                </View>
+                                            </View>
                                         :
-                                        <View style={styles.dateMainView2}>
-                                            < View style={styles.dateSubVIew1}>
-                                                <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                        <View style={styles.dateMAinView3}>
+                                            < View style={styles.dateSubView2}>
+                                                <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                             </View>
                                         </View>
                                     :
-                                    <View style={styles.dateMAinView3}>
-                                        < View style={styles.dateSubView2}>
+                                    <View style={styles.datemainView4}>
+                                        < View style={styles.dateSubView3}>
                                             <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                         </View>
                                     </View>
-                                :
-                                <View style={styles.datemainView4}>
-                                    < View style={styles.dateSubView3}>
-                                        <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
-                                    </View>
-                                </View>
                                 // periodDate.includes(date.dateString) ?
                                 //     date.dateString == periodDate[0] || date.dateString == periodDate[periodDate.length - 1] ?
                                 //         date.dateString == periodDate[0] ?
