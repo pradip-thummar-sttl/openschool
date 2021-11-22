@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Platform,BackHandler } from 'react-native';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,6 +10,8 @@ import FONTS from '../../../../utils/Fonts';
 import { opacity, Var } from '../../../../utils/Constant';
 // import Images from "../../../../utils/Images";
 import BackArrow from '../../../../svg/common/BackArrow';
+import { selectedDate } from '../../../../utils/Model';
+import { setTimeTableWeekEventData } from '../../../../actions/action';
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
 const Calendars = (props) => {
@@ -18,7 +20,7 @@ const Calendars = (props) => {
         return state.AuthReducer.calEventData
     })
     // console.log('cal  event data', calEventData)
-
+    const dispatch = useDispatch()
     useEffect(() => {
         if (Platform.OS==="android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -36,6 +38,11 @@ const Calendars = (props) => {
 
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
+
+    const onDatePress = (date) => {
+        selectedDate.date = date.dateString
+        dispatch(setTimeTableWeekEventData(date.dateString))
+    }
     return (
         <View style={{ backgroundColor: 'white', flex: 1 }}>
 
@@ -55,7 +62,7 @@ const Calendars = (props) => {
                 firstDay={1}
                 dayComponent={({ date, state, marking }) => {
                     return (
-                        <View>
+                        <TouchableOpacity onPress={()=>onDatePress(date)}>
                             {
                                 moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
                                 date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD')  ?
@@ -139,7 +146,7 @@ const Calendars = (props) => {
 
                             }
 
-                        </View>
+                        </TouchableOpacity>
                     )
                 }}
             />

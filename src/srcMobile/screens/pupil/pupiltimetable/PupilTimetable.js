@@ -10,18 +10,24 @@ import Popupdata from "../../../component/reusable/popup/Popupdata";
 // import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCalendarEventData } from "../../../../actions/action";
 import { BadgeIcon, User } from "../../../../utils/Model";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 // import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
+import moment from "moment";
 
 const PupilTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'];
     const dispatch = useDispatch()
+
+    const weekTimeTableDate = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.weekTimeTableData
+    })
 
     const timeTableData__ = [
         {
@@ -73,6 +79,23 @@ const PupilTimeTable = (props) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
     let currentCount = 0
+
+    useEffect(() => {
+        // const unsubscribe = props.navigation.addListener('focus', () => {
+        //     // The screen is focused
+        //     // Call any action
+            console.log('======================.=..........................======================');
+            if (weekTimeTableDate != "") {
+                fetchRecord("","",weekTimeTableDate)
+            }
+           
+        //   });
+      
+        //   // Return the function to unsubscribe from the event so it gets removed on unmount
+        //   return unsubscribe;
+        // fetchRecord("","",selectedDate.date)
+        
+    }, [weekTimeTableDate])
     useEffect(() => {
         if (Platform.OS==="android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -147,7 +170,7 @@ const PupilTimeTable = (props) => {
     }
 
     useEffect(() => {
-        fetchRecord('', '')
+        fetchRecord('', '', moment().format('YYYY-MM-DD'))
 
         Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
@@ -159,11 +182,12 @@ const PupilTimeTable = (props) => {
         })
     }, [])
 
-    const fetchRecord = (searchBy, filterBy) => {
+    const fetchRecord = (searchBy, filterBy, currentDate) => {
         setTimeTableLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            CurrentDate:currentDate
         }
 
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
@@ -193,7 +217,7 @@ const PupilTimeTable = (props) => {
     }
 
     const refresh = () => {
-        fetchRecord('', '')
+        fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }
     const openNotification = () => {
         BadgeIcon.isBadge = false
@@ -215,8 +239,8 @@ const PupilTimeTable = (props) => {
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onCalenderPress={() => {  props.navigation.navigate('Calendars') }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy, moment().format('YYYY-MM-DD'))}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '', moment().format('YYYY-MM-DD')) }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} 
                     onNotification={()=>openNotification()}/>
