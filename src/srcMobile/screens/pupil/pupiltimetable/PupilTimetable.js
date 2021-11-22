@@ -245,7 +245,8 @@ const PupilTimeTable = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '', moment().format('YYYY-MM-DD')) }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()} 
-                    onNotification={()=>openNotification()}/>
+                    onNotification={()=>openNotification()}
+                    onFilterBy={(filter)=>{fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD'))}}/>
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator

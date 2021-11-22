@@ -264,7 +264,7 @@ const TeacherTimeTable = (props) => {
                     onClearSearch={() => fetchRecord('', '', moment().format('YYYY-MM-DD'))}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)}
+                    onFilter={(filterBy) => fetchRecord('', filterBy,moment().format('YYYY-MM-DD'))}
                     onNotification={() => openNotification()}
                 />
                 <View style={{ ...PAGESTYLE.backgroundTable }}>

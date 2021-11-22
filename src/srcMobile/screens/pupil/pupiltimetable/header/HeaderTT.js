@@ -125,7 +125,7 @@ const HeaderTT = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy(''); setSelectedIndex(2) }}>
+                                    onPress={() => { props.onFilterBy(''); setSelectedIndex(2) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>All</Text>
                                         {selectedIndex == 2 ?
@@ -140,7 +140,7 @@ const HeaderTT = (props) => {
                             <MenuOption style={styles.borderList} >
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
+                                    onPress={() => { props.onFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
                                         {selectedIndex == 0 ?
@@ -155,7 +155,7 @@ const HeaderTT = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                    onPress={() => { props.onFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 1 ?
