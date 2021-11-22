@@ -113,6 +113,21 @@ const HeaderTT = (props) => {
                             shadowOpacity: 0.05,
                             shadowRadius: hp(1),
                         }}>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy(''); setSelectedIndex(2) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>All</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
                             <MenuOption style={styles.borderList} >
                                 <TouchableOpacity
                                     activeOpacity={opacity}
@@ -135,21 +150,6 @@ const HeaderTT = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('All'); setSelectedIndex(2) }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>All</Text>
-                                        {selectedIndex == 2 ?
                                             // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
