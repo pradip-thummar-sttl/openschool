@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragmentOpponents"
     style="@style/MatchParent"
@@ -84,7 +85,6 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/toggle_recording"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
@@ -96,11 +96,11 @@
             android:id="@+id/toggle_recording_view"
             android:layout_width="@dimen/toggle_button_params"
             android:layout_height="@dimen/toggle_button_params"
-            android:background="@drawable/call_recording_toggle_background"
-            android:layout_toLeftOf="@+id/button_hangup_call"
-            android:checked="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/button_hangup_call"
+            android:background="@drawable/call_recording_toggle_background"
+            android:checked="true"
             android:textOff=""
             android:textOn="" />
 
@@ -108,12 +108,21 @@
             android:id="@+id/button_hangup_call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/btnMenu"
             android:background="@drawable/shape_round_red"
             android:text="END"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnMenu"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/icn_menu" />
 
     </RelativeLayout>
 

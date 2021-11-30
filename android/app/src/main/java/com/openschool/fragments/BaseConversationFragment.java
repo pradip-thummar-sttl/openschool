@@ -112,6 +112,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private ImageView icPEmoji1;
     private ImageView icPEmoji2;
     private ImageView icPEmoji3;
+    private ImageView btnMenu;
     private LinearLayout llShare;
     private LinearLayout llPupilEmoji;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
@@ -441,6 +442,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         toggle_recording_view = (ToggleButton) view.findViewById(R.id.toggle_recording_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
+        btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
         tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
@@ -588,10 +590,16 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 Log.d(TAG, "Call is stopped");
             }
         });
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+            }
+        });
 
         button_screen_sharing.setOnClickListener(v -> {
 //            startScreenSharing()
-            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+//            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
         });
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
