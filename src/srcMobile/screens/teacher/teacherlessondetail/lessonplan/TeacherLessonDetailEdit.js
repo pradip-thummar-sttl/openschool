@@ -600,7 +600,7 @@ const TLDetailEdit = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } 
+        }
         // else if (recordingArr.length == 0) {
         //     showMessage(MESSAGE.recording);
         //     return false;
@@ -709,9 +709,16 @@ const TLDetailEdit = (props) => {
             }
         });
 
+        console.log('---recordingArr---', recordingArr)
+
         recordingArr.forEach(element => {
             if (element.uri) {
+
                 let ext = element.fileName.split('.');
+
+                if (Platform.OS === 'ios') {
+                    ext = element.uri.split('.');
+                }
 
                 data.append('recording', {
                     uri: element.uri,
@@ -805,7 +812,7 @@ const TLDetailEdit = (props) => {
         setMaterialArr(array)
         console.log('hello material', array)
     }
-    const removeRecording=()=>{
+    const removeRecording = () => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
@@ -910,7 +917,7 @@ const TLDetailEdit = (props) => {
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
-                                    onRemoveRecording={()=>removeRecording()}
+                                    onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
                                     onStopScrrenRecording={() => stopRecording()}
                                     onCameraOnly={() => onCameraOnly()} />
@@ -1022,7 +1029,7 @@ const TLDetailEdit = (props) => {
                                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
                                                 {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                 <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
-                                                </TouchableOpacity>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     :

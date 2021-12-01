@@ -603,7 +603,7 @@ const TLDetailEdit = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } 
+        }
         // else if (recordingArr.length == 0 && !isRunningFromVirtualDevice) {
         //     showMessage(MESSAGE.recording);
         //     return false;
@@ -714,6 +714,10 @@ const TLDetailEdit = (props) => {
         recordingArr.forEach(element => {
             if (element.uri) {
                 let ext = element.fileName.split('.');
+
+                if (Platform.OS === 'ios') {
+                    ext = element.uri.split('.');
+                }
 
                 data.append('recording', {
                     uri: element.uri,

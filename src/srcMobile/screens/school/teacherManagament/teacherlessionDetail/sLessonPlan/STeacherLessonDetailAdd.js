@@ -732,6 +732,10 @@ const STLDetailAdd = (props) => {
         recordingArr.forEach(element => {
             let ext = element.fileName.split('.');
 
+            if (Platform.OS === 'ios') {
+                ext = element.uri.split('.');
+            }
+
             data.append('recording', {
                 uri: element.uri,
                 // name: element.fileName,
@@ -770,12 +774,12 @@ const STLDetailAdd = (props) => {
         })
 
     }
-    const removeRecording=()=>{
+    const removeRecording = () => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
     }
-    
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -870,7 +874,7 @@ const STLDetailAdd = (props) => {
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
-                                    onRemoveRecording={()=>removeRecording()}
+                                    onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
                                     onStopScrrenRecording={() => stopRecording()}
                                     onCameraOnly={() => onCameraOnly()} />
@@ -910,7 +914,7 @@ const STLDetailAdd = (props) => {
                                     materialArr.length != 0 ? materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={{...PAGESTYLE.fileName,  width: wp(75)}} numberOfLines={1}>{item.name}</Text>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name}</Text>
                                                 <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                     {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
