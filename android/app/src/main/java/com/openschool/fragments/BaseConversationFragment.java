@@ -1,5 +1,7 @@
 package com.openschool.fragments;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
 import com.openschool.activity.PollingActivity;
@@ -593,7 +596,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+//
+                showBottomSheetDialog();
             }
         });
 
@@ -1110,5 +1114,30 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                         System.out.println("KDKDKD: Sender Poll " + message + " " + status.getStatusCode());
                     }
                 });
+    }
+
+    private void showBottomSheetDialog() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+        bottomSheetDialog.setContentView(R.layout.bottom_dialog);
+
+        TextView txtSetupVoting = bottomSheetDialog.findViewById(R.id.txtSetupVoting);
+        ImageView btnClose = bottomSheetDialog.findViewById(R.id.BtnClose);
+
+        bottomSheetDialog.show();
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        txtSetupVoting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+                startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+            }
+        });
     }
 }
