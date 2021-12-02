@@ -37,7 +37,8 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     private PollSchoolOptionAdepter _pollOptionAdepter;
     private PollPupilOptionsAdepter _pollPupilOptionsAdepter;
 
-    private Button _btnAddOption, _btnSubmit;
+    private TextView _btnClearPoll, _btnSubmit, _btnSavePoll;
+    private LinearLayout _btnAddOption;
     private EditText _edtQuestion;
     private TextView _txtPupilQutions;
 
@@ -65,7 +66,10 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 
         _edtQuestion = findViewById(R.id.edtQuestion);
         _txtPupilQutions = findViewById(R.id.txtPupilQutions);
+
+        _btnClearPoll = findViewById(R.id.btnClearPoll);
         _btnSubmit = findViewById(R.id.btnSubmit);
+        _btnSavePoll = findViewById(R.id.btnSavePoll);
         _btnAddOption = findViewById(R.id.btnAddOption);
 
         _SchoolRecyclerView = findViewById(R.id.schollList);
@@ -82,8 +86,10 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 
     private void addEvent() {
         _ivBack.setOnClickListener(this);
+        _btnClearPoll.setOnClickListener(this);
         _btnAddOption.setOnClickListener(this);
         _btnSubmit.setOnClickListener(this);
+        _btnSavePoll.setOnClickListener(this);
     }
 
     private void initData() {
@@ -94,13 +100,20 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
         else
             onSchool();
 
+//        if (intent.hasExtra("isForPupil"))
+//            onSchool();
+//        else
+//            onPupil();
     }
 
     private void onPupil() {
-        _llSchool.setVisibility(View.GONE);
+
+        _btnClearPoll.setVisibility(View.GONE);
+        _btnSubmit.setVisibility(View.VISIBLE);
+        _btnSavePoll.setVisibility(View.GONE);
         _btnAddOption.setVisibility(View.GONE);
+        _llSchool.setVisibility(View.GONE);
         _llPupil.setVisibility(View.VISIBLE);
-        _btnSubmit.setText("SUBMIT YOUR ANSWER");
 
         Intent intent = getIntent();
         String data = intent.getStringExtra(PollingActivity.POLLING);
@@ -134,9 +147,13 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void onSchool() {
+
+        _btnClearPoll.setVisibility(View.VISIBLE);
+        _btnSubmit.setVisibility(View.GONE);
+        _btnSavePoll.setVisibility(View.VISIBLE);
+        _btnAddOption.setVisibility(View.VISIBLE);
         _llPupil.setVisibility(View.GONE);
         _llSchool.setVisibility(View.VISIBLE);
-        _btnAddOption.setVisibility(View.VISIBLE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         _SchoolRecyclerView.setLayoutManager(layoutManager);
@@ -153,6 +170,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onRemove(int pos) {
                 _pollSchoolOptionsData.remove(pos);
+                onUpdateAddOptions();
                 _pollOptionAdepter.notifyDataSetChanged();
             }
         });
@@ -166,10 +184,12 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.ivBack:
                 finish();
                 break;
+            case R.id.btnClearPoll:
+                onClearePoll();
+                break;
             case R.id.btnAddOption:
                 insertMethod("");
                 break;
-
             case R.id.btnSubmit:
                 if (_pollPupilOptionData.size() > 0 && !_selectedAns.isEmpty()) {
                     System.out.println("KDKD: selectedAns " + _selectedAns);
@@ -178,7 +198,11 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
                     setResult(CallActivity.POLLING_ANS_REQUEST_CODE, intent);
                     finish();
                 }
-                else if (_edtQuestion.getText().toString().length() > 0 && onCheckOptions()) {
+                else
+                    Toast.makeText(this, "Please select at least one answer", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btnSavePoll:
+                if (_edtQuestion.getText().toString().length() > 0 && onCheckOptions()) {
 
                     Intent intent = new Intent();
                     String data = _edtQuestion.getText().toString() + onGetAns();
@@ -188,16 +212,6 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 
                     setResult(CallActivity.POLLING_REQUEST_CODE, intent);
                     finish();
-
-//                    Intent intent = new Intent();
-//                    _data = _edtQuestion.getText().toString() + onGetAns();
-//                    _isPupil = "isForPupil";
-//                    initData();
-
-//                    intent.putExtra(POLLING, data);
-//                    setResult(CallActivity.POLLING_REQUEST_CODE, intent);
-//                    finish();
-
                 } else {
                     Toast.makeText(this, "Please add at least two options along with question", Toast.LENGTH_SHORT).show();
                 }
@@ -205,10 +219,20 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+
+
     private void insertMethod(String name) {
         PollSchoolOptionModel model = new PollSchoolOptionModel(false,"");
         _pollSchoolOptionsData.add(model);
+        onUpdateAddOptions();
         _pollOptionAdepter.notifyDataSetChanged();
+    }
+
+    private void onUpdateAddOptions() {
+        if(_pollSchoolOptionsData.size() < 6 )
+            _btnAddOption.setVisibility(View.VISIBLE);
+        else
+            _btnAddOption.setVisibility(View.GONE);
     }
 
     private boolean onCheckOptions() {
@@ -228,6 +252,17 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
                 sb.append("##@##"+ pollSchoolOptionModel.isValue);
         }
         return sb.toString();
+    }
+    private void onClearePoll() {
+
+        _edtQuestion.setText("");
+        _pollSchoolOptionsData.clear();
+        PollSchoolOptionModel model = new PollSchoolOptionModel(true,"");
+        _pollSchoolOptionsData.add(model);
+        _pollSchoolOptionsData.add(model);
+        onUpdateAddOptions();
+        _pollOptionAdepter.notifyDataSetChanged();
+
     }
 
 }

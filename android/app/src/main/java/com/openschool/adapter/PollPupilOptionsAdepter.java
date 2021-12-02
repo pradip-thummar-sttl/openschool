@@ -44,9 +44,9 @@ public class PollPupilOptionsAdepter extends RecyclerView.Adapter<PollPupilOptio
         holder.txtOptions.setText(pollPupilModel.getValue());
 
         if(pollPupilModel.isSelected)
-            holder.ll_item.setBackground(applicationContext.getDrawable(R.drawable.shape_poll_selected));
+            holder.txtOptions.setBackground(applicationContext.getDrawable(R.drawable.shape_poll_selected));
         else
-            holder.ll_item.setBackground(applicationContext.getDrawable(R.drawable.shape_poll));
+            holder.txtOptions.setBackground(applicationContext.getDrawable(R.drawable.shape_poll));
 
         holder.txtOptions.setOnClickListener(new View.OnClickListener() {
             @Override
