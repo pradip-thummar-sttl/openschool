@@ -2,11 +2,13 @@ package com.openschool.fragments;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +34,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
@@ -115,6 +120,9 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private ImageView icPEmoji1;
     private ImageView icPEmoji2;
     private ImageView icPEmoji3;
+    private FrameLayout _frEmojiAnimationView;
+    private TextView _txtEmojiAnim;
+
     private ImageView btnMenu;
     private LinearLayout llShare;
     private LinearLayout llPupilEmoji;
@@ -181,8 +189,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         title = this.getArguments().getString(Consts.TITLE);
         channels = this.getArguments().getStringArrayList(Consts.EXTRA_CHANNELS);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
+
         System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
+
         if (currentSession == null) {
             Log.d(TAG, "currentSession = null onCreateView");
             return view;
@@ -459,6 +469,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         allOpponentsTextView = (TextView) view.findViewById(R.id.text_outgoing_opponents_names);
         ringingTextView = (TextView) view.findViewById(R.id.text_ringing);
 
+        _txtEmojiAnim = (TextView) view.findViewById(R.id.txtEmojiAnim);
+        _frEmojiAnimationView = (FrameLayout) view.findViewById(R.id.EmojiAnim);
+        _frEmojiAnimationView.setVisibility(View.GONE);
+
         opponentViewHolders = new SparseArray<>(opponents.size());
         isRemoteShown = false;
 
@@ -495,6 +509,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         actionButtonsEnabled(false);
         setActionButtonsVisibility();
+
     }
 
     private void setActionButtonsVisibility() {
@@ -516,6 +531,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             icPEmoji1.setVisibility(View.VISIBLE);
             icPEmoji2.setVisibility(View.VISIBLE);
             icPEmoji3.setVisibility(View.VISIBLE);
+            toggle_recording_view.setVisibility(View.GONE);
         } else {
             itemHeight = opponents.size() == 1 ? recycleViewHeight : recycleViewHeight / DISPLAY_ROW_AMOUNT;
             llShare.setVisibility(View.VISIBLE);
@@ -609,11 +625,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
 
         icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID));
-
         icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
-
         icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID));
     }
+
+
 
     protected void actionButtonsEnabled(boolean inability) {
 
@@ -936,8 +952,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private class SpanSizeLookupImpl extends GridManager.SpanSizeLookup {
-
-
         @Override
         public int getSpanSize(int position) {
             int itemCount = opponentsAdapter.getItemCount();
@@ -982,7 +996,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 //            return 3;
         }
     }
-
 
     private class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -1069,6 +1082,14 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         if (!isTeacher) {
             int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
             tvTeacherEmoji.setText(getEmoticon(teacherEmojis[Integer.parseInt(tempIndex)]));
+
+            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            tvTeacherEmoji.setText("");
+                        }
+                    },
+                    6000);
         }
     }
 
@@ -1090,6 +1111,19 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected void sendEmoji(String channel, String message, String currentUserID) {
         System.out.println("KDKDKD: channel send" + channel);
+
+        _frEmojiAnimationView.setVisibility(View.VISIBLE);
+
+        int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
+        _txtEmojiAnim.setText(getEmoticon(teacherEmojis[Integer.parseInt(message)]));
+
+        YoYo.with(Techniques.Bounce).onEnd(new YoYo.AnimatorCallback() {
+            @Override
+            public void call(Animator animator) {
+                _frEmojiAnimationView.setVisibility(View.GONE);
+            }
+        }).duration(500).playOn(_frEmojiAnimationView);
+
         hostActivity.getPubNub()
                 .publish()
                 .channel(channel)

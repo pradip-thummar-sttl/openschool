@@ -151,4 +151,24 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
 
+    <FrameLayout
+        android:id="@+id/EmojiAnim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/txtEmojiAnim"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="40dp" />
+
+    </FrameLayout>
+
 </RelativeLayout>

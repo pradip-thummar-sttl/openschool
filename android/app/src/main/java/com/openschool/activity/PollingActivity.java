@@ -93,17 +93,11 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initData() {
-
         Intent intent = getIntent();
         if (intent.hasExtra("isForPupil"))
             onPupil();
         else
             onSchool();
-
-//        if (intent.hasExtra("isForPupil"))
-//            onSchool();
-//        else
-//            onPupil();
     }
 
     private void onPupil() {
@@ -218,8 +212,6 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
-
-
 
     private void insertMethod(String name) {
         PollSchoolOptionModel model = new PollSchoolOptionModel(false,"");
