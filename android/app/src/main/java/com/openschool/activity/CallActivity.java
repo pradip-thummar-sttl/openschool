@@ -43,6 +43,7 @@ import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.enums.PNLogVerbosity;
 import com.pubnub.api.enums.PNReconnectionPolicy;
+import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.conference.ConferenceClient;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.QBConferenceRole;
@@ -50,6 +51,8 @@ import com.quickblox.conference.WsException;
 import com.quickblox.conference.WsHangUpException;
 import com.quickblox.conference.callbacks.ConferenceEntityCallback;
 import com.quickblox.conference.callbacks.ConferenceSessionCallbacks;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.model.QBUser;
 import com.quickblox.videochat.webrtc.AppRTCAudioManager;
 import com.quickblox.videochat.webrtc.BaseSession;
@@ -169,10 +172,10 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         startConversationFragment();
     }
 
-    @Override
-    protected View getSnackbarAnchorView() {
-        return null;
-    }
+//    @Override
+//    protected View getSnackbarAnchorView() {
+//        return null;
+//    }
 
     private boolean currentSessionExist() {
         currentSession = sessionManager.getCurrentSession();
@@ -346,6 +349,34 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
             return;
         }
         QBRTCScreenCapturer.requestPermissions(CallActivity.this);
+    }
+
+    @Override
+    public void onLaunchChatRoom(ArrayList<QBUser> selectedUsers, String chatName) {
+        Log.d(TAG, "Creating Dialog" + selectedUsers + chatName);
+        getChatHelper().createDialogWithSelectedUsers(selectedUsers, chatName,
+                new QBEntityCallback<QBChatDialog>() {
+                    @Override
+                    public void onSuccess(QBChatDialog dialog, Bundle args) {
+                        Log.d(TAG, "Creating Dialog Successful" + dialog.getDialogId());
+                        getQBDialogsHolder().addDialog(dialog);
+
+                        Intent intent = new Intent(CallActivity.this, ChatActivity.class);
+                        intent.putExtra(ChatActivity.EXTRA_DIALOG_ID, dialog.getDialogId());
+                        intent.putExtra(ChatActivity.EXTRA_CURRENT_NAME, currentName);
+                        intent.putExtra(ChatActivity.EXTRA_CURRENT_USER_ID, currentUserID);
+                        intent.putExtra(ChatActivity.EXTRA_IS_NEW_DIALOG, true);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(QBResponseException error) {
+                        Log.d(TAG, "Creating Dialog Error: " + error.getMessage());
+                        hideProgressDialog();
+                        showErrorSnackbar(R.string.dialogs_creation_error, error, null);
+                    }
+                }
+        );
     }
 
     private void startScreenSharing(final Intent data) {
@@ -776,8 +807,8 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         public void onError(WsException exception) {
             Log.d(TAG, "onError joinDialog exception= " + exception);
             showToast("Join exception: " + exception.getMessage());
-//            releaseCurrentSession();
-//            finish();
+            releaseCurrentSession();
+            finish();
         }
     }
 

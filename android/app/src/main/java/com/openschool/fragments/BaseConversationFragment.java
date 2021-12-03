@@ -590,8 +590,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         });
 
         button_screen_sharing.setOnClickListener(v -> {
-//            startScreenSharing()
-            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+//            startScreenSharing();
+
+//            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+
+            conversationFragmentCallbackListener.onLaunchChatRoom(opponents, title);
         });
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));

@@ -2,9 +2,12 @@ package com.openschool.fragments;
 
 import com.openschool.activity.CallActivity;
 import com.quickblox.conference.ConferenceSession;
+import com.quickblox.users.model.QBUser;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 
 import org.webrtc.CameraVideoCapturer;
+
+import java.util.ArrayList;
 
 
 public interface ConversationFragmentCallbackListener {
@@ -30,6 +33,8 @@ public interface ConversationFragmentCallbackListener {
     void onLeaveCurrentSession();
 
     void onStartScreenSharing();
+
+    void onLaunchChatRoom(ArrayList<QBUser> selectedUsers, String chatName);
 
     void onStartScreenRecording(boolean isChecked);
 
