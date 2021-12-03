@@ -99,6 +99,7 @@ const Popupaddrecording = (props) => {
                             })
                         }}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
+                            <View style={{flexDirection:'row'}}>
                         {isMatLoading ?
                             <ActivityIndicator
                                 style={{ ...styles.recordingLinkIcon }}
@@ -111,6 +112,7 @@ const Popupaddrecording = (props) => {
                         {/* <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} /> */}
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
+                        </View>
                         <TouchableOpacity onPress={() => { props.onRemoveRecording() }}>
                             <CloseBlack height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
@@ -240,7 +242,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     recordLinkBlock1: {
-        width: '100%',
+        width: wp(70),
         padding: hp(1.43),
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),
@@ -249,6 +251,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
+        justifyContent:'space-between'
     },
     topSpaceRecording: {
         marginTop: hp(1.401),
@@ -256,6 +259,7 @@ const styles = StyleSheet.create({
     recordingLinkIcon: {
         width: hp(2.34),
         resizeMode: 'contain',
+        alignSelf:'center'
     },
     recordLinkText: {
         fontSize: Platform.OS == 'android' ? 14 : hp(1.85),
