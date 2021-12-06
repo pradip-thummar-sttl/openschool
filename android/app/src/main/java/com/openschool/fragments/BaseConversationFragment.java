@@ -18,10 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.TranslateAnimation;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -72,6 +74,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class BaseConversationFragment extends BaseToolBarFragment implements CallActivity.CurrentCallStateCallback, QBRTCSessionStateCallback<ConferenceSession>,
         QBRTCClientVideoTracksCallbacks<ConferenceSession>, OpponentsFromCallAdapter.OnAdapterEventListener, PNFragmentImpl {
@@ -123,6 +127,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private FrameLayout _frEmojiAnimationView;
     private TextView _txtEmojiAnim;
 
+    private RelativeLayout _headerClip;
     private ImageView btnMenu;
     private LinearLayout llShare;
     private LinearLayout llPupilEmoji;
@@ -140,6 +145,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected String title;
 
     ParentActivityImpl hostActivity;
+    private FrameLayout _fFrame;
+    private boolean _isup = true;
 
     private SparseArray<OpponentsFromCallAdapter.ViewHolder> opponentViewHolders;
 
@@ -213,6 +220,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         onReady();
         hostActivity.getPubNub().addListener(provideListener());
         subscribe();
+
 
         return view;
     }
@@ -473,6 +481,12 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         _frEmojiAnimationView = (FrameLayout) view.findViewById(R.id.EmojiAnim);
         _frEmojiAnimationView.setVisibility(View.GONE);
 
+        _headerClip = (RelativeLayout) view.findViewById(R.id.headerClip);
+        _fFrame = (FrameLayout)view.findViewById(R.id.fFrame);
+        onAutoHide();
+
+
+
         opponentViewHolders = new SparseArray<>(opponents.size());
         isRemoteShown = false;
 
@@ -617,6 +631,22 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
+        _fFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("-----","::----->");
+                onHideAnimation();
+            }
+        });
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("-----","::----->");
+                onHideAnimation();
+            }
+        });
+
         button_screen_sharing.setOnClickListener(v -> {
 //            startScreenSharing()
 //            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
@@ -628,8 +658,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
         icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID));
     }
-
-
 
     protected void actionButtonsEnabled(boolean inability) {
 
@@ -1110,6 +1138,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void sendEmoji(String channel, String message, String currentUserID) {
+        onHideAnimation();
         System.out.println("KDKDKD: channel send" + channel);
 
         _frEmojiAnimationView.setVisibility(View.VISIBLE);
@@ -1173,5 +1202,50 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
             }
         });
+    }
+
+    private void onHideAnimation() {
+        if(_isup)
+        {
+            slideUp(_headerClip,0,-(_headerClip.getHeight()));
+            slideUp(actionButtonsLayout, 0, actionButtonsLayout.getHeight());
+
+        }
+        else
+        {
+            slideDown(_headerClip, -(_headerClip.getHeight()), 0);
+            slideDown(actionButtonsLayout,actionButtonsLayout.getHeight(),0);
+            onAutoHide();
+        }
+    }
+
+    private void onAutoHide() {
+        final Timer[] longTimer = {new Timer()};
+        longTimer[0].schedule(new TimerTask() {
+            public void run() {
+                longTimer[0].cancel();
+                longTimer[0] = null;
+                _isup = true;
+                onHideAnimation();
+            }
+        }, 6000 );
+
+    }
+
+    public void slideUp(View view, int from, float to){
+        view.setVisibility(View.VISIBLE);
+        TranslateAnimation animate = new TranslateAnimation(0,0,  from,to);
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+        _isup = false;
+    }
+
+    public void slideDown(View view, int from, int to){
+        TranslateAnimation animate = new TranslateAnimation(0,0,from,to); // toYDelta
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+        _isup = true;
     }
 }
