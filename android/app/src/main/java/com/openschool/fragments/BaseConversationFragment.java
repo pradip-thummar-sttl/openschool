@@ -1,7 +1,5 @@
 package com.openschool.fragments;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
@@ -32,6 +30,7 @@ import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -115,7 +114,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
-    private ToggleButton toggle_recording_view;
     private TextView handUpCall;
     private TextView tvTeacherEmoji;
     private TextView tvTitle;
@@ -139,6 +137,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected Map<Integer, QBRTCVideoTrack> videoTrackMap;
     protected boolean asListenerRole;
     protected boolean isTeacher;
+    protected boolean isAllowPupilReactions;
     protected String currentUserID;
     protected String currentName;
     protected String teacherQBUserID;
@@ -460,7 +459,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected void initViews(View view) {
         Log.i(TAG, "initViews");
         toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
-        toggle_recording_view = (ToggleButton) view.findViewById(R.id.toggle_recording_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
         btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
@@ -545,7 +543,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             icPEmoji1.setVisibility(View.VISIBLE);
             icPEmoji2.setVisibility(View.VISIBLE);
             icPEmoji3.setVisibility(View.VISIBLE);
-            toggle_recording_view.setVisibility(View.GONE);
+            btnMenu.setVisibility(View.GONE);
         } else {
             itemHeight = opponents.size() == 1 ? recycleViewHeight : recycleViewHeight / DISPLAY_ROW_AMOUNT;
             llShare.setVisibility(View.VISIBLE);
@@ -595,13 +593,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 switchCamera(isChecked);
-            }
-        });
-
-        toggle_recording_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                conversationFragmentCallbackListener.onStartScreenRecording(isChecked);
             }
         });
 
@@ -786,6 +777,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     @Override
     public void onConnectedToUser(ConferenceSession qbrtcSession, final Integer userId) {
+        if (!isTeacher && userId != Integer.parseInt(teacherQBUserID)) {
+            return;
+        }
+
         if (checkIfUserInAdapter(userId)) {
             setStatusForOpponent(userId, getString(R.string.text_status_connected));
             Log.d(TAG, "onConnectedToUser user already in, userId= " + userId);
@@ -1122,6 +1117,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void setEmojiForTeacher(String message) {
+        if (!isAllowPupilReactions) {
+            return;
+        }
+
         String tempMsg = message.replace("\"", "");
         String[] splitStr = tempMsg.split("#@#");
 
@@ -1151,7 +1150,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             public void call(Animator animator) {
                 _frEmojiAnimationView.setVisibility(View.GONE);
             }
-        }).duration(500).playOn(_frEmojiAnimationView);
+        }).duration(2000).playOn(_frEmojiAnimationView);
 
         hostActivity.getPubNub()
                 .publish()
@@ -1185,9 +1184,30 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         bottomSheetDialog.setContentView(R.layout.bottom_dialog);
 
         TextView txtSetupVoting = bottomSheetDialog.findViewById(R.id.txtSetupVoting);
+        TextView txtMuteAll = bottomSheetDialog.findViewById(R.id.txtMuteAll);
         ImageView btnClose = bottomSheetDialog.findViewById(R.id.BtnClose);
+        SwitchCompat switch2 = bottomSheetDialog.findViewById(R.id.switch2);
+        ToggleButton toggle_recording_view = bottomSheetDialog.findViewById(R.id.toggle_recording_view);
 
         bottomSheetDialog.show();
+
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    isAllowPupilReactions = false;
+                } else {
+                    isAllowPupilReactions = true;
+                }
+            }
+        });
+
+        toggle_recording_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                conversationFragmentCallbackListener.onStartScreenRecording(isChecked);
+            }
+        });
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1200,6 +1220,25 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             public void onClick(View v) {
                 bottomSheetDialog.dismiss();
                 startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+            }
+        });
+
+        if (opponentsAdapter.setMuteStatus()) {
+            txtMuteAll.setText("Unmute All");
+        } else {
+            txtMuteAll.setText("Mute All");
+        }
+
+        txtMuteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+                if (opponentsAdapter.setMuteStatus()) {
+                    opponentsAdapter.setMuteAllStatus(false);
+                } else {
+                    opponentsAdapter.setMuteAllStatus(true);
+                }
+                opponentsAdapter.notifyDataSetChanged();
             }
         });
     }
