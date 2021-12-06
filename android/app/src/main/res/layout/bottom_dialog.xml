@@ -28,7 +28,7 @@
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/icn_delete"
+            android:src="@drawable/ic_close"
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
@@ -48,7 +48,7 @@
             android:text="Allow in-class messages"
             android:textColor="@color/black"
             android:textSize="14dp" />
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:textSize="14dp"
             android:padding="8dp"/>
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,9 +83,24 @@
     <RelativeLayout
         android:id="@+id/btnPoll"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="8dp">
+
+        <TextView
+            android:id="@+id/txtMuteAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/txtSetupVoting"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/shape_poll"
+            android:padding="8dp"
+            android:layout_marginRight="10dp"
+            android:text="Mute All"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtSetupVoting"
@@ -102,5 +117,14 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
+    <ToggleButton
+        android:id="@+id/toggle_recording_view"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:checked="false"
+        android:layout_marginTop="10dp"
+        android:textOff="Start Recording"
+        android:textOn="Stop Recording" />
 
 </LinearLayout>

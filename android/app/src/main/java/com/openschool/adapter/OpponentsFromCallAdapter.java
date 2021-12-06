@@ -45,6 +45,7 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
     private LayoutInflater inflater;
     private OnAdapterEventListener adapterListener;
     private boolean isTeacher;
+    private boolean isMuteAll;
 
 
     public OpponentsFromCallAdapter(Context context, ConferenceSession session, List<QBUser> users, int width, int height, boolean isTeacher) {
@@ -73,6 +74,14 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
 
     public List<QBUser> getOpponents() {
         return opponents;
+    }
+
+    public void setMuteAllStatus(boolean isMuteAll) {
+        this.isMuteAll = isMuteAll;
+    }
+
+    public boolean setMuteStatus() {
+        return isMuteAll;
     }
 
     public void removeItem(int index) {
@@ -127,6 +136,12 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         final QBUser user = opponents.get(position);
         int userID = user.getId();
         holder.opponentsName.setText(user.getFullName());
+
+        if (!isMuteAll) {
+            holder.toggleButton.setChecked(true);
+        } else {
+            holder.toggleButton.setChecked(false);
+        }
 
 //        float scale = context.getResources().getDisplayMetrics().density;
 //        int dpAsPixels = (int) (85 * scale + 0.5f);
