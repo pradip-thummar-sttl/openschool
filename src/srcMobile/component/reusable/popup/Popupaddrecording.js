@@ -111,7 +111,7 @@ const Popupaddrecording = (props) => {
                         }
                         {/* <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} /> */}
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
-                        <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
+                        <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         </View>
                         <TouchableOpacity onPress={() => { props.onRemoveRecording() }}>
                             <CloseBlack height={hp(2.94)} width={hp(2.94)} />

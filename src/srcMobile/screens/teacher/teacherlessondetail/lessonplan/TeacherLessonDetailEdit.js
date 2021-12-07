@@ -27,6 +27,9 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import { User } from "../../../../../utils/Model";
 import MESSAGE from "../../../../../utils/Messages";
 import DocumentPicker from 'react-native-document-picker';
+import Modal from 'react-native-modal';
+
+
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -98,6 +101,9 @@ const TLDetailEdit = (props) => {
     const [IsDeliveredLive, setDeliveredLive] = useState(false);
     const [IsPublishBeforeSesson, setPublishBeforeSesson] = useState(false);
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
+
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [recordingName, setRecordingName] = useState('');
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -317,6 +323,8 @@ const TLDetailEdit = (props) => {
     }
 
     const stopRecording = async () => {
+        if (recordingName.length > 0) {
+         
         var arr = []
         const res = await RecordScreen.stopRecording().catch((error) => {
             setRecordingStarted(false)
@@ -326,19 +334,55 @@ const TLDetailEdit = (props) => {
             setRecordingStarted(false)
             const url = res.result.outputURL;
             let ext = url.split('.');
+            // let obj = {
+            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+            //     originalname: 'MY_RECORDING.mp4',
+            //     fileName: 'MY_RECORDING.mp4',
+            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            // }
             let obj = {
                 uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: 'MY_RECORDING.mp4',
-                fileName: 'MY_RECORDING.mp4',
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             }
             arr.push(obj)
             setRecordingArr(arr)
             setScreenVoiceSelected(false)
-
+            setRecordingName("")
+            toggleModal()
             console.log('url', url);
         }
+    }else{
+        // setRecordingStarted(false)
+        // toggleModal()
+        showMessage('Please provide recording name proper')
     }
+    }
+
+    // const stopRecording = async () => {
+    //     var arr = []
+    //     const res = await RecordScreen.stopRecording().catch((error) => {
+    //         setRecordingStarted(false)
+    //         console.warn(error)
+    //     });
+    //     if (res) {
+    //         setRecordingStarted(false)
+    //         const url = res.result.outputURL;
+    //         let ext = url.split('.');
+    //         let obj = {
+    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
+    //             originalname: 'MY_RECORDING.mp4',
+    //             fileName: 'MY_RECORDING.mp4',
+    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+    //         }
+    //         arr.push(obj)
+    //         setRecordingArr(arr)
+    //         setScreenVoiceSelected(false)
+
+    //         console.log('url', url);
+    //     }
+    // }
 
     const onCameraOnly = () => {
         var arr = []
@@ -818,6 +862,52 @@ const TLDetailEdit = (props) => {
         setRecordingArr(arr)
     }
 
+    const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(80) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea,{height:50,width:'89%'}]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                onPress={()=>{stopRecording()}}
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                    </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebar
@@ -919,7 +1009,7 @@ const TLDetailEdit = (props) => {
                                     onScreeVoice={() => onScreeVoice()}
                                     onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
-                                    onStopScrrenRecording={() => stopRecording()}
+                                    onStopScrrenRecording={() => toggleModal()}
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
@@ -1064,6 +1154,7 @@ const TLDetailEdit = (props) => {
                             </View>
                         </View>
                     </ScrollView>
+                    {renderRecordingNamePopup()}
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
