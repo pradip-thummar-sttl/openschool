@@ -1201,5 +1201,37 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
+- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
+//  [self.toolbar setHidden:true];
+  if (self.toolbarHeightConstrain.constant == 0) {
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 50;
+        [self.endCallButton setHidden:false];
+    }];
+  }else{
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 0;
+        [self.endCallButton setHidden:true];
+    }];
+  }
+ 
+}
+- (IBAction)onStartScreenRecordingPressed:(id)sender {
+}
+
+- (IBAction)onPressSetupClassVotting:(id)sender {
+}
+
+- (IBAction)onPressMuteAll:(id)sender {
+}
+
+- (IBAction)onReactionSwitchPressed:(id)sender {
+}
+
+- (IBAction)onMessageSwitchPressed:(id)sender {
+}
+
+- (IBAction)onCloseSettings:(id)sender {
+}
 @end
 
