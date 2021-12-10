@@ -78,7 +78,7 @@
     <include layout="@layout/view_outgoing_screen" />
 
     <RelativeLayout
-        android:id="@+id/headerClip"
+        android:id="@+id/rlHeader"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/shape_top_gradient"
@@ -104,6 +104,7 @@
             android:layout_toLeftOf="@+id/button_hangup_call"
             android:background="@drawable/call_recording_toggle_background"
             android:checked="true"
+            android:visibility="gone"
             android:textOff=""
             android:textOn="" />
 

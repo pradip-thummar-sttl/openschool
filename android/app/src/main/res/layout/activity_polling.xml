@@ -27,6 +27,7 @@
             android:src="@drawable/back_arrow2" />
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -35,7 +36,6 @@
             android:text="Set up in-class voting"
             android:textSize="18sp" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/llSchool"
@@ -67,8 +67,9 @@
             android:hint="Write question here"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:inputType="textCapSentences"
             android:textColorHint="@color/app_text_grey"
-            android:textSize="14dp"/>
+            android:textSize="17sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -141,8 +142,8 @@
             android:ellipsize="end"
             android:text="How it posible?"
             android:textStyle="bold"
-            android:textSize="16dp"
-            android:textColor="@color/grey" />
+            android:textSize="17sp"
+            android:textColor="@color/dark_grey" />
 
         <TextView
             android:layout_width="match_parent"

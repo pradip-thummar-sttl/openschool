@@ -286,13 +286,19 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
                             tvPupilEmoji.setText("");
                         }
                     },
-                    6000);
+                    15000);
         }
 
         public void setPupilPollAns(String ans) {
-            tvPupilPollAns.setVisibility(View.VISIBLE);
-            tvPupilPollAns.setText(ans);
+            tvPupilPollAns.setText(" " + ans + " ");
 
+//            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+//                    new Runnable() {
+//                        public void run() {
+//                            tvPupilPollAns.setText("");
+//                        }
+//                    },
+//                    15000);
         }
 
         public String getEmoticon(int originalUnicode) {

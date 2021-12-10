@@ -41,6 +41,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout _btnAddOption;
     private EditText _edtQuestion;
     private TextView _txtPupilQutions;
+    private TextView _tvTitle;
 
     private ImageView _ivBack;
 
@@ -66,6 +67,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 
         _edtQuestion = findViewById(R.id.edtQuestion);
         _txtPupilQutions = findViewById(R.id.txtPupilQutions);
+        _tvTitle = findViewById(R.id.tvTitle);
 
         _btnClearPoll = findViewById(R.id.btnClearPoll);
         _btnSubmit = findViewById(R.id.btnSubmit);
@@ -108,6 +110,8 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
         _btnAddOption.setVisibility(View.GONE);
         _llSchool.setVisibility(View.GONE);
         _llPupil.setVisibility(View.VISIBLE);
+
+        _tvTitle.setText("Answer to in-class voting");
 
         Intent intent = getIntent();
         String data = intent.getStringExtra(PollingActivity.POLLING);
