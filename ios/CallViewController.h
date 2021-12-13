@@ -48,6 +48,11 @@ typedef void (^CompleteCall)(BOOL isFinished, NSString *url);
 //- (ScreenRecorder *)returnSwiftClassInstance;
 - (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstrain;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeightConstrain;
+
+@property (weak, nonatomic) IBOutlet UIView *headerVIew;
+@property (weak, nonatomic) IBOutlet UIButton *settingButton;
+
 
 @property (weak, nonatomic) IBOutlet UIView *classSettingView;
 @property (weak, nonatomic) IBOutlet UIButton *messageSwitch;
@@ -55,6 +60,7 @@ typedef void (^CompleteCall)(BOOL isFinished, NSString *url);
 @property (weak, nonatomic) IBOutlet UIButton *muteAllButton;
 @property (weak, nonatomic) IBOutlet UIButton *classVottingButton;
 @property (weak, nonatomic) IBOutlet UIButton *screenRecordingButton;
+- (IBAction)onSettingButtonPressed:(id)sender;
 
 - (IBAction)onCloseSettings:(id)sender;
 - (IBAction)onMessageSwitchPressed:(id)sender;

@@ -357,13 +357,16 @@ understand</string>
                                     <constraint firstAttribute="trailing" secondItem="m7N-gJ-2yI" secondAttribute="trailing" id="y7g-ua-0df"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbe-qI-8NB">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbe-qI-8NB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q61-zg-lN3">
                                         <rect key="frame" x="338" y="5" width="27" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="screenshare_selected"/>
+                                        <connections>
+                                            <action selector="onSettingButtonPressed:" destination="Wpm-Ud-a52" eventType="touchUpInside" id="Frh-AZ-Ckn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSo-do-uta">
                                         <rect key="frame" x="248" y="5" width="80" height="40"/>
@@ -380,8 +383,14 @@ understand</string>
                                             <action selector="onEndCallButton:" destination="Wpm-Ud-a52" eventType="touchUpInside" id="bTV-po-ZpO"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weY-Po-9gx">
+                                        <rect key="frame" x="10" y="14.5" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.20201671366788904" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="EPo-Q8-tDv"/>
                                     <constraint firstItem="q61-zg-lN3" firstAttribute="top" secondItem="bbe-qI-8NB" secondAttribute="top" constant="5" id="a68-9V-Vj7"/>
@@ -389,6 +398,8 @@ understand</string>
                                     <constraint firstAttribute="bottom" secondItem="XSo-do-uta" secondAttribute="bottom" constant="5" id="hde-nZ-NpK"/>
                                     <constraint firstItem="q61-zg-lN3" firstAttribute="leading" secondItem="XSo-do-uta" secondAttribute="trailing" constant="10" id="lK4-VM-yrV"/>
                                     <constraint firstAttribute="trailing" secondItem="q61-zg-lN3" secondAttribute="trailing" constant="10" id="rpZ-Q7-Ebk"/>
+                                    <constraint firstItem="weY-Po-9gx" firstAttribute="leading" secondItem="bbe-qI-8NB" secondAttribute="leading" constant="10" id="sjf-GV-Any"/>
+                                    <constraint firstItem="weY-Po-9gx" firstAttribute="centerY" secondItem="bbe-qI-8NB" secondAttribute="centerY" id="zp7-q0-Axv"/>
                                     <constraint firstItem="XSo-do-uta" firstAttribute="top" secondItem="bbe-qI-8NB" secondAttribute="top" constant="5" id="zxX-iv-5zc"/>
                                 </constraints>
                             </view>
@@ -450,11 +461,11 @@ understand</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdz-oA-NkZ">
-                                        <rect key="frame" x="110" y="152.5" width="75" height="30"/>
+                                        <rect key="frame" x="109" y="147.5" width="76" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Zf5-Pu-QPh"/>
-                                            <constraint firstAttribute="width" constant="75" id="sYb-Pd-W2E"/>
+                                            <constraint firstAttribute="height" constant="40" id="Zf5-Pu-QPh"/>
                                         </constraints>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" title="Mute All">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -466,7 +477,7 @@ understand</string>
                                         <rect key="frame" x="195" y="147.5" width="170" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="081-Cf-0CG"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="emr-JK-s7s"/>
+                                            <constraint firstAttribute="height" constant="40" id="emr-JK-s7s"/>
                                         </constraints>
                                         <state key="normal" title="Set up In-class Votting">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -505,7 +516,6 @@ understand</string>
                                     <constraint firstItem="Gp1-DT-7dp" firstAttribute="top" secondItem="9q7-iZ-Qi8" secondAttribute="bottom" constant="25" id="NYj-QJ-Jbz"/>
                                     <constraint firstItem="gdz-oA-NkZ" firstAttribute="centerY" secondItem="Gp1-DT-7dp" secondAttribute="centerY" id="OMT-DQ-eWg"/>
                                     <constraint firstAttribute="trailing" secondItem="qGB-JE-frQ" secondAttribute="trailing" constant="10" id="Ola-NZ-hGr"/>
-                                    <constraint firstItem="gdz-oA-NkZ" firstAttribute="height" secondItem="Gp1-DT-7dp" secondAttribute="height" multiplier="0.75" id="PY9-G1-MP5"/>
                                     <constraint firstItem="9q7-iZ-Qi8" firstAttribute="centerX" secondItem="vlz-JP-Fe3" secondAttribute="centerX" id="T8N-Xw-Hv7"/>
                                     <constraint firstItem="DZr-L6-g87" firstAttribute="leading" secondItem="0ZG-Ex-kjI" secondAttribute="leading" constant="10" id="X82-GR-Yi0"/>
                                     <constraint firstAttribute="trailing" secondItem="vlz-JP-Fe3" secondAttribute="trailing" constant="10" id="aMz-Yc-7nv"/>
@@ -550,6 +560,8 @@ understand</string>
                         <outlet property="doView" destination="35X-b5-LjD" id="suk-AO-Dch"/>
                         <outlet property="emojiView" destination="B7A-tk-4F1" id="h0A-Nj-arU"/>
                         <outlet property="endCallButton" destination="XSo-do-uta" id="pyH-0G-qpE"/>
+                        <outlet property="headerHeightConstrain" destination="EPo-Q8-tDv" id="O6x-x9-fyN"/>
+                        <outlet property="headerVIew" destination="bbe-qI-8NB" id="p1c-KP-Zrr"/>
                         <outlet property="messageSwitch" destination="vlz-JP-Fe3" id="wQQ-bn-N76"/>
                         <outlet property="muteAllButton" destination="gdz-oA-NkZ" id="NwK-xe-GkU"/>
                         <outlet property="opponentsCollectionView" destination="VGE-Qc-V5u" id="FA2-G2-Pow"/>
@@ -558,6 +570,7 @@ understand</string>
                         <outlet property="reactionTableView" destination="Z9W-8C-UQ4" id="vLg-ZI-euK"/>
                         <outlet property="reactionView" destination="RRF-Dg-H0a" id="pwl-qB-EDr"/>
                         <outlet property="screenRecordingButton" destination="deq-tF-9TG" id="tyw-KM-g74"/>
+                        <outlet property="settingButton" destination="q61-zg-lN3" id="LHz-bC-JN6"/>
                         <outlet property="thView" destination="si6-le-d0B" id="oNu-E3-UH1"/>
                         <outlet property="toolbar" destination="nvl-aP-B6G" id="GEn-4J-gzj"/>
                         <outlet property="toolbarHeightConstrain" destination="VHO-eP-YBj" id="d14-Du-sUk"/>
