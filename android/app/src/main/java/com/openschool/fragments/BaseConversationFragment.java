@@ -488,7 +488,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
 //        _headerClip = (RelativeLayout) view.findViewById(R.id.headerClip);
         _fFrame = (FrameLayout)view.findViewById(R.id.fFrame);
-        onAutoHide();
 
 
 
@@ -708,21 +707,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
-        _fFrame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("-----","::----->");
-                onHideAnimation();
-            }
-        });
 
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("-----","::----->");
-                onHideAnimation();
-            }
-        });
 
         button_screen_sharing.setOnClickListener(v -> {
 //            startScreenSharing()
@@ -823,7 +808,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-
     protected OpponentsFromCallAdapter.ViewHolder findHolder(Integer userID) {
         Log.d(TAG, "findHolder for " + userID);
         int childCount = recyclerView.getChildCount();
@@ -839,7 +823,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         }
         return null;
     }
-
+    
     private void setOpponentView(int userID) {
         setOpponentToAdapter(userID);
         if (!isRemoteShown) {
@@ -1224,7 +1208,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void sendEmoji(String channel, String message, String currentUserID) {
-        onHideAnimation();
         System.out.println("KDKDKD: channel send" + channel);
 
         _frEmojiAnimationView.setVisibility(View.VISIBLE);
@@ -1350,50 +1333,5 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 opponentsAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-//    private void onHideAnimation() {
-//        if(_isup)
-//        {
-//            slideUp(_headerClip,0,-(_headerClip.getHeight()));
-//            slideUp(actionButtonsLayout, 0, actionButtonsLayout.getHeight());
-//
-//        }
-//        else
-//        {
-//            slideDown(_headerClip, -(_headerClip.getHeight()), 0);
-//            slideDown(actionButtonsLayout,actionButtonsLayout.getHeight(),0);
-//            onAutoHide();
-//        }
-//    }
-
-    private void onAutoHide() {
-        final Timer[] longTimer = {new Timer()};
-        longTimer[0].schedule(new TimerTask() {
-            public void run() {
-                longTimer[0].cancel();
-                longTimer[0] = null;
-                _isup = true;
-                onHideAnimation();
-            }
-        }, 6000 );
-
-    }
-
-    public void slideUp(View view, int from, float to){
-        view.setVisibility(View.VISIBLE);
-        TranslateAnimation animate = new TranslateAnimation(0,0,  from,to);
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        view.startAnimation(animate);
-        _isup = false;
-    }
-
-    public void slideDown(View view, int from, int to){
-        TranslateAnimation animate = new TranslateAnimation(0,0,from,to); // toYDelta
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        view.startAnimation(animate);
-        _isup = true;
     }
 }

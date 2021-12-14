@@ -291,14 +291,6 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
 
         public void setPupilPollAns(String ans) {
             tvPupilPollAns.setText(" " + ans + " ");
-
-//            new android.os.Handler(Looper.getMainLooper()).postDelayed(
-//                    new Runnable() {
-//                        public void run() {
-//                            tvPupilPollAns.setText("");
-//                        }
-//                    },
-//                    15000);
         }
 
         public String getEmoticon(int originalUnicode) {
