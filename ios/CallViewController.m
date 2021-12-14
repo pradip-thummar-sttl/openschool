@@ -9,6 +9,7 @@
 
 #import "CallViewController.h"
 #import "PollViewController.h"
+#import "PollVC.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -285,7 +286,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           self.pollMessage = message;
           [self.opponentsCollectionView reloadData];
         }else if (listItems.count > 2) {
-          PollViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+          PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
           vc.channels = self.channels;
           vc.ispupil = true;
           vc.pollString = message;
@@ -421,7 +422,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (_isTeacher) {
     [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-      PollViewController *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+      PollVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
       vc.channels = weakSelf.channels;
       vc.ispupil = false;
       [weakSelf presentViewController:vc animated:false completion:nil];

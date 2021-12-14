@@ -20,6 +20,7 @@
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */; };
+		8824A6BD2768ACE200C6E695 /* PollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824A6BC2768ACE200C6E695 /* PollVC.m */; };
 		882EA01C266A1DB3000B9813 /* CallPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA01B266A1DB3000B9813 /* CallPermissions.m */; };
 		882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882EA01E266A1DD7000B9813 /* Call.storyboard */; };
 		882EA02B266A1DF5000B9813 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA021266A1DF4000B9813 /* StatsView.m */; };
@@ -130,6 +131,8 @@
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
+		8824A6BB2768ACE200C6E695 /* PollVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollVC.h; sourceTree = "<group>"; };
+		8824A6BC2768ACE200C6E695 /* PollVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollVC.m; sourceTree = "<group>"; };
 		882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSchool-Bridging-Header.h"; sourceTree = "<group>"; };
 		882EA008266A1CAA000B9813 /* CallTestPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallTestPrefixHeader.pch; sourceTree = "<group>"; };
 		882EA01A266A1DB3000B9813 /* CallPermissions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallPermissions.h; sourceTree = "<group>"; };
@@ -483,6 +486,8 @@
 				88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */,
 				88BE3A6E272FE11400A1693B /* PollViewController.h */,
 				88BE3A6F272FE11400A1693B /* PollViewController.m */,
+				8824A6BB2768ACE200C6E695 /* PollVC.h */,
+				8824A6BC2768ACE200C6E695 /* PollVC.m */,
 			);
 			name = CallViewController;
 			sourceTree = "<group>";
@@ -1203,6 +1208,7 @@
 				88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */,
 				882EA02C266A1DF5000B9813 /* ZoomedView.m in Sources */,
 				88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */,
+				8824A6BD2768ACE200C6E695 /* PollVC.m in Sources */,
 				882EA06E266A1F58000B9813 /* Settings.m in Sources */,
 				882EA079266A1F7B000B9813 /* QBCore.m in Sources */,
 				882EA0B0266A21D0000B9813 /* DialogsDataSource.m in Sources */,
