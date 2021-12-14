@@ -28,3 +28,6 @@ export var NotificationToken = {
 export var BadgeIcon = {
     isBadge: false,   
 };
+export var selectedDate = {
+    date: "",   
+};

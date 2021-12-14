@@ -10,7 +10,7 @@ import Popupdata from "../../../component/reusable/popup/Popupdata";
 import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { BadgeIcon, User } from "../../../../utils/Model";
@@ -82,7 +82,10 @@ const TeacherTimeTable = (props) => {
 
     const [scrollIndex, setScrollIndex] = useState(0);
 
-
+    const weekTimeTableDate = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.weekTimeTableData
+    })
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null, prevSpan=1;
 
@@ -148,9 +151,9 @@ const TeacherTimeTable = (props) => {
 
        setScrollIndex(index)
 
-        fetchRecord('', '')
+        fetchRecord('', '',moment().format('YYYY-MM-DD'))
         let data = {
-            CurrentDate: moment().format('yyyy-MM-DD'),
+            CurrentDate: moment().format('YYYY-MM-DD'),
             
         }
         Service.post(data,`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
@@ -164,12 +167,30 @@ const TeacherTimeTable = (props) => {
             console.log('response of get calander error', err)
         })
     }, [])
+    useEffect(() => {
+        // const unsubscribe = props.navigation.addListener('focus', () => {
+        //     // The screen is focused
+        //     // Call any action
+            console.log('======================.=..........................======================');
+            if (weekTimeTableDate != "") {
+                fetchRecord("","",weekTimeTableDate)
+            }
+           
+        //   });
+      
+        //   // Return the function to unsubscribe from the event so it gets removed on unmount
+        //   return unsubscribe;
+        // fetchRecord("","",selectedDate.date)
+        
+    }, [weekTimeTableDate])
 
-    const fetchRecord = (searchBy, filterBy) => {
+
+    const fetchRecord = (searchBy, filterBy,currentDate) => {
         setTimeTableLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            CurrentDate:currentDate
         }
 
         console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
@@ -190,7 +211,7 @@ const TeacherTimeTable = (props) => {
     }
 
     const refresh = () => {
-        fetchRecord('', '')
+        fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }
 
     const openNotification = () => {
@@ -225,11 +246,11 @@ const TeacherTimeTable = (props) => {
                                 onAlertPress={() => { openNotification() }}
                                 onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                                onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                                onSearch={() => fetchRecord(searchKeyword, filterBy,moment().format('YYYY-MM-DD'))}
+                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '',moment().format('YYYY-MM-DD')) }}
                                 navigateToAddLesson={() => setTeacherLessonAdd(true)}
                                 refreshList={() => refresh()} 
-                                onFilter={(filter)=>fetchRecord(searchKeyword, filter)} />
+                                onFilter={(filter)=>fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD'))} />
 
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isTimeTableLoading ?

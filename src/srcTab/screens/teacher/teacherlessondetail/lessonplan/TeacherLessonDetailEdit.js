@@ -44,7 +44,7 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
-
+import Modal from 'react-native-modal';
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -107,6 +107,8 @@ const TLDetailEdit = (props) => {
     const [IsPublishBeforeSesson, setPublishBeforeSesson] = useState(false);
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
 
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [recordingName, setRecordingName] = useState('');
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -315,6 +317,8 @@ const TLDetailEdit = (props) => {
     }
 
     const stopRecording = async () => {
+        if (recordingName.length > 0) {
+         
         var arr = []
         const res = await RecordScreen.stopRecording().catch((error) => {
             setRecordingStarted(false)
@@ -324,18 +328,30 @@ const TLDetailEdit = (props) => {
             setRecordingStarted(false)
             const url = res.result.outputURL;
             let ext = url.split('.');
+            // let obj = {
+            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+            //     originalname: 'MY_RECORDING.mp4',
+            //     fileName: 'MY_RECORDING.mp4',
+            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            // }
             let obj = {
                 uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: 'MY_RECORDING.mp4',
-                fileName: 'MY_RECORDING.mp4',
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             }
             arr.push(obj)
             setRecordingArr(arr)
             setScreenVoiceSelected(false)
-
+            setRecordingName("")
+            toggleModal()
             console.log('url', url);
         }
+    }else{
+        // setRecordingStarted(false)
+        // toggleModal()
+        showMessage('Please provide recording name proper')
+    }
     }
 
     const onCameraOnly = () => {
@@ -603,7 +619,7 @@ const TLDetailEdit = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } 
+        }
         // else if (recordingArr.length == 0 && !isRunningFromVirtualDevice) {
         //     showMessage(MESSAGE.recording);
         //     return false;
@@ -715,6 +731,10 @@ const TLDetailEdit = (props) => {
             if (element.uri) {
                 let ext = element.fileName.split('.');
 
+                if (Platform.OS === 'ios') {
+                    ext = element.uri.split('.');
+                }
+
                 data.append('recording', {
                     uri: element.uri,
                     // name: element.fileName,
@@ -808,6 +828,51 @@ const TLDetailEdit = (props) => {
         array.splice(index1, 1);
         setMaterialArr(array)
         console.log('hello material', array)
+    }
+    const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(40) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea,{height:50}]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                onPress={()=>{stopRecording()}}
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                    </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
     }
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -917,7 +982,7 @@ const TLDetailEdit = (props) => {
                                             onScreeCamera={() => onScreeCamera()}
                                             onScreeVoice={() => onScreeVoice()}
                                             onStartScrrenRecording={() => startRecording()}
-                                            onStopScrrenRecording={() => stopRecording()}
+                                            onStopScrrenRecording={() => toggleModal()}
                                             onCameraOnly={() => onCameraOnly()}
                                             onRemoveRecording={() => removeRecording()} />
 
@@ -1029,6 +1094,7 @@ const TLDetailEdit = (props) => {
                                     </View>
                                 </View>
                             </ScrollView>
+                            {renderRecordingNamePopup()}
 
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}

@@ -46,5 +46,28 @@ typedef void (^CompleteCall)(BOOL isFinished, NSString *url);
 - (IBAction)thumbBtn:(id)sender;
 
 //- (ScreenRecorder *)returnSwiftClassInstance;
+- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstrain;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeightConstrain;
+
+@property (weak, nonatomic) IBOutlet UIView *headerVIew;
+@property (weak, nonatomic) IBOutlet UIButton *settingButton;
+
+
+@property (weak, nonatomic) IBOutlet UIView *classSettingView;
+@property (weak, nonatomic) IBOutlet UIButton *messageSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *reactionSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *muteAllButton;
+@property (weak, nonatomic) IBOutlet UIButton *classVottingButton;
+@property (weak, nonatomic) IBOutlet UIButton *screenRecordingButton;
+- (IBAction)onSettingButtonPressed:(id)sender;
+
+- (IBAction)onCloseSettings:(id)sender;
+- (IBAction)onMessageSwitchPressed:(id)sender;
+- (IBAction)onReactionSwitchPressed:(id)sender;
+- (IBAction)onPressMuteAll:(id)sender;
+- (IBAction)onPressSetupClassVotting:(id)sender;
+- (IBAction)onStartScreenRecordingPressed:(id)sender;
+
 
 @end

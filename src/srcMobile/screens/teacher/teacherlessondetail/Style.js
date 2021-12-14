@@ -1274,4 +1274,54 @@ export default StyleSheet.create({
     fileBoxGrpWrap: {
         marginBottom: hp(-1.5)
     },
+    // recording name
+    popupCard: {
+        backgroundColor: COLORS.white,
+        borderRadius: hp(2),
+        width: wp(80.54),
+        alignItems: 'center',
+        alignSelf: 'center',
+        overflow: 'hidden',
+        fontFamily: FONTS.fontRegular,
+        position: 'relative',
+        marginTop:hp(5)
+    },
+    popupContent: {
+        width: '100%',
+    },
+    beforeBorder: {
+        padding: hp(2.60),
+        paddingBottom: hp(0.5),
+    },
+    afterBorder: {
+        padding: hp(2.60),
+        paddingTop: hp(0.5),
+    },
+    titleTab: {
+        fontSize: hp(2.125),
+        fontFamily: FONTS.fontBold,
+        // lineHeight: hp(4.55),
+        color: COLORS.darkGray,
+        marginBottom: hp(2.51),
+    },
+    cancelButton: {
+        position: 'absolute',
+        right: hp(1.5),
+        zIndex: 9,
+        top: hp(1),
+    },
+    popupCustomButton: {
+        paddingLeft: hp(4.42),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+    },
+    buttonGrp: {
+        position: 'relative',
+        alignItems: 'center',
+        // flexDirection: 'row',
+        // marginTop:hp(2),
+        justifyContent:'center',
+        marginVertical:hp(2)
+    },
 });

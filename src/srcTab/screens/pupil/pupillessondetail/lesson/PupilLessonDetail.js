@@ -167,11 +167,13 @@ const PupilLessonDetailInternal = (props) => {
                                     <ScrollView>
                                         <View style={PAGESTYLE.containerWrap}>
                                             <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                                                <View style={PAGESTYLE.largeVideoBlock}>
-                                                    {item.RecordingList.length == 0 ?
+                                            {item.RecordingList.length == 0 ?
                                                     // source={require('../../../../../assets/images/videoLarge2.png')} 
-                                                        <Image style={PAGESTYLE.largeVideo} />
+                                                        // <Image style={PAGESTYLE.largeVideo} />
+                                                        null
                                                         :
+                                                <View style={PAGESTYLE.largeVideoBlock}>
+                                                   
                                                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', backgroundColor: COLORS.blueBorder }}>
                                                             <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                                                 resizeMode={'contain'}
@@ -189,8 +191,9 @@ const PupilLessonDetailInternal = (props) => {
                                                                 null
                                                             }
                                                         </View>
-                                                    }
+                                                   
                                                 </View>
+                                                 }
                                                 <View style={{ marginStart: 10 }}>
                                                     <View style={PAGESTYLE.videoTitleLine}>
                                                         <View>
