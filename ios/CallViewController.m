@@ -75,6 +75,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (assign, nonatomic) BOOL shouldGetStats;
 @property (strong, nonatomic) NSNumber *statsUserID;
 
+@property (assign, nonatomic) BOOL isMutedFlag;
+
+@property (assign, nonatomic) BOOL isReaction;
+
 @property (strong, nonatomic) ZoomedView *zoomedView;
 @property (weak, nonatomic) OpponentCollectionViewCell *originCell;
 
@@ -138,6 +142,19 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   self.recordUrl=@"";
   self.isRecording = false;
+  _isMutedFlag = true;
+  _isReaction = true;
+  [_classSettingView setHidden:true];
+  
+  _muteAllButton.layer.cornerRadius=10;
+  _muteAllButton.layer.borderWidth = 1;
+  _muteAllButton.layer.borderColor = [UIColor grayColor].CGColor;
+  
+  _classVottingButton.layer.cornerRadius=10;
+  _classVottingButton.layer.borderWidth = 1;
+  _classVottingButton.layer.borderColor = [UIColor grayColor].CGColor;
+  
+  
   _doView.layer.cornerRadius=10;
   _doView.layer.borderWidth = 3;
   _doView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -556,24 +573,47 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
-
- 
-  if (![_messages isEqualToString:@""]) {
-    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
-    if (_isTeacher) {
-      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
-      }else
-      {
-        reusableCell.emojiLbl.text=@"";
+  
+  if(_isReaction){
+    
+    if (![_messages isEqualToString:@""]) {
+      NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+      if (_isTeacher) {
+        if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+          reusableCell.emojiLbl.text = [items objectAtIndex:0];
+        }else
+        {
+          reusableCell.emojiLbl.text=@"";
+        }
+      }else{
+  //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+          reusableCell.emojiLbl.text = [items objectAtIndex:0];
+  //      }
       }
-    }else{
-//      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
-//      }
     }
     
   }
+  else{
+    reusableCell.emojiLbl.text=@"";
+  }
+
+ 
+//  if (![_messages isEqualToString:@""]) {
+//    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+//    if (_isTeacher) {
+//      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+//      }else
+//      {
+//        reusableCell.emojiLbl.text=@"";
+//      }
+//    }else{
+////      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+////      }
+//    }
+//
+//  }
   
   if (![_pollMessage isEqualToString:@""]) {
     NSArray *items = [_pollMessage componentsSeparatedByString:@"##@##"];
@@ -1200,6 +1240,90 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   NSString *str = [NSString stringWithFormat:@"✋@#@%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
+}
+- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
+//  [self.toolbar setHidden:true];
+  if (self.toolbarHeightConstrain.constant == 0) {
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 50;
+        self.headerHeightConstrain.constant = 50;
+    }];
+  }else{
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 0;
+        self.headerHeightConstrain.constant = 0;
+       
+    }];
+  }
+ 
+}
+- (IBAction)onStartScreenRecordingPressed:(id)sender {
+  if (!self.isRecording) {
+    self.isRecording = true;
+    [self.screenRecordingButton setTitle:@"STOP SCREEN RECORDING" forState:UIControlStateNormal];
+    [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+      NSLog(@"error of recording %@", error);
+    }];
+  }else{
+    self.isRecording = false;
+    [self.screenRecordingButton setTitle:@"START SCREEN RECORDING" forState:UIControlStateNormal];
+    [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+           NSLog(@"stop recording Error %@", url);
+      self.recordUrl = [NSString stringWithFormat:@"%@", url];
+    }];
+  }
+}
+
+- (IBAction)onPressSetupClassVotting:(id)sender {
+}
+
+- (IBAction)onPressMuteAll:(id)sender {
+  
+  if (_isMutedFlag) {
+    _isMutedFlag=false;
+    [_muteAllButton setTitle:@"Unmute All" forState:UIControlStateNormal];
+    for (int i=0; i<self.users.count; i++) {
+      QBUUser *user = self.users[i];
+      QBRTCAudioTrack *audioTrack = [self.session remoteAudioTrackWithUserID:@(user.ID)];
+      audioTrack.enabled = false;
+    }
+   
+   
+  }else{
+    _isMutedFlag=true;
+    [_muteAllButton setTitle:@"Mute All" forState:UIControlStateNormal];
+    for (int i=0; i<self.users.count; i++) {
+      QBUUser *user = self.users[i];
+      QBRTCAudioTrack *audioTrack = [self.session remoteAudioTrackWithUserID:@(user.ID)];
+      audioTrack.enabled = true;
+    }
+    
+  }
+  
+}
+
+- (IBAction)onReactionSwitchPressed:(id)sender {
+  
+  if(_isReaction){
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+  }
+  else{
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+  }
+  
+  _isReaction = !_isReaction;
+//  [_messageSwitch setBackgroundImage:[UIImage imageNamed: @""] forState:UIControlStateNormal];
+}
+
+- (IBAction)onMessageSwitchPressed:(id)sender {
+}
+
+- (IBAction)onCloseSettings:(id)sender {
+  [_classSettingView setHidden:true];
+}
+
+- (IBAction)onSettingButtonPressed:(id)sender {
+  [_classSettingView setHidden:false];
 }
 @end
 

@@ -141,6 +141,11 @@ const TeacherLessonDetail = (props) => {
             if (element.uri) {
                 let ext = element.fileName.split('.');
 
+                if (Platform.OS === 'ios') {
+                    ext = element.uri.split('.');
+                }
+    
+
                 data.append('recording', {
                     uri: element.uri,
                     // name: element.fileName,

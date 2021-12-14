@@ -27,7 +27,7 @@ var year = moment().format('YYYY');
 const markdate = ["2021-03-26", "2021-03-27"]
 const periodDate = ["2021-03-22", "2021-03-23", "2021-03-24", "2021-03-25", "2021-03-26", "2021-03-27", "2021-03-28"]
 const NotificationDrawer = (props) => {
-    const calEventDat = useSelector(state => {
+    const calEventData = useSelector(state => {
         // console.log('state of user',state)
         return state.AuthReducer.calEventData
     })
@@ -37,7 +37,7 @@ const NotificationDrawer = (props) => {
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
     // console.log('date of week', moment(today).format('YYYY-MM-DD'), moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'))
-    const [calEventData, setcalEventData] = useState(calEventDat)
+    // const [calEventData, setcalEventData] = useState(calEventDat)
     const myRef = createRef()
     const isOpen = useIsDrawerOpen()
 
@@ -183,8 +183,8 @@ const NotificationDrawer = (props) => {
                 // console.log('previousMonthDateSet ------- response of calender event is:', res)
                 if (res.code == 200) {
                     // setsta(1)
-                    setcalEventData(res.data)
-                    // dispatch(setCalendarEventData(res.data))
+                    // setcalEventData(res.data)
+                    dispatch(setCalendarEventData(res.data))
 
                     // myRef.current.onPressArrowLeft()
 
@@ -197,8 +197,8 @@ const NotificationDrawer = (props) => {
                 console.log('previousMonthDateSet ------- response of calender event is:', res)
                 if (res.code == 200) {
                     // setsta(1)
-                    setcalEventData(res.data)
-                    // dispatch(setCalendarEventData(res.data))
+                    // setcalEventData(res.data)
+                    dispatch(setCalendarEventData(res.data))
                     // myRef.current.updateMonth(moment(date.CurrentDate).format('YYYY-MM-DD'), true)
                 }
             }, (err) => {
@@ -211,7 +211,7 @@ const NotificationDrawer = (props) => {
         selectedDate.date = date.dateString
         dispatch(setTimeTableWeekEventData(date.dateString))
     }
-    console.log('event data', calEventData);
+    // console.log('event data', calEventData);
     return (
         <View style={styles.drawerMain}>
             {
@@ -222,7 +222,7 @@ const NotificationDrawer = (props) => {
                             ref={myRef}
                             minDate={new Date()}
                             firstDay={1}
-                            onMonthChange={(month) => onMonthChangeFunction(month)}
+                            // onMonthChange={(month) => onMonthChangeFunction(month)}
                             // onDayPress={(day) => { console.log('day press', day); }}
                             // onPressArrowLeft={(subtractMonth) => { subtractMonth(); onMonthChangeFunction(1) }}
                             // onPressArrowRight={(addMonth) => { addMonth(); onMonthChangeFunction(2) }}

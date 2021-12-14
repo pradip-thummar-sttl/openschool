@@ -214,11 +214,13 @@ const PupilLessonDetailInternal = (props) => {
                     onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}
                     onSeeHomeworkPress={() => null} />
                 <View style={{ height: '93%', paddingBottom: 30 }}>
-                    <View style={PAGESTYLE.largeVideoBlock}>
-                        {item.RecordingList.length == 0 ?
-                            <VideoBanner width={'100%'} height={hp(25.86)} style={PAGESTYLE.largeVideo} />
+                {item.RecordingList.length == 0 ?
+                            // <VideoBanner width={'100%'} height={hp(25.86)} style={PAGESTYLE.largeVideo} />
                             // <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                            null
                             :
+                    <View style={PAGESTYLE.largeVideoBlock}>
+                       
                             <View style={{ height: '100%', justifyContent: 'center' }}>
                                 <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                 // hideShutterView={true}
@@ -237,8 +239,9 @@ const PupilLessonDetailInternal = (props) => {
                                     null
                                 }
                             </View>
-                        }
+                       
                     </View>
+                     }
                     <ScrollView style={{ top: 0,marginBottom:5 }} showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.videoTitleLine}>
                             <View>
