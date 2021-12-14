@@ -77,6 +77,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (assign, nonatomic) BOOL isMutedFlag;
 
+@property (assign, nonatomic) BOOL isReaction;
+
 @property (strong, nonatomic) ZoomedView *zoomedView;
 @property (weak, nonatomic) OpponentCollectionViewCell *originCell;
 
@@ -141,6 +143,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   self.recordUrl=@"";
   self.isRecording = false;
   _isMutedFlag = true;
+  _isReaction = true;
   [_classSettingView setHidden:true];
   
   _muteAllButton.layer.cornerRadius=10;
@@ -570,24 +573,47 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
-
- 
-  if (![_messages isEqualToString:@""]) {
-    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
-    if (_isTeacher) {
-      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
-      }else
-      {
-        reusableCell.emojiLbl.text=@"";
+  
+  if(_isReaction){
+    
+    if (![_messages isEqualToString:@""]) {
+      NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+      if (_isTeacher) {
+        if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+          reusableCell.emojiLbl.text = [items objectAtIndex:0];
+        }else
+        {
+          reusableCell.emojiLbl.text=@"";
+        }
+      }else{
+  //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+          reusableCell.emojiLbl.text = [items objectAtIndex:0];
+  //      }
       }
-    }else{
-//      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
-//      }
     }
     
   }
+  else{
+    reusableCell.emojiLbl.text=@"";
+  }
+
+ 
+//  if (![_messages isEqualToString:@""]) {
+//    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+//    if (_isTeacher) {
+//      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+//      }else
+//      {
+//        reusableCell.emojiLbl.text=@"";
+//      }
+//    }else{
+////      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+////      }
+//    }
+//
+//  }
   
   if (![_pollMessage isEqualToString:@""]) {
     NSArray *items = [_pollMessage componentsSeparatedByString:@"##@##"];
@@ -1277,6 +1303,16 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 
 - (IBAction)onReactionSwitchPressed:(id)sender {
+  
+  if(_isReaction){
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+  }
+  else{
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+  }
+  
+  _isReaction = !_isReaction;
+//  [_messageSwitch setBackgroundImage:[UIImage imageNamed: @""] forState:UIControlStateNormal];
 }
 
 - (IBAction)onMessageSwitchPressed:(id)sender {
