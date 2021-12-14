@@ -28,18 +28,25 @@
             android:padding="5dp"
             android:src="@drawable/ic_plus" />
 
-        <ToggleButton
-            android:id="@+id/opponent_toggle_mic"
-            android:layout_width="@dimen/toggle_button_params_small"
-            android:layout_height="@dimen/toggle_button_params_small"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/margin_very_small"
-            android:background="@drawable/call_mic_toggle_small_background"
-            android:checked="true"
-            android:textOff=""
-            android:textOn="" />
+            android:background="@drawable/shape_mic_gradient">
+
+            <ToggleButton
+                android:id="@+id/opponent_toggle_mic"
+                android:layout_width="@dimen/toggle_button_params_small"
+                android:layout_height="@dimen/toggle_button_params_small"
+                android:background="@drawable/call_mic_toggle_small_background"
+                android:checked="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:textOff=""
+                android:textOn="" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/connectionStatus"
@@ -67,23 +74,21 @@
             android:id="@+id/tvPupilPollAns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:maxLines="2"
-            android:ellipsize="end"
             android:layout_above="@+id/opponentName"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="4dp"
-            android:layout_marginRight="5dp"
-            android:textSize="18dp" />
+            android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/opponentName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/toggle_button_params_small"
             android:layout_alignParentBottom="true"
             android:background="@color/black_trans1"
             android:ellipsize="end"
-            android:maxWidth="150dp"
+            android:maxWidth="200dp"
             android:maxLines="1"
             android:paddingHorizontal="10dp"
             android:paddingVertical="4dp"

@@ -205,6 +205,9 @@ dependencies {
     //screen recording
     implementation 'com.github.HBiSoft:HBRecorder:2.0.0'
 
+    //yoyo animation
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }

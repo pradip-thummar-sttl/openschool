@@ -43,7 +43,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Permission-Camera (3.0.4):
+  - Permission-Camera (3.1.0):
     - RNPermissions
   - PromisesObjC (2.0.0)
   - PubNub (4.17.0):
@@ -222,28 +222,28 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-camera (3.43.3):
+  - react-native-camera (3.44.3):
     - React-Core
-    - react-native-camera/RCT (= 3.43.3)
-    - react-native-camera/RN (= 3.43.3)
-  - react-native-camera/RCT (3.43.3):
+    - react-native-camera/RCT (= 3.44.3)
+    - react-native-camera/RN (= 3.44.3)
+  - react-native-camera/RCT (3.44.3):
     - React-Core
-  - react-native-camera/RN (3.43.3):
+  - react-native-camera/RN (3.44.3):
     - React-Core
-  - react-native-document-picker (5.0.2):
+  - react-native-document-picker (5.2.0):
     - React-Core
-  - react-native-image-picker (3.3.2):
+  - react-native-image-picker (3.8.1):
     - React-Core
   - react-native-record-screen (0.3.2):
     - React
-  - react-native-safe-area-context (3.1.9):
+  - react-native-safe-area-context (3.3.2):
     - React-Core
-  - react-native-video (5.1.1):
+  - react-native-video (5.2.0):
     - React-Core
-    - react-native-video/Video (= 5.1.1)
-  - react-native-video/Video (5.1.1):
+    - react-native-video/Video (= 5.2.0)
+  - react-native-video/Video (5.2.0):
     - React-Core
-  - react-native-webview (11.2.3):
+  - react-native-webview (11.15.0):
     - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
@@ -307,34 +307,61 @@ PODS:
     - React-jsi (= 0.63.4)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNCAsyncStorage (1.14.1):
+  - RNCAsyncStorage (1.15.14):
     - React-Core
-  - RNCCheckbox (0.5.7):
+  - RNCCheckbox (0.5.9):
     - React-Core
-  - RNCMaskedView (0.1.10):
+  - RNCMaskedView (0.1.11):
     - React
-  - RNCPicker (1.9.11):
+  - RNCPicker (1.16.8):
     - React-Core
   - RNCPushNotificationIOS (1.10.1):
     - React-Core
-  - RNDateTimePicker (3.0.9):
+  - RNDateTimePicker (3.5.2):
     - React-Core
-  - RNDeviceInfo (8.0.7):
+  - RNDeviceInfo (8.4.8):
     - React-Core
-  - RNFBApp (12.9.1):
+  - RNFBApp (12.9.3):
     - Firebase/CoreOnly (= 8.8.0)
     - React-Core
   - RNFileViewer (2.1.4):
     - React-Core
-  - RNFS (2.17.0):
+  - RNFS (2.18.0):
     - React
-  - RNGestureHandler (1.9.0):
+  - RNGestureHandler (1.10.3):
     - React-Core
-  - RNPermissions (3.0.4):
+  - RNPermissions (3.1.0):
     - React-Core
-  - RNReanimated (1.13.3):
+  - RNReanimated (2.2.4):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - Folly
+    - glog
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-callinvoker
     - React-Core
-  - RNScreens (3.8.0):
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - React-RCTVibration
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNScreens (3.9.0):
     - React-Core
     - React-RCTImage
   - RNSketchCanvas (0.8.0):
