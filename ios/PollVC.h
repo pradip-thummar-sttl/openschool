@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *pupilQuestionTxt;
 @property (weak, nonatomic) IBOutlet UIView *pupilOptionView;
 @property (weak, nonatomic) IBOutlet UIButton *submitAnswerBUtton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pupilOptionHEightConstrain;
 
 - (IBAction)onSubmitAnswer:(id)sender;
 

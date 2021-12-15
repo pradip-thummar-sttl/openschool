@@ -870,6 +870,7 @@ understand</string>
                         <outlet property="addOptionView" destination="vCs-Te-X44" id="FcR-MN-gGi"/>
                         <outlet property="addTextFieldView" destination="Sdd-mS-dSA" id="qDw-0Z-nOd"/>
                         <outlet property="clearPollBtn" destination="2ML-qZ-401" id="QZQ-Tl-eAZ"/>
+                        <outlet property="pupilOptionHEightConstrain" destination="6RG-yi-dTP" id="kY3-IV-YB6"/>
                         <outlet property="pupilOptionView" destination="Dxf-NQ-a3h" id="QMI-8n-zXF"/>
                         <outlet property="pupilPollView" destination="bk9-Su-oec" id="0OK-vb-Hdk"/>
                         <outlet property="pupilQuestionTxt" destination="8x8-GS-jcr" id="ZUc-Pd-pn9"/>

@@ -16,7 +16,9 @@ static NSString * const kChannelGuide = @"the_guide";
 @interface PollVC ()
 @property (nonatomic, strong) PubNub *pubnub;
 @property (strong, nonatomic) NSMutableArray *optionArr;
+@property (strong, nonatomic) NSMutableArray *pupiloptionArr;
 @property (nonatomic) int xHeight;
+@property (nonatomic) int xPupilHeight;
 @end
 
 @implementation PollVC
@@ -34,6 +36,7 @@ static NSString * const kChannelGuide = @"the_guide";
   
   _optionArr=[[NSMutableArray alloc]init];
   _xHeight = 0;
+  _xPupilHeight = 0;
   _clearPollBtn.layer.cornerRadius=10;
   _clearPollBtn.layer.borderWidth=1;
   _clearPollBtn.layer.borderColor=[UIColor grayColor].CGColor;
@@ -50,6 +53,31 @@ static NSString * const kChannelGuide = @"the_guide";
     [_teacherPollView setHidden:true];
     [_teacherButtonView setHidden:true];
     NSArray *listItems = [self.pollString componentsSeparatedByString:@"##@##"];
+    _pupiloptionArr=[[NSMutableArray alloc]init];
+    NSLog(@"list of item %@",listItems);
+    for (int i=0; i<listItems.count; i++) {
+      if (i==0) {
+        [self.pupilQuestionTxt setText:listItems[i]];
+      }else{
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.tag = i;
+        [button addTarget:self
+                   action:@selector(selectOption:)
+         forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.layer.cornerRadius=10;
+        button.layer.borderColor=[UIColor darkGrayColor].CGColor;
+        button.layer.borderWidth = 1;
+        [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [button setTitle:listItems[i] forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, _xPupilHeight, self.pupilQuestionTxt.frame.size.width, 40.0);
+        [self.pupilOptionView addSubview:button];
+        [_pupiloptionArr addObject:button];
+        _xPupilHeight = _xPupilHeight+40+5;
+      }
+    }
+    self.pupilOptionHEightConstrain.constant = _xPupilHeight;
+//    [self setOptionArr:[listItems mutableCopy]];
   }else{
     [_pupilPollView setHidden:true];
     [_submitAnswerBUtton setHidden:true];
@@ -67,6 +95,40 @@ static NSString * const kChannelGuide = @"the_guide";
     // Pass the selected object to the new view controller.
 }
 */
+-(void) selectOption:(UIButton*)sender{
+ 
+  for (int i=0; i<_pupiloptionArr.count; i++) {
+    UIButton *btn = _pupiloptionArr[i];
+    if (sender.tag == btn.tag) {
+      btn.layer.borderColor = [UIColor greenColor].CGColor;
+    }else{
+      btn.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    }
+  }
+  
+}
+
+-(void) setOptionButon:(NSArray*)list{
+  
+  for (int i=0; i<list.count; i++) {
+    if (i==0) {
+      [self.pupilQuestionTxt setText:list[i]];
+    }else{
+      UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+      button.tag = i;
+      [button addTarget:self
+                 action:@selector(selectOption:)
+       forControlEvents:UIControlEventTouchUpInside];
+      [button setTitle:list[i] forState:UIControlStateNormal];
+      button.frame = CGRectMake(0, _xPupilHeight, self.pupilOptionView.frame.size.width, 40.0);
+      [self.pupilOptionView addSubview:button];
+      _xPupilHeight = _xPupilHeight+40+5;
+    }
+  }
+  self.pupilOptionHEightConstrain.constant = _xPupilHeight;
+  
+}
+
 -(void) resetTextField{
   for (UIView *subUIView in self.addTextFieldView.subviews) {
          [subUIView removeFromSuperview];
@@ -229,5 +291,16 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 
 - (IBAction)onSubmitAnswer:(id)sender {
+  for (int i=0; i<_pupiloptionArr.count; i++) {
+    UIButton *btn = _pupiloptionArr[i];
+    if (btn.layer.borderColor == [UIColor greenColor].CGColor) {
+      NSString *str = [NSString stringWithFormat:@"%@##@##%@",btn.titleLabel.text, self.pupilId];
+      [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[0]
+            withCompletion:^(PNPublishStatus *status) {
+        NSLog(@"print status %@", status);
+        [self dismissViewControllerAnimated:YES completion:nil];
+      }];
+    }
+  }
 }
 @end
