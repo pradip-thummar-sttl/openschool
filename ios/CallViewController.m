@@ -152,6 +152,13 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _isReaction = true;
   [_classSettingView setHidden:true];
   
+  if(_isTeacher){
+     [_settingButton setHidden:false];
+   }
+   else{
+     [_settingButton setHidden:true];
+   }
+  
   _muteAllButton.layer.cornerRadius=10;
   _muteAllButton.layer.borderWidth = 1;
   _muteAllButton.layer.borderColor = [UIColor grayColor].CGColor;
