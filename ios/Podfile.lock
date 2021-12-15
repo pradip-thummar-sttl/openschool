@@ -43,7 +43,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Permission-Camera (3.0.4):
+  - Permission-Camera (3.1.0):
     - RNPermissions
   - PromisesObjC (2.0.0)
   - PubNub (4.17.0):
@@ -222,28 +222,28 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-camera (3.43.3):
+  - react-native-camera (3.44.3):
     - React-Core
-    - react-native-camera/RCT (= 3.43.3)
-    - react-native-camera/RN (= 3.43.3)
-  - react-native-camera/RCT (3.43.3):
+    - react-native-camera/RCT (= 3.44.3)
+    - react-native-camera/RN (= 3.44.3)
+  - react-native-camera/RCT (3.44.3):
     - React-Core
-  - react-native-camera/RN (3.43.3):
+  - react-native-camera/RN (3.44.3):
     - React-Core
-  - react-native-document-picker (5.0.2):
+  - react-native-document-picker (5.2.0):
     - React-Core
-  - react-native-image-picker (3.3.2):
+  - react-native-image-picker (3.8.1):
     - React-Core
   - react-native-record-screen (0.3.2):
     - React
-  - react-native-safe-area-context (3.1.9):
+  - react-native-safe-area-context (3.3.2):
     - React-Core
-  - react-native-video (5.1.1):
+  - react-native-video (5.2.0):
     - React-Core
-    - react-native-video/Video (= 5.1.1)
-  - react-native-video/Video (5.1.1):
+    - react-native-video/Video (= 5.2.0)
+  - react-native-video/Video (5.2.0):
     - React-Core
-  - react-native-webview (11.2.3):
+  - react-native-webview (11.15.0):
     - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
@@ -307,34 +307,61 @@ PODS:
     - React-jsi (= 0.63.4)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNCAsyncStorage (1.14.1):
+  - RNCAsyncStorage (1.15.14):
     - React-Core
-  - RNCCheckbox (0.5.7):
+  - RNCCheckbox (0.5.9):
     - React-Core
-  - RNCMaskedView (0.1.10):
+  - RNCMaskedView (0.1.11):
     - React
-  - RNCPicker (1.9.11):
+  - RNCPicker (1.16.8):
     - React-Core
   - RNCPushNotificationIOS (1.10.1):
     - React-Core
-  - RNDateTimePicker (3.0.9):
+  - RNDateTimePicker (3.5.2):
     - React-Core
-  - RNDeviceInfo (8.0.7):
+  - RNDeviceInfo (8.4.8):
     - React-Core
-  - RNFBApp (12.9.1):
+  - RNFBApp (12.9.3):
     - Firebase/CoreOnly (= 8.8.0)
     - React-Core
   - RNFileViewer (2.1.4):
     - React-Core
-  - RNFS (2.17.0):
+  - RNFS (2.18.0):
     - React
-  - RNGestureHandler (1.9.0):
+  - RNGestureHandler (1.10.3):
     - React-Core
-  - RNPermissions (3.0.4):
+  - RNPermissions (3.1.0):
     - React-Core
-  - RNReanimated (1.13.3):
+  - RNReanimated (2.2.4):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - Folly
+    - glog
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-callinvoker
     - React-Core
-  - RNScreens (3.8.0):
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - React-RCTVibration
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNScreens (3.9.0):
     - React-Core
     - React-RCTImage
   - RNSketchCanvas (0.8.0):
@@ -535,7 +562,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  Permission-Camera: 74dc395c37a06ebe915069c5dca954c7a2a5a2e3
+  Permission-Camera: 1f383e3f9a38ba393c63ba9b09a4726f94eda769
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   PubNub: 306896876c3089884067609ff25d628a547d2942
   QuickBlox: 49d85c6e1782993fb2383001301b788a8d7dcad3
@@ -551,13 +578,13 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-camera: 3d39a6120b9e99525bc9d7696a7232c4527c0d44
-  react-native-document-picker: cc847dd5fe2fc51c3a98bd8f2fd1e452db795c48
-  react-native-image-picker: b42940647478bf106ad3c491d6f5d9d40916d865
-  react-native-record-screen: 8aaed44a8464946bb6a0aa63f32d1f4e7663cbf3
-  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
-  react-native-video: 0bb76b6d6b77da3009611586c7dbf817b947f30e
-  react-native-webview: 6520e3e7b4933de76b95ef542c8d7115cf45b68e
+  react-native-camera: fefef39fcd20850d17c3780638b04f741e0ccaae
+  react-native-document-picker: aa3fd58d5fcc1fdbf6939510b9407d16377f5832
+  react-native-image-picker: 5a7dd93d4f9dd0d910da5dde3707fd96f70d03b3
+  react-native-record-screen: 27388935c659e542768ac97c7c017d9b9baa7143
+  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
+  react-native-video: 77ce22be7abff9e373527ca10106a99dea3ba56c
+  react-native-webview: fcadb5d977e7098e14eb3b27d339feae16c549ff
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -569,21 +596,21 @@ SPEC CHECKSUMS:
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNCAsyncStorage: fe58eec522885718d6b297b7b658bf87d7ca557b
-  RNCCheckbox: d1749e6a92178ce5dbc31e63becd1f34f0c76bbd
-  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNCPicker: 6780c753e9e674065db90d9c965920516402579d
-  RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
-  RNDateTimePicker: 8a51a2216c307769e69ef827293d59549ab1ca23
-  RNDeviceInfo: 55463fa6e252ca3f0e2ba6001a7b82f879914338
-  RNFBApp: ece97bfe0a926247591c0aa0bdfe384f06cf46b5
+  RNCAsyncStorage: 4b6538222ce3f01f61011f512226ba3aaa0dc336
+  RNCCheckbox: 7e2cd6ea8e200210c36fe0898bbe200826bdaf56
+  RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
+  RNCPicker: 0991c56da7815c0cf946d6f63cf920b25296e5f6
+  RNCPushNotificationIOS: 089da3b657e1e3d464f38195fd2e3069608ef5af
+  RNDateTimePicker: c9911be59b1f8670b9f244b85af3a7c295e175ed
+  RNDeviceInfo: 417b2ef4456c13a9d50ad8c57895eea837b735a8
+  RNFBApp: 729c0666395b1953198dc4a1ec6deb8fbe1c302e
   RNFileViewer: 83cc066ad795b1f986791d03b56fe0ee14b6a69f
-  RNFS: 93d5b5535eb39d98e6b19009faa8fe717f7ea45d
-  RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
-  RNPermissions: c46788f4cd402287425983e04a4c9bb4356036eb
-  RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
-  RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
-  RNSketchCanvas: 9c28adb5381543ed55cc98ce6de46479cb3cb12c
+  RNFS: 3ab21fa6c56d65566d1fb26c2228e2b6132e5e32
+  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNPermissions: b3588a19e12bff03fe21bc46911fd32343666dc0
+  RNReanimated: e5040efc7c90da0b190a6525fcfc7e1e75973b21
+  RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
+  RNSketchCanvas: 6939b18677cd1794151cc3d8eb5a0a2158a4a05b
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 

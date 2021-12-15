@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <EditText
+            android:id="@+id/edtOption"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_poll"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="Enter your option"
+            android:inputType="textCapSentences"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textColor="@color/black"
+            android:textColorHint="@color/app_text_grey"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/btnRemove"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:src="@drawable/icn_delete" />
+
+    </LinearLayout>
+</LinearLayout>
