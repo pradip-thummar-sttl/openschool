@@ -40,6 +40,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VGE-Qc-V5u">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HNy-nE-Z4V" customClass="OpponentsFlowLayout">
                                     <size key="itemSize" width="145" height="139"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -165,6 +166,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="Wpm-Ud-a52" id="aZW-ig-Nmj"/>
                                     <outlet property="delegate" destination="Wpm-Ud-a52" id="Y8L-kx-1kQ"/>
+                                    <outletCollection property="gestureRecognizers" destination="S1J-oj-a79" appends="YES" id="I4k-FS-DwQ"/>
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRF-Dg-H0a">
@@ -548,9 +550,6 @@ understand</string>
                             <constraint firstItem="nvl-aP-B6G" firstAttribute="top" secondItem="VGE-Qc-V5u" secondAttribute="bottom" id="uef-i7-u9s"/>
                             <constraint firstAttribute="trailing" secondItem="VGE-Qc-V5u" secondAttribute="trailing" id="wLA-5S-AML"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="S1J-oj-a79" appends="YES" id="loM-E8-Phm"/>
-                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="1hu-Kw-QuM"/>
@@ -579,11 +578,7 @@ understand</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6rE-te-Yi0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="S1J-oj-a79">
-                    <connections>
-                        <action selector="onCollectionTap:" destination="Wpm-Ud-a52" id="z5M-tS-VUZ"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="S1J-oj-a79"/>
             </objects>
             <point key="canvasLocation" x="1671.2" y="67.016491754122939"/>
         </scene>

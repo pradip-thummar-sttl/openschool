@@ -46,7 +46,7 @@ typedef void (^CompleteCall)(BOOL isFinished, NSString *url);
 - (IBAction)thumbBtn:(id)sender;
 
 //- (ScreenRecorder *)returnSwiftClassInstance;
-- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender;
+//- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstrain;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeightConstrain;
 

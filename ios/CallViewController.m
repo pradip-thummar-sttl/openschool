@@ -229,8 +229,27 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   self.messages = @"";
   self.pollMessage = @"";
+  
+  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableTapped:)];
+  [self.opponentsCollectionView addGestureRecognizer:tap];
 }
 
+
+- (void)tableTapped:(UITapGestureRecognizer *)tap
+{
+  if (self.toolbarHeightConstrain.constant == 0) {
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 50;
+        self.headerHeightConstrain.constant = 50;
+    }];
+  }else{
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 0;
+        self.headerHeightConstrain.constant = 0;
+
+    }];
+  }
+}
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
@@ -276,7 +295,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 }
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
-    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
+//    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
       if (![message containsString:@"##@##"]) {
         self.messages = message;
         [self.opponentsCollectionView reloadData];
@@ -1216,22 +1235,22 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
-- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
-//  [self.toolbar setHidden:true];
-  if (self.toolbarHeightConstrain.constant == 0) {
-    [UIView animateWithDuration:2.0 animations:^{
-        self.toolbarHeightConstrain.constant = 50;
-        self.headerHeightConstrain.constant = 50;
-    }];
-  }else{
-    [UIView animateWithDuration:2.0 animations:^{
-        self.toolbarHeightConstrain.constant = 0;
-        self.headerHeightConstrain.constant = 0;
-       
-    }];
-  }
- 
-}
+//- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
+////  [self.toolbar setHidden:true];
+//  if (self.toolbarHeightConstrain.constant == 0) {
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 50;
+//        self.headerHeightConstrain.constant = 50;
+//    }];
+//  }else{
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 0;
+//        self.headerHeightConstrain.constant = 0;
+//
+//    }];
+//  }
+//
+//}
 - (IBAction)onStartScreenRecordingPressed:(id)sender {
   if (!self.isRecording) {
     self.isRecording = true;
