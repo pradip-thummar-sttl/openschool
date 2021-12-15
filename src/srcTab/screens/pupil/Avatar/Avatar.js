@@ -14,6 +14,8 @@ import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
 import { User } from '../../../../utils/Model'
 import { baseUrl } from '../../../../utils/Constant';
+import FONTS from '../../../../utils/Fonts';
+
 const tabs = [
     { name: 'COLOUR', isSelected: true },
     { name: 'HAIR', isSelected: false, },
@@ -58,6 +60,7 @@ const Avatar = () => {
 
     useEffect(() => {
 
+        console.log('-----User------', User)
 
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -96,7 +99,7 @@ const Avatar = () => {
                     let colour = [];
                     colour = element.imglist
                     colour.map((data, index) => {
-                        if (User.user.AvatarIdList.length) {
+                        if (User.user.AvatarIdList) {
 
                             if (data._id == User.user.AvatarIdList[0].AvatarId) {
                                 setCurrentSelectedColour(index)
@@ -126,7 +129,7 @@ const Avatar = () => {
                     let hair = [];
                     hair = element.imglist
                     hair.map((data, index) => {
-                        if (User.user.AvatarIdList.length) {
+                        if (User.user.AvatarIdList) {
                             if (data._id === User.user.AvatarIdList[1].AvatarId) {
                                 setCurrentSelectedHair(index)
                                 data['isSelected'] = true
@@ -153,7 +156,7 @@ const Avatar = () => {
                     let eyes = [];
                     eyes = element.imglist
                     eyes.map((data, index) => {
-                        if (User.user.AvatarIdList.length) {
+                        if (User.user.AvatarIdList) {
                             if (data._id === User.user.AvatarIdList[2].AvatarId) {
                                 setCurrentSelectedEyes(index)
                                 data['isSelected'] = true
@@ -198,7 +201,7 @@ const Avatar = () => {
                     let mouth = [];
                     mouth = element.imglist
                     mouth.map((data, index) => {
-                        if (User.user.AvatarIdList.length) {
+                        if (User.user.AvatarIdList) {
                             if (data._id === User.user.AvatarIdList[3].AvatarId) {
                                 setCurrentSelectedMouth(index)
                                 data['isSelected'] = true
@@ -472,9 +475,15 @@ const Avatar = () => {
                                 numColumns={3}
                             /> : null}
 
-                        <TouchableOpacity onPress={() => saveMyAvtar()} >
-                            <Text>Save Avtar</Text>
-                        </TouchableOpacity>
+                        {isLoading == false ?
+                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15 }} onPress={() => saveMyAvtar()} >
+                                <Text style={{
+                                    color: COLORS.white,
+                                    fontSize: hp(1.56),
+                                    textTransform: 'uppercase',
+                                    fontFamily: FONTS.fontBold,
+                                }} >SAVE AVATAR</Text>
+                            </TouchableOpacity> : null}
                     </View>
                 </View>
             </View>
