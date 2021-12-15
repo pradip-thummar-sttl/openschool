@@ -63,6 +63,8 @@ import com.quickblox.videochat.webrtc.callbacks.QBRTCClientVideoTracksCallbacks;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.webrtc.CameraVideoCapturer;
 import org.webrtc.RendererCommon;
 import org.webrtc.SurfaceViewRenderer;
@@ -1170,9 +1172,12 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         holder.setPupilPollAns(splitStr[0]);
     }
 
-    protected void setEmojiForPupil(String message) {
-        System.out.println("KDKDKD: Pupil message " + message);
+    protected void setEmojiForPupil(String msg) {
+        System.out.println("KDKDKD: Pupil message " + msg);
+
+        String message = getIOSEmojiMsg(msg);
         String tempIndex = message.replace("\"", "");
+        
         if (!isTeacher) {
             int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
             tvTeacherEmoji.setText(getEmoticon(teacherEmojis[Integer.parseInt(tempIndex)]));
@@ -1185,6 +1190,33 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                     },
                     15000);
         }
+    }
+
+    public String getIOSEmojiMsg(String code) {
+
+        JSONObject obj = null;
+        String message = "";
+        try {
+            obj = new JSONObject(code);
+        } catch (Throwable t) {
+            Log.e("My App", "Could not parse malformed JSON: \"" + code + "\"");
+        }
+
+        if(obj != null)
+        {
+            try {
+                message = obj.getString("update");
+                String[] splitStr = message.split("#@#");
+                message = splitStr[0];
+            } catch (JSONException e) {
+                message = code;
+                e.printStackTrace();
+            }
+        }
+        else
+            message = code;
+
+        return message;
     }
 
     protected void setEmojiForTeacher(String message) {
