@@ -9,6 +9,7 @@
 
 #import "CallViewController.h"
 #import "PollViewController.h"
+#import "PollVC.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -231,8 +232,27 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   self.messages = @"";
   self.pollMessage = @"";
+  
+  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableTapped:)];
+  [self.opponentsCollectionView addGestureRecognizer:tap];
 }
 
+
+- (void)tableTapped:(UITapGestureRecognizer *)tap
+{
+  if (self.toolbarHeightConstrain.constant == 0) {
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 50;
+        self.headerHeightConstrain.constant = 50;
+    }];
+  }else{
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 0;
+        self.headerHeightConstrain.constant = 0;
+
+    }];
+  }
+}
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
@@ -278,7 +298,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 }
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
-    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
+//    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
       if (![message containsString:@"##@##"]) {
         self.messages = message;
         [self.opponentsCollectionView reloadData];
@@ -288,7 +308,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           self.pollMessage = message;
           [self.opponentsCollectionView reloadData];
         }else if (listItems.count > 2) {
-          PollViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+          PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
           vc.channels = self.channels;
           vc.ispupil = true;
           vc.pollString = message;
@@ -376,39 +396,39 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     __weak __typeof(self)weakSelf = self;
   
- [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
-   
-   weakSelf.muteAudio ^= 1;
-   if (!weakSelf.isRecording) {
-//     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
-//          NSLog(@"rcording progress... %@", error);
-//        } onCompletion:^(NSError * error) {
-//          NSLog(@"rcording error... %@", error);
-//        }];
-     weakSelf.isRecording = true;
-     
-     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
-       NSLog(@"error of recording %@", error);
-     }];
-//    weakSelf.screenRecord
-//     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
+// [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
+//
+//   weakSelf.muteAudio ^= 1;
+//   if (!weakSelf.isRecording) {
+////     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
+////          NSLog(@"rcording progress... %@", error);
+////        } onCompletion:^(NSError * error) {
+////          NSLog(@"rcording error... %@", error);
+////        }];
+//     weakSelf.isRecording = true;
+//
+//     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+//       NSLog(@"error of recording %@", error);
 //     }];
-     
-    
-   }else{
-//     [[ScreenRecordCoordinator recordCordinator] stopRecording];
-     weakSelf.isRecording = false;
-     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
-            NSLog(@"stop recording Error %@", url);
-       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
-     }];
-//     [[ScreenRecorder shareInstance]
-//     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
-//     }]
-   }
-    }];
+////    weakSelf.screenRecord
+////     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }];
+//
+//
+//   }else{
+////     [[ScreenRecordCoordinator recordCordinator] stopRecording];
+//     weakSelf.isRecording = false;
+//     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+//            NSLog(@"stop recording Error %@", url);
+//       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
+//     }];
+////     [[ScreenRecorder shareInstance]
+////     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }]
+//   }
+//    }];
  
  
  
@@ -424,10 +444,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (_isTeacher) {
     [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-      PollViewController *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
-      vc.channels = weakSelf.channels;
-      vc.ispupil = false;
-      [weakSelf presentViewController:vc animated:false completion:nil];
+//      PollVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+//      vc.channels = weakSelf.channels;
+//      vc.ispupil = false;
+//      [weakSelf presentViewController:vc animated:false completion:nil];
     }];
   }
   
@@ -1241,22 +1261,22 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
-- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
-//  [self.toolbar setHidden:true];
-  if (self.toolbarHeightConstrain.constant == 0) {
-    [UIView animateWithDuration:2.0 animations:^{
-        self.toolbarHeightConstrain.constant = 50;
-        self.headerHeightConstrain.constant = 50;
-    }];
-  }else{
-    [UIView animateWithDuration:2.0 animations:^{
-        self.toolbarHeightConstrain.constant = 0;
-        self.headerHeightConstrain.constant = 0;
-       
-    }];
-  }
- 
-}
+//- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
+////  [self.toolbar setHidden:true];
+//  if (self.toolbarHeightConstrain.constant == 0) {
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 50;
+//        self.headerHeightConstrain.constant = 50;
+//    }];
+//  }else{
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 0;
+//        self.headerHeightConstrain.constant = 0;
+//
+//    }];
+//  }
+//
+//}
 - (IBAction)onStartScreenRecordingPressed:(id)sender {
   if (!self.isRecording) {
     self.isRecording = true;
@@ -1275,6 +1295,10 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 
 - (IBAction)onPressSetupClassVotting:(id)sender {
+  PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+  vc.channels = self.channels;
+  vc.ispupil = false;
+  [self presentViewController:vc animated:false completion:nil];
 }
 
 - (IBAction)onPressMuteAll:(id)sender {
