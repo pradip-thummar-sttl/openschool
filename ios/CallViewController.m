@@ -77,6 +77,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) NSNumber *statsUserID;
 
 @property (assign, nonatomic) BOOL isMutedFlag;
+@property (assign, nonatomic) BOOL isTeacherReload;
+@property (assign, nonatomic) BOOL isPupilReload;
 
 @property (strong, nonatomic) ZoomedView *zoomedView;
 @property (weak, nonatomic) OpponentCollectionViewCell *originCell;
@@ -90,6 +92,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (strong, nonatomic) NSMutableArray *reactionImageArr;
 @property (strong, nonatomic) NSMutableArray *reactionUnicodeArr;
+@property (strong, nonatomic) NSMutableArray *pupilreactionUnicodeArr;
 
 @property (nonatomic, strong) PubNub *pubnub;
 @property (nonatomic, strong) NSString *messages;
@@ -141,6 +144,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   self.recordUrl=@"";
   self.isRecording = false;
+  _isTeacherReload=false;
+  _isPupilReload=false;
   _isMutedFlag = true;
   [_classSettingView setHidden:true];
   
@@ -176,6 +181,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _userCameraView.layer.cornerRadius = 10;
   self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
   self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"👊",@"🙌",@"🙂",@"💖",@"👏",@"👍", nil];
+  self.pupilreactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"🤔",@"✋",@"👍", nil];
+  
   [self.reactionTableView setDelegate:self];
   [self.reactionTableView setDataSource:self];
   self.endCallButton.layer.cornerRadius = 10;
@@ -259,15 +266,15 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
       [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
             withCompletion:^(PNPublishStatus *status) {
 
-          NSString *text = update;
-          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
       }];
     }else{
       [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
             withCompletion:^(PNPublishStatus *status) {
 
-          NSString *text = update;
-          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
       }];
     }
   } else {
@@ -297,8 +304,31 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
 //    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
       if (![message containsString:@"##@##"]) {
-        self.messages = message;
-        [self.opponentsCollectionView reloadData];
+        if (_isTeacher) {
+          if (!_isTeacherReload) {
+            self.messages = message;
+            [self.opponentsCollectionView reloadData];
+            _isTeacherReload=false;
+          }else {
+            self.messages = @"";
+            [self.opponentsCollectionView reloadData];
+            _isTeacherReload=false;
+          }
+        }else{
+          if (!_isPupilReload) {
+            self.messages = message;
+            [self.opponentsCollectionView reloadData];
+            _isPupilReload=false;
+          }else {
+            self.messages = @"";
+            [self.opponentsCollectionView reloadData];
+            _isPupilReload=false;
+          }
+        
+        }
+        
+       
+        
       }else{
         NSArray *listItems = [message componentsSeparatedByString:@"##@##"];
         if (_isTeacher) {
@@ -335,7 +365,17 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //                      event.data.message[@"entry"],
 //                      event.data.message[@"update"]];
 
+  
+  NSLog(@"event.data.message %@", event.data.message);
+  
+  if ([event.data.message isKindOfClass:[NSString class]]) {
+    [self displayMessage:event.data.message asType:@"[MESSAGE: received]"];
+  }else{
     [self displayMessage:event.data.message[@"update"] asType:@"[MESSAGE: received]"];
+  }
+ 
+  
+   
 }
 
 - (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
@@ -593,20 +633,27 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
  
   if (![_messages isEqualToString:@""]) {
-    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+    NSArray *items = [_messages componentsSeparatedByString:@"#@#"];
     if (_isTeacher) {
       if (user.ID == [[items objectAtIndex:1] integerValue] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+        reusableCell.emojiLbl.text = [_pupilreactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]] ;
       }else
       {
         reusableCell.emojiLbl.text=@"";
       }
     }else{
 //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+      if (!_isTeacher) {
+        reusableCell.emojiLbl.text = [_reactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
+      }else{
+        reusableCell.emojiLbl.text=@"";
+      }
+      
 //      }
     }
     
+  }else{
+    reusableCell.emojiLbl.text=@"";
   }
   
   if (![_pollMessage isEqualToString:@""]) {
@@ -1210,7 +1257,8 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != 0) {
-      NSString *str = [NSString stringWithFormat:@"%@@#@%@", _reactionUnicodeArr[indexPath.row-1],_selectedId];
+      _isTeacherReload=true;
+      NSString *str = [NSString stringWithFormat:@"%ld#@#%@", indexPath.row-1,_selectedId];
         [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
 //      [self.opponentsCollectionView reloadData];
     }
@@ -1219,19 +1267,23 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   
 }
 
+
 - (IBAction)dontBtn:(id)sender {
-   NSString *str = [NSString stringWithFormat:@"🤔@#@%@",_currentUserID];
+  _isPupilReload=true;
+   NSString *str = [NSString stringWithFormat:@"0#@#%@",_currentUserID];
    [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //   [self.opponentsCollectionView reloadData];
 }
 - (IBAction)thumbBtn:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"👍@#@%@",_currentUserID];
+  _isPupilReload=true;
+  NSString *str = [NSString stringWithFormat:@"2#@#%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
 
 - (IBAction)raiseBtn:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"✋@#@%@",_currentUserID];
+  _isPupilReload=true;
+  NSString *str = [NSString stringWithFormat:@"1#@#%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
