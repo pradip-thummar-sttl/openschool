@@ -231,7 +231,8 @@ static NSString * const kChannelGuide = @"the_guide";
   
     
     NSString *str = [NSString stringWithFormat:@"%@##@##%@##@##%@%@",_txtFieldQuestion.text,_txtFieldOpt1.text,_txtFieldOpt2.text,str1];
-    [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[_channels.count - 1]
+
+    [self.pubnub publish: str toChannel:self.channels[_channels.count - 1]
           withCompletion:^(PNPublishStatus *status) {
       NSLog(@"print status %@", status);
 //        NSString *text = kEntryEarth;
@@ -295,7 +296,7 @@ static NSString * const kChannelGuide = @"the_guide";
     UIButton *btn = _pupiloptionArr[i];
     if (btn.layer.borderColor == [UIColor greenColor].CGColor) {
       NSString *str = [NSString stringWithFormat:@"%@##@##%@",btn.titleLabel.text, self.pupilId];
-      [self.pubnub publish: @{ @"entry": kEntryEarth, @"update": str } toChannel:self.channels[0]
+      [self.pubnub publish:str toChannel:self.channels[0]
             withCompletion:^(PNPublishStatus *status) {
         NSLog(@"print status %@", status);
         [self dismissViewControllerAnimated:YES completion:nil];

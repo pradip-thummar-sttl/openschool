@@ -266,14 +266,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   if (![update containsString:@"##@##"]) {
     if (_isTeacher) {
-      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
+      [self.pubnub publish: update toChannel:_selectedChannel
             withCompletion:^(PNPublishStatus *status) {
 
 //          NSString *text = update;
 //          [self displayMessage:text asType:@"[PUBLISH: sent]"];
       }];
     }else{
-      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
+      [self.pubnub publish: update toChannel:_channels[0]
             withCompletion:^(PNPublishStatus *status) {
 
 //          NSString *text = update;
@@ -382,11 +382,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 }
 
 - (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
-    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
-                      event.data.presence.uuid,
-                      event.data.channel];
-
-    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
+//    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
+//                      event.data.presence.uuid,
+//                      event.data.channel];
+//
+//    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
 //    [self displayMessage:text asType: type];
 }
 //
