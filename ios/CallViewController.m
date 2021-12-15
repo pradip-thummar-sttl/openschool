@@ -1312,6 +1312,8 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   }
   
   _isReaction = !_isReaction;
+  
+  [self.opponentsCollectionView reloadData];
 //  [_messageSwitch setBackgroundImage:[UIImage imageNamed: @""] forState:UIControlStateNormal];
 }
 
