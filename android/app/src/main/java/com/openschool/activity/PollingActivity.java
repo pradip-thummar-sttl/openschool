@@ -136,7 +136,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 PollPupilOptionsModel model = new PollPupilOptionsModel(true, value);
-                _selectedAns= pos +". " + value;
+                _selectedAns= value;
                 _pollPupilOptionData.set(pos, model);
                 _pupiRecyclerView.setAdapter(_pollPupilOptionsAdepter);
             }
@@ -204,6 +204,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 
                     Intent intent = new Intent();
                     String data = _edtQuestion.getText().toString() + onGetAns();
+//                    String data = onGetAns();
 
                     System.out.println("KDKD: data" + data);
                     intent.putExtra(POLLING, data);
@@ -242,6 +243,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private String onGetAns() {
+
         StringBuffer sb = new StringBuffer();
         for (PollSchoolOptionModel pollSchoolOptionModel : _pollSchoolOptionsData) {
             if(!pollSchoolOptionModel.getValue().isEmpty())

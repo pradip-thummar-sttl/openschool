@@ -1153,6 +1153,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected void loadPollingForPupil(String message) {
         message = message.replace("\"", "");
         System.out.println("KDKD: message for pupil " + message);
+
         Intent intent = new Intent(getActivity(), PollingActivity.class);
         intent.putExtra("isForPupil", true);
         intent.putExtra(PollingActivity.POLLING, message);
@@ -1177,7 +1178,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         String message = getIOSEmojiMsg(msg);
         String tempIndex = message.replace("\"", "");
-        
+
         if (!isTeacher) {
             int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
             tvTeacherEmoji.setText(getEmoticon(teacherEmojis[Integer.parseInt(tempIndex)]));
@@ -1194,28 +1195,9 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     public String getIOSEmojiMsg(String code) {
 
-        JSONObject obj = null;
         String message = "";
-        try {
-            obj = new JSONObject(code);
-        } catch (Throwable t) {
-            Log.e("My App", "Could not parse malformed JSON: \"" + code + "\"");
-        }
-
-        if(obj != null)
-        {
-            try {
-                message = obj.getString("update");
-                String[] splitStr = message.split("#@#");
-                message = splitStr[0];
-            } catch (JSONException e) {
-                message = code;
-                e.printStackTrace();
-            }
-        }
-        else
-            message = code;
-
+        String[] splitStr = code.split("#@#");
+        message = splitStr[0];
         return message;
     }
 
