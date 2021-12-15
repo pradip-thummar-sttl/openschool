@@ -17,6 +17,7 @@ import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
 import { User } from '../../../../utils/Model'
 import { baseUrl } from '../../../../utils/Constant';
+import FONTS from '../../../../utils/Fonts';
 
 var tabs = [
     { name: 'COLOUR', isSelected: false },
@@ -45,8 +46,15 @@ const Avatar = (prop) => {
     const [mouthAvtar, setMouthAvtar] = useState([]);
     const [clothsAvtar, setClothsAvtar] = useState([]);
 
+    const [colourId, setColourId] = useState('');
+    const [hairId, setHairId] = useState('');
+    const [eyesId, setEyesId] = useState('');
+    const [mouthId, setMouthId] = useState('');
+    const [clothsId, setClothsId] = useState('');
+
     const [isLoading, setIsLoading] = useState(true);
 
+    const [allAvtarData, setAllAvtarData] = useState([]);
 
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
@@ -82,67 +90,138 @@ const Avatar = (prop) => {
 
             console.log('get avtar ', res)
 
+            setAllAvtarData(res.data)
+
             res.data.forEach(element => {
 
                 if (element.Type === 'colour') {
                     let colour = [];
                     colour = element.imglist
                     colour.map((data, index) => {
-                        if (index === 0) {
-                            data['isSelected'] = true
+                        if (User.user.AvatarIdList) {
+
+                            if (data._id == User.user.AvatarIdList[0].AvatarId) {
+                                setCurrentSelectedColour(index)
+                                data['isSelected'] = true
+                                setColourId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
+
                         }
                         else {
-                            data['isSelected'] = false
+                            if (index === 0) {
+                                data['isSelected'] = true
+                                setColourId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                     })
                     setColourAvtar(colour)
-                    console.log('colour', colour)
-                    console.log('colour', colourAvtar)
+
+
                 }
                 else if (element.Type === 'hair') {
                     let hair = [];
                     hair = element.imglist
                     hair.map((data, index) => {
-                        if (index === 0) {
-                            data['isSelected'] = true
+                        if (User.user.AvatarIdList) {
+                            if (data._id === User.user.AvatarIdList[1].AvatarId) {
+                                setCurrentSelectedHair(index)
+                                data['isSelected'] = true
+                                setHairId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                         else {
-                            data['isSelected'] = false
+                            if (index === 0) {
+                                data['isSelected'] = true
+                                setHairId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                     })
                     setHairAvtar(hair)
-                    console.log('hair', hair)
-                    console.log('hair', hairAvtar)
+
                 }
                 else if (element.Type === 'eyes') {
                     let eyes = [];
                     eyes = element.imglist
                     eyes.map((data, index) => {
-                        if (index === 0) {
-                            data['isSelected'] = true
+                        if (User.user.AvatarIdList) {
+                            if (data._id === User.user.AvatarIdList[2].AvatarId) {
+                                setCurrentSelectedEyes(index)
+                                data['isSelected'] = true
+                                setEyesId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                         else {
-                            data['isSelected'] = false
+                            if (index === 0) {
+                                data['isSelected'] = true
+                                setEyesId(data._id)
+
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                     })
                     setEyesAvtar(eyes)
-                    console.log('eyes', eyes)
-                    console.log('eyes', eyesAvtar)
+
+                    //     if (User.user.AvatarIdList.length) {
+                    //     let newArr = [...eyesAvtar];
+                    //     newArr.map((item) => {
+                    //         item.isSelected = false;
+                    //     })
+
+
+
+
+                    //     element.imglist.map((item, dataIndex) => {
+                    //         if (item._id === User.user.AvatarIdList[2].AvatarId) {
+                    //             setCurrentSelectedEyes(dataIndex)
+                    //             newArr[dataIndex].isSelected = true;
+                    //             setEyesAvtar(newArr)
+                    //         }
+                    //     })
+                    // }
                 }
                 else if (element.Type === 'mouth') {
                     let mouth = [];
                     mouth = element.imglist
                     mouth.map((data, index) => {
-                        if (index === 0) {
-                            data['isSelected'] = true
+                        if (User.user.AvatarIdList) {
+                            if (data._id === User.user.AvatarIdList[3].AvatarId) {
+                                setCurrentSelectedMouth(index)
+                                data['isSelected'] = true
+                                setMouthId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                         else {
-                            data['isSelected'] = false
+                            if (index === 0) {
+                                data['isSelected'] = true
+                                setMouthId(data._id)
+                            }
+                            else {
+                                data['isSelected'] = false
+                            }
                         }
                     })
                     setMouthAvtar(mouth)
-                    console.log('mouth', mouth)
-                    console.log('mouth', mouthAvtar)
+
                 }
                 else if (element.Type === 'clothes') {
                     let clothes = [];
@@ -150,6 +229,7 @@ const Avatar = (prop) => {
                     clothes.map((data, index) => {
                         if (index === 0) {
                             data['isSelected'] = true
+                            setClothsId(data._id)
                         }
                         else {
                             data['isSelected'] = false
@@ -169,6 +249,7 @@ const Avatar = (prop) => {
         }, (err) => {
             console.log('err', err)
         })
+
 
     }, [])
 
@@ -212,6 +293,11 @@ const Avatar = (prop) => {
             newArr[index].isSelected = true;
             setCurrentSelectedColour(index)
             setColourAvtar(newArr)
+            allAvtarData.map((item) => {
+                if (item.Type === "colour") {
+                    setColourId(item.imglist[index]._id)
+                }
+            })
         }
         else if (currentSelected === 'HAIR') {
             let newArr = [...hairAvtar];
@@ -221,6 +307,12 @@ const Avatar = (prop) => {
             newArr[index].isSelected = true;
             setCurrentSelectedHair(index)
             setHairAvtar(newArr);
+
+            allAvtarData.map((item) => {
+                if (item.Type === "hair") {
+                    setHairId(item.imglist[index]._id)
+                }
+            })
         }
         else if (currentSelected === 'EYES') {
             let newArr = [...eyesAvtar];
@@ -230,6 +322,12 @@ const Avatar = (prop) => {
             newArr[index].isSelected = true;
             setCurrentSelectedEyes(index)
             setEyesAvtar(newArr)
+
+            allAvtarData.map((item) => {
+                if (item.Type === "eyes") {
+                    setEyesId(item.imglist[index]._id)
+                }
+            })
         }
         else if (currentSelected === 'MOUTH') {
             let newArr = [...mouthAvtar];
@@ -239,42 +337,51 @@ const Avatar = (prop) => {
             newArr[index].isSelected = true;
             setCurrentSelectedMouth(index)
             setMouthAvtar(newArr)
-        }
-        else {
-            // return outfitImage
-            let newArr = [...clothsAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
+
+            allAvtarData.map((item) => {
+                if (item.Type === "mouth") {
+                    setMouthId(item.imglist[index]._id)
+                }
             })
-            newArr[index].isSelected = true;
-            setCurrentSelectedCloth(index)
-            setClothsAvtar(newArr)
-        }
-    }
-
-    const hairImageSet = () => {
-
-        if (currentSelectedHair === 1) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-1), zIndex: 10, left: hp(-11) }} ></Image>
-        }
-        else if (currentSelectedHair === 2) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-1), zIndex: 10, right: hp(-11) }} ></Image>
-        }
-        else if (currentSelectedHair === 3) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(19), height: hp(19), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
-        }
-        else if (currentSelectedHair === 4) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(19), height: hp(19), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10, }} ></Image>
-        }
-        else if (currentSelectedHair === 5) {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(16), height: hp(16), resizeMode: 'contain', position: 'absolute', top: hp(-6), zIndex: 10, }} ></Image>
         }
         else {
-            return <Image source={hairAvtar[currentSelectedHair].image} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-5), zIndex: 10 }} ></Image>
+            return clothsAvtar
         }
-
     }
 
+    const saveMyAvtar = () => {
+        setTimeout(() => {
+            console.log('colour', colourId)
+            console.log('hair', hairId)
+            console.log('eyes', eyesId)
+            console.log('mouth', mouthId)
+
+
+
+            let avatarIdListArray = []
+            let colourApiId = { "AvatarId": colourId }
+            let hairApiId = { "AvatarId": hairId }
+            let eyesApiId = { "AvatarId": eyesId }
+            let cmouthApiId = { "AvatarId": mouthId }
+            avatarIdListArray.push(colourApiId, hairApiId, eyesApiId, cmouthApiId)
+
+
+            console.log('avatarIdList', avatarIdListArray)
+
+            let data =
+            {
+                AvatarIdList: avatarIdListArray
+            }
+
+            Service.post(data, `${EndPoints.UpdateAvtar}/${User.user.UserDetialId}`, (res) => {
+                console.log('-----------api response------------', res)
+            }, (err) => {
+                console.log('response of get all lesson error', err)
+            })
+
+        }, 2000)
+
+    }
 
 
     return (
@@ -385,6 +492,18 @@ const Avatar = (prop) => {
                         <FlatList
                             data={currentSelectedTab()}
                             contentContainerStyle={{ paddingBottom: hp(5) }}
+                            ListFooterComponent={
+                                isLoading == false ?
+                                    <TouchableOpacity style={{ width: wp(40), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, marginTop: 15, alignSelf: 'center' }} onPress={() => saveMyAvtar()} >
+                                        <Text style={{
+                                            color: COLORS.white,
+                                            fontSize: hp(1.56),
+                                            textTransform: 'uppercase',
+                                            fontFamily: FONTS.fontBold,
+                                        }} >SAVE AVATAR</Text>
+                                    </TouchableOpacity>
+                                    : null
+                            }
                             renderItem={({ item, index }) => {
                                 return (
                                     <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
