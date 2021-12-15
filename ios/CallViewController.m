@@ -374,39 +374,39 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     __weak __typeof(self)weakSelf = self;
   
- [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
-   
-   weakSelf.muteAudio ^= 1;
-   if (!weakSelf.isRecording) {
-//     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
-//          NSLog(@"rcording progress... %@", error);
-//        } onCompletion:^(NSError * error) {
-//          NSLog(@"rcording error... %@", error);
-//        }];
-     weakSelf.isRecording = true;
-     
-     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
-       NSLog(@"error of recording %@", error);
-     }];
-//    weakSelf.screenRecord
-//     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
+// [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
+//
+//   weakSelf.muteAudio ^= 1;
+//   if (!weakSelf.isRecording) {
+////     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
+////          NSLog(@"rcording progress... %@", error);
+////        } onCompletion:^(NSError * error) {
+////          NSLog(@"rcording error... %@", error);
+////        }];
+//     weakSelf.isRecording = true;
+//
+//     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+//       NSLog(@"error of recording %@", error);
 //     }];
-     
-    
-   }else{
-//     [[ScreenRecordCoordinator recordCordinator] stopRecording];
-     weakSelf.isRecording = false;
-     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
-            NSLog(@"stop recording Error %@", url);
-       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
-     }];
-//     [[ScreenRecorder shareInstance]
-//     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
-//     }]
-   }
-    }];
+////    weakSelf.screenRecord
+////     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }];
+//
+//
+//   }else{
+////     [[ScreenRecordCoordinator recordCordinator] stopRecording];
+//     weakSelf.isRecording = false;
+//     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+//            NSLog(@"stop recording Error %@", url);
+//       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
+//     }];
+////     [[ScreenRecorder shareInstance]
+////     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }]
+//   }
+//    }];
  
  
  
@@ -422,10 +422,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (_isTeacher) {
     [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-      PollVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
-      vc.channels = weakSelf.channels;
-      vc.ispupil = false;
-      [weakSelf presentViewController:vc animated:false completion:nil];
+//      PollVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+//      vc.channels = weakSelf.channels;
+//      vc.ispupil = false;
+//      [weakSelf presentViewController:vc animated:false completion:nil];
     }];
   }
   
@@ -1250,6 +1250,10 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 
 - (IBAction)onPressSetupClassVotting:(id)sender {
+  PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+  vc.channels = self.channels;
+  vc.ispupil = false;
+  [self presentViewController:vc animated:false completion:nil];
 }
 
 - (IBAction)onPressMuteAll:(id)sender {
