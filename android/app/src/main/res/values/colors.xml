@@ -6,6 +6,8 @@
 
     <color name="black">#000000</color>
     <color name="black_trans1">#86000000</color>
+    <color name="black_trans2">#59000000</color>
+    <color name="black_trans3">#33000000</color>
     <color name="black_trans">#6B000000</color>
     <color name="white">#ffffff</color>
     <color name="grey">#818181</color>
@@ -77,4 +79,6 @@
     <color name="grey_transparent_20">#20606060</color>
     <color name="grey_transparent_10">#10606060</color>
 
+    <color name="app_text_grey">#b4b6be</color>
+    <color name="green">#00a36b</color>
 </resources>

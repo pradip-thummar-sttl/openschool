@@ -1,22 +1,29 @@
 package com.openschool.fragments;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.TranslateAnimation;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -25,10 +32,14 @@ import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
 import com.openschool.activity.PollingActivity;
@@ -52,6 +63,8 @@ import com.quickblox.videochat.webrtc.callbacks.QBRTCClientVideoTracksCallbacks;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
 import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.webrtc.CameraVideoCapturer;
 import org.webrtc.RendererCommon;
 import org.webrtc.SurfaceViewRenderer;
@@ -64,6 +77,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class BaseConversationFragment extends BaseToolBarFragment implements CallActivity.CurrentCallStateCallback, QBRTCSessionStateCallback<ConferenceSession>,
         QBRTCClientVideoTracksCallbacks<ConferenceSession>, OpponentsFromCallAdapter.OnAdapterEventListener, PNFragmentImpl {
@@ -89,11 +104,13 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private boolean allCallbacksInit;
 
     private RecyclerView recyclerView;
+    private RelativeLayout fragmentOpponents;
     protected QBConferenceSurfaceView localVideoView;
     private List<QBUser> allOpponents;
     protected boolean isRemoteShown;
     protected TextView connectionStatusLocal;
     protected LinearLayout actionButtonsLayout;
+    protected RelativeLayout rlHeader;
     protected OpponentsFromCallAdapter opponentsAdapter;
 
     private GridLayoutManager gridLayoutManager;
@@ -103,7 +120,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     private ToggleButton toggle_camera_view;
     private ToggleButton micToggleCall;
-    private ToggleButton toggle_recording_view;
     private TextView handUpCall;
     private TextView tvTeacherEmoji;
     private TextView tvTitle;
@@ -112,6 +128,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private ImageView icPEmoji1;
     private ImageView icPEmoji2;
     private ImageView icPEmoji3;
+    private FrameLayout _frEmojiAnimationView;
+    private TextView _txtEmojiAnim;
+
+//    private RelativeLayout _headerClip;
+    private ImageView btnMenu;
     private LinearLayout llShare;
     private LinearLayout llPupilEmoji;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
@@ -122,12 +143,18 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected Map<Integer, QBRTCVideoTrack> videoTrackMap;
     protected boolean asListenerRole;
     protected boolean isTeacher;
+    protected boolean isAllowPupilReactions = true;
+    protected boolean isRecordingStarted;
     protected String currentUserID;
     protected String currentName;
     protected String teacherQBUserID;
     protected String title;
+    private boolean isClicked = false;
+    private CountDownTimer cTimer;
 
     ParentActivityImpl hostActivity;
+    private FrameLayout _fFrame;
+    private boolean _isup = true;
 
     private SparseArray<OpponentsFromCallAdapter.ViewHolder> opponentViewHolders;
 
@@ -177,8 +204,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         title = this.getArguments().getString(Consts.TITLE);
         channels = this.getArguments().getStringArrayList(Consts.EXTRA_CHANNELS);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
+
         System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
+
         if (currentSession == null) {
             Log.d(TAG, "currentSession = null onCreateView");
             return view;
@@ -199,6 +228,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         onReady();
         hostActivity.getPubNub().addListener(provideListener());
         subscribe();
+
 
         return view;
     }
@@ -438,9 +468,9 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected void initViews(View view) {
         Log.i(TAG, "initViews");
         toggle_camera_view = (ToggleButton) view.findViewById(R.id.toggle_camera_view);
-        toggle_recording_view = (ToggleButton) view.findViewById(R.id.toggle_recording_view);
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
+        btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
         tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
@@ -454,6 +484,15 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         allOpponentsTextView = (TextView) view.findViewById(R.id.text_outgoing_opponents_names);
         ringingTextView = (TextView) view.findViewById(R.id.text_ringing);
 
+        _txtEmojiAnim = (TextView) view.findViewById(R.id.txtEmojiAnim);
+        _frEmojiAnimationView = (FrameLayout) view.findViewById(R.id.EmojiAnim);
+        _frEmojiAnimationView.setVisibility(View.GONE);
+
+//        _headerClip = (RelativeLayout) view.findViewById(R.id.headerClip);
+        _fFrame = (FrameLayout)view.findViewById(R.id.fFrame);
+
+
+
         opponentViewHolders = new SparseArray<>(opponents.size());
         isRemoteShown = false;
 
@@ -463,6 +502,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         tvTitle.setText(title);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.grid_opponents);
+        fragmentOpponents = (RelativeLayout) view.findViewById(R.id.fragmentOpponents);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.dimen.grid_item_divider));
         recyclerView.setHasFixedSize(false);
@@ -487,9 +527,85 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         connectionStatusLocal = (TextView) view.findViewById(R.id.connectionStatusLocal);
 
         actionButtonsLayout = (LinearLayout) view.findViewById(R.id.element_set_call_buttons);
+        rlHeader = (RelativeLayout) view.findViewById(R.id.rlHeader);
 
         actionButtonsEnabled(false);
         setActionButtonsVisibility();
+
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+                    if (isClicked) {
+                        System.out.println("KDKDKD: recyclerView UP TRUE");
+                        showLayout();
+                    } else {
+                        hideLayout();
+                    }
+                } else {
+                    System.out.println("KDKDKD: recyclerView DOWN");
+                }
+                return false;
+            }
+        });
+    }
+
+    private void hideLayout() {
+        System.out.println("KDKDKD: recyclerView UP FALSE");
+        isClicked = true;
+        actionButtonsLayout.animate()
+                .translationYBy(0)
+                .translationY((float) actionButtonsLayout.getHeight())
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+        localVideoView.animate()
+                .translationYBy(0)
+                .translationY((float) actionButtonsLayout.getHeight())
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+        tvTeacherEmoji.animate()
+                .translationYBy(0)
+                .translationY((float) actionButtonsLayout.getHeight())
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+        rlHeader.animate()
+                .translationYBy(0)
+                .translationY(-1 * (float) rlHeader.getHeight())
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+    }
+
+    private void showLayout() {
+        System.out.println("KDKDKD: recyclerView UP FALSE");
+        isClicked = false;
+        actionButtonsLayout.animate()
+                .translationYBy((float) actionButtonsLayout.getHeight())
+                .translationY(0)
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+        localVideoView.animate()
+                .translationYBy((float) actionButtonsLayout.getHeight())
+                .translationY(0)
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+        tvTeacherEmoji.animate()
+                .translationYBy((float) actionButtonsLayout.getHeight())
+                .translationY(0)
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+        rlHeader.animate()
+                .translationYBy(-1 * ((float) rlHeader.getHeight()))
+                .translationY(0)
+                .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
+
+        startTimerToHideLayout();
+    }
+
+    public void startTimerToHideLayout() {
+        cTimer = new CountDownTimer(3000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Display Data by Every Ten Second
+            }
+
+            @Override
+            public void onFinish() {
+                hideLayout();
+            }
+        }.start();
     }
 
     private void setActionButtonsVisibility() {
@@ -511,6 +627,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             icPEmoji1.setVisibility(View.VISIBLE);
             icPEmoji2.setVisibility(View.VISIBLE);
             icPEmoji3.setVisibility(View.VISIBLE);
+            btnMenu.setVisibility(View.INVISIBLE);
         } else {
             itemHeight = opponents.size() == 1 ? recycleViewHeight : recycleViewHeight / DISPLAY_ROW_AMOUNT;
             llShare.setVisibility(View.VISIBLE);
@@ -563,13 +680,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
-        toggle_recording_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                conversationFragmentCallbackListener.onStartScreenRecording(isChecked);
-            }
-        });
-
         micToggleCall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -580,6 +690,9 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         handUpCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cTimer != null) {
+                    cTimer.cancel();
+                }
                 actionButtonsEnabled(false);
                 handUpCall.setEnabled(false);
                 handUpCall.setActivated(false);
@@ -588,6 +701,15 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 Log.d(TAG, "Call is stopped");
             }
         });
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//
+                showBottomSheetDialog();
+            }
+        });
+
+
 
         button_screen_sharing.setOnClickListener(v -> {
 //            startScreenSharing();
@@ -595,14 +717,14 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 //            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
 
             conversationFragmentCallbackListener.onLaunchChatRoom(opponents, title);
+//            startScreenSharing()
+//            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
         });
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
 
         icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID));
-
         icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
-
         icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID));
     }
 
@@ -693,7 +815,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-
     protected OpponentsFromCallAdapter.ViewHolder findHolder(Integer userID) {
         Log.d(TAG, "findHolder for " + userID);
         int childCount = recyclerView.getChildCount();
@@ -709,7 +830,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         }
         return null;
     }
-
+    
     private void setOpponentView(int userID) {
         setOpponentToAdapter(userID);
         if (!isRemoteShown) {
@@ -733,6 +854,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     @Override
     public void onConnectedToUser(ConferenceSession qbrtcSession, final Integer userId) {
+        if (!isTeacher && userId != Integer.parseInt(teacherQBUserID)) {
+            return;
+        }
+
         if (checkIfUserInAdapter(userId)) {
             setStatusForOpponent(userId, getString(R.string.text_status_connected));
             Log.d(TAG, "onConnectedToUser user already in, userId= " + userId);
@@ -927,8 +1052,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private class SpanSizeLookupImpl extends GridManager.SpanSizeLookup {
-
-
         @Override
         public int getSpanSize(int position) {
             int itemCount = opponentsAdapter.getItemCount();
@@ -973,7 +1096,6 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 //            return 3;
         }
     }
-
 
     private class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -1034,7 +1156,9 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     protected void loadPollingForPupil(String message) {
+        message = message.replace("\"", "");
         System.out.println("KDKD: message for pupil " + message);
+
         Intent intent = new Intent(getActivity(), PollingActivity.class);
         intent.putExtra("isForPupil", true);
         intent.putExtra(PollingActivity.POLLING, message);
@@ -1054,16 +1178,39 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         holder.setPupilPollAns(splitStr[0]);
     }
 
-    protected void setEmojiForPupil(String message) {
-        System.out.println("KDKDKD: Pupil message " + message);
+    protected void setEmojiForPupil(String msg) {
+        System.out.println("KDKDKD: Pupil message " + msg);
+
+        String message = getIOSEmojiMsg(msg);
         String tempIndex = message.replace("\"", "");
+
         if (!isTeacher) {
             int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
             tvTeacherEmoji.setText(getEmoticon(teacherEmojis[Integer.parseInt(tempIndex)]));
+
+            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            tvTeacherEmoji.setText("");
+                        }
+                    },
+                    15000);
         }
     }
 
+    public String getIOSEmojiMsg(String code) {
+
+        String message = "";
+        String[] splitStr = code.split("#@#");
+        message = splitStr[0];
+        return message;
+    }
+
     protected void setEmojiForTeacher(String message) {
+        if (!isAllowPupilReactions) {
+            return;
+        }
+
         String tempMsg = message.replace("\"", "");
         String[] splitStr = tempMsg.split("#@#");
 
@@ -1081,6 +1228,28 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
     protected void sendEmoji(String channel, String message, String currentUserID) {
         System.out.println("KDKDKD: channel send" + channel);
+
+        _frEmojiAnimationView.setVisibility(View.VISIBLE);
+
+        String tempMsg = message.replace("\"", "");
+        String[] splitStr = tempMsg.split("#@#");
+
+        int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
+        int[] pupilEmojis = {0x1F914, 0x270B, 0x1F44D};
+
+        if (isTeacher) {
+            _txtEmojiAnim.setText(getEmoticon(teacherEmojis[Integer.parseInt(splitStr[0])]));
+        } else {
+            _txtEmojiAnim.setText(getEmoticon(pupilEmojis[Integer.parseInt(splitStr[0])]));
+        }
+
+        YoYo.with(Techniques.Bounce).onEnd(new YoYo.AnimatorCallback() {
+            @Override
+            public void call(Animator animator) {
+                _frEmojiAnimationView.setVisibility(View.GONE);
+            }
+        }).duration(2000).playOn(_frEmojiAnimationView);
+
         hostActivity.getPubNub()
                 .publish()
                 .channel(channel)
@@ -1105,5 +1274,83 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                         System.out.println("KDKDKD: Sender Poll " + message + " " + status.getStatusCode());
                     }
                 });
+    }
+
+    private void showBottomSheetDialog() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+        bottomSheetDialog.setContentView(R.layout.bottom_dialog);
+
+        TextView txtSetupVoting = bottomSheetDialog.findViewById(R.id.txtSetupVoting);
+        TextView txtMuteAll = bottomSheetDialog.findViewById(R.id.txtMuteAll);
+        ImageView btnClose = bottomSheetDialog.findViewById(R.id.BtnClose);
+        SwitchCompat switch2 = bottomSheetDialog.findViewById(R.id.switch2);
+        ToggleButton toggle_recording_view = bottomSheetDialog.findViewById(R.id.toggle_recording_view);
+
+        bottomSheetDialog.show();
+
+        if (isAllowPupilReactions) {
+            switch2.setChecked(true);
+        } else {
+            switch2.setChecked(false);
+        }
+
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    isAllowPupilReactions = true;
+                } else {
+                    isAllowPupilReactions = false;
+                }
+            }
+        });
+
+        if (isRecordingStarted) {
+            toggle_recording_view.setChecked(true);
+        } else {
+            toggle_recording_view.setChecked(false);
+        }
+
+        toggle_recording_view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isRecordingStarted = isChecked;
+                conversationFragmentCallbackListener.onStartScreenRecording(isChecked);
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        txtSetupVoting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+                startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+            }
+        });
+
+        if (opponentsAdapter.setMuteStatus()) {
+            txtMuteAll.setText("Unmute All");
+        } else {
+            txtMuteAll.setText("Mute All");
+        }
+
+        txtMuteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+                if (opponentsAdapter.setMuteStatus()) {
+                    opponentsAdapter.setMuteAllStatus(false);
+                } else {
+                    opponentsAdapter.setMuteAllStatus(true);
+                }
+                opponentsAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

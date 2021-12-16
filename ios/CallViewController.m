@@ -9,6 +9,7 @@
 
 #import "CallViewController.h"
 #import "PollViewController.h"
+#import "PollVC.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -76,6 +77,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (strong, nonatomic) NSNumber *statsUserID;
 
 @property (assign, nonatomic) BOOL isMutedFlag;
+@property (assign, nonatomic) BOOL isTeacherReload;
+@property (assign, nonatomic) BOOL isPupilReload;
+
+@property (assign, nonatomic) BOOL isReaction;
 
 @property (strong, nonatomic) ZoomedView *zoomedView;
 @property (weak, nonatomic) OpponentCollectionViewCell *originCell;
@@ -89,6 +94,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (strong, nonatomic) NSMutableArray *reactionImageArr;
 @property (strong, nonatomic) NSMutableArray *reactionUnicodeArr;
+@property (strong, nonatomic) NSMutableArray *pupilreactionUnicodeArr;
 
 @property (nonatomic, strong) PubNub *pubnub;
 @property (nonatomic, strong) NSString *messages;
@@ -140,8 +146,18 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   self.recordUrl=@"";
   self.isRecording = false;
+  _isTeacherReload=false;
+  _isPupilReload=false;
   _isMutedFlag = true;
+  _isReaction = true;
   [_classSettingView setHidden:true];
+  
+  if(_isTeacher){
+     [_settingButton setHidden:false];
+   }
+   else{
+     [_settingButton setHidden:true];
+   }
   
   _muteAllButton.layer.cornerRadius=10;
   _muteAllButton.layer.borderWidth = 1;
@@ -175,6 +191,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _userCameraView.layer.cornerRadius = 10;
   self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
   self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"👊",@"🙌",@"🙂",@"💖",@"👏",@"👍", nil];
+  self.pupilreactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"🤔",@"✋",@"👍", nil];
+  
   [self.reactionTableView setDelegate:self];
   [self.reactionTableView setDataSource:self];
   self.endCallButton.layer.cornerRadius = 10;
@@ -228,26 +246,45 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   self.messages = @"";
   self.pollMessage = @"";
+  
+  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableTapped:)];
+  [self.opponentsCollectionView addGestureRecognizer:tap];
 }
 
+
+- (void)tableTapped:(UITapGestureRecognizer *)tap
+{
+  if (self.toolbarHeightConstrain.constant == 0) {
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 50;
+        self.headerHeightConstrain.constant = 50;
+    }];
+  }else{
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 0;
+        self.headerHeightConstrain.constant = 0;
+
+    }];
+  }
+}
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
   
   if (![update containsString:@"##@##"]) {
     if (_isTeacher) {
-      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
+      [self.pubnub publish: update toChannel:_selectedChannel
             withCompletion:^(PNPublishStatus *status) {
 
-          NSString *text = update;
-          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
       }];
     }else{
-      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
+      [self.pubnub publish: update toChannel:_channels[0]
             withCompletion:^(PNPublishStatus *status) {
 
-          NSString *text = update;
-          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
       }];
     }
   } else {
@@ -275,17 +312,40 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 }
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
-    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
+//    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
       if (![message containsString:@"##@##"]) {
-        self.messages = message;
-        [self.opponentsCollectionView reloadData];
+        if (_isTeacher) {
+          if (!_isTeacherReload) {
+            self.messages = message;
+            [self.opponentsCollectionView reloadData];
+            _isTeacherReload=false;
+          }else {
+            self.messages = @"";
+            [self.opponentsCollectionView reloadData];
+            _isTeacherReload=false;
+          }
+        }else{
+          if (!_isPupilReload) {
+            self.messages = message;
+            [self.opponentsCollectionView reloadData];
+            _isPupilReload=false;
+          }else {
+            self.messages = @"";
+            [self.opponentsCollectionView reloadData];
+            _isPupilReload=false;
+          }
+        
+        }
+        
+       
+        
       }else{
         NSArray *listItems = [message componentsSeparatedByString:@"##@##"];
         if (_isTeacher) {
           self.pollMessage = message;
           [self.opponentsCollectionView reloadData];
         }else if (listItems.count > 2) {
-          PollViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+          PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
           vc.channels = self.channels;
           vc.ispupil = true;
           vc.pollString = message;
@@ -315,15 +375,25 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //                      event.data.message[@"entry"],
 //                      event.data.message[@"update"]];
 
+  
+  NSLog(@"event.data.message %@", event.data.message);
+  
+  if ([event.data.message isKindOfClass:[NSString class]]) {
+    [self displayMessage:event.data.message asType:@"[MESSAGE: received]"];
+  }else{
     [self displayMessage:event.data.message[@"update"] asType:@"[MESSAGE: received]"];
+  }
+ 
+  
+   
 }
 
 - (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
-    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
-                      event.data.presence.uuid,
-                      event.data.channel];
-
-    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
+//    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
+//                      event.data.presence.uuid,
+//                      event.data.channel];
+//
+//    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
 //    [self displayMessage:text asType: type];
 }
 //
@@ -373,39 +443,39 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     __weak __typeof(self)weakSelf = self;
   
- [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
-   
-   weakSelf.muteAudio ^= 1;
-   if (!weakSelf.isRecording) {
-//     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
-//          NSLog(@"rcording progress... %@", error);
-//        } onCompletion:^(NSError * error) {
-//          NSLog(@"rcording error... %@", error);
-//        }];
-     weakSelf.isRecording = true;
-     
-     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
-       NSLog(@"error of recording %@", error);
-     }];
-//    weakSelf.screenRecord
-//     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
+// [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
+//
+//   weakSelf.muteAudio ^= 1;
+//   if (!weakSelf.isRecording) {
+////     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
+////          NSLog(@"rcording progress... %@", error);
+////        } onCompletion:^(NSError * error) {
+////          NSLog(@"rcording error... %@", error);
+////        }];
+//     weakSelf.isRecording = true;
+//
+//     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+//       NSLog(@"error of recording %@", error);
 //     }];
-     
-    
-   }else{
-//     [[ScreenRecordCoordinator recordCordinator] stopRecording];
-     weakSelf.isRecording = false;
-     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
-            NSLog(@"stop recording Error %@", url);
-       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
-     }];
-//     [[ScreenRecorder shareInstance]
-//     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
-//     }]
-   }
-    }];
+////    weakSelf.screenRecord
+////     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }];
+//
+//
+//   }else{
+////     [[ScreenRecordCoordinator recordCordinator] stopRecording];
+//     weakSelf.isRecording = false;
+//     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+//            NSLog(@"stop recording Error %@", url);
+//       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
+//     }];
+////     [[ScreenRecorder shareInstance]
+////     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }]
+//   }
+//    }];
  
  
  
@@ -421,10 +491,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (_isTeacher) {
     [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-      PollViewController *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
-      vc.channels = weakSelf.channels;
-      vc.ispupil = false;
-      [weakSelf presentViewController:vc animated:false completion:nil];
+//      PollVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+//      vc.channels = weakSelf.channels;
+//      vc.ispupil = false;
+//      [weakSelf presentViewController:vc animated:false completion:nil];
     }];
   }
   
@@ -571,23 +641,53 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
 
- 
+
+  if(_isReaction){
   if (![_messages isEqualToString:@""]) {
-    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+    NSArray *items = [_messages componentsSeparatedByString:@"#@#"];
     if (_isTeacher) {
       if (user.ID == [[items objectAtIndex:1] integerValue] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+        reusableCell.emojiLbl.text = [_pupilreactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]] ;
       }else
       {
         reusableCell.emojiLbl.text=@"";
       }
     }else{
 //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+      if (!_isTeacher) {
+        reusableCell.emojiLbl.text = [_reactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
+      }else{
+        reusableCell.emojiLbl.text=@"";
+      }
+      
 //      }
+
     }
     
+  
   }
+  else{
+    reusableCell.emojiLbl.text=@"";
+  }
+  }
+
+ 
+//  if (![_messages isEqualToString:@""]) {
+//    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+//    if (_isTeacher) {
+//      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+//      }else
+//      {
+//        reusableCell.emojiLbl.text=@"";
+//      }
+//    }else{
+////      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+////      }
+//    }
+//
+//  }
   
   if (![_pollMessage isEqualToString:@""]) {
     NSArray *items = [_pollMessage componentsSeparatedByString:@"##@##"];
@@ -1190,7 +1290,8 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != 0) {
-      NSString *str = [NSString stringWithFormat:@"%@@#@%@", _reactionUnicodeArr[indexPath.row-1],_selectedId];
+      _isTeacherReload=true;
+      NSString *str = [NSString stringWithFormat:@"%ld#@#%@", indexPath.row-1,_selectedId];
         [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
 //      [self.opponentsCollectionView reloadData];
     }
@@ -1199,38 +1300,42 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   
 }
 
+
 - (IBAction)dontBtn:(id)sender {
-   NSString *str = [NSString stringWithFormat:@"🤔@#@%@",_currentUserID];
+  _isPupilReload=true;
+   NSString *str = [NSString stringWithFormat:@"0#@#%@",_currentUserID];
    [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //   [self.opponentsCollectionView reloadData];
 }
 - (IBAction)thumbBtn:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"👍@#@%@",_currentUserID];
+  _isPupilReload=true;
+  NSString *str = [NSString stringWithFormat:@"2#@#%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
 
 - (IBAction)raiseBtn:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"✋@#@%@",_currentUserID];
+  _isPupilReload=true;
+  NSString *str = [NSString stringWithFormat:@"1#@#%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
-- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
-//  [self.toolbar setHidden:true];
-  if (self.toolbarHeightConstrain.constant == 0) {
-    [UIView animateWithDuration:2.0 animations:^{
-        self.toolbarHeightConstrain.constant = 50;
-        self.headerHeightConstrain.constant = 50;
-    }];
-  }else{
-    [UIView animateWithDuration:2.0 animations:^{
-        self.toolbarHeightConstrain.constant = 0;
-        self.headerHeightConstrain.constant = 0;
-       
-    }];
-  }
- 
-}
+//- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
+////  [self.toolbar setHidden:true];
+//  if (self.toolbarHeightConstrain.constant == 0) {
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 50;
+//        self.headerHeightConstrain.constant = 50;
+//    }];
+//  }else{
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 0;
+//        self.headerHeightConstrain.constant = 0;
+//
+//    }];
+//  }
+//
+//}
 - (IBAction)onStartScreenRecordingPressed:(id)sender {
   if (!self.isRecording) {
     self.isRecording = true;
@@ -1249,6 +1354,10 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 
 - (IBAction)onPressSetupClassVotting:(id)sender {
+  PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+  vc.channels = self.channels;
+  vc.ispupil = false;
+  [self presentViewController:vc animated:false completion:nil];
 }
 
 - (IBAction)onPressMuteAll:(id)sender {
@@ -1277,6 +1386,18 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 
 - (IBAction)onReactionSwitchPressed:(id)sender {
+  
+  if(_isReaction){
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+  }
+  else{
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+  }
+  
+  _isReaction = !_isReaction;
+  
+  [self.opponentsCollectionView reloadData];
+//  [_messageSwitch setBackgroundImage:[UIImage imageNamed: @""] forState:UIControlStateNormal];
 }
 
 - (IBAction)onMessageSwitchPressed:(id)sender {

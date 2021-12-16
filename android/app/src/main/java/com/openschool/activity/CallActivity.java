@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -412,12 +413,12 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     @Override
     public void onStartScreenRecording(boolean isChecked) {
         if (!isChecked) {
-            startRecordingScreen();
-        } else {
             if (hbRecorder != null) {
                 System.out.println("KDKD: Stopping is in progress");
                 hbRecorder.stopScreenRecording();
             }
+        } else {
+            startRecordingScreen();
         }
     }
 
