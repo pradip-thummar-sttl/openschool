@@ -110,9 +110,12 @@ export default StyleSheet.create({
         fontSize: hp('2.2%'),
         height: hp('7.0%'),
         lineHeight: hp('7.0%'),
+        justifyContent : 'center',
+        textAlignVertical : 'center',
         fontWeight: 'bold',
         paddingLeft: hp(5),
         paddingRight: hp(5),
+        
         fontFamily: FONTS.fontRegular,
     },
     commonButtonGreen: {
