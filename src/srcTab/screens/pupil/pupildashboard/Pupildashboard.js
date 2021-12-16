@@ -537,7 +537,8 @@ const PupuilDashboard = (props) => {
                                                                                             }
                                                                                         </View>
                                                                                         <View style={PAGESTYLE.requirementofClass}>
-                                                                                            <Text style={PAGESTYLE.requireText}>What you will need</Text>
+                                                                                            {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
+                                                                                                <Text style={PAGESTYLE.requireText}>What you will need</Text> : null}
                                                                                             <FlatList
                                                                                                 data={dataOfSubView.CheckList}
                                                                                                 style={{ width: '100%' }}
