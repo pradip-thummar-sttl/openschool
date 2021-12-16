@@ -235,7 +235,7 @@ class PupilRegister extends Component {
             <View style={styles.container}>
                 <View style={styles.lefImage}>
                     {/* <Image source={Images.loginMainBack} style={styles.image}></Image> */}
-                    <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'}/>
+                    <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={'100%'} />
                 </View>
                 <View style={styles.rightContent}>
                     <ScrollView showsVerticalScrollIndicator={false}>
@@ -245,55 +245,16 @@ class PupilRegister extends Component {
                                 <View style={styles.field}>
                                     <Text style={styles.labelInput}>What is the learners date of birth?</Text>
                                     <View style={styles.birthRow}>
-                                        {/* <View style={[styles.day, styles.commonInputRegister]}> 
-                                             <TextInput
-                                                onFocus={() => this.setState({ isDayFocused: true })}
-                                                onBlur={() => this.setState({ isDayFocused: false })}
-                                                returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.t2.focus(); }}
-                                                style={{ ...STYLE.commonInput, borderColor: (this.state.isDayFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                                placeholder="Day"
-                                                autoCapitalize={'none'}
-                                                maxLength={40}
-                                                placeholderTextColor={COLORS.darkGray}
-                                            />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image>  */}
                                         <View style={[STYLE.commonInput, styles.alignVert]}>
                                             {
                                                 this.daysDropDown()
                                             }
                                         </View>
-                                        {/* <View style={[styles.month, styles.commonInputRegister]}>
-                                            <TextInput
-                                                onFocus={() => this.setState({ isMonthFocused: true })}
-                                                onBlur={() => this.setState({ isMonthFocused: false })}
-                                                returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.t2.focus(); }}
-                                                style={{ ...STYLE.commonInput, borderColor: (this.state.isMonthFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                                placeholder="Month"
-                                                autoCapitalize={'none'}
-                                                maxLength={40}
-                                                placeholderTextColor={COLORS.darkGray}
-                                            />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image> */}
                                         <View style={[STYLE.commonInput, styles.alignVert]}>
                                             {
                                                 this.monthsDropDown()
                                             }
                                         </View>
-                                        {/* <View style={[styles.year, styles.commonInputRegister]}>
-                                            <TextInput
-                                                onFocus={() => this.setState({ isYearFocused: true })}
-                                                onBlur={() => this.setState({ isYearFocused: false })}
-                                                returnKeyType={"next"}
-                                                onSubmitEditing={() => { this.t2.focus(); }}
-                                                style={{ ...STYLE.commonInput, borderColor: (this.state.isYearFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                                placeholder="Year"
-                                                autoCapitalize={'none'}
-                                                maxLength={40}
-                                                placeholderTextColor={COLORS.darkGray}
-                                            />
-                                            <Image source={Images.DropArrow} style={styles.arrowIcon}></Image> */}
                                         <View style={[STYLE.commonInput, styles.alignVert]}>
                                             {
                                                 this.yearsDropDown()
@@ -350,7 +311,7 @@ class PupilRegister extends Component {
                                         autoCapitalize={'none'}
                                         maxLength={40}
                                         value={this.state.mobile}
-                                        placeholderTextColor={COLORS.menuLightFonts}
+                                        placeholderTextColor={COLORS.lightGray}
                                         onChangeText={mobile => this.setState({ mobile })} />
                                 </View>
                                 <View style={styles.field}>
@@ -366,7 +327,7 @@ class PupilRegister extends Component {
                                         autoCapitalize={'none'}
                                         maxLength={40}
                                         value={this.state.userName}
-                                        placeholderTextColor={COLORS.menuLightFonts}
+                                        placeholderTextColor={COLORS.lightGray}
                                         onChangeText={userName => this.setState({ userName })} />
                                 </View>
                                 <View style={styles.field}>
@@ -471,6 +432,8 @@ function mapDispatchToProps(dispatch) {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PupilRegister)
+
+
 const styles = StyleSheet.create({
     getStarted: {
         flexDirection: 'row',
@@ -501,6 +464,7 @@ const styles = StyleSheet.create({
         height: hp(28),
         position: 'relative',
         overflow: 'hidden',
+        backgroundColor: COLORS.lightBlueLogin,
     },
     rightContent: {
         width: '100%',

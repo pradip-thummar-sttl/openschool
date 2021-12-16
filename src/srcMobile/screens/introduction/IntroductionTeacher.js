@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     dotContainer: {
         backgroundColor: COLORS.transparent,
-        bottom: hp(6.15),
+        bottom: 20, //6.15
         position: 'absolute',
         alignSelf: 'center',
     },

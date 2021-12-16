@@ -33,7 +33,9 @@ export default StyleSheet.create({
         height: hp('6.8%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
-        fontFamily: FONTS.fontSemiBold,
+        fontWeight: 'bold',
+        fontFamily: FONTS.fontRegular,
+        
     },
     commonInput1: {
         color:COLORS.darkGray,
@@ -72,6 +74,33 @@ export default StyleSheet.create({
         height: 20,
         top: 0,
     },
+    loginButtonView: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: hp('1.0%'),
+        alignItems:'center',
+        justifyContent:'center',
+        height: hp('7.0%'),
+    },
+    loginButtonText: {
+        color: COLORS.white,
+        textAlign: 'center',
+        fontSize: hp('2.2%'),
+        textTransform: 'uppercase',
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        fontSize: hp('2.2%'),
+        fontFamily: FONTS.fontSemiBold,
+        fontWeight: 'bold',
+    },
+    loginButtonLoader: {
+        color: COLORS.white,
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        height: hp('7.0%'),
+        paddingLeft: hp(5),
+        paddingRight: hp(5),
+        fontFamily: FONTS.fontRegular,
+    },
     fullWidthPrimaryButton: {
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
@@ -81,9 +110,12 @@ export default StyleSheet.create({
         fontSize: hp('2.2%'),
         height: hp('7.0%'),
         lineHeight: hp('7.0%'),
+        justifyContent : 'center',
+        textAlignVertical : 'center',
         fontWeight: 'bold',
         paddingLeft: hp(5),
         paddingRight: hp(5),
+        
         fontFamily: FONTS.fontRegular,
     },
     commonButtonGreen: {

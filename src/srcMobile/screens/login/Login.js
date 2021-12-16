@@ -304,13 +304,11 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.lefImage}>
+                <View style={[styles.lefImage, {backgroundColor: this.props.route.params.userType == 'Pupil' ? COLORS.lightBlueLogin: COLORS.lightOrangeLogin}]}>
                     {this.props.route.params.userType == 'Pupil' ?
-                        // <Image source={Images.loginMainBack} style={styles.image}></Image>
                         <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                         :
                         <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
-                        // <Image source={Images.loginMainBackteacher} style={styles.image}></Image>
                     }
                 </View>
                 <View style={styles.rightContent}>
@@ -382,28 +380,31 @@ class Login extends Component {
                                     <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
                                 </View>
                             </View>
-                            <View style={styles.loginButtonView}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => {
-                                        isDesignBuild ?
-                                            this.props.navigation.replace('TeacherDashboard')
-                                            :
-                                            this.isFieldsValidated()
 
-                                    }}>
-                                    {this.state.isLoading ?
-                                        <ActivityIndicator
-                                            style={STYLE.fullWidthPrimaryButton}
-                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                            color={COLORS.white} />
-                                        :
-                                        <Text
-                                            style={{ ...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase', }}>Login to Continue</Text>
+                            <View style={styles.loginButtonView}>
+                                
+                                <TouchableOpacity activeOpacity={opacity} style={STYLE.loginButtonView} 
+                                    onPress={() => { isDesignBuild ? this.props.navigation.replace('TeacherDashboard') : this.isFieldsValidated()}}>
+                                    {
+                                        this.state.isLoading ?
+                                            <ActivityIndicator style={STYLE.loginButtonLoader} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+                                            :
+                                            <Text style={STYLE.loginButtonText}>Login to Continue</Text>
                                     }
                                 </TouchableOpacity>
+
+                                {/* <TouchableOpacity activeOpacity={opacity}
+                                    onPress={() => { isDesignBuild ? this.props.navigation.replace('TeacherDashboard') : this.isFieldsValidated()}}>
+                                    {
+                                        this.state.isLoading ?
+                                            <ActivityIndicator style={STYLE.fullWidthPrimaryButton} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+                                            :
+                                            <Text style={{ ...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase', }}>Login to Continue</Text>
+                                    }
+                                </TouchableOpacity> */}
+
                                 <View style={styles.getStarted}>
-                                    {this.props.route.params.userType == 'Pupil' ?
+                                    {this.props.route.params.userType == 'Pupil' &&
                                         <>
                                             <Text style={styles.getStartedText}>New to MyEd Open School?</Text>
                                             <TouchableOpacity
@@ -414,8 +415,6 @@ class Login extends Component {
                                                 <Text style={styles.getStartedLink}> Get Started</Text>
                                             </TouchableOpacity>
                                         </>
-                                        :
-                                        null
                                     }
                                 </View>
                             </View>
