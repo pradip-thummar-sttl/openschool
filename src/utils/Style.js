@@ -33,7 +33,9 @@ export default StyleSheet.create({
         height: hp('6.8%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
-        fontFamily: FONTS.fontSemiBold,
+        fontWeight: 'bold',
+        fontFamily: FONTS.fontRegular,
+        
     },
     commonInput1: {
         color:COLORS.darkGray,
