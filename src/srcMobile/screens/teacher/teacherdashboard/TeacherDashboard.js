@@ -487,7 +487,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <TouchableOpacity activeOpacity={1}>
                                                         <View style={PAGESTYLE.tabcontent}>
                                                             <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                            <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
+                                                            <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName} </Text>
                                                             <View style={PAGESTYLE.yellowHrTag}></View>
                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
@@ -585,7 +585,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 <View style={{ ...STYLE.commonButtonBordered, marginRight: 0 }}>
                                                                     <TouchableOpacity
                                                                         onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
+                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 2 }}>Edit Class</Text></TouchableOpacity>
                                                                 </View>
                                                                 <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                                                     <TouchableOpacity
@@ -598,7 +598,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                     color={COLORS.white} />
                                                                                 :
-                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10, }}>Start Class</Text>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 2, }}>Start Class</Text>
                                                                         }
 
                                                                     </TouchableOpacity>

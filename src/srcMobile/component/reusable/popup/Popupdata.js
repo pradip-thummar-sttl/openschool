@@ -335,11 +335,12 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                     </View>
-                                    <View style={styles.uploadCalendar}>
+                                    <View style={[styles.uploadCalendar, {marginBottom: 10}]}>
                                         <TouchableOpacity>
                                             {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
+
                                     </View>
                                 </ScrollView>
                                 <View style={styles.lessonstartButton}>
@@ -354,9 +355,9 @@ const Popupdata = (props) => {
                             <View style={{ width: hp(20) }}></View>
                         } */}
                                     {!props.isPupil && props.data.Type == Lesson ?
-                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 5 }}>
                                             <TouchableOpacity
-                                                style={styles.buttonGrp}
+                                                style={styles.editButton}
                                                 activeOpacity={opacity}
                                                 onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, }}>Edit Lesson</Text>
@@ -427,6 +428,7 @@ const styles = StyleSheet.create({
         zIndex: 9,
         top: hp(1),
     },
+  
     popupCard: {
         backgroundColor: COLORS.white,
         width: '100%',
@@ -606,7 +608,7 @@ const styles = StyleSheet.create({
     bottomDrwerButtonGreen: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
+        fontSize: hp(1.99),
         fontWeight: '800',
         borderRadius: hp(0.9),
         overflow: 'hidden',
@@ -631,6 +633,7 @@ const styles = StyleSheet.create({
     calIcon: {
         width: hp(1.8),
         resizeMode: 'contain',
+       
     },
     timeIcon: {
         width: hp(1.8),
@@ -643,6 +646,7 @@ const styles = StyleSheet.create({
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
+       
     },
     downloadIcon: {
         width: hp(2.01),
