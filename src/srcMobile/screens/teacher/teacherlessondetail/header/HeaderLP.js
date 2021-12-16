@@ -13,7 +13,7 @@ import EditWhite from "../../../../../svg/pupil/parentzone/EditWhite";
 const HeaderLP = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain, {paddingVertical:hp(2.5)}]}>
                 <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         padding: hp(1.5),
         borderRadius: hp(1),
-        marginBottom: hp(1.32),
+        // marginBottom: hp(1.32),
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
+       
     },
     lessonPlanTop: {
         flexDirection: 'row',

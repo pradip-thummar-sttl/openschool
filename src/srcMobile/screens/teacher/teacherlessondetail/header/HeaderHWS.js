@@ -11,7 +11,7 @@ import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 const HeaderHWS = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain, {paddingVertical:hp(2.5)}]}>
                 <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
