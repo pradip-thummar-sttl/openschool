@@ -304,7 +304,7 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.lefImage}>
+                <View style={[styles.lefImage, {backgroundColor: this.props.route.params.userType == 'Pupil' ? COLORS.lightBlueLogin: COLORS.lightOrangeLogin}]}>
                     {this.props.route.params.userType == 'Pupil' ?
                         // <Image source={Images.loginMainBack} style={styles.image}></Image>
                         <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
