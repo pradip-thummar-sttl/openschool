@@ -67,11 +67,14 @@ static NSString * const kChannelGuide = @"the_guide";
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)onCreatePollPress:(id)sender {
+  
   if ([_queTextView.text isEqualToString:@""]) {
     UIAlertController * alert = [UIAlertController
                                      alertControllerWithTitle:@"ERROR"
                                      message:@"Please Enter Question"
                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    
     [self presentViewController:alert animated:YES completion:nil];
   }else if ([_opt1TxtField.text isEqualToString:@""]){
     UIAlertController * alert = [UIAlertController
