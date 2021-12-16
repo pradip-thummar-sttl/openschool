@@ -122,7 +122,7 @@ class Login extends Component {
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
-        if (!userName || !emailValidate(userName)) {
+        if (!userName.trim() || !emailValidate(userName.trim())) {
             showMessage(MESSAGE.email)
             return false;
         } else if (!password) {
@@ -137,7 +137,7 @@ class Login extends Component {
                 var userData = res.data
                 var userType = ""
                 console.log('userData', userData);
-                
+
                 userData.map((item) => {
                     if (item.Name === this.props.route.params.userType) {
                         userType = item._id
@@ -145,7 +145,7 @@ class Login extends Component {
                 })
 
                 var data = {
-                    Email: userName,
+                    Email: userName.trim(),
                     Password: password,
                     PushToken: PushToken,
                     Device: Device,
@@ -153,7 +153,7 @@ class Login extends Component {
                     AccessedVia: AccessedVia,
                     UserType: userType
                 }
-                
+
                 console.log('Data', data);
 
                 Service.post(data, EndPoints.Login, (res) => {
@@ -270,7 +270,7 @@ class Login extends Component {
         } else if (this.props.route.params.userType == 'School') {
             AsyncStorage.setItem('school', JSON.stringify(data))
             AsyncStorage.setItem('type', "School")
-        }else {
+        } else {
             AsyncStorage.setItem('user', JSON.stringify(data))
             AsyncStorage.setItem('type', "Teacher")
         }
@@ -318,14 +318,14 @@ class Login extends Component {
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
-                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School'? "email" :"Email"}</Text>
+                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School' ? "email" : "Email"}</Text>
                                 <TextInput
                                     onFocus={() => this.setState({ isEmailFocused: true })}
                                     onBlur={() => this.setState({ isEmailFocused: false })}
                                     returnKeyType={"next"}
                                     onSubmitEditing={() => { this.t2.focus(); }}
                                     style={{ ...STYLE.commonInput, borderColor: (this.state.isEmailFocused) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
-                                    placeholder={this.props.route.params.userType == 'School'? "Enter email" :"Enter email"}
+                                    placeholder={this.props.route.params.userType == 'School' ? "Enter email" : "Enter email"}
                                     autoCapitalize={'none'}
                                     maxLength={40}
                                     value={this.state.userName}
