@@ -124,6 +124,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private TextView tvTeacherEmoji;
     private TextView tvTitle;
     private ImageView button_screen_sharing;
+    private TextView tvShare;
     private ImageView whiteboard;
     private ImageView icPEmoji1;
     private ImageView icPEmoji2;
@@ -372,7 +373,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private void startScreenSharing() {
-        conversationFragmentCallbackListener.onStartScreenSharing();
+        System.out.println("KDKDKD =>: conversationFragmentCallbackListener " + conversationFragmentCallbackListener);
+        if (conversationFragmentCallbackListener != null) {
+            conversationFragmentCallbackListener.onStartScreenSharing();
+        }
     }
 
     @Override
@@ -474,6 +478,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
+        tvShare = (TextView) view.findViewById(R.id.tvShare);
         whiteboard = (ImageView) view.findViewById(R.id.whiteboard);
         icPEmoji1 = (ImageView) view.findViewById(R.id.icPEmoji1);
         icPEmoji2 = (ImageView) view.findViewById(R.id.icPEmoji2);
@@ -551,7 +556,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private void hideLayout() {
-        System.out.println("KDKDKD: recyclerView UP FALSE");
+        System.out.println("KDKDKD: recyclerView UP FALSE" + localVideoView.getX() + " : " + localVideoView.getY() + " : " + localVideoView.getZ());
         isClicked = true;
         actionButtonsLayout.animate()
                 .translationYBy(0)
@@ -716,9 +721,28 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
 //            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
 
-            conversationFragmentCallbackListener.onLaunchChatRoom(opponents, title);
-//            startScreenSharing()
-//            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+//            conversationFragmentCallbackListener.onLaunchChatRoom(opponents, title);
+
+//            System.out.println("KDKDKD =>: " + currentUserID);
+//            QBRTCVideoTrack videoTrack = conversationFragmentCallbackListener.getVideoTrackMap().get(currentUserID);
+//            System.out.println("KDKDKD =>: " + videoTrack);
+//            if (videoTrack == null) {
+////                screenSharingToggle.setChecked(!isChecked);
+//                return;
+//            }
+//            if (controlLayoutVisible) {
+//                toggleCamera(true);
+            System.out.println("KDKDKD =>: on line 612");
+            startScreenSharing();
+//            }
+//            controlsDispatcher.wakeupControls();
+        });
+
+        tvShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                conversationFragmentCallbackListener.onStopPreview();
+            }
         });
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));

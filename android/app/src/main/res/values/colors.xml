@@ -72,7 +72,7 @@
     <color name="text_color_black">#000000</color>
     <color name="text_color_medium_grey">#b1b1b1</color>
 
-    <color name="green">#45D100</color>
+<!--    <color name="green">#45D100</color>-->
     <color name="black_transparent_30">#30000000</color>
     <color name="white_transparent_80">#80FFFFFF</color>
     <color name="white_transparent_50">#50FFFFFF</color>

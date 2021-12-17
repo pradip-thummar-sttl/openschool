@@ -65,6 +65,7 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
 
     @Override
     public int getItemCount() {
+        System.out.println("KDKDKD: size" + opponents);
         return opponents.size();
     }
 

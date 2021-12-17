@@ -78,6 +78,8 @@
             android:name=".activity.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <service android:name=".services.CallService"
+            android:foregroundServiceType="mediaProjection" />
 
     </application>
 

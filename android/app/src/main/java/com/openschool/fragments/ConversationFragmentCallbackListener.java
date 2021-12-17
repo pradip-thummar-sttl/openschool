@@ -4,10 +4,12 @@ import com.openschool.activity.CallActivity;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.users.model.QBUser;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
+import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
 
 import org.webrtc.CameraVideoCapturer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public interface ConversationFragmentCallbackListener {
@@ -34,6 +36,10 @@ public interface ConversationFragmentCallbackListener {
 
     void onStartScreenSharing();
 
+    boolean isScreenSharingState();
+
+    HashMap<Integer, QBRTCVideoTrack> getVideoTrackMap();
+
     void onLaunchChatRoom(ArrayList<QBUser> selectedUsers, String chatName);
 
     void onStartScreenRecording(boolean isChecked);
@@ -41,4 +47,14 @@ public interface ConversationFragmentCallbackListener {
     void onSwitchCamera(CameraVideoCapturer.CameraSwitchHandler cameraSwitchHandler);
 
     void onStartJoinConference();
+
+    String getDialogID();
+
+    String getRoomID();
+
+    String getRoomTitle();
+
+    boolean isListenerRole();
+
+    void onStopPreview();
 }

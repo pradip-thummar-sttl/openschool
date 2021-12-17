@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.openschool.util.WebRtcSessionManager;
 import com.quickblox.conference.ConferenceClient;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.conference.QBConferenceRole;
@@ -29,7 +30,6 @@ import com.quickblox.conference.callbacks.ConferenceSessionCallbacks;
 import com.openschool.MainApplication;
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
-import com.openschool.manager.WebRtcSessionManager;
 import com.openschool.utils.Consts;
 import com.openschool.utils.NetworkConnectionChecker;
 import com.openschool.utils.ToastUtils;
@@ -110,7 +110,7 @@ public class CallService extends Service {
 
     @Override
     public void onCreate() {
-        currentSession = WebRtcSessionManager.getInstance().getCurrentSession();
+        currentSession = WebRtcSessionManager.getInstance(this).getCurrentSession();
         initConferenceClient();
         initNetworkChecker();
         initListeners();

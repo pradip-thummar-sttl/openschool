@@ -36,6 +36,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.openschool.util.WebRtcSessionManager;
 import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.QBMessageStatusesManager;
 import com.quickblox.chat.QBRestChatService;
@@ -61,7 +62,6 @@ import com.openschool.adapter.AttachmentPreviewAdapter;
 import com.openschool.adapter.ChatAdapter;
 import com.openschool.manager.ChatHelper;
 import com.openschool.manager.DialogsManager;
-import com.openschool.manager.WebRtcSessionManager;
 import com.openschool.mediapick.MediaPickHelper;
 import com.openschool.mediapick.OnMediaPickedListener;
 import com.openschool.services.CallService;
@@ -242,7 +242,7 @@ public class ChatActivity extends BaseActivity implements OnMediaPickedListener,
     @Override
     public void onResumeFinished() {
         checker = new PermissionsChecker(getApplicationContext());
-        sessionManager = WebRtcSessionManager.getInstance();
+        sessionManager = WebRtcSessionManager.getInstance(this);
         if (getChatHelper().isLogged()) {
             if (qbChatDialog == null) {
                 String dialogID = getIntent().getStringExtra(EXTRA_DIALOG_ID);
