@@ -17,7 +17,6 @@ const HeaderHW = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
@@ -29,12 +28,6 @@ const HeaderHW = (props) => {
                 </View>
                 <View style={styles.headerRight}>
                     <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
-                    {/* <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity> */}
                 </View>
             </View>
         </View>

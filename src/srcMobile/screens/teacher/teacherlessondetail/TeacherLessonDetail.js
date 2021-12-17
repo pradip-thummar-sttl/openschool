@@ -304,13 +304,7 @@ const TeacherLessonDetail = (props) => {
                                             dataChanged={isHSDataChanged}
                                             navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
                                 }
-                                {/* <TLDetailEdit /> */}
-                                {/* <TLDetailAdd /> */}
-                                {/* <TLVideoGallery /> */}
-                                {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                                {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                                {/* <TLHomeWorkSubmittedDetail /> */}
-                                {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                               
                             </ScrollView>
 
                         </View>}
