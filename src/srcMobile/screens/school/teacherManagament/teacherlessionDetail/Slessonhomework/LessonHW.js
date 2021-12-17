@@ -54,6 +54,9 @@ const TLHomeWork = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
 
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
 
     useEffect(() => {
         console.log('`${EndPoints.Homework}/${props.id}`', `${EndPoints.Homework}/${props.id}`);
@@ -269,25 +272,72 @@ const TLHomeWork = (props) => {
     //     }
     // }
 
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //             Addhomework.RecordingArr = arr
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+        
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
-                Addhomework.RecordingArr = arr
+                
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
     }
+
+
+const saveCameraData = () => {
+
+    var arr = [...recordingArr];
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
 
     const switchOnOff = (isOn) => {
         setSwitch(isOn)
@@ -443,7 +493,8 @@ const TLHomeWork = (props) => {
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={() => { stopRecording() }}
+                                // onPress={() => { stopRecording() }}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
