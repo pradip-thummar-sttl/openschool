@@ -122,7 +122,7 @@ class Login extends Component {
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
-        if (!userName || !emailValidate(userName)) {
+        if (!userName.trim() || !emailValidate(userName.trim())) {
             showMessage(MESSAGE.email)
             return false;
         } else if (!password) {
@@ -145,7 +145,7 @@ class Login extends Component {
                 })
 
                 var data = {
-                    Email: userName,
+                    Email: userName.trim(),
                     Password: password,
                     PushToken: PushToken,
                     Device: Device,
