@@ -14,7 +14,8 @@ export default StyleSheet.create({
     },
     left1: {
         flex: 1,
-        paddingTop: hp(2.46)
+        
+       
     },
     middle: {
         flex: 0.48,
@@ -44,13 +45,12 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightGrayPupil,
     },
     pupilName1: {
-        fontSize: 18,
+        fontSize: 15, //18
         alignSelf: 'center',
         marginHorizontal: 15,
     },
     bar: {
         marginHorizontal: hp(2.46),
-        marginVertical: 10,
         height: 1,
         backgroundColor: COLORS.dashBoard
     },

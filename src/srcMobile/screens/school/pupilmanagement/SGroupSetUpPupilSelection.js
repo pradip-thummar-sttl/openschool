@@ -355,7 +355,7 @@ const SGroupSetUpPupilSelection = (props) => {
                             <ActivityIndicator
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.white} />
-                            : <Text style={PAGESTYLE.button1}>Assign Group</Text>}
+                            : <Text style={PAGESTYLE.button1}>Assign Group </Text>}
 
                     </TouchableOpacity>
                 </View>
