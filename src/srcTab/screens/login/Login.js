@@ -113,7 +113,7 @@ class Login extends Component {
     isFieldsValidated = () => {
         const { userName, password, PushToken, Device, OS, AccessedVia, isRemember } = this.state;
 
-        if (!userName || !emailValidate(userName)) {
+        if (!userName.trim() || !emailValidate(userName.trim())) {
             showMessage(MESSAGE.email)
             return false;
         } else if (!password) {
@@ -134,7 +134,7 @@ class Login extends Component {
                 })
 
                 var data = {
-                    Email: userName,
+                    Email: userName.trim(),
                     Password: password,
                     PushToken: PushToken,
                     Device: Device,
@@ -154,7 +154,7 @@ class Login extends Component {
                         if (isRunningFromVirtualDevice) {
                             this.updateUserID('RUNNIN_FROM_VIRTUAL_DEVICE', res.data, data)
                         } else {
-                            console.log('call else method',Platform.OS)
+                            console.log('call else method', Platform.OS)
                             if (Platform.OS === 'android') {
                                 this.getDataFromQuickBlox_Android(userName, password, res.data, data)
                             } else if (Platform.OS === 'ios') {
