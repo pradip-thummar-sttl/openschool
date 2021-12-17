@@ -10,6 +10,9 @@
 #import "CallViewController.h"
 #import "PollViewController.h"
 #import "PollVC.h"
+#import "ToolBar.h"
+#import "CustomButton.h"
+#import "SharingViewController.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -28,6 +31,7 @@
 #import "ReactionTableViewCell.h"
 #import <PubNub/PubNub.h>
 #import "MYED_Open_School-Swift.h"
+
 
 
 
@@ -61,8 +65,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (weak, nonatomic) QBRTCConferenceSession *session;
 
+@property (strong, nonatomic) CustomButton *screenShareEnabled;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *opponentsCollectionView;
 @property (weak, nonatomic) IBOutlet QBToolBar *toolbar;
+@property (strong, nonatomic) ToolBar *ttoolbar;
 @property (strong, nonatomic) NSMutableArray *users;
 
 @property (strong, nonatomic) QBRTCCameraCapture *cameraCapture;
@@ -509,6 +516,26 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //      vc.channels = weakSelf.channels;
 //      vc.ispupil = false;
 //      [weakSelf presentViewController:vc animated:false completion:nil];
+      __typeof(weakSelf)strongSelf = weakSelf;
+      
+      
+      SharingViewController *sharingVC = [[SharingViewController alloc] init];
+      [sharingVC setDidSetupSharingScreenCapture:^(SharingScreenCapture * _Nonnull screenCapture) {
+          if (screenCapture && strongSelf.session.localMediaStream.videoTrack.videoCapture != screenCapture) {
+              strongSelf.session.localMediaStream.videoTrack.videoCapture = screenCapture;
+          }
+          strongSelf.session.localMediaStream.videoTrack.enabled = YES;
+      }];
+      
+      [sharingVC setDidCloseSharingVC:^{
+          strongSelf.session.localMediaStream.videoTrack.videoCapture = strongSelf.cameraCapture;
+          strongSelf.session.localMediaStream.videoTrack.enabled = !strongSelf.muteVideo;
+//          [strongSelf cameraTurnOn:!strongSelf.muteVideo];
+      }];
+
+      [strongSelf presentViewController:sharingVC animated:NO completion:^{
+          strongSelf.screenShareEnabled.pressed = NO;
+      }];
     }];
   }
   
