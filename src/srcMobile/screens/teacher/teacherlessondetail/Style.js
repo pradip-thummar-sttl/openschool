@@ -374,6 +374,18 @@ export default StyleSheet.create({
         marginVertical: 8,
         color: COLORS.greyplaceholder
     },
+    fileRender: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: hp(1.6),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+        
+    },
+    RenderDownload:{width:wp(12), height:hp(5), justifyContent:'center', padding:hp(1), alignItems:'flex-end'},
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -386,12 +398,11 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(0.8),
         marginBottom: hp(1.04),
+        
     },
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
-        top: hp(0.2),
-        right: hp(1),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,

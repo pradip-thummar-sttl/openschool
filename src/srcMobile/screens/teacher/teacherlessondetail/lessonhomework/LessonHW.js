@@ -537,54 +537,43 @@ const TLHomeWork = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
+
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={PAGESTYLE.requireText}>Learning material</Text>
                             <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                         </View>
+
                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                            {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
                             <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                         </TouchableOpacity>
+
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             {
-                                materialArr.length != 0 ? materialArr.map((item, index) => {
+                                materialArr.length != 0 && materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => {
-                                            item.uri ? removeObject(index, item) : setLoader(true); setMateIndex(index); Download(item, (res) => {
-                                                setLoader(false)
-                                                setMateIndex(-1)
-                                            })
-                                        }} style={PAGESTYLE.fileGrp}>
-                                            <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
-                                            {item.uri ?
-                                                <View>
-                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                </View>
-                                                :
-                                                <View>
-                                                    {(isMatLoading && index == mateIndex) ?
-                                                        <ActivityIndicator
-                                                            style={{ ...PAGESTYLE.downloadIcon }}
-                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                            color={COLORS.blueBorder} />
-                                                        :
-                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                    }
-                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
-                                                </View>
+                                        <View style={PAGESTYLE.fileRender}>
+                                            <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
+                                            {
+                                                item.uri ?
+                                                    <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                        <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    <TouchableOpacity onPress={() => { setMateIndex(index); Download(item, (res) => { setLoader(false); setMateIndex(-1) }) }} style={PAGESTYLE.RenderDownload}>
+                                                        {(isMatLoading && index == mateIndex) ?
+                                                            <ActivityIndicator style={{ ...PAGESTYLE.downloadIcon }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.blueBorder} />
+                                                            :
+                                                            <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                        }
+                                                    </TouchableOpacity>
                                             }
-                                        </TouchableOpacity>
+                                        </View>
                                     )
-                                }) : null
+                                })
                             }
                         </View>
-                        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                            <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                            </View>
-                        </ScrollView> */}
+
+
                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}

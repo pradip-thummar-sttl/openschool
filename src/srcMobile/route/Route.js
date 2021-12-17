@@ -137,7 +137,6 @@ function ScreenStack() {
                 <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
                 <Stack.Screen name="CreateNewEvent" component={CreateNewEvent} />
                 <Stack.Screen name="CreateNewEventPupil" component={CreateNewEventPupil} />
-                {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
                 <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
                 <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
                 <Stack.Screen name="TLDetail" component={TLDetail} />
@@ -145,7 +144,6 @@ function ScreenStack() {
                 <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
                 <Stack.Screen name="PupilHomeWorkSubmitted" component={PupilHomeWorkSubmitted} />
                 <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
-                {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
                 <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
                 <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
                 <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
