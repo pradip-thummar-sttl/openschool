@@ -24,7 +24,7 @@ export default StyleSheet.create({
         overflow: 'hidden',
         height: hp(65),
     },
-    toggleBoxGrpWrap:{
+    toggleBoxGrpWrap: {
         // marginTop: hp(3),        
     },
     commonWidth: {
@@ -53,13 +53,13 @@ export default StyleSheet.create({
         paddingTop: hp(0),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
-        
+
     },
     lessonPlanTop: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: hp(3.90),
-        paddingRight:hp(2),
+        paddingRight: hp(2),
     },
     lessonPlanTab: {
         flexDirection: 'row',
@@ -93,7 +93,7 @@ export default StyleSheet.create({
     },
     subjectDateTime: {
         alignItems: 'flex-start',
-        width:'100%',
+        width: '100%',
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -116,13 +116,13 @@ export default StyleSheet.create({
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         alignSelf: 'center',
     },
     calIconHomeWork: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         alignSelf: 'center',
     },
     calIconNoInput: {
@@ -132,7 +132,7 @@ export default StyleSheet.create({
     timeIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
-        marginRight:hp(1.04),
+        marginRight: hp(1.04),
         alignSelf: 'center',
     },
     timeIconNoInput: {
@@ -168,9 +168,9 @@ export default StyleSheet.create({
     },
     teacherDetailLeft: {
         width: '67.5%',
-         paddingRight: 32,
-         paddingTop: hp(2.5),
-         paddingLeft:30,
+        paddingRight: 32,
+        paddingTop: hp(2.5),
+        paddingLeft: 30,
     },
     requireText: {
         fontSize: hp(2.08),
@@ -206,10 +206,10 @@ export default StyleSheet.create({
     },
     requirementofClass: {
         marginTop: hp(4.68),
-        
+
     },
-    widthHw:{
-        width:'100%',
+    widthHw: {
+        width: '100%',
     },
     videoLinkBlock: {
         width: hp(38),
@@ -357,7 +357,7 @@ export default StyleSheet.create({
         lineHeight: hp(3.60),
     },
     rightSideBar: {
-        width:'32.5%',
+        width: '32.5%',
         justifyContent: 'flex-start',
         paddingLeft: hp(3.125),
         paddingRight: hp(5.33),
@@ -366,12 +366,12 @@ export default StyleSheet.create({
         paddingTop: hp(2.5),
     },
     borderNone: {
-        borderLeftWidth:0,
+        borderLeftWidth: 0,
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
-        width:hp(33.07),
-        height:hp(45.05),
+        width: hp(33.07),
+        height: hp(45.05),
         borderRadius: 10,
         borderColor: COLORS.blueBorder,
         borderWidth: 1,
@@ -388,15 +388,12 @@ export default StyleSheet.create({
         borderRadius: 6,
         marginBottom: hp(0.65),
     },
-    downloadIcon: {
-        width: hp(2),
-        resizeMode: 'contain',
-    },
-    fileName: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.85),
-        lineHeight: hp(3.60),
-    },
+
+    fileRender: { flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal: hp(0.5),borderWidth: 1,borderColor: COLORS.videoLinkBorder,borderRadius: hp(0.8),marginBottom: hp(1.04),},
+    fileName: { width: wp(19.5), fontFamily: FONTS.fontRegular, fontSize: hp(1.85), lineHeight: hp(3.60), backgroundColor: 'pink' },
+    RenderDownload: { width: wp(4), height: hp(5), justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' },
+    downloadIcon: { width: hp(2), resizeMode: 'contain'},
+
     containerWrap: {
         justifyContent: 'space-between',
         flexDirection: 'row',
@@ -404,13 +401,13 @@ export default StyleSheet.create({
     grpThumbVideo: {
         width: 250,
         height: 120,
-        marginVertical:hp(2),
+        marginVertical: hp(2),
         resizeMode: 'contain',
     },
     subLineTitle: {
         marginTop: 5,
         zIndex: 9,
-        paddingRight:hp(1.5),
+        paddingRight: hp(1.5),
     },
     closeIconSmall: {
         width: hp(2.8),
@@ -420,7 +417,7 @@ export default StyleSheet.create({
     addIcon: {
         width: hp(1.56),
         resizeMode: 'contain',
-        marginLeft:hp(1.56),
+        marginLeft: hp(1.56),
     },
     addItem: {
         flexDirection: 'row',
@@ -652,7 +649,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         justifyContent: 'center',
         height: '100%',
-        
+
     },
     dateTimetextdummy2: {
         fontSize: 14,
@@ -671,7 +668,7 @@ export default StyleSheet.create({
     blockSpaceBottom: {
         marginBottom: hp(2.6),
         marginTop: hp(4),
-        width:'100%'
+        width: '100%'
     },
     dueDateWrap: {
         borderRightWidth: 2,
@@ -710,7 +707,7 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: hp(3.60),
         lineHeight: hp(3.60),
-        marginTop:hp(3.5),
+        marginTop: hp(3.5),
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -784,7 +781,7 @@ export default StyleSheet.create({
         borderRadius: hp(1.95),
         height: hp(8.85),
         borderRadius: hp(0.6),
-        marginBottom:hp(0.78),
+        marginBottom: hp(0.78),
     },
     pupilProfile: {
         width: '15%',
@@ -911,126 +908,126 @@ export default StyleSheet.create({
         left: hp(3.5),
     },
     userStampName: {
-        paddingLeft:hp(4.0),
+        paddingLeft: hp(4.0),
     },
-    uploadBoard:{
-        width:hp(33.07),
-        height:hp(45.05),
-        resizeMode:'contain',
+    uploadBoard: {
+        width: hp(33.07),
+        height: hp(45.05),
+        resizeMode: 'contain',
     },
     containerWrapTop: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderWidth:1,
+        borderWidth: 1,
         alignItems: 'center',
-        borderColor:COLORS.lightGrayPupil,
-        borderRadius:hp(0.9),
-        marginBottom:hp(2),
-        padding:hp(1),
+        borderColor: COLORS.lightGrayPupil,
+        borderRadius: hp(0.9),
+        marginBottom: hp(2),
+        padding: hp(1),
         top: hp(2),
         shadowColor: COLORS.lightGrayPupil,
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.8,
         shadowRadius: 1,
-        marginLeft:hp(3.25),
-        marginRight:hp(3.25),
+        marginLeft: hp(3.25),
+        marginRight: hp(3.25),
     },
-    userThumb:{
-        width:hp(6.25), 
-        height:hp(6.25), 
-        backgroundColor: COLORS.lightGrayPupil,  
-        borderRadius: hp(5), 
-        marginRight:hp(1.30),
+    userThumb: {
+        width: hp(6.25),
+        height: hp(6.25),
+        backgroundColor: COLORS.lightGrayPupil,
+        borderRadius: hp(5),
+        marginRight: hp(1.30),
     },
-    userLeft:{
-       width:hp(64.19),
-       flexDirection: 'row',
+    userLeft: {
+        width: hp(64.19),
+        flexDirection: 'row',
     },
-    userRight:{
-        width:hp(53.12),
+    userRight: {
+        width: hp(53.12),
         flexDirection: 'row',
         right: 0,
         position: 'absolute',
     },
-    userTopName:{
+    userTopName: {
         flexDirection: 'row',
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
     },
-    userTopGroup:{
+    userTopGroup: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    dateTitle:{
+    dateTitle: {
         flexDirection: 'row',
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(1.56),
-        color:COLORS.menuLightFonts,
-        textTransform:'uppercase',
+        fontSize: hp(1.56),
+        color: COLORS.menuLightFonts,
+        textTransform: 'uppercase',
     },
-    dateText:{
+    dateText: {
         flexDirection: 'row',
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
     },
-    markedIcon:{
+    markedIcon: {
         width: 60,
         height: 60,
-        resizeMode:'contain',
+        resizeMode: 'contain',
     },
-    markedIcon1:{
+    markedIcon1: {
         width: 30,
         height: 30,
-        resizeMode:'contain',
+        resizeMode: 'contain',
         marginRight: 10,
     },
     uploaded: {
-        alignSelf: 'center', 
-        marginVertical: 8, 
+        alignSelf: 'center',
+        marginVertical: 8,
         color: COLORS.greyplaceholder
     },
-    markedLabel:{
+    markedLabel: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginRight:hp(9.63),
+        marginRight: hp(9.63),
         alignItems: 'center',
     },
-    markedText:{
+    markedText: {
         fontFamily: FONTS.fontRegular,
-        fontSize:hp(1.82),
-        color:COLORS.darkGray,
-        lineHeight:hp(3.2),
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        lineHeight: hp(3.2),
     },
-    dateNameBlock:{
-        marginRight:hp(2.21),
+    dateNameBlock: {
+        marginRight: hp(2.21),
     },
-    feedbackBlock:{
-        width:hp(70.31),
+    feedbackBlock: {
+        width: hp(70.31),
         marginTop: hp(2.5),
-        marginLeft:hp(4.03),
+        marginLeft: hp(4.03),
     },
-    ratingBlock:{
-        width:hp(43.35),
-        marginLeft:hp(1.95),
+    ratingBlock: {
+        width: hp(43.35),
+        marginLeft: hp(1.95),
         marginTop: hp(2.5),
-        marginRight:hp(3.9),
+        marginRight: hp(3.9),
     },
-    lessonTitleBold:{
+    lessonTitleBold: {
         fontFamily: FONTS.fontSemiBold,
-        fontSize:hp(2.08),
-        color:COLORS.darkGray,
+        fontSize: hp(2.08),
+        color: COLORS.darkGray,
     },
-    achivementBox:{
+    achivementBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
-        width :hp(43.48),
-        alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:hp(1.8),
+        width: hp(43.48),
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.8),
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
@@ -1039,179 +1036,179 @@ export default StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 1,
     },
-    starSelectedText:{
+    starSelectedText: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.white,
+        color: COLORS.white,
         fontSize: hp(1.82),
         lineHeight: hp(5.1),
     },
-    starSelected:{
-        width:hp(4.94),
-        height:hp(4.68),
+    starSelected: {
+        width: hp(4.94),
+        height: hp(4.68),
         resizeMode: 'contain',
-        alignItems:'center',
+        alignItems: 'center',
         alignSelf: 'center',
-        marginBottom:hp(1.5),
+        marginBottom: hp(1.5),
     },
-    rewardStarMark:{
+    rewardStarMark: {
         justifyContent: 'space-around',
-        width:'100%',
+        width: '100%',
         flexDirection: 'row',
-        paddingTop:hp(3.05),
-        paddingBottom:hp(3.05),
+        paddingTop: hp(3.05),
+        paddingBottom: hp(3.05),
     },
-    centerText:{
-        alignItems:'center',
+    centerText: {
+        alignItems: 'center',
     },
-    starText:{
+    starText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
     },
-    ratingTitle:{
+    ratingTitle: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
-        color:COLORS.menuLightFonts,
-        paddingBottom:hp(1.5),
+        color: COLORS.menuLightFonts,
+        paddingBottom: hp(1.5),
     },
-    separater:{
-        borderLeftWidth:1,
-        borderLeftColor:COLORS.dashboardBorder,
-        borderRightWidth:1,
-        borderRightColor:COLORS.dashboardBorder,
-        width:hp(14.32),
+    separater: {
+        borderLeftWidth: 1,
+        borderLeftColor: COLORS.dashboardBorder,
+        borderRightWidth: 1,
+        borderRightColor: COLORS.dashboardBorder,
+        width: hp(14.32),
     },
-    centerStar:{
-        alignItems:'center',
+    centerStar: {
+        alignItems: 'center',
     },
-    videoTitle:{
-        fontFamily:FONTS.fontSemiBold,
-        fontSize:hp(2.08),
+    videoTitle: {
+        fontFamily: FONTS.fontSemiBold,
+        fontSize: hp(2.08),
         color: COLORS.darkGray,
         marginTop: hp(2),
     },
-    videoWrap:{
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        flexWrap:'wrap',
-    },  
-    videoThumb:{
-        position:'relative',
-        flexDirection:'row',
-        marginRight:hp(1.56),
+    videoWrap: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        flexWrap: 'wrap',
     },
-    videoThumbnail:{        
-        width:hp(26.17),
-        height:hp(17.83),
-        resizeMode:'contain',
+    videoThumb: {
+        position: 'relative',
+        flexDirection: 'row',
+        marginRight: hp(1.56),
     },
-    videoPlay:{
-        width:hp(5.20),
-        resizeMode:'contain',
-        position:'absolute',
-        top:hp(5.5),
-        left:hp(11.32),
+    videoThumbnail: {
+        width: hp(26.17),
+        height: hp(17.83),
+        resizeMode: 'contain',
     },
-    videoSelected:{
-        width:hp(2.9),
-        resizeMode:'contain',
-        position:'absolute',
-        bottom:hp(0.2),
-        right:hp(1),
+    videoPlay: {
+        width: hp(5.20),
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: hp(5.5),
+        left: hp(11.32),
     },
-    videoSubTitle:{
-        fontFamily:FONTS.fontRegular,
-        fontSize:hp(1.9),
+    videoSelected: {
+        width: hp(2.9),
+        resizeMode: 'contain',
+        position: 'absolute',
+        bottom: hp(0.2),
+        right: hp(1),
+    },
+    videoSubTitle: {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.9),
         color: COLORS.darkGray,
-        flexDirection:'row',
-        lineHeight:hp(2.6),
-        paddingTop:hp(1.5),
-        paddingBottom:hp(1.5),
-        width:hp(26.17),
-        flexWrap:'wrap',
+        flexDirection: 'row',
+        lineHeight: hp(2.6),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        width: hp(26.17),
+        flexWrap: 'wrap',
         marginBottom: hp(2),
     },
-    spaceTop:{
-        marginTop:hp(3.5),
+    spaceTop: {
+        marginTop: hp(3.5),
     },
-    rightSpaceNone:{
-        marginRight:hp(0),
+    rightSpaceNone: {
+        marginRight: hp(0),
     },
-    alignRow:{
-        flexDirection:'row',
+    alignRow: {
+        flexDirection: 'row',
         alignItems: 'center',
         marginBottom: hp(1),
         marginTop: hp(0.5),
     },
-    closeNotificationbar:{
+    closeNotificationbar: {
         width: hp(1),
         height: hp(1),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(2),
         top: hp(0.8),
-    },    
-    borderRight:{
-        borderRightWidth:1,
-        borderRightColor:COLORS.bottomProfileLightBorder,
     },
-    dropHolderImg:{
+    borderRight: {
+        borderRightWidth: 1,
+        borderRightColor: COLORS.bottomProfileLightBorder,
+    },
+    dropHolderImg: {
         width: wp(26.68),
         resizeMode: 'contain',
         alignItems: 'center',
     },
-    thumbVideo:{
+    thumbVideo: {
         // marginTop:hp(6.38),
         // marginBottom:hp(2.99),
     },
-    topSpaceRecording:{
-        marginTop:hp(1.401),
+    topSpaceRecording: {
+        marginTop: hp(1.401),
     },
-    dropDownArrow:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.4),
-        top:hp(2.1),
+    dropDownArrow: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.4),
+        top: hp(2.1),
     },
-    dropDownArrowdatetime:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.6),
+    dropDownArrowdatetime: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
         alignSelf: 'center',
     },
-    dropDownArrowdatetimehomeWork:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.6),
+    dropDownArrowdatetimehomeWork: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
         alignSelf: 'center'
     },
-    plainBg:{
+    plainBg: {
         paddingLeft: hp(3.5),
         paddingRight: hp(3.5),
         paddingBottom: hp(2),
         paddingTop: hp(0),
         backgroundColor: COLORS.backgroundColorCommon,
     },
-    commonInputFull:{
-        width:'100%',
+    commonInputFull: {
+        width: '100%',
     },
-    lessonDesc:{
+    lessonDesc: {
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontRegular,
     },
-    timeSpace:{
-        marginLeft:hp(12.83),
+    timeSpace: {
+        marginLeft: hp(12.83),
     },
-    timeSpace1:{
-        marginLeft:hp(14.83),
+    timeSpace1: {
+        marginLeft: hp(14.83),
     },
-    leftSpace:{
-        paddingLeft:hp(3.5),
+    leftSpace: {
+        paddingLeft: hp(3.5),
     },
     userIcon1Parent: {
         position: 'absolute',
@@ -1233,8 +1230,8 @@ export default StyleSheet.create({
         right: 0,
         top: 0,
         zIndex: hp(1.30)
-      },
-      borderList: {
+    },
+    borderList: {
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: hp(0.26),
     },
@@ -1343,10 +1340,10 @@ export default StyleSheet.create({
         height: 15,
         left: 3,
         resizeMode: 'contain',
-        
+
     },
     checkMarkTool: {
-        marginLeft:hp(0.2),
+        marginLeft: hp(0.2),
     },
     filterListText: {
         color: COLORS.darkGray,
@@ -1371,10 +1368,10 @@ export default StyleSheet.create({
         height: hp(5.20),
         fontSize: hp(1.82),
     },
-    downloaBtn:{
-        alignItems:'center',
+    downloaBtn: {
+        alignItems: 'center',
         justifyContent: 'center',
-        width:hp(5),
+        width: hp(5),
     },
     checkBoxGroup: {
         flexDirection: 'row',
@@ -1393,7 +1390,7 @@ export default StyleSheet.create({
     closeIcon: {
         resizeMode: 'contain',
     },
-// recording name
+    // recording name
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(2),
@@ -1439,7 +1436,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         // flexDirection: 'row',
         // marginTop:hp(2),
-        justifyContent:'center',
-        marginVertical:hp(2)
+        justifyContent: 'center',
+        marginVertical: hp(2)
     },
 });

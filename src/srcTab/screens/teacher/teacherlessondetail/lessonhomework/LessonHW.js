@@ -176,7 +176,6 @@ const TLHomeWork = (props) => {
         var array = [...materialArr];
         array.splice(index1, 1);
         setMaterialArr(array)
-        console.log('hello material', array)
     }
 
     const onCheckList = (index) => {
@@ -423,9 +422,7 @@ const TLHomeWork = (props) => {
             <View style={[PAGESTYLE.blockSpaceBottom]}>
                 {/* <View style={PAGESTYLE.hrCommon}></View> */}
                 {
-                    itemCheckList.length == 0 ?
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>No item added</Text>
-                        : null
+                    itemCheckList.length == 0 && <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>No item added</Text>
                 }
                 <FlatList
                     data={itemCheckList}
@@ -444,7 +441,6 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            {/* <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text> */}
                             <TextInput
                                 style={PAGESTYLE.checkBoxLabelText}
                                 onChangeText={text => { editNewText(text, index) }}
@@ -453,21 +449,9 @@ const TLHomeWork = (props) => {
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
                                 <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2)} width={hp(2)} />
                             </TouchableOpacity>
                         </View>
-                        // <View style={{ margin: 8, }}>
-                        //     <Text style={{ fontSize: 22, paddingRight: 50 }}>{item.ItemName}</Text>
-                        //     <TouchableOpacity
-                        //         style={PAGESTYLE.userIcon1Parent}
-                        //         activeOpacity={opacity}
-                        //         onPress={() => { removeCheckListItem(index) }}>
-                        //         <Image
-                        //             style={PAGESTYLE.userIcon1}
-                        //             source={Images.PopupCloseIcon} />
-                        //     </TouchableOpacity>
-                        // </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
                 />
@@ -487,10 +471,7 @@ const TLHomeWork = (props) => {
                         <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                </TouchableOpacity> */}
+
             </View>
         );
     };
@@ -566,14 +547,12 @@ const TLHomeWork = (props) => {
                                         <View style={PAGESTYLE.dueDateWrap}>
                                             <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                         </View>
-                                        {/* <Image style={PAGESTYLE.calIconHomeWork} source={Images.CalenderIconSmall} /> */}
                                         <Calender style={PAGESTYLE.calIconHomeWork} height={hp(1.76)} width={hp(1.76)} />
                                         <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
                                             <View>
                                                 <Text style={PAGESTYLE.dateTimetextdummy2}>{selectDate}</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        {/* <Image style={PAGESTYLE.dropDownArrowdatetimehomeWork} source={Images.DropArrow} /> */}
                                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetimehomeWork} height={hp(1.51)} width={hp(1.51)} />
                                     </View>
                                 </View>
@@ -588,16 +567,7 @@ const TLHomeWork = (props) => {
                                     onChangeText={(text) => { console.log('text', text); setDesc(text) }}
                                 />
                             </View>
-                            {/* <View style={PAGESTYLE.videoRecording}>
-                        <View style={PAGESTYLE.recordLinkBlock}>
-                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                            <Popupaddrecording />
-                        </View>
-                    </View> */}
-                            {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                        </TouchableOpacity> */}
+
                             <Popupaddrecording
                                 recordingArr={recordingArr}
                                 isVisible={isAddRecording}
@@ -615,73 +585,12 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                                 <View style={PAGESTYLE.checkBoxGroup}>
                                     {
-                                        // checkItem.map((item, index) => {
-                                        //     return (
-                                        // <View style={PAGESTYLE.checkBoxLabelLine}>
-                                        //     <CheckBox
-                                        //         style={PAGESTYLE.checkMark}
-                                        //         value={item.IsCheck}
-                                        //         boxType={'square'}
-                                        // tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                        //         onCheckColor={COLORS.white}
-                                        //         onFillColor={COLORS.dashboardPupilBlue}
-                                        //         onTintColor={COLORS.dashboardPupilBlue}
-                                        //         tintColor={COLORS.dashboardPupilBlue}
-                                        //         onChange={() => onCheckList(index)}
-
-                                        //     />
-                                        //     <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
-                                        // </View>
-                                        //     )
-                                        // })
-
                                         itemCheckListView()
                                     }
 
-                                    {/* <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={PAGESTYLE.checkMark}
-                                    value={false}
-                                    boxType={'square'}
-                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                    onCheckColor={COLORS.white}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Write a list of all the everyday items that come from the Amazon Rainforest</Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={PAGESTYLE.checkMark}
-                                    value={false}
-                                    boxType={'square'}
-                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                    onCheckColor={COLORS.white}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Write a short story about where those items come from in the the forest and what they mean to you. </Text>
-                            </View>
-                            <View style={PAGESTYLE.checkBoxLabelLine}>
-                                <CheckBox
-                                    style={PAGESTYLE.checkMark}
-                                    value={false}
-                                    boxType={'square'}
-                                    tintColors={{true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue}}
-                                    onCheckColor={COLORS.white}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>Take a photo of your work and upload here</Text>
-                            </View> */}
+
                                 </View>
-                                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                            <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                            <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                        </TouchableOpacity> */}
+
                             </View>
                         </View>
                         <View style={PAGESTYLE.rightSideBar}>
@@ -689,53 +598,39 @@ const TLHomeWork = (props) => {
                                 <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                 <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                             </View>
-                            {/* <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                    </View> */}
+
 
                             <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
                                 <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
                                 <Text style={{ position: 'absolute', bottom: hp(4.55), color: COLORS.menuLightFonts, fontFamily: FONTS.fontSemiBold, fontSize: hp(1.82), }}>Upload Material</Text>
                             </TouchableOpacity>
 
                             {
-                                materialArr.length != 0 ? materialArr.map((item, index) => {
+                                materialArr.length != 0 && materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => {
-                                            item.uri ? removeObject(index, item) : setLoader(true); setMateIndex(index); Download(item, (res) => {
-                                                setLoader(false)
-                                                setMateIndex(-1)
-                                            })
-                                        }} style={PAGESTYLE.fileGrp}>
-                                            <Text style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
-                                            {item.uri ?
-                                                <View >
-                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                </View>
-                                                :
-                                                <View >
-                                                    {(isMatLoading && index == mateIndex) ?
-                                                        <ActivityIndicator
-                                                            style={{ ...PAGESTYLE.downloadIcon }}
-                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                            color={COLORS.blueBorder} />
-                                                        :
-                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                    }
-                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
-                                                </View>
+                                        <View style={PAGESTYLE.fileRender}>
+                                            <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.name ? item.name : item.originalname}</Text>
+                                            {
+                                                item.uri ?
+                                                    <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                        <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    <TouchableOpacity onPress={() => { setMateIndex(index); setLoader(true); Download(item, (res) => { setLoader(false); setMateIndex(-1) }) }}
+                                                        style={PAGESTYLE.RenderDownload}>
+                                                        {
+                                                            (isMatLoading && index == mateIndex) ?
+                                                                <ActivityIndicator style={{ ...PAGESTYLE.downloadIcon }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.blueBorder} />
+                                                                :
+                                                                <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                        }
+                                                    </TouchableOpacity>
                                             }
-                                        </TouchableOpacity>
+                                        </View>
                                     )
-                                }) : null
+                                })
                             }
 
-                            {/* <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                            </View> */}
                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                 <TouchableOpacity
                                     style={PAGESTYLE.buttonGrp}
