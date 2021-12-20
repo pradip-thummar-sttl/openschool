@@ -880,11 +880,7 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+           
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <HeaderAddNew
                     isLoading={isLoading}
@@ -1009,18 +1005,18 @@ const TLDetailAdd = (props) => {
                                 </TouchableOpacity>
 
                                 {
-                                    materialArr.length != 0 ? materialArr.map((item, index) => {
+                                    materialArr.length != 0 && materialArr.map((item, index) => {
                                         return (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                            <View style={PAGESTYLE.fileRender}>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name}</Text>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </TouchableOpacity>
                                             </View>
                                         )
-                                    }) : null
+                                    })
                                 }
+
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}

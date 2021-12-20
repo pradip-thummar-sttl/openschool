@@ -910,11 +910,7 @@ const TLDetailEdit = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+          
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <HeaderUpdate
                     onAlertPress={() => props.navigation.openDrawer()}
@@ -1045,51 +1041,19 @@ const TLDetailEdit = (props) => {
                                     </TouchableOpacity>
                                 </View>
                                 {
-                                    materialArr.length != 0 ? materialArr.map((item, index) => {
+                                      materialArr.length != 0 && materialArr.map((item, index) => {
                                         return (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(75) }]}>{item.originalname}</Text>
-                                                {item.uri ?
-                                                    <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                        {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                        <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                    </TouchableOpacity>
-                                                    :
-                                                    null
-                                                }
+                                            <View style={PAGESTYLE.fileRender}>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name}</Text>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                </TouchableOpacity>
                                             </View>
                                         )
-                                    }) : null
+                                    })
+                                   
                                 }
 
-                                {/* <View style={PAGESTYLE.videoScroll}>
-                                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </ScrollView>
-                                </View> */}
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}
@@ -1125,32 +1089,7 @@ const TLDetailEdit = (props) => {
                                     :
                                     null
                                 }
-                                {/* <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                                <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                                <View style={PAGESTYLE.videoLinkBlock}>
-                                    <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                                    <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                            </View> */}
+                              
                             </View>
                         </View>
                     </ScrollView>

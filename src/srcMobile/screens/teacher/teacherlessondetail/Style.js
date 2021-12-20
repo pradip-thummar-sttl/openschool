@@ -171,9 +171,10 @@ export default StyleSheet.create({
     requireText: {
         fontSize: hp(2.08),
         fontFamily: FONTS.fontSemiBold,
-        lineHeight: hp(2.86),
+        lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: hp(2.6),
+        marginBottom: hp(1.3),
+      
     },
     lessonPoints: {
         flexDirection: 'row',
@@ -199,7 +200,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(3.68),
+     marginVertical  : 10
     },
     videoLinkBlock: {
         width: '100%',
@@ -295,18 +296,24 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        alignItems: 'center',
-        paddingBottom: hp(2.2),
-        marginBottom: hp(2.2),
+        textAlignVertical : "bottom",
+        justifyContent: 'flex-start',
+        alignItems : 'center',
+        // paddingBottom: hp(1.1),
+        // marginBottom: hp(1.2),
+        paddingVertical : 5,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
     checkBoxLabelText: {
-        lineHeight: hp(2.82),
-        fontSize: hp(1.85),
-        top: hp(0.5),
+        lineHeight: hp(3.1),
+        fontSize: hp(1.87),
+      
+        // top: hp(0.8),
+        textAlignVertical: "bottom",
+        
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.4),
+        paddingLeft: hp(1.8),
         paddingRight: hp(2),
         width: '90%',
     },
@@ -374,6 +381,18 @@ export default StyleSheet.create({
         marginVertical: 8,
         color: COLORS.greyplaceholder
     },
+    fileRender: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: hp(1.6),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+        
+    },
+    RenderDownload:{width:wp(12), height:hp(5), justifyContent:'center', padding:hp(1), alignItems:'flex-end'},
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -386,12 +405,11 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(0.8),
         marginBottom: hp(1.04),
+        
     },
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
-        top: hp(0.2),
-        right: hp(1),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -619,9 +637,7 @@ export default StyleSheet.create({
         width: '47.2%',
         marginRight: hp(2.1),
     },
-    blockSpaceBottom: {
-        marginBottom: hp(2.6),
-    },
+ 
     dueDateWrap: {
         borderRightWidth: 2,
         borderRightColor: COLORS.commonBorderColor,
@@ -1087,7 +1103,8 @@ export default StyleSheet.create({
         width: 20,
         height: 20,
         left: 2,
-        top: hp(0.52),
+        // textAlignVertical : "bottom",
+        // top: hp(0.52),
     },
     borderRight: {
         borderRightWidth: 1,
@@ -1284,7 +1301,7 @@ export default StyleSheet.create({
         overflow: 'hidden',
         fontFamily: FONTS.fontRegular,
         position: 'relative',
-        marginTop:hp(5)
+        marginTop: hp(5)
     },
     popupContent: {
         width: '100%',
@@ -1321,7 +1338,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         // flexDirection: 'row',
         // marginTop:hp(2),
-        justifyContent:'center',
-        marginVertical:hp(2)
+        justifyContent: 'center',
+        marginVertical: hp(2)
     },
 });

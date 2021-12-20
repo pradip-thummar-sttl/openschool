@@ -393,6 +393,7 @@ class PupilRegister extends Component {
                                         </View>
                                     </View>
                                 </View>
+
                                 <View style={styles.loginButtonView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
@@ -401,6 +402,14 @@ class PupilRegister extends Component {
                                             style={{ ...STYLE.fullWidthPrimaryButton, textTransform: 'uppercase', }}>Create my account</Text>
                                     </TouchableOpacity>
                                 </View>
+
+                                <View style={[styles.loginButtonView,{marginTop:20}]}>
+                                    <TouchableOpacity style={STYLE.loginButtonView}  activeOpacity={opacity} onPress={() => { this.isFieldsValidated() }}>
+                                        <Text style={STYLE.loginButtonText}>Create my account</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+
                                 <View style={styles.getStarted}>
                                     <Text style={styles.getStartedText}> Already Registered?</Text>
                                     <TouchableOpacity activeOpacity={opacity}

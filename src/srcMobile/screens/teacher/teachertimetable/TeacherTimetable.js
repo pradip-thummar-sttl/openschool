@@ -284,26 +284,7 @@ const TeacherTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                {/* <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
-                                    horizontal={true}>
-
-                                    {time.map((data, timneKey) => (
-                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth, }}>
-                                            <Text style={{ ...PAGESTYLE.lable}}>{data}</Text>
-
-                                            <View style={PAGESTYLE.timeLabel}>
-                                                {days.map((data, dayKey) => (
-                                                    dayKey != 0 ?
-                                                        setData(dayKey, timneKey)
-                                                        :
-                                                        null
-
-                                                ))}
-                                            </View>
-                                        </View>
-                                    ))}
-                                </ScrollView> */}
-
+                              
                                 <FlatList
                                     style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
                                     horizontal={true}
@@ -314,15 +295,8 @@ const TeacherTimeTable = (props) => {
                                     renderItem={({ item, index }) => (
                                         <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
                                             <Text style={{ ...PAGESTYLE.lable, }}>{item}</Text>
-
                                             <View style={PAGESTYLE.timeLabel}>
-                                                {days.map((data, dayKey) => (
-                                                    dayKey != 0 ?
-                                                        setData(dayKey, index)
-                                                        :
-                                                        null
-
-                                                ))}
+                                                {days.map((data, dayKey) => ( dayKey != 0 && setData(dayKey, index)))}
                                             </View>
                                         </View>
                                     )}
@@ -330,9 +304,7 @@ const TeacherTimeTable = (props) => {
 
                             </View>
                             :
-                            // <View style={{ height: 100, justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            // </View>
+                        
                             <ScrollView>
                                 <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                             </ScrollView>

@@ -390,13 +390,13 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.requirementofClass}>
                                         {/* <Text style={PAGESTYLE.requireText}>Create Checklist</Text> */}
-                                        <View style={PAGESTYLE.checkBoxGroup}>
+                                       
                                             <FlatList
                                                 data={data.CheckList}
                                                 renderItem={({ item }) => (
-                                                    <View style={PAGESTYLE.checkBoxLabelLine}>
+                                                    <View style={[PAGESTYLE.checkBoxLabelLine, {paddingVertical: hp(1.6)}]}>
                                                         <CheckBox
-                                                            style={PAGESTYLE.checkMark}
+                                                            style={[PAGESTYLE.checkMark, ]}
                                                             value={item.IsCheck}
                                                             disabled
                                                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -406,12 +406,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             onTintColor={COLORS.dashboardPupilBlue}
                                                             tintColor={COLORS.dashboardPupilBlue}
                                                         />
-                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(90) }]}>{item.ItemName}</Text>
+                                                        <View style={{justifyContent : 'center',alignItems : 'center'}}>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(90)}]}>{item.ItemName}</Text>
+                                                        </View>
                                                     </View>
                                                 )}
                                             // style={{ height: 200 }} 
                                             />
-                                        </View>
+                                        
                                     </View>
                                 </View>
                                 <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>

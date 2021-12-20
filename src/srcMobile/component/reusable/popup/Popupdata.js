@@ -360,11 +360,11 @@ const Popupdata = (props) => {
                                                 style={styles.editButton}
                                                 activeOpacity={opacity}
                                                 onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
-                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, }}>Edit Lesson</Text>
+                                                <Text style={styles.btnEditSty}>Edit Lesson</Text>
                                             </TouchableOpacity>
                                         </View>
                                         :
-                                        <View style={STYLE.commonButtonBordered1}></View>
+                                        <View style={STYLE.commonButtonBordered1}/>
                                     }
                                     <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                         <TouchableOpacity
@@ -373,11 +373,9 @@ const Popupdata = (props) => {
                                             onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
                                             {
                                                 isLoading ?
-                                                    <ActivityIndicator
-                                                        style={{ ...styles.buttonGrp, }}
-                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                        color={COLORS.white} /> :
-                                                    <Text style={[styles.bottomDrwerButtonGreen]}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
+                                                    <ActivityIndicator  style={{ ...styles.buttonGrp, }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} /> 
+                                                    :
+                                                    <Text style={styles.bottomDrwerButtonGreen}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
                                             }
                                         </TouchableOpacity>
                                     </View>
@@ -605,6 +603,10 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
+    
+    btnEditSty:{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, fontSize: hp(1.99),
+    fontWeight: '800',},
+
     bottomDrwerButtonGreen: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
@@ -613,8 +615,6 @@ const styles = StyleSheet.create({
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: Platform.OS == 'android' ? hp(4.5) : hp(3.94),
-        paddingRight: Platform.OS == 'android' ? hp(4.5) : hp(3.94),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
