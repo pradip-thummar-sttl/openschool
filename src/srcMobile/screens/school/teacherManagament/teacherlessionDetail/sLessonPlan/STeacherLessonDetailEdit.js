@@ -101,6 +101,10 @@ const STLDetailEdit = (props) => {
 
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -319,40 +323,40 @@ const STLDetailEdit = (props) => {
     }
     const stopRecording = async () => {
         if (recordingName.length > 0) {
-         
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            // let obj = {
-            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-            //     originalname: 'MY_RECORDING.mp4',
-            //     fileName: 'MY_RECORDING.mp4',
-            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            // }
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: `${recordingName}.mp4`,
-                fileName: `${recordingName}.mp4`,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
             }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            setRecordingName("")
-            toggleModal()
-            console.log('url', url);
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
-    }else{
-        // setRecordingStarted(false)
-        // toggleModal()
-        showMessage('Please provide recording name proper')
-    }
     }
 
 
@@ -380,24 +384,71 @@ const STLDetailEdit = (props) => {
     //     }
     // }
 
+    // const onCameraOnly = () => {
+    //     var arr = []
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = []
+
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
 
-                setRecordingArr(arr)
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
     }
+
+
+    const saveCameraData = () => {
+
+        var arr = []
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
 
     const itemCheckListView = () => {
         return (
@@ -839,7 +890,7 @@ const STLDetailEdit = (props) => {
         console.log('hello material', array)
     }
 
-    const removeRecording=()=>{
+    const removeRecording = () => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
@@ -872,19 +923,20 @@ const STLDetailEdit = (props) => {
                                                 value={recordingName}
                                                 placeholderStyle={PAGESTYLE.somePlaceholderStyle}
                                                 placeholderTextColor={COLORS.popupPlaceHolder}
-                                                style={[PAGESTYLE.commonInputTextarea,{height:50,width:'89%'}]}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
                                                 onChangeText={eventName => setRecordingName(eventName)} />
                                         </View>
                                     </View>
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={()=>{stopRecording()}}
+                                // onPress={()=>{stopRecording()}}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
                             </TouchableOpacity>
-                    </View>
+                        </View>
                     </View>
                 </KeyboardAwareScrollView>
             </Modal>
@@ -991,7 +1043,7 @@ const STLDetailEdit = (props) => {
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
-                                    onRemoveRecording={()=>removeRecording()}
+                                    onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
                                     onStopScrrenRecording={() => toggleModal()}
                                     onCameraOnly={() => onCameraOnly()} />
@@ -1103,7 +1155,7 @@ const STLDetailEdit = (props) => {
                                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
                                                 {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                 <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
-                                                </TouchableOpacity>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     :
