@@ -49,7 +49,6 @@ const Message = (props) => {
             Filterby: filterBy
         }
 
-        // Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {
         Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
