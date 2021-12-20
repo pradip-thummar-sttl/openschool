@@ -264,7 +264,7 @@ const PupilLessonDetailInternal = (props) => {
 
                                                 </View> */}
                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                    <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}>Saved workspaces</Text>
+                                                    <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}> Saved workspaces</Text>
                                                     <ScrollView style={{ height: '50%' }} showsVerticalScrollIndicator={false}>
                                                         {
                                                             item.WorkSpacelist.length > 0 ?

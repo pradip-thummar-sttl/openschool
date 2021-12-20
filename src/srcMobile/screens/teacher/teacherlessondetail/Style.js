@@ -801,6 +801,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+      
     },
     pupilImage: {
         width: hp(3.7),
