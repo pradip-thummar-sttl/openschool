@@ -136,8 +136,6 @@ const TLDetailAdd = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
-
-
     }, [])
 
     const showDatePicker = () => {
@@ -359,69 +357,6 @@ const TLDetailAdd = (props) => {
             showMessage('Please provide recording name proper')
         }
     }
-
-
-    // const stopRecording = async () => {
-    //     var arr = []
-    //     const res = await RecordScreen.stopRecording().catch((error) => {
-    //         setRecordingStarted(false)
-    //         console.warn(error)
-    //     });
-    //     if (res) {
-    //         setRecordingStarted(false)
-    //         const url = res.result.outputURL;
-    //         let ext = url.split('.');
-    //         let obj = {
-    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
-    //             originalname: 'MY_RECORDING.mp4',
-    //             fileName: 'MY_RECORDING.mp4',
-    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-    //         }
-    //         arr.push(obj)
-    //         setRecordingArr(arr)
-    //         setScreenVoiceSelected(false)
-
-    //         console.log('url', url);
-    //     }
-    // }
-
-    // const onCameraOnly = () => {
-    //     var arr = [...recordingArr]
-    //     const options = {
-    //         mediaType: "video",
-    //         cameraType: "back"
-    //     };
-    //     launchCamera(options, (response) => {
-    //         // Same code as in above section!
-    //         if (response.errorCode) {
-    //             showMessage(response.errorCode)
-    //         } else if (response.didCancel) {
-
-    //         } else {
-    //             console.log('response', response);
-    //             arr.push(response)
-
-    //             setRecordingArr(arr)
-    //         }
-    //     });
-    //     // launchCamera({ mediaType: 'video',  }, (response) => {
-    //     //     // setResponse(response);
-    //     //     if (response.errorCode) {
-    //     //         showMessage(response.errorCode)
-    //     //     } else if (response.didCancel) {
-    //     //         console.log('did cnacel');
-    //     //         showMessage('did cnacel')
-    //     //     } else {
-    //     //         console.log('response', response);
-    //     //         arr.push(response)
-
-    //     //         setRecordingArr(arr)
-    //     //     }
-
-    //     // })
-    //     setAddRecording(false)
-
-    // }
 
     const onCameraOnly = () => {
 
@@ -894,6 +829,7 @@ const TLDetailAdd = (props) => {
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
+    
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
@@ -940,13 +876,8 @@ const TLDetailAdd = (props) => {
         <View style={PAGESTYLE.mainPage}>
            
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
-                <HeaderAddNew
-                    isLoading={isLoading}
-                    navigateToBack={() => {
-                        props.route.params.onGoBack();
-                        props.navigation.goBack()
-                    }}
-                    saveLesson={() => { getDataFromQuickBloxAndroid() }} />
+                <HeaderAddNew isLoading={isLoading} navigateToBack={() => { props.route.params.onGoBack(); props.navigation.goBack() }}saveLesson={() => { getDataFromQuickBloxAndroid() }} />
+                
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
@@ -1058,7 +989,6 @@ const TLDetailAdd = (props) => {
                                     <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                                 </View>
                                 <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                    {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
                                     <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                                 </TouchableOpacity>
 

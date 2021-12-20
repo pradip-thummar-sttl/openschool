@@ -143,7 +143,6 @@ const TLDetailAdd = (props) => {
             console.log('error of GetPupilByTeacherId', err)
         })
 
-
     }, [])
 
     const showDatePicker = () => {
@@ -1059,17 +1058,19 @@ const TLDetailAdd = (props) => {
                                         </TouchableOpacity>
 
                                         {
-                                            materialArr.length != 0 ? materialArr.map((item, index) => {
-                                                return (
-                                                    <View style={PAGESTYLE.fileGrp}>
-                                                        <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                                        <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                            {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                            <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                )
-                                            }) : null
+                                             materialArr.length != 0 && materialArr.map((item, index) => {
+                                                 return (
+                                                     <View style={PAGESTYLE.fileRender}>
+                                                         <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                         {item &&
+                                                             <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                                 <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
+                                                             </TouchableOpacity>
+                                                         }
+ 
+                                                     </View>
+                                                 )
+                                             })
                                         }
 
 

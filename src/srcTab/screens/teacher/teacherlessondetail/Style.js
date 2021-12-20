@@ -389,9 +389,9 @@ export default StyleSheet.create({
         marginBottom: hp(0.65),
     },
 
-    fileRender: { flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal: hp(0.5),borderWidth: 1,borderColor: COLORS.videoLinkBorder,borderRadius: hp(0.8),marginBottom: hp(1.04),},
-    fileName: { width: wp(19.5), fontFamily: FONTS.fontRegular, fontSize: hp(1.85), lineHeight: hp(3.60), backgroundColor: 'pink' },
-    RenderDownload: { width: wp(4), height: hp(5), justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' },
+    fileRender: { flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal: hp(1),borderWidth: 1,borderColor: COLORS.videoLinkBorder,borderRadius: hp(0.8),marginBottom: hp(1.04),},
+    fileName: { width: wp(20), fontFamily: FONTS.fontRegular, fontSize: hp(1.85), lineHeight: hp(3.60) },
+    RenderDownload: { width: wp(3), height: hp(5), justifyContent: 'center', alignItems: 'center'},
     downloadIcon: { width: hp(2), resizeMode: 'contain'},
 
     containerWrap: {

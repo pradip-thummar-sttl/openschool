@@ -83,6 +83,7 @@ const TLHomeWork = (props) => {
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
 
     useEffect(() => {
+
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
 

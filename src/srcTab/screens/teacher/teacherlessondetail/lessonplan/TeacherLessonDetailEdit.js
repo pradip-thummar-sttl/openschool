@@ -176,6 +176,7 @@ const TLDetailEdit = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
+
     }, [])
 
     const refreshCheckBox = (pupils) => {
@@ -998,10 +999,10 @@ const TLDetailEdit = (props) => {
 
                                             {
                                                 IsDeliveredLive &&
-                                                    <>
-                                                        {fromTimeDropDown()}
-                                                        {toTimeDropDown()}
-                                                    </>
+                                                <>
+                                                    {fromTimeDropDown()}
+                                                    {toTimeDropDown()}
+                                                </>
                                             }
 
                                             {participantsDropDown()}
@@ -1072,20 +1073,21 @@ const TLDetailEdit = (props) => {
                                             <Text style={{ position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold' }}>Upload Material</Text>
                                         </TouchableOpacity>
 
-                                        
+
                                         {
 
 
                                             materialArr.length != 0 &&
-                                             materialArr.map((item, index) => {
+                                            materialArr.map((item, index) => {
                                                 return (
                                                     <View style={PAGESTYLE.fileRender}>
-                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(25) }]}>{item.originalname}</Text>
+                                                        <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.originalname}</Text>
                                                         {item &&
-                                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                                <CloseIcon style={PAGESTYLE.closeIcon} height={hp(1.42)} width={hp(1.42)} />
+                                                            <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                                <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
                                                             </TouchableOpacity>
                                                         }
+
                                                     </View>
                                                 )
                                             })
