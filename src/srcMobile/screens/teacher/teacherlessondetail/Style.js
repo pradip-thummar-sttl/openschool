@@ -173,7 +173,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: hp(1.3),
+        marginBottom: hp(1.6),
       
     },
     lessonPoints: {

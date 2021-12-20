@@ -170,7 +170,7 @@ const GroupSetUpPupilSelection = (props) => {
                     />
                 </View>
             </View>
-            <View style={PAGESTYLE.bar}></View>
+            <View style={[PAGESTYLE.bar,{marginVertical : 5.5}]}></View>
         </View>
         // </TouchableOpacity>
     );
@@ -232,7 +232,7 @@ const GroupSetUpPupilSelection = (props) => {
                         <EmptyStatePlaceHohder holderType={4}  title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',paddingHorizontal: hp(2.46), }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%',paddingHorizontal: 10, }}>
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>
