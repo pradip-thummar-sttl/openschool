@@ -615,7 +615,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                             }
                                                                         </View>
                                                                         <View style={PAGESTYLE.requirementofClass}>
-                                                                            <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                                                            {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
+                                                                                <Text style={PAGESTYLE.requireText}>Items that your class will need</Text> : null}
 
                                                                             {dataOfSubView.CheckList ?
                                                                                 dataOfSubView.CheckList.map((data, index) => (
