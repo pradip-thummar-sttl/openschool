@@ -39,7 +39,10 @@ static NSString * const kSharingReuseIdentifier = @"SharingCell";
     VideoFormat *videoFormat = [[VideoFormat alloc] initWithWidth:UIScreen.mainScreen.bounds.size.width
                                                            height:UIScreen.mainScreen.bounds.size.height
                                                               fps:12];
+  
+  
     self.screenCapture = [[SharingScreenCapture alloc] initWithVideoFormat:videoFormat];
+
     [self startScreenSharing];
     
     

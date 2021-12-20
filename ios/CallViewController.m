@@ -153,6 +153,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
  
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   
@@ -450,6 +452,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)connectionStart {
+  self.state=CallViewControllerStateConnecting;
 }
 
 - (void)configureGUI {

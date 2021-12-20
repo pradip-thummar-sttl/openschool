@@ -63,7 +63,7 @@
 }
 
 - (void)configureGUI {
-    self.view.backgroundColor = UIColor.blackColor;
+    self.view.backgroundColor = UIColor.clearColor;
     
     // configure it if necessary.
     [self setupCollectionView];
