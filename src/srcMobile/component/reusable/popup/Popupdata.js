@@ -610,11 +610,12 @@ const styles = StyleSheet.create({
     bottomDrwerButtonGreen: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.99),
         fontWeight: '800',
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
+        paddingLeft: Platform.OS == 'android' ? hp(3) : hp(3.94),
+        paddingRight: Platform.OS == 'android' ? hp(3) : hp(3.94),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,

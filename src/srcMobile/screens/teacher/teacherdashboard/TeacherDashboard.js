@@ -594,7 +594,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         {
                                                                             isLoading ?
                                                                                 <ActivityIndicator
-                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
+                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: Platform.OS == 'ios' ? 13 : 5 }}
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                     color={COLORS.white} />
                                                                                 :
