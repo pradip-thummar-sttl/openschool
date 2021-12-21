@@ -27,7 +27,7 @@ const SGroupSetUpPupilSelection = (props) => {
     const [selectedGroup, setSelectedGroup] = useState([])
     const [groupName, setGroupName] = useState(props.route.params.isForUpdate ? props.route.params.groupName : '')
     const [isPupilLoading, setPupilLoading] = useState([])
-    const [isGroupLoading, setGroupLoading] = useState([])
+    const [isGroupLoading, setGroupLoading] = useState(false)
 
     const [selectedTeacher, setSelectedTeacher] = useState([])
     const [teachers, setTeachers] = useState([])

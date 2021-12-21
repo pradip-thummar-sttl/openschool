@@ -70,7 +70,7 @@ const TeacheroverView = (props) => {
         // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
             console.log(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`);
         Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
-            console.log('res of all pupil by teacher', res)
+            console.log('res of all pupil by teacher----------->>>>>>', res)
             if (res.flag) {
                 setLoading(false)
                 setPupilData(res.data)
@@ -100,7 +100,7 @@ const TeacheroverView = (props) => {
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                 />
                 {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage} contentContainerStyle={{paddingBottom : 10}} >
                         <View style={PAGESTYLE.mainContainer}>
                             {
                                 isLoading ?
