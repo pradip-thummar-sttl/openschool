@@ -49,13 +49,9 @@ const Header = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>Lesson & homework planner</Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
                         BadgeIcon.isBadge ?
@@ -78,8 +74,6 @@ const Header = (props) => {
                                 :
                                 null
                         }}>
-                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                         {isSearchActive ?
                             <CloseBlack height={20} width={20} />
                             :

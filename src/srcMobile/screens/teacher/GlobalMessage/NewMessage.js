@@ -182,7 +182,7 @@ const NewMessage = (props) => {
             <ScrollView style={{ height: '100%' }}>
                 <View style={[Styles.field1,]}>
                     <Text label style={Style.labelCommon}>Title</Text>
-                    <View style={Styles.copyInputParent}>
+                    <View style={[Styles.copyInputParent,{justifyContent : 'center'}]}>
                         <TextInput
                             multiline={false}
                             numberOfLines={1}

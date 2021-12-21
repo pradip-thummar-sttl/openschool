@@ -31,7 +31,7 @@ const HeaderWhitepupilMessage = (props) => {
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
-                    <Text style={styles.mainTitle}>{props.title}</Text>
+                    <Text style={styles.mainTitle}>Global Messaging{props.title}</Text>
                 </View>
 
                 <View style={styles.headerRight}>
@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
+       //
+        color: COLORS.darkGrayIntro,
     },
     date: {
         fontSize: hp(2.86),

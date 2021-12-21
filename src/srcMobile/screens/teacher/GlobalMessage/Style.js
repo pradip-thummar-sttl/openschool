@@ -1666,17 +1666,19 @@ export default StyleSheet.create({
         fontSize: hp(1.56),
     },
     commonInputTextarea1: {
-        height: hp(5.20),
+        height: hp(5.30), //5.20
         width: '100%',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: 6,
         paddingHorizontal: hp(1.5),
-        paddingVertical: hp(1.5),
+        paddingVertical: 5, // hp(1.5)
         marginTop: hp(1.3),
         fontSize: hp(1.56),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
+       
+       
     },
     copyInputParent: {
         flexDirection: 'row',

@@ -176,6 +176,7 @@ const TLDetailEdit = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
+
     }, [])
 
     const refreshCheckBox = (pupils) => {
@@ -997,12 +998,11 @@ const TLDetailEdit = (props) => {
                                             </View>
 
                                             {
-                                                IsDeliveredLive ?
-                                                    <>
-                                                        {fromTimeDropDown()}
-
-                                                        {toTimeDropDown()}
-                                                    </> : null
+                                                IsDeliveredLive &&
+                                                <>
+                                                    {fromTimeDropDown()}
+                                                    {toTimeDropDown()}
+                                                </>
                                             }
 
                                             {participantsDropDown()}
@@ -1073,40 +1073,26 @@ const TLDetailEdit = (props) => {
                                             <Text style={{ position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold' }}>Upload Material</Text>
                                         </TouchableOpacity>
 
+
                                         {
-                                            materialArr.length != 0 ? materialArr.map((item, index) => {
+
+
+                                            materialArr.length != 0 &&
+                                            materialArr.map((item, index) => {
                                                 return (
-                                                    <View style={PAGESTYLE.fileGrp}>
-                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(25) }]}>{item.originalname}</Text>
-                                                        {item ?
-                                                            <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                                {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                                <CloseIcon style={PAGESTYLE.closeIcon} height={hp(1.42)} width={hp(1.42)} />
+                                                    <View style={PAGESTYLE.fileRender}>
+                                                        <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                        {item &&
+                                                            <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                                <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
                                                             </TouchableOpacity>
-                                                            :
-                                                            null
                                                         }
+
                                                     </View>
                                                 )
-                                            }) : null
+                                            })
                                         }
 
-                                        {/* <View style={PAGESTYLE.uploadBlock}>
-                        <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} />
-                    </View>
-                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Material</Text>
-                            <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.PopupCloseIcon} style={PAGESTYLE.closeIconSmall} /></TouchableOpacity>
-                        </View>
-                    </View> */}
-                                        {/* <View style={PAGESTYLE.thumbVideo}>
-                                            <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                                        </View> */}
                                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                             <TouchableOpacity
                                                 style={PAGESTYLE.buttonGrp}
@@ -1119,8 +1105,6 @@ const TLDetailEdit = (props) => {
                                             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                                 <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                                 <View style={PAGESTYLE.videoLinkBlock}>
-                                                    {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
-                                                    {/* <PlayBlue style={PAGESTYLE.videoLinkIcon}  height={hp(2.38)} width={hp(2.38)} /> */}
                                                     <PlayBlue style={PAGESTYLE.videoLinkIcon} height={hp(2.38)} width={hp(2.38)} />
                                                     <Text style={PAGESTYLE.videoLinkText}>{lessonData.RecordedLessonName}</Text>
                                                 </View>

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         fontSize: hp(1.97),
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
-        marginBottom: hp(0.3),
+        marginBottom: hp(0.12),
     },
     date: {
         fontSize: hp(1.72),

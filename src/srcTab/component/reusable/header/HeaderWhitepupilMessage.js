@@ -4,6 +4,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp, widthPercentageT
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import FONTS from '../../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
@@ -49,26 +51,20 @@ const HeaderWhitepupilMessage = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => null}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
-                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                    
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => { keyword && isSearchActive ? setSearchActive(false):setSearchActive(true)}}>
+                    {isSearchActive ?
+                            <CloseBlack height={20} width={20} />
+                            :
+                            <SearchBlue height={20} width={20} />
+                        }
                     </TouchableOpacity>
+                    
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
@@ -90,11 +86,6 @@ const HeaderWhitepupilMessage = (props) => {
                                     onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Title</Text>
-                                        {/* {selectedIndex == 0 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        } */}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -104,23 +95,16 @@ const HeaderWhitepupilMessage = (props) => {
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
-                                        {/* {selectedIndex == 1 ?
-                                            <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            :
-                                            null
-                                        } */}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.onNewMessage()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)}/>
                     <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
                 </TouchableOpacity>
