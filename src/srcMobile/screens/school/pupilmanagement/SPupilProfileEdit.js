@@ -292,13 +292,16 @@ const SPupilProfileEdit = (props) => {
                             <TopBackImg style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
 
                             <View style={PAGESTYLE.profileOuter}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => showActionChooser()}>
-                                    <Image style={PAGESTYLE.profileImage}
+                            <Image style={PAGESTYLE.profileImage}
                                         source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                    <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
-                                </TouchableOpacity>
+                                <View style={PAGESTYLE.editProfileMain}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => showActionChooser()}>
+                                        {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
+                                        <Ic_Edit style={PAGESTYLE.editProfileIcon} width={hp(2)} height={hp(2)} />
+                                    </TouchableOpacity>
+                                </View>
                                 {/* <Image style={PAGESTYLE.profileImage}></Image> */}
                                 {/* <TouchableOpacity onPress={()=>showActionChooser()} style={PAGESTYLE.editProfileMain}> */}
                                 {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
