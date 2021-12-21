@@ -69,5 +69,6 @@ typedef void (^CompleteCall)(BOOL isFinished, NSString *url);
 - (IBAction)onPressSetupClassVotting:(id)sender;
 - (IBAction)onStartScreenRecordingPressed:(id)sender;
 
-
+- (void)connectionStart;
+- (void)setupLiveVideo:(BOOL)isFront;
 @end
