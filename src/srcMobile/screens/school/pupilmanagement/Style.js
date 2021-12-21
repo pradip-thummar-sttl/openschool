@@ -33,8 +33,8 @@ export default StyleSheet.create({
     },
     pupilParent1: {
         flexDirection: 'row',
-        padding: 10,
-        marginHorizontal: 10,
+        padding: 8,
+        marginHorizontal: 8,
         alignItems: 'center',
     },
     mediabar: {
@@ -199,7 +199,7 @@ export default StyleSheet.create({
     },
     mainPage: {
         height: '100%',
-        paddingHorizontal: hp(2),
+        paddingHorizontal: hp(1.8),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,
     },
@@ -535,6 +535,13 @@ export default StyleSheet.create({
         marginLeft: hp(2.46),
         marginBottom: hp(2.46),
     },
+    backArrow: {
+        width: hp(2.34),
+        resizeMode: 'contain',
+        marginLeft: hp(2.46),
+        marginBottom: hp(2.16),
+    },
+
     checkMark: {
         position :'absolute',
         alignContent: 'flex-end',
@@ -643,8 +650,8 @@ export default StyleSheet.create({
         borderRadius: hp(1.0),
         lineHeight: hp(2.3),
         height: hp(6),
-        paddingLeft: hp(2.0),
-        paddingRight: hp(2.0),
+        paddingLeft: hp(1.5),
+        paddingRight: hp(1.5),
         paddingTop: hp(1.5),
         paddingBottom: hp(1.5),
         fontFamily: FONTS.fontRegular,

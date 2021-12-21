@@ -53,7 +53,7 @@ const HeaderPMInner = (props) => {
                             activeOpacity={opacity}
                             onPress={() => props.navigateToPupilProfileEdit()}>
                             {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
-                            <Ic_Edit style={styles.massagesIcon}width={hp(3.20)} height={hp(3.20)}/>
+                            <Ic_Edit style={styles.massagesIcon}width={hp(2.8)} height={hp(2.8)}/>
                         </TouchableOpacity>
                     </View>
                     :
@@ -132,9 +132,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: hp(2.8),
+        height: hp(2.8),
         resizeMode: 'contain',
+       
     },
     whiteBg: {
         paddingLeft: hp(2.46),
@@ -168,8 +169,8 @@ const styles = StyleSheet.create({
     },
     editButton:{
         borderRadius:10,
-        height:hp(5.20),
-        width:hp(5.20),
+        height:hp(4.20),
+        width:hp(4.20),
          borderWidth:1,
          borderColor:COLORS.borderGrp,
          alignItems:'center',
