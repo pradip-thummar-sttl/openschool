@@ -314,7 +314,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -327,7 +327,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack, {paddingVertical  : 3}]}
                                 placeholder="Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -361,7 +361,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Unique I.D (auto-generated)"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -375,7 +375,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Assigned Teacher</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Assigned Teacher"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -390,7 +390,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's First Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Parent's First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -403,7 +403,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's Last Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="parent's Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -416,7 +416,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Email</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Email"
                                 autoCapitalize={'none'}
                                 maxLength={40}

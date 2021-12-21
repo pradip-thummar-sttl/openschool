@@ -33,8 +33,8 @@ export default StyleSheet.create({
     },
     pupilParent1: {
         flexDirection: 'row',
-        padding: 10,
-        marginHorizontal: 5,
+        padding: 8,
+        marginHorizontal: 8,
         alignItems: 'center',
     },
     mediabar: {

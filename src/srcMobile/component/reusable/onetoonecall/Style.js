@@ -100,7 +100,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         marginVertical: 10,
         fontFamily: FONTS.fontSemiBold,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
     },
     listHeader: {
