@@ -173,7 +173,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: hp(1.3),
+        marginBottom: hp(1.6),
       
     },
     lessonPoints: {
@@ -801,6 +801,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+      
     },
     pupilImage: {
         width: hp(3.7),

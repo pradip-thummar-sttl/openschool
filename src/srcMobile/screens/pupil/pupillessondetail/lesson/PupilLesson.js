@@ -51,9 +51,10 @@ const PupilLesson = (props) => {
                                                 </View>
                                                 <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                                 <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
-                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
-                                                    <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
-                                                    <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft,{alignItems : 'center'
+                                            }]}>
+                                                    <Image style={[PAGESTYLE.lessonThumb]} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
+                                                    <Text style={[PAGESTYLE.videoUserName,{textAlign: "center"}]}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                                 </View>
                                             </TouchableOpacity>
                                         )
@@ -89,9 +90,9 @@ const PupilLesson = (props) => {
                                             </View>
                                             <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                             <Text numberOfLines={1} style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
-                                            <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft]}>
+                                            <View style={[PAGESTYLE.videoWrap, PAGESTYLE.videoUserSpaceLeft,{alignItems : 'center'}]}>
                                                 <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
-                                                <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                                <Text style={[PAGESTYLE.videoUserName,{textAlign : 'center'}]}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                             </View>
                                         </TouchableOpacity>
                                     )

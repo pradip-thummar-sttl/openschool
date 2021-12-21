@@ -54,8 +54,10 @@ const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingHorizontal: hp(2.5),
         backgroundColor: COLORS.white,
-        paddingBottom: 10,
-        paddingTop: hp(5.85),
+        paddingBottom : Platform.OS == 'android' ? 8.5 : 10,
+        paddingTop : Platform.OS == 'android' ? 18 : hp(5.85)
+        // paddingTop: hp(5.85),
+        
     },
     headerMain: {
         flexDirection: 'row',

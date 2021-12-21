@@ -39,9 +39,9 @@ const PupilLessonDue = (props) => {
                                                     <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                                     <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
                                                 </View>
-                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace,{alignItems : 'center'}]}>
                                                     <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
-                                                    <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                                    <Text style={[PAGESTYLE.videoUserName,{textAlign : 'center'}]}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                                 </View>
                                             </TouchableOpacity>
                                         )
@@ -67,7 +67,7 @@ const PupilLessonDue = (props) => {
                                                     <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                                     <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
                                                 </View>
-                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace,{alignItems : 'center'}]}>
                                                     <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                                     <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                                 </View>
@@ -96,7 +96,7 @@ const PupilLessonDue = (props) => {
                                                     <Text style={PAGESTYLE.videoSubTitleNormal}>{item.SubjectName}</Text>
                                                     <Text style={PAGESTYLE.videoSubTitleBold}>{item.LessonTopic}</Text>
                                                 </View>
-                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace]}>
+                                                <View style={[PAGESTYLE.videoWrap, PAGESTYLE.dueVideoUserSpace,{alignItems : 'center'}]}>
                                                     <Image style={PAGESTYLE.lessonThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
                                                     <Text style={PAGESTYLE.videoUserName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                                 </View>

@@ -243,7 +243,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
         width: '100%',
-       marginTop : 10
+        marginVertical : 8 //marginTop : 10
     },
     centerText: {
         textAlign: 'center',
