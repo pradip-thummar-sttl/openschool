@@ -52,11 +52,13 @@ export default HeaderSLP;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(2.46),
-        paddingRight: hp(2),
-        backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(0) : hp(5.85),
-        paddingBottom: Platform.OS == 'android' ? hp(0) : 15,
+       
+            paddingLeft: hp(2.44),
+            paddingRight: hp(1),
+            backgroundColor: COLORS.white,
+            paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.85),
+            paddingBottom: 15,
+       
     },
     headerMain: {
         flexDirection: 'row',
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(1.97),
+        fontSize: wp(4.26),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
@@ -89,7 +91,9 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         padding: hp(1.5),
         borderRadius: hp(1),
-        marginBottom: hp(1.32),
+        // marginBottom: hp(1.32),
+        // backgroundColor: COLORS.dashboardGreenButton,
+       
     },
     filterbarMain: {
         flexDirection: 'row',
