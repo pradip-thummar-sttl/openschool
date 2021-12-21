@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from '../../../../utils/Colors';
 import FONTS from '../../../../utils/Fonts';
@@ -98,17 +98,18 @@ export default StyleSheet.create({
         flexDirection: 'row',
         fontSize: hp(1.95),
         color: COLORS.darkGray,
-        marginVertical: 10,
+        marginTop: Platform.OS === "ios"? hp(5) : hp(2),
+        marginBottom:hp(1.5),
         fontFamily: FONTS.fontSemiBold,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     listHeader: {
         fontSize: hp(1.95),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontSemiBold,
-        paddingVertical: 5,
-        marginLeft: 10
+        paddingVertical: hp(1),
+        marginLeft: hp(2)
     },
     arrow: {
         width: hp(2.34),
