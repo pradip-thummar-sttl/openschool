@@ -71,7 +71,7 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     
-    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.collectionView];
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     CGFloat topBarHeight = self.view.window.windowScene.statusBarManager.statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height;
     self.collectionView.contentInset = UIEdgeInsetsMake(-topBarHeight, 0.0f, 0.0f, 0.0f);
