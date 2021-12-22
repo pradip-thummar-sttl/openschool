@@ -10,7 +10,7 @@ import { User, BadgeIcon } from "../../../../utils/Model";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 const Header = (props) => {
-    console.log('badgeicon true or false', BadgeIcon.isBadge);
+    
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
@@ -22,13 +22,11 @@ const Header = (props) => {
                     style={styles.notificationBar}
                     onPress={() => props.onNotification()}
                     activeOpacity={opacity}>
-                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     {
                         BadgeIcon.isBadge ?
                             <View style={STYLE.redDot}></View> : null
                     }
-                    {/* <View style={STYLE.redDot}></View> */}
                 </TouchableOpacity>
             </View>
         </View>

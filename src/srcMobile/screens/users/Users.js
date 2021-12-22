@@ -12,6 +12,7 @@ import TopMobile from '../../../svg/userselection/TopMobile';
 import School from '../../../svg/userselection/School';
 import Teacher from '../../../svg/userselection/Teacher';
 import Pupil from '../../../svg/userselection/Pupil';
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 export default class Users extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export default class Users extends Component {
                     this.props.navigation.navigate('IntroductionSchool')
                 }
             })
-        } else{
+        } else {
             AsyncStorage.getItem('introducePupil').then((value) => {
                 if (value) {
                     this.props.navigation.navigate('Login', { userType: "Pupil" })
@@ -51,8 +52,9 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/* <Image source={Images.loginTop} style={styles.image}></Image> */}
-                <TopMobile style={styles.image} height={Platform.OS == 'android' ? hp(17.5) : hp(16)} width={'100%'} />
+                <View style={{height:Platform.OS == 'android' ? hp(16.5) : hp(16), backgroundColor:COLORS.lightgreenLogin}}>
+                    <TopMobile style={styles.image} height={Platform.OS == 'android' ? hp(17.5) : hp(16)} width={'100%'} />
+                </View>
                 <View>
                     <Text style={styles.titleText}>Select the type of user you are</Text>
                     <View style={styles.userMain}>
@@ -63,7 +65,7 @@ export default class Users extends Component {
                                 {/* <Image
                                     style={styles.userIcon}
                                     source={Images.school} /> */}
-                                    <School style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
+                                <School style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>School</Text>
                             </View>
                         </TouchableOpacity>
@@ -74,7 +76,7 @@ export default class Users extends Component {
                                 {/* <Image
                                     style={styles.userIcon}
                                     source={Images.teacher} /> */}
-                                    <Teacher style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
+                                <Teacher style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>Teacher</Text>
                             </View>
                         </TouchableOpacity>
@@ -85,7 +87,7 @@ export default class Users extends Component {
                                 {/* <Image
                                     style={styles.userIcon}
                                     source={Images.pupil} /> */}
-                                    <Pupil style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
+                                <Pupil style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>Pupil</Text>
                             </View>
                         </TouchableOpacity>

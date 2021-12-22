@@ -128,19 +128,6 @@ const SchoolDashBoard = (props) => {
                 </View>
 
                 <View style={PAGESTYLE.whiteBoard}>
-                    {/* <View>
-                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                            <FlatList
-                                style={PAGESTYLE.ScrollViewFlatlist}
-                                data={[1,2,3,4,5,6]}
-                                // renderItem={renderItem}
-                                keyExtractor={(item) => item.id}
-                                // extraData={selectedId}
-                                showsVerticalScrollIndicator={false}
-                                nestedScrollEnabled
-                            />
-                        </SafeAreaView>
-                    </View> */}
                     <EmptyStatePlaceHohder holderType={7} title1={MESSAGE.noInsights1} title2={MESSAGE.noInsights2} />
                 </View>
 
