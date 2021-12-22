@@ -31,19 +31,49 @@ const HeaderTM = (props) => {
     const [filterBy, setFilterBy] = useState('1')
     const [keyword, setKeyword] = useState('')
 
-    useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
-    }, [isSearchActive])
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         setKeyword('')
+    //         textInput.current.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
 
-    useEffect(() => {
-        props.onFilter(filterBy)
-    }, [filterBy])
+    // useEffect(() => {
+    //     props.onFilter(filterBy)
+    // }, [filterBy])
+
+    const onPressSearchButton = () => {
+        setSearchActive(true)
+        setTimeout(() => {
+            props.onSearch()
+        }, 500)
+    }
+
+    const onPressCloseButton = () => {
+        setSearchActive(false)
+        setTimeout(() => {
+            props.onClearSearch()
+            textInput.current.clear()
+        }, 500)
+    }
+
+
+    const OnPressAsc = () => {
+        setFilterBy('1'); setSelectedIndex(0)
+        setTimeout(() => {
+            props.onFilter('1')
+        }, 500)
+    }
+
+    const OnPressDes = () => {
+        setFilterBy('-1'); setSelectedIndex(1)
+        setTimeout(() => {
+            props.onFilter('-1')
+        }, 500)
+    }
 
     return (
         <View style={styles.headerBarMainWhite}>
@@ -57,9 +87,9 @@ const HeaderTM = (props) => {
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -69,7 +99,7 @@ const HeaderTM = (props) => {
             <View style={styles.searchParent}>
                 <Text style={[styles.tabsText, styles.tabsTextSelected]}>Teacher Overview</Text>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
@@ -80,14 +110,24 @@ const HeaderTM = (props) => {
                                 :
                                 null
                         }}>
-                        {/* <Image style={{ height: 20, resizeMode: 'contain', }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        <Image style={{ height: 20, resizeMode: 'contain', }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                         {isSearchActive ?
                             <CloseBlack height={20} width={20} />
                             :
                             <SearchBlue height={20} width={20} />
                         }
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
+                    {isSearchActive ?
+                        <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
+                            <CloseBlack height={20} width={20} />
+                        </TouchableOpacity> :
+
+                        <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
+                            <SearchBlue height={20} width={20} />
+                        </TouchableOpacity>}
+
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
@@ -106,7 +146,8 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('1'); setSelectedIndex(0) }}>
+                                    // onPress={() => { setFilterBy('1'); setSelectedIndex(0) }}>
+                                    onPress={() => { OnPressAsc() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
                                         {selectedIndex == 0 ?
@@ -121,7 +162,8 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('-1'); setSelectedIndex(1) }}>
+                                    // onPress={() => { setFilterBy('-1'); setSelectedIndex(1) }}>
+                                    onPress={() => { OnPressDes() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Desending)</Text>
                                         {selectedIndex == 1 ?
