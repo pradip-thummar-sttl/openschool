@@ -198,7 +198,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     mainPage: {
-        height: '100%',
+        height: '75%',
         paddingHorizontal: hp(1.8),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,

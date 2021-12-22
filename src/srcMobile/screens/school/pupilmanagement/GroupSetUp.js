@@ -74,7 +74,8 @@ const GroupSetUp = (props) => {
     const Grouplist = (item) => (
         <View style={PAGESTYLE.groupParent}>
             <View style={PAGESTYLE.groupTitle1}>
-                <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.GroupName}</Text>
+                {console.log('----item------', item)}
+                <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.TeacherFirstName} {item.item.TeacherLastName}</Text>
                 <TouchableOpacity
                     activeOpacity={opacity}
                     onPress={() => { props.props.navigation.navigate('SGroupSetUpPupilSelection', { onRefresh: () => refresh(), 'data': item.item.PupilList, groupName: item.item.GroupName, isForUpdate: true, groupId: item.item._id }) }}>
