@@ -43,8 +43,8 @@ const HeaderTM = (props) => {
     const refRBSheetCSV = useRef();
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [selectedIndex, setSelectedIndex] = useState(0)
+    const [filterBy, setFilterBy] = useState('1')
     const [isModalVisible, setModalVisible] = useState(false)
 
     // useEffect(() => {
@@ -130,14 +130,14 @@ const HeaderTM = (props) => {
     const OnPressAsc = () => {
         setFilterBy('1'); setSelectedIndex(0)
         setTimeout(() => {
-            props.onFilter(filterBy)
+            props.onFilter('1')
         }, 500)
     }
 
     const OnPressDes = () => {
         setFilterBy('-1'); setSelectedIndex(1)
         setTimeout(() => {
-            props.onFilter(filterBy)
+            props.onFilter('-1')
         }, 500)
     }
 
