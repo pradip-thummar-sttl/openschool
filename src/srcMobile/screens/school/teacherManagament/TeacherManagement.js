@@ -15,7 +15,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import FONTS from '../../../../utils/Fonts'
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+import { BadgeIcon, User } from '../../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import MESSAGE from '../../../../utils/Messages';
 import CloseBlack from '../../../../svg/teacher/timetable/Close_Black';
@@ -141,6 +141,12 @@ const TeacherManagement = (props) => {
         }
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+    }
+    
+
     return (
         <View>
             {/* <HeaderTM
@@ -160,7 +166,8 @@ const TeacherManagement = (props) => {
                 refreshList={() => refresh()}
                 title={'Teacher Management'}
                 userType={'Teacher'}
-                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                onFilter={(filterBy) => fetchRecord('', filterBy)} 
+                onNotification={()=>openNotification()} />
 
             {/* {searchHeader()} */}
             {isLoading ?

@@ -262,12 +262,13 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     entryTitle: {
-        fontSize: hp(1.56),
+        fontSize: hp(1.37),// fontSize: hp(1.56),
         fontFamily: FONTS.fontBold,
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
     },
+
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',

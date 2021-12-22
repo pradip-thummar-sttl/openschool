@@ -10,7 +10,7 @@ import HeaderPM from "./HeaderPM";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import GroupSetUp from "./GroupSetUp";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import { baseUrl } from "../../../../utils/Constant";
 
 import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
@@ -68,9 +68,9 @@ const TeacheroverView = (props) => {
         // setSelectedTabIndex(item)
         // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
         // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
-            console.log(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`);
+        console.log(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`);
         Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
-            console.log('res of all pupil by teacher', res)
+            console.log('res of all pupil by teacher----------->>>>>>', res)
             if (res.flag) {
                 setLoading(false)
                 setPupilData(res.data)
@@ -82,11 +82,16 @@ const TeacheroverView = (props) => {
         })
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', 'name') })
+    }
+
     return (
         console.log('iscsvpopup', isCsvPopup),
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
-            {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
+                {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -96,11 +101,12 @@ const TeacheroverView = (props) => {
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
-                    navigateToCsvPopup={()=>{ setCsvPopup(true);console.log('iscsvpopup', isCsvPopup);}}
+                    navigateToCsvPopup={() => { setCsvPopup(true); console.log('iscsvpopup', isCsvPopup); }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
+                    onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage} contentContainerStyle={{paddingBottom : 10}} >
                         <View style={PAGESTYLE.mainContainer}>
                             {
                                 isLoading ?

@@ -52,11 +52,11 @@ export default HeaderSHWS;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(2.46),
-        paddingRight: hp(2.46),
+        paddingLeft: hp(2.44),
+        paddingRight: hp(0.5),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(1) : hp(5.85),
-        paddingBottom: Platform.OS == 'android' ? 0 : 15,
+        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.85),
+        paddingBottom: 15,
         
     },
     headerMain: {

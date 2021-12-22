@@ -243,7 +243,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
         width: '100%',
-        marginVertical : 8 //marginTop : 10
+        marginVertical: 8 //marginTop : 10
     },
     centerText: {
         textAlign: 'center',
@@ -319,6 +319,8 @@ export default StyleSheet.create({
         paddingLeft: hp(2),
         paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontRegular,
+
+
 
     },
     common: {

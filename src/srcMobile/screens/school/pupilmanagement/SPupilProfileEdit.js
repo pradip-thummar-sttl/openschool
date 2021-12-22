@@ -292,13 +292,16 @@ const SPupilProfileEdit = (props) => {
                             <TopBackImg style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
 
                             <View style={PAGESTYLE.profileOuter}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => showActionChooser()}>
-                                    <Image style={PAGESTYLE.profileImage}
+                            <Image style={PAGESTYLE.profileImage}
                                         source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                    <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
-                                </TouchableOpacity>
+                                <View style={PAGESTYLE.editProfileMain}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => showActionChooser()}>
+                                        {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
+                                        <Ic_Edit style={PAGESTYLE.editProfileIcon} width={hp(2)} height={hp(2)} />
+                                    </TouchableOpacity>
+                                </View>
                                 {/* <Image style={PAGESTYLE.profileImage}></Image> */}
                                 {/* <TouchableOpacity onPress={()=>showActionChooser()} style={PAGESTYLE.editProfileMain}> */}
                                 {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
@@ -311,7 +314,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -324,7 +327,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack, {paddingVertical  : 3}]}
                                 placeholder="Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -358,7 +361,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Unique I.D (auto-generated)"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -372,7 +375,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Assigned Teacher</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Assigned Teacher"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -387,7 +390,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's First Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Parent's First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -400,7 +403,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's Last Name</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="parent's Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
@@ -413,7 +416,7 @@ const SPupilProfileEdit = (props) => {
                             <Text LABLE style={PAGESTYLE.labelForm}>Email</Text>
                             <TextInput
                                 returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
+                                style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Email"
                                 autoCapitalize={'none'}
                                 maxLength={40}

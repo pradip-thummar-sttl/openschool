@@ -25,12 +25,12 @@ const HeaderAddNew = (props) => {
                     <View>
                         <Text style={styles.mainTitle}>
                             Add New Lesson
-                    </Text>
+                        </Text>
                         <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    
+
                     <TouchableOpacity style={styles.tickLayout} activeOpacity={opacity} onPress={() => props.saveLesson()}>
 
                         {props.isLoading ?
@@ -41,7 +41,7 @@ const HeaderAddNew = (props) => {
                             </View>
                         }
                     </TouchableOpacity>
-                   
+
                 </View>
             </View>
         </View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
-        marginBottom: Platform.OS == 'android' ? hp(-1) : hp(0),
+        marginBottom: Platform.OS == 'android' ? hp(-0.5) : hp(0),
     },
     massagesIcon: {
         width: hp(5.20),

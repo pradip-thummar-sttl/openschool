@@ -10,6 +10,9 @@
 #import "CallViewController.h"
 #import "PollViewController.h"
 #import "PollVC.h"
+#import "ToolBar.h"
+#import "CustomButton.h"
+#import "SharingViewController.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -28,6 +31,7 @@
 #import "ReactionTableViewCell.h"
 #import <PubNub/PubNub.h>
 #import "MYED_Open_School-Swift.h"
+
 
 
 
@@ -61,8 +65,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (weak, nonatomic) QBRTCConferenceSession *session;
 
+@property (strong, nonatomic) CustomButton *screenShareEnabled;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *opponentsCollectionView;
 @property (weak, nonatomic) IBOutlet QBToolBar *toolbar;
+@property (strong, nonatomic) ToolBar *ttoolbar;
 @property (strong, nonatomic) NSMutableArray *users;
 
 @property (strong, nonatomic) QBRTCCameraCapture *cameraCapture;
@@ -81,6 +88,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (assign, nonatomic) BOOL isPupilReload;
 
 @property (assign, nonatomic) BOOL isReaction;
+@property (assign, nonatomic) BOOL isBack;
 
 @property (strong, nonatomic) ZoomedView *zoomedView;
 @property (weak, nonatomic) OpponentCollectionViewCell *originCell;
@@ -108,6 +116,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (assign, nonatomic) BOOL isRecording;
 
 //@property (weak, nonatomic)ScreenRecorder *screenRecord;
+
+@property (nonatomic) AVCaptureSession *captureSession;
+@property (nonatomic) AVCapturePhotoOutput *stillImageOutput;
+@property (nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 
 
 @end
@@ -141,6 +153,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
  
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   
@@ -150,6 +164,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _isPupilReload=false;
   _isMutedFlag = true;
   _isReaction = true;
+  _isBack=false;
   [_classSettingView setHidden:true];
   
   if(_isTeacher){
@@ -438,6 +453,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)connectionStart {
+  self.state=CallViewControllerStateConnecting;
+}
 
 - (void)configureGUI {
     
@@ -480,8 +498,16 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
  
  
   [self.toolbar addButton:[QBButtonsFactory switchCamera] action:^(UIButton *sender) {
-    Settings *settings = Settings.instance;
-    self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionFront];
+    if (_isBack) {
+      [weakSelf setupLiveVideo:false];
+      Settings *settings = Settings.instance;
+      weakSelf.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionBack];
+    }else{
+      [weakSelf setupLiveVideo:true];
+      Settings *settings = Settings.instance;
+      weakSelf.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionFront];
+    }
+    
   }];
   
   [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
@@ -495,6 +521,26 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //      vc.channels = weakSelf.channels;
 //      vc.ispupil = false;
 //      [weakSelf presentViewController:vc animated:false completion:nil];
+      __typeof(weakSelf)strongSelf = weakSelf;
+      
+      
+      SharingViewController *sharingVC = [[SharingViewController alloc] init];
+      [sharingVC setDidSetupSharingScreenCapture:^(SharingScreenCapture * _Nonnull screenCapture) {
+          if (screenCapture && strongSelf.session.localMediaStream.videoTrack.videoCapture != screenCapture) {
+              strongSelf.session.localMediaStream.videoTrack.videoCapture = screenCapture;
+          }
+          strongSelf.session.localMediaStream.videoTrack.enabled = YES;
+      }];
+      
+      [sharingVC setDidCloseSharingVC:^{
+          strongSelf.session.localMediaStream.videoTrack.videoCapture = strongSelf.cameraCapture;
+          strongSelf.session.localMediaStream.videoTrack.enabled = !strongSelf.muteVideo;
+//          [strongSelf cameraTurnOn:!strongSelf.muteVideo];
+      }];
+
+      [strongSelf presentViewController:sharingVC animated:NO completion:^{
+          strongSelf.screenShareEnabled.pressed = NO;
+      }];
     }];
   }
   
@@ -596,6 +642,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
 }
 
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -608,7 +655,80 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         // here we should get its running state back
         [self.cameraCapture startSession:nil];
     }
+  [self setupLiveVideo:true];
+  
 }
+- (void)viewWillDisappear:(BOOL)animated{
+   [self.captureSession stopRunning];
+}
+
+- (void)setupLiveVideo:(BOOL)isFront {
+  AVCaptureDevice *inputDevice = nil;
+  self.captureSession = [AVCaptureSession new];
+  self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
+  AVCaptureDevice *backCamera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+  for (AVCaptureDevice *camera in devices) {
+    if (isFront) {
+      if ([camera position] == AVCaptureDevicePositionFront) {
+        _isBack=true;
+        inputDevice=camera;
+        break;
+      }
+    }else{
+      if ([camera position] == AVCaptureDevicePositionBack) {
+        _isBack=false;
+        inputDevice=camera;
+        break;
+      }
+    }
+    
+  }
+//  if (!backCamera) {
+//      NSLog(@"Unable to access back camera!");
+//      return;
+//  }
+  NSError *error;
+  AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice
+                                                                      error:&error];
+  if (!error) {
+      //Step 9
+    self.stillImageOutput = [AVCapturePhotoOutput new];
+
+    if ([self.captureSession canAddInput:input] && [self.captureSession canAddOutput:self.stillImageOutput]) {
+        
+        [self.captureSession addInput:input];
+        [self.captureSession addOutput:self.stillImageOutput];
+        [self setupLivePreview];
+    }
+  }
+  else {
+      NSLog(@"Error Unable to initialize back camera: %@", error.localizedDescription);
+  }
+}
+- (void)setupLivePreview {
+    
+    self.videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
+    if (self.videoPreviewLayer) {
+        
+        self.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        self.videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+//      self.videoPreviewLayer.position=AVCaptureDevicePositionFront;
+//      [self.videoPreviewLayer setBackgroundColor:[UIColor redColor].CGColor];
+        [self.userCameraView.layer addSublayer:self.videoPreviewLayer];
+        
+        //Step12
+      dispatch_queue_t globalQueue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+      dispatch_async(globalQueue, ^{
+          [self.captureSession startRunning];
+          //Step 13
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.videoPreviewLayer.frame = self.userCameraView.bounds;
+        });
+      });
+    }
+}
+
 
 - (void)addReaction:(UIButton*)sender
 {

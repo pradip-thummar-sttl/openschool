@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-
+#import "CallViewController.h"
 #import <Quickblox/Quickblox.h>
 #import <QuickbloxWebRTC/QuickbloxWebRTC.h>
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -137,6 +137,19 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
 {
   completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge);
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application{
+  CallViewController *VC = [[CallViewController alloc]init];
+  [VC setupLiveVideo:true];
+  [VC connectionStart];
+  
+}
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+  CallViewController *VC = [[CallViewController alloc]init];
+  [VC connectionStart];
+  
+
 }
 
 @end
