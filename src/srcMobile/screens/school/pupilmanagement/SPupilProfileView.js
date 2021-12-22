@@ -73,7 +73,6 @@ const SPupilProfileView = (props) => {
 
     const handleOnClick = (index) => {
         setTabSelected(index)
-        console.log('reference', myref);
         if (myref.current) {
             myref.current.refresh();
         }
@@ -190,7 +189,6 @@ const SPupilProfileView = (props) => {
                         <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
                             <View style={PAGESTYLE.mainContainerProfile}>
                                 <View style={PAGESTYLE.profileImageArea}>
-                                    {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
                                     <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
                                     <View style={PAGESTYLE.profileOuter}>
                                         <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />

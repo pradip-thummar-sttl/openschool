@@ -52,7 +52,7 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{height:Platform.OS == 'android' ? hp(15.5) : hp(16), backgroundColor:COLORS.lightgreenLogin}}>
+                <View style={{height:Platform.OS == 'android' ? hp(16.5) : hp(16), backgroundColor:COLORS.lightgreenLogin}}>
                     <TopMobile style={styles.image} height={Platform.OS == 'android' ? hp(17.5) : hp(16)} width={'100%'} />
                 </View>
                 <View>

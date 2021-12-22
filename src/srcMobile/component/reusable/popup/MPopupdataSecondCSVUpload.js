@@ -17,6 +17,7 @@ import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
 import { User } from "../../../../utils/Model";
 import MESSAGE from "../../../../utils/Messages";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const MPopupdataSecondCSVUpload = (props) => {
     const isFromDashboard = props.isFromDashboard
@@ -80,30 +81,27 @@ const MPopupdataSecondCSVUpload = (props) => {
 
 
     return (
-        console.log('props iscsvpopup', props.isVisible),
         <View>
-            <TouchableOpacity
-                style={styles.entryData}
-                 activeOpacity={opacity}
-                 onPress={toggleModal}> 
-             {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-               <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} /> 
+            <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}> 
+               <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)}/> 
                 <Text style={styles.entryTitle}>Import From CSV</Text>
             </TouchableOpacity> 
             
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
+                    
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
+                    
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.upload} onPress={() => addCSV()}>
                                 <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
                                 <Text style={styles.labelUpload}>Click here to select source</Text>
                         </TouchableOpacity>
                     </View>
+                    
                 </View>
             </Modal>
          </View>
@@ -234,13 +232,13 @@ const styles = StyleSheet.create({
     entryData: {
         // marginRight: 30,
         alignItems: 'center',
-        marginBottom:hp(5.14)
+        marginBottom:hp(5.14),
     },
     entryIcon: {
-        width: hp(11.19),
-        height: hp(11.19),
         resizeMode: 'contain',
         marginBottom: hp(2.6),
+        justifyContent:'center',
+        alignItems:'center',
     },
     upload: {
         width: '100%',

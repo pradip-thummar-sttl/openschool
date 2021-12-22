@@ -85,15 +85,13 @@ const PopupdataSecondCSVUpload = (props) => {
                 style={styles.entryData}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                 <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                <Text style={styles.entryTitle}>Import From CSV</Text>
+                <Text style={styles.entryTitle}>Import From CSV1</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupCard}>
