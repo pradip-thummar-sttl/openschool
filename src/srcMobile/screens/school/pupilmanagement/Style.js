@@ -14,7 +14,7 @@ export default StyleSheet.create({
     },
     left1: {
         flex: 1,
-        paddingTop: hp(2.46)
+        paddingTop: hp(1.5)
     },
     middle: {
         flex: 0.48,
@@ -83,8 +83,8 @@ export default StyleSheet.create({
         width: hp(2),
         resizeMode: 'contain',
         right: 0,
-        top: 5,
-        marginTop:7
+        top: 2,
+        // marginTop:7
     },
     selectedPupilName: {
         fontSize: hp(2.46),
@@ -198,8 +198,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     mainPage: {
-        height: '75%',
-        paddingHorizontal: hp(1.8),
+        height: '100%',
+        paddingHorizontal: hp(2),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,
     },
