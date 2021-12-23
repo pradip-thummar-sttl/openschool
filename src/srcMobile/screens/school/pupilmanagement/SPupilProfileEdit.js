@@ -286,13 +286,15 @@ const SPupilProfileEdit = (props) => {
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
-                        <View style={PAGESTYLE.profileImageArea}>
+                        <View style={[PAGESTYLE.profileImageArea,{backgroundColor:COLORS.white}]}>
                             <TopBackImg style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.5)}  />
 
                             <View style={PAGESTYLE.profileOuter}>
                                 <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
                                     <Image style={PAGESTYLE.profileImage}  source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                    <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
+                                    <View style={PAGESTYLE.EditIcnView}>
+                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
+                                    </View>
                                 </TouchableOpacity>
                                
                             </View>
@@ -468,6 +470,7 @@ const SPupilProfileEdit = (props) => {
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
                     />
+                    <View style={{height: Platform.OS == "ios" ? 130 : 30}}/>
                 </ScrollView>
             </View>
         </View>
