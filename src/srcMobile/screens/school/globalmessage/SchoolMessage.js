@@ -186,17 +186,17 @@ const SchoolMessage = (props) => {
             Searchby: searchby,
             Filterby: filterBy
         }
-
-        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user.UserDetialId}/S`, (res) => {
+console.log('gfhfuehjheikurfkirrf==>',`${EndPoints.GlobalMessaging}/${User.user._id}/S`);
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/S`, (res) => {
             setLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of get all global messages', res)
                 setMessageData(res.data)
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
-            console.log('response of get all lesson error', err)
+            console.log('response of get all global messages', err)
         })
     }
 

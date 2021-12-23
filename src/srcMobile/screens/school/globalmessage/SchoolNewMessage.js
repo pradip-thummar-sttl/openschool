@@ -134,7 +134,7 @@ const SchoolNewMessage = (props) => {
                 Message: message,
                 SendToAll: parentsData.length == selectedParents.length,
                 Status: selectedStatus,
-                Type: 'T',
+                Type: 'S',
                 UpdatedBy: User.user._id,
                 PupilList: selectedParents
             }
@@ -144,7 +144,7 @@ const SchoolNewMessage = (props) => {
                 Message: message,
                 SendToAll: parentsData.length == selectedParents.length,
                 Status: selectedStatus,
-                Type: 'T',
+                Type: 'S',
                 CreatedBy: User.user._id,
                 PupilList: selectedParents
             }
