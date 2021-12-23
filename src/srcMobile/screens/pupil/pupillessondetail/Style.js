@@ -276,8 +276,9 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
-        top: 5,
-        left: 3,
+        marginRight:hp(1),
+        // top: 5,
+        // left: 3,
         fontFamily: FONTS.fontBold,
     },
     toggleGrp: {
@@ -1259,7 +1260,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
-        lineHeight: hp(3.6),
+        // lineHeight: hp(3.6),
         paddingLeft: hp(0.91),
     },
     bookMarkLabel: {
