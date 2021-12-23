@@ -579,7 +579,7 @@ export default StyleSheet.create({
         width: hp(18.22),
     },
     pupilTableHeadingMainTitle: {
-        fontSize: hp(1.5),
+        fontSize: hp(1.8),
         lineHeight: hp(2.60),
         color: COLORS.menuLightFonts,
         fontFamily: FONTS.fontSemiBold,
@@ -625,6 +625,7 @@ export default StyleSheet.create({
         width: hp(15.80),
         flexDirection: 'row',
         alignItems: 'center',
+        // justifyContent : 'center'
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -712,9 +713,11 @@ export default StyleSheet.create({
     firstColumn: {
         paddingLeft: hp(4.5),
         width: hp(75.55),
+        // backgroundColor : 'red'
     },
     secoundColumn: {
-        width: hp(15.80),
+        width: hp(30),
+        // backgroundColor : 'orange'
     },
     lastColumn: {
         right: 20,
