@@ -301,7 +301,7 @@ const LessonDetail = (props) => {
                                             setSearchKeyword(keyword);
                                         }} />
                                     <TouchableOpacity
-                                        style={PAGESTYLE.userIcon1Parent}
+                                        style={[PAGESTYLE.userIcon1Parent]}
                                         activeOpacity={opacity}
                                         onPress={() => {
                                             searchKeyword ?
@@ -318,11 +318,11 @@ const LessonDetail = (props) => {
                                         {isSearchActive ?
                                             <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
                                             :
-                                            <SearchBlue style={PAGESTYLE.userIcon1} height={20} width={20} />
+                                            <SearchBlue style={[PAGESTYLE.userIcon1]} height={20} width={20} />
                                         }
                                     </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity style={PAGESTYLE.buttonGroup}>
+                                <TouchableOpacity style={[PAGESTYLE.buttonGroup]}>
                                     <Menu style={PAGESTYLE.filterGroup}>
                                         <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
                                         <MenuOptions style={PAGESTYLE.filterListWrap}>

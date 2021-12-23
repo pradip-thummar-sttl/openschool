@@ -17,17 +17,19 @@ const HeaderAddNew = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
-                    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
+                <View style={{flexDirection : 'row',justifyContent : 'center',alignItems : 'center'}}>
+            <TouchableOpacity  activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
-                    </TouchableOpacity> Add New Lesson
-                </Text>
+                    </TouchableOpacity>
+                <Text style={styles.mainTitle}>Add New Lesson</Text>
+                  
+            </View>
                 <View style={styles.headerRight}>
                     {
                     props.isLoading ?
                         <ActivityIndicator style={styles.commonButtonGreenheaderwithouticon} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
                         :
-                        <TouchableOpacity style={styles.buttonGroup} activeOpacity={opacity} onPress={() => props.saveLesson()}>
+                        <TouchableOpacity style={[styles.buttonGroup,{justifyContent : 'center'}]} activeOpacity={opacity} onPress={() => props.saveLesson()}>
                             <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                             <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                         </TouchableOpacity>
@@ -54,6 +56,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,
+        // alignItems : 'center'
     },
     headerMain: {
         flexDirection: 'row',
@@ -180,7 +183,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.5),
+        // top: hp(1.5),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -253,7 +256,7 @@ const styles = StyleSheet.create({
     },
     arrow: {
         width: hp(2.34),
-        top: -3,
+       //top = -3
         resizeMode: 'contain',
         marginRight: hp(1),
     },

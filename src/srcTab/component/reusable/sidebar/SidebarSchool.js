@@ -22,6 +22,7 @@ import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 import Teachers from "../../../../svg/sidebar/Teachers";
 import Pupils from "../../../../svg/sidebar/Pupils";
 import Messaging from "../../../../svg/sidebar/Messaging";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 
 const SidebarSchool = (props) => {
@@ -224,7 +225,7 @@ const SidebarSchool = (props) => {
                             {
                                 isSmall ? null :
                                     <>
-                                        <View style={styles.profileTextMain}>
+                                        <View style={[styles.profileTextMain,{width : '64%'}]}>
                                             <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                                         </View>
                                         <TouchableOpacity style={styles.moreMenu}>

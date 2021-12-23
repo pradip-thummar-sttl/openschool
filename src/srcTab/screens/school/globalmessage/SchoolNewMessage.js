@@ -203,7 +203,7 @@ const SchoolNewMessage = (props) => {
                                 autoCapitalize={'sentences'}
                                 placeholderStyle={styles.somePlaceholderStyle}
                                 placeholderTextColor={COLORS.borderGrp}
-                                style={[styles.commonInputTextarea1, , styles.inputWidth]}
+                                style={[styles.commonInputTextarea1,{paddingVertical : Platform.OS === 'android' ? 3 :0 } , styles.inputWidth]}
                                 onChangeText={title => setTitle(title)} />
                         </View>
                     </View>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Dimensions, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, Dimensions, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, widthPercentageToDP } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -67,7 +67,7 @@ const HeaderWhitepupilMessage = (props) => {
                     
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%',paddingVertical : 3, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search Messages"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -239,6 +239,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         right: 15,
+        width : '15%',
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -381,7 +382,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         borderRadius: 10,
-        width: '70%',
+        width:Platform.OS === 'android' ? '80%' :'70%',
         flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {
