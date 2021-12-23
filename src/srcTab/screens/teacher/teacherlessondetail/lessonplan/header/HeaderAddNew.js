@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.5),
+        // top: hp(1.5),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     },
     arrow: {
         width: hp(2.34),
-        top: -3,
+       //top = -3
         resizeMode: 'contain',
         marginRight: hp(1),
     },
