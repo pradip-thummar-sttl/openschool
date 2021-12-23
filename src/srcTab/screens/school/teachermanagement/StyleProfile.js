@@ -355,6 +355,7 @@ export default StyleSheet.create({
     },
     nameSmlBlock:{
         width: '25%',
+        marginEnd : Platform.OS === 'ios' ? 30 : 0
     },
     dateSmlBlock:{
         width: '25%',

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../../utils/Fonts';
@@ -1229,7 +1229,7 @@ export default StyleSheet.create({
         height: hp(2),
         resizeMode: 'contain',
         alignSelf: 'center',
-        top: hp(1),
+        top:Platform.OS === 'android' ? hp(1) : hp(2) , //hp(1),
         right: 5
        
     },
