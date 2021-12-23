@@ -17,11 +17,18 @@ const HeaderAddNew = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
+                {/* <Text style={styles.mainTitle}>
                     <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity> Add New Lesson
-                </Text>
+                </Text> */}
+                 <View style={{flexDirection : 'row',justifyContent : 'center',alignItems : 'center'}}>
+            <TouchableOpacity  activeOpacity={opacity} onPress={() => props.navigateToBack()}>
+                        <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
+                    </TouchableOpacity>
+                <Text style={styles.mainTitle}>Add New Lesson</Text>
+                  
+            </View>
                 <View style={styles.headerRight}>
                     {
                     props.isLoading ?
@@ -50,7 +57,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,
@@ -253,7 +260,7 @@ const styles = StyleSheet.create({
     },
     arrow: {
         width: hp(2.34),
-        top: -3,
+        // top: -3,
         resizeMode: 'contain',
         marginRight: hp(1),
     },
