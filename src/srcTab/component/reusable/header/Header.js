@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3),
         paddingBottom: Platform.OS == 'android' ? hp(2) : hp(2),
+        // paddingBottom: hp(5),
         backgroundColor: COLORS.transparent,
     },
     mainTitle: {

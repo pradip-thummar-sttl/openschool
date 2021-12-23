@@ -556,7 +556,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         left: hp(4.8),
-        bottom: hp(-0.2),
+        bottom: hp(-0.6),
         borderRadius: hp(1.065),
         borderColor: COLORS.greyInsightLable,
         backgroundColor : 'white'
@@ -566,7 +566,7 @@ export default StyleSheet.create({
         position: 'absolute',
         // right: 32,
         right : Platform.OS === 'android' ? 6 : 32,
-        top: 17,
+        top: Platform.OS === 'android' ? 17 : hp(18)
     },
     topBannerBtn1: {
         fontFamily: FONTS.fontBold,

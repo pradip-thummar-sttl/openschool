@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -606,8 +606,9 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         left: hp(4.8),
-        bottom: hp(-1.6),
-        borderRadius: 15,
+        bottom: hp(-0.8),
+        borderRadius: hp(1.29),
+        backgroundColor : 'white',
         borderColor: COLORS.greyInsightLable,
     },
     topBannerParent: {

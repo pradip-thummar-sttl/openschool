@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -712,7 +712,7 @@ export default StyleSheet.create({
     },
     firstColumn: {
         paddingLeft: hp(4.5),
-        width: hp(75.55),
+        width: Platform.OS === 'android' ?  hp(75.55) : hp(30),
         // backgroundColor : 'red'
     },
     secoundColumn: {

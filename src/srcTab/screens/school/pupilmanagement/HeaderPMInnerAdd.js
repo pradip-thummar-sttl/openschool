@@ -22,8 +22,8 @@ const HeaderPMInnerAdd = (props) => {
 
     return (
         <View style={styles.headerMain}>
-            <View style={styles.headerMaintop}>
-                <View style={styles.titleRow}>
+            <View style={[styles.headerMaintop]}>
+                <View style={[styles.titleRow]}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
@@ -40,7 +40,7 @@ const HeaderPMInnerAdd = (props) => {
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        <Notification style={[styles.massagesIcon,,{top : Platform.OS === 'android' ? 0 : 4}]} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>

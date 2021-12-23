@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
-        top : Platform.OS === 'android' ? 2 : 10
+        top : Platform.OS === 'android' ? 5 : 10
     },
     whiteBg: {
         paddingLeft: hp(3.90),

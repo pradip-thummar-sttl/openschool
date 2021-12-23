@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../../utils/Colors";
 // import Images from '../../../../../../utils/Images';
@@ -14,7 +14,7 @@ import STYLE from "../../../../../../utils/Style";
 const HeaderHWS = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain,{top : Platform.OS === 'ios' ? 4 : 0}]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}

@@ -1229,7 +1229,8 @@ export default StyleSheet.create({
         height: hp(2),
         resizeMode: 'contain',
         alignSelf: 'center',
-        top:Platform.OS === 'android' ? hp(1) : hp(2) , //hp(1),
+        // top: hp(1),
+        top : Platform.OS === 'android' ? hp(1) : hp(2),
         right: 5
        
     },
