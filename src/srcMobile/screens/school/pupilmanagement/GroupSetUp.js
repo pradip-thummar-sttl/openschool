@@ -82,7 +82,7 @@ const GroupSetUp = (props) => {
                     {/* <Image
                         style={PAGESTYLE.groupEdit1}
                         source={Images.Edit} /> */}
-                    <Ic_Edit style={PAGESTYLE.groupEdit1} height={hp(2)} width={hp(2)} />
+                    <Ic_Edit style={PAGESTYLE.groupEdit1} height={hp(3.8)} width={hp(2)} />
                 </TouchableOpacity>
             </View>
             <ScrollView

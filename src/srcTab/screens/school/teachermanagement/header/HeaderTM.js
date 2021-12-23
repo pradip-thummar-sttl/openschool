@@ -85,12 +85,12 @@ const HeaderTM = (props) => {
                         {isSearchActive ?
                             <CloseBlack height={20} width={20} />
                             :
-                            <SearchBlue height={20} width={20} />
+                            <SearchBlue height={18} width={18} />
                         }
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%',paddingVertical  : 3, paddingStart : 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search teacher"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}

@@ -186,7 +186,7 @@ const PupilManagement = (props) => {
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class Group</Text>
                                                     </View>
 
-                                                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
+                                                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22,{alignItems : 'center'}]}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
                                                     </View>
                                                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>

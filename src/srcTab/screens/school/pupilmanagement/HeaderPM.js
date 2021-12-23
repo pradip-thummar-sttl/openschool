@@ -108,7 +108,7 @@ const HeaderPM = (props) => {
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ width: '100%', height: '100%',paddingVertical : 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search pupil"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
@@ -452,6 +452,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: hp(40.59),
         flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
+        // backgroundColor : 'green'
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',

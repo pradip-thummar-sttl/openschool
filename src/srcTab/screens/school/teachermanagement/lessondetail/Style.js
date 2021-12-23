@@ -774,11 +774,19 @@ export default StyleSheet.create({
         height: hp(8.85),
         borderRadius: hp(0.6),
         marginBottom:hp(0.78),
+       
+    },
+    pupilDataList : {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width : '100%',
+        
     },
     pupilProfile: {
         width: hp(15.80),
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent : 'center'
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -866,10 +874,16 @@ export default StyleSheet.create({
     },
     firstColumn: {
         paddingLeft: hp(4.5),
-        width: hp(34.55),
+        width: hp(40),
+        // backgroundColor  :'red',
+        marginRight : hp(2),
+        alignItems : 'center'
     },
     secoundColumn: {
-        width: hp(22.55),
+        width: hp(30),
+        alignItems : 'center',
+       marginHorizontal : 5,
+    //    backgroundColor : 'blue'
     },
     lastColumn: {
         width: hp(18.55),
@@ -1207,6 +1221,7 @@ export default StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 2,
+        
     },
     userIcon1: {
         position: 'absolute',
@@ -1214,8 +1229,9 @@ export default StyleSheet.create({
         height: hp(2),
         resizeMode: 'contain',
         alignSelf: 'center',
-        top: 10,
+        top: hp(1),
         right: 5
+       
     },
     autocompleteContainer: {
         flex: 1,
@@ -1264,10 +1280,11 @@ export default StyleSheet.create({
         position: 'relative',
         width: hp(30),
         justifyContent: 'center',
+        // alignItems : 'center',
         marginRight: hp(1.69),
     },
     searchHeader: {
-        height: hp(5.20),
+        height: hp(6.20),
         paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
