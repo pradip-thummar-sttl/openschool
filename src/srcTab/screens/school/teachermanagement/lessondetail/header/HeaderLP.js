@@ -15,7 +15,7 @@ const HeaderLP = (props) => {
 
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain,{top : Platform.OS === 'ios' ? 4 : 0}]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}
@@ -35,7 +35,7 @@ const HeaderLP = (props) => {
                         <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                     </TouchableOpacity> */}
                     <TouchableOpacity
-                        style={styles.notificationBar}
+                        style={[styles.notificationBar,{justifyContent : 'center',alignItems : 'center'}]}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
+        // top : 8
     },
     filterbarMain: {
         flexDirection: 'row',

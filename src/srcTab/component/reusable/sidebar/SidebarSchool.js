@@ -224,7 +224,7 @@ const SidebarSchool = (props) => {
                             {
                                 isSmall ? null :
                                     <>
-                                        <View style={styles.profileTextMain}>
+                                        <View style={[styles.profileTextMain,{width : '64%'}]}>
                                             <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                                         </View>
                                         <TouchableOpacity style={styles.moreMenu}>

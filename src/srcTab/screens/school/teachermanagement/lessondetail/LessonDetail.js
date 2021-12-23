@@ -301,7 +301,7 @@ const LessonDetail = (props) => {
                                             setSearchKeyword(keyword);
                                         }} />
                                     <TouchableOpacity
-                                        style={PAGESTYLE.userIcon1Parent}
+                                        style={[PAGESTYLE.userIcon1Parent]}
                                         activeOpacity={opacity}
                                         onPress={() => {
                                             searchKeyword ?
