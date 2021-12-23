@@ -311,6 +311,7 @@ export default StyleSheet.create({
     },
     profileImageArea: {
         alignItems: 'center',
+        backgroundColor:'#90daff'
     },
     coverImage: {
         width: '100%',

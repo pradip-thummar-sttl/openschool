@@ -18,43 +18,24 @@ const HeaderAddNew = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
-                    </TouchableOpacity> Add New Lesson</Text>
+                    </TouchableOpacity> Add New Lesson
+                </Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                      <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>*/}
-                    {props.isLoading ?
-                        <ActivityIndicator
-                            style={styles.commonButtonGreenheaderwithouticon}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.white} />
+                    {
+                    props.isLoading ?
+                        <ActivityIndicator style={styles.commonButtonGreenheaderwithouticon} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
                         :
-                        <TouchableOpacity
-                            style={styles.buttonGroup}
-                            activeOpacity={opacity}
-                            onPress={() => props.saveLesson()}>
-                            {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                        <TouchableOpacity style={styles.buttonGroup} activeOpacity={opacity} onPress={() => props.saveLesson()}>
                             <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                             <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                    <TouchableOpacity style={styles.notificationBar} onPress={() => props.onAlertPress()} activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
+                        BadgeIcon.isBadge && <View style={STYLE.redDot}></View>
                     }
                     </TouchableOpacity>
                 </View>

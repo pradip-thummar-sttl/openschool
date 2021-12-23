@@ -75,6 +75,7 @@ const COLORS = {
     greyInsightLable: '#cacbd1',
     lightOrangeLogin:"#ffd719",
     lightBlueLogin:"#90daff",
+    lightgreenLogin:"#8ce33a",
 
 }
 

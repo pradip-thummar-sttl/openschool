@@ -16,11 +16,8 @@ const HeaderAddNew = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.titleRow}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
-
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
@@ -239,10 +236,12 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(2),
-        top: Platform.OS == 'android' ? hp(1.2) : hp(0)
+        // top: Platform.OS == 'android' ? hp(1.2) : hp(0)
     },
     titleRow: {
         flexDirection: 'row',
+        justifyContent:'flex-start',
+        alignItems:'center',
     },
     tickLayout: {
         backgroundColor: COLORS.buttonGreen,

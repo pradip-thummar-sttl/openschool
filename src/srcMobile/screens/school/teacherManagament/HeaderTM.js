@@ -267,7 +267,6 @@ const HeaderTM = (props) => {
                 >
                     <View style={styles.popupLarge}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
@@ -284,11 +283,8 @@ const HeaderTM = (props) => {
                                             <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
                                         </TouchableOpacity> */}
                                         <MPopupdataSecondCSVUpload />
-                                        <TouchableOpacity
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                                            <ImportIndividual style={styles.entryIcon} height={hp(12)} width={hp(12)} />
+                                        <TouchableOpacity style={styles.entryData} onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                            <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                             <Text style={styles.entryTitle}>ADD MANUALLy</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -571,7 +567,7 @@ const styles = StyleSheet.create({
     },
     entryData: {
         marginBottom: hp(5.14),
-        alignItems: 'center'
+        alignItems: 'center',
     },
     entryIcon: {
         marginBottom: hp(2.28),
