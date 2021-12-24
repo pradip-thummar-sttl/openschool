@@ -16,6 +16,7 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 import BackArrow from "../../../../svg/common/BackArrow";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const SGroupSetUpPupilSelection = (props) => {
 
@@ -249,7 +250,7 @@ const SGroupSetUpPupilSelection = (props) => {
                     <CheckBox
                         boxType={'square'}
                         onCheckColor={COLORS.white}
-                        style={STYLE.checkBoxcommon}
+                        style={[STYLE.checkBoxcommon]}
                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                         onFillColor={COLORS.dashboardPupilBlue}
                         onTintColor={COLORS.dashboardPupilBlue}
