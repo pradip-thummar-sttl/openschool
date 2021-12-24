@@ -204,7 +204,7 @@ const NewMessage = (props) => {
                                 autoCapitalize={'sentences'}
                                 placeholderStyle={styles.somePlaceholderStyle}
                                 placeholderTextColor={COLORS.borderGrp}
-                                style={[styles.commonInputTextarea1, , styles.inputWidth]}
+                                style={[styles.commonInputTextarea1, , styles.inputWidth,{paddingVertical : Platform.OS === 'android' ? 3 : 0}]}
                                 onChangeText={title => setTitle(title)} />
                         </View>
                     </View>

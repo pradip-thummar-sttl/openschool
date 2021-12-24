@@ -372,25 +372,20 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={0}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+           
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <Header onNotification={()=>openNotification()} onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}
-                                onPress={() => initOneToOneCall(pupilData)}>
+
+                            <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall(pupilData)}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Start a new call</Text>
-                                    {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground> */}
                                     <StartNewCall style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                 </View>
                             </TouchableOpacity>
+                            
                             <TouchableOpacity
                                 style={PAGESTYLE.boxDash}
                                 activeOpacity={opacity}

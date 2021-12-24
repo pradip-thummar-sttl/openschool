@@ -111,7 +111,7 @@ const PupilChat = (props) => {
                                             )
                                         }} />
                                 </View>
-                                <View style={[Styles.textView, { width: '100%',  }]}>
+                                <View style={[Styles.textView, { width: '100%', bottom : 18 }]}>
                                     <TextInput
                                         style={Styles.input}
                                         multiline={true}

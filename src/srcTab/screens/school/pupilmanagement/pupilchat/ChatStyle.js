@@ -120,7 +120,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.greyBack,
         // position:'absolute',
         // bottom:0
-        // bottom:0,
+        // bottom:18,
     },
     messageCell: {
         flexDirection: 'row',

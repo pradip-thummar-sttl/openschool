@@ -79,12 +79,7 @@ const HeaderPTInner = (props) => {
                                 onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Lessons & Homework</Text>
                             </TouchableOpacity>
-                            {/* <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(3), props.tabIndex(3) }}>
-                                <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>School chat</Text>
-                            </TouchableOpacity> */}
+                           
                         </View>
                     </ScrollView>
                 </View>

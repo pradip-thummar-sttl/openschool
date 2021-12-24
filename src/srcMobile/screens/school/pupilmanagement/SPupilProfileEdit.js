@@ -24,7 +24,6 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 const { CallModule } = NativeModules;
 
 const SPupilProfileEdit = (props) => {
-    // const [isHide, action] = useState(true);
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -88,9 +87,9 @@ const SPupilProfileEdit = (props) => {
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
+                  
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
                             data={teachers}
@@ -287,25 +286,17 @@ const SPupilProfileEdit = (props) => {
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
-                        <View style={PAGESTYLE.profileImageArea}>
-                            {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
-                            <TopBackImg style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
+                        <View style={[PAGESTYLE.profileImageArea,{backgroundColor:COLORS.white}]}>
+                            <TopBackImg style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.5)}  />
 
                             <View style={PAGESTYLE.profileOuter}>
-                            <Image style={PAGESTYLE.profileImage}
-                                        source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                <View style={PAGESTYLE.editProfileMain}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => showActionChooser()}>
-                                        {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                        <Ic_Edit style={PAGESTYLE.editProfileIcon} width={hp(2)} height={hp(2)} />
-                                    </TouchableOpacity>
-                                </View>
-                                {/* <Image style={PAGESTYLE.profileImage}></Image> */}
-                                {/* <TouchableOpacity onPress={()=>showActionChooser()} style={PAGESTYLE.editProfileMain}> */}
-                                {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                {/* </TouchableOpacity> */}
+                                <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
+                                    <Image style={PAGESTYLE.profileImage}  source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
+                                    <View style={PAGESTYLE.EditIcnView}>
+                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
+                                    </View>
+                                </TouchableOpacity>
+                               
                             </View>
                         </View>
                     </View>
@@ -479,6 +470,7 @@ const SPupilProfileEdit = (props) => {
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
                     />
+                    <View style={{height: Platform.OS == "ios" ? 130 : 30}}/>
                 </ScrollView>
             </View>
         </View>

@@ -359,7 +359,7 @@ const SchoolDashboard = (props) => {
                                             <View style={PAGESTYLE.myDay}>
                                                 <View style={{...STYLE.viewRow, alignItems: 'center',position: 'relative',}}>
                                                     {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
-                                                    <Insights style={{...PAGESTYLE.dayIcon, top:4}} height={hp(3.25)} width={hp(4.33)} />
+                                                    <Insights style={{...PAGESTYLE.dayIcon, top:Platform.OS === 'android' ? -1 : 0}} height={hp(3.25)} width={hp(4.33)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>Insights</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>

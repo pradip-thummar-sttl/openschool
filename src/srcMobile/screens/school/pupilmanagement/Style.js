@@ -14,7 +14,7 @@ export default StyleSheet.create({
     },
     left1: {
         flex: 1,
-        paddingTop: hp(2.46)
+        paddingTop: hp(1.5)
     },
     middle: {
         flex: 0.48,
@@ -83,8 +83,8 @@ export default StyleSheet.create({
         width: hp(2),
         resizeMode: 'contain',
         right: 0,
-        top: 5,
-        marginTop:7
+        top: 2,
+        // marginTop:7
     },
     selectedPupilName: {
         fontSize: hp(2.46),
@@ -198,8 +198,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     mainPage: {
-        height: '75%',
-        paddingHorizontal: hp(1.8),
+        height: '100%',
+        paddingHorizontal: hp(2),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,
     },
@@ -311,6 +311,7 @@ export default StyleSheet.create({
     },
     profileImageArea: {
         alignItems: 'center',
+        backgroundColor:'#90daff'
     },
     coverImage: {
         width: '100%',
@@ -332,7 +333,26 @@ export default StyleSheet.create({
         backgroundColor:COLORS.borderGrp,
         borderWidth:5,
         borderColor:COLORS.white
-        // resizeMode: 'contain',
+    },
+    pzEditIcon: {
+        width: hp(2.58),
+        height: hp(2.58),
+        resizeMode: 'contain',
+        position: 'absolute',
+        borderRadius: 15,
+        borderColor: COLORS.greyInsightLable
+    },
+    EditIcnView:{
+        width: hp(4),
+        height: hp(4),
+        borderRadius: hp(4/2),
+        left: hp(4.8),
+        bottom: hp(2),
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:COLORS.white,
+        borderWidth:1,
+        borderColor:COLORS.borderGrp,
     },
     mainDetails: {
         marginTop: hp(8.75),
@@ -368,7 +388,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     scrollViewCommon: {
-        marginBottom: hp(30),
+        marginBottom: hp(15),
     },
     scrollViewCommonPupilEdit: {
         marginBottom: hp(15),
@@ -555,7 +575,7 @@ export default StyleSheet.create({
         left: hp(0.3)
     },
     performancePArent: {
-        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%'
+        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '97%'
     },
     colorLeftParent: {
         flexDirection: 'row', alignItems: 'center', marginHorizontal: 15
@@ -616,17 +636,6 @@ export default StyleSheet.create({
         position:'absolute',
         right:hp(1.4),
         alignSelf: 'center',
-    },
-    
-    pzEditIcon: {
-        width: hp(2.58),
-        height: hp(2.58),
-        resizeMode: 'contain',
-        position: 'absolute',
-        left: hp(4.8),
-        bottom: hp(-1.6),
-        borderRadius: 15,
-        borderColor: COLORS.greyInsightLable,
     },
     subjectText: {
         flexDirection: 'row',

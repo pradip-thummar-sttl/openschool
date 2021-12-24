@@ -86,7 +86,6 @@ const TeacherManagement = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.pupilDetailLink}>
-                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
                     <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
                 </View>
             </TouchableOpacity>
@@ -149,14 +148,9 @@ const TeacherManagement = (props) => {
 
     return (
         <View>
-            {/* <HeaderTM
-                onAlertPress={() => props.navigation.openDrawer()}
-                title={'Teacher Management'}
-            /> */}
 
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
-                // onCalenderPress={() => { props.navigation.navigate('Calendars') }}
                 openCsv={()=>{}}
                 navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}

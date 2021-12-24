@@ -53,7 +53,7 @@ export default class ParentZoneSwitch extends Component {
         return (
             <View style={styles.container}>
                 
-                <View style={{backgroundColor: COLORS.lightOrangeLogin}}>
+                <View style={{backgroundColor: COLORS.lightgreenLogin}}>
                      <SelectPupilTopBg_Mobile style={styles.image} width= {'100%'} height={hp(16.5)}/>
                 </View>
 
