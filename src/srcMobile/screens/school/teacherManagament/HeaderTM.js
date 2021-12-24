@@ -43,22 +43,22 @@ const HeaderTM = (props) => {
     const refRBSheetCSV = useRef();
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [selectedIndex, setSelectedIndex] = useState(0)
+    const [filterBy, setFilterBy] = useState('1')
     const [isModalVisible, setModalVisible] = useState(false)
 
-    useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
-    }, [isSearchActive])
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         textInput.current.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
 
-    useEffect(() => {
-        props.onFilter(filterBy)
-    }, [filterBy])
+    // useEffect(() => {
+    //     props.onFilter(filterBy)
+    // }, [filterBy])
 
     const addCSV = () => {
         console.log('hihihihihihi')
@@ -81,7 +81,7 @@ const HeaderTM = (props) => {
     }
 
     const uploadProfile = (csv) => {
-        
+
         let data = new FormData();
         let url;
 
@@ -110,6 +110,37 @@ const HeaderTM = (props) => {
 
     }
 
+
+    const onPressSearchButton = () => {
+        setSearchActive(true)
+        setTimeout(() => {
+            props.onSearch()
+        }, 500)
+    }
+
+    const onPressCloseButton = () => {
+        setSearchActive(false)
+        setTimeout(() => {
+            props.onClearSearch()
+            textInput.current.clear()
+        }, 500)
+    }
+
+
+    const OnPressAsc = () => {
+        setFilterBy('1'); setSelectedIndex(0)
+        setTimeout(() => {
+            props.onFilter('1')
+        }, 500)
+    }
+
+    const OnPressDes = () => {
+        setFilterBy('-1'); setSelectedIndex(1)
+        setTimeout(() => {
+            props.onFilter('-1')
+        }, 500)
+    }
+
     return (
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
             <View style={styles.headerMain}>
@@ -128,16 +159,16 @@ const HeaderTM = (props) => {
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                         {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => {
                             isSearchActive ?
@@ -145,14 +176,24 @@ const HeaderTM = (props) => {
                                 :
                                 setSearchActive(true)
                         }}>
-                        {/* <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        <Image style={{ height: 18, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                         {isSearchActive ?
                             <CloseBlack height={18} width={18} />
                             :
                             <SearchBlue height={18} width={18} />
                         }
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
+                    {isSearchActive ?
+                        <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
+                            <CloseBlack height={18} width={18} />
+                        </TouchableOpacity> :
+
+                        <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
+                            <SearchBlue height={18} width={18} />
+                        </TouchableOpacity>}
+
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
@@ -171,7 +212,7 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('1'); setSelectedIndex(0) }}>
+                                    onPress={() => { OnPressAsc() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
                                         {selectedIndex == 0 ?
@@ -186,7 +227,7 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('-1'); setSelectedIndex(1) }}>
+                                    onPress={() => { OnPressDes() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Desending)</Text>
                                         {selectedIndex == 1 ?
@@ -233,6 +274,14 @@ const HeaderTM = (props) => {
                                 <View style={styles.beforeBorder}>
                                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
                                     <View style={styles.entryContentMain}>
+                                        {/* <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            style={styles.entryData}
+                                            onPress={() => { refRBSheet.current.close(); props.openCsv() }}> */}
+                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                        {/* <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
+                                            <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
+                                        </TouchableOpacity> */}
                                         <MPopupdataSecondCSVUpload />
                                         <TouchableOpacity style={styles.entryData} onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
                                             <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />

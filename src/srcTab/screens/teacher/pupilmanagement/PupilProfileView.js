@@ -247,7 +247,7 @@ const PupilProfileView = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.graphBlock}>
 
-                                    <View style={PAGESTYLE.graphBox}>
+                                    <View style={[PAGESTYLE.graphBox,{ bottom : 5}]}>
                                         <View style={PAGESTYLE.generalRow}>
                                             <View style={PAGESTYLE.chartBlock}>
                                                 {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}

@@ -150,14 +150,7 @@ const Chat = (props) => {
                                 onChangeText={(text) => setMessage(text)}
                             />
                             <View style={Styles.buttonView}>
-                                {/* <TouchableOpacity>
-                                    <Image style={Styles.btn} source={Images.paperClip} />
-                                </TouchableOpacity>
-                                <TouchableOpacity >
-                                    <Image style={Styles.btn} source={Images.imageUpload} />
-                                </TouchableOpacity> */}
                                 <TouchableOpacity style={Styles.btnBack} onPress={() => sendMessage(message)}>
-                                    {/* <Image style={Styles.btn} source={Images.send} /> */}
                                     <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
                                 </TouchableOpacity>
                             </View>

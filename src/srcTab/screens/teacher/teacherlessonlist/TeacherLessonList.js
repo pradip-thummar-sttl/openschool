@@ -61,6 +61,13 @@ const TeacherLessonList = (props) => {
     const [isAddSubject, setAddSubject] = useState(false)
     const [isTLDetail, setTLDetail] = useState(false)
     const [data, setItem] = useState([])
+
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+
+    const [limit, setLimit] = useState('25')
+
+    let pageNo = 1
+
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
         return (
@@ -97,19 +104,48 @@ const TeacherLessonList = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            page: String(pageNo),
+            limit: limit
         }
 
         Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                setLessonData(res.data)
+                // setLessonData(res.data)
+
+                if (allNewAndOldData.length) {
+                    if (res.data.length) {
+                        let array = []
+                        array.push(allNewAndOldData)
+                        array.push(res.data)
+                        setLessonData(array)
+                        setAllNewAndOldData(array)
+                    }
+                    else {
+                        setLessonData(allNewAndOldData)
+                    }
+                }
+                else {
+                    setLessonData(res.data)
+                    setAllNewAndOldData(res.data)
+                }
+
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
+    }
+
+    const addMorePage = () => {
+        pageNo = pageNo + 1
+
+        setTimeout(() => {
+            console.log('----pageno-----', pageNo)
+            fetchRecord('', '')
+        }, 1000)
     }
 
     const refresh = () => {
@@ -120,7 +156,7 @@ const TeacherLessonList = (props) => {
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
+        props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
 
@@ -176,12 +212,14 @@ const TeacherLessonList = (props) => {
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
                                             style={{ height: wp(53.5) }}
+                                            onEndReachedThreshold={0}
+                                            onEndReached={() => addMorePage()}
                                         />
                                         :
                                         // <View style={{ height: 100, justifyContent: 'center' }}>
                                         //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                                         // </View>
-                                        <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
+                                        <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                                 }
                             </SafeAreaView>
                         </View>
