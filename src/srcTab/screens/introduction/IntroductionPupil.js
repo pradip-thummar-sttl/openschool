@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         left: 0,
+        
+       
     },
     dotContainer: {
         backgroundColor: COLORS.transparent,
