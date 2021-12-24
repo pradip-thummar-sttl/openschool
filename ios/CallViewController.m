@@ -32,6 +32,10 @@
 #import <PubNub/PubNub.h>
 #import "MYED_Open_School-Swift.h"
 
+#import "Reachability.h"
+#import "ChatManager.h"
+#import "ChatViewController.h"
+
 
 
 
@@ -63,6 +67,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     BOOL _didStartPlayAndRecord;
 }
 
+
+@property (nonatomic, strong) ChatManager *chatManager;
 @property (weak, nonatomic) QBRTCConferenceSession *session;
 
 @property (strong, nonatomic) CustomButton *screenShareEnabled;
@@ -158,6 +164,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+  self.chatManager = [ChatManager instance];
   self.recordUrl=@"";
   self.isRecording = false;
   _isTeacherReload=false;
@@ -564,6 +571,47 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     
   }];
+  [self.toolbar addButton:[QBButtonsFactory chatButton] action: ^(UIButton *sender) {
+      
+//      weakSelf.muteAudio ^= 1;
+//    if (Reachability.instance.networkStatus == NetworkStatusNotReachable) {
+//        [self showAlertWithTitle:NSLocalizedString(@"No Internet Connection", nil)
+//                         message:NSLocalizedString(@"Make sure your device is connected to the internet", nil)
+//              fromViewController:self];
+//        [SVProgressHUD dismiss];
+//        return;
+//    }
+    if (weakSelf.users.count >= 1) {
+        // Creating private chat.
+        [SVProgressHUD show];
+        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
+        
+      
+      [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
+            if (response.error) {
+                [SVProgressHUD showErrorWithStatus:response.error.error.localizedDescription];
+                return;
+            }
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
+            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+        ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+        chatController.dialogID = createdDialog.ID;
+        [weakSelf presentViewController:chatController animated:false completion:nil];
+            
+//            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+//              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+//              ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//              chatController.dialogID = createdDialog.ID;
+//              [weakSelf presentViewController:chatController animated:false completion:nil];
+//
+//            }];
+        }];
+    }
+    
+    
+  }];
     
 //    if (_conferenceType > 0) {
 ////      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
@@ -641,7 +689,16 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     self.navigationItem.rightBarButtonItem = self.addUsersItem;
     
 }
-
+- (NSString *)systemMessageWithChatName:(NSString *)chatName {
+    NSString *actionMessage = NSLocalizedString(@"SA_STR_CREATE_NEW", nil);
+  
+//    Profile *currentUser = [[Profile alloc] init];
+//    if (currentUser.isFull == NO) {
+//        return @"";
+//    }
+    NSString *message = [NSString stringWithFormat:@"%@ %@ \"%@\"",  [QBSession currentSession].currentUser.fullName, actionMessage, chatName];
+    return message;
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
