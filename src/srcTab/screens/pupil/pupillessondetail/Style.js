@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -229,7 +229,7 @@ export default StyleSheet.create({
     checkBoxLabelText: {
         fontSize: hp(1.85),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.2),
+        paddingLeft: Platform.OS === 'android' ? hp(3.2) : hp(1.2)
     },
     checkMark: {
         width: hp(1.95),

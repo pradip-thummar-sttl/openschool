@@ -263,7 +263,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.82),
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(2.5),
+        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(3),
         minHeight: hp(6),
         paddingRight: hp(1),
     },
@@ -276,7 +276,8 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
-        top: 5,
+        top : Platform.OS === 'android' ? 3 : 4,
+        // top: 3,
         left: 3,
         fontFamily: FONTS.fontBold,
     },
