@@ -1,8 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
-// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
@@ -18,7 +17,6 @@ const HeaderLP = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
@@ -27,20 +25,10 @@ const HeaderLP = (props) => {
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity> */}
+                  
                     <TouchableOpacity activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}
                         style={styles.profileEdit}>
-                        {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
                         <EditWhite style={styles.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
                     </TouchableOpacity>
                 </View>
@@ -52,11 +40,11 @@ export default HeaderLP;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(2.46),
-        paddingRight: hp(2),
+        paddingLeft: hp(2.44),
+        paddingRight: hp(0.5),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(0) : hp(5.85),
-        paddingBottom: Platform.OS == 'android' ? hp(0) : 15,
+        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.85),
+        paddingBottom: 15,
     },
     headerMain: {
         flexDirection: 'row',
@@ -64,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mainTitle: {
-        fontSize: hp(1.97),
+        fontSize: wp(4.26),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
@@ -89,7 +77,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         padding: hp(1.5),
         borderRadius: hp(1),
-        marginBottom: hp(1.32),
+        // marginBottom: hp(1.32),
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -230,6 +218,7 @@ const styles = StyleSheet.create({
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
+       
     },
     lessonPlanTop: {
         flexDirection: 'row',

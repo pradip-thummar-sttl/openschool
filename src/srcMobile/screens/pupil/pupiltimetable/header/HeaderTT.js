@@ -31,7 +31,7 @@ const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
+    const [selectedIndex, setSelectedIndex] = useState(2)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')

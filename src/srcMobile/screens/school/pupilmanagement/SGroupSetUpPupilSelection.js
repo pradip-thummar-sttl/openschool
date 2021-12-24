@@ -27,7 +27,7 @@ const SGroupSetUpPupilSelection = (props) => {
     const [selectedGroup, setSelectedGroup] = useState([])
     const [groupName, setGroupName] = useState(props.route.params.isForUpdate ? props.route.params.groupName : '')
     const [isPupilLoading, setPupilLoading] = useState([])
-    const [isGroupLoading, setGroupLoading] = useState([])
+    const [isGroupLoading, setGroupLoading] = useState(false)
 
     const [selectedTeacher, setSelectedTeacher] = useState([])
     const [teachers, setTeachers] = useState([])
@@ -314,7 +314,7 @@ const SGroupSetUpPupilSelection = (props) => {
                 activeOpacity={opacity}
                 onPress={() => { props.route.params.onRefresh(); props.navigation.goBack() }}>
                 {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
-                <BackArrow style={PAGESTYLE.arrow} height={hp(2.34)} width={hp(2.34)} />
+                <BackArrow style={PAGESTYLE.backArrow} height={hp(2.34)} width={hp(2.34)} />
 
             </TouchableOpacity>
             {/* <TextInput
@@ -347,7 +347,7 @@ const SGroupSetUpPupilSelection = (props) => {
                         <EmptyStatePlaceHohder holderType={4} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', paddingHorizontal: hp(2.46), }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', paddingHorizontal: hp(1.2), }}>
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>
@@ -355,7 +355,7 @@ const SGroupSetUpPupilSelection = (props) => {
                             <ActivityIndicator
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.white} />
-                            : <Text style={PAGESTYLE.button1}>Assign Group</Text>}
+                            : <Text style={PAGESTYLE.button1}>Assign Group </Text>}
 
                     </TouchableOpacity>
                 </View>

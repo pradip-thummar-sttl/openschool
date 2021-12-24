@@ -56,6 +56,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
     const [isModalVisible1, setModalVisible1] = useState(false);
     const [recordingName, setRecordingName] = useState('');
 
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -85,7 +88,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
         recordingArr.forEach(element => {
             let ext = element.fileName.split('.');
-            
+
             if (Platform.OS === 'ios') {
                 ext = element.uri.split('.');
             }
@@ -176,40 +179,40 @@ const TLHomeWorkSubmittedDetail = (props) => {
     }
     const stopRecording = async () => {
         if (recordingName.length > 0) {
-         
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            // let obj = {
-            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-            //     originalname: 'MY_RECORDING.mp4',
-            //     fileName: 'MY_RECORDING.mp4',
-            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            // }
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: `${recordingName}.mp4`,
-                fileName: `${recordingName}.mp4`,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
             }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            setRecordingName("")
-            toggleModal()
-            console.log('url', url);
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
-    }else{
-        // setRecordingStarted(false)
-        // toggleModal()
-        showMessage('Please provide recording name proper')
-    }
     }
     // const stopRecording = async () => {
     //     var arr = []
@@ -235,24 +238,72 @@ const TLHomeWorkSubmittedDetail = (props) => {
     //     }
     // }
 
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
 
-                setRecordingArr(arr)
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
     }
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr]
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
+
     const onStarSelection = (index) => {
         setBronze(false)
         setSilver(false)
@@ -266,7 +317,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
         }
     }
 
-    const removeRecording=()=>{
+    const removeRecording = () => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
@@ -298,19 +349,20 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                 value={recordingName}
                                                 placeholderStyle={PAGESTYLE.somePlaceholderStyle}
                                                 placeholderTextColor={COLORS.popupPlaceHolder}
-                                                style={[PAGESTYLE.commonInputTextarea,{height:50}]}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50 }]}
                                                 onChangeText={eventName => setRecordingName(eventName)} />
                                         </View>
                                     </View>
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={()=>{stopRecording()}}
+                                // onPress={()=>{stopRecording()}}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
                             </TouchableOpacity>
-                    </View>
+                        </View>
                     </View>
                 </KeyboardAwareScrollView>
             </Modal>
@@ -406,21 +458,21 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             style={{ alignSelf: 'center', width: '100%', top: 10, paddingHorizontal: 10 }}
                                             renderItem={({ item, index }) => (
                                                 <TouchableOpacity onPress={() => {
-                                                    setLoader(true);setMateIndex(index); Download(item, (res) => {
+                                                    setLoader(true); setMateIndex(index); Download(item, (res) => {
                                                         setLoader(false)
                                                         setMateIndex(-1)
                                                     })
                                                 }} style={PAGESTYLE.downloaBtn}>
                                                     <View style={PAGESTYLE.alignRow}>
-                                                        {(isMatLoading && index==mateIndex) ?
+                                                        {(isMatLoading && index == mateIndex) ?
                                                             <ActivityIndicator
                                                                 style={{ ...PAGESTYLE.markedIcon }}
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                 color={COLORS.blueBorder} />
                                                             :
                                                             // <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} />
-                                                            <Doc style={PAGESTYLE.markedIcon}/>
-                                                            
+                                                            <Doc style={PAGESTYLE.markedIcon} />
+
                                                         }
                                                         {/* <Image source={Images.pdfIcon} style={PAGESTYLE.markedIcon} /> */}
                                                     </View>
@@ -465,8 +517,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                         onScreeVoice={() => onScreeVoice()}
                                         onStartScrrenRecording={() => startRecording()}
                                         onStopScrrenRecording={() => toggleModal()}
-                                        onCameraOnly={() => onCameraOnly()} 
-                                        onRemoveRecording={()=>removeRecording()}/>
+                                        onCameraOnly={() => onCameraOnly()}
+                                        onRemoveRecording={() => removeRecording()} />
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

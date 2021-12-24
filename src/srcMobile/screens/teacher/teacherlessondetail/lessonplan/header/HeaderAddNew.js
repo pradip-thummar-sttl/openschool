@@ -16,48 +16,29 @@ const HeaderAddNew = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.titleRow}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
-
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
                             Add New Lesson
-                    </Text>
+                        </Text>
                         <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>*/}
-                    <View style={styles.tickLayout}>
+
+                    <TouchableOpacity style={styles.tickLayout} activeOpacity={opacity} onPress={() => props.saveLesson()}>
+
                         {props.isLoading ?
-                            <ActivityIndicator
-                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.white} />
+                            <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
                             :
-                            <TouchableOpacity style={styles.buttonGroup}
-                                activeOpacity={opacity}
-                                onPress={() => props.saveLesson()}>
-                                {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                            <View style={styles.buttonGroup}>
                                 <TickMarkWhite style={styles.addIcon} height={12} width={12} />
-                                
-                            </TouchableOpacity>
+                            </View>
                         }
-                    </View>
-                    {/* <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
+
                 </View>
             </View>
         </View>
@@ -81,7 +62,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
-        marginBottom: Platform.OS == 'android' ? hp(-1) : hp(0),
+        marginBottom: Platform.OS == 'android' ? hp(-0.5) : hp(0),
     },
     massagesIcon: {
         width: hp(5.20),
@@ -255,10 +236,12 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(2),
-        top: Platform.OS == 'android' ? hp(1.2) : hp(0)
+        // top: Platform.OS == 'android' ? hp(1.2) : hp(0)
     },
     titleRow: {
         flexDirection: 'row',
+        justifyContent:'flex-start',
+        alignItems:'center',
     },
     tickLayout: {
         backgroundColor: COLORS.buttonGreen,

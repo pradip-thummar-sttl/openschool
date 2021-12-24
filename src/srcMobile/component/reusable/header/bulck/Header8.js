@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(1.8) : hp(5.85),
     },
     headerMain: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 15
+        paddingVertical: 6
     },
     titles: {
         marginLeft: hp(2),

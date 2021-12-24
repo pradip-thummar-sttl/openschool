@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
+       //
+        color: COLORS.darkGrayIntro,
     },
     date: {
         fontSize: hp(2.86),

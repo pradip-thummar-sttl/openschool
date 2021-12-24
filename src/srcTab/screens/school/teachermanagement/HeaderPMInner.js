@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
+        top : Platform.OS === 'android' ? 5 : 10
     },
     whiteBg: {
         paddingLeft: hp(3.90),

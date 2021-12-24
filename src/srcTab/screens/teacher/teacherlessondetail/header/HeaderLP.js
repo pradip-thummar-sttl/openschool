@@ -20,30 +20,16 @@ const HeaderLP = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity> */}
+                  
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                        {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                        { BadgeIcon.isBadge && <View style={STYLE.redDot}></View>}
                     </TouchableOpacity>
                 </View>
             </View>

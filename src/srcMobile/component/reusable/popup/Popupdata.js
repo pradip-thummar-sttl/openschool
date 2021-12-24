@@ -335,11 +335,12 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                     </View>
-                                    <View style={styles.uploadCalendar}>
+                                    <View style={[styles.uploadCalendar, {marginBottom: 10}]}>
                                         <TouchableOpacity>
                                             {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
+
                                     </View>
                                 </ScrollView>
                                 <View style={styles.lessonstartButton}>
@@ -354,16 +355,16 @@ const Popupdata = (props) => {
                             <View style={{ width: hp(20) }}></View>
                         } */}
                                     {!props.isPupil && props.data.Type == Lesson ?
-                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 10 }}>
+                                        <View style={{ ...STYLE.commonButtonBordered, marginRight: 5 }}>
                                             <TouchableOpacity
-                                                style={styles.buttonGrp}
+                                                style={styles.editButton}
                                                 activeOpacity={opacity}
                                                 onPress={() => { refRBSheet.current.close(); props.navigateToDetail() }}>
-                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, }}>Edit Lesson</Text>
+                                                <Text style={styles.btnEditSty}>Edit Lesson</Text>
                                             </TouchableOpacity>
                                         </View>
                                         :
-                                        <View style={STYLE.commonButtonBordered1}></View>
+                                        <View style={STYLE.commonButtonBordered1}/>
                                     }
                                     <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                         <TouchableOpacity
@@ -372,11 +373,9 @@ const Popupdata = (props) => {
                                             onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
                                             {
                                                 isLoading ?
-                                                    <ActivityIndicator
-                                                        style={{ ...styles.buttonGrp, }}
-                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                        color={COLORS.white} /> :
-                                                    <Text style={[styles.bottomDrwerButtonGreen]}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
+                                                    <ActivityIndicator  style={{ ...styles.buttonGrp, }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} /> 
+                                                    :
+                                                    <Text style={styles.bottomDrwerButtonGreen}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
                                             }
                                         </TouchableOpacity>
                                     </View>
@@ -427,6 +426,7 @@ const styles = StyleSheet.create({
         zIndex: 9,
         top: hp(1),
     },
+  
     popupCard: {
         backgroundColor: COLORS.white,
         width: '100%',
@@ -603,16 +603,18 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
+    
+    btnEditSty:{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, fontSize: hp(1.99),
+    fontWeight: '800',},
+
     bottomDrwerButtonGreen: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
+        fontSize: hp(1.99),
         fontWeight: '800',
         borderRadius: hp(0.9),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: Platform.OS == 'android' ? hp(4.5) : hp(3.94),
-        paddingRight: Platform.OS == 'android' ? hp(4.5) : hp(3.94),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
@@ -631,6 +633,7 @@ const styles = StyleSheet.create({
     calIcon: {
         width: hp(1.8),
         resizeMode: 'contain',
+       
     },
     timeIcon: {
         width: hp(1.8),
@@ -643,6 +646,7 @@ const styles = StyleSheet.create({
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
+       
     },
     downloadIcon: {
         width: hp(2.01),

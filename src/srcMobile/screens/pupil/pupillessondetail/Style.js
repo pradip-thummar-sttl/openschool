@@ -321,6 +321,11 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         top: hp(-0.5),
     },
+    downloadIconPupil: {
+        width: hp(2.01),
+        // resizeMode: 'contain',
+        // top: hp(-0.5),
+    },
     fileName: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.85),
@@ -1262,6 +1267,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         // lineHeight: hp(3.6),
         paddingLeft: hp(0.91),
+    
+        
     },
     bookMarkLabel: {
         width: hp(1.81),
@@ -1306,10 +1313,11 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightOrangeDue,
     },
     lessonThumb: {
-        width: hp(2.46),
-        height: hp(2.46),
+        width: hp(2.47),
+        height: hp(2.47),
         backgroundColor: COLORS.lightGrayPupil,
         borderRadius: hp(100),
+       
     },
     dueVideoUserSpace: {
         paddingLeft: hp(1.04),

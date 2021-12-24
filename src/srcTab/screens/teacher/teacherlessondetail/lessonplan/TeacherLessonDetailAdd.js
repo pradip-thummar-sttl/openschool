@@ -84,6 +84,11 @@ const TLDetailAdd = (props) => {
 
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -137,7 +142,6 @@ const TLDetailAdd = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
-
 
     }, [])
 
@@ -386,24 +390,71 @@ const TLDetailAdd = (props) => {
     }
     }
 
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+     
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
+     
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
     }
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr]
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
+
 
     const removeRecording=()=>{
         var arr = [...recordingArr]
@@ -851,7 +902,8 @@ const TLDetailAdd = (props) => {
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={()=>{stopRecording()}}
+                                // onPress={()=>{stopRecording()}}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
@@ -1006,17 +1058,19 @@ const TLDetailAdd = (props) => {
                                         </TouchableOpacity>
 
                                         {
-                                            materialArr.length != 0 ? materialArr.map((item, index) => {
-                                                return (
-                                                    <View style={PAGESTYLE.fileGrp}>
-                                                        <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                                        <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                            {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                            <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                )
-                                            }) : null
+                                             materialArr.length != 0 && materialArr.map((item, index) => {
+                                                 return (
+                                                     <View style={PAGESTYLE.fileRender}>
+                                                         <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                         {item &&
+                                                             <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                                 <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
+                                                             </TouchableOpacity>
+                                                         }
+ 
+                                                     </View>
+                                                 )
+                                             })
                                         }
 
 

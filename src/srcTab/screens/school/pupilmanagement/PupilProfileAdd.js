@@ -301,12 +301,15 @@ const PupilProfileAdd = (props) => {
                                 <View style={PAGESTYLE.thumbTopUser}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => showActionChooser()}>
+                                        onPress={() => showActionChooser()}
+
+                                    >
                                         <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
                                         <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
                                     </TouchableOpacity>
                                 </View>
+
                                 <View style={PAGESTYLE.topBannerParent}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}

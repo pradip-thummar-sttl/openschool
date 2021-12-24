@@ -16,7 +16,6 @@ const HeaderHWS = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
@@ -27,22 +26,6 @@ const HeaderHWS = (props) => {
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity> */}
-                    {/* <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity> */}
                 </View>
             </View>
         </View>
@@ -52,11 +35,11 @@ export default HeaderHWS;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-        paddingLeft: hp(2.46),
-        paddingRight: hp(2.46),
+        paddingLeft: hp(2.44),
+        paddingRight: hp(0.5),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(1) : hp(5.85),
-        paddingBottom: Platform.OS == 'android' ? 0 : 15,
+        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.85),
+        paddingBottom: 15,
         
     },
     headerMain: {

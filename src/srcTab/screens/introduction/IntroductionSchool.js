@@ -34,7 +34,7 @@ export default class Introduction extends Component {
                             <Introduction3 navigateToLogin={() => this.navigateToLogin()} />
                         </>
                     }
-                    style={styles.slider}
+                    style={[styles.slider,{bottom : hp(-8)}]}
                     slideCount={3}
                     dots={this.state.activeDot >= 3 ? false : true}
                     dotActiveColor={COLORS.dotActive}

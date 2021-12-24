@@ -378,9 +378,9 @@ const AddNewTeacher = (props) => {
                     {/* <View HR style={STYLE.hrCommon}></View> */}
 
                     <View HR style={STYLE.hrCommon}></View>
-                    <View style={PAGESTYLE.pupilPerfomanceEdit}>
+                    {/* <View style={PAGESTYLE.pupilPerfomanceEdit}>
                         <Text H2 style={PAGESTYLE.titlePerfomance}>Teacher Insights</Text>
-                        {/* <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image> */}
+                        <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image>
                         <View style={PAGESTYLE.performancePArent}>
                             <ActivityRings
                                 data={chartData}
@@ -399,7 +399,7 @@ const AddNewTeacher = (props) => {
                             <View HR style={STYLE.hrCommon}></View>
                             <Text style={PAGESTYLE.bottomText}>Based on { }'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
                         </View>
-                    </View>
+                    </View> */}
                 </KeyboardAwareScrollView>
             </View>
         </View>

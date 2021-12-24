@@ -81,6 +81,10 @@ const TLDetailAdd = (props) => {
 
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -132,8 +136,6 @@ const TLDetailAdd = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
-
-
     }, [])
 
     const showDatePicker = () => {
@@ -320,73 +322,49 @@ const TLDetailAdd = (props) => {
     }
     const stopRecording = async () => {
         if (recordingName.length > 0) {
-         
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            // let obj = {
-            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-            //     originalname: 'MY_RECORDING.mp4',
-            //     fileName: 'MY_RECORDING.mp4',
-            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            // }
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: `${recordingName}.mp4`,
-                fileName: `${recordingName}.mp4`,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
             }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            setRecordingName("")
-            toggleModal()
-            console.log('url', url);
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
-    }else{
-        // setRecordingStarted(false)
-        // toggleModal()
-        showMessage('Please provide recording name proper')
     }
-    }
-
-
-    // const stopRecording = async () => {
-    //     var arr = []
-    //     const res = await RecordScreen.stopRecording().catch((error) => {
-    //         setRecordingStarted(false)
-    //         console.warn(error)
-    //     });
-    //     if (res) {
-    //         setRecordingStarted(false)
-    //         const url = res.result.outputURL;
-    //         let ext = url.split('.');
-    //         let obj = {
-    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
-    //             originalname: 'MY_RECORDING.mp4',
-    //             fileName: 'MY_RECORDING.mp4',
-    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-    //         }
-    //         arr.push(obj)
-    //         setRecordingArr(arr)
-    //         setScreenVoiceSelected(false)
-
-    //         console.log('url', url);
-    //     }
-    // }
 
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+
         const options = {
             mediaType: "video",
             cameraType: "back"
         };
+
         launchCamera(options, (response) => {
             // Same code as in above section!
             if (response.errorCode) {
@@ -395,29 +373,43 @@ const TLDetailAdd = (props) => {
 
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
         });
-        // launchCamera({ mediaType: 'video',  }, (response) => {
-        //     // setResponse(response);
-        //     if (response.errorCode) {
-        //         showMessage(response.errorCode)
-        //     } else if (response.didCancel) {
-        //         console.log('did cnacel');
-        //         showMessage('did cnacel')
-        //     } else {
-        //         console.log('response', response);
-        //         arr.push(response)
-
-        //         setRecordingArr(arr)
-        //     }
-
-        // })
         setAddRecording(false)
 
     }
+
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr]
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
+
 
     const isFieldsValidated = () => {
         if (!lessonTopic.trim()) {
@@ -673,7 +665,7 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } 
+        }
         // else if (recordingArr.length == 0) {
         //     showMessage(MESSAGE.recording);
         //     return false;
@@ -826,7 +818,7 @@ const TLDetailAdd = (props) => {
 
     }
 
-    const removeRecording=()=>{
+    const removeRecording = () => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
@@ -837,6 +829,7 @@ const TLDetailAdd = (props) => {
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
+    
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
@@ -859,19 +852,20 @@ const TLDetailAdd = (props) => {
                                                 value={recordingName}
                                                 placeholderStyle={PAGESTYLE.somePlaceholderStyle}
                                                 placeholderTextColor={COLORS.popupPlaceHolder}
-                                                style={[PAGESTYLE.commonInputTextarea,{height:50,width:'89%'}]}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
                                                 onChangeText={eventName => setRecordingName(eventName)} />
                                         </View>
                                     </View>
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={()=>{stopRecording()}}
+                                // onPress={() => { stopRecording() }}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
                             </TouchableOpacity>
-                    </View>
+                        </View>
                     </View>
                 </KeyboardAwareScrollView>
             </Modal>
@@ -880,19 +874,10 @@ const TLDetailAdd = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+           
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
-                <HeaderAddNew
-                    isLoading={isLoading}
-                    navigateToBack={() => {
-                        props.route.params.onGoBack();
-                        props.navigation.goBack()
-                    }}
-                    saveLesson={() => { getDataFromQuickBloxAndroid() }} />
+                <HeaderAddNew isLoading={isLoading} navigateToBack={() => { props.route.params.onGoBack(); props.navigation.goBack() }}saveLesson={() => { getDataFromQuickBloxAndroid() }} />
+                
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
@@ -972,7 +957,7 @@ const TLDetailAdd = (props) => {
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
-                                    onRemoveRecording={()=>removeRecording()}
+                                    onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
                                     onStopScrrenRecording={() => toggleModal()}
                                     onCameraOnly={() => onCameraOnly()} />
@@ -1004,23 +989,22 @@ const TLDetailAdd = (props) => {
                                     <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                                 </View>
                                 <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                    {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
                                     <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                                 </TouchableOpacity>
 
                                 {
-                                    materialArr.length != 0 ? materialArr.map((item, index) => {
+                                    materialArr.length != 0 && materialArr.map((item, index) => {
                                         return (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
+                                            <View style={PAGESTYLE.fileRender}>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name}</Text>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </TouchableOpacity>
                                             </View>
                                         )
-                                    }) : null
+                                    })
                                 }
+
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}

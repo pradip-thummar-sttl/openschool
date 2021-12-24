@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(0),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(1.5),
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,

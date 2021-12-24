@@ -11,13 +11,21 @@ const HeaderSave = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(80)}]}>
-                    <TouchableOpacity
+            <View style={styles.headerMain}>
+             <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
+                        onPress={() => props.navigateToBack()}
+                        style={{alignSelf : 'center'}}
+                        >
+                        
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
-                    </TouchableOpacity> {props.label} Homework</Text>
+                    </TouchableOpacity> 
+                     <Text numberOfLines={1} style={[styles.mainTitle,{width:wp(80),
+               }]}>{props.label} Homework</Text>
+            </View>
+              
+               
                 <View style={styles.headerRight}>
                     {/* <PopupHomeWorkSave /> */}
                     {/* <TouchableOpacity
@@ -40,6 +48,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4.85),
         paddingBottom: Platform.OS == 'android' ? 0 : 15,
+      
+       
     },
     headerMain: {
         flexDirection: 'row',
@@ -49,7 +59,7 @@ const styles = StyleSheet.create({
     mainTitle: {
         fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,
-        alignItems: 'center',
+        // alignItems: 'center',
     },
     massagesIcon: {
         width: hp(5.20),
@@ -229,6 +239,7 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1.2),
+       
     },
     commonText: {
         fontSize: hp(1.82),

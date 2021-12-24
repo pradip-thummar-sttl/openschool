@@ -372,25 +372,20 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={0}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+           
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <Header onNotification={()=>openNotification()} onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.padLeftRight}>
                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
                         <View style={PAGESTYLE.dashBoardBoxes}>
-                            <TouchableOpacity style={PAGESTYLE.boxDash}
-                                onPress={() => initOneToOneCall(pupilData)}>
+
+                            <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall(pupilData)}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>Start a new call</Text>
-                                    {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground> */}
                                     <StartNewCall style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                 </View>
                             </TouchableOpacity>
+                            
                             <TouchableOpacity
                                 style={PAGESTYLE.boxDash}
                                 activeOpacity={opacity}
@@ -487,7 +482,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     <TouchableOpacity activeOpacity={1}>
                                                         <View style={PAGESTYLE.tabcontent}>
                                                             <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
-                                                            <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName}</Text>
+                                                            <Text style={PAGESTYLE.subTitleTab}>{dataOfSubView.SubjectName} </Text>
                                                             <View style={PAGESTYLE.yellowHrTag}></View>
                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
@@ -566,7 +561,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                     }
                                                                 </View>
                                                                 <View style={PAGESTYLE.requirementofClass}>
-                                                                    <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                                                {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
+                                                                    <Text style={PAGESTYLE.requireText}>Items that your class will need</Text> : null}
 
                                                                     {dataOfSubView.CheckList ?
                                                                         dataOfSubView.CheckList.map((data, index) => (
@@ -585,7 +581,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 <View style={{ ...STYLE.commonButtonBordered, marginRight: 0 }}>
                                                                     <TouchableOpacity
                                                                         onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 10 }}>Edit Class</Text></TouchableOpacity>
+                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 2 }}>Edit Class</Text></TouchableOpacity>
                                                                 </View>
                                                                 <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                                                     <TouchableOpacity
@@ -598,7 +594,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                     color={COLORS.white} />
                                                                                 :
-                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 10, }}>Start Class</Text>
+                                                                                <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 2, }}>Start Class</Text>
                                                                         }
 
                                                                     </TouchableOpacity>

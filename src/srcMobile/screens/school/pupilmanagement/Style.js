@@ -14,7 +14,7 @@ export default StyleSheet.create({
     },
     left1: {
         flex: 1,
-        paddingTop: hp(2.46)
+        paddingTop: hp(1.5)
     },
     middle: {
         flex: 0.48,
@@ -33,8 +33,8 @@ export default StyleSheet.create({
     },
     pupilParent1: {
         flexDirection: 'row',
-        padding: 10,
-        marginHorizontal: 10,
+        padding: 8,
+        marginHorizontal: 8,
         alignItems: 'center',
     },
     mediabar: {
@@ -83,8 +83,8 @@ export default StyleSheet.create({
         width: hp(2),
         resizeMode: 'contain',
         right: 0,
-        top: 5,
-        marginTop:7
+        top: 2,
+        // marginTop:7
     },
     selectedPupilName: {
         fontSize: hp(2.46),
@@ -311,6 +311,7 @@ export default StyleSheet.create({
     },
     profileImageArea: {
         alignItems: 'center',
+        backgroundColor:'#90daff'
     },
     coverImage: {
         width: '100%',
@@ -332,7 +333,26 @@ export default StyleSheet.create({
         backgroundColor:COLORS.borderGrp,
         borderWidth:5,
         borderColor:COLORS.white
-        // resizeMode: 'contain',
+    },
+    pzEditIcon: {
+        width: hp(2.58),
+        height: hp(2.58),
+        resizeMode: 'contain',
+        position: 'absolute',
+        borderRadius: 15,
+        borderColor: COLORS.greyInsightLable
+    },
+    EditIcnView:{
+        width: hp(4),
+        height: hp(4),
+        borderRadius: hp(4/2),
+        left: hp(4.8),
+        bottom: hp(2),
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:COLORS.white,
+        borderWidth:1,
+        borderColor:COLORS.borderGrp,
     },
     mainDetails: {
         marginTop: hp(8.75),
@@ -368,7 +388,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     scrollViewCommon: {
-        marginBottom: hp(30),
+        marginBottom: hp(15),
     },
     scrollViewCommonPupilEdit: {
         marginBottom: hp(15),
@@ -535,6 +555,13 @@ export default StyleSheet.create({
         marginLeft: hp(2.46),
         marginBottom: hp(2.46),
     },
+    backArrow: {
+        width: hp(2.34),
+        resizeMode: 'contain',
+        marginLeft: hp(2.46),
+        marginBottom: hp(2.16),
+    },
+
     checkMark: {
         position :'absolute',
         alignContent: 'flex-end',
@@ -548,7 +575,7 @@ export default StyleSheet.create({
         left: hp(0.3)
     },
     performancePArent: {
-        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '100%'
+        borderColor: COLORS.commonBorderColor, borderRadius: 10, borderWidth: 1, flexDirection: 'column', width: '97%'
     },
     colorLeftParent: {
         flexDirection: 'row', alignItems: 'center', marginHorizontal: 15
@@ -610,17 +637,6 @@ export default StyleSheet.create({
         right:hp(1.4),
         alignSelf: 'center',
     },
-    
-    pzEditIcon: {
-        width: hp(2.58),
-        height: hp(2.58),
-        resizeMode: 'contain',
-        position: 'absolute',
-        left: hp(4.8),
-        bottom: hp(-1.6),
-        borderRadius: 15,
-        borderColor: COLORS.greyInsightLable,
-    },
     subjectText: {
         flexDirection: 'row',
         fontFamily: FONTS.fontBold,
@@ -643,8 +659,8 @@ export default StyleSheet.create({
         borderRadius: hp(1.0),
         lineHeight: hp(2.3),
         height: hp(6),
-        paddingLeft: hp(2.0),
-        paddingRight: hp(2.0),
+        paddingLeft: hp(1.5),
+        paddingRight: hp(1.5),
         paddingTop: hp(1.5),
         paddingBottom: hp(1.5),
         fontFamily: FONTS.fontRegular,

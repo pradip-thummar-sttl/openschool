@@ -15,13 +15,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import FONTS from '../../../../utils/Fonts'
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+// import { User } from '../../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import MESSAGE from '../../../../utils/Messages';
 import CloseBlack from '../../../../svg/teacher/timetable/Close_Black';
 import SearchBlue from '../../../../svg/teacher/timetable/Search_Blue';
 import AddWhite from '../../../../svg/teacher/timetable/Add_White';
 import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
+import { BadgeIcon, User } from "../../../../utils/Model";
+
 var moment = require('moment');
 
 const SchoolMessage = (props) => {
@@ -173,7 +175,7 @@ const SchoolMessage = (props) => {
     };
 
     // useEffect(() => {
-    //     fetchRecord('', )
+    //     ('', )
     // }, [])
 
     useEffect(() => {
@@ -211,11 +213,17 @@ console.log('gfhfuehjheikurfkirrf==>',`${EndPoints.GlobalMessaging}/${User.user.
         }
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
+    }
+
     return (
         <View>
             <HeaderWhitepupilMessage
                 onAlertPress={() => props.navigation.openDrawer()} 
                 title={'Global Messaging'}
+                onNotification={() => openNotification()}
             />
 
             {searchHeader()}

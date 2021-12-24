@@ -413,7 +413,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
+        props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
 
@@ -422,13 +422,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             <Sidebar
                 moduleIndex={selectedIndex}
                 hide={() => action(!isHide)}
-                navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(0); refresh() }}
-                navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(1) }}
-                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(2) }}
-                navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false);setSetting(false); setAddSubject(false); setSelectedIndex(3) }}
-                navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); setSelectedIndex(4) }}
-                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false);setSetting(false); props.navigation.replace('Users'); setSelectedIndex(4) }}
-                navigateSettings={()=>{setTeacherLessonDetail(false); setAddSubject(false);setSetting(true);setSelectedIndex(5)}} />
+                navigateToDashboard={() => { setTeacherLessonDetail(false); setAddSubject(false); setSetting(false); setSelectedIndex(0); refresh() }}
+                navigateToTimetable={() => { setTeacherLessonDetail(false); setAddSubject(false); setSetting(false); setSelectedIndex(1) }}
+                navigateToLessonAndHomework={() => { setTeacherLessonDetail(false); setAddSubject(false); setSetting(false); setSelectedIndex(2) }}
+                navigateToPupilManagement={() => { setPupilManagementselectedTab(0); setTeacherLessonDetail(false); setSetting(false); setAddSubject(false); setSelectedIndex(3) }}
+                navigateToParents={() => { setTeacherLessonDetail(false); setAddSubject(false); setSetting(false); setSelectedIndex(4) }}
+                navigateUser={() => { setTeacherLessonDetail(false); setAddSubject(false); setSetting(false); props.navigation.replace('Users'); setSelectedIndex(4) }}
+                navigateSettings={() => { setTeacherLessonDetail(false); setAddSubject(false); setSetting(true); setSelectedIndex(5) }} />
 
             {
                 isPupilDetail ?
@@ -513,7 +513,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 {isDashDataLoading ?
                                                     <ActivityIndicator
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                        color={COLORS.yellowDark} />
+                                                        color={COLORS.yellowDark}
+                                                        style={{ margin: 20 }} />
                                                     :
                                                     dashData.length > 0 && dataOfSubView ?
                                                         <View style={STYLE.viewRow}>
@@ -614,7 +615,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                             }
                                                                         </View>
                                                                         <View style={PAGESTYLE.requirementofClass}>
-                                                                            <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
+                                                                            {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
+                                                                                <Text style={PAGESTYLE.requireText}>Items that your class will need</Text> : null}
 
                                                                             {dataOfSubView.CheckList ?
                                                                                 dataOfSubView.CheckList.map((data, index) => (
@@ -735,6 +737,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                             <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>
                                                 {isPupilDataLoading ?
                                                     <ActivityIndicator
+                                                        style={{ margin: 20 }}
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.blueButton} />
                                                     :
@@ -809,10 +812,10 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         :
                                         selectedIndex == 3 ?
                                             <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
-                                            :selectedIndex == 5 ?
-                                            <TeacherSetting navigation={props.navigation}/>
-                                            :
-                                            <Message navigation={props.navigation} />
+                                            : selectedIndex == 5 ?
+                                                <TeacherSetting navigation={props.navigation} />
+                                                :
+                                                <Message navigation={props.navigation} />
 
             }
             {isAddEvent ?

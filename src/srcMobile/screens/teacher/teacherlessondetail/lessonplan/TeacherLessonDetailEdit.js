@@ -105,6 +105,9 @@ const TLDetailEdit = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
 
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -324,40 +327,40 @@ const TLDetailEdit = (props) => {
 
     const stopRecording = async () => {
         if (recordingName.length > 0) {
-         
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            // let obj = {
-            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-            //     originalname: 'MY_RECORDING.mp4',
-            //     fileName: 'MY_RECORDING.mp4',
-            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            // }
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: `${recordingName}.mp4`,
-                fileName: `${recordingName}.mp4`,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
             }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            setRecordingName("")
-            toggleModal()
-            console.log('url', url);
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
-    }else{
-        // setRecordingStarted(false)
-        // toggleModal()
-        showMessage('Please provide recording name proper')
-    }
     }
 
     // const stopRecording = async () => {
@@ -384,22 +387,67 @@ const TLDetailEdit = (props) => {
     //     }
     // }
 
+    // const onCameraOnly = () => {
+    //     var arr = []
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+    //             setRecordingArr(arr)
+    //             toggleModal('isCamera')
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
         var arr = []
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
                 arr.push(response)
-
-                setRecordingArr(arr)
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
+
+    }
+
+    const saveCameraData = () => {
+
+        var arr = []
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
 
     }
 
@@ -767,7 +815,7 @@ const TLDetailEdit = (props) => {
                 data.append('recording', {
                     uri: element.uri,
                     // name: element.fileName,
-                    name: 'MY_RECORDING.mp4',
+                    name: `${recordingName}.mp4`,
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
             }
@@ -863,16 +911,33 @@ const TLDetailEdit = (props) => {
     }
 
     const toggleModal = () => {
+
+        // console.log('currentRecordModeStatus', currentRecordModeStatus)
+
+        // if (currentRecordModeStatus === 'isScreen') {
+        //     console.log('------ifffff------')
+        //     setCurrentRecordMode(true)
+        // }
+        // else {
+        //     console.log('------else------')
+        //     setCurrentRecordMode(false)
+        // }
+
+        console.log('currentRecordMode', currentRecordMode)
+
+
         console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
+
+
     };
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={PAGESTYLE.popupCard}>
-                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={() => toggleModal()}>
                             {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
@@ -889,19 +954,19 @@ const TLDetailEdit = (props) => {
                                                 value={recordingName}
                                                 placeholderStyle={PAGESTYLE.somePlaceholderStyle}
                                                 placeholderTextColor={COLORS.popupPlaceHolder}
-                                                style={[PAGESTYLE.commonInputTextarea,{height:50,width:'89%'}]}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
                                                 onChangeText={eventName => setRecordingName(eventName)} />
                                         </View>
                                     </View>
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={()=>{stopRecording()}}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
                             </TouchableOpacity>
-                    </View>
+                        </View>
                     </View>
                 </KeyboardAwareScrollView>
             </Modal>
@@ -910,11 +975,7 @@ const TLDetailEdit = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+          
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <HeaderUpdate
                     onAlertPress={() => props.navigation.openDrawer()}
@@ -1009,7 +1070,7 @@ const TLDetailEdit = (props) => {
                                     onScreeVoice={() => onScreeVoice()}
                                     onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
-                                    onStopScrrenRecording={() => toggleModal()}
+                                    onStopScrrenRecording={() => { setCurrentRecordMode('isScreen'), toggleModal() }}
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
@@ -1045,51 +1106,19 @@ const TLDetailEdit = (props) => {
                                     </TouchableOpacity>
                                 </View>
                                 {
-                                    materialArr.length != 0 ? materialArr.map((item, index) => {
+                                      materialArr.length != 0 && materialArr.map((item, index) => {
                                         return (
-                                            <View style={PAGESTYLE.fileGrp}>
-                                                <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(75) }]}>{item.originalname}</Text>
-                                                {item.uri ?
-                                                    <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                        {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                        <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                    </TouchableOpacity>
-                                                    :
-                                                    null
-                                                }
+                                            <View style={PAGESTYLE.fileRender}>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name}</Text>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                </TouchableOpacity>
                                             </View>
                                         )
-                                    }) : null
+                                    })
+                                   
                                 }
 
-                                {/* <View style={PAGESTYLE.videoScroll}>
-                                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <View style={PAGESTYLE.thumbVideo}>
-                                                <Image source={Images.VideoSmlThumb} style={PAGESTYLE.smlThumbVideo} />
-                                                <Text style={PAGESTYLE.smlThumbVideoText}>BBC Bitesize. The Amazon Rainforest</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </ScrollView>
-                                </View> */}
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                     <TouchableOpacity
                                         style={PAGESTYLE.buttonGrp}
@@ -1125,32 +1154,7 @@ const TLDetailEdit = (props) => {
                                     :
                                     null
                                 }
-                                {/* <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                                <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                                <View style={PAGESTYLE.videoLinkBlock}>
-                                    <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                                    <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                                <View style={PAGESTYLE.fileGrp}>
-                                    <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                    <TouchableOpacity style={PAGESTYLE.closeNotificationbar}><Image source={Images.Download} style={PAGESTYLE.downloadIcon} /></TouchableOpacity>
-                                </View>
-                            </View> */}
+                              
                             </View>
                         </View>
                     </ScrollView>

@@ -89,7 +89,6 @@ const Sidebar = (props) => {
 
     }
 
-    console.log('module index', props.moduleIndex)
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>

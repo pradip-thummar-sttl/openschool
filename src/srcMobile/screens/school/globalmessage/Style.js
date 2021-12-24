@@ -242,7 +242,7 @@ export default StyleSheet.create({
     checkBoxLabelText: {
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: Platform.OS === 'ios'? hp(1):hp(2),
+        paddingLeft: Platform.OS === 'ios'? hp(1):hp(3),
         paddingRight: hp(2),
     },
     checkBoxLabelTextSubmit: {
@@ -1666,7 +1666,7 @@ export default StyleSheet.create({
         fontSize: hp(1.56),
     },
     commonInputTextarea1: {
-        height: hp(5.20),
+        height: hp(5.50),
         width: '100%',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,

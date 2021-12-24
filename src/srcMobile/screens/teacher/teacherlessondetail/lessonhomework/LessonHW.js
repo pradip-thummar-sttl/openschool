@@ -53,6 +53,9 @@ const TLHomeWork = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
 
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
     useEffect(() => {
         console.log('`${EndPoints.Homework}/${props.id}`', `${EndPoints.Homework}/${props.id}`);
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
@@ -266,23 +269,69 @@ const TLHomeWork = (props) => {
     //     }
     // }
 
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //             Addhomework.RecordingArr = arr
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
 
-                setRecordingArr(arr)
-                Addhomework.RecordingArr = arr
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
+
+    }
+
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr]
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
 
     }
 
@@ -450,7 +499,8 @@ const TLHomeWork = (props) => {
                                 </View>
                             </View>
                             <TouchableOpacity
-                                onPress={() => { stopRecording() }}
+                                // onPress={() => { stopRecording() }}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
@@ -537,54 +587,43 @@ const TLHomeWork = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.rightSideBar}>
+
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={PAGESTYLE.requireText}>Learning material</Text>
                             <Text style={PAGESTYLE.rightBlockText}>Drop links, videos, or documents here or find relevant materials with our clever AI</Text>
                         </View>
+
                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                            {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
                             <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                         </TouchableOpacity>
+
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             {
-                                materialArr.length != 0 ? materialArr.map((item, index) => {
+                                materialArr.length != 0 && materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => {
-                                            item.uri ? removeObject(index, item) : setLoader(true); setMateIndex(index); Download(item, (res) => {
-                                                setLoader(false)
-                                                setMateIndex(-1)
-                                            })
-                                        }} style={PAGESTYLE.fileGrp}>
-                                            <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
-                                            {item.uri ?
-                                                <View>
-                                                    {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                    <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                </View>
-                                                :
-                                                <View>
-                                                    {(isMatLoading && index == mateIndex) ?
-                                                        <ActivityIndicator
-                                                            style={{ ...PAGESTYLE.downloadIcon }}
-                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                            color={COLORS.blueBorder} />
-                                                        :
-                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                    }
-                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
-                                                </View>
+                                        <View style={PAGESTYLE.fileRender}>
+                                            <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
+                                            {
+                                                item.uri ?
+                                                    <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                        <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
+                                                    </TouchableOpacity>
+                                                    :
+                                                    <TouchableOpacity onPress={() => { setMateIndex(index); Download(item, (res) => { setLoader(false); setMateIndex(-1) }) }} style={PAGESTYLE.RenderDownload}>
+                                                        {(isMatLoading && index == mateIndex) ?
+                                                            <ActivityIndicator style={{ ...PAGESTYLE.downloadIcon }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.blueBorder} />
+                                                            :
+                                                            <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
+                                                        }
+                                                    </TouchableOpacity>
                                             }
-                                        </TouchableOpacity>
+                                        </View>
                                     )
-                                }) : null
+                                })
                             }
                         </View>
-                        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                            <View style={PAGESTYLE.thumbVideo}>
-                                <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                            </View>
-                        </ScrollView> */}
+
+
                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                             <TouchableOpacity
                                 style={PAGESTYLE.buttonGrp}

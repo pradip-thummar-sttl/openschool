@@ -14,7 +14,8 @@ export default StyleSheet.create({
     },
     left1: {
         flex: 1,
-        paddingTop: hp(2.46)
+
+
     },
     middle: {
         flex: 0.48,
@@ -23,7 +24,7 @@ export default StyleSheet.create({
     },
     right: {
         paddingTop: 10,
-        paddingHorizontal:Platform.OS==='ios'? hp(1.5):hp(0),
+        paddingHorizontal: Platform.OS === 'ios' ? hp(1.5) : hp(0),
         height: '82%',
     },
     pupilParent: {
@@ -33,9 +34,11 @@ export default StyleSheet.create({
     },
     pupilParent1: {
         flexDirection: 'row',
-        padding: 10,
-        marginHorizontal: 10,
+        // padding: 10,
+        marginHorizontal: 5,
+        marginVertical: 5,
         alignItems: 'center',
+       
     },
     mediabar: {
         width: hp(4.16),
@@ -44,14 +47,14 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightGrayPupil,
     },
     pupilName1: {
-        fontSize: 18,
+        fontSize: 15, //18
         alignSelf: 'center',
         marginHorizontal: 15,
     },
     bar: {
-        marginHorizontal: hp(2.46),
-        marginVertical: 10,
-        height: 1,
+        marginHorizontal: hp(1),
+        height: 1.5,
+        marginVertical: 5,
         backgroundColor: COLORS.dashBoard
     },
     selectedPupilParent: {
@@ -84,7 +87,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         right: 0,
         top: Platform.OS == 'android' ? 0 : 5,
-        marginTop:7
+        marginTop: 7
     },
     selectedPupilName: {
         fontSize: hp(2.46),
@@ -147,8 +150,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         fontSize: hp(1.97),
         paddingBottom: hp(1),
-        marginHorizontal: hp(2),
+        marginHorizontal: 6.5,
         marginBottom: hp(1.5),
+        // marginVertical : 5,
+       
     },
     button: {
         color: COLORS.white,
@@ -182,7 +187,7 @@ export default StyleSheet.create({
     buttonParent1: {
         height: hp(5.20),
         marginTop: hp(2.46),
-        marginHorizontal: hp(0.5),
+        marginHorizontal: hp(0.7),
         borderRadius: 8,
         width: '50%',
         borderWidth: 1,
@@ -227,13 +232,13 @@ export default StyleSheet.create({
         alignSelf: 'center',
         fontFamily: FONTS.fontSemiBold,
         fontSize: 18,
-        textAlign : 'center',
+        textAlign: 'center',
         marginBottom: 10,
     },
     nodataContent: {
         alignSelf: 'center',
         fontSize: 18,
-        textAlign : 'center'
+        textAlign: 'center'
     },
     pupilData: {
         flexDirection: 'row',
@@ -255,7 +260,7 @@ export default StyleSheet.create({
     pupilImage: {
         width: hp(3.7),
         height: hp(3.7),
-        borderRadius: hp(3.7/2),
+        borderRadius: hp(3.7 / 2),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1.5),
         top: hp(1.1),
@@ -328,7 +333,7 @@ export default StyleSheet.create({
     profileImage: {
         width: hp(13),
         height: hp(13),
-        borderRadius: hp(13/2),
+        borderRadius: hp(13 / 2),
         // resizeMode: 'contain',
     },
     mainDetails: {
@@ -514,7 +519,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         height: hp(5.91),
         backgroundColor: COLORS.white,
-        marginHorizontal: Platform.OS === 'ios'? hp(2):hp(0),
+        marginHorizontal: Platform.OS === 'ios' ? hp(2) : hp(0),
         marginTop: hp(2),
         paddingLeft: hp(2)
     },
@@ -529,13 +534,15 @@ export default StyleSheet.create({
     arrow: {
         width: hp(2.34),
         resizeMode: 'contain',
-        marginLeft: hp(2.46),
-        marginBottom: hp(2.46),
+        marginLeft: hp(1.5),
+        // marginBottom: hp(2.9),
+        marginVertical : 5
     },
     checkMark: {
-        position :'absolute',
+        position: 'absolute',
         alignContent: 'flex-end',
         right: 10,
+        
     },
     createIcon: {
         width: hp(2.30),
@@ -563,6 +570,6 @@ export default StyleSheet.create({
         color: COLORS.lightGray, fontFamily: FONTS.fontRegular
     },
     bottomText: {
-        color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10 
+        color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10
     }
 });

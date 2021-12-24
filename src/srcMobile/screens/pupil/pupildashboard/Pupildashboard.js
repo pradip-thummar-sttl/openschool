@@ -385,15 +385,11 @@ const PupuilDashboard = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage} >
-            {/* <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={0}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <Header isOpen={BadgeIcon.isBadge} onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
+                        
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>
                                 <View style={PAGESTYLE.myDay}>
@@ -542,7 +538,8 @@ const PupuilDashboard = (props) => {
                                                                                     }
                                                                                 </View>
                                                                                 <View style={PAGESTYLE.requirementofClass}>
-                                                                                    <Text style={PAGESTYLE.requireText}>What you will need</Text>
+                                                                                    {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
+                                                                                        <Text style={PAGESTYLE.requireText}>What you will need</Text> : null}
                                                                                     <FlatList
                                                                                         data={dataOfSubView.CheckList}
                                                                                         style={{ width: '100%' }}
@@ -719,6 +716,7 @@ const PupuilDashboard = (props) => {
                                 </View>
                             </View>
                         </View>
+
                         <View style={PAGESTYLE.achivementWrap}>
                             <View style={PAGESTYLE.achivementBox}>
                                 <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
@@ -760,6 +758,7 @@ const PupuilDashboard = (props) => {
                                 {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
                             </View>
                         </View>
+                        
                     </View>
                 </ScrollView>
             </View>
