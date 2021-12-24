@@ -1265,7 +1265,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
-        lineHeight: hp(3.6),
+        // lineHeight: hp(3.6),
         paddingLeft: hp(0.91),
     
         

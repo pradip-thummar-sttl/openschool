@@ -32,6 +32,7 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
 
 
 const PupilLessonDetail = (props) => {
@@ -231,11 +232,12 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Subject</Text>
-                                            {/* {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 0 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -245,11 +247,12 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                            {/* {selectedIndex == 1 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 1 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -259,11 +262,12 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
-                                            {/* {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 2 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -273,11 +277,12 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
-                                            {/* {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 3 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
