@@ -85,11 +85,12 @@ const SidebarSchool = (props) => {
             { cancelable: true }
         )
     }
-
+   
     const teacherLogout = () => {
-        AsyncStorage.setItem('user', JSON.stringify(null))
+        AsyncStorage.setItem('school', JSON.stringify(null))
         AsyncStorage.setItem('type', "")
         props.navigateUser()
+
 
     }
 

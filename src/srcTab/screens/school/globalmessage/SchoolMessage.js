@@ -112,7 +112,9 @@ const SchoolMessage = (props) => {
                             onSearch={() => fetchRecord(keyword, filterBy)}
                             onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
                             onFilter={(filterBy) => fetchRecord('', filterBy)}
-                            onNewMessage={() => setAddMessage(true)} />
+                            onNewMessage={() => setAddMessage(true)} 
+                            {...props}
+                            />
 
                         <View style={{ backgroundColor: COLORS.greyBack, flex:1 }}>
                             {isLoading ?

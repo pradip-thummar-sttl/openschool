@@ -19,6 +19,7 @@ import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
 import { useIsDrawerOpen } from '@react-navigation/drawer'
 import Clock from "../../../../svg/teacher/dashboard/Clock";
 import { setCalendarEventData, setTimeTableWeekEventData } from "../../../../actions/action";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 var month = moment().format('MM');;
 var date = moment().format('DD');
@@ -76,6 +77,7 @@ const NotificationDrawer = (props) => {
         }
 
     }, [isOpen])
+    
 
     getAllNotification = () => {
 
@@ -338,10 +340,10 @@ const NotificationDrawer = (props) => {
                             <Text style={styles.drawerTitle} >My Notifications</Text>
                             <TouchableOpacity style={styles.closeNotificationbarMain}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.closeDrawer()}
+                                onPress={() => props.navigation.goBack()}
                             >
                                 {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIcon} /> */}
-                                <CloseBlack style={styles.closeIcon} height={23} width={23} />
+                                <CloseBlack style={[styles.closeIcon]} height={23} width={23} />
                             </TouchableOpacity>
                         </View>
                         <ScrollView style={styles.notificationmain} showsVerticalScrollIndicator={false}>
@@ -469,6 +471,7 @@ const NotificationDrawer = (props) => {
                                     <View style={{ height: 100, justifyContent: 'center' }}>
                                         <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No new notifications!</Text>
                                     </View>
+                                    
                             }
 
                             {/* ≥ */}
