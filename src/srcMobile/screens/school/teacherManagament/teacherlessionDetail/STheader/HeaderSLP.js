@@ -9,6 +9,7 @@ import moment from 'moment';
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 // import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import EditWhite from "../../../../../../svg/pupil/parentzone/EditWhite";
+import Notification from "../../../../../../svg/teacher/dashboard/Notification";
 
 const HeaderSLP = (props) => {
     return (
@@ -18,7 +19,6 @@ const HeaderSLP = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
@@ -26,24 +26,10 @@ const HeaderSLP = (props) => {
                         <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
-                <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity> */}
-                    <TouchableOpacity activeOpacity={opacity}
-                        onPress={() => props.navigateToEdit()}
-                        style={styles.profileEdit}>
-                        {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
-                        <EditWhite style={styles.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
-                    </TouchableOpacity>
-                </View>
+
+                <TouchableOpacity activeOpacity={opacity} onPress={() => props.onAlertPress()}>
+                    <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -52,13 +38,13 @@ export default HeaderSLP;
 
 const styles = StyleSheet.create({
     headerBarMainWhite: {
-       
-            paddingLeft: hp(2.44),
-            paddingRight: hp(1),
-            backgroundColor: COLORS.white,
-            paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.85),
-            paddingBottom: 15,
-       
+
+        paddingLeft: hp(2.44),
+        paddingRight: hp(1),
+        backgroundColor: COLORS.white,
+        paddingTop: Platform.OS == 'android' ? hp(2.5) : hp(5.85),
+        paddingBottom: 15,
+
     },
     headerMain: {
         flexDirection: 'row',
@@ -93,7 +79,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         // marginBottom: hp(1.32),
         // backgroundColor: COLORS.dashboardGreenButton,
-       
+
     },
     filterbarMain: {
         flexDirection: 'row',

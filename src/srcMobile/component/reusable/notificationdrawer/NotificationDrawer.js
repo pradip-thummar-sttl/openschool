@@ -64,9 +64,6 @@ const NotificationDrawer = (props) => {
                     }
                 })
                 setNotifications(res.data)
-                // setLiveClassNotifications(liveClass)
-                // setHomeworkNotifications(homework)
-                // setPersonalNotifications(personal)
             }
 
 
@@ -88,7 +85,9 @@ const NotificationDrawer = (props) => {
     }
 
     const goBackPress = () => {
-        props.route.params.onGoBack()
+        if(props && props.route &&props.route.params)
+             props.route.params.onGoBack()
+
         props.navigation.goBack()
     }
 

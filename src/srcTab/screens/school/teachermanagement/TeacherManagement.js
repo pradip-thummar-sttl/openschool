@@ -98,10 +98,7 @@ const TeacherManagement = (props) => {
 
     const pupilRender = ({ item }) => {
         return (
-            <Pupillist
-                item={item}
-                onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}
-            />
+            <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
         );
     };
     const openNotification = () => {
@@ -114,14 +111,9 @@ const TeacherManagement = (props) => {
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                {isTeacherDetail ?
-                    <TeacherProfileView
-                        selectedTeacher={teacherDetailData}
-                        navigateToBack={() => setTeacherDetail(false)} />
+                {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
                     :
-                    isTeacherAdd ?
-                        <TeacherProfileAdd 
-                            navigateToBack={() => setTeacherAdd(false)} />
+                    isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
                         :
                         <>
                             <HeaderTM
@@ -133,6 +125,7 @@ const TeacherManagement = (props) => {
                                 refreshList={() => refresh()}
                                 navigateToAddTeacher={() => setTeacherAdd(true)}
                                 onFilter={(filterBy) => fetchRecord('', filterBy)} />
+
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isDataLoading ?
                                     <ActivityIndicator

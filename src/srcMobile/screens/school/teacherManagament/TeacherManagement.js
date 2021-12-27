@@ -161,7 +161,7 @@ const TeacherManagement = (props) => {
                 title={'Teacher Management'}
                 userType={'Teacher'}
                 onFilter={(filterBy) => fetchRecord('', filterBy)} 
-                onNotification={()=>openNotification()} />
+                onNotification={()=> openNotification()} />
 
             {/* {searchHeader()} */}
             {isLoading ?

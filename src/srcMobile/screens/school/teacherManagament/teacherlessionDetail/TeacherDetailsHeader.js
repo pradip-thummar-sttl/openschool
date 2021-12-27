@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import STYLE from '../../../../../../utils/Style';
+import STYLE from '../../../../../utils/Style';
 import PAGESTYLE from '../Style';
 import { opacity } from "../../../../../../utils/Constant";
 import HeaderGallery from "./header/HeaderGallery";
 
-const STLVideoGallery = (props) => {
+const TeacherDetailsHeader = (props) => {
     const [isHide, action] = useState(true);
     useEffect(() => {
         if (Platform.OS==="android") {
@@ -24,9 +23,7 @@ const STLVideoGallery = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderGallery
-                    navigateToBack={() => props.route.params.goBack()}
-                    onAlertPress={() => props.navigation.openDrawer()} />
+                <HeaderGallery  navigateToBack={() => props.route.params.goBack()} onAlertPress={() => props.navigation.openDrawer()} />
                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                     <View style={PAGESTYLE.whiteBg, PAGESTYLE.mobileGalleryHolder}>
                         <Text style={PAGESTYLE.videoTitle}>Videos</Text>
@@ -140,4 +137,4 @@ const STLVideoGallery = (props) => {
 
     );
 }
-export default STLVideoGallery;
+export default TeacherDetailsHeader;
