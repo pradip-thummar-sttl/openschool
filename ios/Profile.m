@@ -36,6 +36,8 @@ static NSString* const kCurrentProfile = @"curentProfile";
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:kCurrentProfile];
 }
 
+
+
 + (void)updateUser:(QBUUser *)user {
     QBUUser *current = [Profile loadObject];
     

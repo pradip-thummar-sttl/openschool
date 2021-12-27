@@ -215,13 +215,13 @@ ChatDataSourceDelegate, ChatManagerDelegate, QBChatDelegate, ChatCellDelegate, C
     
     self.chatManager.delegate = self;
     
-    Profile *currentUser = [[Profile alloc] init];
-    if (currentUser.isFull == NO || !self.dialogID) {
-        return;
-    }
+//    Profile *currentUser = [[Profile alloc] init];
+//    if (currentUser.isFull == NO || !self.dialogID) {
+//        return;
+//    }
     
-    self.senderDisplayName = currentUser.fullName;
-    self.senderID = currentUser.ID;
+    self.senderDisplayName = self.currentUserName;
+    self.senderID = self.currentUserID;
     self.dialog = [self.chatManager.storage dialogWithID:self.dialogID];
     
     [self setupTitleView];
@@ -649,9 +649,9 @@ ChatDataSourceDelegate, ChatManagerDelegate, QBChatDelegate, ChatCellDelegate, C
         } else {
             
             Profile *currentUser = [[Profile alloc] init];
-            if (currentUser.isFull == NO) {
-                return;
-            }
+//            if (currentUser.isFull == NO) {
+//                return;
+//            }
             
             // group
             self.dialog.pullOccupantsIDs = @[@(currentUser.ID).stringValue];
@@ -956,11 +956,11 @@ didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> 
     
     [self.chatManager sendMessage:message toDialog:self.dialog completion:^(NSError * _Nullable error) {
         __typeof(weakSelf)strongSelf = weakSelf;
-        if (error) {
-            Log(@"%@ sendMessage error: %@",NSStringFromClass([ChatViewController class]),
-                error.localizedDescription);
-            return;
-        }
+//        if (error) {
+//            Log(@"%@ sendMessage error: %@",NSStringFromClass([ChatViewController class]),
+//                error.localizedDescription);
+//            return;
+//        }
         [strongSelf.dataSource addMessage:message];
         [strongSelf finishSendingMessageAnimated:YES];
     }];

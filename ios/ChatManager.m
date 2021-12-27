@@ -76,9 +76,9 @@ typedef void(^UsersPage)(QBGeneralResponsePage *page);
 //MARK: - System Messages
 - (void)sendLeaveMessage:(NSString *)text toDialog:(QBChatDialog *)dialog completion:(QBChatCompletionBlock)completion {
     Profile *currentUser = [[Profile alloc] init];
-    if (currentUser.isFull == NO) {
-        return;
-    }
+//    if (currentUser.isFull == NO) {
+//        return;
+//    }
     
     QBChatMessage *message = [[QBChatMessage alloc] init];
     message.senderID = currentUser.ID;
@@ -120,9 +120,9 @@ typedef void(^UsersPage)(QBGeneralResponsePage *page);
                  toDialog:(QBChatDialog *)dialog
                completion:(QBChatCompletionBlock)completion {
     Profile *currentUser = [[Profile alloc] init];
-    if (currentUser.isFull == NO) {
-        return;
-    }
+//    if (currentUser.isFull == NO) {
+//        return;
+//    }
     NSString *userIDs = [usersIDs componentsJoinedByString:@","];
     
     QBChatMessage *chatMessage = [[QBChatMessage alloc] init];
@@ -183,12 +183,12 @@ typedef void(^UsersPage)(QBGeneralResponsePage *page);
     chatDialog.occupantIDs = occupantIDs.allObjects;
     [QBRequest createDialog:chatDialog successBlock:^(QBResponse * _Nonnull response, QBChatDialog * _Nonnull dialog) {
         [dialog joinWithCompletionBlock:^(NSError * _Nullable error) {
-            if (error) {
-                if (completion) {
-                    completion(response, nil);
-                }
-                return;
-            }
+//            if (error) {
+//                if (completion) {
+//                    completion(response, nil);
+//                }
+//                return;
+//            }
             [self.storage updateDialogs:@[dialog]];
             //Notify about create new dialog
             NSString *dialogName = dialog.name;
@@ -344,9 +344,9 @@ typedef void(^UsersPage)(QBGeneralResponsePage *page);
 
 - (void)prepareDialogWith:(NSString *)dialogId withMessage:(QBChatMessage *)message {
     Profile *currentUser = [[Profile alloc] init];
-    if (currentUser.isFull == NO) {
-        return;
-    }
+//    if (currentUser.isFull == NO) {
+//        return;
+//    }
     
     QBChatDialog *dialog = [self.storage dialogWithID:dialogId];
     if (dialog) {
@@ -527,9 +527,9 @@ typedef void(^UsersPage)(QBGeneralResponsePage *page);
              dialog:(QBChatDialog *)dialog
          completion:(QBChatCompletionBlock)completion {
     Profile *currentUser = [[Profile alloc] init];
-    if (currentUser.isFull == NO) {
-        return;
-    }
+//    if (currentUser.isFull == NO) {
+//        return;
+//    }
     if ([self.delegate respondsToSelector:@selector(chatManagerWillUpdateStorage:)]) {
         [self.delegate chatManagerWillUpdateStorage:self];
     }
@@ -572,9 +572,9 @@ typedef void(^UsersPage)(QBGeneralResponsePage *page);
               dialog:(QBChatDialog *)dialog
           completion:(QBChatCompletionBlock)completion {
     Profile *currentUser = [[Profile alloc] init];
-    if (currentUser.isFull == NO) {
-        return;
-    }
+//    if (currentUser.isFull == NO) {
+//        return;
+//    }
     
     dispatch_group_t readGroup = dispatch_group_create();
     

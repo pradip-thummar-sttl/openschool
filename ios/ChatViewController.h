@@ -26,6 +26,8 @@ typedef NS_ENUM(NSUInteger, ChatActions) {
 
 @interface ChatViewController : UIViewController
 @property (strong, nonatomic) NSString *dialogID;
+@property (strong, nonatomic) NSString *currentUserName;
+@property (strong, nonatomic) NSString *currentUserID;
 
 // metods ChatContextMenuProtocol
 - (void)forwardAction;

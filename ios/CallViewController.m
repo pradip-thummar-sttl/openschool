@@ -9,6 +9,7 @@
 
 #import "CallViewController.h"
 #import "PollViewController.h"
+#import "Profile.h"
 #import "PollVC.h"
 #import "ToolBar.h"
 #import "CustomButton.h"
@@ -47,6 +48,8 @@ static NSString * const kUpdateEntryType = @"entryType";
 static NSString * const kChannelGuide = @"the_guide";
 static NSString * const kEntryEarth = @"Earth";
 
+
+NSString *const QB_DEFAULT_PASSWORD = @"quickblox";
 
 
 
@@ -163,6 +166,15 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  QBUUser *user = [QBUUser user];
+  user.ID = self.currentUserID.integerValue;
+  user.fullName = self.currentName;
+  user.login=@"stud29@silvertouch.com";
+  user.password=@"Admin@123";
+  [Profile synchronizeUser:user];
+  
+  
+  
   
   self.chatManager = [ChatManager instance];
   self.recordUrl=@"";
@@ -271,6 +283,35 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableTapped:)];
   [self.opponentsCollectionView addGestureRecognizer:tap];
+  
+  //
+  __weak __typeof(self)weakSelf = self;
+  Profile *profile = [[Profile alloc]init];
+  [QBRequest logInWithUserLogin:profile.login
+                       password:profile.password
+                   successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+      
+      __typeof(weakSelf)strongSelf = weakSelf;
+      
+      [user setPassword:profile.password];
+      [Profile synchronizeUser:user];
+      
+      if ([user.fullName isEqualToString: profile.fullName] == NO) {
+          [strongSelf updateFullName:profile.fullName login:profile.login];
+      } else {
+          [strongSelf connectToChat:user];
+      }
+      
+  } errorBlock:^(QBResponse * _Nonnull response) {
+//      __typeof(weakSelf)strongSelf = weakSelf;
+      
+//          [strongSelf handleError:response.error.error];
+      if (response.status == QBResponseStatusCodeUnAuthorized) {
+          // Clean profile
+          [Profile clearProfile];
+//              [strongSelf defaultConfiguration];
+      }
+  }];
 }
 
 
@@ -585,6 +626,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         // Creating private chat.
         [SVProgressHUD show];
         [weakSelf.chatManager.storage updateUsers:weakSelf.users];
+      
+     
+     
         
       
       [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
@@ -597,7 +641,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
         ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-        chatController.dialogID = createdDialog.ID;
+        chatController.dialogID = createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+        chatController.currentUserID = self.currentUserID;
+        chatController.currentUserName=self.currentName;
         [weakSelf presentViewController:chatController animated:false completion:nil];
             
 //            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
@@ -689,6 +735,57 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     self.navigationItem.rightBarButtonItem = self.addUsersItem;
     
 }
+
+
+- (void)updateFullName:(NSString *)fullName login:(NSString *)login {
+    QBUpdateUserParameters *updateUserParameter = [[QBUpdateUserParameters alloc] init];
+    updateUserParameter.fullName = fullName;
+    
+    __weak __typeof(self)weakSelf = self;
+    [QBRequest updateCurrentUser:updateUserParameter
+                    successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+        __typeof(weakSelf)strongSelf = weakSelf;
+//        [strongSelf updateLoginInfoText: FULL_NAME_DID_CHANGE];
+        [Profile updateUser:user];
+        [strongSelf connectToChat:user];
+        
+    } errorBlock:^(QBResponse * _Nonnull response) {
+//        __typeof(weakSelf)strongSelf = weakSelf;
+//        [strongSelf handleError:response.error.error];
+    }];
+}
+
+- (void)connectToChat:(QBUUser *)user {
+    
+//    [self updateLoginInfoText:LOGIN_CHAT];
+    
+    __weak __typeof(self)weakSelf = self;
+    [QBChat.instance connectWithUserID:user.ID
+                              password:user.password
+                            completion:^(NSError * _Nullable error) {
+        
+        __typeof(weakSelf)strongSelf = weakSelf;
+        
+        if (error) {
+            if (error.code == QBResponseStatusCodeUnAuthorized) {
+                // Clean profile
+                [Profile clearProfile];
+//                [strongSelf defaultConfiguration];
+            } else {
+//                [strongSelf handleError:error];
+            }
+        } else {
+            //did Login action
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [(RootParentVC *)[strongSelf shared].window.rootViewController showDialogsScreen];
+//            });
+//            self.inputedUsername = @"";
+//            self.inputedLogin = @"";
+        }
+    }];
+    
+}
+
 - (NSString *)systemMessageWithChatName:(NSString *)chatName {
     NSString *actionMessage = NSLocalizedString(@"SA_STR_CREATE_NEW", nil);
   
