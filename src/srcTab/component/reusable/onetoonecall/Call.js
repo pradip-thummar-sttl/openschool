@@ -283,7 +283,7 @@ const Call = (props) => {
                         showsVerticalScrollIndicator={false}
                         ListHeaderComponent={() => {
                             return (
-                                <View style={Style.listHeaderPArent}>
+                                <View style={[Style.listHeaderPArent]}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => releaseResource()}>

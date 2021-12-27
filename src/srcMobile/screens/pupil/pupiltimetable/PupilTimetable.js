@@ -172,6 +172,28 @@ const PupilTimeTable = (props) => {
     }
 
     useEffect(() => {
+
+        let time1 = moment().format('HH:mm')
+        const timeSplit = time1.split(':')
+        console.log('times of ============>', timeSplit);
+        const h = timeSplit[0]  //09:30
+        const m = timeSplit[1]  //09:30
+
+        var index
+        if (m >= 30) {
+            index = ((h - 6) * 2) + 1
+        } else {
+            index = (h - 6) * 2
+        }
+
+        // scrollViewRef.current.scrollTo({
+        //     x: scrollViewRef.nativeEvent.contentOffset.x/scrollIndex,
+        //     animated: true,
+        // });
+
+        setScrollIndex(index)
+        console.log('scrollviewref=====>', time[index]);
+
         fetchRecord('', '', moment().format('YYYY-MM-DD'))
 
         Service.get(`${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {

@@ -90,7 +90,7 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, 
+                        style={{ flex: 1,
                         paddingVertical : Platform.OS === 'android' ? 3 : 0,    
                         height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search subject, class, etc"

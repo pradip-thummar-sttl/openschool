@@ -78,7 +78,7 @@ const HeaderWhitepupilMessage = (props) => {
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By Date</Text></MenuTrigger>
+                        <MenuTrigger><Text style={[styles.commonButtonBorderedheader]}>By Date</Text></MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
