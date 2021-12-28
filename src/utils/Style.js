@@ -65,9 +65,11 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     checkBoxcommon: {
-        width: hp(1.6),
-        height: hp(1.6),
+        // width: hp(4.2),
+        width : Platform.OS === 'android' ? hp(4.2) : hp(1.8),
+        height: hp(1.8),
         top: 0,
+       
     },
     checkBoxcommon1: {
         width: 20,

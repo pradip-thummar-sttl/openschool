@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -352,6 +352,7 @@ const styles = StyleSheet.create({
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
+        right : Platform.OS === 'android' ? 8 : 0
     },
     moreMenu: {
         // position: 'absolute',

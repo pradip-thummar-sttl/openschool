@@ -98,8 +98,8 @@ const ParentZonemain = (props) => {
     }
 
     return (
-        <View>
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+        <View style={{ flex: 1 }}>
+            <View style={{ height: '100%', width: isHide ? '100%' : '100%' }}>
                 <HeaderPM
                     onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
                     data={pupilData}
@@ -110,48 +110,50 @@ const ParentZonemain = (props) => {
                     onSearch={() => fetchRecord(keyword, filterBy)}
                     onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)} />
-                {selectedTabIndex == 0 ?
-                    isLoading ?
-                        <ActivityIndicator
-                            style={{ flex: 1, marginTop: 20 }}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.yellowDark} />
-                        :
-                        messageData.length > 0 ?
-                            <FlatList
-                                style={{ marginTop: 10, height: '77%' }}
-                                data={messageData}
-                                renderItem={messageRender}
-                                keyExtractor={(item) => item.id}
-                                extraData={selectedId}
-                                showsVerticalScrollIndicator={false} />
+                <View style={{ flex: 1, }}>
+                    {selectedTabIndex == 0 ?
+                        isLoading ?
+                            <ActivityIndicator
+                                style={{ flex: 1, marginTop: 20 }}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.yellowDark} />
                             :
-                            // <View style={{ height: 100, justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            // </View>
-                            <EmptyStatePlaceHohder holderType={2}  title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
-
-                    :
-                    selectedTabIndex == 1 ?
-                        <ParentZonePerformance
-                            data={pupilData[pupilIndex]} />
-                        :
-                        selectedTabIndex == 2 ?
-                            <ParentChat
-                                data={pupilData[pupilIndex]}
-                                tabs={1} />
-                            :
-                            selectedTabIndex == 3 ?
-                                null
+                            messageData.length > 0 ?
+                                <FlatList
+                                    style={{ marginTop: 10, height: '77%' }}
+                                    data={messageData}
+                                    renderItem={messageRender}
+                                    keyExtractor={(item) => item.id}
+                                    extraData={selectedId}
+                                    showsVerticalScrollIndicator={false} />
                                 :
-                                selectedTabIndex == 4 ?
-                                    <ParentZoneProfile
-                                        data={pupilData[pupilIndex]}
-                                        navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { onGoBack: () => { setPupilData(User.user.ChildrenList); props.navigation.goBack() }, data: pupilData[pupilIndex] })} />
+                                // <View style={{ height: 100, justifyContent: 'center' }}>
+                                //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                // </View>
+                                <EmptyStatePlaceHohder holderType={2} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
+
+                        :
+                        selectedTabIndex == 1 ?
+                            <ParentZonePerformance
+                                data={pupilData[pupilIndex]} />
+                            :
+                            selectedTabIndex == 2 ?
+                                <ParentChat
+                                    data={pupilData[pupilIndex]}
+                                    tabs={1} />
+                                :
+                                selectedTabIndex == 3 ?
+                                    null
                                     :
-                                    <ParentZoneSchoolDetails
-                                        data={pupilData[pupilIndex]} />
-                }
+                                    selectedTabIndex == 4 ?
+                                        <ParentZoneProfile
+                                            data={pupilData[pupilIndex]}
+                                            navigateToDetail={() => props.navigation.navigate('ParentZoneProfileEdit', { onGoBack: () => { setPupilData(User.user.ChildrenList); props.navigation.goBack() }, data: pupilData[pupilIndex] })} />
+                                        :
+                                        <ParentZoneSchoolDetails
+                                            data={pupilData[pupilIndex]} />
+                    }
+                </View>
             </View>
         </View>
     );
