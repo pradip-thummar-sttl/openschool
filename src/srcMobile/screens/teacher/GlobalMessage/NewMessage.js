@@ -49,7 +49,7 @@ const NewMessage = (props) => {
     }, [data])
 
     useEffect(() => {
-        Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
+        Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {ß
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)

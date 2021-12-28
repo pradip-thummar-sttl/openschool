@@ -152,6 +152,8 @@ function ScreenStack() {
                 <Stack.Screen name="SchoolMessage" component={SchoolMessage} />
                 <Stack.Screen name="SchoolNewMessage" component={SchoolNewMessage} />
                 <Stack.Screen name="TeacherManagement" component={TeacherManagement} />
+                <Stack.Screen name="NotificationDrawer" component={NotificationDrawer} />
+
             </Stack.Navigator>
         </PubNubProvider>
     );
