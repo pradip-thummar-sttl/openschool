@@ -97,8 +97,8 @@ const TeacheroverView = (props) => {
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     tabs={selectedTabIndex}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, '')}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                    onSearch={() => fetchRecord(searchKeyword, 'name')}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', 'name') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
                     // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     navigateToCsvPopup={() => { setCsvPopup(true); console.log('iscsvpopup', isCsvPopup); }}
@@ -106,7 +106,7 @@ const TeacheroverView = (props) => {
                     onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage} contentContainerStyle={{paddingBottom : 10}} >
+                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage} contentContainerStyle={{ paddingBottom: 10 }} >
                         <View style={PAGESTYLE.mainContainer}>
                             {
                                 isLoading ?

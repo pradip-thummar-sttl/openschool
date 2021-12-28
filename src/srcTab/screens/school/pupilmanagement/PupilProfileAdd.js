@@ -451,15 +451,14 @@ const PupilProfileAdd = (props) => {
                                 </View>
                             </View>
                         </View>
-                      
-                    </KeyboardAwareScrollView>
-                    <DateTimePickerModal
+                        <DateTimePickerModal
                             isVisible={isDatePickerVisible}
                             mode="date"
                             maximumDate={new Date()}
                             onConfirm={handleConfirm}
                             onCancel={hideDatePicker}
                         />
+                    </KeyboardAwareScrollView>
                 </View>
             </View>
         </View>
