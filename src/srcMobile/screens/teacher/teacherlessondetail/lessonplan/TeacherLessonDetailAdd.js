@@ -796,7 +796,7 @@ const TLDetailAdd = (props) => {
             return
         }
 
-        console.log('data', data._parts, lessionId);
+        console.log('data', data);
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
