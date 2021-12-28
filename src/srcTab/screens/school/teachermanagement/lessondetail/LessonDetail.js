@@ -215,35 +215,12 @@ const LessonDetail = (props) => {
 
     }
 
-    // useEffect(() => {
-    //     if (!isSearchActive) {
-    //         props.onClearSearch()
-    //         this.textInput.clear()
-    //     } else {
-    //         props.onSearch()
-    //     }
-    // }, [isSearchActive])
-
-    // useEffect(() => {
-    //     props.onFilter(filterBy)
-    // }, [filterBy])
-
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
 
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 {tabIndex == 0 ?
-                    <HeaderLP
-                        lessonData={lessonData}
-                        date={lessonData.Date}
-                        navigateToBack={() => props.goBack()}
-                        onAlertPress={() => { props.onAlertPress() }} />
+                    <HeaderLP  lessonData={lessonData} date={lessonData.Date} navigateToBack={() => props.goBack()} onAlertPress={() => { props.onAlertPress() }} />
                     : tabIndex == 1 ?
                         <HeaderHW
                             hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}

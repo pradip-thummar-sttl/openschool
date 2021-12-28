@@ -380,11 +380,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+           
 
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderSave
@@ -395,6 +391,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onSetHomework={() => isFieldsValidated()}
                 />
+                
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.whiteBg}>

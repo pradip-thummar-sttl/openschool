@@ -316,7 +316,7 @@ class Login extends Component {
                         <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
                         <View style={styles.loginForm}>
                             <View style={styles.field}>
-                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School' ? "email" : "Email"}</Text>
+                                <Text style={styles.labelInput}>{this.props.route.params.userType == 'School' ? "Email" : "Email"}</Text>
                                 <TextInput
                                     onFocus={() => this.setState({ isEmailFocused: true })}
                                     onBlur={() => this.setState({ isEmailFocused: false })}

@@ -52,7 +52,8 @@ export default StyleSheet.create({
 
     //
     views: {
-        height: Platform.OS == 'android' ? '60%' : '52%',
+        // height: Platform.OS == 'android' ? '60%' : '52%',
+        flex: 1,
         width: '100%',
         // flex: 1
     },
@@ -116,19 +117,17 @@ export default StyleSheet.create({
         paddingHorizontal: 10
     },
     textView: {
-        width: '95%',
-        height: hp(12),
-        borderRadius: 10,
+        width: '100%',
+        height: hp(8),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
+        justifyContent: 'center',
         // position: 'absolute',
         // bottom: 10,
-        alignSelf: 'center',
         position: 'absolute',
         bottom: 0,
-        zIndex: 100
-        // bottom:0,
+        // zIndex: 100
     },
     messageCell: {
         flexDirection: 'row',
@@ -174,8 +173,7 @@ export default StyleSheet.create({
 
     },
     input: {
-        // width: '100%',
-        height: '100%',
+        width: '90%',
         fontSize: hp(1.8),
         fontFamily: FONTS.fontSemiBold,
         marginHorizontal: wp(1.5),

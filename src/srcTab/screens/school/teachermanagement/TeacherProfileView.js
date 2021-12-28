@@ -57,18 +57,22 @@ const TeacherProfileView = (props) => {
             console.log('Err of all pupil by teacher', err)
         })
     }, [])
+  
+    const openNotification = () => {
+        props.onNavigation.openDrawer();
+    }
 
     return (
         <View style={PAGESTYLE.mainPage1}>
-            {!isLessonDetail ?
+            {!isLessonDetail &&
                 <HeaderPMInner
-                    navigateToBack={() => props.navigateToBack()} 
+                    navigateToBack={() => {props.navigateToBack()}} 
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
-                    pupilName={item.FirstName + ' ' + item.LastName} />
-                :
-                null
+                    pupilName={item.FirstName + ' ' + item.LastName} 
+                    onNotification={()=> openNotification()} />
             }
+
             {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
@@ -180,9 +184,7 @@ const TeacherProfileView = (props) => {
                             <TeacherChat tabs={tabSelected} data={item} />
                         </View>
                         :
-                        <LessonList
-                            data={item}
-                            setLessonDetail={(flag) => setLessonDetail(flag)} />
+                        <LessonList data={item} onNotification={()=> openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
             }
 
         </View>

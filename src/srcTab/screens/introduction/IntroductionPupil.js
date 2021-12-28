@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions, Platform } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../../utils/Colors';
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         left: 0,
+        bottom  : Platform.OS === 'android' ? hp(-7.5) : hp(-3.5)     //-3.5
     },
     dotContainer: {
         backgroundColor: COLORS.transparent,

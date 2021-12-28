@@ -195,9 +195,12 @@ const PupilLessonDetail = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, topic name, teacher name, etc"
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, 
+                       paddingVertical :  Platform.OS === 'android' ? 3 : 0
+                        }}
+                        placeholder="Search subject,topic name, etc"
                         maxLength={50}
+                        
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                 </View>

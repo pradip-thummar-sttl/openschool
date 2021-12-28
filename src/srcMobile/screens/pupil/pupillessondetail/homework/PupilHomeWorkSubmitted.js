@@ -82,8 +82,8 @@ const PupilHomeWorkSubmitted = (props) => {
                                         data={item.CheckList}
                                         // data={[1,2,]}
                                         renderItem={({ item }) => (
-                                            <View style={PAGESTYLE.checkBoxLabelLine}>
-                                                <View style={PAGESTYLE.alignRow}>
+                                            <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
+                                                <View style={[PAGESTYLE.alignRow]}>
                                                     <CheckBox
                                                         style={[PAGESTYLE.checkMark]}
                                                         value={item.IsCheck}

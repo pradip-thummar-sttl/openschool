@@ -225,12 +225,6 @@ const SchoolTeacherLessonDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             {
                 isScreenAndCameraRecording ?
                     <ScreenAndCameraRecording goBack={() => setScreenAndCameraRecording(false)} />
@@ -238,33 +232,12 @@ const SchoolTeacherLessonDetail = (props) => {
                         <TLVideoGallery goBack={() => setTLVideoGallery(false)} />
                         :
                         <View style={{ width: isHide ? '100%' : '100%' }}>
-                            {tabIndex == 0 ?
-                                <HeaderSLP
+                             <HeaderSLP
                                     lessonData={lessonData}
                                     date={lessonData.Date}
                                     navigateToBack={() => props.navigation.goBack()}
-                                    onAlertPress={() => props.navigation.openDrawer()}
-                                    navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
-                                : tabIndex == 1 ?
-                                    <HeaderSHW
-                                        hwBtnName={updateFlag ? 'Update' : 'Set'}
-                                        SubjectName={lessonData.SubjectName}
-                                        date={lessonData.Date}
-                                        setHomework={() => onAddHomework()}
-                                        navigateToBack={() => props.navigation.goBack()}
-                                        onAlertPress={() => props.navigation.openDrawer()}
-                                        onClose={() => setVisiblePopup(false)}
-                                        isVisible={isVisiblePopup}
-                                        onOpenPopup={() => isFiedlsValidated()}
-                                        isHomeworkLoading={isHomeworkLoading}
-                                    />
-                                    :
-                                    <HeaderSHWS
-                                        subjectName={lessonData.SubjectName}
-                                        date={lessonData.Date}
-                                        navigateToBack={() => props.navigation.goBack()}
-                                        onAlertPress={() => props.navigation.openDrawer()} />
-                            }
+                                    onAlertPress={() => props.navigation.navigate('NotificationDrawer', { onGoBack: () => {} })}/>
+                              
                             <View style={PAGESTYLE.whiteBg}>
                                 <View style={PAGESTYLE.lessonPlanTop}>
                                     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
@@ -291,6 +264,7 @@ const SchoolTeacherLessonDetail = (props) => {
                                     </ScrollView>
                                 </View>
                             </View>
+                            
                             <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                                 {tabIndex == 0 ?
                                     <STLDetail lessonData={lessonData} />
@@ -309,13 +283,7 @@ const SchoolTeacherLessonDetail = (props) => {
                                             dataChanged={isHSDataChanged}
                                             navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
                                 }
-                                {/* <TLDetailEdit /> */}
-                                {/* <TLDetailAdd /> */}
-                                {/* <TLVideoGallery /> */}
-                                {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                                {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                                {/* <TLHomeWorkSubmittedDetail /> */}
-                                {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                               
                             </ScrollView>
 
                         </View>}

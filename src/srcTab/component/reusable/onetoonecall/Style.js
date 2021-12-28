@@ -80,6 +80,7 @@ export default StyleSheet.create({
         fontSize: hp(1.95),
         color: COLORS.darkGray,
         marginVertical: 10,
+        // top : -18,
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
     },
