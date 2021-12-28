@@ -321,7 +321,8 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                         <View style={styles.requirementofClass}>
-                                            <Text style={styles.requireText}>Items that your class will need</Text>
+                                            {props.data.CheckList && props.data.CheckList.length ?
+                                                <Text style={styles.requireText}>Items that your class will need</Text> : null}
                                             {props.data.CheckList ?
                                                 props.data.CheckList.map((data, index) => (
                                                     <View style={styles.lessonPoints}>

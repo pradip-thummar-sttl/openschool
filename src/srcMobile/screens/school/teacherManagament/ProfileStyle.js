@@ -303,7 +303,7 @@ export default StyleSheet.create({
     },
     MainProfile: {
         height: '100%',
-        backgroundColor: COLORS.white,
+        // backgroundColor: COLORS.greenSchool,
     },
     pupilDetaillinkIcon: {
         width: hp(0.9),
@@ -393,7 +393,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     scrollViewCommon: {
-        marginBottom: hp(30),
+        marginBottom: hp(20),
     },
     scrollViewCommonPupilEdit: {
         marginBottom: hp(15),

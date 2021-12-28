@@ -102,7 +102,7 @@ export default StyleSheet.create({
     rightView: {
         // backgroundColor:'red',
         width: '100%',
-        height: '71%',
+        height: '100%',
     },
     mesagesView: {
         width: '100%',
@@ -112,10 +112,12 @@ export default StyleSheet.create({
     },
     textView: {
         width: '100%',
-        height: hp(12),
+        height: hp(8),
         borderTopWidth: 1,
         borderTopColor: COLORS.videoLinkBorder,
         backgroundColor: COLORS.greyBack,
+        position:'absolute',
+        bottom: 0
     },
     messageCell: {
         flexDirection: 'row',
@@ -143,11 +145,10 @@ export default StyleSheet.create({
     },
     input: {
         width: '100%',
-        height: hp(12),
+        height: '100%',
         fontSize: hp(1.72),
         fontFamily:FONTS.fontRegular,
         padding: hp(1.5),
-        paddingTop: hp(1.5),
     },
     buttonView:{
         position:'absolute',

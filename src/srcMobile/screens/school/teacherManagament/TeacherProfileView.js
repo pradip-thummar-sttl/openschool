@@ -175,7 +175,7 @@ const TeacherProfileView = (props) => {
     }
 
     return (
-        <View>
+        <View style={{flex: 1}}>
             <HeaderPTInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
@@ -331,9 +331,8 @@ const TeacherProfileView = (props) => {
                         </ScrollView>
                     </View>
                     : tabSelected === 1 ?
-                        <View style={PAGESTYLE.MainProfile}>
                             <Chat tabs={tabSelected} data={item} />
-                        </View> :
+                            :
                         <STLessonList
                             navigateDetails={(items) => props.navigation.navigate('SchoolTeacherLessonDetail', { 'data': items })}
                             id={item.TeacherId} />
