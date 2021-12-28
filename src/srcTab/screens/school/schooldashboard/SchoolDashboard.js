@@ -82,10 +82,10 @@ const Item = ({ onPress, style, item }) => (
 
 const Pupillist = ({ item, onPress }) => (
 
-
     <TouchableOpacity onPress={() => { onPress() }}>
         <View style={[PAGESTYLE.pupilData]}>
             <View style={PAGESTYLE.pupilProfile}>
+        
                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20), fontFamily: FONTS.fontSemiBold }]}>{item.FirstName} {item.LastName}</Text>
             </View>
@@ -185,7 +185,7 @@ const SchoolDashboard = (props) => {
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setSchoolDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all pupil data', res)
+                console.log('response of get all pupil data', res.data)
                 setSchoolData(res.data)
             } else {
                 showMessage(res.message)

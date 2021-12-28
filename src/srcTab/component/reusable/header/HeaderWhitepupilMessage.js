@@ -46,12 +46,13 @@ const HeaderWhitepupilMessage = (props) => {
         BadgeIcon.isBadge = false;
         console.log('this is props from opennoti',props)
         // props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
-        props.navigation.navigate('NotificationDrawer', {
-            onGoBack: () => 
+        // props.navigation.navigate('NotificationDrawer', {
+        //     onGoBack: () => 
                
-                // fetchRecord('','')
-            'SchoolMessage'
-        })
+        //         fetchRecord('','')
+            
+        // })
+        props.navigation.openDrawer() 
     }
 
     return (
@@ -62,7 +63,7 @@ const HeaderWhitepupilMessage = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}
+                    <TouchableOpacity style={[styles.notificationBar,{ position: 'relative'},]}
                         onPress={() => openNotification()}
                         activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
