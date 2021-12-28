@@ -15,10 +15,14 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 // import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import MESSAGE from "../../../../utils/Messages";
-import { baseUrl, emailValidate, opacity } from "../../../../utils/Constant";
+import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
+
+import { EndPoints } from "../../../../service/EndPoints";
+import { Service } from "../../../../service/Service";
+import moment from 'moment';
 
 const { CallModule } = NativeModules;
 
@@ -41,6 +45,7 @@ const SAddNewTeacher = (props) => {
     const [teachers, setTeachers] = useState([])
 
     const myref = useRef(null);
+    
 
     const activityConfig = {
         width: 200,
@@ -48,6 +53,9 @@ const SAddNewTeacher = (props) => {
     };
 
     useEffect(() => {
+
+        loadTeacher()
+
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -55,6 +63,25 @@ const SAddNewTeacher = (props) => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
     }, [props.navigation]);
+
+
+    const loadTeacher = () => {
+        const data = {
+            Searchby: "",
+            Filterby: ""
+        }
+
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setTeachers(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
 
     const handleBackButtonClick = () => {
         props.navigation.goBack()
@@ -297,8 +324,8 @@ const SAddNewTeacher = (props) => {
                             {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                         </View>
                         <View>
-                                    {teacherDropDown()}
-                                </View>
+                            {teacherDropDown()}
+                        </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
                             <TextInput
