@@ -304,9 +304,9 @@ const PupilProfileAdd = (props) => {
                                         onPress={() => showActionChooser()}
 
                                     >
-                                        <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                        <Image style={{ height: '100%', width: '100%', borderRadius: 100,  backgroundColor: COLORS.lightGrey }}
                                             source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
+                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)}/>
                                     </TouchableOpacity>
                                 </View>
 
