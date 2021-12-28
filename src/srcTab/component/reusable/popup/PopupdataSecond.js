@@ -394,7 +394,7 @@ const PopupdataSecond = (props) => {
                                                 :
                                                 <TouchableOpacity
                                                     onPress={isFieldsValidated}
-                                                    style={styles.buttonGrp}
+                                                    style={[styles.buttonGrp]}
                                                     activeOpacity={opacity}>
                                                     {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
                                                     <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
