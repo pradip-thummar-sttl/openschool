@@ -149,47 +149,23 @@ const HeaderTM = (props) => {
                     <Text style={styles.mainTitle}>{props.title}</Text>
                 </View>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}> */}
-                    {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
-                    {/* <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                            BadgeIcon.isBadge ?
-                                <View style={STYLE.redDot}></View> : null
+                            BadgeIcon.isBadge && <View style={STYLE.redDot}></View>
                         }
-                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    {/* <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
-                        <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                        {isSearchActive ?
-                            <CloseBlack height={18} width={18} />
-                            :
-                            <SearchBlue height={18} width={18} />
-                        }
-                    </TouchableOpacity> */}
-
                     {isSearchActive ?
                         <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
                             <CloseBlack height={18} width={18} />
-                        </TouchableOpacity> :
-
+                        </TouchableOpacity> 
+                        :
                         <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
                             <SearchBlue height={18} width={18} />
                         </TouchableOpacity>}
@@ -199,13 +175,10 @@ const HeaderTM = (props) => {
                         style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            props.onSearchKeyword(keyword);
-                        }} />
+                        onChangeText={keyword => {props.onSearchKeyword(keyword);}} />
 
                     <Menu>
                         <MenuTrigger>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
@@ -215,12 +188,7 @@ const HeaderTM = (props) => {
                                     onPress={() => { OnPressAsc() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
-                                        {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -230,12 +198,7 @@ const HeaderTM = (props) => {
                                     onPress={() => { OnPressDes() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Desending)</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -243,10 +206,7 @@ const HeaderTM = (props) => {
                     </Menu>
                     {/*  */}
                 </View>
-                <TouchableOpacity
-                    style={styles.buttonGroup}
-                    onPress={() => refRBSheet.current.open()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
                     <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
@@ -274,14 +234,6 @@ const HeaderTM = (props) => {
                                 <View style={styles.beforeBorder}>
                                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
                                     <View style={styles.entryContentMain}>
-                                        {/* <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.openCsv() }}> */}
-                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                        {/* <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
-                                            <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
-                                        </TouchableOpacity> */}
                                         <MPopupdataSecondCSVUpload />
                                         <TouchableOpacity style={styles.entryData} onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
                                             <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />

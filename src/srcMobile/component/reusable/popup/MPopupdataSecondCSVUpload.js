@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity,  } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator,  } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -24,6 +24,8 @@ const MPopupdataSecondCSVUpload = (props) => {
     console.log('isFromDashboard', isFromDashboard);
 
     const [isModalVisible, setModalVisible] = useState();
+    const [isLoader, setLoader] = useState(false);
+
     const [csv, setCSV] = useState(null)
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -32,17 +34,14 @@ const MPopupdataSecondCSVUpload = (props) => {
     const addCSV = () => {
         console.log('hihihihihihi')
         try {
-            DocumentPicker.pick({
-                type: [DocumentPicker.types.xlsx,],
-            }).then((results) => {
+            DocumentPicker.pick({type: [DocumentPicker.types.xlsx,],}).then((results) => {
                 console.log('results', results);
-                // setCSV(results)
                 uploadProfile(results)
             });
 
         } catch (err) {
+            setLoader(false);
             if (DocumentPicker.isCancel(err)) {
-                // User cancelled the picker, exit any dialogs or menus and move on
             } else {
                 throw err;
             }
@@ -50,7 +49,7 @@ const MPopupdataSecondCSVUpload = (props) => {
     }
 
     const uploadProfile = (csv) => {
-        
+        setLoader(true);
         let data = new FormData();
         let url;
 
@@ -60,12 +59,7 @@ const MPopupdataSecondCSVUpload = (props) => {
             url = `${EndPoints.PupilUpload}/${User.user.UserDetialId}`
         }
 
-        data.append('file', {
-            uri: csv.uri,
-            name: csv.name,
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        });
-
+        data.append('file', { uri: csv.uri, name: csv.name,type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
         Service.postFormData(data, url, (res) => {
             if (res.code == 200) {
                 showMessage(MESSAGE.inviteSent)
@@ -73,7 +67,9 @@ const MPopupdataSecondCSVUpload = (props) => {
             } else {
                 showMessage(res.message)
             }
+            setLoader(false);
         }, (err) => {
+            setLoader(false);
             console.log('response of get all lesson error', err)
         })
 
@@ -101,8 +97,19 @@ const MPopupdataSecondCSVUpload = (props) => {
                                 <Text style={styles.labelUpload}>Click here to select source</Text>
                         </TouchableOpacity>
                     </View>
+
+                    {
+                    isLoader&&
+                    <ActivityIndicator
+                    style={{ flex: 1, marginTop: "40%", position:'absolute' }}
+                    size={'large'}
+                    color={COLORS.yellowDark} />
                     
+                }
                 </View>
+
+               
+            
             </Modal>
          </View>
     );
