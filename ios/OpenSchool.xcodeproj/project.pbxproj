@@ -60,7 +60,6 @@
 		882EA095266A2151000B9813 /* InfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA093266A2151000B9813 /* InfoTableViewCell.m */; };
 		882EA0A1266A2173000B9813 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA097266A2172000B9813 /* SVProgressHUD.m */; };
 		882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA098266A2172000B9813 /* SVRadialGradientLayer.m */; };
-		882EA0A3266A2173000B9813 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 882EA09A266A2173000B9813 /* SVProgressHUD.bundle */; };
 		882EA0A4266A2173000B9813 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA09E266A2173000B9813 /* SVProgressAnimatedView.m */; };
 		882EA0A5266A2173000B9813 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA09F266A2173000B9813 /* SVIndefiniteAnimatedView.m */; };
 		882EA0B0266A21D0000B9813 /* DialogsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA0AF266A21D0000B9813 /* DialogsDataSource.m */; };
@@ -72,7 +71,6 @@
 		882EA0C6266A224D000B9813 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA0C5266A224D000B9813 /* MainTableViewController.m */; };
 		882EA0C9266A2277000B9813 /* UsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA0C8266A2277000B9813 /* UsersViewController.m */; };
 		882EA0CE266A229A000B9813 /* CheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA0CD266A229A000B9813 /* CheckView.m */; };
-		882EA0D2266A22AB000B9813 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA0D0266A22AB000B9813 /* DialogTableViewCell.m */; };
 		882EA0D6266A22BE000B9813 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA0D5266A22BE000B9813 /* UserTableViewCell.m */; };
 		882EA0D8266A270A000B9813 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882EA0D7266A270A000B9813 /* Main.storyboard */; };
 		8833B50F26661A2D000938B6 /* CreateDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8833B50E26661A2D000938B6 /* CreateDialog.m */; };
@@ -88,6 +86,85 @@
 		883F5635276C59FE009CD7A9 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F5634276C59FE009CD7A9 /* CustomButton.m */; };
 		883F5639276C5A51009CD7A9 /* CallGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F5638276C5A51009CD7A9 /* CallGradientView.m */; };
 		883F563C276C5AB0009CD7A9 /* ButtonsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F563B276C5AB0009CD7A9 /* ButtonsFactory.m */; };
+		884068312775A24C0053E668 /* MenuAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068302775A24C0053E668 /* MenuAction.m */; };
+		884068392775A26A0053E668 /* SelectAssetsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068332775A26A0053E668 /* SelectAssetsVC.m */; };
+		8840683A2775A26A0053E668 /* SelectAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068352775A26A0053E668 /* SelectAssetCell.m */; };
+		8840683B2775A26A0053E668 /* PhotoAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068372775A26A0053E668 /* PhotoAsset.m */; };
+		884068412775A28C0053E668 /* ChatActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840683E2775A28B0053E668 /* ChatActionCell.m */; };
+		884068422775A28C0053E668 /* ActionsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068402775A28C0053E668 /* ActionsMenuViewController.m */; };
+		884068472775A2B30053E668 /* ZoomedAttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068452775A2B30053E668 /* ZoomedAttachmentViewController.m */; };
+		8840684A2775A2C10053E668 /* ParentVideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068492775A2C10053E668 /* ParentVideoVC.m */; };
+		884068522775A35D0053E668 /* ChatDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840684C2775A35D0053E668 /* ChatDataSource.m */; };
+		884068532775A35D0053E668 /* QBChatMessage+QBDateDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840684E2775A35D0053E668 /* QBChatMessage+QBDateDivider.m */; };
+		884068542775A35D0053E668 /* NSDate+ChatDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840684F2775A35D0053E668 /* NSDate+ChatDataSource.m */; };
+		884068652775A3C70053E668 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068632775A3C70053E668 /* ChatViewController.m */; };
+		884068662775A3C70053E668 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 884068642775A3C70053E668 /* Chat.storyboard */; };
+		8840686B2775A5710053E668 /* AttachmentUploadBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068682775A5710053E668 /* AttachmentUploadBar.m */; };
+		8840686C2775A5710053E668 /* AttachmentUploadBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068692775A5710053E668 /* AttachmentUploadBar.xib */; };
+		884068722775A60A0053E668 /* ChatDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8840686F2775A6090053E668 /* ChatDateCell.xib */; };
+		884068732775A60A0053E668 /* ChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068702775A6090053E668 /* ChatDateCell.m */; };
+		884068772775A6350053E668 /* ChatIncomingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068752775A6350053E668 /* ChatIncomingCell.m */; };
+		884068792775A64F0053E668 /* ChatIncomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068782775A64F0053E668 /* ChatIncomingCell.xib */; };
+		8840687E2775A6760053E668 /* ChatAttachmentOutgoingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840687C2775A6760053E668 /* ChatAttachmentOutgoingCell.m */; };
+		8840687F2775A6760053E668 /* ChatAttachmentOutgoingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8840687D2775A6760053E668 /* ChatAttachmentOutgoingCell.xib */; };
+		884068852775A6910053E668 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068822775A6900053E668 /* ChatCell.m */; };
+		884068862775A6910053E668 /* ChatCellLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068832775A6910053E668 /* ChatCellLayoutAttributes.m */; };
+		8840688B2775A6E40053E668 /* ChatNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068892775A6E30053E668 /* ChatNotificationCell.xib */; };
+		8840688C2775A6E40053E668 /* ChatNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840688A2775A6E40053E668 /* ChatNotificationCell.m */; };
+		884068912775A7040053E668 /* ChatCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840688E2775A7040053E668 /* ChatCollectionView.m */; };
+		884068972775A7670053E668 /* ChatCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068932775A7660053E668 /* ChatCollectionViewFlowLayout.m */; };
+		884068982775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068942775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.m */; };
+		8840689C2775A7850053E668 /* ChatAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840689A2775A7850053E668 /* ChatAttachmentCell.m */; };
+		884068A02775A7A70053E668 /* ChatContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840689F2775A7A70053E668 /* ChatContainerView.m */; };
+		884068A52775A7C20053E668 /* ChatOutgoingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068A22775A7C20053E668 /* ChatOutgoingCell.xib */; };
+		884068A62775A7C20053E668 /* ChatOutgoingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068A42775A7C20053E668 /* ChatOutgoingCell.m */; };
+		884068AB2775A7DB0053E668 /* ChatAttachmentIncomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068A82775A7DB0053E668 /* ChatAttachmentIncomingCell.xib */; };
+		884068AC2775A7DB0053E668 /* ChatAttachmentIncomingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068AA2775A7DB0053E668 /* ChatAttachmentIncomingCell.m */; };
+		884068B12775A7F30053E668 /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068AF2775A7F30053E668 /* HeaderCollectionReusableView.m */; };
+		884068B22775A7F30053E668 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068B02775A7F30053E668 /* HeaderCollectionReusableView.xib */; };
+		884068BD2775A8330053E668 /* ToolbarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068B62775A8320053E668 /* ToolbarContentView.m */; };
+		884068BE2775A8330053E668 /* PlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068B72775A8320053E668 /* PlaceHolderTextView.m */; };
+		884068BF2775A8330053E668 /* InputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068B82775A8320053E668 /* InputToolbar.m */; };
+		884068C02775A8330053E668 /* ToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 884068BA2775A8330053E668 /* ToolbarContentView.xib */; };
+		884068C12775A8330053E668 /* KVOView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068BB2775A8330053E668 /* KVOView.m */; };
+		884068C52775A8500053E668 /* CircularProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068C42775A8500053E668 /* CircularProgressBar.m */; };
+		884068C92775A8650053E668 /* ChatPrivateTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068C82775A8650053E668 /* ChatPrivateTitleView.m */; };
+		884068CD2775A87B0053E668 /* TypingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068CB2775A87B0053E668 /* TypingView.m */; };
+		884068D42775A8E40053E668 /* ChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068D12775A8E40053E668 /* ChatManager.m */; };
+		884068D52775A8E40053E668 /* ChatStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068D32775A8E40053E668 /* ChatStorage.m */; };
+		884068D92775A9130053E668 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068D82775A9130053E668 /* Profile.m */; };
+		884068FC2775AA0A0053E668 /* UIColor+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068DC2775AA080053E668 /* UIColor+Chat.m */; };
+		884068FD2775AA0A0053E668 /* UIButton+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068DE2775AA080053E668 /* UIButton+Chat.m */; };
+		884068FE2775AA0A0053E668 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068DF2775AA080053E668 /* UIImage+fixOrientation.m */; };
+		884068FF2775AA0A0053E668 /* UILabel+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068E02775AA080053E668 /* UILabel+Chat.m */; };
+		884069002775AA0A0053E668 /* QBUUser+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068E12775AA080053E668 /* QBUUser+Chat.m */; };
+		884069012775AA0A0053E668 /* UIViewController+ContextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068E22775AA080053E668 /* UIViewController+ContextMenu.m */; };
+		884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068E32775AA080053E668 /* UIImage+Cropper.m */; };
+		884069032775AA0A0053E668 /* UITextField+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068E42775AA080053E668 /* UITextField+Chat.m */; };
+		884069042775AA0A0053E668 /* UIImage+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068E52775AA090053E668 /* UIImage+Chat.m */; };
+		884069052775AA0A0053E668 /* UITableView+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068ED2775AA090053E668 /* UITableView+Chat.m */; };
+		884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068EE2775AA090053E668 /* NSDate+Chat.m */; };
+		884069072775AA0A0053E668 /* UIView+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068F12775AA090053E668 /* UIView+Chat.m */; };
+		884069082775AA0A0053E668 /* NSString+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068F22775AA090053E668 /* NSString+Chat.m */; };
+		884069092775AA0A0053E668 /* CALayer+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068F52775AA0A0053E668 /* CALayer+Chat.m */; };
+		8840690A2775AA0A0053E668 /* NSURL+Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068F62775AA0A0053E668 /* NSURL+Chat.m */; };
+		8840690B2775AA0A0053E668 /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 884068F92775AA0A0053E668 /* UIViewController+Alert.m */; };
+		884069102775AA7F0053E668 /* ChatResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840690D2775AA7F0053E668 /* ChatResources.m */; };
+		884069112775AA7F0053E668 /* DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840690F2775AA7F0053E668 /* DateUtils.m */; };
+		884069152775AA9D0053E668 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069132775AA9D0053E668 /* Log.m */; };
+		884069192775AAB70053E668 /* AbstractAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069172775AAB60053E668 /* AbstractAsyncOperation.m */; };
+		8840691D2775AAD00053E668 /* AttachmentDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840691B2775AAD00053E668 /* AttachmentDownloadManager.m */; };
+		884069212775AAE70053E668 /* CacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840691F2775AAE70053E668 /* CacheManager.m */; };
+		884069252775AB040053E668 /* AttachmentDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069232775AB030053E668 /* AttachmentDownloadOperation.m */; };
+		884069312775AD4F0053E668 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069302775AD4F0053E668 /* Reachability.m */; };
+		884069382775ADEE0053E668 /* DialogsSelectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069352775ADEE0053E668 /* DialogsSelectionVC.m */; };
+		884069392775ADEE0053E668 /* Dialogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 884069362775ADEE0053E668 /* Dialogs.storyboard */; };
+		8840693A2775ADEE0053E668 /* DialogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069372775ADEE0053E668 /* DialogsViewController.m */; };
+		884069422775AE090053E668 /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840693C2775AE090053E668 /* DialogCell.m */; };
+		884069432775AE090053E668 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069402775AE090053E668 /* DialogTableViewCell.m */; };
+		884069442775AE090053E668 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069412775AE090053E668 /* TitleView.m */; };
+		884069482775AE6D0053E668 /* RootParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069472775AE6D0053E668 /* RootParentVC.m */; };
+		884069492775B56C0053E668 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 882EA09A266A2173000B9813 /* SVProgressHUD.bundle */; };
 		887374E6265E35190035B788 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374E5265E35190035B788 /* MobileCoreServices.framework */; };
 		887374E8265E35270035B788 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374E7265E35270035B788 /* CFNetwork.framework */; };
 		887374EA265E353A0035B788 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887374E9265E353A0035B788 /* VideoToolbox.framework */; };
@@ -269,6 +346,154 @@
 		883F5638276C5A51009CD7A9 /* CallGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallGradientView.m; sourceTree = "<group>"; };
 		883F563A276C5AB0009CD7A9 /* ButtonsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsFactory.h; sourceTree = "<group>"; };
 		883F563B276C5AB0009CD7A9 /* ButtonsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsFactory.m; sourceTree = "<group>"; };
+		8840682F2775A24C0053E668 /* MenuAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuAction.h; sourceTree = "<group>"; };
+		884068302775A24C0053E668 /* MenuAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuAction.m; sourceTree = "<group>"; };
+		884068332775A26A0053E668 /* SelectAssetsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAssetsVC.m; sourceTree = "<group>"; };
+		884068342775A26A0053E668 /* SelectAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAssetCell.h; sourceTree = "<group>"; };
+		884068352775A26A0053E668 /* SelectAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAssetCell.m; sourceTree = "<group>"; };
+		884068362775A26A0053E668 /* SelectAssetsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAssetsVC.h; sourceTree = "<group>"; };
+		884068372775A26A0053E668 /* PhotoAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAsset.m; sourceTree = "<group>"; };
+		884068382775A26A0053E668 /* PhotoAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAsset.h; sourceTree = "<group>"; };
+		8840683D2775A28B0053E668 /* ChatActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatActionCell.h; sourceTree = "<group>"; };
+		8840683E2775A28B0053E668 /* ChatActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatActionCell.m; sourceTree = "<group>"; };
+		8840683F2775A28C0053E668 /* ActionsMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionsMenuViewController.h; sourceTree = "<group>"; };
+		884068402775A28C0053E668 /* ActionsMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionsMenuViewController.m; sourceTree = "<group>"; };
+		884068452775A2B30053E668 /* ZoomedAttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomedAttachmentViewController.m; sourceTree = "<group>"; };
+		884068462775A2B30053E668 /* ZoomedAttachmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomedAttachmentViewController.h; sourceTree = "<group>"; };
+		884068482775A2C00053E668 /* ParentVideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentVideoVC.h; sourceTree = "<group>"; };
+		884068492775A2C10053E668 /* ParentVideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentVideoVC.m; sourceTree = "<group>"; };
+		8840684C2775A35D0053E668 /* ChatDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatDataSource.m; sourceTree = "<group>"; };
+		8840684D2775A35D0053E668 /* QBChatMessage+QBDateDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBChatMessage+QBDateDivider.h"; sourceTree = "<group>"; };
+		8840684E2775A35D0053E668 /* QBChatMessage+QBDateDivider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBChatMessage+QBDateDivider.m"; sourceTree = "<group>"; };
+		8840684F2775A35D0053E668 /* NSDate+ChatDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ChatDataSource.m"; sourceTree = "<group>"; };
+		884068502775A35D0053E668 /* NSDate+ChatDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ChatDataSource.h"; sourceTree = "<group>"; };
+		884068512775A35D0053E668 /* ChatDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDataSource.h; sourceTree = "<group>"; };
+		884068622775A3C70053E668 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		884068632775A3C70053E668 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		884068642775A3C70053E668 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		884068682775A5710053E668 /* AttachmentUploadBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentUploadBar.m; sourceTree = "<group>"; };
+		884068692775A5710053E668 /* AttachmentUploadBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttachmentUploadBar.xib; sourceTree = "<group>"; };
+		8840686A2775A5710053E668 /* AttachmentUploadBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentUploadBar.h; sourceTree = "<group>"; };
+		8840686F2775A6090053E668 /* ChatDateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDateCell.xib; sourceTree = "<group>"; };
+		884068702775A6090053E668 /* ChatDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatDateCell.m; sourceTree = "<group>"; };
+		884068712775A6090053E668 /* ChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDateCell.h; sourceTree = "<group>"; };
+		884068752775A6350053E668 /* ChatIncomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatIncomingCell.m; sourceTree = "<group>"; };
+		884068762775A6350053E668 /* ChatIncomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatIncomingCell.h; sourceTree = "<group>"; };
+		884068782775A64F0053E668 /* ChatIncomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatIncomingCell.xib; sourceTree = "<group>"; };
+		8840687B2775A6750053E668 /* ChatAttachmentOutgoingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatAttachmentOutgoingCell.h; sourceTree = "<group>"; };
+		8840687C2775A6760053E668 /* ChatAttachmentOutgoingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatAttachmentOutgoingCell.m; sourceTree = "<group>"; };
+		8840687D2775A6760053E668 /* ChatAttachmentOutgoingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatAttachmentOutgoingCell.xib; sourceTree = "<group>"; };
+		884068812775A6900053E668 /* ChatCellLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCellLayoutAttributes.h; sourceTree = "<group>"; };
+		884068822775A6900053E668 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
+		884068832775A6910053E668 /* ChatCellLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCellLayoutAttributes.m; sourceTree = "<group>"; };
+		884068842775A6910053E668 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		884068882775A6E30053E668 /* ChatNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatNotificationCell.h; sourceTree = "<group>"; };
+		884068892775A6E30053E668 /* ChatNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatNotificationCell.xib; sourceTree = "<group>"; };
+		8840688A2775A6E40053E668 /* ChatNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatNotificationCell.m; sourceTree = "<group>"; };
+		8840688D2775A7040053E668 /* ChatCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCollectionView.h; sourceTree = "<group>"; };
+		8840688E2775A7040053E668 /* ChatCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCollectionView.m; sourceTree = "<group>"; };
+		8840688F2775A7040053E668 /* ChatCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCollectionViewDataSource.h; sourceTree = "<group>"; };
+		884068902775A7040053E668 /* ChatCollectionViewDelegateFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCollectionViewDelegateFlowLayout.h; sourceTree = "<group>"; };
+		884068932775A7660053E668 /* ChatCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		884068942775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		884068952775A7670053E668 /* ChatCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		884068962775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
+		8840689A2775A7850053E668 /* ChatAttachmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatAttachmentCell.m; sourceTree = "<group>"; };
+		8840689B2775A7850053E668 /* ChatAttachmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatAttachmentCell.h; sourceTree = "<group>"; };
+		8840689E2775A7A70053E668 /* ChatContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatContainerView.h; sourceTree = "<group>"; };
+		8840689F2775A7A70053E668 /* ChatContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatContainerView.m; sourceTree = "<group>"; };
+		884068A22775A7C20053E668 /* ChatOutgoingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatOutgoingCell.xib; sourceTree = "<group>"; };
+		884068A32775A7C20053E668 /* ChatOutgoingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatOutgoingCell.h; sourceTree = "<group>"; };
+		884068A42775A7C20053E668 /* ChatOutgoingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatOutgoingCell.m; sourceTree = "<group>"; };
+		884068A82775A7DB0053E668 /* ChatAttachmentIncomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatAttachmentIncomingCell.xib; sourceTree = "<group>"; };
+		884068A92775A7DB0053E668 /* ChatAttachmentIncomingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatAttachmentIncomingCell.h; sourceTree = "<group>"; };
+		884068AA2775A7DB0053E668 /* ChatAttachmentIncomingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatAttachmentIncomingCell.m; sourceTree = "<group>"; };
+		884068AE2775A7F30053E668 /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		884068AF2775A7F30053E668 /* HeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		884068B02775A7F30053E668 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		884068B42775A8320053E668 /* KVOView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVOView.h; sourceTree = "<group>"; };
+		884068B52775A8320053E668 /* ToolbarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarContentView.h; sourceTree = "<group>"; };
+		884068B62775A8320053E668 /* ToolbarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarContentView.m; sourceTree = "<group>"; };
+		884068B72775A8320053E668 /* PlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceHolderTextView.m; sourceTree = "<group>"; };
+		884068B82775A8320053E668 /* InputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputToolbar.m; sourceTree = "<group>"; };
+		884068B92775A8320053E668 /* PlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceHolderTextView.h; sourceTree = "<group>"; };
+		884068BA2775A8330053E668 /* ToolbarContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolbarContentView.xib; sourceTree = "<group>"; };
+		884068BB2775A8330053E668 /* KVOView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVOView.m; sourceTree = "<group>"; };
+		884068BC2775A8330053E668 /* InputToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputToolbar.h; sourceTree = "<group>"; };
+		884068C32775A8500053E668 /* CircularProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularProgressBar.h; sourceTree = "<group>"; };
+		884068C42775A8500053E668 /* CircularProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularProgressBar.m; sourceTree = "<group>"; };
+		884068C72775A8650053E668 /* ChatPrivateTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatPrivateTitleView.h; sourceTree = "<group>"; };
+		884068C82775A8650053E668 /* ChatPrivateTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatPrivateTitleView.m; sourceTree = "<group>"; };
+		884068CB2775A87B0053E668 /* TypingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypingView.m; sourceTree = "<group>"; };
+		884068CC2775A87B0053E668 /* TypingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypingView.h; sourceTree = "<group>"; };
+		884068CF2775A8E40053E668 /* ChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatManager.h; sourceTree = "<group>"; };
+		884068D02775A8E40053E668 /* ChatStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatStorage.h; sourceTree = "<group>"; };
+		884068D12775A8E40053E668 /* ChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatManager.m; sourceTree = "<group>"; };
+		884068D22775A8E40053E668 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		884068D32775A8E40053E668 /* ChatStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatStorage.m; sourceTree = "<group>"; };
+		884068D72775A9130053E668 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		884068D82775A9130053E668 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		884068DC2775AA080053E668 /* UIColor+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Chat.m"; sourceTree = "<group>"; };
+		884068DD2775AA080053E668 /* UITableView+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Chat.h"; sourceTree = "<group>"; };
+		884068DE2775AA080053E668 /* UIButton+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Chat.m"; sourceTree = "<group>"; };
+		884068DF2775AA080053E668 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		884068E02775AA080053E668 /* UILabel+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Chat.m"; sourceTree = "<group>"; };
+		884068E12775AA080053E668 /* QBUUser+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+Chat.m"; sourceTree = "<group>"; };
+		884068E22775AA080053E668 /* UIViewController+ContextMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ContextMenu.m"; sourceTree = "<group>"; };
+		884068E32775AA080053E668 /* UIImage+Cropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Cropper.m"; sourceTree = "<group>"; };
+		884068E42775AA080053E668 /* UITextField+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Chat.m"; sourceTree = "<group>"; };
+		884068E52775AA090053E668 /* UIImage+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Chat.m"; sourceTree = "<group>"; };
+		884068E62775AA090053E668 /* UITextField+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Chat.h"; sourceTree = "<group>"; };
+		884068E72775AA090053E668 /* UIImage+Cropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Cropper.h"; sourceTree = "<group>"; };
+		884068E82775AA090053E668 /* UIViewController+ContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ContextMenu.h"; sourceTree = "<group>"; };
+		884068E92775AA090053E668 /* UIView+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Chat.h"; sourceTree = "<group>"; };
+		884068EA2775AA090053E668 /* NSURL+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Chat.h"; sourceTree = "<group>"; };
+		884068EB2775AA090053E668 /* NSString+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Chat.h"; sourceTree = "<group>"; };
+		884068EC2775AA090053E668 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		884068ED2775AA090053E668 /* UITableView+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Chat.m"; sourceTree = "<group>"; };
+		884068EE2775AA090053E668 /* NSDate+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Chat.m"; sourceTree = "<group>"; };
+		884068EF2775AA090053E668 /* UILabel+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Chat.h"; sourceTree = "<group>"; };
+		884068F02775AA090053E668 /* NSDate+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Chat.h"; sourceTree = "<group>"; };
+		884068F12775AA090053E668 /* UIView+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Chat.m"; sourceTree = "<group>"; };
+		884068F22775AA090053E668 /* NSString+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Chat.m"; sourceTree = "<group>"; };
+		884068F32775AA0A0053E668 /* CALayer+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Chat.h"; sourceTree = "<group>"; };
+		884068F42775AA0A0053E668 /* UIImage+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Chat.h"; sourceTree = "<group>"; };
+		884068F52775AA0A0053E668 /* CALayer+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Chat.m"; sourceTree = "<group>"; };
+		884068F62775AA0A0053E668 /* NSURL+Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Chat.m"; sourceTree = "<group>"; };
+		884068F72775AA0A0053E668 /* UIViewController+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alert.h"; sourceTree = "<group>"; };
+		884068F82775AA0A0053E668 /* UIColor+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Chat.h"; sourceTree = "<group>"; };
+		884068F92775AA0A0053E668 /* UIViewController+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alert.m"; sourceTree = "<group>"; };
+		884068FA2775AA0A0053E668 /* UIButton+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Chat.h"; sourceTree = "<group>"; };
+		884068FB2775AA0A0053E668 /* QBUUser+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBUUser+Chat.h"; sourceTree = "<group>"; };
+		8840690C2775AA7F0053E668 /* ChatResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatResources.h; sourceTree = "<group>"; };
+		8840690D2775AA7F0053E668 /* ChatResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatResources.m; sourceTree = "<group>"; };
+		8840690E2775AA7F0053E668 /* DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtils.h; sourceTree = "<group>"; };
+		8840690F2775AA7F0053E668 /* DateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtils.m; sourceTree = "<group>"; };
+		884069132775AA9D0053E668 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		884069142775AA9D0053E668 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		884069172775AAB60053E668 /* AbstractAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractAsyncOperation.m; sourceTree = "<group>"; };
+		884069182775AAB60053E668 /* AbstractAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractAsyncOperation.h; sourceTree = "<group>"; };
+		8840691B2775AAD00053E668 /* AttachmentDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentDownloadManager.m; sourceTree = "<group>"; };
+		8840691C2775AAD00053E668 /* AttachmentDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentDownloadManager.h; sourceTree = "<group>"; };
+		8840691F2775AAE70053E668 /* CacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheManager.m; sourceTree = "<group>"; };
+		884069202775AAE70053E668 /* CacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheManager.h; sourceTree = "<group>"; };
+		884069232775AB030053E668 /* AttachmentDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentDownloadOperation.m; sourceTree = "<group>"; };
+		884069242775AB040053E668 /* AttachmentDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentDownloadOperation.h; sourceTree = "<group>"; };
+		8840692F2775AD4F0053E668 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		884069302775AD4F0053E668 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		884069332775ADED0053E668 /* DialogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogsViewController.h; sourceTree = "<group>"; };
+		884069342775ADED0053E668 /* DialogsSelectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogsSelectionVC.h; sourceTree = "<group>"; };
+		884069352775ADEE0053E668 /* DialogsSelectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogsSelectionVC.m; sourceTree = "<group>"; };
+		884069362775ADEE0053E668 /* Dialogs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dialogs.storyboard; sourceTree = "<group>"; };
+		884069372775ADEE0053E668 /* DialogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogsViewController.m; sourceTree = "<group>"; };
+		8840693C2775AE090053E668 /* DialogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogCell.m; sourceTree = "<group>"; };
+		8840693D2775AE090053E668 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-master 3/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
+		8840693E2775AE090053E668 /* DialogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogCell.h; sourceTree = "<group>"; };
+		8840693F2775AE090053E668 /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
+		884069402775AE090053E668 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-master 3/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
+		884069412775AE090053E668 /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
+		884069462775AE6D0053E668 /* RootParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootParentVC.h; sourceTree = "<group>"; };
+		884069472775AE6D0053E668 /* RootParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootParentVC.m; sourceTree = "<group>"; };
 		887374E5265E35190035B788 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		887374E7265E35270035B788 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		887374E9265E353A0035B788 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -463,6 +688,10 @@
 		882EA016266A1D55000B9813 /* conference */ = {
 			isa = PBXGroup;
 			children = (
+				884069452775AE600053E668 /* Auth */,
+				884069322775ADD80053E668 /* DialogsScreen */,
+				8840692E2775AD430053E668 /* Reachability */,
+				884068DA2775A9D10053E668 /* Utils */,
 				882BE51326E8AFC00080CF69 /* RecorderClass */,
 				882EA0D7266A270A000B9813 /* Main.storyboard */,
 				888E884E26E7638600148085 /* ScreenRecorder */,
@@ -489,6 +718,9 @@
 		882EA01D266A1DCC000B9813 /* Calls */ = {
 			isa = PBXGroup;
 			children = (
+				884068D62775A9060053E668 /* UserPorfile */,
+				884068CE2775A8D70053E668 /* ChatManager */,
+				8840682D2775A22E0053E668 /* ChatScreen */,
 				883F5636276C5A3F009CD7A9 /* CallGrediantView */,
 				883F562F276C59A1009CD7A9 /* Toolbar */,
 				883F562B276C594C009CD7A9 /* BaseViewController */,
@@ -924,6 +1156,451 @@
 			name = CallGrediantView;
 			sourceTree = "<group>";
 		};
+		8840682D2775A22E0053E668 /* ChatScreen */ = {
+			isa = PBXGroup;
+			children = (
+				884068642775A3C70053E668 /* Chat.storyboard */,
+				884068622775A3C70053E668 /* ChatViewController.h */,
+				884068632775A3C70053E668 /* ChatViewController.m */,
+				884068552775A3830053E668 /* Views */,
+				8840684B2775A34B0053E668 /* ChatDataSource */,
+				884068432775A2960053E668 /* MediaScreen */,
+				8840683C2775A2780053E668 /* ActionsMenuViewController */,
+				884068322775A25B0053E668 /* SelectAssetsScreen */,
+				8840682E2775A23A0053E668 /* Menu Action */,
+			);
+			name = ChatScreen;
+			sourceTree = "<group>";
+		};
+		8840682E2775A23A0053E668 /* Menu Action */ = {
+			isa = PBXGroup;
+			children = (
+				8840682F2775A24C0053E668 /* MenuAction.h */,
+				884068302775A24C0053E668 /* MenuAction.m */,
+			);
+			name = "Menu Action";
+			sourceTree = "<group>";
+		};
+		884068322775A25B0053E668 /* SelectAssetsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				884068382775A26A0053E668 /* PhotoAsset.h */,
+				884068372775A26A0053E668 /* PhotoAsset.m */,
+				884068342775A26A0053E668 /* SelectAssetCell.h */,
+				884068352775A26A0053E668 /* SelectAssetCell.m */,
+				884068362775A26A0053E668 /* SelectAssetsVC.h */,
+				884068332775A26A0053E668 /* SelectAssetsVC.m */,
+			);
+			name = SelectAssetsScreen;
+			sourceTree = "<group>";
+		};
+		8840683C2775A2780053E668 /* ActionsMenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8840683F2775A28C0053E668 /* ActionsMenuViewController.h */,
+				884068402775A28C0053E668 /* ActionsMenuViewController.m */,
+				8840683D2775A28B0053E668 /* ChatActionCell.h */,
+				8840683E2775A28B0053E668 /* ChatActionCell.m */,
+			);
+			name = ActionsMenuViewController;
+			sourceTree = "<group>";
+		};
+		884068432775A2960053E668 /* MediaScreen */ = {
+			isa = PBXGroup;
+			children = (
+				884068482775A2C00053E668 /* ParentVideoVC.h */,
+				884068492775A2C10053E668 /* ParentVideoVC.m */,
+				884068442775A2A40053E668 /* ZoomedAttachment screen */,
+			);
+			name = MediaScreen;
+			sourceTree = "<group>";
+		};
+		884068442775A2A40053E668 /* ZoomedAttachment screen */ = {
+			isa = PBXGroup;
+			children = (
+				884068462775A2B30053E668 /* ZoomedAttachmentViewController.h */,
+				884068452775A2B30053E668 /* ZoomedAttachmentViewController.m */,
+			);
+			name = "ZoomedAttachment screen";
+			sourceTree = "<group>";
+		};
+		8840684B2775A34B0053E668 /* ChatDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				884068512775A35D0053E668 /* ChatDataSource.h */,
+				8840684C2775A35D0053E668 /* ChatDataSource.m */,
+				884068502775A35D0053E668 /* NSDate+ChatDataSource.h */,
+				8840684F2775A35D0053E668 /* NSDate+ChatDataSource.m */,
+				8840684D2775A35D0053E668 /* QBChatMessage+QBDateDivider.h */,
+				8840684E2775A35D0053E668 /* QBChatMessage+QBDateDivider.m */,
+			);
+			name = ChatDataSource;
+			sourceTree = "<group>";
+		};
+		884068552775A3830053E668 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				884068CA2775A8700053E668 /* TypingView */,
+				884068C62775A85B0053E668 /* ChatPrivateTitleView */,
+				884068C22775A8430053E668 /* CircularProgressBar */,
+				884068B32775A8250053E668 /* InputToolbar */,
+				8840686D2775A5840053E668 /* ChatCollectionView */,
+				884068672775A55E0053E668 /* AttachmentBar */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		884068672775A55E0053E668 /* AttachmentBar */ = {
+			isa = PBXGroup;
+			children = (
+				8840686A2775A5710053E668 /* AttachmentUploadBar.h */,
+				884068682775A5710053E668 /* AttachmentUploadBar.m */,
+				884068692775A5710053E668 /* AttachmentUploadBar.xib */,
+			);
+			name = AttachmentBar;
+			sourceTree = "<group>";
+		};
+		8840686D2775A5840053E668 /* ChatCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				884068AD2775A7E50053E668 /* HeaderCollectionReusableView */,
+				884068A72775A7CD0053E668 /* ChatAttachmentIncomingCell */,
+				884068A12775A7B30053E668 /* ChatOutgoingCell */,
+				8840689D2775A7990053E668 /* ChatContainerView */,
+				884068992775A7780053E668 /* ChatAttachmentCell */,
+				884068922775A7140053E668 /* ChatCollectionViewFlowLayout */,
+				8840688D2775A7040053E668 /* ChatCollectionView.h */,
+				8840688E2775A7040053E668 /* ChatCollectionView.m */,
+				8840688F2775A7040053E668 /* ChatCollectionViewDataSource.h */,
+				884068902775A7040053E668 /* ChatCollectionViewDelegateFlowLayout.h */,
+				884068872775A6D50053E668 /* ChatNotificationCell */,
+				884068802775A6830053E668 /* ChatCell */,
+				8840687A2775A6660053E668 /* ChatAttachmentOutgoingCell */,
+				884068742775A6220053E668 /* ChatIncomingCell */,
+				8840686E2775A5F50053E668 /* ChatDateCell */,
+			);
+			name = ChatCollectionView;
+			sourceTree = "<group>";
+		};
+		8840686E2775A5F50053E668 /* ChatDateCell */ = {
+			isa = PBXGroup;
+			children = (
+				884068712775A6090053E668 /* ChatDateCell.h */,
+				884068702775A6090053E668 /* ChatDateCell.m */,
+				8840686F2775A6090053E668 /* ChatDateCell.xib */,
+			);
+			name = ChatDateCell;
+			sourceTree = "<group>";
+		};
+		884068742775A6220053E668 /* ChatIncomingCell */ = {
+			isa = PBXGroup;
+			children = (
+				884068762775A6350053E668 /* ChatIncomingCell.h */,
+				884068782775A64F0053E668 /* ChatIncomingCell.xib */,
+				884068752775A6350053E668 /* ChatIncomingCell.m */,
+			);
+			name = ChatIncomingCell;
+			sourceTree = "<group>";
+		};
+		8840687A2775A6660053E668 /* ChatAttachmentOutgoingCell */ = {
+			isa = PBXGroup;
+			children = (
+				8840687B2775A6750053E668 /* ChatAttachmentOutgoingCell.h */,
+				8840687C2775A6760053E668 /* ChatAttachmentOutgoingCell.m */,
+				8840687D2775A6760053E668 /* ChatAttachmentOutgoingCell.xib */,
+			);
+			name = ChatAttachmentOutgoingCell;
+			sourceTree = "<group>";
+		};
+		884068802775A6830053E668 /* ChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				884068842775A6910053E668 /* ChatCell.h */,
+				884068822775A6900053E668 /* ChatCell.m */,
+				884068812775A6900053E668 /* ChatCellLayoutAttributes.h */,
+				884068832775A6910053E668 /* ChatCellLayoutAttributes.m */,
+			);
+			name = ChatCell;
+			sourceTree = "<group>";
+		};
+		884068872775A6D50053E668 /* ChatNotificationCell */ = {
+			isa = PBXGroup;
+			children = (
+				884068882775A6E30053E668 /* ChatNotificationCell.h */,
+				8840688A2775A6E40053E668 /* ChatNotificationCell.m */,
+				884068892775A6E30053E668 /* ChatNotificationCell.xib */,
+			);
+			name = ChatNotificationCell;
+			sourceTree = "<group>";
+		};
+		884068922775A7140053E668 /* ChatCollectionViewFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				884068952775A7670053E668 /* ChatCollectionViewFlowLayout.h */,
+				884068932775A7660053E668 /* ChatCollectionViewFlowLayout.m */,
+				884068962775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.h */,
+				884068942775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.m */,
+			);
+			name = ChatCollectionViewFlowLayout;
+			sourceTree = "<group>";
+		};
+		884068992775A7780053E668 /* ChatAttachmentCell */ = {
+			isa = PBXGroup;
+			children = (
+				8840689B2775A7850053E668 /* ChatAttachmentCell.h */,
+				8840689A2775A7850053E668 /* ChatAttachmentCell.m */,
+			);
+			name = ChatAttachmentCell;
+			sourceTree = "<group>";
+		};
+		8840689D2775A7990053E668 /* ChatContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				8840689E2775A7A70053E668 /* ChatContainerView.h */,
+				8840689F2775A7A70053E668 /* ChatContainerView.m */,
+			);
+			name = ChatContainerView;
+			sourceTree = "<group>";
+		};
+		884068A12775A7B30053E668 /* ChatOutgoingCell */ = {
+			isa = PBXGroup;
+			children = (
+				884068A32775A7C20053E668 /* ChatOutgoingCell.h */,
+				884068A42775A7C20053E668 /* ChatOutgoingCell.m */,
+				884068A22775A7C20053E668 /* ChatOutgoingCell.xib */,
+			);
+			name = ChatOutgoingCell;
+			sourceTree = "<group>";
+		};
+		884068A72775A7CD0053E668 /* ChatAttachmentIncomingCell */ = {
+			isa = PBXGroup;
+			children = (
+				884068A92775A7DB0053E668 /* ChatAttachmentIncomingCell.h */,
+				884068AA2775A7DB0053E668 /* ChatAttachmentIncomingCell.m */,
+				884068A82775A7DB0053E668 /* ChatAttachmentIncomingCell.xib */,
+			);
+			name = ChatAttachmentIncomingCell;
+			sourceTree = "<group>";
+		};
+		884068AD2775A7E50053E668 /* HeaderCollectionReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				884068AE2775A7F30053E668 /* HeaderCollectionReusableView.h */,
+				884068AF2775A7F30053E668 /* HeaderCollectionReusableView.m */,
+				884068B02775A7F30053E668 /* HeaderCollectionReusableView.xib */,
+			);
+			name = HeaderCollectionReusableView;
+			sourceTree = "<group>";
+		};
+		884068B32775A8250053E668 /* InputToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				884068BC2775A8330053E668 /* InputToolbar.h */,
+				884068B82775A8320053E668 /* InputToolbar.m */,
+				884068B42775A8320053E668 /* KVOView.h */,
+				884068BB2775A8330053E668 /* KVOView.m */,
+				884068B92775A8320053E668 /* PlaceHolderTextView.h */,
+				884068B72775A8320053E668 /* PlaceHolderTextView.m */,
+				884068B52775A8320053E668 /* ToolbarContentView.h */,
+				884068B62775A8320053E668 /* ToolbarContentView.m */,
+				884068BA2775A8330053E668 /* ToolbarContentView.xib */,
+			);
+			name = InputToolbar;
+			sourceTree = "<group>";
+		};
+		884068C22775A8430053E668 /* CircularProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				884068C32775A8500053E668 /* CircularProgressBar.h */,
+				884068C42775A8500053E668 /* CircularProgressBar.m */,
+			);
+			name = CircularProgressBar;
+			sourceTree = "<group>";
+		};
+		884068C62775A85B0053E668 /* ChatPrivateTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				884068C72775A8650053E668 /* ChatPrivateTitleView.h */,
+				884068C82775A8650053E668 /* ChatPrivateTitleView.m */,
+			);
+			name = ChatPrivateTitleView;
+			sourceTree = "<group>";
+		};
+		884068CA2775A8700053E668 /* TypingView */ = {
+			isa = PBXGroup;
+			children = (
+				884068CC2775A87B0053E668 /* TypingView.h */,
+				884068CB2775A87B0053E668 /* TypingView.m */,
+			);
+			name = TypingView;
+			sourceTree = "<group>";
+		};
+		884068CE2775A8D70053E668 /* ChatManager */ = {
+			isa = PBXGroup;
+			children = (
+				884068CF2775A8E40053E668 /* ChatManager.h */,
+				884068D12775A8E40053E668 /* ChatManager.m */,
+				884068D02775A8E40053E668 /* ChatStorage.h */,
+				884068D32775A8E40053E668 /* ChatStorage.m */,
+				884068D22775A8E40053E668 /* Constants.h */,
+			);
+			name = ChatManager;
+			sourceTree = "<group>";
+		};
+		884068D62775A9060053E668 /* UserPorfile */ = {
+			isa = PBXGroup;
+			children = (
+				884068D72775A9130053E668 /* Profile.h */,
+				884068D82775A9130053E668 /* Profile.m */,
+			);
+			name = UserPorfile;
+			sourceTree = "<group>";
+		};
+		884068DA2775A9D10053E668 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8840691A2775AAC20053E668 /* AttachmentDownloadManager */,
+				884069162775AAAB0053E668 /* AbstractAsyncOperation */,
+				884069122775AA8E0053E668 /* Log */,
+				8840690C2775AA7F0053E668 /* ChatResources.h */,
+				8840690D2775AA7F0053E668 /* ChatResources.m */,
+				8840690E2775AA7F0053E668 /* DateUtils.h */,
+				8840690F2775AA7F0053E668 /* DateUtils.m */,
+				884068DB2775A9F80053E668 /* Categories */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		884068DB2775A9F80053E668 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				884068F32775AA0A0053E668 /* CALayer+Chat.h */,
+				884068F52775AA0A0053E668 /* CALayer+Chat.m */,
+				884068F02775AA090053E668 /* NSDate+Chat.h */,
+				884068EE2775AA090053E668 /* NSDate+Chat.m */,
+				884068EB2775AA090053E668 /* NSString+Chat.h */,
+				884068F22775AA090053E668 /* NSString+Chat.m */,
+				884068EA2775AA090053E668 /* NSURL+Chat.h */,
+				884068F62775AA0A0053E668 /* NSURL+Chat.m */,
+				884068FB2775AA0A0053E668 /* QBUUser+Chat.h */,
+				884068E12775AA080053E668 /* QBUUser+Chat.m */,
+				884068FA2775AA0A0053E668 /* UIButton+Chat.h */,
+				884068DE2775AA080053E668 /* UIButton+Chat.m */,
+				884068F82775AA0A0053E668 /* UIColor+Chat.h */,
+				884068DC2775AA080053E668 /* UIColor+Chat.m */,
+				884068F42775AA0A0053E668 /* UIImage+Chat.h */,
+				884068E52775AA090053E668 /* UIImage+Chat.m */,
+				884068E72775AA090053E668 /* UIImage+Cropper.h */,
+				884068E32775AA080053E668 /* UIImage+Cropper.m */,
+				884068EC2775AA090053E668 /* UIImage+fixOrientation.h */,
+				884068DF2775AA080053E668 /* UIImage+fixOrientation.m */,
+				884068EF2775AA090053E668 /* UILabel+Chat.h */,
+				884068E02775AA080053E668 /* UILabel+Chat.m */,
+				884068DD2775AA080053E668 /* UITableView+Chat.h */,
+				884068ED2775AA090053E668 /* UITableView+Chat.m */,
+				884068E62775AA090053E668 /* UITextField+Chat.h */,
+				884068E42775AA080053E668 /* UITextField+Chat.m */,
+				884068E92775AA090053E668 /* UIView+Chat.h */,
+				884068F12775AA090053E668 /* UIView+Chat.m */,
+				884068F72775AA0A0053E668 /* UIViewController+Alert.h */,
+				884068F92775AA0A0053E668 /* UIViewController+Alert.m */,
+				884068E82775AA090053E668 /* UIViewController+ContextMenu.h */,
+				884068E22775AA080053E668 /* UIViewController+ContextMenu.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		884069122775AA8E0053E668 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				884069142775AA9D0053E668 /* Log.h */,
+				884069132775AA9D0053E668 /* Log.m */,
+			);
+			name = Log;
+			sourceTree = "<group>";
+		};
+		884069162775AAAB0053E668 /* AbstractAsyncOperation */ = {
+			isa = PBXGroup;
+			children = (
+				884069182775AAB60053E668 /* AbstractAsyncOperation.h */,
+				884069172775AAB60053E668 /* AbstractAsyncOperation.m */,
+			);
+			name = AbstractAsyncOperation;
+			sourceTree = "<group>";
+		};
+		8840691A2775AAC20053E668 /* AttachmentDownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				884069222775AAF40053E668 /* AttachmentDownloadOperation */,
+				8840691E2775AADB0053E668 /* CacheManager */,
+				8840691C2775AAD00053E668 /* AttachmentDownloadManager.h */,
+				8840691B2775AAD00053E668 /* AttachmentDownloadManager.m */,
+			);
+			name = AttachmentDownloadManager;
+			sourceTree = "<group>";
+		};
+		8840691E2775AADB0053E668 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				884069202775AAE70053E668 /* CacheManager.h */,
+				8840691F2775AAE70053E668 /* CacheManager.m */,
+			);
+			name = CacheManager;
+			sourceTree = "<group>";
+		};
+		884069222775AAF40053E668 /* AttachmentDownloadOperation */ = {
+			isa = PBXGroup;
+			children = (
+				884069242775AB040053E668 /* AttachmentDownloadOperation.h */,
+				884069232775AB030053E668 /* AttachmentDownloadOperation.m */,
+			);
+			name = AttachmentDownloadOperation;
+			sourceTree = "<group>";
+		};
+		8840692E2775AD430053E668 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				8840692F2775AD4F0053E668 /* Reachability.h */,
+				884069302775AD4F0053E668 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		884069322775ADD80053E668 /* DialogsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8840693B2775ADFC0053E668 /* Views */,
+				884069362775ADEE0053E668 /* Dialogs.storyboard */,
+				884069342775ADED0053E668 /* DialogsSelectionVC.h */,
+				884069352775ADEE0053E668 /* DialogsSelectionVC.m */,
+				884069332775ADED0053E668 /* DialogsViewController.h */,
+				884069372775ADEE0053E668 /* DialogsViewController.m */,
+			);
+			name = DialogsScreen;
+			sourceTree = "<group>";
+		};
+		8840693B2775ADFC0053E668 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8840693E2775AE090053E668 /* DialogCell.h */,
+				8840693C2775AE090053E668 /* DialogCell.m */,
+				8840693D2775AE090053E668 /* DialogTableViewCell.h */,
+				884069402775AE090053E668 /* DialogTableViewCell.m */,
+				8840693F2775AE090053E668 /* TitleView.h */,
+				884069412775AE090053E668 /* TitleView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		884069452775AE600053E668 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				884069462775AE6D0053E668 /* RootParentVC.h */,
+				884069472775AE6D0053E668 /* RootParentVC.m */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
 		888E884E26E7638600148085 /* ScreenRecorder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1075,21 +1752,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				882EA0A3266A2173000B9813 /* SVProgressHUD.bundle in Resources */,
+				884068B22775A7F30053E668 /* HeaderCollectionReusableView.xib in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				884068662775A3C70053E668 /* Chat.storyboard in Resources */,
 				882EA08F266A2140000B9813 /* InfoScreen.storyboard in Resources */,
+				8840687F2775A6760053E668 /* ChatAttachmentOutgoingCell.xib in Resources */,
 				883F5626276C5029009CD7A9 /* SharingCell.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */,
 				8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */,
+				884068792775A64F0053E668 /* ChatIncomingCell.xib in Resources */,
 				882EA0D8266A270A000B9813 /* Main.storyboard in Resources */,
+				8840688B2775A6E40053E668 /* ChatNotificationCell.xib in Resources */,
+				884068722775A60A0053E668 /* ChatDateCell.xib in Resources */,
+				884068A52775A7C20053E668 /* ChatOutgoingCell.xib in Resources */,
 				882EA06C266A1F58000B9813 /* Settings.storyboard in Resources */,
 				540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */,
 				8833B51A266643B1000938B6 /* Mains.storyboard in Resources */,
 				6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */,
 				E74D156627158F4A000F6E89 /* GoogleService-Info.plist in Resources */,
 				C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */,
+				8840686C2775A5710053E668 /* AttachmentUploadBar.xib in Resources */,
+				884069392775ADEE0053E668 /* Dialogs.storyboard in Resources */,
+				884068C02775A8330053E668 /* ToolbarContentView.xib in Resources */,
+				884068AB2775A7DB0053E668 /* ChatAttachmentIncomingCell.xib in Resources */,
 				882EA06F266A1F58000B9813 /* SettingCell.xib in Resources */,
+				884069492775B56C0053E668 /* SVProgressHUD.bundle in Resources */,
 				882EA087266A212A000B9813 /* icon-info.png in Resources */,
 				882EA070266A1F58000B9813 /* SettingSwitchCell.xib in Resources */,
 				11BAC19FCA954DAEB65A7D86 /* Poppins-SemiBold.ttf in Resources */,
@@ -1287,68 +1975,134 @@
 			buildActionMask = 2147483647;
 			files = (
 				88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */,
+				884068542775A35D0053E668 /* NSDate+ChatDataSource.m in Sources */,
+				884068AC2775A7DB0053E668 /* ChatAttachmentIncomingCell.m in Sources */,
 				883F562E276C5963009CD7A9 /* BaseViewController.m in Sources */,
+				884069312775AD4F0053E668 /* Reachability.m in Sources */,
 				882EA02C266A1DF5000B9813 /* ZoomedView.m in Sources */,
 				88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */,
 				8824A6BD2768ACE200C6E695 /* PollVC.m in Sources */,
+				884068FF2775AA0A0053E668 /* UILabel+Chat.m in Sources */,
+				8840686B2775A5710053E668 /* AttachmentUploadBar.m in Sources */,
 				882EA06E266A1F58000B9813 /* Settings.m in Sources */,
+				884068412775A28C0053E668 /* ChatActionCell.m in Sources */,
+				884068BF2775A8330053E668 /* InputToolbar.m in Sources */,
 				882EA079266A1F7B000B9813 /* QBCore.m in Sources */,
 				882EA0B0266A21D0000B9813 /* DialogsDataSource.m in Sources */,
 				882EA037266A1E2D000B9813 /* OpponentCollectionViewCell.m in Sources */,
+				884068A02775A7A70053E668 /* ChatContainerView.m in Sources */,
+				884068C12775A8330053E668 /* KVOView.m in Sources */,
+				8840687E2775A6760053E668 /* ChatAttachmentOutgoingCell.m in Sources */,
+				884068D42775A8E40053E668 /* ChatManager.m in Sources */,
 				882EA0A1266A2173000B9813 /* SVProgressHUD.m in Sources */,
 				883F5629276C5029009CD7A9 /* SharingScreenCapture.m in Sources */,
 				8833B50F26661A2D000938B6 /* CreateDialog.m in Sources */,
+				884068FC2775AA0A0053E668 /* UIColor+Chat.m in Sources */,
+				884069002775AA0A0053E668 /* QBUUser+Chat.m in Sources */,
 				882EA075266A1F58000B9813 /* SettingsSectionModel.m in Sources */,
 				883F5632276C59AE009CD7A9 /* ToolBar.m in Sources */,
+				884068C92775A8650053E668 /* ChatPrivateTitleView.m in Sources */,
+				884068732775A60A0053E668 /* ChatDateCell.m in Sources */,
+				884069052775AA0A0053E668 /* UITableView+Chat.m in Sources */,
 				882EA040266A1E48000B9813 /* QBButtonsFactory.m in Sources */,
 				882EA01C266A1DB3000B9813 /* CallPermissions.m in Sources */,
+				884069082775AA0A0053E668 /* NSString+Chat.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */,
 				882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */,
+				884069102775AA7F0053E668 /* ChatResources.m in Sources */,
+				884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */,
+				884068312775A24C0053E668 /* MenuAction.m in Sources */,
 				889633C62667879E00E6DE4F /* CallModule.m in Sources */,
-				882EA0D2266A22AB000B9813 /* DialogTableViewCell.m in Sources */,
+				8840690B2775AA0A0053E668 /* UIViewController+Alert.m in Sources */,
 				882EA02E266A1DF5000B9813 /* LocalVideoView.m in Sources */,
+				884068FE2775AA0A0053E668 /* UIImage+fixOrientation.m in Sources */,
+				884069072775AA0A0053E668 /* UIView+Chat.m in Sources */,
 				882EA0A5266A2173000B9813 /* SVIndefiniteAnimatedView.m in Sources */,
+				8840683A2775A26A0053E668 /* SelectAssetCell.m in Sources */,
 				883F5639276C5A51009CD7A9 /* CallGradientView.m in Sources */,
+				884068472775A2B30053E668 /* ZoomedAttachmentViewController.m in Sources */,
 				8875108B26B2B47C009A35A9 /* ReactionTableViewCell.m in Sources */,
 				882EA08A266A2133000B9813 /* UIViewController+InfoScreen.m in Sources */,
+				884069252775AB040053E668 /* AttachmentDownloadOperation.m in Sources */,
+				8840693A2775ADEE0053E668 /* DialogsViewController.m in Sources */,
 				882EA0B6266A21E0000B9813 /* PlaceholderGenerator.m in Sources */,
+				884068D92775A9130053E668 /* Profile.m in Sources */,
+				884068862775A6910053E668 /* ChatCellLayoutAttributes.m in Sources */,
 				882EA07E266A1FA5000B9813 /* QBProfile.m in Sources */,
+				8840683B2775A26A0053E668 /* PhotoAsset.m in Sources */,
 				882EA033266A1E12000B9813 /* CornerView.m in Sources */,
 				882EA04B266A1F10000B9813 /* BaseSettingsViewController.m in Sources */,
 				882EA073266A1F58000B9813 /* SettingSwitchCell.m in Sources */,
+				884069212775AAE70053E668 /* CacheManager.m in Sources */,
 				882EA08D266A213A000B9813 /* InfoModel.m in Sources */,
 				882EA02B266A1DF5000B9813 /* StatsView.m in Sources */,
 				88BE3A70272FE11400A1693B /* PollViewController.m in Sources */,
+				884069012775AA0A0053E668 /* UIViewController+ContextMenu.m in Sources */,
+				884069482775AE6D0053E668 /* RootParentVC.m in Sources */,
 				882EA03F266A1E48000B9813 /* QBButton.m in Sources */,
+				884069042775AA0A0053E668 /* UIImage+Chat.m in Sources */,
+				8840690A2775AA0A0053E668 /* NSURL+Chat.m in Sources */,
 				882EA058266A1F41000B9813 /* BaseSettingsCell.m in Sources */,
+				884069152775AA9D0053E668 /* Log.m in Sources */,
 				8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */,
+				884068912775A7040053E668 /* ChatCollectionView.m in Sources */,
 				882EA092266A2148000B9813 /* InfoTableViewController.m in Sources */,
 				882EA06D266A1F58000B9813 /* SettingCell.m in Sources */,
 				882EA0C6266A224D000B9813 /* MainTableViewController.m in Sources */,
+				8840684A2775A2C10053E668 /* ParentVideoVC.m in Sources */,
 				882EA05B266A1F41000B9813 /* VideoSettingsViewController.m in Sources */,
 				882EA05A266A1F41000B9813 /* SwitchItemModel.m in Sources */,
 				883F5627276C5029009CD7A9 /* SharingViewController.m in Sources */,
+				884068CD2775A87B0053E668 /* TypingView.m in Sources */,
 				882EA0D6266A22BE000B9813 /* UserTableViewCell.m in Sources */,
 				882EA041266A1E48000B9813 /* QBToolBar.m in Sources */,
 				882EA0B3266A21D6000B9813 /* MainDataSource.m in Sources */,
 				882EA072266A1F58000B9813 /* SettingSliderCell.m in Sources */,
+				884069192775AAB70053E668 /* AbstractAsyncOperation.m in Sources */,
+				884069432775AE090053E668 /* DialogTableViewCell.m in Sources */,
+				884068522775A35D0053E668 /* ChatDataSource.m in Sources */,
+				884068852775A6910053E668 /* ChatCell.m in Sources */,
 				882EA0BC266A21FA000B9813 /* UsersDataSource.m in Sources */,
 				883F5628276C5029009CD7A9 /* SharingCell.m in Sources */,
 				882EA0A4266A2173000B9813 /* SVProgressAnimatedView.m in Sources */,
 				883F5635276C59FE009CD7A9 /* CustomButton.m in Sources */,
 				883F563C276C5AB0009CD7A9 /* ButtonsFactory.m in Sources */,
 				882EA04E266A1F18000B9813 /* SessionSettingsViewController.m in Sources */,
+				884068982775A7670053E668 /* CollectionViewFlowLayoutInvalidationContext.m in Sources */,
+				884068972775A7670053E668 /* ChatCollectionViewFlowLayout.m in Sources */,
+				884068A62775A7C20053E668 /* ChatOutgoingCell.m in Sources */,
+				884068772775A6350053E668 /* ChatIncomingCell.m in Sources */,
+				884068D52775A8E40053E668 /* ChatStorage.m in Sources */,
+				884068392775A26A0053E668 /* SelectAssetsVC.m in Sources */,
+				884068422775A28C0053E668 /* ActionsMenuViewController.m in Sources */,
 				882EA0C3266A2244000B9813 /* AddUsersViewController.m in Sources */,
 				882EA048266A1F06000B9813 /* AudioSettingsViewController.m in Sources */,
 				882EA074266A1F58000B9813 /* SliderItemModel.m in Sources */,
+				884069032775AA0A0053E668 /* UITextField+Chat.m in Sources */,
+				884068C52775A8500053E668 /* CircularProgressBar.m in Sources */,
+				884069442775AE090053E668 /* TitleView.m in Sources */,
+				884069382775ADEE0053E668 /* DialogsSelectionVC.m in Sources */,
+				884068FD2775AA0A0053E668 /* UIButton+Chat.m in Sources */,
 				882EA02D266A1DF5000B9813 /* OpponentsFlowLayout.m in Sources */,
+				884068B12775A7F30053E668 /* HeaderCollectionReusableView.m in Sources */,
+				884068BE2775A8330053E668 /* PlaceHolderTextView.m in Sources */,
 				882EA02F266A1DF5000B9813 /* CallViewController.m in Sources */,
 				882EA059266A1F41000B9813 /* BaseItemModel.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				882EA0C9266A2277000B9813 /* UsersViewController.m in Sources */,
+				884068652775A3C70053E668 /* ChatViewController.m in Sources */,
+				884069112775AA7F0053E668 /* DateUtils.m in Sources */,
+				884068BD2775A8330053E668 /* ToolbarContentView.m in Sources */,
 				882EA0B9266A21EF000B9813 /* QBDataFetcher.m in Sources */,
+				884069422775AE090053E668 /* DialogCell.m in Sources */,
 				882EA095266A2151000B9813 /* InfoTableViewCell.m in Sources */,
+				8840689C2775A7850053E668 /* ChatAttachmentCell.m in Sources */,
+				884068532775A35D0053E668 /* QBChatMessage+QBDateDivider.m in Sources */,
 				883F562A276C5029009CD7A9 /* VideoFormat.m in Sources */,
+				8840688C2775A6E40053E668 /* ChatNotificationCell.m in Sources */,
+				884069092775AA0A0053E668 /* CALayer+Chat.m in Sources */,
+				8840691D2775AAD00053E668 /* AttachmentDownloadManager.m in Sources */,
 				882EA0CE266A229A000B9813 /* CheckView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

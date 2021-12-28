@@ -368,6 +368,10 @@ PODS:
     - React
   - RNSVG (12.1.1):
     - React
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
+  - TTTAttributedLabel (2.0.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -427,6 +431,8 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSketchCanvas (from `../node_modules/@terrylinla/react-native-sketch-canvas`)"
   - RNSVG (from `../node_modules/react-native-svg`)
+  - SDWebImage (~> 4.4.7)
+  - TTTAttributedLabel (~> 2.0.0)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -442,6 +448,8 @@ SPEC REPOS:
     - PubNub
     - QuickBlox
     - Quickblox-WebRTC
+    - SDWebImage
+    - TTTAttributedLabel
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -612,8 +620,10 @@ SPEC CHECKSUMS:
   RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
   RNSketchCanvas: 9c28adb5381543ed55cc98ce6de46479cb3cb12c
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 04584bbdf8e2c5e39f09cfda6af7ab7db804a327
+PODFILE CHECKSUM: 23ff8eeee2dc8c481d92b42515fb2a8040d7684b
 
 COCOAPODS: 1.11.2
