@@ -15,9 +15,7 @@ import ArrowNext from "../../../../../svg/teacher/lessonhwplanner/ArrowNext";
 var moment = require('moment');
 
 const Pupillist = (props, { }) => (
-    <TouchableOpacity
-        activeOpacity={opacity}
-        onPress={() => props.navigateToDetail()}>
+    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToDetail()}>
         <View style={[PAGESTYLE.pupilData]}>
             <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
                 <View style={PAGESTYLE.border}></View>
@@ -55,11 +53,10 @@ const LessonList = (props) => {
     const [] = useState(false)
     const [isTLDetail, setTLDetail] = useState(false)
     const [data, setItem] = useState([])
+
     const pupilRender = ({ item }) => {
         return (
-            <Pupillist
-                item={item}
-                navigateToDetail={() => { setItem(item), setTLDetail(true), props.setLessonDetail(true) }}
+            <Pupillist item={item} navigateToDetail={() => { setItem(item), setTLDetail(true), props.setLessonDetail(true) }}
             />
         );
     };
@@ -147,9 +144,6 @@ const LessonList = (props) => {
                                             style={{ height: wp(53.5) }}
                                         />
                                         :
-                                        // <View style={{ height: 100, justifyContent: 'center' }}>
-                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        // </View>
                                         <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
                                 }
                             </SafeAreaView>
@@ -162,8 +156,7 @@ const LessonList = (props) => {
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
-        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+        props.onNotification(); 
     }
     return (
         <View style={PAGESTYLE.mainPage}>

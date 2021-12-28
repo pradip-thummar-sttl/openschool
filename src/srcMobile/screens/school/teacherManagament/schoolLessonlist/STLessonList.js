@@ -154,17 +154,9 @@ const STLessonList = (props) => {
     );
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column', }}>
                 <View style={{ backgroundColor: 'white', width: '100%', }}>
                     <SchoolHeader
-                        // onAlertPress={() => props.navigation.openDrawer()}
-                        // navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                         onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                         onSearch={() => fetchRecord(searchKeyword, filterBy)}
                         onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
@@ -188,9 +180,6 @@ const STLessonList = (props) => {
                                 showsVerticalScrollIndicator={false}
                             />
                             :
-                            // <View style={{ height: 100, justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            // </View>
                             <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLesson1} title2={MESSAGE.noLessonHW2} />
                     }
                 </View>
