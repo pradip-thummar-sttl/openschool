@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -188,7 +188,8 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: hp(20.15),
+        width : Platform.OS === 'android' ? hp(22.15) : hp(20.15),
+        // width: hp(20.15),
         height: hp(5.20),
         padding: hp(1.43),
         paddingTop: hp(0.8),

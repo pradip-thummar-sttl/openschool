@@ -709,7 +709,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
     @Override
     public void onLeaveCurrentSession() {
-        _callback.invoke(null, mUri);
+        _callback.invoke(null, mUri.getPath());
         leaveCurrentSession();
         finish();
     }

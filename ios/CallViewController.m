@@ -607,57 +607,57 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
       
 //      weakSelf.muteAudio ^= 1;
-    WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
-    [weakSelf presentViewController:vc animated:false completion:nil];
+//    WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
+//    [weakSelf presentViewController:vc animated:false completion:nil];
     
     
   }];
-  [self.toolbar addButton:[QBButtonsFactory chatButton] action: ^(UIButton *sender) {
-      
-//      weakSelf.muteAudio ^= 1;
-//    if (Reachability.instance.networkStatus == NetworkStatusNotReachable) {
-//        [self showAlertWithTitle:NSLocalizedString(@"No Internet Connection", nil)
-//                         message:NSLocalizedString(@"Make sure your device is connected to the internet", nil)
-//              fromViewController:self];
-//        [SVProgressHUD dismiss];
-//        return;
-//    }
-    if (weakSelf.users.count >= 1) {
-        // Creating private chat.
-        [SVProgressHUD show];
-        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
-      
-     
-     
-        
-      
-      [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
-            if (response.error) {
-                [SVProgressHUD showErrorWithStatus:response.error.error.localizedDescription];
-                return;
-            }
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
-            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
-        ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-        chatController.dialogID = createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
-        chatController.currentUserID = self.currentUserID;
-        chatController.currentUserName=self.currentName;
-        [weakSelf presentViewController:chatController animated:false completion:nil];
-            
-//            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
-//              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
-//              ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-//              chatController.dialogID = createdDialog.ID;
-//              [weakSelf presentViewController:chatController animated:false completion:nil];
+//  [self.toolbar addButton:[QBButtonsFactory chatButton] action: ^(UIButton *sender) {
 //
-//            }];
-        }];
-    }
-    
-    
-  }];
+////      weakSelf.muteAudio ^= 1;
+////    if (Reachability.instance.networkStatus == NetworkStatusNotReachable) {
+////        [self showAlertWithTitle:NSLocalizedString(@"No Internet Connection", nil)
+////                         message:NSLocalizedString(@"Make sure your device is connected to the internet", nil)
+////              fromViewController:self];
+////        [SVProgressHUD dismiss];
+////        return;
+////    }
+//    if (weakSelf.users.count >= 1) {
+//        // Creating private chat.
+//        [SVProgressHUD show];
+//        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
+//
+//
+//
+//
+//
+//      [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
+//            if (response.error) {
+//                [SVProgressHUD showErrorWithStatus:response.error.error.localizedDescription];
+//                return;
+//            }
+//            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
+//            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
+//
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+//        ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//        chatController.dialogID = createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+//        chatController.currentUserID = self.currentUserID;
+//        chatController.currentUserName=self.currentName;
+//        [weakSelf presentViewController:chatController animated:false completion:nil];
+//
+////            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+////              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+////              ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+////              chatController.dialogID = createdDialog.ID;
+////              [weakSelf presentViewController:chatController animated:false completion:nil];
+////
+////            }];
+//        }];
+//    }
+//
+//
+//  }];
     
 //    if (_conferenceType > 0) {
 ////      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {

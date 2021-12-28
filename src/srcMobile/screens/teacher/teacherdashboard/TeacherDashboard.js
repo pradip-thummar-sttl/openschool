@@ -189,11 +189,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
+           
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
@@ -224,7 +220,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const startLiveClassAndroid = () => {
         try {
             let qBUserIDs = [], userNames = [], names = [], channels = []
-            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
             dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.PupilEmail)
@@ -241,8 +236,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started', error, ID);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, id) => {
+                    console.log('Class Started', error, id);
 
                     let data = {
                         LessonStart: false,
@@ -251,6 +246,23 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
+
+                    // if (id && id != null &&id != "") {
+                    //     let formData = new FormData();
+                    //     formData.append('file', {
+                    //         uri: id,
+                    //         name: "Test",
+                    //         type: 'video/mp4'
+                    //     });
+
+                    //     Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${dataOfSubView._id}`, (res) => {
+                    //         console.log('response of save recording', res)
+                    //     }, (err) => {
+                    //         console.log('error of save recording', err)
+                    //     })
+
+                    // }
+
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);

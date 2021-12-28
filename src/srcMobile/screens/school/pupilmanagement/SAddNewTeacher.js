@@ -3,6 +3,9 @@ import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
+import { EndPoints } from "../../../../service/EndPoints";
+import { Service } from "../../../../service/Service";
+
 // import Images from '../../../../utils/Images';
 import PAGESTYLE from '../teacherManagament/ProfileStyle';
 import FONTS from '../../../../utils/Fonts';
@@ -15,10 +18,17 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 // import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import MESSAGE from "../../../../utils/Messages";
-import { baseUrl, emailValidate, opacity } from "../../../../utils/Constant";
+import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
+import Calender from "../../../../svg/teacher/dashboard/Calender";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment";
+
+// import { EndPoints } from "../../../../service/EndPoints";
+// import { Service } from "../../../../service/Service";
+// import moment from 'moment';
 
 const { CallModule } = NativeModules;
 
@@ -39,8 +49,11 @@ const SAddNewTeacher = (props) => {
     const [profileUri, setProfileUri] = useState('')
     const [selectedTeacher, setSelectedTeacher] = useState([])
     const [teachers, setTeachers] = useState([])
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isLoading, setLoading] = useState(false)
 
     const myref = useRef(null);
+    
 
     const activityConfig = {
         width: 200,
@@ -48,6 +61,8 @@ const SAddNewTeacher = (props) => {
     };
 
     useEffect(() => {
+        loadTeacher();
+        getUserType()
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -55,6 +70,22 @@ const SAddNewTeacher = (props) => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
     }, [props.navigation]);
+
+    /////
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
+        setSelectedDate(moment(date).format('DD/MM/yyyy'))
+        hideDatePicker();
+    };
+
 
     const handleBackButtonClick = () => {
         props.navigation.goBack()
@@ -112,6 +143,7 @@ const SAddNewTeacher = (props) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
                 uploadProfile(res.data._id)
+                // setTeachers(res.data)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -119,6 +151,37 @@ const SAddNewTeacher = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
             setLoading(false)
+        })
+    }
+    const loadTeacher = () => {
+        const data = {
+            Searchby: "",
+            Filterby: ""
+        }
+
+        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+            console.log('response of GetSubjectBySchoolId response', res)
+            if (res.code == 200) {
+                setTeachers(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
+    const getUserType = () => {
+        Service.get(EndPoints.GetAllUserType, (res) => {
+            if (res.flag) {
+                var userData = res.data
+                userData.map((item) => {
+                    if (item.Name === 'Pupil') {
+                        setUserType(item._id)
+                    }
+                })
+            } else {
+            }
+        }, (err) => {
         })
     }
 
@@ -284,7 +347,17 @@ const SAddNewTeacher = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-                            <TextInput
+                            <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
+                                <TouchableOpacity onPress={() => showDatePicker()}>
+                                    <View style={[PAGESTYLE.commonInput, { flexDirection: 'row' }]}>
+                                        <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
+                                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
+                                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+
+                            {/* <TextInput
                                 returnKeyType={"next"}
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Email"
@@ -293,12 +366,12 @@ const SAddNewTeacher = (props) => {
                                 value={selectedDate}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setSelectedDate(firstName)}
-                            />
+                            /> */}
                             {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                         </View>
                         <View>
-                                    {teacherDropDown()}
-                                </View>
+                            {teacherDropDown()}
+                        </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
                             <TextInput
@@ -400,6 +473,14 @@ const SAddNewTeacher = (props) => {
                             <Text style={PAGESTYLE.bottomText}>Based on { }'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
                         </View>
                     </View>
+               
+                    <DateTimePickerModal
+                            isVisible={isDatePickerVisible}
+                            mode="date"
+                            maximumDate={new Date()}
+                            onConfirm={handleConfirm}
+                            onCancel={hideDatePicker}
+                        />
                 </ScrollView>
             </View>
         </View>

@@ -10,6 +10,8 @@ import FONTS from '../../../../utils/Fonts';
 import Popuphomework from '../../reusable/popup/Popuphomework';
 import Popupsubmithomework from '../../reusable/popup/Popupsubmithomework';
 const { width, height } = Dimensions.get('window');
+import Notification from "../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../utils/Model";
 import {
     Menu,
     MenuOptions,
@@ -40,34 +42,52 @@ const HeaderWhitepupilMessage = (props) => {
         props.onFilter(filterBy)
     }, [filterBy])
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false;
+        console.log('this is props from opennoti',props)
+        // props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
+        // props.navigation.navigate('NotificationDrawer', {
+        //     onGoBack: () => 
+               
+        //         fetchRecord('','')
+            
+        // })
+        props.navigation.openDrawer() 
+    }
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
-                    <Text style={styles.mainTitle}>Global Messaging to Parents</Text>
+                    <Text style={styles.mainTitle}>Global Messaging</Text>
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                    <TouchableOpacity style={[styles.notificationBar,{ position: 'relative'},]}
+                        onPress={() => openNotification()}
                         activeOpacity={opacity}>
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    
-                    <TouchableOpacity activeOpacity={opacity} onPress={() => { keyword && isSearchActive ? setSearchActive(false):setSearchActive(true)}}>
-                    {isSearchActive ?
+
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}>
+                        {isSearchActive ?
                             <CloseBlack height={20} width={20} />
                             :
                             <SearchBlue height={20} width={20} />
                         }
                     </TouchableOpacity>
-                    
+
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%',paddingVertical : 3, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingVertical: 3, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search Messages"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -105,7 +125,7 @@ const HeaderWhitepupilMessage = (props) => {
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.onNewMessage()}>
-                    <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)}/>
+                    <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
                 </TouchableOpacity>
             </View>
@@ -150,6 +170,7 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
+        
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -239,7 +260,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         right: 15,
-        width : '15%',
+        width: '15%',
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -382,7 +403,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         borderRadius: 10,
-        width:Platform.OS === 'android' ? '80%' :'70%',
+        width: Platform.OS === 'android' ? '80%' : '70%',
         flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
     },
     searchMenu: {

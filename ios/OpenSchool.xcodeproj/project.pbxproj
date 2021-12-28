@@ -161,7 +161,6 @@
 		884069392775ADEE0053E668 /* Dialogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 884069362775ADEE0053E668 /* Dialogs.storyboard */; };
 		8840693A2775ADEE0053E668 /* DialogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069372775ADEE0053E668 /* DialogsViewController.m */; };
 		884069422775AE090053E668 /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8840693C2775AE090053E668 /* DialogCell.m */; };
-		884069432775AE090053E668 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069402775AE090053E668 /* DialogTableViewCell.m */; };
 		884069442775AE090053E668 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069412775AE090053E668 /* TitleView.m */; };
 		884069482775AE6D0053E668 /* RootParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 884069472775AE6D0053E668 /* RootParentVC.m */; };
 		884069492775B56C0053E668 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 882EA09A266A2173000B9813 /* SVProgressHUD.bundle */; };
@@ -177,6 +176,7 @@
 		88BE3A70272FE11400A1693B /* PollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BE3A6F272FE11400A1693B /* PollViewController.m */; };
 		88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D20504265E253200D97116 /* RCTCalendarModule.m */; };
 		88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */; };
+		8BA76573277AE93B00FFE1AE /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA76571277AE93A00FFE1AE /* DialogTableViewCell.m */; };
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
 		C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */; };
 		DB01CB6E85DE81B7E47A0B5F /* libPods-OpenSchool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */; };
@@ -487,10 +487,8 @@
 		884069362775ADEE0053E668 /* Dialogs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dialogs.storyboard; sourceTree = "<group>"; };
 		884069372775ADEE0053E668 /* DialogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogsViewController.m; sourceTree = "<group>"; };
 		8840693C2775AE090053E668 /* DialogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogCell.m; sourceTree = "<group>"; };
-		8840693D2775AE090053E668 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-master 3/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
 		8840693E2775AE090053E668 /* DialogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogCell.h; sourceTree = "<group>"; };
 		8840693F2775AE090053E668 /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
-		884069402775AE090053E668 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-master 3/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		884069412775AE090053E668 /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
 		884069462775AE6D0053E668 /* RootParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootParentVC.h; sourceTree = "<group>"; };
 		884069472775AE6D0053E668 /* RootParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootParentVC.m; sourceTree = "<group>"; };
@@ -511,6 +509,8 @@
 		88D20504265E253200D97116 /* RCTCalendarModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardVC.h; sourceTree = "<group>"; };
 		88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardVC.m; sourceTree = "<group>"; };
+		8BA76571277AE93A00FFE1AE /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = ../../../Downloads/files/DialogTableViewCell.m; sourceTree = "<group>"; };
+		8BA76572277AE93A00FFE1AE /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = ../../../Downloads/files/DialogTableViewCell.h; sourceTree = "<group>"; };
 		CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenSchool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5987D201010499FA5C00400 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		E74D156527158F4A000F6E89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1584,8 +1584,8 @@
 			children = (
 				8840693E2775AE090053E668 /* DialogCell.h */,
 				8840693C2775AE090053E668 /* DialogCell.m */,
-				8840693D2775AE090053E668 /* DialogTableViewCell.h */,
-				884069402775AE090053E668 /* DialogTableViewCell.m */,
+				8BA76572277AE93A00FFE1AE /* DialogTableViewCell.h */,
+				8BA76571277AE93A00FFE1AE /* DialogTableViewCell.m */,
 				8840693F2775AE090053E668 /* TitleView.h */,
 				884069412775AE090053E668 /* TitleView.m */,
 			);
@@ -1815,7 +1815,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=/opt/homebrew/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n\n\n";
+			shellScript = "export NODE_BINARY=/usr/local/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n\n\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2010,6 +2010,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */,
 				882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */,
+				8BA76573277AE93B00FFE1AE /* DialogTableViewCell.m in Sources */,
 				884069102775AA7F0053E668 /* ChatResources.m in Sources */,
 				884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */,
 				884068312775A24C0053E668 /* MenuAction.m in Sources */,
@@ -2060,7 +2061,6 @@
 				882EA0B3266A21D6000B9813 /* MainDataSource.m in Sources */,
 				882EA072266A1F58000B9813 /* SettingSliderCell.m in Sources */,
 				884069192775AAB70053E668 /* AbstractAsyncOperation.m in Sources */,
-				884069432775AE090053E668 /* DialogTableViewCell.m in Sources */,
 				884068522775A35D0053E668 /* ChatDataSource.m in Sources */,
 				884068852775A6910053E668 /* ChatCell.m in Sources */,
 				882EA0BC266A21FA000B9813 /* UsersDataSource.m in Sources */,
@@ -2205,7 +2205,7 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.STTLEnterprise.openschool1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.STTLEnterprise.openschool;
 				PRODUCT_NAME = "MYED Open School";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
@@ -2239,7 +2239,7 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.STTLEnterprise.openschool1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.STTLEnterprise.openschool;
 				PRODUCT_NAME = "MYED Open School";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
