@@ -54,6 +54,7 @@ const SGroupSetUpPupilSelection = (props) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
+                console.log('----set pupil------', res.data)
                 setPupilsClone(res.data)
             } else {
                 showMessage(res.message)
@@ -141,7 +142,7 @@ const SGroupSetUpPupilSelection = (props) => {
         // })
 
         //
-        if (selectedTeacher.length<=0) {
+        if (selectedTeacher.length <= 0) {
             showMessage(MESSAGE.selectTeacher)
             return
         } else if (selectedPupils.length == 0) {
