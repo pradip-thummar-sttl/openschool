@@ -26,9 +26,9 @@ import Calender from "../../../../svg/teacher/dashboard/Calender";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 
-import { EndPoints } from "../../../../service/EndPoints";
-import { Service } from "../../../../service/Service";
-import moment from 'moment';
+// import { EndPoints } from "../../../../service/EndPoints";
+// import { Service } from "../../../../service/Service";
+// import moment from 'moment';
 
 const { CallModule } = NativeModules;
 
