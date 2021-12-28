@@ -11,6 +11,7 @@ import CheckBox from '@react-native-community/checkbox';
 import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
 import { ScrollView } from 'react-native-gesture-handler'
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes'
 
 const SchoolNewMessage = (props) => {
     const t2 = useRef(null);
@@ -72,7 +73,7 @@ const SchoolNewMessage = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={{ ...Styles.alignRow, marginTop: 10 }}>
                             <CheckBox
-                                style={Styles.checkMark}
+                                style={[Styles.checkMark]}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

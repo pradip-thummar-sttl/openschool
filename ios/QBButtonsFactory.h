@@ -22,5 +22,6 @@
 + (QBButton *)whiteBoard ;
 + (QBButton *)switchCamera;
 + (QBButton *)screenRecording;
++ (QBButton *)chatButton;
 
 @end

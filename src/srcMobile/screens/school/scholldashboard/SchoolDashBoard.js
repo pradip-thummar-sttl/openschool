@@ -71,12 +71,13 @@ const SchoolDashBoard = (props) => {
 
         let data = {
             Searchby: "",
-            Filterby: -1
+            Filterby: ''
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
+                console.log('res.data =>>>>>>>>>>>>>> ', res.data);
                 setPupilData(res.data)
             } else {
                 showMessage(res.message)
@@ -99,6 +100,17 @@ const SchoolDashBoard = (props) => {
                         <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(40) }]}>{item.FirstName} {item.LastName}</Text>
                         <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.TeachingYear}</Text>
                     </View>
+                    {/* {item.sort((a,b) => {
+                        var nameA = a.FirstName.toUpperCase();
+                        var nameB = b.FirstName.toUpperCase();
+                        if(nameA < nameB){
+                            return -1;
+                        }
+                        if(nameA > nameB){
+                            return 1;
+                        }
+                        return 0;
+                    })} */}
 
                 </View>
 

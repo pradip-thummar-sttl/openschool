@@ -2,21 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
-// import Images from '../../../../utils/Images';
+import Notification from "../../../../svg/teacher/dashboard/Notification";
 import FONTS from '../../../../utils/Fonts';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 import { opacity } from "../../../../utils/Constant";
-import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
-import RBSheet from "react-native-raw-bottom-sheet";
-import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack'
+
 const HeaderPTInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -27,7 +18,6 @@ const HeaderPTInner = (props) => {
     const [isModalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
-        // props.onFilter(filterBy)
     }, [filterBy])
 
     return (
@@ -37,7 +27,6 @@ const HeaderPTInner = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
@@ -45,17 +34,15 @@ const HeaderPTInner = (props) => {
                     </View>
                 </View>
 
-                {/* {tabIndex == 0 ?
-                    <View style={styles.headerRight}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => props.navigateToPupilProfileEdit()}>
-                            <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
-                        </TouchableOpacity>
-                    </View>
-                    :
-                    null
-                } */}
+                <View style={styles.headerRight}>
+                    <TouchableOpacity
+                        style={styles.notificationBar}
+                        onPress={() => props.onNotification()}
+                        activeOpacity={opacity}>
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                    </TouchableOpacity>
+                </View>
+
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>

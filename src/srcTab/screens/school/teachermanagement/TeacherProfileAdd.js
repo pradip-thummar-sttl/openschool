@@ -301,9 +301,9 @@ const TeacherProfileAdd = (props) => {
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => showActionChooser()}>
-                                        <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                        <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
+                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)} />
                                     </TouchableOpacity>
                                 </View>
                                 <View style={PAGESTYLE.topBannerParent}>

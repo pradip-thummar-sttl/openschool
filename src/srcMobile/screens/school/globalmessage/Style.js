@@ -252,7 +252,8 @@ export default StyleSheet.create({
         paddingLeft: hp(1.5),
     },
     checkMark: {
-        width: hp(1.84),
+        // width: hp(4.2),
+        width : Platform.OS === 'android' ? hp(4.2) : hp(1.84),
         height: hp(1.84),
         top: hp(0.35),
         fontFamily: FONTS.fontBold,
