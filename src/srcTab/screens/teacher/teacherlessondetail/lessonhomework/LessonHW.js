@@ -429,9 +429,9 @@ const TLHomeWork = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                     renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark, { top: 5 }]}
+                                style={[PAGESTYLE.checkMark,{justifyContent : 'center'}]}
                                 value={item.IsCheck}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}
@@ -447,7 +447,7 @@ const TLHomeWork = (props) => {
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity
-                                style={PAGESTYLE.userIcon1Parent}
+                                style={[PAGESTYLE.userIcon1Parent,{alignItems : 'center',justifyContent  :'center'}]}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
                                 <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2)} width={hp(2)} />

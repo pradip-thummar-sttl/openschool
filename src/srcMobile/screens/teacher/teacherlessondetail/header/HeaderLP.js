@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import FONTS from '../../../../../utils/Fonts';
@@ -8,6 +8,8 @@ import moment from 'moment';
 import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import EditWhite from "../../../../../svg/pupil/parentzone/EditWhite";
+import { BadgeIcon } from "../../../../../utils/Model";
+
 
 const HeaderLP = (props) => {
     return (
@@ -25,12 +27,12 @@ const HeaderLP = (props) => {
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                  
                     <TouchableOpacity activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}
                         style={styles.profileEdit}>
                         <EditWhite style={styles.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
                     </TouchableOpacity>
+                    
                 </View>
             </View>
         </View>
@@ -74,10 +76,11 @@ const styles = StyleSheet.create({
     },
     profileEdit: {
         backgroundColor: COLORS.dashboardGreenButton,
-        alignSelf: 'flex-end',
+        // alignSelf: 'flex-end',
         padding: hp(1.5),
         borderRadius: hp(1),
         // marginBottom: hp(1.32),
+        marginHorizontal  : 5
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -218,7 +221,7 @@ const styles = StyleSheet.create({
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
-       
+
     },
     lessonPlanTop: {
         flexDirection: 'row',

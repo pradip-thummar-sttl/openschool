@@ -301,9 +301,10 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        paddingBottom: hp(2.2),
-        marginBottom: hp(1.1),
-        marginTop: hp(1.1),
+        // paddingBottom: hp(2.2),
+        // marginBottom: hp(1.1),
+        // marginTop: hp(1.1),
+        marginVertical : hp(1.1),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -1213,7 +1214,7 @@ export default StyleSheet.create({
     userIcon1Parent: {
         position: 'absolute',
         right: 10,
-        top: 2,
+        // top: 2,
     },
     userIcon1: {
         position: 'absolute',
@@ -1221,7 +1222,7 @@ export default StyleSheet.create({
         height: hp(2),
         resizeMode: 'contain',
         alignSelf: 'center',
-        top: 10,
+        // top: 10,
         right: 5
     },
     autocompleteContainer: {
