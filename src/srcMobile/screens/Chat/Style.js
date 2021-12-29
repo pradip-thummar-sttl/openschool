@@ -156,10 +156,9 @@ export default StyleSheet.create({
     buttonView:{
         position:'absolute',
         right:hp(2),
-        paddingBottom: hp(2),
         alignItems: 'flex-end',
         height: '100%',
-        flexDirection:'row'
+        justifyContent: 'center',
     },
     btn:{
         // backgroundColor:'yellow',

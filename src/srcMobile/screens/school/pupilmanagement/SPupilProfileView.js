@@ -175,7 +175,7 @@ const SPupilProfileView = (props) => {
     }
 
     return (
-        <View style={{height:'100%',backgroundColor:'red'}}>
+        <View style={{ height: '100%', }}>
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
@@ -183,6 +183,7 @@ const SPupilProfileView = (props) => {
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />
+            <View style={{flex: 1}}>
             {
                 tabSelected === 0 ?
                     <View style={PAGESTYLE.MainProfile}>
@@ -230,8 +231,8 @@ const SPupilProfileView = (props) => {
                                 </View>
                             </View>
                             <View HR style={STYLE.hrCommon}></View>
-                        
-                            <View style={{flexDirection:'row',}}>
+
+                            <View style={{ flexDirection: 'row', }}>
                                 <View style={PAGESTYLE.squreView}>
                                     <Text style={PAGESTYLE.data}>{joinedLesson}</Text>
                                     <Text style={PAGESTYLE.label1}>Attended lessons</Text>
@@ -272,10 +273,9 @@ const SPupilProfileView = (props) => {
                         </ScrollView>
                     </View>
                     :
-                    <View style={PAGESTYLE.MainProfile}>
-                        <Chat tabs={tabSelected} data={item} />
-                    </View>
+                    <Chat tabs={tabSelected} data={item} />
             }
+            </View>
 
         </View>
     );
