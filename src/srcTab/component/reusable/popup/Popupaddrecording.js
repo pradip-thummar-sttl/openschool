@@ -81,10 +81,10 @@ const Popupaddrecording = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={toggleModal}
-                        style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                        style={[styles.recordLinkBlock, styles.topSpaceRecording,]}>
                         {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
                         <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
-                        <Text style={styles.recordLinkText}>Add Recording</Text>
+                        <Text style={[styles.recordLinkText]}>Add Recording</Text>
                     </TouchableOpacity>
                     :
 
@@ -95,7 +95,7 @@ const Popupaddrecording = (props) => {
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => {props.onRemoveRecording()}}>
-                            <CloseBlack style={STYLE.cancelButtonIcon1} height={hp(2.94)} width={hp(2.94)} />
+                            <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
             }
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.5),
         zIndex: 9,
-        top: hp(1),
+        // top: hp(1),
     },
     popupLarge: {
         backgroundColor: COLORS.white,
@@ -188,8 +188,10 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width : Platform.OS === 'android' ? hp(22.15) : hp(20.15),
+        // width : Platform.OS === 'android' ? hp(50.15) : hp(20.15),
+
         // width: hp(20.15),
+        // height : Platform.OS === 'android' ? hp(20.15) : hp(5.20),
         height: hp(5.20),
         padding: hp(1.43),
         paddingTop: hp(0.8),
@@ -202,17 +204,20 @@ const styles = StyleSheet.create({
         
     },
     recordLinkBlock1: {
-        width: hp(25.15),
-        height: hp(5.20),
+        width: Platform.OS === 'android' ? hp(65.15) : hp(25.15),
+        height: Platform.OS === 'android' ? hp(10) :hp(5.20),
+        // height: hp(5.20),
         padding: hp(1.43),
-        paddingTop: hp(0.8),
-        paddingBottom: hp(0.8),
+        // paddingTop: hp(0.6),
+        // paddingBottom: hp(0.6),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        // backgroundColor : 'red',
+        paddingEnd : 25
     },
     recordLinkBlock2: {
         width: '100%',
@@ -237,5 +242,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
+    
+        // backgroundColor : 'green'
     },
 });

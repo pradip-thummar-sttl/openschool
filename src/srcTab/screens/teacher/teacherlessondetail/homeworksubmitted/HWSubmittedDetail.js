@@ -433,7 +433,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                 renderItem={({ item }) => (
                                                     <View style={PAGESTYLE.checkBoxLabelLine}>
                                                         <CheckBox
-                                                            style={[PAGESTYLE.checkMark, { top: 5 }]}
+                                                            style={[PAGESTYLE.checkMark]}
                                                             value={item.IsCheck}
                                                             disabled
                                                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

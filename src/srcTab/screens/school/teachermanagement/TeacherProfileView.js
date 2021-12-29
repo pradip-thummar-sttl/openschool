@@ -59,7 +59,7 @@ const TeacherProfileView = (props) => {
             console.log('Err of all pupil by teacher', err)
         })
     }, [])
-  
+
     const openNotification = () => {
         props.onNavigation.openDrawer();
     }
@@ -72,8 +72,8 @@ const TeacherProfileView = (props) => {
                     navigateToBack={() => {props.navigateToBack()}} 
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
-                    pupilName={item.FirstName + ' ' + item.LastName} 
-                    onNotification={()=> openNotification()} />
+                    pupilName={item.FirstName + ' ' + item.LastName}
+                    onNotification={() => openNotification()} />
             }
 
             {
@@ -84,7 +84,7 @@ const TeacherProfileView = (props) => {
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                        <View style={{height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0}}>
+                                        <View style={{ height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0 }}>
                                             <TopBackImg style={PAGESTYLE.managementopImage} height={Platform.OS == 'android' && isTablet() ? hp(20.7) : '100%'} width={'100%'} />
                                         </View>
                                         <View style={PAGESTYLE.thumbTopUser}>

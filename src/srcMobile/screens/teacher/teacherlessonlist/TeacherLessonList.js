@@ -92,7 +92,7 @@ const TeacherLessonList = (props) => {
                 }
                 else {
                     setLessonData(res.data)
-                    setAllNewAndOldData(res.data)
+                    // setAllNewAndOldData(res.data)
                 }
 
             } else {
@@ -106,10 +106,12 @@ const TeacherLessonList = (props) => {
     const addMorePage = () => {
         pageNo = pageNo + 1
 
-        setTimeout(() => {
-            console.log('----pageno-----', pageNo)
-            fetchRecord('', '')
-        }, 1000)
+        if (lessonData.length >= Number(limit)) {
+            setTimeout(() => {
+                console.log('----pageno-----', pageNo)
+                fetchRecord('', '')
+            }, 1000)
+        }
     }
 
     const refresh = () => {

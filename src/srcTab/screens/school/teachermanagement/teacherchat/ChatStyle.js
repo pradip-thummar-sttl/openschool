@@ -53,7 +53,7 @@ export default StyleSheet.create({
 
     //
     views: {
-        backgroundColor: COLORS.blueBorder
+        height: '100%',
     },
     leftView: {
         marginLeft: hp(2),
@@ -101,26 +101,27 @@ export default StyleSheet.create({
         fontSize: hp(2.2)
     },
     rightView: {
-        // backgroundColor:'red',
         paddingHorizontal: hp(2),
-        marginTop: hp(2),
-        height: hp(80),
+        paddingTop: hp(2),
+        // height: hp(80),
+        height: '100%',
         width: '100%'
     },
     mesagesView: {
         width: '100%',
-        height: Platform.OS == 'android' && isTablet() ? hp(58) : hp(62),
-        marginBottom: wp(3),
+        // height: Platform.OS == 'android' && isTablet() ? hp(58) : hp(62),
+        height: '100%',
     },
     textView: {
         width: '100%',
-        height: hp(12),
+        height: 100,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        backgroundColor: COLORS.greyBack,        
-        // position:'absolute',
-        // bottom:0
+        backgroundColor: COLORS.greyBack,
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: 10,
         // bottom:0,
     },
     messageCell: {
@@ -146,32 +147,31 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        width: '100%',
+        width: '95%',
         height: '100%',
-        fontSize:hp(1.8),
-        fontFamily:FONTS.fontSemiBold,
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontSemiBold,
         marginHorizontal: Platform.OS == 'android' ? hp(1) : hp(2),
         textAlignVertical: 'top',
-        paddingTop: Platform.OS == 'android' ? hp(1) : hp(2),
+        paddingVertical: 10,
     },
-    buttonView:{
-        position:'absolute',
-        right: hp(-1),
-        bottom: hp(2),
-        alignItems: 'flex-end',
+    buttonView: {
         height: '100%',
-        flexDirection:'row'
+        right: 0,
+        backgroundColor: '#012233',
+        justifyContent: 'center',
+        position: 'absolute',
     },
-    btn:{
+    btn: {
         // backgroundColor:'yellow',
-        width:hp(2.5),
-        height:hp(2.5),
-        marginHorizontal:wp(2.5)
+        width: hp(2.5),
+        height: hp(2.5),
+        marginHorizontal: wp(2.5)
     },
-    timeText:{
-        color:COLORS.menuLightFonts,
-        marginTop:wp(1),
-        fontSize:hp(1.2)
+    timeText: {
+        color: COLORS.menuLightFonts,
+        marginTop: wp(1),
+        fontSize: hp(1.2)
     },
     userIconPupil: {
         width: hp(2.5),

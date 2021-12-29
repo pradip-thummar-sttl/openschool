@@ -40,6 +40,7 @@ import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import Modal from 'react-native-modal';
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -564,7 +565,7 @@ const TLDetailAdd = (props) => {
                                 data={filteredPupils}
                                 style={{ alignSelf: 'center', width: '100%', }}
                                 renderItem={({ item, index }) => (
-                                    <View style={PAGESTYLE.alignRow}>
+                                    <View style={[PAGESTYLE.alignRow,{width : '33.33%'}]}>
                                         <CheckBox
                                             style={PAGESTYLE.checkMark}
                                             boxType={'square'}
@@ -952,7 +953,7 @@ const TLDetailAdd = (props) => {
                                                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                         placeholder="e.g. Grammar, Fractions, etc"
                                                         autoCapitalize={'sentences'}
-                                                        maxLength={40}
+                                                        maxLength={60}
                                                         placeholderTextColor={COLORS.menuLightFonts}
                                                         onChangeText={text => setLessonTopic(text)} />
                                                 </View>
@@ -1061,7 +1062,7 @@ const TLDetailAdd = (props) => {
                                              materialArr.length != 0 && materialArr.map((item, index) => {
                                                  return (
                                                      <View style={PAGESTYLE.fileRender}>
-                                                         <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                         <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.name}</Text>
                                                          {item &&
                                                              <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
                                                                  <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />

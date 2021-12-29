@@ -174,96 +174,98 @@ const TeacherProfileView = (props) => {
     }
 
     const openNotification = () => {
-        props.navigation.navigate('NotificationDrawer', { onGoBack: () => {} })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => { } })
     }
     return (
-        <View>
+        <View style={{ height: '100%', }}>
             <HeaderPTInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
                 navigateToPupilProfileEdit={() => props.navigation.replace('TeacherProfileEdit', { item: item })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
-                onNotification={()=> openNotification()} />
-            {
-                tabSelected === 0 ?
-                    <View style={PAGESTYLE.MainProfile}>
-                        <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
-                            <View style={PAGESTYLE.mainContainerProfile}>
-                                <View style={PAGESTYLE.profileImageArea}>
-                                    <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
-                                    <View style={PAGESTYLE.profileOuter}>
-                                        <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={PAGESTYLE.mainDetails}>
-                                <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>Teacher name</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.FirstName} {item.LastName}</Text>
-                                </View>
-                                <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>Teaching Year</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.TeachingYear}</Text>
-                                </View>
-                                <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
-                                    <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
-                                </View>
-                                <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
-                                </View>
-                                <View style={PAGESTYLE.fieldDetails}>
-                                    <Text LABLE style={PAGESTYLE.label}>status</Text>
-                                    <Text P style={PAGESTYLE.data}>{item.Active ? "Active" : 'Deactive'}</Text>
-                                </View>
-                            </View>
-                            <View HR style={STYLE.hrCommon}></View>
-                           
-                            <View style={PAGESTYLE.pupilPerfomance}>
-                                <Text H2 style={PAGESTYLE.titlePerfomance}>Teacher Insights</Text>
-
-                                <View style={PAGESTYLE.achivementBox}>
-                                    <View style={PAGESTYLE.insightBox}>
-                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.ScheduledLesson}</Text>
-                                        <Text style={PAGESTYLE.insightLabel}>Scheduled Lessons</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.insightBox}>
-                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSet}</Text>
-                                        <Text style={PAGESTYLE.insightLabel}>Homework Set</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.insightBox}>
-                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.ActivePupile}</Text>
-                                        <Text style={PAGESTYLE.insightLabel}>Active Pupils</Text>
-                                    </View>
-                                </View>
-
-                                <View style={PAGESTYLE.achivementBox}>
-                                    <View style={PAGESTYLE.insightBox}>
-                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.PreviousLesson}</Text>
-                                        <Text style={PAGESTYLE.insightLabel}>Previous Lessons</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.insightBox}>
-                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSubmited}</Text>
-                                        <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
-                                    </View>
-                                    <View style={PAGESTYLE.insightBox}>
-                                        <Text style={PAGESTYLE.insightMain}>{teacherCountData.InActivePupile}</Text>
-                                        <Text style={PAGESTYLE.insightLabel}>Inactive Pupils</Text>
-                                    </View>
-                                </View>
-
-                            </View>
-                        </ScrollView>
-                    </View>
-                    : tabSelected === 1 ?
+                onNotification={() => openNotification()} />
+            <View style={{ flex: 1 }}>
+                {
+                    tabSelected === 0 ?
                         <View style={PAGESTYLE.MainProfile}>
-                            <Chat tabs={tabSelected} data={item} />
-                        </View> :
-                        <STLessonList navigateDetails={(items) => props.navigation.navigate('SchoolTeacherLessonDetail', { 'data': items })} id={item.TeacherId} />
-            }
+                            <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
+                                <View style={PAGESTYLE.mainContainerProfile}>
+                                    <View style={PAGESTYLE.profileImageArea}>
+                                        <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
+                                        <View style={PAGESTYLE.profileOuter}>
+                                            <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={PAGESTYLE.mainDetails}>
+                                    <View style={PAGESTYLE.fieldDetails}>
+                                        <Text LABLE style={PAGESTYLE.label}>Teacher name</Text>
+                                        <Text P style={PAGESTYLE.data}>{item.FirstName} {item.LastName}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.fieldDetails}>
+                                        <Text LABLE style={PAGESTYLE.label}>Teaching Year</Text>
+                                        <Text P style={PAGESTYLE.data}>{item.TeachingYear}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.fieldDetails}>
+                                        <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
+                                        <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.fieldDetails}>
+                                        <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
+                                        <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.fieldDetails}>
+                                        <Text LABLE style={PAGESTYLE.label}>status</Text>
+                                        <Text P style={PAGESTYLE.data}>{item.Active ? "Active" : 'Deactive'}</Text>
+                                    </View>
+                                </View>
+                                <View HR style={STYLE.hrCommon}></View>
 
+                                <View style={PAGESTYLE.pupilPerfomance}>
+                                    <Text H2 style={PAGESTYLE.titlePerfomance}>Teacher Insights</Text>
+
+                                    <View style={PAGESTYLE.achivementBox}>
+                                        <View style={PAGESTYLE.insightBox}>
+                                            <Text style={PAGESTYLE.insightMain}>{teacherCountData.ScheduledLesson}</Text>
+                                            <Text style={PAGESTYLE.insightLabel}>Scheduled Lessons</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.insightBox}>
+                                            <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSet}</Text>
+                                            <Text style={PAGESTYLE.insightLabel}>Homework Set</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.insightBox}>
+                                            <Text style={PAGESTYLE.insightMain}>{teacherCountData.ActivePupile}</Text>
+                                            <Text style={PAGESTYLE.insightLabel}>Active Pupils</Text>
+                                        </View>
+                                    </View>
+
+                                    <View style={PAGESTYLE.achivementBox}>
+                                        <View style={PAGESTYLE.insightBox}>
+                                            <Text style={PAGESTYLE.insightMain}>{teacherCountData.PreviousLesson}</Text>
+                                            <Text style={PAGESTYLE.insightLabel}>Previous Lessons</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.insightBox}>
+                                            <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSubmited}</Text>
+                                            <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
+                                        </View>
+                                        <View style={PAGESTYLE.insightBox}>
+                                            <Text style={PAGESTYLE.insightMain}>{teacherCountData.InActivePupile}</Text>
+                                            <Text style={PAGESTYLE.insightLabel}>Inactive Pupils</Text>
+                                        </View>
+                                    </View>
+
+                                </View>
+                            </ScrollView>
+                        </View>
+                        : tabSelected === 1 ?
+                            <Chat tabs={tabSelected} data={item} />
+                            :
+                            <STLessonList
+                                navigateDetails={(items) => props.navigation.navigate('SchoolTeacherLessonDetail', { 'data': items })}
+                                id={item.TeacherId} />
+                }
+            </View>
         </View>
     );
 }

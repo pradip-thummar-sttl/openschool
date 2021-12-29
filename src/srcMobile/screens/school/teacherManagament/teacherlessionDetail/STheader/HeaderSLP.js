@@ -28,7 +28,7 @@ const HeaderSLP = (props) => {
                 </View>
 
                 <TouchableOpacity activeOpacity={opacity} onPress={() => props.onAlertPress()}>
-                    <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                    <Notification style={[styles.massagesIcon]} height={hp(5.20)} width={hp(5.20)} />
                 </TouchableOpacity>
             </View>
         </View>
