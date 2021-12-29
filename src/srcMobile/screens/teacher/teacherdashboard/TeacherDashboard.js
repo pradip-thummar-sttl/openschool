@@ -56,21 +56,18 @@ const Pupillist = ({ item, onPress }) => (
                     return (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                 <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.22)} height={hp(2.12)} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                     <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.22)} height={hp(2.12)} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
-                                        {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                         <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.22)} height={hp(2.12)} />
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
@@ -78,11 +75,7 @@ const Pupillist = ({ item, onPress }) => (
                                     null
                     )
                 })}
-                {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-            <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
             </View>
-            {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
             <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.51)} width={hp(0.95)} />
         </View>
     </TouchableOpacity>
