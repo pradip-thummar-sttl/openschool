@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.media.MediaScannerConnection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Build;
@@ -475,7 +476,6 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private String generateFileName() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
         Date curDate = new Date(System.currentTimeMillis());
-//        return formatter.format(curDate).replace(" ", "");
         return "MY CLASS RECORDING";
     }
 
@@ -499,11 +499,24 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             System.out.println("KDKD: " + mUri);
         } else {
-            File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/OpenSchool");
-            Uri uri = Uri.parse(path.toString());
-            System.out.println(uri);
-            mUri = uri;
+//            File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/OpenSchool");
+//            Uri uri = Uri.parse(path.toString());
+//            System.out.println(uri);
+//            mUri = uri;
+            refreshGalleryFile();
         }
+    }
+
+    private void refreshGalleryFile() {
+        MediaScannerConnection.scanFile(this,
+                new String[]{hbRecorder.getFilePath()}, null,
+                new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        mUri = Uri.parse(path);
+                        Log.i("ExternalStorage", "Scanned " + path + ":");
+                        Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
     }
 
     @Override
@@ -709,7 +722,16 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
     @Override
     public void onLeaveCurrentSession() {
-        _callback.invoke(null, mUri.getPath());
+//        _callback.invoke(null, mUri.getPath());
+
+        if (mUri != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                _callback.invoke(null, mUri.getPath());
+            } else {
+                _callback.invoke(null, "file://"+mUri.getPath());
+            }
+        }
+
         leaveCurrentSession();
         finish();
     }

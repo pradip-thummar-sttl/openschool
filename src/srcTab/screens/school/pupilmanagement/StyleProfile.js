@@ -551,15 +551,16 @@ export default StyleSheet.create({
         fontSize: 20,
         fontFamily: FONTS.fontBold,
     }, pzEditIcon: {
-        width: hp(2.58),
-        height: hp(2.58),
+        width: hp(4),
+        height: hp(4),
         resizeMode: 'contain',
         position: 'absolute',
         left: hp(4.8),
-        bottom: hp(-0.6),
-        borderRadius: hp(1.065),
-        borderColor: COLORS.greyInsightLable,
-        backgroundColor : 'white'
+        bottom: hp(-0.3),
+        borderRadius: hp(100),
+        backgroundColor: COLORS.white,
+        borderColor: COLORS.editBorder,
+        borderWidth: 1,
     },
     topBannerParent: {
         paddingHorizontal: 6,
