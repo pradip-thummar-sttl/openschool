@@ -265,9 +265,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                         });
 
+                        refRBSheet.current.close()
+                        setUploading(true);
                         Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${dataOfSubView._id}`, (res) => {
+                            setUploading(false);
                             console.log('response of save recording', res)
                         }, (err) => {
+                            setUploading(false);
                             console.log('error of save recording', err)
                         })
 

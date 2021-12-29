@@ -171,6 +171,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
+    const [isUploading, setUploading] = useState(false);
+
     const [dashData, setdashData] = useState([])
     const [pupilData, setPupilData] = useState([])
     const [isDashDataLoading, setDashDataLoading] = useState(true)
@@ -300,7 +302,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const startLiveClassAndroid = () => {
         try {
             let qBUserIDs = [], userNames = [], names = [], channels = []
-            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
             dataOfSubView.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.PupilEmail)
@@ -316,9 +317,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
 
             if (Platform.OS == 'android') {
-                console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started', error, ID);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, title, channels, (error, id) => {
+                    console.log('Class Started', error, id);
                     let data = {
                         LessonStart: false,
                         LessonEnd: true
@@ -326,11 +326,32 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                     Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     }, (err) => {
                     })
+
+                    if (id && id != null && id != "") {
+                        let formData = new FormData();
+                        let ext = id.split('.');
+                        let names = id.split('/');
+                        let name = names[names.length - 1];
+                        formData.append('file', {
+                            uri: id,
+                            name: name,
+                            type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                        });
+
+                        setUploading(true);
+                        Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${dataOfSubView._id}`, (res) => {
+                            setUploading(false);
+                            console.log('response of save recording', res)
+                        }, (err) => {
+                            setUploading(false);
+                            console.log('error of save recording', err)
+                        })
+
+                    }
+
                 });
             } else {
-                console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, true, QBUserId, false, title, channels, (id) => {
-                    console.log('hi id:---------', id)
                     let data = {
                         LessonStart: false,
                         LessonEnd: true
@@ -341,7 +362,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
                     if (id != "") {
                         let formData = new FormData();
-
                         let ext = id.split('.');
                         let names = id.split('/');
                         let name = names[names.length - 1];
@@ -349,14 +369,16 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
                         formData.append('file', {
                             uri: removeFile,
-                            // name: element.fileName,
                             name: name,
                             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                         });
-                        console.log('hello url in REcord screen', formData)
+                        
+                        setUploading(true);
                         Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${dataOfSubView._id}`, (res) => {
+                            setUploading(false);
                             console.log('response of save recording', res)
                         }, (err) => {
+                            setUploading(false);
                             console.log('error of save recording', err)
                         })
 
@@ -530,35 +552,27 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 />
                                                             </SafeAreaView>
                                                             <View style={PAGESTYLE.rightTabContent}>
-                                                                {/* {
-                                            console.log('hello222222222', dashData.indexOf(dataOfSubView), selectedId),
-                                            dashData.indexOf(dataOfSubView) == selectedId ?
-                                                <View style={PAGESTYLE.arrowSelectedTab}></View>
-                                                : null
-                                        } */}
                                                                 <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.scrollView}>
                                                                     <View style={PAGESTYLE.tabcontent}>
                                                                         <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                         <View style={PAGESTYLE.timedateGrp}>
                                                                             <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                                                                 <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                 <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                             </View>
                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                                {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
                                                                                 <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                 <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                                             </View>
                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
                                                                                 <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                 <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
                                                                             </View>
                                                                         </View>
                                                                         <View style={STYLE.hrCommon}></View>
                                                                         <View style={PAGESTYLE.mediaMain}>
-                                                                            {dataOfSubView.Allpupillist ?
+
+                                                                            {dataOfSubView.Allpupillist &&
                                                                                 dataOfSubView.Allpupillist.map((data, index) => (
                                                                                     <TouchableOpacity
                                                                                         style={PAGESTYLE.mediabarTouch}
@@ -566,20 +580,12 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                         <Image style={PAGESTYLE.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
                                                                                     </TouchableOpacity>
                                                                                 ))
-                                                                                :
-                                                                                null
                                                                             }
                                                                         </View>
                                                                         <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                                         <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                                            {/* <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                                            <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                            <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList ? dataOfSubView.MaterialList.length : 0} Attachment(s)</Text>
-                                                                        </TouchableOpacity>
-                                                                        <TouchableOpacity>
-                                                                            <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                                        </TouchableOpacity> */}
-                                                                            {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
+                                                                            {
+                                                                                dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 &&
                                                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
                                                                                     <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
                                                                                     <FlatList
@@ -600,34 +606,28 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                             color={COLORS.blueBorder} />
                                                                                                         :
-                                                                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                                                                         <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                                                     }
-                                                                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                                 </View>
                                                                                             </TouchableOpacity>
                                                                                         )}
                                                                                         keyExtractor={(item, index) => index.toString()}
                                                                                     />
                                                                                 </View>
-                                                                                :
-                                                                                null
+
                                                                             }
                                                                         </View>
                                                                         <View style={PAGESTYLE.requirementofClass}>
                                                                             {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
                                                                                 <Text style={PAGESTYLE.requireText}>Items that your class will need</Text> : null}
 
-                                                                            {dataOfSubView.CheckList ?
+                                                                            {dataOfSubView.CheckList &&
                                                                                 dataOfSubView.CheckList.map((data, index) => (
                                                                                     <View style={PAGESTYLE.lessonPoints}>
-                                                                                        {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                                                                         <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                                                                         <Text style={PAGESTYLE.lessonPointText}>{data.ItemName}</Text>
                                                                                     </View>
                                                                                 ))
-                                                                                :
-                                                                                null
                                                                             }
                                                                         </View>
                                                                         <View style={PAGESTYLE.lessonstartButton}>
@@ -652,83 +652,21 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                         </View>
                                                                     </View>
                                                                 </ScrollView>
-                                                                {/* <View style={PAGESTYLE.tabcontent}>
-                                    <Text h2 style={PAGESTYLE.titleTab}>Cartoon Drawings</Text>
-                                    <View style={PAGESTYLE.timedateGrp}>
-                                        <View style={PAGESTYLE.dateWhiteBoard}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} />
-                                            <Text style={PAGESTYLE.datetimeText}>14/09/2020</Text>
-                                        </View>
-                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                            <Image style={PAGESTYLE.timeIcon} source={Images.Clock} />
-                                            <Text style={PAGESTYLE.datetimeText}>09:00 - 09:30</Text>
-                                        </View>
-                                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                            <Image style={PAGESTYLE.calIcon} source={Images.Group} />
-                                            <Text style={PAGESTYLE.datetimeText}>Group 2A</Text>
-                                        </View>
-                                    </View>
-                                    <View style={STYLE.hrCommon}></View>
-                                    <View style={PAGESTYLE.mediaMain}>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.mediabar}></View></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.mediabarTouch}><View style={PAGESTYLE.moreMedia}><Text style={PAGESTYLE.moreMediaText}>2+</Text></View></TouchableOpacity>
-                                    </View>
-                                    <Text style={PAGESTYLE.lessondesciption}>This fun lesson will be focused on drawing a cartoon character. We will work together to sharpen your drawing skills, encourage creative thinking and have fun with colours.</Text>
-                                    <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                        <TouchableOpacity style={PAGESTYLE.attachment}>
-                                            <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                            <Text style={PAGESTYLE.attachmentText}>1 Attachment</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <Text style={PAGESTYLE.linkText}>see more</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={PAGESTYLE.requirementofClass}>
-                                        <Text style={PAGESTYLE.requireText}>Items that your class will need</Text>
-                                        <View style={PAGESTYLE.lessonPoints}>
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                            <Text style={PAGESTYLE.lessonPointText}>Text book, a pencil, colouring pencils or felt tip pens, rubber eraser, tip pens.</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.lessonPoints}>
-                                            <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} />
-                                            <Text style={PAGESTYLE.lessonPointText}>Drawing work sheet.</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.lessonstartButton}>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>Edit Lesson</Text></TouchableOpacity>
-                                        <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text></TouchableOpacity>
-                                    </View>
-                                </View> */}
+                                                               
                                                             </View>
                                                         </View>
                                                         :
-                                                        // <View style={{ height: 100, justifyContent: 'center' }}>
-                                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        // </View>
                                                         <EmptyStatePlaceHohder holderType={5} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                 }
                                             </View>
                                             <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                                                 <View style={[STYLE.viewRow]}>
-                                                    {/* <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} /> */}
                                                     <MyPupils style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>
                                                     <View>
                                                         <TouchableOpacity>
-                                                            {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                                             <MoreWhite style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
                                                         </TouchableOpacity>
                                                     </View>
@@ -770,14 +708,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             <View style={[STYLE.hrCommon, PAGESTYLE.pupilhrCustomMargin]}></View>
                                                             <View style={PAGESTYLE.pupilTabledata}>
                                                                 <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                                                                    {/* <FlatList
-                                                                        data={pupilData}
-                                                                        renderItem={pupilRender}
-                                                                        style={PAGESTYLE.pupilListing}
-                                                                        keyExtractor={(item) => item.id}
-                                                                        extraData={selectedId}
-                                                                        showsVerticalScrollIndicator={false}
-                                                                    /> */}
                                                                     <View style={PAGESTYLE.pupilListing}>
                                                                         {pupilData.map((data) => {
                                                                             return (
@@ -793,10 +723,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             </View>
                                                         </View>
                                                         :
-
-                                                        // <View>
-                                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        // </View>
                                                         <EmptyStatePlaceHohder holderType={4} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                                                 }
                                             </View>
@@ -818,13 +744,17 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                 <Message navigation={props.navigation} />
 
             }
-            {isAddEvent ?
-                <PopupdataSecond
-                    isFromDashboard={true}
-                    goBack={() => { setAddEvent(false) }} />
-                :
-                null
-            }
+
+            {isAddEvent && <PopupdataSecond isFromDashboard={true} goBack={() => { setAddEvent(false) }} />}
+
+            {isUploading && 
+            <View style={PAGESTYLE.uploadVideoStl}>
+                <View style={PAGESTYLE.uploadVideoInnerStl}>
+                <ActivityIndicator style={{ margin: 20 }} size={'large'} color={COLORS.yellowDark} />
+                <Text style={PAGESTYLE.uploadVideoTextStl}>{"Just a minute \n We are uploading a recorded video..."}</Text>
+                </View>
+            </View>}
+            
         </View>
 
     );

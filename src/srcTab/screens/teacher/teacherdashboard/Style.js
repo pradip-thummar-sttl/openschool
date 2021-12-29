@@ -525,4 +525,8 @@ export default StyleSheet.create({
     scrollView: {
         height: hp(67.44),
     },
+
+    uploadVideoStl:{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.3);', position: 'absolute', justifyContent: 'center', alignItems:'center' },
+    uploadVideoInnerStl:{width: '80%',borderRadius: hp(1),backgroundColor:COLORS.white, padding:10},
+    uploadVideoTextStl:{ textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom:hp(2) },
 });
