@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -304,18 +304,20 @@ export default StyleSheet.create({
         // paddingBottom: hp(2.2),
         // marginBottom: hp(1.1),
         // marginTop: hp(1.1),
-        marginVertical : hp(1.1),
+        // marginVertical : hp(1.1),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
+        // paddingVertical : 9
     },
     checkBoxLabelText: {
         lineHeight: hp(2.82),
         fontSize: hp(1.70),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGrayIntro,
-        paddingRight: hp(1),
-        marginLeft: 15,
-        width: '92%'
+        // paddingRight: hp(1),
+        // marginLeft: 15,
+        width: '40%',
+        // backgroundColor : 'green'
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -669,7 +671,7 @@ export default StyleSheet.create({
     blockSpaceBottom: {
         marginBottom: hp(2.6),
         marginTop: hp(4),
-        width: '100%'
+        width: '100%',
     },
     dueDateWrap: {
         borderRightWidth: 2,
@@ -1005,6 +1007,8 @@ export default StyleSheet.create({
     },
     dateNameBlock: {
         marginRight: hp(2.21),
+        right : Platform.OS === 'android' ? hp(3) : 0
+        // right : hp(3) 
     },
     feedbackBlock: {
         width: hp(70.31),
@@ -1212,18 +1216,28 @@ export default StyleSheet.create({
         paddingLeft: hp(3.5),
     },
     userIcon1Parent: {
-        position: 'absolute',
-        right: 10,
+        // position: 'absolute',
+        // right: 10,
         // top: 2,
+        position: 'absolute',
+        width: hp(2.5),
+        height: hp(2.5),
+        right: hp(2),
+        justifyContent : 'center'
     },
     userIcon1: {
-        position: 'absolute',
-        width: hp(2),
-        height: hp(2),
-        resizeMode: 'contain',
-        alignSelf: 'center',
+        // position: 'absolute',
+        // width: hp(2),
+        // height: hp(2),
+        // resizeMode: 'contain',
+        // alignSelf: 'center',
         // top: 10,
-        right: 5
+        // right: 5
+
+        position: 'absolute',
+        width: hp(2.5),
+        height: hp(2.5),
+        // right: hp(1),
     },
     autocompleteContainer: {
         flex: 1,
@@ -1337,10 +1351,12 @@ export default StyleSheet.create({
         shadowRadius: hp(1),
     },
     checkMark: {
-        width: 15,
+        width : Platform.OS === 'android' ? 28 : 15,
+        // width: 25,
         height: 15,
         left: 3,
         resizeMode: 'contain',
+        marginEnd : hp(1)
 
     },
     checkMarkTool: {

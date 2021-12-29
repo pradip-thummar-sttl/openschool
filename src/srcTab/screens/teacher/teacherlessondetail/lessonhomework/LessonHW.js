@@ -429,9 +429,9 @@ const TLHomeWork = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark,{justifyContent : 'center'}]}
+                                style={[PAGESTYLE.checkMark,{justifyContent : 'center',alignItems  :'center'}]}
                                 value={item.IsCheck}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}
@@ -443,14 +443,14 @@ const TLHomeWork = (props) => {
 
                             />
                             <TextInput
-                                style={PAGESTYLE.checkBoxLabelText}
+                                style={[PAGESTYLE.checkBoxLabelText]}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity
-                                style={[PAGESTYLE.userIcon1Parent,{alignItems : 'center',justifyContent  :'center'}]}
+                                style={[PAGESTYLE.userIcon1Parent]}
                                 activeOpacity={opacity}
-                                onPress={() => { removeCheckListItem(index) }}>
-                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2)} width={hp(2)} />
+                                onPress={() =>  { removeCheckListItem(index) }}>
+                                <CloseBlack style={[PAGESTYLE.userIcon1]} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
                         </View>
                     )}

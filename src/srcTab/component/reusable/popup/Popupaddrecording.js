@@ -95,7 +95,7 @@ const Popupaddrecording = (props) => {
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => {props.onRemoveRecording()}}>
-                            <CloseBlack style={STYLE.cancelButtonIcon1} height={hp(2.94)} width={hp(2.94)} />
+                            <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
             }
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.5),
         zIndex: 9,
-        top: hp(1),
+        // top: hp(1),
     },
     popupLarge: {
         backgroundColor: COLORS.white,
@@ -242,5 +242,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
+    
+        // backgroundColor : 'green'
     },
 });

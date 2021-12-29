@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -301,7 +301,7 @@ export default StyleSheet.create({
         alignItems : 'center',
         // paddingBottom: hp(1.1),
         // marginBottom: hp(1.2),
-        paddingVertical : 5,
+        // paddingVertical : 5,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -314,7 +314,8 @@ export default StyleSheet.create({
         
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.8),
-        paddingRight: hp(2),
+        paddingRight : Platform.OS === 'android'  ?hp(3)  :hp(2),
+        // paddingRight: hp(2),
         width: '90%',
     },
     checkBoxLabelTextNone: {
@@ -1283,11 +1284,13 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         right: hp(1),
+       
     },
     userIcon1: {
         position: 'absolute',
         width: hp(2.5),
         height: hp(2.5),
+       
     },
     fileBoxGrpWrap: {
         marginBottom: hp(-1.5)

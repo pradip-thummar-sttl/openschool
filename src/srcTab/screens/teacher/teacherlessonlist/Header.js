@@ -30,6 +30,7 @@ const Header = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
+    console.log('===========',selectedIndex);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -102,6 +103,7 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
+                                    style = {{backgroundColor : 'red'}}
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>

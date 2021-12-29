@@ -466,18 +466,19 @@ const TLDetailEdit = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: hp(2) }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                        <View style={{ margin: hp(0.5),alignItems : 'center',justifyContent : 'center',  borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
                             {/* <Text style={{ fontSize: hp(1.85), paddingRight: hp(5) }}>{item.ItemName}</Text> */}
                             <TextInput
-                                style={{ width: '90%', height: 41, fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
+                                style={{ width: '90%', height: 41,textAlignVertical  :'bottom',
+                                 fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity
-                                style={PAGESTYLE.userIcon1Parent}
+                                style={[PAGESTYLE.userIcon1Parent]}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
                                 {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
-                                <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2.5)} width={hp(2.5)} />
+                                <CloseBlack style={[PAGESTYLE.userIcon1]} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -543,7 +544,7 @@ const TLDetailEdit = (props) => {
                         renderItem={({ item, index }) => (
                             <View style={PAGESTYLE.alignRow}>
                                 <CheckBox
-                                    style={PAGESTYLE.checkMark}
+                                    style={[PAGESTYLE.checkMark]}
                                     boxType={'square'}
                                     onCheckColor={COLORS.white}
                                     tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -1109,7 +1110,7 @@ const TLDetailEdit = (props) => {
                                       materialArr.length != 0 && materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileRender}>
-                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name}</Text>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.originalname}</Text>
                                                 <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </TouchableOpacity>

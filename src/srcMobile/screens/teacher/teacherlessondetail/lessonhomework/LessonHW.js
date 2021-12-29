@@ -153,10 +153,12 @@ const TLHomeWork = (props) => {
     const onCheckList = (index) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
         Addhomework.CheckList = itemCheckList
+        
     }
 
     const onScreeCamera = () => {
         setAddRecording(false)
+
         props.navigateScreeCamera()
     }
 
