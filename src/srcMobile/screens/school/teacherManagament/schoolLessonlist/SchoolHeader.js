@@ -73,51 +73,36 @@ const SchoolHeader = (props) => {
                         }} />
                     <Menu>
                         <MenuTrigger>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>
+
                         <MenuOptions style={styles.filterListWrap}>
+
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 1 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+                            
                         </MenuOptions>
                     </Menu>
                 </View>
-                {/* <TouchableOpacity
-                    style={styles.commonButtonGreenheader}
-                    activeOpacity={opacity}
-                    onPress={() => props.navigateToAddSubject()}> */}
-                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
-                {/* </View> <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} /> */}
-                {/* <Text style={styles.commonButtonGreenheader}></Text> */}
-                {/* </TouchableOpacity> */}
             </View>
         </View>
     );

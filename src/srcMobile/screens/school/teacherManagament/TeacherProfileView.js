@@ -66,7 +66,6 @@ const TeacherProfileView = (props) => {
 
     const handleOnClick = (index) => {
         setTabSelected(index)
-        console.log('reference', myref);
         if (myref.current) {
             myref.current.refresh();
         }
@@ -262,9 +261,7 @@ const TeacherProfileView = (props) => {
                         <View style={PAGESTYLE.MainProfile}>
                             <Chat tabs={tabSelected} data={item} />
                         </View> :
-                        <STLessonList
-                            navigateDetails={(items) => props.navigation.navigate('SchoolTeacherLessonDetail', { 'data': items })}
-                            id={item.TeacherId} />
+                        <STLessonList navigateDetails={(items) => props.navigation.navigate('SchoolTeacherLessonDetail', { 'data': items })} id={item.TeacherId} />
             }
 
         </View>

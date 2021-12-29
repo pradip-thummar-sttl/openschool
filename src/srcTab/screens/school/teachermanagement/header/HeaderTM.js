@@ -31,20 +31,6 @@ const HeaderTM = (props) => {
     const [filterBy, setFilterBy] = useState('1')
     const [keyword, setKeyword] = useState('')
 
-    // useEffect(() => {
-    //     if (!isSearchActive) {
-    //         props.onClearSearch()
-    //         setKeyword('')
-    //         textInput.current.clear()
-    //     } else {
-    //         props.onSearch()
-    //     }
-    // }, [isSearchActive])
-
-    // useEffect(() => {
-    //     props.onFilter(filterBy)
-    // }, [filterBy])
-
     const onPressSearchButton = () => {
         setSearchActive(true)
         setTimeout(() => {
@@ -146,12 +132,10 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    // onPress={() => { setFilterBy('1'); setSelectedIndex(0) }}>
                                     onPress={() => { OnPressAsc() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
                                         {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -162,12 +146,10 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    // onPress={() => { setFilterBy('-1'); setSelectedIndex(1) }}>
                                     onPress={() => { OnPressDes() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Desending)</Text>
                                         {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -177,7 +159,6 @@ const HeaderTM = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                     <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                 </View>
                 <PopupaddnewdataTM
@@ -291,6 +272,11 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
     },
+    filterListText: {
+        color: COLORS.darkGray,
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+    },
     filterListWrap: {
         paddingTop: hp(1),
         paddingLeft: hp(1.2),
@@ -310,11 +296,7 @@ const styles = StyleSheet.create({
         width: hp(1.48),
         resizeMode: 'contain',
     },
-    filterListText: {
-        color: COLORS.darkGray,
-        fontSize: hp(1.82),
-        fontFamily: FONTS.fontRegular,
-    },
+    
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',
