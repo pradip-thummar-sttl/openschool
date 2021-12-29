@@ -66,7 +66,7 @@ const Chat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event]);
+            addMessage(messages => [...messages, event].reverse());
         }
     };
 
@@ -110,21 +110,21 @@ const Chat = (props) => {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ height: '100%', }}>
 
+            <View style={Styles.views}>
 
-            <KeyboardAwareScrollView
-                enableOnAndroid={true}
-                extraScrollHeight={90}
-                scrollEnabled
-                enableAutomaticScroll={(Platform.OS === 'ios')}
-                contentContainerStyle={{ flex: 1 }}
-            >
-                <View style={Styles.views}>
-
+                <KeyboardAwareScrollView
+                    enableOnAndroid={true}
+                    extraScrollHeight={90}
+                    scrollEnabled
+                    enableAutomaticScroll={(Platform.OS === 'ios')}
+                    contentContainerStyle={{ flex: 1 }}>
                     <View style={Styles.rightView}>
                         <View style={Styles.mesagesView}>
                             <FlatList
+                                style={{ marginBottom: 120 }}
+                                inverted={true}
                                 data={messages}
                                 renderItem={({ item, index }) => {
                                     return (
@@ -144,7 +144,7 @@ const Chat = (props) => {
                             <TextInput
                                 style={Styles.input}
                                 multiline={true}
-                                placeholder={placeholder}
+                                placeholder={'Type a message here...'}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 value={message}
                                 onChangeText={(text) => setMessage(text)}
@@ -156,9 +156,8 @@ const Chat = (props) => {
                             </View>
                         </View>
                     </View>
-                </View>
-            </KeyboardAwareScrollView>
-
+                </KeyboardAwareScrollView>
+            </View>
         </View>
 
     )
