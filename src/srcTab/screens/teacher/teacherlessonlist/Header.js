@@ -338,8 +338,9 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        position: 'absolute',
-        top: hp(6),
+        // position: 'absolute',
+        // top: hp(6),
+        backgroundColor : 'green'
     },
     checkMark: {
         width: hp(1.48),

@@ -112,6 +112,8 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
         setLoading(true)
 
+        console.log('--------data--------', data);
+
         Service.postFormData(formData, `${EndPoints.TeacherMarkedHomework}/${data.HomeWorkId}/${data.PupilId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
@@ -380,7 +382,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-           
+
 
             <View style={{ width: isHide ? '100%' : '100%' }}>
                 <HeaderSave
@@ -391,7 +393,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                     onAlertPress={() => { props.navigation.openDrawer() }}
                     onSetHomework={() => isFieldsValidated()}
                 />
-                
+
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.whiteBg}>
@@ -439,30 +441,30 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                     </View>
                                     <View style={PAGESTYLE.requirementofClass}>
                                         {/* <Text style={PAGESTYLE.requireText}>Create Checklist</Text> */}
-                                       
-                                            <FlatList
-                                                data={data.CheckList}
-                                                renderItem={({ item }) => (
-                                                    <View style={[PAGESTYLE.checkBoxLabelLine, {paddingVertical: hp(1.6)}]}>
-                                                        <CheckBox
-                                                            style={[PAGESTYLE.checkMark, ]}
-                                                            value={item.IsCheck}
-                                                            disabled
-                                                            tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                                            boxType={'square'}
-                                                            onCheckColor={COLORS.white}
-                                                            onFillColor={COLORS.dashboardPupilBlue}
-                                                            onTintColor={COLORS.dashboardPupilBlue}
-                                                            tintColor={COLORS.dashboardPupilBlue}
-                                                        />
-                                                        <View style={{justifyContent : 'center',alignItems : 'center'}}>
-                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(90)}]}>{item.ItemName}</Text>
-                                                        </View>
+
+                                        <FlatList
+                                            data={data.CheckList}
+                                            renderItem={({ item }) => (
+                                                <View style={[PAGESTYLE.checkBoxLabelLine, { paddingVertical: hp(1.6) }]}>
+                                                    <CheckBox
+                                                        style={[PAGESTYLE.checkMark,]}
+                                                        value={item.IsCheck}
+                                                        disabled
+                                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                                        boxType={'square'}
+                                                        onCheckColor={COLORS.white}
+                                                        onFillColor={COLORS.dashboardPupilBlue}
+                                                        onTintColor={COLORS.dashboardPupilBlue}
+                                                        tintColor={COLORS.dashboardPupilBlue}
+                                                    />
+                                                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(90) }]}>{item.ItemName}</Text>
                                                     </View>
-                                                )}
-                                            // style={{ height: 200 }} 
-                                            />
-                                        
+                                                </View>
+                                            )}
+                                        // style={{ height: 200 }} 
+                                        />
+
                                     </View>
                                 </View>
                                 <View style={[PAGESTYLE.rightSideBar, PAGESTYLE.borderNone]}>

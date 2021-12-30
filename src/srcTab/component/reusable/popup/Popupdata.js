@@ -27,12 +27,13 @@ import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 const { CallModule, CallModuleIos } = NativeModules;
 
 const Popupdata = (props) => {
+    const [isUploading, setUploading] = useState(false);
+
     const [isModalVisible, setModalVisible] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
 
-    // const [isRecordLoading, setRecordLoader] = useState(false)
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -40,17 +41,10 @@ const Popupdata = (props) => {
     const launchLiveClassForPupil = () => {
         if (isRunningFromVirtualDevice) {
 
-            // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
-                // showMessage('time to start')
                 let data = { "Absent": false }
                 Service.post(data, `${EndPoints.LessonCheck}/${props.data._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
@@ -73,17 +67,10 @@ const Popupdata = (props) => {
 
     const launchLiveClassForTeacher = () => {
         if (isRunningFromVirtualDevice) {
-            // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
-                // showMessage('time to start')
                 let data = {
                     LessonStart: true,
                     LessonEnd: false
@@ -108,7 +95,6 @@ const Popupdata = (props) => {
     const startLiveClassAndroid = () => {
         try {
             let qBUserIDs = [], userNames = [], names = [], channels = []
-            // let qBUserIDs = ['128367057'], userNames = ['ffffffff-c9b2-d023-ffff-ffffef05ac4a'], names = ['Test Device'];
             props.data.Allpupillist.forEach(pupil => {
                 qBUserIDs.push(pupil.QBUserID)
                 userNames.push(pupil.PupilEmail)
@@ -122,7 +108,7 @@ const Popupdata = (props) => {
                 channels.push(props.data.TeacherID + "_" + User.user.UserDetialId) //For instant reaction
                 channels.push(props.data.TeacherID + "_" + props.data._id)        //For polling
             } else {
-                channels.push(props.data.TeacherID + "_" + dataOfSubView._id)        //For polling
+                channels.push(props.data.TeacherID + "_" + props.data._id)        //For polling
             }
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
@@ -133,8 +119,7 @@ const Popupdata = (props) => {
 
             if (Platform.OS === 'android') {
                 console.log('KDKD: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started');
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, id) => {
 
                     if (!props.isPupil) {
                         let data = {
@@ -144,12 +129,32 @@ const Popupdata = (props) => {
                         Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
                         }, (err) => {
                         })
+
+                        if (id && id != null && id != "") {
+                            let formData = new FormData();
+                            let ext = id.split('.');
+                            let names = id.split('/');
+                            let name = names[names.length - 1];
+                            formData.append('file', {
+                                uri: id,
+                                name: name,
+                                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                            });
+                            setUploading(true);
+                            Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${props.data._id}`, (res) => {
+                                setUploading(false);
+                                console.log('response of save recording', res)
+                            }, (err) => {
+                                setUploading(false);
+                                console.log('error of save recording', err)
+                            })
+
+                        }
                     }
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, true, title, channels, (id) => {
-                    console.log('hi id:---------', id)
 
                     if (!props.isPupil) {
                         let data = {
@@ -169,14 +174,16 @@ const Popupdata = (props) => {
 
                             formData.append('file', {
                                 uri: id,
-                                // name: element.fileName,
                                 name: name,
                                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                             });
 
+                            setUploading(true);
                             Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${props.data._id}`, (res) => {
+                                setUploading(false);
                                 console.log('response of save recording', res)
                             }, (err) => {
+                                setUploading(false);
                                 console.log('error of save recording', err)
                             })
 
@@ -220,12 +227,11 @@ const Popupdata = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <Modal isVisible={isModalVisible} style={{ height: wp(55) }}>
+            <Modal isVisible={isModalVisible} style={{ height: wp(55)}}>
                 <ScrollView >
 
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
@@ -237,26 +243,23 @@ const Popupdata = (props) => {
                                         <View style={styles.yellowHrTag}></View>
                                         <View style={styles.timedateGrp}>
                                             <View style={styles.dateWhiteBoard}>
-                                                {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                                 <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
-                                                <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
+                                                <Text numberOfLines={1} style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
                                             </View>
                                             <View style={[styles.dateWhiteBoard, styles.time]}>
-                                                {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
                                                 <Clock style={styles.timeIcon} height={hp(1.8)} width={hp(1.8)} />
-                                                <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
+                                                <Text numberOfLines={1} style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
                                             </View>
                                             <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                                {/* <Image style={styles.calIcon} source={Images.Group} /> */}
                                                 <Participants style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
-                                                <Text style={styles.datetimeText}>{props.data.GroupName}</Text>
+                                                <Text numberOfLines={1} style={styles.datetimeText}>{props.data.GroupName}</Text>
                                             </View>
                                         </View>
                                     </View>
                                     <View style={STYLE.hrCommon}></View>
                                     <View style={styles.afterBorder}>
                                         <View style={styles.mediaMain}>
-                                            {props.data.Allpupillist ?
+                                            {props.data.Allpupillist &&
                                                 props.data.Allpupillist.map((data, index) => (
                                                     <TouchableOpacity
                                                         style={styles.mediabarTouch}
@@ -264,19 +267,11 @@ const Popupdata = (props) => {
                                                         <Image style={styles.mediabar} source={{ uri: baseUrl + data.ProfilePicture }}></Image>
                                                     </TouchableOpacity>
                                                 ))
-                                                :
-                                                null
                                             }
                                         </View>
                                         <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
                                         <View style={styles.attchmentSectionwithLink}>
-                                            {/* <TouchableOpacity style={styles.attachment}>
-                                                <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                                <Text style={styles.attachmentText}>1 Attachment</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity>
-                                                <Text style={styles.linkText}>see more</Text>
-                                            </TouchableOpacity> */}
+                                           
                                             {props.data.MaterialList && props.data.MaterialList.length > 0 ?
                                                 <View style={styles.fileBoxGrpWrap}>
                                                     <Text style={styles.requireText}>Attachment(s)</Text>
@@ -298,7 +293,6 @@ const Popupdata = (props) => {
                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                             color={COLORS.blueBorder} />
                                                                         :
-                                                                        // <Image source={Images.Download} style={styles.downloadIcon} />
                                                                         <DownloadSVG style={styles.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                     }
 
@@ -314,7 +308,7 @@ const Popupdata = (props) => {
                                         </View>
                                         <View style={styles.requirementofClass}>
                                             <Text style={styles.requireText}>Items that your class will need</Text>
-                                            {props.data.CheckList ?
+                                            {props.data.CheckList &&
                                                 props.data.CheckList.map((data, index) => (
                                                     <View style={styles.lessonPoints}>
                                                         {/* <Image source={Images.CheckIcon} style={styles.checkIcon} /> */}
@@ -322,22 +316,20 @@ const Popupdata = (props) => {
                                                         <Text style={styles.lessonPointText}>{data.ItemName}</Text>
                                                     </View>
                                                 ))
-                                                :
-                                                null
                                             }
                                         </View>
                                         <View style={styles.uploadCalendar}>
                                             <TouchableOpacity>
-                                                {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                                 <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                             </TouchableOpacity>
+                                         
                                             <View style={styles.lessonstartButton}>
                                                 {!props.isPupil && props.data.Type == Lesson ?
                                                     <TouchableOpacity
-                                                        style={styles.buttonGrp}
+                                                        style={styles.buttonGrp1}
                                                         activeOpacity={opacity}
                                                         onPress={() => { toggleModal(); props.navigateToDetail() }}>
-                                                        <Text style={[STYLE.commonButtonBordered]}>Edit Lesson</Text>
+                                                        <Text style={[styles.commonButtonBordered]}>Edit Lesson</Text>
                                                     </TouchableOpacity>
                                                     :
                                                     <View style={{ width: hp(20) }}></View>
@@ -392,6 +384,15 @@ const Popupdata = (props) => {
                     </View>
                 </ScrollView>
 
+                <Modal transparent={true} visible={isUploading}>
+                <View style={styles.uploadVideoStl}>
+                    <View style={styles.uploadVideoInnerStl}>
+                        <ActivityIndicator style={{ margin: 20 }} size={'large'} color={COLORS.yellowDark} />
+                        <Text style={styles.uploadVideoTextStl}>{"Just a minute \n We are uploading a recorded video..."}</Text>
+                    </View>
+                </View>
+            </Modal>
+
             </Modal>
         </View>
     );
@@ -408,7 +409,7 @@ const styles = StyleSheet.create({
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(2),
-        width: hp(60.54),
+        width: hp(61),
         alignItems: 'center',
         alignSelf: 'center',
         overflow: 'hidden',
@@ -457,6 +458,7 @@ const styles = StyleSheet.create({
         marginRight: hp(3.25),
     },
     datetimeText: {
+        width:hp(13),
         fontSize: hp(1.82),
         lineHeight: hp(2.60),
         marginLeft: hp(0.9),
@@ -605,7 +607,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonGrp: {
-        marginLeft: hp(2.21),
+        width:hp(18),
+        marginLeft: hp(1),
+    },
+    buttonGrp1: {
+        width:hp(32),
+        marginLeft: hp(1),
     },
     calIcon: {
         width: hp(1.8),
@@ -628,4 +635,28 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+
+    commonButtonBordered: {
+        width:hp(32),
+        backgroundColor: COLORS.transparent,
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        borderRadius: 6,
+        overflow: 'hidden',
+        textAlign: 'center',
+        alignItems: 'center',
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+    },
+    uploadVideoStl:{ width: '50%', height: '100%',alignSelf:'center', 
+    position: 'absolute', justifyContent: 'center', alignItems:'center' },
+    uploadVideoInnerStl:{width: '80%',borderRadius: hp(1),backgroundColor:COLORS.white, padding:10, borderColor:COLORS.darkGray, borderWidth:hp(0.1)},
+    uploadVideoTextStl:{ textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom:hp(2) },
+
 });

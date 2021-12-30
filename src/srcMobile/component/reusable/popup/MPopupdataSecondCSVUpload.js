@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator,  } from "react-native";
-import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, } from "react-native";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -32,15 +32,12 @@ const MPopupdataSecondCSVUpload = (props) => {
     };
 
     const addCSV = () => {
-        console.log('hihihihihihi')
         try {
-            DocumentPicker.pick({type: [DocumentPicker.types.xlsx,],}).then((results) => {
-                console.log('results', results);
+            DocumentPicker.pick({ type: [DocumentPicker.types.xlsx,], }).then((results) => {
                 uploadProfile(results)
             });
 
         } catch (err) {
-            setLoader(false);
             if (DocumentPicker.isCancel(err)) {
             } else {
                 throw err;
@@ -59,7 +56,7 @@ const MPopupdataSecondCSVUpload = (props) => {
             url = `${EndPoints.PupilUpload}/${User.user.UserDetialId}`
         }
 
-        data.append('file', { uri: csv.uri, name: csv.name,type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+        data.append('file', { uri: csv.uri, name: csv.name, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         Service.postFormData(data, url, (res) => {
             if (res.code == 200) {
                 showMessage(MESSAGE.inviteSent)
@@ -78,40 +75,38 @@ const MPopupdataSecondCSVUpload = (props) => {
 
     return (
         <View>
-            <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}> 
-               <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)}/> 
+            <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}>
+                <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                 <Text style={styles.entryTitle}>Import From CSV</Text>
-            </TouchableOpacity> 
-            
+            </TouchableOpacity>
+
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
-                    
+
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    
+
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.upload} onPress={() => addCSV()}>
-                                <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
-                                <Text style={styles.labelUpload}>Click here to select source</Text>
+                            <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
+                            <Text style={styles.labelUpload}>Click here to select source</Text>
                         </TouchableOpacity>
                     </View>
-
-                    {
-                    isLoader&&
-                    <ActivityIndicator
-                    style={{ flex: 1, marginTop: "40%", position:'absolute' }}
-                    size={'large'}
-                    color={COLORS.yellowDark} />
-                    
-                }
                 </View>
 
-               
-            
+                {
+                    isLoader &&
+                    <ActivityIndicator
+                        style={{ width: '100%', height: '50%', borderRadius: hp(1), backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute' }}
+                        size={'large'}
+                        color={COLORS.yellowDark} />
+
+                }
+
             </Modal>
-         </View>
+        </View>
     );
 }
 export default MPopupdataSecondCSVUpload;
@@ -239,13 +234,13 @@ const styles = StyleSheet.create({
     entryData: {
         // marginRight: 30,
         alignItems: 'center',
-        marginBottom:hp(5.14),
+        marginBottom: hp(5.14),
     },
     entryIcon: {
         resizeMode: 'contain',
         marginBottom: hp(2.6),
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     upload: {
         width: '100%',

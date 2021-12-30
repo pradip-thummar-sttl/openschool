@@ -105,4 +105,9 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginRight: 13,
     },
+
+    uploadVideoStl:{ width: '100%', height: '100%', 
+    position: 'absolute', justifyContent: 'center', alignItems:'center' },
+    uploadVideoInnerStl:{width: '80%',borderRadius: hp(1),backgroundColor:COLORS.white, padding:10, borderColor:COLORS.darkGray, borderWidth:hp(0.1)},
+    uploadVideoTextStl:{ textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom:hp(2) },
 });

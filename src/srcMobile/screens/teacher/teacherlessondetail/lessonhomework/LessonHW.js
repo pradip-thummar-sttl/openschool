@@ -397,7 +397,7 @@ const TLHomeWork = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
                             <CheckBox
                                 style={PAGESTYLE.checkMark}
                                 value={item.IsCheck}

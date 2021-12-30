@@ -101,11 +101,11 @@ const TeacherManagement = (props) => {
             <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
         );
     };
+
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
-        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
 
     return (
@@ -172,10 +172,6 @@ const TeacherManagement = (props) => {
                                             </View>
                                         </View>
                                         :
-
-                                        // <View>
-                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        // </View>
                                         <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
                                 }
                             </View>

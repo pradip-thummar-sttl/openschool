@@ -68,6 +68,9 @@ const LessonList = (props) => {
 
 
 
+    useEffect(() => {
+        fetchRecord(props.search, props.filter)
+    }, [props])
 
     useEffect(() => {
         fetchRecord('', '')

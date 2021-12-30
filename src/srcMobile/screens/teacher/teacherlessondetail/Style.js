@@ -190,7 +190,7 @@ export default StyleSheet.create({
     checkIcon: {
         width: hp(1.7),
         resizeMode: 'contain',
-        top: hp(0.2),
+        top: hp(0.1),
     },
     lessonPointText: {
         fontSize: hp(1.85),
@@ -296,12 +296,13 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        textAlignVertical : "bottom",
-        justifyContent: 'flex-start',
-        alignItems : 'center',
+        // textAlignVertical : "bottom",
+        // justifyContent: 'flex-start',
+        // alignItems : 'center',
         // paddingBottom: hp(1.1),
         // marginBottom: hp(1.2),
         // paddingVertical : 5,
+       
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },

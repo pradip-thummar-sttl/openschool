@@ -62,7 +62,6 @@ const Sidebar = (props) => {
 
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
-        // setSelectedIndex(1);
     }
 
     const showActionChooser = () => {
@@ -123,10 +122,6 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { navigateSidebarIndex(); toggleAnimation(true) }}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.Teacher}
-                        /> */}
                         <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
                         {
                             isSmall ? null :

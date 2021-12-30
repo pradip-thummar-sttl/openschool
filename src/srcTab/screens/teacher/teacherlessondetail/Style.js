@@ -1459,6 +1459,6 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // marginTop:hp(2),
         justifyContent: 'center',
-        marginVertical: hp(2)
+        // marginVertical: hp(2)
     },
 });

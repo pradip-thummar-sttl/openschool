@@ -84,7 +84,9 @@ const Popupaddrecording = (props) => {
                         style={[styles.recordLinkBlock, styles.topSpaceRecording,]}>
                         {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
                         <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
-                        <Text style={[styles.recordLinkText]}>Add Recording</Text>
+                        <Text
+                            numberOfLines={2} ellipsizeMode='tail'
+                            style={[styles.recordLinkText]}>Add Recording</Text>
                     </TouchableOpacity>
                     :
 
@@ -94,7 +96,7 @@ const Popupaddrecording = (props) => {
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]} >
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
-                        <TouchableOpacity style={styles.cancelButton} onPress={() => {props.onRemoveRecording()}}>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.onRemoveRecording() }}>
                             <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
@@ -108,7 +110,7 @@ const Popupaddrecording = (props) => {
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
-                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
+                                <Text numberOfLines={2} ellipsizeMode='tail' h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
                                     {/* <TouchableOpacity onPress={() => { toggleModal(); props.onScreeCamera() }} style={styles.entryData}>
@@ -194,18 +196,20 @@ const styles = StyleSheet.create({
         // height : Platform.OS === 'android' ? hp(20.15) : hp(5.20),
         height: hp(5.20),
         padding: hp(1.43),
-        paddingTop: hp(0.8),
-        paddingBottom: hp(0.8),
+        // paddingTop: hp(0.8),
+        // paddingBottom: hp(0.8),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
-        
+        justifyContent : 'center',
+        alignItems : 'center'
+
     },
     recordLinkBlock1: {
         width: Platform.OS === 'android' ? hp(65.15) : hp(25.15),
-        height: Platform.OS === 'android' ? hp(10) :hp(5.20),
+        height: Platform.OS === 'android' ? hp(7.20) : hp(5.20),
         // height: hp(5.20),
         padding: hp(1.43),
         // paddingTop: hp(0.6),
@@ -215,9 +219,10 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        // backgroundColor : 'red',
-        paddingEnd : 25
+        // justifyContent: 'space-between',
+        justifyContent: 'center',
+       
+        paddingEnd: 25
     },
     recordLinkBlock2: {
         width: '100%',
@@ -228,9 +233,11 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
+
     },
     topSpaceRecording: {
         marginTop: hp(1.401),
+
     },
     recordingLinkIcon: {
         width: hp(2.34),
@@ -242,7 +249,9 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
-    
+       
+
+
         // backgroundColor : 'green'
     },
 });

@@ -80,7 +80,7 @@ const PupiloverView = (props) => {
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => fetchRecord('', '') })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
     }
 
     return (
@@ -94,7 +94,8 @@ const PupiloverView = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, '')}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister', { userType: "Pupil" })}
                     onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
