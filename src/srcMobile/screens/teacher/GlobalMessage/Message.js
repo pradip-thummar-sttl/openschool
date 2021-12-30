@@ -121,7 +121,9 @@ const Message = (props) => {
                 </View>
                 <TouchableOpacity
                     style={PAGESTYLE.buttonGroup}
-                    onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refresh() })}>
+                    // onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refreshOnNewMessageBack() })}
+                    onPress={() => props.navigation.navigate('NewMessage', { onGoBack: () => refreshOnNewMessageBack() })}
+                >
                     {/* <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} /> */}
                     <AddWhite style={PAGESTYLE.addIcon4} height={hp(1.56)} width={hp(1.56)} />
                 </TouchableOpacity>
@@ -129,6 +131,10 @@ const Message = (props) => {
 
 
         )
+    }
+
+    const refreshOnNewMessageBack = () => {
+        fetchRecord('', filterBy)
     }
 
     const [isSearchActive, setSearchActive] = useState(false)
@@ -201,27 +207,26 @@ const Message = (props) => {
     }
 
     const refresh = () => {
-
-        if (keyword.length) {
-            if (isSearchActive) {
-                textInput.current.clear()
-                setSearchActive(false)
-                fetchRecord('', filterBy)
-            } else {
-                setSearchActive(true)
-                fetchRecord(keyword, filterBy)
-            }
+        if (isSearchActive) {
+            textInput.current.clear()
+            setSearchActive(false)
+            fetchRecord('', filterBy)
+        } else {
+            setSearchActive(true)
+            fetchRecord(keyword, filterBy)
         }
     }
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+        // props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+        props.navigation.navigate('NotificationDrawer')
     }
 
     return (
         <View>
             <HeaderWhitepupilMessage
+                title={'Global Messaging'}
                 onAlertPress={() => props.navigation.openDrawer()}
                 onNotification={() => openNotification()} />
 
