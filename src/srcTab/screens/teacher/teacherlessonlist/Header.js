@@ -103,7 +103,7 @@ const Header = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    style = {{backgroundColor : 'red'}}
+                                  
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
         shadowRadius: hp(1),
         // position: 'absolute',
         // top: hp(6),
-        backgroundColor : 'green'
+        // backgroundColor : 'green'
     },
     checkMark: {
         width: hp(1.48),
