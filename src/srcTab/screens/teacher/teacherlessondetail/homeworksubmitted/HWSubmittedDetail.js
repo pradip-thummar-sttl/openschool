@@ -431,7 +431,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             <FlatList
                                                 data={data.CheckList}
                                                 renderItem={({ item }) => (
-                                                    <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
+                                                    <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : 6}]}>
                                                         <CheckBox
                                                             style={[PAGESTYLE.checkMark]}
                                                             value={item.IsCheck}
