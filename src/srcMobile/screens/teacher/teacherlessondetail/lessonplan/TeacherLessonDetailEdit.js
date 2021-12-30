@@ -542,7 +542,7 @@ const TLDetailEdit = (props) => {
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', marginTop: 5, paddingStart: 5, bottom: 20 }}
                         renderItem={({ item, index }) => (
-                            <View style={PAGESTYLE.alignRow}>
+                            <View style={[PAGESTYLE.alignRow,{width : '33%'}]}>
                                 <CheckBox
                                     style={[PAGESTYLE.checkMark]}
                                     boxType={'square'}

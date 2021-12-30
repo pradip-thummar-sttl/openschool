@@ -190,7 +190,7 @@ export default StyleSheet.create({
     checkIcon: {
         width: hp(1.7),
         resizeMode: 'contain',
-        top: hp(0.2),
+        top: hp(0.1),
     },
     lessonPointText: {
         fontSize: hp(1.85),
@@ -296,12 +296,13 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        textAlignVertical : "bottom",
-        justifyContent: 'flex-start',
-        alignItems : 'center',
+        // textAlignVertical : "bottom",
+        // justifyContent: 'flex-start',
+        // alignItems : 'center',
         // paddingBottom: hp(1.1),
         // marginBottom: hp(1.2),
         // paddingVertical : 5,
+       
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -316,7 +317,7 @@ export default StyleSheet.create({
         paddingLeft: hp(1.8),
         paddingRight : Platform.OS === 'android'  ?hp(3)  :hp(2),
         // paddingRight: hp(2),
-        width: '90%',
+        width : Platform.OS === 'android' ? hp(20) : hp(20)
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
