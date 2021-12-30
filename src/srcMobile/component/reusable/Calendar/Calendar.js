@@ -10,10 +10,10 @@ import FONTS from '../../../../utils/Fonts';
 import { opacity, Var } from '../../../../utils/Constant';
 // import Images from "../../../../utils/Images";
 import BackArrow from '../../../../svg/common/BackArrow';
-import { setCalendarEventData } from "../../../../actions/action";
+import { setCalendarEventData, setTimeTableWeekEventData } from "../../../../actions/action";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { User, selectedDate } from "../../../../utils/Model";
 import { useDispatch } from "react-redux";
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
@@ -83,6 +83,16 @@ const Calendars = (props) => {
     const dispatch = useDispatch()
 
 
+    const onDatePress = (date) => {
+        selectedDate.date = date.dateString
+        dispatch(setTimeTableWeekEventData(date.dateString))
+        setTimeout(() => {
+            props.navigation.goBack()
+            return true;
+        }, 500)
+    }
+
+
     return (
         <View style={{ backgroundColor: 'white', flex: 1 }}>
 
@@ -103,7 +113,8 @@ const Calendars = (props) => {
                     firstDay={1}
                     dayComponent={({ date, state, marking }) => {
                         return (
-                            <View>
+                            // <View>
+                            <TouchableOpacity onPress={() => onDatePress(date)}>
                                 {
                                     moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
                                         date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD') ?
@@ -187,7 +198,8 @@ const Calendars = (props) => {
 
                                 }
 
-                            </View>
+                                {/* </View> */}
+                            </TouchableOpacity>
                         )
                     }}
                 /> : null}
