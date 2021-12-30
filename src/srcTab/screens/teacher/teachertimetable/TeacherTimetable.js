@@ -223,12 +223,6 @@ const TeacherTimeTable = (props) => {
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
-            {/* <Sidebar
-                moduleIndex={1}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             {
                 isTeacherLessonDetail ?
                     <TLDetailEdit
@@ -282,41 +276,14 @@ const TeacherTimeTable = (props) => {
 
                                                         <View style={PAGESTYLE.timeLabel}>
                                                             {days.map((data, dayKey) => (
-                                                                dayKey != 0 ?
-                                                                    setData(dayKey, index)
-                                                                    :
-                                                                    null
-
+                                                                dayKey != 0 && setData(dayKey, index)
                                                             ))}
                                                         </View>
                                                     </View>
                                                 )}
                                             />
-
-                                            {/* <ScrollView showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
-                                                horizontal={true} >
-
-                                                {time.map((data, timneKey) => (
-                                                    <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth, }}>
-                                                        <Text style={{ ...PAGESTYLE.lable, }}>{data}</Text>
-
-                                                        <View style={{ ...PAGESTYLE.timeLabel }}>
-                                                            {days.map((data, dayKey) => (
-                                                                dayKey != 0 ?
-                                                                    setData(dayKey, timneKey)
-                                                                    :
-                                                                    null
-
-                                                            ))}
-                                                        </View>
-                                                    </View>
-                                                ))}
-                                            </ScrollView> */}
                                         </View>
                                         :
-                                        // <View style={{ height: hp(13), justifyContent: 'center' }}>
-                                        //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
-                                        // </View>
                                         <ScrollView>
                                             <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                                         </ScrollView>

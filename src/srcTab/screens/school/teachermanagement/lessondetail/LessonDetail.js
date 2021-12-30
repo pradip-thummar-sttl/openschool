@@ -280,18 +280,7 @@ const LessonDetail = (props) => {
                                     <TouchableOpacity
                                         style={[PAGESTYLE.userIcon1Parent]}
                                         activeOpacity={opacity}
-                                        onPress={() => {
-                                            searchKeyword ?
-                                                isSearchActive ?
-                                                    setSearchActive(false)
-                                                    :
-                                                    setSearchActive(true)
-                                                :
-                                                null
-                                        }}>
-                                        {/* <Image
-                                                                style={PAGESTYLE.userIcon1}
-                                                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                                        onPress={() => {searchKeyword ? isSearchActive && setSearchActive(false):setSearchActive(true)}}>
                                         {isSearchActive ?
                                             <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
                                             :
@@ -309,12 +298,7 @@ const LessonDetail = (props) => {
                                                     onPress={() => { setFilterBy('Pupil Name'); setSelectedIndex(0) }}>
                                                     <View style={PAGESTYLE.filterList}>
                                                         <Text style={PAGESTYLE.filterListText}>Pupil Name</Text>
-                                                        {selectedIndex == 0 ?
-                                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                                            <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                            :
-                                                            null
-                                                        }
+                                                        {selectedIndex == 0 && <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                                     </View>
                                                 </TouchableOpacity>
                                             </MenuOption>
@@ -365,13 +349,7 @@ const LessonDetail = (props) => {
                                     dataChanged={isHSDataChanged} />
 
                         }
-                        {/* <TLDetailEdit /> */}
-                        {/* <TLDetailAdd /> */}
-                        {/* <TLVideoGallery /> */}
-                        {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                        {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                        {/* <TLHomeWorkSubmittedDetail /> */}
-                        {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+                       
                     </ScrollView>
                 </KeyboardAwareScrollView>
             </View>

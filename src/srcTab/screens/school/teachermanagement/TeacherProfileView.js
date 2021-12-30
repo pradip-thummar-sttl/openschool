@@ -38,6 +38,8 @@ const TeacherProfileView = (props) => {
     const [chartData, setChartData] = useState([])
     const [isLessonDetail, setLessonDetail] = useState(false);
     const [teacherCountData, setTeacherCountData] = useState([])
+    const [isSearch, setSearch] = useState('')
+    const [isFilter, setFilter] = useState('')
 
     const activityConfig = {
         width: 300,
@@ -66,7 +68,8 @@ const TeacherProfileView = (props) => {
         <View style={PAGESTYLE.mainPage1}>
             {!isLessonDetail &&
                 <HeaderPMInner
-                    navigateToBack={() => { props.navigateToBack() }}
+                    onSearch={(search, filter)=> {setSearch(search); setFilter(filter)}}
+                    navigateToBack={() => {props.navigateToBack()}} 
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
                     pupilName={item.FirstName + ' ' + item.LastName}
@@ -179,9 +182,11 @@ const TeacherProfileView = (props) => {
                     </View>
                     :
                     tabSelected === 1 ?
-                        <TeacherChat tabs={tabSelected} data={item} />
+                        <View style={{ width: isHide ? '100%' : '100%', }}>
+                            <TeacherChat tabs={tabSelected} data={item} />
+                        </View>
                         :
-                        <LessonList data={item} onNotification={() => openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
+                        <LessonList data={item} search={isSearch} filter={isFilter} onNotification={()=> openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
             }
 
         </View>

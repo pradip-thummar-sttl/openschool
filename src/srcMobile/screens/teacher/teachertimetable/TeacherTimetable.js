@@ -130,32 +130,18 @@ const TeacherTimeTable = (props) => {
         }
     }
 
-    // useEffect(() => {
-    //     fetchRecord('', '')
-    // }, [])
-
     useEffect(() => {
-        // const unsubscribe = props.navigation.addListener('focus', () => {
         //     // The screen is focused
         //     // Call any action
-        console.log('======================.=..........................======================');
         if (weekTimeTableDate != "") {
             fetchRecord("", "", weekTimeTableDate)
         }
-
-        //   });
-
-        //   // Return the function to unsubscribe from the event so it gets removed on unmount
-        //   return unsubscribe;
-        // fetchRecord("","",selectedDate.date)
-
     }, [weekTimeTableDate])
    
 
     useEffect(() => {
         let time1 = moment().format('HH:mm')
         const timeSplit = time1.split(':')
-        console.log('times of ============>', timeSplit);
         const h = timeSplit[0]  //09:30
         const m = timeSplit[1]  //09:30
 
@@ -166,14 +152,7 @@ const TeacherTimeTable = (props) => {
             index = (h - 6) * 2
         }
 
-        // scrollViewRef.current.scrollTo({
-        //     x: scrollViewRef.nativeEvent.contentOffset.x/scrollIndex,
-        //     animated: true,
-        // });
-
         setScrollIndex(index)
-        console.log('scrollviewref=====>', time[index]);
-
         fetchRecord('', '',moment().format('YYYY-MM-DD'))
     }, [])
 
@@ -248,12 +227,6 @@ const TeacherTimeTable = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={1}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.white }}>
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
@@ -304,7 +277,6 @@ const TeacherTimeTable = (props) => {
 
                             </View>
                             :
-                        
                             <ScrollView>
                                 <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                             </ScrollView>

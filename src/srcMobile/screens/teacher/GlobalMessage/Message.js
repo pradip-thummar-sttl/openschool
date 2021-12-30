@@ -66,7 +66,7 @@ const Message = (props) => {
                         }}>
                         {/* <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                            {isSearchActive ?
+                        {isSearchActive ?
                             <CloseBlack height={15} width={15} />
                             :
                             <SearchBlue height={15} width={15} />
@@ -74,7 +74,7 @@ const Message = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         multiline={false}
@@ -84,7 +84,7 @@ const Message = (props) => {
                         <Menu style={PAGESTYLE.filterGroup}>
                             <MenuTrigger>
                                 {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
-                                </MenuTrigger>
+                            </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                 <MenuOption style={PAGESTYLE.borderList}>
                                     <TouchableOpacity
@@ -152,9 +152,9 @@ const Message = (props) => {
                         {/* <Text style={PAGESTYLE.groupText}>Group A</Text> */}
                     </View>
                     <View style={PAGESTYLE.secondRow}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.titleText,{width:'85%'}]}>{item.item.Title}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.titleText, { width: '85%' }]}>{item.item.Title}</Text>
                         {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.54)} width={hp(1.54)}  />
+                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.54)} width={hp(1.54)} />
                     </View>
                     <View style={item.item.Status == 'Draft' ? PAGESTYLE.thirdRowDraft : PAGESTYLE.thirdRow}>
                         <Text style={item.item.Status == 'Draft' ? PAGESTYLE.draftText : PAGESTYLE.sentText}>{item.item.Status}</Text>
@@ -201,26 +201,29 @@ const Message = (props) => {
     }
 
     const refresh = () => {
-        if (isSearchActive) {
-            textInput.current.clear()
-            setSearchActive(false)
-            fetchRecord('', filterBy)
-        } else {
-            setSearchActive(true)
-            fetchRecord(keyword, filterBy)
+
+        if (keyword.length) {
+            if (isSearchActive) {
+                textInput.current.clear()
+                setSearchActive(false)
+                fetchRecord('', filterBy)
+            } else {
+                setSearchActive(true)
+                fetchRecord(keyword, filterBy)
+            }
         }
     }
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
 
     return (
         <View>
             <HeaderWhitepupilMessage
-                onAlertPress={() => props.navigation.openDrawer()} 
-                onNotification={() => openNotification()}/>
+                onAlertPress={() => props.navigation.openDrawer()}
+                onNotification={() => openNotification()} />
 
 
             {searchHeader()}
@@ -242,7 +245,7 @@ const Message = (props) => {
                     // <View style={{ height: 100, justifyContent: 'center' }}>
                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
                     // </View>
-                    <EmptyStatePlaceHohder holderType={2}  title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
+                    <EmptyStatePlaceHohder holderType={2} title1={MESSAGE.noMessage1} title2={MESSAGE.noMessage2} />
             }
         </View>
     )

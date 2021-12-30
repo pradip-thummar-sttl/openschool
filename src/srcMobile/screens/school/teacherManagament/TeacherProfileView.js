@@ -66,7 +66,6 @@ const TeacherProfileView = (props) => {
 
     const handleOnClick = (index) => {
         setTabSelected(index)
-        console.log('reference', myref);
         if (myref.current) {
             myref.current.refresh();
         }

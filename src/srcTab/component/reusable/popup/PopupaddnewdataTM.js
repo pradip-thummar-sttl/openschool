@@ -56,12 +56,13 @@ const PopupaddnewdataTM = (props) => {
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>Add Teacher</Text>
             </TouchableOpacity>
+            
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
+
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
