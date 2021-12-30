@@ -1083,10 +1083,10 @@ const TLDetailEdit = (props) => {
                                             materialArr.length != 0 &&
                                             materialArr.map((item, index) => {
                                                 return (
-                                                    <View style={[PAGESTYLE.fileRender,{backgroundColor : 'pink'}]}>
-                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName,{backgroundColor  :'green'}]}>{item.originalname}</Text>
+                                                    <View style={[PAGESTYLE.fileRender]}>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName]}>{item.originalname}</Text>
                                                         {item &&
-                                                            <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{backgroundColor : 'maroon'}]}>
+                                                            <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload]}>
                                                                 <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
                                                             </TouchableOpacity>
                                                         }

@@ -316,8 +316,10 @@ export default StyleSheet.create({
         color: COLORS.darkGrayIntro,
         // paddingRight: hp(1),
         // marginLeft: 15,
-        width: '40%',
+        width : Platform.OS === 'android' ? '40%' : '55%'
+        // width: '40%',
         // backgroundColor : 'green'
+        
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -1356,7 +1358,8 @@ export default StyleSheet.create({
         height: 15,
         left: 3,
         resizeMode: 'contain',
-        marginEnd : hp(1)
+        marginEnd : hp(1),
+        // top : Platform.OS === 'android' ? 0 : 0
 
     },
     checkMarkTool: {
@@ -1393,6 +1396,8 @@ export default StyleSheet.create({
     checkBoxGroup: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginVertical  :5,
+        justifyContent : 'center',alignItems : 'center'
     },
     hrTagMIddle: {
         flexDirection: 'row-reverse',
