@@ -401,7 +401,7 @@ const TLHomeWork = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
                             <CheckBox
-                                style={PAGESTYLE.checkMark}
+                                style={[PAGESTYLE.checkMark,]}
                                 value={item.IsCheck}
                                 boxType={'square'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

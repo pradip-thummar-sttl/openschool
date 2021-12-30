@@ -315,8 +315,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGrayIntro,
         // paddingRight: hp(1),
-        marginLeft:Platform.OS === 'android' ? 0  :15,
-        width : Platform.OS === 'android' ? '40%' : '70%'
+        // marginLeft: 15,
+        width : Platform.OS === 'android' ? '40%' : '55%'
         // width: '40%',
         // backgroundColor : 'green'
         
@@ -392,6 +392,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: 6,
         marginBottom: hp(0.65),
+        marginTop : 5
     },
 
     fileRender: { flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal: hp(1),borderWidth: 1,borderColor: COLORS.videoLinkBorder,borderRadius: hp(0.8),marginBottom: hp(1.04),},

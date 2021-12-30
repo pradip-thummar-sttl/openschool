@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent : 'center',
-        alignItems : 'center'
+        // justifyContent : 'center',
+        // alignItems : 'center'
 
     },
     recordLinkBlock1: {
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         // justifyContent: 'space-between',
-        justifyContent: 'center',
+        // justifyContent: 'center',
        
         paddingEnd: 25
     },

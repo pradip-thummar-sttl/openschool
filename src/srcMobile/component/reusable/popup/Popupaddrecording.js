@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
-        alignItems: 'center',
+        // alignItems: 'center',
         
     },
     recordLinkBlock1: {
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         marginLeft: hp(1.3),
         // backgroundColor : 'red',
-        width : hp(25),
+        width : hp(35),
         textTransform: 'uppercase',
     },
 });
