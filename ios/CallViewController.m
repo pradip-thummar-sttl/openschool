@@ -169,7 +169,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   QBUUser *user = [QBUUser user];
   user.ID = self.currentUserID.integerValue;
   user.fullName = self.currentName;
-  user.login=@"teacher7@silvertouch.com";
+  user.login=@"stud29@silvertouch.com";
   user.password=@"Admin@123";
   [Profile synchronizeUser:user];
   
@@ -654,13 +654,18 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
             }
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
             NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
+        
+        [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+//            [self openNewDialog:createdDialog];
+          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+          ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+          chatController.dialogID = createdDialog.ID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+          chatController.currentUserID = weakSelf.currentUserID;
+          chatController.currentUserName=weakSelf.currentName;
+          [weakSelf presentViewController:chatController animated:false completion:nil];
+        }];
 
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
-        ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-        chatController.dialogID = createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
-        chatController.currentUserID = self.currentUserID;
-        chatController.currentUserName=self.currentName;
-        [weakSelf presentViewController:chatController animated:false completion:nil];
+       
 
 //            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
 //              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
