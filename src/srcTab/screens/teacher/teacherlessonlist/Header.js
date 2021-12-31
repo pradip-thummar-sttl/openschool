@@ -95,15 +95,15 @@ const Header = (props) => {
                         }} />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Menu style={{ marginLeft: 10 }}>
+                    <Menu style={{ marginLeft: 10}}>
                         <MenuTrigger style={{alignItems : 'center',justifyContent : 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
                         <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
                         </MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
+                        <MenuOptions style={[styles.filterListWrap]}>
+                            <MenuOption style={[styles.borderList]}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    style = {{backgroundColor : 'red'}}
+                                  
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
@@ -338,8 +338,9 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        position: 'absolute',
-        top: hp(6),
+        // position: 'absolute',
+        // top: hp(6),
+        // backgroundColor : 'green'
     },
     checkMark: {
         width: hp(1.48),

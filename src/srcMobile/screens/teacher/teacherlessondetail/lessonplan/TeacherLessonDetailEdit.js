@@ -542,7 +542,7 @@ const TLDetailEdit = (props) => {
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', marginTop: 5, paddingStart: 5, bottom: 20 }}
                         renderItem={({ item, index }) => (
-                            <View style={PAGESTYLE.alignRow}>
+                            <View style={[PAGESTYLE.alignRow,{width : '33.33%'}]}>
                                 <CheckBox
                                     style={[PAGESTYLE.checkMark]}
                                     boxType={'square'}
@@ -554,7 +554,7 @@ const TLDetailEdit = (props) => {
                                     value={isPupilChecked(index)}
                                     onValueChange={(newValue) => pushPupilItem(newValue, index)}
                                 />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
+                                <Text style={[PAGESTYLE.checkBoxLabelText]}>{item.FirstName} {item.LastName}</Text>
                             </View>
                         )}
                         numColumns={2}

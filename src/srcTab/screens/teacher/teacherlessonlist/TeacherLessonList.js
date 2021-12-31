@@ -39,10 +39,10 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props?.item?.LiveSession ? (props.item.LiveSession).toString() : '')}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString() }</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props?.item?.Publish ? (props.item.Publish).toString() : '')}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
                 <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
@@ -54,6 +54,7 @@ const Pupillist = (props, { style }) => (
         </View>
     </TouchableOpacity>
 );
+// (props?.item?.LiveSession ? (props.item.LiveSession).toString() : ''
 
 const TeacherLessonList = (props) => {
     const [isHide, action] = useState(true);
@@ -215,7 +216,7 @@ const TeacherLessonList = (props) => {
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
-                                            style={{ height: wp(53.5) }}
+                                            style={{ paddingHorizontal: hp(1.22), marginBottom: hp(1.47) }}
                                             onEndReachedThreshold={0.5}
                                             onEndReached={() => addMorePage()}
                                             // onEndReachedThreshold={0.01}

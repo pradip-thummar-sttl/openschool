@@ -82,6 +82,7 @@ const TLHomeWork = (props) => {
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
 
+    const [checkVal, setcheckVal] = useState('false');
     useEffect(() => {
 
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
@@ -180,9 +181,11 @@ const TLHomeWork = (props) => {
     }
 
     const onCheckList = (index) => {
+        console.log('!itemCheckList[index].IsCheck', );
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
         console.log('check item', itemCheckList)
         Addhomework.CheckList = itemCheckList
+        setcheckVal(!checkVal);
     }
     const onScreeCamera = () => {
         setAddRecording(false)
@@ -427,11 +430,12 @@ const TLHomeWork = (props) => {
                 }
                 <FlatList
                     data={itemCheckList}
+                    extraData={checkVal}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',}]}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical :Platform.OS === 'android' ? 0 : 10}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark,{justifyContent : 'center',alignItems  :'center'}]}
+                                style={[PAGESTYLE.checkMark,{justifyContent : 'center',alignItems  :'center',top: Platform.OS === 'android' ? 0 : 3}]}
                                 value={item.IsCheck}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}

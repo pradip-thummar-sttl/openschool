@@ -565,7 +565,7 @@ const TLDetailAdd = (props) => {
                                 data={filteredPupils}
                                 style={{ alignSelf: 'center', width: '100%', }}
                                 renderItem={({ item, index }) => (
-                                    <View style={[PAGESTYLE.alignRow,{width : '33.33%'}]}>
+                                    <View style={[PAGESTYLE.alignRow,{width :'33.33%'}]}>
                                         <CheckBox
                                             style={PAGESTYLE.checkMark}
                                             boxType={'square'}
@@ -889,7 +889,7 @@ const TLDetailAdd = (props) => {
                                     <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
                                     <View style={[PAGESTYLE.field, { width: wp(40) }]}>
                                         <Text label style={STYLE.labelCommon}>For what recording is?</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                        <View style={[PAGESTYLE.subjectDateTime, { marginBottom  : 20,height: 50, width: '100%' }]}>
                                             <TextInput
                                                 multiline={false}
                                                 placeholder='Name of event'
@@ -905,7 +905,7 @@ const TLDetailAdd = (props) => {
                             <TouchableOpacity
                                 // onPress={()=>{stopRecording()}}
                                 onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
-                                style={PAGESTYLE.buttonGrp}
+                                style={[PAGESTYLE.buttonGrp,{marginBottom  :10}]}
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
                             </TouchableOpacity>

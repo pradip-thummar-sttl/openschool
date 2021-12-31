@@ -316,8 +316,10 @@ export default StyleSheet.create({
         color: COLORS.darkGrayIntro,
         // paddingRight: hp(1),
         // marginLeft: 15,
-        width: '40%',
+        width : Platform.OS === 'android' ? '40%' : '55%'
+        // width: '40%',
         // backgroundColor : 'green'
+        
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -390,6 +392,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: 6,
         marginBottom: hp(0.65),
+        marginTop : 5
     },
 
     fileRender: { flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal: hp(1),borderWidth: 1,borderColor: COLORS.videoLinkBorder,borderRadius: hp(0.8),marginBottom: hp(1.04),},
@@ -1356,7 +1359,8 @@ export default StyleSheet.create({
         height: 15,
         left: 3,
         resizeMode: 'contain',
-        marginEnd : hp(1)
+        marginEnd : hp(1),
+        // top : Platform.OS === 'android' ? 0 : 0
 
     },
     checkMarkTool: {
@@ -1393,6 +1397,8 @@ export default StyleSheet.create({
     checkBoxGroup: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginVertical  :5,
+        justifyContent : 'center',alignItems : 'center'
     },
     hrTagMIddle: {
         flexDirection: 'row-reverse',
@@ -1454,6 +1460,6 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // marginTop:hp(2),
         justifyContent: 'center',
-        marginVertical: hp(2)
+        // marginVertical: hp(2)
     },
 });
