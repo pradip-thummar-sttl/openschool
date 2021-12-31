@@ -53,8 +53,8 @@ export default StyleSheet.create({
     //
     views: {
         flexDirection: 'row',
-        borderTopWidth:1,
-        borderColor:COLORS.borderGrp
+        borderTopWidth: 1,
+        borderColor: COLORS.borderGrp
 
     },
     leftView: {
@@ -105,23 +105,23 @@ export default StyleSheet.create({
     rightView: {
         // backgroundColor:'red',
         marginLeft: hp(2),
-        marginTop: hp(2),
         width: hp(76),
-        height: wp(60),
+        height: '100%'
     },
     mesagesView: {
         width: '105%',
-        height: wp(45),
-        marginBottom: wp(3),
+        height: '100%',
+        paddingBottom: 120
 
     },
     textView: {
         width: '100%',
-        height: wp(12),
+        height: 100,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        // bottom:0,
+        position: 'absolute',
+        bottom: 20,
 
     },
     messageCell: {
@@ -149,28 +149,26 @@ export default StyleSheet.create({
     },
     input: {
         width: '85%',
-        height: '85%',
-        fontSize:hp(2.2),
-        fontFamily:FONTS.fontSemiBold,
-        marginHorizontal:wp(1.5),
-        marginVertical:hp(1),
-        
+        height: '100%',
+        fontSize: hp(2.2),
+        fontFamily: FONTS.fontSemiBold,
+        marginHorizontal: wp(1.5),
     },
-    buttonView:{
-        position:'absolute',
-        right:hp(2),
-        bottom:wp(2),
-        flexDirection:'row'
+    buttonView: {
+        position: 'absolute',
+        right: hp(2),
+        bottom: wp(2),
+        flexDirection: 'row'
     },
-    btn:{
+    btn: {
         // backgroundColor:'yellow',
-        width:hp(3),
-        height:hp(3),
-        marginHorizontal:wp(1.5)
+        width: hp(3),
+        height: hp(3),
+        marginHorizontal: wp(1.5)
     },
-    timeText:{
-        color:COLORS.menuLightFonts,
-        marginTop:wp(1),
-        fontSize:hp(2)
+    timeText: {
+        color: COLORS.menuLightFonts,
+        marginTop: wp(1),
+        fontSize: hp(2)
     }
 })
