@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -378,6 +378,8 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
+      
+        
     },
     pupilTableHeadingMainsubTitle: {
         fontSize: hp(1.56),

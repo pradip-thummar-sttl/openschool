@@ -141,7 +141,7 @@ export default Popupaddrecording;
 const styles = StyleSheet.create({
     cancelButton: {
         position: 'absolute',
-        right: hp(1.5),
+        right:Platform.OS === 'android' ?  hp(1.5) : hp(1),
         zIndex: 9,
         // top: hp(1),
     },
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
 
     },
     recordLinkBlock1: {
-        width: Platform.OS === 'android' ? hp(65.15) : hp(25.15),
+        width: Platform.OS === 'android' ? hp(65.15) : hp(45.15),
         height: Platform.OS === 'android' ? hp(7.20) : hp(5.20),
         // height: hp(5.20),
         padding: hp(1.43),
@@ -221,8 +221,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         // justifyContent: 'space-between',
         // justifyContent: 'center',
+        // backgroundColor : 'red',
        
-        paddingEnd: 25
+        paddingEnd:  Platform.OS === 'android' ? 25  :55
     },
     recordLinkBlock2: {
         width: '100%',
