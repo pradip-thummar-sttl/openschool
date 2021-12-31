@@ -68,7 +68,7 @@ const Popupaddrecording = (props) => {
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.onStartScrrenRecording()}
-                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginRight: 5 }}>
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording}}>
                             <Text style={styles.recordLinkText}>Start Screen + Voice Recording</Text>
                         </TouchableOpacity>
                         :
@@ -116,8 +116,9 @@ const Popupaddrecording = (props) => {
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text numberOfLines={2} ellipsizeMode='tail' style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }} style={{}}>
-                            <CloseBlack height={hp(2.94)} width={hp(5.94)} />
+                        
+                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }} style={ [styles.cancelButton,{width  : 10}]}>
+                            <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
             }
@@ -178,9 +179,11 @@ export default Popupaddrecording;
 const styles = StyleSheet.create({
     cancelButton: {
         position: 'absolute',
-        right: hp(1.5),
+        right: hp(1),
         zIndex: 9,
-        top: hp(1),
+        // paddingHorizontal  :5,
+        // backgroundColor : 'red'
+        // top: hp(1),
     },
     popupLarge: {
         backgroundColor: COLORS.white,
@@ -275,8 +278,8 @@ const styles = StyleSheet.create({
         top: Platform.OS == 'android' ? hp(0.2) : hp(0),
         color: COLORS.darkGray,
         marginLeft: hp(1.3),
-        // backgroundColor : 'red',
-        width : hp(35),
+        // backgroundColor : 'green',
+        width : hp(32),
         textTransform: 'uppercase',
     },
 });

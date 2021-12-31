@@ -96,7 +96,7 @@ const Popupaddrecording = (props) => {
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]} >
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
                         <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
-                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.onRemoveRecording() }}>
+                        <TouchableOpacity style={[styles.cancelButton]} onPress={() => { props.onRemoveRecording() }}>
                             <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
