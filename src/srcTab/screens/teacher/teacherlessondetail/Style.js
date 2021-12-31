@@ -94,6 +94,7 @@ export default StyleSheet.create({
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',
+        marginBottom  : 15
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -1461,5 +1462,6 @@ export default StyleSheet.create({
         // marginTop:hp(2),
         justifyContent: 'center',
         // marginVertical: hp(2)
+        marginBottom : 10
     },
 });

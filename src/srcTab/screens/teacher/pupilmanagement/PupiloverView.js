@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from '../../../../service/EndPoints'
@@ -28,18 +28,18 @@ const Pupillist = (props, { item }) => (
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
             <View style={[PAGESTYLE.pupilProfile,]}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(10) }]}>{props.item.FirstName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width:  Platform.OS === 'android' ? hp(20) : wp(10) }]}>{props.item.FirstName}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(10) }]}>{props.item.LastName}</Text>
+            <View style={[PAGESTYLE.pupilProfile,{marginRight :  Platform.OS === 'android' ? 14 : 0}]}>
+                <Text  style={[PAGESTYLE.pupilName, { width:  Platform.OS === 'android' ? hp(20) : wp(10) ,textAlign  :Platform.OS === 'android' ? 'center' : 'auto'}]}>{props.item.LastName}</Text>
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
-            <View style={PAGESTYLE.groupColumn}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(8) }]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
+            <View style={[PAGESTYLE.groupColumn,{marginRight : Platform.OS === 'android' ? 14 : 0}]}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
-            <View style={PAGESTYLE.groupColumn11}>
+            <View style={[PAGESTYLE.groupColumn11,{marginRight :  Platform.OS === 'android' ? 12 : 0}]}>
                 <Text style={PAGESTYLE.pupilgroupName10} numberOfLines={1}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
             {/* </View> */}
@@ -160,8 +160,8 @@ const PupiloverView = (props) => {
                             pupilData.length > 0 ?
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
-                                        <View style={{width: hp(2)}}></View>
-                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                        <View style={{width:Platform.OS === 'android' ? hp(0) : hp(2)}}></View>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain]}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                         </View>
@@ -185,7 +185,7 @@ const PupiloverView = (props) => {
                                         </View>
                                         <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain,{paddingStart: Platform.OS === 'android' ? 16 : 0}]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>

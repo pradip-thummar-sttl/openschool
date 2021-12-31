@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -347,7 +347,7 @@ export default StyleSheet.create({
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        marginLeft:hp(4.5),
+        marginLeft: hp(4.5),
         marginBottom: 10,
         // backgroundColor: COLORS.white
     },
@@ -358,26 +358,35 @@ export default StyleSheet.create({
         paddingBottom: hp(3.51),
     },
     pupilTableHeadingMain: {
-        width: hp(15),
+        width: Platform.OS === 'android' ? hp(18) : hp(15),
+        // width: hp(15),
+        // backgroundColor: 'red',
+        marginRight: Platform.OS === 'android' ? 18 : 0
     },
     tabpupil2: {
-        width: hp(15.97),
+        width: Platform.OS === 'android' ? hp(18) : hp(15.97)
     },
     tabpupil22: {
-        width: hp(13.97),
+        width: Platform.OS === 'android' ? hp(18) : hp(13.97),
     },
     tabpupil3: {
-        width: hp(20.18),
-        marginRight: hp(9.50),
+        width: Platform.OS === 'android' ? hp(25) : hp(20.18),
+        marginRight: Platform.OS === 'android' ? hp(5.50) : hp(9.50),
+        // marginRight: hp(9.50),
+        marginStart: Platform.OS === 'android' ? 5 : 0,
+        // backgroundColor: 'pink'
     },
     tabpupil4: {
-        width: hp(18.22),
+        width: Platform.OS === 'android' ? hp(29) : hp(18.22),
     },
     pupilTableHeadingMainTitle: {
         fontSize: hp(1.82),
         lineHeight: hp(2.60),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
+        textAlign : Platform.OS === 'android' ? 'center' : 'auto'
+        
+        // backgroundColor: 'green'
     },
     pupilTableHeadingMainsubTitle: {
         fontSize: hp(1.56),
@@ -385,7 +394,8 @@ export default StyleSheet.create({
         color: COLORS.menuLightFonts,
         textTransform: 'uppercase',
         lineHeight: hp(2.08),
-        marginRight: hp(2.60),
+        marginRight: Platform.OS === 'android' ? 0 : hp(2.60),
+        marginLeft:  Platform.OS === 'android' ? hp(2.60) : 0
     },
     pupilTableHeadingMainsubTitlestar: {
         fontSize: hp(1.56),
@@ -393,7 +403,9 @@ export default StyleSheet.create({
         color: COLORS.menuLightFonts,
         textTransform: 'uppercase',
         lineHeight: hp(2.08),
-        marginRight: hp(0.91),
+        marginLeft :  Platform.OS === 'android' ? 10.5 : 0,
+        // marginRight: hp(0.91),
+        marginRight : Platform.OS === 'android' ? 0 :  hp(0.91)
     },
     pupilTableHeadingsubMain: {
         flexDirection: 'row',
@@ -403,39 +415,48 @@ export default StyleSheet.create({
         marginBottom: hp(1.30),
     },
     pupilData: {
-        height:wp(6),
+        height: wp(6),
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius:10,
-        backgroundColor:'white',
-        marginBottom:wp(1),
-        paddingHorizontal:hp(2)
+        borderRadius: 10,
+        backgroundColor: 'white',
+        marginBottom: wp(1),
+        paddingHorizontal: hp(2)
         //  marginLeft:hp(4.5)
     },
     pupilProfile: {
-        width: hp(15),
+        width:  Platform.OS === 'android' ?  hp(18) : hp(15),
         flexDirection: 'row',
         alignItems: 'center',
+
+
+
     },
     groupColumnmain: {
         width: hp(17.97),
-        backgroundColor:'blue'
-        
+        backgroundColor: 'blue'
+
     },
     groupColumn: {
-        width: hp(10.59),
+        // width: hp(10.59),
+        width: Platform.OS === 'android' ? hp(20) : hp(10.59),
+        // alignItems: 'center',
+        // justifyContent:'center',
+        // width: hp(22),
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'center',
-        marginLeft:hp(-2)
+        marginLeft :  Platform.OS === 'android' ? 0  :hp(-2)
+        // backgroundColor: 'pink'
     },
     groupColumn1: {
         width: hp(10.59),
         alignItems: 'center',
     },
     groupColumn11: {
-        width: hp(10.59),
-        alignItems: 'flex-start',
-        marginLeft:hp(5)
+        width: Platform.OS === 'android' ? hp(20) : hp(10.59),
+        alignItems: Platform.OS === 'android' ? 'center' : 'flex-start',
+        // alignItems: 'flex-start',
+        marginLeft: Platform.OS === 'android' ? 0: hp(5)
     },
     pupilgroupName: {
         textAlign: 'center',
@@ -443,17 +464,22 @@ export default StyleSheet.create({
     perfomanceColumn: {
         flexDirection: 'row',
         width: hp(20.18),
-        marginLeft:hp(4),
+        marginLeft: hp(4),
         marginRight: hp(9.50),
     },
     perfomanceDotmain: {
         width: hp(10.80),
         alignItems: 'center',
-        marginRight: hp(2.60),
+        // marginRight: hp(2.60),
+        marginRight :  Platform.OS === 'android' ? hp(2) : hp(2.60),
+        // backgroundColor : 'red'
     },
     perfomanceDotmainTwo: {
-        width: hp(7),
+        width :  Platform.OS === 'android' ?  hp(10) : hp(7),
+        // width: hp(7),
+        // backgroundColor : 'red'
         alignItems: 'center',
+      
     },
     perfomanceDots: {
         width: hp(1.1),
@@ -471,14 +497,15 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     rewardStar: {
-        width: hp(5.5),
-        marginRight: hp(0.91),
+        width: Platform.OS === 'android' ? hp(6) : hp(5.5),
+        marginStart : 10,
+        marginRight: Platform.OS === 'android' ? 0 : hp(0.91),
     },
     rewardStartIcon: {
         width: hp(2.15),
         resizeMode: 'contain',
         alignSelf: 'center',
-        marginBottom:hp(1)
+        marginBottom: hp(1)
     },
     pupilDetailLink: {
         width: '100%',
@@ -486,7 +513,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
-        right: 20,
+        right: 30,
         position: 'absolute',
     },
     pupilImage: {
@@ -510,16 +537,17 @@ export default StyleSheet.create({
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        marginLeft:22,
-        width:100,
-        textAlign:'center'
+        // marginLeft : Platform.OS === 'android' ? 11 : 22,
+        width: Platform.OS === 'android' ? hp(20) : 100,
+        // width:100,
+        textAlign: 'center'
     },
     pupilgroupName10: {
         fontSize: hp(1.82),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
-        width:100,
-        textAlign:'center'
+        width: Platform.OS === 'android' ? hp(20) : 100,
+        textAlign: 'center'
     },
     mainContainer: {
         width: '100%',
@@ -539,13 +567,13 @@ export default StyleSheet.create({
         alignSelf: 'center',
         fontFamily: FONTS.fontSemiBold,
         fontSize: 18,
-        textAlign : 'center',
+        textAlign: 'center',
         marginBottom: 10,
     },
     nodataContent: {
         alignSelf: 'center',
         fontSize: 18,
-        textAlign : 'center'
+        textAlign: 'center'
     },
-  
+
 })

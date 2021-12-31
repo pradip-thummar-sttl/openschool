@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -97,7 +97,7 @@ const HeaderPM = (props) => {
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ width: '100%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical : Platform.OS === 'android' ? 2 : 0 }}
                                 placeholder="Search subject, class, etc"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
