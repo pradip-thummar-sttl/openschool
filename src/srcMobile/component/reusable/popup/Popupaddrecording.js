@@ -68,7 +68,7 @@ const Popupaddrecording = (props) => {
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.onStartScrrenRecording()}
-                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording}}>
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording }}>
                             <Text style={styles.recordLinkText}>Start Screen + Voice Recording</Text>
                         </TouchableOpacity>
                         :
@@ -90,11 +90,8 @@ const Popupaddrecording = (props) => {
                         <Text style={styles.recordLinkText}>Add Recording</Text>
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity
+                    <TouchableOpacity onPress={() => { setLoader(true); Download(props.recordingArr[0], (res) => { setLoader(false) }) }}
                         activeOpacity={opacity}
-                        onPress={() => {
-                            setLoader(true); Download(props.recordingArr[0], (res) => { setLoader(false) })
-                        }}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
                         <View style={{ flexDirection: 'row' }}>
                             {
@@ -108,8 +105,9 @@ const Popupaddrecording = (props) => {
                             }
                             <Text numberOfLines={2} ellipsizeMode='tail' style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         </View>
-                        
-                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }} style={ [styles.cancelButton,{width  : 10}]}>
+
+                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }}
+                            style={[styles.cancelButton, { width: hp(3) }]}>
                             <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
@@ -233,18 +231,13 @@ const styles = StyleSheet.create({
 
     },
     recordLinkBlock1: {
-        width: wp(80),
         padding: hp(1.43),
-        // paddingTop: hp(0.8),
-        // paddingBottom: hp(0.8),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // backgroundColor : 'red',
-
     },
     topSpaceRecording: {
         marginTop: hp(1.401),
