@@ -216,7 +216,7 @@ const TeacherLessonList = (props) => {
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
-                                            style={{ height: wp(53.5) }}
+                                            style={{ paddingHorizontal: hp(1.22), marginBottom: hp(1.47) }}
                                             onEndReachedThreshold={0.5}
                                             onEndReached={() => addMorePage()}
                                             // onEndReachedThreshold={0.01}

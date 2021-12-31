@@ -95,12 +95,12 @@ const Header = (props) => {
                         }} />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Menu style={{ marginLeft: 10 }}>
+                    <Menu style={{ marginLeft: 10}}>
                         <MenuTrigger style={{alignItems : 'center',justifyContent : 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
                         <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
                         </MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
+                        <MenuOptions style={[styles.filterListWrap]}>
+                            <MenuOption style={[styles.borderList]}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                   

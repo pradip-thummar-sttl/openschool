@@ -17,13 +17,13 @@ import STYLE from "../../../../../../utils/Style";
 const HeaderUpdate = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                        <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
+                        <BackArrow style={[styles.arrow,]} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
@@ -54,9 +54,9 @@ const HeaderUpdate = (props) => {
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -264,7 +264,8 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top: -3,
+        // top: -3,
+        // alignItems  :'center'
     },
     commonButtonGreenheaderwithouticon: {
         backgroundColor: COLORS.dashboardGreenButton,
