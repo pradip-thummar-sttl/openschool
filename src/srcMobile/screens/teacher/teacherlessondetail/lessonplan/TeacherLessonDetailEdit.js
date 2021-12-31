@@ -909,6 +909,7 @@ const TLDetailEdit = (props) => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
+        console.log('==============================',arr);
     }
 
     const toggleModal = () => {

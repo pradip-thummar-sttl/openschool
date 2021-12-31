@@ -117,7 +117,7 @@ export default StyleSheet.create({
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
         position: 'absolute',
-        bottom: 30,
+        bottom: 20,
         alignSelf: 'center'
     },
     messageCell: {

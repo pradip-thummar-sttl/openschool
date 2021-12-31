@@ -110,7 +110,7 @@ const Chat = (props) => {
 
     return (
 
-        <View style={{ height: '100%', }}>
+        <View style={{ height: '100%' }}>
 
             <View style={Styles.views}>
 
@@ -119,7 +119,7 @@ const Chat = (props) => {
                     extraScrollHeight={90}
                     scrollEnabled
                     enableAutomaticScroll={(Platform.OS === 'ios')}
-                    contentContainerStyle={{ flex: 1 }}>
+                    contentContainerStyle={{ height: '100%', }}>
                     <View style={Styles.rightView}>
                         <View style={Styles.mesagesView}>
                             <FlatList
