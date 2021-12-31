@@ -88,10 +88,8 @@ const TeacheroverView = (props) => {
     }
 
     return (
-        console.log('iscsvpopup', isCsvPopup),
         <View>
-            <View style={{ width: isHide ? '100%' : '100%' }}>
-                {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
+            <View style={{ width:'100%', height:'100%' }}>
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -100,7 +98,6 @@ const TeacheroverView = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, 'name')}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', 'name') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     navigateToCsvPopup={() => { setCsvPopup(true); console.log('iscsvpopup', isCsvPopup); }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                     onNotification={() => openNotification()}
