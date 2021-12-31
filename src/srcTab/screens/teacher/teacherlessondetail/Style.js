@@ -94,7 +94,7 @@ export default StyleSheet.create({
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',
-        marginBottom  : 15
+        marginBottom  : Platform.OS === 'android' ? 0 : 20
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -599,6 +599,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
+       
     },
     commonInputTextareaBoldGrey: {
         width: '100%',
@@ -1462,6 +1463,6 @@ export default StyleSheet.create({
         // marginTop:hp(2),
         justifyContent: 'center',
         // marginVertical: hp(2)
-        marginBottom : 10
+        marginBottom : Platform.OS === 'android' ? 0 : 10
     },
 });

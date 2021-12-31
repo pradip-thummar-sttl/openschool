@@ -138,14 +138,15 @@ const PupilProfileView = (props) => {
             <HeaderPMInner
                 navigateToBack={() => props.navigateToBack()} tabIndex={(index) => { setTabSelected(index) }}
                 pupilName={props.selectedPupil.FirstName + ' ' + props.selectedPupil.LastName} />
-            {
-                tabSelected === 0 ?
-                    <View style={{ width: isHide ? '100%' : '100%', }}>
-                        <View style={PAGESTYLE.whiteBg}>
-                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
-                                <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.managementBlockTop}>
-                                        {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
+            <View style={{ flex: 1 }}>
+                {
+                    tabSelected === 0 ?
+                        <View style={{ width: isHide ? '100%' : '100%', }}>
+                            <View style={PAGESTYLE.whiteBg}>
+                                <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
+                                    <View style={PAGESTYLE.managementDetail}>
+                                        <View style={PAGESTYLE.managementBlockTop}>
+                                            {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
                                             <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
                                             <View style={PAGESTYLE.thumbTopUser}>
                                                 <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
@@ -154,134 +155,132 @@ const PupilProfileView = (props) => {
                                             {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
                                             </TouchableOpacity> */}
-                                        {/* </ImageBackground> */}
-                                    </View>
-                                    <View style={PAGESTYLE.managementNameSec}>
-                                        <View style={PAGESTYLE.nameSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Pupil name</Text>
-                                            <Text style={PAGESTYLE.userName}>{props.selectedPupil.FirstName} {props.selectedPupil.LastName}</Text>
+                                            {/* </ImageBackground> */}
                                         </View>
-                                        <View style={PAGESTYLE.dateSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
-                                            <Text style={PAGESTYLE.userName}>{moment(props.selectedPupil.Dob).format('DD/MM/yyyy')}</Text>
-                                        </View>
-                                        <View>
-                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel, { width: wp(15) }]}>Unique I.D (auto-generated)</Text>
-                                            <Text style={PAGESTYLE.userName}>{props.selectedPupil.UniqueNumber}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.managementParaSec}>
-                                        <Text style={PAGESTYLE.userLabel}>Notes</Text>
-                                        <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.Note ? props.selectedPupil.Note : '-'}</Text>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.rateAnnotationBlock}>
-                                    <View style={PAGESTYLE.ratingBlock}>
-                                        <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
-                                        <View style={PAGESTYLE.achivementBox}>
-                                            <View style={PAGESTYLE.rewardStarMark}>
-                                                <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
-                                                    <View style={PAGESTYLE.centerText}>
-                                                        {
-                                                            isBronze ?
-                                                                <BronzeFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
-                                                                : <Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
-                                                        }
-                                                        {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
-                                                        <Text style={PAGESTYLE.starText}>Bronze star</Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
-                                                    <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
-                                                        {
-                                                            isSilver ?
-                                                                <SilverFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
-                                                                : <Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
-                                                        }
-                                                        {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
-                                                        <Text style={PAGESTYLE.starText}>Silver star</Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
-                                                    <View style={PAGESTYLE.centerText}>
-                                                        {
-                                                            isGold ?
-                                                                <GoldFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
-                                                                : <Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
-                                                        }
-                                                        {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
-                                                        <Text style={PAGESTYLE.starText}>Gold star</Text>
-                                                    </View>
-                                                </TouchableOpacity>
+                                        <View style={PAGESTYLE.managementNameSec}>
+                                            <View style={PAGESTYLE.nameSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Pupil name</Text>
+                                                <Text style={PAGESTYLE.userName}>{props.selectedPupil.FirstName} {props.selectedPupil.LastName}</Text>
                                             </View>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.annotationText}>
-                                        <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-                                            <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
-                                            <View style={PAGESTYLE.tickLayoutPArent}>
-                                                <TouchableOpacity
-                                                    activeOpacity={opacity}
-                                                    onPress={() => setInstantRewards()}>
-                                                    <View>
-                                                        {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
-                                                        <Ic_CheckWhite style={PAGESTYLE.tickLayout} height={15} width={15} />
-                                                    </View>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
-                                        <TextInput
-                                            returnKeyType={"next"}
-                                            multiline={true}
-                                            autoCapitalize={'sentences'}
-                                            numberOfLines={4}
-                                            placeholder='Leave feedback here'
-                                            style={[PAGESTYLE.paragraphText1, PAGESTYLE.annotationBox]}
-                                            value={feedBack}
-                                            onChangeText={feedback => setFeedback(feedback)} />
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.generalRow}>
-                                    <Text style={PAGESTYLE.graphTitle}>Pupil’s performance</Text>
-                                </View>
-                                <View style={PAGESTYLE.graphBlock}>
-
-                                    <View style={[PAGESTYLE.graphBox,{ bottom : 5}]}>
-                                        <View style={PAGESTYLE.generalRow}>
-                                            <View style={PAGESTYLE.chartBlock}>
-                                                {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
-                                                <ActivityRings
-                                                    data={chartData}
-                                                    config={activityConfig} />
+                                            <View style={PAGESTYLE.dateSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
+                                                <Text style={PAGESTYLE.userName}>{moment(props.selectedPupil.Dob).format('DD/MM/yyyy')}</Text>
                                             </View>
                                             <View>
-                                                <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
-                                                <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
-                                                    <Image  style={PAGESTYLE.purpleMark} />
-                                                    <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
-                                                </View>
-                                                <View style={PAGESTYLE.generalRow}>
-                                                    <Image  style={PAGESTYLE.orangeMark} />
-                                                    <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
+                                                <Text numberOfLines={1} style={[PAGESTYLE.userLabel, { width: wp(15) }]}>Unique I.D (auto-generated)</Text>
+                                                <Text style={PAGESTYLE.userName}>{props.selectedPupil.UniqueNumber}</Text>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.managementParaSec}>
+                                            <Text style={PAGESTYLE.userLabel}>Notes</Text>
+                                            <Text style={PAGESTYLE.paragraphText}>{props.selectedPupil.Note ? props.selectedPupil.Note : '-'}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={PAGESTYLE.rateAnnotationBlock}>
+                                        <View style={PAGESTYLE.ratingBlock}>
+                                            <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>
+                                            <View style={PAGESTYLE.achivementBox}>
+                                                <View style={PAGESTYLE.rewardStarMark}>
+                                                    <TouchableOpacity onPress={() => onStarSelection(3)} activeOpacity={opacity}>
+                                                        <View style={PAGESTYLE.centerText}>
+                                                            {
+                                                                isBronze ?
+                                                                    <BronzeFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                                    : <Bronze style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                            }
+                                                            {/* <Image source={isBronze ? Images.BronzeStarFill : Images.BronzeStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                            <Text style={PAGESTYLE.starText}>Bronze star</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => onStarSelection(6)} activeOpacity={opacity}>
+                                                        <View style={[PAGESTYLE.centerStar, PAGESTYLE.separater]}>
+                                                            {
+                                                                isSilver ?
+                                                                    <SilverFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                                    : <Silver style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                            }
+                                                            {/* <Image source={isSilver ? Images.SilverStarFill : Images.SilverStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                            <Text style={PAGESTYLE.starText}>Silver star</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => onStarSelection(9)} activeOpacity={opacity}>
+                                                        <View style={PAGESTYLE.centerText}>
+                                                            {
+                                                                isGold ?
+                                                                    <GoldFill style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                                    : <Gold style={[PAGESTYLE.starSelected]} width={hp(4.94)} height={hp(4.68)} />
+                                                            }
+                                                            {/* <Image source={isGold ? Images.GoldStarFill : Images.GoldStar} style={[PAGESTYLE.starSelected]} /> */}
+                                                            <Text style={PAGESTYLE.starText}>Gold star</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
                                                 </View>
                                             </View>
                                         </View>
-                                        {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
+                                        <View style={PAGESTYLE.annotationText}>
+                                            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <Text style={[PAGESTYLE.userLabel, PAGESTYLE.anoteTitle]}>What is the reward for?</Text>
+                                                <View style={PAGESTYLE.tickLayoutPArent}>
+                                                    <TouchableOpacity
+                                                        activeOpacity={opacity}
+                                                        onPress={() => setInstantRewards()}>
+                                                        <View>
+                                                            {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
+                                                            <Ic_CheckWhite style={PAGESTYLE.tickLayout} height={15} width={15} />
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </View>
+                                            {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
+                                            <TextInput
+                                                returnKeyType={"next"}
+                                                multiline={true}
+                                                autoCapitalize={'sentences'}
+                                                numberOfLines={4}
+                                                placeholder='Leave feedback here'
+                                                style={[PAGESTYLE.paragraphText1, PAGESTYLE.annotationBox]}
+                                                value={feedBack}
+                                                onChangeText={feedback => setFeedback(feedback)} />
+                                        </View>
                                     </View>
-                                    <View>
+                                    <View style={PAGESTYLE.generalRow}>
+                                        <Text style={PAGESTYLE.graphTitle}>Pupil’s performance</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.graphBlock}>
 
+                                        <View style={[PAGESTYLE.graphBox, { bottom: 5 }]}>
+                                            <View style={PAGESTYLE.generalRow}>
+                                                <View style={PAGESTYLE.chartBlock}>
+                                                    {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
+                                                    <ActivityRings
+                                                        data={chartData}
+                                                        config={activityConfig} />
+                                                </View>
+                                                <View>
+                                                    <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
+                                                    <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
+                                                        <Image style={PAGESTYLE.purpleMark} />
+                                                        <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
+                                                    </View>
+                                                    <View style={PAGESTYLE.generalRow}>
+                                                        <Image style={PAGESTYLE.orangeMark} />
+                                                        <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
+                                                    </View>
+                                                </View>
+                                            </View>
+                                            {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
+                                        </View>
+                                        <View>
+
+                                        </View>
                                     </View>
-                                </View>
-                            </KeyboardAwareScrollView>
+                                </KeyboardAwareScrollView>
+                            </View>
                         </View>
-                    </View>
-                    :
-                    <View style={{ width: isHide ? '100%' : '100%', }}>
-
+                        :
                         <Chat tabs={tabSelected} data={props.selectedPupil} />
-                    </View>
-            }
+                }
+            </View>
 
         </View>
     );
