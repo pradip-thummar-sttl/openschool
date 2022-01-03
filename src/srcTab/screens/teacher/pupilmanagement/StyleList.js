@@ -370,14 +370,14 @@ export default StyleSheet.create({
         width: Platform.OS === 'android' ? hp(18) : hp(13.97),
     },
     tabpupil3: {
-        width: Platform.OS === 'android' ? hp(25) : hp(20.18),
+        width: Platform.OS === 'android' ? hp(23) : hp(20.18),
         marginRight: Platform.OS === 'android' ? hp(5.50) : hp(9.50),
         // marginRight: hp(9.50),
         marginStart: Platform.OS === 'android' ? 5 : 0,
         // backgroundColor: 'pink'
     },
     tabpupil4: {
-        width: Platform.OS === 'android' ? hp(29) : hp(18.22),
+        width: Platform.OS === 'android' ? hp(32) : hp(18.22),
     },
     pupilTableHeadingMainTitle: {
         fontSize: hp(1.82),
@@ -468,7 +468,8 @@ export default StyleSheet.create({
         marginRight: hp(9.50),
     },
     perfomanceDotmain: {
-        width: hp(10.80),
+        width : Platform.OS === 'android' ? hp(8) :hp(10.80) ,
+        // width: hp(10.80),
         alignItems: 'center',
         // marginRight: hp(2.60),
         marginRight :  Platform.OS === 'android' ? hp(2) : hp(2.60),
@@ -497,7 +498,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     rewardStar: {
-        width: Platform.OS === 'android' ? hp(6) : hp(5.5),
+        width: Platform.OS === 'android' ? hp(5) : hp(5.5),
         marginStart : 10,
         marginRight: Platform.OS === 'android' ? 0 : hp(0.91),
     },
@@ -522,6 +523,7 @@ export default StyleSheet.create({
         borderRadius: hp(100),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1),
+        marginStart  : Platform.OS === 'android' ? hp(1) : 0
     },
     pupilName: {
         fontSize: hp(1.82),
