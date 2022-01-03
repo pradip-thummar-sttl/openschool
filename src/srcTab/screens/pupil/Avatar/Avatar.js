@@ -12,8 +12,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from '../../../../utils/Colors';
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
-import { User } from '../../../../utils/Model'
-import { baseUrl } from '../../../../utils/Constant';
+// import { User } from '../../../../utils/Model'
+import { baseUrl,showMessage } from '../../../../utils/Constant';
 import FONTS from '../../../../utils/Fonts';
 import { BadgeIcon, User } from '../../../../utils/Model'
 import { Var } from '../../../../utils/Constant'
@@ -384,6 +384,8 @@ const Avatar = () => {
 
             Service.post(data, `${EndPoints.UpdateAvtar}/${User.user.UserDetialId}`, (res) => {
                 console.log('-----------api response------------', res)
+                showMessage('Avtar Saved')
+                
             }, (err) => {
                 console.log('response of get all lesson error', err)
             })
@@ -391,7 +393,7 @@ const Avatar = () => {
         }, 2000)
 
     }
-    
+
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
@@ -400,7 +402,7 @@ const Avatar = () => {
     }
     return (
         <View>
-            <AvatarHeader onAlertPress={()=>openNotification() }/>
+            <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
                 {/* LeftView */}
                 <View style={Styles.leftView}>
@@ -473,6 +475,17 @@ const Avatar = () => {
                         {isLoading == false ?
                             <FlatList
                                 data={currentSelectedTab()}
+                                ListFooterComponent={
+                                    isLoading == false ?
+                                        <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center',marginTop:25}} onPress={() => saveMyAvtar()} >
+                                            <Text style={{
+                                                color: COLORS.white,
+                                                fontSize: hp(1.56),
+                                                textTransform: 'uppercase',
+                                                fontFamily: FONTS.fontBold,
+                                            }} >SAVE AVATAR</Text>
+                                        </TouchableOpacity> : null
+                                }
                                 renderItem={({ item, index }) => {
                                     return (
                                         <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
@@ -481,17 +494,8 @@ const Avatar = () => {
                                     )
                                 }}
                                 numColumns={3}
-                            /> : null}
-
-                        {isLoading == false ?
-                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15 }} onPress={() => saveMyAvtar()} >
-                                <Text style={{
-                                    color: COLORS.white,
-                                    fontSize: hp(1.56),
-                                    textTransform: 'uppercase',
-                                    fontFamily: FONTS.fontBold,
-                                }} >SAVE AVATAR</Text>
-                            </TouchableOpacity> : null}
+                            />
+                            : null}
                     </View>
                 </View>
             </View>

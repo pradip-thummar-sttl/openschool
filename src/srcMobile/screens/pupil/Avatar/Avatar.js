@@ -15,8 +15,8 @@ import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
 import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import { Service } from '../../../../service/Service'
 import { EndPoints } from '../../../../service/EndPoints'
-import { User } from '../../../../utils/Model'
-import { baseUrl } from '../../../../utils/Constant';
+// import { User } from '../../../../utils/Model'
+import { baseUrl,showMessage } from '../../../../utils/Constant';
 import FONTS from '../../../../utils/Fonts';
 import { BadgeIcon, User } from '../../../../utils/Model'
 import { Var } from '../../../../utils/Constant'
@@ -383,6 +383,7 @@ const Avatar = (prop) => {
 
             Service.post(data, `${EndPoints.UpdateAvtar}/${User.user.UserDetialId}`, (res) => {
                 console.log('-----------api response------------', res)
+                showMessage('Avtar Saved')
             }, (err) => {
                 console.log('response of get all lesson error', err)
             })
