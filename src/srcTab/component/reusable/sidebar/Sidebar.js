@@ -62,7 +62,6 @@ const Sidebar = (props) => {
 
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
-        // setSelectedIndex(1);
     }
 
     const showActionChooser = () => {
@@ -84,11 +83,11 @@ const Sidebar = (props) => {
 
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
+        AsyncStorage.setItem('type', "")
         props.navigateUser()
 
     }
 
-    console.log('module index', props.moduleIndex)
     return (
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
@@ -123,10 +122,6 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { navigateSidebarIndex(); toggleAnimation(true) }}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.Teacher}
-                        /> */}
                         <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
                         {
                             isSmall ? null :
@@ -212,7 +207,7 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={[styles.userInfobottomMain]}>
-                    <View style={[styles.userInfobottom]}>
+                    <TouchableOpacity onPress={() => { props.navigateSettings(); toggleAnimation(true) }} style={[styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         {
                             isSmall ? null :
@@ -226,7 +221,7 @@ const Sidebar = (props) => {
                                     </TouchableOpacity>
                                 </>
                         }
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </Animated.View>
         </View>

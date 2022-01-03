@@ -59,7 +59,7 @@ export default class Users extends Component {
             <View style={styles.container}>
                 <ImageBackground style={styles.image}>
                     {/* <Image style={styles.topBg} source={Images.illuTopBg} /> */}
-                    <View style={{height: hp(22.9), overflow: 'hidden', width: '100%', position: 'absolute', top: 0,}}>
+                    <View style={{height: Platform.OS == 'android' ? hp(22.5) : hp(22.9), overflow: 'hidden', width: '100%', position: 'absolute', top: 0,}}>
                         <Top style={styles.topBg} width={'100%'} height={'100%'} />
                     </View>
                     <View>

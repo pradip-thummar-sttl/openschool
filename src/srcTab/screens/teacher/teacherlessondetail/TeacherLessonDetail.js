@@ -220,27 +220,9 @@ const TeacherLessonDetail = (props) => {
 
     }
 
-    // useEffect(() => {
-    //     if (!isSearchActive) {
-    //         props.onClearSearch()
-    //         this.textInput.clear()
-    //     } else {
-    //         props.onSearch()
-    //     }
-    // }, [isSearchActive])
-
-    // useEffect(() => {
-    //     props.onFilter(filterBy)
-    // }, [filterBy])
-
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
+
             {
                 isTLHomeWorkSubmittedDetail ?
                     <TLHomeWorkSubmittedDetail
@@ -262,33 +244,36 @@ const TeacherLessonDetail = (props) => {
                                     onAlertPress={() => { props.onAlertPress() }} />
                                 :
                                 <View style={{ width: isHide ? '100%' : '78%' }}>
-                                    {tabIndex == 0 ?
-                                        <HeaderLP
-                                            lessonData={lessonData}
-                                            date={lessonData.Date}
-                                            navigateToBack={() => props.goBack()}
-                                            onAlertPress={() => { props.onAlertPress() }} />
-                                        : tabIndex == 1 ?
-                                            <HeaderHW
-                                                hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
-                                                SubjectName={lessonData.SubjectName}
-                                                date={lessonData.Date}
-                                                setHomework={() => onAddHomework()}
-                                                navigateToBack={() => props.goBack()}
-                                                onAlertPress={() => { props.onAlertPress() }}
-                                                onClose={() => setVisiblePopup(false)}
-                                                isVisible={isVisiblePopup}
-                                                onOpenPopup={() => isFiedlsValidated()}
-                                                isHomeworkLoading={isHomeworkLoading}
-                                            />
 
-                                            :
-                                            <HeaderHWS
-                                                subjectName={lessonData.SubjectName}
+                                    {
+                                        tabIndex == 0 ?
+                                            < HeaderLP
+                                                lessonData={lessonData}
                                                 date={lessonData.Date}
                                                 navigateToBack={() => props.goBack()}
                                                 onAlertPress={() => { props.onAlertPress() }} />
+                                            :
+                                            tabIndex == 1 ?
+                                                <HeaderHW
+                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
+                                                    SubjectName={lessonData.SubjectName}
+                                                    date={lessonData.Date}
+                                                    setHomework={() => onAddHomework()}
+                                                    navigateToBack={() => props.goBack()}
+                                                    onAlertPress={() => { props.onAlertPress() }}
+                                                    onClose={() => setVisiblePopup(false)}
+                                                    isVisible={isVisiblePopup}
+                                                    onOpenPopup={() => isFiedlsValidated()}
+                                                    isHomeworkLoading={isHomeworkLoading}
+                                                />
+                                                :
+                                                <HeaderHWS
+                                                    subjectName={lessonData.SubjectName}
+                                                    date={lessonData.Date}
+                                                    navigateToBack={() => props.goBack()}
+                                                    onAlertPress={() => { props.onAlertPress() }} />
                                     }
+                                    
                                     <View style={PAGESTYLE.whiteBg}>
                                         <View style={PAGESTYLE.lessonPlanTop}>
                                             <View style={PAGESTYLE.lessonPlanTab}>
@@ -311,7 +296,8 @@ const TeacherLessonDetail = (props) => {
                                                     <Text style={[PAGESTYLE.tabsText, tabIndex == 2 ? PAGESTYLE.tabsTextSelected : null]}>homework submitted</Text>
                                                 </TouchableOpacity>
                                             </View>
-                                            {tabIndex == 0 ?
+                                            {
+                                                tabIndex == 0 &&
                                                 <View style={PAGESTYLE.lessonstartButton}>
                                                     <TouchableOpacity
                                                         style={PAGESTYLE.buttonGrp}
@@ -321,15 +307,17 @@ const TeacherLessonDetail = (props) => {
                                                         <Text style={STYLE.commonButtonGreenDashboardSide}>Edit Lesson</Text>
                                                     </TouchableOpacity>
                                                 </View>
-                                                :
-                                                null
+
                                             }
-                                            {tabIndex == 2 ?
+                                            {
+                                                tabIndex == 2 &&
                                                 <View style={PAGESTYLE.filterbarMain}>
                                                     <View style={PAGESTYLE.field}>
                                                         <TextInput
                                                             ref={textInput}
-                                                            style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
+                                                            style={[STYLE.commonInput, PAGESTYLE.searchHeader,
+                                                            {paddingVertical : Platform.OS === 'android' ? 2 : 0}
+                                                            ]}
                                                             placeholder="Search pupil"
                                                             maxLength={50}
                                                             placeholderTextColor={COLORS.menuLightFonts}
@@ -398,11 +386,10 @@ const TeacherLessonDetail = (props) => {
                                                         <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                                     </TouchableOpacity>
                                                 </View>
-                                                :
-                                                null
                                             }
                                         </View>
                                     </View>
+
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: COLORS.backgroundColorCommon }}>
                                         <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
                                             {tabIndex == 0 ?
@@ -422,15 +409,8 @@ const TeacherLessonDetail = (props) => {
                                                         navigateToDetail={(data) => { setItem(data), setTLHomeWorkSubmittedDetail(true) }}
                                                         onGoBack={() => setHSDataChanged(true)}
                                                         dataChanged={isHSDataChanged} />
-
                                             }
-                                            {/* <TLDetailEdit /> */}
-                                            {/* <TLDetailAdd /> */}
-                                            {/* <TLVideoGallery /> */}
-                                            {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                                            {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                                            {/* <TLHomeWorkSubmittedDetail /> */}
-                                            {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+
                                         </ScrollView>
                                     </KeyboardAwareScrollView>
                                 </View>

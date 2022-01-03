@@ -72,7 +72,10 @@ const COLORS = {
     pinkInsights: '#dd7eff',
     greenSchool: '#00b754',
     greyInsight: '#f9fafc',
-    greyInsightLable: '#cacbd1'
+    greyInsightLable: '#cacbd1',
+    lightOrangeLogin:"#ffd719",
+    lightBlueLogin:"#90daff",
+    lightgreenLogin:"#8ce33a",
 
 }
 

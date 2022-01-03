@@ -26,6 +26,7 @@ import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
 import NewLesson from "../../../../../svg/teacher/timetable/NewLesson";
 import NewEvent from "../../../../../svg/teacher/timetable/NewEvent";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderFour = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -57,11 +58,15 @@ const HeaderFour = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>

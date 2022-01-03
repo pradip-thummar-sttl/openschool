@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -171,9 +171,10 @@ export default StyleSheet.create({
     requireText: {
         fontSize: hp(2.08),
         fontFamily: FONTS.fontSemiBold,
-        lineHeight: hp(2.86),
+        lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: hp(2.6),
+        marginBottom: hp(1.6),
+      
     },
     lessonPoints: {
         flexDirection: 'row',
@@ -189,7 +190,7 @@ export default StyleSheet.create({
     checkIcon: {
         width: hp(1.7),
         resizeMode: 'contain',
-        top: hp(0.2),
+        top: hp(0.1),
     },
     lessonPointText: {
         fontSize: hp(1.85),
@@ -199,7 +200,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-        marginTop: hp(3.68),
+     marginVertical  : 10
     },
     videoLinkBlock: {
         width: '100%',
@@ -295,20 +296,29 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        alignItems: 'center',
-        paddingBottom: hp(2.2),
-        marginBottom: hp(2.2),
+        // textAlignVertical : "bottom",
+        // justifyContent: 'flex-start',
+        // alignItems : 'center',
+        // paddingBottom: hp(1.1),
+        // marginBottom: hp(1.2),
+        // paddingVertical : 5,
+       
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
     checkBoxLabelText: {
-        lineHeight: hp(2.82),
-        fontSize: hp(1.85),
-        top: hp(0.5),
+        lineHeight: hp(3.1),
+        fontSize: hp(1.87),
+      
+        // top: hp(0.8),
+        textAlignVertical: "bottom",
+        
+        
         fontFamily: FONTS.fontRegular,
-        paddingLeft: hp(1.4),
-        paddingRight: hp(2),
-        width: '90%',
+        paddingLeft: hp(1.8),
+        paddingRight : Platform.OS === 'android'  ?hp(3)  :hp(3.5),
+        // paddingRight: hp(2),
+       width : Platform.OS === 'android' ? hp(20) : hp(20)
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -374,6 +384,18 @@ export default StyleSheet.create({
         marginVertical: 8,
         color: COLORS.greyplaceholder
     },
+    fileRender: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: hp(1.6),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(0.8),
+        marginBottom: hp(1.04),
+        
+    },
+    RenderDownload:{width:wp(12), height:hp(5), justifyContent:'center', padding:hp(1), alignItems:'flex-end'},
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -386,12 +408,11 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(0.8),
         marginBottom: hp(1.04),
+        
     },
     downloadIcon: {
         width: hp(2.01),
         resizeMode: 'contain',
-        top: hp(0.2),
-        right: hp(1),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -619,9 +640,7 @@ export default StyleSheet.create({
         width: '47.2%',
         marginRight: hp(2.1),
     },
-    blockSpaceBottom: {
-        marginBottom: hp(2.6),
-    },
+ 
     dueDateWrap: {
         borderRightWidth: 2,
         borderRightColor: COLORS.commonBorderColor,
@@ -785,6 +804,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
+      
     },
     pupilImage: {
         width: hp(3.7),
@@ -1087,7 +1107,8 @@ export default StyleSheet.create({
         width: 20,
         height: 20,
         left: 2,
-        top: hp(0.52),
+        // textAlignVertical : "bottom",
+        // top: hp(0.52),
     },
     borderRight: {
         borderRightWidth: 1,
@@ -1265,13 +1286,65 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         right: hp(1),
+       
     },
     userIcon1: {
         position: 'absolute',
         width: hp(2.5),
         height: hp(2.5),
+       
     },
     fileBoxGrpWrap: {
         marginBottom: hp(-1.5)
+    },
+    // recording name
+    popupCard: {
+        backgroundColor: COLORS.white,
+        borderRadius: hp(2),
+        width: wp(80.54),
+        alignItems: 'center',
+        alignSelf: 'center',
+        overflow: 'hidden',
+        fontFamily: FONTS.fontRegular,
+        position: 'relative',
+        marginTop: hp(5)
+    },
+    popupContent: {
+        width: '100%',
+    },
+    beforeBorder: {
+        padding: hp(2.60),
+        paddingBottom: hp(0.5),
+    },
+    afterBorder: {
+        padding: hp(2.60),
+        paddingTop: hp(0.5),
+    },
+    titleTab: {
+        fontSize: hp(2.125),
+        fontFamily: FONTS.fontBold,
+        // lineHeight: hp(4.55),
+        color: COLORS.darkGray,
+        marginBottom: hp(2.51),
+    },
+    cancelButton: {
+        position: 'absolute',
+        right: hp(1.5),
+        zIndex: 9,
+        top: hp(1),
+    },
+    popupCustomButton: {
+        paddingLeft: hp(4.42),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+    },
+    buttonGrp: {
+        position: 'relative',
+        alignItems: 'center',
+        // flexDirection: 'row',
+        // marginTop:hp(2),
+        justifyContent: 'center',
+        marginVertical: hp(2)
     },
 });

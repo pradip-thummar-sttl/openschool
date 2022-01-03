@@ -9,6 +9,8 @@ import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import { BadgeIcon } from "../../../../../utils/Model";
+import STYLE from "../../../../../utils/Style";
 
 const HeaderHW = (props) => {
     return (
@@ -29,6 +31,10 @@ const HeaderHW = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(2),
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
     },
     headerMain: {
         flexDirection: 'row',

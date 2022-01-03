@@ -10,6 +10,7 @@ import moment from 'moment';
 import AddWhite from "../../../../../../svg/teacher/timetable/Add_White";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import EditWhite from "../../../../../../svg/pupil/parentzone/EditWhite";
+import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const HeaderUpdate = (props) => {
     return (
@@ -19,7 +20,6 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
@@ -30,33 +30,17 @@ const HeaderUpdate = (props) => {
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>*/}
-                    <View style={styles.tickLayout}>
+                  
+                    <TouchableOpacity style={styles.tickLayout} activeOpacity={opacity} onPress={() => props.saveLesson()}>
                         {props.isLoading ?
-                            <ActivityIndicator
-                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.white} />
+                            <ActivityIndicator  size={'small'} color={COLORS.white} />
                             :
-                            <TouchableOpacity
-                                style={styles.buttonGroup}
-                                activeOpacity={opacity}
-                                onPress={() => props.saveLesson()}>
-                                {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
-                                <EditWhite style={styles.addIcon} height={12} width={12} />
-                            </TouchableOpacity>
+                            <View style={styles.buttonGroup}>
+                                <TickMarkWhite style={styles.addIcon} height={12} width={12} />
+                            </View>
                         }
-                    </View>
-                    {/* <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        <Image style={styles.massagesIcon} source={Images.Notification} />
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
+                   
                 </View>
             </View>
         </View>

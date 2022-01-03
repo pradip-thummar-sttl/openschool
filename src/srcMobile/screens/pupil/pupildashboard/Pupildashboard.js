@@ -13,7 +13,7 @@ import { useImperativeHandle } from "react/cjs/react.development";
 import { baseUrl, isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack, Var } from "../../../../utils/Constant";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
 import RBSheet from "react-native-raw-bottom-sheet";
 import MESSAGE from "../../../../utils/Messages";
@@ -132,6 +132,10 @@ const PupuilDashboard = (props) => {
     }
 
     useEffect(() => {
+        refresh()
+    }, [])
+
+    const refresh = () => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag === true) {
@@ -182,7 +186,7 @@ const PupuilDashboard = (props) => {
             }
         }, (err) => {
         })
-    }, [])
+    }
 
     const launchLiveClass = () => {
         console.log('data of sub view', dataOfSubView)
@@ -228,7 +232,8 @@ const PupuilDashboard = (props) => {
                 names.push(pupil.PupilName)
             });
 
-            channels.push(dataOfSubView.TeacherID + "_" + User.user.UserDetialId)
+            channels.push(dataOfSubView.TeacherID + "_" + User.user.UserDetialId)   //For instant reaction
+            channels.push(dataOfSubView.TeacherID + "_" + dataOfSubView._id)        //For polling
             let dialogID = dataOfSubView.QBDilogID
             let QBUserId = User.user.QBUserId
             let currentName = User.user.FirstName + " " + User.user.LastName
@@ -321,6 +326,16 @@ const PupuilDashboard = (props) => {
         setSelectedId(index)
         setDataOfSubView(myClass[index])
     }
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', {
+            onGoBack: () => {
+                console.log('avu')
+                refresh()
+            }
+        })
+    }
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={() => { onPress(); refRBSheet.current.open() }} style={[PAGESTYLE.item, style]}>
@@ -366,17 +381,15 @@ const PupuilDashboard = (props) => {
 
         </TouchableOpacity>
     );
+
+
     return (
         <View style={PAGESTYLE.mainPage} >
-            {/* <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={0}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <Header onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
+                <Header isOpen={BadgeIcon.isBadge} onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
+                        
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>
                                 <View style={PAGESTYLE.myDay}>
@@ -525,7 +538,8 @@ const PupuilDashboard = (props) => {
                                                                                     }
                                                                                 </View>
                                                                                 <View style={PAGESTYLE.requirementofClass}>
-                                                                                    <Text style={PAGESTYLE.requireText}>What you will need</Text>
+                                                                                    {dataOfSubView.CheckList && dataOfSubView.CheckList.length ?
+                                                                                        <Text style={PAGESTYLE.requireText}>What you will need</Text> : null}
                                                                                     <FlatList
                                                                                         data={dataOfSubView.CheckList}
                                                                                         style={{ width: '100%' }}
@@ -702,6 +716,7 @@ const PupuilDashboard = (props) => {
                                 </View>
                             </View>
                         </View>
+
                         <View style={PAGESTYLE.achivementWrap}>
                             <View style={PAGESTYLE.achivementBox}>
                                 <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
@@ -743,6 +758,7 @@ const PupuilDashboard = (props) => {
                                 {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
                             </View>
                         </View>
+                        
                     </View>
                 </ScrollView>
             </View>

@@ -9,46 +9,41 @@ import { useLinkProps } from "@react-navigation/native";
 import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
+
 const HeaderAddNew = (props) => {
     console.log('props', props);
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-                <Text style={styles.mainTitle}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                {/* <Text style={styles.mainTitle}>
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
-                    </TouchableOpacity> Add New Lesson</Text>
-                <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                      <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
+                    </TouchableOpacity> Add New Lesson
+                </Text> */}
+                 <View style={{flexDirection : 'row',justifyContent : 'center',alignItems : 'center'}}>
+            <TouchableOpacity  activeOpacity={opacity} onPress={() => props.navigateToBack()}>
+                        <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>*/}
-                    {props.isLoading ?
-                        <ActivityIndicator
-                            style={styles.commonButtonGreenheaderwithouticon}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.white} />
+                <Text style={styles.mainTitle}>Add New Lesson</Text>
+                  
+            </View>
+                <View style={styles.headerRight}>
+                    {
+                    props.isLoading ?
+                        <ActivityIndicator style={styles.commonButtonGreenheaderwithouticon} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
                         :
-                        <TouchableOpacity
-                            style={styles.buttonGroup}
-                            activeOpacity={opacity}
-                            onPress={() => props.saveLesson()}>
-                            {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
+                        <TouchableOpacity style={[styles.buttonGroup,{justifyContent : 'center'}]} activeOpacity={opacity} onPress={() => props.saveLesson()}>
                             <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                             <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity
-                        style={styles.notificationBar}
-                        onPress={() => props.onAlertPress()}
-                        activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
+                    <TouchableOpacity style={styles.notificationBar} onPress={() => props.onAlertPress()} activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge && <View style={STYLE.redDot}></View>
+                    }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -62,10 +57,11 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,
+        // alignItems : 'center'
     },
     headerMain: {
         flexDirection: 'row',
@@ -192,7 +188,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.5),
+        // top: hp(1.5),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -265,7 +261,7 @@ const styles = StyleSheet.create({
     },
     arrow: {
         width: hp(2.34),
-        top: -3,
+        // top: -3,
         resizeMode: 'contain',
         marginRight: hp(1),
     },

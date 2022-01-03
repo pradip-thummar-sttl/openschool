@@ -52,8 +52,11 @@ export default class ParentZoneSwitch extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/* <Image source={Images.parentZone} style={styles.image}></Image> */}
-                <SelectPupilTopBg_Mobile style={styles.image} width= {'100%'} height={hp(16.5)}/>
+                
+                <View style={{backgroundColor: COLORS.lightgreenLogin}}>
+                     <SelectPupilTopBg_Mobile style={styles.image} width= {'100%'} height={hp(16.5)}/>
+                </View>
+
                 <View style={{ flex: 1 }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
@@ -61,9 +64,6 @@ export default class ParentZoneSwitch extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.props.navigation.replace('PupilRegister')}>
                             <View style={styles.user}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.addUser} /> */}
                                     <AddNewPupil style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>Add new user</Text>
                             </View>

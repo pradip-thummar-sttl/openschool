@@ -39,7 +39,8 @@ import Participants from "../../../../../svg/teacher/dashboard/Participants";
 import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
-
+import Modal from 'react-native-modal';
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -81,6 +82,13 @@ const TLDetailAdd = (props) => {
     const [IsVotingEnabled, setVotingEnabled] = useState(false);
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
+
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -135,7 +143,6 @@ const TLDetailAdd = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
-
 
     }, [])
 
@@ -320,49 +327,140 @@ const TLDetailAdd = (props) => {
 
     }
 
-    const stopRecording = async () => {
-        var arr = []
+    // const stopRecording = async () => {
+    //     var arr = []
 
+    //     const res = await RecordScreen.stopRecording().catch((error) => {
+    //         setRecordingStarted(false)
+    //         console.warn(error)
+    //         console.log(error);
+    //     });
+    //     if (res) {
+    //         setRecordingStarted(false)
+    //         const url = res.result.outputURL;
+    //         let ext = url.split('.');
+    //         let obj = {
+    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
+    //             originalname: 'MY_RECORDING.mp4',
+    //             fileName: 'MY_RECORDING.mp4',
+    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+    //         }
+    //         arr.push(obj)
+    //         setRecordingArr(arr)
+    //         setScreenVoiceSelected(false)
+
+    //         console.log('url', url);
+    //     }
+    // }
+
+    const stopRecording = async () => {
+        if (recordingName.length > 0) {
+         
+        var arr = []
         const res = await RecordScreen.stopRecording().catch((error) => {
             setRecordingStarted(false)
             console.warn(error)
-            console.log(error);
         });
         if (res) {
             setRecordingStarted(false)
             const url = res.result.outputURL;
             let ext = url.split('.');
+            // let obj = {
+            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+            //     originalname: 'MY_RECORDING.mp4',
+            //     fileName: 'MY_RECORDING.mp4',
+            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            // }
             let obj = {
                 uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: 'MY_RECORDING.mp4',
-                fileName: 'MY_RECORDING.mp4',
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             }
             arr.push(obj)
             setRecordingArr(arr)
             setScreenVoiceSelected(false)
-
+            setRecordingName("")
+            toggleModal()
             console.log('url', url);
         }
+    }else{
+        // setRecordingStarted(false)
+        // toggleModal()
+        showMessage('Please provide recording name proper')
+    }
     }
 
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+     
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
+     
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
+    }
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr]
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
+
+
+    const removeRecording=()=>{
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
     }
 
     const isFieldsValidated = () => {
@@ -467,7 +565,7 @@ const TLDetailAdd = (props) => {
                                 data={filteredPupils}
                                 style={{ alignSelf: 'center', width: '100%', }}
                                 renderItem={({ item, index }) => (
-                                    <View style={PAGESTYLE.alignRow}>
+                                    <View style={[PAGESTYLE.alignRow,{width :'33.33%'}]}>
                                         <CheckBox
                                             style={PAGESTYLE.checkMark}
                                             boxType={'square'}
@@ -619,10 +717,11 @@ const TLDetailAdd = (props) => {
         } else if (!description.trim()) {
             showMessage(MESSAGE.description);
             return false;
-        } else if (recordingArr.length == 0) {
-            showMessage(MESSAGE.recording);
-            return false;
         }
+        // } else if (recordingArr.length == 0) {
+        //     showMessage(MESSAGE.recording);
+        //     return false;
+        // }
 
         setLoading(true)
 
@@ -727,6 +826,10 @@ const TLDetailAdd = (props) => {
         recordingArr.forEach(element => {
             let ext = element.fileName.split('.');
 
+            if (Platform.OS === 'ios') {
+                ext = element.uri.split('.');
+            }
+
             data.append('recording', {
                 uri: element.uri,
                 // name: element.fileName,
@@ -766,6 +869,53 @@ const TLDetailAdd = (props) => {
 
     }
 
+    const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(40) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { marginBottom  : 20,height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea,{height:50}]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                // onPress={()=>{stopRecording()}}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
+                                style={[PAGESTYLE.buttonGrp,{marginBottom  :10}]}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                    </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {
@@ -803,7 +953,7 @@ const TLDetailAdd = (props) => {
                                                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                                                         placeholder="e.g. Grammar, Fractions, etc"
                                                         autoCapitalize={'sentences'}
-                                                        maxLength={40}
+                                                        maxLength={60}
                                                         placeholderTextColor={COLORS.menuLightFonts}
                                                         onChangeText={text => setLessonTopic(text)} />
                                                 </View>
@@ -870,8 +1020,9 @@ const TLDetailAdd = (props) => {
                                             onScreeCamera={() => onScreeCamera()}
                                             onScreeVoice={() => onScreeVoice()}
                                             onStartScrrenRecording={() => startRecording()}
-                                            onStopScrrenRecording={() => stopRecording()}
-                                            onCameraOnly={() => onCameraOnly()} />
+                                            onStopScrrenRecording={() => toggleModal()}
+                                            onCameraOnly={() => onCameraOnly()} 
+                                            onRemoveRecording={()=>removeRecording()}/>
 
                                         {pupilListView()}
 
@@ -908,17 +1059,19 @@ const TLDetailAdd = (props) => {
                                         </TouchableOpacity>
 
                                         {
-                                            materialArr.length != 0 ? materialArr.map((item, index) => {
-                                                return (
-                                                    <View style={PAGESTYLE.fileGrp}>
-                                                        <Text style={PAGESTYLE.fileName}>{item.name}</Text>
-                                                        <TouchableOpacity onPress={() => removeObject(index, item)}>
-                                                            {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
-                                                            <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                )
-                                            }) : null
+                                             materialArr.length != 0 && materialArr.map((item, index) => {
+                                                 return (
+                                                     <View style={PAGESTYLE.fileRender}>
+                                                         <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.name}</Text>
+                                                         {item &&
+                                                             <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                                 <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
+                                                             </TouchableOpacity>
+                                                         }
+ 
+                                                     </View>
+                                                 )
+                                             })
                                         }
 
 
@@ -946,7 +1099,7 @@ const TLDetailAdd = (props) => {
                                 // </View>
                                 // : null
                             }
-
+                            {renderRecordingNamePopup()}
                             <DateTimePickerModal
                                 isVisible={isDatePickerVisible}
                                 mode="date"

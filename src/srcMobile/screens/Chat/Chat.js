@@ -66,7 +66,7 @@ const Chat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event]);
+            addMessage(messages => [...messages, event].reverse());
         }
     };
 
@@ -110,21 +110,21 @@ const Chat = (props) => {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ height: '100%' }}>
 
+            <View style={Styles.views}>
 
-            <KeyboardAwareScrollView
-                enableOnAndroid={true}
-                extraScrollHeight={90}
-                scrollEnabled
-                enableAutomaticScroll={(Platform.OS === 'ios')}
-                contentContainerStyle={{ flex: 1 }}
-            >
-                <View style={Styles.views}>
-
+                <KeyboardAwareScrollView
+                    enableOnAndroid={true}
+                    extraScrollHeight={90}
+                    scrollEnabled
+                    enableAutomaticScroll={(Platform.OS === 'ios')}
+                    contentContainerStyle={{ height: '100%', }}>
                     <View style={Styles.rightView}>
                         <View style={Styles.mesagesView}>
                             <FlatList
+                                style={{ marginBottom: 120 }}
+                                inverted={true}
                                 data={messages}
                                 renderItem={({ item, index }) => {
                                     return (
@@ -144,28 +144,20 @@ const Chat = (props) => {
                             <TextInput
                                 style={Styles.input}
                                 multiline={true}
-                                placeholder={placeholder}
+                                placeholder={'Type a message here...'}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 value={message}
                                 onChangeText={(text) => setMessage(text)}
                             />
                             <View style={Styles.buttonView}>
-                                {/* <TouchableOpacity>
-                                    <Image style={Styles.btn} source={Images.paperClip} />
-                                </TouchableOpacity>
-                                <TouchableOpacity >
-                                    <Image style={Styles.btn} source={Images.imageUpload} />
-                                </TouchableOpacity> */}
                                 <TouchableOpacity style={Styles.btnBack} onPress={() => sendMessage(message)}>
-                                    {/* <Image style={Styles.btn} source={Images.send} /> */}
                                     <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
-                </View>
-            </KeyboardAwareScrollView>
-
+                </KeyboardAwareScrollView>
+            </View>
         </View>
 
     )

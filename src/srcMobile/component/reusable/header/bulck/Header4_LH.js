@@ -18,6 +18,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../utils/Model";
 const Header4_LH = (props) => {
     const refRBSheet = useRef();
     const [isSearchActive, setSearchActive] = useState(false)
@@ -29,16 +30,20 @@ const Header4_LH = (props) => {
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width= {hp(2.60)} height= {hp(1.84)} style={styles.menuIcon}/></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
                     <Text style={styles.mainTitle}>Lessons and Homework</Text>
                 </View>
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
-    },    
+    },
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,

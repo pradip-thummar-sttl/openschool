@@ -36,29 +36,29 @@ import { Service } from "../../../../service/Service";
 import MESSAGE from "../../../../utils/Messages";
 import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 const HeaderTM = (props) => {
     const refRBSheet = useRef();
     const refRBSheetCSV = useRef();
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [selectedIndex, setSelectedIndex] = useState(0)
+    const [filterBy, setFilterBy] = useState('1')
     const [isModalVisible, setModalVisible] = useState(false)
 
-    useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
-    }, [isSearchActive])
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         textInput.current.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
 
-    useEffect(() => {
-        props.onFilter(filterBy)
-    }, [filterBy])
+    // useEffect(() => {
+    //     props.onFilter(filterBy)
+    // }, [filterBy])
 
     const addCSV = () => {
         console.log('hihihihihihi')
@@ -81,7 +81,7 @@ const HeaderTM = (props) => {
     }
 
     const uploadProfile = (csv) => {
-        
+
         let data = new FormData();
         let url;
 
@@ -110,6 +110,37 @@ const HeaderTM = (props) => {
 
     }
 
+
+    const onPressSearchButton = () => {
+        setSearchActive(true)
+        setTimeout(() => {
+            props.onSearch()
+        }, 500)
+    }
+
+    const onPressCloseButton = () => {
+        setSearchActive(false)
+        setTimeout(() => {
+            props.onClearSearch()
+            textInput.current.clear()
+        }, 500)
+    }
+
+
+    const OnPressAsc = () => {
+        setFilterBy('1'); setSelectedIndex(0)
+        setTimeout(() => {
+            props.onFilter('1')
+        }, 500)
+    }
+
+    const OnPressDes = () => {
+        setFilterBy('-1'); setSelectedIndex(1)
+        setTimeout(() => {
+            props.onFilter('-1')
+        }, 500)
+    }
+
     return (
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
             <View style={styles.headerMain}>
@@ -118,78 +149,56 @@ const HeaderTM = (props) => {
                     <Text style={styles.mainTitle}>{props.title}</Text>
                 </View>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}> */}
-                    {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
-                    {/* <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                            BadgeIcon.isBadge && <View style={STYLE.redDot}></View>
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
-                        {/* <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                        {isSearchActive ?
+                    {isSearchActive ?
+                        <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
                             <CloseBlack height={18} width={18} />
-                            :
+                        </TouchableOpacity> 
+                        :
+                        <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
                             <SearchBlue height={18} width={18} />
-                        }
-                    </TouchableOpacity>
+                        </TouchableOpacity>}
+
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {
-                            props.onSearchKeyword(keyword);
-                        }} />
+                        onChangeText={keyword => {props.onSearchKeyword(keyword);}} />
 
                     <Menu>
                         <MenuTrigger>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('1'); setSelectedIndex(0) }}>
+                                    onPress={() => { OnPressAsc() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
-                                        {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('-1'); setSelectedIndex(1) }}>
+                                    onPress={() => { OnPressDes() }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Desending)</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -197,10 +206,7 @@ const HeaderTM = (props) => {
                     </Menu>
                     {/*  */}
                 </View>
-                <TouchableOpacity
-                    style={styles.buttonGroup}
-                    onPress={() => refRBSheet.current.open()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
                     <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
@@ -221,7 +227,6 @@ const HeaderTM = (props) => {
                 >
                     <View style={styles.popupLarge}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
@@ -229,20 +234,9 @@ const HeaderTM = (props) => {
                                 <View style={styles.beforeBorder}>
                                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
                                     <View style={styles.entryContentMain}>
-                                        {/* <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.openCsv() }}> */}
-                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                            {/* <ImportCSV style={styles.entryIcon} height={hp(12)} width={hp(12)} />
-                                            <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
-                                        </TouchableOpacity> */}
                                         <MPopupdataSecondCSVUpload />
-                                        <TouchableOpacity
-                                            style={styles.entryData}
-                                            onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
-                                            <ImportIndividual style={styles.entryIcon} height={hp(12)} width={hp(12)} />
+                                        <TouchableOpacity style={styles.entryData} onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
+                                            <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                             <Text style={styles.entryTitle}>ADD MANUALLy</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -525,7 +519,7 @@ const styles = StyleSheet.create({
     },
     entryData: {
         marginBottom: hp(5.14),
-        alignItems: 'center'
+        alignItems: 'center',
     },
     entryIcon: {
         marginBottom: hp(2.28),

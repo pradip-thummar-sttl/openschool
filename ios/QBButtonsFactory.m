@@ -71,8 +71,8 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
     
     button.pushed = YES;
     
-    button.iconView = [self iconViewWithNormalImage:@"mute_on_ic"
-                                      selectedImage:@"mute_off_ic"];
+    button.iconView = [self iconViewWithNormalImage:@"mute_off_ic"
+                                      selectedImage:@"mute_on_ic"];
     return button;
 }
 
@@ -172,6 +172,17 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
                                     selectedImage:@"switchCamera"];
   button.labelName.text = @"video";
   return button;
+}
+
++ (QBButton *)chatButton {
+    
+    QBButton *button = [self buttonWithFrame:kDefCircleDeclineRect
+                             backgroundColor:kDefDeclineColor
+                               selectedColor:kDefSelectedColor];
+    
+    button.iconView = [self iconViewWithNormalImage:@"more"
+                                      selectedImage:@"more"];
+    return button;
 }
 
 @end

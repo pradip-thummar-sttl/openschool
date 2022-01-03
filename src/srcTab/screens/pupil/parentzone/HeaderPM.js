@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -16,7 +16,7 @@ import { baseUrl, opacity } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
@@ -97,6 +97,10 @@ const HeaderPM = (props) => {
                     <TouchableOpacity style={PAGESTYLE.notificationBar}>
                         {/* <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={PAGESTYLE.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
 
                 </View>
@@ -155,7 +159,9 @@ const HeaderPM = (props) => {
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ flex: 1, height: '100%',
+                                paddingVertical : Platform.OS === 'android' ? 2 : 0,
+                                paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search message"
                                 maxLength={50}
                                 placeholderTextColor={COLORS.menuLightFonts}

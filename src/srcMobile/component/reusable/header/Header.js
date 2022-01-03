@@ -6,10 +6,11 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 // import Images from '../../../../utils/Images';
 import { opacity } from "../../../../utils/Constant";
-import { User } from "../../../../utils/Model";
+import { User, BadgeIcon } from "../../../../utils/Model";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 const Header = (props) => {
+    
     return (
         <View style={styles.headerMain}>
             <View style={styles.menuIconWithTitle}>
@@ -19,11 +20,13 @@ const Header = (props) => {
             <View>
                 <TouchableOpacity
                     style={styles.notificationBar}
-                    onPress={() => null}
+                    onPress={() => props.onNotification()}
                     activeOpacity={opacity}>
-                    {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    <View style={STYLE.redDot}></View>
+                    {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                 </TouchableOpacity>
             </View>
         </View>

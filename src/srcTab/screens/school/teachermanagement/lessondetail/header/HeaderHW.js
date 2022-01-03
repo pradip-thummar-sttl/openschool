@@ -9,11 +9,13 @@ import { opacity } from "../../../../../../utils/Constant";
 import moment from 'moment';
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
 
 const HeaderHW = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain,,{top : Platform.OS === 'ios' ? 4 : 0}]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}
@@ -28,6 +30,10 @@ const HeaderHW = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

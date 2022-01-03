@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useFocus, createRef, RefObject } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
@@ -12,10 +12,18 @@ import { opacity, showMessage, Var } from '../../../../utils/Constant';
 // import Images from "../../../../utils/Images";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { User } from "../../../../utils/Model";
+import { selectedDate, User } from "../../../../utils/Model";
 import CloseBlack from "../../../../svg/teacher/pupilmanagement/Close_Black";
+import { useIsDrawerOpen } from '@react-navigation/drawer'
+import Clock from "../../../../svg/teacher/dashboard/Clock";
+import { setCalendarEventData, setTimeTableWeekEventData } from "../../../../actions/action";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+
+var month = moment().format('MM');;
+var date = moment().format('DD');
+var year = moment().format('YYYY');
 
 const markdate = ["2021-03-26", "2021-03-27"]
 const periodDate = ["2021-03-22", "2021-03-23", "2021-03-24", "2021-03-25", "2021-03-26", "2021-03-27", "2021-03-28"]
@@ -30,9 +38,26 @@ const NotificationDrawer = (props) => {
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
     // console.log('date of week', moment(today).format('YYYY-MM-DD'), moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'))
-    // const [calEventData, setcalEventData] = useState([])
+    // const [calEventData, setcalEventData] = useState(calEventDat)
+    const myRef = createRef()
+    const isOpen = useIsDrawerOpen()
+
+    const [liveClassNotifications, setLiveClassNotifications] = useState([])
+    const [homeworkNotifications, setHomeworkNotifications] = useState([])
+    const [personalNotifications, setPersonalNotifications] = useState([])
+    const [st, setsta] = useState(0)
+
+
+    const [notifications, setNotifications] = useState([])
+    const dispatch = useDispatch()
     useEffect(() => {
+        // month = moment().format('MM');
+        // date = moment().format('DD');
+        // year = moment().format('YYYY');
+        // var m = check.format('M');
+        console.log('month calandar event', month, date, year);
         if (Var.isCalender) {
+
 
             // setcalEventData(res.date)
             // Service.get(`${EndPoints.CalenderEvent}/${User.user._id}`, (res) => {
@@ -46,23 +71,169 @@ const NotificationDrawer = (props) => {
             //     console.log('Error of calandar event', err);
             // })
         }
-    }, [])
-    console.log('event data', calEventData);
+
+        if (isOpen) {
+            getAllNotification()
+        }
+
+    }, [isOpen])
+    
+
+    getAllNotification = () => {
+
+        let data = {
+            userid: User.user.UserType == "Teacher" ? User.user._id : User.user.UserDetialId,//"6047645b9a6ac02f68642c72",
+            page: "1",
+            limit: "50"
+        }
+
+        Service.post(data, `${EndPoints.getAllNotifications}`, (res) => {
+            console.log('succss', res);
+            if (res.flag) {
+                let allNotifications = res.data
+                let liveClass = []
+                let homework = []
+                let personal = []
+                allNotifications.map((item) => {
+                    if (item.NotificationType === 'LIVE CLASSES') {
+                        liveClass.push(item)
+                    } else if (item.NotificationType === 'HOMEWORK') {
+                        homework.push(item)
+                    } else if (item.NotificationType === 'PERSONAL') {
+                        personal.push(item)
+                    }
+                })
+
+                setNotifications(res.data)
+                // setLiveClassNotifications(liveClass)
+                // setHomeworkNotifications(homework)
+                // setPersonalNotifications(personal)
+            }
+
+
+        }, (err) => {
+            console.log('errr', errrr)
+        })
+
+    }
+
+    deleteNotification = (id) => {
+        Service.get(`${EndPoints.deleteNotification}/${id}`, (res) => {
+            console.log('res-delete', res)
+            if (res.flag) {
+                getAllNotification()
+            }
+        }, (err) => {
+            console.log('Error of calandar event', err);
+        })
+    }
+
+
+    const onOpenClass = () => {
+        if (User.user.UserType == "Teacher") {
+            props.navigation.replace('TeacherDashboard', { index: 1, })
+        } else {
+            props.navigation.replace('PupuilDashboard', { index: 1, })
+        }
+    }
+    const onOpenhomework = () => {
+        if (User.user.UserType == "Teacher") {
+            props.navigation.replace('TeacherDashboard', { index: 2, })
+        } else {
+            props.navigation.replace('PupuilDashboard', { index: 2, })
+        }
+    }
+
+    const onMonthChangeFunction = (month) => {
+        // const date = moment().format('YYYY-MM-DD')
+        // // const m = month
+        // const d = moment().format('D');
+        // var y = moment().format('YYYY');
+        // console.log('hello index', index, month, year, date);
+        // if (index === 1) {
+        //     console.log('hello 1');
+        //     if (month === 1) {
+        //         console.log('hello 2');
+        //         month = 12
+        //         year = year - 1
+        //     } else {
+        //         console.log('hello 3');
+        //         month = month - 1
+        //     }
+
+        // } else {
+        //     console.log('hello else 1');
+        //     if (month === 12) {
+        //         console.log('hello else 1');
+        //         month = 1
+        //         year = year + 1
+        //     } else {
+        //         console.log('hello else 1');
+        //         month = month + 1
+        //     }
+        // }
+        // console.log("log of current date and time===================>", year, month, date);
+
+        // let datestrings = `${year}-${month}-${date}`
+
+        let data = {
+            CurrentDate: moment(month.timestamp).format('YYYY-MM-DD')
+        }
+        // console.log('data of current date',data, datestrings);
+        if (User.user.UserType === "Teacher") {
+            Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
+                // console.log('previousMonthDateSet ------- response of calender event is:', res)
+                if (res.code == 200) {
+                    // setsta(1)
+                    // setcalEventData(res.data)
+                    dispatch(setCalendarEventData(res.data))
+
+                    // myRef.current.onPressArrowLeft()
+
+                }
+            }, (err) => {
+                console.log('response of calender event eror is:', err)
+            })
+        } else {
+            Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
+                console.log('previousMonthDateSet ------- response of calender event is:', res)
+                if (res.code == 200) {
+                    // setsta(1)
+                    // setcalEventData(res.data)
+                    dispatch(setCalendarEventData(res.data))
+                    // myRef.current.updateMonth(moment(date.CurrentDate).format('YYYY-MM-DD'), true)
+                }
+            }, (err) => {
+                console.log('response of calender event eror is:', err)
+            })
+        }
+
+    }
+    const onDatePress = (date) => {
+        selectedDate.date = date.dateString
+        dispatch(setTimeTableWeekEventData(date.dateString))
+    }
+    // console.log('event data', calEventData);
     return (
         <View style={styles.drawerMain}>
             {
                 Var.isCalender ?
                     <View style={styles.datepickerDrwaer}>
-                        {Var.isCalender = false}
+                        {/* {Var.isCalender = false} */}
                         <Calendar
+                            ref={myRef}
                             minDate={new Date()}
                             firstDay={1}
+                            // onMonthChange={(month) => onMonthChangeFunction(month)}
+                            // onDayPress={(day) => { console.log('day press', day); }}
+                            // onPressArrowLeft={(subtractMonth) => { subtractMonth(); onMonthChangeFunction(1) }}
+                            // onPressArrowRight={(addMonth) => { addMonth(); onMonthChangeFunction(2) }}
                             dayComponent={({ date, state, marking }) => {
                                 return (
-                                    <View>
+                                    <TouchableOpacity onPress={() => onDatePress(date)}>
                                         {
                                             moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
-                                                date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD')  ?
+                                                date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD') ?
                                                     date.dateString == moment(startDate).format('YYYY-MM-DD') ?
                                                         <View style={styles.datemainView1}>
                                                             < View style={styles.dateSubVIew1}>
@@ -118,8 +289,9 @@ const NotificationDrawer = (props) => {
                                         }
                                         {
                                             Object.keys(calEventData).map((item) => {
+                                                // console.log('date strung', item);
                                                 return (
-                                                    moment(item).format('yyyy-MM-DD') === date.dateString ?
+                                                    moment(item).format('YYYY-MM-DD') === date.dateString ?
                                                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                             {
                                                                 calEventData[`${item}`].map((obj) => {
@@ -140,7 +312,7 @@ const NotificationDrawer = (props) => {
 
                                         }
 
-                                    </View>
+                                    </TouchableOpacity>
                                 )
                             }}
                         />
@@ -168,86 +340,149 @@ const NotificationDrawer = (props) => {
                             <Text style={styles.drawerTitle} >My Notifications</Text>
                             <TouchableOpacity style={styles.closeNotificationbarMain}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.closeDrawer()}
+                                onPress={() => props.navigation.goBack()}
                             >
                                 {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIcon} /> */}
-                                <CloseBlack style={styles.closeIcon} height={23} width={23  } />
+                                <CloseBlack style={[styles.closeIcon]} height={23} width={23} />
                             </TouchableOpacity>
                         </View>
                         <ScrollView style={styles.notificationmain} showsVerticalScrollIndicator={false}>
-                            <View>
-                                <Text style={{...styles.notificationsText, paddingTop: hp(1),}}>Live Classes</Text>
-                                <View style={styles.classDetail}>
-                                    <TouchableOpacity style={styles.closeNotificationbar}>
-                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                        </TouchableOpacity>
-                                    <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
-                                    <View style={styles.timingJoinClass}>
-                                        <View style={styles.timing}>
-                                            {/* <Image source={require('../../../../assets/images/clock2.png')} style={styles.timingClass} /> */}
-                                            <Text style={styles.timingText}>09:00 - 09:30</Text>
-                                        </View>
-                                        <TouchableOpacity>
-                                            <Text style={{...STYLE.openClassLink, marginBottom: 0,}}>{[<PopupUser />]}</Text>
-                                        </TouchableOpacity>
+
+                            {
+                                notifications.length ?
+                                    notifications.map((item, index) => {
+                                        return (
+
+                                            item.NotificationType === 'LIVE CLASSES' ?
+                                                <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                    <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>Live Classes</Text>
+                                                    <View style={styles.classDetail}>
+
+                                                        <>
+                                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                                <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
+                                                                <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                    {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                    {/* <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} /> */}
+                                                                    <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                    {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                            <View style={styles.timingJoinClass}>
+                                                                <View style={styles.timing}>
+                                                                    <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
+                                                                    <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                                                </View>
+                                                                <TouchableOpacity onPress={() => { onOpenClass() }} >
+                                                                    {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
+                                                                    <Text style={STYLE.openClassLink}>Open Class</Text>
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                        </>
+
+
+
+                                                    </View>
+                                                </View> : item.NotificationType === 'HOMEWORK' ?
+                                                    <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                        <Text style={styles.notificationsText}>Homework</Text>
+                                                        <View style={styles.classDetail}>
+                                                            <TouchableOpacity style={styles.closeNotificationbar}>
+                                                                {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                            </TouchableOpacity>
+
+                                                            <>
+                                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
+                                                                    <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
+                                                                    <TouchableOpacity onPress={() => deleteNotification(item._id)}>
+                                                                        <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                        {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <View style={styles.timingJoinClass}>
+                                                                    <View style={styles.timing}>
+                                                                        <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                                                    </View>
+                                                                    <TouchableOpacity onPress={() => { onOpenhomework() }} >
+                                                                        <Text style={STYLE.openClassLink}>Check</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            </>
+
+
+                                                        </View>
+                                                    </View>
+                                                    :
+                                                    item.NotificationType === 'LESSON' ?
+                                                        <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                            <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>LESSON</Text>
+                                                            <View style={styles.classDetail}>
+
+                                                                <>
+                                                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                                        <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
+                                                                        <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                            {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                            <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                            {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                        </TouchableOpacity>
+                                                                    </View>
+                                                                    <View style={styles.timingJoinClass}>
+                                                                        <View style={styles.timing}>
+                                                                            <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
+                                                                            <Text style={styles.timingText}>{item.SubDesc}</Text>
+                                                                        </View>
+                                                                        <TouchableOpacity onPress={() => { onOpenhomework() }} >
+                                                                            {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
+                                                                            <Text style={STYLE.openClassLink}>VIEW</Text>
+                                                                        </TouchableOpacity>
+                                                                    </View>
+                                                                </>
+
+
+
+                                                            </View>
+                                                        </View> :
+                                                        <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
+                                                            <Text style={styles.notificationsText}>Personal</Text>
+
+                                                            <View style={styles.classDetail}>
+                                                                <View tyle={styles.timingJoinClass}>
+                                                                    <Text style={[styles.classsummary, { width: '80%' }]}>{item.Title}</Text>
+                                                                    <TouchableOpacity onPress={() => deleteNotification(item._id)} style={styles.closeNotificationbar}>
+                                                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
+                                                                        <CloseBlack style={styles.closeIconSmall} height={hp(2.94)} width={hp(2.94)} />
+                                                                        {/* <Text style={[STYLE.openClassLink, { color: 'red' }]}>DELETE</Text> */}
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <View style={styles.timingJoinClass}>
+                                                                    <View style={styles.timing}>
+                                                                        <Text style={styles.timingText}>{item.Description}</Text>
+                                                                    </View>
+                                                                    <TouchableOpacity onPress={() => { props.navigation.navigate('Passcode') }}>
+                                                                        <Text style={STYLE.openClassLink}>Read</Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            </View>
+                                                        </View>
+                                        )
+                                    })
+                                    :
+                                    <View style={{ height: 100, justifyContent: 'center' }}>
+                                        <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No new notifications!</Text>
                                     </View>
-                                </View>
-                            </View>
-                            <View>
-                                <Text style={styles.notificationsText}>Homework</Text>
-                                <View style={styles.classDetail}>
-                                    <TouchableOpacity style={styles.closeNotificationbar}>
-                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                        </TouchableOpacity>
-                                    <Text style={styles.classsummary}>Your English Grammar class - Group 1A is schedule to start in 5m</Text>
-                                    <View style={styles.timingJoinClass}>
-                                        <View style={styles.timing}>
-                                            <Text style={styles.timingText}>6 submitted</Text>
-                                        </View>
-                                        <TouchableOpacity>
-                                            <Text style={STYLE.openClassLink}>Check</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                            <View>
-                                <Text style={styles.notificationsText}>Personal</Text>
-                                <View style={styles.classDetail}>
-                                    <TouchableOpacity style={styles.closeNotificationbar}>
-                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                        </TouchableOpacity>
-                                    <Text style={styles.classsummary}>You have a new message from</Text>
-                                    <View style={styles.timingJoinClass}>
-                                        <View style={styles.timing}>
-                                            <Text style={styles.timingText}>Mrs Ann Le-Paradesi</Text>
-                                        </View>
-                                        <TouchableOpacity>
-                                            <Text style={STYLE.openClassLink}>Read</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={styles.classDetailLast}>
-                                    <TouchableOpacity style={styles.closeNotificationbar}>
-                                        {/* <Image source={require('../../../../assets/images/cancel2.png')} style={styles.closeIconSmall} /> */}
-                                        </TouchableOpacity>
-                                    <Text style={styles.classsummary}>You have a new message from</Text>
-                                    <View style={styles.timingJoinClass}>
-                                        <View style={styles.timing}>
-                                            <Text style={styles.timingText}>Mr Harminder Singh</Text>
-                                        </View>
-                                        <TouchableOpacity>
-                                            <Text style={STYLE.openClassLink}>Read</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
+                                    
+                            }
+
+                            {/* ≥ */}
+
                         </ScrollView>
-                        <View style={styles.bottomButton}>
+                        {/* <View style={styles.bottomButton}>
                             <TouchableOpacity style={styles.buttonTrash}>
-                                {/* <Image source={Images.trashIcon} style={styles.trashIcon} /> */}
+                                <Image source={Images.trashIcon} style={styles.trashIcon} />
                                 <Text style={styles.clearText}>Clear all notifications</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
                     </View>
             }
         </View >
@@ -320,13 +555,18 @@ const styles = StyleSheet.create({
     },
     closeNotificationbar: {
         position: 'absolute',
-        top: hp(0.7),
-        right: hp(1.95),
+        top: -10,
+        right: 0,
     },
     closeIconSmall: {
-        width: hp(2.8),
+        width: hp(2.94),
         resizeMode: 'contain',
-        opacity: 0.4,
+        opacity: 0.6,
+        // alignSelf:'flex-end'
+    },
+    closeIconSmall1: {
+        width: hp(2.5),
+        resizeMode: 'contain',
     },
     classsummary: {
         paddingRight: hp(5.1),

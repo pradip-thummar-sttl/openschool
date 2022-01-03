@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../../utils/Fonts';
@@ -774,11 +774,19 @@ export default StyleSheet.create({
         height: hp(8.85),
         borderRadius: hp(0.6),
         marginBottom:hp(0.78),
+       
+    },
+    pupilDataList : {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width : '100%',
+        
     },
     pupilProfile: {
         width: hp(15.80),
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent : 'center'
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -866,10 +874,16 @@ export default StyleSheet.create({
     },
     firstColumn: {
         paddingLeft: hp(4.5),
-        width: hp(34.55),
+        width: hp(40),
+        // backgroundColor  :'red',
+        marginRight : hp(2),
+        alignItems : 'center'
     },
     secoundColumn: {
-        width: hp(22.55),
+        width: hp(30),
+        alignItems : 'center',
+       marginHorizontal : 5,
+    //    backgroundColor : 'blue'
     },
     lastColumn: {
         width: hp(18.55),
@@ -1207,6 +1221,7 @@ export default StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 2,
+        
     },
     userIcon1: {
         position: 'absolute',
@@ -1214,8 +1229,10 @@ export default StyleSheet.create({
         height: hp(2),
         resizeMode: 'contain',
         alignSelf: 'center',
-        top: 10,
+        // top: hp(1),
+        top : Platform.OS === 'android' ? hp(1) : hp(2),
         right: 5
+       
     },
     autocompleteContainer: {
         flex: 1,
@@ -1264,10 +1281,11 @@ export default StyleSheet.create({
         position: 'relative',
         width: hp(30),
         justifyContent: 'center',
+        // alignItems : 'center',
         marginRight: hp(1.69),
     },
     searchHeader: {
-        height: hp(5.20),
+        height: hp(6.20),
         paddingLeft: 15,
         borderColor: COLORS.borderGrp,
         fontSize: hp(1.82),
@@ -1382,5 +1400,54 @@ export default StyleSheet.create({
     },
     closeIcon: {
         resizeMode: 'contain',
+    },
+    // recording name
+    popupCard: {
+        backgroundColor: COLORS.white,
+        borderRadius: hp(2),
+        width: hp(60.54),
+        alignItems: 'center',
+        alignSelf: 'center',
+        overflow: 'hidden',
+        fontFamily: FONTS.fontRegular,
+        position: 'relative',
+    },
+    popupContent: {
+        width: '100%',
+    },
+    beforeBorder: {
+        padding: hp(2.60),
+        paddingBottom: hp(0.5),
+    },
+    afterBorder: {
+        padding: hp(2.60),
+        paddingTop: hp(0.5),
+    },
+    titleTab: {
+        fontSize: hp(3.125),
+        fontFamily: FONTS.fontBold,
+        lineHeight: hp(4.55),
+        color: COLORS.darkGray,
+        marginBottom: hp(6.51),
+    },
+    cancelButton: {
+        position: 'absolute',
+        right: hp(1.5),
+        zIndex: 9,
+        top: hp(1),
+    },
+    popupCustomButton: {
+        paddingLeft: hp(4.42),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+    },
+    buttonGrp: {
+        position: 'relative',
+        alignItems: 'center',
+        // flexDirection: 'row',
+        // marginTop:hp(2),
+        justifyContent:'center',
+        marginVertical:hp(2)
     },
 });

@@ -263,7 +263,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.82),
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(2.5),
+        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(3),
         minHeight: hp(6),
         paddingRight: hp(1),
     },
@@ -276,7 +276,8 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
-        top: 5,
+        top : Platform.OS === 'android' ? 3 : 4,
+        // top: 3,
         left: 3,
         fontFamily: FONTS.fontBold,
     },
@@ -319,6 +320,11 @@ export default StyleSheet.create({
         width: hp(2.01),
         resizeMode: 'contain',
         top: hp(-0.5),
+    },
+    downloadIconPupil: {
+        width: hp(2.01),
+        // resizeMode: 'contain',
+        // top: hp(-0.5),
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -1259,8 +1265,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGray,
-        lineHeight: hp(3.6),
+        // lineHeight: hp(3.6),
         paddingLeft: hp(0.91),
+    
+        
     },
     bookMarkLabel: {
         width: hp(1.81),
@@ -1305,10 +1313,11 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightOrangeDue,
     },
     lessonThumb: {
-        width: hp(2.46),
-        height: hp(2.46),
+        width: hp(2.47),
+        height: hp(2.47),
         backgroundColor: COLORS.lightGrayPupil,
         borderRadius: hp(100),
+       
     },
     dueVideoUserSpace: {
         paddingLeft: hp(1.04),

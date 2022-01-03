@@ -429,6 +429,7 @@ export default StyleSheet.create({
         shadowRadius: 1,
         width:'100%',
         padding:hp(3),
+       
     },
     purpleMark:{
         width:hp(1.82),

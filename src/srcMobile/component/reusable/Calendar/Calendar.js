@@ -1,5 +1,5 @@
-import React,{useEffect} from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Platform,BackHandler } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, BackHandler } from 'react-native';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
@@ -10,6 +10,11 @@ import FONTS from '../../../../utils/Fonts';
 import { opacity, Var } from '../../../../utils/Constant';
 // import Images from "../../../../utils/Images";
 import BackArrow from '../../../../svg/common/BackArrow';
+import { setCalendarEventData, setTimeTableWeekEventData } from "../../../../actions/action";
+import { Service } from "../../../../service/Service";
+import { EndPoints } from "../../../../service/EndPoints";
+import { User, selectedDate } from "../../../../utils/Model";
+import { useDispatch } from "react-redux";
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
 const Calendars = (props) => {
@@ -19,23 +24,75 @@ const Calendars = (props) => {
     })
     // console.log('cal  event data', calEventData)
 
-    useEffect(() => {
-        if (Platform.OS==="android") {
-            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
-        return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-      }, [props.navigation]);
+    const [isLoading, setLoading] = useState(true)
+    const [dateApiData, setDateApiData] = useState([])
 
-      const handleBackButtonClick=()=> {
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        }
+
+
+        let data = {
+            // CurrentDate: moment('2021-11-24').format('yyyy-MM-DD')
+            CurrentDate: moment().format('yyyy-MM-DD')
+
+        }
+
+        if (User.user.UserType === "Teacher") {
+
+            Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
+                if (res.code == 200) {
+                    setDateApiData(res.data)
+                    setLoading(false)
+                }
+            }, (err) => {
+                console.log('response of calender event eror is:', err)
+            })
+
+        }
+        else {
+
+            Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
+                if (res.code == 200) {
+                    setDateApiData(res.data)
+                    setLoading(false)
+                }
+            }, (err) => {
+                console.log('response of calender event eror is:', err)
+            })
+        }
+
+
+
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+    }, [props.navigation]);
+
+    const handleBackButtonClick = () => {
         // props.route.params.goBack()
-        props.navigation.goBack() 
+        props.navigation.goBack()
         return true;
-      }
+    }
+
+
 
     var startDate = moment().startOf('isoWeek');
     var endDate = moment().endOf('isoWeek');
+    const dispatch = useDispatch()
+
+
+    const onDatePress = (date) => {
+        selectedDate.date = date.dateString
+        dispatch(setTimeTableWeekEventData(date.dateString))
+        setTimeout(() => {
+            props.navigation.goBack()
+            return true;
+        }, 500)
+    }
+
+
     return (
         <View style={{ backgroundColor: 'white', flex: 1 }}>
 
@@ -46,103 +103,106 @@ const Calendars = (props) => {
                 >
                     {/* <Image source={Images.backArrow} style={styles.closeIcon} /> */}
                     <BackArrow style={styles.closeIcon} height={hp(2)} width={hp(2.4)} />
-                    
+
                 </TouchableOpacity>
             </View>
-            <Calendar
-                style={styles.datepickerDrwaer}
-                minDate={new Date()}
-                firstDay={1}
-                dayComponent={({ date, state, marking }) => {
-                    return (
-                        <View>
-                            {
-                                moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
-                                date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD')  ?
-                                    date.dateString == moment(startDate).format('YYYY-MM-DD') ?
-                                        <View style={styles.datemainView1}>
-                                            < View style={styles.dateSubVIew1}>
-                                                <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+            {isLoading == false ?
+                <Calendar
+                    style={styles.datepickerDrwaer}
+                    minDate={new Date()}
+                    firstDay={1}
+                    dayComponent={({ date, state, marking }) => {
+                        return (
+                            // <View>
+                            <TouchableOpacity onPress={() => onDatePress(date)}>
+                                {
+                                    moment(startDate).format('YYYY-MM-DD') <= date.dateString && moment(endDate).format('YYYY-MM-DD') >= date.dateString ?
+                                        date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD') ?
+                                            date.dateString == moment(startDate).format('YYYY-MM-DD') ?
+                                                <View style={styles.datemainView1}>
+                                                    < View style={styles.dateSubVIew1}>
+                                                        <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                    </View>
+                                                </View>
+                                                :
+                                                <View style={styles.dateMainView2}>
+                                                    < View style={styles.dateSubVIew1}>
+                                                        <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                                    </View>
+                                                </View>
+                                            :
+                                            <View style={styles.dateMAinView3}>
+                                                < View style={styles.dateSubView2}>
+                                                    <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                                </View>
                                             </View>
-                                        </View>
                                         :
-                                        <View style={styles.dateMainView2}>
-                                            < View style={styles.dateSubVIew1}>
-                                                <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                        <View style={styles.datemainView4}>
+                                            < View style={styles.dateSubView3}>
+                                                <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
                                             </View>
                                         </View>
-                                    :
-                                    <View style={styles.dateMAinView3}>
-                                        < View style={styles.dateSubView2}>
-                                            <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
-                                        </View>
-                                    </View>
-                                :
-                                <View style={styles.datemainView4}>
-                                    < View style={styles.dateSubView3}>
-                                        <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
-                                    </View>
-                                </View>
-                                // periodDate.includes(date.dateString) ?
-                                //     date.dateString == periodDate[0] || date.dateString == periodDate[periodDate.length - 1] ?
-                                //         date.dateString == periodDate[0] ?
-                                //             <View style={styles.datemainView1}>
-                                //                 < View style={styles.dateSubVIew1}>
-                                //                     <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
-                                //                 </View>
-                                //             </View>
-                                //             :
-                                //             <View style={styles.dateMainView2}>
-                                //                 < View style={styles.dateSubVIew1}>
-                                //                     <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
-                                //                 </View>
-                                //             </View>
-                                //         :
-                                //         <View style={styles.dateMAinView3}>
-                                //             < View style={styles.dateSubView2}>
-                                //                 <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
-                                //             </View>
-                                //         </View>
-                                //     :
-                                //     <View style={styles.datemainView4}>
-                                //         < View style={styles.dateSubView3}>
-                                //             <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
-                                //         </View>
-                                //     </View>
-                            }
-                            {
-                                Object.keys(calEventData).map((item) => {
-                                    return (
-                                        moment(item).format('yyyy-MM-DD') === date.dateString ?
-                                            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                                                {
-                                                    calEventData[`${item}`].map((obj) => {
-                                                        console.log('uitem 2', calEventData[`${item}`])
-                                                        return (
-                                                            <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
-                                                        )
-                                                    })
-                                                }
-                                            </View> : null
-                                    )
-                                })
+                                    // periodDate.includes(date.dateString) ?
+                                    //     date.dateString == periodDate[0] || date.dateString == periodDate[periodDate.length - 1] ?
+                                    //         date.dateString == periodDate[0] ?
+                                    //             <View style={styles.datemainView1}>
+                                    //                 < View style={styles.dateSubVIew1}>
+                                    //                     <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                    //                 </View>
+                                    //             </View>
+                                    //             :
+                                    //             <View style={styles.dateMainView2}>
+                                    //                 < View style={styles.dateSubVIew1}>
+                                    //                     <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
+                                    //                 </View>
+                                    //             </View>
+                                    //         :
+                                    //         <View style={styles.dateMAinView3}>
+                                    //             < View style={styles.dateSubView2}>
+                                    //                 <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                    //             </View>
+                                    //         </View>
+                                    //     :
+                                    //     <View style={styles.datemainView4}>
+                                    //         < View style={styles.dateSubView3}>
+                                    //             <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black' }}>{date.day}</Text>
+                                    //         </View>
+                                    //     </View>
+                                }
+                                {
+                                    Object.keys(dateApiData).map((item) => {
+                                        return (
+                                            moment(item).format('yyyy-MM-DD') === date.dateString ?
+                                                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                                    {
+                                                        dateApiData[`${item}`].map((obj) => {
+                                                            console.log('uitem 2', dateApiData[`${item}`])
+                                                            return (
+                                                                <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
+                                                            )
+                                                        })
+                                                    }
+                                                </View> : null
+                                        )
+                                    })
 
-                                // calEventData.map((item) => {
-                                //     return (
-                                //         moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
-                                //             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                                //                 {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
-                                //                 <View style={{ position: 'absolute', top: hp(0.1), left: hp(-0.26), height: hp(0.77), width: hp(0.77), borderRadius: hp(0.77), backgroundColor: item.EventColor, }} />
-                                //             </View> : null
-                                //     )
-                                // })
+                                    // calEventData.map((item) => {
+                                    //     return (
+                                    //         moment(item.EventDate).format('yyyy-MM-DD') === date.dateString ?
+                                    //             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                                    //                 {/* <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: 'purple', marginRight: 2 }} /> */}
+                                    //                 <View style={{ position: 'absolute', top: hp(0.1), left: hp(-0.26), height: hp(0.77), width: hp(0.77), borderRadius: hp(0.77), backgroundColor: item.EventColor, }} />
+                                    //             </View> : null
+                                    //     )
+                                    // })
 
-                            }
+                                }
 
-                        </View>
-                    )
-                }}
-            />
+                                {/* </View> */}
+                            </TouchableOpacity>
+                        )
+                    }}
+                /> : null}
 
             <View style={{ paddingLeft: hp(1.97), marginTop: hp(6.0) }}>
                 <View style={styles.colorView}>

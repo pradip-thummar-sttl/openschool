@@ -18,6 +18,8 @@ import { EndPoints } from '../../../../service/EndPoints'
 import { User } from '../../../../utils/Model'
 import { baseUrl } from '../../../../utils/Constant';
 import FONTS from '../../../../utils/Fonts';
+import { BadgeIcon, User } from '../../../../utils/Model'
+import { Var } from '../../../../utils/Constant'
 
 var tabs = [
     { name: 'COLOUR', isSelected: false },
@@ -60,7 +62,14 @@ const Avatar = (prop) => {
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
 
+
     useEffect(() => {
+        refresh()
+    }, [])
+
+
+    const refresh = () => {
+
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag) {
@@ -250,8 +259,7 @@ const Avatar = (prop) => {
             console.log('err', err)
         })
 
-
-    }, [])
+    }
 
     const changeTab = (index) => {
         let newArr = [...stateOptions];
@@ -383,10 +391,17 @@ const Avatar = (prop) => {
 
     }
 
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        prop.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+    }
+
+
 
     return (
         <View>
-            <AvatarHeader onAlertPress={() => { prop.navigation.openDrawer() }} />
+            <AvatarHeader onAlertPress={() => { prop.navigation.openDrawer() }} onNotification={() => openNotification()} />
             <View style={Styles.mainView}>
                 <View style={Styles.yellowView}>
                     <Text style={Styles.subText}>Your stars convert to</Text>

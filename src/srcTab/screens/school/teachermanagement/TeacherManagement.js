@@ -6,7 +6,7 @@ import HeaderTM from "./header/HeaderTM";
 import { baseUrl, showMessage, Var } from "../../../../utils/Constant";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import ArrowNext from "../../../../svg/teacher/pupilmanagement/ArrowNext";
 import NoPupil from "../../../../svg/emptystate/NoPupil";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -98,28 +98,26 @@ const TeacherManagement = (props) => {
 
     const pupilRender = ({ item }) => {
         return (
-            <Pupillist
-                item={item}
-                onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}
-            />
+            <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
         );
     };
+
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+    }
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                {isTeacherDetail ?
-                    <TeacherProfileView
-                        selectedTeacher={teacherDetailData}
-                        navigateToBack={() => setTeacherDetail(false)} />
+                {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
                     :
-                    isTeacherAdd ?
-                        <TeacherProfileAdd 
-                            navigateToBack={() => setTeacherAdd(false)} />
+                    isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
                         :
                         <>
                             <HeaderTM
-                                onAlertPress={() => { props.navigation.openDrawer() }}
+                                onAlertPress={() => { openNotification() }}
                                 onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                                 onSearch={() => fetchRecord(searchKeyword, filterBy)}
@@ -127,6 +125,7 @@ const TeacherManagement = (props) => {
                                 refreshList={() => refresh()}
                                 navigateToAddTeacher={() => setTeacherAdd(true)}
                                 onFilter={(filterBy) => fetchRecord('', filterBy)} />
+
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isDataLoading ?
                                     <ActivityIndicator
@@ -173,10 +172,6 @@ const TeacherManagement = (props) => {
                                             </View>
                                         </View>
                                         :
-
-                                        // <View>
-                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        // </View>
                                         <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
                                 }
                             </View>

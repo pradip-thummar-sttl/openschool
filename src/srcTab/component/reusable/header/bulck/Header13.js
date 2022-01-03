@@ -16,6 +16,7 @@ import {
 import { opacity } from "../../../../../utils/Constant";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import BackArrow from "../../../../../svg/common/BackArrow";
+import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -31,7 +32,10 @@ const HeaderWhite = (props) => {
                         onPress={() => props.onAlertPress()}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

@@ -141,6 +141,11 @@ const TeacherLessonDetail = (props) => {
             if (element.uri) {
                 let ext = element.fileName.split('.');
 
+                if (Platform.OS === 'ios') {
+                    ext = element.uri.split('.');
+                }
+
+
                 data.append('recording', {
                     uri: element.uri,
                     // name: element.fileName,
@@ -234,7 +239,9 @@ const TeacherLessonDetail = (props) => {
                                     date={lessonData.Date}
                                     navigateToBack={() => props.navigation.goBack()}
                                     onAlertPress={() => props.navigation.openDrawer()}
-                                    navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
+                                    navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })}
+                                    onNotification = {() => props.navigation.navigate('NotificationDrawer')}
+                                    />
                                 : tabIndex == 1 ?
                                     <HeaderHW
                                         hwBtnName={updateFlag ? 'Update' : 'Set'}
@@ -282,30 +289,26 @@ const TeacherLessonDetail = (props) => {
                                 </View>
                             </View>
                             <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
-                                {tabIndex == 0 ?
-                                    <TLDetail lessonData={lessonData} />
-                                    : tabIndex == 1 ?
-                                        <TLHomeWork
-                                            id={props.route.params.data._id}
-                                            updateBtnName={(flag) => setUpdate(flag)}
-                                            navigateScreeCamera={() => setScreenAndCameraRecording(true)}
-                                            navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery', { goBack: () => props.navigation.goBack() })} />
+                                {
+                                    tabIndex == 0 ?
+                                        <TLDetail lessonData={lessonData} />
                                         :
-                                        <TLHomeWorkSubmitted
-                                            lessonId={lessonData._id}
-                                            searchKeyword={searchKeyword}
-                                            filterBy={filterBy}
-                                            searchActive={isSearchActive}
-                                            dataChanged={isHSDataChanged}
-                                            navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
+                                        tabIndex == 1 ?
+                                            <TLHomeWork
+                                                id={props.route.params.data._id}
+                                                updateBtnName={(flag) => setUpdate(flag)}
+                                                navigateScreeCamera={() => setScreenAndCameraRecording(true)}
+                                                navigateToVideoGallery={() => props.navigation.navigate('TLVideoGallery', { goBack: () => props.navigation.goBack() })} />
+                                            :
+                                            <TLHomeWorkSubmitted
+                                                lessonId={lessonData._id}
+                                                searchKeyword={searchKeyword}
+                                                filterBy={filterBy}
+                                                searchActive={isSearchActive}
+                                                dataChanged={isHSDataChanged}
+                                                navigateToDetail={(data) => props.navigation.navigate('TLHomeWorkSubmittedDetail', { onGoBack: () => { console.log('BACK'); setHSDataChanged(true) }, 'item': data })} />
                                 }
-                                {/* <TLDetailEdit /> */}
-                                {/* <TLDetailAdd /> */}
-                                {/* <TLVideoGallery /> */}
-                                {/* <TLHomeWorkInstructionalVideoWithRecording /> */}
-                                {/* <TLHomeWorkInstructionalVideoAdded /> */}
-                                {/* <TLHomeWorkSubmittedDetail /> */}
-                                {/* <TLHomeWorkSubmittedDetailConfirmation /> */}
+
                             </ScrollView>
 
                         </View>}

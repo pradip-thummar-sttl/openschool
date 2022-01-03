@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -190,9 +190,9 @@ export default StyleSheet.create({
         top: 32,
     },
     thumbTopUser1: {
-        width: 100,
-        height: 100,
-        borderRadius: 100,
+        width: hp(13),
+        height: hp(13),
+        borderRadius: hp(13),
         borderColor: COLORS.white,
         borderWidth: 4,
     },
@@ -212,8 +212,9 @@ export default StyleSheet.create({
         textTransform: 'uppercase',
         borderRadius: 8,
         borderWidth: 1,
-        width: 128,
-        height: 40,
+        // width: 125,
+        width: Platform.OS === 'android' ? 122: 125,
+        height: Platform.OS === 'android' ? 34: 40,
         textAlign: 'center',
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
@@ -222,8 +223,10 @@ export default StyleSheet.create({
     topBannerParent: {
         paddingHorizontal: 10,
         position: 'absolute',
-        right: 32,
-        top: 17,
+        // right: 32,
+        right: Platform.OS === 'android' ? wp(14) : 32,
+        top: Platform.OS === 'android' ? hp(2) : 17
+        // top: 17,
     },
     managementNameSec: {
         flexDirection: 'row',
@@ -251,11 +254,11 @@ export default StyleSheet.create({
     passSmlBlock: {
         marginRight: hp(2),
         width: 200,
-    },    
+    },
     addSmlBlock: {
         marginRight: hp(2),
         width: 625,
-    },    
+    },
     dateSmlBlock: {
         marginRight: hp(2),
         width: 200,
@@ -391,7 +394,7 @@ export default StyleSheet.create({
         width: 10,
         height: 10,
         borderRadius: hp(1.8),
-        backgroundColor:'purple'
+        backgroundColor: 'purple'
     },
     labelMark: {
         fontFamily: FONTS.fontRegular,
@@ -429,8 +432,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginTop: hp(0.3),
         marginRight: hp(1.5),
-        backgroundColor:'#BE8CFF',
-        borderRadius:5
+        backgroundColor: '#BE8CFF',
+        borderRadius: 5
     },
     orangeMark: {
         width: hp(1.82),
@@ -438,8 +441,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginTop: hp(0.3),
         marginRight: hp(1.5),
-        backgroundColor:'orange',
-        borderRadius:5
+        backgroundColor: 'orange',
+        borderRadius: 5
     },
     mngmntgraphImg: {
         width: hp(118.16),
@@ -450,13 +453,14 @@ export default StyleSheet.create({
         marginBottom: hp(1.5),
     },
     pzEditIcon: {
-        width: hp(3.38),
-        height: hp(3.38),
-        resizeMode: 'contain',
+        width: hp(4),
+        height: hp(4),
         position: 'absolute',
-        left: hp(4.8),
-        bottom: hp(-1.6),
-        backgroundColor: COLORS.white
+        bottom: hp(-1.5),
+        borderRadius: 100,
+        backgroundColor: COLORS.white,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     editProfileIcon: {
         width: hp(3.38),
@@ -705,8 +709,7 @@ export default StyleSheet.create({
         marginBottom: 90,
     },
     dateField: {
-        paddingRight: hp(5),
-        paddingLeft: hp(5),
+        paddingHorizontal: 10,
     },
     dateIconSml: {
         position: 'absolute',
@@ -726,7 +729,7 @@ export default StyleSheet.create({
         marginLeft: hp(1.5),
     },
     dropArrow1: {
-        position:'absolute',
+        position: 'absolute',
         width: hp(1.51),
         height: hp(0.95),
         resizeMode: 'contain',
@@ -1001,7 +1004,7 @@ export default StyleSheet.create({
         width: '100%',
     },
     commonInput: {
-        color:COLORS.darkGrayIntro,
+        color: COLORS.darkGrayIntro,
         fontSize: 14,
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
@@ -1014,7 +1017,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     commonInputPassword: {
-        color:COLORS.darkGrayIntro,
+        color: COLORS.darkGrayIntro,
         fontSize: 14,
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
@@ -1245,15 +1248,19 @@ export default StyleSheet.create({
         marginTop: 20,
     },
     proffileLogo: {
-        width: 100,
-        height: 100,
+        width: Platform.OS === 'android' ? 60 : 100,
+        height: Platform.OS === 'android' ? 60 : 100,
+        // width: 100,
+        // height: 100,
         resizeMode: 'cover',
         borderRadius: hp(100),
         position: 'absolute',
-        left: 78,
+        // left: 78,
+        left: Platform.OS === 'android' ? hp(30) : 78,
         borderColor: COLORS.white,
         borderWidth: 4,
         backgroundColor: COLORS.greyBack,
-        top: 32,
+        top: Platform.OS === 'android' ? hp(2) : 32
+        // top: 32,
     },
 });

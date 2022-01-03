@@ -311,6 +311,7 @@ export default StyleSheet.create({
     },
     profileImageArea: {
         alignItems: 'center',
+        backgroundColor:'#90daff'
     },
     coverImage: {
         width: '100%',
@@ -364,7 +365,7 @@ export default StyleSheet.create({
         height: 110,
         alignItems:'center',
         flexDirection: 'row',
-        marginTop: 50,
+        marginTop: hp(4),
     },
     insightBox: {
         backgroundColor: COLORS.greyInsight,
@@ -466,7 +467,7 @@ export default StyleSheet.create({
     },
     pupilPerfomance: {
         marginTop: hp(2.5),
-        paddingLeft: hp(2),
+       
         marginBottom: hp(3)
     },
     pupilPerfomanceEdit: {
@@ -498,6 +499,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.darkGray,
         marginBottom: hp(1),
+        marginLeft:hp(1)
     },
     graph: {
         width: '100%',

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -22,6 +22,7 @@ import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 import Teachers from "../../../../svg/sidebar/Teachers";
 import Pupils from "../../../../svg/sidebar/Pupils";
 import Messaging from "../../../../svg/sidebar/Messaging";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 
 const SidebarSchool = (props) => {
@@ -84,10 +85,12 @@ const SidebarSchool = (props) => {
             { cancelable: true }
         )
     }
-
+   
     const teacherLogout = () => {
-        AsyncStorage.setItem('user', JSON.stringify(null))
+        AsyncStorage.setItem('school', JSON.stringify(null))
+        AsyncStorage.setItem('type', "")
         props.navigateUser()
+
 
     }
 
@@ -223,7 +226,7 @@ const SidebarSchool = (props) => {
                             {
                                 isSmall ? null :
                                     <>
-                                        <View style={styles.profileTextMain}>
+                                        <View style={[styles.profileTextMain,{width : '64%'}]}>
                                             <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                                         </View>
                                         <TouchableOpacity style={styles.moreMenu}>
@@ -350,6 +353,7 @@ const styles = StyleSheet.create({
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
+        right : Platform.OS === 'android' ? 8 : 0
     },
     moreMenu: {
         // position: 'absolute',

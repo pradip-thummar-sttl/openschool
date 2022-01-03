@@ -15,7 +15,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import FONTS from '../../../../utils/Fonts'
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+import { BadgeIcon, User } from '../../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import MESSAGE from '../../../../utils/Messages';
 import CloseBlack from '../../../../svg/teacher/timetable/Close_Black';
@@ -86,7 +86,6 @@ const TeacherManagement = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.pupilDetailLink}>
-                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
                     <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
                 </View>
             </TouchableOpacity>
@@ -141,16 +140,17 @@ const TeacherManagement = (props) => {
         }
     }
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+    }
+    
+
     return (
         <View>
-            {/* <HeaderTM
-                onAlertPress={() => props.navigation.openDrawer()}
-                title={'Teacher Management'}
-            /> */}
 
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
-                // onCalenderPress={() => { props.navigation.navigate('Calendars') }}
                 openCsv={()=>{}}
                 navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
@@ -160,7 +160,8 @@ const TeacherManagement = (props) => {
                 refreshList={() => refresh()}
                 title={'Teacher Management'}
                 userType={'Teacher'}
-                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                onFilter={(filterBy) => fetchRecord('', filterBy)} 
+                onNotification={()=> openNotification()} />
 
             {/* {searchHeader()} */}
             {isLoading ?

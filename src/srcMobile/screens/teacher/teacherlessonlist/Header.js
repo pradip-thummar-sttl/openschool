@@ -21,6 +21,7 @@ import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import { BadgeIcon } from "../../../../utils/Model";
 const Header = (props) => {
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
@@ -55,10 +56,15 @@ const Header = (props) => {
                         <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
                     </TouchableOpacity> */}
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -126,6 +132,34 @@ const Header = (props) => {
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
                                             // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 2 ?
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 3 ?
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null

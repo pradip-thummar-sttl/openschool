@@ -5,5 +5,7 @@
         <domain includeSubdomains="true">14.143.90.234</domain>
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">192.168.0.218</domain>
+        <domain includeSubdomains="true">janus.quickblox.com</domain>
+        <domain includeSubdomains="true">13.126.26.24</domain>
     </domain-config>
 </network-security-config>

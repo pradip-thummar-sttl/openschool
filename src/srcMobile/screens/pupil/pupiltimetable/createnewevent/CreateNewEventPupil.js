@@ -279,7 +279,7 @@ const CreateNewEventPupil = (props) => {
                     <View style={styles.tabcontent}>
                         <KeyboardAwareScrollView>
                             <View style={styles.beforeBorder}>
-                                <View style={styles.titleSave}>
+                                <View style={[styles.titleSave,{marginTop : 10}]}>
                                     <View style={styles.title}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}

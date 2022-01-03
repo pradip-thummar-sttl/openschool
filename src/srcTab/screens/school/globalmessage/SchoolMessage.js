@@ -50,7 +50,7 @@ const SchoolMessage = (props) => {
         }
 
         // Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {
-        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user.UserDetialId}/S`, (res) => {
+        Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/S`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
@@ -112,7 +112,9 @@ const SchoolMessage = (props) => {
                             onSearch={() => fetchRecord(keyword, filterBy)}
                             onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
                             onFilter={(filterBy) => fetchRecord('', filterBy)}
-                            onNewMessage={() => setAddMessage(true)} />
+                            onNewMessage={() => setAddMessage(true)} 
+                            {...props}
+                            />
 
                         <View style={{ backgroundColor: COLORS.greyBack, flex:1 }}>
                             {isLoading ?

@@ -10,17 +10,20 @@ import moment from 'moment';
 import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
+
 
 const HeaderUpdate = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                        <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
+                        <BackArrow style={[styles.arrow,]} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment().format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
                     {/* <TouchableOpacity style={styles.buttonGrp}>
@@ -50,6 +53,10 @@ const HeaderUpdate = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -63,7 +70,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,
@@ -257,7 +264,8 @@ const styles = StyleSheet.create({
         width: hp(2.34),
         resizeMode: 'contain',
         marginRight: hp(1),
-        top: -3,
+        // top: -3,
+        // alignItems  :'center'
     },
     commonButtonGreenheaderwithouticon: {
         backgroundColor: COLORS.dashboardGreenButton,

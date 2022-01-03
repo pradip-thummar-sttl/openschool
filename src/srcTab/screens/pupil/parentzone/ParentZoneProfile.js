@@ -29,7 +29,8 @@ const ParentZoneProfile = (props) => {
                             <View style={PAGESTYLE.profile}>
                                 <View style={PAGESTYLE.managementBlockTop} >
                                     {/* <ImageBackground style={PAGESTYLE.managementopImage} source={Images.managementBlockTopImg} /> */}
-                                    <EditProfileTop_Tablet style={PAGESTYLE.managementopImage} height={hp(14.06)} width={'100%'}/>
+                                    <EditProfileTop_Tablet style={PAGESTYLE.managementopImage} 
+                                    height={hp(14.06)} width={'100%'}/>
                                     {/* childrenList.length == 0 ? Images.userparent : */}
                                     <Image style={PAGESTYLE.proffileLogo} source={ { uri: baseUrl + props.data.ProfilePicture }} />
                                     <View style={PAGESTYLE.topBannerParent}>

@@ -36,7 +36,7 @@ const PupilChat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event]);
+            addMessage(messages => [...messages, event].reverse());
         }
     };
 
@@ -81,7 +81,7 @@ const PupilChat = (props) => {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ height: '100%'}}>
 
             {selectedTeacherIndex != -1 ?
                 <>
@@ -91,6 +91,7 @@ const PupilChat = (props) => {
                             <KeyboardAwareScrollView enableOnAndroid={true}
                                 extraScrollHeight={90}
                                 scrollEnabled
+                                contentContainerStyle={{flex: 1}}
                                 enableAutomaticScroll={(Platform.OS === 'ios')} >
 
 
@@ -99,6 +100,8 @@ const PupilChat = (props) => {
                                     <FlatList
                                         data={messages}
                                         showsVerticalScrollIndicator={false}
+                                        inverted={true}
+                                        style={{ marginBottom: 120 }}
                                         renderItem={({ item, index }) => {
                                             return (
                                                 <View style={Styles.messageCell}>
@@ -111,7 +114,7 @@ const PupilChat = (props) => {
                                             )
                                         }} />
                                 </View>
-                                <View style={[Styles.textView, { width: '100%',  }]}>
+                                <View style={[Styles.textView, { width: '100%', bottom : 18 }]}>
                                     <TextInput
                                         style={Styles.input}
                                         multiline={true}

@@ -39,6 +39,9 @@ import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
 
+
+import Modal from 'react-native-modal';
+
 const { DialogModule, Dialog } = NativeModules;
 
 const STLDetailAdd = (props) => {
@@ -79,6 +82,13 @@ const STLDetailAdd = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
 
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+
+    
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -316,8 +326,9 @@ const STLDetailAdd = (props) => {
 
 
     }
-
     const stopRecording = async () => {
+        if (recordingName.length > 0) {
+         
         var arr = []
         const res = await RecordScreen.stopRecording().catch((error) => {
             setRecordingStarted(false)
@@ -327,26 +338,110 @@ const STLDetailAdd = (props) => {
             setRecordingStarted(false)
             const url = res.result.outputURL;
             let ext = url.split('.');
+            // let obj = {
+            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+            //     originalname: 'MY_RECORDING.mp4',
+            //     fileName: 'MY_RECORDING.mp4',
+            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            // }
             let obj = {
                 uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: 'MY_RECORDING.mp4',
-                fileName: 'MY_RECORDING.mp4',
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             }
             arr.push(obj)
             setRecordingArr(arr)
             setScreenVoiceSelected(false)
-
+            setRecordingName("")
+            toggleModal()
             console.log('url', url);
         }
+    }else{
+        // setRecordingStarted(false)
+        // toggleModal()
+        showMessage('Please provide recording name proper')
+    }
     }
 
+//
+
+
+
+//
+
+
+
+
+    // const stopRecording = async () => {
+    //     var arr = []
+    //     const res = await RecordScreen.stopRecording().catch((error) => {
+    //         setRecordingStarted(false)
+    //         console.warn(error)
+    //     });
+    //     if (res) {
+    //         setRecordingStarted(false)
+    //         const url = res.result.outputURL;
+    //         let ext = url.split('.');
+    //         let obj = {
+    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
+    //             originalname: 'MY_RECORDING.mp4',
+    //             fileName: 'MY_RECORDING.mp4',
+    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+    //         }
+    //         arr.push(obj)
+    //         setRecordingArr(arr)
+    //         setScreenVoiceSelected(false)
+
+    //         console.log('url', url);
+    //     }
+    // }
+
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     const options = {
+    //         mediaType: "video",
+    //         cameraType: "back"
+    //     };
+    //     launchCamera(options, (response) => {
+    //         // Same code as in above section!
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //         }
+    //     });
+    //     // launchCamera({ mediaType: 'video',  }, (response) => {
+    //     //     // setResponse(response);
+    //     //     if (response.errorCode) {
+    //     //         showMessage(response.errorCode)
+    //     //     } else if (response.didCancel) {
+    //     //         console.log('did cnacel');
+    //     //         showMessage('did cnacel')
+    //     //     } else {
+    //     //         console.log('response', response);
+    //     //         arr.push(response)
+
+    //     //         setRecordingArr(arr)
+    //     //     }
+
+    //     // })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+
         const options = {
             mediaType: "video",
             cameraType: "back"
         };
+     
         launchCamera(options, (response) => {
             // Same code as in above section!
             if (response.errorCode) {
@@ -355,29 +450,41 @@ const STLDetailAdd = (props) => {
 
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
         });
-        // launchCamera({ mediaType: 'video',  }, (response) => {
-        //     // setResponse(response);
-        //     if (response.errorCode) {
-        //         showMessage(response.errorCode)
-        //     } else if (response.didCancel) {
-        //         console.log('did cnacel');
-        //         showMessage('did cnacel')
-        //     } else {
-        //         console.log('response', response);
-        //         arr.push(response)
-
-        //         setRecordingArr(arr)
-        //     }
-
-        // })
         setAddRecording(false)
 
     }
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr];
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
 
     const isFieldsValidated = () => {
         if (!lessonTopic.trim()) {
@@ -732,6 +839,10 @@ const STLDetailAdd = (props) => {
         recordingArr.forEach(element => {
             let ext = element.fileName.split('.');
 
+            if (Platform.OS === 'ios') {
+                ext = element.uri.split('.');
+            }
+
             data.append('recording', {
                 uri: element.uri,
                 // name: element.fileName,
@@ -770,6 +881,59 @@ const STLDetailAdd = (props) => {
         })
 
     }
+    const removeRecording = () => {
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
+    const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(80) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea,{height:50,width:'89%'}]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                // onPress={()=>{stopRecording()}}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                    </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
+    }
+
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -865,8 +1029,9 @@ const STLDetailAdd = (props) => {
                                     onClose={() => setAddRecording(false)}
                                     onScreeCamera={() => onScreeCamera()}
                                     onScreeVoice={() => onScreeVoice()}
+                                    onRemoveRecording={() => removeRecording()}
                                     onStartScrrenRecording={() => startRecording()}
-                                    onStopScrrenRecording={() => stopRecording()}
+                                    onStopScrrenRecording={() => toggleModal()}
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {pupilListView()}
@@ -904,7 +1069,7 @@ const STLDetailAdd = (props) => {
                                     materialArr.length != 0 ? materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileGrp}>
-                                                <Text style={{...PAGESTYLE.fileName,  width: wp(75)}} numberOfLines={1}>{item.name}</Text>
+                                                <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name}</Text>
                                                 <TouchableOpacity onPress={() => removeObject(index, item)}>
                                                     {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
@@ -925,6 +1090,7 @@ const STLDetailAdd = (props) => {
                             </View>
                         </View>
                     </ScrollView>
+                    {renderRecordingNamePopup()}
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"

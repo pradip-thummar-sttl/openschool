@@ -7,15 +7,21 @@ import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import HeaderPM from "./HeaderPM";
+import { BadgeIcon } from "../../../../utils/Model";
 
 const { CallModule } = NativeModules;
 
 const PupilManagement = (props) => {
     const [isHide, action] = useState(true);
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} />
+                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainer}>
                         {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}

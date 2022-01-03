@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, BackHandler, Platform, ToastAndroid } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, BackHandler, Platform, ToastAndroid, FlatList } from "react-native";
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
@@ -10,20 +10,26 @@ import Popupdata from "../../../component/reusable/popup/Popupdata";
 // import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import { Lesson } from "../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 // import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
+import moment from "moment";
 
 
 const TeacherTimeTable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'];
     const dispatch = useDispatch()
+
+    const weekTimeTableDate = useSelector(state => {
+        // console.log('state of user',state)
+        return state.AuthReducer.weekTimeTableData
+    })
 
     const timeTableData__ = [
         {
@@ -74,6 +80,7 @@ const TeacherTimeTable = (props) => {
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    const [scrollIndex, setScrollIndex] = useState(0);
 
     const setData = (dayKey, timneKey) => {
         let flag = false, span = 1, lblTitle = '', lblTime = '', data = null;
@@ -113,7 +120,7 @@ const TeacherTimeTable = (props) => {
         if (flag) {
             return (
                 <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
-                    navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })} 
+                    navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })}
                     isLesson={data.Type == Lesson} />
             );
         } else {
@@ -123,15 +130,38 @@ const TeacherTimeTable = (props) => {
         }
     }
 
-    // useEffect(() => {
-    //     fetchRecord('', '')
-    // }, [])
+    useEffect(() => {
+        //     // The screen is focused
+        //     // Call any action
+        if (weekTimeTableDate != "") {
+            fetchRecord("", "", weekTimeTableDate)
+        }
+    }, [weekTimeTableDate])
+   
 
-    const fetchRecord = (searchBy, filterBy) => {
+    useEffect(() => {
+        let time1 = moment().format('HH:mm')
+        const timeSplit = time1.split(':')
+        const h = timeSplit[0]  //09:30
+        const m = timeSplit[1]  //09:30
+
+        var index
+        if (m >= 30) {
+            index = ((h - 6) * 2) + 1
+        } else {
+            index = (h - 6) * 2
+        }
+
+        setScrollIndex(index)
+        fetchRecord('', '',moment().format('YYYY-MM-DD'))
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy, currentDate) => {
         setTimeTableLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            CurrentDate: currentDate
         }
 
         console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
@@ -160,54 +190,56 @@ const TeacherTimeTable = (props) => {
 
     const refresh = () => {
         console.log('Refreshed');
-        fetchRecord('', '')
+        fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }
     let currentCount = 0
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, []);
+    }, []);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
             BackHandler.exitApp()
             return true;
-          }
+        }
 
         if (currentCount < 1) {
             currentCount += 1;
-            ToastAndroid.show('Press BACK again to quit the App',ToastAndroid.SHORT)
-          }
-          setTimeout(() => {
+            ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
+        }
+        setTimeout(() => {
             currentCount = 0;
-          }, 2000);
-        
+        }, 2000);
+
         return true;
-      }
+    }
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={1}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.white }}>
                 <HeaderTT
                     onAlertPress={() => props.navigation.openDrawer()}
                     onCalenderPress={() => { props.navigation.navigate('Calendars') }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEvent', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => fetchRecord('', '')}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy, moment().format('YYYY-MM-DD'))}
+                    onClearSearch={() => fetchRecord('', '', moment().format('YYYY-MM-DD'))}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()} />
+                    refreshList={() => refresh()}
+                    onFilter={(filterBy) => fetchRecord('', filterBy,moment().format('YYYY-MM-DD'))}
+                    onNotification={() => openNotification()}
+                />
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
@@ -225,30 +257,26 @@ const TeacherTimeTable = (props) => {
                                     ))}
                                 </View>
 
-                                <ScrollView showsVerticalScrollIndicator={false} style={{...STYLE.padLeftRight, paddingLeft:0,}}
-                                    horizontal={true}>
-
-                                    {time.map((data, timneKey) => (
-                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth, }}>
-                                            <Text style={{ ...PAGESTYLE.lable}}>{data}</Text>
-
+                              
+                                <FlatList
+                                    style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                    initialScrollIndex={scrollIndex}
+                                    onScrollToIndexFailed={0}
+                                    data={time}
+                                    renderItem={({ item, index }) => (
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                            <Text style={{ ...PAGESTYLE.lable, }}>{item}</Text>
                                             <View style={PAGESTYLE.timeLabel}>
-                                                {days.map((data, dayKey) => (
-                                                    dayKey != 0 ?
-                                                        setData(dayKey, timneKey)
-                                                        :
-                                                        null
-
-                                                ))}
+                                                {days.map((data, dayKey) => ( dayKey != 0 && setData(dayKey, index)))}
                                             </View>
                                         </View>
-                                    ))}
-                                </ScrollView>
+                                    )}
+                                />
+
                             </View>
                             :
-                            // <View style={{ height: 100, justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            // </View>
                             <ScrollView>
                                 <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                             </ScrollView>

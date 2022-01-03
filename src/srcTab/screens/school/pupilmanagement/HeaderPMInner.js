@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -33,7 +33,7 @@ const HeaderPMInner = (props) => {
 
     return (
         <View style={styles.headerMain}>
-            <View style={styles.headerMaintop}>
+            <View style={[styles.headerMaintop,{top : Platform.OS === 'android' ? 0 : 8}]}>
                 <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}

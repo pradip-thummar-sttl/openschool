@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from './Colors';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from './Fonts';
 
 const { width, height } = Dimensions.get('window');
@@ -23,39 +23,41 @@ export default StyleSheet.create({
         width: '100%'
     },
     commonInput: {
-        color:COLORS.themeBlue,
+        color: COLORS.themeBlue,
         fontSize: hp('1.9%'),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
-        lineHeight:hp(2.3),
+        lineHeight: hp(2.3),
         height: hp('6.8%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
-        fontFamily: FONTS.fontSemiBold,
+        fontWeight: 'bold',
+        fontFamily: FONTS.fontRegular,
+
     },
     commonInput1: {
-        color:COLORS.darkGray,
+        color: COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 2,
         borderColor: COLORS.videoLinkBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
-        lineHeight:hp(2.3),
+        lineHeight: hp(2.3),
         height: hp('6.8%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontSemiBold,
     },
     commonInputPassword: {
-        color:COLORS.themeBlue,
-        fontSize:hp('1.8%'),
+        color: COLORS.themeBlue,
+        fontSize: hp('1.8%'),
         borderWidth: 2,
         borderColor: COLORS.videoLinkBorder,
         overflow: 'hidden',
         borderRadius: hp('1.0%'),
-        lineHeight:hp(2.3),
+        lineHeight: hp(2.3),
         height: hp('7.0%'),
         paddingLeft: hp('2.0%'),
         paddingRight: hp('6.0%'),
@@ -63,14 +65,43 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     checkBoxcommon: {
-        width: hp(1.6),
-        height: hp(1.6),
+        // width: hp(4.2),
+        width : Platform.OS === 'android' ? hp(4.2) : hp(1.8),
+        height: hp(1.8),
         top: 0,
+       
     },
     checkBoxcommon1: {
         width: 20,
         height: 20,
         top: 0,
+    },
+    loginButtonView: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: hp('1.0%'),
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: hp('7.0%'),
+    },
+    loginButtonText: {
+        color: COLORS.white,
+        textAlign: 'center',
+        fontSize: hp('2.2%'),
+        textTransform: 'uppercase',
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        fontSize: hp('2.2%'),
+        fontFamily: FONTS.fontSemiBold,
+        fontWeight: 'bold',
+    },
+    loginButtonLoader: {
+        color: COLORS.white,
+        overflow: 'hidden',
+        borderRadius: hp('1.0%'),
+        height: hp('7.0%'),
+        paddingLeft: hp(5),
+        paddingRight: hp(5),
+        fontFamily: FONTS.fontRegular,
     },
     fullWidthPrimaryButton: {
         backgroundColor: COLORS.buttonGreen,
@@ -81,9 +112,12 @@ export default StyleSheet.create({
         fontSize: hp('2.2%'),
         height: hp('7.0%'),
         lineHeight: hp('7.0%'),
+        justifyContent: 'center',
+        textAlignVertical: 'center',
         fontWeight: 'bold',
         paddingLeft: hp(5),
         paddingRight: hp(5),
+
         fontFamily: FONTS.fontRegular,
     },
     commonButtonGreen: {
@@ -129,6 +163,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp(1.21),
         paddingBottom: hp(1.21),
+        width: wp(45),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
@@ -172,6 +207,12 @@ export default StyleSheet.create({
         top: 10,
         resizeMode: 'contain',
     },
+    cancelButtonIcon1: {
+        width: hp(1.94),
+        alignSelf: 'center',
+        // top: 10,
+        resizeMode: 'contain',
+    },
     popupContentMain: {
         paddingLeft: hp(1.5),
         paddingRight: hp(1.5),
@@ -204,8 +245,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
         width: '100%',
-        marginTop: hp(2),
-        marginBottom: hp(2),
+        marginVertical: 8 //marginTop : 10
     },
     centerText: {
         textAlign: 'center',
@@ -244,6 +284,13 @@ export default StyleSheet.create({
         paddingLeft: hp(1.3),
         width: '100%',
     },
+    labelCommon1: {
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: Platform.OS === 'android' ? 0 : hp(1.3),
+        width: '100%',
+    },
     recordLinkText: {
         fontSize: hp(1.85),
         fontFamily: FONTS.fontSemiBold,
@@ -262,22 +309,24 @@ export default StyleSheet.create({
         top: -3,
     },
     commonInputGrayBack: {
-        color:COLORS.darkGray,
+        color: COLORS.darkGray,
         fontSize: hp('1.8%'),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp('1.0%'),
-        lineHeight:hp(2.3),
+        lineHeight: hp(2.3),
         height: hp(6),
         backgroundColor: COLORS.backgroundColorCommon,
         textAlignVertical: 'center',
         paddingLeft: hp(2),
         paddingRight: hp('2.0%'),
         fontFamily: FONTS.fontRegular,
-        
+
+
+
     },
-    common:{
-        flexDirection:'row',
-        alignItems:'center',
+    common: {
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 });

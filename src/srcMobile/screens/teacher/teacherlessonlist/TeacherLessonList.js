@@ -10,10 +10,10 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "./Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { isDesignBuild, opacity, showMessage } from "../../../../utils/Constant";
+import { isDesignBuild, opacity, showMessage, Var } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
 import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
@@ -26,9 +26,13 @@ const TeacherLessonList = (props) => {
         return state.AuthReducer.userAuthData
     })
     const [lessonData, setLessonData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
     const [isLessonLoading, setLessonLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    const [limit, setLimit] = useState('25')
+
+    let pageNo = 1
     let currentCount = 0
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -66,19 +70,48 @@ const TeacherLessonList = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            page: String(pageNo),
+            limit: limit
         }
 
         Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                setLessonData(res.data)
+                if (allNewAndOldData.length) {
+                    if (res.data.length) {
+                        let array = []
+                        array.push(allNewAndOldData)
+                        array.push(res.data)
+                        setLessonData(array)
+                        setAllNewAndOldData(array)
+                    }
+                    else {
+                        setLessonData(allNewAndOldData)
+                    }
+                }
+                else {
+                    setLessonData(res.data)
+                    // setAllNewAndOldData(res.data)
+                }
+
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
+    }
+
+    const addMorePage = () => {
+        pageNo = pageNo + 1
+
+        if (lessonData.length >= Number(limit)) {
+            setTimeout(() => {
+                console.log('----pageno-----', pageNo)
+                fetchRecord('', '')
+            }, 1000)
+        }
     }
 
     const refresh = () => {
@@ -151,8 +184,14 @@ const TeacherLessonList = (props) => {
             </View>
         </TouchableOpacity>
     );
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
+    }
+
     return (
-        <View style={{...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon}}>
+        <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             {/* <Sidebar
                 moduleIndex={2}
                 hide={() => action(!isHide)}
@@ -166,8 +205,8 @@ const TeacherLessonList = (props) => {
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy)}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
-
+                    onFilter={(filterBy) => fetchRecord('', filterBy)}
+                    onNotification={() => openNotification()} />
                 {isLessonLoading ?
                     <ActivityIndicator
                         style={{ margin: 20 }}
@@ -182,6 +221,8 @@ const TeacherLessonList = (props) => {
                             keyExtractor={(item) => item.id}
                             extraData={selectedId}
                             showsVerticalScrollIndicator={false}
+                            onEndReachedThreshold={0}
+                            onEndReached={() => addMorePage()}
                         />
                         :
                         // <View style={{ height: 100, justifyContent: 'center' }}>

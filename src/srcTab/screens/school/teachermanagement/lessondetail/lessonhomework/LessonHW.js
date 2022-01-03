@@ -30,7 +30,7 @@ import ArrowDown from "../../../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import UploadDoc from "../../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import CloseBlack from "../../../../../../svg/teacher/timetable/Close_Black";
 import DownloadSVG from "../../../../../../svg/teacher/lessonhwplanner/Download";
-
+import Modal from 'react-native-modal';
 var checkItem = [
     {
         ItemName: "Watch The BBC Bitesize Video",
@@ -74,6 +74,11 @@ const TLHomeWork = (props) => {
     const [isMatLoading, setLoader] = useState(false)
 
     // const [isRecordLoading, setRecordLoader] = useState(false)
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
 
     useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
@@ -227,51 +232,134 @@ const TLHomeWork = (props) => {
             }
         }
     }
-
     const stopRecording = async () => {
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: 'MY_RECORDING.mp4',
-                fileName: 'MY_RECORDING.mp4',
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            Addhomework.RecordingArr = arr
+        if (recordingName.length > 0) {
 
-            console.log('url', url);
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
+            }
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
     }
 
+    // const stopRecording = async () => {
+    //     var arr = []
+    //     const res = await RecordScreen.stopRecording().catch((error) => {
+    //         setRecordingStarted(false)
+    //         console.warn(error)
+    //     });
+    //     if (res) {
+    //         setRecordingStarted(false)
+    //         const url = res.result.outputURL;
+    //         let ext = url.split('.');
+    //         let obj = {
+    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
+    //             originalname: 'MY_RECORDING.mp4',
+    //             fileName: 'MY_RECORDING.mp4',
+    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+    //         }
+    //         arr.push(obj)
+    //         setRecordingArr(arr)
+    //         setScreenVoiceSelected(false)
+    //         Addhomework.RecordingArr = arr
+
+    //         console.log('url', url);
+    //     }
+    // }
+
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //             Addhomework.RecordingArr = arr
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+     
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
-                Addhomework.RecordingArr = arr
+     
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
     }
+
+    const saveCameraData = () => {
+
+        var arr = [...recordingArr]
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
 
     const switchOnOff = (isOn) => {
         setSwitch(isOn)
@@ -313,6 +401,13 @@ const TLHomeWork = (props) => {
         textInput.current.clear()
         setNewItem('')
     }
+
+    const removeRecording = () => {
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.blockSpaceBottom]}>
@@ -326,9 +421,9 @@ const TLHomeWork = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                     renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.checkBoxLabelLine}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center'}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark, { top: 5 }]}
+                                style={[PAGESTYLE.checkMark]}
                                 value={item.IsCheck}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}
@@ -339,7 +434,7 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                            <Text style={[PAGESTYLE.checkBoxLabelText]}>{item.ItemName}</Text>
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -385,6 +480,54 @@ const TLHomeWork = (props) => {
             </View>
         );
     };
+
+    const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(40) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50 }]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                // onPress={() => { stopRecording() }}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
+    }
+
 
     return (
         <View style={{ backgroundColor: 'white', height: wp(61.8) }}>
@@ -449,11 +592,12 @@ const TLHomeWork = (props) => {
                                 onScreeCamera={() => onScreeCamera()}
                                 onScreeVoice={() => onScreeVoice()}
                                 onStartScrrenRecording={() => startRecording()}
-                                onStopScrrenRecording={() => stopRecording()}
-                                onCameraOnly={() => onCameraOnly()} />
+                                onStopScrrenRecording={() => toggleModal()}
+                                onCameraOnly={() => onCameraOnly()}
+                                onRemoveRecording={() => removeRecording()} />
 
                             <View style={[PAGESTYLE.requirementofClass,]}>
-                                <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
+                                <Text style={PAGESTYLE.requireText}>Create gghhChecklist</Text>
                                 <View style={PAGESTYLE.checkBoxGroup}>
                                     {
                                         // checkItem.map((item, index) => {
@@ -544,7 +688,7 @@ const TLHomeWork = (props) => {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
                                         <TouchableOpacity onPress={() => {
-                                            item.uri ? removeObject(index, item) : setLoader(true);setMateIndex(index); Download(item, (res) => {
+                                            item.uri ? removeObject(index, item) : setLoader(true); setMateIndex(index); Download(item, (res) => {
                                                 setLoader(false)
                                                 setMateIndex(-1)
                                             })
@@ -557,7 +701,7 @@ const TLHomeWork = (props) => {
                                                 </View>
                                                 :
                                                 <View >
-                                                    {(isMatLoading && index==mateIndex) ?
+                                                    {(isMatLoading && index == mateIndex) ?
                                                         <ActivityIndicator
                                                             style={{ ...PAGESTYLE.downloadIcon }}
                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -587,7 +731,7 @@ const TLHomeWork = (props) => {
                             </View>
                         </View>
                     </View>
-
+                    {renderRecordingNamePopup()}
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"

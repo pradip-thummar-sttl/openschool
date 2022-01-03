@@ -5,14 +5,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 import { EndPoints } from '../../../../service/EndPoints'
 import { Service } from '../../../../service/Service'
-import { baseUrl, opacity, showMessage } from '../../../../utils/Constant'
+import { baseUrl, opacity, showMessage, Var } from '../../../../utils/Constant'
 // import Images from '../../../../utils/Images'
 import STYLE from '../../../../utils/Style'
 import HeaderPM from './HeaderPM'
 import PAGESTYLE from './StyleList'
 import ClassSetUp from './ClassSetUp'
 import COLORS from '../../../../utils/Colors'
-import { User } from '../../../../utils/Model'
+import { BadgeIcon, User } from '../../../../utils/Model'
 import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
 import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
 import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
@@ -132,6 +132,12 @@ const PupilManagement = (props) => {
             />
         );
     };
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.backgroundColorCommon }}>
             {isPupilProfile ?
@@ -146,7 +152,7 @@ const PupilManagement = (props) => {
                     :
                     <>
                         <HeaderPM
-                            onAlertPress={() => props.navigation.openDrawer()}
+                            onAlertPress={() => openNotification()}
                             onTabSelected={(tab) => setSelectedTab(tab)}
                             tabs={props.tabs}
                             onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
@@ -180,7 +186,7 @@ const PupilManagement = (props) => {
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class Group</Text>
                                                     </View>
 
-                                                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
+                                                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22,{alignItems : 'center'}]}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
                                                     </View>
                                                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>

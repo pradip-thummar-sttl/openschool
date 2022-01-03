@@ -38,7 +38,6 @@ const HeaderPMInner = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
@@ -46,19 +45,16 @@ const HeaderPMInner = (props) => {
                     </View>
                 </View>
 
-                {tabIndex == 0 ?
+                {/* {tabIndex == 0 &&
                     <View style={styles.headerRight}>
                         <TouchableOpacity
                         style={styles.editButton}
                             activeOpacity={opacity}
                             onPress={() => props.navigateToPupilProfileEdit()}>
-                            {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
-                            <Ic_Edit style={styles.massagesIcon}width={hp(3.20)} height={hp(3.20)}/>
+                            <Ic_Edit style={styles.massagesIcon}width={hp(2.5)} height={hp(2.5)}/>
                         </TouchableOpacity>
                     </View>
-                    :
-                    null
-                }
+                } */}
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
@@ -76,18 +72,6 @@ const HeaderPMInner = (props) => {
                                 onPress={() => { setSelectedTab(1), props.tabIndex(1) }}>
                                 <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>Parent Chat</Text>
                             </TouchableOpacity>
-                            {/* <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
-                                <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Pupil chat</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.tabs}
-                                activeOpacity={opacity}
-                                onPress={() => { setSelectedTab(3), props.tabIndex(3) }}>
-                                <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>School chat</Text>
-                            </TouchableOpacity> */}
                         </View>
                     </ScrollView>
                 </View>
@@ -132,9 +116,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     massagesIcon: {
-        width: hp(5.20),
-        height: hp(5.20),
+        width: hp(2.8),
+        height: hp(2.8),
         resizeMode: 'contain',
+       
     },
     whiteBg: {
         paddingLeft: hp(2.46),
@@ -168,8 +153,8 @@ const styles = StyleSheet.create({
     },
     editButton:{
         borderRadius:10,
-        height:hp(5.20),
-        width:hp(5.20),
+        height:hp(4.20),
+        width:hp(4.20),
          borderWidth:1,
          borderColor:COLORS.borderGrp,
          alignItems:'center',

@@ -22,6 +22,7 @@ import CloseBlack from '../../../../svg/teacher/pupilmanagement/Close_Black'
 import AddWhite from '../../../../svg/teacher/timetable/Add_White'
 import Notification from '../../../../svg/teacher/dashboard/Notification'
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import { BadgeIcon } from "../../../../utils/Model";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -58,12 +59,17 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <View style={styles.massagesIcon}>
                             <Notification />
                         </View>
+                        {/* <View style={STYLE.redDot}></View> */}
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>

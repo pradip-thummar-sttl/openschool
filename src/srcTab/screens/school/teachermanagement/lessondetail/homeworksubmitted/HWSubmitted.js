@@ -18,6 +18,7 @@ const Pupillist = (props, { }) => (
         activeOpacity={opacity}
         onPress={() => props.navigateToDetail()}>
         <View style={[PAGESTYLE.pupilData]}>
+            <View style={PAGESTYLE.pupilDataList}>
             <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
                 <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:wp(20)}]}>{props.item.PupilName}</Text>
@@ -25,18 +26,17 @@ const Pupillist = (props, { }) => (
             <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(15)}]}>{props.item.GroupName}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile}>
+            <View style={[PAGESTYLE.pupilProfile]}>
                 <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
                 <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
             </View>
-            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
+            <View style={[PAGESTYLE.pupilProfile,{ width: hp(18.55),}]}>
                 <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
                 <View style={PAGESTYLE.pupilDetailLink}>
-                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                    {/* <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} /> */}
                 </View>
+            </View>
             </View>
         </View>
     </TouchableOpacity>
@@ -95,9 +95,7 @@ const TLHomeWorkSubmitted = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-        console.log('props.lessonId', props.lessonId);
         Service.post(data, `${EndPoints.HomeworkSubmited}${props.lessonId}`, (res) => {
-            // Service.post(data, `${EndPoints.HomeworkSubmited}606d5993b1cda417a86d9332`, (res) => {
             setLoading(false)
             if (res.code == 200) {
                 setHomeworkData(res.data)
@@ -148,9 +146,6 @@ const TLHomeWorkSubmitted = (props) => {
                                 showsVerticalScrollIndicator={false}
                             />
                             :
-                            // <View style={{ height: 100, justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                            // </View>
                             <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noHomework1} title2={MESSAGE.noHomework2} />
                     }
                 </SafeAreaView>

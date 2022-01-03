@@ -57,9 +57,9 @@ const Pupillist = (props, item) => (
                     }
                     <Text style={PAGESTYLE.tickText}>Marked</Text>
                 </View>
-                <View>
+                <View style={{alignItems : 'center',justifyContent : 'center'}}>
                     {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                    <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} />
+                    <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon]} height={hp(1.51)} width={hp(0.95)} />
                 </View>
             </View>
         </View>

@@ -30,7 +30,8 @@ const SchoolNewMessage = (props) => {
     const [isLoading, setLoading] = useState(true)
     const [parentsData, setPatrentsData] = useState([])
     const [selectedParents, setSelectedParents] = useState([])
-
+   
+   
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -60,6 +61,9 @@ const SchoolNewMessage = (props) => {
         setSwitch(isOn)
     }
 
+    // parentsData.map(() => {
+
+    // })
     useEffect(() => {
         // Service.get('parentlist/60b0b79a0e74b0373679d1b6/T', (res) => {
         Service.get(`${EndPoints.ParentList}/${User.user.UserDetialId}/S`, (res) => {
@@ -67,6 +71,7 @@ const SchoolNewMessage = (props) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setPatrentsData(res.data)
+                
             } else {
                 showMessage(res.message)
             }
@@ -86,6 +91,8 @@ const SchoolNewMessage = (props) => {
             return false
         }
     }
+
+
 
     const pushPupilItem = (isSelected, _index) => {
         console.log('isSelected', isSelected, _index);
@@ -151,7 +158,7 @@ const SchoolNewMessage = (props) => {
             setLoading(false)
         })
     }
-
+    console.log(parentsData,'--------------------------');
     const parentListView = () => {
         return (
             <View style={{ marginBottom: 10, width: '65%', flexDirection: 'column', }}>
@@ -162,7 +169,7 @@ const SchoolNewMessage = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={{ ...styles.alignRow, marginTop: 10, marginRight: 20 }}>
                             <CheckBox
-                                style={styles.checkMark1}
+                                style={[styles.checkMark1]}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -203,7 +210,7 @@ const SchoolNewMessage = (props) => {
                                 autoCapitalize={'sentences'}
                                 placeholderStyle={styles.somePlaceholderStyle}
                                 placeholderTextColor={COLORS.borderGrp}
-                                style={[styles.commonInputTextarea1, , styles.inputWidth]}
+                                style={[styles.commonInputTextarea1,{paddingVertical : Platform.OS === 'android' ? 3 :0 } , styles.inputWidth]}
                                 onChangeText={title => setTitle(title)} />
                         </View>
                     </View>

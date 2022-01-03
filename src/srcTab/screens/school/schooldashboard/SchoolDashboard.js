@@ -10,10 +10,10 @@ import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import Header from "../../../component/reusable/header/Header";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, isDesignBuild, isRunningFromVirtualDevice, opacity, showMessage, Var } from "../../../../utils/Constant";
 import { connect, useSelector } from "react-redux";
 import moment from 'moment';
-import { appSettings, User } from "../../../../utils/Model";
+import { appSettings, BadgeIcon, User } from "../../../../utils/Model";
 import TeacherTimeTable from "../../teacher/teachertimetable/TeacherTimetable";
 import TeacherLessonList from "../../teacher/teacherlessonlist/TeacherLessonList";
 import TLDetailEdit from "../../teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit";
@@ -82,10 +82,10 @@ const Item = ({ onPress, style, item }) => (
 
 const Pupillist = ({ item, onPress }) => (
 
-
     <TouchableOpacity onPress={() => { onPress() }}>
         <View style={[PAGESTYLE.pupilData]}>
             <View style={PAGESTYLE.pupilProfile}>
+        
                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(20), fontFamily: FONTS.fontSemiBold }]}>{item.FirstName} {item.LastName}</Text>
             </View>
@@ -185,7 +185,7 @@ const SchoolDashboard = (props) => {
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setSchoolDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all pupil data', res)
+                console.log('response of get all pupil data', res.data)
                 setSchoolData(res.data)
             } else {
                 showMessage(res.message)
@@ -313,6 +313,12 @@ const SchoolDashboard = (props) => {
         props.navigation.navigate('Call', { userType: 'Teacher', pupilData: pupilData })
     }
 
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <SidebarSchool
@@ -336,24 +342,24 @@ const SchoolDashboard = (props) => {
                     isTeacherLessonDetail ?
                         <TLDetailEdit
                             goBack={() => setTeacherLessonDetail(false)}
-                            onAlertPress={() => props.navigation.openDrawer()}
+                            onAlertPress={() => openNotification()}
                             onRefresh={() => refresh()}
                             data={dataOfSubView} />
                         :
                         isAddSubject ?
                             <TLDetailAdd
                                 goBack={() => { setAddSubject(false) }}
-                                onAlertPress={() => props.navigation.openDrawer()} />
+                                onAlertPress={() => openNotification()} />
                             :
                             selectedIndex == 0 ?
                                 <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
-                                    <Header onAlertPress={() => props.navigation.openDrawer()} />
+                                    <Header onAlertPress={() => openNotification()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
                                         <ScrollView style={STYLE.padLeftRight}>
                                             <View style={PAGESTYLE.myDay}>
                                                 <View style={{...STYLE.viewRow, alignItems: 'center',position: 'relative',}}>
                                                     {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
-                                                    <Insights style={{...PAGESTYLE.dayIcon, top:4}} height={hp(3.25)} width={hp(4.33)} />
+                                                    <Insights style={{...PAGESTYLE.dayIcon, top:Platform.OS === 'android' ? -1 : 0}} height={hp(3.25)} width={hp(4.33)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>Insights</Text>
                                                 </View>
                                                 <View style={[PAGESTYLE.rightContent]}>

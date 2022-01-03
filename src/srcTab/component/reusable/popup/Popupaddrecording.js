@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -81,19 +81,24 @@ const Popupaddrecording = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={toggleModal}
-                        style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
+                        style={[styles.recordLinkBlock, styles.topSpaceRecording,]}>
                         {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
                         <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
-                        <Text style={styles.recordLinkText}>Add Recording</Text>
+                        <Text
+                            numberOfLines={2} ellipsizeMode='tail'
+                            style={[styles.recordLinkText]}>Add Recording</Text>
                     </TouchableOpacity>
                     :
-                    
+
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {console.log(props.recordingArr[0]);Download(props.recordingArr[0],(res)=>{})}}
-                        style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
+                        onPress={() => { console.log(props.recordingArr[0]); Download(props.recordingArr[0], (res) => { }) }}
+                        style={[styles.recordLinkBlock1, styles.topSpaceRecording]} >
                         {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
-                        <Text style={styles.recordLinkText}>MY_RECORDING.mp4</Text>
+                        <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
+                        <TouchableOpacity style={[styles.cancelButton]} onPress={() => { props.onRemoveRecording() }}>
+                            <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
                     </TouchableOpacity>
             }
             <Modal isVisible={isModalVisible}>
@@ -105,7 +110,7 @@ const Popupaddrecording = (props) => {
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
-                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
+                                <Text numberOfLines={2} ellipsizeMode='tail' h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
                                     {/* <TouchableOpacity onPress={() => { toggleModal(); props.onScreeCamera() }} style={styles.entryData}>
@@ -136,9 +141,9 @@ export default Popupaddrecording;
 const styles = StyleSheet.create({
     cancelButton: {
         position: 'absolute',
-        right: hp(1.5),
+        right:Platform.OS === 'android' ?  hp(1.5) : hp(1),
         zIndex: 9,
-        top: hp(1),
+        // top: hp(1),
     },
     popupLarge: {
         backgroundColor: COLORS.white,
@@ -185,16 +190,40 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     recordLinkBlock: {
-        width: hp(20.15),
+        // width : Platform.OS === 'android' ? hp(50.15) : hp(20.15),
+
+        // width: hp(20.15),
+        // height : Platform.OS === 'android' ? hp(20.15) : hp(5.20),
         height: hp(5.20),
         padding: hp(1.43),
-        paddingTop: hp(0.8),
-        paddingBottom: hp(0.8),
+        // paddingTop: hp(0.8),
+        // paddingBottom: hp(0.8),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
+        // justifyContent : 'center',
+        // alignItems : 'center'
+
+    },
+    recordLinkBlock1: {
+        width: Platform.OS === 'android' ? hp(65.15) : hp(45.15),
+        height: Platform.OS === 'android' ? hp(7.20) : hp(5.20),
+        // height: hp(5.20),
+        padding: hp(1.43),
+        // paddingTop: hp(0.6),
+        // paddingBottom: hp(0.6),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp(1),
+        alignItems: 'center',
+        flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // justifyContent: 'center',
+        // backgroundColor : 'red',
+       
+        paddingEnd:  Platform.OS === 'android' ? 25  :55
     },
     recordLinkBlock2: {
         width: '100%',
@@ -205,9 +234,11 @@ const styles = StyleSheet.create({
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
         alignItems: 'center',
+
     },
     topSpaceRecording: {
         marginTop: hp(1.401),
+
     },
     recordingLinkIcon: {
         width: hp(2.34),
@@ -219,5 +250,9 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
+       
+
+
+        // backgroundColor : 'green'
     },
 });

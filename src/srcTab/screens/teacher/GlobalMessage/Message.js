@@ -49,7 +49,6 @@ const Message = (props) => {
             Filterby: filterBy
         }
 
-        // Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {
         Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {
             setLoading(false)
             if (res.code == 200) {
@@ -83,15 +82,15 @@ const Message = (props) => {
                     <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,]}>{item.item.Title}</Text>
                 </View>
 
-                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-                    <Text style={[PAGESTYLE.pupilName, { marginLeft: -12 }]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,{justifyContent : 'center'}]}>
+                    <Text style={[PAGESTYLE.pupilName, ]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
                 </View>
                 {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
                 <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
             </View> */}
 
-                <View style={PAGESTYLE.pupilProfile}>
-                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText, { marginLeft: -12 }]}>{item.item.Status}</Text>
+                <View style={[PAGESTYLE.pupilProfile,{justifyContent : 'center',width: hp(28.80),}]}>
+                    <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText, ]}>{item.item.Status}</Text>
                 </View>
 
                 <View style={[PAGESTYLE.lastColumn]}>
@@ -122,14 +121,14 @@ const Message = (props) => {
                                     color={COLORS.yellowDark} />
                                 :
                                 messageData.length > 0 ? <>
-                                    <View style={PAGESTYLE.pupilTable}>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
+                                    <View style={[PAGESTYLE.pupilTable]}>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn,{justifyContent : 'center',alignItems : 'center'}]}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>MESSAGE TITLE</Text>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain,{ justifyContent : 'center',alignItems : 'center'}, PAGESTYLE.secoundColumn]}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>DATE</Text>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
+                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn,{justifyContent : 'center',alignItems : 'center',marginLeft  : 10}]}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>STATUS</Text>
                                         </View>
                                     </View>

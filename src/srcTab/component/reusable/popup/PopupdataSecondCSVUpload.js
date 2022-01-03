@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -20,28 +20,22 @@ import MESSAGE from "../../../../utils/Messages";
 
 const PopupdataSecondCSVUpload = (props) => {
     const isFromDashboard = props.isFromDashboard
-    console.log('isFromDashboard', isFromDashboard);
-
     const [isModalVisible, setModalVisible] = useState();
+    const [isLoader, setLoader] = useState(false);
+
     const [csv, setCSV] = useState(null)
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
 
     const addCSV = () => {
-        console.log('hihihihihihi')
         try {
-            DocumentPicker.pick({
-                type: [DocumentPicker.types.xlsx,],
-            }).then((results) => {
-                console.log('results', results);
-                // setCSV(results)
+            DocumentPicker.pick({ type: [DocumentPicker.types.xlsx,], }).then((results) => {
                 uploadProfile(results)
             });
 
         } catch (err) {
             if (DocumentPicker.isCancel(err)) {
-                // User cancelled the picker, exit any dialogs or menus and move on
             } else {
                 throw err;
             }
@@ -49,7 +43,7 @@ const PopupdataSecondCSVUpload = (props) => {
     }
 
     const uploadProfile = (csv) => {
-        
+
         let data = new FormData();
         let url;
 
@@ -65,6 +59,7 @@ const PopupdataSecondCSVUpload = (props) => {
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         });
 
+        setLoader(true)
         Service.postFormData(data, url, (res) => {
             if (res.code == 200) {
                 showMessage(MESSAGE.inviteSent)
@@ -72,20 +67,18 @@ const PopupdataSecondCSVUpload = (props) => {
             } else {
                 showMessage(res.message)
             }
+            setLoader(false)
         }, (err) => {
+            setLoader(false)
             console.log('response of get all lesson error', err)
         })
-
     }
-
-
     return (
         <View>
             <TouchableOpacity
                 style={styles.entryData}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                 <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                 <Text style={styles.entryTitle}>Import From CSV</Text>
             </TouchableOpacity>
@@ -93,17 +86,27 @@ const PopupdataSecondCSVUpload = (props) => {
                 <View style={styles.popupLarge}>
                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.upload} onPress={() => addCSV()}>
-                                <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
-                                <Text style={styles.labelUpload}>Click here to select source</Text>
+                            <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
+                            <Text style={styles.labelUpload}>Click here to select source</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
+                {
+                    isLoader &&
+                    <ActivityIndicator
+                        style={{ width: '70%', height: '50%', alignSelf:'center', borderRadius: hp(2), backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute' }}
+                        size={'large'}
+                        color={COLORS.yellowDark} />
+
+                }
             </Modal>
+
+
+           
         </View>
     );
 }

@@ -16,6 +16,7 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 import BackArrow from "../../../../svg/common/BackArrow";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const SGroupSetUpPupilSelection = (props) => {
 
@@ -27,7 +28,7 @@ const SGroupSetUpPupilSelection = (props) => {
     const [selectedGroup, setSelectedGroup] = useState([])
     const [groupName, setGroupName] = useState(props.route.params.isForUpdate ? props.route.params.groupName : '')
     const [isPupilLoading, setPupilLoading] = useState([])
-    const [isGroupLoading, setGroupLoading] = useState([])
+    const [isGroupLoading, setGroupLoading] = useState(false)
 
     const [selectedTeacher, setSelectedTeacher] = useState([])
     const [teachers, setTeachers] = useState([])
@@ -50,10 +51,18 @@ const SGroupSetUpPupilSelection = (props) => {
         loadTeacher()
         setPupilLoading(true)
 
+        if (props.route.params.groupData) {
+            let previoslySelectedData = props.route.params.groupData
+            setSelectedPupils(previoslySelectedData)
+        }
+
+
+
         Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
+                console.log('----set pupil------', res.data)
                 setPupilsClone(res.data)
             } else {
                 showMessage(res.message)
@@ -74,10 +83,20 @@ const SGroupSetUpPupilSelection = (props) => {
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
+            console.log('response of load response', res)
             if (res.code == 200) {
                 setTeachers(res.data)
                 // setTeacherClone(res.data)
+
+                if (props.route.params.teacherId) {
+                    let teacherData = []
+                    res.data.map((item) => {
+                        if (item.TeacherId === props.route.params.teacherId) {
+                            teacherData.push(item)
+                        }
+                    })
+                    setSelectedTeacher(teacherData)
+                }
             } else {
                 showMessage(res.message)
             }
@@ -141,7 +160,7 @@ const SGroupSetUpPupilSelection = (props) => {
         // })
 
         //
-        if (selectedTeacher.length<=0) {
+        if (selectedTeacher.length <= 0) {
             showMessage(MESSAGE.selectTeacher)
             return
         } else if (selectedPupils.length == 0) {
@@ -168,6 +187,10 @@ const SGroupSetUpPupilSelection = (props) => {
                 reset()
                 // loadGroup()
                 showMessage(MESSAGE.classSetup)
+                setTimeout(() => {
+                    props.route.params.onRefresh();
+                    props.navigation.goBack()
+                }, 1000)
             } else {
                 showMessage(res.message)
             }
@@ -177,7 +200,7 @@ const SGroupSetUpPupilSelection = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', selectedPupils, pupils);
+        // console.log('isSelected', selectedPupils, pupils);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item.PupilId !== pupils[_index].PupilId);
             setSelectedPupils(newList)
@@ -187,7 +210,10 @@ const SGroupSetUpPupilSelection = (props) => {
     }
 
     const isPupilChecked = (_index) => {
-        console.log('selectedPupils', selectedPupils, _index);
+        // console.log('selectedPupils', selectedPupils, _index);
+
+        console.log('----selectedTeacher-------', selectedTeacher)
+
         if (selectedPupils.length > 0) {
             if (selectedPupils.some(ele => ele.PupilId == pupils[_index].PupilId)) {
                 return true
@@ -249,7 +275,7 @@ const SGroupSetUpPupilSelection = (props) => {
                     <CheckBox
                         boxType={'square'}
                         onCheckColor={COLORS.white}
-                        style={STYLE.checkBoxcommon}
+                        style={[STYLE.checkBoxcommon]}
                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                         onFillColor={COLORS.dashboardPupilBlue}
                         onTintColor={COLORS.dashboardPupilBlue}
@@ -308,13 +334,14 @@ const SGroupSetUpPupilSelection = (props) => {
         );
     };
 
+
     return (
         <SafeAreaView style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.white }}>
             <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={() => { props.route.params.onRefresh(); props.navigation.goBack() }}>
                 {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
-                <BackArrow style={PAGESTYLE.arrow} height={hp(2.34)} width={hp(2.34)} />
+                <BackArrow style={PAGESTYLE.backArrow} height={hp(2.34)} width={hp(2.34)} />
 
             </TouchableOpacity>
             {/* <TextInput
@@ -347,7 +374,7 @@ const SGroupSetUpPupilSelection = (props) => {
                         <EmptyStatePlaceHohder holderType={4} title1={MESSAGE.noPupil1} title2={MESSAGE.noPupil2} />
                 }
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', paddingHorizontal: hp(2.46), }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', borderTopWidth: 1, borderColor: COLORS.commonBorderColor, width: '100%', paddingHorizontal: hp(1.2), }}>
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>
@@ -355,7 +382,7 @@ const SGroupSetUpPupilSelection = (props) => {
                             <ActivityIndicator
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.white} />
-                            : <Text style={PAGESTYLE.button1}>Assign Group</Text>}
+                            : <Text style={PAGESTYLE.button1}>Assign Group </Text>}
 
                     </TouchableOpacity>
                 </View>

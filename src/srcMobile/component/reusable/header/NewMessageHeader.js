@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
         alignItems: 'center',
-        marginLeft: 15
+        marginLeft: 15,
+        
     },
     massagesIcon: {
         width: hp(5.20),

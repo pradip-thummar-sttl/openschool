@@ -12,7 +12,7 @@ import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import { baseUrl, showMessage } from '../../../../utils/Constant';
 import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
-import { User } from '../../../../utils/Model';
+import { BadgeIcon, User } from '../../../../utils/Model';
 import MyPupils from '../../../../svg/teacher/dashboard/MyPupils';
 import Insights from '../../../../svg/school/dashboard/Insights';
 
@@ -71,12 +71,13 @@ const SchoolDashBoard = (props) => {
 
         let data = {
             Searchby: "",
-            Filterby: -1
+            Filterby: ''
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
+                console.log('res.data =>>>>>>>>>>>>>> ', res.data);
                 setPupilData(res.data)
             } else {
                 showMessage(res.message)
@@ -99,6 +100,17 @@ const SchoolDashBoard = (props) => {
                         <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(40) }]}>{item.FirstName} {item.LastName}</Text>
                         <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.TeachingYear}</Text>
                     </View>
+                    {/* {item.sort((a,b) => {
+                        var nameA = a.FirstName.toUpperCase();
+                        var nameB = b.FirstName.toUpperCase();
+                        if(nameA < nameB){
+                            return -1;
+                        }
+                        if(nameA > nameB){
+                            return 1;
+                        }
+                        return 0;
+                    })} */}
 
                 </View>
 
@@ -108,10 +120,14 @@ const SchoolDashBoard = (props) => {
         </TouchableOpacity>
     );
 
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
 
     return (
         <View >
-            <Header onAlertPress={() => props.navigation.openDrawer()} />
+            <Header onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
             <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>
@@ -124,19 +140,6 @@ const SchoolDashBoard = (props) => {
                 </View>
 
                 <View style={PAGESTYLE.whiteBoard}>
-                    {/* <View>
-                        <SafeAreaView style={PAGESTYLE.leftTabbing}>
-                            <FlatList
-                                style={PAGESTYLE.ScrollViewFlatlist}
-                                data={[1,2,3,4,5,6]}
-                                // renderItem={renderItem}
-                                keyExtractor={(item) => item.id}
-                                // extraData={selectedId}
-                                showsVerticalScrollIndicator={false}
-                                nestedScrollEnabled
-                            />
-                        </SafeAreaView>
-                    </View> */}
                     <EmptyStatePlaceHohder holderType={7} title1={MESSAGE.noInsights1} title2={MESSAGE.noInsights2} />
                 </View>
 

@@ -43,42 +43,16 @@ const SchoolHeader = (props) => {
     }, [filterBy])
 
     return (
-        <View style={{ backgroundColor: COLORS.white, borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard,width:'100%' }}>
-            {/* <View style={styles.headerMain}>
-                <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
-                    <Text style={styles.mainTitle}>Lesson & homework planner</Text>
-                </View>
-
-                <View style={styles.headerRight}> */}
-                    {/* <TouchableOpacity style={styles.notificationBar}>
-                        <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} />
-                    </TouchableOpacity> */}
-                    {/* <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
-                        activeOpacity={opacity}> */}
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                        {/* <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    </TouchableOpacity>
-                </View>
-            </View> */}
+        <View style={{ backgroundColor: COLORS.white, borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, width: '100%' }}>
 
 
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
-                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        onPress={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}>
+                       
+                       
                         {isSearchActive ?
                             <CloseBlack height={15} width={15} />
                             :
@@ -99,51 +73,36 @@ const SchoolHeader = (props) => {
                         }} />
                     <Menu>
                         <MenuTrigger>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>
+
                         <MenuOptions style={styles.filterListWrap}>
+
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
-                                        {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 1 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+                            
                         </MenuOptions>
                     </Menu>
                 </View>
-                {/* <TouchableOpacity
-                    style={styles.commonButtonGreenheader}
-                    activeOpacity={opacity}
-                    onPress={() => props.navigateToAddSubject()}> */}
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
-                   {/* </View> <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} /> */}
-                    {/* <Text style={styles.commonButtonGreenheader}></Text> */}
-                {/* </TouchableOpacity> */}
             </View>
         </View>
     );
@@ -349,10 +308,10 @@ const styles = StyleSheet.create({
         marginRight: hp(1.56),
     },
     searchParent: {
-        flexDirection: 'row', alignItems: 'center', marginBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,height:60,
+        flexDirection: 'row', alignItems: 'center', marginBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white, height: 60,
     },
     searchInner: {
-        height: 50,marginHorizontal: hp(1.84), flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+        height: 50, marginHorizontal: hp(1.84), flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
         height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',

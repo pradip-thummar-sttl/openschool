@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
@@ -19,6 +19,8 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
 import PopupdataSecond from "../../popup/PopupdataSecond";
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
+import { BadgeIcon } from "../../../../../utils/Model";
+import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 
 const HeaderWhite = (props) => {
 
@@ -56,7 +58,12 @@ const HeaderWhite = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {/* <View style={STYLE.redDot}></View> */}
 
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -83,7 +90,9 @@ const HeaderWhite = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 10,
+                        paddingVertical : Platform.OS === 'android' ? 3 : 0,
+                        fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -92,6 +101,43 @@ const HeaderWhite = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
+                <TouchableOpacity style={styles.buttonGroup}>
+                    <Menu style={styles.filterGroup}>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
+                        <MenuOptions style={styles.filterListWrap}>
+                            {/* <MenuOption style={styles.borderList}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Subject</Text> */}
+                                    {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
+                                {/* </View>
+                            </MenuOption> */}
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity onPress={()=>{props.onFilter('')}}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>All</Text>
+                                </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity onPress={()=>{props.onFilter('LiveLesson')}}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Live Lesson</Text>
+                                </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity onPress={()=>{props.onFilter('PublishLesson')}}>
+                                <View style={styles.filterList}>
+                                    <Text style={styles.filterListText}>Publish Lesson</Text>
+                                </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
+                    <FilterBlack style={styles.filterIcon} width={hp(1.74)} height={hp(1.50)}/>
+
+                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
+                </TouchableOpacity>
                 <PopupdataSecondPupil
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
@@ -102,6 +148,20 @@ const HeaderWhite = (props) => {
 export default HeaderWhite;
 
 const styles = StyleSheet.create({
+    filterIcon: {
+        width: hp(1.74),
+        height: hp(1.50),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.30),
+        top: hp(1.85),
+    },
+    buttonGroup: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: hp(1.69),
+    },
     headerBarMainWhite: {
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),

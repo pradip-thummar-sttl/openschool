@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -220,6 +220,7 @@ const PopupdataSecond = (props) => {
                     <View style={styles.colorDropView2}>
                         <FlatList
                             data={timeSlot}
+                            nestedScrollEnabled
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
@@ -254,6 +255,7 @@ const PopupdataSecond = (props) => {
                     <View style={styles.colorDropView2}>
                         <FlatList
                             data={timeSlot}
+                            nestedScrollEnabled
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={opacity}
@@ -326,7 +328,7 @@ const PopupdataSecond = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo1}>
-                                            <Text label style={STYLE.labelCommon}>What time is it?</Text>
+                                            <Text label style={STYLE.labelCommon1}>What time is it?</Text>
                                             {/* <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
@@ -392,7 +394,7 @@ const PopupdataSecond = (props) => {
                                                 :
                                                 <TouchableOpacity
                                                     onPress={isFieldsValidated}
-                                                    style={styles.buttonGrp}
+                                                    style={[styles.buttonGrp]}
                                                     activeOpacity={opacity}>
                                                     {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
                                                     <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
@@ -518,8 +520,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        paddingTop: Platform.OS === 'android' ? 0 : hp(1.5),
+        paddingBottom: Platform.OS === 'android' ? 0 : hp(1.5),
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
@@ -534,6 +536,7 @@ const styles = StyleSheet.create({
     somePlaceholderStyle: {
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
+        padding: 0
     },
     fieldWidthtwoMain: {
         flexDirection: 'row',

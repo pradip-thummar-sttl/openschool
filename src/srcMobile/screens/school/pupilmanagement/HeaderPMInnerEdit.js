@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2),
         paddingRight: hp(2),
         paddingBottom: hp(1.23),
-        paddingTop: hp(2.3),
+        paddingTop:Platform.OS === 'android' ? hp(1) :  hp(2.3),
     },
     headerMain: {
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3.5),
+        paddingTop: Platform.OS == 'android' ? hp(1.5) : hp(3.5),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     buttonGroup: {
         position: 'relative',
         flexDirection: 'row',
+        justifyContent : 'center',
         alignItems: 'center',
         marginRight: hp(1.69),
     },
@@ -138,8 +139,8 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.52),
-        left: hp(1.8),
+        // top: hp(1.52),
+        // left: hp(1.8),
         zIndex: 9,
     },
     commonButtonGreenheader: {

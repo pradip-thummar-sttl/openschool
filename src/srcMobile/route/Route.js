@@ -52,6 +52,7 @@ import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import Calendars from '../component/reusable/Calendar/Calendar';
 import Setting from '../screens/Setting/Setting';
+import teacherSetting from '../screens/teacher/teacherSetting/teacherSetting'
 import Message from '../screens/teacher/GlobalMessage/Message';
 import NewMessage from '../screens/teacher/GlobalMessage/NewMessage';
 import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSetUpPupilSelection';
@@ -136,7 +137,6 @@ function ScreenStack() {
                 <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
                 <Stack.Screen name="CreateNewEvent" component={CreateNewEvent} />
                 <Stack.Screen name="CreateNewEventPupil" component={CreateNewEventPupil} />
-                {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
                 <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
                 <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
                 <Stack.Screen name="TLDetail" component={TLDetail} />
@@ -144,13 +144,13 @@ function ScreenStack() {
                 <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />
                 <Stack.Screen name="PupilHomeWorkSubmitted" component={PupilHomeWorkSubmitted} />
                 <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
-                {/* <Stack.Screen name="TeacherLessonEmpty" component={TeacherLessonEmpty} /> */}
                 <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
                 <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
                 <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
                 <Stack.Screen name="WorkSpace" component={WorkSpace} />
                 <Stack.Screen name="Calendars" component={Calendars} />
                 <Stack.Screen name="Setting" component={Setting} />
+                <Stack.Screen name="TeacherSetting" component={teacherSetting} />
                 <Stack.Screen name="Message" component={Message} />
                 <Stack.Screen name="NewMessage" component={NewMessage} />
                 <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
@@ -180,6 +180,7 @@ function ScreenStack() {
                 <Stack.Screen name="SPupilProfileEdit" component={SPupilProfileEdit} />
                 <Stack.Screen name="SAddNewTeacher" component={SAddNewTeacher} />
                 <Stack.Screen name="SGroupSetUpPupilSelection" component={SGroupSetUpPupilSelection} />
+                <Stack.Screen name="NotificationDrawer" component={NotificationDrawer} />
             </Stack.Navigator>
         </PubNubProvider>
     );

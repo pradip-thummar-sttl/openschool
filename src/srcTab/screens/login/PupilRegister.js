@@ -415,7 +415,9 @@ class Login extends Component {
                                             :
                                             this.isFieldsValidated()
 
-                                    }}>
+                                    }}
+                                    style={{}}
+                                    >
                                     {this.state.isLoading ?
                                         <ActivityIndicator
                                             style={styles.commonButtonGreen}
@@ -567,7 +569,7 @@ const styles = StyleSheet.create({
     commonButtonGreen: {
         backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
-        fontSize: hp('1.56'),
+        fontSize:Platform.OS === 'android' ?  hp('1.96') :  hp('1.86'),
         fontWeight: '800',
         borderRadius: hp('1.3'),
         overflow: 'hidden',
@@ -575,8 +577,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        width: 250,
-        height: 55,
+        width :  Platform.OS === 'android' ? 200 : 250,
+        // width: 250,
+        // height: 55,
+        height :  Platform.OS === 'android' ? 45 : 55,
         paddingVertical: 15
     },
     getStartText: {

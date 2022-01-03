@@ -88,7 +88,7 @@ const TLDetail = (props) => {
                             data={props.lessonData.CheckList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
-                                <View style={PAGESTYLE.checkBoxLabelLine}>
+                                <View style={[PAGESTYLE.checkBoxLabelLine,{paddingVertical  :5}]}>
                                     {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                     <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text numberOfLines={1} style={[PAGESTYLE.lessonPointText, { width: wp(82) }]}>{item.ItemName}</Text>

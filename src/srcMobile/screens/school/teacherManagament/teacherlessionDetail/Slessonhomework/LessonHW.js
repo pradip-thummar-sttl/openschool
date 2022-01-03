@@ -29,6 +29,7 @@ import Calender from "../../../../../../svg/teacher/dashboard/Calender";
 import ArrowDown from "../../../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import UploadMaterial from "../../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
 import DownloadSVG from "../../../../../../svg/teacher/lessonhwplanner/Download";
+import Modal from 'react-native-modal';
 
 const TLHomeWork = (props) => {
     const textInput = useRef(null);
@@ -50,6 +51,11 @@ const TLHomeWork = (props) => {
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [recordingName, setRecordingName] = useState('');
+
+    const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
+    const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
 
 
     useEffect(() => {
@@ -203,6 +209,8 @@ const TLHomeWork = (props) => {
     }
 
     const stopRecording = async () => {
+        if (recordingName.length > 0) {
+         
         var arr = []
         const res = await RecordScreen.stopRecording().catch((error) => {
             setRecordingStarted(false)
@@ -212,40 +220,124 @@ const TLHomeWork = (props) => {
             setRecordingStarted(false)
             const url = res.result.outputURL;
             let ext = url.split('.');
+            // let obj = {
+            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+            //     originalname: 'MY_RECORDING.mp4',
+            //     fileName: 'MY_RECORDING.mp4',
+            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            // }
             let obj = {
                 uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: 'MY_RECORDING.mp4',
-                fileName: 'MY_RECORDING.mp4',
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
             }
             arr.push(obj)
             setRecordingArr(arr)
             setScreenVoiceSelected(false)
-            Addhomework.RecordingArr = arr
-
+            setRecordingName("")
+            toggleModal()
             console.log('url', url);
         }
+    }else{
+        // setRecordingStarted(false)
+        // toggleModal()
+        showMessage('Please provide recording name proper')
+    }
     }
 
+
+    // const stopRecording = async () => {
+    //     var arr = []
+    //     const res = await RecordScreen.stopRecording().catch((error) => {
+    //         setRecordingStarted(false)
+    //         console.warn(error)
+    //     });
+    //     if (res) {
+    //         setRecordingStarted(false)
+    //         const url = res.result.outputURL;
+    //         let ext = url.split('.');
+    //         let obj = {
+    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
+    //             originalname: 'MY_RECORDING.mp4',
+    //             fileName: 'MY_RECORDING.mp4',
+    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+    //         }
+    //         arr.push(obj)
+    //         setRecordingArr(arr)
+    //         setScreenVoiceSelected(false)
+    //         Addhomework.RecordingArr = arr
+
+    //         console.log('url', url);
+    //     }
+    // }
+
+    // const onCameraOnly = () => {
+    //     var arr = [...recordingArr]
+    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
+    //         // setResponse(response);
+    //         if (response.errorCode) {
+    //             showMessage(response.errorCode)
+    //         } else if (response.didCancel) {
+    //         } else {
+    //             console.log('response', response);
+    //             arr.push(response)
+
+    //             setRecordingArr(arr)
+    //             Addhomework.RecordingArr = arr
+    //         }
+
+    //     })
+    //     setAddRecording(false)
+
+    // }
+
     const onCameraOnly = () => {
-        var arr = [...recordingArr]
+        
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-            // setResponse(response);
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                arr.push(response)
-
-                setRecordingArr(arr)
-                Addhomework.RecordingArr = arr
+                
+                setVideoRecordingResponse(response)
+                setCurrentRecordMode('isCamera')
+                toggleModal()
             }
 
         })
         setAddRecording(false)
 
     }
+
+
+const saveCameraData = () => {
+
+    var arr = [...recordingArr];
+
+        if (recordingName.length > 0) {
+
+            const url = videoRecordingResponse.uri;
+            let ext = url.split('.');
+
+            let obj = {
+                uri: url,
+                originalname: `${recordingName}.mp4`,
+                fileName: `${recordingName}.mp4`,
+                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+            }
+            arr.push(obj)
+            setRecordingArr(arr)
+            setRecordingName("")
+            toggleModal()
+
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+
+    }
+
 
     const switchOnOff = (isOn) => {
         setSwitch(isOn)
@@ -287,6 +379,14 @@ const TLHomeWork = (props) => {
         textInput.current.clear()
         setNewItem('')
     }
+
+    const removeRecording = () => {
+        var arr = [...recordingArr]
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
+
     const itemCheckListView = () => {
         return (
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
@@ -359,6 +459,53 @@ const TLHomeWork = (props) => {
             </View>
         );
     };
+    const toggleModal = () => {
+        console.log('!isModalVisible', !isModalVisible);
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(80) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                // onPress={() => { stopRecording() }}
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
+    }
+
 
     return (
 
@@ -417,8 +564,9 @@ const TLHomeWork = (props) => {
                                 onClose={() => setAddRecording(false)}
                                 onScreeCamera={() => onScreeCamera()}
                                 onScreeVoice={() => onScreeVoice()}
+                                onRemoveRecording={() => removeRecording()}
                                 onStartScrrenRecording={() => startRecording()}
-                                onStopScrrenRecording={() => stopRecording()}
+                                onStopScrrenRecording={() => toggleModal()}
                                 onCameraOnly={() => onCameraOnly()} />
                         </View>
 
@@ -445,11 +593,13 @@ const TLHomeWork = (props) => {
                             {
                                 materialArr.length != 0 ? materialArr.map((item, index) => {
                                     return (
-                                        <TouchableOpacity onPress={() => {item.uri ? removeObject(index, item) : setLoader(true);setMateIndex(index); Download(item, (res) => {
-                                            setLoader(false)
-                                            setMateIndex(-1)
-                                        })}} style={PAGESTYLE.fileGrp}>
-                                            <Text style={{...PAGESTYLE.fileName,  width: wp(75)}} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
+                                        <TouchableOpacity onPress={() => {
+                                            item.uri ? removeObject(index, item) : setLoader(true); setMateIndex(index); Download(item, (res) => {
+                                                setLoader(false)
+                                                setMateIndex(-1)
+                                            })
+                                        }} style={PAGESTYLE.fileGrp}>
+                                            <Text style={{ ...PAGESTYLE.fileName, width: wp(75) }} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
                                             {item.uri ?
                                                 <View>
                                                     {/* <Image source={Images.PopupCloseIcon} style={PAGESTYLE.downloadIcon} /> */}
@@ -457,7 +607,7 @@ const TLHomeWork = (props) => {
                                                 </View>
                                                 :
                                                 <View>
-                                                    {(isMatLoading && index==mateIndex) ?
+                                                    {(isMatLoading && index == mateIndex) ?
                                                         <ActivityIndicator
                                                             style={{ ...PAGESTYLE.downloadIcon }}
                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -494,6 +644,7 @@ const TLHomeWork = (props) => {
                     onScreeVoice={() => onScreeVoice()}
                     onCameraOnly={() => onCameraOnly()} /> */}
 
+                {renderRecordingNamePopup()}
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}
                     mode="date"

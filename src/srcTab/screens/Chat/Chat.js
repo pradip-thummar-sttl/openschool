@@ -62,7 +62,7 @@ const Chat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event]);
+            addMessage(messages => [...messages, event].reverse());
         }
     };
 
@@ -111,7 +111,7 @@ const Chat = (props) => {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ height: '100%'}}>
             {/* <ChatHeader /> */}
             {/* tabs */}
             {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
@@ -176,15 +176,17 @@ const Chat = (props) => {
                         : null
                 }
 
-                <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
+                <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85), height: '100%', }]}>
                     <KeyboardAwareScrollView enableOnAndroid={true}
                         extraScrollHeight={90}
                         scrollEnabled
+                        contentContainerStyle={{height: '100%'}}
                         enableAutomaticScroll={(Platform.OS === 'ios')} >
 
                         <View style={Styles.mesagesView}>
                             <FlatList
                                 data={messages}
+                                inverted={true}
                                 renderItem={({ item, index }) => {
                                     return (
                                         <View style={Styles.messageCell}>

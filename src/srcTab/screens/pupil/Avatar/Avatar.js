@@ -15,6 +15,8 @@ import { EndPoints } from '../../../../service/EndPoints'
 import { User } from '../../../../utils/Model'
 import { baseUrl } from '../../../../utils/Constant';
 import FONTS from '../../../../utils/Fonts';
+import { BadgeIcon, User } from '../../../../utils/Model'
+import { Var } from '../../../../utils/Constant'
 
 const tabs = [
     { name: 'COLOUR', isSelected: true },
@@ -389,10 +391,16 @@ const Avatar = () => {
         }, 2000)
 
     }
-
+    
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer()
+        // prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
     return (
         <View>
-            <AvatarHeader />
+            <AvatarHeader onAlertPress={()=>openNotification() }/>
             <View style={Styles.mainView}>
                 {/* LeftView */}
                 <View style={Styles.leftView}>

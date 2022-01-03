@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../../utils/Colors";
 import STYLE from '../../../../../../utils/Style';
@@ -37,7 +37,8 @@ const HeaderGallery = (props) => {
                             style={styles.userIcon}
                             source={Images.SearchIcon} /> */}
                         <TextInput
-                            style={[STYLE.commonInput, styles.searchHeader]}
+                            style={[STYLE.commonInput, styles.searchHeader,
+                            {paddingVertical : Platform.OS === 'android' ? 2 : 0}]}
                             placeholder="Search subject, class, etc"
                             maxLength={50}
                             placeholderTextColor={COLORS.menuLightFonts}

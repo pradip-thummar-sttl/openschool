@@ -24,9 +24,9 @@ import {
 } from 'react-native-popup-menu';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
-import { opacity } from "../../../../utils/Constant";
+import { opacity, Var } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
@@ -195,9 +195,12 @@ const PupilLessonDetail = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search subject, topic name, teacher name, etc"
+                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, 
+                       paddingVertical :  Platform.OS === 'android' ? 3 : 0
+                        }}
+                        placeholder="Search subject,topic name, etc"
                         maxLength={50}
+                        
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                 </View>
@@ -235,6 +238,36 @@ const PupilLessonDetail = (props) => {
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={PAGESTYLE.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                    <View style={PAGESTYLE.filterList}>
+                                        <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 3 ?
+                                            // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            :
+                                            null
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
                         </MenuOptions>
                     </Menu>
                     {/* <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} /> */}
@@ -243,10 +276,16 @@ const PupilLessonDetail = (props) => {
             </View>
         )
     }
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     const lessonRender = () => {
         return (
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                <Header4 onAlertPress={() => props.navigation.openDrawer()} />
+                <Header4 onAlertPress={() => openNotification()} />
                 <View style={PAGESTYLE.whiteBg}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
@@ -295,24 +334,24 @@ const PupilLessonDetail = (props) => {
                     <PupilLessonDetailInternal
                         item={item}
                         goBack={() => setLessonDetail(false)}
-                        onAlertPress={() => props.navigation.openDrawer()}
+                        onAlertPress={() => openNotification()}
                     />
                     : isHomeworkDetail ?
                         <PupilHomeWorkDetail
                             item={item}
                             goBack={() => setHomeworkDetail(false)}
-                            onAlertPress={() => props.navigation.openDrawer()} />
+                            onAlertPress={() => openNotification()} />
                         :
                         isHomeWorkSubmitted ?
                             <PupilHomeWorkSubmitted
                                 item={item}
                                 goBack={() => setHomeWorkSubmitted(false)}
-                                onAlertPress={() => props.navigation.openDrawer()} />
+                                onAlertPress={() => openNotification()} />
                             : isHomeWorkMarked ?
                                 <PupilHomeWorkMarked
                                     item={item}
                                     goBack={() => setHomeWorkMarked(false)}
-                                    onAlertPress={() => props.navigation.openDrawer()} />
+                                    onAlertPress={() => openNotification()} />
                                 :
                                 lessonRender()
             }

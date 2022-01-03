@@ -543,7 +543,13 @@ const styles = StyleSheet.create({
         marginTop: hp(1.3),
         color: COLORS.darkGray,
         fontFamily: FONTS.fontSemiBold,
-        textAlignVertical: 'center',
+        // paddingHorizontal : 10,
+        textAlignVertical: "bottom"
+        // alignContent : 'center',
+        // alignItems : 'flex-start',
+        // justifyContent : 'center'
+       
+
     },
     field: {
         marginBottom: hp(2.5),

@@ -8,7 +8,7 @@ import SettingHeader from "../../component/reusable/header/SettingHeader";
 import STYLES from "../../../utils/Style";
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
+import { BadgeIcon, User } from "../../../utils/Model";
 import { showMessage } from "../../../utils/Constant";
 import { log } from "react-native-reanimated";
 const Setting = (props) => {
@@ -46,6 +46,9 @@ const Setting = (props) => {
       }
 
     useEffect(() => {
+        refresh()
+    }, [])
+    const refresh=()=>{
         Service.get(`${EndPoints.UserSetting}/${User.user.UserDetialId}`, (res) => {
             console.log('user setting response', res);
             if (res.flag) {
@@ -58,7 +61,7 @@ const Setting = (props) => {
             console.log('user setting error', err);
 
         })
-    }, [])
+    }
     const setData = (data) => {
         var type = []
         var type1 = []
@@ -126,9 +129,14 @@ const Setting = (props) => {
         })
         // setSwitch(isOn)
     }
+    const openNotification = () => {
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
+    }
+
     return (
         <View style={styles.mainPage}>
-            <SettingHeader onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLES.pupilHeader} />
+            <SettingHeader onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLES.pupilHeader} onNotification={()=>openNotification()} />
 
             <View style={[styles.lessonPlanTab, { height: 50, }]}>
                 {

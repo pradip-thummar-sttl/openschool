@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert, AppState } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -30,10 +30,35 @@ import Messaging from "../../../../svg/sidebar/Messaging";
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
     const [selectedModule, setSelectedModule] = useState(0);
+    const [lastLogoutModule, setLastLogoutModule] = useState(0);
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
         setSelectedIndex(1);
     }
+
+
+
+
+    const appState = useRef(AppState.currentState);
+
+
+    useEffect(() => {
+        const subscription = AppState.addEventListener("change", nextAppState => {
+            if (appState.current.match(/inactive|background/) && nextAppState === "active") {
+                console.log("App has come to the foreground!");
+            }
+            else {
+                setSelectedModule(0)
+            }
+            appState.current = nextAppState;
+        });
+
+        return () => {
+            subscription.remove();
+        };
+    }, []);
+
+
 
     const showActionChooserTeacher = () => {
         Alert.alert(
@@ -41,7 +66,7 @@ const Sidebar = (props) => {
             'Do you really want to logout?',
             [{
                 text: 'YES',
-                onPress: () => teacherLogout(),
+                onPress: () => { teacherLogout(), setSelectedModule(0) },
             },
             {
                 text: 'NO',
@@ -58,7 +83,7 @@ const Sidebar = (props) => {
             'Do you really want to logout?',
             [{
                 text: 'YES',
-                onPress: () => pupilLogout(),
+                onPress: () => { pupilLogout(), setSelectedModule(0) },
             },
             {
                 text: 'NO',
@@ -75,7 +100,7 @@ const Sidebar = (props) => {
             'Do you really want to logout?',
             [{
                 text: 'YES',
-                onPress: () => schoolLogout(),
+                onPress: () => { schoolLogout(), setSelectedModule(0) },
             },
             {
                 text: 'NO',
@@ -88,16 +113,20 @@ const Sidebar = (props) => {
 
     const teacherLogout = () => {
         AsyncStorage.setItem('user', JSON.stringify(null))
+        AsyncStorage.setItem('type', '')
         props.navigation.replace('Users');
+
     }
 
     const pupilLogout = () => {
         AsyncStorage.setItem('pupil', JSON.stringify(null))
+        AsyncStorage.setItem('type', '')
         props.navigation.replace('Users');
 
     }
     const schoolLogout = () => {
         AsyncStorage.setItem('school', JSON.stringify(null))
+        AsyncStorage.setItem('type', '')
         props.navigation.replace('Users');
 
     }
@@ -187,7 +216,8 @@ const Sidebar = (props) => {
                         <TouchableOpacity
                             style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}
                             activeOpacity={opacity}
-                            onPress={() => { showActionChooserTeacher(); setSelectedModule(6); props.navigation.closeDrawer() }}>
+                            // onPress={() => { showActionChooserTeacher(); setSelectedModule(6); props.navigation.closeDrawer() }}>
+                            onPress={() => { showActionChooserTeacher(); props.navigation.closeDrawer() }}>
                             {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.Faqs}
@@ -196,7 +226,9 @@ const Sidebar = (props) => {
                             <Text style={[styles.menuText, selectedModule == 6 ? styles.selectedMenuText : null]}>Logout</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={[styles.userInfo, styles.userInfobottom]}>
+                    <TouchableOpacity
+                        onPress={() => { props.navigation.navigate('TeacherSetting'); props.navigation.closeDrawer() }}
+                        style={[styles.userInfo, styles.userInfobottom]}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         <View style={styles.profileTextMain}>
                             <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
@@ -205,7 +237,7 @@ const Sidebar = (props) => {
                             {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                             <More style={styles.moreIcon} height={5} width={hp(3)} />
                         </TouchableOpacity>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             : User.user.UserType == 'School' ?
@@ -274,7 +306,9 @@ const Sidebar = (props) => {
 
                                 <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { showActionChooserSchool(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+                            {/* <TouchableOpacity onPress={() => { showActionChooserSchool(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}> */}
+                            <TouchableOpacity onPress={() => { showActionChooserSchool(); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
@@ -364,7 +398,9 @@ const Sidebar = (props) => {
 
                                 <Text style={[styles.menuText, selectedModule == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { showActionChooserPupil(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+                            {/* <TouchableOpacity onPress={() => { showActionChooserPupil(); setSelectedModule(6); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}> */}
+                            <TouchableOpacity onPress={() => { showActionChooserPupil(); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 6 ? styles.menuItemSelected : null]}>
+
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
@@ -379,7 +415,7 @@ const Sidebar = (props) => {
                         <View style={[styles.userInfo, styles.userInfobottom]}>
                             <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                             <View style={styles.profileTextMain}>
-                                <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(45) }]}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(35) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                             </View>
                             <TouchableOpacity style={styles.moreMenu}>
                                 {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}

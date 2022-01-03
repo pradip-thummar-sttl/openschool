@@ -8,36 +8,28 @@ import { opacity } from "../../../../../../utils/Constant";
 import moment from 'moment';
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
 
 const HeaderLP = (props) => {
 
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain,{top : Platform.OS === 'ios' ? 4 : 0}]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity> */}
+                    
                     <TouchableOpacity
-                        style={styles.notificationBar}
+                        style={[styles.notificationBar,{justifyContent : 'center',alignItems : 'center'}]}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        { BadgeIcon.isBadge && <View style={STYLE.redDot}></View> }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -73,6 +65,7 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
+        // top : 8
     },
     filterbarMain: {
         flexDirection: 'row',

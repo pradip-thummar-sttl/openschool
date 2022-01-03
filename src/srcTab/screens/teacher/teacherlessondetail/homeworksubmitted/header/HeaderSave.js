@@ -8,10 +8,14 @@ import { opacity } from "../../../../../../utils/Constant";
 import PopupHomeWorkSave from "../../../../../component/reusable/popup/PopupHomeWorkSave";
 import BackArrow from "../../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../../utils/Model";
+import STYLE from "../../../../../../utils/Style";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+
 const HeaderSave = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={styles.headerMain}>
+            <View style={[styles.headerMain]}>
                 <Text numberOfLines={1} style={[styles.mainTitle,{width:hp(55)}]}>
                     <TouchableOpacity
                         activeOpacity={opacity}
@@ -32,6 +36,10 @@ const HeaderSave = (props) => {
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -45,13 +53,14 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         paddingBottom: hp(0.60),
     },
     headerMain: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+       
     },
     mainTitle: {
         fontSize: hp(2.86),

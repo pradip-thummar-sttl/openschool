@@ -169,6 +169,14 @@ const NewMessage = (props) => {
         })
     }
 
+    const onBackPress = () => {
+        if (props && props.route && props.route.params) {
+            props.route.params.onGoBack()
+        }
+
+        props.navigation.goBack()
+    }
+
     return (
 
 
@@ -176,13 +184,14 @@ const NewMessage = (props) => {
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
                 onDraft={() => saveMessage('Draft')}
-                onGoback={() => props.navigation.goBack()}
+                // onGoback={() => props.navigation.goBack()}
+                onGoback={() => onBackPress()}
                 status={status} />
 
             <ScrollView style={{ height: '100%' }}>
                 <View style={[Styles.field1,]}>
                     <Text label style={Style.labelCommon}>Title</Text>
-                    <View style={Styles.copyInputParent}>
+                    <View style={[Styles.copyInputParent, { justifyContent: 'center' }]}>
                         <TextInput
                             multiline={false}
                             numberOfLines={1}

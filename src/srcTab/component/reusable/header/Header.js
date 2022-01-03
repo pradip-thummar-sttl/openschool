@@ -5,7 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 // import Images from "../../../../utils/Images";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 
@@ -20,7 +20,11 @@ const Header = (props) => {
                     activeOpacity={opacity}>
                     {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                     <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    <View style={STYLE.redDot}></View>
+                    {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    }
+
                 </TouchableOpacity>
             </View>
         </View>
@@ -35,8 +39,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
-        paddingBottom: hp(5),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3),
+        paddingBottom: Platform.OS == 'android' ? hp(2) : hp(2),
+        // paddingBottom: hp(5),
         backgroundColor: COLORS.transparent,
     },
     mainTitle: {

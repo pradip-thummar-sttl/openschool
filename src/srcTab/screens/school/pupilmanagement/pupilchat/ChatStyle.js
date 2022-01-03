@@ -52,7 +52,7 @@ export default StyleSheet.create({
 
     //
     views: {
-        backgroundColor: COLORS.blueBorder
+        backgroundColor: COLORS.white,
     },
     leftView: {
         marginLeft: hp(2),
@@ -108,19 +108,18 @@ export default StyleSheet.create({
     },
     mesagesView: {
         width: '100%',
-        height: hp(62),
-        marginBottom: wp(3),
+        height: '100%',
     },
     textView: {
         width: '100%',
-        height: hp(12),
+        height: 100,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
-        // position:'absolute',
-        // bottom:0
-        // bottom:0,
+        position:'absolute',
+        bottom:0
+        // bottom:18,
     },
     messageCell: {
         flexDirection: 'row',

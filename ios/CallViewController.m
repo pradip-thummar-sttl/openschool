@@ -8,7 +8,12 @@
 
 
 #import "CallViewController.h"
-
+#import "PollViewController.h"
+#import "Profile.h"
+#import "PollVC.h"
+#import "ToolBar.h"
+#import "CustomButton.h"
+#import "SharingViewController.h"
 #import "LocalVideoView.h"
 #import "OpponentCollectionViewCell.h"
 #import "OpponentsFlowLayout.h"
@@ -28,6 +33,11 @@
 #import <PubNub/PubNub.h>
 #import "MYED_Open_School-Swift.h"
 
+#import "Reachability.h"
+#import "ChatManager.h"
+#import "ChatViewController.h"
+
+
 
 
 #pragma mark Statics
@@ -38,6 +48,8 @@ static NSString * const kUpdateEntryType = @"entryType";
 static NSString * const kChannelGuide = @"the_guide";
 static NSString * const kEntryEarth = @"Earth";
 
+
+NSString *const QB_DEFAULT_PASSWORD = @"quickblox";
 
 
 
@@ -58,10 +70,15 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     BOOL _didStartPlayAndRecord;
 }
 
+
+@property (nonatomic, strong) ChatManager *chatManager;
 @property (weak, nonatomic) QBRTCConferenceSession *session;
+
+@property (strong, nonatomic) CustomButton *screenShareEnabled;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *opponentsCollectionView;
 @property (weak, nonatomic) IBOutlet QBToolBar *toolbar;
+@property (strong, nonatomic) ToolBar *ttoolbar;
 @property (strong, nonatomic) NSMutableArray *users;
 
 @property (strong, nonatomic) QBRTCCameraCapture *cameraCapture;
@@ -75,6 +92,13 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (assign, nonatomic) BOOL shouldGetStats;
 @property (strong, nonatomic) NSNumber *statsUserID;
 
+@property (assign, nonatomic) BOOL isMutedFlag;
+@property (assign, nonatomic) BOOL isTeacherReload;
+@property (assign, nonatomic) BOOL isPupilReload;
+
+@property (assign, nonatomic) BOOL isReaction;
+@property (assign, nonatomic) BOOL isBack;
+
 @property (strong, nonatomic) ZoomedView *zoomedView;
 @property (weak, nonatomic) OpponentCollectionViewCell *originCell;
 
@@ -87,9 +111,11 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (strong, nonatomic) NSMutableArray *reactionImageArr;
 @property (strong, nonatomic) NSMutableArray *reactionUnicodeArr;
+@property (strong, nonatomic) NSMutableArray *pupilreactionUnicodeArr;
 
 @property (nonatomic, strong) PubNub *pubnub;
 @property (nonatomic, strong) NSString *messages;
+@property (nonatomic, strong) NSString *pollMessage;
 
 @property (strong, nonatomic) NSString *selectedChannel;
 @property (strong, nonatomic) NSString *selectedId;
@@ -99,6 +125,10 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (assign, nonatomic) BOOL isRecording;
 
 //@property (weak, nonatomic)ScreenRecorder *screenRecord;
+
+@property (nonatomic) AVCaptureSession *captureSession;
+@property (nonatomic) AVCapturePhotoOutput *stillImageOutput;
+@property (nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 
 
 @end
@@ -132,11 +162,46 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
  
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+  QBUUser *user = [QBUUser user];
+  user.ID = self.currentUserID.integerValue;
+  user.fullName = self.currentName;
+  user.login=@"stud29@silvertouch.com";
+  user.password=@"Admin@123";
+  [Profile synchronizeUser:user];
   
+  
+  
+  
+  self.chatManager = [ChatManager instance];
   self.recordUrl=@"";
   self.isRecording = false;
+  _isTeacherReload=false;
+  _isPupilReload=false;
+  _isMutedFlag = true;
+  _isReaction = true;
+  _isBack=false;
+  [_classSettingView setHidden:true];
+  
+  if(_isTeacher){
+     [_settingButton setHidden:false];
+   }
+   else{
+     [_settingButton setHidden:true];
+   }
+  
+  _muteAllButton.layer.cornerRadius=10;
+  _muteAllButton.layer.borderWidth = 1;
+  _muteAllButton.layer.borderColor = [UIColor grayColor].CGColor;
+  
+  _classVottingButton.layer.cornerRadius=10;
+  _classVottingButton.layer.borderWidth = 1;
+  _classVottingButton.layer.borderColor = [UIColor grayColor].CGColor;
+  
+  
   _doView.layer.cornerRadius=10;
   _doView.layer.borderWidth = 3;
   _doView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -160,6 +225,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _userCameraView.layer.cornerRadius = 10;
   self.reactionImageArr=[[NSMutableArray alloc]initWithObjects:@"cancel_ic",@"first_reaction",@"second_reaction",@"third_reaction",@"fourth_reaction",@"fifth_reaction",@"sixth_reaction", nil];
   self.reactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"👊",@"🙌",@"🙂",@"💖",@"👏",@"👍", nil];
+  self.pupilreactionUnicodeArr=[[NSMutableArray alloc]initWithObjects: @"🤔",@"✋",@"👍", nil];
+  
   [self.reactionTableView setDelegate:self];
   [self.reactionTableView setDataSource:self];
   self.endCallButton.layer.cornerRadius = 10;
@@ -212,33 +279,147 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   [self.pubnub subscribeToChannels: self.channels withPresence:YES];
   
   self.messages = @"";
+  self.pollMessage = @"";
+  
+  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableTapped:)];
+  [self.opponentsCollectionView addGestureRecognizer:tap];
+  
+  //
+  __weak __typeof(self)weakSelf = self;
+  Profile *profile = [[Profile alloc]init];
+  [QBRequest logInWithUserLogin:profile.login
+                       password:profile.password
+                   successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+      
+      __typeof(weakSelf)strongSelf = weakSelf;
+      
+      [user setPassword:profile.password];
+      [Profile synchronizeUser:user];
+      
+      if ([user.fullName isEqualToString: profile.fullName] == NO) {
+          [strongSelf updateFullName:profile.fullName login:profile.login];
+      } else {
+          [strongSelf connectToChat:user];
+      }
+      
+  } errorBlock:^(QBResponse * _Nonnull response) {
+//      __typeof(weakSelf)strongSelf = weakSelf;
+      
+//          [strongSelf handleError:response.error.error];
+      if (response.status == QBResponseStatusCodeUnAuthorized) {
+          // Clean profile
+          [Profile clearProfile];
+//              [strongSelf defaultConfiguration];
+      }
+  }];
 }
 
+
+- (void)tableTapped:(UITapGestureRecognizer *)tap
+{
+  if (self.toolbarHeightConstrain.constant == 0) {
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 50;
+        self.headerHeightConstrain.constant = 50;
+    }];
+  }else{
+    [UIView animateWithDuration:2.0 animations:^{
+        self.toolbarHeightConstrain.constant = 0;
+        self.headerHeightConstrain.constant = 0;
+
+    }];
+  }
+}
 #pragma mark - Updates sending
 
 - (void)submitUpdate:(NSString *)update forEntry:(NSString *)entry toChannel:(NSString *)channel {
-  if (_isTeacher) {
-    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_selectedChannel
-          withCompletion:^(PNPublishStatus *status) {
+  
+  if (![update containsString:@"##@##"]) {
+    if (_isTeacher) {
+      [self.pubnub publish: update toChannel:_selectedChannel
+            withCompletion:^(PNPublishStatus *status) {
 
-        NSString *text = update;
-        [self displayMessage:text asType:@"[PUBLISH: sent]"];
-    }];
-  }else{
-    [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[0]
-          withCompletion:^(PNPublishStatus *status) {
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      }];
+    }else{
+      [self.pubnub publish: update toChannel:_channels[0]
+            withCompletion:^(PNPublishStatus *status) {
 
-        NSString *text = update;
-        [self displayMessage:text asType:@"[PUBLISH: sent]"];
-    }];
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      }];
+    }
+  } else {
+//    if (_isTeacher) {
+//      [self.pubnub publish: @{ @"entry": entry, @"update": update } toChannel:_channels[_channels.count-1]
+//            withCompletion:^(PNPublishStatus *status) {
+//
+//          NSString *text = update;
+//          [self displayMessage:text asType:@"[PUBLISH: sent]"];
+//      }];
+//    }else{
+//      PollViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollViewController"];
+//      vc.channels = self.channels;
+//      vc.ispupil = true;
+//      vc.pollString = update;
+//      vc.pupilId = _currentUserID;
+//      [self presentViewController:vc animated:false completion:nil];
+//    }
+      
+      
   }
+  
+  
     
 }
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
-    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
-    self.messages = message;
-  [self.opponentsCollectionView reloadData];
+//    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
+      if (![message containsString:@"##@##"]) {
+        if (_isTeacher) {
+          if (!_isTeacherReload) {
+            self.messages = message;
+            [self.opponentsCollectionView reloadData];
+            _isTeacherReload=false;
+          }else {
+            self.messages = @"";
+            [self.opponentsCollectionView reloadData];
+            _isTeacherReload=false;
+          }
+        }else{
+          if (!_isPupilReload) {
+            self.messages = message;
+            [self.opponentsCollectionView reloadData];
+            _isPupilReload=false;
+          }else {
+            self.messages = @"";
+            [self.opponentsCollectionView reloadData];
+            _isPupilReload=false;
+          }
+        
+        }
+        
+       
+        
+      }else{
+        NSArray *listItems = [message componentsSeparatedByString:@"##@##"];
+        if (_isTeacher) {
+          self.pollMessage = message;
+          [self.opponentsCollectionView reloadData];
+        }else if (listItems.count > 2) {
+          PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+          vc.channels = self.channels;
+          vc.ispupil = true;
+          vc.pollString = message;
+          vc.pupilId = _currentUserID;
+          [self presentViewController:vc animated:false completion:nil];
+        }else{
+          self.pollMessage = message;
+          [self.opponentsCollectionView reloadData];
+        }
+      }
+   
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 //
 //    [self.tableView beginUpdates];
@@ -257,15 +438,25 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //                      event.data.message[@"entry"],
 //                      event.data.message[@"update"]];
 
+  
+  NSLog(@"event.data.message %@", event.data.message);
+  
+  if ([event.data.message isKindOfClass:[NSString class]]) {
+    [self displayMessage:event.data.message asType:@"[MESSAGE: received]"];
+  }else{
     [self displayMessage:event.data.message[@"update"] asType:@"[MESSAGE: received]"];
+  }
+ 
+  
+   
 }
 
 - (void)client:(PubNub *)pubnub didReceivePresenceEvent:(PNPresenceEventResult *)event {
-    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
-                      event.data.presence.uuid,
-                      event.data.channel];
-
-    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
+//    NSString *text = [NSString stringWithFormat:@"event uuid: %@, channel: %@",
+//                      event.data.presence.uuid,
+//                      event.data.channel];
+//
+//    NSString *type = [NSString stringWithFormat:@"[PRESENCE: %@]", event.data.presenceEvent];
 //    [self displayMessage:text asType: type];
 }
 //
@@ -310,50 +501,61 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)connectionStart {
+  self.state=CallViewControllerStateConnecting;
+}
 
 - (void)configureGUI {
     
     __weak __typeof(self)weakSelf = self;
   
- [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
-   
-   weakSelf.muteAudio ^= 1;
-   if (!weakSelf.isRecording) {
-//     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
-//          NSLog(@"rcording progress... %@", error);
-//        } onCompletion:^(NSError * error) {
-//          NSLog(@"rcording error... %@", error);
-//        }];
-     weakSelf.isRecording = true;
-     
-     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
-       NSLog(@"error of recording %@", error);
-     }];
-//    weakSelf.screenRecord
-//     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
+// [self.toolbar addButton:[QBButtonsFactory screenRecording] action: ^(UIButton *sender) {
+//
+//   weakSelf.muteAudio ^= 1;
+//   if (!weakSelf.isRecording) {
+////     [[ScreenRecordCoordinator recordCordinator]startRecordingWithFileName:@"my_screenrecord_2" recordingHandler:^(NSError * error) {
+////          NSLog(@"rcording progress... %@", error);
+////        } onCompletion:^(NSError * error) {
+////          NSLog(@"rcording error... %@", error);
+////        }];
+//     weakSelf.isRecording = true;
+//
+//     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+//       NSLog(@"error of recording %@", error);
 //     }];
-     
-    
-   }else{
-//     [[ScreenRecordCoordinator recordCordinator] stopRecording];
-     weakSelf.isRecording = false;
-     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
-            NSLog(@"stop recording Error %@", url);
-       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
-     }];
-//     [[ScreenRecorder shareInstance]
-//     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
-//       NSLog(@"rcording progress... %@", error);
-//     }]
-   }
-    }];
+////    weakSelf.screenRecord
+////     [[ScreenRecorder shared]startRecordingsaveToCameraRoll:true errorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }];
+//
+//
+//   }else{
+////     [[ScreenRecordCoordinator recordCordinator] stopRecording];
+//     weakSelf.isRecording = false;
+//     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+//            NSLog(@"stop recording Error %@", url);
+//       weakSelf.recordUrl = [NSString stringWithFormat:@"%@", url];
+//     }];
+////     [[ScreenRecorder shareInstance]
+////     [weakSelf.screenRecord stoprecordingerrorHandler:^(NSError * error){
+////       NSLog(@"rcording progress... %@", error);
+////     }]
+//   }
+//    }];
  
  
  
   [self.toolbar addButton:[QBButtonsFactory switchCamera] action:^(UIButton *sender) {
-    Settings *settings = Settings.instance;
-    self.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionFront];
+    if (_isBack) {
+      [weakSelf setupLiveVideo:false];
+      Settings *settings = Settings.instance;
+      weakSelf.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionBack];
+    }else{
+      [weakSelf setupLiveVideo:true];
+      Settings *settings = Settings.instance;
+      weakSelf.cameraCapture = [[QBRTCCameraCapture alloc] initWithVideoFormat:settings.videoFormat position:AVCaptureDevicePositionFront];
+    }
+    
   }];
   
   [self.toolbar addButton:[QBButtonsFactory auidoEnable] action: ^(UIButton *sender) {
@@ -363,7 +565,30 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   if (_isTeacher) {
     [self.toolbar addButton:[QBButtonsFactory screenShare] action:^(UIButton *sender) {
       
-        
+//      PollVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+//      vc.channels = weakSelf.channels;
+//      vc.ispupil = false;
+//      [weakSelf presentViewController:vc animated:false completion:nil];
+      __typeof(weakSelf)strongSelf = weakSelf;
+      
+      
+      SharingViewController *sharingVC = [[SharingViewController alloc] init];
+      [sharingVC setDidSetupSharingScreenCapture:^(SharingScreenCapture * _Nonnull screenCapture) {
+          if (screenCapture && strongSelf.session.localMediaStream.videoTrack.videoCapture != screenCapture) {
+              strongSelf.session.localMediaStream.videoTrack.videoCapture = screenCapture;
+          }
+          strongSelf.session.localMediaStream.videoTrack.enabled = YES;
+      }];
+      
+      [sharingVC setDidCloseSharingVC:^{
+          strongSelf.session.localMediaStream.videoTrack.videoCapture = strongSelf.cameraCapture;
+          strongSelf.session.localMediaStream.videoTrack.enabled = !strongSelf.muteVideo;
+//          [strongSelf cameraTurnOn:!strongSelf.muteVideo];
+      }];
+
+      [strongSelf presentViewController:sharingVC animated:NO completion:^{
+          strongSelf.screenShareEnabled.pressed = NO;
+      }];
     }];
   }
   
@@ -382,11 +607,57 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   [self.toolbar addButton:[QBButtonsFactory whiteBoard] action: ^(UIButton *sender) {
       
 //      weakSelf.muteAudio ^= 1;
-    WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
-    [weakSelf presentViewController:vc animated:false completion:nil];
+//    WhiteboardVC *vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"WhiteboardVC"];
+//    [weakSelf presentViewController:vc animated:false completion:nil];
     
     
   }];
+//  [self.toolbar addButton:[QBButtonsFactory chatButton] action: ^(UIButton *sender) {
+//
+////      weakSelf.muteAudio ^= 1;
+////    if (Reachability.instance.networkStatus == NetworkStatusNotReachable) {
+////        [self showAlertWithTitle:NSLocalizedString(@"No Internet Connection", nil)
+////                         message:NSLocalizedString(@"Make sure your device is connected to the internet", nil)
+////              fromViewController:self];
+////        [SVProgressHUD dismiss];
+////        return;
+////    }
+//    if (weakSelf.users.count >= 1) {
+//        // Creating private chat.
+//        [SVProgressHUD show];
+//        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
+//
+//
+//
+//
+//
+//      [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
+//            if (response.error) {
+//                [SVProgressHUD showErrorWithStatus:response.error.error.localizedDescription];
+//                return;
+//            }
+//            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
+//            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
+//
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+//        ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//        chatController.dialogID = createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+//        chatController.currentUserID = self.currentUserID;
+//        chatController.currentUserName=self.currentName;
+//        [weakSelf presentViewController:chatController animated:false completion:nil];
+//
+////            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+////              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+////              ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+////              chatController.dialogID = createdDialog.ID;
+////              [weakSelf presentViewController:chatController animated:false completion:nil];
+////
+////            }];
+//        }];
+//    }
+//
+//
+//  }];
     
 //    if (_conferenceType > 0) {
 ////      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
@@ -465,6 +736,67 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
 }
 
+
+- (void)updateFullName:(NSString *)fullName login:(NSString *)login {
+    QBUpdateUserParameters *updateUserParameter = [[QBUpdateUserParameters alloc] init];
+    updateUserParameter.fullName = fullName;
+    
+    __weak __typeof(self)weakSelf = self;
+    [QBRequest updateCurrentUser:updateUserParameter
+                    successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+        __typeof(weakSelf)strongSelf = weakSelf;
+//        [strongSelf updateLoginInfoText: FULL_NAME_DID_CHANGE];
+        [Profile updateUser:user];
+        [strongSelf connectToChat:user];
+        
+    } errorBlock:^(QBResponse * _Nonnull response) {
+//        __typeof(weakSelf)strongSelf = weakSelf;
+//        [strongSelf handleError:response.error.error];
+    }];
+}
+
+- (void)connectToChat:(QBUUser *)user {
+    
+//    [self updateLoginInfoText:LOGIN_CHAT];
+    
+    __weak __typeof(self)weakSelf = self;
+    [QBChat.instance connectWithUserID:user.ID
+                              password:user.password
+                            completion:^(NSError * _Nullable error) {
+        
+        __typeof(weakSelf)strongSelf = weakSelf;
+        
+        if (error) {
+            if (error.code == QBResponseStatusCodeUnAuthorized) {
+                // Clean profile
+                [Profile clearProfile];
+//                [strongSelf defaultConfiguration];
+            } else {
+//                [strongSelf handleError:error];
+            }
+        } else {
+            //did Login action
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [(RootParentVC *)[strongSelf shared].window.rootViewController showDialogsScreen];
+//            });
+//            self.inputedUsername = @"";
+//            self.inputedLogin = @"";
+        }
+    }];
+    
+}
+
+- (NSString *)systemMessageWithChatName:(NSString *)chatName {
+    NSString *actionMessage = NSLocalizedString(@"SA_STR_CREATE_NEW", nil);
+  
+//    Profile *currentUser = [[Profile alloc] init];
+//    if (currentUser.isFull == NO) {
+//        return @"";
+//    }
+    NSString *message = [NSString stringWithFormat:@"%@ %@ \"%@\"",  [QBSession currentSession].currentUser.fullName, actionMessage, chatName];
+    return message;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -477,7 +809,80 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         // here we should get its running state back
         [self.cameraCapture startSession:nil];
     }
+  [self setupLiveVideo:true];
+  
 }
+- (void)viewWillDisappear:(BOOL)animated{
+   [self.captureSession stopRunning];
+}
+
+- (void)setupLiveVideo:(BOOL)isFront {
+  AVCaptureDevice *inputDevice = nil;
+  self.captureSession = [AVCaptureSession new];
+  self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
+  AVCaptureDevice *backCamera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+  for (AVCaptureDevice *camera in devices) {
+    if (isFront) {
+      if ([camera position] == AVCaptureDevicePositionFront) {
+        _isBack=true;
+        inputDevice=camera;
+        break;
+      }
+    }else{
+      if ([camera position] == AVCaptureDevicePositionBack) {
+        _isBack=false;
+        inputDevice=camera;
+        break;
+      }
+    }
+    
+  }
+//  if (!backCamera) {
+//      NSLog(@"Unable to access back camera!");
+//      return;
+//  }
+  NSError *error;
+  AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice
+                                                                      error:&error];
+  if (!error) {
+      //Step 9
+    self.stillImageOutput = [AVCapturePhotoOutput new];
+
+    if ([self.captureSession canAddInput:input] && [self.captureSession canAddOutput:self.stillImageOutput]) {
+        
+        [self.captureSession addInput:input];
+        [self.captureSession addOutput:self.stillImageOutput];
+        [self setupLivePreview];
+    }
+  }
+  else {
+      NSLog(@"Error Unable to initialize back camera: %@", error.localizedDescription);
+  }
+}
+- (void)setupLivePreview {
+    
+    self.videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
+    if (self.videoPreviewLayer) {
+        
+        self.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        self.videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+//      self.videoPreviewLayer.position=AVCaptureDevicePositionFront;
+//      [self.videoPreviewLayer setBackgroundColor:[UIColor redColor].CGColor];
+        [self.userCameraView.layer addSublayer:self.videoPreviewLayer];
+        
+        //Step12
+      dispatch_queue_t globalQueue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+      dispatch_async(globalQueue, ^{
+          [self.captureSession startRunning];
+          //Step 13
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.videoPreviewLayer.frame = self.userCameraView.bounds;
+        });
+      });
+    }
+}
+
 
 - (void)addReaction:(UIButton*)sender
 {
@@ -510,20 +915,71 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     [reusableCell setVideoView:[self videoViewWithOpponentID:@(user.ID)]];
 
- 
+
+  if(_isReaction){
   if (![_messages isEqualToString:@""]) {
-    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+    NSArray *items = [_messages componentsSeparatedByString:@"#@#"];
     if (_isTeacher) {
       if (user.ID == [[items objectAtIndex:1] integerValue] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+        reusableCell.emojiLbl.text = [_pupilreactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]] ;
       }else
       {
         reusableCell.emojiLbl.text=@"";
       }
     }else{
 //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+      if (!_isTeacher) {
+        reusableCell.emojiLbl.text = [_reactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
+      }else{
+        reusableCell.emojiLbl.text=@"";
+      }
+      
 //      }
+
+    }
+    
+  
+  }
+  else{
+    reusableCell.emojiLbl.text=@"";
+  }
+  }
+
+ 
+//  if (![_messages isEqualToString:@""]) {
+//    NSArray *items = [_messages componentsSeparatedByString:@"@#@"];
+//    if (_isTeacher) {
+//      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+//      }else
+//      {
+//        reusableCell.emojiLbl.text=@"";
+//      }
+//    }else{
+////      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+//        reusableCell.emojiLbl.text = [items objectAtIndex:0];
+////      }
+//    }
+//
+//  }
+  
+  if (![_pollMessage isEqualToString:@""]) {
+    NSArray *items = [_pollMessage componentsSeparatedByString:@"##@##"];
+    if (_isTeacher) {
+      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+        reusableCell.pollLabel.text = [items objectAtIndex:0];
+      }
+//      else
+//      {
+//        reusableCell.pollLabel.text=@"";
+//      }
+    }else{
+//      if (_teacherQBUserID == [items objectAtIndex:1] ) {
+      if (_currentUserID == [items objectAtIndex:1]) {
+        reusableCell.pollLabel.text = [items objectAtIndex:0];
+      }else{
+        reusableCell.pollLabel.text = @"";
+      }
     }
     
   }
@@ -1108,7 +1564,8 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != 0) {
-      NSString *str = [NSString stringWithFormat:@"%@@#@%@", _reactionUnicodeArr[indexPath.row-1],_selectedId];
+      _isTeacherReload=true;
+      NSString *str = [NSString stringWithFormat:@"%ld#@#%@", indexPath.row-1,_selectedId];
         [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
 //      [self.opponentsCollectionView reloadData];
     }
@@ -1117,21 +1574,115 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   
 }
 
+
 - (IBAction)dontBtn:(id)sender {
-   NSString *str = [NSString stringWithFormat:@"🤔@#@%@",_currentUserID];
+  _isPupilReload=true;
+   NSString *str = [NSString stringWithFormat:@"0#@#%@",_currentUserID];
    [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //   [self.opponentsCollectionView reloadData];
 }
 - (IBAction)thumbBtn:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"👍@#@%@",_currentUserID];
+  _isPupilReload=true;
+  NSString *str = [NSString stringWithFormat:@"2#@#%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
 }
 
 - (IBAction)raiseBtn:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"✋@#@%@",_currentUserID];
+  _isPupilReload=true;
+  NSString *str = [NSString stringWithFormat:@"1#@#%@",_currentUserID];
   [self submitUpdate:str forEntry:kEntryEarth toChannel:_channels[0]];
 //  [self.opponentsCollectionView reloadData];
+}
+//- (IBAction)onCollectionTap:(UITapGestureRecognizer *)sender {
+////  [self.toolbar setHidden:true];
+//  if (self.toolbarHeightConstrain.constant == 0) {
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 50;
+//        self.headerHeightConstrain.constant = 50;
+//    }];
+//  }else{
+//    [UIView animateWithDuration:2.0 animations:^{
+//        self.toolbarHeightConstrain.constant = 0;
+//        self.headerHeightConstrain.constant = 0;
+//
+//    }];
+//  }
+//
+//}
+- (IBAction)onStartScreenRecordingPressed:(id)sender {
+  if (!self.isRecording) {
+    self.isRecording = true;
+    [self.screenRecordingButton setTitle:@"STOP SCREEN RECORDING" forState:UIControlStateNormal];
+    [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
+      NSLog(@"error of recording %@", error);
+    }];
+  }else{
+    self.isRecording = false;
+    [self.screenRecordingButton setTitle:@"START SCREEN RECORDING" forState:UIControlStateNormal];
+    [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
+           NSLog(@"stop recording Error %@", url);
+      self.recordUrl = [NSString stringWithFormat:@"%@", url];
+    }];
+  }
+}
+
+- (IBAction)onPressSetupClassVotting:(id)sender {
+  PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+  vc.channels = self.channels;
+  vc.ispupil = false;
+  [self presentViewController:vc animated:false completion:nil];
+}
+
+- (IBAction)onPressMuteAll:(id)sender {
+  
+  if (_isMutedFlag) {
+    _isMutedFlag=false;
+    [_muteAllButton setTitle:@"Unmute All" forState:UIControlStateNormal];
+    for (int i=0; i<self.users.count; i++) {
+      QBUUser *user = self.users[i];
+      QBRTCAudioTrack *audioTrack = [self.session remoteAudioTrackWithUserID:@(user.ID)];
+      audioTrack.enabled = false;
+    }
+   
+   
+  }else{
+    _isMutedFlag=true;
+    [_muteAllButton setTitle:@"Mute All" forState:UIControlStateNormal];
+    for (int i=0; i<self.users.count; i++) {
+      QBUUser *user = self.users[i];
+      QBRTCAudioTrack *audioTrack = [self.session remoteAudioTrackWithUserID:@(user.ID)];
+      audioTrack.enabled = true;
+    }
+    
+  }
+  
+}
+
+- (IBAction)onReactionSwitchPressed:(id)sender {
+  
+  if(_isReaction){
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+  }
+  else{
+    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+  }
+  
+  _isReaction = !_isReaction;
+  
+  [self.opponentsCollectionView reloadData];
+//  [_messageSwitch setBackgroundImage:[UIImage imageNamed: @""] forState:UIControlStateNormal];
+}
+
+- (IBAction)onMessageSwitchPressed:(id)sender {
+}
+
+- (IBAction)onCloseSettings:(id)sender {
+  [_classSettingView setHidden:true];
+}
+
+- (IBAction)onSettingButtonPressed:(id)sender {
+  [_classSettingView setHidden:false];
 }
 @end
 

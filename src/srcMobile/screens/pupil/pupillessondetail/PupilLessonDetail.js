@@ -24,13 +24,15 @@ import {
 } from 'react-native-popup-menu';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
-import { User } from "../../../../utils/Model";
+import { BadgeIcon, User } from "../../../../utils/Model";
 import moment from "moment";
-import { opacity } from "../../../../utils/Constant";
+import { opacity, Var } from "../../../../utils/Constant";
 import Header4_LH from "../../../component/reusable/header/bulck/Header4_LH";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
 
 
 const PupilLessonDetail = (props) => {
@@ -219,6 +221,8 @@ const PupilLessonDetail = (props) => {
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
                             <MenuTrigger>
+                            <FilterBlack style={PAGESTYLE.searchMenu} height={15} width={15} />
+
                                 {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
                             </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
@@ -228,11 +232,12 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Subject</Text>
-                                            {/* {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 0 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -242,11 +247,42 @@ const PupilLessonDetail = (props) => {
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                            {/* {selectedIndex == 1 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 1 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
+                                            {selectedIndex == 2 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
+                                                :
+                                                null
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
+                                            {selectedIndex == 3 ?
+                                                // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMark} height={hp(1.84)} width={hp(1.84)} />
+                                                :
+                                                null
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -325,6 +361,11 @@ const PupilLessonDetail = (props) => {
             // </View>
         )
     }
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -334,7 +375,7 @@ const PupilLessonDetail = (props) => {
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
             <View style={{ backgroundColor: COLORS.white }}>
-                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} />
+                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
                 {searchHeader()}
                 <View style={PAGESTYLE.whiteBg1}>
                     <View style={PAGESTYLE.lessonPlanTop}>

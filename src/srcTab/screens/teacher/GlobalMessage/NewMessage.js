@@ -76,6 +76,9 @@ const NewMessage = (props) => {
     }, [])
 
     const isPupilChecked = (_index) => {
+
+        console.log("---->",parentsData);
+
         if (selectedParents.length > 0) {
             if (selectedParents.some(ele => ele.MobileNumber == parentsData[_index].MobileNumber)) {
                 return true
@@ -117,7 +120,6 @@ const NewMessage = (props) => {
                 SendToAll: parentsData.length == selectedParents.length,
                 Status: selectedStatus,
                 Type: 'T',
-                // UpdatedBy: '60b0b79a0e74b0373679d1b6',
                 UpdatedBy: User.user._id,
                 PupilList: selectedParents
             }
@@ -128,7 +130,6 @@ const NewMessage = (props) => {
                 SendToAll: parentsData.length == selectedParents.length,
                 Status: selectedStatus,
                 Type: 'T',
-                // CreatedBy: '60b0b79a0e74b0373679d1b6',
                 CreatedBy: User.user._id,
                 PupilList: selectedParents
             }
@@ -203,28 +204,16 @@ const NewMessage = (props) => {
                                 autoCapitalize={'sentences'}
                                 placeholderStyle={styles.somePlaceholderStyle}
                                 placeholderTextColor={COLORS.borderGrp}
-                                style={[styles.commonInputTextarea1, , styles.inputWidth]}
+                                style={[styles.commonInputTextarea1, , styles.inputWidth,{paddingVertical : Platform.OS === 'android' ? 3 : 0}]}
                                 onChangeText={title => setTitle(title)} />
                         </View>
                     </View>
 
                     <View style={styles.field1}>
                         <View style={styles.copyInputParent}>
-                            {/* <TextInput
-                        multiline={false}
-                        placeholder='Enter title of the message'
-                        value={event}
-                        placeholderStyle={styles.somePlaceholderStyle}
-                        placeholderTextColor={COLORS.borderGrp}
-                        style={styles.commonInputTextarea1}
-                        onChangeText={eventName => setEvent(eventName)} /> */}
                             {parentListView()}
-
-                            <ToggleSwitch onColor={COLORS.dashboardGreenButton}
-                                isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                            />
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}/>
                             <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
-
                         </View>
                     </View>
 
@@ -249,7 +238,6 @@ const NewMessage = (props) => {
                         <TouchableOpacity style={styles.buttonGroup1}
                             activeOpacity={opacity}
                             onPress={() => saveMessage('Draft')}>
-                            {/* <Image style={styles.addIcon} source={Images.CheckIcon} /> */}
                             <TickMarkGreen style={styles.addIcon} width={hp(1.55)} height={hp(1.55)}/>
                             <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
                         </TouchableOpacity>

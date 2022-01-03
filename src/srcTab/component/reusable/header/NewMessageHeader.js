@@ -15,6 +15,7 @@ import {
 import BackArrow from "../../../../svg/common/BackArrow";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../utils/Model";
 const NewMessageHeader = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -34,9 +35,14 @@ const NewMessageHeader = (props) => {
                             <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity onPress={() => { }} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => { props.onAlertPress()}} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {/* <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                        BadgeIcon.isBadge ?
+                            <View style={STYLE.redDot}></View> : null
+                    } */}
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -50,7 +56,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(0),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(1.5),
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,

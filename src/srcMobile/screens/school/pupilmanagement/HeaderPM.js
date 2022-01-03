@@ -27,6 +27,7 @@ import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
+import { BadgeIcon } from "../../../../utils/Model";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -40,13 +41,13 @@ const HeaderPM = (props) => {
 
 
     useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
+        // if (!isSearchActive) {
+        //     props.onClearSearch()
+        //     setKeyword('')
+        //     textInput.current.clear()
+        // } else {
+        //     props.onSearch()
+        // }
     }, [isSearchActive])
 
     useEffect(() => {
@@ -54,6 +55,23 @@ const HeaderPM = (props) => {
         console.log('log of props in header pm mobile', props.tabs);
         setSelectedTab(props.tabs)
     }, [filterBy, props.tabs])
+
+
+    const onPressSearch = () => {
+        setSearchActive(true)
+        setTimeout(() => {
+            props.onSearch()
+        }, 500)
+    }
+
+    const onPressClose = () => {
+        setSearchActive(false)
+        setTimeout(() => {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+        }, 500)
+    }
 
     return (
         <View style={styles.headerMain}>
@@ -67,19 +85,24 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <View style={styles.massagesIcon}>
                             <Notification />
+                            {/* <View style={STYLE.redDot}></View> */}
                         </View>
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
             {props.tabs === 0 ?
                 <View style={styles.searchParent}>
                     <View style={styles.searchInner}>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => {
                                 isSearchActive ?
@@ -87,12 +110,26 @@ const HeaderPM = (props) => {
                                     :
                                     setSearchActive(true)
                             }}>
-                            {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                            <Image style={{ height: 20, resizeMode: 'contain' }}
+                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
                             {isSearchActive ?
                                 <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} /> :
                                 <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />}
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+
+                        {!isSearchActive ?
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => { onPressSearch() }}>
+                                <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => { onPressClose() }}>
+                                <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />
+                            </TouchableOpacity>}
+
                         <TextInput
                             ref={textInput}
                             style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
@@ -189,7 +226,6 @@ const HeaderPM = (props) => {
             >
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
@@ -197,19 +233,11 @@ const HeaderPM = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupil</Text>
                                 <View style={styles.entryContentMain}>
-                                    {/* <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        style={styles.entryData}
-                                        onPress={() => { refRBSheet.current.close(); props.navigateToCsvPopup() }}> */}
-                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                        {/* <ImportCSV style={styles.entryIcon} height={hp(10)} width={hp(10)} />
-                                        <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
-                                    </TouchableOpacity> */}
+                                    
                                     <MPopupdataSecondCSVUpload />
                                     <TouchableOpacity
                                         style={styles.entryData}
                                         onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                        {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                                         <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                         <Text style={styles.entryTitle}>ADD MANUALLY</Text>
                                     </TouchableOpacity>
@@ -219,12 +247,7 @@ const HeaderPM = (props) => {
                     </View>
                 </View>
             </RBSheet>
-            {/* { */}
-            {/* // isCsvPopup ? */}
-            {/* <View> */}
-            {/* </View> */}
-            {/* // : null */}
-            {/* // } */}
+           
         </View>
     );
 }
@@ -472,7 +495,7 @@ const styles = StyleSheet.create({
     },
     entryContentMain: {
         alignItems: 'center',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     entryData: {
         marginBottom: hp(5.14)

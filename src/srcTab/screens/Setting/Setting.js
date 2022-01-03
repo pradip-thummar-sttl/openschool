@@ -7,8 +7,8 @@ import COLORS from "../../../utils/Colors";
 import ToggleSwitch from 'toggle-switch-react-native';
 import { Service } from "../../../service/Service";
 import { EndPoints } from "../../../service/EndPoints";
-import { User } from "../../../utils/Model";
-import { showMessage } from "../../../utils/Constant";
+import { BadgeIcon, User } from "../../../utils/Model";
+import { showMessage, Var } from "../../../utils/Constant";
 const Setting = (props) => {
     const [isSwitch, setSwitch] = useState(true)
     const [typeObject, setTypeObject] = useState([])
@@ -97,9 +97,15 @@ const Setting = (props) => {
         setSettings(mainArray)
         console.log('type  of mainArray ', mainArray)
     }
+    const openNotification = () => {
+        Var.isCalender = false
+        BadgeIcon.isBadge = false
+        props.navigation.openDrawer() 
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+    }
     return (
         <View style={styles.mainPage}>
-            <SettingHeader onAlertPress={() => { props.navigation.openDrawer() }} />
+            <SettingHeader onAlertPress={() => { openNotification() }} />
 
 
             <View style={[styles.lessonPlanTab, { height: 50 }]}>

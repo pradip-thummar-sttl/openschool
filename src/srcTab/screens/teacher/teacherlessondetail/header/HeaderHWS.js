@@ -8,6 +8,8 @@ import { opacity } from "../../../../../utils/Constant";
 import moment from 'moment';
 import BackArrow from "../../../../../svg/teacher/lessonhwplanner/ArrowBack";
 import Notification from "../../../../../svg/teacher/dashboard/Notification";
+import { BadgeIcon } from "../../../../../utils/Model";
+import STYLE from "../../../../../utils/Style";
 
 const HeaderHWS = (props) => {
     return (
@@ -17,26 +19,16 @@ const HeaderHWS = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.subjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
-                    {/* <TouchableOpacity style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonGroup}>
-                        <Image style={styles.addIcon} source={Images.CheckIconWhite} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                    </TouchableOpacity> */}
+                  
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        { BadgeIcon.isBadge && <View style={STYLE.redDot}></View>}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -51,7 +43,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(2),
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
     },
     headerMain: {
         flexDirection: 'row',

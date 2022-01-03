@@ -21,7 +21,7 @@ const TLDetail = (props) => {
     const [mateIndex, setMateIndex] = useState(-1)
     const [isMatLoading, setLoader] = useState(false)
 
-    console.log('props', props.lessonData.MaterialList);
+    console.log('props', props.lessonData.PupilList);
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
@@ -105,7 +105,7 @@ const TLDetail = (props) => {
                         </View>
                         <View style={PAGESTYLE.checkBoxGrp}>
                             <FlatList
-                                data={props.lessonData.Allpupillist}
+                                data={props.lessonData.PupilList}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item }) => (
                                     <View style={PAGESTYLE.checkBoxLabelNone}>
