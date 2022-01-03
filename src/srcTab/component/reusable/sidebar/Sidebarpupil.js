@@ -132,7 +132,7 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
+                    <TouchableOpacity onPress={() => { toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
@@ -194,7 +194,8 @@ const Sidebar = (props) => {
                                 <View style={styles.profileTextMain}>
                                     <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: hp(12) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                                 </View>
-                                <TouchableOpacity style={styles.moreMenu}>
+                                <TouchableOpacity style={styles.moreMenu}
+                                    onPress={() => props.onSetting()}>
                                     <More style={styles.moreIcon} width={hp(3)} height={5} />
                                     {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                                 </TouchableOpacity>

@@ -51,6 +51,13 @@ const SGroupSetUpPupilSelection = (props) => {
         loadTeacher()
         setPupilLoading(true)
 
+        if (props.route.params.groupData) {
+            let previoslySelectedData = props.route.params.groupData
+            setSelectedPupils(previoslySelectedData)
+        }
+
+
+
         Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
@@ -76,10 +83,20 @@ const SGroupSetUpPupilSelection = (props) => {
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
+            console.log('response of load response', res)
             if (res.code == 200) {
                 setTeachers(res.data)
                 // setTeacherClone(res.data)
+
+                if (props.route.params.teacherId) {
+                    let teacherData = []
+                    res.data.map((item) => {
+                        if (item.TeacherId === props.route.params.teacherId) {
+                            teacherData.push(item)
+                        }
+                    })
+                    setSelectedTeacher(teacherData)
+                }
             } else {
                 showMessage(res.message)
             }
@@ -170,6 +187,10 @@ const SGroupSetUpPupilSelection = (props) => {
                 reset()
                 // loadGroup()
                 showMessage(MESSAGE.classSetup)
+                setTimeout(() => {
+                    props.route.params.onRefresh();
+                    props.navigation.goBack()
+                }, 1000)
             } else {
                 showMessage(res.message)
             }
@@ -179,7 +200,7 @@ const SGroupSetUpPupilSelection = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', selectedPupils, pupils);
+        // console.log('isSelected', selectedPupils, pupils);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item.PupilId !== pupils[_index].PupilId);
             setSelectedPupils(newList)
@@ -189,7 +210,10 @@ const SGroupSetUpPupilSelection = (props) => {
     }
 
     const isPupilChecked = (_index) => {
-        console.log('selectedPupils', selectedPupils, _index);
+        // console.log('selectedPupils', selectedPupils, _index);
+
+        console.log('----selectedTeacher-------', selectedTeacher)
+
         if (selectedPupils.length > 0) {
             if (selectedPupils.some(ele => ele.PupilId == pupils[_index].PupilId)) {
                 return true
@@ -309,6 +333,7 @@ const SGroupSetUpPupilSelection = (props) => {
             </View>
         );
     };
+
 
     return (
         <SafeAreaView style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.white }}>

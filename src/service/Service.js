@@ -47,6 +47,7 @@ export const Service = {
     },
 
     postFormData: (data, endPoint, success, error) => {
+        
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {

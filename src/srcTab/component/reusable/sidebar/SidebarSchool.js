@@ -172,7 +172,7 @@ const SidebarSchool = (props) => {
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
-                        onPress={() => { props.navigateToParents(); toggleAnimation(true) }}>
+                        onPress={() => { toggleAnimation(true) }}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
