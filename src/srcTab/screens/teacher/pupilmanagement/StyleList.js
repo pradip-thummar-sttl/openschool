@@ -468,7 +468,8 @@ export default StyleSheet.create({
         marginRight: hp(9.50),
     },
     perfomanceDotmain: {
-        width: hp(10.80),
+        width : Platform.OS === 'android' ? hp(8) :hp(10.80) ,
+        // width: hp(10.80),
         alignItems: 'center',
         // marginRight: hp(2.60),
         marginRight :  Platform.OS === 'android' ? hp(2) : hp(2.60),
@@ -523,6 +524,7 @@ export default StyleSheet.create({
         borderRadius: hp(100),
         backgroundColor: COLORS.lightGrayPupil,
         marginRight: hp(1),
+        marginStart  : Platform.OS === 'android' ? hp(1) : 0
     },
     pupilName: {
         fontSize: hp(1.82),

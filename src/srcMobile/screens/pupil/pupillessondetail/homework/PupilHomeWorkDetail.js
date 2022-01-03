@@ -69,7 +69,7 @@ const PupilHomeWorkDetail = (props) => {
 
         // formData.append("Feedback", feedBack);
         // formData.append("Rewards", '1');
-
+console.log('endpoint  url', `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`);
         Service.postFormData(formData, `${EndPoints.PupilUploadHomework}/${item.HomeWorkId}/${User.user.UserDetialId}`, (res) => {
             console.log('res', res);
             if (res.code == 200) {

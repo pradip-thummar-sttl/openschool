@@ -160,7 +160,7 @@ const PupiloverView = (props) => {
                             pupilData.length > 0 ?
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
-                                        <View style={{width:Platform.OS === 'android' ? hp(0) : hp(2)}}></View>
+                                        <View style={{width:Platform.OS === 'android' ? 0 : hp(2)}}></View>
                                         <View style={[PAGESTYLE.pupilTableHeadingMain]}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
@@ -185,7 +185,7 @@ const PupiloverView = (props) => {
                                         </View>
                                         <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain,{paddingStart: Platform.OS === 'android' ? 16 : 0}]}>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain,{paddingStart: Platform.OS === 'android' ? 20 : 0}]}>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
