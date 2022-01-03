@@ -38,6 +38,8 @@ const TeacherProfileView = (props) => {
     const [chartData, setChartData] = useState([])
     const [isLessonDetail, setLessonDetail] = useState(false);
     const [teacherCountData, setTeacherCountData] = useState([])
+    const [isSearch, setSearch] = useState('')
+    const [isFilter, setFilter] = useState('')
 
     const activityConfig = {
         width: 300,
@@ -57,7 +59,7 @@ const TeacherProfileView = (props) => {
             console.log('Err of all pupil by teacher', err)
         })
     }, [])
-  
+
     const openNotification = () => {
         props.onNavigation.openDrawer();
     }
@@ -66,11 +68,12 @@ const TeacherProfileView = (props) => {
         <View style={PAGESTYLE.mainPage1}>
             {!isLessonDetail &&
                 <HeaderPMInner
+                    onSearch={(search, filter)=> {setSearch(search); setFilter(filter)}}
                     navigateToBack={() => {props.navigateToBack()}} 
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
-                    pupilName={item.FirstName + ' ' + item.LastName} 
-                    onNotification={()=> openNotification()} />
+                    pupilName={item.FirstName + ' ' + item.LastName}
+                    onNotification={() => openNotification()} />
             }
 
             {
@@ -81,7 +84,7 @@ const TeacherProfileView = (props) => {
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                        <View style={{height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0}}>
+                                        <View style={{ height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0 }}>
                                             <TopBackImg style={PAGESTYLE.managementopImage} height={Platform.OS == 'android' && isTablet() ? hp(20.7) : '100%'} width={'100%'} />
                                         </View>
                                         <View style={PAGESTYLE.thumbTopUser}>
@@ -180,11 +183,10 @@ const TeacherProfileView = (props) => {
                     :
                     tabSelected === 1 ?
                         <View style={{ width: isHide ? '100%' : '100%', }}>
-
                             <TeacherChat tabs={tabSelected} data={item} />
                         </View>
                         :
-                        <LessonList data={item} onNotification={()=> openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
+                        <LessonList data={item} search={isSearch} filter={isFilter} onNotification={()=> openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
             }
 
         </View>

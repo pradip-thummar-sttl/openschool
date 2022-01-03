@@ -29,6 +29,8 @@ const { CallModule, CallModuleIos } = NativeModules;
 
 const Popupdata = (props) => {
     const refRBSheet = useRef();
+    const [isUploading, setUploading] = useState(false);
+
     const [isModalVisible, setModalVisible] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [isMatLoading, setLoader] = useState(false)
@@ -74,17 +76,10 @@ const Popupdata = (props) => {
 
     const launchLiveClassForTeacher = () => {
         if (isRunningFromVirtualDevice) {
-            // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= props.data.StartTime && currentTime <= props.data.EndTime) {
-                // showMessage('time to start')
                 let data = {
                     LessonStart: true,
                     LessonEnd: false
@@ -123,7 +118,8 @@ const Popupdata = (props) => {
                 channels.push(props.data.TeacherID + "_" + User.user.UserDetialId) //For instant reaction
                 channels.push(props.data.TeacherID + "_" + props.data._id)        //For polling
             } else {
-                channels.push(props.data.TeacherID + "_" + dataOfSubView._id)        //For polling
+                channels.push(props.data.TeacherID + "_" + props.data._id)        //For polling
+                // channels.push(props.data.TeacherID + "_" + dataOfSubView._id)        //For polling
             }
             let dialogID = props.data.QBDilogID
             let QBUserId = User.user.QBUserId
@@ -134,8 +130,8 @@ const Popupdata = (props) => {
             console.log('KDKD: ', dialogID, User.user.QBUserId, currentName, qBUserIDs, userNames, names, channels);
 
             if (Platform.OS == 'android') {
-                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, ID) => {
-                    console.log('Class Started', error, ID);
+                CallModule.qbLaunchLiveClass(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, title, channels, (error, id) => {
+                    console.log('Class Started', error, id);
 
                     if (!props.isPupil) {
                         let data = {
@@ -145,12 +141,32 @@ const Popupdata = (props) => {
                         Service.post(data, `${EndPoints.LessionStartEnd}/${props.data._id}`, (res) => {
                         }, (err) => {
                         })
+
+                        if (id && id != null && id != "") {
+                            let formData = new FormData();
+                            let ext = id.split('.');
+                            let names = id.split('/');
+                            let name = names[names.length - 1];
+                            formData.append('file', {
+                                uri: id,
+                                name: name,
+                                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                            });
+                            setUploading(true);
+                            Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${props.data._id}`, (res) => {
+                                setUploading(false);
+                                console.log('response of save recording', res)
+                            }, (err) => {
+                                setUploading(false);
+                                console.log('error of save recording', err)
+                            })
+
+                        }
                     }
                 });
             } else {
                 console.log('PTPT: ', dialogID, QBUserId, currentName, qBUserIDs, userNames, names);
                 CallModuleIos.createCallDialogid(dialogID, QBUserId, currentName, qBUserIDs, userNames, names, props.isPupil ? false : true, props.isPupil ? teacherQBUserID : QBUserId, true, title, channels, (id) => {
-                    console.log('hi id:---------', id)
 
                     if (!props.isPupil) {
                         let data = {
@@ -162,25 +178,27 @@ const Popupdata = (props) => {
                         })
                         if (id != "") {
                             let formData = new FormData();
-    
+
                             let ext = id.split('.');
                             let names = id.split('/');
                             let name = names[names.length - 1];
-    
-    
+
+
                             formData.append('file', {
                                 uri: id,
-                                // name: element.fileName,
                                 name: name,
                                 type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                             });
-    
+
+                            setUploading(true);
                             Service.postFormData(formData, `${EndPoints.SaveLessionRecord}/${props.data._id}`, (res) => {
+                                setUploading(false);
                                 console.log('response of save recording', res)
                             }, (err) => {
+                                setUploading(false);
                                 console.log('error of save recording', err)
                             })
-    
+
                         }
                     }
 
@@ -197,29 +215,26 @@ const Popupdata = (props) => {
 
     return (
         <View>
-            {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Details</Text></TouchableOpacity> */}
             <TouchableOpacity
                 style={STYLE.openClassLink}
                 activeOpacity={opacity}
                 onPress={() => refRBSheet.current.open()}>
                 <View style={{ ...PAGESTYLE.dayRightmain, width: cellWidth * props.span, borderStartColor: props.data.Type == Lesson ? props.data.Color : props.data.EventColor, borderStartWidth: 3, }}>
-                    <View style={{ ...PAGESTYLE.backOpacity, width: cellWidth * props.span,borderTopColor: COLORS.videoLinkBorder, borderBottomColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, borderRightColor: COLORS.videoLinkBorder, borderRightWidth: 1, }}></View>
+                    <View style={{ ...PAGESTYLE.backOpacity, width: cellWidth * props.span, borderTopColor: COLORS.videoLinkBorder, borderBottomColor: COLORS.videoLinkBorder, borderTopWidth: 1, borderBottomWidth: 1, borderRightColor: COLORS.videoLinkBorder, borderRightWidth: 1, }}></View>
                     <View style={PAGESTYLE.attachmentTitle}>
-                    <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 75 }}>{props.title}</Text>
-                    {props.data.MaterialList && props.data.MaterialList.length > 0 ?
-                        // <Image source={Images.attachmentTimeTable} style={PAGESTYLE.attachmentIcon} />
-                        <Attachment style={PAGESTYLE.attachmentIcon} height={hp(1.95)} width={hp(1.03)} />
-                        :
-                        null
-                    }
+                        <Text numberOfLines={1} style={{ ...PAGESTYLE.labledataTitle, width: cellWidth * props.span - 75 }}>{props.title}</Text>
+                        {
+                            props.data.MaterialList && props.data.MaterialList.length > 0 &&
+                            <Attachment style={PAGESTYLE.attachmentIcon} height={hp(1.95)} width={hp(1.03)} />
+                        }
                     </View>
                     <View style={PAGESTYLE.row}>
-                        {/* <Image source={Images.timeTableClock} style={PAGESTYLE.timeIcon} /> */}
                         <Clock style={PAGESTYLE.timeIcon} height={hp(1.8)} width={hp(1.8)} />
                         <Text style={{ ...PAGESTYLE.labelTime, width: cellWidth * props.span }}>{props.time}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
+
             <RBSheet
                 ref={refRBSheet}
                 closeOnDragDown={true}
@@ -245,17 +260,14 @@ const Popupdata = (props) => {
                                     <View style={styles.yellowHrTag}></View>
                                     <View style={styles.timedateGrp}>
                                         <View style={styles.dateWhiteBoard}>
-                                            {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                             <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <Text style={styles.datetimeText}>{moment(props.data.Date).format('DD/MM/yyyy')}</Text>
                                         </View>
                                         <View style={[styles.dateWhiteBoard, styles.time]}>
-                                            {/* <Image style={styles.timeIcon} source={Images.Clock} /> */}
                                             <Clock style={styles.timeIcon} height={hp(1.8)} width={hp(1.8)} />
                                             <Text style={styles.datetimeText}>{props.data.StartTime} - {props.data.EndTime}</Text>
                                         </View>
                                         <View style={[styles.dateWhiteBoard, styles.grp]}>
-                                            {/* <Image style={styles.calIcon} source={Images.Group} /> */}
                                             <Participants style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <Text numberOfLines={1} style={[styles.datetimeText, { width: wp(18) }]}>{props.data.GroupName}</Text>
                                         </View>
@@ -279,13 +291,7 @@ const Popupdata = (props) => {
                                         </View>
                                         <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
                                         <View style={styles.attchmentSectionwithLink}>
-                                            {/* <TouchableOpacity style={styles.attachment}>
-                                        <Image style={styles.attachmentIcon} source={Images.AttachmentIcon} />
-                                        <Text style={styles.attachmentText}>{props.data.MaterialList ? props.data.MaterialList.length : 0} Attachment(s)</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity>
-                                        <Text style={styles.linkText}>see more</Text>
-                                    </TouchableOpacity> */}
+
                                             {props.data.MaterialList && props.data.MaterialList.length > 0 ?
                                                 <View style={styles.fileBoxGrpWrap}>
                                                     <Text style={styles.requireText}>Attachment(s)</Text>
@@ -293,23 +299,23 @@ const Popupdata = (props) => {
                                                         data={props.data.MaterialList}
                                                         style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                                         renderItem={({ item, index }) => (
-                                                            <TouchableOpacity onPress={() =>{setLoader(true); setMateIndex(index); Download(item, (res) => {
-                                                                setLoader(false)
-                                                                setMateIndex(-1)
-                                                            })}} style={styles.downloaBtn}>
+                                                            <TouchableOpacity onPress={() => {
+                                                                setLoader(true); setMateIndex(index); Download(item, (res) => {
+                                                                    setLoader(false)
+                                                                    setMateIndex(-1)
+                                                                })
+                                                            }} style={styles.downloaBtn}>
                                                                 <View style={styles.fileGrp}>
                                                                     <Text numberOfLines={1} style={[styles.fileName, { width: wp(70) }]}>{item.originalname}</Text>
 
-                                                                    {(isMatLoading && index==mateIndex) ?
+                                                                    {(isMatLoading && index == mateIndex) ?
                                                                         <ActivityIndicator
                                                                             style={{ ...styles.downloadIcon }}
                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                             color={COLORS.blueBorder} />
                                                                         :
-                                                                        // <Image source={Images.Download} style={styles.downloadIcon} />
                                                                         <DownloadSVG style={styles.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                     }
-                                                                    {/* <Image source={Images.Download} style={styles.downloadIcon} /> */}
                                                                 </View>
                                                             </TouchableOpacity>
                                                         )}
@@ -336,7 +342,7 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                     </View>
-                                    <View style={[styles.uploadCalendar, {marginBottom: 10}]}>
+                                    <View style={[styles.uploadCalendar, { marginBottom: 10 }]}>
                                         <TouchableOpacity>
                                             {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
@@ -365,7 +371,7 @@ const Popupdata = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         :
-                                        <View style={STYLE.commonButtonBordered1}/>
+                                        <View style={STYLE.commonButtonBordered1} />
                                     }
                                     <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
                                         <TouchableOpacity
@@ -374,7 +380,7 @@ const Popupdata = (props) => {
                                             onPress={() => { props.isPupil ? launchLiveClassForPupil() : launchLiveClassForTeacher() }}>
                                             {
                                                 isLoading ?
-                                                    <ActivityIndicator  style={{ ...styles.buttonGrp, }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} /> 
+                                                    <ActivityIndicator style={{ ...styles.buttonGrp, }} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
                                                     :
                                                     <Text style={styles.bottomDrwerButtonGreen}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
                                             }
@@ -415,6 +421,16 @@ const Popupdata = (props) => {
 
                 }
             </RBSheet>
+
+            <Modal transparent={true} visible={isUploading}>
+                <View style={PAGESTYLE.uploadVideoStl}>
+                    <View style={PAGESTYLE.uploadVideoInnerStl}>
+                        <ActivityIndicator style={{ margin: 20 }} size={'large'} color={COLORS.yellowDark} />
+                        <Text style={PAGESTYLE.uploadVideoTextStl}>{"Just a minute \n We are uploading a recorded video..."}</Text>
+                    </View>
+                </View>
+            </Modal>
+
         </View>
     );
 }
@@ -427,7 +443,7 @@ const styles = StyleSheet.create({
         zIndex: 9,
         top: hp(1),
     },
-  
+
     popupCard: {
         backgroundColor: COLORS.white,
         width: '100%',
@@ -604,9 +620,11 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },
-    
-    btnEditSty:{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, fontSize: hp(1.99),
-    fontWeight: '800',},
+
+    btnEditSty: {
+        textTransform: 'uppercase', fontFamily: FONTS.fontBold, fontSize: hp(1.99),
+        fontWeight: '800',
+    },
 
     bottomDrwerButtonGreen: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -635,7 +653,7 @@ const styles = StyleSheet.create({
     calIcon: {
         width: hp(1.8),
         resizeMode: 'contain',
-       
+
     },
     timeIcon: {
         width: hp(1.8),
@@ -648,7 +666,7 @@ const styles = StyleSheet.create({
     uploadCalIcon: {
         width: hp(5.20),
         resizeMode: 'contain',
-       
+
     },
     downloadIcon: {
         width: hp(2.01),

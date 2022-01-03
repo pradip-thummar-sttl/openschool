@@ -431,9 +431,9 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             <FlatList
                                                 data={data.CheckList}
                                                 renderItem={({ item }) => (
-                                                    <View style={PAGESTYLE.checkBoxLabelLine}>
+                                                    <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : 7}]}>
                                                         <CheckBox
-                                                            style={[PAGESTYLE.checkMark, { top: 5 }]}
+                                                            style={[PAGESTYLE.checkMark]}
                                                             value={item.IsCheck}
                                                             disabled
                                                             tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

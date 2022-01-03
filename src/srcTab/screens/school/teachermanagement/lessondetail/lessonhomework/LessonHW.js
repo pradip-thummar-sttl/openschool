@@ -597,7 +597,7 @@ const TLHomeWork = (props) => {
                                 onRemoveRecording={() => removeRecording()} />
 
                             <View style={[PAGESTYLE.requirementofClass,]}>
-                                <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
+                                <Text style={PAGESTYLE.requireText}>Create gghhChecklist</Text>
                                 <View style={PAGESTYLE.checkBoxGroup}>
                                     {
                                         // checkItem.map((item, index) => {

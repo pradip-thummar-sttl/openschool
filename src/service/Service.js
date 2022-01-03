@@ -47,13 +47,12 @@ export const Service = {
     },
 
     postFormData: (data, endPoint, success, error) => {
-        
+        console.log('Request ----------->', endPoint,JSON.stringify(data));
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {
                 "Content-type": "multipart/form-data",
                 "Authorization": `JWT ${User.user.Token}`
-                // "Authorization": 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcmVzaC5sYWt1bUBzaWx2ZXJ0b3VjaC5jb20iLCJmdWxsTmFtZSI6IlNpbHZlciIsIl9pZCI6IjYwM2Y3YWY0ZjVkYzVkNGJiNDg5MmRmMCIsImlhdCI6MTYxNTg5NTgyN30.gCsd2gRA3qtHX7EQbi-b4Xm6nETAg0MjjojD_q8fO6Q'
             },
             body: data,
         }).then((res) => res.json()).then((res) => {

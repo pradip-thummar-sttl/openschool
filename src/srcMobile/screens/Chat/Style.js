@@ -52,7 +52,7 @@ export default StyleSheet.create({
 
     //
     views: {
-        flexDirection: 'row',
+        flex: 1
     },
     leftView: {
         marginLeft: hp(2),
@@ -108,16 +108,17 @@ export default StyleSheet.create({
         width: '100%',
         height: '100%',
         paddingHorizontal: hp(2),
-        marginBottom: hp(1),
     },
     textView: {
-        width: '100%',
-        height: hp(8),
-        borderTopWidth: 1,
-        borderTopColor: COLORS.videoLinkBorder,
+        width: '95%',
+        height: 90,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
-        position:'absolute',
-        bottom: 0
+        position: 'absolute',
+        bottom: 20,
+        alignSelf: 'center'
     },
     messageCell: {
         flexDirection: 'row',
@@ -144,19 +145,20 @@ export default StyleSheet.create({
         paddingRight: 15,
     },
     input: {
-        width: '100%',
+        width: '95%',
         height: '100%',
-        fontSize: hp(1.72),
-        fontFamily:FONTS.fontRegular,
-        padding: hp(1.5),
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontSemiBold,
+        marginHorizontal: Platform.OS == 'android' ? hp(1) : hp(2),
+        textAlignVertical: 'top',
+        paddingVertical: 10,
     },
     buttonView:{
         position:'absolute',
         right:hp(2),
-        paddingBottom: hp(2),
         alignItems: 'flex-end',
         height: '100%',
-        flexDirection:'row'
+        justifyContent: 'center',
     },
     btn:{
         // backgroundColor:'yellow',

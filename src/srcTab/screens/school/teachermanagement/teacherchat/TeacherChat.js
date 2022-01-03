@@ -36,7 +36,7 @@ const TeacherChat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event]);
+            addMessage(messages => [...messages, event].reverse());
         }
     };
 
@@ -81,23 +81,25 @@ const TeacherChat = (props) => {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, }}>
 
             {selectedTeacherIndex != -1 ?
                 <>
                     <View style={Styles.views}>
 
-                        <View style={[Styles.rightView, ]}>
-                            <KeyboardAwareScrollView enableOnAndroid={true}
-                                extraScrollHeight={90}
-                                scrollEnabled
-                                enableAutomaticScroll={(Platform.OS === 'ios')} >
+                        <KeyboardAwareScrollView enableOnAndroid={true}
+                            extraScrollHeight={90}
+                            scrollEnabled
+                            contentContainerStyle={{ flex: 1 }}
+                            enableAutomaticScroll={(Platform.OS === 'ios')} >
 
+                            <View style={[Styles.rightView,]}>
 
-
-                                <View style={[Styles.mesagesView,{  }]}>
+                                <View style={[Styles.mesagesView, {}]}>
                                     <FlatList
+                                        style={{ flex: 1, marginBottom: 120 }}
                                         data={messages}
+                                        inverted={true}
                                         showsVerticalScrollIndicator={false}
                                         renderItem={({ item, index }) => {
                                             return (
@@ -111,11 +113,11 @@ const TeacherChat = (props) => {
                                             )
                                         }} />
                                 </View>
-                                <View style={[Styles.textView, { width: '100%',  }]}>
+                                <View style={[Styles.textView, { width: '100%', }]}>
                                     <TextInput
                                         style={Styles.input}
                                         multiline={true}
-                                        placeholder={placeholder}
+                                        placeholder={'Type a message here...'}
                                         placeholderTextColor={COLORS.menuLightFonts}
                                         value={message}
                                         onChangeText={(text) => setMessage(text)}
@@ -126,10 +128,10 @@ const TeacherChat = (props) => {
                                             <Ic_Send style={Styles.btn} height={hp(2.5)} width={hp(2.5)} />
                                         </TouchableOpacity>
                                     </View>
-                                </View>
-                            </KeyboardAwareScrollView>
 
-                        </View>
+                                </View>
+                            </View>
+                        </KeyboardAwareScrollView>
                     </View>
                 </>
                 :

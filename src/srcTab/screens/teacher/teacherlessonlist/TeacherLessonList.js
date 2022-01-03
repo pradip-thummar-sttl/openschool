@@ -39,10 +39,10 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString() }</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
                 <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
@@ -54,6 +54,7 @@ const Pupillist = (props, { style }) => (
         </View>
     </TouchableOpacity>
 );
+// (props?.item?.LiveSession ? (props.item.LiveSession).toString() : ''
 
 const TeacherLessonList = (props) => {
     const [isHide, action] = useState(true);
@@ -96,6 +97,7 @@ const TeacherLessonList = (props) => {
 
 
     useEffect(() => {
+        pageNo = 1;
         fetchRecord('', '')
     }, [])
 
@@ -108,27 +110,28 @@ const TeacherLessonList = (props) => {
             limit: limit
         }
 
+        console.log('this is filters data', data)
+
         Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
             setLessonLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of get all lesson', res.data.length, '---',allNewAndOldData)
                 // setLessonData(res.data)
 
                 if (allNewAndOldData.length) {
-                    if (res.data.length) {
+                    if (res.data.length !== 0) {
                         let array = []
                         array.push(allNewAndOldData)
                         array.push(res.data)
                         setLessonData(array)
                         setAllNewAndOldData(array)
-                    }
-                    else {
+                    } else {
                         setLessonData(allNewAndOldData)
                     }
                 }
                 else {
                     setLessonData(res.data)
-                    setAllNewAndOldData(res.data)
+                    // setAllNewAndOldData(res.data)
                 }
 
             } else {
@@ -142,10 +145,12 @@ const TeacherLessonList = (props) => {
     const addMorePage = () => {
         pageNo = pageNo + 1
 
-        setTimeout(() => {
-            console.log('----pageno-----', pageNo)
-            fetchRecord('', '')
-        }, 1000)
+        if (lessonData.length >= Number(limit)) {
+            setTimeout(() => {
+                console.log('----pageno-----', pageNo)
+                fetchRecord('', '')
+            }, 1000)
+        }
     }
 
     const refresh = () => {
@@ -211,9 +216,10 @@ const TeacherLessonList = (props) => {
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
-                                            style={{ height: wp(53.5) }}
-                                            onEndReachedThreshold={0}
+                                            style={{ paddingHorizontal: hp(1.22), marginBottom: hp(1.47) }}
+                                            onEndReachedThreshold={0.5}
                                             onEndReached={() => addMorePage()}
+                                            // onEndReachedThreshold={0.01}
                                         />
                                         :
                                         // <View style={{ height: 100, justifyContent: 'center' }}>

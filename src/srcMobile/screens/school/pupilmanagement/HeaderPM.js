@@ -226,7 +226,6 @@ const HeaderPM = (props) => {
             >
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
@@ -234,19 +233,11 @@ const HeaderPM = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupil</Text>
                                 <View style={styles.entryContentMain}>
-                                    {/* <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        style={styles.entryData}
-                                        onPress={() => { refRBSheet.current.close(); props.navigateToCsvPopup() }}> */}
-                                    {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                    {/* <ImportCSV style={styles.entryIcon} height={hp(10)} width={hp(10)} />
-                                        <Text style={styles.entryTitle}>IMPORT FROM CSV</Text>
-                                    </TouchableOpacity> */}
+                                    
                                     <MPopupdataSecondCSVUpload />
                                     <TouchableOpacity
                                         style={styles.entryData}
                                         onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                        {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                                         <ImportIndividual style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                         <Text style={styles.entryTitle}>ADD MANUALLY</Text>
                                     </TouchableOpacity>
@@ -256,12 +247,7 @@ const HeaderPM = (props) => {
                     </View>
                 </View>
             </RBSheet>
-            {/* { */}
-            {/* // isCsvPopup ? */}
-            {/* <View> */}
-            {/* </View> */}
-            {/* // : null */}
-            {/* // } */}
+           
         </View>
     );
 }

@@ -315,7 +315,9 @@ const TeacherLessonDetail = (props) => {
                                                     <View style={PAGESTYLE.field}>
                                                         <TextInput
                                                             ref={textInput}
-                                                            style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
+                                                            style={[STYLE.commonInput, PAGESTYLE.searchHeader,
+                                                            {paddingVertical : Platform.OS === 'android' ? 2 : 0}
+                                                            ]}
                                                             placeholder="Search pupil"
                                                             maxLength={50}
                                                             placeholderTextColor={COLORS.menuLightFonts}

@@ -239,7 +239,9 @@ const TeacherLessonDetail = (props) => {
                                     date={lessonData.Date}
                                     navigateToBack={() => props.navigation.goBack()}
                                     onAlertPress={() => props.navigation.openDrawer()}
-                                    navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })} />
+                                    navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })}
+                                    onNotification = {() => props.navigation.navigate('NotificationDrawer')}
+                                    />
                                 : tabIndex == 1 ?
                                     <HeaderHW
                                         hwBtnName={updateFlag ? 'Update' : 'Set'}

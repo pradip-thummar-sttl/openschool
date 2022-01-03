@@ -24,7 +24,7 @@ const TLDetail = (props) => {
     const [mateIndex, setMateIndex] = useState(-1)
     const [isMatLoading, setLoader] = useState(false)
 
-    console.log('props', props.lessonData.MaterialList);
+    console.log('props', props.lessonData._id);
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
@@ -108,7 +108,7 @@ const TLDetail = (props) => {
                             data={props.lessonData.CheckList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
-                                <View style={PAGESTYLE.checkBoxLabelLine}>
+                                <View style={[PAGESTYLE.checkBoxLabelLine,{paddingVertical : Platform.OS === 'android' ? 5 : 10}]}>
                                     {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                     <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
@@ -124,7 +124,7 @@ const TLDetail = (props) => {
                         </View>
                         <View style={PAGESTYLE.checkBoxGrp}>
                             <FlatList
-                                data={props.lessonData.Allpupillist}
+                                data={props.lessonData.PupilList}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
                                     <View style={PAGESTYLE.checkBoxLabelNone}>

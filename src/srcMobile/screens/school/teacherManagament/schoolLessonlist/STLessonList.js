@@ -117,12 +117,10 @@ const STLessonList = (props) => {
                         <Text style={PAGESTYLE.groupName}>{item.GroupName}</Text>
                         <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
                     </View>
-                    {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
                     <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} />
                 </View>
                 <View style={PAGESTYLE.row}>
                     <View style={PAGESTYLE.checkMarkedText}>
-                        {/* <Image style={PAGESTYLE.tickIcon} source={item.LiveSession ? Images.CheckIcon : Images.CheckIconGrey} /> */}
                         {item.LiveSession ?
                             <TickMarkBlue style={PAGESTYLE.tickIcon} height={hp(1.4)} width={hp(1.4)} />
                             :
@@ -152,6 +150,7 @@ const STLessonList = (props) => {
             </View>
         </TouchableOpacity>
     );
+    
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column', }}>
