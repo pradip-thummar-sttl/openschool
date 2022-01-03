@@ -45,17 +45,18 @@ const HeaderPMInner = (props) => {
                     </View>
                 </View>
 
-                {/* {tabIndex == 0 ?
+                {tabIndex == 0 ?
                     <View style={styles.headerRight}>
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.navigateToPupilProfileEdit()}>
-                            <Image style={styles.massagesIcon} source={Images.MobileEditIcon} />
+                            {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
+                            <Text>Hello</Text>
                         </TouchableOpacity>
                     </View>
                     :
                     null
-                } */}
+                }
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
