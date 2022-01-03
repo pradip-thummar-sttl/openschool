@@ -370,14 +370,14 @@ export default StyleSheet.create({
         width: Platform.OS === 'android' ? hp(18) : hp(13.97),
     },
     tabpupil3: {
-        width: Platform.OS === 'android' ? hp(25) : hp(20.18),
+        width: Platform.OS === 'android' ? hp(25) : hp(18),
         marginRight: Platform.OS === 'android' ? hp(5.50) : hp(9.50),
         // marginRight: hp(9.50),
         marginStart: Platform.OS === 'android' ? 5 : 0,
         // backgroundColor: 'pink'
     },
     tabpupil4: {
-        width: Platform.OS === 'android' ? hp(29) : hp(18.22),
+        width: Platform.OS === 'android' ? hp(29) : hp(17),
     },
     pupilTableHeadingMainTitle: {
         fontSize: hp(1.82),
@@ -394,7 +394,7 @@ export default StyleSheet.create({
         color: COLORS.menuLightFonts,
         textTransform: 'uppercase',
         lineHeight: hp(2.08),
-        marginRight: Platform.OS === 'android' ? 0 : hp(2.60),
+        marginRight: Platform.OS === 'android' ? 0 : hp(1.60),
         marginLeft:  Platform.OS === 'android' ? hp(2.60) : 0
     },
     pupilTableHeadingMainsubTitlestar: {
@@ -405,7 +405,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.08),
         marginLeft :  Platform.OS === 'android' ? 10.5 : 0,
         // marginRight: hp(0.91),
-        marginRight : Platform.OS === 'android' ? 0 :  hp(0.91)
+        marginRight : Platform.OS === 'android' ? 0 :  hp(0.8)
     },
     pupilTableHeadingsubMain: {
         flexDirection: 'row',
@@ -497,9 +497,10 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     rewardStar: {
-        width: Platform.OS === 'android' ? hp(6) : hp(5.5),
-        marginStart : 10,
-        marginRight: Platform.OS === 'android' ? 0 : hp(0.91),
+        width: Platform.OS === 'android' ? hp(6) : hp(4.5),
+        marginStart :  Platform.OS === 'android' ? 10 : 4,
+        // backgroundColor : 'red',
+        marginRight: Platform.OS === 'android' ? 0 : hp(0.9),
     },
     rewardStartIcon: {
         width: hp(2.15),
@@ -513,7 +514,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
-        right: 30,
+        right:Platform.OS === 'android' ? 30  : 0,
         position: 'absolute',
     },
     pupilImage: {
