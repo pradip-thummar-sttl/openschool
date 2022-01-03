@@ -445,7 +445,7 @@ export default StyleSheet.create({
         // width: hp(22),
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft :  Platform.OS === 'android' ? 0  :hp(-2)
+        marginLeft :  Platform.OS === 'android' ? 0  :hp(-0.5)
         // backgroundColor: 'pink'
     },
     groupColumn1: {
@@ -464,8 +464,9 @@ export default StyleSheet.create({
     perfomanceColumn: {
         flexDirection: 'row',
         width: hp(20.18),
-        marginLeft: hp(4),
+        marginLeft: Platform.OS === 'android' ? hp(4) : hp(3),
         marginRight: hp(9.50),
+        // backgroundColor : 'red'
     },
     perfomanceDotmain: {
         width : Platform.OS === 'android' ? hp(8) :hp(10.80) ,
@@ -484,6 +485,7 @@ export default StyleSheet.create({
     },
     perfomanceDots: {
         width: hp(1.1),
+        // backgroundColor : 'red',
         height: hp(1.1),
         borderRadius: hp(100),
     },
@@ -499,9 +501,9 @@ export default StyleSheet.create({
     },
     rewardStar: {
         width: Platform.OS === 'android' ? hp(6) : hp(4.5),
-        marginStart :  Platform.OS === 'android' ? 10 : 4,
+        marginStart :  Platform.OS === 'android' ? 10 : 0,
         // backgroundColor : 'red',
-        marginRight: Platform.OS === 'android' ? 0 : hp(0.9),
+        marginRight: Platform.OS === 'android' ? 0 : hp(1.5),
     },
     rewardStartIcon: {
         width: hp(2.15),
