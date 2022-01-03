@@ -30,7 +30,9 @@ const NewMessage = (props) => {
     const [isLoading, setLoading] = useState(true)
     const [parentsData, setPatrentsData] = useState([])
     const [selectedParents, setSelectedParents] = useState([])
+    const [isDataChange, setisDataChange] = useState(false);
 
+    console.log('========###3#### data',data);
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -55,62 +57,95 @@ const NewMessage = (props) => {
         }
     }, [data])
 
-    const [isSwitch, setSwitch] = useState(true)
+    const [isSwitch, setSwitch] = useState(false)
     const switchOnOff = (isOn) => {
+        // console.log('isOn',isOn);
+        parentsData.map((item, index) => {
+            // console.log('item >>>>>>>>>>>>>>>>>>>>', item)
+            parentsData[index].isParentChecked = isOn;
+        })
+        setPatrentsData(parentsData);
         setSwitch(isOn)
+        // console.log('selectedParents => =>' , parentsData)
+        // allSentData()
     }
 
     useEffect(() => {
         // Service.get('parentlist/60b0b79a0e74b0373679d1b6/T', (res) => {
-        Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
-            setLoading(false)
-            if (res.code == 200) {
-                console.log('response of get all lesson', res)
-                setPatrentsData(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('response of get all lesson error', err)
-        })
+            Service.get(`${EndPoints.ParentList}/${User.user._id}/T`, (res) => {
+                setLoading(false)
+                if (res.code == 200) {
+                    console.log('response of get all lesson', res)
+                    if (data && data?.PupilList.length !== 0) {
+                        res.data.map((item, index) => {
+                            data.PupilList.map((it,inx) => {
+                                if (item._id === it._id) {
+                                    res.data[index].isParentChecked = true;
+                                    console.log('in if', res.data[index])
+                                } 
+                            })
+                            // res.data[index].isParentChecked = res.data[index]?.isParentChecked ? true : false
+                        })
+                    } else {
+                        res.data.map((item, index) => {
+                            res.data[index].isParentChecked = false
+                        })
+                    }
+                    console.log('res.data', res.data);
+                    setPatrentsData(res.data)
+                } else {
+                    showMessage(res.message)
+                }
+            }, (err) => {
+                console.log('response of get all lesson error', err)
+            })
+       
     }, [])
 
-    const isPupilChecked = (_index) => {
-
-        console.log("---->",parentsData);
-
-        if (selectedParents.length > 0) {
-            if (selectedParents.some(ele => ele.MobileNumber == parentsData[_index].MobileNumber)) {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return false
-        }
+    const isPupilChecked = (isSelected, _index) => {
+        // console.log('isSelected, _index', isSelected, _index)
+        parentsData[_index].isParentChecked = isSelected;
+        // console.log('selectedParents => =>' , parentsData[_index])
+        setisDataChange(!isDataChange)
+        setPatrentsData(parentsData);
+        
     }
 
-    const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', isSelected, _index);
-        if (!isSelected) {
-            const newList = selectedParents.filter((item, index) => item.MobileNumber !== parentsData[_index].MobileNumber);
-            setSelectedParents(newList)
-        } else {
-            setSelectedParents([...selectedParents, parentsData[_index]])
-        }
-    }
+    // const pushPupilItem = (isSelected, _index) => {
+    //     console.log('isSelected ********++++++++++++', isSelected, _index);
+    //     // if (!isSelected) {
+    //     //     const newList = selectedParents.filter((item, index) => item.MobileNumber !== parentsData[_index].MobileNumber);
+    //     //     console.log(newList,'&&&&&&&&&&&&&');
+    //     //     setSelectedParents(newList)
+    //     // } else {
+    //     //     setSelectedParents([...selectedParents, parentsData[_index]])
+    //     // }
+    //     isPupilChecked(isSelected, _index);
+    // }
+    // const allSentData = () => {
+    //     setPatrentsData(parentsData);
+    //     console.log('*****************************',parentsData);
+    // }
 
     const saveMessage = (selectedStatus) => {
         if (!title.trim()) {
             showMessage(MESSAGE.gmTitle)
             return false;
-        } else if (selectedParents.length == 0) {
+        } else if (parentsData.length == 0) {
             showMessage(MESSAGE.gmPArent)
             return false;
         } else if (!message.trim()) {
             showMessage(MESSAGE.gmMessage)
             return false;
         }
+
+        // getting checked data from parentsdata array.
+        
+        parentsData.map((item) => {
+            if (item.isParentChecked){
+                selectedParents.push(item);
+            }
+        })
 
         if (status == 'Draft') {
             var data = {
@@ -135,11 +170,11 @@ const NewMessage = (props) => {
             }
         }
 
-        console.log('postData', data);
+        // console.log('postData', data);
 
         Service.post(data, status == 'Draft' ? `${EndPoints.UpdateGlobalMessaging}` : `${EndPoints.GlobalMessaging}`, (res) => {
             if (res.code == 200) {
-                console.log('response of save lesson', res)
+                // console.log('response of save lesson', res)
                 showMessageWithCallBack(selectedStatus == 'Draft' ? MESSAGE.gmMessageDraft : MESSAGE.gmMessageSent, () => {
                     props.onGoBack()
                 })
@@ -159,20 +194,23 @@ const NewMessage = (props) => {
                 <Text label style={styles.labelCommon}>Recipient</Text>
                 <FlatList
                     data={parentsData}
+                    extraData={isDataChange}
                     style={{ width: '100%', paddingHorizontal: 20, }}
                     renderItem={({ item, index }) => (
+                      
                         <View style={{ ...styles.alignRow, marginTop: 10, marginRight: 20 }}>
+                           {  console.log('============',item)}
                             <CheckBox
-                                style={styles.checkMark1}
+                                style={[styles.checkMark1]}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onFillColor={COLORS.dashboardPupilBlue}
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
-                                value={isPupilChecked(index)}
+                                value={item.isParentChecked}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
+                                onValueChange={(newValue) => { isPupilChecked(newValue, index) }}
                             />
                             <Text style={styles.checkBoxLabelText}>{item.ParentFirstName} {item.ParentLastName}</Text>
                         </View>
