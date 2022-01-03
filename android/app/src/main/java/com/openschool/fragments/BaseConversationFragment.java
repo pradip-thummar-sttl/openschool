@@ -745,7 +745,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
-        whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
+        // whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
 
         icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID));
         icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
