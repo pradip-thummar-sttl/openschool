@@ -22,7 +22,8 @@ const PupilManagement = (props) => {
                 isDetailSelected ?
                     <PupilProfileView
                         selectedPupil={selectedPupil}
-                        navigateToBack={() => { setOverViewSelected(true); setDetailSelected(false) }} />
+                        navigateToBack={() => { setOverViewSelected(true); setDetailSelected(false) }}
+                        navigations={props} />
                     :
                     null
             }

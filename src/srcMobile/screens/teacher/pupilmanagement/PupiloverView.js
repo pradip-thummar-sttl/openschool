@@ -83,6 +83,10 @@ const PupiloverView = (props) => {
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
     }
 
+    const onRefresh = () => {
+        fetchRecord('', '')
+    }
+
     return (
         <View>
             <View style={{ width: isHide ? '100%' : '100%' }}>
@@ -111,7 +115,7 @@ const PupiloverView = (props) => {
                                     pupilData.length > 0 ?
                                         pupilData.map((item, index) => {
                                             return (
-                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
+                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item, onGoBack: () => onRefresh() })}>
                                                     <View style={[PAGESTYLE.pupilData]}>
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>
