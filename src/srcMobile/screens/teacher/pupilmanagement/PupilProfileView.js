@@ -168,7 +168,7 @@ const PupilProfileView = (props) => {
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
+                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item , onGoBack: () => props.route.params.onGoBack()})}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />

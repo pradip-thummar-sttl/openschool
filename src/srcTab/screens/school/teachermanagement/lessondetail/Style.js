@@ -1220,10 +1220,10 @@ export default StyleSheet.create({
     userIcon1Parent: {
         position: 'absolute',
         right: 10,
-        // top :2,
-        justifyContent : 'center',alignItems : 'center'
-       
-     
+        top: 2,
+        width :25 ,
+        height : 25
+      
         
               
     },
@@ -1349,10 +1349,11 @@ export default StyleSheet.create({
         shadowRadius: hp(1),
     },
     checkMark: {
-        width: 15,
+        width: Platform.OS === 'android' ?  22 : 15,
         height: 15,
         left: 3,
         resizeMode: 'contain',
+        
         
     },
     checkMarkTool: {

@@ -67,6 +67,9 @@ import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
 import SchoolSetting from '../screens/school/setting/SchoolSetting';
 import TeacherManagement from '../screens/school/teachermanagement/TeacherManagement';
 
+import PupilProfileEdit from '../screens/teacher/pupilmanagement/PupilProfileEdit';
+
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -135,6 +138,7 @@ function ScreenStack() {
                 <Stack.Screen name="PupiloverView" component={PupiloverView} />
                 <Stack.Screen name="PupilManagement" component={PupilManagement} />
                 <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
+                <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
                 <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
                 <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
                 <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />

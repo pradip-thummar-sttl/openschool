@@ -173,7 +173,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: hp(1.6),
+        marginBottom: Platform.OS === 'android' ?  hp(2) :  hp(1.6),
+        // backgroundColor : 'red'
       
     },
     lessonPoints: {
@@ -1286,6 +1287,8 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         right: hp(1),
+        // top : Platform.OS === 'android' ? hp(1.5) : 0,
+        // backgroundColor : 'red'
        
     },
     userIcon1: {
