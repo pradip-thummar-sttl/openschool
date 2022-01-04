@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -18,6 +18,8 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
+import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
+
 const HeaderPMInner = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -26,15 +28,15 @@ const HeaderPMInner = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const showAlert = () =>{
+    const showAlert = () => {
         Alert.alert(
-           'Record successfully Saved...'
+            'Record successfully Saved...'
         )
-     }
+    }
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-    
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -51,11 +53,21 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
-                        {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
-                        <CheckedBlue style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
-                        <Text style={styles.commonButtonGreenheader}></Text>
-                    </TouchableOpacity>
+                    {props.isLoading ?
+                        <TouchableOpacity style={styles.buttonGroup}>
+                            <ActivityIndicator
+                                style={[styles.addIcon1, styles.iconTop]}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            <Text style={styles.commonButtonGreenheader}></Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity onPress={() => props.onPressSave()} style={styles.buttonGroup}>
+                            {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
+                            {/* <CheckedBlue style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} /> */}
+                            <Ic_CheckWhite style={[styles.addIcon, styles.iconTop]} width={hp(1.55)} height={hp(1.55)} />
+                            <Text style={styles.commonButtonGreenheader}></Text>
+                        </TouchableOpacity>}
                 </View>
             </View>
         </View>

@@ -373,7 +373,7 @@ export default StyleSheet.create({
         marginBottom: hp(30),
     },
     scrollViewCommonPupilEdit: {
-        marginBottom: hp(15),
+        marginBottom: hp(30),
     },
     rewardSection: {
         paddingHorizontal: hp(2),
