@@ -56,6 +56,7 @@ const TLHomeWork = (props) => {
 
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+    const [isChecked, setIsChecked] = useState(false)
 
 
     useEffect(() => {
@@ -155,6 +156,7 @@ const TLHomeWork = (props) => {
     const onCheckList = (index) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
         Addhomework.CheckList = itemCheckList
+        setIsChecked(!isChecked)
     }
 
     const onScreeCamera = () => {
@@ -210,40 +212,40 @@ const TLHomeWork = (props) => {
 
     const stopRecording = async () => {
         if (recordingName.length > 0) {
-         
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            // let obj = {
-            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-            //     originalname: 'MY_RECORDING.mp4',
-            //     fileName: 'MY_RECORDING.mp4',
-            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            // }
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: `${recordingName}.mp4`,
-                fileName: `${recordingName}.mp4`,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
             }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            setRecordingName("")
-            toggleModal()
-            console.log('url', url);
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
-    }else{
-        // setRecordingStarted(false)
-        // toggleModal()
-        showMessage('Please provide recording name proper')
-    }
     }
 
 
@@ -293,14 +295,14 @@ const TLHomeWork = (props) => {
     // }
 
     const onCameraOnly = () => {
-        
+
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
             if (response.errorCode) {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
                 console.log('response', response);
-                
+
                 setVideoRecordingResponse(response)
                 setCurrentRecordMode('isCamera')
                 toggleModal()
@@ -312,9 +314,9 @@ const TLHomeWork = (props) => {
     }
 
 
-const saveCameraData = () => {
+    const saveCameraData = () => {
 
-    var arr = [...recordingArr];
+        var arr = [...recordingArr];
 
         if (recordingName.length > 0) {
 
@@ -397,6 +399,7 @@ const saveCameraData = () => {
                         : null
                 }
                 <FlatList
+                    extraData={isChecked}
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (

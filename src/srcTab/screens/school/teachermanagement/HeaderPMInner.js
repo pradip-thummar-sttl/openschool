@@ -125,7 +125,7 @@ const HeaderPMInner = (props) => {
 
                             <TextInput
                                 ref={textInput}
-                                style={styles.searchHeader}
+                                style={[styles.searchHeader,{width : '100%',paddingVertical : Platform.OS === 'android' ? 2.5 : 0}]}
                                 placeholder="Search pupil"
                                 maxLength={50}
 
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.themeBlue,
         fontSize: hp('1.9%'),
+        
     },
     userIcon1Parent: {
         position: 'absolute',

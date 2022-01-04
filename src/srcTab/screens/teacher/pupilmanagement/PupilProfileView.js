@@ -287,7 +287,7 @@ const PupilProfileView = (props) => {
             }
         </View>
 
-        </View >
+        // </View >
     );
 }
 export default PupilProfileView;
