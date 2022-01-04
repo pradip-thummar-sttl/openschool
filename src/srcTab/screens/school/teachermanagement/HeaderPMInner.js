@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.themeBlue,
         fontSize: hp('1.9%'),
+      
     },
     userIcon1Parent: {
         position: 'absolute',
