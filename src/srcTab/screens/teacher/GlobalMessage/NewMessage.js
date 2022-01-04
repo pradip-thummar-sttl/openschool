@@ -61,7 +61,7 @@ const NewMessage = (props) => {
     const switchOnOff = (isOn) => {
         // console.log('isOn',isOn);
         parentsData.map((item, index) => {
-            // console.log('item >>>>>>>>>>>>>>>>>>>>', item)
+            console.log('item >>>>>>>>>>>>>>>>>>>>', item)
             parentsData[index].isParentChecked = isOn;
         })
         setPatrentsData(parentsData);
@@ -139,7 +139,7 @@ const NewMessage = (props) => {
             return false;
         }
 
-        // getting checked data from parentsdata array.
+        
         
         parentsData.map((item) => {
             if (item.isParentChecked){
