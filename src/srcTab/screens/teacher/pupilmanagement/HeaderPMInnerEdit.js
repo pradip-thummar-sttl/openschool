@@ -11,14 +11,14 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { opacity } from "../../../utils/Constant";
+import { opacity } from "../../../../utils/Constant";
 import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
-const HeaderPMInner = (props) => {
+const HeaderPMInnerEdit = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
     const [tabIndex, setSelectedTab] = useState(0);
@@ -26,22 +26,22 @@ const HeaderPMInner = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
-    const showAlert = () =>{
+    const showAlert = () => {
         Alert.alert(
-           'Record successfully Saved...'
+            'Record successfully Saved...'
         )
-     }
+    }
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-    
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
                 <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
+                        onPress={() => props.onGoBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
@@ -51,9 +51,9 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={showAlert} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onPressSave()} style={styles.buttonGroup}>
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} /> */}
-                        <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)}/>
+                        <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
 
                         <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity>
@@ -62,7 +62,7 @@ const HeaderPMInner = (props) => {
         </View>
     );
 }
-export default HeaderPMInner;
+export default HeaderPMInnerEdit;
 
 const styles = StyleSheet.create({
     headerMaintop: {

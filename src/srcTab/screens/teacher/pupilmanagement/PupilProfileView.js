@@ -132,10 +132,16 @@ const PupilProfileView = (props) => {
         }
     }
 
+    const onGoBack = () => {
+        props.navigateToBack()
+    }
+
     console.log('props', props.selectedPupil);
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInner
+                onEditPress={() => props.navigations.navigation.navigate('PupilProfileEdit', { item: item, onGoBack: () => onGoBack() })}
+                // onEditPress={() => props.navigations.navigation.navigate('PupilProfileEdit')}
                 navigateToBack={() => props.navigateToBack()} tabIndex={(index) => { setTabSelected(index) }}
                 pupilName={props.selectedPupil.FirstName + ' ' + props.selectedPupil.LastName} />
             {
@@ -146,12 +152,12 @@ const PupilProfileView = (props) => {
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                            <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
-                                            <View style={PAGESTYLE.thumbTopUser}>
-                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
-                                                    source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
-                                            </View>
-                                            {/* <TouchableOpacity>
+                                        <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
+                                        <View style={PAGESTYLE.thumbTopUser}>
+                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                                source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
+                                        </View>
+                                        {/* <TouchableOpacity>
                                                 <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
                                             </TouchableOpacity> */}
                                         {/* </ImageBackground> */}
@@ -247,7 +253,7 @@ const PupilProfileView = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.graphBlock}>
 
-                                    <View style={[PAGESTYLE.graphBox,{ bottom : 5}]}>
+                                    <View style={[PAGESTYLE.graphBox, { bottom: 5 }]}>
                                         <View style={PAGESTYLE.generalRow}>
                                             <View style={PAGESTYLE.chartBlock}>
                                                 {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
@@ -258,11 +264,11 @@ const PupilProfileView = (props) => {
                                             <View>
                                                 <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
                                                 <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
-                                                    <Image  style={PAGESTYLE.purpleMark} />
+                                                    <Image style={PAGESTYLE.purpleMark} />
                                                     <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
                                                 </View>
                                                 <View style={PAGESTYLE.generalRow}>
-                                                    <Image  style={PAGESTYLE.orangeMark} />
+                                                    <Image style={PAGESTYLE.orangeMark} />
                                                     <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
                                                 </View>
                                             </View>
