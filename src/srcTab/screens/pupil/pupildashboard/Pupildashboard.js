@@ -412,7 +412,7 @@ const PupuilDashboard = (props) => {
             {selectedIndex != 5 ?
                 <Sidebarpupil hide={() => action(!isHide)}
                     moduleIndex={selectedIndex}
-                    navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0) }}
+                    navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0); getPupilAvtarList() }}
                     navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
                     onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
