@@ -286,8 +286,6 @@ const PupilProfileView = (props) => {
                     <Chat tabs={tabSelected} data={props.selectedPupil} />
             }
         </View>
-
-        </View >
     );
 }
 export default PupilProfileView;

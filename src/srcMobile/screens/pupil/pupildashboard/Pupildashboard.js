@@ -65,6 +65,9 @@ const PupuilDashboard = (props) => {
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
 
+    const [pupilAvatarList, setPupilAvatarList] = useState([])
+    const [avatarListIndex, setAvtarIndex] = useState([])
+
     let currentCount = 0
     useEffect(() => {
         initApp(callBack => {
@@ -133,7 +136,41 @@ const PupuilDashboard = (props) => {
 
     useEffect(() => {
         refresh()
+        getPupilAvtarList()
     }, [])
+
+    const getPupilAvtarList = () => {
+
+        let allAvatrData = []
+
+        Service.get(EndPoints.GetAllAvtar, (res) => {
+
+            if (res.flag === true) {
+                console.log('------get Avatar---------', res)
+                res.data.map((item) => {
+                    if (item.Type === "hair") {
+                        allAvatrData = item.imglist
+                    }
+                })
+            }
+
+            Service.get(`${`pupilgetavatar`}/${User.user.UserDetialId}`, (res) => {
+                if (res.flag === true) {
+                    console.log('------get pupilAvatar---------', res.data)
+                    allAvatrData.map((data, index) => {
+                        if (data._id === res.data[1]._id) {
+                            setAvtarIndex(index)
+                        }
+                    })
+                    setPupilAvatarList(res.data)
+                }
+            }, (err) => {
+                console.log('------errrrrrr---------', res)
+            })
+        }, (err) => {
+            console.log('------errrrrrr outer ---------', res)
+        })
+    }
 
     const refresh = () => {
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
@@ -389,7 +426,7 @@ const PupuilDashboard = (props) => {
                 <Header isOpen={BadgeIcon.isBadge} onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
-                        
+
                         <View style={PAGESTYLE.dashboardOrangeBox}>
                             <View style={PAGESTYLE.orangeBoxTop}>
                                 <View style={PAGESTYLE.myDay}>
@@ -753,12 +790,38 @@ const PupuilDashboard = (props) => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <View style={PAGESTYLE.achivementRobot}>
-                                <RobotAvtar style={PAGESTYLE.cartoon} height={hp(35.71)} width={hp(41.25)} />
-                                {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
-                            </View>
+                            {pupilAvatarList.length ?
+                                <View style={PAGESTYLE.achivementRobot}>
+                                    {/* <RobotAvtar style={PAGESTYLE.cartoon} height={hp(35.71)} width={hp(41.25)} /> */}
+                                    {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
+                                    {/* <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[0].Images }} />
+                                    <Image style={{ height: hp(3), width: hp(3), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[1].Images }} /> */}
+                                    {/* <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[2].Images }} />
+                                    <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[3].Images }} /> */}
+                                    {avatarListIndex == 0 ?
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-2), zIndex: 10, left: hp(8.5), alignSelf: 'center' }} ></Image>
+                                        : null}
+                                    {avatarListIndex == 1 ?
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-6), zIndex: 10, alignSelf: 'center' }} ></Image>
+                                        : null}
+                                    {avatarListIndex == 2 ?
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, alignSelf: 'center', right: hp(8.5) }} ></Image>
+                                        : null}
+                                    {avatarListIndex == 3 ?
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(19), height: hp(19), resizeMode: 'contain', position: 'absolute', top: hp(-5), zIndex: 10, alignSelf: 'center' }} ></Image>
+                                        : null}
+                                    {avatarListIndex == 4 ?
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(19), height: hp(19), resizeMode: 'contain', position: 'absolute', top: hp(-5), zIndex: 10, alignSelf: 'center' }} ></Image>
+                                        : null}
+                                    {avatarListIndex == 5 ?
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(16), height: hp(16), resizeMode: 'contain', position: 'absolute', top: hp(-7), zIndex: 10, alignSelf: 'center' }} ></Image>
+                                        : null}
+                                    <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(20), height: hp(35), resizeMode: 'contain', alignSelf: 'center' }} ></Image>
+                                    <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(4), zIndex: 20, alignSelf: 'center' }} ></Image>
+                                    <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(10), zIndex: 20, alignSelf: 'center' }} ></Image>
+                                </View> : null}
                         </View>
-                        
+
                     </View>
                 </ScrollView>
             </View>
