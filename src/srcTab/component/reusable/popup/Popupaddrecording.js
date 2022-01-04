@@ -86,10 +86,8 @@ const Popupaddrecording = (props) => {
                         <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.recordLinkText]}>Add Recording</Text>
                     </TouchableOpacity>
                     :
-
                     <TouchableOpacity  onPress={() => {Download(props.recordingArr[0], (res) => { }) }} activeOpacity={opacity}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]} >
-
                         <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         <TouchableOpacity style={[styles.cancelButton]} onPress={() => { props.onRemoveRecording() }}>
                             <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />

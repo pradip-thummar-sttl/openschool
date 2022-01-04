@@ -93,7 +93,7 @@ const Popupaddrecording = (props) => {
                     <TouchableOpacity onPress={() => { setLoader(true); Download(props.recordingArr[0], (res) => { setLoader(false) }) }}
                         activeOpacity={opacity}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{width:'100%', flexDirection: 'row'}}>
                             {
                                 isMatLoading ?
                                     <ActivityIndicator
@@ -107,7 +107,7 @@ const Popupaddrecording = (props) => {
                         </View>
 
                         <TouchableOpacity onPress={() => { props.onRemoveRecording() }}
-                            style={[styles.cancelButton, { width: hp(3) }]}>
+                            style={[styles.cancelButton, { width: hp(5)}]}>
                             <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     recordingLinkIcon: {
         width: hp(2.34),
         resizeMode: 'contain',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     recordLinkText: {
         fontSize: Platform.OS == 'android' ? 14 : hp(1.85),
