@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native'
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 // import Images from '../../../../utils/Images'
 // import Images from '../../../../../srcmobile/utils/Images'
@@ -17,6 +17,7 @@ import { baseUrl,showMessage } from '../../../../utils/Constant';
 import FONTS from '../../../../utils/Fonts';
 import { BadgeIcon, User } from '../../../../utils/Model'
 import { Var } from '../../../../utils/Constant'
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes'
 
 const tabs = [
     { name: 'COLOUR', isSelected: true },
@@ -401,7 +402,7 @@ const Avatar = () => {
         // prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
     }
     return (
-        <View>
+        <ScrollView>
             <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
                 {/* LeftView */}
@@ -457,7 +458,7 @@ const Avatar = () => {
                 </View>
 
                 {/* Right View */}
-                <View style={Styles.rightView}>
+                <View style={[Styles.rightView]}>
                     <View style={Styles.borderView}>
                         {/* Tabs */}
                         {isLoading == false ?
@@ -499,7 +500,7 @@ const Avatar = () => {
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
