@@ -79,9 +79,15 @@ const PupuilDashboard = (props) => {
     const [mateIndex, setMateIndex] = useState(-1)
 
 
+    const [pupilAvatarList, setPupilAvatarList] = useState([])
+    const [avatarListIndex, setAvtarIndex] = useState([])
 
     let currentCount = 0
     useEffect(() => {
+
+        getPupilAvtarList()
+
+
         console.log('poarams', props.route.params);
         if (props.route.params && props.route.params.index == 2) {
             setSelectedIndex(2)
@@ -151,6 +157,7 @@ const PupuilDashboard = (props) => {
     }
 
     useEffect(() => {
+
         Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag === true) {
@@ -202,6 +209,40 @@ const PupuilDashboard = (props) => {
         }, (err) => {
         })
     }, [])
+
+
+    const getPupilAvtarList = () => {
+
+        let allAvatrData = []
+
+        Service.get(EndPoints.GetAllAvtar, (res) => {
+
+            if (res.flag === true) {
+                console.log('------get Avatar---------', res)
+                res.data.map((item) => {
+                    if (item.Type === "hair") {
+                        allAvatrData = item.imglist
+                    }
+                })
+            }
+
+            Service.get(`${`pupilgetavatar`}/${User.user.UserDetialId}`, (res) => {
+                if (res.flag === true) {
+                    console.log('------get pupilAvatar---------', res.data)
+                    allAvatrData.map((data, index) => {
+                        if (data._id === res.data[1]._id) {
+                            setAvtarIndex(index)
+                        }
+                    })
+                    setPupilAvatarList(res.data)
+                }
+            }, (err) => {
+                console.log('------errrrrrr---------', res)
+            })
+        }, (err) => {
+            console.log('------errrrrrr outer ---------', res)
+        })
+    }
 
     const launchLiveClass = () => {
         if (isRunningFromVirtualDevice) {
@@ -722,10 +763,32 @@ const PupuilDashboard = (props) => {
                                                             <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>edit avatar</Text></TouchableOpacity>
                                                         </View>
                                                     </View>
-                                                    <View style={PAGESTYLE.achivementRobot}>
-                                                        {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
-                                                        <RobotAvtar style={PAGESTYLE.cartoon} height={hp(45.18)} width={hp(67.51)} />
-                                                    </View>
+                                                    {pupilAvatarList.length ?
+                                                        <View style={PAGESTYLE.achivementRobot}>
+                                                            {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
+                                                            {/* <RobotAvtar style={PAGESTYLE.cartoon} height={hp(45.18)} width={hp(67.51)} /> */}
+                                                            {avatarListIndex == 0 ?
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10,alignSelf: 'center',left:wp(21)}} ></Image>
+                                                                : null}
+                                                            {avatarListIndex == 1 ?
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10 }} ></Image>
+                                                                : null}
+                                                            {avatarListIndex == 2 ?
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10, right: wp(21) }} ></Image>
+                                                                : null}
+                                                            {avatarListIndex == 3 ?
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} ></Image>
+                                                                : null}
+                                                            {avatarListIndex == 4 ?
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} ></Image>
+                                                                : null}
+                                                            {avatarListIndex == 5 ?
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} ></Image>
+                                                                : null}
+                                                            <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(25), height: hp(50), resizeMode: 'contain' }} ></Image>
+                                                            <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(9), zIndex: 20 }} ></Image>
+                                                            <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(16), zIndex: 20 }} ></Image>
+                                                        </View> : null}
                                                 </View>
                                             </View>
                                         </ScrollView>
